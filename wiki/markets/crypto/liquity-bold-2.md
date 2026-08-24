@@ -9,12 +9,12 @@ aliases: ["BOLD", "BOLD stablecoin", "Liquity BOLD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.liquity.org/"
-related: ["[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[liquid-staking]]", "[[liquity-usd]]", "[[liquity]]", "[[maker]]", "[[stablecoin]]"]
+related: ["[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[liquid-staking]]", "[[liquity-usd]]", "[[liquity]]", "[[maker]]", "[[stablecoins]]"]
 ---
 
 # BOLD
 
-**BOLD** is the USD-pegged [[stablecoin]] issued by [[liquity|Liquity]] V2, the second generation of the Liquity decentralized borrowing protocol, on [[ethereum|Ethereum]]. Unlike the protocol's first-generation stablecoin [[liquity-usd|LUSD]] (which charged a fixed one-time borrowing fee), BOLD introduces **user-set interest rates**: each borrower chooses the annual rate they are willing to pay, and the protocol uses those rates to order redemptions, replacing LUSD's fixed-fee model with a market for borrowing cost. BOLD is fully crypto-collateralized and overcollateralized by ETH and liquid-staking tokens, and is distinct from both LUSD (Liquity V1) and the [[liquity|LQTY]] governance/incentive token.
+**BOLD** is the USD-pegged [[stablecoins]] issued by [[liquity|Liquity]] V2, the second generation of the Liquity decentralized borrowing protocol, on [[ethereum|Ethereum]]. Unlike the protocol's first-generation stablecoin [[liquity-usd|LUSD]] (which charged a fixed one-time borrowing fee), BOLD introduces **user-set interest rates**: each borrower chooses the annual rate they are willing to pay, and the protocol uses those rates to order redemptions, replacing LUSD's fixed-fee model with a market for borrowing cost. BOLD is fully crypto-collateralized and overcollateralized by ETH and liquid-staking tokens, and is distinct from both LUSD (Liquity V1) and the [[liquity|LQTY]] governance/incentive token.
 
 > *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).*
 
@@ -42,7 +42,7 @@ As of 2026-06-22, BOLD trades at **$0.999084** — effectively on its $1.00 peg 
 
 ## Overview
 
-BOLD is a fully redeemable USD-pegged stablecoin issued by the [[liquity|Liquity]] V2 protocol. It is minted when users open borrowing positions ("Troves") against ETH and liquid-staking-token collateral — wstETH (Lido) and rETH (Rocket Pool). Loans must maintain a minimum collateral ratio, and the system is backstopped by a Stability Pool holding deposited BOLD plus a redistribution mechanism in which solvent borrowers absorb the debt and collateral of liquidated positions, acting as guarantors of last resort. BOLD is a [[cdp|CDP]]-style (collateralized-debt-position) [[stablecoin]] in the same lineage as MakerDAO's DAI, but with Liquity's signature emphasis on decentralization and minimal governance.
+BOLD is a fully redeemable USD-pegged stablecoin issued by the [[liquity|Liquity]] V2 protocol. It is minted when users open borrowing positions ("Troves") against ETH and liquid-staking-token collateral — wstETH (Lido) and rETH (Rocket Pool). Loans must maintain a minimum collateral ratio, and the system is backstopped by a Stability Pool holding deposited BOLD plus a redistribution mechanism in which solvent borrowers absorb the debt and collateral of liquidated positions, acting as guarantors of last resort. BOLD is a [[cdp|CDP]]-style (collateralized-debt-position) [[stablecoins]] in the same lineage as MakerDAO's DAI, but with Liquity's signature emphasis on decentralization and minimal governance.
 
 ### Architecture — Collateral and backing
 
@@ -107,7 +107,7 @@ BOLD is primarily an Ethereum-native stable with bridged presence on Optimism an
 
 ## Narrative, Category & Catalysts
 
-- **Category:** Decentralized, yield-bearing, crypto-backed [[stablecoin]] — the "DeFi-native dollar with native yield" narrative.
+- **Category:** Decentralized, yield-bearing, crypto-backed [[stablecoins]] — the "DeFi-native dollar with native yield" narrative.
 - **Bull catalysts:** Demand for decentralized stables that *pay* holders (via Stability Pool); growth of LST collateral (wstETH/rETH) deepening backing; migration of borrowing demand from V1 [[liquity-usd|LUSD]] to V2; integrations across DeFi.
 - **Bear catalysts:** LST [[depeg|depeg]] or smart-contract incidents impairing a branch; thin liquidity limiting large redemptions; competition from larger yield-bearing stables.
 - The peg's stability through Extreme-Fear tape is itself the headline: BOLD is functioning as designed in a stressed market.
@@ -247,7 +247,7 @@ BOLD is primarily an Ethereum-native stable with bridged presence on Optimism an
 - [[ethereum]]
 - [[liquity]] — the issuing protocol (V1 and V2) and LQTY token
 - [[liquity-usd]] — LUSD, the Liquity V1 stablecoin
-- [[stablecoin]] · [[collateralization]] · [[cdp]] · [[depeg]] · [[liquid-staking]] · [[maker]]
+- [[stablecoins]] · [[collateralization]] · [[cdp]] · [[depeg]] · [[liquid-staking]] · [[maker]]
 
 ---
 

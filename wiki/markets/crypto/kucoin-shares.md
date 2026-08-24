@@ -15,7 +15,7 @@ related: ["[[binance]]", "[[bitget-token]]", "[[crypto-markets]]", "[[exchange-c
 
 # KuCoin Token
 
-**KuCoin Token** (KCS, originally "KuCoin Shares") is the native exchange token of [[centralized-exchange|centralized exchange]] KuCoin, a Seychelles-based platform founded in 2017 that ranks among the top global crypto exchanges by spot volume. KCS gives holders a share of exchange economics via a quarterly buyback-and-burn (10% of net profit) and historically a daily bonus paid from trading-fee revenue, making it a direct proxy bet on KuCoin's trading volumes and regulatory standing. It sits in the [[centralized-exchange|CEX]]-token basket alongside [[binance-coin|BNB]], [[okb|OKB]], and [[bitget-token|BGB]].
+**KuCoin Token** (KCS, originally "KuCoin Shares") is the native exchange token of [[centralized-exchange|centralized exchange]] KuCoin, a Seychelles-based platform founded in 2017 that ranks among the top global crypto exchanges by spot volume. KCS gives holders a share of exchange economics via a quarterly buyback-and-burn (10% of net profit) and historically a daily bonus paid from trading-fee revenue, making it a direct proxy bet on KuCoin's trading volumes and regulatory standing. It sits in the [[centralized-exchange|CEX]]-token basket alongside [[bnb|BNB]], [[okb|OKB]], and [[bitget-token|BGB]].
 
 ---
 
@@ -61,7 +61,7 @@ Snapshot context: the backdrop on 2026-06-20 is an **"Established Bear Market"**
 KuCoin is an international cryptocurrency exchange based in the Seychelles that supports trading of several hundred digital assets and claims 40M+ registered users. KCS is its "shares"-style token, and what is unique about the model is **fee-revenue sharing**:
 
 - **KCS Bonus (dividend)** — historically a *daily* bonus funded by 50% of overall trading-fee revenue, paid pro-rata to KCS holders — a dividend-style accrual closer to equity than most exchange tokens.
-- **Trading-fee discounts** — holders pay reduced fees, similar in spirit to [[binance-coin|BNB]].
+- **Trading-fee discounts** — holders pay reduced fees, similar in spirit to [[bnb|BNB]].
 - **Buyback-and-burn** — KuCoin uses 10% of quarterly net profit to buy back and burn KCS, shrinking supply toward the 100M target.
 - **KCC (KuCoin Community Chain)** — KCS is the gas/native asset of KCC, an EVM-compatible L1; a KCS Layer-2 scaling launch has been flagged as a forward catalyst.
 
@@ -120,13 +120,13 @@ KCS liquidity is **heavily concentrated on KuCoin itself** (KCS/USDT) — a stru
 - **Exchange-volume proxy** — KCS demand scales with KuCoin trading-fee revenue, which drives *both* the bonus dividend and the burn. KuCoin's volume share and user growth are the swing factors.
 - **Dividend/yield proxy** — uniquely among the basket, KCS can be approximated by a dividend-discount lens: project the KCS Bonus stream off expected fee revenue.
 - **Buyback proxy** — burn size scales with quarterly profit; faster burns toward 100M compress supply.
-- **Relative** — compare KCS market cap / KuCoin volume against [[binance-coin|BNB]]/Binance, [[okb|OKB]]/OKX, and [[bitget-token|BGB]]/Bitget. KCS's regulatory overhang (US exit, see below) is a discount factor.
+- **Relative** — compare KCS market cap / KuCoin volume against [[bnb|BNB]]/Binance, [[okb|OKB]]/OKX, and [[bitget-token|BGB]]/Bitget. KCS's regulatory overhang (US exit, see below) is a discount factor.
 
 ---
 
 ## Trading Playbook
 
-- **High-beta basket cousin** — KCS trades as a high-beta, lower-liquidity cousin of [[binance-coin|BNB]]; CEX-token baskets outperform when retail volumes rise.
+- **High-beta basket cousin** — KCS trades as a high-beta, lower-liquidity cousin of [[bnb|BNB]]; CEX-token baskets outperform when retail volumes rise.
 - **Micro-catalysts** — quarterly burn announcements and KCS Bonus changes are recurring drivers; MiCAR-era EU growth and the planned KCS Layer-2 are forward catalysts; US re-entry after the two-year ban (2027+) is a longer-dated option.
 - **Regulatory-event template** — the Jan 2025 DOJ plea is the case study for how exchange-regulatory shocks transmit to the token (KCS rallied ~13.7% on *uncertainty removal*). Watch for similar "resolution rallies."
 - **Liquidity caution** — at ~0.2% turnover and Fear & Greed 23, KCS is the most slippage-prone token in the peer group; size small, expect gaps.
@@ -149,7 +149,7 @@ KCS liquidity is **heavily concentrated on KuCoin itself** (KCS/USDT) — a stru
 
 | Token | Exchange | Mkt cap | Rank | Supply mechanic | MC/FDV | Liquidity (24h vol) |
 |---|---|---|---|---|---|---|
-| [[binance-coin\|BNB]] | Binance | (basket leader) | top-10 | Auto-burn | ~1.0 | Deep |
+| [[bnb\|BNB]] | Binance | (basket leader) | top-10 | Auto-burn | ~1.0 | Deep |
 | [[okb\|OKB]] | OKX | $1.587B | #52 | Hard-capped 21M | 1.00 | $22.9M |
 | [[bitget-token\|BGB]] | Bitget | $1.239B | #60 | Burn → 100M | 0.77 | $12.4M |
 | **KCS** | KuCoin | $0.966B | #69 | Quarterly buyback-burn; **unlimited nominal cap** | 0.95 | **$1.85M** |
@@ -182,7 +182,7 @@ KCS liquidity is **heavily concentrated on KuCoin itself** (KCS/USDT) — a stru
 
 - [[crypto-markets]]
 - [[centralized-exchange]]
-- [[binance]], [[binance-coin]] — the BNB exchange-token template
+- [[binance]], [[bnb]] — the BNB exchange-token template
 - [[okb]], [[bitget-token]] — CEX-token peers
 - [[kraken]], [[coinbase]] — regulated-exchange contrast
 - [[exchange-collapses]] — tail-risk narrative for CEX tokens

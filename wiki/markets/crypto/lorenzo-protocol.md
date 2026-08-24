@@ -9,7 +9,7 @@ aliases: ["BANK"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://lorenzo-protocol.xyz/"
-related: ["[[bitcoin]]", "[[bnb]]", "[[crypto-markets]]", "[[defi]]", "[[governance-token]]", "[[liquid-restaking]]", "[[liquid-staking]]", "[[real-world-assets]]", "[[restaking]]", "[[stablecoin]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
+related: ["[[bitcoin]]", "[[bnb]]", "[[crypto-markets]]", "[[defi]]", "[[governance-token]]", "[[liquid-restaking]]", "[[liquid-staking]]", "[[real-world-assets]]", "[[restaking]]", "[[stablecoins]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Lorenzo Protocol

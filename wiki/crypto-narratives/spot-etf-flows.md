@@ -6,7 +6,7 @@ updated: 2026-07-13
 status: good
 tags: [crypto, bitcoin, ethereum, event-driven, market-regime, liquidity, market-microstructure, behavioral-finance, narrative-impact]
 aliases: ["Bitcoin ETF Flows", "ETH ETF Flows", "IBIT Flows", "GBTC Outflows", "Spot ETF Net Flow Signal"]
-related: ["[[crypto-narratives-overview]]", "[[bitcoin-etf]]", "[[regulatory-approvals-policy]]", "[[cryptodataapi]]"]
+related: ["[[crypto-narratives-overview]]", "[[bitcoin-etfs]]", "[[regulatory-approvals-policy]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, behavioral-finance]
 difficulty: intermediate
 ---

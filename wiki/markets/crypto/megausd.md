@@ -9,12 +9,12 @@ aliases: ["USDM", "USDm"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://megaeth.com/"
-related: ["[[crypto-markets]]", "[[ethena-usde]]", "[[megaeth]]", "[[stablecoins]]", "[[usde]]"]
+related: ["[[crypto-markets]]", "[[ethena-usde]]", "[[megaeth]]", "[[stablecoins]]", "[[ethena-usde]]"]
 ---
 
 # MegaUSD
 
-**MegaUSD** (ticker USDM, styled "USDm") is the native dollar stablecoin of the **MegaETH** blockchain. It targets a soft peg of **1 USDm ≈ US$1** and is **issued through Ethena's stablecoin stack** — i.e. it inherits the synthetic-dollar mechanism behind [[ethena-usde]] / [[usde]] rather than holding fiat reserves directly. USDm is designed to be the default settlement asset across wallets, apps, and on-chain services on [[megaeth]], the dollar rail for a chain marketing real-time (~10 ms) block times.
+**MegaUSD** (ticker USDM, styled "USDm") is the native dollar stablecoin of the **MegaETH** blockchain. It targets a soft peg of **1 USDm ≈ US$1** and is **issued through Ethena's stablecoin stack** — i.e. it inherits the synthetic-dollar mechanism behind [[ethena-usde]] / [[ethena-usde]] rather than holding fiat reserves directly. USDm is designed to be the default settlement asset across wallets, apps, and on-chain services on [[megaeth]], the dollar rail for a chain marketing real-time (~10 ms) block times.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -38,7 +38,7 @@ At the snapshot USDm was holding its peg tightly (~$0.9995). Supply has grown sh
 
 ## Architecture & how it works
 
-USDm is issued via **Ethena's** infrastructure, the same stack behind [[usde]] (USDe). The design is a **synthetic dollar**, not a fiat-custody coin.
+USDm is issued via **Ethena's** infrastructure, the same stack behind [[ethena-usde]] (USDe). The design is a **synthetic dollar**, not a fiat-custody coin.
 
 - **Collateral / reserve model:** Ethena's design backs the token with crypto collateral (liquid staking assets and stablecoins) hedged by an offsetting **short perpetual-futures** position — a [[delta-neutral]] position — so the *dollar value* of the backing stays roughly constant regardless of the collateral's spot price. As a MegaETH-native deployment, USDm leans on this Ethena machinery rather than maintaining an independent reserve.
 - **Peg / stability mechanism:** The peg is defended by the delta-neutral hedge (collateral gains/losses offset by the short) plus mint/redeem arbitrage through the Ethena stack. When USDm trades below $1, authorised parties can redeem against backing; when above, they can mint — this two-sided arbitrage is what tethers the secondary price to NAV.
@@ -60,7 +60,7 @@ Circulating and total supply are equal at **221.37M USDM** — no locked overhan
 | Token | Issuer / chain | Backing model | Yield to base holder | Notes |
 |---|---|---|---|---|
 | **USDm** | Ethena stack / MegaETH | Crypto collateral + delta-neutral short hedge | No (yield via staked variant) | Chain-native settlement dollar |
-| [[usde\|USDe]] | Ethena / multi-chain | Same delta-neutral synthetic-dollar model | No (sUSDe earns) | The flagship the USDm stack derives from |
+| [[ethena-usde\|USDe]] | Ethena / multi-chain | Same delta-neutral synthetic-dollar model | No (sUSDe earns) | The flagship the USDm stack derives from |
 | [[usdc]] | Circle / multi-chain | Fiat reserves (T-bills, cash) | No | Fiat-custody, attested |
 | [[dai]] | MakerDAO/Sky | Crypto + RWA overcollateralised | No (sDAI earns) | Decentralised CDP model |
 
@@ -96,7 +96,7 @@ USDm sits at the intersection of two themes: **synthetic dollars** (Ethena-style
 
 ## Risks
 
-- **De-peg risk:** as an Ethena-style synthetic dollar, USDm is exposed to the same failure modes as [[usde]] — sustained **negative funding rates** can erode the backing yield, and sharp collateral drawdowns can stress the hedge. The current "Extreme Fear" backdrop (crypto Fear & Greed ~21, BTC ≈ $64,568) is the kind of environment where funding can turn negative. The 2026-06-14 intraday low ($0.9739) shows the peg can dislocate on thin liquidity.
+- **De-peg risk:** as an Ethena-style synthetic dollar, USDm is exposed to the same failure modes as [[ethena-usde]] — sustained **negative funding rates** can erode the backing yield, and sharp collateral drawdowns can stress the hedge. The current "Extreme Fear" backdrop (crypto Fear & Greed ~21, BTC ≈ $64,568) is the kind of environment where funding can turn negative. The 2026-06-14 intraday low ($0.9739) shows the peg can dislocate on thin liquidity.
 - **Collateral / hedge risk:** reliance on perpetual-futures hedging introduces exchange counterparty risk and execution risk on the [[delta-neutral]] position.
 - **Yield-source / counterparty risk:** the backing yield is derivative income from centralised perp venues; venue insolvency, socialised losses, or a prolonged negative-funding regime impair the model.
 - **Redemption-gating risk:** primary redemption is permissioned through the Ethena stack; ordinary holders rely on MegaETH secondary liquidity, which can thin out under stress.
@@ -117,7 +117,7 @@ USDm sits at the intersection of two themes: **synthetic dollars** (Ethena-style
 
 ## Related
 
-- [[ethena-usde]], [[usde]] — the issuing synthetic-dollar protocol and its flagship token
+- [[ethena-usde]], [[ethena-usde]] — the issuing synthetic-dollar protocol and its flagship token
 - [[ethena]] — issuer
 - [[delta-neutral]] — the hedging mechanism
 - [[stablecoins]] — landscape overview

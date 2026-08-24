@@ -15,7 +15,7 @@ related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoins]]", "[[tether-lim
 
 # Plasma
 
-**Plasma** (ticker **XPL**) is a [[layer-1|Layer 1]] blockchain purpose-built for [[stablecoin]] payments — zero-fee USDT transfers, custom gas tokens, and deep [[tether-limited|Tether]]/USDT0 integration on its own stablecoin-optimized chain. For traders it is the purest listed expression of the "stablecoin infrastructure" narrative: a token that round-tripped from a $1.68 launch-euphoria high (Sept 2025) to $0.073 (Feb 2026) and then re-rated as TVL and USDT0 flows made it a top-10 chain by value locked. XPL is the native gas/staking asset.
+**Plasma** (ticker **XPL**) is a [[layer-1|Layer 1]] blockchain purpose-built for [[stablecoins]] payments — zero-fee USDT transfers, custom gas tokens, and deep [[tether-limited|Tether]]/USDT0 integration on its own stablecoin-optimized chain. For traders it is the purest listed expression of the "stablecoin infrastructure" narrative: a token that round-tripped from a $1.68 launch-euphoria high (Sept 2025) to $0.073 (Feb 2026) and then re-rated as TVL and USDT0 flows made it a top-10 chain by value locked. XPL is the native gas/staking asset.
 
 ---
 
@@ -77,7 +77,7 @@ Plasma's global payments coverage and inbound suite of products position it as t
 
 ## Technology & Consensus
 
-Plasma is a stablecoin-optimized [[layer-1|Layer 1]] designed so that the dominant on-chain activity — moving [[stablecoin|stablecoins]], specifically USD₮ — is fast, cheap, and ideally free at the point of use:
+Plasma is a stablecoin-optimized [[layer-1|Layer 1]] designed so that the dominant on-chain activity — moving [[stablecoins|stablecoins]], specifically USD₮ — is fast, cheap, and ideally free at the point of use:
 
 - **Zero-fee USD₮ transfers** — the protocol sponsors gas for simple stablecoin sends, removing the need for users to hold a separate gas token to move dollars.
 - **Custom gas tokens** — fees for other operations can be paid in approved assets rather than only the native token, lowering UX friction for payment apps.
@@ -135,7 +135,7 @@ The Feb 2026 trough of ~$0.073 cited in earlier reporting was undercut by a fres
 
 ## Use Case, Narrative & Category
 
-- **Narrative baskets**: stablecoin infrastructure (with [[ethena]], [[tether-limited|Tether ecosystem]] assets), new-L1 launches, "GENIUS-Act / regulated stablecoin" macro basket. XPL is the high-beta way to trade [[stablecoin]] adoption.
+- **Narrative baskets**: stablecoin infrastructure (with [[ethena]], [[tether-limited|Tether ecosystem]] assets), new-L1 launches, "GENIUS-Act / regulated stablecoin" macro basket. XPL is the high-beta way to trade [[stablecoins]] adoption.
 - **Key catalysts**: USDT0 supply growth on-chain, Binance Earn campaigns, neobank product rollout — vs the **July 2026 25% unlock**, which sets up a classic pre-unlock fade / post-unlock reload structure.
 
 ---
@@ -182,7 +182,7 @@ Within the stablecoin-infrastructure basket, XPL is the highest-liquidity, highe
 
 ## Related
 
-- [[stablecoin]]
+- [[stablecoins]]
 - [[stablecoins]]
 - [[stablecoin-yields]]
 - [[tether-limited]]

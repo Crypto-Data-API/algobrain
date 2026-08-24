@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-04
 updated: 2026-07-13
 status: excellent
-tags: [strategy-development, crypto, solana, memecoin, sniping, pump-fun, bonding-curve, mev, microcap, low-cap, research]
+tags: [strategy-development, crypto, solana, memecoins, sniping, pump-fun, bonding-curve, mev, microcap, low-cap, research]
 aliases: ["Low-Cap Trading Map", "Memecoin Trading Map", "Solana Microcap Map", "Pump.fun Strategy Map"]
 domain: [crypto, sniping, memecoin]
 difficulty: advanced

@@ -9,12 +9,12 @@ aliases: ["EUSD", "Electronic Dollar", "eUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://register.app/"
-related: ["[[crypto-markets]]", "[[dai]]", "[[depeg]]", "[[ethereum]]", "[[real-world-assets]]", "[[stablecoin]]", "[[tokenization]]", "[[treasuries]]", "[[usdc]]"]
+related: ["[[crypto-markets]]", "[[dai]]", "[[depeg]]", "[[ethereum]]", "[[real-world-assets]]", "[[stablecoins]]", "[[tokenization]]", "[[treasuries]]", "[[usdc]]"]
 ---
 
 # Electronic USD
 
-**Electronic USD** (ticker **eUSD / EUSD**) is a **U.S. dollar–pegged [[stablecoin]]** in the **Reserve Protocol** ecosystem, designed to hold a value of $1.00 and trade as an on-chain digital dollar. Reserve "RTokens" like eUSD are backed by a **transparent, on-chain basket of collateral** rather than by a single off-chain reserve account, which is why aggregators classify eUSD as both **fiat-backed and crypto-backed (overcollateralized)**. It is **Base-native** and also live on [[ethereum|Ethereum]] and Arbitrum.
+**Electronic USD** (ticker **eUSD / EUSD**) is a **U.S. dollar–pegged [[stablecoins]]** in the **Reserve Protocol** ecosystem, designed to hold a value of $1.00 and trade as an on-chain digital dollar. Reserve "RTokens" like eUSD are backed by a **transparent, on-chain basket of collateral** rather than by a single off-chain reserve account, which is why aggregators classify eUSD as both **fiat-backed and crypto-backed (overcollateralized)**. It is **Base-native** and also live on [[ethereum|Ethereum]] and Arbitrum.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -145,7 +145,7 @@ Secondary liquidity is **moderate** and concentrated on-chain across Base, Ether
 
 ## See Also
 
-- [[stablecoin]]
+- [[stablecoins]]
 - [[real-world-assets]]
 - [[tokenization]]
 - [[treasuries]]

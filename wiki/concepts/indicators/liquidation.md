@@ -5,7 +5,7 @@ created: 2026-04-06
 updated: 2026-07-19
 status: good
 confidence: medium
-tags: [derivatives, risk-management, liquidation, leverage]
+tags: [derivatives, risk-management, liquidations, leverage]
 aliases: ["Forced Liquidation", "Liq", "Getting Liquidated", "Getting Rekt", "Liquidation Risk"]
 domain: [risk-management, derivatives]
 prerequisites: ["[[leverage]]", "[[margin]]", "[[perpetual-futures]]"]

@@ -9,7 +9,7 @@ aliases: ["LAB", "LABtrade"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://lab.pro/"
-related: ["[[bnb]]", "[[crypto-markets]]", "[[decentralized-finance]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[defi]]"]
 ---
 
 # LAB
@@ -140,7 +140,7 @@ Framing only — not advice. Against the 2026-06-23 macro backdrop (Fear & Greed
 
 - [[crypto-markets]]
 - [[bnb]]
-- [[decentralized-finance]]
+- [[defi]]
 
 ---
 

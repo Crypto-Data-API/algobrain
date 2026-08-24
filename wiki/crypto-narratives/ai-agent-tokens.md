@@ -175,7 +175,7 @@ Analog mechanisms (transferable to other narratives): `sentiment-shock`, `dry-po
 - [[bitcoin]]
 - [[ethereum]]
 - [[solana]]
-- [[memecoins]]
+- [[meme-coins]]
 - [[bittensor]]
 - [[ai-trading]]
 - [[market-regime]]

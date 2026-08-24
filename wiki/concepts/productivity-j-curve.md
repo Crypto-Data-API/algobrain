@@ -73,7 +73,7 @@ The J-curve framework distinguishes three positioning regimes:
 
 ### Regime A: Pre-Inflection (current 2026 state)
 
-- Long capex enablers ([[nvidia]], data center / power infrastructure) capture continued investment-phase spend
+- Long capex enablers ([[nvidia-ai|Nvidia]], data center / power infrastructure) capture continued investment-phase spend
 - Short narrative-disconnect plays: companies advertising AI productivity gains they cannot yet demonstrate
 - Watch for capex-vs-cash-flow stress — see ai-capex-vs-cash-flow-divergence
 

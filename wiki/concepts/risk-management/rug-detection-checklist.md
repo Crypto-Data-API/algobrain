@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-04
 updated: 2026-07-13
 status: good
-tags: [crypto, risk-management, defi, security, memecoin, scams]
+tags: [crypto, risk-management, defi, security, memecoins, scams]
 aliases: ["rug check", "pre-trade rug check", "rug filter", "scam check"]
 domain: [risk-management]
 difficulty: beginner

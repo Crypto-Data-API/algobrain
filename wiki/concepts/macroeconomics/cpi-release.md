@@ -93,7 +93,7 @@ The single most important cell for an options book is the bottom-left: a *hot su
 
 ### The 8:30 AM mechanic
 
-CPI prints at 8:30:00 AM Eastern. The *first* 60 seconds of trading on E-mini S&P futures and Treasury futures is where the bulk of the surface re-pricing happens. By 8:35, the IV of the front-week SPX cycle is typically already at its post-print equilibrium. The cash-open at 9:30 then re-prices single names against the new index level, often with overshoot in beta-heavy names ([[nvidia|NVDA]], TSLA, small-cap names via [[iwm|IWM]]).
+CPI prints at 8:30:00 AM Eastern. The *first* 60 seconds of trading on E-mini S&P futures and Treasury futures is where the bulk of the surface re-pricing happens. By 8:35, the IV of the front-week SPX cycle is typically already at its post-print equilibrium. The cash-open at 9:30 then re-prices single names against the new index level, often with overshoot in beta-heavy names ([[nvidia-ai|NVDA]], TSLA, small-cap names via [[iwm|IWM]]).
 
 ## Examples / Empirical Evidence
 

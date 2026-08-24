@@ -9,7 +9,7 @@ aliases: ["BARD", "LBTC", "Lombard Protocol"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.lombard.finance/"
-related: ["[[babylon]]", "[[bitcoin]]", "[[crypto-markets]]", "[[decentralized-finance]]", "[[defi]]", "[[ethereum]]", "[[liquid-staking]]", "[[restaking]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[token-unlock-supply-event]]"]
+related: ["[[babylon]]", "[[bitcoin]]", "[[crypto-markets]]", "[[defi]]", "[[defi]]", "[[ethereum]]", "[[liquid-staking]]", "[[restaking]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[token-unlock-supply-event]]"]
 ---
 
 # Lombard
@@ -129,7 +129,7 @@ BARD is a **token on the BTCfi platform**, not BTC itself — investors must sep
 - [[ethereum]]
 - [[restaking]]
 - [[liquid-staking]]
-- [[decentralized-finance]]
+- [[defi]]
 - [[defi]]
 - [[babylon]]
 - [[crypto-fear-and-greed-index]]

@@ -219,7 +219,7 @@ Relative to LayerZero, Wormhole, or Axelar — which have far deeper integration
 
 ## Trading Playbook (bear / Extreme-Fear regime)
 
-> Context: F&G = 21 (Extreme Fear), established bear market, [[btc-bitcoin|BTC]] ~$64k. BFC is a thin, Korean-venue-concentrated interoperability micro-cap.
+> Context: F&G = 21 (Extreme Fear), established bear market, [[bitcoin|BTC]] ~$64k. BFC is a thin, Korean-venue-concentrated interoperability micro-cap.
 
 - **Bias:** capital-preservation. BFC is a high-beta infrastructure small-cap in a crowded, incumbent-dominated niche, with weak token value capture.
 - **Longs:** only as a small, asymmetric interoperability-recovery bet sized for total loss; prefer accumulation near historical support over chasing Upbit-driven spikes.

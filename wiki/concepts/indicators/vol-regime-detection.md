@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-07
 updated: 2026-07-19
 status: excellent
-tags: [volatility, indicators, regime, machine-learning, risk-management]
+tags: [volatility, indicators, market-regime, machine-learning, risk-management]
 aliases: ["Vol Regime Detection", "Volatility Regime Detection", "Regime Detection"]
 related: ["[[volatility-regime]]", "[[volatility-regime-classification]]", "[[volatility-regime-switching]]", "[[volatility-spike]]", "[[volatility-term-structure]]", "[[vix]]", "[[vix-futures]]", "[[vvix]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[options-risk-budgeting]]", "[[vega-budgeting]]", "[[risk-budgeting]]", "[[hidden-markov-model]]", "[[machine-learning]]", "[[correlation-regime]]", "[[correlation-breakdown]]", "[[asymmetric-risk-reward]]", "[[convexity]]", "[[cryptodataapi]]"]
 domain: [volatility, indicators, risk-management]

@@ -230,7 +230,7 @@ C98 trades roughly **-99.8%** below its August 2021 all-time high of ~$6.42, a d
 
 ## Trading Playbook (bear / Extreme-Fear regime)
 
-> Context: F&G = 21 (Extreme Fear), established bear market, [[btc-bitcoin|BTC]] ~$64k. C98 is a thin DeFi-wallet small-cap with weak token value capture.
+> Context: F&G = 21 (Extreme Fear), established bear market, [[bitcoin|BTC]] ~$64k. C98 is a thin DeFi-wallet small-cap with weak token value capture.
 
 - **Bias:** capital-preservation. C98 is a high-beta DeFi small-cap whose token does not cleanly capture product value; it rallies on sentiment and Southeast-Asian retail flows more than fundamentals.
 - **Longs:** small, asymmetric DeFi-recovery bets sized for total loss; prefer accumulation near historical support (recent ATL zone) over chasing Binance-led spikes.

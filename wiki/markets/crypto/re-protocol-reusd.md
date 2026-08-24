@@ -9,7 +9,7 @@ aliases: ["REUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://re.xyz"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[stablecoin]]", "[[stablecoins]]", "[[yield-bearing-stablecoin]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[stablecoins]]", "[[stablecoins]]", "[[yield-bearing-stablecoin]]"]
 ---
 
 # Re Protocol reUSD
@@ -198,7 +198,7 @@ reUSD sits in the **insurance-linked / RWA-yield** narrative — bringing reinsu
 
 ## Related
 
-- [[stablecoin]] / [[stablecoins]]
+- [[stablecoins]] / [[stablecoins]]
 - [[real-world-assets]]
 - [[yield-bearing-stablecoin]]
 - [[crypto-markets]]

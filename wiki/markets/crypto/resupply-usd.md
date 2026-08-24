@@ -9,12 +9,12 @@ aliases: ["REUSD", "Resupply USD", "reUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://resupply.fi/"
-related: ["[[collateralization]]", "[[crypto-markets]]", "[[curve]]", "[[dai]]", "[[defi]]", "[[dola-usd]]", "[[ethereum]]", "[[stablecoin]]", "[[usdc]]"]
+related: ["[[collateralization]]", "[[crypto-markets]]", "[[curve]]", "[[dai]]", "[[defi]]", "[[dola-usd]]", "[[ethereum]]", "[[stablecoins]]", "[[usdc]]"]
 ---
 
 # Resupply USD
 
-**Resupply USD** (ticker **REUSD / reUSD**) is a decentralized, **crypto-collateralized [[stablecoin]]** soft-pegged to the U.S. dollar on [[ethereum|Ethereum]], issued by the **Resupply** [[defi|DeFi]] protocol within the [[curve|Curve]] / Frax ecosystem. Its distinguishing feature is the *type* of collateral: rather than fiat or raw volatile crypto, REUSD is minted against **interest-bearing lending-market deposits** — receipt tokens from venues such as [[curve|Curve Lend]] and Fraxlend that are *already* earning yield. It is a [[collateralization|collateralized-debt-position]] (CDP) stablecoin layered on top of money markets: a "stablecoin of yield-bearing stablecoin positions."
+**Resupply USD** (ticker **REUSD / reUSD**) is a decentralized, **crypto-collateralized [[stablecoins]]** soft-pegged to the U.S. dollar on [[ethereum|Ethereum]], issued by the **Resupply** [[defi|DeFi]] protocol within the [[curve|Curve]] / Frax ecosystem. Its distinguishing feature is the *type* of collateral: rather than fiat or raw volatile crypto, REUSD is minted against **interest-bearing lending-market deposits** — receipt tokens from venues such as [[curve|Curve Lend]] and Fraxlend that are *already* earning yield. It is a [[collateralization|collateralized-debt-position]] (CDP) stablecoin layered on top of money markets: a "stablecoin of yield-bearing stablecoin positions."
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -122,7 +122,7 @@ REUSD liquidity is concentrated in **[[defi|DeFi]] venues on [[ethereum|Ethereum
 - **Governance risk** — Parameter and emissions decisions (collateral types, rates, insurance-pool sizing) directly affect peg stability.
 - **Regulatory risk** — Evolving stablecoin rules may affect DeFi-native dollar issuance.
 
-See [[stablecoin]], [[depeg]], and [[collateralization]] for the general framework.
+See [[stablecoins]], [[depeg]], and [[collateralization]] for the general framework.
 
 ---
 
@@ -136,7 +136,7 @@ See [[stablecoin]], [[depeg]], and [[collateralization]] for the general framewo
 
 ## Related
 
-- [[stablecoin]]
+- [[stablecoins]]
 - [[defi]]
 - [[collateralization]]
 - [[cdp]]

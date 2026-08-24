@@ -205,7 +205,7 @@ Yearn's moat is its **strategy sophistication** and **auto-compounding infrastru
 - [[arbitrum]] -- An L2 deployment with lower-cost vaults
 - [[smart-contracts]] -- Underlying technology (ERC-4626 vault standard in v3)
 - [[liquid-staking]] -- The LSD layer underneath yETH
-- [[stablecoin]] -- Base asset for the lowest-risk vaults
+- [[stablecoins]] -- Base asset for the lowest-risk vaults
 - [[smart-contract-risk]] -- The composability risk stacked across vault layers
 
 ---

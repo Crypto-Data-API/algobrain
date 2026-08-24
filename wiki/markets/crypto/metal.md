@@ -9,7 +9,7 @@ aliases: ["MTL", "Metal Pay", "Metallicus"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.metalpay.com/"
-related: ["[[crypto-markets]]", "[[governance-token]]", "[[payments]]", "[[stablecoin]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
+related: ["[[crypto-markets]]", "[[governance-token]]", "[[payments]]", "[[stablecoins]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Metal DAO
@@ -44,7 +44,7 @@ Metal Pay was developed and launched by **Metallicus** in 2016 as a peer-to-peer
 
 MTL itself functions as a [[governance-token]] and loyalty token rather than a base-layer gas asset. Its principal roles are:
 
-- **Stablecoin governance** — MTL holders govern the **Metal Dollar (XMD)** [[stablecoin]], including the composition of its backing basket and the admission of new stablecoin issuers (e.g., community banks or fintechs).
+- **Stablecoin governance** — MTL holders govern the **Metal Dollar (XMD)** [[stablecoins]], including the composition of its backing basket and the admission of new stablecoin issuers (e.g., community banks or fintechs).
 - **Fee discounts** — Holding MTL grants tiered reductions on in-app crypto trading fees; large holders historically qualified for zero-fee purchases.
 
 This positions Metal DAO at the intersection of consumer [[payments]], rewards, and stablecoin governance, rather than as a general smart-contract platform.
@@ -85,7 +85,7 @@ MTL competes in the crowded consumer-payments-token niche, where the loyalty/dis
 |---|---|---|---|
 | **MTL** (Metal DAO) | Metal Pay / Metal Blockchain | Fee discounts + XMD governance | U.S.-domiciled, compliance-oriented; stablecoin-governance angle |
 | **[[crypto-com-coin|CRO]]** (Cronos) | Crypto.com app / Cronos chain | Fee discounts, staking, card tiers | Much larger consumer app + card program; broader utility |
-| **[[binance-coin|BNB]]** (BNB Chain) | Binance / BNB Chain | Fee discounts, gas, launchpad | Exchange-backed mega-cap; the archetype of the fee-discount token |
+| **[[bnb|BNB]]** (BNB Chain) | Binance / BNB Chain | Fee discounts, gas, launchpad | Exchange-backed mega-cap; the archetype of the fee-discount token |
 | **[[pax-dollar|USDP]] / similar** | — | Stablecoin | XMD's peers as a governed stablecoin product |
 
 MTL's defensible angle is **regulatory positioning** — a U.S. team building compliance-oriented infrastructure for banks and fintechs — rather than scale. Against exchange-backed tokens (CRO, BNB) it is tiny and lacks a comparably large consumer funnel.
@@ -287,7 +287,7 @@ Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataap
 
 - [[crypto-markets]]
 - [[payments]]
-- [[stablecoin]]
+- [[stablecoins]]
 - [[governance-token]]
 
 ---

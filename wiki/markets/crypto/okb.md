@@ -10,12 +10,12 @@ entity_type: protocol
 founded: 2018
 headquarters: "OKX: Seychelles / San Jose (US entity)"
 website: "https://www.okx.com/"
-related: ["[[binance-coin]]", "[[binance]]", "[[bitget-token]]", "[[crypto-markets]]", "[[ethereum]]", "[[kucoin-shares]]", "[[okx]]"]
+related: ["[[bnb]]", "[[binance]]", "[[bitget-token]]", "[[crypto-markets]]", "[[ethereum]]", "[[kucoin-shares]]", "[[okx]]"]
 ---
 
 # OKB
 
-**OKB** is the native utility token of [[okx|OKX]], one of the largest crypto exchanges by volume, and the gas token of OKX's X Layer L2. For traders it is the canonical 2025 case study in **supply-shock tokenomics**: in August 2025 OKX burned 52% of the supply in one stroke, hard-capping OKB at 21 million tokens (deliberately mirroring [[bitcoin|Bitcoin]]'s cap) and tripling the price within days. It belongs to the [[centralized-exchange|centralized-exchange]] (CEX) token basket alongside [[binance-coin|BNB]], [[bitget-token|BGB]], and [[kucoin-shares|KCS]].
+**OKB** is the native utility token of [[okx|OKX]], one of the largest crypto exchanges by volume, and the gas token of OKX's X Layer L2. For traders it is the canonical 2025 case study in **supply-shock tokenomics**: in August 2025 OKX burned 52% of the supply in one stroke, hard-capping OKB at 21 million tokens (deliberately mirroring [[bitcoin|Bitcoin]]'s cap) and tripling the price within days. It belongs to the [[centralized-exchange|centralized-exchange]] (CEX) token basket alongside [[bnb|BNB]], [[bitget-token|BGB]], and [[kucoin-shares|KCS]].
 
 ---
 
@@ -127,7 +127,7 @@ Exchange tokens have no cash-flow claim, but they can be valued **qualitatively 
 - **Exchange-volume proxy** — OKB demand scales with OKX trading-fee revenue (via discounts + launchpad gating). Rising retail/derivatives volume on OKX tightens the float.
 - **Buyback proxy → now demand proxy** — pre-2025, OKB was valued partly on the expected NPV of quarterly buy-and-burns. Post-burn, that lever is gone; the token reprices purely on demand against a frozen 21M supply.
 - **X Layer usage proxy** — incremental demand from L2 gas consumption; adoption metrics (TVL, daily transactions, active addresses) are the forward valuation drivers.
-- **Relative**: compare OKB market cap / OKX volume to [[binance-coin|BNB]]/Binance volume and [[bitget-token|BGB]]/Bitget volume to gauge whether OKB is rich or cheap within the basket.
+- **Relative**: compare OKB market cap / OKX volume to [[bnb|BNB]]/Binance volume and [[bitget-token|BGB]]/Bitget volume to gauge whether OKB is rich or cheap within the basket.
 
 A useful sanity check: with supply fixed, **price is the only adjustment variable** — there is no buyback to "absorb" weakness, so OKB tends to be higher-beta to OKX flow sentiment than buyback-cushioned peers.
 
@@ -161,7 +161,7 @@ OKB competes within the [[centralized-exchange|CEX]]-token basket. Peer comparis
 
 | Token | Exchange | Mkt cap | Rank | Supply mechanic | MC/FDV | Dilution risk |
 |---|---|---|---|---|---|---|
-| [[binance-coin\|BNB]] | Binance | (basket leader, largest) | top-10 | Auto-burn (quarterly) | ~1.0 | Low |
+| [[bnb\|BNB]] | Binance | (basket leader, largest) | top-10 | Auto-burn (quarterly) | ~1.0 | Low |
 | **OKB** | OKX | $1.587B | #52 | **Hard-capped 21M (no burns)** | **1.00** | **None** |
 | [[bitget-token\|BGB]] | Bitget | $1.239B | #60 | Burn glide path to 100M | 0.77 | Medium (ongoing burns/migration) |
 | [[kucoin-shares\|KCS]] | KuCoin | $0.966B | #69 | Quarterly buyback-burn; unlimited nominal cap | 0.95 | Low–medium |
@@ -201,7 +201,7 @@ OKB competes within the [[centralized-exchange|CEX]]-token basket. Peer comparis
 - [[ethereum]]
 - [[bitcoin]]
 - [[binance]]
-- [[binance-coin]]
+- [[bnb]]
 - [[bitget-token]]
 - [[kucoin-shares]]
 - [[layer-2]]

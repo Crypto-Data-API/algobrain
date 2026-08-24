@@ -4,7 +4,7 @@ type: reference
 created: 2026-04-10
 updated: 2026-06-20
 status: excellent
-tags: [data, data-providers, paid]
+tags: [data-provider, data-providers, paid]
 aliases: ["Commercial Market Data", "Quant Data Vendors"]
 related: ["[[data-sources-overview]]", "[[free-data-sources]]", "[[crypto-data-sources]]", "[[historical-spread-data]]", "[[exchange-api-reference]]"]
 ---

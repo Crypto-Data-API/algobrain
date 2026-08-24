@@ -9,7 +9,7 @@ aliases: ["EBTC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.echo-protocol.xyz/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[decentralized-finance]]", "[[liquid-staking]]", "[[restaking]]", "[[wrapped-bitcoin]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[defi]]", "[[liquid-staking]]", "[[restaking]]", "[[wrapped-bitcoin]]"]
 ---
 
 # eBTC
@@ -120,7 +120,7 @@ In the 2026-06-24 backdrop (Fear & Greed 22, established bear market, BTC ~$62.6
 
 - [[crypto-markets]]
 - [[bitcoin]]
-- [[decentralized-finance]]
+- [[defi]]
 - [[liquid-staking]]
 - [[wrapped-bitcoin]]
 - [[restaking]]

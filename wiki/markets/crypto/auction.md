@@ -9,7 +9,7 @@ aliases: ["AUCTION", "Bounce Finance", "BounceBit"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://bounce.finance/"
-related: ["[[crypto-markets]]", "[[decentralized-finance]]", "[[ethereum]]", "[[governance-token]]", "[[launchpad]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[funding-rate-harvest]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[governance-token]]", "[[launchpad]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[funding-rate-harvest]]"]
 ---
 
 # Bounce
@@ -48,7 +48,7 @@ Bounce launched in 2020 as a decentralized auction protocol, branding itself an 
 - **Sealed-bid auctions** — bids hidden until settlement, reducing front-running.
 - **English auctions** — ascending open bids, common for NFTs.
 
-This makes Bounce a general-purpose [[launchpad]] for token generation events (TGEs), NFT mints, and OTC-style sales, operating across [[ethereum|Ethereum]] and multiple EVM chains. The protocol charges fees on auctions, and **AUCTION** is used for [[governance-token|governance]], staking, and fee/access benefits within the ecosystem. AUCTION has a hard-capped maximum supply of 10 million tokens, making it one of the lower-supply [[decentralized-finance|DeFi]] governance tokens.
+This makes Bounce a general-purpose [[launchpad]] for token generation events (TGEs), NFT mints, and OTC-style sales, operating across [[ethereum|Ethereum]] and multiple EVM chains. The protocol charges fees on auctions, and **AUCTION** is used for [[governance-token|governance]], staking, and fee/access benefits within the ecosystem. AUCTION has a hard-capped maximum supply of 10 million tokens, making it one of the lower-supply [[defi|DeFi]] governance tokens.
 
 ---
 
@@ -85,7 +85,7 @@ With circulating supply ~7.34M of a 10M cap, the **MC/FDV ratio is ~0.96** — a
 
 ## Comparison vs Competitors
 
-Launchpads are a competitive, reputation-sensitive corner of [[decentralized-finance|DeFi]]. Bounce competes with dedicated IDO/launch platforms and exchange-native sale desks.
+Launchpads are a competitive, reputation-sensitive corner of [[defi|DeFi]]. Bounce competes with dedicated IDO/launch platforms and exchange-native sale desks.
 
 | Platform | Model | Sale formats | Token | Differentiator |
 |---|---|---|---|---|
@@ -284,7 +284,7 @@ Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataap
 - [[crypto-markets]]
 - [[ethereum]]
 - [[launchpad]]
-- [[decentralized-finance]]
+- [[defi]]
 - [[governance-token]]
 - [[mev]]
 - [[risk-management]]

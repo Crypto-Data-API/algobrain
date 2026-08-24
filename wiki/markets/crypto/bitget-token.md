@@ -10,12 +10,12 @@ entity_type: protocol
 founded: 2021
 headquarters: "Decentralized (Bitget: Seychelles; Morph Foundation stewardship)"
 website: "https://www.bitget.com/"
-related: ["[[binance-coin]]", "[[bitget]]", "[[crypto-markets]]", "[[ethereum]]", "[[gatechain-token]]", "[[kucoin-shares]]", "[[okb]]"]
+related: ["[[bnb]]", "[[bitget]]", "[[crypto-markets]]", "[[ethereum]]", "[[gatechain-token]]", "[[kucoin-shares]]", "[[okb]]"]
 ---
 
 # Bitget Token
 
-**Bitget Token** (BGB) is the exchange token of the [[bitget|Bitget]] exchange and Bitget Wallet, which since a September 2025 strategic partnership has also become the **gas and governance token of the Morph layer-2 chain**, with the non-profit Morph Foundation responsible for its future development. For traders, BGB is one of the major [[centralized-exchange|CEX]]-token plays (alongside [[binance-coin|BNB]], [[okb|OKB]], [[gatechain-token|GT]], [[kucoin-shares|KCS]]) — a bet on Bitget's exchange volumes plus an aggressive **buyback-and-burn programme targeting a final supply of 100 million tokens**.
+**Bitget Token** (BGB) is the exchange token of the [[bitget|Bitget]] exchange and Bitget Wallet, which since a September 2025 strategic partnership has also become the **gas and governance token of the Morph layer-2 chain**, with the non-profit Morph Foundation responsible for its future development. For traders, BGB is one of the major [[centralized-exchange|CEX]]-token plays (alongside [[bnb|BNB]], [[okb|OKB]], [[gatechain-token|GT]], [[kucoin-shares|KCS]]) — a bet on Bitget's exchange volumes plus an aggressive **buyback-and-burn programme targeting a final supply of 100 million tokens**.
 
 ---
 
@@ -135,13 +135,13 @@ Investment framing: *BGB = a deflating claim on Bitget exchange economics + Morp
 - **Exchange-volume proxy** — BGB demand scales with Bitget trading-fee revenue (fee discounts + launchpad gating). Bitget's market-share gains/losses drive the idiosyncratic component.
 - **Buyback/burn proxy** — value accrual rests on the credibility of the burn glide path to 100M; faster burns funded by higher profits compress supply and support price.
 - **Morph usage proxy** — incremental demand from L2 gas as Morph adoption grows (TVL, transactions).
-- **Relative** — compare BGB market cap / Bitget volume against [[okb|OKB]]/OKX and [[binance-coin|BNB]]/Binance to judge richness within the basket. BGB's higher dilution (0.77 vs OKB's 1.00) is a structural discount factor.
+- **Relative** — compare BGB market cap / Bitget volume against [[okb|OKB]]/OKX and [[bnb|BNB]]/Binance to judge richness within the basket. BGB's higher dilution (0.77 vs OKB's 1.00) is a structural discount factor.
 
 ---
 
 ## Trading Playbook
 
-- **Basket member** — BGB tends to correlate with [[binance-coin|BNB]], [[okb|OKB]], and [[gatechain-token|GT]]; idiosyncratic moves come from burn announcements and Bitget volume share. Now also carries an L2/gas angle via Morph.
+- **Basket member** — BGB tends to correlate with [[bnb|BNB]], [[okb|OKB]], and [[gatechain-token|GT]]; idiosyncratic moves come from burn announcements and Bitget volume share. Now also carries an L2/gas angle via Morph.
 - **Catalyst calendar** — quarterly burn reports, Morph chain adoption metrics (gas burned = BGB sink), Bitget Launchpool cycles, and the long-run supply glide path to 100M.
 - **Relative-value** — long a fixed-supply peer ([[okb|OKB]]) vs short BGB expresses a view that dilution overhang outweighs burn pace; the reverse trade bets burns accelerate.
 - **Bear-market context** — at Fear & Greed 23 with ~1% turnover, BGB is prone to gappy, low-liquidity moves; the -79% drawdown from ATH shows how far CEX premia can compress.
@@ -162,7 +162,7 @@ Investment framing: *BGB = a deflating claim on Bitget exchange economics + Morp
 
 | Token | Exchange | Mkt cap | Rank | Supply mechanic | MC/FDV | Dilution risk |
 |---|---|---|---|---|---|---|
-| [[binance-coin\|BNB]] | Binance | (basket leader) | top-10 | Auto-burn (quarterly) | ~1.0 | Low |
+| [[bnb\|BNB]] | Binance | (basket leader) | top-10 | Auto-burn (quarterly) | ~1.0 | Low |
 | [[okb\|OKB]] | OKX | $1.587B | #52 | Hard-capped 21M | 1.00 | None |
 | **BGB** | Bitget | $1.239B | #60 | Burn glide path to 100M | **0.77** | **Medium** |
 | [[kucoin-shares\|KCS]] | KuCoin | $0.966B | #69 | Quarterly buyback-burn | 0.95 | Low–medium |
@@ -200,7 +200,7 @@ Investment framing: *BGB = a deflating claim on Bitget exchange economics + Morp
 - [[centralized-exchange]]
 - [[ethereum]]
 - [[bitget]]
-- [[binance-coin]]
+- [[bnb]]
 - [[okb]]
 - [[kucoin-shares]]
 - [[gatechain-token]]

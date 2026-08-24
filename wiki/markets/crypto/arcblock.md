@@ -214,7 +214,7 @@ ArcBlock's relative strength is a long-lived, integrated dev stack with native D
 
 ## Trading Playbook (bear / Extreme-Fear regime)
 
-> Context: F&G = 21 (Extreme Fear), established bear market, [[btc-bitcoin|BTC]] ~$64k. ABT is a very thin AI-narrative micro-cap with violent swings.
+> Context: F&G = 21 (Extreme Fear), established bear market, [[bitcoin|BTC]] ~$64k. ABT is a very thin AI-narrative micro-cap with violent swings.
 
 - **Bias:** treat as a high-volatility narrative trade, not an investment. Pricing is driven by AI sentiment and low-float mechanics, not verifiable revenue.
 - **Longs:** if trading the AI narrative, size tiny and for total loss; the +100%+ monthly swings cut both ways. Prefer entries after consolidation, not after a vertical spike (which is often exit liquidity).

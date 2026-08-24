@@ -22,10 +22,10 @@ The investor implication is that the headline "diversification" of a broad index
 
 ## How the Magnificent Seven Came to Dominate the S&P 500
 
-The post-2010s rise of the Magnificent Seven — apple, microsoft, alphabet, amazon, [[nvidia]], meta-platforms, and tesla — is the defining concentration episode of the modern era. Several forces compounded:
+The post-2010s rise of the Magnificent Seven — apple, microsoft, alphabet, amazon, [[nvidia-ai|Nvidia]], meta-platforms, and tesla — is the defining concentration episode of the modern era. Several forces compounded:
 
 - **Genuine fundamental dominance** — these firms built wide economic moats ([[network-effects]], scale, ecosystem lock-in) and grew earnings far faster than the index, justifying much (not all) of their rising weight.
-- **The AI re-rating (2023–2026)** — the artificial-intelligence capex cycle re-rated the mega-cap complex, with [[nvidia]] in particular driving an outsized share of index gains.
+- **The AI re-rating (2023–2026)** — the artificial-intelligence capex cycle re-rated the mega-cap complex, with [[nvidia-ai|Nvidia]] in particular driving an outsized share of index gains.
 - **Cap-weight mechanics** — as these names outperformed, their index weight rose automatically, so the index increasingly *was* them.
 - **Passive-flow reinforcement** — the secular shift from active to passive ([[passive-investing]]) meant new money flowed into constituents *in proportion to their existing weight*, sending the most dollars to the names already largest.
 

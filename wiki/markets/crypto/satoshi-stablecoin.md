@@ -9,12 +9,12 @@ aliases: ["River satUSD", "SATUSD", "Satoshi Stablecoin", "satUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://river.inc"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[dai]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[dai]]", "[[stablecoins]]", "[[stablecoins]]", "[[usdc]]"]
 ---
 
 # Satoshi Stablecoin
 
-**Satoshi Stablecoin** (SATUSD / satUSD) is a crypto-collateralized, chain-abstracted US-dollar [[stablecoin]] issued by **River** (formerly Satoshi Protocol), targeting a 1 USD peg. It is built around an "omni-CDP" (collateralized-debt-position) model: users can deposit collateral on one chain and mint satUSD on another **without bridging the underlying assets**, enabling cross-chain collateral, yield, and liquidity. Given River's roots and deployments, the design is oriented toward **[[bitcoin]]-backed collateral**. It is deployed natively across BOB Network, [[ethereum|Ethereum]], Base, Arbitrum, BNB Chain, Sonic, Bitlayer, BEVM, BSquared, and Hemi — several of which are Bitcoin-aligned L2s.
+**Satoshi Stablecoin** (SATUSD / satUSD) is a crypto-collateralized, chain-abstracted US-dollar [[stablecoins]] issued by **River** (formerly Satoshi Protocol), targeting a 1 USD peg. It is built around an "omni-CDP" (collateralized-debt-position) model: users can deposit collateral on one chain and mint satUSD on another **without bridging the underlying assets**, enabling cross-chain collateral, yield, and liquidity. Given River's roots and deployments, the design is oriented toward **[[bitcoin]]-backed collateral**. It is deployed natively across BOB Network, [[ethereum|Ethereum]], Base, Arbitrum, BNB Chain, Sonic, Bitlayer, BEVM, BSquared, and Hemi — several of which are Bitcoin-aligned L2s.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -109,7 +109,7 @@ satUSD sits at the intersection of two narratives: the **crypto-collateralized s
 ## Related
 
 - [[dai]] — the canonical crypto-overcollateralized stablecoin (closest design analog)
-- [[stablecoin]] / [[stablecoins]] — category overview
+- [[stablecoins]] / [[stablecoins]] — category overview
 - [[bitcoin]] — relevant given River's Bitcoin-L2 deployments and BTC collateral orientation
 - [[usdc]] — fiat-backed peer (for peg-stability contrast)
 - [[helio-protocol-hay|Lista USD]] — another crypto-collateralized peer

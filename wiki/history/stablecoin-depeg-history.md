@@ -327,6 +327,6 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 - [[makerdao]] — issuer of DAI/USDS (Black Thursday, SVB sympathy)
 - [[sky]] / [[usds]] — current Sky-era stablecoin brand
 - [[dai]] · [[usdc]] · [[terra-luna-collapse-2022]] — the principals in the defining events
-- [[stablecoin]] — general concept and design taxonomy
+- [[stablecoins]] — general concept and design taxonomy
 - [[real-world-assets]] — Treasury backing relevant to modern collateralized stables
 - Individual case studies: [[2017-2020-tether-banking-premium]] · [[2020-03-dai-black-thursday]] · [[2022-05-terra-luna-depeg-arb]] · [[2022-06-steth-depeg]] · [[2023-02-busd-wind-down]] · [[2023-03-usdc-svb-depeg]] · [[2026-04-kelp-stable-sympathy-depeg]]

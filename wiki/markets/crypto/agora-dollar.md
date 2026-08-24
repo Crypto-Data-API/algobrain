@@ -9,12 +9,12 @@ aliases: ["AUSD", "Agora Dollar", "Agora USD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://agora.finance/"
-related: ["[[crypto-markets]]", "[[dai]]", "[[ethereum]]", "[[pyusd]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]", "[[usdt]]"]
+related: ["[[crypto-markets]]", "[[dai]]", "[[ethereum]]", "[[pyusd]]", "[[stablecoins]]", "[[stablecoins]]", "[[usdc]]", "[[usdt]]"]
 ---
 
 # AUSD
 
-**AUSD** (Agora Dollar) is a **fiat-collateralized US-dollar [[stablecoin]]** issued by **Agora**, minted 1:1 against USD fiat and pegged to 1 USD. Agora positions AUSD around **institutional-grade custody and oversight** — reserves safeguarded by a major global custodian bank, audited by a Big Four auditor, and managed by a top-tier fund manager — and emphasizes a **gas-optimized smart contract** for low-cost transfers. It is deployed across a wide range of chains including [[ethereum|Ethereum]], Solana, Sui, Base, Arbitrum, Avalanche, BNB Chain, and Polygon.
+**AUSD** (Agora Dollar) is a **fiat-collateralized US-dollar [[stablecoins]]** issued by **Agora**, minted 1:1 against USD fiat and pegged to 1 USD. Agora positions AUSD around **institutional-grade custody and oversight** — reserves safeguarded by a major global custodian bank, audited by a Big Four auditor, and managed by a top-tier fund manager — and emphasizes a **gas-optimized smart contract** for low-cost transfers. It is deployed across a wide range of chains including [[ethereum|Ethereum]], Solana, Sui, Base, Arbitrum, Avalanche, BNB Chain, and Polygon.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -117,7 +117,7 @@ In the current Extreme-Fear environment (Fear & Greed 21), institutionally-posit
 
 ## Related
 
-- [[stablecoin]] / [[stablecoins]] — category overview
+- [[stablecoins]] / [[stablecoins]] — category overview
 - [[usdc]], [[usdt]] — fiat-backed peers
 - [[pyusd]] — consumer-brand fiat-backed peer
 - [[dai]] — decentralized, crypto-overcollateralized peer

@@ -84,7 +84,7 @@ OPEN is the unit that powers the attribution/reward economy: in the project's fr
 | **Render** | RENDER | Solana / multi | Decentralised GPU rendering/compute | Largely circulating | Established DePIN compute supply |
 | **io.net** | IO | Solana | Decentralised GPU aggregation | Low float, unlock-heavy | Aggregated GPU compute |
 
-OPEN's differentiation is **vertical** — it owns the *data-attribution accounting layer* rather than selling compute (RENDER, IO) or generic intelligence markets (TAO) or agents (FET). Its advantages are unusually **broad tier-1 CEX distribution** (Binance/Kraken/Upbit/Bitget/KuCoin) and a clean, specific wedge. Its disadvantages are a **heavy ~0.22-float unlock overhang** versus more-circulated peers like RENDER, and the fact that at-scale on-chain attribution is **unproven** where TAO/RENDER/FET have demonstrably live networks. See [[bittensor]], [[fetch-ai]], [[render]], [[io-net]].
+OPEN's differentiation is **vertical** — it owns the *data-attribution accounting layer* rather than selling compute (RENDER, IO) or generic intelligence markets (TAO) or agents (FET). Its advantages are unusually **broad tier-1 CEX distribution** (Binance/Kraken/Upbit/Bitget/KuCoin) and a clean, specific wedge. Its disadvantages are a **heavy ~0.22-float unlock overhang** versus more-circulated peers like RENDER, and the fact that at-scale on-chain attribution is **unproven** where TAO/RENDER/FET have demonstrably live networks. See [[bittensor]], [[fetch-ai]], [[render-token]], [[io-net]].
 
 ---
 
@@ -198,7 +198,7 @@ Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataap
 - [[ai-agent-tokens]]
 - [[data-provider]]
 - [[bittensor]]
-- [[render]]
+- [[render-token]]
 
 ---
 

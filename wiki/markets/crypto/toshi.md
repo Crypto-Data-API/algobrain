@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, meme, memecoins, altcoins, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
+tags: [crypto, memecoins, altcoins, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["TOSHI"]
 entity_type: protocol
 headquarters: "Decentralized"
@@ -165,7 +165,7 @@ TOSHI is tradable on [[binance]] — **spot plus a USD-margined perpetual** ([[f
 
 ### Volatility & regime character
 
-Small-cap ([[altcoins|altcoin]]) [[memecoins|memecoin]] with **high beta** to the risk/meme cycle and strong **reflexivity** — attention drives price drives attention in both directions. As a [[base]]-native cat meme it is highly correlated to broad BTC/ETH risk-on/risk-off regimes and to Base-ecosystem flows, while adding idiosyncratic spikes from Korean (Upbit/KRW) retail. Expect wide intraday ranges, fat tails, and regime shifts that favor trend/breakout tactics in expansions and mean-reversion/fades in exhaustion.
+Small-cap ([[altcoins|altcoin]]) [[meme-coins|memecoin]] with **high beta** to the risk/meme cycle and strong **reflexivity** — attention drives price drives attention in both directions. As a [[base]]-native cat meme it is highly correlated to broad BTC/ETH risk-on/risk-off regimes and to Base-ecosystem flows, while adding idiosyncratic spikes from Korean (Upbit/KRW) retail. Expect wide intraday ranges, fat tails, and regime shifts that favor trend/breakout tactics in expansions and mean-reversion/fades in exhaustion.
 
 ### Risk flags
 

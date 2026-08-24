@@ -10,12 +10,12 @@ entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://tron.network"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[proof-of-stake]]", "[[stablecoins]]", "[[tether]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[funding-rate-harvest]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[proof-of-stake]]", "[[stablecoins]]", "[[usdt|Tether]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[funding-rate-harvest]]"]
 ---
 
 # TRON
 
-**TRON** (TRX) is a high-throughput Layer 1 blockchain that has become the dominant settlement rail for [[tether|Tether (USDT)]], hosting roughly $86B of USDT — about half of all USDT in circulation — as of spring 2026. For traders, TRX is less a smart-contract-platform bet and more a levered proxy on global stablecoin payment flows, consistently ranking in the top 10 by market capitalization.
+**TRON** (TRX) is a high-throughput Layer 1 blockchain that has become the dominant settlement rail for [[usdt|Tether (USDT)]], hosting roughly $86B of USDT — about half of all USDT in circulation — as of spring 2026. For traders, TRX is less a smart-contract-platform bet and more a levered proxy on global stablecoin payment flows, consistently ranking in the top 10 by market capitalization.
 
 ---
 
@@ -213,7 +213,7 @@ The single most important fundamental signal for TRX is **on-chain USDT supply a
 
 - **What it proxies:** TRX is the market's cleanest listed bet on USDT payment-rail dominance. Watch USDT mints/redemptions on TRON (DefiLlama stablecoin dashboards) as the core fundamental signal.
 - **Where it trades:** deep spot liquidity on Binance, Kraken, Bitget, KuCoin; perps as **TRX-PERP** on [[hyperliquid]] and all major CEX perp venues.
-- **Narrative basket:** stablecoin-rails / payments basket (with [[tether]], [[bitcoin-cash]]-style payments names); also a "Justin Sun headline risk" name — SEC litigation history and Sun's ventures (World Liberty Financial ties, Tron Inc.) move the token.
+- **Narrative basket:** stablecoin-rails / payments basket (with [[usdt|Tether]], [[bitcoin-cash]]-style payments names); also a "Justin Sun headline risk" name — SEC litigation history and Sun's ventures (World Liberty Financial ties, Tron Inc.) move the token.
 - **Behavior:** historically low-beta vs other alt majors; supply is ~fully circulating (MC/FDV ≈ 1.0), so no unlock overhang.
 - **Catalysts:** US stablecoin legislation flows, Tron Inc. treasury announcements, USDT supply migration between chains.
 
@@ -319,7 +319,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can trade T
 ## See Also
 
 - [[crypto-markets]]
-- [[tether]] / [[stablecoins]] — the core demand driver
+- [[usdt|Tether]] / [[stablecoins]] — the core demand driver
 - [[ethereum]] — rival USDT settlement rail
 - [[solana]] — emerging payments competitor
 - [[bitcoin]] — macro anchor

@@ -11,7 +11,7 @@ markets_affected: [crypto]
 impact: high
 verified: true
 sources_count: 8
-related: ["[[stablecoin-pair-arbitrage]]", "[[stablecoin-depeg-profit-capture]]", "[[synthetic-stablecoin-depeg-arbitrage]]", "[[depeg-risk]]", "[[tether]]", "[[bitfinex]]", "[[2023-03-usdc-svb-depeg]]", "[[stablecoin-depeg-history]]"]
+related: ["[[stablecoin-pair-arbitrage]]", "[[stablecoin-depeg-profit-capture]]", "[[synthetic-stablecoin-depeg-arbitrage]]", "[[depeg-risk]]", "[[tether-limited|Tether]]", "[[bitfinex]]", "[[2023-03-usdc-svb-depeg]]", "[[stablecoin-depeg-history]]"]
 ---
 
 # Tether Banking Premium 2017-2020
@@ -127,6 +127,6 @@ This case study informs three principles for [[stablecoin-depeg-profit-capture]]
 - [[stablecoin-depeg-profit-capture]] — Method 2 (redemption arb) draws directly on this case
 - [[synthetic-stablecoin-depeg-arbitrage]] — modern synthetic equivalent
 - [[depeg-risk]] — risk framework
-- [[tether]] · [[bitfinex]] — entity pages
+- [[tether-limited|Tether]] · [[bitfinex]] — entity pages
 - [[2023-03-usdc-svb-depeg]] — modern parallel (banking-partner failure)
 - [[stablecoin-depeg-history]] — master timeline

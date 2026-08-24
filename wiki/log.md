@@ -2,12 +2,141 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-07-19
+updated: 2026-08-22
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-08-22 — Wikilink rename-mismatch batch (daily loop iter 8, Fix)
+
+**Scope:** Daily improvement loop, Fix track. Wrote a standalone tally script (reusing
+`tools/lint.py`'s own wikilink-extraction logic) to find broken-link targets referenced
+from many pages at once — `lint.py`'s own report only shows pages with >5 broken links
+and truncates each list to 5 targets, hiding cross-wiki patterns. Found 1,226 distinct
+broken targets; sampled usage context on the top ones to separate real rename-mismatches
+from genuine missing-concept gaps.
+
+- **Fixed 5 rename-mismatches, 60 files, 150 link-target changes:**
+  [[memecoins]]→[[meme-coins]] (8 files), [[btc-bitcoin]]→[[bitcoin]] (10 files, `|BTC`
+  alias preserved), [[nvidia]]→[[nvidia-ai]] (16 files, `|Nvidia` alias added where
+  missing), [[rwa]]→[[real-world-assets]] (9 files — all were redundant duplicates
+  alongside an existing real-world-assets link, so deleted rather than renamed),
+  [[tether]]→[[usdt]] or [[tether-limited]] by context (17 files, 72 refs — split roughly
+  50 token/market-context refs to `usdt` and 22 issuer/company/regulatory-context refs to
+  `tether-limited`, read individually rather than blind-replaced).
+- **Ruled out** [[bnb-chain]] (10 pages) as a rename-mismatch after checking usage — it
+  genuinely means the BNB Layer-1 chain itself, distinct from [[bnb]] the token/market
+  page (which even links to `[[bnb-chain]]` separately). A real missing-page gap, not a
+  typo.
+- **Queued for Build (iter9+):** [[depeg]] (43 pages/135 refs — very high leverage; `depeg`
+  was adopted as an approved tag in iter7 but has no page at all), [[dao]] (9 pages),
+  [[tokenization]] (15 pages), [[tokenomics]] (10 pages), [[bnb-chain]] (10 pages).
+- **Verified independently:** re-ran `tools/lint.py` before and after — `[links]` 247→240;
+  `[tags]`/`[orphans]`/`[stale]`/`[empty]` byte-identical (659/39/6/51). Spot-read the
+  rwa-dedup and tether-split diffs directly.
+
+## 2026-08-21 — Tag audit batch 3 (daily loop iter 7, Fix)
+
+**Scope:** Daily improvement loop, Fix track. Fresh lint run showed 852 pages carrying
+non-approved tags (flat since iter 3) — by far the largest lint category, versus 247
+broken links, 51 empty pages, 39 orphans, 6 stale. Continued the tag audit begun in batch 2 (2026-08-15).
+
+- **Adopted 42 new tags** into CLAUDE.md/AGENTS.md's Approved Tags list and
+  `tools/lint.py` (additive, "Adopted 2026-08-21 (tag audit batch 3)"): DeFi/crypto
+  infrastructure vocabulary the approved list had never picked up (staking, lending,
+  restaking, yield-farming, smart-contracts, mev, oracle, amm, cross-chain, layer-2,
+  governance, launchpad, depeg), AI/ML sub-domains (ai, nlp, llm), options vocabulary
+  (premium-selling, defined-risk, income, greeks, gamma), quant/strategy-methodology
+  terms (factor-investing, alpha-edge, informational-edge, performance, diversification,
+  portfolio-construction, contrarian, price-action, grid-trading, calendar-effects),
+  macro/commodities (fixed-income, monetary-policy, vix, crisis, industrial-metals,
+  agricultural, payments), and standalone themes (institutional, digital-art,
+  short-selling, open-source).
+- **Consolidated 7 near-duplicate tags** across 50 pages: artificial-intelligence→ai,
+  regime→market-regime, api-trading→api, on-chain-analytics→on-chain,
+  comparison→comparisons, liquidation→liquidations, course→courses. Zero duplicate-tag
+  lines introduced (verified).
+- **Skipped:** research, banking, economics — too generic or ambiguous to classify
+  mechanically; left for a future batch with more editorial judgment.
+- **Verified independently:** re-ran `tools/lint.py` before and after (not just the
+  sub-agent's report) — `[tags]` 852→659; `[links]`/`[orphans]`/`[stale]`/`[empty]`
+  byte-identical (247/39/6/51), confirming zero content regressions. Spot-read 2
+  consolidated pages and 1 adopt-only page for correct, isolated `tags:` line edits.
+- **Note:** the local wiki MCP server showed "Connected" via `claude mcp list` but its
+  tools were unreachable from this session (same gap as iter 6, survived a re-registration
+  attempt). Worked via `tools/lint.py` run directly with the repo's venv Python instead of
+  `wiki_lint` — a fully adequate substitute, now the preferred fallback.
+
+797 distinct non-approved tags remain (mostly long-tail 1-3-occurrence ones) for future
+batches.
+
+## 2026-08-20 — Expanded 6 more concept stubs (daily loop iter 6, Build)
+
+**Scope:** Daily improvement loop, Build track (second Build iteration, continuing from
+2026-08-19). Of the 37 `status: stub` pages remaining after iter 5, 21 were genuine
+concept-page candidates. Ranked all 21 by inbound wikilink count and picked the 6
+highest, verifying each was still a genuine ~200-430 char placeholder before committing.
+
+- **Pages updated (all `type: concept`, stub → draft):** [[altcoins]] (33 inbound links,
+  916 words — asset-class definition, BTC-dominance rotation mechanics, alt-season
+  breadth), [[gaming-tokens]] (33 inbound links, 1,045 words — token-taxonomy angle
+  deliberately distinct from the already-substantive [[gamefi]]/[[play-to-earn]] pages:
+  governance vs. reward vs. chain-native vs. interop tokens), [[data-availability]]
+  (30 inbound links, 1,022 words — DAS/erasure coding, EIP-4844 blobs, Celestia, EigenDA,
+  validiums), [[modular-blockchains]] (28 inbound links, 977 words — the 4-function
+  execution/settlement/consensus/DA split vs. Solana's monolithic design), [[sequencer]]
+  (28 inbound links, 996 words — centralization risk, MEV chokepoint, based/shared
+  sequencing decentralization paths), [[consensus-mechanism]] (28 inbound links, 1,095
+  words — PoW/PoS/DPoS/BFT/PoA taxonomy, the Merge as reference case).
+- **Getting the Data (CryptoDataAPI) added** to [[altcoins]] (`/market-health/altcoin-breadth`,
+  `/coins/top`) and [[gaming-tokens]] (`/coins/category-groups`) — the other 4 are
+  infrastructure/mechanism concepts with no direct data-mapped endpoint, matching the
+  2026-08-19 precedent of omitting the section rather than forcing a weak fit.
+- **Rejected after inspection:** [[crypto-market-regimes]] (28 inbound links, would have
+  ranked in the top 6) — dropped because the topic is already exhaustively covered by the
+  existing `status: good` [[crypto-market-regime-taxonomy]] page (which even carries
+  "Crypto Market Regimes" as an alias) plus a 14-page `market-regimes/` subdirectory;
+  fully expanding the stub would have duplicated that content rather than adding to it.
+  [[consensus-mechanism]] was promoted from the tier below to fill the 6th slot.
+- **Verified:** every wikilink added across all 6 pages resolves to a real existing page
+  (checked via Glob/Grep before adding, not just assumed); one near-miss caught and fixed
+  — `[[memecoins]]` does not exist as a file (only `[[meme-coins]]`/`[[meme-coin]]`
+  redirect stubs do, themselves pointing at the same missing target — a pre-existing
+  wiki-wide gap left untouched); only CLAUDE.md-approved tags used.
+
+## 2026-08-19 — Expanded 7 L2/infrastructure stubs, left over from the 2026-07-19 A3 batch
+
+**Scope:** Daily improvement loop, Build track (first Build iteration after 4 straight Fix
+iterations rebalanced the loop). The 2026-07-19 A3 batch created a wave of concept stubs
+to resolve broken links and explicitly deferred expanding them ("stay as intentional
+stubs — expand opportunistically"). Nobody had. Picked the 7 highest-inbound-demand
+survivors of that batch and brought them to full concept pages at the quality bar of the
+existing [[depin]]/[[liquidations]]/[[governance-token]] pages (mechanism, concrete
+named examples with real dates/figures, AlgoBrain trading-relevance links, honest
+unsourced-knowledge disclosure — `status: draft`, not `good`, matching that precedent).
+
+- **Pages updated (all `type: concept`, stub → draft):** [[cross-chain]] (863 words — the
+  general taxonomy of why/how assets move between chains), [[centralized-exchange]] (874
+  words — CEX business model and custody risk, FTX/Mt. Gox as case studies),
+  [[zk-rollup]] (943 words — sequencer→prover→verifier architecture, zkEVM Type 1-4),
+  [[exchange-tokens]] (917 words — explicitly differentiated from [[governance-token]];
+  BNB/OKB/KCS/BGB, FTT as the cautionary tale), [[cross-chain-bridge]] (1,154 words —
+  lock-mint/burn-mint/liquidity-network mechanisms plus Ronin $625M, Wormhole $325M,
+  Nomad $190M, Multichain $130M+, cross-referenced against the deeper existing
+  [[cross-chain-bridges]] comparison page rather than duplicating it), [[interoperability]]
+  (911 words — IBC/LayerZero/Wormhole messaging-standard philosophy, explicit
+  "related but distinct" note vs. the other two), [[optimistic-rollup]] (930 words —
+  fraud-proof/challenge-window mechanics, mirrored against [[zk-rollup]]).
+- **Verified:** every wikilink added across all 7 pages resolves to a real existing page
+  (spot-checked ~20, zero fabricated targets); only CLAUDE.md-approved tags used; full
+  lint pass after the change shows zero regressions (tags 852, links 247, orphans 39,
+  stale 6 all unchanged; empty pages 58→55 as three former near-empty stubs crossed the
+  content threshold).
+- **Not done:** no "Getting the Data (CryptoDataAPI)" sections — these are
+  infrastructure/mechanism concepts, not data-mapped instruments, and no genuinely
+  applicable documented endpoint exists for them.
 
 ## 2026-07-20 — Stretch Revert cluster: inbound links, findings feedback, lifecycle records
 

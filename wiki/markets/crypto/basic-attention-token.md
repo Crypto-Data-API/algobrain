@@ -83,7 +83,7 @@ BAT's category is **Brave-ads / attention-economy utility token**. The model:
 - **Brave Ads** — users opt in to privacy-preserving ads and earn BAT; advertisers pay in BAT to access attention; publishers/creators receive BAT tips and rewards.
 - The thesis is to "fix digital advertising" — replacing surveillance-based ad-tech with a privacy-respecting, attention-priced marketplace.
 
-The narrative depends on Brave browser user growth and the depth of the ads marketplace. A key structural critique is that Brave has progressively allowed users to earn rewards/cash without holding BAT, and ad payouts can be made in [[stablecoin|stablecoins]], which dilutes BAT's must-hold utility and weakens the token-to-product flywheel.
+The narrative depends on Brave browser user growth and the depth of the ads marketplace. A key structural critique is that Brave has progressively allowed users to earn rewards/cash without holding BAT, and ad payouts can be made in [[stablecoins|stablecoins]], which dilutes BAT's must-hold utility and weakens the token-to-product flywheel.
 
 ---
 

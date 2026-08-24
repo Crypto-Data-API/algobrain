@@ -9,7 +9,7 @@ aliases: ["TCY", "THORChain Yield"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://thorchain.org"
-related: ["[[crypto-markets]]", "[[decentralized-finance]]", "[[thorchain]]", "[[yield-farming]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[thorchain]]", "[[yield-farming]]"]
 ---
 
 # THORChain Yield
@@ -204,7 +204,7 @@ Each $1 of debt was converted into 1 TCY, resulting in 210 million TCY tokens ou
 
 - [[crypto-markets]]
 - [[thorchain]] — the underlying network whose fees fund TCY
-- [[decentralized-finance]]
+- [[defi]]
 - [[yield-farming]]
 
 ---

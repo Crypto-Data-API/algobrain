@@ -120,7 +120,7 @@ ARK's narrative is **legacy interoperability / app-chain infrastructure**. It pr
 | **24h Change** | +1.55% |
 | **7d Change** | -4.68% |
 
-> ARK sits roughly 99% below its January-2018 peak, a typical profile for a 2017-cycle infrastructure token that never recaptured prior highs. With a market-cap-to-FDV ratio near 1.0, nearly all supply is circulating. The -4.68% week aligns with the broad **Extreme Fear** backdrop (Fear & Greed 22, [[btc-bitcoin|BTC]] ~$64,180 on 2026-06-21).
+> ARK sits roughly 99% below its January-2018 peak, a typical profile for a 2017-cycle infrastructure token that never recaptured prior highs. With a market-cap-to-FDV ratio near 1.0, nearly all supply is circulating. The -4.68% week aligns with the broad **Extreme Fear** backdrop (Fear & Greed 22, [[bitcoin|BTC]] ~$64,180 on 2026-06-21).
 
 ---
 
@@ -215,7 +215,7 @@ ARK's narrative is **legacy interoperability / app-chain infrastructure**. It pr
 
 *Context: 2026-06-23 macro is Extreme Fear (F&G 21), market-health 29/100 bearish, long-horizon regime "bottoming / accumulation." ARK is a thin micro-cap with no fresh catalyst.*
 
-- **Default stance: avoid / underweight.** In Extreme Fear, illiquid 2017-cycle micro-caps like ARK bleed against [[btc-bitcoin|BTC]] and gap on low volume. There is no edge in holding a low-utility infrastructure relic through a bear without a specific catalyst.
+- **Default stance: avoid / underweight.** In Extreme Fear, illiquid 2017-cycle micro-caps like ARK bleed against [[bitcoin|BTC]] and gap on low volume. There is no edge in holding a low-utility infrastructure relic through a bear without a specific catalyst.
 - **If accumulating the bottoming thesis:** size tiny, scale in, and treat it as a high-beta altcoin-sentiment proxy rather than a fundamentals bet. The clean MC/FDV ≈ 1.0 (no unlock cliff) is a genuine structural positive versus heavily-locked peers like [[stronghold-token|SHX]] or [[audiera|BEAT]].
 - **Catalyst triggers to watch:** a Core/SmartBridge release, a real bridgechain launch, a Korean-market (Upbit) volume spike, or a broad old-coin rotation. Without one, expect drift.
 - **Risk controls:** assume meaningful slippage on size; the [[hyperliquid|Hyperliquid]] ARK-PERP allows a hedge/short but with thin liquidity and noisy funding. Hard-size limits and a sentiment-based stop (e.g., exit if BTC breaks the bottoming range) are prudent.
@@ -258,7 +258,7 @@ ARK's narrative is **legacy interoperability / app-chain infrastructure**. It pr
 - [[narrative-trading]] — as a 2017-cycle legacy infra token, ARK moves on idiosyncratic catalysts (Core/SmartBridge releases, bridgechain launches, old-coin rotations) rather than fundamentals.
 - [[range-mean-reversion]] — absent a catalyst ARK drifts and chops within ranges, suiting fade-the-edges reversion with tight risk.
 
-**Volatility & regime character.** ARK is a low-liquidity **infrastructure / interoperability micro-cap** (rank ~800) with high-beta behaviour: it acts largely as a proxy for small-cap altcoin sentiment and is strongly correlated to [[btc-bitcoin|BTC]]/[[ethereum|ETH]] beta, tending to amplify moves on the downside and lag on recoveries. With MC/FDV ≈ 1.0 there is no unlock-driven supply reflexivity, so price action is dominated by flow, thin-book gaps, and broad-market risk regime rather than tokenomics events.
+**Volatility & regime character.** ARK is a low-liquidity **infrastructure / interoperability micro-cap** (rank ~800) with high-beta behaviour: it acts largely as a proxy for small-cap altcoin sentiment and is strongly correlated to [[bitcoin|BTC]]/[[ethereum|ETH]] beta, tending to amplify moves on the downside and lag on recoveries. With MC/FDV ≈ 1.0 there is no unlock-driven supply reflexivity, so price action is dominated by flow, thin-book gaps, and broad-market risk regime rather than tokenomics events.
 
 **Risk flags.**
 - **Liquidity / venue concentration** — shallow order books on both venues; a small number of large orders (or a Korean-market volume spike) can move price sharply.

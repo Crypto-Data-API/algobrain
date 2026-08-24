@@ -9,7 +9,7 @@ aliases: ["USN"]
 entity_type: protocol
 headquarters: "Decentralized (Noon Capital)"
 website: "https://www.noon.capital/"
-related: ["[[aegis-yusd]]", "[[basis-trade]]", "[[crypto-markets]]", "[[delta-neutral]]", "[[depeg]]", "[[ethena-usde]]", "[[ethereum]]", "[[funding-rate]]", "[[stablecoin]]", "[[synthetic-dollar]]"]
+related: ["[[aegis-yusd]]", "[[basis-trade]]", "[[crypto-markets]]", "[[delta-neutral]]", "[[depeg]]", "[[ethena-usde]]", "[[ethereum]]", "[[funding-rate]]", "[[stablecoins]]", "[[synthetic-dollar]]"]
 ---
 
 # Noon USN
@@ -102,7 +102,7 @@ USN sits in the **delta-neutral synthetic-dollar / "internet bond"** category, w
 
 ## See Also
 
-- [[stablecoin]]
+- [[stablecoins]]
 - [[synthetic-dollar]]
 - [[delta-neutral]]
 - [[funding-rate]]

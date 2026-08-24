@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [commodities, futures, macro-trading]
+tags: [commodities, futures, macro]
 aliases: ["Commodity Markets"]
 domain: [commodities, macro-trading]
 prerequisites: ["[[futures]]"]

@@ -40,7 +40,7 @@ Polymarket-as-crypto-leading-indicator is a hybrid information-arbitrage strateg
 | **Crowding risk** | Medium — AI bots + HFT desks compressing the lag |
 | **Backtest status** | **Untested** — all performance numbers are priors, not measurements |
 
-The whale-flow leg overlaps with the broader [[on-chain-analytics|on-chain analytics]] toolkit (reading [[polymarket-subgraph]] positioning via [[nansen]]).
+The whale-flow leg overlaps with the broader [[on-chain-analysis|on-chain analytics]] toolkit (reading [[polymarket-subgraph]] positioning via [[nansen]]).
 
 ## Edge source
 
@@ -285,7 +285,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - [[kalshi]]
 - [[cme-fedwatch]]
 - [[nansen]]
-- [[on-chain-analytics]]
+- [[on-chain-analysis]]
 - [[edge-taxonomy]]
 - [[failure-modes]]
 - [[when-to-retire-a-strategy]]

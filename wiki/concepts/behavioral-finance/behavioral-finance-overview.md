@@ -4,7 +4,7 @@ type: index
 created: 2026-04-06
 updated: 2026-06-22
 status: excellent
-tags: [behavioral-finance, psychology]
+tags: [behavioral-finance]
 aliases: ["Behavioral Finance Index", "Psychology of Trading"]
 related: ["[[behavioral-finance]]", "[[cognitive-biases]]", "[[cognitive-bias]]", "[[trading-psychology]]", "[[prospect-theory]]", "[[loss-aversion]]", "[[sentiment]]", "[[efficient-market-hypothesis]]"]
 ---

@@ -150,7 +150,7 @@ Features and analog mechanisms a quant can consume, aggregated across archetypes
 - [[forced-liquidation]]
 - [[reflexive-deleveraging]]
 - [[ftx-collapse]]
-- [[bitcoin-etf]]
+- [[bitcoin-etfs]]
 - [[yen-carry-trade]]
 - [[mean-reversion]]
 - [[trend-following]]

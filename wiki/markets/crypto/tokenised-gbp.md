@@ -9,12 +9,12 @@ aliases: ["TGBP", "tGBP"]
 entity_type: protocol
 headquarters: "United Kingdom"
 website: "https://www.tokenisedgbp.com"
-related: ["[[british-pound]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[forex]]", "[[real-world-assets]]", "[[stablecoin]]", "[[tokenization]]", "[[treasuries]]"]
+related: ["[[british-pound]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[forex]]", "[[real-world-assets]]", "[[stablecoins]]", "[[tokenization]]", "[[treasuries]]"]
 ---
 
 # Tokenised GBP
 
-**Tokenised GBP** (TGBP) is a **British Pound Sterling–pegged [[stablecoin]]** issued by a UK FCA-registered firm. It maintains a 1:1 peg to GBP (1 TGBP ≈ £1.00) and is fully collateralised by fiat and short-term zero-coupon bonds issued by HM Treasury. TGBP is built for on-chain sterling payments, programmable transactions, and exposure to GBP-linked [[real-world-assets]] such as tokenized bonds.
+**Tokenised GBP** (TGBP) is a **British Pound Sterling–pegged [[stablecoins]]** issued by a UK FCA-registered firm. It maintains a 1:1 peg to GBP (1 TGBP ≈ £1.00) and is fully collateralised by fiat and short-term zero-coupon bonds issued by HM Treasury. TGBP is built for on-chain sterling payments, programmable transactions, and exposure to GBP-linked [[real-world-assets]] such as tokenized bonds.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -37,7 +37,7 @@ Because CoinGecko and most aggregators quote in USD, a GBP stablecoin will **alw
 
 ### Mint, Redeem, and Peg Mechanism
 
-TGBP follows the standard fiat-backed [[stablecoin]] model: authorized users mint by depositing GBP and redeem 1:1 for GBP, with reserves held in cash and UK Treasury instruments. This reserve-backed redeemability is the primary peg-maintenance mechanism, supplemented by arbitrage against the GBP reference rate. Mint/redeem is typically KYC-gated and jurisdiction-restricted.
+TGBP follows the standard fiat-backed [[stablecoins]] model: authorized users mint by depositing GBP and redeem 1:1 for GBP, with reserves held in cash and UK Treasury instruments. This reserve-backed redeemability is the primary peg-maintenance mechanism, supplemented by arbitrage against the GBP reference rate. Mint/redeem is typically KYC-gated and jurisdiction-restricted.
 
 ### Reserve & peg architecture (deep dive)
 
@@ -147,7 +147,7 @@ Context: as of 2026-06-23 the wider crypto market reads **Extreme Fear (F&G 21)*
 
 ## See Also
 
-- [[stablecoin]]
+- [[stablecoins]]
 - [[forex]]
 - [[british-pound]]
 - [[depeg]]

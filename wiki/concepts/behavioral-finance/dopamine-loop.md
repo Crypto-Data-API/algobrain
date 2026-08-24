@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-07
 updated: 2026-06-21
 status: excellent
-tags: [behavioral-finance, psychology, options, volatility, risk-management]
+tags: [behavioral-finance, options, volatility, risk-management]
 aliases: ["Dopamine Loop", "Variable-Ratio Reinforcement", "Trader Psychology Reward Loop"]
 related: ["[[long-vol-vs-short-vol]]", "[[options-premium-selling]]", "[[tail-risk-hedging]]", "[[loss-aversion]]", "[[behavioral-finance]]", "[[overtrading]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[ergodicity]]", "[[geometric-mean]]", "[[kelly-criterion]]", "[[short-strangle]]", "[[gambling-addiction]]", "[[prospect-theory]]"]
 domain: [behavioral-finance]

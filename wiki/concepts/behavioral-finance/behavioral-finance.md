@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-06
 updated: 2026-06-21
 status: excellent
-tags: [behavioral-finance, psychology, risk-management]
+tags: [behavioral-finance, risk-management]
 aliases: ["Behavioral Economics", "Behavioural Finance"]
 domain: [behavioral-finance]
 difficulty: beginner

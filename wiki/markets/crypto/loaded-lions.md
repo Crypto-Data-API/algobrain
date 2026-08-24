@@ -9,12 +9,12 @@ aliases: ["LION"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://loadedlions.com/"
-related: ["[[arbitrum]]", "[[cronos]]", "[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[non-fungible-token]]", "[[solana]]"]
+related: ["[[arbitrum]]", "[[cronos]]", "[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[nft]]", "[[solana]]"]
 ---
 
 # Loaded Lions
 
-**Loaded Lions** (LION) is the native utility token of **Loaded Lions**, the flagship NFT collection and community brand of **Crypto.com**. Launched primarily on the [[cronos|Cronos]] EVM chain, $LION serves as the economic backbone of the Loaded Lions ecosystem — including the *Mane City* game and Crypto.com App perks — with cross-chain deployments on [[solana|Solana]], [[arbitrum|Arbitrum]], and (planned) [[ethereum|Ethereum]]. It is a community / [[non-fungible-token|NFT]] / [[gamefi|GameFi]] token tightly linked to the Crypto.com / Cronos ecosystem.
+**Loaded Lions** (LION) is the native utility token of **Loaded Lions**, the flagship NFT collection and community brand of **Crypto.com**. Launched primarily on the [[cronos|Cronos]] EVM chain, $LION serves as the economic backbone of the Loaded Lions ecosystem — including the *Mane City* game and Crypto.com App perks — with cross-chain deployments on [[solana|Solana]], [[arbitrum|Arbitrum]], and (planned) [[ethereum|Ethereum]]. It is a community / [[nft|NFT]] / [[gamefi|GameFi]] token tightly linked to the Crypto.com / Cronos ecosystem.
 
 ---
 
@@ -161,7 +161,7 @@ This is not investment advice; LION is a speculative, illiquid community/GameFi 
 
 - [[crypto-markets]]
 - [[cronos]]
-- [[non-fungible-token]]
+- [[nft]]
 - [[gamefi]]
 - [[solana]]
 - [[arbitrum]]

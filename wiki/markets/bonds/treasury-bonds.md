@@ -4,7 +4,7 @@ type: market
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [bonds, macro-trading, fixed-income]
+tags: [bonds, macro, fixed-income]
 aliases: ["Treasuries", "US Treasuries", "T-Bonds"]
 related: ["[[yield-curve]]", "[[bonds-overview]]", "[[macro-trading]]", "[[federal-reserve]]", "[[interest-rates]]"]
 ---

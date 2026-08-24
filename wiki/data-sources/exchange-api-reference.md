@@ -4,7 +4,7 @@ type: reference
 created: 2026-04-20
 updated: 2026-06-20
 status: excellent
-tags: [data, crypto, arbitrage, market-microstructure, algorithmic, execution]
+tags: [data-provider, crypto, arbitrage, market-microstructure, algorithmic, execution]
 aliases: ["Exchange APIs", "Crypto API Reference", "Arbitrage API Endpoints"]
 related: ["[[crypto-data-sources]]", "[[data-sources-overview]]", "[[cross-exchange-arbitrage]]", "[[funding-rate-arbitrage]]", "[[triangular-arbitrage]]", "[[binance]]", "[[coinbase]]", "[[hyperliquid]]", "[[fees]]", "[[latency-arbitrage]]"]
 ---

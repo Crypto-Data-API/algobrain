@@ -70,7 +70,7 @@ Lisk is a member of the **[[optimism|Optimism]] [[superchain|Superchain]]** — 
 | Arbitrum One | Nitro (own) | Optimistic (interactive) | Ethereum | Largest L2 by TVL; mature |
 | zkSync / Starknet | ZK | Validity proofs | Ethereum | Faster finality, no challenge window |
 
-Versus [[aurora-near|Aurora]] (an EVM-on-[[near-protocol|NEAR]] whose security comes from NEAR, *not* Ethereum), Lisk is a **true Ethereum rollup**: its funds-security ultimately derives from Ethereum L1, a meaningfully stronger trust model. Its competitive challenge is differentiation in a crowded OP-Stack field where it lacks the distribution of [[base|Base]] or the TVL of Arbitrum.
+Versus [[aurora-near|Aurora]] (an EVM-on-[[near|NEAR]] whose security comes from NEAR, *not* Ethereum), Lisk is a **true Ethereum rollup**: its funds-security ultimately derives from Ethereum L1, a meaningfully stronger trust model. Its competitive challenge is differentiation in a crowded OP-Stack field where it lacks the distribution of [[base|Base]] or the TVL of Arbitrum.
 
 ---
 

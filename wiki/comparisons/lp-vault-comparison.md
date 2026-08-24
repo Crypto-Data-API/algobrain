@@ -4,7 +4,7 @@ type: comparison
 created: 2026-05-05
 updated: 2026-06-21
 status: excellent
-tags: [crypto, defi, vaults, comparison, yield, hyperliquid, gmx, jupiter, ethena, aave, liquity]
+tags: [crypto, defi, vaults, comparisons, yield, hyperliquid, gmx, jupiter, ethena, aave, liquity]
 aliases: ["DeFi Yield Vault Comparison", "HLP vs GLP vs JLP vs sUSDe"]
 related: ["[[hyperliquid-hlp-basis-arbitrage]]", "[[hyperliquid-vault-architecture]]", "[[ethena-usde]]", "[[ethena]]", "[[aave]]", "[[liquity]]", "[[gmx]]", "[[hlp-cascade-alongside-playbook]]", "[[hyperliquid]]", "[[hlp]]", "[[liquidity-provider]]", "[[liquidity-pool]]", "[[multi-venue-capital-management]]", "[[counterparty-risk]]", "[[smart-contract-risk]]"]
 subjects: ["[[hyperliquid-hlp-basis-arbitrage|HLP]]", "[[gmx|GLP/GM]]", "[[jupiter-jlp|JLP]]", "[[ethena-usde|sUSDe]]", "[[aave|aUSDC]]", "[[liquity|Stability Pool]]"]
@@ -106,7 +106,7 @@ Most retail allocators ask "what's the APR?" The professional question is **"wha
 
 ### Aave aUSDC
 
-**You are short:** Aave bad-debt accumulation, **plus** [[stablecoin|stablecoin]] depeg of underlying USDC.
+**You are short:** Aave bad-debt accumulation, **plus** [[stablecoins|stablecoin]] depeg of underlying USDC.
 
 - [[aave|Aave]] is the **most battle-tested DeFi lending protocol**, live since 2020 (V1) with V3 since 2022. Multi-billion-dollar TVL, multiple audits, on-chain insurance via the [[aave|Safety Module]].
 - Yield comes from borrowers paying interest. APR is typically **4-8%** on USDC depending on utilization.

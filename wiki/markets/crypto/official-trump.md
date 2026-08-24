@@ -247,7 +247,7 @@ TRUMP's distinguishing feature is *political headline beta* and event-driven per
 - [[perpetual-futures]] — derivatives context
 - [[bonk]], [[pudgy-penguins]], [[spx6900]], [[dogecoin]] — meme peers
 - [[narrative-trading]] — PolitiFi / meme basket
-- [[memecoins]]
+- [[meme-coins]]
 
 ---
 

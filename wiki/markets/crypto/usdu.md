@@ -9,12 +9,12 @@ aliases: ["USDU"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://unitas.so"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[ondo-u-s-dollar-token]]", "[[real-world-assets]]", "[[solana]]", "[[stablecoin]]", "[[stablecoins]]", "[[treasuries]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[ondo-u-s-dollar-token]]", "[[real-world-assets]]", "[[solana]]", "[[stablecoins]]", "[[stablecoins]]", "[[treasuries]]"]
 ---
 
 # USDu
 
-**USDu** (ticker **USDU**) is a yield-bearing, fiat-backed [[stablecoin]] issued by **Unitas Labs**, targeting a 1:1 peg to the US dollar. It is issued primarily on [[solana|Solana]] (SPL standard) with a [[bnb-chain|BNB Chain]] deployment, and is backed by cash and short-duration US [[treasuries|Treasury]] instruments held with regulated custodians — placing it in the [[real-world-assets|real-world-asset (RWA)]] tokenized-Treasury category alongside [[ondo-u-s-dollar-token|Ondo's USDON]]. Minting and redemption are permissioned (KYC), while circulating USDu transfers freely on-chain.
+**USDu** (ticker **USDU**) is a yield-bearing, fiat-backed [[stablecoins]] issued by **Unitas Labs**, targeting a 1:1 peg to the US dollar. It is issued primarily on [[solana|Solana]] (SPL standard) with a [[bnb-chain|BNB Chain]] deployment, and is backed by cash and short-duration US [[treasuries|Treasury]] instruments held with regulated custodians — placing it in the [[real-world-assets|real-world-asset (RWA)]] tokenized-Treasury category alongside [[ondo-u-s-dollar-token|Ondo's USDON]]. Minting and redemption are permissioned (KYC), while circulating USDu transfers freely on-chain.
 
 The core proposition is simple: a dollar that earns the prevailing short-Treasury yield while remaining redeemable at par for KYC counterparties. This places USDu in the fast-growing **"the dollar that pays you"** cohort of stablecoins — economically a tokenized money-market position dressed as a transferable token — competing with [[ondo-u-s-dollar-token|Ondo USDON]], [[blackrock-buidl|BlackRock BUIDL]], and the staked tier of synthetic-dollar issuers such as [[ethena-usde|Ethena]]. Its defining trade-off versus the synthetic-dollar camp is that yield derives from **real, exogenous T-bill cash flows** rather than crypto funding rates, making it more defensive in a bear regime but capping upside at the risk-free rate.
 
@@ -201,7 +201,7 @@ USDu sits in the **tokenized-Treasury / yield-bearing stablecoin** narrative —
 
 ## Related
 
-- [[stablecoin]] / [[stablecoins]]
+- [[stablecoins]] / [[stablecoins]]
 - [[real-world-assets]] / [[treasuries]]
 - [[ondo-u-s-dollar-token]] — peer tokenized-Treasury yield dollar
 - [[crypto-markets]]

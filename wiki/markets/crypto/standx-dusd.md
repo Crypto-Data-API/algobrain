@@ -9,7 +9,7 @@ aliases: ["DUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://standx.com/"
-related: ["[[bnb]]", "[[crypto-markets]]", "[[ethena-usde]]", "[[solana]]", "[[stablecoins]]", "[[usde]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[ethena-usde]]", "[[solana]]", "[[stablecoins]]", "[[ethena-usde]]"]
 ---
 
 # StandX DUSD
@@ -43,7 +43,7 @@ DUSD is described as a **fully collateralized, yield-bearing stablecoin** that *
 - **Collateral / reserve model:** StandX states DUSD is **fully collateralized.** As the native margin asset of a perp DEX, the collateral pool is deployed to generate returns while backing the token. The exact composition is set by StandX and not itemised in the CoinGecko snapshot, but for a perp-DEX margin dollar it is typically a mix of stablecoins and crypto deployed into market-neutral strategies.
 - **Peg / stability mechanism:** Full collateralization plus mint/redeem against the collateral pool. Because yield auto-distributes, the token is designed to track $1 with returns accruing on top (via rebasing of balance rather than price drift) — though the CoinGecko price is quoted around $1.00, consistent with a balance-rebasing rather than price-appreciating design.
 - **Mint / redeem & gating:** Handled through the **StandX protocol** against the collateral pool; secondary exit is via on-chain liquidity on BNB Chain and Solana. Primary redemption depends on StandX honouring redemptions at $1 from the collateral pool.
-- **Yield source & distribution:** "Real yield" generated from the protocol's **deployment of collateral** — for a perp-DEX margin dollar this typically includes **funding-rate / basis income** and other market-neutral strategies, the same broad source as [[ethena-usde]] / [[usde]]. Yield is **auto-distributed to all holders**, including traders earning on their **margin balances** while positions are open.
+- **Yield source & distribution:** "Real yield" generated from the protocol's **deployment of collateral** — for a perp-DEX margin dollar this typically includes **funding-rate / basis income** and other market-neutral strategies, the same broad source as [[ethena-usde]] / [[ethena-usde]]. Yield is **auto-distributed to all holders**, including traders earning on their **margin balances** while positions are open.
 
 ---
 
@@ -59,7 +59,7 @@ Circulating and total supply are essentially equal at ~**100.6M DUSD** — no me
 |---|---|---|---|---|
 | **DUSD** | StandX (perp DEX) | **Auto-distributed (no staking)** | Fully collateralised, deployed | Margin + savings dollar |
 | [[astherus-usdf\|asUSDF]] | Aster (perp DEX) | Stake-for-yield | Collateral-deployed | Margin + savings |
-| [[usde\|USDe]] | Ethena | Stake (sUSDe) | Delta-neutral hedge | Yield dollar |
+| [[ethena-usde\|USDe]] | Ethena | Stake (sUSDe) | Delta-neutral hedge | Yield dollar |
 | [[usdc]] | Circle | None (base) | Fiat reserves | Settlement |
 
 DUSD's differentiator versus its closest peer ([[astherus-usdf|asUSDF]]) is the **no-staking, auto-distribution** mechanic — holders and active traders earn without an extra step. The trade-off is that any backing shortfall is shared *immediately* across all holders rather than isolated to a staked tranche.
@@ -115,7 +115,7 @@ DUSD belongs to the **perp-DEX yield-dollar** category — stablecoins issued by
 
 ## Related
 
-- [[ethena-usde]], [[usde]] — synthetic / yield-bearing dollar peers
+- [[ethena-usde]], [[ethena-usde]] — synthetic / yield-bearing dollar peers
 - [[astherus-usdf]] — peer yield-bearing dollar from a perp DEX
 - [[stablecoins]] — landscape overview
 - [[usdc]], [[usdt]], [[dai]] — peer dollars

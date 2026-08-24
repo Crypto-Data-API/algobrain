@@ -9,7 +9,7 @@ aliases: ["OMI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://ecomi.notion.site/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[non-fungible-token]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[nft]]"]
 ---
 
 # ECOMI
@@ -35,7 +35,7 @@ related: ["[[crypto-markets]]", "[[ethereum]]", "[[non-fungible-token]]"]
 | **vs ATH** | -98.48% |
 | **All-Time Low** | $0.00000337 |
 
-OMI remains one of the weakest performers in this cohort: **down ~-14.8% over 7 days** (a small +0.9% dead-cat bounce on the day) and ~98.5% below its March-2021 ATH, reflecting the collapse of the 2021 [[non-fungible-token|NFT]]-collectibles mania and the current [[crypto-fear-and-greed-index|extreme-fear]] (Fear & Greed = 23) **Established Bear Market**. Its sub-cent nominal price is a function of its very large token supply, not a sign of cheapness.
+OMI remains one of the weakest performers in this cohort: **down ~-14.8% over 7 days** (a small +0.9% dead-cat bounce on the day) and ~98.5% below its March-2021 ATH, reflecting the collapse of the 2021 [[nft|NFT]]-collectibles mania and the current [[crypto-fear-and-greed-index|extreme-fear]] (Fear & Greed = 23) **Established Bear Market**. Its sub-cent nominal price is a function of its very large token supply, not a sign of cheapness.
 
 ---
 
@@ -85,7 +85,7 @@ OMI sits in the **digital-collectibles / licensed-IP NFT app** niche, distinct f
 
 | Token | Category | Demand driver | Approx. MC rank | Max supply | MC/FDV | Notes |
 |---|---|---|---|---|---|---|
-| **ECOMI (OMI)** | Licensed-IP collectibles ([[non-fungible-token\|NFT]]) app | VeVe drops, IP licensing, secondary trades | #419 | 750B | ~0.87 | Marvel/DC licensed; mobile-first |
+| **ECOMI (OMI)** | Licensed-IP collectibles ([[nft\|NFT]]) app | VeVe drops, IP licensing, secondary trades | #419 | 750B | ~0.87 | Marvel/DC licensed; mobile-first |
 | ApeCoin (APE) | PFP-NFT ecosystem (Bored Ape) | BAYC/Otherside ecosystem | Mid-cap | 1B | high | Yuga Labs universe |
 | ImmutableX (IMX) | NFT/gaming L2 | Gaming NFT throughput | Mid-cap | 2B | moderate | Infrastructure, not a single app |
 | Gala (GALA) | GameFi / entertainment | Gala games + media | Mid/small-cap | large | moderate | Broad GameFi platform |
@@ -124,7 +124,7 @@ OMI's differentiator is exclusive **licensed-IP partnerships** (Marvel, DC) and 
 
 - [[crypto-markets]]
 - [[ethereum]]
-- [[non-fungible-token]]
+- [[nft]]
 
 ---
 

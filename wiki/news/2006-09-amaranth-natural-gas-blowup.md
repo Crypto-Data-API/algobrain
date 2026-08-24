@@ -142,7 +142,7 @@ This same pattern recurred in [[2022-06-three-arrows-blowup]] (3AC), [[2022-11-f
 
 The Amaranth/Arnold trade is widely cited but not easily repeated. Three specific barriers:
 
-1. **Position-size visibility requires institutional infrastructure**. Arnold knew Amaranth's positioning through prime-broker conversations, large-trader reports, and inferential trading-desk intel. Retail traders rarely have this visibility — though [[on-chain-analytics]] now provides analogous transparency for crypto.
+1. **Position-size visibility requires institutional infrastructure**. Arnold knew Amaranth's positioning through prime-broker conversations, large-trader reports, and inferential trading-desk intel. Retail traders rarely have this visibility — though [[on-chain-analysis]] now provides analogous transparency for crypto.
 2. **You need fundamental conviction independent of the counterparty thesis**. Arnold's view of gas fundamentals had to be correct on its own merits. If you only short because you think someone is forced to sell, you can be right on the unwind but wrong on the eventual recovery direction.
 3. **Sizing and timing are non-trivial**. If you size too aggressively too early, you take the same losses as the eventual loser before the unwind. If you wait too late, the spreads have already moved. The Centaurus structure was built over months, not days.
 

@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2019
 headquarters: "Gate (formerly Gate.io); GateLayer ecosystem"
 website: "https://www.gate.com/gt"
-related: ["[[binance-coin]]", "[[bitget-token]]", "[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[bnb]]", "[[bitget-token]]", "[[crypto-markets]]", "[[ethereum]]"]
 ---
 
 # GateToken
@@ -60,7 +60,7 @@ GT launched in 2019 as the native token of GateChain and platform token of the G
 ## Trading Relevance
 
 - **Where it trades**: overwhelmingly on Gate itself (GT/USDT); thin external liquidity (Uniswap on Ethereum). No major Hyperliquid or top-tier CEX perp listing — liquidity concentration on the issuer's own venue is a structural caveat for position sizing and exit risk.
-- **Narrative basket**: the **CEX-token basket** with [[binance-coin|BNB]], [[bitget-token|BGB]], OKB — GT historically exhibits the sharpest burn-driven supply squeeze mechanics of the group (96%+ of original supply destroyed or scheduled).
+- **Narrative basket**: the **CEX-token basket** with [[bnb|BNB]], [[bitget-token|BGB]], OKB — GT historically exhibits the sharpest burn-driven supply squeeze mechanics of the group (96%+ of original supply destroyed or scheduled).
 - **Catalysts**: quarterly burn announcements, Gate Layer adoption (gas demand = GT sink), Gate launchpad/HODLer-airdrop cycles, exchange volume share data.
 - **Risks**: issuer-concentration risk (GT value is a leveraged bet on one exchange's solvency, volumes, and regulatory standing); reflexivity — burns are funded by exchange profits, so bear-market volume declines slow the deflation engine exactly when price support is most needed; thin off-platform liquidity.
 
@@ -96,14 +96,14 @@ GT is the rare exchange token where the **headline scarcity story is genuine**: 
 
 - **Burn-adjusted scarcity:** GT's bull thesis is that quarterly burns mechanically shrink supply against exchange-fee demand. The honest counter is reflexivity — the burn is funded by Gate's profits, so it is largest in bull markets (when price is already strong) and smallest in bears (when support is needed).
 - **Sum-of-the-parts:** GT is a leveraged claim on Gate's exchange volumes plus the nascent Gate Layer gas sink. Neither cash flow is paid directly to holders; value accrual is via burn + utility, not dividends.
-- **Relative to CEX-token peers:** at #83 / ~$715M GT is mid-tier among exchange tokens — well below [[binance-coin|BNB]] but a peer-or-larger to [[bitget-token|BGB]] and OKB by narrative. Its drawdown (-73.5%) is broadly in line with the basket.
+- **Relative to CEX-token peers:** at #83 / ~$715M GT is mid-tier among exchange tokens — well below [[bnb|BNB]] but a peer-or-larger to [[bitget-token|BGB]] and OKB by narrative. Its drawdown (-73.5%) is broadly in line with the basket.
 
 ## Peer Comparison
 
 | Token | Exchange | Mkt Cap Rank | Mkt Cap | vs ATH | Burn mechanic |
 |---|---|---|---|---|---|
 | **GateToken (GT)** | Gate.com | #83 | ~$715M | -73.5% | Quarterly profit-funded; ~86% of original supply destroyed/scheduled |
-| [[binance-coin\|BNB]] | Binance | top-5 | — | — | Auto-burn formula + real-time gas burn |
+| [[bnb\|BNB]] | Binance | top-5 | — | — | Auto-burn formula + real-time gas burn |
 | [[bitget-token\|BGB]] | Bitget | — | — | — | Quarterly buyback-and-burn |
 | OKB | OKX | — | — | — | Buyback-and-burn |
 
@@ -147,7 +147,7 @@ GT is the rare exchange token where the **headline scarcity story is genuine**: 
 - [[crypto-markets]]
 - [[ethereum]]
 - [[bitget-token]]
-- [[binance-coin]]
+- [[bnb]]
 - [[centralized-exchange]]
 - [[layer-2]]
 - [[perpetual-futures]]

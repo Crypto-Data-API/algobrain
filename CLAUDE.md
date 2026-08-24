@@ -58,7 +58,7 @@ Every wiki page MUST have YAML frontmatter. The schema varies by page type:
 ```yaml
 ---
 title: "Human-Readable Title"
-type: concept | strategy | entity | market | comparison | news | source | index | overview
+type: concept | strategy | entity | market | comparison | news | source | index | overview | redirect | reference | narrative
 created: 2026-04-06
 updated: 2026-04-06
 status: stub | draft | review | good | excellent
@@ -301,6 +301,12 @@ regime-detection, methodology, event-driven, hyperliquid
 
 # Adopted 2026-07-19 (tag audit)
 anomalies, australia, bittensor, combinations, crashes, execution, exploits, gamefi, hedge-funds, hedging, macro, market-making, meta-strategy, narrative-impact, options-structures, privacy, python, real-world-assets, security, sniping, solana, statistics, strategy-development, tax, trading-bots, volume
+
+# Adopted 2026-08-15 (tag audit batch 2)
+agents, alternative-data, api, bnb, compliance, deep-learning, depin, dex, energy, etf, free, hft, interest-rates, market-neutral, order-flow, position-sizing, prediction-markets, sentiment, tail-risk, theta, trading-psychology, validation, yield
+
+# Adopted 2026-08-21 (tag audit batch 3)
+agricultural, ai, alpha-edge, amm, calendar-effects, contrarian, crisis, cross-chain, defined-risk, depeg, digital-art, diversification, factor-investing, fixed-income, gamma, governance, greeks, grid-trading, income, industrial-metals, informational-edge, institutional, launchpad, layer-2, lending, llm, mev, monetary-policy, nlp, open-source, oracle, payments, performance, portfolio-construction, premium-selling, price-action, restaking, short-selling, smart-contracts, staking, vix, yield-farming
 ```
 
 ## Content Guidelines

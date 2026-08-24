@@ -9,7 +9,7 @@ aliases: ["BEAT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://audiera.fi/"
-related: ["[[bnb]]", "[[crypto-markets]]", "[[gamefi]]", "[[non-fungible-token]]", "[[play-to-earn]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[gamefi]]", "[[nft]]", "[[play-to-earn]]"]
 ---
 
 # Audiera
@@ -48,7 +48,7 @@ Audiera is a dual-platform Web3 rhythm game built on [[bnb|BNB Chain]], billed a
 - **Telegram mini-game** — a lightweight, viral on-ramp leveraging Telegram's distribution (a common 2024-25 GameFi user-acquisition tactic, popularised by tap-to-earn titles).
 - **Web3 economy** — NFTs (characters/items), AI-driven interaction, and the **BEAT** token for in-game rewards, purchases, and a [[play-to-earn]] loop.
 
-**Token mechanics & the GameFi flywheel.** BEAT is a BNB Chain **BEP-20** (contract `0xcf32...3e36`). The intended flywheel is: players earn BEAT and NFTs by playing, spend to upgrade/compete, and new users are pulled in via the Telegram mini-app and [[non-fungible-token|NFT]] sales. The structural weakness — endemic to [[play-to-earn]] economies — is that durability depends on **real, retained players versus mercenary reward-farmers**. When token rewards (sell pressure) outpace genuine demand to play, the economy enters a death spiral: token price falls, rewards lose value, players leave, and price falls further. BEAT's **-75.91% week** is a textbook expression of that dynamic, amplified by a large emissions overhang (~71% of supply uncirculated) feeding the play-to-earn reward pool.
+**Token mechanics & the GameFi flywheel.** BEAT is a BNB Chain **BEP-20** (contract `0xcf32...3e36`). The intended flywheel is: players earn BEAT and NFTs by playing, spend to upgrade/compete, and new users are pulled in via the Telegram mini-app and [[nft|NFT]] sales. The structural weakness — endemic to [[play-to-earn]] economies — is that durability depends on **real, retained players versus mercenary reward-farmers**. When token rewards (sell pressure) outpace genuine demand to play, the economy enters a death spiral: token price falls, rewards lose value, players leave, and price falls further. BEAT's **-75.91% week** is a textbook expression of that dynamic, amplified by a large emissions overhang (~71% of supply uncirculated) feeding the play-to-earn reward pool.
 
 ---
 
@@ -144,7 +144,7 @@ Audiera rides the **GameFi + NFT + Telegram mini-app + AI** narrative stack — 
 - [[crypto-markets]]
 - [[bnb]]
 - [[gamefi]]
-- [[non-fungible-token]]
+- [[nft]]
 - [[play-to-earn]]
 
 ---

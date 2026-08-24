@@ -10,12 +10,12 @@ entity_type: protocol
 founded: 2022
 headquarters: "Decentralized (TRON DAO Reserve)"
 website: "https://usdd.io/"
-related: ["[[crypto-markets]]", "[[htx-dao]]", "[[stablecoin]]", "[[stablecoins]]", "[[tron]]", "[[usdt]]"]
+related: ["[[crypto-markets]]", "[[htx-dao]]", "[[stablecoins]]", "[[stablecoins]]", "[[tron]]", "[[usdt]]"]
 ---
 
 # USDD
 
-**USDD** (Decentralized USD; ticker **USDD**) is the [[tron|TRON]]-native [[stablecoin]] backed by the TRON DAO Reserve and closely associated with Justin Sun. Originally launched in May 2022 as an algorithmic stablecoin (weeks after Terra's UST collapse, briefly depegging to $0.928 in June 2022), it was relaunched in January 2025 as **USDD 2.0** — an overcollateralized design paying a heavily subsidized 20% APY. For traders it is primarily a [[stablecoin-yields|stablecoin-yield]] instrument and a depeg-risk monitor within the Justin Sun complex.
+**USDD** (Decentralized USD; ticker **USDD**) is the [[tron|TRON]]-native [[stablecoins]] backed by the TRON DAO Reserve and closely associated with Justin Sun. Originally launched in May 2022 as an algorithmic stablecoin (weeks after Terra's UST collapse, briefly depegging to $0.928 in June 2022), it was relaunched in January 2025 as **USDD 2.0** — an overcollateralized design paying a heavily subsidized 20% APY. For traders it is primarily a [[stablecoin-yields|stablecoin-yield]] instrument and a depeg-risk monitor within the Justin Sun complex.
 
 ---
 
@@ -152,7 +152,7 @@ A stablecoin is "valued" not by upside but by **peg integrity and backing qualit
 ## Related
 
 - [[tron]]
-- [[stablecoin]]
+- [[stablecoins]]
 - [[stablecoins]]
 - [[stablecoin-yields]]
 - [[usdt]]

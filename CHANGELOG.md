@@ -4,6 +4,153 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-08-22 — Fix 5 wikilink rename-mismatches across 60 pages
+
+**Fixed:** Rewrote wikilink targets on 60 pages (150 total changes) that pointed at
+near-miss filenames instead of the real page: memecoins→meme-coins, btc-bitcoin→bitcoin,
+nvidia→nvidia-ai, rwa→real-world-assets (dropping redundant duplicate links), and
+tether→usdt/tether-limited split by whether the sentence meant the stablecoin or the
+issuing company.
+
+**Notes:** Fix-track iteration of the daily improvement loop. Broken-link lint issues
+dropped from 247 to 240 pages; other lint categories unchanged. A wider tally (1,226
+distinct broken link targets wiki-wide) also surfaced several genuine missing-concept
+gaps rather than rename-mismatches — `depeg`, `dao`, `tokenization`, `tokenomics`, and
+the BNB Layer-1 chain page — queued for a future Build iteration.
+
+## 2026-08-21 — Tag audit batch 3: adopt 42 tags, consolidate 7 duplicates
+
+**Added:** 42 new tags to CLAUDE.md/AGENTS.md's Approved Tags list and `tools/lint.py` —
+mostly DeFi/crypto infrastructure vocabulary (staking, lending, restaking, mev, oracle,
+amm, cross-chain, layer-2, governance, launchpad, depeg, and more) that had been in
+everyday use across the wiki without ever being formally approved, plus AI/ML, options,
+quant-methodology, and macro terms.
+
+**Changed:** Consolidated 7 near-duplicate tags across 50 pages (artificial-intelligence→ai,
+regime→market-regime, api-trading→api, on-chain-analytics→on-chain, comparison→comparisons,
+liquidation→liquidations, course→courses) — frontmatter-only edits, no page content touched.
+
+**Notes:** Fix-track iteration of the daily improvement loop. Non-approved-tag lint issues
+dropped from 852 to 659 pages; all other lint categories (links, orphans, stale, empty)
+verified byte-identical before/after. 797 distinct non-approved tags remain, mostly
+long-tail one-off usages, for future batches.
+
+## 2026-08-20 — 6 more concept stubs expanded to full pages
+
+**Added:** Expanded `altcoins`, `gaming-tokens`, `data-availability`, `modular-blockchains`,
+`sequencer`, and `consensus-mechanism` from ~200-400 character placeholder stubs into full
+concept pages (916-1,095 words each) — real mechanism explanations, named protocols/events
+with dates and figures (Ethereum's September 2022 Merge, the March 2024 Dencun/EIP-4844
+blob upgrade, Celestia's October 2023 mainnet), and trading-relevance links to existing
+AlgoBrain strategy pages. These were the 6 highest-inbound-link survivors of the 21
+concept-page candidates among the 37 `status: stub` pages left after the 2026-08-19 batch.
+
+**Notes:** Second "Build" iteration of the daily improvement loop. Dropped one initially
+top-ranked candidate (`crypto-market-regimes`) after finding its topic already covered in
+depth by an existing `status: good` page under a different filename — expanding it would
+have duplicated content rather than added to it. All added wikilinks verified against the
+actual file tree before use (one near-miss caught: `memecoins` doesn't exist as a page,
+only `meme-coins`/`meme-coin` redirect stubs do).
+
+## 2026-08-19 — 7 infrastructure concept stubs expanded to full pages
+
+**Added:** Expanded `cross-chain`, `centralized-exchange`, `zk-rollup`, `exchange-tokens`,
+`cross-chain-bridge`, `interoperability`, and `optimistic-rollup` from ~200-400 character
+placeholder stubs into full concept pages (863-1,154 words each) — real mechanism
+explanations, named protocols/events with dates and figures (the Ronin/Wormhole/Nomad/
+Multichain bridge-hack timeline, OKB's August 2025 supply burn, the FTT/FTX
+concentration-risk case), and trading-relevance links to existing AlgoBrain strategy
+pages. These were the highest-demand survivors of a 2026-07-19 batch that created the
+stubs to fix broken links and explicitly deferred filling them in.
+
+**Notes:** First "Build" iteration of the daily improvement loop — the loop's prior 4
+iterations were all lint fixes, so its instructions were updated to require balancing
+fix work against real content growth (see the 2026-08-19 "Add Fix/Build balance" commit
+to `.claude/commands/improve-algobrain-loop.md`). All added wikilinks verified to resolve
+to real pages; a full lint pass afterward shows no regressions.
+
+## 2026-08-17 — 9 wikilink rename-mismatches fixed across 150 pages
+
+**Fixed:** Retargeted 9 wikilinks that pointed to a page name close to, but not exactly
+matching, an existing page — `stablecoin`→`stablecoins` (the big one: 82 pages, 230
+references), `decentralized-finance`→`defi`, `non-fungible-token`→`nft`,
+`binance-coin`→`bnb`, `render`→`render-token`, `bitcoin-etf`→`bitcoin-etfs`,
+`on-chain-analytics`→`on-chain-analysis`, `usde`→`ethena-usde`, `near-protocol`→`near`.
+150 pages touched, 425 reference instances fixed. Mechanical, target-only rewrites —
+alias text, section anchors, and surrounding content preserved verbatim; verified no
+remaining references to any of the 9 old names anywhere in the wiki.
+
+**Notes:** Fourth run of the daily improvement loop, continuing from the rename-mismatch
+list surfaced 2026-08-16. Lint's `links` issue count dropped from 283 to 247 pages
+(verified independently before committing). The remaining flags are mostly genuine
+forward-link gaps (expected — CLAUDE.md treats these as fine, signaling future
+page-creation opportunities, not bugs), though a further characterization pass is queued
+in `.claude/wiki-improvement-backlog.md` to confirm that and catch any other
+rename-mismatches beyond this batch's 9.
+
+## 2026-08-16 — Two lint.py parsing bugs fixed: escaped-pipe wikilinks, UTF-8 BOM
+
+**Fixed:** `tools/lint.py`'s `extract_wikilinks()` didn't account for the escaped pipe
+(`\|`) that markdown tables require on aliased wikilinks (`[[target\|Display Text]]`),
+so every such link was captured with a stray trailing backslash and flagged as pointing
+to a nonexistent page even when the target existed. This was the root cause of most
+false-positive "broken link" noise (both the `links` and `orphans` checks share this
+function). Fixed by stripping the trailing backslash from extracted targets — verified
+safe wiki-wide (all 2,815 backslash-suffixed matches were this escaping artifact, none a
+legitimate target). Also fixed the UTF-8 BOM bug flagged 2026-08-14: 12 pages read with
+plain `utf-8` kept a leading BOM that broke the frontmatter regex; switched to
+`utf-8-sig`.
+
+**Notes:** Third run of the daily improvement loop. Lint counts: links 460→283,
+frontmatter 12→0, orphans 40→39, tags 851→852 (one previously BOM-hidden page's tags
+became visible — expected, not a regression). Characterizing the remaining 283 `links`
+flags surfaced the next high-leverage target: `[[stablecoin]]` (singular, no such page)
+should point to `[[stablecoins]]` — 82 pages, ~230 references, the largest single
+rename-mismatch pattern found. Queued in `.claude/wiki-improvement-backlog.md` along with
+several smaller ones.
+
+## 2026-08-15 — Tag audit batch 2: 23 tags adopted, 87 pages consolidated
+
+**Added:** 23 new approved tags to CLAUDE.md/AGENTS.md's "Approved Tags" list (and
+`tools/lint.py`) — `position-sizing`, `sentiment`, `trading-psychology`, `api`, `agents`,
+`prediction-markets`, `free`, `tail-risk`, `hft`, `dex`, `energy`, `etf`, `depin`,
+`validation`, `order-flow`, `bnb`, `market-neutral`, `interest-rates`, `theta`,
+`deep-learning`, `yield`, `alternative-data`, `compliance` — the top 30 non-approved tags
+by page-count, minus 7 that turned out to be duplicates of existing tags.
+
+**Changed:** Consolidated 7 duplicate/variant tag names across 87 pages' frontmatter:
+`hacks`→dropped (duplicate of `exploits`), `psychology`→dropped (duplicate of
+`behavioral-finance`), `meme`/`memecoin`→`memecoins`, `macro-trading`→`macro`,
+`data`→`data-provider`, `technology`→`infrastructure` (on the `ai-trading/infrastructure`
+pages only). No page body content was touched — frontmatter `tags:` lines only.
+
+**Notes:** Second run of the daily improvement loop. Lint's `tags` issue count dropped
+from 1,051 to 851 pages; the remaining ~851 are outside this batch's top-30 threshold or
+were deliberately left flagged (e.g. `wiki/markets/crypto/etherrock.md`'s `meme` tag
+means internet-meme-culture, not a coin — correctly not renamed). Next tag-audit batch
+and the still-open 12-page UTF-8-BOM lint bug (from 2026-08-14) are queued in
+`.claude/wiki-improvement-backlog.md`.
+
+## 2026-08-14 — Lint tool's type/tag schema resynced to CLAUDE.md
+
+**Fixed:** `tools/lint.py`'s `VALID_TYPES` and `APPROVED_TAGS` constants — and the `type`
+enum documented in CLAUDE.md/AGENTS.md — had drifted from real wiki usage and from
+CLAUDE.md's own Approved Tags list. Three page types in wide legitimate use (`redirect`,
+201 pages; `reference`, 35; `narrative`, 2) weren't recognized as valid, and roughly 30
+tags CLAUDE.md already approves (funding-rate, hyperliquid, stablecoins, memecoins, the
+full 2026-07-19 tag-audit batch, etc.) weren't in the lint script's list. Together this
+was producing false-positive noise on ~2,100 of 2,676 total lint issues. CLAUDE.md and
+AGENTS.md's `type` line now both read `... | redirect | reference | narrative`, and
+`tools/lint.py` was updated to match (additive only — nothing removed). A full lint pass
+now reports tags 1051 (was 1871) and frontmatter 12 (was 249), both genuine remaining
+debt; links/empty/orphans/stale are unchanged (content wasn't touched).
+
+**Notes:** First run of the new daily improvement loop (`/start-loops` →
+`/improve-algobrain-loop`, armed today). Two follow-ups queued for future iterations: 12
+pages fail the frontmatter check due to a leading UTF-8 BOM breaking `lint.py`'s
+frontmatter regex (not actually missing fields), and ~1,051 pages carry genuinely
+non-approved tags worth a dedicated tag-audit batch.
+
 ## 2026-07-20 — Trading referrals baked across venue-relevant pages
 
 Referral links with automatic fee discounts — Hyperliquid (4% off spot & perp fees) and

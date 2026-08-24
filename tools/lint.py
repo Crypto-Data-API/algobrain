@@ -24,6 +24,7 @@ REQUIRED_FIELDS = ["title", "type", "created", "updated", "status", "tags"]
 VALID_TYPES = {
     "concept", "strategy", "entity", "market", "comparison",
     "news", "source", "index", "overview",
+    "redirect", "reference", "narrative",
 }
 VALID_STATUSES = {"stub", "draft", "review", "good", "excellent"}
 APPROVED_TAGS = {
@@ -38,8 +39,10 @@ APPROVED_TAGS = {
     "risk-management", "portfolio-theory", "market-microstructure", "order-types",
     "indicators", "behavioral-finance", "valuation", "leverage", "margin",
     "derivatives", "volatility", "correlation", "liquidity", "slippage",
+    "on-chain", "funding-rate", "perpetual-futures", "liquidations", "open-interest",
     # Asset-specific
     "bitcoin", "ethereum", "altcoins", "sp500", "nasdaq", "gold", "oil", "treasuries",
+    "stablecoins", "memecoins",
     # Meta
     "history", "news", "education", "book", "person", "company", "exchange",
     "regulation", "ai-trading", "machine-learning", "backtesting", "data-provider",
@@ -48,6 +51,26 @@ APPROVED_TAGS = {
     "trading-bots", "infrastructure", "courses", "resources",
     "crashes", "bull-markets", "bear-markets", "notable-trades", "market-evolution",
     "strategies", "concepts", "entities", "markets",
+    "market-regime", "regime-detection", "methodology", "event-driven", "hyperliquid",
+    # Adopted 2026-07-19 (tag audit)
+    "anomalies", "australia", "bittensor", "combinations", "execution", "exploits",
+    "gamefi", "hedging", "macro", "market-making", "meta-strategy", "narrative-impact",
+    "options-structures", "privacy", "python", "real-world-assets", "security",
+    "sniping", "solana", "statistics", "strategy-development", "tax", "volume",
+    # Adopted 2026-08-15 (tag audit batch 2)
+    "agents", "alternative-data", "api", "bnb", "compliance", "deep-learning",
+    "depin", "dex", "energy", "etf", "free", "hft", "interest-rates",
+    "market-neutral", "order-flow", "position-sizing", "prediction-markets",
+    "sentiment", "tail-risk", "theta", "trading-psychology", "validation", "yield",
+    # Adopted 2026-08-21 (tag audit batch 3)
+    "agricultural", "ai", "alpha-edge", "amm", "calendar-effects", "contrarian",
+    "crisis", "cross-chain", "defined-risk", "depeg", "digital-art", "diversification",
+    "factor-investing", "fixed-income", "gamma", "governance", "greeks", "grid-trading",
+    "income", "industrial-metals", "informational-edge", "institutional", "launchpad",
+    "layer-2", "lending", "llm", "mev", "monetary-policy", "nlp", "open-source",
+    "oracle", "payments", "performance", "portfolio-construction", "premium-selling",
+    "price-action", "restaking", "short-selling", "smart-contracts", "staking", "vix",
+    "yield-farming",
 }
 
 
@@ -74,7 +97,7 @@ def load_pages() -> list[dict]:
     """Load all wiki pages."""
     pages = []
     for md_file in WIKI_ROOT.rglob("*.md"):
-        content = md_file.read_text(encoding="utf-8", errors="ignore")
+        content = md_file.read_text(encoding="utf-8-sig", errors="ignore")
         fm = parse_frontmatter(content)
         body = get_body(content)
         rel_path = str(md_file.relative_to(WIKI_ROOT.parent))
@@ -91,7 +114,8 @@ def load_pages() -> list[dict]:
 
 def extract_wikilinks(text: str) -> list[str]:
     """Extract all [[wikilink]] targets from text."""
-    return re.findall(r"\[\[([^\]|]+?)(?:\|[^\]]+?)?\]\]", text)
+    raw = re.findall(r"\[\[([^\]|]+?)(?:\|[^\]]+?)?\]\]", text)
+    return [t.rstrip("\\") for t in raw]
 
 
 def check_frontmatter(pages: list[dict]) -> list[dict]:

@@ -264,7 +264,7 @@ Polkadot competes with other **interop/shared-security** platforms (Cosmos, [[et
 - [[proof-of-stake]] / [[staking]] — consensus and yield
 - [[hyperliquid]] / [[funding-rate]] / [[open-interest]] — perp venue & toolkit
 - [[narrative-trading]] — legacy-L1 rotation basket
-- [[etf]] / [[bitcoin-etf]] — alt-ETF wave context
+- [[etf]] / [[bitcoin-etfs]] — alt-ETF wave context
 
 ---
 

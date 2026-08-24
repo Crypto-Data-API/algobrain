@@ -4,7 +4,7 @@ type: reference
 created: 2026-04-20
 updated: 2026-06-20
 status: excellent
-tags: [data, crypto, defi, arbitrage, execution, meta]
+tags: [data-provider, crypto, defi, arbitrage, execution, meta]
 aliases: ["Contract Addresses", "DeFi Contracts", "Smart Contract Registry"]
 related: ["[[flash-loan-arbitrage]]", "[[cross-chain-arbitrage]]", "[[mev-strategies]]", "[[exchange-api-reference]]", "[[automated-market-maker]]", "[[defi]]", "[[cross-chain-bridges]]", "[[cctp]]", "[[uniswap]]", "[[aave]]"]
 ---

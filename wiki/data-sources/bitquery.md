@@ -4,7 +4,7 @@ type: source
 created: 2026-05-04
 updated: 2026-06-12
 status: good
-tags: [data-provider, on-chain-analytics, crypto, solana, defi, sniping]
+tags: [data-provider, on-chain, crypto, solana, defi, sniping]
 source_type: data
 source_url: "https://bitquery.io"
 source_author: "Bitquery"

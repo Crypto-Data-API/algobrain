@@ -6,9 +6,9 @@ updated: 2026-07-17
 status: draft
 tags: [crypto]
 aliases: ["meme coin", "meme-coins"]
-related: ["[[memecoins]]"]
+related: ["[[meme-coins]]"]
 ---
 
 # Meme Coin
 
-**Meme Coin** — see **[[memecoins]]**.
+**Meme Coin** — see **[[meme-coins]]**.

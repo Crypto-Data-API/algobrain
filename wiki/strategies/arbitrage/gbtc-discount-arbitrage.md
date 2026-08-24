@@ -26,7 +26,7 @@ related: ["[[funding-rate-arbitrage]]", "[[cash-and-carry]]", "[[2020-03-bond-et
 
 # GBTC Discount/Premium Arbitrage
 
-Grayscale Bitcoin Trust ([[gbtc]]) discount/premium arbitrage exploited the persistent dislocation between GBTC's share price and its underlying Bitcoin net asset value (NAV). It is the crypto-native instance of the classic **[[closed-end-fund]] NAV-discount/premium trade** ([[arbitrage]] family; a structural cousin of merger-arbitrage and risk-arbitrage in that the edge is the *convergence to a known terminal value*). From 2017–2020, GBTC traded at a structural **premium** to NAV (typically +10% to +40%), enabling an in-kind creation arbitrage. From February 2021 onward, GBTC flipped to a deepening **discount** (reaching -48.9% on December 13, 2022) that was finally closed by the January 11, 2024 conversion to a spot [[bitcoin-etf]]. The full arc — premium → trap-flip → deep discount → ETF conversion → discount-close — is the single most instructive case study in [[limits-to-arbitrage]] in crypto history.
+Grayscale Bitcoin Trust ([[gbtc]]) discount/premium arbitrage exploited the persistent dislocation between GBTC's share price and its underlying Bitcoin net asset value (NAV). It is the crypto-native instance of the classic **[[closed-end-fund]] NAV-discount/premium trade** ([[arbitrage]] family; a structural cousin of merger-arbitrage and risk-arbitrage in that the edge is the *convergence to a known terminal value*). From 2017–2020, GBTC traded at a structural **premium** to NAV (typically +10% to +40%), enabling an in-kind creation arbitrage. From February 2021 onward, GBTC flipped to a deepening **discount** (reaching -48.9% on December 13, 2022) that was finally closed by the January 11, 2024 conversion to a spot [[bitcoin-etfs]]. The full arc — premium → trap-flip → deep discount → ETF conversion → discount-close — is the single most instructive case study in [[limits-to-arbitrage]] in crypto history.
 
 ## Edge Source
 
@@ -262,7 +262,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can monitor
 
 - [[arbitrage]] — parent concept
 - [[closed-end-fund]] — the wrapper structure that creates the NAV gap
-- [[bitcoin-etf]] — the terminal wrapper that closed the discount
+- [[bitcoin-etfs]] — the terminal wrapper that closed the discount
 - [[limits-to-arbitrage]] — why a visible mispricing persisted for years
 - [[funding-rate-arbitrage]] — sister crypto basis trade
 - [[cash-and-carry]] — classical futures basis equivalent

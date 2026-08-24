@@ -9,7 +9,7 @@ aliases: ["Astherus USDF", "USDF", "asUSDF"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.asterdex.com/en/usdf"
-related: ["[[asterdex]]", "[[bnb]]", "[[crypto-markets]]", "[[delta-neutral]]", "[[ethena-usde]]", "[[stablecoins]]", "[[usde]]", "[[usdt]]"]
+related: ["[[asterdex]]", "[[bnb]]", "[[crypto-markets]]", "[[delta-neutral]]", "[[ethena-usde]]", "[[stablecoins]]", "[[ethena-usde]]", "[[usdt]]"]
 ---
 
 # Aster USDF
@@ -106,7 +106,7 @@ Contract address:
 ## Risks
 
 - **De-peg risk:** USDF printed as low as ~$0.80 on 2025-10-10 — a demonstrated severe de-peg event. Thin secondary liquidity and the current Extreme-Fear regime (Fear & Greed 21) keep this risk live.
-- **Funding-rate / yield-source risk:** the [[delta-neutral]] yield engine depends on positive perpetual funding; sustained negative funding erodes yield and can stress the backing — the classic synthetic-dollar failure mode shared with [[usde]].
+- **Funding-rate / yield-source risk:** the [[delta-neutral]] yield engine depends on positive perpetual funding; sustained negative funding erodes yield and can stress the backing — the classic synthetic-dollar failure mode shared with [[ethena-usde]].
 - **Counterparty / venue risk:** the hedge relies on perpetual-futures venues; an exchange or Aster-platform failure threatens the backing.
 - **Issuer / custodial risk:** USDF backing depends on Aster's management of the delta-neutral book and its 1:1 USDT reserves.
 - **Redemption-gating risk:** par redemption runs through the Aster protocol; if that path is paused or congested, holders depend on thin secondary liquidity to exit.
@@ -125,7 +125,7 @@ Contract address:
 
 ## Related
 
-- [[ethena-usde]], [[usde]] — flagship delta-neutral synthetic dollar (closest analog)
+- [[ethena-usde]], [[ethena-usde]] — flagship delta-neutral synthetic dollar (closest analog)
 - [[delta-neutral]] — the hedging mechanism
 - [[asterdex]] — the issuing perp DEX (Aster / Astherus)
 - [[usdt]] — the 1:1 backing/convertibility asset

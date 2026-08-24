@@ -9,7 +9,7 @@ aliases: ["FT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://flyingtulip.com/"
-related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-finance]]", "[[ethereum]]", "[[perpetual-futures]]"]
+related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[perpetual-futures]]"]
 ---
 
 # Flying Tulip
@@ -124,7 +124,7 @@ Given the 2026-06-24 Extreme-Fear, established-bear backdrop, FT is a **high-bet
 - [[crypto-markets]]
 - [[ethereum]]
 - [[sonic]]
-- [[decentralized-finance]]
+- [[defi]]
 - [[automated-market-maker]]
 - [[perpetual-futures]]
 - [[yearn-finance]]

@@ -9,12 +9,12 @@ aliases: ["BRLA"]
 entity_type: protocol
 headquarters: "Brazil (BRLA Digital)"
 website: "https://brla.digital/"
-related: ["[[brazilian-real]]", "[[brz]]", "[[crown-brlv]]", "[[crypto-markets]]", "[[depeg]]", "[[forex]]", "[[polygon]]", "[[stablecoin]]"]
+related: ["[[brazilian-real]]", "[[brz]]", "[[crown-brlv]]", "[[crypto-markets]]", "[[depeg]]", "[[forex]]", "[[polygon]]", "[[stablecoins]]"]
 ---
 
 # BRLA Digital BRLA
 
-**BRLA Digital BRLA** (BRLA) is a fiat-backed [[stablecoin]] that tracks the **[[brazilian-real|Brazilian real]] (BRL)**, not the US dollar. Issued by **BRLA Digital**, it is designed primarily for **B2B cross-border payments and on/off-ramps**, and is marketed as the only **audited** BRL stablecoin — a compliance-first competitor to [[brz|BRZ]] and [[crown-brlv|Crown BRLV]] inside Brazil's on-chain economy.
+**BRLA Digital BRLA** (BRLA) is a fiat-backed [[stablecoins]] that tracks the **[[brazilian-real|Brazilian real]] (BRL)**, not the US dollar. Issued by **BRLA Digital**, it is designed primarily for **B2B cross-border payments and on/off-ramps**, and is marketed as the only **audited** BRL stablecoin — a compliance-first competitor to [[brz|BRZ]] and [[crown-brlv|Crown BRLV]] inside Brazil's on-chain economy.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -105,7 +105,7 @@ BRLA is a **regional / FX-denominated stablecoin** positioned at the **regulated
 
 ## See Also
 
-- [[stablecoin]]
+- [[stablecoins]]
 - [[brazilian-real]]
 - [[forex]]
 - [[brz]]

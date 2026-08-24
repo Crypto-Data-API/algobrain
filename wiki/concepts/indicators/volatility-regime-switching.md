@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-07
 updated: 2026-07-19
 status: excellent
-tags: [volatility, indicators, quantitative, regime, backtesting]
+tags: [volatility, indicators, quantitative, market-regime, backtesting]
 aliases: ["Regime-Switching Models", "Markov-Switching Volatility", "Vol Regime Switching"]
 related: ["[[volatility-regime]]", "[[volatility-regime-classification]]", "[[volatility-term-structure]]", "[[market-regime]]", "[[market-regime-detection-ml]]", "[[hidden-markov-model]]", "[[garch]]", "[[backtesting]]", "[[lookahead-bias]]", "[[overfitting]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[volmageddon]]", "[[covid-crash]]", "[[vix-august-2024-spike]]", "[[cryptodataapi]]"]
 domain: [quantitative, volatility]

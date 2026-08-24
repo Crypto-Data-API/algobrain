@@ -9,7 +9,7 @@ aliases: ["FF", "USDf"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://app.falcon.finance/swap/mint"
-related: ["[[crypto-markets]]", "[[decentralized-finance]]", "[[ethereum]]", "[[real-world-assets]]", "[[stablecoins]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[real-world-assets]]", "[[stablecoins]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Falcon Finance
@@ -36,7 +36,7 @@ related: ["[[crypto-markets]]", "[[decentralized-finance]]", "[[ethereum]]", "[[
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
-Trading context: the market is in **extreme fear** ([[fear-and-greed-index|Fear & Greed]] = 23) and an **"Established Bear Market"** as of 2026-06-21. FF bounced ~+2.7% on the day but is still down ~8% on the week and remains only ~17% above its all-time low (~$0.061, set 2026-05-04), roughly **91% below** its September 2025 ATH — a steep, persistent drawdown for a synthetic-dollar governance token. Note this market data is for the **FF governance token**, not for the [[stablecoin|USDf stablecoin]] (CoinGecko id `falcon-finance`, ~$1.46B cap, rank #54), which targets a $1 peg and is a separate listing.
+Trading context: the market is in **extreme fear** ([[fear-and-greed-index|Fear & Greed]] = 23) and an **"Established Bear Market"** as of 2026-06-21. FF bounced ~+2.7% on the day but is still down ~8% on the week and remains only ~17% above its all-time low (~$0.061, set 2026-05-04), roughly **91% below** its September 2025 ATH — a steep, persistent drawdown for a synthetic-dollar governance token. Note this market data is for the **FF governance token**, not for the [[stablecoins|USDf stablecoin]] (CoinGecko id `falcon-finance`, ~$1.46B cap, rank #54), which targets a $1 peg and is a separate listing.
 
 ---
 
@@ -79,7 +79,7 @@ With listings on Binance and other majors plus ~$14.6M/24h spot volume, FF has r
 
 ## Use Case / Narrative / Category
 
-Falcon Finance sits in the **synthetic dollar / yield-bearing [[stablecoin]] + [[real-world-assets|RWA]] collateral** category — a fast-growing [[defi|DeFi]] vertical that blends stablecoin issuance with delta-neutral yield (the [[ethena|Ethena]]-style "internet bond" thesis) and extends collateral acceptance to tokenized real-world assets. The narrative: unlock liquidity from a wide range of assets without selling them (mint USDf), and earn institutional-style yield (sUSDf), bridging TradFi collateral and DeFi liquidity. FF is the way to take equity-like exposure to that growth.
+Falcon Finance sits in the **synthetic dollar / yield-bearing [[stablecoins]] + [[real-world-assets|RWA]] collateral** category — a fast-growing [[defi|DeFi]] vertical that blends stablecoin issuance with delta-neutral yield (the [[ethena|Ethena]]-style "internet bond" thesis) and extends collateral acceptance to tokenized real-world assets. The narrative: unlock liquidity from a wide range of assets without selling them (mint USDf), and earn institutional-style yield (sUSDf), bridging TradFi collateral and DeFi liquidity. FF is the way to take equity-like exposure to that growth.
 
 ---
 
@@ -130,9 +130,9 @@ FF is the small-cap, broad-collateral entrant in a category led by Ethena on the
 
 - [[crypto-markets]]
 - [[ethereum]]
-- [[stablecoins]] · [[stablecoin]]
+- [[stablecoins]] · [[stablecoins]]
 - [[real-world-assets]]
-- [[decentralized-finance]] · [[defi]]
+- [[defi]] · [[defi]]
 - [[ethena]] — reference synthetic-dollar peer
 - [[fear-and-greed-index]]
 

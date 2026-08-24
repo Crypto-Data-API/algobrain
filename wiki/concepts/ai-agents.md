@@ -32,7 +32,7 @@ A functional AI trading agent typically combines:
 
 ### AI agent narrative tokens
 
-In late 2023 and through 2024, a speculative category of tokens emerged whose primary value proposition was association with AI agents: VIRTUAL (Virtuals Protocol), AI16Z (ai16z/ElizaOS), AIXBT (an AI-driven market commentary agent), and HYPE-adjacent tokens. These tokens are more closely related to [[memecoins]] in their trading dynamics — driven by narrative velocity, social media virality, and the overall AI × crypto narrative cycle — than by agent deployment metrics.
+In late 2023 and through 2024, a speculative category of tokens emerged whose primary value proposition was association with AI agents: VIRTUAL (Virtuals Protocol), AI16Z (ai16z/ElizaOS), AIXBT (an AI-driven market commentary agent), and HYPE-adjacent tokens. These tokens are more closely related to [[meme-coins]] in their trading dynamics — driven by narrative velocity, social media virality, and the overall AI × crypto narrative cycle — than by agent deployment metrics.
 
 ## Concrete Examples
 

@@ -14,7 +14,7 @@ related: ["[[avalanche-2]]", "[[avalanche]]", "[[collateral]]", "[[crypto-market
 
 # NXUSD
 
-**NXUSD** is a crypto-collateralized [[stablecoin|stablecoin]] (a [[synthetic-dollar]] designed to track US$1.00) issued by Nereus Finance, a decentralised, non-custodial liquidity-market protocol native to the [[avalanche-2|Avalanche]] ecosystem. On the Nereus money market, depositors supply liquidity to earn passive yield while borrowers draw against collateral on either an over-collateralised (perpetual) or one-block (flash) basis; NXUSD is the protocol's algorithmic dollar unit minted against that collateral.
+**NXUSD** is a crypto-collateralized [[stablecoins|stablecoin]] (a [[synthetic-dollar]] designed to track US$1.00) issued by Nereus Finance, a decentralised, non-custodial liquidity-market protocol native to the [[avalanche-2|Avalanche]] ecosystem. On the Nereus money market, depositors supply liquidity to earn passive yield while borrowers draw against collateral on either an over-collateralised (perpetual) or one-block (flash) basis; NXUSD is the protocol's algorithmic dollar unit minted against that collateral.
 
 Unlike the fiat-backed ([[usdh-2|USDH]]) or reinsurance-RWA ([[re-protocol-reusd|reUSD]]) dollars elsewhere in this category, NXUSD is **endogenously collateralized** — its backing is volatile crypto held inside the Nereus money market, and its peg is sustained by over-collateralization, price oracles, and arbitrage rather than by any off-chain reserve. That makes it structurally closer to a [[makerdao|MakerDAO]]-style crypto-backed dollar than to a reserve coin, and explains why, at low liquidity, it currently trades at a modest discount to par rather than dead-on $1.
 

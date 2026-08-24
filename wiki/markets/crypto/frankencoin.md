@@ -9,12 +9,12 @@ aliases: ["ZCHF"]
 entity_type: protocol
 headquarters: "Decentralized (Switzerland-aligned community)"
 website: "https://www.frankencoin.com"
-related: ["[[crypto-markets]]", "[[dai]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[forex]]", "[[stablecoin]]", "[[swiss-franc]]", "[[usda-2]]"]
+related: ["[[crypto-markets]]", "[[dai]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[forex]]", "[[stablecoins]]", "[[swiss-franc]]", "[[usda-2]]"]
 ---
 
 # Frankencoin
 
-**Frankencoin** (ticker **ZCHF**; native chain [[ethereum|Ethereum]], with deployments on Polygon, Base, Optimism, Arbitrum, Gnosis and Avalanche) is a decentralized, **over-collateralized** [[stablecoin]] that tracks the **[[swiss-franc|Swiss franc]] (CHF)**, not the US dollar. Its defining feature is that it uses **no price oracle**: anyone can mint ZCHF against approved collateral through an adversarial **Dutch-auction price-discovery mechanism** rather than a centralized price feed. The peg model is collateral-redemption plus auction liquidation; "yield" in the system accrues to equity providers (the Frankencoin Pool Share, FPS) who bear first-loss risk, not to ZCHF holders directly. ZCHF is one of the few sizeable non-USD FX stablecoins, alongside euro coins like EURe and real coins like [[brz]] / [[brla-digital-brla]].
+**Frankencoin** (ticker **ZCHF**; native chain [[ethereum|Ethereum]], with deployments on Polygon, Base, Optimism, Arbitrum, Gnosis and Avalanche) is a decentralized, **over-collateralized** [[stablecoins]] that tracks the **[[swiss-franc|Swiss franc]] (CHF)**, not the US dollar. Its defining feature is that it uses **no price oracle**: anyone can mint ZCHF against approved collateral through an adversarial **Dutch-auction price-discovery mechanism** rather than a centralized price feed. The peg model is collateral-redemption plus auction liquidation; "yield" in the system accrues to equity providers (the Frankencoin Pool Share, FPS) who bear first-loss risk, not to ZCHF holders directly. ZCHF is one of the few sizeable non-USD FX stablecoins, alongside euro coins like EURe and real coins like [[brz]] / [[brla-digital-brla]].
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 >
@@ -116,7 +116,7 @@ Frankencoin sits in the **non-USD / FX stablecoin** and **oracle-free CDP** narr
 
 ## See Also
 
-- [[stablecoin]]
+- [[stablecoins]]
 - [[swiss-franc]]
 - [[forex]]
 - [[dai]] — USD CDP analogue

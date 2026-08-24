@@ -4,7 +4,7 @@ type: reference
 created: 2026-04-10
 updated: 2026-06-21
 status: excellent
-tags: [data, data-providers, free]
+tags: [data-provider, data-providers, free]
 aliases: ["Free Market Data"]
 related: ["[[data-sources-overview]]", "[[paid-data-providers]]", "[[crypto-data-sources]]", "[[macro-data-sources]]"]
 ---

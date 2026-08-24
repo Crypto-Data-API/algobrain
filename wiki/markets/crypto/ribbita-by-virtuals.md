@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-agents, artificial-intelligence, crypto]
+tags: [ai-agents, ai, crypto]
 aliases: ["TIBBIR", "Tibbir"]
 entity_type: protocol
 headquarters: "Decentralized"

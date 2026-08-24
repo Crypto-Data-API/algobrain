@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [crypto, company, behavioral-finance, news]
 aliases: ["Telegram", "Telegram Messenger"]
-related: ["[[ton]]", "[[pump-and-dump]]", "[[market-manipulation]]", "[[narrative-signals]]", "[[sentiment-analysis]]", "[[social-sentiment]]", "[[memecoins]]"]
+related: ["[[ton]]", "[[pump-and-dump]]", "[[market-manipulation]]", "[[narrative-signals]]", "[[sentiment-analysis]]", "[[social-sentiment]]", "[[meme-coins]]"]
 entity_type: company
 founded: 2013
 headquarters: "Dubai, UAE"
@@ -21,7 +21,7 @@ Telegram is a cloud-based messaging platform founded in 2013 by Pavel and Nikola
 
 - **Project and community hubs.** Nearly every crypto project runs an official Telegram for announcements; group activity and member growth are coarse [[narrative-signals|narrative]] and demand proxies.
 - **Signal groups.** Paid and free "alpha" / signal groups broadcast entries and exits to thousands of followers simultaneously, creating self-reinforcing flow into thin-liquidity tokens — a key transmission mechanism in the ai-microcap-pump-pattern and memecoin cycles.
-- **Trading bots.** Telegram-native bots (e.g. Solana/EVM sniping and swap bots) let users trade directly in chat, compressing the gap between a call being posted and execution. This is a major retail order-flow channel for [[memecoins]].
+- **Trading bots.** Telegram-native bots (e.g. Solana/EVM sniping and swap bots) let users trade directly in chat, compressing the gap between a call being posted and execution. This is a major retail order-flow channel for [[meme-coins]].
 - **TON ecosystem.** Telegram is integrated with [[ton|The Open Network]], embedding wallets and mini-apps; Telegram engagement directly affects TON-ecosystem token demand.
 
 ## Manipulation and Risk
@@ -32,7 +32,7 @@ Telegram's reach and pseudonymity make it the primary venue for coordinated [[pu
 
 - **Sentiment and narrative input.** Aggregated group activity, message velocity, and keyword trends feed [[sentiment-analysis]] / [[social-sentiment]] pipelines and [[narrative-signals]] models.
 - **Front-running the crowd, not joining it.** The profitable use is detecting an emerging coordinated bid early and exiting into the broadcast peak, treating retail Telegram flow as exit liquidity.
-- **Scam-detection layer.** Group age, admin anonymity, and "guaranteed return" language are red flags integrated into due-diligence screens for [[memecoins]] and microcaps.
+- **Scam-detection layer.** Group age, admin anonymity, and "guaranteed return" language are red flags integrated into due-diligence screens for [[meme-coins]] and microcaps.
 - **Data access.** The Telegram API enables programmatic scraping of public groups for systematic signal extraction, subject to rate limits and channel-access constraints.
 
 ## Related
@@ -40,7 +40,7 @@ Telegram's reach and pseudonymity make it the primary venue for coordinated [[pu
 - [[ton]] — the blockchain integrated with Telegram
 - [[pump-and-dump]], [[market-manipulation]] — schemes coordinated on the platform
 - [[narrative-signals]], [[sentiment-analysis]], [[social-sentiment]] — signal-extraction uses
-- ai-microcap-pump-pattern, [[memecoins]] — assets most affected by Telegram flow
+- ai-microcap-pump-pattern, [[meme-coins]] — assets most affected by Telegram flow
 
 ## Sources
 

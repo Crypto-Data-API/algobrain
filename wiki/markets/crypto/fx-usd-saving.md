@@ -67,7 +67,7 @@ Supply is elastic to fxUSD deposits; there is no fixed cap. Because yield accrue
 |---|---|---|---|---|
 | **fxSAVE** | [[f-x-protocol-fxusd\|fxUSD]] | Stability-pool fees + wstETH staking | Accruing per-share | **No — contract-only** |
 | sDAI | [[dai\|DAI]] | DAI Savings Rate (RWA/T-bills) | Accruing per-share | Yes (deep) |
-| sUSDe | [[usde\|USDe]] | Delta-neutral funding/basis | Accruing per-share | Yes |
+| sUSDe | [[ethena-usde\|USDe]] | Delta-neutral funding/basis | Accruing per-share | Yes |
 | savUSD | Avant USD | Strategy yield | Accruing per-share | Limited |
 
 fxSAVE follows the same **accruing-savings-wrapper** pattern as sDAI and sUSDe, but its yield is tied to f(x) Protocol's CDP-style stability pool and ETH/BTC collateral, and — unlike sDAI/sUSDe — it has **effectively no secondary liquidity** (24h volume ~$5.77), so it must be entered/exited through the protocol rather than on an exchange.

@@ -10,7 +10,7 @@ entity_type: company
 founded: 2015
 headquarters: "San Francisco, USA"
 website: "https://www.openai.com"
-related: ["[[anthropic]]", "[[ai-trading-agents]]", "[[llm-market-analysis]]", "[[langchain]]", "[[artificial-intelligence]]", "[[ai-narrative-arc]]", "[[ai-agent-tokens]]", "[[nvidia]]"]
+related: ["[[anthropic]]", "[[ai-trading-agents]]", "[[llm-market-analysis]]", "[[langchain]]", "[[artificial-intelligence]]", "[[ai-narrative-arc]]", "[[ai-agent-tokens]]", "[[nvidia-ai|Nvidia]]"]
 ---
 
 # OpenAI
@@ -113,7 +113,7 @@ The AI narrative in crypto functions as a **beta play on AI progress**. Traders 
 
 - AI tokens are **high-beta**: They amplify AI-sector moves, both up and down
 - AI tokens are **narrative-driven, not fundamental**: They rally on attention, not on protocol revenue or user growth
-- **Correlation with [[nvidia|NVIDIA]] (NVDA)**: AI tokens often move in sympathy with NVDA earnings and guidance, since NVIDIA is the public-market proxy for AI investment
+- **Correlation with [[nvidia-ai|NVIDIA]] (NVDA)**: AI tokens often move in sympathy with NVDA earnings and guidance, since NVIDIA is the public-market proxy for AI investment
 
 ### Risk Factors
 
@@ -131,6 +131,6 @@ The AI narrative in crypto functions as a **beta play on AI progress**. Traders 
 - [[langchain]] — Framework for building GPT-4 applications
 - [[ai-narrative-arc]] — The 2024-2026 AI hype cycle in crypto
 - [[ai-agent-tokens]] — AI tokens that correlate with OpenAI news
-- [[nvidia]] — Public-market AI proxy that also moves crypto AI tokens
+- [[nvidia-ai|Nvidia]] — Public-market AI proxy that also moves crypto AI tokens
 - [[worldcoin]] — Sam Altman's personal crypto project
 - [[artificial-intelligence]] — AI section hub

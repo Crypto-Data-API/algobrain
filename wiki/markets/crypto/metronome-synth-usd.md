@@ -9,12 +9,12 @@ aliases: ["MSUSD", "msUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://metronome.io/"
-related: ["[[collateralization]]", "[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[stablecoin]]"]
+related: ["[[collateralization]]", "[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[stablecoins]]"]
 ---
 
 # Metronome Synth USD
 
-**Metronome Synth USD** (ticker **MSUSD**, also styled **msUSD**) is the synthetic US-dollar [[stablecoin]] of the **Metronome Synth** system — a synthetic-asset protocol that lets users deposit collateral and mint **synthetic** dollar-denominated tokens against it. msUSD is a debt-backed synthetic dollar rather than a fiat- or reserve-backed coin, and it is deployed across [[ethereum]] and several L2/EVM ecosystems (Optimism, Base, Plasma). It ranks **#750** by market capitalization.
+**Metronome Synth USD** (ticker **MSUSD**, also styled **msUSD**) is the synthetic US-dollar [[stablecoins]] of the **Metronome Synth** system — a synthetic-asset protocol that lets users deposit collateral and mint **synthetic** dollar-denominated tokens against it. msUSD is a debt-backed synthetic dollar rather than a fiat- or reserve-backed coin, and it is deployed across [[ethereum]] and several L2/EVM ecosystems (Optimism, Base, Plasma). It ranks **#750** by market capitalization.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -40,7 +40,7 @@ At the latest snapshot msUSD traded at **$0.996379** (market cap **$23,585,425**
 
 ## Overview
 
-Metronome Synth is a synthetic-asset protocol in which users deposit collateral and **mint synthetic tokens** that track an external price — in this case **msUSD**, a synthetic US dollar. Unlike a fiat-backed [[stablecoin]] (held in bank reserves) or a redeemable crypto-CDP coin, a synthetic dollar is created as **debt against collateral** within the protocol: the collateral secures the synthetic, and the synthetic's value is maintained by the protocol's minting, fee, and liquidation mechanics rather than by direct 1:1 fiat redemption.
+Metronome Synth is a synthetic-asset protocol in which users deposit collateral and **mint synthetic tokens** that track an external price — in this case **msUSD**, a synthetic US dollar. Unlike a fiat-backed [[stablecoins]] (held in bank reserves) or a redeemable crypto-CDP coin, a synthetic dollar is created as **debt against collateral** within the protocol: the collateral secures the synthetic, and the synthetic's value is maintained by the protocol's minting, fee, and liquidation mechanics rather than by direct 1:1 fiat redemption.
 
 Metronome Synth is the second-generation product from the **Metronome** team (originally known for the cross-chain **MET** token). The defining feature versus a plain CDP like [[dai|DAI]] is that the same collateral pool can mint a whole family of *synths* (synthetic USD, and in principle synthetic ETH, BTC and other price-tracked assets) — msUSD is the dollar leg of that family. A user deposits collateral once and can mint or switch between synths, with the protocol netting the debt across the basket.
 
@@ -133,7 +133,7 @@ msUSD sits in the **decentralized crypto-collateralized stablecoin** category �
 | **24h Change** | -0.02% |
 | **7d Change** | -0.09% |
 
-*As a synthetic-dollar [[stablecoin]], msUSD's price history is a tight band around $1; the extreme ATH/ATL above reflect brief illiquid prints/depeg episodes, not directional appreciation.*
+*As a synthetic-dollar [[stablecoins]], msUSD's price history is a tight band around $1; the extreme ATH/ATL above reflect brief illiquid prints/depeg episodes, not directional appreciation.*
 
 ---
 
@@ -203,7 +203,7 @@ msUSD sits in the **decentralized crypto-collateralized stablecoin** category �
 
 ## See Also
 
-- [[stablecoin]]
+- [[stablecoins]]
 - [[collateralization]]
 - [[depeg]]
 - [[ethereum]]

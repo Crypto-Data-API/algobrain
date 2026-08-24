@@ -9,12 +9,12 @@ aliases: ["FEUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://usefelix.xyz/"
-related: ["[[collateralized-debt-position]]", "[[crypto-markets]]", "[[dai]]", "[[hyperliquid]]", "[[stablecoin]]", "[[stablecoins]]"]
+related: ["[[collateralized-debt-position]]", "[[crypto-markets]]", "[[dai]]", "[[hyperliquid]]", "[[stablecoins]]", "[[stablecoins]]"]
 ---
 
 # Felix feUSD
 
-**Felix feUSD** (ticker **FEUSD**) is a crypto-collateralized [[stablecoin]] issued by the Felix protocol on **HyperEVM**, the EVM execution layer of the [[hyperliquid|Hyperliquid]] ecosystem, targeting a 1:1 peg to the US dollar. feUSD is minted against over-collateralized crypto deposits in a [[collateralized-debt-position|CDP / vault]] model — conceptually similar to MakerDAO's [[dai|DAI]] — rather than being backed by fiat reserves. It functions as the native dollar unit for borrowing, leverage, and DeFi activity within Hyperliquid/HyperEVM.
+**Felix feUSD** (ticker **FEUSD**) is a crypto-collateralized [[stablecoins]] issued by the Felix protocol on **HyperEVM**, the EVM execution layer of the [[hyperliquid|Hyperliquid]] ecosystem, targeting a 1:1 peg to the US dollar. feUSD is minted against over-collateralized crypto deposits in a [[collateralized-debt-position|CDP / vault]] model — conceptually similar to MakerDAO's [[dai|DAI]] — rather than being backed by fiat reserves. It functions as the native dollar unit for borrowing, leverage, and DeFi activity within Hyperliquid/HyperEVM.
 
 ---
 
@@ -200,7 +200,7 @@ feUSD's thesis is a **bet on Hyperliquid**: as HyperEVM accrues TVL and DeFi act
 
 ## Related
 
-- [[stablecoin]] / [[stablecoins]]
+- [[stablecoins]] / [[stablecoins]]
 - [[collateralized-debt-position]]
 - [[dai]] — the canonical crypto-collateralized stablecoin
 - [[crvusd]] — closest architectural peer (CDP + stability mechanics)

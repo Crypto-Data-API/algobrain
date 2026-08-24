@@ -4,7 +4,7 @@ type: comparison
 created: 2026-04-14
 updated: 2026-06-21
 status: excellent
-tags: [commodities, futures, comparison]
+tags: [commodities, futures, comparisons]
 aliases: ["Futures vs ETFs for Commodities"]
 subjects: ["[[futures-overview]]", "[[commodities]]"]
 comparison_dimensions: [cost, tracking-error, leverage, tax-treatment, accessibility]

@@ -21,7 +21,7 @@ expected_sharpe: 1.8
 expected_max_drawdown: 0.15
 breakeven_cost_bps: 20
 decay_evidence: "Major depeg events ~1-2 per year; profile depends on banking/regulatory environment."
-related: ["[[funding-rate-arbitrage]]", "[[lst-depeg-arbitrage]]", "[[depeg-risk]]", "[[curve-finance]]", "[[2022-05-terra-luna-depeg-arb]]", "[[circle]]", "[[tether]]", "[[makerdao]]", "[[ethena]]", "[[synthetic-stablecoin-depeg-arbitrage]]", "[[cross-chain-contagion-hedge]]", "[[ai-amplified-exploit-arbitrage]]", "[[stablecoin-depeg-profit-capture]]", "[[2017-2020-tether-banking-premium]]", "[[2020-03-dai-black-thursday]]", "[[2023-02-busd-wind-down]]", "[[2026-04-kelp-stable-sympathy-depeg]]", "[[stablecoin-depeg-history]]"]
+related: ["[[funding-rate-arbitrage]]", "[[lst-depeg-arbitrage]]", "[[depeg-risk]]", "[[curve-finance]]", "[[2022-05-terra-luna-depeg-arb]]", "[[circle]]", "[[tether-limited|Tether]]", "[[makerdao]]", "[[ethena]]", "[[synthetic-stablecoin-depeg-arbitrage]]", "[[cross-chain-contagion-hedge]]", "[[ai-amplified-exploit-arbitrage]]", "[[stablecoin-depeg-profit-capture]]", "[[2017-2020-tether-banking-premium]]", "[[2020-03-dai-black-thursday]]", "[[2023-02-busd-wind-down]]", "[[2026-04-kelp-stable-sympathy-depeg]]", "[[stablecoin-depeg-history]]"]
 ---
 
 # Stablecoin Pair Arbitrage
@@ -274,7 +274,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - [[liquidation-cascade-arbitrage]] — depegs and cascades often co-occur in the same crisis
 - [[mev-execution-guide]] — protect on-chain legs from sandwiching
 - [[2022-05-terra-luna-depeg-arb]] — counterexample (UST failed, not an arb)
-- [[curve-finance]], [[circle]], [[tether]], [[makerdao]], [[ethena]]
+- [[curve-finance]], [[circle]], [[tether-limited|Tether]], [[makerdao]], [[ethena]]
 - [[cross-chain-arbitrage]] — bridges create their own stablecoin price gaps
 - [[crypto-data-sources]] — where to source stable prices, attestations, and pool data
 - [[edge-taxonomy]], [[failure-modes]], [[leg-risk]]

@@ -78,7 +78,7 @@ Validators secure the chains using a **[[proof-of-stake]] / BFT** validator mode
 |---|---|---|---|---|
 | **Venom** | Dynamic sharding (workchains + threads) | TVM / T-Sol (async) | Asynchronous (message-passing) | TON lineage; ADGM-regulated foundation, Abu Dhabi |
 | TON | Dynamic sharding (similar) | TVM / FunC, Tact (async) | Asynchronous | Telegram-origin; consumer/payments |
-| [[near-protocol\|NEAR]] | Nightshade sharding | WASM / Rust, JS | Async cross-shard | Sharded smart-contract L1 |
+| [[near\|NEAR]] | Nightshade sharding | WASM / Rust, JS | Async cross-shard | Sharded smart-contract L1 |
 | Ethereum | Monolithic L1 + rollups | EVM / Solidity (sync) | Synchronous (on L1) | General-purpose settlement |
 | Solana | Single global state (parallel exec) | SVM / Rust | Synchronous, parallel | High-throughput monolith |
 
@@ -184,7 +184,7 @@ VENOM holders are intended to participate in network governance — voting on pr
 - **Centralization / origin risk:** A foundation-led, regulated-by-design model can mean more centralized control and validator concentration than a permissionless chain; "regulated" status does not equal decentralization.
 - **Adoption risk:** Enterprise/CBDC/tokenization narratives are common across many L1s; actual paying usage is what matters, and it is not verified here.
 - **Async-VM developer friction:** the message-passing TVM/T-Sol model is unfamiliar to EVM developers, which can slow ecosystem growth versus EVM-compatible chains.
-- **Competition:** Venom competes directly with its TON architectural cousin and with sharded smart-contract L1s like [[near-protocol|NEAR]] for the high-throughput / institutional niche.
+- **Competition:** Venom competes directly with its TON architectural cousin and with sharded smart-contract L1s like [[near|NEAR]] for the high-throughput / institutional niche.
 - **Cycle risk:** Down ~97% from ATH (~$27M market cap, rank #690) in an Extreme Fear market.
 
 > Not investment advice. Figures are point-in-time; verify project and on-chain claims independently.
@@ -215,7 +215,7 @@ VENOM holders are intended to participate in network governance — voting on pr
 - [[sharding]]
 - [[smart-contracts]]
 - [[proof-of-stake]]
-- [[near-protocol]]
+- [[near]]
 - [[defi]]
 
 ---

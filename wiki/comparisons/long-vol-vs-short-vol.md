@@ -4,7 +4,7 @@ type: comparison
 created: 2026-05-05
 updated: 2026-06-20
 status: excellent
-tags: [options, volatility, comparison, strategy-types]
+tags: [options, volatility, comparisons, strategy-types]
 aliases: ["Long Vol vs Short Vol", "Vol Buyer vs Vol Seller"]
 related: ["[[variance-risk-premium]]", "[[volatility-regime-classification]]", "[[tail-risk-hedging]]", "[[options-premium-selling]]", "[[options-portfolio-construction]]", "[[vega-budgeting]]", "[[vix-august-2024-spike]]", "[[long-vol-overlay]]", "[[long-volatility-strategies]]", "[[short-volatility-strategies]]", "[[regime-matrix]]", "[[market-regime]]"]
 subjects: ["[[long-volatility-strategies]]", "[[short-volatility-strategies]]"]

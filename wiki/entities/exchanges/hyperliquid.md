@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-06
 updated: 2026-07-20
 status: excellent
-tags: [crypto, exchange, defi, derivatives, algorithmic, api-trading]
+tags: [crypto, exchange, defi, derivatives, algorithmic, api]
 aliases: ["HL", "Hyperliquid DEX"]
 entity_type: exchange
 founded: 2022
@@ -122,7 +122,7 @@ Hyperliquid has expanded well beyond crypto-native assets. With 229 [[perpetual-
 
 **Equities / Indices** (via xyz: prefix markets):
 - Indices: SP500
-- Tech: TSLA, [[nvidia|NVDA]], INTC
+- Tech: TSLA, [[nvidia-ai|NVDA]], INTC
 - Fintech/Crypto-adjacent: [[robinhood|HOOD]], [[coinbase-stock|COIN]]
 
 The inclusion of traditional assets as [[perpetual-futures|perpetual contracts]] on a decentralized platform is notable -- it positions Hyperliquid as a **universal derivatives venue** rather than a crypto-only DEX. These traditional asset perps use price feeds to synthesize exposure without holding the underlying.

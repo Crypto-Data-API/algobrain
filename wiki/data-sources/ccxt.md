@@ -4,7 +4,7 @@ type: source
 created: 2026-05-05
 updated: 2026-06-12
 status: good
-tags: [data-provider, crypto, exchange, algorithmic, api-trading]
+tags: [data-provider, crypto, exchange, algorithmic, api]
 source_type: data
 source_url: "https://github.com/ccxt/ccxt"
 aliases: ["ccxt", "CCXT Pro", "ccxt.pro"]

@@ -4,7 +4,7 @@ type: source
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [book, macro-trading, behavioral-finance, reflexivity]
+tags: [book, macro, behavioral-finance, reflexivity]
 aliases: ["The Alchemy of Finance", "Alchemy of Finance Soros"]
 related: ["[[george-soros]]", "[[behavioral-finance]]", "[[macro-trading]]", "[[trend-following]]", "[[quantum-fund]]", "[[the-alchemy-of-finance]]"]
 source_type: book

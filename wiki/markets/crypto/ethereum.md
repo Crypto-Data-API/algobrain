@@ -256,7 +256,7 @@ ETH competes with other smart-contract platforms ("ETH killers") and, via the ET
 - [[smart-contracts]] -- The primitive that powers the ecosystem
 - [[proof-of-stake]] / [[staking]] -- Ethereum's consensus and yield
 - [[arbitrum]] -- Leading Ethereum L2
-- [[stablecoins]] / [[tether]] -- Major on-chain settlement assets
+- [[stablecoins]] / [[usdt|Tether]] -- Major on-chain settlement assets
 - [[hyperliquid]] -- DEX where ETH-PERP is the #2 market
 - [[binance]] / [[coinbase]] -- Largest CEX and builder of Base L2
 - [[funding-rate]] / [[open-interest]] / [[basis-trade]] -- Derivatives toolkit

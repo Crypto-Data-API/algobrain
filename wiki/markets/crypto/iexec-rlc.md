@@ -84,14 +84,14 @@ RLC is a fixed-supply ERC-20 (max 87M, with the bulk circulating) deployed prima
 
 ## Competitive Position
 
-iExec competes in two overlapping arenas: general [[decentralized-compute|decentralized compute]] (against networks like Akash, [[render|Render]], and [[nosana|Nosana]] for GPU/AI compute) and **confidential computing** (against [[phala-network|Phala]], Oasis, [[nillion|Nillion]], and centralized TEE clouds). Its differentiator is the combination of TEE-based confidentiality with a built-in data-monetization layer (DataProtector + iApps), which most general GPU-marketplace peers do not offer.
+iExec competes in two overlapping arenas: general [[decentralized-compute|decentralized compute]] (against networks like Akash, [[render-token|Render]], and [[nosana|Nosana]] for GPU/AI compute) and **confidential computing** (against [[phala-network|Phala]], Oasis, [[nillion|Nillion]], and centralized TEE clouds). Its differentiator is the combination of TEE-based confidentiality with a built-in data-monetization layer (DataProtector + iApps), which most general GPU-marketplace peers do not offer.
 
 | Network | Primary niche | Confidentiality approach | Settlement | Token | Key contrast vs iExec |
 |---|---|---|---|---|---|
 | **iExec (RLC)** | Confidential off-chain compute + data monetization | Intel SGX/TDX TEEs (PoCo validation) | Ethereum / Arbitrum | RLC (fixed 87M) | Pairs TEE compute with a data-access/monetization marketplace |
 | **[[phala-network|Phala]]** | Confidential compute (TEE workers, AI agents) | TEE worker network | Phala / Polkadot | PHA | Broad TEE compute; iExec adds a richer data layer |
 | **[[nillion|Nillion]]** | Blind computation / privacy | [[multi-party-computation|MPC]] + TEEs (cryptographic, no single trusted enclave) | Nillion chain | NIL (1B, emissive) | MPC removes hardware-vendor trust iExec inherits |
-| **[[render|Render]]** | GPU rendering / AI compute | None (not confidential) | Solana | RENDER | Raw GPU throughput, no privacy primitive |
+| **[[render-token|Render]]** | GPU rendering / AI compute | None (not confidential) | Solana | RENDER | Raw GPU throughput, no privacy primitive |
 | **Akash** | Decentralized cloud (containers) | None (not confidential) | Cosmos | AKT | General cloud, no confidentiality or data-monetization layer |
 
 iExec's narrowest, most defensible angle is **confidential compute over private data** — the same DeAI thesis as [[nillion|Nillion]] and [[phala-network|Phala]], but reached through hardware enclaves plus a fixed-supply token rather than cryptographic MPC or heavy emissions.
@@ -102,10 +102,10 @@ RLC has comparatively deep small-cap liquidity for a ~$24M-cap DePIN name, liste
 
 ## Narrative & Catalysts
 
-RLC sits in the **DeAI / confidential-compute** intersection of the broader AI-coin basket (alongside [[bittensor|TAO]], [[render|RENDER]], [[fetch-ai|FET]], WLD). In the current tape (2026-06-22, Fear & Greed 21 / Extreme Fear, established bear-market regime) the AI/DePIN basket is high-beta and trending hard in both directions. RLC-specific catalysts that historically move the token:
+RLC sits in the **DeAI / confidential-compute** intersection of the broader AI-coin basket (alongside [[bittensor|TAO]], [[render-token|RENDER]], [[fetch-ai|FET]], WLD). In the current tape (2026-06-22, Fear & Greed 21 / Extreme Fear, established bear-market regime) the AI/DePIN basket is high-beta and trending hard in both directions. RLC-specific catalysts that historically move the token:
 - **Confidential-AI / DeAI product launches** — new iApps, TEE-backed model-serving, or DataProtector integrations that demonstrate real paid compute throughput.
 - **Enterprise / data-monetization partnerships** — the demand side that the fixed-supply thesis depends on.
-- **AI-basket beta** — RLC tends to amplify moves in the AI narrative leaders; rallies and drawdowns in [[bittensor|TAO]]/[[render|RENDER]] spill into RLC.
+- **AI-basket beta** — RLC tends to amplify moves in the AI narrative leaders; rallies and drawdowns in [[bittensor|TAO]]/[[render-token|RENDER]] spill into RLC.
 - **TEE-security headlines** — a high-profile SGX/TDX side-channel disclosure is a sector-wide negative catalyst for all TEE-reliant tokens.
 
 ## History & Timeline
@@ -131,7 +131,7 @@ RLC sits in the **DeAI / confidential-compute** intersection of the broader AI-c
 > Educational framing only — not financial advice. RLC is a high-beta small-cap.
 
 - **Regime awareness** — at Fear & Greed 21 (Extreme Fear) in an established bear market, AI/DePIN small-caps like RLC carry elevated downside beta; size positions far smaller than for majors and expect 2-3x the volatility of [[bitcoin|BTC]].
-- **Basket correlation** — RLC trades as part of the AI basket; gauge entries against [[bittensor|TAO]]/[[render|RENDER]] momentum rather than in isolation. Broad-basket capitulation often marks better risk/reward than chasing isolated RLC spikes.
+- **Basket correlation** — RLC trades as part of the AI basket; gauge entries against [[bittensor|TAO]]/[[render-token|RENDER]] momentum rather than in isolation. Broad-basket capitulation often marks better risk/reward than chasing isolated RLC spikes.
 - **Liquidity / slippage** — use limit orders on Binance/Kraken; the ~$2M daily volume means market orders of size will move price. Watch the Upbit RLC/BTC book for Korea-driven gaps.
 - **Catalyst vs noise** — distinguish DeAI product-usage signals (recurring compute throughput) from announcement-driven pumps; the former supports the fixed-supply thesis, the latter mean-reverts.
 - **Invalidation** — a confirmed TEE side-channel break or stalled marketplace usage undermines the core thesis; treat such headlines as structural, not dip-buying opportunities.
@@ -241,7 +241,7 @@ RLC is tradable on [[binance]] — both spot (RLC/USDT) and a USD-margined [[per
 
 ### Volatility & regime character
 
-RLC is a small-cap (~#803) infrastructure/DePIN token with high beta to the AI narrative basket ([[bittensor|TAO]], [[render|RENDER]], [[fetch-ai|FET]]) and to [[bitcoin|BTC]]/[[ethereum|ETH]] risk regimes. It typically runs 2-3x the volatility of majors, amplifying both rallies and drawdowns. It is not a memecoin — moves are driven by DeAI/DePIN narrative rotation and compute-demand headlines rather than pure reflexivity — but its low float and thin book give it memecoin-like impulsiveness during basket-wide capitulations or squeezes. Correlation to BTC/ETH tightens sharply in risk-off tapes.
+RLC is a small-cap (~#803) infrastructure/DePIN token with high beta to the AI narrative basket ([[bittensor|TAO]], [[render-token|RENDER]], [[fetch-ai|FET]]) and to [[bitcoin|BTC]]/[[ethereum|ETH]] risk regimes. It typically runs 2-3x the volatility of majors, amplifying both rallies and drawdowns. It is not a memecoin — moves are driven by DeAI/DePIN narrative rotation and compute-demand headlines rather than pure reflexivity — but its low float and thin book give it memecoin-like impulsiveness during basket-wide capitulations or squeezes. Correlation to BTC/ETH tightens sharply in risk-off tapes.
 
 ### Risk flags
 
@@ -282,7 +282,7 @@ Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataap
 - [[decentralized-compute]]
 - [[trusted-execution-environment]]
 - [[nosana]]
-- [[render]]
+- [[render-token]]
 - [[phala-network]]
 - [[nillion]]
 - [[bittensor]]

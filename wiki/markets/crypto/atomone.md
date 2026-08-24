@@ -83,7 +83,7 @@ The result is a deliberately conservative "neutral hub" whose value proposition 
 | **24h Change** | -0.05% |
 | **7d Change** | -7.98% |
 
-> ATONE is a relatively young token (fork distribution began in 2024-2025) and has already fallen far from its late-2025 peak. The -7.98% week reflects both the broad **Extreme Fear** regime (Fear & Greed 22, [[btc-bitcoin|BTC]] ~$64,180 on 2026-06-21) and the still-developing state of the fork's ecosystem. Circulating supply is below total supply, so some inflation/dilution is ongoing.
+> ATONE is a relatively young token (fork distribution began in 2024-2025) and has already fallen far from its late-2025 peak. The -7.98% week reflects both the broad **Extreme Fear** regime (Fear & Greed 22, [[bitcoin|BTC]] ~$64,180 on 2026-06-21) and the still-developing state of the fork's ecosystem. Circulating supply is below total supply, so some inflation/dilution is ongoing.
 
 ---
 

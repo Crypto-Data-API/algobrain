@@ -119,7 +119,7 @@ MAG7.SSI sits in the **on-chain index / "crypto beta in one token"** narrative �
 
 ## See Also
 
-- [[real-world-assets]] / [[rwa]] — broader tokenized-asset context
+- [[real-world-assets]] — broader tokenized-asset context
 - [[defi-index]] — on-chain index products
 - [[bitcoin]], [[ethereum]] — largest basket constituents
 - [[crypto-markets]]

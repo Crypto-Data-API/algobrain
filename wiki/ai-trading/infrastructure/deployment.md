@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-15
 updated: 2026-06-12
 status: good
-tags: [technology, algorithmic, backtesting, risk-management]
+tags: [infrastructure, algorithmic, backtesting, risk-management]
 aliases: ["Deployment", "Strategy Deployment", "Going Live"]
 domain: [market-microstructure]
 related:

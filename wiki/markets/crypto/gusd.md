@@ -9,7 +9,7 @@ aliases: ["GUSD", "Gate USD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.gate.com/"
-related: ["[[crypto-markets]]", "[[dai]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]", "[[usdt]]"]
+related: ["[[crypto-markets]]", "[[dai]]", "[[stablecoins]]", "[[stablecoins]]", "[[usdc]]", "[[usdt]]"]
 ---
 
 # GUSD
@@ -65,7 +65,7 @@ In a macro backdrop of Fear & Greed 23 ("Established Bear Market"), demand for e
 
 ## Related
 
-- [[stablecoin]] / [[stablecoins]] — category overview
+- [[stablecoins]] / [[stablecoins]] — category overview
 - [[usdc]], [[usdt]] — the assets used to mint and redeem GUSD
 - [[dai]] — decentralized, crypto-overcollateralized peer
 - [[frax-usd|Frax USD]], [[agora-dollar|AUSD]] — other USD stablecoin peers

@@ -9,7 +9,7 @@ aliases: ["USDON"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://app.ondo.finance/"
-related: ["[[bnb-chain]]", "[[crypto-markets]]", "[[ethereum]]", "[[ondo-finance]]", "[[real-world-assets]]", "[[stablecoin]]", "[[stablecoins]]", "[[tokenized-treasuries]]", "[[treasuries]]", "[[usdu]]"]
+related: ["[[bnb-chain]]", "[[crypto-markets]]", "[[ethereum]]", "[[ondo-finance]]", "[[real-world-assets]]", "[[stablecoins]]", "[[stablecoins]]", "[[tokenized-treasuries]]", "[[treasuries]]", "[[usdu]]"]
 ---
 
 # Ondo U.S. Dollar Token
@@ -204,7 +204,7 @@ USDON is a play on **tokenized-Treasury / yield-bearing dollars** and Ondo's bro
 ## Related
 
 - [[ondo-finance]] — the issuer
-- [[stablecoin]] / [[stablecoins]]
+- [[stablecoins]] / [[stablecoins]]
 - [[real-world-assets]] / [[treasuries]] / [[tokenized-treasuries]]
 - [[usdu]] — peer tokenized-Treasury yield dollar
 - [[crypto-markets]]

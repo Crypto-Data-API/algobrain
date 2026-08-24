@@ -9,12 +9,12 @@ aliases: ["LUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.liquity.org/"
-related: ["[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[liquity-bold-2]]", "[[liquity]]", "[[maker]]", "[[stablecoin]]"]
+related: ["[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[liquity-bold-2]]", "[[liquity]]", "[[maker]]", "[[stablecoins]]"]
 ---
 
 # Liquity USD
 
-**Liquity USD** (ticker **LUSD**) is an interest-free, [[ethereum]]-collateralized, decentralized [[stablecoin]] soft-pegged to the US dollar and minted by the **Liquity** protocol (see [[liquity]]). It is distinct from **LQTY**, Liquity's secondary/governance-adjacent incentive token — LUSD is the dollar unit, LQTY is the protocol token. Liquity is a non-custodial, immutable, and governance-free borrowing protocol that lets users draw **0%-interest** loans in LUSD against [[ethereum]] (ETH) as collateral. It ranks **#668** by market capitalization.
+**Liquity USD** (ticker **LUSD**) is an interest-free, [[ethereum]]-collateralized, decentralized [[stablecoins]] soft-pegged to the US dollar and minted by the **Liquity** protocol (see [[liquity]]). It is distinct from **LQTY**, Liquity's secondary/governance-adjacent incentive token — LUSD is the dollar unit, LQTY is the protocol token. Liquity is a non-custodial, immutable, and governance-free borrowing protocol that lets users draw **0%-interest** loans in LUSD against [[ethereum]] (ETH) as collateral. It ranks **#668** by market capitalization.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -40,7 +40,7 @@ At the latest snapshot LUSD traded at **$1.01** (market cap **$28,248,066**, ran
 
 ## Overview
 
-LUSD is a fully redeemable USD-pegged [[stablecoin]] issued by the [[liquity]] protocol. Liquity is a decentralized borrowing protocol that lets users draw **0%-interest** loans against [[ethereum]] (ETH) used as collateral. Loans are paid out in LUSD and must maintain a minimum collateral ratio of only **110%** — one of the most capital-efficient ratios among decentralized, crypto-backed stablecoins. Borrowers pay a one-time borrowing fee at issuance rather than recurring interest.
+LUSD is a fully redeemable USD-pegged [[stablecoins]] issued by the [[liquity]] protocol. Liquity is a decentralized borrowing protocol that lets users draw **0%-interest** loans against [[ethereum]] (ETH) used as collateral. Loans are paid out in LUSD and must maintain a minimum collateral ratio of only **110%** — one of the most capital-efficient ratios among decentralized, crypto-backed stablecoins. Borrowers pay a one-time borrowing fee at issuance rather than recurring interest.
 
 Liquity is **non-custodial, immutable, and governance-free** — the core contracts cannot be upgraded or paused, which removes admin-key risk but also means no parameter can be changed after deployment. (Liquity's second generation, [[liquity-bold-2|BOLD]] / Liquity V2, replaces the fixed fee with user-set interest rates; LUSD remains the immutable V1 stablecoin.)
 
@@ -107,7 +107,7 @@ LUSD trades on Ethereum DEXs (Uniswap, Sushiswap, Balancer) and is bridged to se
 
 ## Narrative, Category & Catalysts
 
-- **Category:** Decentralized, crypto-backed [[stablecoin]] — the "credibly neutral" / censorship-resistant stable narrative.
+- **Category:** Decentralized, crypto-backed [[stablecoins]] — the "credibly neutral" / censorship-resistant stable narrative.
 - **Bull catalysts:** Demand for non-fiat, immutable stables during regulatory or counterparty stress; ETH strength expanding collateral capacity; Stability-Pool yield attracting deposits.
 - **Bear catalysts:** Migration of borrowing demand to V2 [[liquity-bold-2|BOLD]] (which offers LST collateral and yield); shrinking supply if redemptions outpace minting; small size limiting integrations.
 - In a risk-off ETH tape, redemptions can compress supply as borrowers close Troves, but the peg mechanism keeps price stable — LUSD is a defensive, on-peg holding, not a directional bet.
@@ -149,7 +149,7 @@ LUSD trades on Ethereum DEXs (Uniswap, Sushiswap, Balancer) and is bridged to se
 | **24h Change** | +0.33% |
 | **7d Change** | +0.19% |
 
-*As a [[stablecoin]], LUSD's price history is a tight band around $1; the ATH/ATL above represent brief depeg episodes, not directional appreciation.*
+*As a [[stablecoins]], LUSD's price history is a tight band around $1; the ATH/ATL above represent brief depeg episodes, not directional appreciation.*
 
 ---
 
@@ -256,7 +256,7 @@ LUSD trades on Ethereum DEXs (Uniswap, Sushiswap, Balancer) and is bridged to se
 
 - [[liquity]]
 - [[liquity-bold-2]]
-- [[stablecoin]]
+- [[stablecoins]]
 - [[collateralization]]
 - [[cdp]]
 - [[depeg]]

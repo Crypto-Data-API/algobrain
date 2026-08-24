@@ -9,7 +9,7 @@ aliases: ["FIGR_HELOC", "Figure HELOC", "Figure Technologies"]
 entity_type: protocol
 founded: 2018
 website: "https://www.figure.com"
-related: ["[[crypto-markets]]", "[[hastra-prime]]", "[[private-credit]]", "[[provenance-blockchain]]", "[[real-world-assets]]", "[[rwa]]", "[[tokenization]]"]
+related: ["[[crypto-markets]]", "[[hastra-prime]]", "[[private-credit]]", "[[provenance-blockchain]]", "[[real-world-assets]]", "[[tokenization]]"]
 headquarters: "Decentralized"
 ---
 
@@ -200,7 +200,7 @@ The supply grew from ~16.57B (April 2026) to ~19.04B (June 2026), reflecting **c
 ## See Also
 
 - [[crypto-markets]]
-- [[real-world-assets]], [[rwa]]
+- [[real-world-assets]]
 - [[tokenization]]
 - [[private-credit]]
 - [[hastra-prime]]

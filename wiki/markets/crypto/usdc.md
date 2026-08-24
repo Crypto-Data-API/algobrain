@@ -36,7 +36,7 @@ USD Coin (USDC) is the **second-largest [[stablecoins|stablecoin]]** by market c
 
 > *Market data as of 2026-06-20 (cryptodataapi.com / CoinGecko).*
 
-As a fiat-backed [[stablecoin]], USDC is **designed to hold $1.00** — its near-zero 24h/7d change is the intended behaviour, not a tradable signal. The relevant "price" risk is **de-peg tail risk** (see the SVB section below), not directional volatility. USDC held its peg through the **extreme fear** macro backdrop (Crypto [[fear-and-greed-index|Fear & Greed Index]] = 23, long-horizon "Established Bear Market" regime as of 2026-06-20); in risk-off regimes USDC supply typically contracts as holders redeem to T-bills, while [[usdt|USDT]] tends to hold or grow on emerging-market demand. Note the market cap (~$74.8B) is well above the ~$30-35B level of early 2024, reflecting post-[[stablecoin-regulation|GENIUS/MiCA]] institutional adoption.
+As a fiat-backed [[stablecoins]], USDC is **designed to hold $1.00** — its near-zero 24h/7d change is the intended behaviour, not a tradable signal. The relevant "price" risk is **de-peg tail risk** (see the SVB section below), not directional volatility. USDC held its peg through the **extreme fear** macro backdrop (Crypto [[fear-and-greed-index|Fear & Greed Index]] = 23, long-horizon "Established Bear Market" regime as of 2026-06-20); in risk-off regimes USDC supply typically contracts as holders redeem to T-bills, while [[usdt|USDT]] tends to hold or grow on emerging-market demand. Note the market cap (~$74.8B) is well above the ~$30-35B level of early 2024, reflecting post-[[stablecoin-regulation|GENIUS/MiCA]] institutional adoption.
 
 ## Overview
 

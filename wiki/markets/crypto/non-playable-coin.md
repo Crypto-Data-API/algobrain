@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, meme, nft, altcoins, memecoins]
+tags: [crypto, nft, altcoins, memecoins]
 aliases: ["NPC"]
 entity_type: protocol
 headquarters: "Decentralized"

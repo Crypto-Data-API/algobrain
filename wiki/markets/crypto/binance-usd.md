@@ -9,12 +9,12 @@ aliases: ["BUSD", "Binance USD"]
 entity_type: protocol
 headquarters: "New York, USA (issuer Paxos)"
 website: "https://www.paxos.com/busd/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[paxos-standard]]", "[[paxos]]", "[[stablecoin]]", "[[tether]]", "[[usdc]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[paxos-standard]]", "[[paxos]]", "[[stablecoins]]", "[[usdt|Tether]]", "[[usdc]]"]
 ---
 
 # Binance USD
 
-**Binance USD** (BUSD) is a fiat-collateralized [[stablecoin]] formerly pegged 1:1 to the U.S. dollar, **issued by [[paxos|Paxos Trust Company]]** under license to Binance and originally approved by the New York State Department of Financial Services (NYDFS). BUSD is **no longer being minted**: in February 2023 NYDFS ordered Paxos to stop issuing new BUSD, and the token has been in long-term wind-down ever since. The figures below describe a contracting, legacy stablecoin, not an actively growing one.
+**Binance USD** (BUSD) is a fiat-collateralized [[stablecoins]] formerly pegged 1:1 to the U.S. dollar, **issued by [[paxos|Paxos Trust Company]]** under license to Binance and originally approved by the New York State Department of Financial Services (NYDFS). BUSD is **no longer being minted**: in February 2023 NYDFS ordered Paxos to stop issuing new BUSD, and the token has been in long-term wind-down ever since. The figures below describe a contracting, legacy stablecoin, not an actively growing one.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -49,7 +49,7 @@ On **13 February 2023**, NYDFS directed Paxos to **cease minting new BUSD**, cit
 - Stopping all new BUSD issuance.
 - Continuing to **honor redemptions** of existing BUSD 1:1 for USD through a defined wind-down period, supported by reserves.
 
-Because no new tokens can be created and holders steadily redeem, BUSD's supply and market cap have declined monotonically toward the ~$38M residual seen on 2026-06-21. Binance itself has migrated users toward other stablecoins (including its own branded alternatives and [[tether]]/[[usdc]]).
+Because no new tokens can be created and holders steadily redeem, BUSD's supply and market cap have declined monotonically toward the ~$38M residual seen on 2026-06-21. Binance itself has migrated users toward other stablecoins (including its own branded alternatives and [[usdt|Tether]]/[[usdc]]).
 
 This history is the defining fact about BUSD: it is a **regulator-ordered sunset of a fiat-backed stablecoin**, and a case study in how stablecoins carry issuer and regulatory risk even when reserves are sound.
 
@@ -75,16 +75,16 @@ Major exchanges have delisted or de-emphasized BUSD spot pairs since the wind-do
 - **Regulatory risk (realized)** — BUSD is itself the example: NYDFS ordered minting to stop and the SEC alleged it was a security.
 - **Smart-contract risk** — Standard ERC-20 exposure.
 
-See [[stablecoin]] and [[depeg]] for the general framework, and [[paxos-standard|USDP/Pax Dollar]] for the issuer's still-active dollar stablecoin.
+See [[stablecoins]] and [[depeg]] for the general framework, and [[paxos-standard|USDP/Pax Dollar]] for the issuer's still-active dollar stablecoin.
 
 ---
 
 ## Related
 
-- [[stablecoin]]
+- [[stablecoins]]
 - [[paxos]]
 - [[paxos-standard]]
-- [[tether]]
+- [[usdt|Tether]]
 - [[usdc]]
 - [[depeg]]
 - [[collateralization]]

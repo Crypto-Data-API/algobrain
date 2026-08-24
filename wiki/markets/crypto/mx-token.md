@@ -9,12 +9,12 @@ aliases: ["MX", "MX Token", "MXC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.mexc.com/"
-related: ["[[binance-coin]]", "[[crypto-markets]]", "[[ethereum]]", "[[exchange-tokens]]", "[[hype]]", "[[mexc]]", "[[whitebit]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[exchange-tokens]]", "[[hype]]", "[[mexc]]", "[[whitebit]]"]
 ---
 
 # MX
 
-**MX** (MX Token, ticker **MX**) is the native **exchange utility / centralized-exchange (CEX) token** of the **[[mexc|MEXC]]** trading platform (formerly MXC), an ERC-20 on [[ethereum|Ethereum]] (also deployed on Morph L2). It functions as a "proof of rights and interests" on MEXC: holders access fee discounts, platform-revenue rebates, launchpad/airdrop ("Kickstarter") participation, voting and other benefits -- the same [[exchange-tokens|exchange-token]] model used by [[binance-coin|BNB]] (Binance), [[whitebit|WBT]] (WhiteBIT) and others.
+**MX** (MX Token, ticker **MX**) is the native **exchange utility / centralized-exchange (CEX) token** of the **[[mexc|MEXC]]** trading platform (formerly MXC), an ERC-20 on [[ethereum|Ethereum]] (also deployed on Morph L2). It functions as a "proof of rights and interests" on MEXC: holders access fee discounts, platform-revenue rebates, launchpad/airdrop ("Kickstarter") participation, voting and other benefits -- the same [[exchange-tokens|exchange-token]] model used by [[bnb|BNB]] (Binance), [[whitebit|WBT]] (WhiteBIT) and others.
 
 > *Market data as of 2026-06-20 (cryptodataapi.com / CoinGecko).*
 
@@ -56,7 +56,7 @@ MX is the proof of rights and interests of MXC trading platform itself. Its tota
 | **Fully Diluted Valuation** | ~$715.8M |
 | **Market Cap / FDV Ratio** | ~0.22 |
 
-As an exchange token, MX's supply is managed by MEXC's **buyback-and-burn** policy: the exchange uses a portion of platform revenue to repurchase and burn MX, structurally reducing supply over time and concentrating value in remaining tokens (the same deflationary lever used by [[binance-coin|BNB]] and [[whitebit|WBT]]). The low ~0.22 MC/FDV ratio means a large gap between the ~91.84M circulating float and the ~409M total supply — disciplined burns are what keep dilution in check, and the uncapped max supply makes burn cadence a key fundamental to monitor.
+As an exchange token, MX's supply is managed by MEXC's **buyback-and-burn** policy: the exchange uses a portion of platform revenue to repurchase and burn MX, structurally reducing supply over time and concentrating value in remaining tokens (the same deflationary lever used by [[bnb|BNB]] and [[whitebit|WBT]]). The low ~0.22 MC/FDV ratio means a large gap between the ~91.84M circulating float and the ~409M total supply — disciplined burns are what keep dilution in check, and the uncapped max supply makes burn cadence a key fundamental to monitor.
 
 ---
 
@@ -135,7 +135,7 @@ MX is a **centralized-exchange (CEX) token** -- its value is fundamentally a bet
 - **Governance / voting** on platform decisions.
 - **Buyback-and-burn** programs in which MEXC uses revenue to repurchase and burn MX, reducing supply over time.
 
-The narrative is therefore tightly coupled to MEXC's market share among retail-focused exchanges (MEXC is known for listing a very large number of small-cap tokens early). This is the same exchange-token playbook as [[binance-coin|BNB]] (Binance) and others.
+The narrative is therefore tightly coupled to MEXC's market share among retail-focused exchanges (MEXC is known for listing a very large number of small-cap tokens early). This is the same exchange-token playbook as [[bnb|BNB]] (Binance) and others.
 
 > **Data note / contradiction:** The legacy lead text describes MX's circulation as "3 billion constantly and never added," but the snapshot-derived **Tokenomics** table below shows ~91.84M circulating against a ~409.02M total supply and *unlimited* max supply. These figures are inconsistent and likely reflect different historical supply schedules and buyback/burn adjustments. Treat the snapshot figures (circulating ~91.84M; FDV ~$732M; MC/FDV ~0.22) as the data-block values, but verify current supply directly on MEXC/CoinGecko before relying on either.
 
@@ -181,7 +181,7 @@ As an exchange-native token, the overwhelming majority of MX's liquidity and tra
 
 | Token | Ticker | Exchange | Rank | Price | Market Cap | MC/FDV |
 |---|---|---|---|---|---|---|
-| [[binance-coin\|BNB]] | BNB | Binance | — | — | — | — |
+| [[bnb\|BNB]] | BNB | Binance | — | — | — | — |
 | [[whitebit\|WhiteBIT Coin]] | WBT | WhiteBIT | #17 | $52.35 | $6.19B | ~0.30 |
 | [[hype\|HYPE]] | HYPE | Hyperliquid (DEX) | #10 | $70.43 | $15.67B | ~0.22 |
 | **MX** | MX | MEXC | #196 | $1.75 | $0.16B | ~0.22 |
@@ -196,7 +196,7 @@ As an exchange-native token, the overwhelming majority of MX's liquidity and tra
 - [[exchange-tokens]] -- the CEX-token category
 - [[mexc]] -- the issuing exchange
 - [[ethereum]]
-- [[binance-coin]] -- comparable exchange (CEX) utility token
+- [[bnb]] -- comparable exchange (CEX) utility token
 - [[whitebit]] -- another European/retail exchange token
 
 ---

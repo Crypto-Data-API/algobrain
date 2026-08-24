@@ -4,7 +4,7 @@ type: source
 created: 2026-07-13
 updated: 2026-07-13
 status: good
-tags: [data-provider, crypto, api, strategy-baskets, portfolio, thematic, regime]
+tags: [data-provider, crypto, api, strategy-baskets, portfolio, thematic, market-regime]
 aliases: ["CryptoDataAPI Strategy Baskets", "CDA Strategy Baskets", "CryptoDataAPI Meta-Baskets", "Trading Strategy Baskets API"]
 source_type: data
 source_url: "https://cryptodataapi.com/api/docs"

@@ -62,7 +62,7 @@ For an infrastructure/DA token, the natural value-accrual path is **fees paid fo
 
 UB competes in **decentralized-AI infrastructure / DePIN**, alongside DA layers and agent-infra tokens.
 
-| Dimension | **Unibase (UB)** | **[[bittensor|Bittensor (TAO)]]** | **[[render|Render (RENDER)]]** | **Fetch / [[artificial-superintelligence-alliance|ASI]]** |
+| Dimension | **Unibase (UB)** | **[[bittensor|Bittensor (TAO)]]** | **[[render-token|Render (RENDER)]]** | **Fetch / [[artificial-superintelligence-alliance|ASI]]** |
 |---|---|---|---|---|
 | Role | AI memory / DA layer for agents | Decentralized ML incentive network | Decentralized GPU rendering/compute | AI-agent utility & infra |
 | Layer | Backend infra (agent memory) | Backend infra (model incentives) | Backend infra (compute) | Agent framework + utility |
@@ -124,7 +124,7 @@ Unibase is a core **decentralized-AI / DePIN agent-infrastructure** play, adjace
 - [[sentient]]
 - [[depin]]
 - [[bittensor]]
-- [[render]]
+- [[render-token]]
 
 ---
 

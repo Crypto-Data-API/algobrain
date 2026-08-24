@@ -114,7 +114,7 @@ Trader implication: even Hypothesis A (the bullish productivity case) implies a 
 - [[capex-cycle]], [[market-bubbles]], [[market-cycles]]
 - 2024-nvidia-ai-boom, [[2025-tariff-market-volatility]]
 - [[ai-trading]], [[ai-trading-overview]]
-- microsoft, alphabet, amazon, [[nvidia]], meta-platforms — hyperscaler capex flows
+- microsoft, alphabet, amazon, [[nvidia-ai|Nvidia]], meta-platforms — hyperscaler capex flows
 - [[anthropic]], citrini-research
 
 ## Sources

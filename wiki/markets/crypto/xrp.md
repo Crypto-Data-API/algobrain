@@ -8,7 +8,7 @@ tags: [cross-border, crypto, etf, payments, regulation, ripple, xrp, hyperliquid
 entity_type: protocol
 aliases: ["Ripple", "XRP", "XRP-Ledger", "XRPL"]
 website: "https://xrpl.org"
-related: ["[[bitcoin]]", "[[carry-trade]]", "[[crypto-markets]]", "[[ethereum]]", "[[ripple-usd]]", "[[sec]]", "[[stablecoin]]", "[[xrp-ledger]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[basis-trading]]", "[[oi-confirmed-trend]]"]
+related: ["[[bitcoin]]", "[[carry-trade]]", "[[crypto-markets]]", "[[ethereum]]", "[[ripple-usd]]", "[[sec]]", "[[stablecoins]]", "[[xrp-ledger]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[basis-trading]]", "[[oi-confirmed-trend]]"]
 headquarters: "Decentralized"
 ---
 
@@ -328,7 +328,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can trade X
 - [[ethereum]] — Second largest cryptocurrency
 - [[stellar]] — Closest payments-L1 peer (shared co-founder)
 - [[ripple-usd]] — Ripple's USD stablecoin (RLUSD)
-- [[stablecoin]] — Stablecoin context (RLUSD on XRPL)
+- [[stablecoins]] — Stablecoin context (RLUSD on XRPL)
 - [[sec]] — The regulator behind the XRP lawsuit
 - [[2024-crypto-regulatory-shift]] — Broader regulatory context
 

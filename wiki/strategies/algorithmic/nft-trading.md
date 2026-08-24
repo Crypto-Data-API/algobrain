@@ -4,7 +4,7 @@ type: strategy
 created: 2026-04-06
 updated: 2026-07-19
 status: good
-tags: [crypto, nft, floor-sweeping, rarity-sniping, trait-arbitrage, liquidity-provision, opensea, blur, on-chain-analytics, algorithmic]
+tags: [crypto, nft, floor-sweeping, rarity-sniping, trait-arbitrage, liquidity-provision, opensea, blur, on-chain, algorithmic]
 aliases: ["NFT Trading Strategies", "NFT Flipping", "Rarity Sniping", "Floor Sweeping", "Trait Arbitrage"]
 strategy_type: hybrid
 timeframe: swing

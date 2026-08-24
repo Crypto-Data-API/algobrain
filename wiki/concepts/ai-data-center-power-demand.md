@@ -16,7 +16,7 @@ The **AI Data Center Power Demand** thesis frames electrical power — generatio
 
 ## Overview
 
-GPU clusters consume electricity at densities that conventional commercial real estate never had to plan for. A single hyperscale AI campus can demand hundreds of megawatts at a single interconnect — comparable to a small city. Aggregated across microsoft, meta-platforms, alphabet, amazon, [[nvidia]]-customer build plans, and a long tail of neocloud and sovereign-AI projects, the result is a multi-decade re-rating of US power demand growth from "flat" to "structurally accelerating."
+GPU clusters consume electricity at densities that conventional commercial real estate never had to plan for. A single hyperscale AI campus can demand hundreds of megawatts at a single interconnect — comparable to a small city. Aggregated across microsoft, meta-platforms, alphabet, amazon, [[nvidia-ai|Nvidia]]-customer build plans, and a long tail of neocloud and sovereign-AI projects, the result is a multi-decade re-rating of US power demand growth from "flat" to "structurally accelerating."
 
 This re-rating reaches into nearly every part of the energy and industrial complex: nuclear utilities, natural gas, transmission and distribution (T&D) infrastructure, electrical equipment OEMs, fuel cells, and skilled-trades labor (see [[skilled-trades-wage-boom]]).
 
@@ -84,7 +84,7 @@ Power demand is the **physically real** counter-narrative to the "AI is a softwa
 - [[skilled-trades-wage-boom]]
 - [[ai-layoff-trap]]
 - [[ai-driven-demand-destruction]]
-- [[nvidia]]
+- [[nvidia-ai|Nvidia]]
 - [[capex-cycle]]
 - [[commodity-super-cycle]]
 

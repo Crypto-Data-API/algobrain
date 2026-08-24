@@ -48,7 +48,7 @@ related: ["[[copy-trading]]", "[[smart-money]]", "[[smart-money-concepts]]", "[[
 | **Cost floor** | ~2-4% round-trip (bot fees, priority/Jito tips, slippage) |
 | **Biggest risk** | Crowding, survivorship bias, adverse selection (headfake/deployer wallets) |
 
-This strategy is one node of the broader [[on-chain-analytics|on-chain analytics]] toolkit; see also the [[low-cap-crypto-trading-map|low-cap crypto trading map]].
+This strategy is one node of the broader [[on-chain-analysis|on-chain analytics]] toolkit; see also the [[low-cap-crypto-trading-map|low-cap crypto trading map]].
 
 ## Edge source
 
@@ -301,7 +301,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - [[holder-concentration-analysis]]
 - [[rug-detection-checklist]]
 - [[token-migration-sniping]]
-- [[on-chain-analytics]]
+- [[on-chain-analysis]]
 - [[on-chain-flow-trading]]
 - [[edge-taxonomy]]
 - [[failure-modes]]

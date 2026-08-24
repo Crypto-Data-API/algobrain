@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-15
 updated: 2026-06-12
 status: good
-tags: [technology, backtesting, data-provider, quantitative]
+tags: [infrastructure, backtesting, data-provider, quantitative]
 aliases: ["Data Management", "Market Data Management", "Tick Store"]
 domain: [market-microstructure]
 related:

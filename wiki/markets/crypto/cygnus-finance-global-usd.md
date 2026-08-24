@@ -133,7 +133,7 @@ CGUSD sits in the **tokenized-Treasury / RWA-yield** narrative — one of the mo
 - [[real-world-assets]] — RWA / tokenized-Treasury context
 - [[stablecoins]] — landscape overview
 - [[ondo-finance]] — peer interest-bearing RWA dollar (USDY/OUSG)
-- [[ethena-usde]], [[usde]] — synthetic-dollar peers (different yield source)
+- [[ethena-usde]], [[ethena-usde]] — synthetic-dollar peers (different yield source)
 - [[usdc]], [[usdt]], [[dai]] — peer dollars
 - [[base]] — host chain
 - [[crypto-markets]]

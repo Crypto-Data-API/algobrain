@@ -9,12 +9,12 @@ aliases: ["BUCK"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://bucketprotocol.io/"
-related: ["[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[depeg]]", "[[liquidation]]", "[[stablecoin]]", "[[sui]]"]
+related: ["[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[depeg]]", "[[liquidation]]", "[[stablecoins]]", "[[sui]]"]
 ---
 
 # Bucket Protocol BUCK Stablecoin
 
-**BUCK** is the over-collateralized [[stablecoin]] of **Bucket Protocol**, a **collateralized debt position** ([[cdp]]) protocol on the [[sui]] blockchain. Bucket supports multiple assets as collateral — including SUI, BTC, ETH, and liquid-staking tokens (LSTs) — and BUCK is minted when users lock that collateral. Unlike the RWA dollars in this cluster (USDO, FIDD, USDY), BUCK is **crypto-collateralized**, not backed by off-chain Treasuries or cash; its "real-world asset" is none — it is a decentralized, on-chain dollar. It targets a 1:1 soft peg to the US dollar and ranks **#703** by market capitalization.
+**BUCK** is the over-collateralized [[stablecoins]] of **Bucket Protocol**, a **collateralized debt position** ([[cdp]]) protocol on the [[sui]] blockchain. Bucket supports multiple assets as collateral — including SUI, BTC, ETH, and liquid-staking tokens (LSTs) — and BUCK is minted when users lock that collateral. Unlike the RWA dollars in this cluster (USDO, FIDD, USDY), BUCK is **crypto-collateralized**, not backed by off-chain Treasuries or cash; its "real-world asset" is none — it is a decentralized, on-chain dollar. It targets a 1:1 soft peg to the US dollar and ranks **#703** by market capitalization.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -44,7 +44,7 @@ At the latest snapshot BUCK traded at **$0.99898** (market cap **$25,907,941**, 
 
 ## Overview
 
-Bucket Protocol is a **collateralized debt position** ([[cdp]]) protocol on the [[sui]] network, supporting multiple assets as collateral — including SUI, BTC, ETH, and liquid-staking tokens (LSTs). **BUCK** is the over-collateralized [[stablecoin]] minted when users deposit and lock that collateral. The design lineage is the Liquity/MakerDAO family of decentralized, crypto-backed dollars: no fiat reserve, no off-chain custodian — solvency is enforced entirely on-chain by over-collateralization and a liquidation engine.
+Bucket Protocol is a **collateralized debt position** ([[cdp]]) protocol on the [[sui]] network, supporting multiple assets as collateral — including SUI, BTC, ETH, and liquid-staking tokens (LSTs). **BUCK** is the over-collateralized [[stablecoins]] minted when users deposit and lock that collateral. The design lineage is the Liquity/MakerDAO family of decentralized, crypto-backed dollars: no fiat reserve, no off-chain custodian — solvency is enforced entirely on-chain by over-collateralization and a liquidation engine.
 
 ---
 
@@ -132,7 +132,7 @@ BUCK is a play on **Sui-ecosystem DeFi** and the **decentralized stablecoin** ca
 | **24h Change** | -0.04% |
 | **7d Change** | +0.10% |
 
-*As a [[stablecoin]], BUCK's price history is a tight band around $1; the extreme ATH/ATL above reflect brief illiquid prints/depeg episodes, not directional moves.*
+*As a [[stablecoins]], BUCK's price history is a tight band around $1; the extreme ATH/ATL above reflect brief illiquid prints/depeg episodes, not directional moves.*
 
 ---
 
@@ -215,7 +215,7 @@ BUCK is a play on **Sui-ecosystem DeFi** and the **decentralized stablecoin** ca
 ## See Also
 
 - [[sui]]
-- [[stablecoin]]
+- [[stablecoins]]
 - [[collateralization]]
 - [[cdp]]
 - [[liquidation]]

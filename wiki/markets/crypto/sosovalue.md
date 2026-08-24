@@ -81,7 +81,7 @@ SOSO has limited centralized-exchange spot depth.
 
 ## Use Case, Narrative & Category
 
-- **Category:** Index, Decentralized Finance ([[decentralized-finance|DeFi]]), Analytics, [[ethereum|Ethereum]] Ecosystem, Base Ecosystem.
+- **Category:** Index, Decentralized Finance ([[defi|DeFi]]), Analytics, [[ethereum|Ethereum]] Ecosystem, Base Ecosystem.
 - **Narrative:** "AI crypto research + on-chain index." SoSoValue is best known as a data/analytics destination — particularly its spot-[[etf|ETF]] flow trackers for [[bitcoin|BTC]] and [[ethereum|ETH]] — and is building the SSI protocol to let users hold tokenized crypto index baskets on-chain. SOSO captures utility from both the research product and the index protocol.
 - **Demand driver:** Platform/data adoption, premium-feature demand, and SSI index AUM.
 
@@ -116,7 +116,7 @@ The honest read: the **highest-quality fundamental story in this run** (real pro
 | Pyth (PYTH) | Oracle / market data | — | (mid-cap) | — | — | Low-latency price feeds |
 | Kaito (KAITO) | AI crypto data/analytics | — | (mid-cap) | — | — | AI-driven market intelligence |
 
-*SOSO competes in the broad "crypto data/analytics" space but is differentiated by its **consumer-facing research dashboards + on-chain index baskets (SSI)** rather than machine-readable oracle feeds. See [[decentralized-finance]] and [[etf]].*
+*SOSO competes in the broad "crypto data/analytics" space but is differentiated by its **consumer-facing research dashboards + on-chain index baskets (SSI)** rather than machine-readable oracle feeds. See [[defi]] and [[etf]].*
 
 ---
 
@@ -141,7 +141,7 @@ The honest read: the **highest-quality fundamental story in this run** (real pro
 - [[crypto-markets]]
 - [[ethereum]]
 - [[etf]]
-- [[decentralized-finance]]
+- [[defi]]
 - [[bitcoin]]
 - [[fear-and-greed-index]]
 

@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [traders, person, macro-trading, forex, futures]
+tags: [traders, person, macro, forex, futures]
 aliases: []
 entity_type: person
 founded: 1945

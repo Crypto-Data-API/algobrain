@@ -9,7 +9,7 @@ aliases: ["GLIDR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://glidr.xyz/"
-related: ["[[bnb]]", "[[crypto-markets]]", "[[gamefi]]", "[[non-fungible-token]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[gamefi]]", "[[nft]]"]
 ---
 
 # Glidr
@@ -75,7 +75,7 @@ Because much of the available information originates from the project's own whit
 Per the team's own materials, Glidr packages a set of standard Web3-abstraction primitives into a developer suite:
 
 - **Account abstraction** — smart-contract wallets, gasless/sponsored transactions, and social login so end-users never manage seed phrases or gas. This is the most concrete and most commoditised piece — AA is now offered by many infra providers.
-- **Programmable asset issuance** — tooling to mint and manage in-app assets/[[non-fungible-token|NFTs]] (game items, creator assets) with configurable logic.
+- **Programmable asset issuance** — tooling to mint and manage in-app assets/[[nft|NFTs]] (game items, creator assets) with configurable logic.
 - **zk-proof support** — claimed zero-knowledge primitives for privacy/verification.
 - **Programmable smart locks** — configurable on-chain access/escrow controls for assets.
 
@@ -160,7 +160,7 @@ Framing only — not advice. Against the 2026-06-23 macro backdrop (Fear & Greed
 - [[crypto-markets]]
 - [[bnb]]
 - [[gamefi]]
-- [[non-fungible-token]]
+- [[nft]]
 
 ---
 

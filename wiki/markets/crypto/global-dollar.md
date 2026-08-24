@@ -15,7 +15,7 @@ related: ["[[crypto-markets]]", "[[genius-act]]", "[[paxos]]", "[[solana]]", "[[
 
 # Global Dollar
 
-**Global Dollar** (USDG) is a regulated, fiat-backed USD [[stablecoin]] issued by [[paxos|Paxos]] (Singapore MAS-supervised; EU via a Finnish EMI, MiCA-compliant), native on [[solana|Solana]] and also on [[ethereum|Ethereum]], launched November 2024 as the settlement asset of the **Global Dollar Network (GDN)** — a consortium founded by Paxos, Robinhood, Kraken, Galaxy Digital, Anchorage Digital, Bullish and Nuvei that **shares reserve yield with distribution partners**. That yield-sharing model is its differentiator vs [[usdt|USDT]]/[[usdc|USDC]], and it has scaled fast: from ~$1B supply (late 2025) to **~$2.81B and 130+ partners by mid-2026** (rank #33).
+**Global Dollar** (USDG) is a regulated, fiat-backed USD [[stablecoins]] issued by [[paxos|Paxos]] (Singapore MAS-supervised; EU via a Finnish EMI, MiCA-compliant), native on [[solana|Solana]] and also on [[ethereum|Ethereum]], launched November 2024 as the settlement asset of the **Global Dollar Network (GDN)** — a consortium founded by Paxos, Robinhood, Kraken, Galaxy Digital, Anchorage Digital, Bullish and Nuvei that **shares reserve yield with distribution partners**. That yield-sharing model is its differentiator vs [[usdt|USDT]]/[[usdc|USDC]], and it has scaled fast: from ~$1B supply (late 2025) to **~$2.81B and 130+ partners by mid-2026** (rank #33).
 
 ---
 
@@ -46,7 +46,7 @@ related: ["[[crypto-markets]]", "[[genius-act]]", "[[paxos]]", "[[solana]]", "[[
 | Field | Detail |
 |---|---|
 | **Ticker** | USDG |
-| **Type** | Fiat-backed USD [[stablecoin]] (1:1 redeemable via [[paxos|Paxos]]) |
+| **Type** | Fiat-backed USD [[stablecoins]] (1:1 redeemable via [[paxos|Paxos]]) |
 | **Backing** | 100% liquid reserves — cash and short-dated [[treasury-bills|US T-bills]] — in bankruptcy-remote segregated trust accounts; monthly attestations, annual audits |
 | **Supply** | ~$2.81B circulating, rank #33 (2026-06-20); ~$2.75B (May 2026); crossed $1B late 2025; ~$2.03B at the April 2026 snapshot |
 | **Issuers** | Paxos Digital Singapore (MAS Major Payments Institution); Paxos Issuance Europe Oy (FIN-FSA EMI, MiCA-compliant) |

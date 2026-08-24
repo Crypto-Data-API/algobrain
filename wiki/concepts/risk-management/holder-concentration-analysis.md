@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-04
 updated: 2026-07-13
 status: good
-tags: [crypto, risk-management, defi, market-microstructure, memecoin]
+tags: [crypto, risk-management, defi, market-microstructure, memecoins]
 aliases: ["holder analysis", "wallet concentration", "top-holder scan", "bundle detection"]
 domain: [risk-management]
 difficulty: intermediate

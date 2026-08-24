@@ -74,7 +74,7 @@ SENT's role is to coordinate and reward the contributor network — in the proje
 | **Render** | RENDER | Solana / multi | Decentralised GPU rendering/compute | Largely circulating | Established DePIN compute supply |
 | **io.net** | IO | Solana | Decentralised GPU aggregation | Low float, unlock-heavy | Pure GPU-compute DePIN |
 
-Sentient's distinction is the **broad "open AGI" composition thesis** (orchestrating five resource types) and notably **broad tier-1 CEX liquidity**. Its handicaps: it is attempting one of the most ambitious goals in the category (general intelligence) where [[bittensor|TAO]], [[fetch-ai|FET]], [[render|RENDER]] and [[io-net|IO]] have demonstrably live, narrower networks; and its ~0.21 float carries a heavy unlock overhang versus largely-circulated RENDER. See [[bittensor]], [[fetch-ai]], [[render]], [[io-net]].
+Sentient's distinction is the **broad "open AGI" composition thesis** (orchestrating five resource types) and notably **broad tier-1 CEX liquidity**. Its handicaps: it is attempting one of the most ambitious goals in the category (general intelligence) where [[bittensor|TAO]], [[fetch-ai|FET]], [[render-token|RENDER]] and [[io-net|IO]] have demonstrably live, narrower networks; and its ~0.21 float carries a heavy unlock overhang versus largely-circulated RENDER. See [[bittensor]], [[fetch-ai]], [[render-token]], [[io-net]].
 
 ---
 

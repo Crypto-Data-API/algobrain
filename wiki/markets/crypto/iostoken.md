@@ -84,7 +84,7 @@ Net effect: IOST is an EOS/Tendermint-era "high-TPS L1" whose differentiation is
 | **24h Change** | +1.85% |
 | **7d Change** | -2.71% |
 
-> IOST trades roughly 99% below its January-2018 peak. The 7-day change of -2.71% is consistent with broad small-cap weakness under the current **Extreme Fear** regime (Fear & Greed 22, [[btc-bitcoin|BTC]] ~$64,180 on 2026-06-21). Max supply (90B IOST) exceeds circulating supply, so some future dilution remains.
+> IOST trades roughly 99% below its January-2018 peak. The 7-day change of -2.71% is consistent with broad small-cap weakness under the current **Extreme Fear** regime (Fear & Greed 22, [[bitcoin|BTC]] ~$64,180 on 2026-06-21). Max supply (90B IOST) exceeds circulating supply, so some future dilution remains.
 
 ---
 
@@ -255,7 +255,7 @@ IOST is tradable on **Binance** — both **spot** (IOST/USDT) and a **USD-margin
 
 ### Volatility & regime character
 
-IOST is a **micro-cap, legacy high-throughput L1** that trades as a **high-beta proxy on overall crypto risk appetite** rather than on its own fundamentals. It has strong positive correlation to [[btc-bitcoin|BTC]]/[[ethereum|ETH]] direction and amplifies broad-market moves in both directions because of thin order books. It carries a notable Korean-retail (Upbit/KRW) flow component that can decouple it briefly from global tape. Realized volatility is elevated relative to large caps, and rallies are typically sharp, liquidity-driven, and non-durable absent a fundamental catalyst.
+IOST is a **micro-cap, legacy high-throughput L1** that trades as a **high-beta proxy on overall crypto risk appetite** rather than on its own fundamentals. It has strong positive correlation to [[bitcoin|BTC]]/[[ethereum|ETH]] direction and amplifies broad-market moves in both directions because of thin order books. It carries a notable Korean-retail (Upbit/KRW) flow component that can decouple it briefly from global tape. Realized volatility is elevated relative to large caps, and rallies are typically sharp, liquidity-driven, and non-durable absent a fundamental catalyst.
 
 ### Risk flags
 

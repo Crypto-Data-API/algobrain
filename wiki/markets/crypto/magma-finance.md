@@ -9,7 +9,7 @@ aliases: ["MAGMA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://magmafinance.io/"
-related: ["[[automated-market-maker]]", "[[cetus-protocol]]", "[[crypto-markets]]", "[[decentralized-finance]]", "[[impermanent-loss]]", "[[liquidity]]", "[[sui]]", "[[uniswap]]"]
+related: ["[[automated-market-maker]]", "[[cetus-protocol]]", "[[crypto-markets]]", "[[defi]]", "[[impermanent-loss]]", "[[liquidity]]", "[[sui]]", "[[uniswap]]"]
 ---
 
 # Magma Finance
@@ -149,7 +149,7 @@ Context: 2026-06-23 — **Extreme Fear** (F&G 21), long-horizon **Bottoming / Ac
 
 - [[crypto-markets]]
 - [[sui]]
-- [[decentralized-finance]]
+- [[defi]]
 - [[automated-market-maker]]
 - [[liquidity]]
 - [[cetus-protocol]]

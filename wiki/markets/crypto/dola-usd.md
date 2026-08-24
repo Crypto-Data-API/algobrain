@@ -9,12 +9,12 @@ aliases: ["DOLA", "DOLA USD", "Inverse Finance DOLA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.inverse.finance/"
-related: ["[[collateralization]]", "[[crvusd]]", "[[crypto-markets]]", "[[curve]]", "[[dai]]", "[[defi]]", "[[ethereum]]", "[[stablecoin]]", "[[tether]]", "[[usdc]]"]
+related: ["[[collateralization]]", "[[crvusd]]", "[[crypto-markets]]", "[[curve]]", "[[dai]]", "[[defi]]", "[[ethereum]]", "[[stablecoins]]", "[[usdt|Tether]]", "[[usdc]]"]
 ---
 
 # DOLA
 
-**DOLA** (native on [[ethereum|Ethereum]]) is a decentralized, **debt-backed (crypto-collateralized)** [[stablecoin]] soft-pegged to the U.S. dollar, issued by the **Inverse Finance** [[defi|DeFi]] protocol. Unlike fiat-reserve stablecoins such as [[usdc|USDC]] or [[paxos-standard|USDP]], DOLA is created as protocol debt: it is borrowed into existence against crypto collateral via Inverse Finance's lending system (**FiRM**) rather than minted 1:1 against bank-held dollars. Its closest design peers are [[dai|DAI]] and Curve's [[crvusd|crvUSD]] — collateralized debt positions (CDPs), not custodial reserves.
+**DOLA** (native on [[ethereum|Ethereum]]) is a decentralized, **debt-backed (crypto-collateralized)** [[stablecoins]] soft-pegged to the U.S. dollar, issued by the **Inverse Finance** [[defi|DeFi]] protocol. Unlike fiat-reserve stablecoins such as [[usdc|USDC]] or [[paxos-standard|USDP]], DOLA is created as protocol debt: it is borrowed into existence against crypto collateral via Inverse Finance's lending system (**FiRM**) rather than minted 1:1 against bank-held dollars. Its closest design peers are [[dai|DAI]] and Curve's [[crvusd|crvUSD]] — collateralized debt positions (CDPs), not custodial reserves.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -51,7 +51,7 @@ DOLA is issued by **Inverse Finance**, a decentralized, DAO-governed protocol wi
 Protocol-controlled smart contracts called **"Feds"** mint or burn DOLA directly into liquidity venues (e.g. [[curve|Curve]] pools) to add or remove supply. A **Fed expansion** mints DOLA into a pool to deepen liquidity; a **contraction** burns DOLA to tighten supply and support the peg. This is an open-market-operations-style mechanism that lets the DAO actively manage where DOLA's price sits relative to $1.
 
 ### Peg maintenance
-Because DOLA is debt-backed rather than fiat-redeemable, its peg is **soft**: defended by collateralization, by arbitrage in DOLA/[[usdc|USDC]]/[[tether|USDT]] liquidity pools, and by Fed expansion/contraction — **not** by a 1:1 cash redemption guarantee. The small discount ($0.9954) is the expected behavior of a soft-pegged CDP stablecoin. See [[collateralization]].
+Because DOLA is debt-backed rather than fiat-redeemable, its peg is **soft**: defended by collateralization, by arbitrage in DOLA/[[usdc|USDC]]/[[usdt|USDT]] liquidity pools, and by Fed expansion/contraction — **not** by a 1:1 cash redemption guarantee. The small discount ($0.9954) is the expected behavior of a soft-pegged CDP stablecoin. See [[collateralization]].
 
 ---
 
@@ -107,7 +107,7 @@ These episodes are why DOLA carries materially higher protocol/smart-contract ri
 - **Fixed-rate / DBR risk** — The DBR mechanism can leave borrowers under-provisioned if DBR runs out, forcing accruing debt and liquidation pressure.
 - **Governance risk** — DAO decisions on collateral parameters, DBR pricing, and Fed mint/burn directly affect peg stability and solvency.
 
-See [[stablecoin]], [[depeg]], and [[collateralization]] for the general framework.
+See [[stablecoins]], [[depeg]], and [[collateralization]] for the general framework.
 
 ---
 
@@ -122,14 +122,14 @@ See [[stablecoin]], [[depeg]], and [[collateralization]] for the general framewo
 
 ## Related
 
-- [[stablecoin]]
+- [[stablecoins]]
 - [[defi]]
 - [[collateralization]]
 - [[depeg]]
 - [[dai]]
 - [[crvusd]]
 - [[usdc]]
-- [[tether]]
+- [[usdt|Tether]]
 - [[curve]]
 - [[ethereum]]
 - [[crypto-markets]]

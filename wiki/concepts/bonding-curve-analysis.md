@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-04
 updated: 2026-07-13
 status: excellent
-tags: [crypto, defi, bonding-curve, memecoin, sniping, market-microstructure]
+tags: [crypto, defi, bonding-curve, memecoins, sniping, market-microstructure]
 aliases: ["Bonding Curve", "BC Analysis", "Pump.fun Bonding Curve"]
 domain: [defi, market-microstructure]
 prerequisites: ["[[automated-market-maker]]", "[[liquidity-pool]]"]

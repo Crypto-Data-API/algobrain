@@ -9,12 +9,12 @@ aliases: ["FRAX", "FXS", "Frax Finance", "Frax Share", "frxETH", "frxUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://frax.finance"
-related: ["[[automated-market-maker]]", "[[binance]]", "[[crypto-markets]]", "[[curve-finance]]", "[[dai]]", "[[defi]]", "[[ethereum]]", "[[governance-token]]", "[[lido]]", "[[liquid-staking]]", "[[mint-parity-arbitrage]]", "[[rocket-pool]]", "[[stablecoin]]", "[[stablecoin-depeg-profit-capture]]"]
+related: ["[[automated-market-maker]]", "[[binance]]", "[[crypto-markets]]", "[[curve-finance]]", "[[dai]]", "[[defi]]", "[[ethereum]]", "[[governance-token]]", "[[lido]]", "[[liquid-staking]]", "[[mint-parity-arbitrage]]", "[[rocket-pool]]", "[[stablecoins]]", "[[stablecoin-depeg-profit-capture]]"]
 ---
 
 # Frax (prev. FXS)
 
-**FRAX** (formerly ticker **FXS**) is the governance and value-accrual token of **Frax Finance**, one of the longest-running [[stablecoin]] and [[defi|DeFi]] protocols on [[ethereum|Ethereum]]. Frax began in 2020 as a fractional-algorithmic stablecoin project and has since expanded into a full "decentralized central bank" stack spanning a stablecoin, a [[liquid-staking|liquid-staking]] ETH derivative, a lending market, an [[automated-market-maker|AMM]], and its own [[ethereum|Ethereum]] Layer-2 chain, Fraxtal. The token trades at **$0.268447**, ranking **#723** by market capitalization (**$25,126,264** market cap), down **-1.53%** over 24h and down **-5.44%** over the past 7 days.
+**FRAX** (formerly ticker **FXS**) is the governance and value-accrual token of **Frax Finance**, one of the longest-running [[stablecoins]] and [[defi|DeFi]] protocols on [[ethereum|Ethereum]]. Frax began in 2020 as a fractional-algorithmic stablecoin project and has since expanded into a full "decentralized central bank" stack spanning a stablecoin, a [[liquid-staking|liquid-staking]] ETH derivative, a lending market, an [[automated-market-maker|AMM]], and its own [[ethereum|Ethereum]] Layer-2 chain, Fraxtal. The token trades at **$0.268447**, ranking **#723** by market capitalization (**$25,126,264** market cap), down **-1.53%** over 24h and down **-5.44%** over the past 7 days.
 
 > *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).*
 
@@ -75,7 +75,7 @@ The **TWAMM** in Fraxswap is itself a notable innovation: it splits a large orde
 
 ## Competitive Position
 
-Frax competes across several DeFi verticals simultaneously: against [[stablecoin|stablecoins]] like [[dai|DAI]], USDC, and USDT in stable money; against [[lido|Lido]] and [[rocket-pool|Rocket Pool]] in liquid staking; and against general-purpose L2s with Fraxtal. Its differentiator is integration — collateral, staking, lending, AMM and an L2 are designed to reinforce one another and route yield back to a single token. The trade-off is complexity and surface area: a protocol this broad has more components that can fail and a token whose value depends on many moving parts performing.
+Frax competes across several DeFi verticals simultaneously: against [[stablecoins|stablecoins]] like [[dai|DAI]], USDC, and USDT in stable money; against [[lido|Lido]] and [[rocket-pool|Rocket Pool]] in liquid staking; and against general-purpose L2s with Fraxtal. Its differentiator is integration — collateral, staking, lending, AMM and an L2 are designed to reinforce one another and route yield back to a single token. The trade-off is complexity and surface area: a protocol this broad has more components that can fail and a token whose value depends on many moving parts performing.
 
 ---
 
@@ -272,7 +272,7 @@ Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 - [[crypto-markets]]
 - [[ethereum]]
-- [[stablecoin]]
+- [[stablecoins]]
 - [[liquid-staking]]
 - [[defi]]
 - [[curve-finance]]

@@ -131,7 +131,7 @@ THBILL sits in the **tokenized Treasuries** segment of the RWA narrative, with a
 
 ## See Also
 
-- [[real-world-assets]] / [[rwa]]
+- [[real-world-assets]]
 - [[tokenized-treasuries]]
 - [[ousg]], [[hashnote-usyc]], [[buidl]], [[vaneck-treasury-fund]] — peer tokenized Treasury / MMF products
 - [[crypto-markets]]

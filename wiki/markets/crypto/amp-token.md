@@ -9,7 +9,7 @@ aliases: ["AMP"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.amp.xyz"
-related: ["[[collateral]]", "[[crypto-markets]]", "[[decentralized-finance]]", "[[ethereum]]", "[[flexa]]", "[[stablecoins]]", "[[binance]]", "[[dca-strategy]]", "[[range-mean-reversion]]"]
+related: ["[[collateral]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[flexa]]", "[[stablecoins]]", "[[binance]]", "[[dca-strategy]]", "[[range-mean-reversion]]"]
 ---
 
 # Amp
@@ -171,9 +171,9 @@ Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 - [[crypto-markets]]
 - [[ethereum]]
 - [[flexa]]
-- [[decentralized-finance]]
+- [[defi]]
 - [[collateral]]
-- [[stablecoins]] / [[stablecoin]]
+- [[stablecoins]] / [[stablecoins]]
 - [[ripple-usd]]
 - [[pantera-capital]]
 

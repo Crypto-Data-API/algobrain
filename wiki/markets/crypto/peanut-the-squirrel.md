@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-20
 status: excellent
-tags: [crypto, meme, solana, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins, altcoins]
+tags: [crypto, solana, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins, altcoins]
 aliases: ["PNUT"]
 entity_type: protocol
 headquarters: "Decentralized"

@@ -198,7 +198,7 @@ The DAG token is the native asset used to access and secure the network: it is s
 
 ## Trading Playbook (bear / Extreme-Fear regime)
 
-> Context: F&G = 21 (Extreme Fear), established bear market, [[btc-bitcoin|BTC]] ~$64k. DAG is additionally in an acute, unexplained ~-42.6% weekly drawdown.
+> Context: F&G = 21 (Extreme Fear), established bear market, [[bitcoin|BTC]] ~$64k. DAG is additionally in an acute, unexplained ~-42.6% weekly drawdown.
 
 - **Bias:** elevated caution / avoid until the cause of the 7-day collapse is identified. A token-specific crash of this magnitude in a risk-off market is a red flag, not an automatic dip-buy.
 - **Longs:** do **not** "catch the knife" blindly. If trading a potential capitulation bounce, demand confirmation (stabilization, volume normalization, and an *explained* catalyst) and size for total loss.

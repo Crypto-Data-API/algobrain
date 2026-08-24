@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-22
 updated: 2026-06-11
 status: good
-tags: [behavioral-finance, psychology]
+tags: [behavioral-finance]
 aliases: ["confirmatory bias", "myside bias"]
 domain: [behavioral-finance]
 difficulty: beginner

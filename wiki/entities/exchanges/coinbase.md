@@ -10,7 +10,7 @@ entity_type: exchange
 founded: 2012
 headquarters: "San Francisco, California, USA (remote-first)"
 website: "https://www.coinbase.com"
-related: ["[[binance]]", "[[hyperliquid]]", "[[sec]]", "[[cftc]]", "[[usdc]]", "[[circle]]", "[[base]]", "[[cctp]]", "[[centre-consortium]]", "[[blackrock]]", "[[bitcoin-etf]]", "[[regulation]]", "[[counterparty-risk]]"]
+related: ["[[binance]]", "[[hyperliquid]]", "[[sec]]", "[[cftc]]", "[[usdc]]", "[[circle]]", "[[base]]", "[[cctp]]", "[[centre-consortium]]", "[[blackrock]]", "[[bitcoin-etfs]]", "[[regulation]]", "[[counterparty-risk]]"]
 ---
 
 # Coinbase
@@ -176,7 +176,7 @@ Coinbase's revenue is **highly procyclical** with crypto activity: transaction f
 
 - **Cyclicality / fee compression**: Trading-fee revenue collapses in bear markets (COIN fell to ~$35 in Dec 2022). Long-term fee pressure from competitors and zero-fee venues is a structural headwind.
 - **Regulatory whiplash**: The 2023 [[sec|SEC]] suit (dismissed Feb 2025) showed how a change in administration can swing Coinbase's existential risk in either direction. Future legislation (market-structure bills splitting [[sec]]/[[cftc]] oversight) will reshape its business model.
-- **Custody concentration / [[systemic-risk]]**: Coinbase custodies the majority of US spot [[bitcoin-etf|Bitcoin ETF]] assets. An operational, security, or solvency event at Coinbase could ripple across the entire regulated ETF complex — a concentration regulators monitor closely. This is also a [[counterparty-risk]] consideration for anyone whose exposure routes through Coinbase-custodied products.
+- **Custody concentration / [[systemic-risk]]**: Coinbase custodies the majority of US spot [[bitcoin-etfs|Bitcoin ETF]] assets. An operational, security, or solvency event at Coinbase could ripple across the entire regulated ETF complex — a concentration regulators monitor closely. This is also a [[counterparty-risk]] consideration for anyone whose exposure routes through Coinbase-custodied products.
 - **Security history**: As a large custodian, Coinbase is a persistent target; it has disclosed support-related social-engineering and data-exposure incidents over its history. (No specific figures asserted here — see official disclosures.)
 - **USDC dependence**: A meaningful slice of revenue comes from [[usdc|USDC]] reserve interest via the [[circle|Circle]] relationship; a sustained drop in rates or USDC market share would compress that stream.
 - **Stock volatility**: COIN routinely moves 2-3x [[bitcoin|BTC]]'s daily percentage and carries equity-specific risks (dilution, litigation, key-person exposure to founder/CEO Brian Armstrong).
@@ -189,7 +189,7 @@ Coinbase's revenue is **highly procyclical** with crypto activity: transaction f
 - [[hyperliquid]] -- Decentralized exchange; lists COIN as a tradeable perpetual
 - [[bitcoin]] -- Primary asset on Coinbase; core of the ETF custody business
 - [[ethereum]] -- Second most important asset; Coinbase built Base L2 on Ethereum
-- [[bitcoin-etf]] -- Spot Bitcoin ETFs with Coinbase as majority custodian
+- [[bitcoin-etfs]] -- Spot Bitcoin ETFs with Coinbase as majority custodian
 - [[bitcoin-etfs]] -- Spot Bitcoin ETF complex (Coinbase as majority custodian)
 - [[sec]] -- 2023 lawsuit, dismissed with prejudice in 2025
 - [[cftc]] -- Regulator for Coinbase's crypto-derivatives offering

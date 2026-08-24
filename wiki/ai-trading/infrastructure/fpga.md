@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-15
 updated: 2026-06-12
 status: good
-tags: [technology, market-microstructure, high-frequency-trading, latency]
+tags: [infrastructure, market-microstructure, high-frequency-trading, latency]
 aliases: ["FPGA", "Field-Programmable Gate Array", "FPGAs"]
 domain: [market-microstructure]
 related:

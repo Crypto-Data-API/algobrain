@@ -44,7 +44,7 @@ related: ["[[on-chain-regime]]", "[[crypto-market-regime-taxonomy]]", "[[on-chai
 | **Critical discipline** | **Point-in-time** label snapshots; out-of-sample validation |
 | **Biggest risk** | Label revision / look-ahead bias; ETF-era flow migration |
 
-This is the macro, basket-level member of the [[on-chain-analytics|on-chain analytics]] family; contrast with the wallet-level [[on-chain-smart-money-tracking]].
+This is the macro, basket-level member of the [[on-chain-analysis|on-chain analytics]] family; contrast with the wallet-level [[on-chain-smart-money-tracking]].
 
 ## Edge source
 
@@ -256,7 +256,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - [[on-chain-regime]]
 - [[crypto-market-regime-taxonomy]]
 - [[on-chain-analysis]]
-- [[on-chain-analytics]]
+- [[on-chain-analysis]]
 - [[whale-trade]]
 - [[on-chain-smart-money-tracking]]
 - [[miner-capitulation-bottom]]

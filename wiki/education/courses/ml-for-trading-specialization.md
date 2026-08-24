@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [education, course, machine-learning, free]
+tags: [education, courses, machine-learning, free]
 related:
   - "[[andrew-ng-ml-course]]"
   - "[[python-quant-stack]]"

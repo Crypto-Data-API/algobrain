@@ -81,7 +81,7 @@ HYPE's economics are the core of the bull case and distinguish it from most gove
 - Hyperliquid's trading volume and [[open-interest]] growth directly drive the fee-revenue buyback bid, and thus HYPE's fundamental valuation
 - HYPE staking dynamics affect circulating supply -- higher staking rates reduce sell pressure
 - As Hyperliquid's [[hyperevm|HyperEVM]] ecosystem expands (DeFi protocols deploying on the chain) and [[hip-3-builder-deployed-perps|HIP-3]] markets multiply, demand for HYPE as gas and collateral grows
-- HYPE competes with DYDX ([[dydx]]), GMX and Vertex as the leading decentralized derivatives exchange tokens, and screens against [[exchange-tokens|CEX tokens]] like [[binance-coin|BNB]], OKB and [[whitebit|WBT]] as a "claim on an exchange" trade
+- HYPE competes with DYDX ([[dydx]]), GMX and Vertex as the leading decentralized derivatives exchange tokens, and screens against [[exchange-tokens|CEX tokens]] like [[bnb|BNB]], OKB and [[whitebit|WBT]] as a "claim on an exchange" trade
 
 ---
 
@@ -113,7 +113,7 @@ HYPE is best framed as **equity in a fast-growing exchange** rather than a utili
 | **Hyperliquid** | HYPE | Perp DEX / L1 | #10 | $70.43 | $15.67B | ~0.22 |
 | [[dydx]] | DYDX | Perp DEX | — | — | — | — |
 | [[whitebit\|WhiteBIT Coin]] | WBT | CEX token | #17 | $52.35 | $6.19B | ~0.30 |
-| [[binance-coin\|BNB]] | BNB | CEX token / L1 | — | — | — | — |
+| [[bnb\|BNB]] | BNB | CEX token / L1 | — | — | — | — |
 | [[mx-token\|MX]] | MX | CEX token | #196 | $1.75 | $0.16B | ~0.22 |
 
 *HYPE is the only decentralized-exchange token in this peer set with both top-10 liquidity and a mechanical fee→buyback bid; CEX peers rely on discretionary burn/buyback programs.*

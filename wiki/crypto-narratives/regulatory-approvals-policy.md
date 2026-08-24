@@ -220,7 +220,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 - [[bitcoin]]
 - [[ethereum]]
 - [[xrp]]
-- [[bitcoin-etf]]
+- [[bitcoin-etfs]]
 - [[spot-bitcoin-etf]]
 - [[spot-ethereum-etf]]
 - [[stablecoins]]

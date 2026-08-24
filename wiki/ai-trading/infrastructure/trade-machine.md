@@ -4,7 +4,7 @@ type: source
 created: 2026-05-07
 updated: 2026-06-12
 status: good
-tags: [data-provider, options, backtesting, derivatives, technology]
+tags: [data-provider, options, backtesting, derivatives, infrastructure]
 aliases: ["Trade Machine", "Trade Machine Pro", "CML Trade Machine", "Capital Market Labs Trade Machine"]
 source_type: data
 source_url: "https://www.cmlviz.com/trademachine"

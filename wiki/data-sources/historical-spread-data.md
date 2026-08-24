@@ -4,7 +4,7 @@ type: reference
 created: 2026-04-20
 updated: 2026-07-13
 status: excellent
-tags: [data, arbitrage, backtesting, crypto, options, futures, meta]
+tags: [data-provider, arbitrage, backtesting, crypto, options, futures, meta]
 aliases: ["Spread Data", "Basis Data Sources", "Funding Rate History", "Historical Arbitrage Data"]
 related: ["[[data-sources-overview]]", "[[crypto-data-sources]]", "[[paid-data-providers]]", "[[free-data-sources]]", "[[arbitrage-overview]]", "[[funding-rate-arbitrage]]", "[[cross-exchange-arbitrage]]", "[[cash-and-carry]]", "[[volatility-arbitrage]]", "[[pairs-trading]]", "[[transaction-cost-modeling]]", "[[exchange-api-reference]]", "[[etf-arbitrage]]", "[[cryptodataapi]]"]
 ---

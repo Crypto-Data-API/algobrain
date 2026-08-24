@@ -14,7 +14,7 @@ related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[stablecoins]]", "[[treasur
 
 # USDH
 
-**USDH** is a **fiat-backed digital dollar [[stablecoin|stablecoin]]** built natively for [[hyperliquid|Hyperliquid]] (chain: [[hyperliquid|HyperEVM]]). It is designed by **Native Markets** and issued by **Bridge Building Inc**, and aims to be the credible, ecosystem-aligned native dollar for the Hyperliquid / HyperEVM ecosystem. Unlike a [[synthetic-dollar]] minted against crypto, USDH is **fully reserved by cash and short-term US-government instruments**, redeemable 1:1.
+**USDH** is a **fiat-backed digital dollar [[stablecoins|stablecoin]]** built natively for [[hyperliquid|Hyperliquid]] (chain: [[hyperliquid|HyperEVM]]). It is designed by **Native Markets** and issued by **Bridge Building Inc**, and aims to be the credible, ecosystem-aligned native dollar for the Hyperliquid / HyperEVM ecosystem. Unlike a [[synthetic-dollar]] minted against crypto, USDH is **fully reserved by cash and short-term US-government instruments**, redeemable 1:1.
 
 > **Subject note / disambiguation:** "USDH" is a name shared by several unrelated projects (historically Hubble Protocol's USDH on Solana, among others). *This* page is specifically the **Native Markets / Bridge Building USDH for Hyperliquid**, the winner of Hyperliquid's native-stablecoin ticker process. Do not conflate it with other USDH coins.
 

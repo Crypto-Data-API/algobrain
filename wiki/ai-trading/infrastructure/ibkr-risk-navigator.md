@@ -4,7 +4,7 @@ type: source
 created: 2026-05-07
 updated: 2026-06-12
 status: good
-tags: [risk-management, options, derivatives, technology]
+tags: [risk-management, options, derivatives, infrastructure]
 aliases: ["Risk Navigator", "IBKR Risk Navigator", "IB Risk Navigator"]
 source_type: data
 source_url: "https://www.interactivebrokers.com/en/trading/risk-navigator.php"

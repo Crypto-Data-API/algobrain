@@ -169,7 +169,7 @@ The July 2025 dip to $0.94 shows the peg is softer than fiat-backed coins under 
 
 ## Related
 
-- [[stablecoins]] / [[stablecoin]]
+- [[stablecoins]] / [[stablecoins]]
 - [[synthetic-dollar]]
 - [[stablecoin-yields]]
 - [[ethena-usde]]

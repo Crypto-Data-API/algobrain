@@ -9,12 +9,12 @@ aliases: ["AURORA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://aurora.dev/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[near-protocol]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[near]]"]
 ---
 
 # Aurora
 
-**Aurora** (AURORA) is an **EVM (Ethereum Virtual Machine) that runs as a smart contract on the [[near-protocol|NEAR Protocol]]** — effectively an Ethereum-compatible execution layer hosted on NEAR rather than a standalone chain or a classic [[ethereum|Ethereum]] rollup. It gives developers a turn-key, Ethereum-compatible, high-throughput environment with very low transaction costs, settling within NEAR's sharded consensus. As of 2026-06-22 AURORA trades at **$0.02625635**, ranked **#851** with a market capitalization of **~$18.8M**.
+**Aurora** (AURORA) is an **EVM (Ethereum Virtual Machine) that runs as a smart contract on the [[near|NEAR Protocol]]** — effectively an Ethereum-compatible execution layer hosted on NEAR rather than a standalone chain or a classic [[ethereum|Ethereum]] rollup. It gives developers a turn-key, Ethereum-compatible, high-throughput environment with very low transaction costs, settling within NEAR's sharded consensus. As of 2026-06-22 AURORA trades at **$0.02625635**, ranked **#851** with a market capitalization of **~$18.8M**.
 
 > *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).* AURORA trades at **$0.02625635**, market cap **$18,788,389** (rank **#851**), down **-0.06%** over 24h and down **-0.45%** over 7 days, in a broad risk-off regime (BTC ~$64,166; Fear & Greed Index 21 / Extreme Fear).
 
@@ -39,7 +39,7 @@ related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[near-protocol]
 
 ## Overview
 
-Aurora is an **EVM built on the [[near-protocol|NEAR Protocol]]**. Rather than being an [[ethereum|Ethereum]] [[layer-2|Layer 2]] rollup, Aurora is the **Aurora Engine**: an EVM implemented *as a WASM smart contract deployed on NEAR*, so Ethereum-style transactions execute inside NEAR's sharded ("Nightshade") runtime. This lets Solidity contracts and standard Ethereum tooling (MetaMask, Hardhat, etc.) work unchanged while benefiting from NEAR's throughput and low, predictable fees. Aurora's security and finality derive from NEAR's proof-of-stake consensus, not from Ethereum.
+Aurora is an **EVM built on the [[near|NEAR Protocol]]**. Rather than being an [[ethereum|Ethereum]] [[layer-2|Layer 2]] rollup, Aurora is the **Aurora Engine**: an EVM implemented *as a WASM smart contract deployed on NEAR*, so Ethereum-style transactions execute inside NEAR's sharded ("Nightshade") runtime. This lets Solidity contracts and standard Ethereum tooling (MetaMask, Hardhat, etc.) work unchanged while benefiting from NEAR's throughput and low, predictable fees. Aurora's security and finality derive from NEAR's proof-of-stake consensus, not from Ethereum.
 
 Connectivity to Ethereum and other chains is provided by the **Rainbow Bridge**, a trustless light-client bridge between NEAR/Aurora and Ethereum that lets assets move across. Aurora also offers "Aurora Chains" / Virtual Chains — app-specific EVM chains powered by the same engine.
 
@@ -51,7 +51,7 @@ Connectivity to Ethereum and other chains is provided by the **Rainbow Bridge**,
 
 The crucial architectural fact about Aurora is that it is **not** an [[ethereum|Ethereum]] [[layer-2|Layer 2]] rollup. There is no fraud proof, no validity proof, and no posting of compressed transaction data back to Ethereum for [[data-availability|data availability]]. Instead:
 
-- The **Aurora Engine** is a WASM smart contract deployed on [[near-protocol|NEAR]]. It implements the full EVM bytecode interpreter and Ethereum state model.
+- The **Aurora Engine** is a WASM smart contract deployed on [[near|NEAR]]. It implements the full EVM bytecode interpreter and Ethereum state model.
 - Ethereum-style transactions are submitted to this contract, executed inside NEAR's runtime, and their results become part of **NEAR's** state.
 - **Security, consensus, and finality come from NEAR's "Nightshade" sharded [[proof-of-stake]]** — *not* from Ethereum. An attacker who could compromise NEAR could compromise Aurora; Ethereum's validator set provides no protection here.
 
@@ -67,7 +67,7 @@ Practically, this means Solidity contracts, MetaMask, Hardhat, Foundry, and stan
 
 | Approach | Example | Where security comes from | Bridge dependency | Gas asset |
 |---|---|---|---|---|
-| **EVM-as-contract on another L1** | **Aurora (on [[near-protocol\|NEAR]])** | NEAR PoS (not Ethereum) | Rainbow Bridge to Ethereum | ETH |
+| **EVM-as-contract on another L1** | **Aurora (on [[near\|NEAR]])** | NEAR PoS (not Ethereum) | Rainbow Bridge to Ethereum | ETH |
 | Optimistic rollup | [[optimism\|Optimism]], [[lisk\|Lisk]], Base | Ethereum (fraud proofs + DA) | Canonical rollup bridge | ETH |
 | ZK rollup | zkSync, Starknet | Ethereum (validity proofs + DA) | Canonical rollup bridge | ETH |
 | Sidechain | Polygon PoS (legacy) | Own validator set | External bridge | Own token |
@@ -91,7 +91,7 @@ The token's **value-accrual challenge is structural**: because gas is paid in ET
 
 ## History
 
-Aurora launched in 2021, developed within the [[near-protocol|NEAR]] ecosystem (by Aurora Labs / "Aurora is NEAR"), to offer an Ethereum-compatible environment on NEAR with the Rainbow Bridge for asset movement. Its token-generation event and **Aurora DAO** formation followed, alongside the **Aurora+ / staking** program. It rode the 2021–2022 cycle — its all-time high of **$35.40** dates to **2022-01-16** — and has since fallen more than 99% from that peak. Over time Aurora introduced **Aurora Chains / Virtual Chains** (app-specific EVM chains) to broaden its offering. Because security and activity are inherited from NEAR rather than Ethereum, Aurora's trajectory is tied closely to NEAR ecosystem health and developer adoption. In 2026 AURORA printed an all-time low of **$0.0236** on 2026-02-06 during the small-cap washout before stabilizing.
+Aurora launched in 2021, developed within the [[near|NEAR]] ecosystem (by Aurora Labs / "Aurora is NEAR"), to offer an Ethereum-compatible environment on NEAR with the Rainbow Bridge for asset movement. Its token-generation event and **Aurora DAO** formation followed, alongside the **Aurora+ / staking** program. It rode the 2021–2022 cycle — its all-time high of **$35.40** dates to **2022-01-16** — and has since fallen more than 99% from that peak. Over time Aurora introduced **Aurora Chains / Virtual Chains** (app-specific EVM chains) to broaden its offering. Because security and activity are inherited from NEAR rather than Ethereum, Aurora's trajectory is tied closely to NEAR ecosystem health and developer adoption. In 2026 AURORA printed an all-time low of **$0.0236** on 2026-02-06 during the small-cap washout before stabilizing.
 
 ### Notable events
 
@@ -104,7 +104,7 @@ Aurora launched in 2021, developed within the [[near-protocol|NEAR]] ecosystem (
 
 ## Risks
 
-- **Dependence on NEAR** — Aurora's liveness, finality, and security are inherited from [[near-protocol|NEAR Protocol]]; problems with NEAR consensus, validators, or governance flow directly to Aurora.
+- **Dependence on NEAR** — Aurora's liveness, finality, and security are inherited from [[near|NEAR Protocol]]; problems with NEAR consensus, validators, or governance flow directly to Aurora.
 - **Bridge risk** — the Rainbow Bridge (and any cross-chain pathways) is a major attack surface; light-client bridges are more trust-minimized than multisigs but still carry implementation and liveness risk. Cross-chain bridges are among the most-exploited components in crypto.
 - **Not an Ethereum rollup** — Aurora does *not* inherit Ethereum's security; users assuming "L2 = Ethereum security" are mistaken, since settlement is on NEAR. Its trust model is closer to a sidechain/alt-L1 (see comparison table) than to true rollups like [[lisk|Lisk]] or [[optimism|Optimism]].
 - **Weak token value accrual** — gas is paid in ETH, so network usage does not directly accrue to AURORA; the token relies on governance/incentive demand, which can decouple from real activity.
@@ -222,7 +222,7 @@ Aurora launched in 2021, developed within the [[near-protocol|NEAR]] ecosystem (
 
 - [[crypto-markets]]
 - [[ethereum]]
-- [[near-protocol]]
+- [[near]]
 - [[layer-2]]
 - [[proof-of-stake]]
 - [[smart-contracts]]

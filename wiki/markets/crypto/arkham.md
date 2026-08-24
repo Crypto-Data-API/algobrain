@@ -9,7 +9,7 @@ aliases: ["ARKM", "Arkham Intelligence"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "http://arkm.com/"
-related: ["[[binance]]", "[[cex]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[on-chain-analysis]]", "[[on-chain-analytics]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
+related: ["[[binance]]", "[[cex]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[on-chain-analysis]]", "[[on-chain-analysis]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Arkham
@@ -44,7 +44,7 @@ ARKM is down ~2.3% on the day but roughly flat-to-up on the week (+1.1%) — mod
 
 Arkham operates two tightly linked products:
 
-- **Arkham Intel Platform** — an [[on-chain-analytics|on-chain analytics]] / forensics engine. Its proprietary **"Ultra" AI engine** attributes addresses to real-world entities, then exposes holdings, transfers, P&L, and counterparty graphs through dashboards, entity profiles, network-map visualizations, real-time alerts, and an API. Arkham claims billions of labeled addresses and attribution of the large majority of on-chain value.
+- **Arkham Intel Platform** — an [[on-chain-analysis|on-chain analytics]] / forensics engine. Its proprietary **"Ultra" AI engine** attributes addresses to real-world entities, then exposes holdings, transfers, P&L, and counterparty graphs through dashboards, entity profiles, network-map visualizations, real-time alerts, and an API. Arkham claims billions of labeled addresses and attribution of the large majority of on-chain value.
 - **Intel Exchange** — a marketplace where users post bounties (paid in ARKM) for specific on-chain intelligence (e.g. "identify the owner of this wallet") and others fulfill them — a crowdsourced de-anonymization layer.
 - **Arkham Exchange** — a centralized [[cex|CEX]] (CLOB) for spot and perpetuals, with the intel layer wired directly into the trading UI so traders can see entity flows alongside the order book.
 
@@ -77,7 +77,7 @@ ARKM launched in July 2023 via a **[[binance]] Launchpad** sale and an early "In
 
 ## Use Case, Narrative & Category
 
-Arkham sits at the intersection of two narratives: **[[on-chain-analytics|on-chain intelligence / analytics]]** and **exchange tokens**. The intel product is its differentiator — it claims billions of labeled addresses, the large majority of on-chain value attributed, and trillions in labeled asset flow, exposed via dashboards, alerts, network maps, an API, and AI-assisted analysis. This makes ARKM a play on demand for [[on-chain-analysis|on-chain forensics]] (used by traders, funds, journalists, and reportedly government clients) plus the volume/fee growth of Arkham Exchange.
+Arkham sits at the intersection of two narratives: **[[on-chain-analysis|on-chain intelligence / analytics]]** and **exchange tokens**. The intel product is its differentiator — it claims billions of labeled addresses, the large majority of on-chain value attributed, and trillions in labeled asset flow, exposed via dashboards, alerts, network maps, an API, and AI-assisted analysis. This makes ARKM a play on demand for [[on-chain-analysis|on-chain forensics]] (used by traders, funds, journalists, and reportedly government clients) plus the volume/fee growth of Arkham Exchange.
 
 ---
 
@@ -126,7 +126,7 @@ At ~$86M cap, ~97% below ATH but ~42% above the ATL, the market is pricing ARKM 
 ## Related
 
 - [[on-chain-analysis]] — Arkham's core data product
-- [[on-chain-analytics]] — the broader analytics category
+- [[on-chain-analysis]] — the broader analytics category
 - [[cex]] — Arkham Exchange is a centralized venue
 - [[binance]] — ARKM launched via Binance Launchpad
 - [[hyperliquid]] — where ARKM-PERP also trades

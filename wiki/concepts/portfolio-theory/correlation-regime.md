@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-07
 updated: 2026-07-13
 status: excellent
-tags: [portfolio-theory, risk-management, correlation, regime, diversification]
+tags: [portfolio-theory, risk-management, correlation, market-regime, diversification]
 aliases: ["Correlation Regime", "Correlation Spike", "Correlation Regimes"]
 related: ["[[correlation]]", "[[correlation-of-returns]]", "[[correlation-matrix]]", "[[implied-correlation]]", "[[diversification]]", "[[risk-parity]]", "[[modern-portfolio-theory]]", "[[options-risk-budgeting]]", "[[risk-budgeting]]", "[[volatility-regime]]", "[[volatility-regime-classification]]", "[[volatility-regime-switching]]", "[[fat-tails]]", "[[covid-crash]]", "[[2008-financial-crisis]]", "[[vix-august-2024-spike]]", "[[volmageddon]]", "[[cryptodataapi]]"]
 domain: [portfolio-theory, risk-management]

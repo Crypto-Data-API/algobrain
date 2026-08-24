@@ -124,7 +124,7 @@ XAUm sits in the **tokenized-gold / RWA store-of-value** category — bringing t
 ## See Also
 
 - [[gold]] — underlying asset
-- [[real-world-assets]] / [[rwa]]
+- [[real-world-assets]]
 - [[pax-gold]], [[tether-gold]] — peer tokenized-gold products
 - [[crypto-markets]]
 - [[ethereum]]

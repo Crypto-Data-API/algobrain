@@ -130,7 +130,7 @@ DeFAI tokens as an asset class have distinct trading characteristics:
 
 - DeFAI tokens are among the **highest-beta assets in crypto** — they amplify moves in both BTC and the AI narrative
 - A 5% BTC move can translate into 15-30% moves in DeFAI tokens
-- Correlation to [[openai|OpenAI]] news, [[nvidia|NVIDIA]] earnings, and AI conference announcements is high (see [[openai#ChatGPT's Impact on the AI Token Narrative]])
+- Correlation to [[openai|OpenAI]] news, [[nvidia-ai|NVIDIA]] earnings, and AI conference announcements is high (see [[openai#ChatGPT's Impact on the AI Token Narrative]])
 
 ### Sector Rotation Patterns
 

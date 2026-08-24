@@ -94,7 +94,7 @@ The expected value of the bad outcome is large enough that it dwarfs the credit 
 
 ### Routine pinning in mega-caps
 
-AAPL, MSFT, TSLA, [[nvidia|NVDA]], and SPY all show pronounced pinning on monthly expiration days. AAPL, in particular, has closed within $0.50 of a $5 strike on more than 60% of monthly expirations in the post-2015 sample, materially more than the unconditional probability would predict. The Ni-Pearson-Poteshman work originally documented this effect on liquid US stocks; subsequent work by [[golez-jackwerth|Golez and Jackwerth]] (2012) extended it to index futures.
+AAPL, MSFT, TSLA, [[nvidia-ai|NVDA]], and SPY all show pronounced pinning on monthly expiration days. AAPL, in particular, has closed within $0.50 of a $5 strike on more than 60% of monthly expirations in the post-2015 sample, materially more than the unconditional probability would predict. The Ni-Pearson-Poteshman work originally documented this effect on liquid US stocks; subsequent work by [[golez-jackwerth|Golez and Jackwerth]] (2012) extended it to index futures.
 
 ### High-profile pinning incidents
 

@@ -9,12 +9,12 @@ aliases: ["MUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.mezo.org"
-related: ["[[bitcoin]]", "[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[liquity-usd]]", "[[stablecoin]]"]
+related: ["[[bitcoin]]", "[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[liquity-usd]]", "[[stablecoins]]"]
 ---
 
 # Mezo USD
 
-**Mezo USD** (ticker **MUSD**) is the [[bitcoin]]-collateralized [[stablecoin]] of **Mezo**, a Bitcoin-centric economy/network. MUSD is minted when users deposit BTC as collateral and borrow against it at low, fixed rates, using a **collateralized debt position** ([[cdp]]) model: each MUSD is backed by over-collateralized BTC and can be redeemed against the system, helping it hold a 1:1 soft peg to the US dollar. MUSD is native to **Mezo** and bridged to [[ethereum|Ethereum]] and **Base**. It ranks **#658** by market capitalization.
+**Mezo USD** (ticker **MUSD**) is the [[bitcoin]]-collateralized [[stablecoins]] of **Mezo**, a Bitcoin-centric economy/network. MUSD is minted when users deposit BTC as collateral and borrow against it at low, fixed rates, using a **collateralized debt position** ([[cdp]]) model: each MUSD is backed by over-collateralized BTC and can be redeemed against the system, helping it hold a 1:1 soft peg to the US dollar. MUSD is native to **Mezo** and bridged to [[ethereum|Ethereum]] and **Base**. It ranks **#658** by market capitalization.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -40,7 +40,7 @@ At the latest snapshot MUSD traded at **$0.99817** (market cap **$28,734,792**, 
 
 ## Overview
 
-MUSD is Mezo's [[bitcoin]]-backed [[stablecoin]], minted when users deposit BTC as collateral and borrow against it at low, fixed rates. The system uses a **collateralized debt position** ([[cdp]]) model, where each MUSD is backed by over-collateralized BTC and can be redeemed against the system, helping MUSD maintain its 1:1 soft peg to USD.
+MUSD is Mezo's [[bitcoin]]-backed [[stablecoins]], minted when users deposit BTC as collateral and borrow against it at low, fixed rates. The system uses a **collateralized debt position** ([[cdp]]) model, where each MUSD is backed by over-collateralized BTC and can be redeemed against the system, helping MUSD maintain its 1:1 soft peg to USD.
 
 **Mezo** positions itself as a Bitcoin-economy network — infrastructure designed to make BTC productive (borrowing, payments, yield) without selling it. MUSD is the unit of account that lets BTC holders unlock dollar liquidity against their coins, which is the core use case the network is built around.
 
@@ -157,7 +157,7 @@ MUSD sits at the intersection of two themes: **Bitcoin-DeFi / "productive BTC"**
 | **24h Change** | +0.05% |
 | **7d Change** | +0.04% |
 
-*As a [[stablecoin]], MUSD's price history is a tight band around $1; the ATH/ATL above represent brief minor depeg episodes, not directional moves.*
+*As a [[stablecoins]], MUSD's price history is a tight band around $1; the ATH/ATL above represent brief minor depeg episodes, not directional moves.*
 
 ---
 
@@ -237,7 +237,7 @@ MUSD sits at the intersection of two themes: **Bitcoin-DeFi / "productive BTC"**
 ## See Also
 
 - [[bitcoin]]
-- [[stablecoin]]
+- [[stablecoins]]
 - [[collateralization]]
 - [[cdp]]
 - [[depeg]]

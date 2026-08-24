@@ -15,7 +15,7 @@ related: ["[[crypto-markets]]", "[[genius-act]]", "[[ripple]]", "[[stablecoins]]
 
 # Ripple USD
 
-**Ripple USD** (ticker **RLUSD**) is the NYDFS-regulated, fiat-backed USD [[stablecoin]] issued by **Standard Custody & Trust Company**, a wholly owned subsidiary of [[ripple|Ripple Labs]], launched in December 2024 on both the [[xrp|XRP Ledger]] and [[ethereum|Ethereum]]. For traders it is one of the fastest-growing regulated stablecoins (~$1.6B and closing on $2B by mid-2026), a direct beneficiary of the [[genius-act|GENIUS Act]] regime, and — importantly — a complicating factor for the XRP thesis, since RLUSD competes with XRP's bridge-asset use case.
+**Ripple USD** (ticker **RLUSD**) is the NYDFS-regulated, fiat-backed USD [[stablecoins]] issued by **Standard Custody & Trust Company**, a wholly owned subsidiary of [[ripple|Ripple Labs]], launched in December 2024 on both the [[xrp|XRP Ledger]] and [[ethereum|Ethereum]]. For traders it is one of the fastest-growing regulated stablecoins (~$1.6B and closing on $2B by mid-2026), a direct beneficiary of the [[genius-act|GENIUS Act]] regime, and — importantly — a complicating factor for the XRP thesis, since RLUSD competes with XRP's bridge-asset use case.
 
 ---
 
@@ -148,7 +148,7 @@ RLUSD is a **fiat-reserve payment stablecoin** — the most conservative backing
 
 - [[xrp]]
 - [[ripple]]
-- [[stablecoins]] / [[stablecoin]]
+- [[stablecoins]] / [[stablecoins]]
 - [[usdc]]
 - [[usdt]]
 - [[usdtb]]

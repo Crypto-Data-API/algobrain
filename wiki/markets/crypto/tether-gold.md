@@ -10,12 +10,12 @@ entity_type: protocol
 founded: 2020
 headquarters: "El Salvador (TG Commodities); gold vaulted in Switzerland"
 website: "https://gold.tether.to/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gold]]", "[[hashnote-usyc]]", "[[tether]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[narrative-trading]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gold]]", "[[hashnote-usyc]]", "[[tether-limited|Tether]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[narrative-trading]]"]
 ---
 
 # Tether Gold
 
-**Tether Gold** (XAUT) is [[tether|Tether's]] gold-backed token: each XAU₮ represents one troy ounce of physical gold on a specific London Good Delivery bar held in Swiss vaults. It is the largest or second-largest tokenized-gold product (alongside Paxos' PAXG) and the main on-chain proxy for the 2024–2026 gold bull market — its market value topped **$3.3B in Q1 2026** after a 36% quarterly jump in bullion reserves, before settling around **$2.6B as of June 2026 (approximate)** as gold pulled back from highs.
+**Tether Gold** (XAUT) is [[tether-limited|Tether's]] gold-backed token: each XAU₮ represents one troy ounce of physical gold on a specific London Good Delivery bar held in Swiss vaults. It is the largest or second-largest tokenized-gold product (alongside Paxos' PAXG) and the main on-chain proxy for the 2024–2026 gold bull market — its market value topped **$3.3B in Q1 2026** after a 36% quarterly jump in bullion reserves, before settling around **$2.6B as of June 2026 (approximate)** as gold pulled back from highs.
 
 ---
 
@@ -129,7 +129,7 @@ Each XAU₮ token represents ownership of one troy fine ounce of physical gold o
 
 - [[crypto-markets]]
 - [[ethereum]]
-- [[tether]] / [[usdt]]
+- [[tether-limited|Tether]] / [[usdt]]
 - [[gold]] — the underlying
 - [[hashnote-usyc]], [[blackrock-usd-institutional-digital-liquidity-fund]] — fellow RWA tokens
 - [[narrative-trading]] — RWA / debasement-hedge basket

@@ -4,7 +4,7 @@ type: source
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [book, history, hedge-funds, macro-trading, quantitative]
+tags: [book, history, hedge-funds, macro, quantitative]
 aliases: ["More Money Than God"]
 related: ["[[george-soros]]", "[[paul-tudor-jones]]", "[[jim-simons]]", "[[renaissance-technologies]]", "[[quantum-fund]]", "[[bridgewater-associates]]", "[[ray-dalio]]", "[[citadel]]", "[[more-money-than-god]]"]
 source_type: book

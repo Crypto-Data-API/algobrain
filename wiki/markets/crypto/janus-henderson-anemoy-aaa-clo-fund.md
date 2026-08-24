@@ -10,7 +10,7 @@ entity_type: fund
 founded: 2025
 headquarters: "On-chain (issued via Anemoy/Centrifuge; Janus Henderson is the manager)"
 website: "https://www.anemoy.io/"
-related: ["[[aave]]", "[[centrifuge-2]]", "[[clo]]", "[[crypto-markets]]", "[[ethena]]", "[[ethereum]]", "[[janus-henderson-anemoy-treasury-fund]]", "[[private-credit]]", "[[real-world-assets]]", "[[rwa]]", "[[sky]]", "[[tokenized-treasuries]]"]
+related: ["[[aave]]", "[[centrifuge-2]]", "[[clo]]", "[[crypto-markets]]", "[[ethena]]", "[[ethereum]]", "[[janus-henderson-anemoy-treasury-fund]]", "[[private-credit]]", "[[real-world-assets]]", "[[sky]]", "[[tokenized-treasuries]]"]
 ---
 
 # Janus Henderson Anemoy AAA CLO Fund
@@ -171,7 +171,7 @@ Visible supply nearly **doubled** from ~390M (April 2026) to ~706M (June 2026) a
 ## Related
 
 - [[centrifuge-2]] (Centrifuge / CFG)
-- [[real-world-assets]], [[rwa]], [[private-credit]], [[clo]]
+- [[real-world-assets]], [[private-credit]], [[clo]]
 - [[janus-henderson-anemoy-treasury-fund]], [[tokenized-treasuries]]
 - [[hastra-prime]] — peer RWA yield token
 - [[sky]]
