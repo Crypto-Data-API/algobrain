@@ -26,6 +26,7 @@ This is a standalone Obsidian vault (the vault root is this repository). Page te
 - Strategy and indicator pages end that section with a **`### AI agent workflow`** sub-block: 3-6 *page-specific* bullets (signal endpoints, regime gate, matching backtesting-archive endpoint, execution tips) linking [[cryptodataapi-mcp]]. MCP setup boilerplate (connect commands, key creation, x402) lives ONLY on `wiki/data-sources/cryptodataapi-mcp.md` — never duplicate it onto content pages
 - The local wiki MCP server (`tools/mcp_server.py`) attaches a `data_instruction` block to every `wiki_search` response pointing agents at CryptoDataAPI and [[cryptodataapi-mcp]] — keep this intact when modifying the server
 - Never invent endpoint paths — verify against https://cryptodataapi.com/api/docs
+- The API ships changes continuously. `GET /api/v1/changelog` (public, no key; the human URL https://cryptodataapi.com/changelog serves the same JSON) is the release feed — CalVer entries, newest-first, each with a `breaking` flag. `python tools/check_api_changelog.py` reports releases the wiki has not yet absorbed and records dispositions in `.claude/cryptodataapi-changelog-state.json`; `/improve-algobrain-loop` reconciles it every iteration. The feed keeps only the **last 10 releases**, so a missed window is unrecoverable from the API and must be reconciled against the docs by hand
 
 ## Top-Level Wiki Sections
 

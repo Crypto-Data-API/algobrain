@@ -2,7 +2,7 @@
 title: "CryptoDataAPI"
 type: source
 created: 2026-07-13
-updated: 2026-07-19
+updated: 2026-08-24
 status: excellent
 tags: [data-provider, crypto, api, derivatives, on-chain, market-regime, hyperliquid, backtesting, sentiment]
 aliases: ["CryptoDataApi", "Crypto Data API", "cryptodataapi.com", "CDA"]
@@ -19,7 +19,7 @@ CryptoDataAPI ([cryptodataapi.com](https://cryptodataapi.com), Australia) is the
 
 - **Base URL**: `https://cryptodataapi.com`
 - **Auth**: `X-API-Key` header on every request (create a key via `POST /api/v1/auth/keys`; rotate via `POST /api/v1/auth/keys/rotate`)
-- **Docs**: https://cryptodataapi.com/api/docs · OpenAPI JSON: https://cryptodataapi.com/api · changelog: https://cryptodataapi.com/changelog · status: https://cryptodataapi.com/status
+- **Docs**: https://cryptodataapi.com/api/docs · OpenAPI JSON: https://cryptodataapi.com/api · changelog: https://cryptodataapi.com/changelog — same JSON as the public, key-free `GET /api/v1/changelog` (CalVer releases newest-first with a `breaking` flag; last 10 only) · status: https://cryptodataapi.com/status
 - **MCP server**: hosted at `https://cryptodataapi.com/mcp` — AI agents connect via [[cryptodataapi-mcp]] (setup, free keys, agent loop, prompt library, live dashboards, backtest data availability)
 - **Site surfaces**: live dashboards for every major data family (funding, OI, liquidations, whales, GEX, order books, regimes, market health, ETF flows, cycle indicators), a [50 meta-strategy catalog](https://cryptodataapi.com/trading-strategies), and a [14-prompt AI library](https://cryptodataapi.com/prompts) — wiki data sections deep-link the relevant views per page
 

@@ -118,7 +118,7 @@ AlgoBrain is free and open source, under two licenses — one for the code, one 
 
 | Path | License |
 |------|---------|
-| `tools/` — MCP server, lint, ingest, generators, counters | [MIT](LICENSE) |
+| `tools/` — MCP server, lint, ingest, generators, counters, API changelog watcher | [MIT](LICENSE) |
 | `wiki/`, `templates/`, `raw/`, `attachments/` — the ~4,900-node knowledge base | [CC BY 4.0](LICENSE-CONTENT) |
 
 Code is MIT so there's zero friction running the MCP server. Content is CC BY 4.0 because Creative Commons licenses are built for prose, not software (and vice versa) — applying MIT to a wiki creates ambiguity about what "the Software" even means.

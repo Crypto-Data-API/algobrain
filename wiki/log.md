@@ -2,12 +2,29 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-08-22
+updated: 2026-08-24
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-08-24 — Tooling: CryptoDataAPI changelog reconciliation added to the improvement loop
+
+**Scope:** Loop/tooling change, not a content batch. The daily improvement loop now
+reconciles the upstream API release feed before choosing a track, so endpoint
+documentation across the wiki can no longer drift silently.
+
+- Added `tools/check_api_changelog.py` — watches the public, key-free
+  `GET /api/v1/changelog` feed and reports releases the wiki has not absorbed, with state
+  in `.claude/cryptodataapi-changelog-state.json`.
+- Pages updated: [[cryptodataapi]] — the Docs line now names the machine-readable
+  changelog endpoint and its 10-release retention limit.
+- No content pages were re-synced in this operation. The first Sync-track iteration of the
+  loop will triage the 10 currently-unprocessed releases (2026-06-27 through 2026-08-23,
+  two of them breaking); known drift already visible includes the Pro Plus per-minute rate
+  limit and the free-tier limits on [[cryptodataapi]].
+
 
 ## 2026-08-22 — Wikilink rename-mismatch batch (daily loop iter 8, Fix)
 

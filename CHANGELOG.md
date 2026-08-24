@@ -4,6 +4,31 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-08-24 — Reconcile the upstream API changelog every improvement-loop iteration
+
+**Added:** `tools/check_api_changelog.py`, a watcher for the data layer's public, key-free
+release feed (`GET /api/v1/changelog`). It reports releases the wiki has not yet absorbed,
+records how each was handled (`material` / `noted`) in
+`.claude/cryptodataapi-changelog-state.json`, and warns when releases have scrolled off —
+the feed retains only the last 10 and offers no pagination, so a missed window is
+unrecoverable from the API.
+
+**Changed:** `/improve-algobrain-loop` now opens every iteration with that check and gains
+a third track, **Sync**, which takes priority over Fix and Build when a release changes
+something the wiki documents (breaking changes outrank everything). Sync is bounded like
+any other iteration and sits outside the Fix/Build balance rule. The command carries
+explicit integration rules for each kind of change — new endpoint, new category, renamed
+field, deprecation, tier/rate-limit change — and requires every path be verified against
+the live docs before it is written. `/start-loops` now warns that intervals longer than
+24h risk dropping releases off the 10-entry feed.
+
+**Notes:** The schema in `CLAUDE.md` and `AGENTS.md` (kept byte-identical) now names the
+changelog feed alongside the existing never-invent-an-endpoint rule, and the data-source
+hub page documents the machine-readable endpoint. No content pages were re-synced here:
+10 releases from 2026-06-27 to 2026-08-23 are queued for the first Sync iteration, two of
+them breaking, with known drift already visible in the documented rate limits.
+
+
 ## 2026-08-22 — Fix 5 wikilink rename-mismatches across 60 pages
 
 **Fixed:** Rewrote wikilink targets on 60 pages (150 total changes) that pointed at
