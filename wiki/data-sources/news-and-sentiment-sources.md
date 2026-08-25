@@ -2,11 +2,11 @@
 title: "News and Sentiment Sources"
 type: reference
 created: 2026-04-10
-updated: 2026-06-20
+updated: 2026-08-25
 status: excellent
 tags: [data-provider, news, sentiment, nlp]
 aliases: ["News Data", "Sentiment Data", "News Providers", "Sentiment Providers"]
-related: ["[[data-sources-overview]]", "[[alternative-data-providers]]", "[[sentiment-analysis]]", "[[news-trading]]"]
+related: ["[[data-sources-overview]]", "[[alternative-data-providers]]", "[[sentiment-analysis]]", "[[news-trading]]", "[[cryptodataapi-news]]"]
 ---
 
 # News and Sentiment Sources
@@ -38,6 +38,7 @@ A consolidated view of the providers detailed below. Cost tiers are relative (ve
 | Refinitiv I/B/E/S | Analyst estimates | Institutional | Ticker-level | n/a | Sell-side consensus (see fundamental-data-sources) |
 | Wall Street Horizon | Corporate calendar | Institutional | Ticker-level | n/a | Clean event calendars |
 | SEC EDGAR | Regulatory filings | Free | CIK-level | n/a | 8-K/10-K/13F/Form 4, authoritative |
+| CryptoDataAPI | Crypto news/catalysts | Free-Pro Plus | Yes (cashtag/name/entity match_mode) | Yes (impact score, signed bias) | Crypto event-driven catalysts, backtestable market response |
 
 ## Institutional News Vendors
 
@@ -203,6 +204,16 @@ Legislative tracking, regulatory news, congressional agendas.
 ### Federal Register (Free)
 
 US federal regulations and notices. Real-time RSS available.
+
+## Crypto-Native News & Catalysts
+
+The general vendors above are built around equity tickers and CIKs; crypto strategies need entity resolution and impact scoring built around perpetual-futures symbols instead.
+
+### CryptoDataAPI (Free - Pro Plus)
+
+[[cryptodataapi-news|CryptoDataAPI's News & Catalysts category]] is this wiki's canonical layer for crypto catalyst data: free, keyless sourcing from publisher RSS and exchange announcements, reduced to per-coin news pressure/tilt features, an impact-scored catalyst tape, and a backtestable archive with measured post-catalyst price, volatility, OI, and funding response. See [[cryptodataapi-news]] for the full endpoint reference and [[cryptodataapi]] for the wider data layer it belongs to.
+
+**Use for:** Crypto event-driven and [[news-trading]] strategies that need machine-readable, entity-resolved catalysts scoped to Hyperliquid perps rather than equities.
 
 ## Common News-Data Pitfalls
 

@@ -4,6 +4,27 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-08-25 — Document the news/catalyst endpoint family
+
+**Added:** A new data-source category page for the news and catalyst family the wiki had
+no coverage of at all — per-coin news pressure and tilt features, the filtered catalyst
+tape, per-coin qualified events, feed-health and funnel monitoring, and a backtestable
+archive carrying the measured price, volume, open-interest and funding response after each
+catalyst. Registered it across the hub category map and five sibling pages. Also added the
+forced-liquidation squeeze tripwire to the market-intelligence page and the archived news
+tape to the backtesting page.
+
+**Fixed:** Recorded a corrected sign error in the policy-headline classifier, where an
+unbounded rule matched "banking", "banks" and "banner" as maximum-severity regulatory bans
+and skewed the aggregate headline tilt and regulatory-pressure readings negative. Raised
+the documented endpoint count from "190+" to "200+" to match the current spec.
+
+**Notes:** Second Sync iteration; no new upstream releases since the last one, so this
+worked the deferred backlog. Three releases remain queued, each introducing an endpoint
+family that needs its own category page (venue directory, supply/unlock calendar, volume
+scanner). Verified independently that this batch introduced no unresolvable endpoint
+references and that lint is unchanged.
+
 ## 2026-08-24 — Sync the wiki to the data layer's API changelog (first Sync iteration)
 
 **Fixed:** Every row of the documented plans/rate-limits table was wrong — the free tier

@@ -1,5 +1,5 @@
 {
-  "last_checked": "2026-08-24",
+  "last_checked": "2026-08-25",
   "api_version_seen": "2026-08-23",
   "processed": [
     {
@@ -9,10 +9,22 @@
       "note": "iter9 Sync: tier/rate-limit table (all 3 rows), auth email-verification + resend-verify, ETF flows/aum + liquidations/by-exchange corrections, quant/gex breaking envelope + new fields"
     },
     {
+      "version": "2026-08-21",
+      "processed_on": "2026-08-25",
+      "disposition": "material",
+      "note": "iter10 Sync: created cryptodataapi-news.md for the /news/* family; registered across hub+5 siblings; added squeeze-alerts to market-intelligence, news-events to backtesting, policy/headlines sign-fix note to regimes"
+    },
+    {
       "version": "2026-08-20",
       "processed_on": "2026-08-24",
       "disposition": "material",
       "note": "iter9 Sync: tier/rate-limit table (all 3 rows), auth email-verification + resend-verify, ETF flows/aum + liquidations/by-exchange corrections, quant/gex breaking envelope + new fields"
+    },
+    {
+      "version": "2026-08-18",
+      "processed_on": "2026-08-25",
+      "disposition": "material",
+      "note": "iter10 Sync: created cryptodataapi-news.md for the /news/* family; registered across hub+5 siblings; added squeeze-alerts to market-intelligence, news-events to backtesting, policy/headlines sign-fix note to regimes"
     },
     {
       "version": "2026-07-10",
