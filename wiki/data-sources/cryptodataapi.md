@@ -2,7 +2,7 @@
 title: "CryptoDataAPI"
 type: source
 created: 2026-07-13
-updated: 2026-08-24
+updated: 2026-08-26
 status: excellent
 tags: [data-provider, crypto, api, derivatives, on-chain, market-regime, hyperliquid, backtesting, sentiment]
 aliases: ["CryptoDataApi", "Crypto Data API", "cryptodataapi.com", "CDA"]
@@ -10,7 +10,7 @@ source_type: data
 source_url: "https://cryptodataapi.com"
 source_author: "CryptoDataAPI"
 confidence: high
-related: ["[[cryptodataapi-mcp]]", "[[cryptodataapi-market-data]]", "[[cryptodataapi-derivatives]]", "[[cryptodataapi-hyperliquid]]", "[[cryptodataapi-hyperliquid-traders]]", "[[cryptodataapi-regimes]]", "[[cryptodataapi-market-intelligence]]", "[[cryptodataapi-on-chain]]", "[[cryptodataapi-sentiment]]", "[[cryptodataapi-market-health]]", "[[cryptodataapi-indicators]]", "[[cryptodataapi-dex]]", "[[cryptodataapi-coins]]", "[[cryptodataapi-strategy-baskets]]", "[[cryptodataapi-backtesting]]", "[[cryptodataapi-nft]]", "[[coinglass]]", "[[glassnode]]", "[[hyperliquid-api-and-sdk]]", "[[data-sources-overview]]"]
+related: ["[[cryptodataapi-mcp]]", "[[cryptodataapi-market-data]]", "[[cryptodataapi-derivatives]]", "[[cryptodataapi-hyperliquid]]", "[[cryptodataapi-hyperliquid-traders]]", "[[cryptodataapi-regimes]]", "[[cryptodataapi-market-intelligence]]", "[[cryptodataapi-on-chain]]", "[[cryptodataapi-sentiment]]", "[[cryptodataapi-market-health]]", "[[cryptodataapi-indicators]]", "[[cryptodataapi-dex]]", "[[cryptodataapi-coins]]", "[[cryptodataapi-strategy-baskets]]", "[[cryptodataapi-backtesting]]", "[[cryptodataapi-nft]]", "[[cryptodataapi-news]]", "[[coinglass]]", "[[glassnode]]", "[[hyperliquid-api-and-sdk]]", "[[data-sources-overview]]"]
 ---
 
 CryptoDataAPI ([cryptodataapi.com](https://cryptodataapi.com), Australia) is the **canonical data layer for this wiki**: a single REST API with 190+ endpoints spanning live crypto market data, derivatives positioning, Hyperliquid perp and trader intelligence, multi-family market-regime classification, on-chain flows, sentiment, DEX/memecoin screening, NFTs, and a point-in-time backtesting archive going back to 2020. Where a wiki page describes data an endpoint serves, the page carries a **"Getting the Data (CryptoDataAPI)"** section with the live and historical access patterns.
@@ -50,7 +50,8 @@ Free was raised from 50/day + 5/min on 2026-08-20; Pro Plus burst was raised fro
 | Hyperliquid | [[cryptodataapi-hyperliquid]] | Perp prices, funding, OI, OHLCV candles, L2 order book |
 | Hyperliquid Traders | [[cryptodataapi-hyperliquid-traders]] | Leaderboard, wallet positions/signals, trader profiles, copy-trading signals, watchlists |
 | Market & Quant Regimes | [[cryptodataapi-regimes]] | 10-state market regimes, HMM quant probabilities (6 regimes), volatility/liquidity/meme/event/security/policy regimes |
-| Market Intelligence | [[cryptodataapi-market-intelligence]] | BTC cycle indicators, ETF flows, liquidations, options max-pain, exchange balance, Coinbase premium, taker buy/sell |
+| Market Intelligence | [[cryptodataapi-market-intelligence]] | BTC cycle indicators, ETF flows, liquidations, options max-pain, exchange balance, Coinbase premium, taker buy/sell, squeeze alerts |
+| News & Catalysts | [[cryptodataapi-news]] | Per-coin news pressure/tilt, filtered market-moving catalyst tape, crypto-native and policy/macro categories, catalyst archive |
 | On-Chain | [[cryptodataapi-on-chain]] | Stablecoin reserves & dry powder, exchange flows, miner reserves, hash ribbon, MVRV dormancy, whale scores |
 | Sentiment & Macro | [[cryptodataapi-sentiment]] | Fear & Greed, stablecoin supply/flows, macro (EUR/USD, gold, yields) |
 | Market Health | [[cryptodataapi-market-health]] | Dual-score market health (11 components), altcoin breadth |

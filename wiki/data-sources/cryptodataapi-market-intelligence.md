@@ -2,14 +2,14 @@
 title: "CryptoDataAPI — Market Intelligence"
 type: source
 created: 2026-07-13
-updated: 2026-08-24
+updated: 2026-08-26
 status: good
 tags: [data-provider, crypto, api, etf-flows, liquidations, options, cycle-indicators, coinbase-premium, market-intelligence]
 aliases: ["CryptoDataAPI Market Intelligence", "CDA Market Intelligence", "Market Intelligence API"]
 source_type: data
 source_url: "https://cryptodataapi.com/api/docs"
 confidence: high
-related: ["[[cryptodataapi]]", "[[spot-etf-flows]]", "[[max-pain]]", "[[liquidation]]", "[[cryptodataapi-derivatives]]", "[[cryptodataapi-on-chain]]", "[[cryptodataapi-sentiment]]", "[[cryptodataapi-backtesting]]"]
+related: ["[[cryptodataapi]]", "[[spot-etf-flows]]", "[[max-pain]]", "[[liquidation]]", "[[cryptodataapi-derivatives]]", "[[cryptodataapi-on-chain]]", "[[cryptodataapi-sentiment]]", "[[cryptodataapi-backtesting]]", "[[cryptodataapi-news]]"]
 ---
 
 The Market Intelligence category of [[cryptodataapi]] aggregates the institutional and structural signals that sit above raw price: BTC cycle indicators, spot-ETF AUM and flows, cross-exchange liquidations, options [[max-pain]], exchange BTC balances, the Coinbase premium, Grayscale holdings, taker buy/sell ratio, margin borrow interest, and long-run Fear & Greed and stablecoin histories. Most endpoints carry historical series, making this the wiki's one-stop source for cycle- and flow-level context.
@@ -32,6 +32,7 @@ The Market Intelligence category of [[cryptodataapi]] aggregates the institution
 | GET | /api/v1/market-intelligence/grayscale/premium | Grayscale BTC premium/discount (through Jan 2024) | — | — |
 | GET | /api/v1/market-intelligence/taker-buy-sell | Taker buy/sell ratio by exchange, 4h window, per-coin | — | — |
 | GET | /api/v1/market-intelligence/liquidations/by-exchange | Liquidations by venue, BTC only, 4h — streamed-venue subset only | — | — |
+| GET | /api/v1/market-intelligence/squeeze-alerts | Coins with one-sided, abnormal forced-liquidation flow right now (`direction`, `severity`, `triggered`, `suppressed_by`) | symbol, window_s, min_severity, include_quiet, limit | Free = BTC only; Pro/Pro Plus = full universe |
 | GET | /api/v1/market-intelligence/borrow-interest | Margin borrow rate, BTC/Binance, 4h | — | — |
 | GET | /api/v1/market-intelligence/fear-greed-history | Fear & Greed timeseries, historical | — | — |
 | GET | /api/v1/market-intelligence/stablecoin-history | Stablecoin mcap timeseries, historical | — | — |
@@ -48,6 +49,8 @@ Tier "—" = not marked with a plan gate in the API docs; standard plan rate lim
 **`/etf/{asset}/flows` supports BTC, ETH, and SOL only.** `xrp` now returns a `400` (previously it 503'd) — no free source publishes XRP spot-ETF flow data, so the API does not serve it. SOL flow coverage was dead from 2026-07-24 and came back live on 2026-08-22.
 
 **`/liquidations/by-exchange` coverage caveat** (shared with `/liquidations`): rows only cover the streamed venue subset — OKX, Bybit, and Hyperliquid — because Binance geo-blocks its liquidation stream. Totals therefore run *under* a true all-exchange number. The endpoint was returning `503` on every call from 2026-07-24 until fixed 2026-08-22; a `503` today should only mean a cold start (first minutes after a deploy, before the trailing 4h window has venue-tagged events).
+
+**`/squeeze-alerts` names the side being liquidated, not the price direction** — `direction: short_squeeze` means shorts are being forced to buy (upward pressure) and `long_flush` means longs are being forced to sell, so the label is correct before price confirms it. It shares the same venue coverage as `/liquidations/by-exchange` (OKX, Bybit, and Hyperliquid only — Binance geo-blocks its liquidation stream from this API's infrastructure) and hides rows that fail to trigger by default; pass `include_quiet=true` to see a suppressed row alongside the `suppressed_by` gate that blocked it. Free tier is scoped to BTC only; Pro and Pro Plus cover the full universe.
 
 ## Historical Data
 

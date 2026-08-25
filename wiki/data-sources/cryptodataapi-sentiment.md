@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Sentiment & Macro"
 type: source
 created: 2026-07-13
-updated: 2026-07-13
+updated: 2026-08-26
 status: good
 tags: [data-provider, crypto, api, sentiment, fear-greed, stablecoins, macro]
 aliases: ["CDA Sentiment", "CryptoDataAPI Sentiment", "cryptodataapi fear greed", "cryptodataapi macro"]
@@ -10,7 +10,7 @@ source_type: data
 source_url: "https://cryptodataapi.com/api/docs"
 source_author: "CryptoDataAPI"
 confidence: high
-related: ["[[cryptodataapi]]", "[[cryptodataapi-market-health]]", "[[cryptodataapi-market-intelligence]]", "[[cryptodataapi-on-chain]]", "[[fear-and-greed-index]]", "[[alternative-me]]", "[[stablecoin-supply]]", "[[sentiment-analysis]]", "[[sentiment-trading]]"]
+related: ["[[cryptodataapi]]", "[[cryptodataapi-market-health]]", "[[cryptodataapi-market-intelligence]]", "[[cryptodataapi-on-chain]]", "[[cryptodataapi-news]]", "[[fear-and-greed-index]]", "[[alternative-me]]", "[[stablecoin-supply]]", "[[sentiment-analysis]]", "[[sentiment-trading]]"]
 ---
 
 The Sentiment & Macro category of [[cryptodataapi]] bundles the crowd-psychology and macro backdrop reads: the Fear & Greed index, a macro snapshot (EUR/USD, gold, yields), and stablecoin market-cap levels with 14d/90d flows. Stablecoin supply doubles as a "dry powder" gauge — capital parked on-chain waiting to rotate into risk.
@@ -55,6 +55,7 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/sentiment/stable
 - [[cryptodataapi-market-health]] — composite health scores built partly from sentiment inputs
 - [[cryptodataapi-market-intelligence]] — Fear & Greed history and stablecoin mcap timeseries
 - [[cryptodataapi-on-chain]] — CEX stablecoin reserves and the dry-powder z-score signal
+- [[cryptodataapi-news]] — per-coin news pressure/tilt and the filtered catalyst tape, the event-level counterpart to this category's crowd-psychology reads
 - [[fear-and-greed-index]], [[alternative-me]], [[stablecoin-supply]], [[sentiment-analysis]], [[sentiment-trading]]
 
 ## Sources

@@ -4,6 +4,25 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-08-26 — Document the News & Catalyst Detection data endpoints
+
+**Added:** A new data-source category page covering the data layer's news-derived
+catalyst-detection endpoints — per-coin news pressure/tilt, a filtered market-moving
+event tape spanning crypto-native and policy/macro categories, per-feed health
+diagnostics, and a backtestable archive with measured post-event market response. Also
+documented a related forced-liquidation squeeze-alert endpoint on the existing market
+intelligence page, and extended two event-driven strategy pages to cite the new signals.
+
+**Fixed:** Noted (on the relevant strategy page) that a sign-error affecting some
+constructive policy headlines — misclassified as maximum-severity regulatory bans — was
+corrected upstream, improving that page's existing signal's reliability.
+
+**Notes:** Sync-track iteration of the daily improvement loop, reconciling the wiki
+against the upstream release feed. Of 6 pending releases, the two most tightly coupled
+and highest-leverage were processed this iteration; four smaller/independent releases
+(a venue directory, a volume-scanner family, token-supply endpoints, and two additive
+fields) remain queued for future iterations. Zero lint regressions.
+
 ## 2026-08-25 — Add 3 missing concept pages: DAO, tokenization, tokenomics
 
 **Added:** Three new concept pages closing genuine content gaps that were already

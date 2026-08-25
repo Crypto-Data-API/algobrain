@@ -2,12 +2,56 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-08-25
+updated: 2026-08-26
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-08-26 — Documented the News & Catalyst Detection endpoint family (daily loop iter 11, Sync)
+
+**Scope:** Sync-track iteration. `tools/check_api_changelog.py` found 6 unprocessed
+CryptoDataAPI releases (2026-08-17 through 2026-08-25) — more than one bounded batch
+could responsibly cover. Picked the highest-leverage, self-contained cluster: the
+2026-08-18 and 2026-08-21 releases, which together are entirely about one coherent
+signal family (news-derived catalyst detection plus a closely-related forced-liquidation
+tripwire) with zero prior wiki coverage, and left the other 4 releases genuinely
+unprocessed rather than stretching the batch.
+
+- **Created** [[cryptodataapi-news]] — new data-source category page covering
+  `/news/pulse`, `/news/market-moving`, `/news/coin/{symbol}`, `/news/sources`, and
+  `/backtesting/news-events`. Documents the filtered-tape nature (~15-40 of 300-500 daily
+  stories qualify, no raw-feed endpoint at any tier), `match_mode`/`confidence` tiers
+  (the Hyperliquid perp universe has many ordinary-English-word tickers), the
+  `corroboration` cross-source signal, the 2026-08-21 nine-category policy-taxonomy
+  expansion (added after a 2026-08-20 BTC move liquidating ~$3B of shorts on zero recorded
+  catalyst events, root-caused to a missing legislation/executive-action/sovereign-buyer
+  taxonomy), and the hard 2026-08-18 no-backfill start date.
+- **Updated** [[cryptodataapi-market-intelligence]] — added `/market-intelligence/
+  squeeze-alerts` to its endpoint table plus a caveat on the `direction` naming convention
+  (named after the side being liquidated), shared venue-coverage gap, and
+  `suppressed_by`/`include_quiet`.
+- **Registered** the new category on [[cryptodataapi]]'s category map + `related:`, and
+  added a reverse link from [[cryptodataapi-sentiment]].
+- **Extended** [[news-trading]] with a `Getting the Data` + `AI agent workflow` update
+  (it previously cited zero `/news/*` endpoints despite its name) and made a small, scoped
+  addition to [[crypto-policy-shock-trading]] (a `/news/market-moving` corroboration
+  signal, plus a caveat that a 2026-08-21 sign-error fix on `/policy/headlines` — which
+  had scored constructive "banking"/"banks" headlines as maximum-severity bans — improved
+  that page's existing signal's reliability).
+- **Sub-agent self-correction:** the task brief named `event-driven-trading.md` as an
+  edit target; the sub-agent found it was actually an out-of-scope equity redirect stub
+  (removed 2026-07-19 per CLAUDE.md's scope rules), left it untouched, and substituted the
+  real crypto strategy page ([[news-trading]]) instead of silently complying with a
+  contradicted premise.
+- **Verified independently:** all 9 added wikilinks resolve to real files; `tools/lint.py`
+  re-run shows links/tags/orphans/stale/empty/frontmatter byte-identical to iter10
+  (234/659/39/6/51/0) — zero regressions. Marked material in the changelog state file:
+  2026-08-18, 2026-08-21. Left unprocessed (deferred, not "noted"): 2026-08-25
+  (`ret_90d`/`sr` additive fields), 2026-08-23 (`/exchanges` venue directory), 2026-08-19
+  (`/supply/float` + `/supply/unlocks`, pairs naturally with [[token-unlocks]] next),
+  2026-08-17 (`/volume/scanner` family, needs its own category page).
 
 ## 2026-08-25 — Created 3 missing concept pages: DAO, Tokenization, Tokenomics (daily loop iter 10, Build)
 

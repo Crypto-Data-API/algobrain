@@ -566,3 +566,58 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   citations) which iter9 itself flagged as competing for the next Fix slot. `[[bnb-chain]]`
   (10 inbound refs) remains queued from iter8 as a further genuine Build gap if Build
   continues instead.
+- 2026-08-26 iter 11 (Sync): `tools/check_api_changelog.py` found 6 unprocessed releases
+  (2026-08-17 through 2026-08-25) -- more material content than one ~60-min batch could
+  responsibly cover (a full new News/Catalyst family, a squeeze-alerts endpoint, a
+  volume-scanner family, an exchange directory, supply/float+unlocks, and two additive
+  fields). Per the Sync integration rules, picked the single highest-leverage, self-
+  contained cluster and left the rest genuinely unprocessed rather than stretching the
+  batch: the 2026-08-18 and 2026-08-21 releases are, together, entirely about ONE coherent
+  signal family (news-derived catalyst detection + a closely-related forced-liquidation
+  tripwire), already had zero wiki coverage, and tie directly into two existing strategy
+  pages -- clean scope boundary, high real value (catalyst/event-driven signals are core
+  AlgoBrain territory). MCP server tools still unreachable this session -- used
+  `tools/lint.py`/`check_api_changelog.py` via venv Python directly, the now-standard
+  fallback. **Delegated and verified:** created `wiki/data-sources/cryptodataapi-news.md`
+  (new category page: `/news/pulse`, `/news/market-moving`, `/news/coin/{symbol}`,
+  `/news/sources`, `/backtesting/news-events` -- filtered-tape caveat, match_mode/
+  confidence tiers, corroboration, the 2026-08-21 nine-category policy-taxonomy expansion
+  with its own origin story (a 2026-08-20 BTC 10% move + $3B of shorts liquidated on zero
+  recorded catalyst events, root-caused to a missing legislation/executive-action/
+  sovereign-buyer taxonomy), no-backfill-before-2026-08-18 hard start date); added
+  `/market-intelligence/squeeze-alerts` to the existing `cryptodataapi-market-
+  intelligence.md` endpoint table + a caveat paragraph (direction-naming convention,
+  shared venue-coverage gap, `suppressed_by`/`include_quiet`); registered the new category
+  on `cryptodataapi.md`'s category map + `related:`, and added a reverse link from
+  `cryptodataapi-sentiment.md`; added a `Getting the Data` + `AI agent workflow` extension
+  to `wiki/strategies/fundamental-analysis/news-trading.md` (previously cited zero
+  `/news/*` endpoints despite its name) and a small, scoped addition to `crypto-policy-
+  shock-trading.md` (the new `/news/market-moving` policy-category corroboration signal,
+  plus a one-line caveat that a 2026-08-21 sign-error fix on `/policy/headlines` -- which
+  had scored constructive "banking"/"banks" headlines as maximum-severity bans --
+  improved that page's existing signal's reliability). **Sub-agent caught its own scope
+  error**: the task brief named `event-driven-trading.md` as a target, but that page
+  turned out to be an out-of-scope equity redirect stub (removed 2026-07-19 per CLAUDE.md
+  scope rules) -- the sub-agent read the file, recognized the contradiction, left it
+  untouched, and substituted the real crypto strategy page (`news-trading.md`) instead of
+  silently complying with a premise the file itself disproved. Verification method: the
+  sub-agent found WebFetch summaries of the live docs unreliable (inconsistent excerpts,
+  one fabricated enum), so it downloaded the raw OpenAPI spec + docs HTML + public
+  changelog JSON directly and parsed them for exact field/path text -- flagged one thing
+  it could NOT verify (the pre-2026-08-21 crypto-native `category` enum is unpublished)
+  and correctly omitted it rather than guessing. Verified independently: all 9 wikilinks
+  added across the 5 touched files resolve to real files (checked via `find`); re-ran
+  `tools/lint.py` myself -- links/tags/orphans/stale/empty/frontmatter byte-identical to
+  iter10 (234/659/39/6/51/0), confirming zero regressions. **Marked material** in
+  `.claude/cryptodataapi-changelog-state.json`: 2026-08-18, 2026-08-21. **Left
+  unprocessed** (not noted -- genuinely deferred, not surfaceless): 2026-08-25 (`ret_90d`
+  meme field, `sr` support/resistance field -- additive, low urgency), 2026-08-23
+  (`/exchanges` venue directory -- ties well to the README's existing referral-link work,
+  good next-Sync candidate), 2026-08-19 (`/supply/float` + `/supply/unlocks` as first-
+  class endpoints -- natural pairing with the existing `token-unlocks.md` page; its
+  unlock-coverage/entity-resolution fixes needed no wiki correction since no page cited
+  the stale figures), 2026-08-17 (`/volume/scanner` family -- entirely undocumented,
+  needs its own category page). Sync sits outside the Fix/Build balance rule -- last 3
+  Fix/Build entries remain iter7 Fix, iter8 Fix, iter10 Build, so the next Fix/Build choice
+  is still owed a **Fix** per the balance rule, competing candidates unchanged
+  (`[[depeg]]`->`[[depeg-risk]]` rename, iter9's 24-broken-endpoint-path sweep).
