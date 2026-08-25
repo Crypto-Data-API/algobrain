@@ -2,12 +2,59 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-08-24
+updated: 2026-08-25
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-08-25 — Created 3 missing concept pages: DAO, Tokenization, Tokenomics (daily loop iter 10, Build)
+
+**Scope:** Daily improvement loop, Build track. Balance check (last 3 Fix/Build-classified
+entries: iter6 Build, iter7 Fix, iter8 Fix) required Build; iter9 (Sync, below) sits
+outside the Fix/Build balance rule per its own design. iter8 had queued `[[depeg]]`,
+`[[dao]]`, `[[tokenization]]`, `[[tokenomics]]` as genuine missing-page gaps — re-verified
+all four before acting and found `[[depeg]]` was misclassified:
+`wiki/concepts/risk-management/depeg-risk.md` already covers it comprehensively and even
+lists "depeg" as a frontmatter alias, but `tools/lint.py` doesn't resolve frontmatter
+aliases when checking wikilinks, so it still reads as broken. Left `depeg.md` uncreated to
+avoid duplicating `depeg-risk.md`; queued the real fix (rewrite the 43 pages' `[[depeg]]`
+links to `[[depeg-risk|depeg]]`) as a Fix-track item for a future iteration instead. The
+other three were confirmed genuine: no page exists under any filename or alias for any of
+them, and each was already anticipated by an existing page — `[[governance-token]]` lists
+`[[dao]]` as a frontmatter prerequisite, `[[real-world-assets]]` links `[[tokenization]]`,
+`[[emissions]]` links `[[tokenomics]]`.
+
+- **Pages created (all `type: concept`, `status: draft`):** [[dao]] (1,741 words —
+  proposal lifecycle, voting mechanisms incl. token-weighted/delegation/vote-escrow/
+  quadratic/dTAO's market-based alternative, treasury custody models, legal wrappers
+  incl. Wyoming DAO LLC 2021 and CFTC v. Ooki DAO 2022-2023, notable examples incl. The
+  DAO 2016 hack and the ETH/ETC fork it caused, failure modes incl. the 2022 Beanstalk
+  flash-loan governance attack), [[tokenization]] (1,269 words — the general
+  mint/custody/redemption mechanism one level above [[real-world-assets]]'s TradFi-
+  specific treatment, custody-model spectrum from fully on-chain to wrapped to off-chain
+  SPV), [[tokenomics]] (1,434 words — supply design, distribution/vesting, value-accrual
+  mechanisms, sinks-vs-faucets incentive design incl. the 2020 DeFi Summer liquidity-
+  mining/mercenary-capital case study, failure modes incl. hyperinflationary emissions and
+  unlock overhangs).
+- **Differentiation deliberately preserved:** [[dao]] covers the organizational/governance
+  structure and defers to the pre-existing [[governance-token]] for the token instrument
+  itself; [[tokenization]] covers the general mechanism and defers to [[real-world-assets]]
+  for TradFi-specific depth; [[tokenomics]] is the umbrella concept and defers to the
+  pre-existing [[emissions]]/[[token-unlock-supply-event]]/[[staking]] stubs for their
+  specific sub-topics rather than re-explaining them.
+- **No `Getting the Data (CryptoDataAPI)` section** on any of the three — all are
+  structural/conceptual topics with no direct market-data endpoint, matching the
+  2026-08-20 precedent of omitting rather than forcing a weak fit.
+- **Verified independently:** every wikilink target across all three pages (30 distinct
+  targets) checked against the real file tree — zero broken links introduced. Fresh
+  `tools/lint.py` run: links 240→234 (partial resolution — `check_wikilinks` only flags
+  pages with >5 broken links total, so some of the ~35 references now resolve without the
+  source page dropping below threshold), tags/orphans/stale/empty/frontmatter unchanged
+  (659/39/6/51/0) — confirms only additive, schema-clean changes. `[[bnb-chain]]` remains
+  queued from iter8 as a further genuine Build gap (10 inbound refs, the BNB Layer-1 chain
+  distinct from the token page).
 
 ## 2026-08-24 — API changelog sync: tier limits, ETF/liquidation endpoints, gex breaking change (daily loop iter 9, Sync)
 
@@ -61,7 +108,6 @@ documentation across the wiki can no longer drift silently.
   loop will triage the 10 currently-unprocessed releases (2026-06-27 through 2026-08-23,
   two of them breaking); known drift already visible includes the Pro Plus per-minute rate
   limit and the free-tier limits on [[cryptodataapi]].
-
 
 ## 2026-08-22 — Wikilink rename-mismatch batch (daily loop iter 8, Fix)
 

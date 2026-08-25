@@ -4,6 +4,20 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-08-25 — Add 3 missing concept pages: DAO, tokenization, tokenomics
+
+**Added:** Three new concept pages closing genuine content gaps that were already
+anticipated by existing pages: `dao` (governance structure, voting mechanisms, treasury
+custody, legal wrappers, notable failures), `tokenization` (the general asset-tokenization
+mechanism, one level above the existing real-world-assets page), and `tokenomics` (supply
+design, distribution, value accrual, incentive design).
+
+**Notes:** Build-track iteration of the daily improvement loop. Resolves broken wikilinks
+referenced from roughly 35 existing pages across all three new targets. A related lead —
+`depeg` — turned out to be a false positive: an existing page already covers it under a
+frontmatter alias that the lint tool doesn't resolve, so that one needs a link-rewrite fix
+rather than a new page, queued for a future Fix iteration instead.
+
 ## 2026-08-24 — Sync the wiki to the data layer's API changelog (first Sync iteration)
 
 **Fixed:** Every row of the documented plans/rate-limits table was wrong — the free tier
