@@ -2,7 +2,7 @@
 title: "Crypto Policy Shock Trading"
 type: strategy
 created: 2026-06-03
-updated: 2026-07-19
+updated: 2026-08-26
 status: excellent
 tags: [crypto, market-regime, regulation, news, event-driven, swing-trading]
 aliases: ["Crypto Policy Shock Trading", "Policy Event Trading", "Regulatory Event Trading"]
@@ -226,6 +226,9 @@ The strategy logic, signature playbooks, and base-rate framing are the wiki's ow
 - `GET /api/v1/policy/headlines` — live regulatory feed (Federal Register / SEC / CFTC)
 - `GET /api/v1/policy/regime` — policy risk + signed tilt + rate calendar
 - `GET /api/v1/policy/regime/score` — policy-risk composite (0-100)
+- `GET /api/v1/news/market-moving` — corroborating signal: filter the returned `category` field to the policy set added 2026-08-21 (`legislation`, `executive_signal`, `rulemaking`, `restrictive_policy`, `sovereign_bid`, `strategic_reserve`, `pro_crypto_eo`, `macro_liquidity`, `macro_tightening`) for an independently-sourced read (`corroboration` count) alongside `/policy/headlines` — see [[cryptodataapi-news]]
+
+A 2026-08-21 fix corrected a sign error that had scored constructive headlines containing "banking"/"banks" (e.g. stablecoin rulemaking coverage) as maximum-severity bans, so `headline_tilt`/`regulatory_pressure` from `/policy/headlines` are more reliable on policy-adjacent stories since that date.
 
 **Historical data:**
 - `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time snapshots

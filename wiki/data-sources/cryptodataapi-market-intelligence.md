@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Market Intelligence"
 type: source
 created: 2026-07-13
-updated: 2026-08-25
+updated: 2026-08-26
 status: good
 tags: [data-provider, crypto, api, etf-flows, liquidations, options, cycle-indicators, coinbase-premium, market-intelligence]
 aliases: ["CryptoDataAPI Market Intelligence", "CDA Market Intelligence", "Market Intelligence API"]
@@ -32,6 +32,7 @@ The Market Intelligence category of [[cryptodataapi]] aggregates the institution
 | GET | /api/v1/market-intelligence/grayscale/premium | Grayscale BTC premium/discount (through Jan 2024) | — | — |
 | GET | /api/v1/market-intelligence/taker-buy-sell | Taker buy/sell ratio by exchange, 4h window, per-coin | — | — |
 | GET | /api/v1/market-intelligence/liquidations/by-exchange | Liquidations by venue, BTC only, 4h — streamed-venue subset only | — | — |
+| GET | /api/v1/market-intelligence/squeeze-alerts | Coins with one-sided, abnormal forced-liquidation flow right now (`direction`, `severity`, `triggered`, `suppressed_by`) | symbol, window_s, min_severity, include_quiet, limit | Free = BTC only; Pro/Pro Plus = full universe |
 | GET | /api/v1/market-intelligence/borrow-interest | Margin borrow rate, BTC/Binance, 4h | — | — |
 | GET | /api/v1/market-intelligence/fear-greed-history | Fear & Greed timeseries, historical | — | — |
 | GET | /api/v1/market-intelligence/stablecoin-history | Stablecoin mcap timeseries, historical | — | — |
@@ -50,7 +51,7 @@ Tier "—" = not marked with a plan gate in the API docs; standard plan rate lim
 
 **`/liquidations/by-exchange` coverage caveat** (shared with `/liquidations`): rows only cover the streamed venue subset — OKX, Bybit, and Hyperliquid — because Binance geo-blocks its liquidation stream. Totals therefore run *under* a true all-exchange number. The endpoint was returning `503` on every call from 2026-07-24 until fixed 2026-08-22; a `503` today should only mean a cold start (first minutes after a deploy, before the trailing 4h window has venue-tagged events).
 
-**`/squeeze-alerts` (new) is a cascade tripwire, not a news feed** — explicitly the answer to news being 15-45 minutes behind a breaking story (see [[cryptodataapi-news]]). It flags coins whose forced-liquidation flow is one-sided and abnormal right now: `direction` (`short_squeeze` / `long_flush` / `balanced`), `severity` (0-1), `triggered`, `asymmetry`, `side_ratio`, `spike_ratio`, `oi_change_pct`, `oi_state`, and `suppressed_by` (which gate blocked an alert — `no_spike_baseline`, `spike_ratio`, `asymmetry`, `severity`, `min_notional`, `baseline_too_young`). **`direction` names the side being liquidated, not the price direction** — a short liquidation is forced buying, so `short_squeeze` means upward price pressure. Severity is built ~80% from ratios (`spike_ratio` against the coin's trailing-24h mean, and `asymmetry`) rather than absolute dollar notionals, because notionals are the quantity most distorted by the same streamed-venue coverage gap noted above. `oi_state` (`covering` / `fresh_longs` / `capitulating` / `fresh_shorts` / `unclear`) is `null` until OI history has at least two samples — it distinguishes shorts covering into the squeeze from fresh longs piling on. Check `window_uptime_h`: `spike_ratio` understates on a recently reconnected feed.
+**`/squeeze-alerts` names the side being liquidated, not the price direction** — `direction: short_squeeze` means shorts are being forced to buy (upward pressure) and `long_flush` means longs are being forced to sell, so the label is correct before price confirms it. It shares the same venue coverage as `/liquidations/by-exchange` (OKX, Bybit, and Hyperliquid only — Binance geo-blocks its liquidation stream from this API's infrastructure) and hides rows that fail to trigger by default; pass `include_quiet=true` to see a suppressed row alongside the `suppressed_by` gate that blocked it. Free tier is scoped to BTC only; Pro and Pro Plus cover the full universe.
 
 ## Historical Data
 

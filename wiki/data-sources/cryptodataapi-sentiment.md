@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Sentiment & Macro"
 type: source
 created: 2026-07-13
-updated: 2026-08-25
+updated: 2026-08-26
 status: good
 tags: [data-provider, crypto, api, sentiment, fear-greed, stablecoins, macro]
 aliases: ["CDA Sentiment", "CryptoDataAPI Sentiment", "cryptodataapi fear greed", "cryptodataapi macro"]
@@ -55,7 +55,7 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/sentiment/stable
 - [[cryptodataapi-market-health]] — composite health scores built partly from sentiment inputs
 - [[cryptodataapi-market-intelligence]] — Fear & Greed history and stablecoin mcap timeseries
 - [[cryptodataapi-on-chain]] — CEX stablecoin reserves and the dry-powder z-score signal
-- [[cryptodataapi-news]] — per-coin news pressure/tilt and the catalyst tape, the natural adjacent read to crowd sentiment
+- [[cryptodataapi-news]] — per-coin news pressure/tilt and the filtered catalyst tape, the event-level counterpart to this category's crowd-psychology reads
 - [[fear-and-greed-index]], [[alternative-me]], [[stablecoin-supply]], [[sentiment-analysis]], [[sentiment-trading]]
 
 ## Sources

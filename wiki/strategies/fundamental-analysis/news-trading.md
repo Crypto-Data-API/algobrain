@@ -2,7 +2,7 @@
 title: "News Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-08-26
 status: review
 tags: [news-trading, event-driven, volatility, crypto, fundamental-analysis, execution, day-trading]
 aliases: ["News-Based Trading", "Event-Driven Trading", "Headline Trading", "Catalyst Trading"]
@@ -11,7 +11,7 @@ timeframe: intraday
 markets: [crypto, forex]
 complexity: advanced
 backtest_status: untested
-related: ["[[event-driven-trading]]", "[[scalping]]", "[[volatility]]", "[[sentiment-trading]]", "[[funding-rate]]", "[[liquidations]]", "[[dvol]]", "[[cryptodataapi]]"]
+related: ["[[event-driven-trading]]", "[[scalping]]", "[[volatility]]", "[[sentiment-trading]]", "[[funding-rate]]", "[[liquidations]]", "[[dvol]]", "[[cryptodataapi]]", "[[cryptodataapi-news]]"]
 
 # Edge characterization
 edge_source: [informational, behavioral]
@@ -168,16 +168,19 @@ News trading is inherently small-scale: the edge window is seconds to minutes, a
 - `GET /api/v1/market-intelligence/liquidations` — liquidation cascade data: exhaustion signal for fade entries
 - `GET /api/v1/market-data/short-term-price` — intraday momentum metrics for fade timing
 - `GET /api/v1/volatility/regime` — pre-event vol regime: compressed vol → larger move on surprise
+- `GET /api/v1/news/market-moving` — the filtered catalyst tape itself: qualified crypto-native and policy/macro events with `impact_score`, signed `bias`, and `corroboration`, in place of manually watching RSS for a trigger (see [[cryptodataapi-news]])
+- `GET /api/v1/market-intelligence/squeeze-alerts` — a faster forced-liquidation tripwire than the news tape's ~30s-5min RSS latency; on 2026-08-19 it flagged a BTC short-liquidation spike 23 minutes before the first related headline qualified on `/news/market-moving`
 
 **Historical:**
 - `GET /api/v1/backtesting/klines?symbol=BTCUSDT&interval=1m` — 1-minute OHLCV around past events for context
 - `GET /api/v1/backtesting/liquidations` — historical liquidation data to identify post-event cascade patterns
+- `GET /api/v1/backtesting/news-events` — archived catalyst tape with measured `ret_15m`/`ret_1h`/`ret_4h` response, for validating which news categories actually produce tradable follow-through (Pro Plus; history starts 2026-08-18, no backfill)
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
 ```
 
-Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-intelligence]].
+Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-intelligence]], [[cryptodataapi-news]].
 
 **Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates)
 
@@ -186,6 +189,7 @@ Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-derivatives]], [[cryptod
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the confirmation and fade layers of this strategy (the first-seconds momentum window belongs to the exchange WS):
 
 - **Calendar** — `GET /api/v1/event/calendar` lists scheduled catalysts up to 30 days out (macro prints, unlocks, depeg risk) with a directional bias per event — the agent's pre-positioning map
+- **Catalyst tape** — `GET /api/v1/news/market-moving?symbol=BTC` (or omit `symbol`, or pass `MARKET` for market-wide stories) surfaces already-qualified events with `match_mode`/`confidence`, so the agent skips its own headline-parsing step; treat `min_impact` above the 0.45 pipeline floor and `corroboration >= 2` as the multi-source real-story gate
 - **Confirmation** — `GET /api/v1/derivatives/funding-rates?coin=BTC` for the post-release funding repricing (momentum live vs exhausted) and `GET /api/v1/market-intelligence/liquidations` for the forced-flow exhaustion that arms the fade entry
 - **Regime gate** — `GET /api/v1/volatility/regime`: a `compressed` pre-event state implies larger moves on surprise (the highest-EV events); already-`vol_shock` tape means the move is underway and only the fade applies
 - **Backtest** — event studies on 1m bars from `GET /api/v1/backtesting/klines` are possible only since 2026-03-30 (1m grows forward); 1h bars back to 2017-08 cover coarser reaction windows. `GET /api/v1/backtesting/liquidations` (HL, since 2026-03-30) replays post-event cascades
@@ -199,3 +203,4 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - [[liquidations]] — cascade data for fade exhaustion
 - [[dvol]] — pre-event vol regime context
 - [[cryptodataapi]] — data layer for live and historical event-window analysis
+- [[cryptodataapi-news]] — the filtered catalyst tape and per-coin news pressure/tilt series

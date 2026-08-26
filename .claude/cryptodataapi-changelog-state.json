@@ -1,6 +1,6 @@
 {
-  "last_checked": "2026-08-25",
-  "api_version_seen": "2026-08-23",
+  "last_checked": "2026-08-26",
+  "api_version_seen": "2026-08-25",
   "processed": [
     {
       "version": "2026-08-22",
@@ -10,9 +10,9 @@
     },
     {
       "version": "2026-08-21",
-      "processed_on": "2026-08-25",
+      "processed_on": "2026-08-26",
       "disposition": "material",
-      "note": "iter10 Sync: created cryptodataapi-news.md for the /news/* family; registered across hub+5 siblings; added squeeze-alerts to market-intelligence, news-events to backtesting, policy/headlines sign-fix note to regimes"
+      "note": "iter10/iter11 Sync (two concurrent loops, merged): created wiki/data-sources/cryptodataapi-news.md documenting the full /news/* family (pulse, market-moving, coin/{symbol}, sources) plus /backtesting/news-events; registered in the hub category map + related, sentiment, market-intelligence and backtesting reverse-links, and news-and-sentiment-sources; added /market-intelligence/squeeze-alerts to cryptodataapi-market-intelligence.md; recorded the /policy/headlines sign-error fix on cryptodataapi-regimes.md; tied into news-trading and crypto-policy-shock-trading. 2026-08-19's supply/float+unlocks remain deferred as a distinct batch."
     },
     {
       "version": "2026-08-20",
@@ -22,9 +22,9 @@
     },
     {
       "version": "2026-08-18",
-      "processed_on": "2026-08-25",
+      "processed_on": "2026-08-26",
       "disposition": "material",
-      "note": "iter10 Sync: created cryptodataapi-news.md for the /news/* family; registered across hub+5 siblings; added squeeze-alerts to market-intelligence, news-events to backtesting, policy/headlines sign-fix note to regimes"
+      "note": "iter10/iter11 Sync (two concurrent loops, merged): created wiki/data-sources/cryptodataapi-news.md documenting the full /news/* family (pulse, market-moving, coin/{symbol}, sources) plus /backtesting/news-events; registered in the hub category map + related, sentiment, market-intelligence and backtesting reverse-links, and news-and-sentiment-sources; added /market-intelligence/squeeze-alerts to cryptodataapi-market-intelligence.md; recorded the /policy/headlines sign-error fix on cryptodataapi-regimes.md; tied into news-trading and crypto-policy-shock-trading. 2026-08-19's supply/float+unlocks remain deferred as a distinct batch."
     },
     {
       "version": "2026-07-10",

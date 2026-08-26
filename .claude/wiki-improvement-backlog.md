@@ -559,3 +559,107 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   position is unchanged: last 3 Fix/Build entries remain iter6 Build, iter7 Fix, iter8
   Fix, so a **Build** is still owed -- competing with the 24-bad-endpoint Fix sweep queued
   in iter 9, which remains the highest-leverage Fix available.
+- 2026-08-25 iter 10 (Build): balance check confirmed iter10 owed a Build (iter6 Build,
+  iter7 Fix, iter8 Fix -- 2 of 3 Fix; iter9 was Sync, which sits outside the Fix/Build
+  balance rule per its own log entry above). Before acting on iter8's queued candidates
+  ([[depeg]], [[dao]], [[tokenization]], [[tokenomics]]), re-verified each -- and caught
+  an error in iter8's classification: `[[depeg]]` is NOT a missing page. It's already
+  comprehensively covered by `wiki/concepts/risk-management/depeg-risk.md` (status good,
+  916 words, named events incl. USDC/SVB and Terra/UST), which even lists "depeg" as a
+  frontmatter alias -- but `tools/lint.py` doesn't resolve frontmatter aliases when
+  checking wikilinks (confirmed: zero "alias" references in the script), so the 43
+  pages/134 refs linking `[[depeg]]` still read as broken. Creating `depeg.md` would have
+  duplicated `depeg-risk.md`'s content outright. Left it uncreated; queued the real fix
+  (rewrite those 43 pages' `[[depeg]]` targets to `[[depeg-risk|depeg]]`, same pattern as
+  the iter4/iter8 rename-mismatch batches) as a Fix-track item for a future iteration.
+  The other three held up on inspection: no page exists for any of them under any
+  filename or alias (checked via `find`), and each was already anticipated by an existing
+  page's forward links -- [[governance-token]] lists `[[dao]]` as a frontmatter
+  prerequisite, [[real-world-assets]] links `[[tokenization]]` in `related`, [[emissions]]
+  links `[[tokenomics]]` in its Related section. Delegated authoring of all three to one
+  sub-agent with explicit differentiation boundaries against the pre-existing adjacent
+  pages. Created (all `type: concept`, `status: draft`, difficulty intermediate):
+  [[dao]] (1,741 words -- proposal lifecycle, voting mechanisms incl. token-weighted/
+  delegation/vote-escrow/quadratic/dTAO market-based, treasury custody incl. multisig vs.
+  fully-on-chain, legal wrappers incl. Wyoming DAO LLC 2021 + CFTC v. Ooki DAO 2022-2023,
+  notable examples incl. The DAO 2016 hack/ETH-ETC fork + Uniswap's Dec 2025 UNIfication
+  fee-switch vote, failure modes incl. the 2022 Beanstalk $182M flash-loan governance
+  attack -- defers to the pre-existing [[governance-token]] for the token instrument
+  itself), [[tokenization]] (1,269 words -- general mint/custody/redemption mechanism one
+  level above [[real-world-assets]]'s TradFi-specific treatment; custody-model spectrum
+  fully-on-chain/wrapped/off-chain-SPV; explicitly covers native-crypto-value
+  tokenization, not just RWA), [[tokenomics]] (1,434 words -- supply design, distribution/
+  vesting cliffs, value-accrual mechanisms incl. Uniswap's 2025 buyback-and-burn,
+  sinks-vs-faucets incentive design incl. the 2020 DeFi Summer liquidity-mining/mercenary-
+  capital case study and Olympus's OHM collapse as a cautionary case, failure modes incl.
+  hyperinflationary emissions and unlock overhangs -- umbrella page deferring to the
+  pre-existing [[emissions]]/[[token-unlock-supply-event]]/[[staking]] stubs). No
+  `Getting the Data` section on any of the three (structural/conceptual topics, no direct
+  CryptoDataAPI endpoint -- matches iter6 precedent). Verified independently: all 30
+  distinct wikilink targets across the three pages checked against the real file tree via
+  `find`, zero broken links introduced; re-ran `tools/lint.py` myself -- links 240->234
+  (partial resolution; `check_wikilinks` only flags pages with >5 broken links so some
+  references now resolve without the source page dropping below threshold),
+  tags/orphans/stale/empty/frontmatter byte-identical (659/39/6/51/0), confirming zero
+  regressions. Per the balance rule, Fix is due next (last 3 Fix/Build entries will be
+  iter7 Fix, iter8 Fix, iter10 Build -- 1 of 3 Fix, technically either track open, but two
+  Fix candidates are already queued and ready: the `[[depeg]]`->`[[depeg-risk]]`
+  rename-mismatch above, and iter9's higher-leverage 24-broken-endpoint-path sweep (166
+  citations) which iter9 itself flagged as competing for the next Fix slot. `[[bnb-chain]]`
+  (10 inbound refs) remains queued from iter8 as a further genuine Build gap if Build
+  continues instead.
+- 2026-08-26 iter 11 (Sync): `tools/check_api_changelog.py` found 6 unprocessed releases
+  (2026-08-17 through 2026-08-25) -- more material content than one ~60-min batch could
+  responsibly cover (a full new News/Catalyst family, a squeeze-alerts endpoint, a
+  volume-scanner family, an exchange directory, supply/float+unlocks, and two additive
+  fields). Per the Sync integration rules, picked the single highest-leverage, self-
+  contained cluster and left the rest genuinely unprocessed rather than stretching the
+  batch: the 2026-08-18 and 2026-08-21 releases are, together, entirely about ONE coherent
+  signal family (news-derived catalyst detection + a closely-related forced-liquidation
+  tripwire), already had zero wiki coverage, and tie directly into two existing strategy
+  pages -- clean scope boundary, high real value (catalyst/event-driven signals are core
+  AlgoBrain territory). MCP server tools still unreachable this session -- used
+  `tools/lint.py`/`check_api_changelog.py` via venv Python directly, the now-standard
+  fallback. **Delegated and verified:** created `wiki/data-sources/cryptodataapi-news.md`
+  (new category page: `/news/pulse`, `/news/market-moving`, `/news/coin/{symbol}`,
+  `/news/sources`, `/backtesting/news-events` -- filtered-tape caveat, match_mode/
+  confidence tiers, corroboration, the 2026-08-21 nine-category policy-taxonomy expansion
+  with its own origin story (a 2026-08-20 BTC 10% move + $3B of shorts liquidated on zero
+  recorded catalyst events, root-caused to a missing legislation/executive-action/
+  sovereign-buyer taxonomy), no-backfill-before-2026-08-18 hard start date); added
+  `/market-intelligence/squeeze-alerts` to the existing `cryptodataapi-market-
+  intelligence.md` endpoint table + a caveat paragraph (direction-naming convention,
+  shared venue-coverage gap, `suppressed_by`/`include_quiet`); registered the new category
+  on `cryptodataapi.md`'s category map + `related:`, and added a reverse link from
+  `cryptodataapi-sentiment.md`; added a `Getting the Data` + `AI agent workflow` extension
+  to `wiki/strategies/fundamental-analysis/news-trading.md` (previously cited zero
+  `/news/*` endpoints despite its name) and a small, scoped addition to `crypto-policy-
+  shock-trading.md` (the new `/news/market-moving` policy-category corroboration signal,
+  plus a one-line caveat that a 2026-08-21 sign-error fix on `/policy/headlines` -- which
+  had scored constructive "banking"/"banks" headlines as maximum-severity bans --
+  improved that page's existing signal's reliability). **Sub-agent caught its own scope
+  error**: the task brief named `event-driven-trading.md` as a target, but that page
+  turned out to be an out-of-scope equity redirect stub (removed 2026-07-19 per CLAUDE.md
+  scope rules) -- the sub-agent read the file, recognized the contradiction, left it
+  untouched, and substituted the real crypto strategy page (`news-trading.md`) instead of
+  silently complying with a premise the file itself disproved. Verification method: the
+  sub-agent found WebFetch summaries of the live docs unreliable (inconsistent excerpts,
+  one fabricated enum), so it downloaded the raw OpenAPI spec + docs HTML + public
+  changelog JSON directly and parsed them for exact field/path text -- flagged one thing
+  it could NOT verify (the pre-2026-08-21 crypto-native `category` enum is unpublished)
+  and correctly omitted it rather than guessing. Verified independently: all 9 wikilinks
+  added across the 5 touched files resolve to real files (checked via `find`); re-ran
+  `tools/lint.py` myself -- links/tags/orphans/stale/empty/frontmatter byte-identical to
+  iter10 (234/659/39/6/51/0), confirming zero regressions. **Marked material** in
+  `.claude/cryptodataapi-changelog-state.json`: 2026-08-18, 2026-08-21. **Left
+  unprocessed** (not noted -- genuinely deferred, not surfaceless): 2026-08-25 (`ret_90d`
+  meme field, `sr` support/resistance field -- additive, low urgency), 2026-08-23
+  (`/exchanges` venue directory -- ties well to the README's existing referral-link work,
+  good next-Sync candidate), 2026-08-19 (`/supply/float` + `/supply/unlocks` as first-
+  class endpoints -- natural pairing with the existing `token-unlocks.md` page; its
+  unlock-coverage/entity-resolution fixes needed no wiki correction since no page cited
+  the stale figures), 2026-08-17 (`/volume/scanner` family -- entirely undocumented,
+  needs its own category page). Sync sits outside the Fix/Build balance rule -- last 3
+  Fix/Build entries remain iter7 Fix, iter8 Fix, iter10 Build, so the next Fix/Build choice
+  is still owed a **Fix** per the balance rule, competing candidates unchanged
+  (`[[depeg]]`->`[[depeg-risk]]` rename, iter9's 24-broken-endpoint-path sweep).
