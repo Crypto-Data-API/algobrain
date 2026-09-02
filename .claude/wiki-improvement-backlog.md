@@ -517,6 +517,48 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   Fix, iter8 Fix, so iter 10 is still owed a **Build** -- but this endpoint sweep is a
   strong Fix candidate competing with it, and the deferred 5 releases are Sync work that
   outranks both.
+- 2026-08-25 iter 10 (Sync -- news/catalyst family): no new upstream releases since iter 9
+  (`api_version` still 2026-08-23), so this iteration worked the deferred backlog rather
+  than fresh drift. Of the 5 releases left unprocessed, took the two that are
+  interdependent and form one coherent unit: 2026-08-18 (the whole `/news/*` family) and
+  2026-08-21 (the policy-catalyst taxonomy that adds `category` values to those same
+  endpoints, plus `/market-intelligence/squeeze-alerts`). Doing 08-21 without 08-18 would
+  have documented category values for endpoints the wiki did not describe at all. MCP
+  tools still unavailable in-session (the server is running from iter 9's fix, PID 55260,
+  but cannot register into a session that started before it existed) -- used the OpenAPI
+  spec + Grep fallback. **Created** `wiki/data-sources/cryptodataapi-news.md`, the 17th
+  `cryptodataapi-*` category page: 5 endpoints (`/news/pulse`, `/news/market-moving`,
+  `/news/coin/{symbol}`, `/news/sources`, `/backtesting/news-events`), full tier gating
+  per endpoint, the `news_pressure`/`news_tilt`/`headlines` feature semantics, the
+  `match_mode`/`confidence` provenance model, the funnel-health fields, and the two hard
+  constraints on the archive (qualified events only; history starts 2026-08-18 and cannot
+  ever be backfilled because RSS serves only a recent window). **Registered** it in the
+  hub category map + `related:`, and added reverse links on market-intelligence,
+  backtesting, regimes, and sentiment, plus an entry on news-and-sentiment-sources.
+  **Also absorbed:** `/market-intelligence/squeeze-alerts` onto the market-intelligence
+  page (with the nuance that `direction` names the side being LIQUIDATED, so
+  `short_squeeze` is upward pressure), `/backtesting/news-events` onto the backtesting
+  page, and the `/policy/headlines` sign-error fix onto the regimes page (the `ban` rule
+  was unbounded on the right, so "banking"/"banks"/"banner" scored as maximum-severity
+  regulatory bans at `bias: -1.0`, skewing `headline_tilt` and `regulatory_pressure`
+  negative). Bumped the hub's "190+ endpoints" to "200+" -- the spec now lists 204.
+  **Verified independently, not taken on trust:** re-fetched the OpenAPI spec and
+  confirmed all 5 new-page paths resolve; re-ran the iter-9 template-aware endpoint sweep
+  and confirmed it stayed at exactly 24 bad paths / 166 citations, i.e. this batch
+  introduced no invented endpoints (the specific failure mode from iter 9); confirmed all
+  11 wikilinks on the new page resolve to real files (zero forward links) and all 8 tags
+  are on the approved list; re-ran lint -- byte-identical at 995 issues
+  (links 240 / tags 659 / orphans 39 / stale 6 / empty 51), so the new page is fully
+  linked rather than an orphan. Sub-agent reported no paths written outside the brief,
+  which the sweep corroborates. **Remaining deferred (3, all new families needing their
+  own category pages):** 2026-08-23 (`/exchanges`, `/exchanges/{slug}` -- public venue
+  directory carrying referral disclosure, which interacts with the README's existing
+  referral-link section and wants care), 2026-08-19 (`/supply/float`, `/supply/unlocks`,
+  plus a `mint` event type on `/event/calendar`), 2026-08-17 (`/volume/scanner`,
+  `/volume/scanner/{symbol}`). Per the balance rule Sync creates no debt, so the standing
+  position is unchanged: last 3 Fix/Build entries remain iter6 Build, iter7 Fix, iter8
+  Fix, so a **Build** is still owed -- competing with the 24-bad-endpoint Fix sweep queued
+  in iter 9, which remains the highest-leverage Fix available.
 - 2026-08-25 iter 10 (Build): balance check confirmed iter10 owed a Build (iter6 Build,
   iter7 Fix, iter8 Fix -- 2 of 3 Fix; iter9 was Sync, which sits outside the Fix/Build
   balance rule per its own log entry above). Before acting on iter8's queued candidates

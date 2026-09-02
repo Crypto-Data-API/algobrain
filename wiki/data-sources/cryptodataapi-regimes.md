@@ -9,7 +9,7 @@ aliases: ["CryptoDataAPI Regimes", "CDA Regimes", "CryptoDataAPI Quant Probabili
 source_type: data
 source_url: "https://cryptodataapi.com/api/docs"
 confidence: high
-related: ["[[cryptodataapi]]", "[[cryptodataapi-indicators]]", "[[cryptodataapi-backtesting]]", "[[cryptodataapi-strategy-baskets]]", "[[cryptodataapi-market-health]]", "[[cryptodataapi-derivatives]]", "[[cryptodataapi-supply]]", "[[crypto-market-regime-taxonomy]]", "[[regime-strategy-playbook]]", "[[regime-detection]]", "[[market-regime-detection-ml]]", "[[volatility-regime]]", "[[regime-matrix]]", "[[gamma-exposure]]", "[[hidden-markov-models]]"]
+related: ["[[cryptodataapi]]", "[[cryptodataapi-indicators]]", "[[cryptodataapi-backtesting]]", "[[cryptodataapi-strategy-baskets]]", "[[cryptodataapi-market-health]]", "[[cryptodataapi-derivatives]]", "[[cryptodataapi-supply]]", "[[cryptodataapi-news]]", "[[crypto-market-regime-taxonomy]]", "[[regime-strategy-playbook]]", "[[regime-detection]]", "[[market-regime-detection-ml]]", "[[volatility-regime]]", "[[regime-matrix]]", "[[gamma-exposure]]", "[[hidden-markov-models]]"]
 ---
 
 CryptoDataAPI's regime endpoints are the largest signal surface on the API: eight complementary regime families that classify the market by long-horizon cycle state, short-horizon HMM probabilities, volatility, liquidity fragility, meme-coin lifecycle, forward catalysts, security stress, and geopolitical/policy shock. Together they map directly onto this wiki's [[crypto-market-regime-taxonomy]] and drive the [[regime-strategy-playbook]] — each family exposes a current-state endpoint, most add a 0-100 composite score, per-symbol detail, and a refresh trigger.
@@ -126,6 +126,8 @@ Regulatory and macro-policy shock detection built on GDELT news flow, cross-asse
 | GET | /api/v1/policy/regime/score | Composite 0-100: 40% GDELT, 35% cross-asset, 25% rate | — | — |
 | GET | /api/v1/policy/headlines | Live regulatory feed (Federal Register/SEC/CFTC) | — | — |
 | POST | /api/v1/policy/regime/refresh | Force recompute | — | Pro+ |
+
+**Sign-error fix (2026-08-21):** the `ban` classification rule on `/policy/headlines` and the policy-regime sidecar was unbounded on the right, so any headline containing "banking", "banks", or "banner" scored as a maximum-severity regulatory ban at `bias: -1.0` — including constructive stories. This skewed `headline_tilt` and `regulatory_pressure` negative accordingly; both are now fixed. whitehouse.gov (news, fact sheets, presidential actions) was added to the policy feed set at the same time, admitted only when items name digital assets. The same release shared a new policy-catalyst `category` taxonomy (`legislation`, `executive_signal`, `rulemaking`, `restrictive_policy`, `sovereign_bid`, `strategic_reserve`, `pro_crypto_eo`, `macro_liquidity`, `macro_tightening`) with the `/news/*` family — see [[cryptodataapi-news]].
 
 ## Live Data
 

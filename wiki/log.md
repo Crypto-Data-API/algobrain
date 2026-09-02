@@ -158,6 +158,40 @@ them, and each was already anticipated by an existing page — `[[governance-tok
   (659/39/6/51/0) — confirms only additive, schema-clean changes. `[[bnb-chain]]` remains
   queued from iter8 as a further genuine Build gap (10 inbound refs, the BNB Layer-1 chain
   distinct from the token page).
+## 2026-08-25 — New category page: News & Catalysts (daily loop iter 10, Sync)
+
+**Scope:** Second Sync-track iteration, working the backlog deferred from iter 9 (no new
+upstream releases since). Absorbed the two interdependent releases that introduce the
+`/news/*` endpoint family and the policy-catalyst taxonomy layered on top of it.
+
+- Pages created:
+  - [[cryptodataapi-news]] — the 17th CryptoDataAPI category page, covering
+    `/news/pulse` (per-coin `news_pressure` / `news_tilt` features, cross-sectionally
+    ranked and joinable onto price), `/news/market-moving` (the filtered catalyst tape),
+    `/news/coin/{symbol}`, `/news/sources` (feed health and funnel counts), and
+    `/backtesting/news-events` (the archived tape with measured `ret_15m` / `ret_1h` /
+    `ret_4h` response labels). Documents the nine policy `category` values added
+    2026-08-21 — `legislation`, `executive_signal`, `rulemaking`, `restrictive_policy`,
+    `sovereign_bid`, `strategic_reserve`, `pro_crypto_eo`, `macro_liquidity`,
+    `macro_tightening` — all of which resolve to `symbol: "MARKET"`. States plainly that
+    the archive holds qualified events only and that its history begins 2026-08-18 and
+    cannot be backfilled.
+- Pages updated:
+  - [[cryptodataapi]] — category map row, `related:`, and the endpoint count raised from
+    "190+" to "200+" (the spec now lists 204).
+  - [[cryptodataapi-market-intelligence]] — added `/market-intelligence/squeeze-alerts`,
+    the forced-liquidation cascade tripwire, including the reading that matters most:
+    `direction` names the side being *liquidated*, so `short_squeeze` is upward pressure,
+    and `oi_state` separates a move consuming its own fuel from fresh positioning.
+  - [[cryptodataapi-backtesting]] — added `/backtesting/news-events` with its no-backfill
+    constraint.
+  - [[cryptodataapi-regimes]] — recorded the `/policy/headlines` sign-error fix: the `ban`
+    rule was unbounded on the right, so any headline containing "banking", "banks" or
+    "banner" scored as a maximum-severity regulatory ban, skewing `headline_tilt` and
+    `regulatory_pressure` negative. whitehouse.gov joined the policy feed set.
+  - [[cryptodataapi-sentiment]], [[news-and-sentiment-sources]] — cross-registered.
+- Every endpoint path was verified against the live OpenAPI spec before writing, and a
+  wiki-wide sweep confirmed this batch introduced no unresolvable endpoint references.
 
 ## 2026-08-24 — API changelog sync: tier limits, ETF/liquidation endpoints, gex breaking change (daily loop iter 9, Sync)
 

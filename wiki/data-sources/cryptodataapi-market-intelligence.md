@@ -36,6 +36,7 @@ The Market Intelligence category of [[cryptodataapi]] aggregates the institution
 | GET | /api/v1/market-intelligence/borrow-interest | Margin borrow rate, BTC/Binance, 4h | — | — |
 | GET | /api/v1/market-intelligence/fear-greed-history | Fear & Greed timeseries, historical | — | — |
 | GET | /api/v1/market-intelligence/stablecoin-history | Stablecoin mcap timeseries, historical | — | — |
+| GET | /api/v1/market-intelligence/squeeze-alerts | One-sided, abnormal forced-liquidation flow — cascade tripwire | symbol, window_s, min_severity, include_quiet, limit | Pro (free tier scoped to BTC) |
 | GET | /api/v1/market-intelligence/status | Collector status + rate usage | — | — |
 
 Tier "—" = not marked with a plan gate in the API docs; standard plan rate limits apply.
@@ -60,7 +61,7 @@ Historical series come from `/btc/cycle-indicators` (all 8 indicators, or one vi
 
 - [[spot-etf-flows]] — daily BTC/ETH/SOL ETF flow series (no XRP) plus the reconstructed live BTC AUM estimate quantify the institutional bid that has driven post-2024 cycles
 - [[max-pain]] — `/options` returns BTC options OI, volume, and the max-pain strike for expiry-pinning and dealer-positioning analysis
-- [[liquidation]] cascades — cross-exchange and per-venue liquidation feeds identify forced-flow events and stop-hunt zones, subject to the streamed-venue coverage caveat above
+- [[liquidation]] cascades — cross-exchange and per-venue liquidation feeds identify forced-flow events and stop-hunt zones, subject to the streamed-venue coverage caveat above; `/squeeze-alerts` adds a real-time cascade tripwire on top, ahead of the 15-45 minute lag on [[cryptodataapi-news]]
 - Cycle timing — the 8 BTC cycle indicators plus Coinbase premium (US institutional spot demand vs offshore) and exchange BTC balance frame where we sit in the [[bitcoin-cycle-regime]] map
 - Demand quality — taker buy/sell ratio and borrow interest separate aggressive spot demand from leverage-driven rallies, complementing [[cryptodataapi-derivatives]] funding data
 
@@ -78,6 +79,7 @@ curl -H "X-API-Key: $CDA_KEY" \
 - [[cryptodataapi-on-chain]] — exchange flows, miner reserves, and MVRV
 - [[cryptodataapi-sentiment]] — live Fear & Greed and stablecoin flow snapshots
 - [[cryptodataapi-backtesting]] — liquidation and snapshot archives
+- [[cryptodataapi-news]] — catalyst tape and news pressure/tilt features; `/squeeze-alerts` is the same-second complement to its 15-45min lag
 - [[spot-etf-flows]], [[max-pain]], [[liquidation]] — concept pages
 
 ## Sources

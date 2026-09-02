@@ -13,7 +13,7 @@ confidence: high
 related: ["[[cryptodataapi-mcp]]", "[[cryptodataapi-market-data]]", "[[cryptodataapi-derivatives]]", "[[cryptodataapi-hyperliquid]]", "[[cryptodataapi-hyperliquid-traders]]", "[[cryptodataapi-regimes]]", "[[cryptodataapi-market-intelligence]]", "[[cryptodataapi-on-chain]]", "[[cryptodataapi-sentiment]]", "[[cryptodataapi-market-health]]", "[[cryptodataapi-indicators]]", "[[cryptodataapi-dex]]", "[[cryptodataapi-coins]]", "[[cryptodataapi-strategy-baskets]]", "[[cryptodataapi-backtesting]]", "[[cryptodataapi-nft]]", "[[cryptodataapi-news]]", "[[cryptodataapi-supply]]", "[[coinglass]]", "[[glassnode]]", "[[hyperliquid-api-and-sdk]]", "[[data-sources-overview]]"]
 ---
 
-CryptoDataAPI ([cryptodataapi.com](https://cryptodataapi.com), Australia) is the **canonical data layer for this wiki**: a single REST API with 190+ endpoints spanning live crypto market data, derivatives positioning, Hyperliquid perp and trader intelligence, multi-family market-regime classification, on-chain flows, sentiment, DEX/memecoin screening, NFTs, and a point-in-time backtesting archive going back to 2020. Where a wiki page describes data an endpoint serves, the page carries a **"Getting the Data (CryptoDataAPI)"** section with the live and historical access patterns.
+CryptoDataAPI ([cryptodataapi.com](https://cryptodataapi.com), Australia) is the **canonical data layer for this wiki**: a single REST API with 200+ endpoints spanning live crypto market data, derivatives positioning, Hyperliquid perp and trader intelligence, multi-family market-regime classification, on-chain flows, sentiment, news and catalyst detection, DEX/memecoin screening, NFTs, and a point-in-time backtesting archive going back to 2020. Where a wiki page describes data an endpoint serves, the page carries a **"Getting the Data (CryptoDataAPI)"** section with the live and historical access patterns.
 
 ## Access
 
@@ -56,6 +56,7 @@ Free was raised from 50/day + 5/min on 2026-08-20; Pro Plus burst was raised fro
 | News & Catalysts | [[cryptodataapi-news]] | Per-coin news pressure/tilt, filtered market-moving catalyst tape, crypto-native and policy/macro categories, catalyst archive |
 | On-Chain | [[cryptodataapi-on-chain]] | Stablecoin reserves & dry powder, exchange flows, miner reserves, hash ribbon, MVRV dormancy, whale scores |
 | Sentiment & Macro | [[cryptodataapi-sentiment]] | Fear & Greed, stablecoin supply/flows, macro (EUR/USD, gold, yields) |
+| News & Catalysts | [[cryptodataapi-news]] | Per-coin news pressure/tilt, filtered catalyst tape, feed health, backtestable event archive |
 | Market Health | [[cryptodataapi-market-health]] | Dual-score market health (11 components), altcoin breadth |
 | Indicators | [[cryptodataapi-indicators]] | Signum RGG (ADX/DMI), technical price-structure state (SMA/BB/RSI) |
 | Supply | [[cryptodataapi-supply]] | Circulating float, dilution overhang, forward token-unlock cliff calendar |

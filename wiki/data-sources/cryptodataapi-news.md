@@ -4,13 +4,13 @@ type: source
 created: 2026-08-26
 updated: 2026-08-26
 status: good
-tags: [data-provider, crypto, api, news, event-driven, sentiment, hyperliquid, regulation]
-aliases: ["CryptoDataAPI News", "CDA News", "News & Catalyst Detection API", "Market-Moving News API"]
+tags: [data-provider, crypto, api, news, event-driven, sentiment, hyperliquid, regulation, backtesting]
+aliases: ["CryptoDataAPI News", "CDA News", "News & Catalyst Detection API", "Market-Moving News API", "CryptoDataAPI Catalysts"]
 source_type: data
 source_url: "https://cryptodataapi.com/api/docs"
 source_author: "CryptoDataAPI"
 confidence: high
-related: ["[[cryptodataapi]]", "[[cryptodataapi-market-intelligence]]", "[[cryptodataapi-sentiment]]", "[[cryptodataapi-backtesting]]", "[[crypto-policy-shock-trading]]", "[[news-trading]]", "[[policy-shock-regime]]", "[[event-catalyst-regime]]", "[[hyperliquid]]"]
+related: ["[[cryptodataapi]]", "[[cryptodataapi-market-intelligence]]", "[[cryptodataapi-sentiment]]", "[[cryptodataapi-backtesting]]", "[[cryptodataapi-mcp]]", "[[crypto-policy-shock-trading]]", "[[news-trading]]", "[[event-driven-trading]]", "[[sentiment-analysis]]", "[[news-and-sentiment-sources]]", "[[policy-shock-regime]]", "[[event-catalyst-regime]]", "[[liquidation]]", "[[hyperliquid]]"]
 ---
 
 The News & Catalyst Detection family of [[cryptodataapi]] (shipped 2026-08-18) turns the ~300-500 crypto and policy stories ingested daily from free RSS and announcement feeds into a filtered, per-coin catalyst tape: a `news_pressure`/`news_tilt` feature series for every Hyperliquid perp, a qualified-events tape with an `impact_score` and signed `bias`, feed-health diagnostics, and a Parquet-archived history for backtesting. It is the wiki's structured alternative to manually watching a news terminal for crypto-moving headlines.
@@ -48,6 +48,15 @@ Tier "—" = not gated beyond a valid API key per the docs.
 - **A related sign-error fix landed the same day (2026-08-21).** The separate `/api/v1/policy/headlines` feed (see [[crypto-policy-shock-trading]]) had an unbounded "ban" rule that scored any headline containing "banking", "banks", or "banner" as a maximum-severity regulatory ban — including constructive stories like "Banking Regulator Races to Finalize GENIUS Act Stablecoin Rules." Policy-adjacent reliability across both the headline sidecar and this news family's new policy categories has been more trustworthy since that fix.
 - **Sourcing is free and keyless throughout**: publisher RSS (The Block, CoinDesk, Cointelegraph, Decrypt, The Defiant, CryptoSlate, Bitcoin Magazine), OKX announcements, whitehouse.gov, and roughly 25 project blogs, Discourse governance forums, and GitHub release feeds for larger perps. Latency runs **~30 seconds to 5 minutes behind the source** — this is a context and event-study feed, not a listing-sniping race winner. There is **no X/Twitter coverage** (no free read tier exists for it), so anything breaking there reaches this feed minutes later via the outlets that pick it up.
 - **For a faster forced-flow tripwire**, see `/market-intelligence/squeeze-alerts` on [[cryptodataapi-market-intelligence]] — it reads the liquidation stream directly rather than RSS, and on 2026-08-19 flagged a BTC short-liquidation spike 23 minutes before the first related headline qualified for this tape.
+
+## Trading Applications
+
+- **Catalyst-gated entries** — [[event-driven-trading]] and [[news-trading]] systems can gate entries on `/news/market-moving` events clearing `min_impact`, using `corroboration` as the strongest single signal that a story is real rather than syndicated
+- **Continuous news feature for sentiment and regime models** — `news_pressure` and `news_tilt` from `/news/pulse` are cross-sectionally comparable and join straight onto price for [[sentiment-analysis]] pipelines; most coins sit at zero pressure while `headlines` keeps counting, so treat a high-`headlines`/zero-pressure coin as attention, not a signal
+- **Policy-day awareness** — the nine 2026-08-21 categories resolve to `symbol: "MARKET"`, so a book that only watches per-coin events misses market-wide regulatory and macro-liquidity catalysts entirely; any consumer switching on `category` needs a default branch for values it does not recognise
+- **Backtestable catalyst response** — `/backtesting/news-events` supplies measured `ret_15m` / `ret_1h` / `ret_4h` / `vol_mult` / `abnormality` outcomes for building or validating a response model, subject to the qualified-events-only and no-backfill caveats above
+- **Feed-health monitoring** — the `funnel_24h` counts and `not_modified` flag on `/news/sources` catch a silently broken feed before a strategy starves on stale data; `unresolvable` flags perps whose ticker collides with a common English word
+- **Pair with a faster tripwire** — this feed runs 30 seconds to 5 minutes behind the source, so pair it with `/market-intelligence/squeeze-alerts` on [[cryptodataapi-market-intelligence]] for a forced-[[liquidation]] signal while the story is still being written
 
 ## Example
 
