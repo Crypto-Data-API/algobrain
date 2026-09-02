@@ -4,6 +4,25 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-09-02 — Sync the wiki to 4 more data-layer releases: supply/unlocks, volume scanner, error envelope
+
+**Added:** A new data-source category page for the data layer's token-supply endpoints —
+circulating float with a dilution-overhang metric, and a dedicated forward token-unlock
+cliff calendar — linked into the existing token-unlock-tracker page. Documented a new
+Hyperliquid relative-volume scanner (24h notional vs. its own 30-day baseline, with an
+activity-band classification) on the Hyperliquid data page.
+
+**Changed:** Added a new stablecoin mint/burn catalyst type and a 90-day return field to
+the market-regime data page; added a support/resistance level field to the technical
+-indicators data page; documented the data layer's now-consistent JSON error envelope
+across auth/rate-limit failures on the hub page.
+
+**Notes:** Sync-track iteration of the daily improvement loop. Of 8 pending upstream
+releases (one breaking), 4 were absorbed this iteration and 4 were noted as having no
+wiki-visible surface; a venue-directory endpoint and one additive news field remain
+queued for a future iteration. Every endpoint documented was verified against the live
+API schema directly, not taken from release notes alone. Zero lint regressions.
+
 ## 2026-08-26 — Document the News & Catalyst Detection data endpoints
 
 **Added:** A new data-source category page covering the data layer's news-derived

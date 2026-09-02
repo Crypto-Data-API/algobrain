@@ -2,13 +2,13 @@
 title: "Token Unlock Trackers"
 type: source
 created: 2026-05-16
-updated: 2026-07-13
+updated: 2026-09-02
 status: good
 tags: [data-provider, crypto, altcoins, event-driven]
 aliases: ["TokenUnlocks", "Token Unlock Calendar", "Vesting Calendar", "Token Unlock Trackers"]
 source_type: data
 source_url: "https://token.unlocks.app"
-related: ["[[token-unlock-arbitrage]]", "[[token-unlocks-narrative]]", "[[crypto-trading-sessions]]", "[[session-overlap-liquidity]]", "[[crypto-weekday-weekend-etf-era]]", "[[whale-alert]]", "[[arkham-intelligence]]", "[[crypto-data-sources]]", "[[cryptodataapi]]"]
+related: ["[[token-unlock-arbitrage]]", "[[token-unlocks-narrative]]", "[[crypto-trading-sessions]]", "[[session-overlap-liquidity]]", "[[crypto-weekday-weekend-etf-era]]", "[[whale-alert]]", "[[arkham-intelligence]]", "[[crypto-data-sources]]", "[[cryptodataapi]]", "[[cryptodataapi-supply]]"]
 ---
 
 Token unlock trackers — most prominently **TokenUnlocks** (token.unlocks.app), plus unlock-calendar features on **CryptoRank**, **DefiLlama**, **Tokenomist**, and similar platforms — aggregate and visualize token unlock and vesting schedules across crypto projects. They surface upcoming supply events — cliffs, linear vests, ecosystem unlocks — that intraday and swing traders use to position around predictable supply pressure (Source: [[2026-04-22-gap-finder-crypto-intraday-session-liquidity-effect]]). This page covers the unlock-calendar data category; for the broader directional/narrative impact of unlocks on price see [[token-unlocks|Token Unlocks & Vesting Cliffs (narrative)]]. Note that [[token-terminal|Token Terminal]] is a protocol-fundamentals platform, not an unlock tracker, and is covered separately.
@@ -57,7 +57,9 @@ Secondary uses:
 ## Getting the Data (CryptoDataAPI)
 
 **Live data:**
-- `GET /api/v1/event/calendar` — forward catalyst calendar up to 30d out (filter by type/symbol/bias)
+- `GET /api/v1/supply/unlocks` — the dedicated cliff-calendar view: forward token-unlock cliffs sized in tokens, USD, and `pct_of_float`/`pct_of_market_cap` (free: next 7 days; Pro/Pro Plus: full 35-day horizon). This is a **cliff calendar only** — continuous emission (mining inflation, linear vesting, runs of identical daily releases) is deliberately excluded, and coverage is bounded by what DefiLlama tracks, so absence is not evidence of no unlock
+- `GET /api/v1/supply/float` — circulating float and dilution overhang per coin (`float_pct`, `dilution_overhang`, `next_unlock`, `unlock_coverage`), ranked by ascending float, for sizing how exposed a token is to its own unlock schedule
+- `GET /api/v1/event/calendar` — the broader forward catalyst calendar up to 30d out (filter by `type=unlock`/`macro_print`/`depeg`/`mint`, `symbol`, `bias`). `/supply/unlocks` is now the first-class view of the same unlock data that `/event/calendar?type=unlock` has always carried alongside macro prints, depegs, and stablecoin mint/burn events — not a fork, just a dedicated surface
 - `GET /api/v1/event/regime/score` — event-risk composite (0-100)
 - `GET /api/v1/event/regime/{symbol}` — per-symbol pending catalysts
 
@@ -65,13 +67,14 @@ Secondary uses:
 - `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time snapshots for event backtests
 
 ```bash
-curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/event/calendar"
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/supply/unlocks?window_days=35"
 ```
 
-Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]], [[cryptodataapi-supply]].
 
 ## Related
 
+- [[cryptodataapi-supply]] — the dedicated Supply category page for `/supply/float` and `/supply/unlocks`
 - [[token-unlock-arbitrage]] — full strategy treatment of trading around unlocks
 - [[token-unlocks|Token Unlocks & Vesting Cliffs (narrative)]] — directional/narrative impact of unlock supply on price
 - [[token-terminal]] — protocol-fundamentals platform (distinct from unlock trackers)

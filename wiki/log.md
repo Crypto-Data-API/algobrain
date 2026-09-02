@@ -2,12 +2,71 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-08-26
+updated: 2026-09-02
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-09-02 — Absorbed 4 CryptoDataAPI releases: supply/float, unlocks, volume scanner, sr/ret_90d fields, error envelope (Sync)
+
+**Scope:** Bounded ~60-minute Sync batch reconciling the 4 CryptoDataAPI releases left
+unprocessed by prior iterations (2026-08-17, 2026-08-19, 2026-08-25, 2026-08-26 — flagged
+as deferred in iter11's log entry and confirmed still outstanding by
+`tools/check_api_changelog.py`). Every endpoint path, param, and response field below was
+verified against the live OpenAPI schema (`curl https://cryptodataapi.com/api`, parsed with
+Python) and, for the new error envelope, against live `401`/`403`/`429` responses pulled
+with a freshly-minted free API key — not taken on the changelog's prose alone.
+
+- **Created** [[cryptodataapi-supply]] — new category page for `/api/v1/supply/float`
+  (circulating float, `dilution_overhang`, `next_unlock`, the `unlock_coverage:
+  not_tracked` "not the same as no unlock" caveat) and `/api/v1/supply/unlocks` (dedicated
+  cliff-calendar view — tokens/USD/`pct_of_float`, cliffs only, DefiLlama coverage bound).
+  Registered on [[cryptodataapi]]'s category map and `related:`.
+- **Updated** [[token-unlocks]] — `Getting the Data` section now lists `/supply/unlocks`
+  and `/supply/float` alongside the existing `/event/calendar` reference, explaining
+  `/supply/unlocks` is the new first-class view of the same unlock data
+  `/event/calendar?type=unlock` already carried. Added [[cryptodataapi-supply]] to
+  `Related` and frontmatter.
+- **Updated** [[cryptodataapi-regimes]] — documented the new `mint` event type on
+  `/event/calendar`/`/event/regime*` (`delta_usd`, `pct_of_supply`, `long`/`short` bias,
+  observed-not-scheduled) in the Event Regime section, and added `ret_90d` to the Meme
+  Regime section's metrics list (null under 91d history, not part of the lifecycle
+  classifier).
+- **Updated** [[cryptodataapi-indicators]] — documented the new `sr` (support/resistance)
+  field on `/indicators/technical[/{symbol}]`: up to 3 levels/side, `{price, strength,
+  dist_pct}`, swing-pivot clustering within 1.5%, empty `[]` as a real "no clean level"
+  read. Added a trading-applications bullet linking the existing [[support-and-resistance]]
+  concept page.
+- **Updated** [[cryptodataapi-hyperliquid]] — added `/volume/scanner` and
+  `/volume/scanner/{symbol}` to the endpoint table (`volume_24h`, `avg_volume_30d`/
+  `median_volume_30d`, `multiplier`/`multiplier_median`, activity `band` enum, `kBONK`/
+  `kPEPE`/`kSHIB` alias handling); documented `/hyperliquid/summary`'s 3 new additive
+  fields (`avg_volume_30d`, `volume_multiplier`, `volume_band`); added a relative-volume
+  screening trading-applications bullet.
+- **Updated** [[cryptodataapi]] — Access section now documents the shared
+  `{"detail":{"error","message",...}}` JSON envelope now returned on every `401`/`403`/
+  `429` across `/api/*`, including `403`'s `required_tier`/`pricing_url` (confirmed live)
+  and `429`'s `scope` field (confirmed live) plus CDA's documented `Retry-After`/
+  `X-RateLimit-*` headers. Per explicit instruction, left the existing GEX-is-Pro-tier note
+  on [[cryptodataapi-regimes]] untouched — this release only fixed an inconsistent error
+  *message*, not access.
+- **Live-verification note:** a rapid 15-request burst against a fresh free key reproduced
+  the `403` envelope exactly (`required_tier`, `pricing_url`) but the `429` response from
+  that burst carried only `error`/`message`/`scope`/`pricing_url` — no `Retry-After` header,
+  no `X-RateLimit-*` headers, no `limit`/`window`/`tier`/`retry_after` body fields that
+  CryptoDataAPI's own rate-limit blog post documents. Most likely explanation: a rapid
+  same-second burst trips Cloudflare edge-level protection before the origin app's richer
+  per-tier limiter runs. Wiki text notes the header/field set as CDA's documented behavior
+  rather than asserting personal reproduction of every field, since the discrepancy could
+  not be resolved within the batch's time budget.
+- **Verified independently:** all live OpenAPI schema pulls (`SupplyFloatRow`,
+  `SupplyUnlockItem`, `NextUnlock`, `EventCatalystModel`, `VolumeScannerItem`,
+  `VolumeScannerDetailResponse`, `HLSummaryResponse`, `TechnicalRegimeItem`,
+  `SupportResistanceModel`, `SRLevelModel`, `MemeMetricsModel`) matched every field named in
+  the task brief exactly — no invented paths or fields. Marked material in the changelog
+  state file: 2026-08-17, 2026-08-19, 2026-08-25, 2026-08-26.
 
 ## 2026-08-26 — Documented the News & Catalyst Detection endpoint family (daily loop iter 11, Sync)
 

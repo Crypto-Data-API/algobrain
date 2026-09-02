@@ -2,7 +2,7 @@
 title: "CryptoDataAPI"
 type: source
 created: 2026-07-13
-updated: 2026-08-26
+updated: 2026-09-02
 status: excellent
 tags: [data-provider, crypto, api, derivatives, on-chain, market-regime, hyperliquid, backtesting, sentiment]
 aliases: ["CryptoDataApi", "Crypto Data API", "cryptodataapi.com", "CDA"]
@@ -10,7 +10,7 @@ source_type: data
 source_url: "https://cryptodataapi.com"
 source_author: "CryptoDataAPI"
 confidence: high
-related: ["[[cryptodataapi-mcp]]", "[[cryptodataapi-market-data]]", "[[cryptodataapi-derivatives]]", "[[cryptodataapi-hyperliquid]]", "[[cryptodataapi-hyperliquid-traders]]", "[[cryptodataapi-regimes]]", "[[cryptodataapi-market-intelligence]]", "[[cryptodataapi-on-chain]]", "[[cryptodataapi-sentiment]]", "[[cryptodataapi-market-health]]", "[[cryptodataapi-indicators]]", "[[cryptodataapi-dex]]", "[[cryptodataapi-coins]]", "[[cryptodataapi-strategy-baskets]]", "[[cryptodataapi-backtesting]]", "[[cryptodataapi-nft]]", "[[cryptodataapi-news]]", "[[coinglass]]", "[[glassnode]]", "[[hyperliquid-api-and-sdk]]", "[[data-sources-overview]]"]
+related: ["[[cryptodataapi-mcp]]", "[[cryptodataapi-market-data]]", "[[cryptodataapi-derivatives]]", "[[cryptodataapi-hyperliquid]]", "[[cryptodataapi-hyperliquid-traders]]", "[[cryptodataapi-regimes]]", "[[cryptodataapi-market-intelligence]]", "[[cryptodataapi-on-chain]]", "[[cryptodataapi-sentiment]]", "[[cryptodataapi-market-health]]", "[[cryptodataapi-indicators]]", "[[cryptodataapi-dex]]", "[[cryptodataapi-coins]]", "[[cryptodataapi-strategy-baskets]]", "[[cryptodataapi-backtesting]]", "[[cryptodataapi-nft]]", "[[cryptodataapi-news]]", "[[cryptodataapi-supply]]", "[[coinglass]]", "[[glassnode]]", "[[hyperliquid-api-and-sdk]]", "[[data-sources-overview]]"]
 ---
 
 CryptoDataAPI ([cryptodataapi.com](https://cryptodataapi.com), Australia) is the **canonical data layer for this wiki**: a single REST API with 190+ endpoints spanning live crypto market data, derivatives positioning, Hyperliquid perp and trader intelligence, multi-family market-regime classification, on-chain flows, sentiment, DEX/memecoin screening, NFTs, and a point-in-time backtesting archive going back to 2020. Where a wiki page describes data an endpoint serves, the page carries a **"Getting the Data (CryptoDataAPI)"** section with the live and historical access patterns.
@@ -40,6 +40,8 @@ Free was raised from 50/day + 5/min on 2026-08-20; Pro Plus burst was raised fro
 
 **Email verification unlocks the full free allowance.** A freshly created, unverified free key sits on a smaller starter allowance below the 1,000/day headline. Confirming the key's email address unlocks the full 1,000/day free tier **and** grants 24 hours of Pro-tier access as a trial. `POST /api/v1/auth/resend-verify` re-sends the confirmation link for the calling key's own address (10-minute cooldown between sends). The daily-quota `429` response for an unverified free key over its starter cap carries `upgrade_available: "verify_email"`, `upgrade_message`, and `verified_daily_limit` so an agent can detect and act on the gate programmatically.
 
+**Consistent error envelope.** Every `401`/`403`/`429` on an `/api/*` path returns the same JSON shape — `{"detail": {"error": "<code>", "message": "<text>", ...}}` — never HTML or a bare string, so an agent can branch on `detail.error` instead of parsing prose. `403` tier refusals additionally carry `required_tier` (`"pro"`/`"pro_plus"`) and `pricing_url` as machine-readable fields (confirmed live: `{"detail":{"error":"pro_required","message":"...","required_tier":"pro","pricing_url":"https://cryptodataapi.com/pricing"}}`); `429`s carry a `scope` field (`"api_key"`) and, per CryptoDataAPI's own rate-limit documentation, a `Retry-After` header plus the full `X-RateLimit-*` set for backoff.
+
 ## Category map
 
 | Category | Page | What it covers |
@@ -56,6 +58,7 @@ Free was raised from 50/day + 5/min on 2026-08-20; Pro Plus burst was raised fro
 | Sentiment & Macro | [[cryptodataapi-sentiment]] | Fear & Greed, stablecoin supply/flows, macro (EUR/USD, gold, yields) |
 | Market Health | [[cryptodataapi-market-health]] | Dual-score market health (11 components), altcoin breadth |
 | Indicators | [[cryptodataapi-indicators]] | Signum RGG (ADX/DMI), technical price-structure state (SMA/BB/RSI) |
+| Supply | [[cryptodataapi-supply]] | Circulating float, dilution overhang, forward token-unlock cliff calendar |
 | DEX & Memecoins | [[cryptodataapi-dex]] | Trending pools, new launches, token security/rug reports, promotion-spend signal |
 | Strategy Baskets | [[cryptodataapi-strategy-baskets]] | 50 meta-baskets across 6 thematic groups |
 | Backtesting | [[cryptodataapi-backtesting]] | Historical klines/funding/liquidations, point-in-time daily snapshots, Parquet archives since 2020 |

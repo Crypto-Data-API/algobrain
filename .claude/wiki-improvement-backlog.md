@@ -621,3 +621,51 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   Fix/Build entries remain iter7 Fix, iter8 Fix, iter10 Build, so the next Fix/Build choice
   is still owed a **Fix** per the balance rule, competing candidates unchanged
   (`[[depeg]]`->`[[depeg-risk]]` rename, iter9's 24-broken-endpoint-path sweep).
+- 2026-09-02 iter 12 (Sync): `tools/check_api_changelog.py` reported 8 unprocessed
+  releases (2026-08-17 through 2026-08-28), including one **breaking** entry, and
+  surfaced a real bug in the upstream feed itself: two distinct changelog entries (a
+  breaking error-envelope change and an unrelated cache/security fix) both carry the
+  identical version string `2026-08-26` — the feed's dedup key isn't unique. The state
+  file can only hold one record per version, so both had to collapse into a single
+  `2026-08-26` entry; noted here so a future iteration doesn't get confused if the report
+  ever shows `2026-08-26` as unprocessed again after this. Triaged all 8: 4 marked
+  **noted** (2026-08-28 onboarding/agent-UX polish, 2026-08-27 param bug-fixes, and the
+  non-breaking half of 2026-08-26 — none had wiki-visible surface, no stale claims to
+  fix); 4 marked **material** and absorbed this iteration (2026-08-17, 2026-08-19,
+  2026-08-25, the breaking half of 2026-08-26); 1 left genuinely unprocessed
+  (2026-08-23's new `/exchanges` venue directory — a real new category, deferred purely
+  for batch size, good next-Sync candidate) plus one bullet of 2026-08-19 (the
+  `/news/pulse` `headlines` field — belongs on `cryptodataapi-news.md`, not touched this
+  batch). **Delegated and verified:** created `wiki/data-sources/cryptodataapi-supply.md`
+  (new category page for `/supply/float` and `/supply/unlocks` — dilution overhang,
+  `unlock_coverage: not_tracked` caveat, cliff-only calendar, DefiLlama coverage bound),
+  registered on `cryptodataapi.md`'s category map + `related:`; updated `token-
+  unlocks.md`'s `Getting the Data` section to cite the new dedicated supply endpoints
+  alongside the existing `/event/calendar` reference; added the new `mint` event type
+  (stablecoin mint/burn, `delta_usd`/`pct_of_supply`, observed-not-scheduled) and
+  `ret_90d` (meme regime) to `cryptodataapi-regimes.md`; added the new `sr` (support/
+  resistance) field to `cryptodataapi-indicators.md` with a trading-applications bullet
+  linking the existing `[[support-and-resistance]]` concept page; added `/volume/scanner`
+  + `/volume/scanner/{symbol}` and 3 new `/hyperliquid/summary` fields to `cryptodataapi-
+  hyperliquid.md` with a relative-volume-screening bullet; added a one-paragraph note on
+  the new consistent `401`/`403`/`429` JSON error envelope to `cryptodataapi.md`'s Access
+  section. Explicitly left the existing GEX-is-Pro-tier note on `cryptodataapi-regimes.md`
+  untouched — already correct from iter9, this release only fixed an inconsistent error
+  *message*. Verification method: sub-agent downloaded the live OpenAPI spec
+  (`curl https://cryptodataapi.com/api`, 397KB) and parsed every path/param/schema with
+  Python rather than trusting changelog prose, and additionally minted a live free API key
+  to curl real `401`/`403`/`429` responses confirming the exact error-envelope shape (one
+  gap flagged honestly: a rapid-burst `429` test showed only `error`/`message`/`scope`,
+  not the `Retry-After`/`X-RateLimit-*` headers CDA's own docs describe — likely Cloudflare
+  edge-layer throttling short-circuiting the origin app on a same-second burst; wiki text
+  attributes the richer set to CDA's docs, not to personal reproduction, and the gap is
+  logged in `wiki/log.md` for future reconciliation). I independently re-verified all 4 new
+  endpoint paths (`/supply/float`, `/supply/unlocks`, `/volume/scanner`, `/volume/scanner/
+  {symbol}`) plus `SRLevelModel` against a fresh pull of the live OpenAPI spec myself
+  rather than taking the sub-agent's word for it — all present. `git diff --stat`: 6 wiki
+  files touched + 1 created, 134 insertions / 19 deletions, all wikilink targets confirmed
+  to resolve (`[[support-and-resistance]]` exists at `wiki/concepts/indicators/`).
+  Sync sits outside the Fix/Build balance rule — last 3 Fix/Build entries unchanged since
+  iter11 (iter7 Fix, iter8 Fix, iter10 Build), so the next Fix/Build choice is still owed
+  a **Build** per the balance rule (2 of the last 3 were Fix) — note this corrects iter11's
+  entry, which mis-stated the owed track as Fix.

@@ -2,14 +2,14 @@
 title: "CryptoDataAPI — Market & Quant Regimes"
 type: source
 created: 2026-07-13
-updated: 2026-07-13
+updated: 2026-09-02
 status: good
 tags: [data-provider, crypto, api, market-regime, regime-detection, hmm, volatility, liquidity, gamma-exposure, event-risk]
 aliases: ["CryptoDataAPI Regimes", "CDA Regimes", "CryptoDataAPI Quant Probabilities", "CryptoDataAPI Regime Engine"]
 source_type: data
 source_url: "https://cryptodataapi.com/api/docs"
 confidence: high
-related: ["[[cryptodataapi]]", "[[cryptodataapi-indicators]]", "[[cryptodataapi-backtesting]]", "[[cryptodataapi-strategy-baskets]]", "[[cryptodataapi-market-health]]", "[[cryptodataapi-derivatives]]", "[[crypto-market-regime-taxonomy]]", "[[regime-strategy-playbook]]", "[[regime-detection]]", "[[market-regime-detection-ml]]", "[[volatility-regime]]", "[[regime-matrix]]", "[[gamma-exposure]]", "[[hidden-markov-models]]"]
+related: ["[[cryptodataapi]]", "[[cryptodataapi-indicators]]", "[[cryptodataapi-backtesting]]", "[[cryptodataapi-strategy-baskets]]", "[[cryptodataapi-market-health]]", "[[cryptodataapi-derivatives]]", "[[cryptodataapi-supply]]", "[[crypto-market-regime-taxonomy]]", "[[regime-strategy-playbook]]", "[[regime-detection]]", "[[market-regime-detection-ml]]", "[[volatility-regime]]", "[[regime-matrix]]", "[[gamma-exposure]]", "[[hidden-markov-models]]"]
 ---
 
 CryptoDataAPI's regime endpoints are the largest signal surface on the API: eight complementary regime families that classify the market by long-horizon cycle state, short-horizon HMM probabilities, volatility, liquidity fragility, meme-coin lifecycle, forward catalysts, security stress, and geopolitical/policy shock. Together they map directly onto this wiki's [[crypto-market-regime-taxonomy]] and drive the [[regime-strategy-playbook]] — each family exposes a current-state endpoint, most add a 0-100 composite score, per-symbol detail, and a refresh trigger.
@@ -88,9 +88,11 @@ Meme-coin lifecycle states plus a market-wide hype gauge. Taxonomy: **euphoric, 
 | GET | /api/v1/meme/regime/{symbol} | Per-asset detail + 60d history | symbol | Pro+ |
 | POST | /api/v1/meme/regime/refresh | Force recompute | — | Pro+ |
 
+Per-asset meme-metrics fields include a return-window ladder — `ret_1d`, `ret_7d`, `ret_30d`, and (added 2026-08-25) `ret_90d` — plus `vol_spike`, `vol_pctile_30`, `sma20_extension_pct`, `funding_rate`, `oi_usd`, and `days_in_regime`. `ret_90d` is null for a coin with less than 91 days of daily kline history, and it is not part of the `euphoric`/`distribution`/`ignition`/`bleeding`/`dormant` classifier itself (which uses only `ret_7d`/`ret_30d`) — it is context for judging how the current lifecycle stage fits into the coin's longer-run trend.
+
 ### Event / Catalyst Regime
 
-Forward-looking catalyst calendar (unlocks, macro prints, depeg risk) with a directional bias per event.
+Forward-looking catalyst calendar (unlocks, macro prints, depeg risk, stablecoin mint/burn steps) with a directional bias per event.
 
 | Method | Path | Returns | Key Params | Tier |
 |--------|------|---------|------------|------|
@@ -99,6 +101,8 @@ Forward-looking catalyst calendar (unlocks, macro prints, depeg risk) with a dir
 | GET | /api/v1/event/calendar | Filterable events up to 30d out | type, symbol, bias | — |
 | GET | /api/v1/event/regime/{symbol} | Per-symbol pending catalysts | symbol | Pro+ |
 | POST | /api/v1/event/regime/refresh | Force recompute | — | Pro+ |
+
+**`mint` event type (2026-08-19):** `/event/calendar` and `/event/regime*` gained a fourth catalyst type alongside `unlock`/`macro_print`/`depeg` — dated stablecoin mint/burn steps, with `delta_usd` (signed) and `pct_of_supply` fields sizing the move. Bias is `long` on a mint and `short` on a redemption. These are **observed, not scheduled** — they carry `days_until <= 0` since a mint/burn is reported after it happens rather than forecast in advance, unlike the forward-looking unlock and macro-print entries in the same calendar. See also [[cryptodataapi-supply]] for the dedicated `/supply/unlocks` cliff-calendar view that now backs the `unlock` type here.
 
 ### Security / Black-Swan Regime
 
