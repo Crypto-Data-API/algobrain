@@ -2,12 +2,87 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-09-03
+updated: 2026-09-04
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-09-04 — Fix: finish the CryptoDataAPI broken-path sweep (borrow-interest, grayscale, hyperliquid mark-price/funding-rates, volatility/realized, blockchain/exchange-flows, archives-index, mvrv, stablecoin-flows, dex/tokens)
+
+**Scope:** completes the sweep iter14 (2026-09-03) deferred. Rebuilt the broken-path list from
+scratch — did not trust the old iter9/iter14 counts — by pulling a fresh `curl
+https://cryptodataapi.com/api` OpenAPI spec, normalizing every real path, and grepping all of
+`wiki/` for `/api/v1/...` citations, matching concrete param substitutions against the wildcard
+form. Found 13 distinct broken strings after the previous fixes; 6 were false positives
+(regex truncation on `<PLACEHOLDER>` curl examples for `dex/security/{chain}/{address}` and
+`nfts/collections/{slug}`; deliberate `/api/v1/backtesting/*` and `/api/v1/dex/*` wildcard
+prose; Santiment's `/api/v1/social_volume`, explicitly labeled non-CryptoDataAPI) — leaving
+**11 real broken paths, ~47 citations** to fix.
+
+- **`/market-intelligence/borrow-interest` and `/market-intelligence/grayscale/{holdings,premium}`**
+  (12 citations, 6 files) — confirmed **retired with no replacement** (absent from the live
+  spec; no changelog rename entry, no `borrow`/`grayscale`/`margin`-rate hits anywhere in the
+  spec text). Per the deprecation rule: struck through on [[cryptodataapi-market-intelligence]]'s
+  endpoint table with a dated warning callout, and struck through inline on every citing
+  strategy page ([[crypto-signal-library]], [[box-spread]], [[staking-yield-arbitrage]],
+  [[cash-and-carry]]) rather than deleted — each now points at perp funding as the
+  leverage-cost proxy instead. Content preserved, not removed.
+- **`/derivatives/hyperliquid/funding-rates` → `/hyperliquid/funding-rates`** (7 citations,
+  2 files: [[funding-window-timing]], [[cross-venue-cascade-dislocation]]) — plain path swap.
+- **`/derivatives/hyperliquid/mark-price` → `/hyperliquid/summary?coin=BTC`** (`mark_price`
+  field) (4 citations, [[cross-venue-cascade-dislocation]]) — the invented path had no real
+  analog; `/hyperliquid/summary` is the real endpoint carrying a genuine `mark_price` field.
+- **`/volatility/realized?coin=BTC&days=30` → `/volatility/index`** (`majors[].realized_30`
+  + pre-computed `vrp` = implied − realized) (5 citations, [[options-rv-event-calendar]],
+  [[defi-yield-regime-gate]]) — better than the invented endpoint would have been: VRP is
+  already computed server-side. Historical variant on defi-yield-regime-gate pointed at
+  `/volatility/regime/BTC`'s 60d Pro-Plus `history[]` (`rv_cc_30`) instead. Also fixed the
+  same file's `/volatility/correlation?assets=BTC,SPX` (no such endpoint exists) to state
+  plainly it must be computed from klines — the wiki's own "(if available)" hedge was right
+  to be suspicious.
+- **`/blockchain/exchange-flows` → `/on-chain/exchange-flows/spike-alerts`** (multi-asset
+  case) or `/on-chain/exchange-flows/{symbol}` (per-symbol case) (3 citations,
+  [[news-trading]], [[structural-forced-selling]]) — also added the EVM-chain+Solana-only
+  coverage caveat (no native BTC) to structural-forced-selling's per-symbol citation, the same
+  class of coverage gap iter14 found on whale-score.
+- **`/backtesting/archives-index` → `/backtesting/archives/index`** (2 citations,
+  [[cryptodataapi-backtesting]], concepts/indicators/backtesting) — path had an extra
+  flattening; real route nests `index` under `archives/`.
+- **`/on-chain/mvrv` → `/on-chain/dormancy/btc`** (1 citation, [[alternative-data-alpha]];
+  the [[log]] mention is historical) — flagged by iter14, fixed this pass. Verified fields:
+  `metrics.mvrv` (raw ratio) + `mvrv_signal.zone` (categorical: capitulation → accumulation →
+  neutral → elevated → euphoria). Noted the endpoint is **BTC-only**, not a general
+  per-altcoin MVRV route as the old citation implied.
+- **event-vol-buying "No CryptoDataAPI endpoint for event calendar" → `/event/calendar`**
+  (flagged stale by iter14, fixed this pass) — the claim predated the endpoint's addition;
+  corrected to cite it with its real filters (`type`, `symbol`, `bias`, `min_magnitude`,
+  `window_days`) and fixed an adjacent `?days=30` param-name bug to `?window_days=30` in the
+  same file.
+- **`/sentiment/stablecoin-flows` → `/sentiment/stablecoins`** (1 citation,
+  [[stablecoin-sentiment-depeg-entry]]) — real endpoint returns market cap + 14d/90d flow
+  fields (`inflow_14d_billions`, `inflow_90d_billions`).
+- **`/dex/tokens` → `/coins/{symbol}` (market cap) + `/dex/token/{chain}/{address}` (DEX
+  liquidity, once a contract address is known)** (1 citation, [[narrative-position-vol-targeting]])
+  — the invented plural route doesn't exist; the real singular route needs chain+address, not
+  a bare symbol.
+- **Verified:** re-grepped `wiki/` for every fixed path string — zero remaining *live*
+  citations. All post-fix hits are either deliberate deprecation/correction annotations
+  (struck-through table rows, "retired"/"corrected from the invented X" inline notes — exactly
+  the ADD-never-destroy documentation this fix requires) or the 6 pre-existing false positives
+  above, unchanged.
+- **Not touched (bounded scope):** the `?days=30` vs `window_days` param-name mismatch on
+  `/event/calendar` recurs across ~15 other pages; only the one page already being edited for
+  the stale-claim fix got the param corrected. A dedicated params-only pass would be needed to
+  clear the rest.
+- **Files touched (17):** all bump `updated: 2026-09-04`. [[cryptodataapi-market-intelligence]],
+  [[cryptodataapi-backtesting]], [[crypto-signal-library]], [[box-spread]],
+  [[staking-yield-arbitrage]], [[cash-and-carry]], [[funding-window-timing]],
+  [[cross-venue-cascade-dislocation]], [[options-rv-event-calendar]],
+  [[defi-yield-regime-gate]], [[news-trading]], [[structural-forced-selling]],
+  [[alternative-data-alpha]], [[event-vol-buying]], [[stablecoin-sentiment-depeg-entry]],
+  [[narrative-position-vol-targeting]], concepts/indicators/backtesting.
 
 ## 2026-09-03 — Fix: 4 confirmed-broken CryptoDataAPI paths (fear-greed-index, whale-score, volatility/dvol, dvol-history)
 

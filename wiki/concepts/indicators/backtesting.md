@@ -2,7 +2,7 @@
 title: "Backtesting"
 type: redirect
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-09-04
 status: good
 tags: [backtesting, quantitative]
 aliases: ["Backtesting", "backtest"]
@@ -32,7 +32,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-backtesting]].
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run backtests over the archive directly:
 
-- **Discover** — `GET /api/v1/backtesting/symbols` and `GET /api/v1/backtesting/archives-index` list what is available before designing a test
+- **Discover** — `GET /api/v1/backtesting/symbols` and `GET /api/v1/backtesting/archives/index` list what is available before designing a test
 - **Fetch** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08; 1m only since 2026-03-30), `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30), `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30)
 - **Point-in-time** — replay `GET /api/v1/backtesting/daily-snapshots/{date}` (full `/daily` payload since 2026-03-02) so each simulated day sees only what a live system saw
 - **Tip** — bulk research is faster over Parquet: `GET /api/v1/backtesting/archives/download` returns pre-signed URLs that load straight into pandas/DuckDB

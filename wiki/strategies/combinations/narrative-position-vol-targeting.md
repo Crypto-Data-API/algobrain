@@ -2,7 +2,7 @@
 title: "Narrative Position Vol Targeting"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-03
+updated: 2026-09-04
 status: good
 tags: [combinations, meta-strategy, momentum, volatility, risk-management, behavioral-finance, memecoins, event-driven, quantitative, crypto, altcoins]
 aliases: ["Narrative Book Vol Sizing", "Vol-Scaled Narrative Trading", "Risk-Contribution Narrative Sizing", "Meme-Vol Risk Budget"]
@@ -340,7 +340,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/derivatives/funding-rates?coin={TOKEN}` — funding context check for perp-expressed narrative positions
 - `GET /api/v1/regimes/current` — macro regime; reduce heat cap to 10% if `Risk_Off` or `Structural_Shock`
 - `GET /api/v1/sentiment/fear-greed` — book-level risk-appetite context; Fear & Greed < 30 reduces heat cap
-- `GET /api/v1/dex/tokens` or `GET /api/v1/coins/{symbol}` — token market cap and liquidity context; filter out tokens below minimum DEX volume threshold
+- `GET /api/v1/coins/{symbol}` — token market cap and price context (works for any CEX-listed narrative name); for pure DEX-only memecoins, `GET /api/v1/dex/token/{chain}/{address}` gives per-token liquidity/volume once the contract address is known (e.g. from `/api/v1/dex/trending` or `/api/v1/dex/new-pools` discovery) — filter out tokens below minimum DEX volume threshold. *Corrected from the invented `/api/v1/dex/tokens`, which is not a real path.*
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol={TOKEN}USDT&interval=1d&limit=90` — 90-day daily OHLCV for vol regime history and lookback calibration

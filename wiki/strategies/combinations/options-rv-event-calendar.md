@@ -2,7 +2,7 @@
 title: "Options Relative-Value × Event Calendar"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-03
+updated: 2026-09-04
 status: good
 tags: [combinations, meta-strategy, options-structures, derivatives, volatility, event-driven, term-structure, crypto, deribit, quantitative]
 aliases: ["Options RV Event Calendar", "Term-Structure Event Positioning", "Calendar Event Vol-of-Vol Premium", "Event-Anchored Options RV"]
@@ -195,9 +195,9 @@ The production system polls Deribit's options chain every 30 minutes to update n
 
 - **Deribit IV by expiry** — Deribit API: `GET /api/v2/public/get_historical_volatility?currency=BTC` (historical) and options chain for per-expiry IV; primary input for term-structure measurement. *Not in CryptoDataAPI — sourced directly from Deribit API.*
 - **DVOL (BTC/ETH 30-day IV index)** — `GET /api/v1/volatility/implied`; context metric to assess whether the overall vol surface is elevated pre-event.
-- **BTC-SPX 30-day correlation** — `GET /api/v1/volatility/correlation?assets=BTC,SPX&days=30` (if available) or computed from daily OHLCV; Tier 2 gate for FOMC events.
-- **Event calendar** — maintained manually by the operator; key dates: halving (block-height countdown), ETF decision (SEC calendar), FOMC meeting dates (Federal Reserve calendar), major token unlock schedules (Messari, TokenUnlocks).
-- **Realized vol** — `GET /api/v1/volatility/realized?coin=BTC&days=30`; secondary context for assessing whether the pre-event DVOL spike is justified or excessive.
+- **BTC-SPX 30-day correlation** — *not a CryptoDataAPI endpoint* (no `/volatility/correlation` route exists in the live spec); compute from daily OHLCV — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=30` for the BTC leg, paired with an external SPX daily series; Tier 2 gate for FOMC events.
+- **Event calendar** — `GET /api/v1/event/calendar` (CryptoDataAPI, filterable up to 30d out) for unlocks/macro-print/depeg catalysts, supplemented manually for dates outside that window: halving (block-height countdown), ETF decision (SEC calendar), FOMC meeting dates (Federal Reserve calendar).
+- **Realized vol** — `GET /api/v1/volatility/index`; `majors[]` carries BTC/ETH `realized_30` (30d annualized realized vol) alongside `implied_dvol` and `vrp` (implied − realized) already computed — secondary context for assessing whether the pre-event DVOL spike is justified or excessive. *Corrected from the invented `/api/v1/volatility/realized?coin=BTC&days=30`, which is not a real path.*
 - **Funding rates** — `GET /api/v1/derivatives/funding-rates?coin=BTC`; used to assess cost of delta hedging via perp (high funding = expensive delta hedge in one direction).
 
 ## Example trade
@@ -285,7 +285,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 
 **Live data:**
 - `GET /api/v1/volatility/implied` — DVOL 30-day index; one call's `items[]` covers both BTC and ETH (Pro/Pro Plus; BTC-only Free) — context for overall vol level pre-event
-- `GET /api/v1/volatility/realized?coin=BTC&days=30` — realised vol comparison to assess DVOL richness
+- `GET /api/v1/volatility/index` — `majors[]` gives BTC/ETH `realized_30`, `implied_dvol`, and a pre-computed `vrp` (implied − realized) — realised-vol comparison to assess DVOL richness
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — delta-hedge cost check (elevated funding = expensive perp hedge)
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=30` — recent daily OHLCV for BTC-SPX correlation computation
 
@@ -311,7 +311,7 @@ Auth: CryptoDataAPI requires `X-API-Key` header. Deribit public endpoints requir
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the context half of this trade end-to-end:
 
-- **Signal context** — `GET /api/v1/volatility/implied` vs `GET /api/v1/volatility/realized?coin=BTC&days=30` establishes whether event IV is rich before the calendar spread goes on
+- **Signal context** — `GET /api/v1/volatility/index`'s `majors[].vrp` (implied − realized, pre-computed) establishes whether event IV is rich before the calendar spread goes on
 - **Event leg** — `GET /api/v1/event/calendar` (filterable up to 30d out) gives the agent machine-readable macro and unlock event dates to anchor expiry selection
 - **Filter** — `GET /api/v1/derivatives/funding-rates?coin=BTC`; elevated funding raises delta-hedge carry costs and shrinks the trade's edge
 - **Backtest** — `GET /api/v1/volatility/implied`'s `items[].history` (Pro Plus) for event-window vol-premium behaviour, joined to daily klines back to 2017-08 from `GET /api/v1/backtesting/klines`

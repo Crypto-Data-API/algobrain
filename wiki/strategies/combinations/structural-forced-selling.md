@@ -2,7 +2,7 @@
 title: Structural Forced Selling
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-09-04
 status: review
 tags: [combinations, market-microstructure, liquidations, funding-rate, crypto, perpetual-futures, structural, event-driven]
 aliases: ["Forced Seller Flow", "Mandatory Liquidation", "Crypto Forced Selling"]
@@ -79,7 +79,7 @@ If crypto markets are efficient enough that forced-selling dislocations are imme
 
 **Identification:**
 - Major counterparty failures (exchange insolvency, stablecoin depeg, large fund blow-up) force exposed funds to liquidate *all* liquid holdings, not just the directly exposed assets.
-- Monitor on-chain exchange inflows for large, concentrated addresses moving coins to exchanges (CryptoDataAPI `/api/v1/blockchain/exchange-flows`). Elevated inflows across multiple top-50 assets simultaneously signal fund-level liquidation.
+- Monitor on-chain exchange inflows for large, concentrated addresses moving coins to exchanges (CryptoDataAPI `/api/v1/on-chain/exchange-flows/spike-alerts` — recent large transfers to/from tracked CEX wallets, USD-thresholded). Elevated inflows across multiple top-50 assets simultaneously signal fund-level liquidation.
 - Track cross-asset correlation compression: quality DeFi tokens, BTC, and ETH all declining simultaneously at high volume on no individual-asset news is the contagion signature.
 
 **Entry:** 3–10 days after the contagion event begins; wait for on-chain exchange inflows to peak and decline, signalling that the selling is exhausting. The FTX contagion (November 2022) example: quality DeFi tokens dropped 50%+ on pure flow, recovered 100%+ over the following three months.
@@ -154,7 +154,7 @@ Crypto forced-selling trades are capacity-constrained by: (1) the distressed-exi
 - `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidation volume (the primary forced-selling signal)
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding rate; deeply negative = crowded forced sellers
 - `GET /api/v1/derivatives/open-interest` — OI trend confirms whether shorts are loading or covering
-- `GET /api/v1/blockchain/exchange-flows` — on-chain exchange inflows: large inflows = coins moved to sell
+- `GET /api/v1/on-chain/exchange-flows/spike-alerts` — real-time large-transfer alerts to/from tracked CEX wallets (USD-thresholded); large concentrated inflows = coins moved to sell. Per-symbol detail via `GET /api/v1/on-chain/exchange-flows/{symbol}` (symbol must be tracked across ETH/BSC/Base/Arbitrum/Optimism/Tron/Solana — native BTC is not covered).
 
 **Historical:**
 - `GET /api/v1/backtesting/liquidations` — liquidation cascade archive for identifying historical forced-selling windows
@@ -174,7 +174,7 @@ Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]], [
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
 - **Signal** — `GET /api/v1/market-intelligence/liquidations` (forced-flow volume) with `GET /api/v1/derivatives/funding-rates?coin=BTC` deeply negative marks seller exhaustion
-- **Filter** — `GET /api/v1/derivatives/open-interest` distinguishes shorts loading (avoid) from shorts covering (fade window); `GET /api/v1/on-chain/exchange-flows/BTC` confirms whether coins are still moving onto exchanges to be sold
+- **Filter** — `GET /api/v1/derivatives/open-interest` distinguishes shorts loading (avoid) from shorts covering (fade window); `GET /api/v1/on-chain/exchange-flows/spike-alerts` confirms whether coins are still moving onto exchanges to be sold (per-symbol detail via `/on-chain/exchange-flows/{symbol}` is EVM-chain + Solana only — it does not cover native BTC)
 - **Backtest** — post-cascade recovery from `GET /api/v1/backtesting/klines` (1d back to 2017-08) and funding exhaustion from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30); direct liquidation replay only since 2026-03-30 (Hyperliquid)
 - **Tips** — structural selling (fund unwinds, treasury sales) often precedes the liquidation print; watch `GET /api/v1/on-chain/exchange-flows/spike-alerts` as the leading leg of the sequence
 

@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Backtesting Archive"
 type: source
 created: 2026-07-13
-updated: 2026-08-25
+updated: 2026-09-04
 status: good
 tags: [data-provider, crypto, api, backtesting, historical-data, point-in-time, parquet, klines, funding, liquidations]
 aliases: ["CryptoDataAPI Backtesting", "CDA Backtesting", "CryptoDataAPI Historical Archive", "CryptoDataAPI Archives"]
@@ -27,7 +27,7 @@ CryptoDataAPI's Backtesting section is the historical arm of the API: a full arc
 | GET | /api/v1/backtesting/symbols | Backtest-available symbols | — | — |
 | GET | /api/v1/backtesting/status | Collector status | — | — |
 | GET | /api/v1/backtesting/export | Export data, custom range | — | — |
-| GET | /api/v1/backtesting/archives-index | Index of archives | — | — |
+| GET | /api/v1/backtesting/archives/index | Index of archives — data types, symbols, exchanges, date ranges | — | — |
 | GET | /api/v1/backtesting/archives | List archived datasets | — | — |
 | GET | /api/v1/backtesting/archives/download | Download archive (pre-signed URL) | — | — |
 | GET | /api/v1/backtesting/daily-snapshots | Daily snapshot list | — | — |
@@ -37,7 +37,7 @@ Historical depth: Parquet archive from 2020.
 
 ## Live Data
 
-Only `/backtesting/status` is about the present — it reports collector health so you know whether the archive is up to date. `/backtesting/symbols`, `/backtesting/snapshots/types`, and `/backtesting/archives-index` are discovery endpoints listing what is currently available to query or download.
+Only `/backtesting/status` is about the present — it reports collector health so you know whether the archive is up to date. `/backtesting/symbols`, `/backtesting/snapshots/types`, and `/backtesting/archives/index` are discovery endpoints listing what is currently available to query or download.
 
 ## Historical Data
 

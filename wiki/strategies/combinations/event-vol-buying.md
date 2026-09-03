@@ -2,7 +2,7 @@
 title: "Event Vol Buying"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-03
+updated: 2026-09-04
 status: good
 tags: [combinations, meta-strategy, options, volatility, derivatives, event-driven, behavioral-finance, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Scheduled-Event Straddle", "Catalyst IV Buying", "Event Straddle Strategy", "Pre-Catalyst Long Vol"]
@@ -224,7 +224,7 @@ The production system adds: Deribit WebSocket feeds for live IV monitoring on th
 - **ATM implied volatility (Deribit)** — the primary entry gate; requires the options chain on the Deribit API for the catalyst expiry. CryptoDataAPI does not document a verified options IV endpoint; source from [[deribit]] directly (`GET /api/v2/public/get_order_book?instrument_name=BTC-{date}-{strike}-C`) or Deribit's implied-vol history endpoint.
 - **DVOL (Deribit Bitcoin/Ethereum Volatility Index)** — `/api/v1/volatility/implied` (CryptoDataAPI) or Deribit's `deribit_price_index` DVOL timeseries. Used for the 30-day trailing average IV level as the "not yet priced" baseline.
 - **Realized vol (30-day)** — computed from daily OHLCV: `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=60`. Yang-Zhang estimator or close-to-close log-return vol.
-- **Event calendar** — public sources: Bitcoin block height countdown (bitcoin.clarkmoody.com), SEC EDGAR decision deadlines (public EDGAR calendar), Ethereum core developer blog (ethresear.ch, ethereum.org/en/history/). No CryptoDataAPI endpoint for event calendar; maintain a manual or scraped event log.
+- **Event calendar** — `GET /api/v1/event/calendar` (CryptoDataAPI) — filterable forward catalyst calendar up to 30 days out (`type`, `symbol`, `bias`, `min_magnitude`); covers scheduled unlocks, macro prints, and depeg/mint events with a directional bias per entry. Supplement with public sources for catalyst types outside that window or its coverage: Bitcoin block height countdown (bitcoin.clarkmoody.com) for halvings beyond 30 days out, SEC EDGAR decision deadlines (public EDGAR calendar), Ethereum core developer blog (ethresear.ch, ethereum.org/en/history/).
 - **Regime classification** — `GET /api/v1/regimes/current` — blocks entry in `Structural_Shock` regime.
 - **Options chain** — Deribit is the primary venue for BTC and ETH options with sufficient open interest in the relevant expiry. See [[deribit]] for API access.
 
@@ -321,6 +321,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 
 **Live data:**
 - `GET /api/v1/volatility/implied` — DVOL (Deribit Volatility Index) history for BTC and ETH; primary baseline for the "IV not yet moved" gate (compare current ATM IV to 30-day DVOL average)
+- `GET /api/v1/event/calendar?window_days=30` — forward catalyst calendar (unlocks, macro prints, depeg/mint events) with a directional bias per entry; the machine-readable half of the "Event calendar" input above
 - `GET /api/v1/regimes/current` — macro regime classification; blocks entry in `Structural_Shock`
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=60` — daily OHLCV for realized-vol computation
 
@@ -344,7 +345,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intellig
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
 - **IV gate** — `GET /api/v1/volatility/implied` — current IV vs the 30-day DVOL average: the "IV not yet moved" entry condition
-- **Catalyst feed** — `GET /api/v1/event/calendar?days=30` + `GET /api/v1/event/regime/score` — candidate catalysts with directional bias to buy vol into
+- **Catalyst feed** — `GET /api/v1/event/calendar?window_days=30` + `GET /api/v1/event/regime/score` — candidate catalysts with directional bias to buy vol into
 - **Regime gate** — `GET /api/v1/regimes/current` — no entries in `Structural_Shock` (vol has already repriced)
 - **Backtest** — replay the IV gate across past catalysts with the same DVOL series; realized-vol outcomes from `GET /api/v1/backtesting/klines` (daily back to 2017-08); straddle-level pricing history stays on Deribit
 - **Tips** — cheapness is relative: score IV against both the 30d DVOL average and realized vol computed from klines before paying for the straddle

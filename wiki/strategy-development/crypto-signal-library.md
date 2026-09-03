@@ -2,7 +2,7 @@
 title: "Crypto Signal Library"
 type: index
 created: 2026-07-14
-updated: 2026-09-03
+updated: 2026-09-04
 status: good
 tags: [meta, crypto, quantitative, methodology, data-provider]
 aliases: ["Signal Library", "Crypto Signal Menu", "Signal Primitives"]
@@ -53,7 +53,7 @@ Secondary primitives — usually gates or confirmations rather than standalone a
 | **Gamma exposure (GEX)** | `/api/v1/quant/gex` | MM inventory + liquidation profile | Pin/anti-pin and squeeze-risk gate |
 | **Hash ribbon** | `/api/v1/on-chain/miners/hash-ribbon` | 30d vs 60d hashrate MA state | BTC miner-capitulation bottom filter |
 | **Options max-pain** | `/api/v1/market-intelligence/options` | OI, volume, max-pain strike | Expiry-pin bias near BTC option expiries |
-| **Borrow interest** | `/api/v1/market-intelligence/borrow-interest` | Margin borrow rate, 4h | Leverage-cost / short-squeeze pressure |
+| **Borrow interest** | ~~`/api/v1/market-intelligence/borrow-interest`~~ **RETIRED**, no replacement (verified 2026-09-04, see [[cryptodataapi-market-intelligence]]) | Margin borrow rate, 4h | Leverage-cost / short-squeeze pressure — use `/api/v1/derivatives/funding-rates` as the leverage-cost proxy instead |
 | **Volatility regime** ([[volatility-regime]]) | `/api/v1/volatility/regime` | Compressed/expanding/shock label | Sizing and normalization regime for all signals above |
 
 ## Decay tiers (rebalance to the half-life)

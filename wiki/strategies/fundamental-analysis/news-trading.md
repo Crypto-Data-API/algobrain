@@ -2,7 +2,7 @@
 title: "News Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-08-26
+updated: 2026-09-04
 status: review
 tags: [news-trading, event-driven, volatility, crypto, fundamental-analysis, execution, day-trading]
 aliases: ["News-Based Trading", "Event-Driven Trading", "Headline Trading", "Catalyst Trading"]
@@ -50,7 +50,7 @@ The behavioral edge: after the initial directional move, crowd behavior amplifie
 
 1. **Macro (FOMC, CPI, NFP)** — BTC has become highly macro-sensitive post-ETF approval. US CPI and FOMC rate decisions now move BTC perps within seconds via the BTC/SPX correlation channel. High-impact US data releases require the same seconds-level execution as equity/FX news trading, but with a crypto-specific layer: perp funding and open interest begin repricing within the same minute.
 2. **Crypto-native events** — ETF approval/rejection decisions, exchange solvency news (FTX-style), major protocol exploits, large token unlocks, regulatory announcements. These move crypto faster and further than macro, and have no equity equivalent in speed or magnitude.
-3. **On-chain alerts** — large whale movements, exchange inflows/outflows, and smart-contract events can trigger price moves before public news. CryptoDataAPI `/api/v1/blockchain/exchange-flows` and whale-alert services provide early signals.
+3. **On-chain alerts** — large whale movements, exchange inflows/outflows, and smart-contract events can trigger price moves before public news. CryptoDataAPI `/api/v1/on-chain/exchange-flows/spike-alerts` (real-time large-transfer alerts to/from tracked CEX wallets) and whale-alert services provide early signals.
 4. **Social/narrative catalysts** — viral posts from influential accounts, trending narratives (DeepSeek AI, Musk tweets) can move speculative tokens immediately and then reverse. The fade variant is most applicable here.
 
 **Corporate earnings are out of scope.** This wiki does not cover single-name equities. News trading on equity earnings (SPY, individual stocks) is the TradFi origination context for the strategy but is not the target here.

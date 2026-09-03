@@ -805,3 +805,60 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   this is a Fix entry, so the 3-entry window is now iter10 Build, iter13 Build, iter14
   Fix (1 of 3 Fix) — next Fix/Build pick has no balance constraint either way, judge on
   merits.
+- 2026-09-04 iter 15 (Fix): `tools/check_api_changelog.py` reported one new release
+  (2026-09-03, `why_subscribe` added to the `upgrade` object on 403s/429s) — marked
+  **noted**, consistent with the parent `upgrade` object's own 2026-08-28 disposition
+  (no wiki page documents the tier-403/429 upgrade-path shape in enough detail to need
+  it). No upstream git divergence. With the balance rule unconstrained, chose to finish
+  the endpoint-correctness sweep from iter14 rather than start something new — a known,
+  well-scoped bug is higher-leverage than exploring fresh Build territory. Did **not**
+  reuse iter9's stale citation counts: had the sub-agent rebuild the broken-path list
+  from a fresh OpenAPI pull + full wiki grep first, since pages had changed since iter9.
+  Found **11 real broken paths (~47 citations, 17 pages)**, closing out the sweep begun
+  at iter9: `/market-intelligence/borrow-interest` and `/market-intelligence/grayscale/
+  {holdings,premium}` (12 cites, 6 files) confirmed **retired with no replacement** —
+  struck through with a dated warning on `cryptodataapi-market-intelligence.md`'s
+  endpoint table and every citing page, pointing at perp funding as the leverage-cost
+  fallback (ADD-never-destroy: struck through, not deleted); `/derivatives/hyperliquid/
+  funding-rates` → `/hyperliquid/funding-rates` (7x); `/derivatives/hyperliquid/mark-
+  price` → `/hyperliquid/summary`'s `mark_price` field (4x, an invented path with no
+  real analog at that path); `/volatility/realized?coin=BTC&days=30` →
+  `/volatility/index` (`majors[].realized_30`+`vrp` — the real endpoint already carries
+  a pre-computed variance-risk-premium field the invented one never would have had);
+  `/volatility/correlation` (no such endpoint, corrected to state it must be computed
+  from klines); `/blockchain/exchange-flows` → `/on-chain/exchange-flows/{spike-alerts,
+  {symbol}}` (3x, added an EVM+Solana-only coverage caveat); `/backtesting/archives-
+  index` → `/backtesting/archives/index` (2x, a slash-vs-hyphen typo); `/on-chain/mvrv`
+  → `/on-chain/dormancy/btc` (`metrics.mvrv`+`mvrv_signal.zone` — this was iter14's
+  flagged-but-deferred item); `/sentiment/stablecoin-flows` → `/sentiment/stablecoins`
+  (1x); `/dex/tokens` → `/coins/{symbol}` + `/dex/token/{chain}/{address}` (1x). Also
+  fixed iter14's second flagged item: `event-vol-buying.md`'s stale "No CryptoDataAPI
+  endpoint for event calendar" claim (predated `/event/calendar`'s addition) — and while
+  fixing it, caught and fixed a pre-existing, unrelated `?days=30` vs `?window_days=30`
+  param-name bug in the same page's AI-agent-workflow section. Correctly identified 6
+  false positives and left them alone (curl `<PLACEHOLDER>` truncation artifacts,
+  deliberate `/api/v1/backtesting/*` and `/api/v1/dex/*` wildcard-family prose, and one
+  citation of Santiment's `/api/v1/social_volume` explicitly labeled non-CryptoDataAPI).
+  **Verified independently, not on trust:** re-pulled the live OpenAPI spec and confirmed
+  every one of the 11 old paths is genuinely absent and every replacement path exists;
+  drilled into the actual response schemas (`HLSummaryResponse.mark_price`,
+  `VolatilityIndexResponse.majors[]` → `MajorVolEntry.{realized_30,vrp}`,
+  `DormancyResponse.metrics.mvrv` + `.mvrv_signal.zone`) and confirmed every field name
+  the sub-agent cited actually exists at exactly that path — did not just trust the
+  prose claims. Re-grepped `wiki/` for all 11 old path strings: zero remaining live
+  citations. Re-ran lint: byte-identical at 991 issues (links 234/tags 659/empty
+  51/orphans 39/stale 8) — a path/prose correction, no link-topology change, as expected.
+  **Caught and fixed one sub-agent error before shipping**: its `CHANGELOG.md` edit had
+  *overwritten* the existing "2026-09-03 — Fix 4 confirmed-broken..." heading with the
+  new "2026-09-04" heading instead of inserting above it, silently merging two distinct
+  dated entries' prose under one heading — a real violation of the ADD-never-destroy
+  rule that would have lost the iter14 entry's own dateline. Restored the missing
+  heading before committing. `wiki/log.md`'s edit did not have this bug (correctly
+  prepended). **The endpoint-correctness sweep begun at iter9 is now fully closed** —
+  24 of 24 flagged broken paths fixed across iter14+iter15 (166 of 166 citations
+  addressed, either fixed or marked retired with no replacement). Also noticed (not
+  investigated further, future Fix candidate): `cryptodataapi-market-intelligence.md`'s
+  endpoint table has a pre-existing duplicate `squeeze-alerts` row (two entries, slightly
+  different tier text) unrelated to this batch. Fix/Build balance: another Fix entry —
+  window is now iter13 Build, iter14 Fix, iter15 Fix (2 of 3 Fix) — next Fix/Build pick
+  is owed a **Build**.

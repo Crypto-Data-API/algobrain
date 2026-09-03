@@ -2,7 +2,7 @@
 title: "Staking Yield Arbitrage"
 type: strategy
 created: 2026-04-07
-updated: 2026-07-19
+updated: 2026-09-04
 status: good
 tags: [arbitrage, crypto, defi, staking, liquid-staking, funding-rate, delta-neutral, restaking, leverage]
 aliases: ["Staking Arb", "LST Basis Trade", "Staking-vs-Borrow Carry", "DeFi Yield Arb"]
@@ -259,7 +259,7 @@ Native ETH staking yields and DeFi (Aave/Morpho) borrow rates come from on-chain
 
 **Live data:**
 - `GET /api/v1/derivatives/funding-rates?coin=ETH` — cross-exchange ETH perp funding (delta-neutral hedge cost)
-- `GET /api/v1/market-intelligence/borrow-interest` — margin borrow rate (BTC/Binance) as a CEX borrow-cost proxy
+- ~~`GET /api/v1/market-intelligence/borrow-interest`~~ — **retired**, no replacement (verified 2026-09-04, see [[cryptodataapi-market-intelligence]]); read the CEX borrow rate directly from the exchange's margin API instead
 - `GET /api/v1/dex/token/{chain}/{address}` — LST pool price on a DEX (e.g. stETH/ETH Curve pool) → depeg signal
 - `GET /api/v1/liquidity/depth` — per-coin depth/spread (unwind-slippage gate for the LST leg)
 
@@ -270,7 +270,6 @@ Native ETH staking yields and DeFi (Aave/Morpho) borrow rates come from on-chain
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=ETH"
-curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/borrow-interest"
 ```
 
 Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-derivatives]], [[cryptodataapi-market-intelligence]], [[cryptodataapi-dex]].
@@ -281,7 +280,7 @@ Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-derivatives]], [[crypto
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can manage the hedged (delta-neutral) variant end-to-end:
 
-- **Carry math** — `GET /api/v1/derivatives/funding-rates?coin=ETH` gives the short-perp hedge cost; net carry = staking APR (on-chain read) minus funding paid minus borrow cost (`GET /api/v1/market-intelligence/borrow-interest` as CEX proxy). Only deploy while net carry is positive after gas.
+- **Carry math** — `GET /api/v1/derivatives/funding-rates?coin=ETH` gives the short-perp hedge cost; net carry = staking APR (on-chain read) minus funding paid minus borrow cost (the CEX margin-rate endpoint this used to read is retired — read the borrow rate directly from the exchange's own margin API). Only deploy while net carry is positive after gas.
 - **Depeg watch** — `GET /api/v1/dex/token/{chain}/{address}` on the stETH/ETH pool detects LST discount; a widening discount is both the entry for the convergence add-on ([[lst-depeg-arbitrage]]) and a margin warning for looped positions.
 - **Regime gate** — `GET /api/v1/quant/market`: negative-funding episodes cluster in `strong_trend_bear` and `vol_spike` states (the Nov 2022 failure mode) — de-lever the loop when those probabilities rise. `GET /api/v1/security/regime/score` adds a depeg/hack stress overlay.
 - **Backtest** — `GET /api/v1/backtesting/funding` (Hyperliquid hourly ETH funding since 2023-05) replays the hedge-cost leg across Shapella-era history; `GET /api/v1/backtesting/klines` covers stETH-proxy basis studies. Pair with `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime state.

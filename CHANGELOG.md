@@ -4,6 +4,24 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-09-04 — Finish the data-layer broken-path sweep: 11 more invented/retired endpoints across 17 pages
+
+**Fixed:** Closed out the endpoint-path audit from two iterations ago. Rebuilt the
+broken-path list from a fresh pull of the live API spec rather than trusting old counts,
+and found 11 real broken paths (~47 citations) plus 6 false alarms (curl placeholder
+truncation, deliberate wildcard-family prose, and one clearly-labeled non-data-layer
+citation). Two endpoints — a margin-borrow-rate proxy and a fund-holdings/premium pair —
+are confirmed retired from the live API with no replacement; struck through and dated on
+the data-source page and every citing strategy page rather than deleted, pointing at perp
+funding as the leverage-cost fallback. The rest were path renames or invented paths with
+real analogs: a Hyperliquid mark-price and funding-rate pair, a realized-volatility
+endpoint (whose real replacement turned out to already carry a pre-computed variance-risk-
+premium field, better than the invented one would have been), an exchange-flows path, a
+backtesting-archive discovery path, an MVRV path (flagged but out of scope two iterations
+ago), a stablecoin-flow path, and a DEX-token path. Also fixed a stale "no endpoint exists"
+claim for the event calendar that predated the endpoint's addition. Re-verified with a
+fresh grep: zero remaining live citations of any fixed path.
+
 ## 2026-09-03 — Fix 4 confirmed-broken data-layer endpoint paths across 45 pages
 
 **Fixed:** Corrected four endpoint paths cited across the wiki that did not exist against

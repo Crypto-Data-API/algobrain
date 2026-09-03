@@ -2,7 +2,7 @@
 title: "Box Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-09-04
 status: good
 tags: [options, box-spread, arbitrage, financing, crypto, derivatives, interest-rates]
 aliases: ["Long Box", "Box Arbitrage", "Synthetic Loan", "Deribit Box"]
@@ -100,7 +100,7 @@ Box pricing is a Deribit order-book task ([[greeks-live]] / Deribit API for the 
 - `GET /api/v1/derivatives/open-interest?coin=BTC` — futures/perp basis context for cash-and-carry comparison
 - `GET /api/v1/market-intelligence/options` — BTC options OI / volume, a liquidity read for four-leg fillability
 - `GET /api/v1/sentiment/stablecoins` — stablecoin market-cap and flows, a proxy for USDC lending supply/demand
-- `GET /api/v1/market-intelligence/borrow-interest` — BTC margin borrow rate (Binance, 4h), a comparable financing benchmark
+- ~~`GET /api/v1/market-intelligence/borrow-interest`~~ — **retired**, no replacement (verified 2026-09-04, see [[cryptodataapi-market-intelligence]]); perp funding above is now the only CryptoDataAPI financing-rate benchmark for the box
 
 **Historical data:**
 - `GET /api/v1/backtesting/funding` — historical funding to reconstruct the crypto USD rate curve over a box's life
@@ -118,7 +118,7 @@ Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-derivatives]] and [[cryp
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
-- **Signal** — benchmark the box's implied rate against `GET /api/v1/derivatives/funding-rates?coin=ETH` (annualised perp carry) and `GET /api/v1/market-intelligence/borrow-interest`; trade only when the locked rate beats both after four-leg fees
+- **Signal** — benchmark the box's implied rate against `GET /api/v1/derivatives/funding-rates?coin=ETH` (annualised perp carry); trade only when the locked rate beats it after four-leg fees (the margin-borrow-rate benchmark this used to also check against is retired — no CryptoDataAPI replacement)
 - **Execution** — check `GET /api/v1/market-intelligence/options` OI/volume before quoting: on a thin chain, four-leg fill quality *is* the trade
 - **Backtest** — reconstruct the crypto USD rate curve the box competed with using `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30)
 - **Tips** — a box is rate arbitrage, not a market bet, so skip the directional regime gate; instead watch `/api/v1/sentiment/stablecoins` for USDC supply squeezes that move the whole crypto rate curve, and fold rate checks into an hourly cached `GET /api/v1/daily` poll rather than per-tick polling.

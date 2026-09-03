@@ -2,7 +2,7 @@
 title: "Cash and Carry Arbitrage"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-20
+updated: 2026-09-04
 status: good
 tags: [arbitrage, crypto, basis-trade, futures, contango, market-neutral, derivatives, etf]
 aliases: ["Basis Trade", "Cash and Carry", "Spot-Futures Arbitrage", "Crypto Carry (Dated)"]
@@ -273,7 +273,7 @@ CryptoDataAPI does **not** serve the full dated-quarterly-futures curve — asse
 - `GET /api/v1/derivatives/open-interest?coin=BTC` — cross-exchange OI (short-leg liquidity/crowding)
 - `GET /api/v1/derivatives/summary?coin=BTC` — combined derivatives overview (markdown format available)
 - `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` — spot price (the long leg / convergence anchor)
-- `GET /api/v1/market-intelligence/borrow-interest` — margin borrow rate (BTC/Binance) as the short-leg funding-cost proxy
+- ~~`GET /api/v1/market-intelligence/borrow-interest`~~ — **retired**, no replacement (verified 2026-09-04, see [[cryptodataapi-market-intelligence]]); read the short-leg margin/borrow rate directly from the exchange instead
 
 **Historical / research:**
 - `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding-rate history
@@ -283,7 +283,6 @@ CryptoDataAPI does **not** serve the full dated-quarterly-futures curve — asse
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
-curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/borrow-interest"
 ```
 
 Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-derivatives]], [[cryptodataapi-market-intelligence]], [[cryptodataapi-backtesting]].
@@ -294,7 +293,7 @@ Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-derivatives]], [[crypto
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the go/no-go and monitoring loop (the dated futures price is native Deribit/CME/Binance, not CryptoDataAPI):
 
-- **Carry hurdle** — `GET /api/v1/derivatives/funding-rates?coin=BTC` (fair-carry anchor) and `GET /api/v1/market-intelligence/borrow-interest` (short-leg funding-cost proxy) set the annualised-basis hurdle; `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` is the spot long leg.
+- **Carry hurdle** — `GET /api/v1/derivatives/funding-rates?coin=BTC` (fair-carry anchor) sets the annualised-basis hurdle (the short-leg borrow-rate proxy endpoint this used to also check is retired — read that rate directly from the exchange); `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` is the spot long leg.
 - **Short-leg liquidity** — `GET /api/v1/derivatives/open-interest?coin=BTC` gauges crowding/liquidity on the futures short.
 - **Regime gate** — `GET /api/v1/quant/market`: pause fresh carry in `strong_trend_bear`/`vol_spike`, the states where the majors basis inverts into backwardation.
 - **Backtest** — `GET /api/v1/backtesting/funding` + `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08) for spot-vs-basis replays.

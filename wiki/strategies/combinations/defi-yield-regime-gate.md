@@ -2,7 +2,7 @@
 title: "DeFi Yield / LP Regime Gate"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-03
+updated: 2026-09-04
 status: good
 tags: [combinations, meta-strategy, defi, yield-farming, volatility, market-regime, regime-detection, quantitative, crypto, impermanent-loss]
 aliases: ["DeFi LP Regime Filter", "LP Vol-Regime Gate", "Yield Farm Regime Gate", "IL-Aware LP Deployment"]
@@ -201,7 +201,7 @@ def deployment_decision(dvol: float, adx: float, macro_regime: str,
 
 - **DVOL (Deribit BTC/ETH 30-day implied vol)** — `GET /api/v1/volatility/implied`; primary gate input; 30d IV index from Deribit; ≤ 45% = DEPLOY, 45–60% = REDUCE, > 60% = PAUSE.
 - **Macro regime** — `GET /api/v1/regimes/current`; regime label determines deploy/reduce/pause along with DVOL; `Structural_Shock` or `Crash` = immediate PAUSE.
-- **30-day realized vol** — `GET /api/v1/volatility/realized?coin=BTC&days=30`; secondary confirmation; > 80% annualized = PAUSE regardless of DVOL.
+- **30-day realized vol** — `GET /api/v1/volatility/index`; `majors[].realized_30` (BTC's 30d annualized realized vol); secondary confirmation; > 80% annualized = PAUSE regardless of DVOL. *Corrected from the invented `/api/v1/volatility/realized?coin=BTC&days=30`, which is not a real path.*
 - **OHLCV daily** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=3`; 24h price move calculation for acute-event PAUSE trigger.
 - **Funding rates** — `GET /api/v1/derivatives/funding-rates?coin=BTC`; elevated funding (> 0.04%/8h) signals leverage buildup that typically precedes vol spikes; use as leading REDUCE indicator.
 - **Gas price (ETH base fee)** — sourced from Ethereum node RPC or Etherscan gas API (not in CryptoDataAPI); viability check for rebalancing economics.
@@ -296,7 +296,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 
 **Historical data:**
 - `GET /api/v1/volatility/implied` — `items[].history` (Pro Plus) carries the full DVOL-history series for annual gate threshold calibration
-- `GET /api/v1/volatility/realized?coin=BTC&days=30` — 30-day realized vol for secondary gate check
+- `GET /api/v1/volatility/regime/BTC` — `history[]` (60d, Pro Plus) carries daily `rv_cc_30`/`rv_gk_30` for the secondary realized-vol gate check; the live snapshot is `GET /api/v1/volatility/index`'s `majors[].realized_30`. *Corrected from the invented `/api/v1/volatility/realized?coin=BTC&days=30`, which is not a real path.*
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=730` — 2-year daily OHLCV for backtesting regime classification
 
 *Note: DEX pool APR, TVL, and tick-level LP data are not available via CryptoDataAPI. Use the Uniswap v3 subgraph (`thegraph.com/hosted-service/subgraph/uniswap/uniswap-v3`), Revert Finance (`revert.finance`), or Defillama (`defillama.com/yields`) for pool-level LP analytics.*

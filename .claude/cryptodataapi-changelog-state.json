@@ -1,7 +1,13 @@
 {
-  "last_checked": "2026-09-03",
-  "api_version_seen": "2026-08-28",
+  "last_checked": "2026-09-04",
+  "api_version_seen": "2026-09-03",
   "processed": [
+    {
+      "version": "2026-09-03",
+      "processed_on": "2026-09-04",
+      "disposition": "noted",
+      "note": "why_subscribe field added to the upgrade object (403s + now 429s too). The parent upgrade object itself (introduced 2026-08-28) was already marked noted -- no wiki page documents the tier-403/429 upgrade-path shape in enough detail to need updating with this incremental field. Consistent with the 2026-08-28 disposition."
+    },
     {
       "version": "2026-08-28",
       "processed_on": "2026-09-02",

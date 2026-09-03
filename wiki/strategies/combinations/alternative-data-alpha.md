@@ -2,7 +2,7 @@
 title: Alternative Data Alpha
 type: strategy
 created: 2026-04-06
-updated: 2026-09-03
+updated: 2026-09-04
 status: review
 tags: [combinations, alpha-edge, alternative-data, quantitative, informational-edge, data-science, satellite-data, crypto]
 strategy_type: hybrid
@@ -162,8 +162,8 @@ Crypto alt-data alpha is limited by the liquidity of the tokens being traded, no
 
 **On-chain signals:**
 - `GET /api/v1/on-chain/whales/accumulation-score` — aggregate whale accumulation `signal` (`accumulating`/`neutral`/`distributing`/`unknown`); currently disabled upstream, see [[cryptodataapi-on-chain]]
-- `GET /api/v1/on-chain/exchange-flows` — net exchange inflow/outflow
-- `GET /api/v1/on-chain/mvrv` — MVRV ratio (valuation signal)
+- `GET /api/v1/on-chain/exchange-flows/{symbol}` — net exchange inflow/outflow; `symbol` must be tracked by the collector across ETH/BSC/Base/Arbitrum/Optimism/Tron/Solana — native BTC is not covered
+- `GET /api/v1/on-chain/dormancy/btc` — BTC-only. `metrics.mvrv` is the raw market-cap/realized-cap ratio; `mvrv_signal.zone` gives the categorical read (`capitulation`/`accumulation`/`neutral`/`elevated`/`euphoria`). *Corrected from the invented `/api/v1/on-chain/mvrv`, which is not a real path — there is no per-altcoin MVRV endpoint, only this BTC-specific one.*
 
 **Sentiment:**
 - `GET /api/v1/sentiment/fear-greed` — Fear & Greed index

@@ -2,7 +2,7 @@
 title: "Funding Window Timing"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-20
+updated: 2026-09-04
 status: good
 tags: [combinations, meta-strategy, funding-rate, perpetual-futures, market-microstructure, quantitative, derivatives, hyperliquid, crypto, bitcoin, ethereum]
 aliases: ["Funding Settlement Timing", "8H Funding Carry Timing", "Pre-Settlement Drift Trade", "Funding Snapshot Positioning"]
@@ -98,7 +98,7 @@ Currently not rejected (`backtest_status: untested`). Testable prediction: compu
 
 **Condition 4 (Hyperliquid hourly variant): HL hourly funding is diverging from next CEX settlement**
 - HL 1h funding (annualised) is in the **opposite direction** from the Binance 8h funding that will settle within the next 3 hours.
-- Source: `GET /api/v1/derivatives/hyperliquid/funding-rates` and `GET /api/v1/derivatives/funding-rates?coin=BTC&exchange=binance`.
+- Source: `GET /api/v1/hyperliquid/funding-rates` and `GET /api/v1/derivatives/funding-rates?coin=BTC&exchange=binance`.
 - *Rationale:* when HL hourly and Binance 8h funding are in the same direction, both cadences reinforce the same positioning incentive. When they diverge, there is an opportunity to be on the receiving side of HL hourly while simultaneously hedging via the Binance 8h direction — or to trade each settlement separately on its own venue.
 
 ### Entry
@@ -244,7 +244,7 @@ The production system adds: a real-time UTC clock integrated with the settlement
 ## Indicators / data used
 
 - **Funding rates** — `GET /api/v1/derivatives/funding-rates?coin=BTC` (and ETH); current 8h rate, sign, and magnitude. Core filter (Condition 1). Also used for HL vs CEX comparison (Condition 4).
-- **Hyperliquid funding rates** — `GET /api/v1/derivatives/hyperliquid/funding-rates`; hourly funding for the HL settlement variant and the CEX/HL cadence divergence check.
+- **Hyperliquid funding rates** — `GET /api/v1/hyperliquid/funding-rates`; hourly funding for the HL settlement variant and the CEX/HL cadence divergence check.
 - **Open interest** — `GET /api/v1/derivatives/open-interest?coin=BTC`; current OI and 30-day history for OI percentile calculation (Condition 2).
 - **Liquidations** — `GET /api/v1/market-intelligence/liquidations?interval=1h`; 1h liquidation volume vs 7d average to detect and avoid cascades (Condition 3).
 - **Intraday OHLCV (15m)** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=8`; last 2 hours of 15m bars for context and stop-level setting.
@@ -349,7 +349,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 
 **Live data:**
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — current 8h CEX funding rate and history; magnitude and sign check (Condition 1)
-- `GET /api/v1/derivatives/hyperliquid/funding-rates` — HL hourly funding rate; HL variant trigger and cross-cadence divergence check (Condition 4)
+- `GET /api/v1/hyperliquid/funding-rates` — HL hourly funding rate; HL variant trigger and cross-cadence divergence check (Condition 4)
 - `GET /api/v1/derivatives/open-interest?coin=BTC` — current OI and 30-day history for OI percentile (Condition 2)
 - `GET /api/v1/market-intelligence/liquidations?interval=1h` — 1h liquidation volume vs baseline; cascade avoidance (Condition 3)
 - `GET /api/v1/derivatives/binance/long-short-ratio` — current positioning context; directional confirmation
@@ -374,7 +374,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], 
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
-- **Signal** — `GET /api/v1/derivatives/funding-rates?coin=BTC` (8h CEX cadence) + `GET /api/v1/derivatives/hyperliquid/funding-rates` (hourly HL cadence) — magnitude, sign, and the cross-cadence divergence around settlement
+- **Signal** — `GET /api/v1/derivatives/funding-rates?coin=BTC` (8h CEX cadence) + `GET /api/v1/hyperliquid/funding-rates` (hourly HL cadence) — magnitude, sign, and the cross-cadence divergence around settlement
 - **Gates** — `GET /api/v1/derivatives/open-interest?coin=BTC` (OI percentile, Condition 2) + `GET /api/v1/market-intelligence/liquidations?interval=1h` (cascade avoidance, Condition 3)
 - **Regime gate** — `GET /api/v1/regimes/current` — skip settlement windows flagged `Structural_Shock`
 - **Backtest** — `GET /api/v1/backtesting/funding` — HL hourly since 2023-05 is ideal for settlement-window studies; the Binance daily archive (since 2026-03-30) is too coarse for intraday drift, so pair funding stamps with 15m bars from `GET /api/v1/market-data/klines` and 1m bars from `GET /api/v1/backtesting/klines` (since 2026-03-30)

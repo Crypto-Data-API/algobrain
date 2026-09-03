@@ -2,7 +2,7 @@
 title: "Stablecoin Depeg Sentiment Entry"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-03
+updated: 2026-09-04
 status: good
 tags: [combinations, meta-strategy, stablecoins, arbitrage, behavioral-finance, mean-reversion, sentiment, crypto, defi]
 aliases: ["Stablecoin Panic Entry", "Depeg Sentiment Filter", "Fear-Driven Depeg Buy", "Stablecoin Sentiment-Extreme Gate"]
@@ -212,7 +212,7 @@ def exit_decision(pos: OpenPosition, current_price: float) -> Optional[dict]:
 
 - **Fear & Greed Index** — `GET /api/v1/sentiment/fear-greed`; current value and historical readings; Gate 1: ≤ 15 for ≥ 48h.
 - **Stablecoin spot prices** — multi-venue (Binance, Coinbase, Kraken APIs; stablecoin price data is not in CryptoDataAPI but is available from exchange APIs directly); Gate 2: ≤ $0.97 on at least 2 venues.
-- **Stablecoin flow anomalies** — `GET /api/v1/sentiment/stablecoin-flows` or `GET /api/v1/on-chain/exchange-flows/USDC`; large exchange inflows of USDC signal redemption pressure; large outflows signal distribution.
+- **Stablecoin flow anomalies** — `GET /api/v1/sentiment/stablecoins` (market cap + 14d/90d flows, `inflow_14d_billions`/`inflow_90d_billions`) or `GET /api/v1/on-chain/exchange-flows/USDC` (per-venue CEX flow windows); large exchange inflows of USDC signal redemption pressure; large outflows signal distribution. *Corrected from the invented `/api/v1/sentiment/stablecoin-flows`, which is not a real path.*
 - **Regime** — `GET /api/v1/regimes/current`; `Structural_Shock` or `Crash` regimes confirm the macro context that justifies panic entry; `Bear_Trend` without panic context is insufficient.
 - **DVOL** — `GET /api/v1/volatility/implied`; elevated DVOL (> 80) in conjunction with Fear & Greed ≤ 15 confirms systemic risk-off environment (not just a normal correction).
 - **Issuer redemption status** — manual: Circle blog (`circle.com/blog`), Tether attestations, MakerDAO governance forum. CryptoDataAPI does not cover issuer communication.
