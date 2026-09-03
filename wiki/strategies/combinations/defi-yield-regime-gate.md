@@ -2,7 +2,7 @@
 title: "DeFi Yield / LP Regime Gate"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-09-03
 status: good
 tags: [combinations, meta-strategy, defi, yield-farming, volatility, market-regime, regime-detection, quantitative, crypto, impermanent-loss]
 aliases: ["DeFi LP Regime Filter", "LP Vol-Regime Gate", "Yield Farm Regime Gate", "IL-Aware LP Deployment"]
@@ -199,7 +199,7 @@ def deployment_decision(dvol: float, adx: float, macro_regime: str,
 
 ## Indicators / data used
 
-- **DVOL (Deribit BTC/ETH 30-day implied vol)** — `GET /api/v1/volatility/dvol?coin=BTC`; primary gate input; 30d IV index from Deribit; ≤ 45% = DEPLOY, 45–60% = REDUCE, > 60% = PAUSE.
+- **DVOL (Deribit BTC/ETH 30-day implied vol)** — `GET /api/v1/volatility/implied`; primary gate input; 30d IV index from Deribit; ≤ 45% = DEPLOY, 45–60% = REDUCE, > 60% = PAUSE.
 - **Macro regime** — `GET /api/v1/regimes/current`; regime label determines deploy/reduce/pause along with DVOL; `Structural_Shock` or `Crash` = immediate PAUSE.
 - **30-day realized vol** — `GET /api/v1/volatility/realized?coin=BTC&days=30`; secondary confirmation; > 80% annualized = PAUSE regardless of DVOL.
 - **OHLCV daily** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=3`; 24h price move calculation for acute-event PAUSE trigger.
@@ -289,14 +289,13 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 ## Getting the Data (CryptoDataAPI)
 
 **Live data:**
-- `GET /api/v1/volatility/dvol?coin=BTC` — DVOL 30-day IV index (primary gate signal)
-- `GET /api/v1/volatility/dvol?coin=ETH` — ETH DVOL (for ETH-pool positions)
+- `GET /api/v1/volatility/implied` — DVOL 30-day IV index; one call returns `items[]` for both BTC and ETH (Pro/Pro Plus; BTC-only on Free) — primary gate input, read `items[symbol="BTC"].dvol` (and `.dvol` for ETH pools)
 - `GET /api/v1/regimes/current` — macro regime classification (PAUSE trigger for Structural_Shock/Crash)
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — leading indicator for vol buildup
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=3` — 24h price move for acute-event PAUSE trigger
 
 **Historical data:**
-- `GET /api/v1/volatility/dvol?coin=BTC&historical=true&days=365` — annual DVOL history for gate threshold calibration
+- `GET /api/v1/volatility/implied` — `items[].history` (Pro Plus) carries the full DVOL-history series for annual gate threshold calibration
 - `GET /api/v1/volatility/realized?coin=BTC&days=30` — 30-day realized vol for secondary gate check
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=730` — 2-year daily OHLCV for backtesting regime classification
 
@@ -304,7 +303,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
-  "https://cryptodataapi.com/api/v1/volatility/dvol?coin=BTC"
+  "https://cryptodataapi.com/api/v1/volatility/implied"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-volatility]], [[cryptodataapi-regimes]], [[cryptodataapi-market-data]].
@@ -315,10 +314,10 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-volatility]], [
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
-- **Gate signal** — `GET /api/v1/volatility/dvol?coin=BTC` (and `?coin=ETH` for ETH pools) — the DVOL threshold that switches LP capital in and out
+- **Gate signal** — `GET /api/v1/volatility/implied` — one call's `items[]` covers both BTC and ETH — the DVOL threshold that switches LP capital in and out
 - **Pause triggers** — `GET /api/v1/regimes/current` (Structural Shock / Crash) + `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=3` (acute 24h move)
 - **Leading indicator** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding buildup often precedes the vol expansion that hurts LPs
-- **Backtest** — `GET /api/v1/volatility/dvol?coin=BTC&historical=true&days=365` calibrates gate thresholds over a year; `GET /api/v1/backtesting/klines` (daily back to 2017-08) extends the price-path / IL replay across full cycles — LP fee income must be modelled from external pool data
+- **Backtest** — `GET /api/v1/volatility/implied` calibrates gate thresholds over a year; `GET /api/v1/backtesting/klines` (daily back to 2017-08) extends the price-path / IL replay across full cycles — LP fee income must be modelled from external pool data
 - **Tips** — make gate flips sticky (hysteresis) by evaluating on daily closes, not intraday DVOL prints, so LP capital is not whipsawed in and out
 
 ## Related

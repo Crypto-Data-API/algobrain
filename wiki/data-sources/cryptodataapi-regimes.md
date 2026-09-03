@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Market & Quant Regimes"
 type: source
 created: 2026-07-13
-updated: 2026-09-02
+updated: 2026-09-03
 status: good
 tags: [data-provider, crypto, api, market-regime, regime-detection, hmm, volatility, liquidity, gamma-exposure, event-risk]
 aliases: ["CryptoDataAPI Regimes", "CDA Regimes", "CryptoDataAPI Quant Probabilities", "CryptoDataAPI Regime Engine"]
@@ -64,6 +64,18 @@ Per-asset [[volatility-regime]] classifier. Taxonomy: **compressed, expanding, v
 | GET | /api/v1/volatility/regime/score | Market-wide vol-stress composite 0-100 | — | — |
 | GET | /api/v1/volatility/regime/{symbol} | Per-asset detail + 60d history | symbol | Pro+ |
 | POST | /api/v1/volatility/regime/refresh | Force recompute | — | Pro+ |
+
+**CVI (market-wide realized vol) and DVOL (BTC/ETH implied vol) — a separate endpoint pair under the same "Volatility Regime" tag, not to be confused with the regime classifier above:**
+
+| Method | Path | Returns | Key Params | Tier |
+|--------|------|---------|------------|------|
+| GET | /api/v1/volatility/index | Crypto Volatility Index: `cvi_realized_30`/`cvi_realized_7` (volume-weighted market-wide realized vol), `composite_score` (0-100 vol-stress breadth), `majors[]` (BTC/ETH `realized_30` vs Deribit `implied_dvol` + `vrp`) | — | `majors` BTC-only on Free, +ETH on Pro/Pro Plus |
+| GET | /api/v1/volatility/index/history | Daily archive of the CVI headline only (`date`, `cvi_realized_30`, `cvi_realized_7`, `composite_score`, `sentiment`) — **no DVOL/implied-vol field**, realized vol only | `days` (max 365, default 90) | Pro Plus |
+| GET | /api/v1/volatility/implied | BTC/ETH implied vol (Deribit DVOL) + variance risk premium: `items[]` of `{symbol, dvol, dvol_change_24h, realized_30, vrp, history[], term_structure[]}` | — | current DVOL+VRP: BTC-only Free, BTC+ETH Pro/Pro Plus; `items[].history` (full DVOL-history series, `{date, dvol}` points) + `items[].term_structure` (ATM IV by expiry): Pro Plus only |
+
+**Do not confuse `/volatility/index/history` with a DVOL history endpoint** — its per-day points carry only realized-vol fields (`cvi_realized_30`/`cvi_realized_7`), not the Deribit-implied `dvol` value. The only endpoint that returns a historical DVOL series is `/volatility/implied` (Pro Plus, `items[].history`). This distinction matters for any options/IV-percentile strategy: use `/volatility/implied` for DVOL current + history; use `/volatility/index` or `/volatility/index/history` only for market-wide realized-vol breadth.
+
+**Path history (2026-09 recheck):** several wiki pages previously cited invented paths for this family — `/market-intelligence/dvol-history` and `/volatility/dvol` — that never existed in the API. Both have been corrected to `/volatility/implied`, the endpoint that actually carries DVOL current + history.
 
 ### Liquidity & Market Depth
 

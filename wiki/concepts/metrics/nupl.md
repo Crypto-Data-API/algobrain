@@ -2,7 +2,7 @@
 title: "Net Unrealized Profit/Loss (NUPL)"
 type: concept
 created: 2026-06-24
-updated: 2026-07-13
+updated: 2026-09-03
 status: draft
 tags: [crypto, bitcoin, indicators, valuation, market-microstructure, behavioral-finance]
 aliases: ["NUPL", "Net Unrealized Profit/Loss", "Net Unrealized Profit Loss", "net-unrealized-profit-loss"]
@@ -67,7 +67,7 @@ If [[bitcoin]]'s market cap is well above its realized cap — say realized cap 
 - `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
 
 **Historical data:**
-- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score timeseries
+- `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score timeseries
 - `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
 
 ```bash

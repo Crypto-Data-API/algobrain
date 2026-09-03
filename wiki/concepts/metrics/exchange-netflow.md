@@ -2,7 +2,7 @@
 title: "Exchange Net Flows"
 type: concept
 created: 2026-06-24
-updated: 2026-07-13
+updated: 2026-09-03
 status: draft
 tags: [indicators, bitcoin, behavioral-finance]
 aliases: ["Exchange Net Flows", "exchange-netflow", "Exchange Netflow", "Exchange Net Flow", "Exchange Reserve", "Net Exchange Flow"]
@@ -69,7 +69,7 @@ Suppose, over several weeks, the exchange reserve for [[bitcoin]] steadily decli
 - `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
 
 **Historical data:**
-- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score timeseries
+- `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score timeseries
 - `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
 
 ```bash

@@ -2,7 +2,7 @@
 title: "Multi-Strategy Crypto Portfolio"
 type: strategy
 created: 2026-07-14
-updated: 2026-07-20
+updated: 2026-09-03
 status: good
 tags: [combinations, meta-strategy, crypto, funding-rate, momentum, on-chain, memecoins, market-regime, risk-management, hyperliquid]
 aliases: ["Multi-Strategy Crypto Book", "Crypto Multi-Sleeve Portfolio", "Crypto Pod Book"]
@@ -273,7 +273,7 @@ See [[failure-modes]]. Most likely:
 **On-chain:**
 - `GET /api/v1/on-chain/exchange-flows/{symbol}` — CEX inflow/outflow
 - `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + supply-shock zones
-- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score
+- `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score
 - `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` — dry-powder z-score
 
 **Memecoin:**
@@ -293,7 +293,7 @@ Auth: `X-API-Key` header. Category pages: [[cryptodataapi-regimes]], [[cryptodat
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
 - **Allocation loop** — `GET /api/v1/regimes/current` + `GET /api/v1/quant/market` — the regime read that sets sleeve weights (this is the MCP core agent loop applied to a whole book)
-- **Sleeve signals** — carry: `GET /api/v1/derivatives/funding-rates` + `/open-interest`; momentum: klines + `GET /api/v1/indicators/signum-rgg`; on-chain: `/api/v1/on-chain/exchange-flows/{symbol}`, `/whale-score/{symbol}`, `/stablecoin-reserves/dry-powder`; memecoin: `/api/v1/dex/trending` + `/dex/security/{chain}/{address}`
+- **Sleeve signals** — carry: `GET /api/v1/derivatives/funding-rates` + `/open-interest`; momentum: klines + `GET /api/v1/indicators/signum-rgg`; on-chain: `/api/v1/on-chain/exchange-flows/{symbol}`, `/whales/accumulation-score/{symbol}`, `/stablecoin-reserves/dry-powder`; memecoin: `/api/v1/dex/trending` + `/dex/security/{chain}/{address}`
 - **Risk sizing** — `GET /api/v1/quant/coins/risk?horizon=24h` — per-coin regime and vol-target multipliers for the whole book in one call
 - **Backtest** — `GET /api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus) × `GET /api/v1/backtesting/klines` (back to 2017-08) for regime-conditional sleeve returns; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time allocation replays; the carry sleeve from `GET /api/v1/backtesting/funding` (HL hourly since 2023-05)
 - **Tips** — poll `GET /api/v1/daily` hourly as the portfolio heartbeat; rebalance sleeves on regime *transitions*, not on every probability wiggle

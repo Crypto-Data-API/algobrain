@@ -2,7 +2,7 @@
 title: "Whale & On-Chain Exchange Flows — Narrative Impact"
 type: concept
 created: 2026-06-04
-updated: 2026-07-13
+updated: 2026-09-03
 status: good
 tags: [crypto, bitcoin, event-driven, market-microstructure, behavioral-finance, liquidity, narrative-impact]
 aliases: ["Whale Flows", "Exchange Netflow", "On-Chain Flows", "Whale Deposit Signal", "Satoshi-Era Wallet", "Mt Gox Overhang", "Government BTC Sale"]
@@ -160,7 +160,7 @@ Aggregated across archetypes — the quant-consumable signal set.
 - `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
 
 **Historical data:**
-- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score timeseries
+- `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation signal timeseries (see [[cryptodataapi-on-chain]]: currently disabled upstream and, once live, scoped to ERC-20 tokens only — not native BTC/ETH)
 - `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
 
 ```bash

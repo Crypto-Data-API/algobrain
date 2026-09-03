@@ -2,7 +2,7 @@
 title: "Miner Capitulation Bottom"
 type: strategy
 created: 2026-06-03
-updated: 2026-07-19
+updated: 2026-09-03
 status: excellent
 tags: [crypto, bitcoin, market-regime, position-trading, quantitative, regime-detection]
 aliases: ["Miner Capitulation Bottom", "Hash Ribbon Strategy", "Miner Capitulation Trade"]
@@ -263,7 +263,7 @@ These are intentionally conservative because the underlying sample is too small 
 - `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
 
 **Historical data:**
-- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score timeseries
+- `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score timeseries
 - `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
 
 ```bash

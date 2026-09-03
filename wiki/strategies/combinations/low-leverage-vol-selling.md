@@ -2,7 +2,7 @@
 title: "Low-Leverage Vol Selling"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-09-03
 status: good
 tags: [combinations, meta-strategy, options, volatility, derivatives, open-interest, funding-rate, risk-management, behavioral-finance, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Deleveraged-State Vol Selling", "Structural-Leverage-Absent Short Vol", "Zero-Cascade-Fuel Vol Entry", "Clean-Book Vol Selling"]
@@ -107,7 +107,7 @@ Currently not rejected (`backtest_status: untested`). Testable prediction: ident
 **Gate 4: IV is elevated enough to justify the trade (VRP present)**
 - DVOL ≥ **45th percentile** of its trailing 52-week distribution (options are not in the cheapest regime; there is a premium to sell).
 - IV − 20-day realised vol ≥ **5 vol points** (the VRP spread is present and meaningful).
-- Source: `GET /api/v1/market-intelligence/dvol-history`; RV computed from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=200`.
+- Source: `GET /api/v1/volatility/implied`; RV computed from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=200`.
 - *Rationale:* the lower DVOL percentile threshold (45th vs the 40th–90th in [[crypto-options-volatility-selling]]) reflects that in the low-leverage state, even modest IV richness is harvestable because the catastrophic left tail has been filtered out. The IV−RV spread requirement ensures there is a real premium to capture.
 
 ### Instrument selection
@@ -235,7 +235,7 @@ The production system adds: a Deribit WebSocket for live DVOL and options pricin
 - **Market cap** — `GET /api/v1/coins/BTC` or equivalent; MC denominator for OI/MC ratio.
 - **Funding rates** — `GET /api/v1/derivatives/funding-rates?coin=BTC`; 8h rate and 7-day rolling average (Gate 2 and leverage-rebuild exit monitoring while position is open).
 - **Long/short ratio** — `GET /api/v1/derivatives/binance/long-short-ratio`; balanced-positioning confirmation (Gate 3).
-- **DVOL** — `GET /api/v1/market-intelligence/dvol-history`; current DVOL, 52-week percentile, and 30-day trailing average (Gate 4, profit exit target, stop reference).
+- **DVOL** — `GET /api/v1/volatility/implied`; current DVOL, 52-week percentile, and 30-day trailing average (Gate 4, profit exit target, stop reference).
 - **Realized vol (20-day)** — computed from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=200`; 20-day annualised RV for the IV−RV spread check (Gate 4).
 - **Regime** — `GET /api/v1/regimes/current`; if `Trending_Momentum` or `Structural_Shock`, the vol surface may be directionally skewed; reduce position size or skip.
 - **OTM option pricing (Deribit)** — specific strike/delta options pricing NOT available via CryptoDataAPI; source from [[deribit]] API directly.
@@ -340,14 +340,14 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/derivatives/open-interest?coin=BTC` — Gate 1 numerator: OI for OI/MC ratio
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — Gate 2: 8h rate and 7-day average
 - `GET /api/v1/derivatives/binance/long-short-ratio` — Gate 3: account long/short balance
-- `GET /api/v1/market-intelligence/dvol-history` — Gate 4: DVOL percentile, 30d avg; profit-exit and stop reference
+- `GET /api/v1/volatility/implied` — Gate 4: DVOL percentile, 30d avg; profit-exit and stop reference
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=200` — Gate 4: 20-day realised vol from 15m OHLCV
 - `GET /api/v1/regimes/current` — directional-regime context; reduce size if `Trending_Momentum`
 - `GET /api/v1/derivatives/binance/summary?symbol=BTCUSDT` — combined snapshot of OI, funding, and long/short for a single-call check at strategy startup
 
 **Historical data:**
 - `GET /api/v1/derivatives/binance/history?days=90` — extended OI and funding history for leverage-state threshold calibration and clean-book window frequency analysis
-- `GET /api/v1/market-intelligence/dvol-history` — extended DVOL series for 52-week percentile calibration
+- `GET /api/v1/volatility/implied` — extended DVOL series for 52-week percentile calibration
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=365` — annual daily OHLCV for post-cascade OI/MC analysis
 
 *Note: 25-delta put and 15-delta call pricing at specific strikes requires [[deribit]] API access directly. DVOL index, OI, and funding data are available via CryptoDataAPI.*
@@ -357,7 +357,7 @@ curl -H "X-API-Key: $CDA_KEY" \
   "https://cryptodataapi.com/api/v1/derivatives/binance/summary?symbol=BTCUSDT"
 ```
 
-Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-intelligence]], [[cryptodataapi-market-data]].
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-intelligence]], [[cryptodataapi-market-data]], [[cryptodataapi-regimes]].
 
 **Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [long-term regimes](https://cryptodataapi.com/regimes) · [open interest](https://cryptodataapi.com/open-interest)
 
@@ -366,7 +366,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
 - **Leverage gates (1–3)** — `GET /api/v1/derivatives/binance/summary?symbol=BTCUSDT` — one call covers OI, funding, and long/short for the clean-book check
-- **Vol gate (4)** — `GET /api/v1/market-intelligence/dvol-history` + 15m klines for the 20-day realized-vol comparison
+- **Vol gate (4)** — `GET /api/v1/volatility/implied` + 15m klines for the 20-day realized-vol comparison
 - **Regime context** — `GET /api/v1/regimes/current` — reduce size in `Trending_Momentum`
 - **Backtest** — `GET /api/v1/derivatives/binance/history?days=90` for gate calibration; post-window realized-vol outcomes from `GET /api/v1/backtesting/klines` (back to 2017-08); funding context from `GET /api/v1/backtesting/funding` (HL hourly since 2023-05; Binance daily since 2026-03-30)
 - **Tips** — clean-book windows are rare: run the four gates as a daily screen off the single `/derivatives/binance/summary` call and alert on all-clear rather than streaming every input

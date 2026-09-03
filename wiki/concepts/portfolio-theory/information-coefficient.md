@@ -2,7 +2,7 @@
 title: "Information Coefficient"
 type: concept
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-09-03
 status: good
 tags: [portfolio-theory, quantitative, machine-learning, crypto]
 aliases: ["IC", "Information Coefficient", "Rank IC", "Rank-IC"]
@@ -111,7 +111,7 @@ IC is computed on a signal series aligned to forward returns. Pull both from the
 **Live (to compute IC on current signals):**
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding signal
 - `GET /api/v1/on-chain/dormancy/btc` — MVRV/dormancy signal
-- `GET /api/v1/on-chain/whale-score/{symbol}` — whale-accumulation signal
+- `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale-accumulation signal
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/backtesting/klines?symbol=BTCUSDT&interval=1d&limit=1000"

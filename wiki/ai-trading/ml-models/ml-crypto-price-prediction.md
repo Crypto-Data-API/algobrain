@@ -2,7 +2,7 @@
 title: "ML Crypto Price Prediction"
 type: concept
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-09-03
 status: good
 tags: [ai-trading, machine-learning, backtesting, crypto]
 aliases: ["ML Crypto Price Prediction", "Crypto ML Pipeline", "Machine Learning Crypto Prediction"]
@@ -100,7 +100,7 @@ The whole pipeline is feedable from the CryptoDataAPI market, derivatives, on-ch
 - `GET /api/v1/backtesting/funding` — funding archive
 - `GET /api/v1/backtesting/liquidations` — historical liquidations
 - `GET /api/v1/quant/history` — point-in-time regime probability records
-- `GET /api/v1/on-chain/whale-score/BTC` — whale-score timeseries
+- `GET /api/v1/on-chain/whales/accumulation-score/BTC` — whale-score timeseries
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=1000"

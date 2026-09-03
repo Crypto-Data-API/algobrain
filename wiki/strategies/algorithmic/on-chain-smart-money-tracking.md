@@ -2,7 +2,7 @@
 title: "On-Chain Smart Money Tracking"
 type: strategy
 created: 2026-05-04
-updated: 2026-07-19
+updated: 2026-09-03
 status: excellent
 tags: [crypto, algorithmic, scalping]
 aliases: ["Smart Wallet Tracking", "On-Chain Copy Trading", "Wallet Alpha"]
@@ -260,7 +260,7 @@ See [[when-to-retire-a-strategy]].
 - `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
 
 **Historical data:**
-- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score timeseries
+- `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score timeseries
 - `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
 
 ```bash

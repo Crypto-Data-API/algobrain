@@ -2,7 +2,7 @@
 title: Alternative Data Alpha
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-09-03
 status: review
 tags: [combinations, alpha-edge, alternative-data, quantitative, informational-edge, data-science, satellite-data, crypto]
 strategy_type: hybrid
@@ -44,7 +44,7 @@ In crypto, the most actionable alt-data sources are on-chain (whale accumulation
 
 **Crypto-specific signals with documented predictive power (illustrative, not exhaustive):**
 - Exchange net-outflow spike (accumulation by long-term holders) → bullish 7–30 day
-- Whale score rising (CryptoDataAPI `/api/v1/on-chain/whale-score`) → large accounts accumulating
+- Whale accumulation `signal` turning `accumulating` (CryptoDataAPI `/api/v1/on-chain/whales/accumulation-score`; currently disabled upstream — see [[cryptodataapi-on-chain]]) → large accounts accumulating
 - Social engagement surge before price move (LunarCrush, Santiment) → momentum window
 - Dev-activity spike on a protocol → fundamental catalyst building
 
@@ -161,7 +161,7 @@ Crypto alt-data alpha is limited by the liquidity of the tokens being traded, no
 ## Getting the Data (CryptoDataAPI)
 
 **On-chain signals:**
-- `GET /api/v1/on-chain/whale-score` — whale accumulation scoring
+- `GET /api/v1/on-chain/whales/accumulation-score` — aggregate whale accumulation `signal` (`accumulating`/`neutral`/`distributing`/`unknown`); currently disabled upstream, see [[cryptodataapi-on-chain]]
 - `GET /api/v1/on-chain/exchange-flows` — net exchange inflow/outflow
 - `GET /api/v1/on-chain/mvrv` — MVRV ratio (valuation signal)
 
@@ -177,8 +177,8 @@ Full catalog: [[cryptodataapi-on-chain]], [[cryptodataapi-sentiment]].
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
-- **Signal** — `GET /api/v1/on-chain/whale-score/{symbol}` (accumulation score with historical timeseries) + `GET /api/v1/on-chain/exchange-flows/{symbol}` (1h–7d net-flow windows) — the two on-chain legs of the composite
+- **Signal** — `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` (per-token accumulation `signal`, ERC-20 only) + `GET /api/v1/on-chain/exchange-flows/{symbol}` (1h–7d net-flow windows) — the two on-chain legs of the composite
 - **Confluence filter** — `GET /api/v1/sentiment/fear-greed` + `GET /api/v1/on-chain/exchange-flows/spike-alerts` (≥ $1M whale deposits to CEXs) — require 3+ confirming signals before sizing, per the rules above
 - **Regime gate** — `GET /api/v1/regimes/current` — down-weight bullish on-chain composites in Established Bear / Capitulation states
 - **Backtest** — `GET /api/v1/backtesting/daily-snapshots/{date}` replays the full daily payload (health, sentiment, flows) point-in-time since 2026-03-02; forward returns from `GET /api/v1/backtesting/klines` (Binance spot daily back to 2017-08); `GET /api/v1/market-intelligence/fear-greed-history` extends the sentiment leg further back
-- **Tips** — the `/on-chain/whales` top-holder endpoints currently return 503; use whale-score + spike-alerts instead. Poll the cached `GET /api/v1/daily` bundle hourly rather than hitting each signal endpoint per tick
+- **Tips** — the entire `/on-chain/whales*` family (top-holders and accumulation-score alike) currently returns the API's "coming soon" placeholder; run on `exchange-flows` + `spike-alerts` alone until it re-enables, and re-probe monthly. Poll the cached `GET /api/v1/daily` bundle hourly rather than hitting each signal endpoint per tick

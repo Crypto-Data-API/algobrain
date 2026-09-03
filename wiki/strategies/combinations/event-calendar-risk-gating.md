@@ -2,7 +2,7 @@
 title: "Event Calendar Risk Gating"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-09-03
 status: good
 tags: [combinations, meta-strategy, event-driven, risk-management, market-making, funding-rate, volatility, grid-trading, perpetual-futures, quantitative, crypto, methodology]
 aliases: ["Event-Pause Framework", "Binary-Event Pause Protocol", "Scheduled-Event De-sizing", "Calendar-Gated Strategy Pause"]
@@ -157,7 +157,7 @@ Update the calendar weekly. Assign each upcoming event to a Tier based on the ta
 ### Step 3: Resume check
 
 After a Tier 1 or Tier 2 pause, check the resume conditions from the per-strategy table before re-deploying:
-- DVOL normalisation: `GET /api/v1/market-intelligence/dvol-history`
+- DVOL normalisation: `GET /api/v1/volatility/implied`
 - Funding normalisation: `GET /api/v1/derivatives/funding-rates?coin=BTC`
 - Price within grid range: `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=12`
 
@@ -166,7 +166,7 @@ Do not resume until ALL conditions for the applicable strategy type are met. Pre
 ### Step 4: Monitoring protocol
 
 During an active pause window (strategy halted or reduced), continue monitoring:
-- DVOL every 2 hours via `GET /api/v1/market-intelligence/dvol-history`
+- DVOL every 2 hours via `GET /api/v1/volatility/implied`
 - OI and funding every 2 hours via `GET /api/v1/derivatives/open-interest?coin=BTC` and `GET /api/v1/derivatives/funding-rates?coin=BTC`
 - Liquidation spikes via `GET /api/v1/market-intelligence/liquidations`
 
@@ -291,7 +291,7 @@ The production system adds: an event calendar ingestion pipeline (weekly pull fr
 ## Indicators / data used
 
 - **Event calendar** — external source (tokenunlocks.app, Coinglass unlock calendar, protocol blog posts, SEC.gov for ETF decision dates, CME economic calendar for FOMC). NOT available via CryptoDataAPI.
-- **DVOL** — `GET /api/v1/market-intelligence/dvol-history`; pre-event baseline, real-time monitoring during event window, and post-event resume check for grid and short-vol.
+- **DVOL** — `GET /api/v1/volatility/implied`; pre-event baseline, real-time monitoring during event window, and post-event resume check for grid and short-vol.
 - **Funding rates** — `GET /api/v1/derivatives/funding-rates?coin=BTC`; pre-event baseline and post-event normalisation check for carry book resume.
 - **Open interest** — `GET /api/v1/derivatives/open-interest?coin=BTC`; pre-event build-up monitoring and post-event normalisation.
 - **Liquidations** — `GET /api/v1/market-intelligence/liquidations`; real-time cascade detection during the event window.
@@ -370,7 +370,7 @@ See [[when-to-retire-a-strategy]] and [[failure-modes]] for the broader framewor
 ## Getting the Data (CryptoDataAPI)
 
 **Live data:**
-- `GET /api/v1/market-intelligence/dvol-history` — DVOL monitoring during event window; resume-condition check for grid and short-vol
+- `GET /api/v1/volatility/implied` — DVOL monitoring during event window; resume-condition check for grid and short-vol
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding monitoring during event window; resume-condition check for carry book
 - `GET /api/v1/derivatives/open-interest?coin=BTC` — OI monitoring during event window; pre-event build-up detection
 - `GET /api/v1/market-intelligence/liquidations` — real-time cascade detection during event window
@@ -380,7 +380,7 @@ See [[when-to-retire-a-strategy]] and [[failure-modes]] for the broader framewor
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
-  "https://cryptodataapi.com/api/v1/market-intelligence/dvol-history"
+  "https://cryptodataapi.com/api/v1/volatility/implied"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]], [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]], [[cryptodataapi-regimes]].
@@ -391,7 +391,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intellig
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
-- **Monitor set** — `GET /api/v1/market-intelligence/dvol-history`, `GET /api/v1/derivatives/funding-rates?coin=BTC`, `GET /api/v1/derivatives/open-interest?coin=BTC` — the resume-condition dashboard during each event window
+- **Monitor set** — `GET /api/v1/volatility/implied`, `GET /api/v1/derivatives/funding-rates?coin=BTC`, `GET /api/v1/derivatives/open-interest?coin=BTC` — the resume-condition dashboard during each event window
 - **Cascade check** — `GET /api/v1/market-intelligence/liquidations` — real-time forced-flow detection while the book is gated down
 - **Event feed** — `GET /api/v1/event/calendar?type=unlock&days=30` + `GET /api/v1/event/regime/score` — a native forward catalyst calendar (unlocks, macro prints, depeg risk) to cross-check the external calendar sources noted above
 - **Backtest** — gate-window P&L replay from `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08); `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) preserves what the derivatives/vol dashboard actually showed on each historical date

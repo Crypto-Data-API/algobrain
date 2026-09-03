@@ -2,7 +2,7 @@
 title: "Bitcoin Halving Cycle Timing"
 type: strategy
 created: 2026-07-14
-updated: 2026-07-19
+updated: 2026-09-03
 status: good
 tags: [position-trading, fundamental-analysis, crypto, bitcoin, on-chain, valuation, market-regime]
 aliases: ["Halving Cycle Timing", "BTC Cycle Timing", "On-Chain Cycle Timing", "MVRV Cycle Strategy", "Halving Position Trade"]
@@ -270,7 +270,7 @@ Re-engage: zones and halving overlay realign with a completed cycle turn, and on
 - `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical (the cycle-timing battery)
 - `GET /api/v1/market-intelligence/btc/cycle-indicators/{indicator}` — single indicator by name (e.g. MVRV-Z), historical
 - `GET /api/v1/market-data/btc-price-history?days=730` — BTC price history + 200-day MA
-- `GET /api/v1/on-chain/whale-score/BTC` — whale accumulation score timeseries (accumulation-zone corroboration)
+- `GET /api/v1/on-chain/whales/accumulation-score/BTC` — whale accumulation score timeseries (accumulation-zone corroboration)
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/on-chain/dormancy/btc"

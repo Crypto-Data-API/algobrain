@@ -2,7 +2,7 @@
 title: "Post-Panic Vol Selling"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-09-03
 status: good
 tags: [combinations, meta-strategy, options, volatility, derivatives, behavioral-finance, sentiment, mean-reversion, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Post-Event Short Vol", "Fear-Extreme Vol Selling", "Panic-Spike Premium Harvesting", "Stabilisation-Confirmed Vol Entry"]
@@ -81,13 +81,13 @@ Currently not rejected (`backtest_status: untested`). Testable prediction: ident
 
 **Gate 1: Panic sentiment extreme**
 - Fear & Greed index ≤ **20** (Extreme Fear) for at least **2 consecutive days**.
-- Source: `/api/v1/sentiment/fear-greed-index` or alternative (alternative.me API; CryptoDataAPI provides the index).
+- Source: `/api/v1/sentiment/fear-greed` or alternative (alternative.me API; CryptoDataAPI provides the index).
 - *Rationale:* persistent extreme fear (not just a one-day reading) confirms the panic is at its sentiment apex, not still escalating.
 
 **Gate 2: IV is at a post-panic peak**
 - DVOL ≥ **85th percentile** of its trailing 52-week DVOL distribution.
 - DVOL has risen ≥ **20 vol points** from its level 5 days prior (the spike is recent and substantial).
-- Source: `/api/v1/market-intelligence/dvol-history`.
+- Source: `/api/v1/volatility/implied`.
 - *Rationale:* the IV peak must be clearly elevated relative to history AND relative to recent levels; a DVOL that was already high before the panic does not qualify.
 
 **Gate 3: Realized vol is rolling over**
@@ -223,8 +223,8 @@ The production system adds: a Deribit WebSocket feed for live DVOL and options p
 
 ## Indicators / data used
 
-- **Fear & Greed index** — `/api/v1/sentiment/fear-greed-index` (CryptoDataAPI sentiment layer) or alternative.me API. Consecutive ≤ 20 readings (Gate 1).
-- **DVOL** — `/api/v1/market-intelligence/dvol-history`; current DVOL, 5-day-ago level, 30-day trailing average, and 52-week percentile (Gates 2, and profit-exit target).
+- **Fear & Greed index** — `/api/v1/sentiment/fear-greed` (CryptoDataAPI sentiment layer) or alternative.me API. Consecutive ≤ 20 readings (Gate 1).
+- **DVOL** — `/api/v1/volatility/implied`; current DVOL, 5-day-ago level, 30-day trailing average, and 52-week percentile (Gates 2, and profit-exit target).
 - **Realized vol (24h and 48h peak)** — computed from `/api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=200`; Yang-Zhang or close-to-close log-return vol over trailing 24h window. Gate 3 (rolling over).
 - **Liquidations (12h)** — `/api/v1/market-intelligence/liquidations?coin=BTC`; 12h aggregated liquidation volume vs 7-day average. Gate 4 (no fresh cascade).
 - **4h OHLCV** — `/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=50`; check for new 168-hour low in the most recent candle. Gate 5.
@@ -325,8 +325,8 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 ## Getting the Data (CryptoDataAPI)
 
 **Live data:**
-- `GET /api/v1/sentiment/fear-greed-index` — Fear & Greed index; Gate 1 (consecutive extreme fear readings)
-- `GET /api/v1/market-intelligence/dvol-history` — DVOL history; Gate 2 (percentile + spike magnitude) and profit-exit target
+- `GET /api/v1/sentiment/fear-greed` — Fear & Greed index; Gate 1 (consecutive extreme fear readings)
+- `GET /api/v1/volatility/implied` — DVOL history; Gate 2 (percentile + spike magnitude) and profit-exit target
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=200` — 15m OHLCV; compute 24h realized vol and Gate 3 (rolling over)
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=50` — 4h OHLCV; Gate 5 (no new 7-day low)
 - `GET /api/v1/market-intelligence/liquidations?coin=BTC` — liquidation volume; Gate 4 (no fresh cascade)
@@ -334,17 +334,17 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/regimes/current` — macro regime; defer entry in `Structural_Shock`
 
 **Historical data:**
-- `GET /api/v1/market-intelligence/dvol-history` — extended DVOL series for 52-week percentile calibration and post-panic backtest
+- `GET /api/v1/volatility/implied` — extended DVOL series for 52-week percentile calibration and post-panic backtest
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200` — daily OHLCV for longer-window realized-vol baseline
 
 *Note: 25-delta put pricing for specific strikes and expiries is NOT currently documented as a CryptoDataAPI endpoint. Source from [[deribit]] API directly (`GET /api/v2/public/get_order_book`, `GET /api/v2/public/get_instruments`). DVOL index history is available via CryptoDataAPI.*
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
-  "https://cryptodataapi.com/api/v1/market-intelligence/dvol-history"
+  "https://cryptodataapi.com/api/v1/volatility/implied"
 ```
 
-Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]], [[cryptodataapi-market-data]].
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]], [[cryptodataapi-market-data]], [[cryptodataapi-regimes]].
 
 **Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [fear & greed](https://cryptodataapi.com/fear-greed) · [funding rates](https://cryptodataapi.com/funding-rates) · [long-term regimes](https://cryptodataapi.com/regimes)
 
@@ -352,7 +352,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intellig
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run all five gates end-to-end:
 
-- **Gate stack** — `GET /api/v1/sentiment/fear-greed` (consecutive extreme-fear), `GET /api/v1/market-intelligence/dvol-history` (spike percentile), and `GET /api/v1/market-intelligence/liquidations?coin=BTC` (no fresh cascade) are polled together each hour post-panic
+- **Gate stack** — `GET /api/v1/sentiment/fear-greed` (consecutive extreme-fear), `GET /api/v1/volatility/implied` (spike percentile), and `GET /api/v1/market-intelligence/liquidations?coin=BTC` (no fresh cascade) are polled together each hour post-panic
 - **Signal** — 15m klines compute realised vol rolling over (Gate 3) — the actual entry trigger
 - **Regime gate** — `GET /api/v1/regimes/current`; `Structural_Shock` defers entry no matter how stretched DVOL is
 - **Backtest** — `GET /api/v1/market-intelligence/fear-greed-history` + DVOL history + `GET /api/v1/backtesting/klines` (1d back to 2017-08) replay the gates across past panics; the cascade-clear condition (Gate 4) replays only since 2026-03-30 via `GET /api/v1/backtesting/liquidations`

@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — On-Chain Intelligence"
 type: source
 created: 2026-07-13
-updated: 2026-07-13
+updated: 2026-09-03
 status: good
 tags: [data-provider, crypto, api, on-chain, exchange-flows, miners, whales, stablecoins, mvrv]
 aliases: ["CryptoDataAPI On-Chain", "CDA On-Chain", "On-Chain Intelligence API"]
@@ -27,13 +27,20 @@ The On-Chain Intelligence category of [[cryptodataapi]] reads blockchain-native 
 | GET | /api/v1/on-chain/dormancy/btc | BTC MVRV + supply-shock signals, zone classification (capitulation-euphoria) | — | — |
 | GET | /api/v1/on-chain/whales | Top-100 non-CEX holders (ERC-20s) | — | — |
 | GET | /api/v1/on-chain/whales/{symbol} | Top holders per token + balance deltas | symbol | — |
-| GET | /api/v1/on-chain/whale-score/{symbol} | Whale accumulation score, historical timeseries | symbol | — |
+| GET | /api/v1/on-chain/whales/accumulation-score | Aggregate `signal` across all tracked ERC-20s + per-token counts | — | — |
+| GET | /api/v1/on-chain/whales/accumulation-score/{symbol} | Per-token `signal` + per-window deltas, ERC-20 only | symbol | — |
 | GET | /api/v1/on-chain/score | On-Chain Health composite 0-100 | — | — |
 
 Tier "—" = not marked with a plan gate in the API docs; standard plan rate limits apply.
 
-> [!warning] Temporarily disabled
-> `/on-chain/whales` and `/on-chain/whales/{symbol}` currently return **503** — the top-holder endpoints are temporarily disabled. Use `/on-chain/whale-score/{symbol}` and `/on-chain/exchange-flows/spike-alerts` for whale signals in the meantime.
+> [!warning] Whole `/on-chain/whales*` family temporarily disabled (2026-09-02 recheck)
+> `/on-chain/whales`, `/on-chain/whales/{symbol}`, `/on-chain/whales/accumulation-score`, and `/on-chain/whales/accumulation-score/{symbol}` all now return the API's "🚧 Coming soon" placeholder — the entire whale-tracking family is temporarily disabled, not just the top-holder pair. There is currently **no working CryptoDataAPI whale-accumulation signal**. Fall back to `/quant/whales` ([[cryptodataapi-regimes]] — live Hyperliquid ≥$100k-account positioning, a perp-book proxy rather than on-chain spot accumulation) and `/on-chain/exchange-flows/spike-alerts` (still live) until the family is re-enabled.
+>
+> **Path history:** the endpoint used to be a flat `/on-chain/whale-score/{symbol}`; the live spec now nests it as `/on-chain/whales/accumulation-score/{symbol}` (plus a bare `/on-chain/whales/accumulation-score` aggregate) under the same family as the disabled top-holder routes.
+>
+> **Scope change:** once re-enabled, both accumulation-score routes cover **ERC-20 tokens only — USDT/USDC/WBTC/WETH** — not native BTC. Pages on this wiki that cite it for BTC (e.g. via `WBTC` as the closest wrapped proxy) should be read with that caveat.
+>
+> **Response shape changed too:** the live schema (`WhaleAccumulationScoreResponse`) is `{signal: string, counts?: {token: int}, tracked_tokens?: [string], symbol?: string, deltas?: {window: {available: bool, delta: number|null, pct_change: number|null}}, reason?: string}`. The API's own docs confirm `signal` is a categorical verdict — **`accumulating` / `neutral` / `distributing` / `unknown`** (the aggregate route's description spells this out) — **not** a continuous 0-100 score, and per-symbol signals stay `unknown` until the collector has ≥7 days of history. Any page on this wiki describing a numeric "≥ 60/100" or "≥ 65" whale-score threshold is describing the pre-rename endpoint's assumed shape, not this one; those thresholds need recalibrating to the `accumulating`/`neutral`/`distributing` verdict once the endpoint ships.
 
 ## Live Data
 
@@ -41,7 +48,7 @@ Current-state reads: `/stablecoin-reserves` and its `/dry-powder` signal, `/exch
 
 ## Historical Data
 
-`/whale-score/{symbol}` returns a historical accumulation-score timeseries. Longer stablecoin market-cap history lives in [[cryptodataapi-market-intelligence]] (`/market-intelligence/stablecoin-history`) and [[cryptodataapi-sentiment]] (`/sentiment/stablecoins/remote-history`), with point-in-time snapshots in [[cryptodataapi-backtesting]].
+`/whales/accumulation-score/{symbol}` is meant to return a historical accumulation-score timeseries via its `deltas` windows, but see the disabled/ERC-20-scope warning above — it is not currently usable for majors like BTC/ETH. Longer stablecoin market-cap history lives in [[cryptodataapi-market-intelligence]] (`/market-intelligence/stablecoin-history`) and [[cryptodataapi-sentiment]] (`/sentiment/stablecoins/remote-history`), with point-in-time snapshots in [[cryptodataapi-backtesting]].
 
 ## Trading Applications
 

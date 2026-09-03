@@ -4,6 +4,21 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-09-03 — Fix 4 confirmed-broken data-layer endpoint paths across 45 pages
+
+**Fixed:** Corrected four endpoint paths cited across the wiki that did not exist against
+the live API spec (~119 citations, ~45 pages) — a Fear & Greed path rename, a whale-
+accumulation-score path rename, and two Deribit-implied-volatility (DVOL) paths that had
+never existed at all. Independent schema verification caught more than a simple path swap:
+the whale-accumulation endpoint is currently disabled upstream and scoped to wrapped/
+stablecoin tokens only (not native BTC), with a categorical accumulation verdict rather
+than the numeric 0-100 score several strategy pages assumed — both corrected and flagged
+inline. The DVOL fix deliberately used a different endpoint than a prior pass had proposed,
+after verification showed that endpoint carries realized volatility only, not the implied-
+vol series every citing page actually needs. Documented the DVOL/CVI endpoint family for
+the first time (new subsection of the existing regimes data-source page). ~20 further
+broken paths from the same audit remain queued for a future fix pass.
+
 ## 2026-09-03 — Sync the venue-directory endpoint; add AsterDEX, Lighter, BNB Chain pages
 
 **Added:** A new data-source category page documenting the data layer's public venue

@@ -2,7 +2,7 @@
 title: "Meta-Labeling"
 type: concept
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-09-03
 status: good
 tags: [ai-trading, machine-learning, quantitative]
 aliases: ["Meta-Labeling", "Meta Labeling", "Secondary ML Filter", "Bet Sizing Model"]
@@ -63,7 +63,7 @@ A concrete crypto instantiation pairs a structural primary with an ML filter bui
 |---|---|---|
 | Funding structure | funding z-score, funding slope, cross-venue funding spread | `derivatives/funding-rates` |
 | [[open-interest|Open interest]] | OI change %, OI-vs-price divergence (1h/4h/24h) | `liquidity/oi-divergence` |
-| Whale positioning | whale long/short skew, whale accumulation score | `quant/whales`, `on-chain/whale-score/{symbol}` |
+| Whale positioning | whale long/short skew, whale accumulation score | `quant/whales`, `on-chain/whales/accumulation-score/{symbol}` |
 | Regime | HMM regime probabilities, volatility regime label | `quant/market`, `volatility/regime` |
 | Liquidation pressure | recent long/short liquidation imbalance | `market-intelligence/liquidations` |
 | Breadth | % of alts above their 200D MA | `market-health/altcoin-breadth` |
@@ -108,7 +108,7 @@ Features for the secondary model come from the derivatives, positioning, regime,
 - `GET /api/v1/backtesting/klines` — OHLCV path for triple-barrier resolution
 - `GET /api/v1/backtesting/funding` — funding archive for the primary signal
 - `GET /api/v1/quant/whales/history?days=90` — whale positioning timeseries
-- `GET /api/v1/on-chain/whale-score/BTC` — historical whale accumulation score
+- `GET /api/v1/on-chain/whales/accumulation-score/BTC` — historical whale accumulation score
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/liquidity/oi-divergence"

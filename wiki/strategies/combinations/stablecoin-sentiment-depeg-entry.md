@@ -2,7 +2,7 @@
 title: "Stablecoin Depeg Sentiment Entry"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-09-03
 status: good
 tags: [combinations, meta-strategy, stablecoins, arbitrage, behavioral-finance, mean-reversion, sentiment, crypto, defi]
 aliases: ["Stablecoin Panic Entry", "Depeg Sentiment Filter", "Fear-Driven Depeg Buy", "Stablecoin Sentiment-Extreme Gate"]
@@ -214,7 +214,7 @@ def exit_decision(pos: OpenPosition, current_price: float) -> Optional[dict]:
 - **Stablecoin spot prices** — multi-venue (Binance, Coinbase, Kraken APIs; stablecoin price data is not in CryptoDataAPI but is available from exchange APIs directly); Gate 2: ≤ $0.97 on at least 2 venues.
 - **Stablecoin flow anomalies** — `GET /api/v1/sentiment/stablecoin-flows` or `GET /api/v1/on-chain/exchange-flows/USDC`; large exchange inflows of USDC signal redemption pressure; large outflows signal distribution.
 - **Regime** — `GET /api/v1/regimes/current`; `Structural_Shock` or `Crash` regimes confirm the macro context that justifies panic entry; `Bear_Trend` without panic context is insufficient.
-- **DVOL** — `GET /api/v1/volatility/dvol?coin=BTC`; elevated DVOL (> 80) in conjunction with Fear & Greed ≤ 15 confirms systemic risk-off environment (not just a normal correction).
+- **DVOL** — `GET /api/v1/volatility/implied`; elevated DVOL (> 80) in conjunction with Fear & Greed ≤ 15 confirms systemic risk-off environment (not just a normal correction).
 - **Issuer redemption status** — manual: Circle blog (`circle.com/blog`), Tether attestations, MakerDAO governance forum. CryptoDataAPI does not cover issuer communication.
 - **Curve pool composition** — manual: Curve Finance UI or DefiLlama for pool imbalance data (high USDC fraction in 3pool = USDC is cheap; pool is imbalanced toward USDC).
 
@@ -300,7 +300,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 **Live data:**
 - `GET /api/v1/sentiment/fear-greed` — Gate 1: Fear & Greed Index value and history; ≤ 15 for 48h = entry trigger
 - `GET /api/v1/regimes/current` — macro regime context; Structural_Shock or Crash confirms panic environment
-- `GET /api/v1/volatility/dvol?coin=BTC` — secondary panic confirmation; DVOL > 80 in conjunction with low F&G
+- `GET /api/v1/volatility/implied` — secondary panic confirmation; DVOL > 80 in conjunction with low F&G
 - `GET /api/v1/on-chain/exchange-flows/USDC` — stablecoin exchange flow context; large USDC exchange inflows signal redemption pressure
 
 **Historical data:**
@@ -322,7 +322,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-sentiment]], [[
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can arm this trade end-to-end (execution needs external venue feeds):
 
 - **Gate** — `GET /api/v1/sentiment/fear-greed` at or below 15 for 48h plus `GET /api/v1/regimes/current` in a shock label are the panic pre-conditions
-- **Filter** — `GET /api/v1/volatility/dvol?coin=BTC` above 80 corroborates systemic panic; `GET /api/v1/on-chain/exchange-flows/USDC` flags redemption pressure building
+- **Filter** — `GET /api/v1/volatility/implied` above 80 corroborates systemic panic; `GET /api/v1/on-chain/exchange-flows/USDC` flags redemption pressure building
 - **Signal** — the depeg price itself comes from venue tickers (Binance/Coinbase REST, no CDA endpoint); the agent arms on CDA panic gates and executes on external price feeds
 - **Backtest** — `GET /api/v1/market-intelligence/fear-greed-history` aligned with known depeg events (see [[stablecoin-depeg-history]]) calibrates the threshold; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) preserves point-in-time sentiment for future events
 - **Tips** — depegs resolve in hours; pre-authorize order routes before the event, because a depeg hitting during rate-limit exhaustion is an unrecoverable miss

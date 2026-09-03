@@ -2,12 +2,86 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-09-02
+updated: 2026-09-03
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-09-03 — Fix: 4 confirmed-broken CryptoDataAPI paths (fear-greed-index, whale-score, volatility/dvol, dvol-history)
+
+**Scope:** iter9/iter10 flagged 24 distinct invented/renamed endpoint paths cited across the
+wiki (166 citations); this iteration fixed the 4 highest-citation ones (~119 citations,
+~45 pages), independently re-verified against a fresh pull of the live OpenAPI spec
+(`curl https://cryptodataapi.com/api`) plus the current `/api/v1/changelog` feed (no
+relevant entries — the rename predates the 10-release retention window, confirmed by hand
+against the spec instead). The other ~20 broken paths
+(`/derivatives/hyperliquid/funding-rates`, `/market-intelligence/borrow-interest`,
+`/market-intelligence/grayscale/*`, and a long tail) are **explicitly deferred** to a
+future Fix iteration — not touched.
+
+- **`/sentiment/fear-greed-index` → `/sentiment/fear-greed`** (8 citations, 3 files: narrative-
+  position-vol-targeting, post-panic-vol-selling, put-protected-dip-buying). Straight path
+  swap — `FearGreedResponse{value, classification, sources, individual_values}` matches the
+  wiki's existing field claims exactly, no drift.
+- **`/on-chain/whale-score/{symbol}` (incl. concrete `/BTC` forms) →
+  `/on-chain/whales/accumulation-score/{symbol}`** (39 citations, 27 files) — but
+  verification surfaced three problems beyond the path rename that a blind swap would have
+  hidden: (1) the **entire** `/on-chain/whales*` family, including the "renamed" endpoint,
+  is currently "Coming soon" (temporarily disabled) per the live spec — not just the
+  top-holder pair the wiki already knew about; (2) it is scoped to **ERC-20 tokens only
+  (USDT/USDC/WBTC/WETH)** — it does not accept native BTC, which most citing pages assume;
+  (3) the real response (`WhaleAccumulationScoreResponse`) is a categorical verdict —
+  `signal: "accumulating"|"neutral"|"distributing"|"unknown"` plus `counts`,
+  `tracked_tokens`, `symbol`, `deltas` (per-window `available`/`delta`/`pct_change`), and
+  `reason` — **not** the continuous 0-100 score several strategy pages build numeric Gate
+  thresholds on ("≥ 60", "≥ 65"). Fixed the path everywhere;
+  rewrote the disabled-endpoint caveats on [[cryptodataapi-on-chain]] (table + warning box +
+  historical-data section, now naming both accumulation-score routes and the confirmed
+  signal enum), [[whale-copy-flow-funding-filter]], [[smart-money-vs-crowd-divergence]],
+  [[alternative-data-alpha]], [[crypto-signal-library]], [[whale-onchain-flows]], and
+  [[whale-alert]]. Did **not** rewrite the numeric Gate-threshold logic itself (unverified
+  exactly how "≥ 60/100" maps onto the real 4-way signal) — flagged inline on both strategy
+  pages as unresolved pending the endpoint's re-enable.
+- **`/volatility/dvol` (17 citations) and `/market-intelligence/dvol-history` (55 citations,
+  11 files) → `/volatility/implied`** — **deviates from the iter9 backlog note**, which
+  proposed `/volatility/index` / `/volatility/index/history` for these. Schema-level
+  verification showed why that would have been a second, quieter bug: `/volatility/index`'s
+  `majors[]` and `/volatility/index/history`'s points carry only realized vol
+  (`cvi_realized_30`/`cvi_realized_7`) — **no DVOL/implied-vol field at all** — while every
+  citing page is explicitly about Deribit-implied vol (DVOL) for options/IV gates. The genuine
+  match is `/volatility/implied`: `items[]` of `symbol`, `dvol`, `dvol_change_24h`,
+  `realized_30`, `vrp`, `history[]`, `term_structure[]` (BTC-only Free, +ETH Pro/Pro Plus;
+  `history`/`term_structure` Pro Plus only) — a real per-date DVOL series the index-history
+  route cannot provide. Also dropped invented `?coin=BTC`/`?coin=ETH`/`&historical=true`
+  query params (not real parameters on any of these routes — one call's `items[]` already
+  covers both symbols) and merged the resulting duplicate BTC/ETH bullets. Documented the
+  whole CVI/DVOL family (new to this wiki) as a subsection of [[cryptodataapi-regimes]]'s
+  existing "Volatility Regime" section, since no dedicated `cryptodataapi-volatility` hub page
+  exists yet (two pages had a pre-existing forward-link to that name; left as-is rather than
+  building a new hub page, which is Build- not Fix-scope) — added `[[cryptodataapi-regimes]]`
+  to the "Full endpoint catalog" line on the 10 of 14 pages that lacked it.
+- **Noticed but out of scope, not touched:** [[alternative-data-alpha]] also cites
+  `/api/v1/on-chain/mvrv`, which is not a real path either (the live route is
+  `/on-chain/dormancy/btc`) — part of the deferred ~20; [[event-vol-buying]] states "No
+  CryptoDataAPI endpoint for event calendar," which is stale (`/api/v1/event/calendar` exists
+  and is documented on [[cryptodataapi-regimes]]) — a staleness bug, not a broken-path bug,
+  left for a future pass.
+- **Verified:** re-grepped `wiki/` for all 4 original broken strings post-fix — zero
+  remaining citations (the only hits are the deliberate historical record in this log and two
+  "path history" callouts on the hub pages explaining the old→new rename for context).
+- **Files touched (45):** all bump `updated: 2026-09-03`. [[cryptodataapi-on-chain]],
+  [[cryptodataapi-regimes]] (new CVI/DVOL section), [[crypto-signal-library]],
+  [[whale-onchain-flows]], [[whale-alert]], [[alternative-data-alpha]],
+  [[whale-copy-flow-funding-filter]], [[smart-money-vs-crowd-divergence]], plus 23 further
+  whale-score spoke pages (concept/metrics pages, ML-model pages, on-chain strategy pages)
+  and 3 fear-greed-index pages fixed as plain path swaps; and 14 DVOL-family strategy
+  combination pages (event-calendar-risk-gating, complacency-vol-buying, cascade-
+  monetization-rotation, trend-aligned-premium-selling, low-leverage-vol-selling, long-
+  options-trend-expression, leverage-stress-tail-hedge, grid-with-tail-hedge, put-protected-
+  dip-buying, post-panic-vol-selling, event-vol-buying, stablecoin-sentiment-depeg-entry,
+  options-rv-event-calendar, defi-yield-regime-gate).
 
 ## 2026-09-03 — Sync: new /exchanges venue directory; Build: AsterDEX, Lighter, BNB Chain entity pages
 

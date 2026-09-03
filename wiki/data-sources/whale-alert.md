@@ -2,7 +2,7 @@
 title: "Whale Alert"
 type: source
 created: 2026-05-16
-updated: 2026-07-13
+updated: 2026-09-03
 status: good
 tags: [data-provider, crypto, bitcoin, ethereum, news]
 aliases: ["WhaleAlert", "Whale Alert Feed"]
@@ -72,7 +72,7 @@ The practical heuristic: Whale Alert is most useful as a confirmation/context to
 - `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
 
 **Historical data:**
-- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score timeseries
+- `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation signal timeseries (see [[cryptodataapi-on-chain]]: currently disabled upstream and, once live, scoped to ERC-20 tokens only — not native BTC/ETH)
 - `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
 
 ```bash

@@ -2,7 +2,7 @@
 title: "Narrative Position Vol Targeting"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-09-03
 status: good
 tags: [combinations, meta-strategy, momentum, volatility, risk-management, behavioral-finance, memecoins, event-driven, quantitative, crypto, altcoins]
 aliases: ["Narrative Book Vol Sizing", "Vol-Scaled Narrative Trading", "Risk-Contribution Narrative Sizing", "Meme-Vol Risk Budget"]
@@ -230,7 +230,7 @@ The production system adds: a narrative signal aggregator that monitors social v
 - **Realized vol (20-day)** — computed from `GET /api/v1/market-data/klines?symbol={TOKEN}USDT&interval=1d&limit=30`; close-to-close log-return standard deviation × √365. The primary sizing input.
 - **Funding rates** — `GET /api/v1/derivatives/funding-rates?coin={TOKEN}`; context check — if funding is negative (crowd is shorting), the narrative trade may be entering against positioning headwind.
 - **Market cap / token price** — `GET /api/v1/coins/{symbol}` or market data endpoint; used to convert notional to token units and check minimum viable trade size.
-- **Sentiment / social volume** — `GET /api/v1/sentiment/fear-greed-index` for macro context; narrative-specific social volume requires external tools (Santiment, Nansen narrative dashboard) — not a current CryptoDataAPI endpoint.
+- **Sentiment / social volume** — `GET /api/v1/sentiment/fear-greed` for macro context; narrative-specific social volume requires external tools (Santiment, Nansen narrative dashboard) — not a current CryptoDataAPI endpoint.
 - **Sector flows / regime** — `GET /api/v1/regimes/current`; if `Risk_Off` or `Structural_Shock`, the heat cap should be reduced to 10% of portfolio (narrative trades are highly correlated to risk appetite).
 - **DEX / token data** — for memecoin narratives: `GET /api/v1/dex/*` endpoints for on-chain liquidity context; minimum $2M daily DEX volume for a narrative name to be tradeable at meaningful size.
 
@@ -339,7 +339,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/market-data/klines?symbol={TOKEN}USDT&interval=1d&limit=30` — daily OHLCV for 20-day realised vol calculation (the primary sizing input)
 - `GET /api/v1/derivatives/funding-rates?coin={TOKEN}` — funding context check for perp-expressed narrative positions
 - `GET /api/v1/regimes/current` — macro regime; reduce heat cap to 10% if `Risk_Off` or `Structural_Shock`
-- `GET /api/v1/sentiment/fear-greed-index` — book-level risk-appetite context; Fear & Greed < 30 reduces heat cap
+- `GET /api/v1/sentiment/fear-greed` — book-level risk-appetite context; Fear & Greed < 30 reduces heat cap
 - `GET /api/v1/dex/tokens` or `GET /api/v1/coins/{symbol}` — token market cap and liquidity context; filter out tokens below minimum DEX volume threshold
 
 **Historical data:**

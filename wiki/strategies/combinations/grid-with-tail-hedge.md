@@ -2,7 +2,7 @@
 title: "Grid with Tail Hedge"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-09-03
 status: good
 tags: [combinations, meta-strategy, grid-trading, market-making, options, volatility, hedging, derivatives, risk-management, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Hedged Grid", "Grid OTM Hedge", "Budgeted Grid Hedge", "Income-Financed Tail Hedge"]
@@ -105,7 +105,7 @@ Currently not rejected (`backtest_status: untested`). Testable prediction: acros
 - Strike selection: the deepest OTM put the budget can fund, subject to a minimum of **10% OTM from the current mid-price** (e.g., $58,500 put when BTC is at $65,000). Do NOT buy ATM protection from grid income — the premium is too high.
 - Expiry: nearest monthly (or weekly if monthly is unavailable) with DTE 21–35 days.
 - DVOL check: purchase put only when DVOL ≤ 70th percentile of its trailing 52-week distribution. If DVOL ≥ 75th percentile, defer the purchase (puts are expensive; income budget is insufficient to fund adequate coverage).
-- Source: DVOL from `GET /api/v1/market-intelligence/dvol-history`; put pricing from [[deribit]] API directly.
+- Source: DVOL from `GET /api/v1/volatility/implied`; put pricing from [[deribit]] API directly.
 
 **Step 3: Position sizing**
 - Notional covered = budget / put premium per unit. Round down to nearest whole contract.
@@ -229,7 +229,7 @@ The production system adds: a Deribit connection for real-time put pricing to ev
 - **OHLCV (1h and 15m)** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=168` for grid range setting and ADX calculation; `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=96` for intraday grid-fill monitoring.
 - **Open interest** — `GET /api/v1/derivatives/open-interest?coin=BTC`; 12h OI change as the grid-halt signal (same as [[oi-aware-grid]] runtime check).
 - **Funding rates** — `GET /api/v1/derivatives/funding-rates?coin=BTC`; funding context for grid centre-price adjustment and cost monitoring.
-- **DVOL** — `GET /api/v1/market-intelligence/dvol-history`; DVOL percentile for put-purchase timing (Condition: DVOL ≤ 70th percentile).
+- **DVOL** — `GET /api/v1/volatility/implied`; DVOL percentile for put-purchase timing (Condition: DVOL ≤ 70th percentile).
 - **Realized vol (20-day)** — computed from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=2000`; IV−RV spread context for put pricing validation.
 - **Regime** — `GET /api/v1/regimes/current`; if `Trending_Momentum`, halt grid and defer put purchases.
 - **OTM put pricing (Deribit)** — specific strike/delta put pricing NOT available via CryptoDataAPI; source from [[deribit]] API directly for budget-to-coverage calculation.
@@ -335,22 +335,22 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=96` — 24h 15m bars for intraday grid monitoring and fill tracking
 - `GET /api/v1/derivatives/open-interest?coin=BTC` — current OI and 12h change for grid-halt signal (mirrors [[oi-aware-grid]] logic)
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding rate context for grid centre-price adjustment
-- `GET /api/v1/market-intelligence/dvol-history` — DVOL current and 52-week percentile for put-purchase timing gate
+- `GET /api/v1/volatility/implied` — DVOL current and 52-week percentile for put-purchase timing gate
 - `GET /api/v1/regimes/current` — regime context; halt grid if `Trending_Momentum`
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=365` — annual daily OHLCV for grid range calibration and gap-event frequency analysis
 - `GET /api/v1/derivatives/binance/history?days=90` — extended OI and funding history for grid-halt threshold calibration
-- `GET /api/v1/market-intelligence/dvol-history` — extended DVOL series for 52-week percentile computation and put-purchase timing analysis
+- `GET /api/v1/volatility/implied` — extended DVOL series for 52-week percentile computation and put-purchase timing analysis
 
 *Note: OTM put strike pricing (specific strike + DTE on Deribit) requires [[deribit]] API access directly. DVOL index, OI, and funding data are available via CryptoDataAPI.*
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
-  "https://cryptodataapi.com/api/v1/market-intelligence/dvol-history"
+  "https://cryptodataapi.com/api/v1/volatility/implied"
 ```
 
-Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]], [[cryptodataapi-derivatives]], [[cryptodataapi-market-intelligence]].
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]], [[cryptodataapi-derivatives]], [[cryptodataapi-market-intelligence]], [[cryptodataapi-regimes]].
 
 **Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [long-term regimes](https://cryptodataapi.com/regimes)
 
@@ -360,7 +360,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Grid leg** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=168` for range setting and ADX; 15m bars for fill monitoring
 - **Halt gates** — `GET /api/v1/derivatives/open-interest?coin=BTC` (12h OI build) + `GET /api/v1/regimes/current` (halt on `Trending_Momentum`)
-- **Hedge leg** — `GET /api/v1/market-intelligence/dvol-history` — the DVOL 52-week percentile times put purchases (strike pricing itself on Deribit)
+- **Hedge leg** — `GET /api/v1/volatility/implied` — the DVOL 52-week percentile times put purchases (strike pricing itself on Deribit)
 - **Backtest** — `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08) for grid cycles and gap-event frequency; 1m fill simulation only since 2026-03-30; overlay hedge cost from the DVOL series
 - **Tips** — the hedge budget is the strategy's fixed cost: track realized grid revenue vs cumulative put spend per cycle so the agent can prove the overlay is paying for itself
 

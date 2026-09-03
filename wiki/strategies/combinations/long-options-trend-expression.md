@@ -2,7 +2,7 @@
 title: "Long Options Trend Expression"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-09-03
 status: good
 tags: [combinations, meta-strategy, trend-following, options, volatility, derivatives, options-structures, risk-management, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Trend via Long Options", "Convex Trend Expression", "IV-Cheap Trend Options", "Calls-Instead-of-Futures Trend"]
@@ -109,7 +109,7 @@ Currently not rejected (`backtest_status: untested`). Testable predictions:
 - DVOL (current) ≤ **90% of its 30-day trailing average** (IV is below its recent average; not elevated).
 - 20-day realized vol ≥ **DVOL + 5 vol points** (recent RV exceeds current IV by a margin sufficient to justify option purchase; VRP has inverted).
 - OR: DVOL 30-day percentile ≤ **40th** (IV is in the cheaper half of the trailing year distribution).
-- Source: `GET /api/v1/market-intelligence/dvol-history`; 20d RV from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=2000`.
+- Source: `GET /api/v1/volatility/implied`; 20d RV from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=2000`.
 
 **If IV is NOT cheap (DVOL elevated):** do NOT buy options under this strategy. Instead, if the trend signal is strong, consider a perp entry per [[trend-following-cta]] rules — or wait for the next IV-cheap window. Do not force option purchases when IV is expensive.
 
@@ -254,7 +254,7 @@ The production system adds: a Deribit options chain connection for real-time cal
 - **OHLCV (daily)** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=60`; 50-day EMA and new-20d-low check.
 - **OHLCV (4h)** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=20`; 4h RSI for trend confirmation.
 - **Funding rates** — `GET /api/v1/derivatives/funding-rates?coin=BTC`; 7-day average funding for trend-crowd confirmation gate.
-- **DVOL** — `GET /api/v1/market-intelligence/dvol-history`; current DVOL, 30-day average, 52-week percentile for IV-cheap filter.
+- **DVOL** — `GET /api/v1/volatility/implied`; current DVOL, 30-day average, 52-week percentile for IV-cheap filter.
 - **Realized vol (20-day)** — computed from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=2000`; 20d annualised RV for IV/RV comparison (IV-cheap check).
 - **Open interest** — `GET /api/v1/derivatives/open-interest?coin=BTC`; trend confirmation context (rising OI in uptrend = genuine directional flow).
 - **Regime** — `GET /api/v1/regimes/current`; if not `Trending_Momentum` or `Technical_Structural`, the trend gate is harder to satisfy; reduce confidence in signal.
@@ -365,23 +365,23 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=60` — daily OHLCV; 50-day EMA and new-20d-low check (trend gate and trend-failure exit)
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=20` — 4h OHLCV; RSI calculation (trend gate)
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — 7-day average funding for trend-crowd confirmation
-- `GET /api/v1/market-intelligence/dvol-history` — DVOL current, 30d avg, 52-week percentile (IV-cheap filter)
+- `GET /api/v1/volatility/implied` — DVOL current, 30d avg, 52-week percentile (IV-cheap filter)
 - `GET /api/v1/derivatives/open-interest?coin=BTC` — OI growth context for trend quality
 - `GET /api/v1/regimes/current` — regime context; Trending_Momentum regime increases trend gate confidence
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=2000` — extended 15m bars for 20-day RV calculation (IV/RV comparison)
-- `GET /api/v1/market-intelligence/dvol-history` — extended DVOL series for 52-week percentile calibration and IV-cheap frequency analysis
+- `GET /api/v1/volatility/implied` — extended DVOL series for 52-week percentile calibration and IV-cheap frequency analysis
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=365` — annual daily for trend-gate threshold calibration
 
 *Note: specific BTC call pricing at target strikes / DTE requires [[deribit]] API access directly. DVOL, OI, funding, and OHLCV data are available via CryptoDataAPI.*
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
-  "https://cryptodataapi.com/api/v1/market-intelligence/dvol-history"
+  "https://cryptodataapi.com/api/v1/volatility/implied"
 ```
 
-Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]], [[cryptodataapi-market-intelligence]], [[cryptodataapi-derivatives]].
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]], [[cryptodataapi-market-intelligence]], [[cryptodataapi-derivatives]], [[cryptodataapi-regimes]].
 
 **Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [long-term regimes](https://cryptodataapi.com/regimes)
 
@@ -391,7 +391,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Trend gate** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=60` (50d EMA, new-20d-low check) + 4h bars for RSI
 - **Crowd confirm** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — 7-day average funding as trend-crowd confirmation
-- **IV-cheap filter** — `GET /api/v1/market-intelligence/dvol-history` — DVOL 52-week percentile; call pricing at specific strikes stays on Deribit
+- **IV-cheap filter** — `GET /api/v1/volatility/implied` — DVOL 52-week percentile; call pricing at specific strikes stays on Deribit
 - **Backtest** — trend-gate replay from `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08); IV-side history from the DVOL series; realized vol from 15m klines for the IV/RV comparison
 - **Tips** — the position pays theta while waiting: check the trend-failure exit (new 20d low) daily, and only roll strikes when both the trend and IV gates re-confirm
 

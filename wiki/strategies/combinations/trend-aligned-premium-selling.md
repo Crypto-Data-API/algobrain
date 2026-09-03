@@ -2,7 +2,7 @@
 title: "Trend-Aligned Premium Selling"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-09-03
 status: good
 tags: [combinations, meta-strategy, options, volatility, derivatives, trend-following, mean-reversion, behavioral-finance, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Trend-Selective Wing Selling", "Directional Premium Seller", "Trend-Conditioned Vol Selling", "Wing-Selective Short Vol"]
@@ -257,7 +257,7 @@ The production system adds: a Deribit WebSocket feed for live DVOL and option mi
 - **Daily OHLCV (SMA20)** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=30`; 20-day SMA and price-distance for trend Gate 1.
 - **4h OHLCV (RSI)** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=50`; 14-period RSI for trend Gate 2.
 - **Funding rate (7-day average)** — `GET /api/v1/derivatives/funding-rates?coin=BTC`; directional-bias confirmation for trend Gate 3.
-- **DVOL** — `GET /api/v1/market-intelligence/dvol-history`; DVOL current level, 52-week percentile, and 30-day trailing average for IV gate and stop monitoring.
+- **DVOL** — `GET /api/v1/volatility/implied`; DVOL current level, 52-week percentile, and 30-day trailing average for IV gate and stop monitoring.
 - **Realized vol (30-day)** — computed from `/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=60`; Yang-Zhang estimator for IV−RV gate.
 - **Regime** — `GET /api/v1/regimes/current`; context for regime filtering (avoid entries in `Structural_Shock`).
 - **Options pricing (Deribit)** — 25-delta put and call pricing requires [[deribit]] API access directly (`GET /api/v2/public/get_order_book?instrument_name=BTC-{date}-{strike}-{P/C}`).
@@ -356,21 +356,21 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=30` — daily OHLCV; SMA20 and price distance for trend Gate 1
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=50` — 4h OHLCV; 14-period RSI for trend Gate 2
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — 7-day average funding for trend Gate 3
-- `GET /api/v1/market-intelligence/dvol-history` — DVOL current, 52-week percentile, and 30-day trailing average for IV gate
+- `GET /api/v1/volatility/implied` — DVOL current, 52-week percentile, and 30-day trailing average for IV gate
 - `GET /api/v1/regimes/current` — regime context; block entry in `Structural_Shock`
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200` — daily OHLCV for trend-regime classification across historical periods
-- `GET /api/v1/market-intelligence/dvol-history` — extended DVOL series for 52-week percentile calibration and wing-P&L backtest by regime
+- `GET /api/v1/volatility/implied` — extended DVOL series for 52-week percentile calibration and wing-P&L backtest by regime
 
 *Note: 25-delta put and call pricing for specific strikes and expiries requires [[deribit]] API access directly. DVOL index, klines, and funding data are available via CryptoDataAPI.*
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
-  "https://cryptodataapi.com/api/v1/market-intelligence/dvol-history"
+  "https://cryptodataapi.com/api/v1/volatility/implied"
 ```
 
-Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]], [[cryptodataapi-market-data]], [[cryptodataapi-derivatives]].
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]], [[cryptodataapi-market-data]], [[cryptodataapi-derivatives]], [[cryptodataapi-regimes]].
 
 **Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [long-term regimes](https://cryptodataapi.com/regimes)
 
@@ -379,7 +379,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intellig
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run every gate end-to-end:
 
 - **Trend gate** — daily klines (SMA20 distance), 4h klines (RSI), and `GET /api/v1/derivatives/funding-rates?coin=BTC` 7-day average must all agree before any premium is sold
-- **Vol gate** — `GET /api/v1/market-intelligence/dvol-history` supplies the 52-week IV percentile that decides whether premium is worth selling at all
+- **Vol gate** — `GET /api/v1/volatility/implied` supplies the 52-week IV percentile that decides whether premium is worth selling at all
 - **Regime gate** — `GET /api/v1/regimes/current`; `Structural_Shock` closes the strategy regardless of trend and IV state
 - **Backtest** — regime-classified wing P&L from DVOL history joined to `GET /api/v1/backtesting/klines` (1d/4h back to 2017-08); pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) so past trend-gate states are point-in-time
 - **Tips** — strikes and fills live on Deribit; re-check all three trend gates at roll time, not just entry — trend decay mid-position is this strategy's main bleed

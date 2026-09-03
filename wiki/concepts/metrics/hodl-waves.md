@@ -2,7 +2,7 @@
 title: "HODL Waves"
 type: concept
 created: 2026-06-24
-updated: 2026-07-13
+updated: 2026-09-03
 status: draft
 tags: [indicators, bitcoin, behavioral-finance]
 aliases: ["HODL Waves", "hodl-waves", "HODL Wave", "Realized Cap HODL Waves", "RHODL"]
@@ -67,7 +67,7 @@ Imagine a long, quiet bear market. On the HODL Waves chart, the older bands (1�
 - `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
 
 **Historical data:**
-- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score timeseries
+- `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score timeseries
 - `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
 
 ```bash

@@ -2,7 +2,7 @@
 title: "On-Chain Intelligence Regime"
 type: concept
 created: 2026-06-03
-updated: 2026-07-13
+updated: 2026-09-03
 status: good
 tags: [crypto, market-regime, market-microstructure, bitcoin, quantitative]
 aliases: ["On-Chain Regime", "On-Chain Intelligence", "On-Chain Signals Regime"]
@@ -96,7 +96,7 @@ On-chain intelligence is a **leading bias layer**, not a directional backdrop on
 - `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
 
 **Historical data:**
-- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score timeseries
+- `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score timeseries
 - `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
 
 ```bash

@@ -2,7 +2,7 @@
 title: "Cascade Monetization Rotation"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-09-03
 status: good
 tags: [combinations, meta-strategy, options, volatility, derivatives, liquidations, tail-risk, mean-reversion, event-driven, behavioral-finance, quantitative, crypto, bitcoin]
 aliases: ["Tail-to-Fade Rotation", "Crash Hedge Monetization", "Cascade Lifecycle Strategy", "Tail-Payoff Redeployment"]
@@ -232,10 +232,10 @@ The production system adds: Deribit API for OTM put pricing and real-time DVOL m
   - OI: `GET /api/v1/derivatives/open-interest?coin=BTC`
   - Funding: `GET /api/v1/derivatives/funding-rates?coin=BTC`
   - Long/short ratio: `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT`
-  - DVOL: `GET /api/v1/market-intelligence/dvol-history`
+  - DVOL: `GET /api/v1/volatility/implied`
 - **Cascade trigger monitoring (Phase 2)**:
   - Real-time price: `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=10`
-  - DVOL expansion: `GET /api/v1/market-intelligence/dvol-history`
+  - DVOL expansion: `GET /api/v1/volatility/implied`
   - Liquidation flow (6h): `GET /api/v1/market-intelligence/liquidations?coin=BTC`
 - **Rotation gate (Phase 3)**:
   - Liquidation flow (30m): `GET /api/v1/market-intelligence/liquidations?coin=BTC`
@@ -345,7 +345,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/derivatives/open-interest?coin=BTC` — Phase 1: OI/MC Gate 1
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — Phase 1: funding Gate 2 and kill condition
 - `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — Phase 1: directional crowding Gate 3
-- `GET /api/v1/market-intelligence/dvol-history` — Phase 1: DVOL not-yet-spiked gate; Phase 2: DVOL expansion trigger
+- `GET /api/v1/volatility/implied` — Phase 1: DVOL not-yet-spiked gate; Phase 2: DVOL expansion trigger
 - `GET /api/v1/market-intelligence/liquidations?coin=BTC` — Phase 2: 6h liquidation cascade confirmation; Phase 3: 30m liquidation deceleration gate
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=200` — Phase 2/3: real-time price monitoring; CVD approximation from volume-at-price
 - `GET /api/v1/regimes/current` — Phase 3: regime check before fade entry
@@ -361,7 +361,7 @@ curl -H "X-API-Key: $CDA_KEY" \
   "https://cryptodataapi.com/api/v1/market-intelligence/liquidations?coin=BTC"
 ```
 
-Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]], [[cryptodataapi-derivatives]].
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]], [[cryptodataapi-derivatives]], [[cryptodataapi-regimes]].
 
 **Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [long-term regimes](https://cryptodataapi.com/regimes)
 

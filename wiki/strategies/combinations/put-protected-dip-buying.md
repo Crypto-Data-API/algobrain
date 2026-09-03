@@ -2,7 +2,7 @@
 title: "Put-Protected Dip Buying"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-09-03
 status: good
 tags: [combinations, meta-strategy, options, derivatives, mean-reversion, tail-risk, risk-management, behavioral-finance, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Defined-Stop Dip Buy", "OTM-Put-Hedged Capitulation Entry", "Knife-Catch with Floor", "Protected Mean-Reversion Buy"]
@@ -93,7 +93,7 @@ Currently not rejected (`backtest_status: untested`). The null is plausible: in 
 
 **Method C — On-chain + sentiment confluence (from [[onchain-capitulation-confluence]])**
 - On-chain capitulation signal active: exchange inflow spike (top-decile, from `/api/v1/on-chain/exchange-flows/spike-alerts`) AND Fear & Greed ≤ 20 for 2+ consecutive days.
-- Source: `/api/v1/on-chain/exchange-flows/BTC` and `/api/v1/sentiment/fear-greed-index`.
+- Source: `/api/v1/on-chain/exchange-flows/BTC` and `/api/v1/sentiment/fear-greed`.
 
 Any one of the three methods qualifying is sufficient to activate the entry timer. Preference ranking: Method C (strongest confluence) > Method A > Method B.
 
@@ -108,7 +108,7 @@ Any one of the three methods qualifying is sufficient to activate the entry time
 
 **Premium budget:**
 - Cap the put cost at **1.5–2.5%** of the notional long position. If the current DVOL implies a put premium higher than 2.5% of notional at the 15–20% OTM strike, do not enter — the overlay is too expensive relative to the mean-reversion premium being targeted.
-- Source: Deribit API for option pricing; DVOL from `GET /api/v1/market-intelligence/dvol-history`.
+- Source: Deribit API for option pricing; DVOL from `GET /api/v1/volatility/implied`.
 
 ### Position sizing
 
@@ -254,8 +254,8 @@ The production system adds: Deribit WebSocket for live put pricing and delta-hed
 - **Funding rates** — `GET /api/v1/derivatives/funding-rates?coin=BTC` (Method A: sustained negative funding confirming deleveraging)
 - **Open interest** — `GET /api/v1/derivatives/open-interest?coin=BTC` (Method B: OI decline ≥ 15% from 5d peak)
 - **Exchange flows (BTC inflow spike)** — `GET /api/v1/on-chain/exchange-flows/BTC` and `GET /api/v1/on-chain/exchange-flows/spike-alerts` (Method C: on-chain capitulation signal)
-- **Fear & Greed index** — `GET /api/v1/sentiment/fear-greed-index` (Method C: sentiment extreme gate; also provides context for put timing)
-- **DVOL** — `GET /api/v1/market-intelligence/dvol-history`; current DVOL used to estimate put premium budget gate and compare to 30-day average for context
+- **Fear & Greed index** — `GET /api/v1/sentiment/fear-greed` (Method C: sentiment extreme gate; also provides context for put timing)
+- **DVOL** — `GET /api/v1/volatility/implied`; current DVOL used to estimate put premium budget gate and compare to 30-day average for context
 - **4h OHLCV** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=50`; recent price action for entry timing and 5-day high reference
 - **Liquidations** — `GET /api/v1/market-intelligence/liquidations?coin=BTC`; context check — if cascades are still occurring, defer entry even if capitulation signal fires
 - **Regime** — `GET /api/v1/regimes/current`; if `Structural_Shock`, defer entry (ongoing systemic shock)
@@ -364,8 +364,8 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/derivatives/open-interest?coin=BTC` — Method B: OI decline from 5-day peak
 - `GET /api/v1/on-chain/exchange-flows/BTC` — Method C: per-symbol inflow/outflow windows
 - `GET /api/v1/on-chain/exchange-flows/spike-alerts` — Method C: real-time large transfer alerts for whale deposits (on-chain capitulation signal)
-- `GET /api/v1/sentiment/fear-greed-index` — Method C: consecutive extreme-fear readings
-- `GET /api/v1/market-intelligence/dvol-history` — put premium budget gate; DVOL percentile context
+- `GET /api/v1/sentiment/fear-greed` — Method C: consecutive extreme-fear readings
+- `GET /api/v1/volatility/implied` — put premium budget gate; DVOL percentile context
 - `GET /api/v1/market-intelligence/liquidations?coin=BTC` — cascade-clear confirmation before entry
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=50` — entry timing and 5-day high reference
 - `GET /api/v1/regimes/current` — structural shock check; defer entry if `Structural_Shock`
@@ -381,7 +381,7 @@ curl -H "X-API-Key: $CDA_KEY" \
   "https://cryptodataapi.com/api/v1/derivatives/open-interest?coin=BTC"
 ```
 
-Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-on-chain]], [[cryptodataapi-market-intelligence]].
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-on-chain]], [[cryptodataapi-market-intelligence]], [[cryptodataapi-regimes]].
 
 **Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [open interest](https://cryptodataapi.com/open-interest) · [long-term regimes](https://cryptodataapi.com/regimes)
 
@@ -390,7 +390,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
 - **Signal** — capitulation detection across `GET /api/v1/derivatives/funding-rates?coin=BTC` (sustained negative), `GET /api/v1/derivatives/open-interest?coin=BTC` (decline from 5d peak), and `GET /api/v1/on-chain/exchange-flows/spike-alerts` (whale deposits)
-- **Filter** — `GET /api/v1/market-intelligence/liquidations?coin=BTC` must show the cascade has cleared; `GET /api/v1/market-intelligence/dvol-history` sets the put-premium budget gate
+- **Filter** — `GET /api/v1/market-intelligence/liquidations?coin=BTC` must show the cascade has cleared; `GET /api/v1/volatility/implied` sets the put-premium budget gate
 - **Regime gate** — `GET /api/v1/regimes/current`; defer while `Structural_Shock` persists
 - **Backtest** — post-capitulation recovery paths from `GET /api/v1/backtesting/klines` (1d back to 2017-08); the cascade-clear condition replays only since 2026-03-30 (`GET /api/v1/backtesting/liquidations`, Hyperliquid), so older backtests must proxy it from funding and OI alone
 - **Tips** — the protective put is priced on Deribit; re-check the DVOL percentile at fill time — premium budgets set at signal time go stale fast in post-panic tape

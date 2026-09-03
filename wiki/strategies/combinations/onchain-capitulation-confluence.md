@@ -2,7 +2,7 @@
 title: "On-Chain Capitulation Confluence"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-09-03
 status: good
 tags: [combinations, meta-strategy, on-chain, sentiment, mean-reversion, behavioral-finance, bitcoin, quantitative, crypto, position-trading]
 aliases: ["Capitulation Confluence Entry", "On-Chain + Sentiment Bottom", "Dual-Signal Capitulation Buy"]
@@ -236,7 +236,7 @@ The production system adds: on-chain data polling via CryptoDataAPI endpoints; a
 - **[[fear-and-greed-index]]** — `/api/v1/sentiment/fear-greed`: live Fear & Greed reading; `/api/v1/market-intelligence/fear-greed-history` for historical series.
 - **On-Chain Health composite** — `/api/v1/on-chain/score`: the 0-100 composite that collapses all on-chain signals; a score ≤ 20 is consistent with confluence conditions.
 - **Stablecoin dry-powder z-score** — `/api/v1/on-chain/stablecoin-reserves/dry-powder`: optional higher-conviction confirmation.
-- **Whale accumulation score** — `/api/v1/on-chain/whale-score/BTC`: rising whale accumulation in the capitulation window is a positive confluence signal.
+- **Whale accumulation score** — `/api/v1/on-chain/whales/accumulation-score/BTC`: rising whale accumulation in the capitulation window is a positive confluence signal.
 - **Regime classification** — `/api/v1/regimes/current`: reject entries in `Structural_Shock` regime.
 
 ## Example trade
@@ -333,7 +333,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100); a score ≤ 20 is consistent with capitulation confluence
 - `GET /api/v1/sentiment/fear-greed` — live Fear & Greed index reading; Signal 2
 - `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` — stablecoin dry-powder z-score; optional higher-conviction confirmation
-- `GET /api/v1/on-chain/whale-score/BTC` — whale accumulation score timeseries; secondary bullish signal
+- `GET /api/v1/on-chain/whales/accumulation-score/BTC` — whale accumulation score timeseries; secondary bullish signal
 - `GET /api/v1/regimes/current` — regime classification; blocks entry in `Structural_Shock`
 
 **Historical data:**

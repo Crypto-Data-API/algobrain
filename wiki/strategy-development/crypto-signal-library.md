@@ -2,7 +2,7 @@
 title: "Crypto Signal Library"
 type: index
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-09-03
 status: good
 tags: [meta, crypto, quantitative, methodology, data-provider]
 aliases: ["Signal Library", "Crypto Signal Menu", "Signal Primitives"]
@@ -32,7 +32,7 @@ related: ["[[feature-engineering-crypto]]", "[[information-coefficient]]", "[[si
 | **OI divergence** ([[open-interest]]) | `/api/v1/liquidity/oi-divergence` | Sign of ΔOI vs Δprice at 1h/4h/24h | Rising OI + rising price = new longs (continuation); rising OI + falling price = short buildup (squeeze risk) | 1h-24h, **fast** | Momentum / breakout; squeeze plays |
 | **Exchange netflow** ([[exchange-netflow]]) | `/api/v1/on-chain/exchange-flows/{symbol}` | Trailing flow z-score; inflow vs outflow; spike-alerts for whales | Large CEX **inflow** → supply to sell (bearish); **outflow** → self-custody/accumulation (bullish) | 1-7d, **medium** | Swing accumulation basket |
 | **MVRV / dormancy** ([[mvrv-z-score]]) | `/api/v1/on-chain/dormancy/btc` | Zone classification; MVRV-Z level | Low MVRV-Z (<0) → capitulation, accumulate; high (>7) → euphoria, distribute | Weeks-months, **slow** | BTC cycle-position overlay |
-| **Whale-score** | `/api/v1/on-chain/whale-score/{symbol}` | Accumulation score; z-score per token | Whale accumulation → bullish; distribution → bearish | Days-weeks, **medium** | Smart-money follow basket |
+| **Whale-score** | `/api/v1/on-chain/whales/accumulation-score/{symbol}` ([[cryptodataapi-on-chain|currently disabled, ERC-20-only]]) | Categorical `signal` + per-window deltas — not a 0-100 score | Whale accumulation → bullish; distribution → bearish | Days-weeks, **medium** | Smart-money follow basket |
 | **Dry-powder z-score** | `/api/v1/on-chain/stablecoin-reserves/dry-powder` | Z-score of CEX stablecoin reserves (accumulating/neutral/depleting) | Rising dry powder → buying capacity building (bullish tailwind) | Weeks, **slow** | Market-wide risk-on gate |
 | **Fear & Greed** ([[fear-and-greed-index]]) | `/api/v1/sentiment/fear-greed` | 0-100 index; contrarian bands | Extreme fear (<20) → buy; extreme greed (>80) → trim | Days, **medium** | Contrarian overlay / regime gate |
 | **Taker buy/sell** | `/api/v1/market-intelligence/taker-buy-sell` | 4h ratio; z-score | Aggressive taker-buy dominance → short-term up; extreme → exhaustion | Minutes-hours, **very fast** | Intraday flow / execution timing |
@@ -49,7 +49,7 @@ Secondary primitives — usually gates or confirmations rather than standalone a
 | Signal | CryptoDataAPI endpoint | Transform | Use |
 |---|---|---|---|
 | **Long/short ratio** | `/api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` | Top-trader account ratio; z-score | Crowding confirmation for the funding fade |
-| **HL whale positioning** | `/api/v1/quant/whales` | ≥$100k account net stance | Confirm whale-score with live perp positioning |
+| **HL whale positioning** | `/api/v1/quant/whales` | ≥$100k account net stance | Live perp-book proxy while whale-score is disabled (see caveat above) |
 | **Gamma exposure (GEX)** | `/api/v1/quant/gex` | MM inventory + liquidation profile | Pin/anti-pin and squeeze-risk gate |
 | **Hash ribbon** | `/api/v1/on-chain/miners/hash-ribbon` | 30d vs 60d hashrate MA state | BTC miner-capitulation bottom filter |
 | **Options max-pain** | `/api/v1/market-intelligence/options` | OI, volume, max-pain strike | Expiry-pin bias near BTC option expiries |

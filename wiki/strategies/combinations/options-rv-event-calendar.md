@@ -2,7 +2,7 @@
 title: "Options Relative-Value × Event Calendar"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-09-03
 status: good
 tags: [combinations, meta-strategy, options-structures, derivatives, volatility, event-driven, term-structure, crypto, deribit, quantitative]
 aliases: ["Options RV Event Calendar", "Term-Structure Event Positioning", "Calendar Event Vol-of-Vol Premium", "Event-Anchored Options RV"]
@@ -194,7 +194,7 @@ The production system polls Deribit's options chain every 30 minutes to update n
 ## Indicators / data used
 
 - **Deribit IV by expiry** — Deribit API: `GET /api/v2/public/get_historical_volatility?currency=BTC` (historical) and options chain for per-expiry IV; primary input for term-structure measurement. *Not in CryptoDataAPI — sourced directly from Deribit API.*
-- **DVOL (BTC/ETH 30-day IV index)** — `GET /api/v1/volatility/dvol?coin=BTC`; context metric to assess whether the overall vol surface is elevated pre-event.
+- **DVOL (BTC/ETH 30-day IV index)** — `GET /api/v1/volatility/implied`; context metric to assess whether the overall vol surface is elevated pre-event.
 - **BTC-SPX 30-day correlation** — `GET /api/v1/volatility/correlation?assets=BTC,SPX&days=30` (if available) or computed from daily OHLCV; Tier 2 gate for FOMC events.
 - **Event calendar** — maintained manually by the operator; key dates: halving (block-height countdown), ETF decision (SEC calendar), FOMC meeting dates (Federal Reserve calendar), major token unlock schedules (Messari, TokenUnlocks).
 - **Realized vol** — `GET /api/v1/volatility/realized?coin=BTC&days=30`; secondary context for assessing whether the pre-event DVOL spike is justified or excessive.
@@ -284,27 +284,26 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 ## Getting the Data (CryptoDataAPI)
 
 **Live data:**
-- `GET /api/v1/volatility/dvol?coin=BTC` — DVOL 30-day index; context for overall vol level pre-event
-- `GET /api/v1/volatility/dvol?coin=ETH` — ETH DVOL for ETH event trades
+- `GET /api/v1/volatility/implied` — DVOL 30-day index; one call's `items[]` covers both BTC and ETH (Pro/Pro Plus; BTC-only Free) — context for overall vol level pre-event
 - `GET /api/v1/volatility/realized?coin=BTC&days=30` — realised vol comparison to assess DVOL richness
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — delta-hedge cost check (elevated funding = expensive perp hedge)
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=30` — recent daily OHLCV for BTC-SPX correlation computation
 
 **Historical data:**
-- `GET /api/v1/volatility/dvol?coin=BTC&historical=true&days=730` — 2-year DVOL history for event-vol-premium backtesting
+- `GET /api/v1/volatility/implied` — `items[].history` (Pro Plus) carries the full DVOL-history series for event-vol-premium backtesting
 
 *Note: per-expiry Deribit implied volatility (the core input for the calendar spread entry and exit) is NOT available via CryptoDataAPI. Access Deribit's public API directly: `GET https://www.deribit.com/api/v2/public/get_book_summary_by_currency?currency=BTC&kind=option` for live options chain, and `GET https://www.deribit.com/api/v2/public/get_historical_volatility?currency=BTC` for historical DVOL. The Deribit API is public (no auth required for read-only endpoints).*
 
 ```bash
 # CryptoDataAPI for context metrics:
 curl -H "X-API-Key: $CDA_KEY" \
-  "https://cryptodataapi.com/api/v1/volatility/dvol?coin=BTC"
+  "https://cryptodataapi.com/api/v1/volatility/implied"
 
 # Deribit for per-expiry IV (no auth needed):
 curl "https://www.deribit.com/api/v2/public/get_historical_volatility?currency=BTC"
 ```
 
-Auth: CryptoDataAPI requires `X-API-Key` header. Deribit public endpoints require no auth. Full endpoint catalog: [[cryptodataapi-volatility]], [[cryptodataapi-market-data]].
+Auth: CryptoDataAPI requires `X-API-Key` header. Deribit public endpoints require no auth. Full endpoint catalog: [[cryptodataapi-regimes]], [[cryptodataapi-market-data]].
 
 **Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates)
 
@@ -312,10 +311,10 @@ Auth: CryptoDataAPI requires `X-API-Key` header. Deribit public endpoints requir
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the context half of this trade end-to-end:
 
-- **Signal context** — `GET /api/v1/volatility/dvol?coin=BTC` vs `GET /api/v1/volatility/realized?coin=BTC&days=30` establishes whether event IV is rich before the calendar spread goes on
+- **Signal context** — `GET /api/v1/volatility/implied` vs `GET /api/v1/volatility/realized?coin=BTC&days=30` establishes whether event IV is rich before the calendar spread goes on
 - **Event leg** — `GET /api/v1/event/calendar` (filterable up to 30d out) gives the agent machine-readable macro and unlock event dates to anchor expiry selection
 - **Filter** — `GET /api/v1/derivatives/funding-rates?coin=BTC`; elevated funding raises delta-hedge carry costs and shrinks the trade's edge
-- **Backtest** — `GET /api/v1/volatility/dvol?coin=BTC&historical=true&days=730` for two years of event-window vol-premium behaviour, joined to daily klines back to 2017-08 from `GET /api/v1/backtesting/klines`
+- **Backtest** — `GET /api/v1/volatility/implied`'s `items[].history` (Pro Plus) for event-window vol-premium behaviour, joined to daily klines back to 2017-08 from `GET /api/v1/backtesting/klines`
 - **Tips** — per-expiry IV and the actual spread legs come from Deribit's public API; use CryptoDataAPI for regime and vol context, Deribit for pricing, and keep the two clocks synchronized when logging fills
 
 ## Related

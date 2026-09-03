@@ -756,3 +756,52 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   threshold. Fix/Build balance now satisfied — this iteration's Build entry means the next
   Fix/Build choice starts a fresh 3-entry window (iter8 Fix, iter10 Build, iter13 Build:
   2 of 3 Build), so the next Fix/Build pick is owed a **Fix**.
+- 2026-09-03 iter 14 (Fix): `tools/check_api_changelog.py` reported zero unprocessed
+  releases (fully synced as of iter13) and no upstream git divergence, so this iteration
+  was a clean Fix pick per the balance rule owed since iter13. Took the highest-leverage
+  queued Fix candidate: iter9's template-aware sweep had found **24 distinct
+  CryptoDataAPI endpoint paths cited in the wiki that do not exist** (166 citations),
+  re-confirmed unchanged through iter10 and again by me this iteration before delegating.
+  Scoped to the top 4 offenders (~119 of 166 citations, ~72%): `/market-intelligence/
+  dvol-history` (55 cites), `/on-chain/whale-score/{symbol}` (39), `/volatility/dvol`
+  (17), `/sentiment/fear-greed-index` (8). **The sub-agent caught something my brief got
+  wrong**: I'd suggested `/volatility/index`(`/history`) as the DVOL replacement, but
+  schema inspection showed that endpoint carries realized vol only (`cvi_realized_30`/
+  `cvi_realized_7`) with no implied-vol field at all — the real match is
+  `/volatility/implied` (`items[].{dvol, dvol_change_24h, realized_30, vrp, history[],
+  term_structure[]}`), which every citing page (Deribit-implied-vol option gates)
+  actually needs. It also found the whale-score replacement
+  (`/on-chain/whales/accumulation-score/{symbol}`) is currently **disabled upstream**
+  ("🚧 Coming soon"), scoped to **ERC-20 tokens only** (USDT/USDC/WBTC/WETH, not native
+  BTC), and returns a categorical `signal` (`accumulating`/`neutral`/`distributing`/
+  `unknown`) rather than the continuous 0-100 score several strategy pages built numeric
+  Gate thresholds on — it fixed the path everywhere AND added honest inline caveats
+  rather than silently swapping the path and leaving the numeric-threshold claims wrong.
+  fear-greed-index → fear-greed was a clean path swap, fields matched. **44 wiki pages +
+  CHANGELOG.md touched**, incl. two hub pages with real content additions: `cryptodataapi-
+  on-chain.md` (rewrote the disabled-family warning box with the ERC-20 scope and real
+  `signal` enum) and `cryptodataapi-regimes.md` (new subsection documenting `/volatility/
+  index`, `/volatility/index/history`, and `/volatility/implied` for the first time —
+  these were never previously documented anywhere in the wiki despite being cited, wrong,
+  from 14 strategy pages). Full file list and the two Gate-1 strategy pages needing
+  numeric-threshold recalibration (still flagged inline, not resolved) are in
+  `wiki/log.md`'s 2026-09-03 Fix entry. **Verified independently, not on trust:**
+  re-pulled the live OpenAPI spec and confirmed `/volatility/implied` and
+  `WhaleAccumulationScoreResponse` match exactly what the sub-agent reported (including
+  the disabled-status description text and ERC-20 scope), re-grepped all of `wiki/` for
+  the 4 old broken path strings myself — zero remaining citations outside one deliberate
+  historical-explanation mention on `cryptodataapi-on-chain.md`. Re-ran lint: byte-
+  identical at 991 issues (links 234/tags 659/empty 51/orphans 39/stale 8) — this was a
+  path/prose correction, not a link-topology change, so no shift expected or seen.
+  **Flagged but explicitly not touched** (2 items the sub-agent found while grepping,
+  outside this batch's 4-path scope): `alternative-data-alpha.md` also cites
+  `/on-chain/mvrv` (not real; should be `/on-chain/dormancy/btc`), and
+  `event-vol-buying.md` claims "No CryptoDataAPI endpoint for event calendar" which is
+  now stale (`/event/calendar` exists) — both queued as small future Fix items alongside
+  the ~20 remaining broken paths from the original sweep (`/derivatives/hyperliquid/
+  funding-rates` 7x, `/market-intelligence/borrow-interest` 10x, `/market-intelligence/
+  grayscale/*` — possibly retired outright, and a long tail of ~18 more paths / ~30
+  citations) — deliberately deferred, not stretched into this batch. Fix/Build balance:
+  this is a Fix entry, so the 3-entry window is now iter10 Build, iter13 Build, iter14
+  Fix (1 of 3 Fix) — next Fix/Build pick has no balance constraint either way, judge on
+  merits.
