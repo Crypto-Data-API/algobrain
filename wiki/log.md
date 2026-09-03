@@ -9,6 +9,54 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-09-03 — Sync: new /exchanges venue directory; Build: AsterDEX, Lighter, BNB Chain entity pages
+
+**Scope:** Bounded iteration combining a small Sync batch (one new CryptoDataAPI release,
+2026-08-23) with a Build batch (three high-inbound-link entity-page gaps). The new
+`/api/v1/exchanges` and `/api/v1/exchanges/{slug}` endpoints were verified against the raw
+OpenAPI JSON (`curl https://cryptodataapi.com/api`, parsed with Python) and live curl
+responses — confirming `{slug}` is a path parameter, the current 7-slug set (hyperliquid,
+binance, bybit, okx, robinhood, asterdex, lighter), and the exact `ExchangeInfo`/
+`ExchangeSpecs` field shapes — before any page cited them.
+
+- **Created** [[cryptodataapi-exchanges]] — new category page for the public (no API key)
+  venue-directory endpoints: `slug`, `kind` (CEX/DEX/Broker), `specs`
+  (instruments/coins/max_leverage/kyc/custody/fiat_onramp), and the referral
+  `signup_url`/`signup_incentive`/`referral_code`/`is_referral_link`/`disclosure` fields,
+  with the disclosure-surfacing rule spelled out. Registered on [[cryptodataapi]]'s category
+  map and `related:`; cross-linked from [[exchanges-overview]]'s Start Here list.
+- **Created** [[asterdex]] — entity page for the AsterDEX perp DEX (46 inbound links across
+  16 files; the highest-priority gap). Covers the December 2024 APX Finance/Astherus merger,
+  March 2025 "Aster" rebrand, YZi Labs/CZ backing, hidden-order and yield-collateral
+  mechanics, and a fee-schedule table hedged against third-party-tracker disagreement.
+  `founded` frontmatter uses the 2025 rebrand year; the page documents all three candidate
+  "founding" dates (merger, rebrand, CryptoDataAPI's own "2024") rather than asserting one.
+  [[aster-2]] (an existing redirect stub) now resolves correctly.
+- **Created** [[lighter]] — entity page for the zk-rollup perp DEX (14 inbound links).
+  Covers the 2022 company founding, January 2025 private beta, the Season 1/2 points
+  program, the December 2025 LIT TGE (1B supply, ~25% to points holders), and the
+  Circle-subsidized zero-fee retail model — flagged as an unverified permanent structure.
+  Cross-checked against [[edgex]] and [[dydx-chain]]'s existing treatment of comparable
+  zk/L2 perp-DEX peers so as not to contradict prior claims.
+- **Created** [[bnb-chain]] — entity page for the BNB Chain protocol (10 inbound links,
+  twice-queued in prior iterations), distinct from the [[bnb]] token page. Covers the
+  September 2020 Binance Smart Chain launch, the February 15, 2022 rename to BNB Chain,
+  PoSA consensus (~21-validator Cabinet), EVM compatibility, PancakeSwap/Venus as the
+  dominant DeFi primitives, and the October 2022 bridge exploit — without duplicating
+  [[bnb]]'s existing "BNB Chain Ecosystem" section; links back to it for token/tokenomics.
+- **Marked seen** in `.claude/cryptodataapi-changelog-state.json`: release `2026-08-23`
+  (disposition: material).
+
+**Verification:** `python tools/lint.py --check links --json` only reports files with **>5**
+broken wikilinks, so it undercounts the fix here (most of the 46+14+10 inbound references
+to these three targets sit in files with just 1-2 broken links each, invisible to this
+per-file threshold in either run). Within that reported set, the aggregate count still
+dropped from 2,501 to 2,491 broken wikilinks (234 files both before and after — same file
+set, lower counts per file), with `wiki/log.md` and `wiki/markets/crypto/lista.md` each
+losing their `bnb-chain` entries specifically. A full occurrence count (not just the
+>5-threshold report) would show a larger drop across the ~30 files that reference
+[[asterdex]], [[lighter]], or [[bnb-chain]].
+
 ## 2026-09-02 — Absorbed 4 CryptoDataAPI releases: supply/float, unlocks, volume scanner, sr/ret_90d fields, error envelope (Sync)
 
 **Scope:** Bounded ~60-minute Sync batch reconciling the 4 CryptoDataAPI releases left

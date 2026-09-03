@@ -1,7 +1,19 @@
 {
-  "last_checked": "2026-09-02",
+  "last_checked": "2026-09-03",
   "api_version_seen": "2026-08-28",
   "processed": [
+    {
+      "version": "2026-08-28",
+      "processed_on": "2026-09-02",
+      "disposition": "noted",
+      "note": "Onboarding/agent-UX polish (auth/keys next_calls ladder, GET /api/v1 first_calls, list_capabilities no-key, MCP tool error enrichment, urllib User-Agent gotcha). No wiki page walks the mint/verify/upgrade sequence step-by-step; x402 agent-subscribe already documented on cryptodataapi-mcp.md. No edit needed."
+    },
+    {
+      "version": "2026-08-27",
+      "processed_on": "2026-09-02",
+      "disposition": "noted",
+      "note": "Bug fixes to limit (funding-rates) and minutes (liquidity/depth) params. Wiki's cryptodataapi-derivatives.md documents limit without claiming the old broken fixed-window behavior, and no wiki page describes liquidity/depth's minutes semantics in detail. No stale claims to correct."
+    },
     {
       "version": "2026-08-26",
       "processed_on": "2026-09-02",
@@ -15,28 +27,10 @@
       "note": "Sync batch: documented the new sr (support/resistance) field on /indicators/technical[/{symbol}] in cryptodataapi-indicators.md (up to 3 levels/side, {price,strength,dist_pct}, swing-pivot clustering, empty [] = real no-level read) with a trading-applications bullet linking [[support-and-resistance]]; documented ret_90d on /meme/regime[/{symbol}] in cryptodataapi-regimes.md's Meme Regime section (null <91d history, not part of the regime classifier). All fields verified against the live OpenAPI schema (SRLevelModel, MemeMetricsModel)."
     },
     {
-      "version": "2026-08-19",
-      "processed_on": "2026-09-02",
+      "version": "2026-08-23",
+      "processed_on": "2026-09-03",
       "disposition": "material",
-      "note": "Sync batch: created wiki/data-sources/cryptodataapi-supply.md (new category page) covering /supply/float and /supply/unlocks in full (float_pct, supply_basis, locked_supply/locked_usd, dilution_overhang, next_unlock, unlock_coverage not_tracked caveat; cliff-only /supply/unlocks with pct_of_float, DefiLlama coverage caveat); registered on cryptodataapi.md's category map + related; updated token-unlocks.md's Getting the Data section to add both new endpoints alongside /event/calendar?type=unlock; documented the new mint event type (delta_usd, pct_of_supply, long/short bias, observed not scheduled) in cryptodataapi-regimes.md's Event Regime section. All fields verified against the live OpenAPI schema (SupplyFloatRow, SupplyUnlockItem, NextUnlock, EventCatalystModel) and live curl tests."
-    },
-    {
-      "version": "2026-08-17",
-      "processed_on": "2026-09-02",
-      "disposition": "material",
-      "note": "Sync batch: added /volume/scanner and /volume/scanner/{symbol} to cryptodataapi-hyperliquid.md's endpoint table with full field docs (volume_24h, avg_volume_30d/median_volume_30d, multiplier/multiplier_median, band enum, kBONK/kPEPE/kSHIB aliases); documented /hyperliquid/summary's 3 new fields (avg_volume_30d, volume_multiplier, volume_band); added a relative-volume-screening trading-applications bullet. Verified against live OpenAPI schema (VolumeScannerItem, VolumeScannerDetailResponse, HLSummaryResponse)."
-    },
-    {
-      "version": "2026-08-28",
-      "processed_on": "2026-09-02",
-      "disposition": "noted",
-      "note": "Onboarding/agent-UX polish (auth/keys next_calls ladder, GET /api/v1 first_calls, list_capabilities no-key, MCP tool error enrichment, urllib User-Agent gotcha). No wiki page walks the mint/verify/upgrade sequence step-by-step; x402 agent-subscribe already documented on cryptodataapi-mcp.md. No edit needed."
-    },
-    {
-      "version": "2026-08-27",
-      "processed_on": "2026-09-02",
-      "disposition": "noted",
-      "note": "Bug fixes to limit (funding-rates) and minutes (liquidity/depth) params. Wiki's cryptodataapi-derivatives.md documents limit without claiming the old broken fixed-window behavior, and no wiki page describes liquidity/depth's minutes semantics in detail. No stale claims to correct."
+      "note": "Sync batch: created wiki/data-sources/cryptodataapi-exchanges.md documenting the new public /exchanges and /exchanges/{slug} venue-directory endpoints (ExchangeInfo/ExchangeSpecs fields, referral disclosure requirement, 7-slug set); registered on cryptodataapi.md's category map + related; cross-linked from exchanges-overview.md's Start Here list. Verified live against the raw OpenAPI JSON and live curl responses (path param, not query param, for {slug}). Also used the endpoint to build wiki/entities/exchanges/asterdex.md and wiki/entities/exchanges/lighter.md as Build-batch entity pages in the same iteration."
     },
     {
       "version": "2026-08-22",
@@ -57,10 +51,22 @@
       "note": "iter9 Sync: tier/rate-limit table (all 3 rows), auth email-verification + resend-verify, ETF flows/aum + liquidations/by-exchange corrections, quant/gex breaking envelope + new fields"
     },
     {
+      "version": "2026-08-19",
+      "processed_on": "2026-09-02",
+      "disposition": "material",
+      "note": "Sync batch: created wiki/data-sources/cryptodataapi-supply.md (new category page) covering /supply/float and /supply/unlocks in full (float_pct, supply_basis, locked_supply/locked_usd, dilution_overhang, next_unlock, unlock_coverage not_tracked caveat; cliff-only /supply/unlocks with pct_of_float, DefiLlama coverage caveat); registered on cryptodataapi.md's category map + related; updated token-unlocks.md's Getting the Data section to add both new endpoints alongside /event/calendar?type=unlock; documented the new mint event type (delta_usd, pct_of_supply, long/short bias, observed not scheduled) in cryptodataapi-regimes.md's Event Regime section. All fields verified against the live OpenAPI schema (SupplyFloatRow, SupplyUnlockItem, NextUnlock, EventCatalystModel) and live curl tests."
+    },
+    {
       "version": "2026-08-18",
       "processed_on": "2026-08-26",
       "disposition": "material",
       "note": "iter10/iter11 Sync (two concurrent loops, merged): created wiki/data-sources/cryptodataapi-news.md documenting the full /news/* family (pulse, market-moving, coin/{symbol}, sources) plus /backtesting/news-events; registered in the hub category map + related, sentiment, market-intelligence and backtesting reverse-links, and news-and-sentiment-sources; added /market-intelligence/squeeze-alerts to cryptodataapi-market-intelligence.md; recorded the /policy/headlines sign-error fix on cryptodataapi-regimes.md; tied into news-trading and crypto-policy-shock-trading. 2026-08-19's supply/float+unlocks remain deferred as a distinct batch."
+    },
+    {
+      "version": "2026-08-17",
+      "processed_on": "2026-09-02",
+      "disposition": "material",
+      "note": "Sync batch: added /volume/scanner and /volume/scanner/{symbol} to cryptodataapi-hyperliquid.md's endpoint table with full field docs (volume_24h, avg_volume_30d/median_volume_30d, multiplier/multiplier_median, band enum, kBONK/kPEPE/kSHIB aliases); documented /hyperliquid/summary's 3 new fields (avg_volume_30d, volume_multiplier, volume_band); added a relative-volume-screening trading-applications bullet. Verified against live OpenAPI schema (VolumeScannerItem, VolumeScannerDetailResponse, HLSummaryResponse)."
     },
     {
       "version": "2026-07-10",

@@ -4,6 +4,23 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-09-03 — Sync the venue-directory endpoint; add AsterDEX, Lighter, BNB Chain pages
+
+**Added:** A new data-source category page documenting the data layer's public venue
+directory (exchange/DEX profiles, specs, and referral sign-up links), completing the last
+pending release from the previous sync. Also added three entity pages closing genuine,
+long-standing gaps flagged by dozens of existing internal references: a decentralized
+perpetual-futures exchange known for hidden orders and yield-bearing collateral, a
+zero-knowledge-rollup perpetual-futures exchange, and the EVM-compatible chain behind the
+BNB token (distinct from the existing token page, which it now links back to instead of
+duplicating).
+
+**Notes:** Combined Sync + Build iteration of the daily improvement loop — the one
+remaining pending release was small, so the balance-owed Build pick was folded into the
+same batch. The data layer is now fully reconciled against the upstream release feed.
+Zero lint regressions; the three new pages resolve wikilinks that were broken across
+70+ existing references.
+
 ## 2026-09-02 — Sync the wiki to 4 more data-layer releases: supply/unlocks, volume scanner, error envelope
 
 **Added:** A new data-source category page for the data layer's token-supply endpoints —

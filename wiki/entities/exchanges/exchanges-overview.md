@@ -20,6 +20,7 @@ This section covers both centralized exchanges (CEXs) and decentralized exchange
 - [[exchange-data-sources]] -- Master reference of official data endpoints for all major exchanges
 - [[centralized-vs-decentralized-exchanges]] -- The CEX/DEX trade-off (custody, KYC, liquidity, smart-contract risk)
 - [[exchange-risk]] -- Counterparty and solvency risk (the [[ftx]] case study)
+- [[cryptodataapi-exchanges]] -- Machine-readable venue directory: a public API returning `kind`, `focus`, `specs` (instruments, leverage, KYC, custody), and referral sign-up links for the venues in the tables below, so an agent can discover and compare venues programmatically instead of hardcoding this page
 
 ## How to Navigate This Hub
 

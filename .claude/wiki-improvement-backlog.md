@@ -711,3 +711,48 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   iter11 (iter7 Fix, iter8 Fix, iter10 Build), so the next Fix/Build choice is still owed
   a **Build** per the balance rule (2 of the last 3 were Fix) — note this corrects iter11's
   entry, which mis-stated the owed track as Fix.
+- 2026-09-03 iter 13 (Sync + Build, combined): `tools/check_api_changelog.py` reported
+  exactly 1 unprocessed release (2026-08-23, the `/exchanges` venue directory deferred
+  from iter12). Per the "small Sync batch ⇒ also do a Fix/Build pick" rule, and since the
+  balance check owed a **Build** (last 3 Fix/Build entries: iter7 Fix, iter8 Fix, iter10
+  Build — 2 of 3 Fix), combined both in one delegated batch. **Sync:** verified
+  `GET /api/v1/exchanges` and `GET /api/v1/exchanges/{slug}` against the raw OpenAPI JSON
+  and live curl responses (confirmed `{slug}` is a path param, not `?slug=`, correcting an
+  assumption in the task brief) before writing anything; created
+  `wiki/data-sources/cryptodataapi-exchanges.md` (new category page: `kind`/`specs`/
+  referral fields, the disclosure-surfacing rule), registered on `cryptodataapi.md`'s
+  category map + `related:`, cross-linked from `exchanges-overview.md`'s Start Here list.
+  Marked `2026-08-23` material — `check_api_changelog.py` now reports zero unprocessed
+  releases, wiki fully level with the upstream feed. **Build:** found 3 genuine
+  high-inbound missing entity pages by direct grep (not just lint's truncated broken-link
+  sample, which only lists the first ~5 targets per file): `[[asterdex]]` (46 refs across
+  16 files — highest priority, a redirect stub `aster-2.md` and a full existing strategy
+  map `asterdex-perp-trading-map.md` both already assumed it would exist), `[[lighter]]`
+  (14 refs), `[[bnb-chain]]` (10 refs — queued twice before, in iter8 and iter9, never
+  actioned). Created all three: `wiki/entities/exchanges/asterdex.md` (Dec 2024 APX
+  Finance/Astherus merger, Mar 2025 "Aster" rebrand, hidden orders, USDF/asBNB yield
+  collateral — 3 candidate "founding" dates all documented rather than one asserted),
+  `wiki/entities/exchanges/lighter.md` (zk-rollup perp DEX, Jan 2025 beta, Dec 2025 LIT
+  TGE), `wiki/entities/protocols/bnb-chain.md` (PoSA consensus, Feb 2022 BSC→BNB Chain
+  rename, Oct 2022 bridge exploit — explicitly the protocol/chain layer, distinct from and
+  linking back to the existing `bnb.md` token page rather than duplicating its "BNB Chain
+  Ecosystem" section). Nicely paired with the Sync work: asterdex and lighter are 2 of the
+  7 venues in the new `/exchanges` directory, and both new entity pages cite it in their
+  `Getting the Data` sections. **Verified myself** rather than taking the sub-agent's word
+  for it: re-pulled the live OpenAPI JSON and confirmed `/api/v1/exchanges`,
+  `/api/v1/exchanges/{slug}`, `ExchangeListResponse`, `ExchangeDetailResponse`,
+  `ExchangeSpecs` all present; confirmed every new wikilink target referenced from the 4
+  new pages exists (`pancakeswap-token`, `venus`, `layer-1`, `bitcoin`, `edgex`,
+  `dydx-chain`, `layer-2`); validated `.claude/cryptodataapi-changelog-state.json` as
+  valid JSON with 14 unique version entries, no duplicates. `git status`/`git diff --stat`
+  clean, no upstream divergence this time (unlike iter12). Fully hedged facts the
+  sub-agent could not verify (AsterDEX's exact fee schedule and single founding date,
+  Lighter's current fee/leverage figures, both venues' live TVL/OI) rather than asserting
+  them. Lint: `tools/lint.py --check links --json` reports one entry per file with **>5**
+  broken links, so the file-count (234) held steady while the underlying broken-link
+  *instance* count dropped (~2,501 → ~2,491 per the sub-agent's more granular count) —
+  consistent, not contradictory, since the files citing `bnb-chain`/`asterdex`/`lighter`
+  each still have other unrelated broken links keeping them above the 5-link reporting
+  threshold. Fix/Build balance now satisfied — this iteration's Build entry means the next
+  Fix/Build choice starts a fresh 3-entry window (iter8 Fix, iter10 Build, iter13 Build:
+  2 of 3 Build), so the next Fix/Build pick is owed a **Fix**.
