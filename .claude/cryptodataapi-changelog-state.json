@@ -1,7 +1,13 @@
 {
-  "last_checked": "2026-09-04",
-  "api_version_seen": "2026-09-03",
+  "last_checked": "2026-09-05",
+  "api_version_seen": "2026-09-04",
   "processed": [
+    {
+      "version": "2026-09-04",
+      "processed_on": "2026-09-05",
+      "disposition": "noted",
+      "note": "Edge-authed endpoints (quant/gex, quant/positioning, hyperliquid/*) now serve the same complete upgrade object + Retry-After on 403/429 that the app-authed endpoints already had (2026-08-28, 2026-09-03). Consistency fix at the edge layer, no new field shape, no wiki-visible surface -- same disposition as its two predecessor releases in this family."
+    },
     {
       "version": "2026-09-03",
       "processed_on": "2026-09-04",

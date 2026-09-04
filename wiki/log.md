@@ -2,12 +2,63 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-09-04
+updated: 2026-09-05
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-09-05 — Build: expanded 5 thin stub concept pages (lending, emissions, MiCA, synthetic dollar, crypto market regimes)
+
+**Scope:** all 5 pages carried only a one-paragraph lead, a bare `## Related` list, and
+minimal frontmatter (missing `domain`/`prerequisites`/`difficulty`), despite genuine
+inbound demand (7-11 wikilinks each from existing pages). Selected by inbound-link count
+among the wiki's 31 `status: stub` pages.
+
+- **[[lending]]** (11 inbound refs) — DeFi money markets (Aave/Morpho/Compound
+  utilization-curve interest rates, health-factor liquidations, flash loans) vs. CeFi
+  lending desks, with the Terra/LUNA → 3AC → Voyager/Celsius/Genesis → FTX → BlockFi 2022
+  contagion as the canonical CeFi-lending failure case study, plus how lending rates feed
+  borrow-to-short, leveraged yield farming, and cash-and-carry. `Getting the Data` cites
+  `/derivatives/funding-rates` and `/derivatives/summary` as the genuinely relevant
+  surface — explicitly notes CryptoDataAPI does not carry on-chain DeFi protocol lending
+  rates (Aave/Compound/Morpho APYs) rather than inventing an endpoint for them.
+- **[[emissions]]** (11 inbound refs) — emission schedule types (Bitcoin-halving-style
+  fixed/decaying, fixed/non-decaying, inflation-targeted, liquidity-mining), holder
+  dilution mechanics, and an explicit "Emissions vs. Unlocks" section built directly on
+  [[cryptodataapi-supply]]'s documented cliff-calendar-vs-emissions-feed distinction. No
+  `Getting the Data` section — correctly identified that no genuine CryptoDataAPI
+  endpoint covers continuous emissions (the supply/unlocks endpoint explicitly excludes
+  them by design).
+- **[[mica]]** — EU CASP licensing/passporting, the EMT/ART stablecoin reserve rules
+  (pointing to the already-thorough [[stablecoin-regulation]] rather than duplicating its
+  table), the phased 2024-2026 rollout, and MiCA's role as a Geopolitical/Policy Shock
+  catalyst. `Getting the Data` cites `/policy/headlines`, `/policy/regime`,
+  `/policy/regime/score` — framed honestly as the general policy-headline surface, not
+  MiCA-specific.
+- **[[synthetic-dollar]]** (8 inbound refs) — the delta-neutral basis-trade mechanism
+  (long staked collateral + short equal-notional perp), funding-flip/venue-custody/
+  synthetic-specific-depeg risks, and a 4-way comparison table against fiat-backed/
+  crypto-overcollateralized/algorithmic stablecoin designs, kept consistent with
+  [[ethena-usde]]'s existing supply-trajectory and depeg-history figures. `Getting the
+  Data` cites `/sentiment/stablecoins` (+ `/remote-history`) and `/derivatives/
+  funding-rates` as the two live inputs that determine hedge health.
+- **[[crypto-market-regimes]]** (7 inbound refs) — rewritten as the accessible bridging
+  page it was always meant to be rather than a duplicate of the much deeper
+  [[crypto-market-regime-taxonomy]] and [[regime-strategy-playbook]] pages it links to:
+  why regime-gating matters, the four beginner-level axes (risk-on/off, trending/ranging,
+  vol, alt-season/BTC-dominance), and a high-level, non-duplicative pointer to the
+  CryptoDataAPI regime engine.
+
+All 5 pages moved `status: stub` → `good` with full `domain`/`prerequisites`/`difficulty`
+frontmatter and approved tags. Verified every endpoint cited against a fresh live OpenAPI
+pull (`/derivatives/funding-rates`, `/derivatives/summary`, `/policy/headlines`,
+`/policy/regime`, `/policy/regime/score`, `/sentiment/stablecoins` + `/remote-history` —
+all confirmed present) and every wikilink added across all 5 pages against the wiki
+filesystem — zero forward links, all resolve to real pages. Re-ran lint: 991 → 987 issues
+(empty-page count 51 → 47, consistent with genuine content added to previously
+near-empty pages; links/tags/orphans/stale unchanged at 234/659/39/8 — no regressions).
 
 ## 2026-09-04 — Fix: finish the CryptoDataAPI broken-path sweep (borrow-interest, grayscale, hyperliquid mark-price/funding-rates, volatility/realized, blockchain/exchange-flows, archives-index, mvrv, stablecoin-flows, dex/tokens)
 

@@ -4,6 +4,21 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-09-05 — Expand 5 thin stub concept pages: lending, emissions, MiCA, synthetic dollar, market regimes
+
+**Added:** Full treatment for five concept pages that previously carried only a one-paragraph
+stub despite real demand (7-11 existing pages already linking to each): crypto lending
+(DeFi money-market mechanics versus CeFi lending desks, with the 2022 CeFi lending
+contagion as the canonical failure case), token emissions (schedule types and how they
+differ from cliff unlocks), the EU's MiCA crypto regulatory framework, synthetic
+dollars (the delta-neutral stablecoin design Ethena's USDe pioneers), and a rewritten
+accessible overview of crypto market regimes that routes to the wiki's deeper
+regime-taxonomy and strategy-playbook pages rather than duplicating them.
+
+**Notes:** Build-track iteration of the daily improvement loop. Every data-layer endpoint
+cited was verified against the live API spec; every new cross-reference resolves to an
+existing wiki page. Zero lint regressions.
+
 ## 2026-09-04 — Finish the data-layer broken-path sweep: 11 more invented/retired endpoints across 17 pages
 
 **Fixed:** Closed out the endpoint-path audit from two iterations ago. Rebuilt the

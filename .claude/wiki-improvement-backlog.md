@@ -862,3 +862,39 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   different tier text) unrelated to this batch. Fix/Build balance: another Fix entry —
   window is now iter13 Build, iter14 Fix, iter15 Fix (2 of 3 Fix) — next Fix/Build pick
   is owed a **Build**.
+- 2026-09-05 iter 16 (Build): `tools/check_api_changelog.py` reported one new release
+  (2026-09-04, `upgrade` object + `Retry-After` extended to edge-authed endpoints'
+  403s/429s) — marked **noted**, third release in this same consistency-fix family
+  (2026-08-28, 2026-09-03) and same reasoning each time: no wiki page documents the
+  tier-403/429 upgrade-path shape in enough detail to need it. No upstream git
+  divergence. Balance rule owed a Build (iter14 Fix, iter15 Fix = 2 of last 3). Surveyed
+  the wiki's 31 `status: stub` pages, counted inbound-wikilink demand for each via grep,
+  and picked the top 5 by count: [[lending]] (11), [[emissions]] (11), [[mica]] (10),
+  [[synthetic-dollar]] (8), [[crypto-market-regimes]] (7) — all genuinely thin (one
+  paragraph + bare Related list, missing `domain`/`prerequisites`/`difficulty`
+  frontmatter) despite the real demand. Expanded all 5 to full concept pages: DeFi vs.
+  CeFi lending mechanics (with the 2022 CeFi contagion case study); emission-schedule
+  taxonomy built explicitly on [[cryptodataapi-supply]]'s documented emissions-vs-cliff-
+  unlock distinction (correctly added NO `Getting the Data` section since no genuine
+  endpoint covers continuous emissions); MiCA's CASP-licensing/EMT-ART framework
+  (pointing to the existing [[stablecoin-regulation]] table rather than duplicating it,
+  citing `/policy/*` for the general regulatory-headline surface); the synthetic-dollar
+  delta-neutral mechanism with a 4-way stablecoin-design comparison table, consistent
+  with [[ethena-usde]]'s existing figures; and a rewrite of `crypto-market-regimes` as
+  the accessible bridging page to the much deeper [[crypto-market-regime-taxonomy]] and
+  [[regime-strategy-playbook]] rather than a duplicate of either. All 5 moved
+  `stub` → `good`. **Verified independently, not on trust:** re-pulled the live OpenAPI
+  spec and confirmed all 6 distinct endpoints cited across the batch
+  (`/derivatives/funding-rates`, `/derivatives/summary`, `/policy/headlines`,
+  `/policy/regime`, `/policy/regime/score`, `/sentiment/stablecoins` +
+  `/remote-history`) exist exactly as claimed; checked every wikilink added across all 5
+  pages (30+ distinct targets, including less-common ones like `[[compound]]`,
+  `[[flash-loans]]`, `[[governance-token]]`, `[[basis-carry-regime]]`,
+  `[[regime-adaptive-strategy]]`) against the wiki filesystem — zero forward links, 100%
+  resolve. `git status`/`git diff --stat` confirmed only the 5 target concept pages were
+  touched. Re-ran lint: 991 → 987 (empty 51 → 47, consistent with genuine content
+  replacing near-empty stubs; links/tags/orphans/stale unchanged at 234/659/39/8 — no
+  regressions). Fix/Build balance: this is a Build entry — window is now iter14 Fix,
+  iter15 Fix, iter16 Build (1 of 3 Build) — next Fix/Build pick has no balance
+  constraint either way. 26 stub pages remain (of the original 31) for a future Build
+  iteration, ranked by inbound-link count if that signal still holds.
