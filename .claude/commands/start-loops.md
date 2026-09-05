@@ -28,7 +28,8 @@ obvious:
 - The loop only keeps advancing while this local session/CLI process stays running.
   Closing the terminal breaks the chain; re-run `/start-loops` to resume.
 - Before starting, confirm the local MCP server is up (`/start-servers` if not — check
-  `.mcp-http.pid` / tail `.mcp-http.err.log`), since the first iteration will try to use it.
+  with `<python> tools/manage_mcp.py status`), since the first iteration will try to use
+  it.
 - Each firing runs exactly one bounded iteration of `/improve-algobrain-loop` (reconcile
   the upstream API changelog, then pick one area, ~60 minutes of sub-agent work, commit +
   push with a changelog entry) — the loop itself just handles the once-per-interval

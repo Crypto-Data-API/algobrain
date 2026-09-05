@@ -10,9 +10,10 @@ payload of the `/start-loops` recurring loop.
 ## 0. Check the local MCP server
 
 Try a quick `mcp__algobrain__wiki_stats` (or `wiki_lint`) call. If the server isn't
-reachable, run `powershell -ExecutionPolicy Bypass -File tools/start_servers.ps1` (see
-`/start-servers`) and retry once. If it still fails, fall back to Grep/Glob over `wiki/`
-directly for this iteration and note in the log (step 4) that the MCP was unavailable.
+reachable, run `<python> tools/manage_mcp.py start` (`python3` on macOS/Linux or `py` on
+Windows; see `/start-servers`) and retry once. If it still fails, fall back to Grep/Glob
+over `wiki/` directly for this iteration and note in the log (step 4) that the MCP was
+unavailable.
 
 ## 1. Check the CryptoDataAPI changelog — every iteration
 

@@ -4,6 +4,23 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-09-05 — Cross-platform MCP setup and MCP SDK 2 migration
+
+**Changed:** Replaced the Windows-only server lifecycle with `tools/manage_mcp.py`, a
+single Python entry point for setup, start, stop, restart, status, STDIO, and foreground
+HTTP operation on Windows, macOS, and Linux. The existing PowerShell scripts now delegate
+to the cross-platform manager for backward compatibility. Expanded the README with
+one-command setup and configuration examples for Claude Code, Codex, and generic MCP
+clients.
+
+**Fixed:** Migrated the server from the removed MCP SDK 1.x `FastMCP` API to the current
+2.x `MCPServer` API and constrained the dependency to `mcp>=2.0,<3`. Removed the unused
+`markitdown[all]` dependency, which made fresh installation fail on Python 3.14. HTTP now
+uses the SDK's current stateless Streamable HTTP configuration. Restricted `wiki_read` to
+Markdown files inside `wiki/` to prevent absolute-path and parent-directory traversal.
+
+**Added:** MCP integration tests covering tool discovery, tool calls, and path security.
+
 ## 2026-09-05 — Expand 5 thin stub concept pages: lending, emissions, MiCA, synthetic dollar, market regimes
 
 **Added:** Full treatment for five concept pages that previously carried only a one-paragraph

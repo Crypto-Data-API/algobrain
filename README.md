@@ -8,21 +8,71 @@ An LLM Wiki-Brain knowledge base for **crypto trading strategy generation**. Exp
 
 ## Quickstart
 
-Serve the vault to Claude Code (or any MCP client) as a local wiki API:
+Prerequisite: **Python 3.10 or newer**. Then run one command from the repository root.
 
-```powershell
-# One-time setup
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r tools/requirements.txt
+macOS or Linux:
+
+```bash
+python3 tools/manage_mcp.py start
 ```
 
-Then start the server with the **`/start-servers`** slash command in Claude Code — or run it directly:
+Windows PowerShell:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools/start_servers.ps1
+py tools/manage_mcp.py start
 ```
 
-This launches the wiki MCP server over Streamable HTTP at **http://127.0.0.1:8010/mcp**, exposing `wiki_search`, `wiki_read`, `wiki_stats`, `wiki_lint`, and `wiki_ingest` over the full vault. It's already registered for this repo via `.mcp.json` — approve it when Claude Code prompts. Stop it again with `tools/stop_servers.ps1`.
+The first run creates an isolated `.venv`, installs the current MCP SDK, and starts
+AlgoBrain over Streamable HTTP at **http://127.0.0.1:8010/mcp**. Later starts reuse the
+same environment. The server exposes `wiki_search`, `wiki_read`, `wiki_stats`,
+`wiki_lint`, and `wiki_ingest` over the full vault.
+
+Claude Code discovers the checked-in `.mcp.json` automatically. For Codex, register the
+same local endpoint once:
+
+```bash
+codex mcp add algobrain --url http://127.0.0.1:8010/mcp
+```
+
+Other MCP clients can use:
+
+```json
+{
+  "mcpServers": {
+    "algobrain": { "url": "http://127.0.0.1:8010/mcp" }
+  }
+}
+```
+
+### Server commands
+
+| Command | Purpose |
+|---------|---------|
+| `<python> tools/manage_mcp.py setup` | Create/update the virtual environment only |
+| `<python> tools/manage_mcp.py start` | Start HTTP in the background; runs setup if needed |
+| `<python> tools/manage_mcp.py status` | Show whether the background server is running |
+| `<python> tools/manage_mcp.py restart` | Restart the background server |
+| `<python> tools/manage_mcp.py stop` | Stop the background server |
+| `<python> tools/manage_mcp.py run-http` | Run HTTP in the foreground for logs or containers |
+| `<python> tools/manage_mcp.py run` | Run over STDIO for a local MCP host |
+
+Use `python3` for `<python>` on macOS/Linux or `py` on Windows.
+
+Logs are written to `.mcp-http.log` and `.mcp-http.err.log`. The server binds to
+`127.0.0.1` by default, so it is not exposed to the network.
+
+For STDIO, run setup once and configure your MCP host to execute the manager from an
+absolute path:
+
+```bash
+python3 tools/manage_mcp.py setup
+codex mcp add algobrain-stdio -- python3 /absolute/path/to/algobrain/tools/manage_mcp.py run
+```
+
+On Windows, substitute `py` and a Windows absolute path.
+
+The old PowerShell start/stop scripts remain as compatibility wrappers, but new setups
+should use `manage_mcp.py` on every operating system.
 
 ## What's inside
 

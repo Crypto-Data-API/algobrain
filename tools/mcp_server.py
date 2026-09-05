@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-MCP Server for Trading Wiki — exposes wiki operations as Claude-accessible tools.
+MCP server for AlgoBrain — exposes wiki operations to any MCP client.
 
 Provides tools:
   - wiki_search: Search wiki pages by query, tag, type, status
@@ -9,20 +9,11 @@ Provides tools:
   - wiki_read: Read a specific wiki page by path
   - wiki_stats: Get wiki statistics
 
-Run:
-    .venv/bin/python tools/mcp_server.py
+Run over STDIO (recommended for local clients):
+    <python> tools/manage_mcp.py run
 
-Register in Claude Code settings or claude_desktop_config.json (the command
-must point at the project venv's interpreter — system python3 does not have
-the `mcp` package installed):
-    {
-      "mcpServers": {
-        "trading-wiki": {
-          "command": "/Users/samd/websites/trader-wiki/.venv/bin/python",
-          "args": ["/Users/samd/websites/trader-wiki/tools/mcp_server.py"]
-        }
-      }
-    }
+Run over Streamable HTTP:
+    <python> tools/manage_mcp.py start
 """
 import json
 import re
@@ -34,15 +25,22 @@ from pathlib import Path
 WIKI_ROOT = Path(__file__).parent.parent
 
 try:
-    from mcp.server.fastmcp import FastMCP
+    from mcp.server import MCPServer
 except ImportError:
     print(
-        "MCP SDK not installed. Run: pip install mcp",
+        "MCP SDK 2.x is not installed. Run: <python> tools/manage_mcp.py setup",
         file=sys.stderr,
     )
     sys.exit(1)
 
-server = FastMCP("trading-wiki")
+server = MCPServer(
+    name="algobrain",
+    title="AlgoBrain",
+    instructions=(
+        "Search and read the AlgoBrain crypto-trading knowledge base. Use wiki_search "
+        "before wiki_read. Treat the content as research material, not financial advice."
+    ),
+)
 
 # Standing instruction returned with every wiki_search response so that any
 # agent querying this wiki knows where (and how) to get live/historical market
@@ -175,9 +173,12 @@ async def wiki_lint(check: str = "") -> str:
 
 @server.tool()
 async def wiki_read(page_path: str) -> str:
-    """Read a wiki page by its path relative to repo root. Example: 'wiki/markets/crypto/_index.md'"""
-    full_path = WIKI_ROOT / page_path
-    if full_path.exists():
+    """Read a Markdown page inside wiki/. Example: 'wiki/markets/crypto/bitcoin.md'."""
+    wiki_root = (WIKI_ROOT / "wiki").resolve()
+    full_path = (WIKI_ROOT / page_path).resolve()
+    if not full_path.is_relative_to(wiki_root) or full_path.suffix.lower() != ".md":
+        return "Invalid page path: paths must refer to Markdown files inside wiki/."
+    if full_path.is_file():
         return full_path.read_text(encoding="utf-8")
     return f"Page not found: {page_path}"
 
