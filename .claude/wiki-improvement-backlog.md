@@ -898,3 +898,40 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   iter15 Fix, iter16 Build (1 of 3 Build) — next Fix/Build pick has no balance
   constraint either way. 26 stub pages remain (of the original 31) for a future Build
   iteration, ranked by inbound-link count if that signal still holds.
+- 2026-09-06 iter 17 (Build): `tools/check_api_changelog.py` reported zero unprocessed
+  releases (fully synced). No upstream git divergence to worry about from my own
+  changes, but found and fast-forward-pulled a real upstream commit from the actual
+  user (`463679f "Make MCP setup cross-platform"` — FastMCP 1.x → MCP SDK 2.x migration,
+  new `tools/manage_mcp.py` cross-platform entry point, README/command-file updates)
+  before starting; confirmed the MCP server still worked post-migration via a live
+  `wiki_stats` call before proceeding. Balance rule had no constraint (iter15 Fix,
+  iter16 Build = 1 of 3 Build). Considered a Fix pass on the 659-page non-approved-tags
+  backlog first, but tallied actual tag frequencies and found it's now a long diffuse
+  tail (max 10 uses for any single tag, versus the 20-30+ concentrated wins previous tag
+  audits found) — lower leverage than continuing the stub-expansion method that worked
+  cleanly last iteration, so stayed Build. Ranked the wiki's remaining 16 non-source
+  `status: stub` pages by inbound-link count and took the next 5: `[[bitcoin-mining]]`
+  (7), and a 4-way pick from an 8-way tie at 6 refs each — `[[paxos]]`, `[[securitize]]`,
+  `[[delegated-proof-of-stake]]`, `[[justin-sun]]` — chosen for cross-linking synergy
+  with recent work (MiCA/stablecoin-regulation, tokenization, BNB Chain's PoSA
+  consensus). All 5 expanded to full pages with complete frontmatter, moved
+  `stub` → `good`. Full per-page detail in `wiki/log.md`'s 2026-09-06 entry (same
+  detail level as always, not duplicated here) — notably including a real cross-page
+  consistency reconciliation (DPoS page vs. `bnb-chain.md`'s PoSA description) and one
+  deliberately omitted unverifiable claim (a Justin Sun/Poloniex-hack-response detail no
+  wiki source confirmed). **Caught and fixed a sub-agent error before shipping**:
+  `justin-sun.md`'s frontmatter used `founded: 1990` for a birth year and an empty
+  `website: ""` — checked 4 other `entity_type: person` pages on this wiki and confirmed
+  neither convention is used for a person page here; removed both fields (the birth year
+  was already in the lead paragraph, so no information was lost). **Verified
+  independently, not on trust:** re-pulled the live OpenAPI spec and confirmed all 4
+  `/on-chain/*` endpoints cited on `bitcoin-mining.md` exist exactly as claimed; checked
+  all 27 distinct new wikilink targets across the 5 pages against the wiki filesystem —
+  zero forward links, 100% resolve; `git status`/`git diff --stat` confirmed only the 5
+  target pages were touched (plus the pre-existing, expected `changelog-state.json`
+  `last_checked` bump from step 1's check). Re-ran lint: 987 → 982 (empty 47 → 42,
+  exactly matching the 5 pages expanded; links/tags/orphans/stale unchanged at
+  234/659/39/8 — no regressions). Fix/Build balance: another Build entry — window is now
+  iter15 Fix, iter16 Build, iter17 Build (2 of 3 Build) — next Fix/Build pick is owed a
+  **Fix**. 21 stub pages remain (11 non-source + 10 gap-finder source stubs, the latter
+  not really candidates for this expansion method) for future iterations.

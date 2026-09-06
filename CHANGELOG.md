@@ -4,6 +4,23 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-09-06 — Expand 5 more thin stub pages: Bitcoin mining, Paxos, Securitize, DPoS, Justin Sun
+
+**Added:** Full treatment for five more pages that previously carried only a one-paragraph
+stub despite real demand (6-7 existing pages linking to each): Bitcoin mining economics
+(hashrate, difficulty, hash price, and the miner-capitulation cycle), Paxos (the regulated
+stablecoin issuer behind USDP, PYUSD, and the wound-down BUSD), Securitize (the
+regulated-transfer-agent model behind BlackRock's tokenized BUIDL fund), delegated
+proof-of-stake as a consensus mechanism, and Justin Sun's role across the TRON/HTX/USDD
+ecosystem.
+
+**Notes:** Build-track iteration of the daily improvement loop. Reconciled a real
+cross-page inconsistency along the way — the consensus-mechanism page previously implied
+a chain documented elsewhere runs plain delegated proof-of-stake, when that page actually
+documents a distinct proof-of-authority hybrid; both pages now agree. Every endpoint cited
+was verified against the live API spec; every new cross-reference resolves to an existing
+wiki page. Zero lint regressions.
+
 ## 2026-09-05 — Cross-platform MCP setup and MCP SDK 2 migration
 
 **Changed:** Replaced the Windows-only server lifecycle with `tools/manage_mcp.py`, a

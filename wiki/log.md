@@ -2,12 +2,74 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-09-05
+updated: 2026-09-06
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-09-06 — Build: expanded 5 more thin stub pages (bitcoin mining, Paxos, Securitize, DPoS, Justin Sun)
+
+**Scope:** second stub-expansion batch, same method as 2026-09-05's — ranked the wiki's
+remaining `status: stub` pages by inbound-wikilink count and expanded the top 5
+(6-7 refs each) from a one-paragraph lead to a full page.
+
+- **[[bitcoin-mining]]** (7 inbound refs) — PoW security mechanism, hashrate/difficulty-
+  adjustment mechanics (2,016-block retarget), miner revenue (subsidy + fees), mining
+  economics (ASIC/energy costs, hash price/breakeven), a full miner-capitulation-dynamics
+  section cross-checked against [[miner-capitulation-bottom]] to avoid contradicting its
+  small-sample/ETF-era-dampening caveats, and public-miner coverage (MARA, Hut 8, Core
+  Scientific, Bitdeer). `Getting the Data` cites `/on-chain/miners/reserves`,
+  `/on-chain/miners/hash-ribbon`, `/on-chain/dormancy/btc`, `/on-chain/score`. Fixed a
+  stale link along the way: the stub's `[[halving]]` target is only a redirect stub —
+  repointed to the real, richly-developed `[[bitcoin-halving]]` page.
+- **[[paxos]]** (6 inbound refs) — NYDFS trust-charter regulatory model, full stablecoin-
+  issuance history (USDP/BUSD/PYUSD/Global Dollar), the February 2023 BUSD wind-down as a
+  regulatory case study, and its tokenization/settlement business. Cross-linked to
+  [[mica]] and [[stablecoin-regulation]] (both recently built) as the wiki's clearest
+  regulated-issuer example. No `Getting the Data` section — Paxos itself isn't a priced
+  token; USDP/PYUSD carry their own endpoints on their own pages.
+- **[[securitize]]** (6 inbound refs) — the SEC-registered-transfer-agent/broker-dealer
+  regulatory model (not an unregistered token issuer), its flagship tokenized-RWA
+  products (BlackRock BUIDL, STAC, ACRED, a VanEck fund), and why they trade as
+  effectively-zero-secondary-volume sector barometers rather than directional
+  instruments. Cross-linked to the existing [[tokenization]] page's off-chain custody/SPV
+  model. No `Getting the Data` section — no CryptoDataAPI price endpoint is meaningful for
+  permissioned, whitelist-only securities.
+- **[[delegated-proof-of-stake]]** (6 inbound refs) — DPoS mechanism, tradeoffs vs. plain
+  PoS, the EOS vote-buying/cartel critique, and canonical examples (TRON, EOS, Hive/Steem,
+  ARK, GXChain). **Reconciled a real cross-page tension**: the stub previously implied
+  "early BNB Chain" was a DPoS chain; [[bnb-chain]] (built two iterations ago) documents
+  its actual consensus as Proof of Staked Authority, an explicit PoA/DPoS hybrid — added a
+  dedicated section correcting this and keeping the two pages consistent rather than
+  contradictory.
+- **[[justin-sun]]** (6 inbound refs) — TRON founding (Aug 28, 2017 genesis), the 2020
+  Steemit acquisition and Hive fork, HTX advisory role, USDD/TRON DAO Reserve history, the
+  March 2023 SEC civil complaint (stayed Feb 2025, reported dismissed with prejudice March
+  6, 2026 per aggregator tracking on [[bittorrent]] — explicitly flagged as reported, not
+  independently confirmed), and the 2025-2026 World Liberty Financial wallet-freeze
+  dispute. Deliberately omitted an unverifiable Poloniex-hack-response claim rather than
+  guessing. **Caught and fixed a frontmatter error before shipping**: the sub-agent had
+  used `founded: 1990` for Sun's birth year and an empty `website: ""` — checked 4 other
+  `entity_type: person` pages on this wiki and confirmed neither field is used that way
+  for a person (birth year belongs in prose, which the lead paragraph already had;
+  `website` is omitted rather than left empty) — removed both fields.
+
+All 5 pages moved `status: stub` → `good` with full frontmatter. Verified independently:
+re-pulled the live OpenAPI spec and confirmed all 4 cited `/on-chain/*` endpoints exist
+exactly as claimed; checked all 27 distinct new wikilink targets across the 5 pages
+against the wiki filesystem (mara, hut-8, core-scientific, bitdeer-technologies,
+on-chain-analysis, paxos-standard, pyusd, binance-usd, global-dollar,
+2023-02-busd-wind-down, blackrock-usd-institutional-digital-liquidity-fund,
+securitize-tokenized-aaa-clo-fund, apollo-diversified-credit-securitize-fund,
+vaneck-treasury-fund, blackrock, tron, usdd, htx-dao, bittorrent,
+world-liberty-financial, sun-token, apenft, hive, steem, consensus-mechanism,
+proof-of-stake, ark, gxchain) — zero forward links, 100% resolve. `git status`/`git diff
+--stat` confirmed only the 5 target pages were touched. Re-ran lint: 987 → 982 (empty
+47 → 42, exactly matching the 5 pages expanded from near-empty; links/tags/orphans/stale
+unchanged at 234/659/39/8 — no regressions). 21 stub pages remain (16 non-source minus
+the 5 done here, plus 10 gap-finder source stubs not in scope for this method).
 
 ## 2026-09-05 — Build: expanded 5 thin stub concept pages (lending, emissions, MiCA, synthetic dollar, crypto market regimes)
 
