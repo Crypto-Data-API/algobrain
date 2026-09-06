@@ -123,7 +123,7 @@ on marketplace_price_update(token):
 
 **SATS BRC-20 (mid-2023).** Sat-denominated meme; rallied 50x in 3 months. Cross-marketplace + cross-indexer arbs frequent.
 
-**Runes launch April 20, 2024 (Bitcoin halving).** Casey Rodarmor's Runes protocol activated at halving block 840,000, which alone carried ~37.6 BTC (~$2.4M) in fees — the most valuable block ever mined — and Runes generated an estimated $135M+ in transaction fees in its first week, the highest fee period in Bitcoin history. Runes "etching arb" — predicting which Runes would have value vs which were spam — was the day's main game.
+**Runes launch April 20, 2024 (Bitcoin halving).** [[casey-rodarmor|Casey Rodarmor]]'s Runes protocol activated at halving block 840,000, which alone carried ~37.6 BTC (~$2.4M) in fees — the most valuable block ever mined — and Runes generated an estimated $135M+ in transaction fees in its first week, the highest fee period in Bitcoin history. Runes "etching arb" — predicting which Runes would have value vs which were spam — was the day's main game.
 
 **RSIC (RSIC Metaprotocol)** — Rare Ordinals project; both BRC-20 and Runes versions. Cross-standard arb between RSIC variants captured 200-500 bp during peak launch.
 
@@ -173,4 +173,4 @@ Per-trade capacity bound by single-token liquidity (typically $1-50K per trade).
 
 ## Related
 
-[[nft-arbitrage]] · [[bitcoin-ordinals]] · [[fork-airdrop-triangulation]] · [[memecoin-sniping]] · [[liquidity-sniping]] · [[pump-fun-bonding-curve-sniping]]
+[[nft-arbitrage]] · [[bitcoin-ordinals]] · [[casey-rodarmor]] · [[fork-airdrop-triangulation]] · [[memecoin-sniping]] · [[liquidity-sniping]] · [[pump-fun-bonding-curve-sniping]]

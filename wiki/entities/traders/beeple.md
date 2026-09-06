@@ -10,7 +10,7 @@ entity_type: person
 founded: 1981
 headquarters: "Charleston, South Carolina, USA"
 website: "https://beeple-crap.com"
-related: ["[[nft]]", "[[ethereum]]", "[[cryptopunks]]", "[[bored-ape-yacht-club]]", "[[nft-trading]]"]
+related: ["[[nft]]", "[[ethereum]]", "[[cryptopunks]]", "[[bored-ape-yacht-club]]", "[[nft-trading]]", "[[metakovan]]"]
 ---
 
 # Beeple
@@ -38,7 +38,7 @@ The defining moment of both Beeple's career and the 2021 NFT boom came on March 
 Key facts:
 
 - **Sale price**: $69,346,250 (paid in [[ethereum]])
-- **Buyer**: MetaKovan (Vignesh Sundaresan), founder of the Metapurse fund, a Singapore-based crypto investor who had previously purchased other Beeple works
+- **Buyer**: **[[metakovan|MetaKovan]]** (Vignesh Sundaresan), founder of the Metapurse fund, a Singapore-based crypto investor who had previously purchased other Beeple works
 - **Significance**: Third-most-expensive sale by a living artist at the time, behind only Jeff Koons and David Hockney
 - **Auction house**: Christie's -- one of the world's oldest and most prestigious auction houses, lending institutional legitimacy to NFTs
 - **Payment**: Christie's accepted [[ethereum]] as payment for the first time
@@ -71,6 +71,7 @@ The Beeple story is also a cautionary tale for the NFT market:
 
 ## Related
 
+- [[metakovan]] — Buyer of "Everydays: The First 5000 Days" for $69.3 million
 - [[nft]]
 - [[nft-trading]]
 - [[ethereum]]

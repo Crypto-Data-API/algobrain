@@ -206,10 +206,11 @@ Deribit's dominance is also a source of structural risk for the traders who depe
 - **Max pain / options expiry**: Large Deribit expiries (quarterly, monthly) influence spot price dynamics as dealers hedge gamma
 - **[[funding-rate]] arbitrage**: Compare Deribit perp funding vs. [[hyperliquid]] and [[binance]] for cross-venue arb
 - **Vol surface arbitrage**: Compare Deribit IV surface to CME for cross-venue vol discrepancies
-- **Sentiment indicator**: Put/call ratios, skew, and OI changes on Deribit serve as leading sentiment indicators, complementing [[alternative-me|Fear & Greed Index]] and [[cryptoquant|CryptoQuant]] on-chain data
+- **Sentiment indicator**: [[put-call-ratio|Put/call ratios]], skew, and OI changes on Deribit serve as leading sentiment indicators, complementing [[alternative-me|Fear & Greed Index]] and [[cryptoquant|CryptoQuant]] on-chain data
 
 ## Related
 
+- [[put-call-ratio]] — Sentiment indicator computed from Deribit's put/call open interest and volume
 - [[options-overview]] — Options trading concepts and [[greeks]]
 - [[bitcoin]] — BTC options and futures
 - [[ethereum]] — ETH options and futures

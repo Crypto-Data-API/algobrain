@@ -38,7 +38,7 @@ There is no reliable real-time bubble detector — Eugene Fama disputes the term
 
 - Valuation multiples (CAPE, price-to-sales, price-to-book) at multi-standard-deviation extremes versus history
 - Parabolic price action — accelerating gains on a log chart
-- Surging retail participation, margin debt, IPO/SPAC volume, and credit issuance
+- Surging retail participation, [[margin-debt|margin debt]], IPO/SPAC volume, and credit issuance
 - Narrative saturation in mainstream media and the abandonment of traditional metrics
 - Deteriorating market breadth (fewer stocks driving index gains)
 - Extreme bullish [[sentiment]] readings and collapsing [[volatility]] (complacency)

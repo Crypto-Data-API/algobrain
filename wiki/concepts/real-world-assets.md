@@ -9,7 +9,7 @@ aliases: ["Real World Assets", "RWA", "RWA Tokenization", "Asset Tokenization", 
 domain: [market-microstructure]
 prerequisites: ["[[stablecoins]]", "[[defi]]"]
 difficulty: intermediate
-related: ["[[defi]]", "[[stablecoins]]", "[[tokenization]]", "[[ethereum]]", "[[regulation]]", "[[treasuries]]", "[[ondo-finance]]"]
+related: ["[[defi]]", "[[stablecoins]]", "[[tokenization]]", "[[ethereum]]", "[[regulation]]", "[[treasuries]]", "[[ondo-finance]]", "[[sophisticated-investor]]"]
 ---
 
 Real-world assets (RWAs) are off-chain assets — government bonds, private credit, real estate, commodities, equities, and money-market funds — represented as tokens on a blockchain. Tokenization aims to bring the settlement speed, programmability, fractional ownership, and 24/7 transferability of crypto rails to traditional financial instruments. Stablecoins are technically the first and largest RWA category (tokenized fiat), but the term "RWA" is usually reserved for everything *except* stablecoins.
@@ -38,7 +38,7 @@ As of Q1-Q2 2026, the total value of tokenized RWAs on-chain *excluding* stablec
 
 - **On-chain yield, off-chain safety** — tokenized Treasuries let DeFi participants and crypto treasuries earn ~4-5% risk-free-equivalent yield without leaving the blockchain, draining capital that previously sat in zero-yield stablecoins. This is a major reason RWA Treasury products exploded once US rates rose.
 - **Collateral** — tokenized Treasuries are increasingly used as collateral in DeFi lending and as backing for newer yield-bearing stablecoins, blurring the line between RWA and [[stablecoins]].
-- **Fractionalization and access** — tokenization can lower minimums for traditionally gated assets (private credit, real estate), though most institutional products remain permissioned to accredited/qualified investors.
+- **Fractionalization and access** — tokenization can lower minimums for traditionally gated assets (private credit, real estate), though most institutional products remain permissioned to [[sophisticated-investor|accredited/qualified investors]].
 - **Risks** — RWAs reintroduce off-chain counterparty, custody, and legal-enforceability risk that "trustless" crypto was meant to avoid; a token is only as good as the SPV and the courts behind it. Regulatory treatment ([[regulation]]) varies sharply by jurisdiction, and secondary-market liquidity for most RWA tokens is still thin relative to the underlying.
 
 ## Related
@@ -49,6 +49,7 @@ As of Q1-Q2 2026, the total value of tokenized RWAs on-chain *excluding* stablec
 - [[treasuries]] — the dominant underlying asset
 - [[ondo-finance]] — a leading RWA issuer
 - [[regulation]] — securities-law constraints on tokenized assets
+- [[sophisticated-investor]] — the accredited/qualified-investor gate on most institutional RWA products
 
 ## Sources
 

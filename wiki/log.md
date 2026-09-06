@@ -2,12 +2,60 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-09-06
+updated: 2026-09-07
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-09-07 — Fix: un-orphaned 8 substantive zero-inbound-link pages
+
+**Scope:** the wiki's 39 lint-flagged "orphan" pages split into two very different
+buckets on inspection — 13 are `type: redirect` stubs, correctly orphaned by design
+(nothing should link to a redirect alias), and 26 are real, substantive content pages
+(mostly `status: good`/`excellent`) that genuinely have zero inbound wikilinks despite
+solid content — undiscoverable via the wiki's link graph. Picked the 8 highest-value
+ones and found genuine (not forced) conceptual connections to link them from, adding
+real inline-prose wikilinks rather than padding `## Related` lists alone:
+
+- **[[put-call-ratio]]** — linked from [[deribit]] ("Put/call ratios, skew, and OI
+  changes on Deribit serve as leading sentiment indicators") and
+  [[sentiment-analysis]] (a section literally titled "Put/Call Ratio" that had never
+  linked the actual page).
+- **[[margin-debt]]** — linked from [[market-bubbles]] and [[deleveraging]] ("high
+  aggregate leverage (measured by margin debt...)").
+- **[[pensions]]** — linked from [[2022-09-uk-mini-budget-crisis]] (two prose
+  mentions of UK pension-fund LDI strategies) and a new row added to
+  [[deleveraging]]'s Historical Episodes table for the 2022 UK Gilt/LDI crisis as a
+  cross-asset forced-selling case study.
+- **[[casey-rodarmor]]** — linked from [[bitcoin-ordinals]] ("created by developer
+  Casey Rodarmor") and [[bitcoin-runes-brc20-arbitrage]] ("Casey Rodarmor's Runes
+  protocol activated at halving block 840,000").
+- **[[zagabond]]** — linked from [[azuki]] ("Azuki's pseudonymous founder Zagabond
+  published a blog post...") — a genuine gap, since Azuki's page never linked its own
+  founder.
+- **[[metakovan]]** — linked from [[beeple]] ("Buyer: MetaKovan (Vignesh
+  Sundaresan)") — same gap pattern: Beeple's page named MetaKovan five times without
+  ever linking him.
+- **[[sophisticated-investor]]** — linked from [[securitize]] (the exact unlinked
+  "Reg D for U.S. accredited/qualified investors" phrase) and [[real-world-assets]]
+  ("most institutional products remain permissioned to accredited/qualified
+  investors"). Checked [[paxos]] and [[tokenization]] too — neither mentions
+  accredited/qualified investors, so correctly left unlinked there.
+- **[[cfd-trading]]** — linked from [[asic]] and [[esma]] (both regulators'
+  CFD-restriction actions) — the originally-suggested [[perpetual-futures]] link
+  didn't pan out (that page never mentions CFDs at all), so the regulator pages were
+  the genuine natural fit instead.
+
+13 files touched, all small (2-8 line diffs) — this is a link-addition pass, not a
+content rewrite. Verified independently: re-grepped for inbound links on all 8 targets
+myself (not just trusting the sub-agent's report) — all 8 now show 1-2 genuine inbound
+links; spot-read the `deleveraging.md` and `securitize.md` diffs directly and confirmed
+minimal, well-integrated, contextually correct insertions. Re-ran lint: orphans 39 → 31
+(exactly the 8 fixed), everything else unchanged (links 234/tags 659/empty 42/stale 8)
+— no regressions, no side effects on unrelated pages. 18 non-redirect orphans remain
+(26 minus the 8 done here) for a future Fix iteration.
 
 ## 2026-09-06 — Build: expanded 5 more thin stub pages (bitcoin mining, Paxos, Securitize, DPoS, Justin Sun)
 

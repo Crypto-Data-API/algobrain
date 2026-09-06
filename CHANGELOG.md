@@ -4,6 +4,20 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-09-07 — Fix: link 8 substantive pages that had zero inbound references
+
+**Fixed:** Eight solid, previously-written pages (options sentiment, aggregate margin
+debt, pension-fund mechanics, and several notable figures in crypto/NFT history) were
+undiscoverable through the wiki's link graph despite good content, because nothing else
+in the wiki linked to them. Added genuine, contextual links from related pages —
+including two real gaps where a page named a person five times without ever linking
+their profile.
+
+**Notes:** Fix-track iteration of the daily improvement loop. Distinguished genuine gaps
+from false positives first: of 39 pages lint flags as having no inbound links, 13 are
+redirect aliases that are correctly never linked directly, leaving 26 real gaps, of which
+this batch addressed 8. Zero lint regressions elsewhere.
+
 ## 2026-09-06 — Expand 5 more thin stub pages: Bitcoin mining, Paxos, Securitize, DPoS, Justin Sun
 
 **Added:** Full treatment for five more pages that previously carried only a one-paragraph

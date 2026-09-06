@@ -10,7 +10,7 @@ entity_type: regulator
 founded: 1998
 headquarters: "Sydney, Australia"
 website: "https://asic.gov.au"
-related: ["[[sec]]", "[[regulation]]", "[[superannuation]]", "[[smsf]]", "[[austrac]]", "[[apra]]", "[[australian-regulatory-framework]]", "[[afsl]]", "[[vasp-regulation]]"]
+related: ["[[sec]]", "[[regulation]]", "[[superannuation]]", "[[smsf]]", "[[austrac]]", "[[apra]]", "[[australian-regulatory-framework]]", "[[afsl]]", "[[vasp-regulation]]", "[[cfd-trading]]"]
 ---
 
 The Australian Securities and Investments Commission (ASIC) is Australia's primary regulator of financial markets, financial services, and corporate governance. Established in 1998 as the successor to the Australian Securities Commission, ASIC's mandate combines functions that in the United States are split across the [[sec|SEC]], FINRA, CFPB, and parts of the OCC — making it one of the broadest financial regulators in the developed world. Its retail-protection rules (CFD leverage caps, binary-option ban) closely mirror the EU's [[esma|ESMA]] intervention; see [[regulation]] for the global comparison.
@@ -90,7 +90,7 @@ ASIC can:
 
 ### CFD and Derivatives Restrictions (2021)
 
-In March 2021, ASIC implemented sweeping restrictions on CFD and binary options products offered to retail investors:
+In March 2021, ASIC implemented sweeping restrictions on [[cfd-trading|CFD]] and binary options products offered to retail investors:
 
 | Product | Restriction |
 |---------|------------|
@@ -191,6 +191,7 @@ These overlap heavily with the global retail-derivative protection wave that [[e
 
 ## Related
 
+- [[cfd-trading]] — the leveraged product ASIC's 2021 leverage caps and negative-balance-protection rules target
 - [[sec]] — US analogue (narrower mandate, SRO model via FINRA)
 - [[esma]] — EU analogue; near-identical retail CFD intervention
 - [[regulation]] — Global financial-regulation overview

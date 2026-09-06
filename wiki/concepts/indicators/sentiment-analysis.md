@@ -36,7 +36,7 @@ The [[vix|VIX]] measures implied [[volatility]] from [[options-overview|S&P 500 
 - **VIX > 40**: Panic -- historically marks major bottoms
 
 ### Put/Call Ratio
-The ratio of [[options-overview|put]] volume to call volume:
+The [[put-call-ratio|put/call ratio]] measures the ratio of [[options-overview|put]] volume to call volume:
 - **High put/call** (>1.0): Excessive hedging/bearishness -- contrarian bullish
 - **Low put/call** (<0.7): Excessive bullishness/complacency -- contrarian bearish
 - CBOE equity put/call and index put/call ratios are the most commonly used

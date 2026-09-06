@@ -935,3 +935,33 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   iter15 Fix, iter16 Build, iter17 Build (2 of 3 Build) — next Fix/Build pick is owed a
   **Fix**. 21 stub pages remain (11 non-source + 10 gap-finder source stubs, the latter
   not really candidates for this expansion method) for future iterations.
+- 2026-09-07 iter 18 (Fix): `tools/check_api_changelog.py` reported zero unprocessed
+  releases, no upstream git divergence. Balance rule owed a Fix (iter16 Build, iter17
+  Build = 2 of 3 Build). Instead of the usual candidates, found a fresh angle on the
+  39-page orphan-lint signal by checking each flagged page's `type`: 13 are
+  `type: redirect` stubs, correctly orphaned by design (a redirect alias should never
+  receive inbound links — that's not what it's for), leaving **26 genuinely
+  undiscoverable, substantive pages** (mostly `status: good`/`excellent`) that the
+  lint tool had been lumping in with false positives every prior iteration. Picked 8 of
+  the 26 by cross-referencing against recently-built pages for concrete, verifiable
+  connections rather than guessing blind: `put-call-ratio`, `margin-debt`, `pensions`,
+  `casey-rodarmor`, `zagabond`, `metakovan`, `sophisticated-investor` (spotted myself —
+  ties directly to `securitize.md`'s existing unlinked "Reg D for accredited/qualified
+  investors" phrase from iter17), `cfd-trading`. Delegated with instructions to add
+  genuine inline-prose links only, explicitly permitting "found zero genuine connection"
+  as a valid outcome rather than forcing weak links to hit a quota — the sub-agent used
+  that permission correctly twice (declined `perpetual-futures.md` for `cfd-trading`
+  since that page never mentions CFDs at all, used regulator pages instead; declined
+  `paxos.md`/`tokenization.md` for `sophisticated-investor` since neither mentions
+  accredited investors). Also surfaced two genuine pre-existing gaps while grepping:
+  `azuki.md` had never linked its own founder (`zagabond`), and `beeple.md` named
+  MetaKovan five times without ever linking him. 13 files touched, all small (2-8 line
+  diffs) — a link-addition pass, not a rewrite. Full per-page source/target detail in
+  `wiki/log.md`'s 2026-09-07 entry. **Verified independently, not on trust:** re-grepped
+  inbound-link counts on all 8 targets myself — all now show 1-2 genuine links; spot-read
+  the `deleveraging.md` and `securitize.md` diffs directly for correctness. Re-ran lint:
+  974 total, orphans 39 → 31 (exactly the 8 fixed), links/tags/empty/stale unchanged at
+  234/659/42/8 — no regressions, no side effects elsewhere. Fix/Build balance: this is a
+  Fix entry — window is now iter16 Build, iter17 Build, iter18 Fix (1 of 3 Fix) — next
+  Fix/Build pick has no balance constraint either way. 18 non-redirect orphans remain
+  (26 minus 8) as a queued Fix candidate using the same method.

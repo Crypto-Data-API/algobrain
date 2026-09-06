@@ -54,6 +54,7 @@ When forced deleveraging at one institution triggers forced deleveraging at othe
 | [[ltcm|LTCM Collapse (1998)]] | Russian default triggered losses → margin calls from 25+ counterparties | LTCM's massive bond positions pushed spreads wider, threatening banks |
 | [[quant-meltdown-2007]] | One fund's forced credit liquidation spilled into equity quant strategies | Factor overlap meant all quant funds held similar positions → simultaneous selling |
 | [[2008-global-financial-crisis|2008 GFC]] | Subprime losses → margin calls → asset fire sales → broader asset price collapse | Banks, hedge funds, money markets, and insurers all deleveraging simultaneously |
+| [[2022-09-uk-mini-budget-crisis|UK Gilt / LDI Crisis (2022)]] | Mini-budget shock spiked gilt yields → margin calls on [[pensions|pension fund]] LDI hedges | Funds were forced to sell gilts to raise collateral, pushing yields higher until the Bank of England intervened |
 | [[terra-luna|Terra/LUNA (2022)]] | UST depeg → LUNA crash → Three Arrows Capital margin calls → Celsius/Voyager failures | Contagion through shared crypto exposure and lending relationships |
 | Crypto liquidation cascades | Sharp price move → exchange auto-liquidation → selling pressure → deeper price decline | $1B+ liquidated in hours during major moves; concentrated on high-leverage exchanges |
 
@@ -75,7 +76,7 @@ George Soros's concept of [[reflexivity]] applies directly: falling asset prices
 
 1. **Deleveraging creates buying opportunities** — forced sellers are not making valuation judgments. If you have dry powder and can tolerate further drawdown, buying during forced deleveraging is historically one of the highest-returning strategies. See [[market-crashes]].
 
-2. **High leverage signals future fragility.** Markets with high aggregate leverage (measured by margin debt, futures open interest, or lending volumes) are primed for deleveraging cascades. The risk is building before the trigger.
+2. **High leverage signals future fragility.** Markets with high aggregate leverage (measured by [[margin-debt|margin debt]], futures open interest, or lending volumes) are primed for deleveraging cascades. The risk is building before the trigger.
 
 3. **Cross-asset contagion is a leverage phenomenon.** When you see crypto crashing and bonds selling off simultaneously, the common factor is usually deleveraging — not a shared fundamental story.
 
@@ -85,10 +86,13 @@ George Soros's concept of [[reflexivity]] applies directly: falling asset prices
 
 - [[leverage]] — the buildup that precedes deleveraging
 - [[margin]] — the mechanism that triggers forced selling
+- [[margin-debt]] — the aggregate leverage gauge that flags fragility before a deleveraging cascade
 - [[liquidation]] — the execution of forced deleveraging
 - [[crowding-risk]] — when multiple participants hold the same positions, deleveraging is correlated
 - [[quant-meltdown-2007]] — classic factor-crowding deleveraging cascade
 - [[2008-global-financial-crisis]] — the systemic deleveraging event
+- [[2022-09-uk-mini-budget-crisis]] — the UK gilt/LDI deleveraging cascade
+- [[pensions]] — LDI mechanics behind the 2022 gilt-crisis cascade
 - [[liquidity]] — what disappears during forced selling
 
 ## Sources

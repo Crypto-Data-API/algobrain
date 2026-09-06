@@ -9,7 +9,7 @@ aliases: ["Securitize Inc.", "Securitize Markets"]
 entity_type: company
 founded: 2017
 website: "https://securitize.io"
-related: ["[[blackrock-usd-institutional-digital-liquidity-fund]]", "[[securitize-tokenized-aaa-clo-fund]]", "[[apollo-diversified-credit-securitize-fund]]", "[[vaneck-treasury-fund]]", "[[tokenization]]", "[[real-world-assets]]", "[[tokenized-treasuries]]", "[[blackrock]]"]
+related: ["[[blackrock-usd-institutional-digital-liquidity-fund]]", "[[securitize-tokenized-aaa-clo-fund]]", "[[apollo-diversified-credit-securitize-fund]]", "[[vaneck-treasury-fund]]", "[[tokenization]]", "[[real-world-assets]]", "[[tokenized-treasuries]]", "[[blackrock]]", "[[sophisticated-investor]]"]
 ---
 
 # Securitize
@@ -22,7 +22,7 @@ Securitize does not typically manage the underlying assets in the products it to
 
 - **Tokenization** — minting a blockchain-native token that represents a fractional claim on a fund or asset, using permissioned token standards rather than freely-transferable ERC-20s.
 - **Transfer agency** — Securitize's SEC-registered transfer-agent role means it maintains the official register of who owns what, mint/redemption at the fund's published NAV, and enforces a whitelist so tokens only move between KYC/AML-screened, eligible holders.
-- **Primary-market distribution** — Securitize Markets, the broker-dealer/ATS affiliate, handles subscription and (where permitted) secondary transfers among eligible investors under securities-law exemptions (Reg D for U.S. accredited/qualified investors, Reg S for non-U.S. investors).
+- **Primary-market distribution** — Securitize Markets, the broker-dealer/ATS affiliate, handles subscription and (where permitted) secondary transfers among eligible investors under securities-law exemptions (Reg D for U.S. [[sophisticated-investor|accredited/qualified investors]], Reg S for non-U.S. investors).
 
 This is the **off-chain custody / SPV** custody model described in the wiki's [[tokenization]] concept page: the underlying asset (Treasuries, private credit, a CLO tranche) is held by a regulated custodian or fund structure, and the token is a claim on that structure enforced by a combination of smart-contract allowlisting and traditional securities law — not a fully trustless, code-only claim the way a liquid-staking token is.
 
@@ -57,6 +57,7 @@ Securitize itself does not have a publicly traded token; exposure to its busines
 - [[vaneck-treasury-fund]] — another Securitize-tokenized Treasury product
 - [[tokenization]] — the general mechanism, including the off-chain custody/SPV model Securitize's products use
 - [[real-world-assets]] — the broader RWA category and market-size context
+- [[sophisticated-investor]] — the accredited/qualified-investor classification that gates Reg D access to Securitize's products
 - [[tokenized-treasuries]] — the specific product category most of Securitize's flagship funds sit in
 - [[blackrock]] — asset manager behind BUIDL
 

@@ -6,10 +6,10 @@ updated: 2026-06-21
 status: excellent
 tags: [crypto, bitcoin, nft, digital-assets]
 aliases: ["Ordinals", "Bitcoin NFTs", "Inscriptions"]
-related: ["[[bitcoin]]", "[[nft]]", "[[nft-trading]]", "[[brc-20]]", "[[ordi]]", "[[magic-eden]]", "[[gamma-nft]]", "[[ethereum]]"]
+related: ["[[bitcoin]]", "[[nft]]", "[[nft-trading]]", "[[brc-20]]", "[[ordi]]", "[[magic-eden]]", "[[gamma-nft]]", "[[ethereum]]", "[[casey-rodarmor]]"]
 ---
 
-Bitcoin Ordinals are a protocol created by developer **Casey Rodarmor** (with ongoing maintenance by Raph Japh) that launched on Bitcoin mainnet in January 2023, enabling NFT-like inscriptions directly on the Bitcoin blockchain. Unlike [[ethereum|Ethereum]] NFTs that reference external metadata via token IDs, Ordinals embed arbitrary data — images, text, video, audio — into the witness data of individual satoshis, making them Bitcoin-native digital artifacts rather than pointers. The protocol introduced a numbering scheme ("ordinal theory") that gives each satoshi a unique identity, and has generated a distinct NFT asset class with its own marketplaces, collector community, and trading dynamics.
+Bitcoin Ordinals are a protocol created by developer **[[casey-rodarmor|Casey Rodarmor]]** (with ongoing maintenance by Raph Japh) that launched on Bitcoin mainnet in January 2023, enabling NFT-like inscriptions directly on the Bitcoin blockchain. Unlike [[ethereum|Ethereum]] NFTs that reference external metadata via token IDs, Ordinals embed arbitrary data — images, text, video, audio — into the witness data of individual satoshis, making them Bitcoin-native digital artifacts rather than pointers. The protocol introduced a numbering scheme ("ordinal theory") that gives each satoshi a unique identity, and has generated a distinct NFT asset class with its own marketplaces, collector community, and trading dynamics.
 
 ## How Ordinals Work
 
@@ -116,6 +116,7 @@ This tension occasionally surfaces as proposals to soft-fork out inscription sup
 
 ## Related
 
+- [[casey-rodarmor]] — Creator of the Ordinals protocol and, later, Runes
 - [[bitcoin]] — Underlying blockchain; Ordinals floor prices track BTC closely
 - [[nft]] — Broader NFT market context
 - [[brc-20]] — Fungible tokens via inscriptions

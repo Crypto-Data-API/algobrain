@@ -10,7 +10,7 @@ entity_type: regulator
 founded: 2011
 headquarters: "Paris, France"
 website: "https://www.esma.europa.eu"
-related: ["[[finra]]", "[[sec]]", "[[fees-and-friction]]", "[[professional-vs-retail-mindset]]", "[[options]]", "[[futures]]", "[[robinhood]]"]
+related: ["[[finra]]", "[[sec]]", "[[fees-and-friction]]", "[[professional-vs-retail-mindset]]", "[[options]]", "[[futures]]", "[[robinhood]]", "[[cfd-trading]]"]
 ---
 
 The European Securities and Markets Authority (ESMA) is the European Union's pan-EU financial markets regulator, headquartered in Paris and established in January 2011. ESMA's mandate is threefold: investor protection, the orderly functioning of EU financial markets, and the safeguarding of EU-wide financial stability. For traders, ESMA matters most for two things: it is the architect of [[mifid-ii|MiFID II]] (the post-2018 transparency, best-execution, and reporting regime that governs EU equity, options, and derivatives trading), and it is the regulator behind the 2018 retail-CFD intervention whose mandatory loss-disclosures provide the cleanest publicly available evidence on how retail derivative traders actually perform. It is the EU peer of the US [[sec|SEC]], Australia's [[asic|ASIC]], and shares derivatives turf conceptually with the US [[cftc|CFTC]]; see [[regulation]] for the cross-jurisdiction map.
@@ -79,7 +79,7 @@ The most felt second-order consequence has been the contraction of EU sell-side 
 
 ## The 2018 Retail-CFD Intervention
 
-In **March 2018**, ESMA used its MiFIR Article 40 powers for the first time to impose binding EU-wide restrictions on the marketing, distribution, and sale of contracts-for-difference (CFDs) and binary options to retail clients. The original measure was renewed every three months until **August 2019**, at which point individual national regulators (CySEC, BaFin, FCA, etc.) made the rules permanent under their own statutes. The measures remain in force across the EU and, post-Brexit, in the UK.
+In **March 2018**, ESMA used its MiFIR Article 40 powers for the first time to impose binding EU-wide restrictions on the marketing, distribution, and sale of [[cfd-trading|contracts-for-difference (CFDs)]] and binary options to retail clients. The original measure was renewed every three months until **August 2019**, at which point individual national regulators (CySEC, BaFin, FCA, etc.) made the rules permanent under their own statutes. The measures remain in force across the EU and, post-Brexit, in the UK.
 
 ### What the intervention actually does
 
@@ -164,6 +164,7 @@ The data is widely cited by professional-trader educators precisely because it i
 
 ## Related
 
+- [[cfd-trading]] — the retail derivative product the 2018 leverage-cap and loss-disclosure intervention targets
 - [[finra]] — US analogue at the broker-dealer oversight layer
 - [[sec]] — US analogue at the federal securities regulator layer
 - [[asic]] — Australian analogue; near-identical retail CFD intervention

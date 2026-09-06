@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2022
 headquarters: ""
 website: "https://azuki.com"
-related: ["[[nft]]", "[[ethereum]]", "[[nft-trading]]", "[[bored-ape-yacht-club]]", "[[cryptopunks]]"]
+related: ["[[nft]]", "[[ethereum]]", "[[nft-trading]]", "[[bored-ape-yacht-club]]", "[[cryptopunks]]", "[[zagabond]]"]
 ---
 
 # Azuki
@@ -29,7 +29,7 @@ Chiru Labs developed and open-sourced ERC-721A, a gas-optimized implementation o
 
 ### Founder Controversy (May 2022)
 
-In May 2022, Azuki's pseudonymous founder "Zagabond" published a blog post revealing that he had previously created and abandoned multiple NFT projects (CryptoZunks, Tendies, and CryptoPhunks) before starting Azuki. The NFT community reacted with outrage, viewing the revelation as evidence of serial project abandonment. The floor price dropped significantly in the aftermath.
+In May 2022, Azuki's pseudonymous founder **[[zagabond|Zagabond]]** published a blog post revealing that he had previously created and abandoned multiple NFT projects (CryptoZunks, Tendies, and CryptoPhunks) before starting Azuki. The NFT community reacted with outrage, viewing the revelation as evidence of serial project abandonment. The floor price dropped significantly in the aftermath.
 
 Despite this controversy, Azuki maintained its blue-chip status -- a testament to the strength of its art, community, and brand. Many collectors concluded that the art quality and technical innovation justified continued holding regardless of the founder's history.
 
@@ -114,6 +114,7 @@ The NFT market remains deeply depressed in this cycle. With the broader crypto [
 
 ## Related
 
+- [[zagabond]] — Pseudonymous founder, central to the May 2022 controversy
 - [[nft]]
 - [[nft-trading]]
 - [[ethereum]]

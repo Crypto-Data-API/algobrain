@@ -11,12 +11,12 @@ markets_affected: [forex, bonds, equities]
 impact: high
 verified: true
 sources_count: 5
-related: ["[[crisis-currency-triangular-arbitrage]]", "[[currency-peg-break-arbitrage]]", "[[1992-black-wednesday-erm-crisis]]", "[[triangular-arbitrage]]"]
+related: ["[[crisis-currency-triangular-arbitrage]]", "[[currency-peg-break-arbitrage]]", "[[1992-black-wednesday-erm-crisis]]", "[[triangular-arbitrage]]", "[[pensions]]", "[[deleveraging]]"]
 ---
 
 # UK Mini-Budget Crisis (September 2022)
 
-On **Friday, September 23, 2022**, UK Chancellor **Kwasi Kwarteng** delivered a "Growth Plan" mini-budget under Prime Minister **Liz Truss** featuring £45B of unfunded tax cuts — the largest UK tax giveaway since 1972. Markets reacted with extreme violence: GBP/USD crashed to an all-time low of $1.0327 within 72 hours; 30-year gilt yields rose 100+ bp in three sessions; **Liability-Driven Investment (LDI)** strategies used by UK pension funds came within hours of forced collateral defaults that would have triggered systemic collapse.
+On **Friday, September 23, 2022**, UK Chancellor **Kwasi Kwarteng** delivered a "Growth Plan" mini-budget under Prime Minister **Liz Truss** featuring £45B of unfunded tax cuts — the largest UK tax giveaway since 1972. Markets reacted with extreme violence: GBP/USD crashed to an all-time low of $1.0327 within 72 hours; 30-year gilt yields rose 100+ bp in three sessions; **Liability-Driven Investment (LDI)** strategies used by UK [[pensions|pension funds]] came within hours of forced collateral defaults that would have triggered systemic collapse.
 
 The Bank of England intervened on September 28 with emergency gilt buying. Truss's premiership effectively ended within weeks; she resigned October 20, 2022 — the shortest tenure in British history at 49 days.
 
@@ -50,7 +50,7 @@ GBP fell ~9% in 72 hours. 30Y gilt yields rose 130 bp in 4 sessions — historic
 
 ## The LDI Mechanism (Why It Nearly Broke the System)
 
-UK defined-benefit pension funds use **Liability-Driven Investment (LDI)** to match their long-dated liabilities. In LDI structures:
+UK defined-benefit [[pensions|pension funds]] use **Liability-Driven Investment (LDI)** to match their long-dated liabilities. In LDI structures:
 
 1. Pension fund posts collateral (typically gilts) to a derivatives counterparty.
 2. Counterparty provides interest-rate swap exposure that hedges the pension's liabilities.
@@ -133,4 +133,4 @@ The crisis created multiple cross-rate dislocations:
 
 ## Related
 
-[[crisis-currency-triangular-arbitrage]] · [[currency-peg-break-arbitrage]] · [[1992-black-wednesday-erm-crisis]] · [[triangular-arbitrage]] · [[2015-01-snb-swiss-franc-unpeg]] · [[1987-andy-krieger-nzd-short]] · [[liquidation-cascade-arbitrage]]
+[[crisis-currency-triangular-arbitrage]] · [[currency-peg-break-arbitrage]] · [[1992-black-wednesday-erm-crisis]] · [[triangular-arbitrage]] · [[2015-01-snb-swiss-franc-unpeg]] · [[1987-andy-krieger-nzd-short]] · [[liquidation-cascade-arbitrage]] · [[pensions]] · [[deleveraging]]
