@@ -2,7 +2,7 @@
 title: "CryptoDataAPI"
 type: source
 created: 2026-07-13
-updated: 2026-09-02
+updated: 2026-09-08
 status: excellent
 tags: [data-provider, crypto, api, derivatives, on-chain, market-regime, hyperliquid, backtesting, sentiment]
 aliases: ["CryptoDataApi", "Crypto Data API", "cryptodataapi.com", "CDA"]
@@ -40,7 +40,7 @@ Free was raised from 50/day + 5/min on 2026-08-20; Pro Plus burst was raised fro
 
 **Email verification unlocks the full free allowance.** A freshly created, unverified free key sits on a smaller starter allowance below the 1,000/day headline. Confirming the key's email address unlocks the full 1,000/day free tier **and** grants 24 hours of Pro-tier access as a trial. `POST /api/v1/auth/resend-verify` re-sends the confirmation link for the calling key's own address (10-minute cooldown between sends). The daily-quota `429` response for an unverified free key over its starter cap carries `upgrade_available: "verify_email"`, `upgrade_message`, and `verified_daily_limit` so an agent can detect and act on the gate programmatically.
 
-**Consistent error envelope.** Every `401`/`403`/`429` on an `/api/*` path returns the same JSON shape — `{"detail": {"error": "<code>", "message": "<text>", ...}}` — never HTML or a bare string, so an agent can branch on `detail.error` instead of parsing prose. `403` tier refusals additionally carry `required_tier` (`"pro"`/`"pro_plus"`) and `pricing_url` as machine-readable fields (confirmed live: `{"detail":{"error":"pro_required","message":"...","required_tier":"pro","pricing_url":"https://cryptodataapi.com/pricing"}}`); `429`s carry a `scope` field (`"api_key"`) and, per CryptoDataAPI's own rate-limit documentation, a `Retry-After` header plus the full `X-RateLimit-*` set for backoff.
+**Consistent error envelope.** Every `401`/`403`/`429` on an `/api/*` path returns the same JSON shape — `{"detail": {"error": "<code>", "message": "<text>", ...}}` — never HTML or a bare string, so an agent can branch on `detail.error` instead of parsing prose. `403` tier refusals additionally carry `required_tier` (`"pro"`/`"pro_plus"`) and `pricing_url` as machine-readable fields (confirmed live: `{"detail":{"error":"pro_required","message":"...","required_tier":"pro","pricing_url":"https://cryptodataapi.com/pricing"}}`); `429`s carry a `scope` field (`"api_key"`) and, per CryptoDataAPI's own rate-limit documentation, a `Retry-After` header plus the full `X-RateLimit-*` set for backoff. Both `403` and `429` bodies also nest a machine-readable `upgrade` object (live-confirmed on both) whose fields now include `passes` (the six x402 time-boxed plans), `pay_per_request` (the six keyless-402 endpoints), and `pricing_api` (`https://cryptodataapi.com/api/v1/pricing`) alongside the existing subscription pricing — see [[cryptodataapi-mcp]]'s x402 section for the full three-rail payment detail.
 
 ## Category map
 
@@ -83,4 +83,5 @@ Free was raised from 50/day + 5/min on 2026-08-20; Pro Plus burst was raised fro
 
 ## Sources
 
+- https://cryptodataapi.com/api (live OpenAPI JSON) and live curl tests of 403/429 `upgrade` object fields (fetched 2026-09-08)
 - https://cryptodataapi.com/api/docs (fetched 2026-07-13)

@@ -1,7 +1,13 @@
 {
-  "last_checked": "2026-09-07",
-  "api_version_seen": "2026-09-04",
+  "last_checked": "2026-09-08",
+  "api_version_seen": "2026-09-07",
   "processed": [
+    {
+      "version": "2026-09-07",
+      "processed_on": "2026-09-08",
+      "disposition": "material",
+      "note": "x402 payment rails expanded significantly (pay-per-request 402 on 6 endpoints, pay-per-time subscription plan types, new pay-per-resource archives/purchase endpoint, new /pricing endpoint) -- cryptodataapi-mcp.md's existing x402 section only covered the old single agent-subscribe flow. Also added the new /backtesting/hl-liquidations endpoint (Pro tier) to cryptodataapi-backtesting.md -- a brand new endpoint, not a tier-correction of existing wiki content since it was never documented before."
+    },
     {
       "version": "2026-09-04",
       "processed_on": "2026-09-05",

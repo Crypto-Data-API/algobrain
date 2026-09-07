@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Backtesting Archive"
 type: source
 created: 2026-07-13
-updated: 2026-09-04
+updated: 2026-09-08
 status: good
 tags: [data-provider, crypto, api, backtesting, historical-data, point-in-time, parquet, klines, funding, liquidations]
 aliases: ["CryptoDataAPI Backtesting", "CDA Backtesting", "CryptoDataAPI Historical Archive", "CryptoDataAPI Archives"]
@@ -20,7 +20,8 @@ CryptoDataAPI's Backtesting section is the historical arm of the API: a full arc
 |--------|------|---------|------------|------|
 | GET | /api/v1/backtesting/klines | OHLCV candles, full archive | — | — |
 | GET | /api/v1/backtesting/funding | Funding rates, historical | — | — |
-| GET | /api/v1/backtesting/liquidations | Liquidation records, historical | — | — |
+| GET | /api/v1/backtesting/liquidations | Liquidation records, historical (venue-merged, rolling window) | symbol, start*, end, bounds, limit | — |
+| GET | /api/v1/backtesting/hl-liquidations | Per-event Hyperliquid liquidation tape (exact fills: side, px, sz, USD notional, method, mark price) | coin, start*, end, bounds, limit | Pro |
 | GET | /api/v1/backtesting/news-events | Archived catalyst tape with measured market-response labels | start*, symbol, end, min_impact, bounds, limit | Pro Plus |
 | GET | /api/v1/backtesting/snapshots | Historical JSON snapshots for one data type, streamed | data_type*, start*, end, bounds, limit, universe | — |
 | GET | /api/v1/backtesting/snapshots/types | Available snapshot types with row counts and date ranges | — | — |
@@ -30,10 +31,13 @@ CryptoDataAPI's Backtesting section is the historical arm of the API: a full arc
 | GET | /api/v1/backtesting/archives/index | Index of archives — data types, symbols, exchanges, date ranges | — | — |
 | GET | /api/v1/backtesting/archives | List archived datasets | — | — |
 | GET | /api/v1/backtesting/archives/download | Download archive (pre-signed URL) | — | — |
+| GET | /api/v1/backtesting/archives/purchase | Buy one archived object over x402 (pay per resource); free for Pro Plus keys | data_type*, exchange, symbol, date, month, interval, bundle, snapshot_type | keyless (x402) / Pro Plus free |
 | GET | /api/v1/backtesting/daily-snapshots | Daily snapshot list | — | — |
 | GET | /api/v1/backtesting/daily-snapshots/{date} | Snapshot by date, point-in-time | date | — |
 
 Historical depth: Parquet archive from 2020.
+
+`/backtesting/liquidations` vs `/backtesting/hl-liquidations`: the former is the general, cross-exchange liquidation-records archive (venue-merged, summary-level) already covered under Trading Applications below; `hl-liquidations` is Hyperliquid-specific and per-event — every exact liquidation fill (market and backstop) across the full HL perp universe, with side, price, size, USD notional, liquidation method, and mark price. `hl-liquidations` serves a local retention window of roughly 30 days rather than the full history; the full history is archived daily as the `hl_liquidations` data type (one Parquet per day, all coins) via `/backtesting/archives`. Use `liquidations` for cross-exchange summary flow, `hl-liquidations` when a strategy needs the exact fill tape on Hyperliquid. `hl-liquidations` moved from Pro Plus to **Pro** tier on 2026-09-07 (the underlying daily-Parquet archive stays Pro Plus).
 
 ## Live Data
 
@@ -41,7 +45,7 @@ Only `/backtesting/status` is about the present — it reports collector health 
 
 ## Historical Data
 
-Everything else is history. `/backtesting/klines`, `/backtesting/funding`, and `/backtesting/liquidations` query the full archive directly; `/backtesting/export` pulls a custom range; `/backtesting/archives` + `/backtesting/archives/download` hand out pre-signed URLs for bulk Parquet datasets going back to 2020. The point-in-time core is `/backtesting/daily-snapshots/{date}`: the API's state frozen as of that day, so a backtest on 2023-03-15 sees exactly what a live system saw on 2023-03-15. Regime-probability history lives separately under the Pro Plus quant endpoints on [[cryptodataapi-regimes]]. `/backtesting/news-events` (Pro Plus, detailed on [[cryptodataapi-news]]) is a shallower archive by construction: it only holds qualified catalysts, and its history starts 2026-08-18 — the day the news family shipped — and **cannot be backfilled**, because the underlying RSS sourcing only ever serves a recent window.
+Everything else is history. `/backtesting/klines`, `/backtesting/funding`, `/backtesting/liquidations`, and `/backtesting/hl-liquidations` query the full archive directly; `/backtesting/export` pulls a custom range; `/backtesting/archives` + `/backtesting/archives/download` hand out pre-signed URLs for bulk Parquet datasets going back to 2020; `/backtesting/archives/purchase` sells a single archived object over x402 for an agent that doesn't hold an API key at all (payment mechanics, the 404-before-quote guarantee, and the Pro-Plus-free exception are detailed on [[cryptodataapi-mcp]]'s x402 section). The point-in-time core is `/backtesting/daily-snapshots/{date}`: the API's state frozen as of that day, so a backtest on 2023-03-15 sees exactly what a live system saw on 2023-03-15. Regime-probability history lives separately under the Pro Plus quant endpoints on [[cryptodataapi-regimes]]. `/backtesting/news-events` (Pro Plus, detailed on [[cryptodataapi-news]]) is a shallower archive by construction: it only holds qualified catalysts, and its history starts 2026-08-18 — the day the news family shipped — and **cannot be backfilled**, because the underlying RSS sourcing only ever serves a recent window.
 
 ## Trading Applications
 
@@ -79,4 +83,5 @@ The dated daily snapshots are what make this rigorous: the same point-in-time fr
 
 ## Sources
 
+- https://cryptodataapi.com/api (live OpenAPI JSON) and live curl tests of `/backtesting/hl-liquidations` and `/backtesting/archives/purchase` (fetched 2026-09-08)
 - https://cryptodataapi.com/api/docs (fetched 2026-07-13)

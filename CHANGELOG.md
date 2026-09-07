@@ -4,6 +4,20 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-09-08 — Sync: expanded agent-payment documentation, one new endpoint
+
+**Added:** Documented two new agent-payment methods on the data layer's MCP/agent guide —
+paying per individual API call and paying to download a single archived data file — 
+alongside the existing pay-for-a-subscription flow, which itself gained short-lived
+time-boxed passes as an alternative to a full subscription. Added a new Hyperliquid
+per-event liquidation-tape endpoint to the backtesting archive page.
+
+**Notes:** Sync-track iteration of the daily improvement loop. Every field documented was
+confirmed against live API responses (a disposable free key was created purely to observe
+real payment-required and rate-limit responses), including one field flagged as
+reported-but-unverifiable rather than asserted as fact, since producing it requires an
+actual payment. Zero lint regressions.
+
 ## 2026-09-07 — Fix: link 8 substantive pages that had zero inbound references
 
 **Fixed:** Eight solid, previously-written pages (options sentiment, aggregate margin

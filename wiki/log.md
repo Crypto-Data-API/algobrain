@@ -2,12 +2,27 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-09-07
+updated: 2026-09-08
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-09-08 — Sync: CryptoDataAPI 2026-09-07 release (x402 three-rail payments, hl-liquidations)
+
+**Scope:** absorbed the 2026-09-07 upstream API release (already pre-marked `material` in `.claude/cryptodataapi-changelog-state.json`) — a significant expansion of x402 agent payments plus one brand-new backtesting endpoint. All endpoints and response fields verified against the live OpenAPI JSON (`https://cryptodataapi.com/api`) and live curl tests (a throwaway free key was minted for verification purposes) before writing.
+
+- **[[cryptodataapi-mcp]]** — expanded the existing single-flow x402 section (`agent-subscribe` + `plan:"monthly"`) into three documented rails, keeping the original curl example intact:
+  1. **Pay per time** — `agent-subscribe` and the parallel `subscribe` endpoint now take 6 plan values beyond the original `monthly`/`annual` (`pass_1h`, `pass_1d`, `pass_7d` → Pro; `pass_1h_plus`, `pass_1d_plus`, `pass_7d_plus` → Pro Plus), confirmed against the live `AgentSubscribeRequest`/`SubscribeRequest` schemas.
+  2. **Pay per request** — 6 endpoints (`quant/whales`, `quant/market`, `regimes/current`, `market-intelligence/liquidations`, `event/calendar`, `market-intelligence/etf/{asset}/flows`) now 402 instead of 401 when keyless; documented the live-verified 402 body (`accepts[]`, `resource`, `extensions.bazaar`, `price_usd`, `route_id`, `grants_tier`, `alternatives`) from a real unauthenticated `GET /quant/whales` call.
+  3. **Pay per resource** — new `GET /backtesting/archives/purchase`; live-verified the 404-before-quote guarantee on a missing object and the 402 quote shape on a real one.
+  - Added `GET /api/v1/pricing` as the price-lookup endpoint for all three rails.
+  - Hedged one brief-supplied field (`seconds_remaining` on the subscribe success response) as reported-but-unconfirmed, since that response is untyped (`schema: {}`) in the published OpenAPI spec and could not be produced without an actual USDC payment.
+- **[[cryptodataapi-backtesting]]** — added `/backtesting/hl-liquidations` (new, Pro tier since 2026-09-07 — the per-event Hyperliquid liquidation tape, ~30-day hot window) and `/backtesting/archives/purchase` (pay-per-resource, cross-referenced to `cryptodataapi-mcp`'s payment detail rather than duplicated) to the endpoint table, with prose distinguishing `hl-liquidations` (Hyperliquid per-event fills) from the existing `liquidations` (cross-exchange summary).
+- **[[cryptodataapi]]** — small addition to the Access section's error-envelope paragraph: the `403`/`429` `upgrade` object gained `passes`, `pay_per_request`, and `pricing_api` fields (live-confirmed on both a triggered `403` and a triggered `429`).
+
+**Verification note:** every endpoint and field cited was checked against the live OpenAPI JSON's `paths`/`components.schemas`, plus direct curl tests (some requiring a throwaway free key) for the 402/403/404/429 response bodies — nothing in this batch was taken on the brief's word alone.
 
 ## 2026-09-07 — Fix: un-orphaned 8 substantive zero-inbound-link pages
 

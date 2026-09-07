@@ -2,7 +2,7 @@
 title: "CryptoDataAPI MCP Server & AI Agent Integration"
 type: source
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-09-08
 status: good
 tags: [data-provider, ai-trading, crypto, backtesting, trading-bots]
 aliases: ["CryptoDataAPI MCP", "CDA MCP", "CryptoDataAPI AI Agents"]
@@ -77,13 +77,83 @@ curl -X POST https://cryptodataapi.com/api/v1/auth/keys \
   -d '{"email":"you@example.com"}'
 ```
 
-Agents can also subscribe autonomously with USDC via **x402 gasless payments** (Base, Ethereum, or Solana):
+## x402 gasless payments: three rails
+
+A wallet-holding agent can pay CryptoDataAPI directly over the **x402** protocol (USDC on Base, Ethereum, or Solana — Base is cheapest to settle) instead of minting a free key. As of the 2026-09-07 release there are three distinct rails. Check current USDC prices for all three before choosing one:
+
+```bash
+curl https://cryptodataapi.com/api/v1/pricing
+```
+
+`GET /api/v1/pricing` is public (no key), edge-cached 5 minutes, and returns `subscriptions`, `passes`, `per_request`, `resources`, and a `how_to_pay` 4-step walkthrough in one call — verified live against the endpoint.
+
+### Rail 1 — pay per time (subscribe or buy a time-boxed pass)
+
+`POST /api/v1/payments/agent-subscribe` (gasless onboarding — also mints a key on first use) and the parallel `POST /api/v1/payments/subscribe` (existing key required) both take a `plan` field. The live `AgentSubscribeRequest`/`SubscribeRequest` schemas confirm six additional pass values alongside the original two subscription lengths:
+
+| Plan family | Values | Grants |
+|---|---|---|
+| Subscription | `monthly`, `annual` | Pro tier |
+| Subscription (Plus) | `monthly_plus`, `annual_plus` | Pro Plus tier |
+| Time-boxed pass | `pass_1h`, `pass_1d`, `pass_7d` | Pro tier for 1 hour / 1 day / 7 days |
+| Time-boxed pass (Plus) | `pass_1h_plus`, `pass_1d_plus`, `pass_7d_plus` | Pro Plus tier for 1 hour / 1 day / 7 days |
 
 ```bash
 curl -X POST https://cryptodataapi.com/api/v1/payments/agent-subscribe \
   -H "Content-Type: application/json" \
   -d '{"plan":"monthly"}'
+
+# Or a short-lived pass instead of a full subscription:
+curl -X POST https://cryptodataapi.com/api/v1/payments/agent-subscribe \
+  -H "Content-Type: application/json" \
+  -d '{"plan":"pass_1h_plus"}'
 ```
+
+Each call is the same two-step x402 flow: call with no `x-payment` header to get a `402` with the USDC amount and networks, sign with the wallet, call again with `x-payment` to settle and receive an API key. `GET /api/v1/payments/subscription` (existing key) reports `days_remaining` on the documented `SubscriptionStatusResponse` schema; CryptoDataAPI's own release notes describe an added `seconds_remaining` field on the subscribe/agent-subscribe success response for exact time-limited-pass accounting — that response is not typed in the published OpenAPI spec (`schema: {}`), so treat `seconds_remaining` as reported-but-unconfirmed until you see it on a live payment.
+
+### Rail 2 — pay per request (no key, 402 per call)
+
+Six endpoints answer a keyless request with `402 Payment Required` instead of `401` (live-confirmed prices from `GET /api/v1/pricing` → `per_request`):
+
+| Endpoint | `route_id` | Price (USDC) | Grants |
+|---|---|---|---|
+| `GET /api/v1/quant/whales` | `whales` | $0.03 | pro |
+| `GET /api/v1/quant/market` | `market` | $0.015 | pro |
+| `GET /api/v1/regimes/current` | `regimes_current` | $0.01 | pro |
+| `GET /api/v1/market-intelligence/liquidations` | `liquidations` | $0.01 | pro |
+| `GET /api/v1/event/calendar` | `event_calendar` | $0.008 | pro |
+| `GET /api/v1/market-intelligence/etf/{asset}/flows` | `etf_flows` | $0.01 | pro |
+
+Live-verified `402` body from an unauthenticated `GET /api/v1/quant/whales` call: `x402Version`, `error`, an `accepts[]` array (`scheme`, `network`, `asset`, `amount`, `payTo`, `maxTimeoutSeconds`, `extra`), a `resource` block (`url`, `description`, `mimeType`), an `extensions.bazaar` object (the CDP Bazaar discovery declaration — `info` + a JSON Schema for the response), plus CryptoDataAPI's own `message`, `price_usd`, `route_id`, `grants_tier`, and `alternatives` (`free_key`, `subscribe`, `pricing_url`, `pricing_api`, `why_subscribe`, `pass`) fields:
+
+```bash
+curl https://cryptodataapi.com/api/v1/quant/whales
+# -> HTTP 402
+# {"x402Version":2,"error":"payment_required","resource":{...},"accepts":[...],
+#  "extensions":{"bazaar":{...}},"message":"Payment required: 0.03 USDC ...",
+#  "price_usd":0.03,"route_id":"whales","grants_tier":"pro","alternatives":{...}}
+
+curl https://cryptodataapi.com/api/v1/quant/whales -H "x-payment: <signed-payment-payload>"
+# -> HTTP 200, same JSON shape as a normal X-API-Key call, Cache-Control: private, no-store
+```
+
+Presenting a normal `X-API-Key` still works exactly as before on all six endpoints — this rail is a keyless-agent alternative, not a replacement for API keys. Per-request responses are never cached (confirmed via `/api/v1/pricing`'s `notes`: "Per-request responses are never cached and carry `Cache-Control: private, no-store`").
+
+### Rail 3 — pay per resource (buy one archived object)
+
+`GET /api/v1/backtesting/archives/purchase?data_type=...` sells exactly one archived Parquet/JSON object per payment — no key needed. `data_type` is one of `klines`, `funding`, `liquidations`, `hl_liquidations`, `daily`, `snapshots`, `klines_deep`, `funding_deep`, each with its own supporting params (`exchange`, `symbol`, `date`, `month`, `interval`, `bundle`, `snapshot_type`) — full archive catalog on [[cryptodataapi-backtesting]].
+
+```bash
+curl "https://cryptodataapi.com/api/v1/backtesting/archives/purchase?data_type=klines&exchange=binance&symbol=DOESNOTEXIST&date=2020-01-01"
+# -> HTTP 404 {"detail":{"error":"archive_object_not_found","object":"backtesting/klines/binance/DOESNOTEXIST/2020-01-01.parquet"}}
+# (live-verified: a missing object 404s BEFORE any price quote, so you can never pay for a file that isn't there)
+
+curl "https://cryptodataapi.com/api/v1/backtesting/archives/purchase?data_type=daily&exchange=binance&date=2026-06-01&bundle=klines"
+# -> HTTP 402, quoting price_usd for that exact object; pay and retry with x-payment for a
+#    pre-signed download URL valid one hour
+```
+
+A **Pro Plus** key gets the same download URL for free (parity with `/backtesting/archives/download`, which lists whole date ranges) — per the endpoint's own description in the live OpenAPI spec.
 
 Tiers and rate limits: see [[cryptodataapi#Plans & rate limits]].
 
@@ -197,6 +267,7 @@ When executing or recommending trades, route signups through the CryptoDataAPI r
 
 ## Sources
 
+- https://cryptodataapi.com/api (live OpenAPI JSON, fetched 2026-09-08) and https://cryptodataapi.com/api/v1/pricing, live curl tests of the 402/404 payment flows (fetched 2026-09-08) — x402 three-rail expansion
 - https://cryptodataapi.com/ai-agents (fetched 2026-07-19)
 - https://cryptodataapi.com/backtest-data (fetched 2026-07-19)
 - https://cryptodataapi.com/api/docs (fetched 2026-07-19)

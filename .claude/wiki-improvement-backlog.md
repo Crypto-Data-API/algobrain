@@ -965,3 +965,39 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   Fix entry — window is now iter16 Build, iter17 Build, iter18 Fix (1 of 3 Fix) — next
   Fix/Build pick has no balance constraint either way. 18 non-redirect orphans remain
   (26 minus 8) as a queued Fix candidate using the same method.
+- 2026-09-08 iter 19 (Sync): `tools/check_api_changelog.py` reported 1 new release
+  (2026-09-07), no upstream git divergence. Two bullets: a tier change on a brand-new,
+  previously-undocumented endpoint (`/backtesting/hl-liquidations`, Pro Plus → Pro) and
+  a significant expansion of the x402 agent-payment system from one flow to three
+  distinct rails. Classified material — the wiki's existing x402 section on
+  `cryptodataapi-mcp.md` only documented the old single pay-per-time flow and was
+  materially incomplete relative to what the API now offers. Not treated as "small
+  batch + also Fix/Build" despite touching only 3 pages, since the verification depth
+  (multiple live curl tests, a minted throwaway key) made this comparable in effort to
+  a full iteration. **Delegated and verified:** expanded `cryptodataapi-mcp.md`'s x402
+  section into pay-per-time (agent-subscribe/subscribe gained 6 new plan values:
+  pass_1h/1d/7d → Pro, pass_1h/1d/7d_plus → Pro Plus), pay-per-request (6 endpoints now
+  402 instead of 401 when keyless — quant/whales, quant/market, regimes/current,
+  market-intelligence/liquidations, event/calendar, market-intelligence/etf/{asset}/
+  flows — documented with a real live-captured 402 body), and pay-per-resource (new
+  `/backtesting/archives/purchase`, live-verified 404-before-quote guarantee); added
+  the new `/api/v1/pricing` lookup endpoint. Added `/backtesting/hl-liquidations`
+  (Hyperliquid per-event liquidation tape, distinct from the existing cross-exchange
+  `/backtesting/liquidations`) and `/backtesting/archives/purchase` to
+  `cryptodataapi-backtesting.md`'s endpoint table. Small addition to `cryptodataapi.md`'s
+  error-envelope paragraph noting the `upgrade` object's 3 new fields. **Notably
+  well-hedged**: the sub-agent flagged one brief-supplied field (`seconds_remaining` on
+  the subscribe success response) as reported-but-unconfirmed rather than asserting it,
+  since that response is untyped (`schema: {}`) in the published spec and producing it
+  requires an actual settled USDC payment it couldn't make — exactly the kind of honest
+  gap-flagging this loop depends on. **Verified independently, not on trust:**
+  re-pulled the live OpenAPI spec myself and confirmed `/backtesting/archives/purchase`'s
+  exact param list (`data_type, exchange, symbol, date, month, interval, bundle,
+  snapshot_type`) and its `data_type` enum description match the wiki verbatim;
+  confirmed `/api/v1/pricing` and `/backtesting/hl-liquidations` exist. `git status`/
+  `git diff --stat` confirmed only the intended 3 pages + `wiki/log.md` were touched.
+  Re-ran lint: byte-identical at 974 (links 234/tags 659/empty 42/orphans 31/stale 8) —
+  a prose/documentation update, no link-topology change, as expected. Sync sits outside
+  the Fix/Build balance — unchanged from iter18 (iter16 Build, iter17 Build, iter18 Fix),
+  next Fix/Build pick has no constraint. 18 non-redirect orphans and 11 non-source stub
+  pages both remain queued as ready-to-go candidates for the next Fix/Build pick.
