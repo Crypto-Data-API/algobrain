@@ -2,12 +2,68 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-09-08
+updated: 2026-09-09
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-09-09 — Build: expanded 5 DePIN/infra concept stubs; skipped 2 deliberately-thin bios
+
+**Scope:** ranked the wiki's remaining `status: stub` pages by inbound-link count as
+usual, but found the top 2 (mark-jurik, arnaud-legoux, 6 refs each) are **not** content
+gaps — both are already thorough, well-sourced pages deliberately kept at `stub` status
+because their subjects (Jurik Moving Average and Arnaud Legoux Moving Average's
+creators) have genuinely thin, unverifiable public records, and the pages themselves
+say so explicitly ("Status is stub and should stay there"). Expanding either would mean
+fabricating biographical detail the pages correctly refuse to assert. Skipped both and
+moved to the next tier: 5 DePIN/crypto-infrastructure concepts (5-6 refs each), all
+genuinely thin one-paragraph stubs this time.
+
+- **[[decentralized-identity]]** — DID/verifiable-credential/soulbound-token primitives,
+  a three-way proof-of-personhood comparison (biometric/social-graph/credential-
+  aggregation), the privacy-surveillance tension (Worldcoin's ZK-unlinkability claim
+  flagged as a live debate, not a settled guarantee), and identity-gated airdrops as the
+  trading-relevant mechanism. Cross-checked against [[worldcoin-wld]] and
+  [[ethereum-name-service]] without contradicting either.
+- **[[decentralized-compute]]** — the two-sided marketplace mechanism, token-incentive
+  bootstrapping and mercenary-capital risk (using Akash's own Q1 2026 lease-count-up/
+  revenue-down disclosure as a concrete illustration), Render's and Akash's burn-and-mint
+  mechanisms, and the AI-compute-shortage demand thesis — sitting inside, not
+  duplicating, the general [[depin]] page.
+- **[[decentralized-storage]]** — contrasts Filecoin's renewable PoRep/PoSt contract
+  model, Arweave's pay-once endowment model, and Walrus's newer erasure-coded ("Red
+  Stuff") design, with an explicit hedge that Walrus's mechanism is less battle-tested
+  than the other two's multi-year track record.
+- **[[trusted-execution-environment]]** — SGX/SEV/TrustZone mechanics, the three crypto
+  use cases (confidential compute, oracle attestation, MEV/encrypted-mempool
+  infrastructure via Flashbots' SUAVE), and an honest, named exploit history (Foreshadow
+  2018, Plundervolt 2019, the broader MDS side-channel family) — explicitly flagged as
+  illustrative and non-exhaustive rather than a complete list.
+- **[[move-language]]** — the resource-type-system design (no-copy, no-implicit-discard)
+  contrasted with Solidity's mapping-based accounting, the Aptos-vs-Sui dialect
+  divergence (account-centric/Block-STM vs. object-centric/Mysticeti), and an honest
+  limit: Move's resource safety did not prevent the May 2025 Cetus exploit on Sui
+  ($223M) because that was application-level math (a u256 overflow), not a language
+  flaw.
+
+All 5 moved `stub` → `good` with full `domain`/`prerequisites`/`difficulty` frontmatter.
+None received a `Getting the Data (CryptoDataAPI)` section for a real reason in each
+case (checked, not skipped by default): these are infrastructure/mechanism concepts, not
+tradeable-signal topics, and CryptoDataAPI has no identity/DePIN-usage/TEE/language-level
+endpoints — where a related token already has its own verified endpoint section (WLD,
+ENS, RENDER, IO, FIL, AR), the page links there instead of duplicating it.
+
+**Verified independently, not on trust:** checked all 30 distinct wikilink targets
+referenced across the 5 pages against the wiki filesystem — zero forward links, 100%
+resolve, including less-common ones (`civic`, `gitcoin`, `humanity`, `bittensor`,
+`iexec-rlc`, `oasis-network`, `movement`). `git status`/`git diff --stat` confirmed only
+the 5 target pages were touched — `mark-jurik.md` and `arnaud-legoux.md` correctly left
+alone. Re-ran lint: 974 → 970 (empty 42 → 38; links/tags/orphans/stale unchanged at
+234/659/31/8 — no regressions). 8 non-source stub pages remain (12 minus the 5 done
+here minus the 2 correctly-excluded bios still counted as "stub" but not real Build
+candidates using this method).
 
 ## 2026-09-08 — Sync: CryptoDataAPI 2026-09-07 release (x402 three-rail payments, hl-liquidations)
 

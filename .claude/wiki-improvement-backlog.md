@@ -1001,3 +1001,32 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   the Fix/Build balance — unchanged from iter18 (iter16 Build, iter17 Build, iter18 Fix),
   next Fix/Build pick has no constraint. 18 non-redirect orphans and 11 non-source stub
   pages both remain queued as ready-to-go candidates for the next Fix/Build pick.
+- 2026-09-09 iter 20 (Build): `tools/check_api_changelog.py` reported zero unprocessed
+  releases, no upstream git divergence. Balance rule unconstrained (iter17 Build, iter18
+  Fix, iter19 Sync-outside-balance). Chose Build over continuing the orphan-fix method,
+  simple alternation. **Important correction to the stub-ranking method**: the two
+  highest-inbound-count stubs (`mark-jurik`, `arnaud-legoux`, 6 refs each) turned out to
+  be a false signal — both are already thorough pages deliberately kept at `stub` status
+  because their subjects (JMA and ALMA's creators) have genuinely unverifiable
+  biographies, and the pages themselves say "should stay there." Caught this before
+  delegating by actually reading the two pages rather than trusting the inbound-count
+  heuristic blindly — expanding either would have meant fabricating biographical
+  content the pages correctly refuse to invent. Skipped both explicitly in the brief and
+  moved to the next tier: 5 DePIN/infra concepts (`decentralized-identity`,
+  `decentralized-compute`, `decentralized-storage`, `trusted-execution-environment`,
+  `move-language`, 5-6 refs each), all genuinely thin. Full per-page content summary in
+  `wiki/log.md`'s 2026-09-09 entry — notably each page correctly declined a `Getting the
+  Data` section for a real, checked reason (no CryptoDataAPI identity/DePIN-usage/TEE/
+  language-level endpoints exist) rather than skipping the check by default, and pointed
+  to the relevant token's own page instead of duplicating. All 5 moved `stub` → `good`
+  with full frontmatter. **Verified independently, not on trust:** checked all 30
+  distinct wikilink targets across the 5 pages against the wiki filesystem — zero
+  forward links, 100% resolve; `git status`/`git diff --stat` confirmed only the 5
+  target pages were touched, `mark-jurik.md`/`arnaud-legoux.md` correctly untouched.
+  Re-ran lint: 974 → 970 (empty 42 → 38; links/tags/orphans/stale unchanged at
+  234/659/31/8 — no regressions). Fix/Build balance: this is a Build entry — window is
+  now iter18 Fix, iter19 (Sync, skipped), iter20 Build — effectively iter17 Build,
+  iter18 Fix, iter20 Build (2 of 3 Build counting only real Fix/Build entries), so the
+  next pick leans **Fix** though not a hard constraint yet. 18 non-redirect orphans
+  remain the best-queued Fix candidate; roughly 5-6 genuine stub pages remain for a
+  future Build pass (the 2 correctly-excluded trader bios don't count toward that).

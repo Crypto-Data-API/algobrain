@@ -4,6 +4,23 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-09-09 — Expand 5 more thin stub pages: decentralized identity, compute, storage, TEEs, Move
+
+**Added:** Full treatment for five infrastructure/mechanism concept pages that
+previously carried only a one-paragraph stub: decentralized identity (proof-of-
+personhood approaches and the identity-gated-airdrop pattern), decentralized compute and
+storage as DePIN verticals (token-incentive bootstrapping, mercenary-capital risk, and
+how the leading networks in each differ mechanically), trusted execution environments
+(their crypto use cases and an honest account of their real exploit history), and the
+Move smart-contract language (the resource-safety design and its actual limits, using
+a real 2025 exploit as the illustrating case).
+
+**Notes:** Build-track iteration of the daily improvement loop. Caught and corrected a
+false signal in the usual ranking method first: the two highest-demand candidate pages
+turned out to be deliberately minimal (their subjects have unverifiable biographies, and
+the pages say so), so they were explicitly skipped rather than padded with invented
+detail. Every cross-reference resolves to an existing wiki page. Zero lint regressions.
+
 ## 2026-09-08 — Sync: expanded agent-payment documentation, one new endpoint
 
 **Added:** Documented two new agent-payment methods on the data layer's MCP/agent guide —
