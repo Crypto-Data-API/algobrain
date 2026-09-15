@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Market & Quant Regimes"
 type: source
 created: 2026-07-13
-updated: 2026-09-03
+updated: 2026-09-16
 status: good
 tags: [data-provider, crypto, api, market-regime, regime-detection, hmm, volatility, liquidity, gamma-exposure, event-risk]
 aliases: ["CryptoDataAPI Regimes", "CDA Regimes", "CryptoDataAPI Quant Probabilities", "CryptoDataAPI Regime Engine"]
@@ -40,19 +40,31 @@ A [[hidden-markov-models|Hidden Markov Model]] engine refreshed every 15 minutes
 | GET | /api/v1/quant/timeline | Daily market regime labels (2019-now) | — | Pro Plus |
 | GET | /api/v1/quant/positioning | Trader type split (MM/whale/other) | per-coin optional | Pro |
 | GET | /api/v1/quant/gex | Gamma Exposure (MM inventory + liquidation profile) | per-coin optional | Pro |
+| GET | /api/v1/quant/gex/history | Hourly `distribution_context` scalar history for one coin, <=30 days | symbol, from, to, grain=1h | Pro |
 | GET | /api/v1/quant/whales | >=$100k account whale activity summary | — | Pro+ |
 | GET | /api/v1/quant/whales/history | Daily whale positioning timeseries | days 7-540 | Pro Plus |
 | GET | /api/v1/quant/model | Model transparency (version, metrics, sha256) | — | — |
 | GET | /api/v1/quant/regimes | 6-regime taxonomy (id, label, stance) | — | — |
 | POST | /api/v1/quant/refresh | Force immediate inference | — | Pro Plus |
 
+`/quant/regimes` gained an additive **`catalog_version`** field (CalVer, added 2026-09-15) on the id<->label mapping: unchanged `catalog_version` is a checkable guarantee that every `id` still maps to the same `label`, so a consumer can key off `regime.id` directly instead of re-resolving `label` on every call. A relabel or reorder of an existing id bumps this (and gets its own changelog entry); appending a new id at the end does not.
+
 `/quant/gex` and `/quant/positioning` moved to the **Pro** tier on 2026-07-10 — Pro keys had been incorrectly 403'ing on both before the fix.
+
+**HMM regime dwell (2026-09-09):** `/quant/market` (and the `regime` block of `/quant/coins`/`/quant/coins/{symbol}`) now expose the anti-churn dwell mechanics directly: `in_regime_since` (ISO timestamp the current label was entered), `pending {label, count, needed}` (a challenger label's streak toward confirmation — `null` when no challenger is accumulating), and `hysteresis {margin: 0.10, bars: 2, override: 0.70, incumbent_floor: 0.10, min_dwell_bars: 0}`. In practice there is **no forced minimum hold**: a challenger posterior crossing 0.70, or the incumbent dropping below 0.10, switches the label on the next refresh regardless of how recently it changed. Retroactive note: model `2.0.0` (feature set `fv2`) replaced `1.0.0` on 2026-06-21 with no change to the label set; model version bumps now get their own changelog entry going forward.
+
+**`current` field (2026-09-15):** `/quant/market` and `/quant/coins/{symbol}` also gained `current`, a byte-identical copy of `regime` for the same call. `regime` was already computed once from the model's posterior — horizon-independent, not a per-horizon forecast — but returning it under the same key at `horizon=4h` and `horizon=24h` with nothing marking it as identical made that easy to miss. `current` makes the "what regime are we in right now" reading unambiguous; `regime` is unchanged and stays for backward compatibility. Both are `null` while the scope is warming up.
 
 **`/quant/gex` breaking change (2026-06-27):** a single-symbol query (`?symbol=X`) now returns the same bulk envelope as the unfiltered call — `{scope, note, timestamp, meta, coins:{X:{...}}}` — narrowed to one coin, rather than a bare per-coin object. Any integration or example that expects `?symbol=X` to return a flat per-coin object needs updating to read `coins[X]` out of the envelope. The response also gained:
 - **`regime.confidence`** (0-1) — scales with market-maker account count and gross book depth behind the read, so thin-sample regimes can be down-weighted
 - **Capped `regime.flip_price` / `gamma_flip`** — now bounded to within +/-30% of mark and returns `null` when there is no in-band liquidation crossover, instead of the previously possible absurd out-of-range levels
 - **Per-coin `distribution_context`** — trailing-30-day percentile ranks of near-mark cluster density, `|distance to flip|`, normalized MM skew (`mm_net_delta/mm_gross`), regime score, and funding rate; history is forward-only from the change date, hourly samples
 - **`regime.inputs.realized_liq`** now populates for Hyperliquid's 1000x-multiplier meme perps (kPEPE, kBONK, etc.), which previously had no realized-liquidation input
+
+**`/quant/gex` regime rule change and coverage fields (2026-09-09, `regime.rules_version` 1 → 2):** the skew leg of the amplify/dampen score now reads the coin's own trailing-30-day `distribution_context.mm_skew_pctile` (>=90 or <=10 = one-sided, 25-75 = balanced) instead of the raw skew sign, which had scored roughly 95% of the universe "one-sided" because market makers are structurally short perps everywhere. While a coin's distribution history is still `warming`, the v1 raw `market_skew` rule applies instead; `regime.inputs.skew_source` reports which fired (`mm_skew_pctile` | `market_skew_raw` | `none`). Every other weight and term is unchanged, and the full rule set is now echoed back in `meta.regime_rules`. Also, `distribution_context.funding_rate_pctile` is `null` whenever `funding_pinned` is true — funding glued to Hyperliquid's 1.25e-5 interest baseline would otherwise rank at a meaningless ~50th percentile.
+- **`regime.coverage`** (`full` | `funding_only` | `none`) plus **`regime.insufficient_mm_coverage`** flag how much evidence the state rests on: `full` needs enough market-maker accounts and at least one density band behind the read; `funding_only` means the state rests on funding/OI/cascade signals alone with no real MM positioning behind it (118/231 coins fell into this bucket at ship time) and should be treated as low-evidence; `none` means no usable read. `regime.state` is still returned in every case — **filter on `regime.coverage` before trusting it**, do not assume every `amplify`/`dampen` read is high-confidence. Per-coin `coverage {bands, mm_n_accounts, has_flip, history_days}` gives the underlying counts.
+- **`levels`** — up to 3 nearest liquidation clusters above mark and 3 below (`{price, dist_pct, total_usd, side, n_accounts}`), built from every account class rather than market makers only — distinct from the MM-only `gamma_profile` cluster density.
+- Also added: `regime.since` (when the current state was first committed), `distribution_context.mm_skew_z` / `sample_ts`, top-level and per-coin `positions_as_of`, `meta.classifier_version`. `symbol` now accepts a comma-separated list (`BTC,ETH,SOL`). New **`GET /api/v1/quant/gex/history`** (Pro, see table above) serves the ~hourly `distribution_context` scalar ring behind these reads — `near_density`, `dist_to_flip_pct`, `mm_skew`, `mm_gross`, `mm_n_accounts`, `regime_score`, `funding_rate`, `oi_change_pct` — up to 30 days, forward-only from this deploy.
 
 ### Volatility Regime
 
@@ -64,6 +76,8 @@ Per-asset [[volatility-regime]] classifier. Taxonomy: **compressed, expanding, v
 | GET | /api/v1/volatility/regime/score | Market-wide vol-stress composite 0-100 | — | — |
 | GET | /api/v1/volatility/regime/{symbol} | Per-asset detail + 60d history | symbol | Pro+ |
 | POST | /api/v1/volatility/regime/refresh | Force recompute | — | Pro+ |
+
+**`vol_target_multiplier` is ABSOLUTE, not relative (additive fields 2026-09-09):** it is `60 / rv_gk_30` (Garman-Klass 30d vol, close-to-close fallback), clamped to `[0.25, 3.0]` — **not** a percentile of the coin's own history. A coin sitting at >=240% 30d vol pins at the 0.25 floor for as long as that holds; the new `vol.multiplier_at_floor` (bool) and `vol.multiplier_floor_days` (consecutive days pinned at the floor) fields make that state explicit. **For a relative shock gate, use `vol.rv_z_7 >= 2`** (7d vol two standard deviations above the coin's own trailing 90d) or `vol_pctile_7` instead — `vol_shock` itself is relative by construction (7d Garman-Klass at or above the coin's own 90th percentile over its trailing 90 days), which is easy to conflate with the absolute-multiplier field if you only read the field name. Also new: a coin that misses a 30-min compute cycle is now carried over with `stale_cycles` (0 = fresh this cycle, ages out after 8 consecutive misses) instead of dropping out of the response with a 404.
 
 **CVI (market-wide realized vol) and DVOL (BTC/ETH implied vol) — a separate endpoint pair under the same "Volatility Regime" tag, not to be confused with the regime classifier above:**
 
@@ -116,6 +130,8 @@ Forward-looking catalyst calendar (unlocks, macro prints, depeg risk, stablecoin
 
 **`mint` event type (2026-08-19):** `/event/calendar` and `/event/regime*` gained a fourth catalyst type alongside `unlock`/`macro_print`/`depeg` — dated stablecoin mint/burn steps, with `delta_usd` (signed) and `pct_of_supply` fields sizing the move. Bias is `long` on a mint and `short` on a redemption. These are **observed, not scheduled** — they carry `days_until <= 0` since a mint/burn is reported after it happens rather than forecast in advance, unlike the forward-looking unlock and macro-print entries in the same calendar. See also [[cryptodataapi-supply]] for the dedicated `/supply/unlocks` cliff-calendar view that now backs the `unlock` type here.
 
+**`hl_symbol` resolution fix (2026-09-15):** `/event/regime/{symbol}` now resolves `hl_symbol` (the Hyperliquid perp join key) even when there's no pending catalyst for that symbol — previously it was only populated as a side effect of a pending-event entry, so it read `null` for the common case of nothing currently pending. `null` now means only "no HL perp for this ticker" (e.g. stablecoins), not "nothing pending right now."
+
 ### Security / Black-Swan Regime
 
 Tail-risk overlay tracking hacks, depegs, and abnormal flows.
@@ -127,6 +143,8 @@ Tail-risk overlay tracking hacks, depegs, and abnormal flows.
 | GET | /api/v1/security/events | Filterable recent events | 10d lookback | — |
 | GET | /api/v1/security/regime/{symbol} | Per-symbol security overlay | symbol | Pro+ |
 | POST | /api/v1/security/regime/refresh | Force recompute | — | Pro+ |
+
+**`hl_symbol` resolution fix (2026-09-15):** `/security/regime/{symbol}` gets the same fix as the Event Regime endpoint above — `hl_symbol` now resolves independent of whether an implicating event is currently pending, so `null` means "no HL perp for this ticker," not "nothing pending right now."
 
 ### Geopolitical / Policy Regime
 

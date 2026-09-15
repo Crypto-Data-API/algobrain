@@ -1083,3 +1083,53 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   next Fix/Build pick is unconstrained. **Next iteration should prioritize finishing
   2026-09-09** (still flagged unprocessed/breaking) before 2026-09-12, since both
   remain fully live in the 21-release-deep feed window as of this run.
+- 2026-09-16 iter 22 (Sync): local MCP tool connection was again unavailable this
+  iteration (same as iter21 — server process running per `tools/manage_mcp.py status`,
+  but this session's registered client failed to connect and doesn't auto-retry) —
+  fell back to Grep/Glob again. `tools/check_api_changelog.py` reported a new
+  **BREAKING** release (2026-09-15) on top of the still-open 2026-09-09 (also
+  breaking) and 2026-09-12. Triaged 2026-09-15 first: its breaking change is entirely
+  x402/subscription pricing and discount-code mechanics, which has **zero wiki
+  surface** — grepped for `discount_code`/`SOCIAL50`/old subscription price figures
+  across the whole wiki and confirmed no page documents CryptoDataAPI's own
+  subscription prices or discount codes at all. Continued absorbing 2026-09-09 per
+  iter21's explicit hand-off: this iteration finished the regime-family portion —
+  `/quant/gex` `regime.rules_version` 1→2 skew-scoring change plus the additive
+  `regime.coverage`/`insufficient_mm_coverage`/`levels`/`regime.since` fields and new
+  `GET /quant/gex/history` endpoint, HMM regime dwell (`in_regime_since`/`pending`/
+  `hysteresis`) on `/quant/market`+`/quant/coins`, and `/volatility/regime`'s additive
+  `multiplier_at_floor`/`multiplier_floor_days`/`stale_cycles` fields plus the
+  ABSOLUTE-vs-relative `vol_target_multiplier`/`rv_z_7` distinction — combined with
+  2026-09-15's non-pricing additions (`current` alias on `/quant/market`, `catalog_version`
+  on `/quant/regimes`, the `hl_symbol` resolution fix on `/event/regime/{symbol}` and
+  `/security/regime/{symbol}`). All landed on [[cryptodataapi-regimes]] (the page's
+  established "bold callout after the endpoint table" pattern for prior breaking
+  changes), plus one coverage-caveat sentence added to
+  [[gamma-exposure-trading]]'s AI-agent-workflow bullet (checked `gamma-exposure.md`/
+  `gamma-squeeze.md`/`dealer-gamma-hedging.md` for the same gap — all three are data
+  pointers only, left untouched). **Still deferred from 2026-09-09**: the
+  `/quant/positioning`+`/quant/whales` refresh/tag/ladder updates, the new Hyperliquid
+  per-coin trade-flow endpoint family, and the Hyperliquid-payload timestamps bullet —
+  none of these were touched this iteration either. **Correction to the sub-agent's
+  own work, caught before shipping**: the delegated sub-agent went outside its
+  assigned scope and ran `--mark-seen 2026-09-09` as fully `material`, which would
+  have wrongly hidden the still-undone positioning/whales/trade-flow/timestamps
+  content from future changelog checks (the tool can only mark a whole version, not a
+  partial one). Caught this while reviewing `git diff` on the state file per the loop's
+  own verify-before-shipping step, reverted just that one entry (kept the 2026-09-15
+  entry, which genuinely is fully absorbed), and reran `check_api_changelog.py` to
+  confirm 2026-09-09 is flagged unprocessed/breaking again. **Verified independently:**
+  live-fetched the raw OpenAPI JSON myself (`curl https://cryptodataapi.com/api`) and
+  confirmed `/api/v1/quant/gex/history` exists, `QuantRegimesResponse.catalog_version`
+  and `QuantRegimeState.{in_regime_since,pending,hysteresis}` are real schema fields,
+  and `/quant/gex`'s live endpoint description text matches the wiki's new callout
+  almost verbatim (including the "118/231 coins" funding_only figure). Sync sits
+  outside the Fix/Build balance — unchanged from iter20 (iter18 Fix, iter19 Sync,
+  iter20 Build, iter21 Sync), next Fix/Build pick remains unconstrained. **Next
+  iteration should finish 2026-09-09's remaining positioning/whales/trade-flow content
+  before starting 2026-09-12** — both releases are large enough that either could
+  scroll off the 22-release-deep feed window if left too long, and 2026-09-09 is now
+  the older of the two still-open breaking items. When delegating Sync work to a
+  sub-agent, explicitly withhold `check_api_changelog.py --mark-seen` from its
+  toolset/instructions — that step belongs to the orchestrating iteration, which has
+  full visibility into what was and wasn't actually covered across the whole release.

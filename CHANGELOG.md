@@ -4,6 +4,31 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-09-16 — Sync: gamma-exposure regime rules, HMM dwell, volatility regime fields
+
+**Changed:** The perp gamma-exposure classifier's positioning read now scores from a
+coin's own trailing-30-day skew percentile instead of the raw sign, which had previously
+misread the large majority of the universe as one-sided because market makers are
+structurally short perps everywhere. Consumers should now check the new per-read coverage
+flag before trusting the classification — a sizeable share of coins carry too few
+market-maker accounts for a real positioning read and rest on funding/open-interest
+signals alone.
+
+**Added:** Documented a new liquidation-cluster field on the gamma-exposure endpoint that
+spans every account class (not just market makers), a new hourly-history endpoint behind
+it, explicit dwell/hysteresis mechanics on the short-horizon market-regime model (no forced
+minimum hold time), a clearer alias field for "current regime" that removes an ambiguity
+between the present-state read and a per-horizon forecast, a versioned guarantee on the
+6-regime id-to-label mapping, two new volatility-regime fields marking when a position-size
+multiplier is pinned at its floor, and a resolver fix so a derivatives-venue symbol join now
+populates on catalyst/security overlays regardless of whether anything is currently pending.
+
+**Notes:** Sync-track iteration, second half of the 2026-09-09 release absorption (the first
+half — a bar-completion fix and venue stats — landed 2026-09-15) plus the non-pricing portion
+of 2026-09-15's release. Every changed field and endpoint path was checked against the live
+API schema before being written up. Added one caveat sentence to a strategy page whose
+AI-agent workflow relied on the gamma-exposure classifier without a coverage check.
+
 ## 2026-09-15 — Sync: SIGNUM RGG completed-bar breaking change; exchange venue stats
 
 **Fixed:** SIGNUM RGG's daily colour classification now reads from completed UTC daily

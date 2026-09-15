@@ -2,12 +2,57 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-09-15
+updated: 2026-09-16
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-09-16 — Sync: `/quant/gex` regime-rule change, HMM dwell, volatility regime additive fields
+
+**Scope:** the regime-family portion of the 2026-09-09 changelog release not yet absorbed
+(SIGNUM RGG and exchange `stats` from the same release were synced 2026-09-15), plus the
+non-pricing regime-family additions from 2026-09-15. Every path and field name below was
+checked against the live OpenAPI JSON (`https://cryptodataapi.com/api`) before writing.
+
+- **`/quant/gex` regime rule change (`regime.rules_version` 1 → 2) and coverage fields.**
+  The skew leg of the amplify/dampen score now reads the coin's own trailing-30-day
+  `distribution_context.mm_skew_pctile` instead of the raw skew sign (`regime.inputs.skew_source`
+  says which rule fired). Documented the new `regime.coverage`/`regime.insufficient_mm_coverage`
+  fields (`full`/`funding_only`/`none` — filter on this before trusting `regime.state`), the
+  all-account-class `levels` field (distinct from the MM-only `gamma_profile`), `regime.since`,
+  and the new `GET /api/v1/quant/gex/history` endpoint (Pro, ~hourly `distribution_context`
+  scalar ring, <=30 days). Added a one-sentence coverage caveat to
+  [[gamma-exposure-trading]]'s AI-agent-workflow bullet (the only page found giving trading
+  rules off this endpoint's regime/state output without one).
+- **HMM regime dwell on `/quant/market` and `/quant/coins`.** Documented `in_regime_since`,
+  `pending {label, count, needed}`, and `hysteresis {margin, bars, override, incumbent_floor,
+  min_dwell_bars}` — no forced minimum dwell, a challenger crossing 0.70 or the incumbent
+  dropping below 0.10 switches immediately.
+- **`current` field on `/quant/market` and `/quant/coins/{symbol}`** — a byte-identical,
+  horizon-independent alias for `regime`, not a new per-horizon forecast.
+- **`/volatility/regime` additive fields.** `vol.multiplier_at_floor` / `vol.multiplier_floor_days`,
+  and clarified that `vol_target_multiplier` is an ABSOLUTE multiplier (`60 / rv_gk_30`, clamped
+  0.25-3.0) — for a relative shock gate use `vol.rv_z_7 >= 2` instead. Also `stale_cycles`
+  (a coin that misses a compute cycle is now retained, not 404'd).
+- **`/quant/regimes` gains `catalog_version`** (CalVer on the id<->label mapping — safe to key
+  off `regime.id` while unchanged).
+- **`hl_symbol` resolution fix on `/event/regime/{symbol}` and `/security/regime/{symbol}`** —
+  now resolves independent of whether a catalyst/event is currently pending; `null` means only
+  "no HL perp for this ticker."
+
+Page updated: [[cryptodataapi-regimes]] (all of the above); [[gamma-exposure-trading]] (one
+caveat sentence). Checked `wiki/concepts/market-microstructure/gamma-exposure.md`,
+`gamma-squeeze.md`, and `dealer-gamma-hedging.md` for the same gap — all three only list the
+endpoint as a data pointer with no regime/state-based trading rules, so left untouched.
+No discrepancies found between the changelog text and the live schema (the "≤6 nearest
+liquidation clusters" in the changelog and the docstring's "3 nearest above/below mark" are
+the same shape — 3 per side — not a conflict). Out of scope and untouched: pricing/subscription
+content (no wiki surface exists for it), `/quant/positioning`, `/quant/whales`, Hyperliquid
+trade-flow, and the 2026-09-12 release.
+
+**Claims:** 0 new source ingestion (API-changelog sync, not a document ingest).
 
 ## 2026-09-15 — Sync: absorbed 2 CryptoDataAPI changelog releases (SIGNUM RGG breaking change, exchanges `stats`)
 

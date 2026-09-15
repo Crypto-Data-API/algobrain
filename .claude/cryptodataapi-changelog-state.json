@@ -1,7 +1,13 @@
 {
-  "last_checked": "2026-09-15",
-  "api_version_seen": "2026-09-14",
+  "last_checked": "2026-09-16",
+  "api_version_seen": "2026-09-15",
   "processed": [
+    {
+      "version": "2026-09-15",
+      "processed_on": "2026-09-16",
+      "disposition": "material",
+      "note": "Non-pricing portion only (pricing/subscription/discount-code changes in this release have zero wiki surface and are permanently out of scope for this wiki). Documented the additive `current` field on GET /quant/market and /quant/coins/{symbol} (byte-identical horizon-independent alias for `regime`, not a new forecast) and the additive `catalog_version` field on GET /quant/regimes (CalVer guarantee on the id<->label mapping) in cryptodataapi-regimes.md. Documented the hl_symbol resolution fix on GET /event/regime/{symbol} and /security/regime/{symbol} (now resolves independent of whether a catalyst/event is pending) in the same page. All verified against the live OpenAPI JSON (QuantProbabilityObject, QuantCoinDetailResponse, QuantRegimesResponse, EventSymbolOverlayResponse, SecuritySymbolOverlayResponse schemas)."
+    },
     {
       "version": "2026-09-14",
       "processed_on": "2026-09-15",
