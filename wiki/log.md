@@ -2,12 +2,46 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-09-09
+updated: 2026-09-15
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-09-15 — Sync: absorbed 2 CryptoDataAPI changelog releases (SIGNUM RGG breaking change, exchanges `stats`)
+
+**Scope:** two releases from the CryptoDataAPI changelog (2026-09-09 and 2026-09-14).
+Every path and field name below was checked against the live OpenAPI JSON
+(`https://cryptodataapi.com/api`) before writing, not just the changelog text.
+
+- **SIGNUM RGG completed-bar breaking change (2026-09-09).** `/indicators/signum-rgg`
+  (list + `/{symbol}`) and the archived `signum_rgg` block now compute `color`,
+  `days_in_color`, `adx`, `plus_di`, `minus_di`, `flipped_at`, `pct_change_since_flip`,
+  `price`, `range`, and detail `history` from **completed** UTC daily bars only
+  (`is_final: true`, `computed_from`); the forming-bar read moved to new
+  `color_live`/`adx_live`/`days_in_color_live`. Documented the additive `pegged` flag,
+  `flip_alert_reason`/`intraday_disagrees`/`recent_flip`, the list endpoint's new
+  `offset` param and `limit` raised to 1000, `/indicators/signum-rgg/{symbol}`'s
+  `intraday_history` moving to opt-in via `?intraday=true`, the Hyperliquid-symbol
+  resolver fix (`kPEPE`), and the new `GET /api/v1/backtesting/signum-rgg?date=` archive
+  endpoint. Pages updated: [[cryptodataapi-indicators]], [[cryptodataapi-backtesting]].
+  Checked ~30 pages that link to SIGNUM RGG in passing (strategy/indicator pages,
+  [[cryptodataapi]], [[cryptodataapi-mcp]], [[cryptodataapi-regimes]]) — no stale
+  forming-bar or default-intraday-history claims found there, so left untouched.
+- **Exchanges `stats` object (2026-09-14).** `/exchanges` and `/exchanges/{slug}` gain
+  an additive per-venue `stats` object (`open_interest_usd`, `volume_24h_usd`,
+  `funding_rate_apr_pct`, `market_count`, `note`, `source`), populated today only for
+  `lighter` and `asterdex` (AsterDEX's `open_interest_usd` always `null`; its `note`
+  carries a DefiLlama wash-trading-correlation caveat, Oct 2025), refreshed every 5
+  minutes. Distinct from the existing BTC-only cross-exchange `/derivatives/open-interest`
+  and `/derivatives/funding-rates` on [[cryptodataapi-derivatives]]. Pages updated:
+  [[cryptodataapi-exchanges]], [[lighter]], [[asterdex]] (also tightened a
+  now-imprecise sentence on each entity page about cross-exchange feed coverage).
+
+**Claims:** 0 new source ingestion (API-changelog sync, not a document ingest) —
+verification was against the live OpenAPI JSON directly rather than a single source
+summary.
 
 ## 2026-09-09 — Build: expanded 5 DePIN/infra concept stubs; skipped 2 deliberately-thin bios
 

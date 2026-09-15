@@ -4,6 +4,27 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-09-15 — Sync: SIGNUM RGG completed-bar breaking change; exchange venue stats
+
+**Fixed:** SIGNUM RGG's daily colour classification now reads from completed UTC daily
+bars only, instead of a still-forming day that could flip and un-flip before close.
+Documented the new `is_final`/`computed_from` fields, the separate live-forming-bar
+readout, the additive pegged-asset exclusion flag and flip-alert companions, updated
+pagination limits, opt-in intraday history, a symbol-resolver fix for Hyperliquid-only
+listings, and a new archived daily colour-map endpoint.
+
+**Added:** The exchange venue directory now returns a live per-venue stats object
+(open interest, 24h volume, annualized funding rate) for two venues, distinct from the
+existing BTC-only cross-exchange comparison feeds — including one venue's standing
+wash-trading caveat on its self-reported volume.
+
+**Notes:** Sync-track iteration. The triggering upstream release also touched several
+other data families (an options/perp positioning classifier, a new per-trade flow feed,
+a volatility regime, and a market-state model) that were deliberately left for a future
+iteration rather than stretched into this batch — every changed field and endpoint path
+was checked against the live API schema before being written up, which caught one
+attribution error in the source release notes before it reached the wiki.
+
 ## 2026-09-09 — Expand 5 more thin stub pages: decentralized identity, compute, storage, TEEs, Move
 
 **Added:** Full treatment for five infrastructure/mechanism concept pages that

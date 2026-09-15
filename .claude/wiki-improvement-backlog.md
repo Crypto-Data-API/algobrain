@@ -1030,3 +1030,56 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   next pick leans **Fix** though not a hard constraint yet. 18 non-redirect orphans
   remain the best-queued Fix candidate; roughly 5-6 genuine stub pages remain for a
   future Build pass (the 2 correctly-excluded trader bios don't count toward that).
+- 2026-09-15 iter 21 (Sync): local MCP server tool connection was unavailable this
+  iteration (server process confirmed running via `tools/manage_mcp.py status`, but this
+  session's registered MCP client had already failed to connect before the server was
+  started, and did not auto-retry) — fell back to Grep/Glob over `wiki/` directly per the
+  loop's step-0 fallback rule; no lint/stats numbers this iteration as a result.
+  `tools/check_api_changelog.py` reported **3 unprocessed releases, one BREAKING**
+  (2026-09-09, 2026-09-12, 2026-09-14) — far too large to absorb in one ~60-min batch
+  (the 2026-09-09 release alone touches SIGNUM RGG, `/quant/gex` v2, positioning/whales,
+  volatility regime, HMM regime dwell, and a brand-new Hyperliquid trade-flow family;
+  grepping the wiki for GEX/positioning/whales terms alone returned 74 files). Per the
+  loop's priority order (breaking first, then new endpoint families, then additive),
+  scoped this iteration to the two highest-leverage, cleanly-bounded pieces and
+  deliberately left the rest **unmarked/unprocessed** in the changelog state rather than
+  stretching the batch or falsely marking a release complete:
+  - **SIGNUM RGG completed-bar breaking change** (part of 2026-09-09 only — the rest of
+    that release's content, GEX/positioning/whales/volatility-regime/HMM-dwell/HL-trade-
+    flow, is still fully unprocessed and will re-surface in full on the next
+    `check_api_changelog.py` run). Documented the completed-bar-only computation
+    (`is_final`, `computed_from`, new `color_live`/`adx_live`/`days_in_color_live`),
+    the additive `pegged`/`flip_alert_reason`/`intraday_disagrees`/`recent_flip` fields,
+    `offset` param + `limit` raised to 1000, opt-in `?intraday=true`, the `kPEPE`
+    resolver fix, and the new `GET /backtesting/signum-rgg?date=` archive endpoint.
+    Pages: [[cryptodataapi-indicators]], [[cryptodataapi-backtesting]]. Because this is
+    only a partial slice of the 2026-09-09 release, **did not** call `--mark-seen` for
+    2026-09-09 — marking it would have hidden the remaining ~90% of that release's
+    content from future iterations, which the changelog tool can only track at
+    whole-version granularity.
+  - **Exchanges `stats` object** (2026-09-14, handled in full) — new additive per-venue
+    `open_interest_usd`/`volume_24h_usd`/`funding_rate_apr_pct`/`market_count`/`note`/
+    `source`, populated today only for `lighter`/`asterdex` (AsterDEX `open_interest_usd`
+    always `null`; `note` carries a DefiLlama wash-trading-correlation caveat). Pages:
+    [[cryptodataapi-exchanges]], [[lighter]], [[asterdex]] (also tightened an
+    imprecise sentence on each entity page conflating this venue-scoped feed with the
+    BTC-only cross-exchange derivatives feeds). Marked **material** via `--mark-seen
+    2026-09-14`.
+  - 2026-09-12 (grain/paging/coverage overhaul across every `/backtesting/*` range
+    reader, new `/backtesting/hl-liquidation-bars` and `/derivatives/hyperliquid/history`
+    endpoints) left entirely untouched/unprocessed — its own future Sync iteration.
+  **Verified independently, not on trust:** every endpoint path and field name was
+  checked against the live OpenAPI JSON at `https://cryptodataapi.com/api` (the docs
+  page at `/api/docs` is a JS-rendered SPA WebFetch couldn't reliably parse) before being
+  written — this caught one real discrepancy: the changelog attributes
+  `summary.pegged_excluded`/`net_breadth_pct`/`top_green`/`top_red` to
+  `/indicators/signum-rgg`, but those breadth/top-list aggregates actually live on the
+  separate `/api/v1/daily` endpoint's `signum_rgg` block; wiki text was written to match
+  the verified schema, not the changelog's field attribution verbatim. Checked ~30
+  other pages that merely wikilink to SIGNUM RGG in passing — no stale forming-bar or
+  default-intraday-history claims found, left untouched. `git status`/`git diff --stat`
+  confirmed only the 6 intended files (+ `wiki/log.md`) were touched. Sync sits outside
+  the Fix/Build balance — unchanged from iter20 (iter18 Fix, iter19 Sync, iter20 Build),
+  next Fix/Build pick is unconstrained. **Next iteration should prioritize finishing
+  2026-09-09** (still flagged unprocessed/breaking) before 2026-09-12, since both
+  remain fully live in the 21-release-deep feed window as of this run.

@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Backtesting Archive"
 type: source
 created: 2026-07-13
-updated: 2026-09-08
+updated: 2026-09-15
 status: good
 tags: [data-provider, crypto, api, backtesting, historical-data, point-in-time, parquet, klines, funding, liquidations]
 aliases: ["CryptoDataAPI Backtesting", "CDA Backtesting", "CryptoDataAPI Historical Archive", "CryptoDataAPI Archives"]
@@ -34,6 +34,7 @@ CryptoDataAPI's Backtesting section is the historical arm of the API: a full arc
 | GET | /api/v1/backtesting/archives/purchase | Buy one archived object over x402 (pay per resource); free for Pro Plus keys | data_type*, exchange, symbol, date, month, interval, bundle, snapshot_type | keyless (x402) / Pro Plus free |
 | GET | /api/v1/backtesting/daily-snapshots | Daily snapshot list | — | — |
 | GET | /api/v1/backtesting/daily-snapshots/{date} | Snapshot by date, point-in-time | date | — |
+| GET | /api/v1/backtesting/signum-rgg | Archived full-universe SIGNUM RGG colour map for one date (`summary` + `by_symbol`) | date* | — |
 
 Historical depth: Parquet archive from 2020.
 
@@ -45,7 +46,7 @@ Only `/backtesting/status` is about the present — it reports collector health 
 
 ## Historical Data
 
-Everything else is history. `/backtesting/klines`, `/backtesting/funding`, `/backtesting/liquidations`, and `/backtesting/hl-liquidations` query the full archive directly; `/backtesting/export` pulls a custom range; `/backtesting/archives` + `/backtesting/archives/download` hand out pre-signed URLs for bulk Parquet datasets going back to 2020; `/backtesting/archives/purchase` sells a single archived object over x402 for an agent that doesn't hold an API key at all (payment mechanics, the 404-before-quote guarantee, and the Pro-Plus-free exception are detailed on [[cryptodataapi-mcp]]'s x402 section). The point-in-time core is `/backtesting/daily-snapshots/{date}`: the API's state frozen as of that day, so a backtest on 2023-03-15 sees exactly what a live system saw on 2023-03-15. Regime-probability history lives separately under the Pro Plus quant endpoints on [[cryptodataapi-regimes]]. `/backtesting/news-events` (Pro Plus, detailed on [[cryptodataapi-news]]) is a shallower archive by construction: it only holds qualified catalysts, and its history starts 2026-08-18 — the day the news family shipped — and **cannot be backfilled**, because the underlying RSS sourcing only ever serves a recent window.
+Everything else is history. `/backtesting/klines`, `/backtesting/funding`, `/backtesting/liquidations`, and `/backtesting/hl-liquidations` query the full archive directly; `/backtesting/export` pulls a custom range; `/backtesting/archives` + `/backtesting/archives/download` hand out pre-signed URLs for bulk Parquet datasets going back to 2020; `/backtesting/archives/purchase` sells a single archived object over x402 for an agent that doesn't hold an API key at all (payment mechanics, the 404-before-quote guarantee, and the Pro-Plus-free exception are detailed on [[cryptodataapi-mcp]]'s x402 section). The point-in-time core is `/backtesting/daily-snapshots/{date}`: the API's state frozen as of that day, so a backtest on 2023-03-15 sees exactly what a live system saw on 2023-03-15. `/backtesting/signum-rgg?date=YYYY-MM-DD` is a thin wrapper over that same daily snapshot that returns just its `signum_rgg` block (universe breadth `summary` plus the full per-symbol `by_symbol` map), stored since 2026-03-02 under the same auth gate as `daily-snapshots`; `computed_from` (present on days archived from 2026-09-09 onward) marks the last completed daily bar the colours were read from — see [[cryptodataapi-indicators]] for the live SIGNUM RGG endpoints this mirrors, including the 2026-09-09 completed-bar breaking change. Regime-probability history lives separately under the Pro Plus quant endpoints on [[cryptodataapi-regimes]]. `/backtesting/news-events` (Pro Plus, detailed on [[cryptodataapi-news]]) is a shallower archive by construction: it only holds qualified catalysts, and its history starts 2026-08-18 — the day the news family shipped — and **cannot be backfilled**, because the underlying RSS sourcing only ever serves a recent window.
 
 ## Trading Applications
 
@@ -85,3 +86,4 @@ The dated daily snapshots are what make this rigorous: the same point-in-time fr
 
 - https://cryptodataapi.com/api (live OpenAPI JSON) and live curl tests of `/backtesting/hl-liquidations` and `/backtesting/archives/purchase` (fetched 2026-09-08)
 - https://cryptodataapi.com/api/docs (fetched 2026-07-13)
+- https://cryptodataapi.com/api (raw OpenAPI JSON; `/api/v1/backtesting/signum-rgg` path, `date` param, and `SignumRggArchiveResponse` schema — `date`, `as_of`, `computed_from`, `summary`, `by_symbol` — confirmed live, fetched 2026-09-15)

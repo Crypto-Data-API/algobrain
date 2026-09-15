@@ -2,14 +2,14 @@
 title: "AsterDEX"
 type: entity
 created: 2026-09-03
-updated: 2026-09-03
+updated: 2026-09-15
 status: good
 tags: [exchange, crypto, derivatives, defi, hyperliquid, perpetual-futures, bnb]
 entity_type: exchange
 aliases: ["Aster", "ASTER", "Aster DEX", "Astherus"]
 founded: 2025
 website: "https://www.asterdex.com"
-related: ["[[hyperliquid]]", "[[asterdex-perp-trading-map]]", "[[hyperliquid-vs-asterdex-vs-tiger-brokers]]", "[[cryptodataapi-exchanges]]", "[[perpetual-futures]]", "[[aster-2]]", "[[bnb-chain]]", "[[funding-rate]]", "[[liquidation]]"]
+related: ["[[hyperliquid]]", "[[asterdex-perp-trading-map]]", "[[hyperliquid-vs-asterdex-vs-tiger-brokers]]", "[[cryptodataapi-exchanges]]", "[[cryptodataapi-derivatives]]", "[[perpetual-futures]]", "[[aster-2]]", "[[bnb-chain]]", "[[funding-rate]]", "[[liquidation]]"]
 ---
 
 # AsterDEX
@@ -85,6 +85,7 @@ Traders can post **USDF** (a yield-bearing stablecoin backed by delta-neutral De
 **Live data:**
 - `GET /api/v1/exchanges/asterdex` — venue profile: `kind`, `focus[]`, `specs` (instruments, max_leverage, KYC, custody), no API key required (see [[cryptodataapi-exchanges]])
 - `GET /api/v1/exchanges?referral_only=true` — filters the venue directory to partner-link venues only
+- As of 2026-09-14, that same response also carries a `stats` object with live `volume_24h_usd` and `funding_rate_apr_pct` (annualized, from AsterDEX's own BTC perpetual funding rate); `open_interest_usd` is always `null` — AsterDEX exposes no open-interest endpoint. Its `note` field carries a standing caveat that DefiLlama flagged AsterDEX's self-reported volume for a wash-trading-like correlation with Binance's perp volume in Oct 2025 — worth weighing alongside the "Zero/near-zero fee windows" volume note above
 
 ```bash
 curl "https://cryptodataapi.com/api/v1/exchanges/asterdex"
@@ -92,7 +93,7 @@ curl "https://cryptodataapi.com/api/v1/exchanges/asterdex"
 
 Auth: none required for the Exchanges category. Endpoint catalog: [[cryptodataapi-exchanges]]. See also [[cryptodataapi]].
 
-AsterDEX itself is not yet a first-class venue in CryptoDataAPI's derivatives/funding/OI feeds the way Hyperliquid is (see [[cryptodataapi-hyperliquid]] for that venue's full live+historical coverage); CryptoDataAPI's liquidation feed does ingest AsterDEX force-orders where available per the exchange directory's own description.
+AsterDEX itself is not yet a first-class venue in CryptoDataAPI's BTC-only cross-exchange derivatives/funding/OI feeds the way Hyperliquid is (see [[cryptodataapi-hyperliquid]] for that venue's full live+historical coverage, and [[cryptodataapi-derivatives]] for the cross-exchange comparison); the exchange directory's own `stats` object (above) now supplies AsterDEX's own aggregate volume/funding as a separate, venue-scoped feed. CryptoDataAPI's liquidation feed does ingest AsterDEX force-orders where available per the exchange directory's own description.
 
 ### AI agent workflow
 
@@ -117,6 +118,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] researching
 ## Sources
 
 - https://cryptodataapi.com/api/docs and live `GET /api/v1/exchanges/asterdex` response (fetched 2026-09-03)
+- https://cryptodataapi.com/api (raw OpenAPI JSON; `ExchangeInfo.stats` / `ExchangeStats` schema confirmed live, fetched 2026-09-15) — see [[cryptodataapi-exchanges]]
 - [[asterdex-perp-trading-map]] — existing wiki treatment (formation, backing, key metrics, fee snapshots)
 - [[hyperliquid-vs-asterdex-vs-tiger-brokers]] — existing wiki comparison page
 - APX Finance x Astherus merger announcement, December 2024 (Medium, apx-finance)

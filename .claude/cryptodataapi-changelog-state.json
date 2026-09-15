@@ -1,7 +1,13 @@
 {
-  "last_checked": "2026-09-09",
-  "api_version_seen": "2026-09-07",
+  "last_checked": "2026-09-15",
+  "api_version_seen": "2026-09-14",
   "processed": [
+    {
+      "version": "2026-09-14",
+      "processed_on": "2026-09-15",
+      "disposition": "material",
+      "note": "Documented the new additive stats object (open_interest_usd, volume_24h_usd, funding_rate_apr_pct, market_count, note, source) on GET /exchanges and /exchanges/{slug} in cryptodataapi-exchanges.md, incl. lighter/asterdex-only population, AsterDEX null-OI and DefiLlama wash-trading-correlation caveat, 5-min refresh, and the distinction from the BTC-only cross-exchange /derivatives/open-interest+funding-rates feeds. Added one-line stats mentions to lighter.md and asterdex.md entity pages. Verified against live OpenAPI JSON."
+    },
     {
       "version": "2026-09-07",
       "processed_on": "2026-09-08",

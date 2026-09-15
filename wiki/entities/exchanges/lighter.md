@@ -2,14 +2,14 @@
 title: "Lighter"
 type: entity
 created: 2026-09-03
-updated: 2026-09-03
+updated: 2026-09-15
 status: good
 tags: [exchange, crypto, derivatives, defi, hyperliquid, perpetual-futures, layer-2]
 entity_type: exchange
 aliases: ["Lighter Exchange", "LIT"]
 founded: 2022
 website: "https://lighter.xyz"
-related: ["[[hyperliquid]]", "[[edgex]]", "[[dydx-chain]]", "[[cryptodataapi-exchanges]]", "[[perpetual-futures]]", "[[layer-2]]", "[[funding-rate]]"]
+related: ["[[hyperliquid]]", "[[edgex]]", "[[dydx-chain]]", "[[cryptodataapi-exchanges]]", "[[cryptodataapi-derivatives]]", "[[perpetual-futures]]", "[[layer-2]]", "[[funding-rate]]"]
 ---
 
 # Lighter
@@ -55,6 +55,7 @@ Lighter's headline differentiator is that **standard retail accounts pay zero tr
 **Live data:**
 - `GET /api/v1/exchanges/lighter` — venue profile: `kind`, `focus[]`, `specs` (instruments, max_leverage, KYC, custody), no API key required (see [[cryptodataapi-exchanges]])
 - `GET /api/v1/exchanges?referral_only=true` — filters the venue directory to partner-link venues only (Lighter currently holds no CryptoDataAPI referral link)
+- As of 2026-09-14, that same response also carries a `stats` object with live `open_interest_usd` and `volume_24h_usd` (summed across Lighter's own active perp markets) and `funding_rate_apr_pct` (annualized, from Lighter's own BTC perpetual funding rate), refreshed every 5 minutes — one of only two venues (with [[asterdex]]) this is currently populated for
 
 ```bash
 curl "https://cryptodataapi.com/api/v1/exchanges/lighter"
@@ -62,7 +63,7 @@ curl "https://cryptodataapi.com/api/v1/exchanges/lighter"
 
 Auth: none required for the Exchanges category. Endpoint catalog: [[cryptodataapi-exchanges]]. See also [[cryptodataapi]].
 
-CryptoDataAPI does not yet carry Lighter in its cross-exchange derivatives/funding/OI feeds the way it does [[hyperliquid]] — the exchange directory entry is presently an overview-only profile, not a live market-data feed for this venue.
+CryptoDataAPI does not yet carry Lighter in its BTC-only cross-exchange derivatives/funding/OI feeds ([[cryptodataapi-derivatives]]'s `/derivatives/open-interest` and `/derivatives/funding-rates`) the way it does [[hyperliquid]]; the exchange directory's own `stats` object (above) now supplies Lighter's own aggregate OI/volume/funding, but that is a distinct, venue-scoped feed on the Exchanges category, not the cross-exchange derivatives comparison.
 
 ### AI agent workflow
 
@@ -86,6 +87,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] researching
 ## Sources
 
 - https://cryptodataapi.com/api/docs and live `GET /api/v1/exchanges/lighter` response (fetched 2026-09-03)
+- https://cryptodataapi.com/api (raw OpenAPI JSON; `ExchangeInfo.stats` / `ExchangeStats` schema confirmed live, fetched 2026-09-15) — see [[cryptodataapi-exchanges]]
 - [[dydx-chain]] — existing wiki peer-comparison data on Lighter (MC rank #120, ~$382M cap, MC/FDV ~0.25 as of its 2026-06-21 snapshot)
 - [[edgex]] — existing wiki context on the "CEX-grade perp DEX" competitive set including Lighter
 - Bitget Academy, "What Is Lighter (LIGHT): zk-Rollup Perpetuals With Secure Liquidations" and "What is Lighter (LIT)?"

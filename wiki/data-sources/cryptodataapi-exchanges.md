@@ -2,14 +2,14 @@
 title: "CryptoDataAPI — Exchanges"
 type: source
 created: 2026-09-03
-updated: 2026-09-03
+updated: 2026-09-15
 status: good
 tags: [data-provider, crypto, api, exchange]
 aliases: ["CryptoDataAPI Exchanges", "CDA Exchange Directory", "Exchange Directory API"]
 source_type: data
 source_url: "https://cryptodataapi.com/api/docs"
 confidence: high
-related: ["[[cryptodataapi]]", "[[exchanges-overview]]", "[[asterdex]]", "[[lighter]]", "[[hyperliquid]]"]
+related: ["[[cryptodataapi]]", "[[exchanges-overview]]", "[[asterdex]]", "[[lighter]]", "[[hyperliquid]]", "[[cryptodataapi-derivatives]]"]
 ---
 
 The Exchanges category of [[cryptodataapi]] serves the venue directory behind CryptoDataAPI's own exchange pages: a small, structured profile — type, focus, specs, sign-up link — for each venue it profiles. Unlike every other category on this hub, it carries no price, regime, or signal data; it is pure venue metadata plus (where CryptoDataAPI holds one) a referral sign-up link. Both routes are public and require no `X-API-Key`.
@@ -34,6 +34,7 @@ Each row (`ExchangeInfo`) carries:
 - `focus[]` — short tags describing what the venue is known for
 - `specs` — `{instruments[], coins, max_leverage, kyc, custody, fiat_onramp}`, each nullable where CryptoDataAPI has no data point
 - `signup_url`, `signup_incentive`, `referral_code`, `is_referral_link` — null/`false` for venues with no partner link
+- `stats` — additive per-venue aggregate object (added 2026-09-14): `{open_interest_usd, volume_24h_usd, funding_rate_apr_pct, market_count, note, source}`, `null` for every field on a venue CryptoDataAPI doesn't (yet) source this for. This is each venue's own aggregate across its **full perp book**, pulled from that venue's own public API — it is **not** the BTC-only cross-exchange OI/funding comparison already served by [[cryptodataapi-derivatives]]'s `/derivatives/open-interest` and `/derivatives/funding-rates`. Populated today only for **`lighter`** (`open_interest_usd` and `volume_24h_usd` summed across every active perp market via its own `orderBookDetails` endpoint; `funding_rate_apr_pct` from its own BTC perpetual funding rate, annualized) and **`asterdex`** (`volume_24h_usd` and `funding_rate_apr_pct` the same way, but `open_interest_usd` is always `null` — AsterDEX exposes no open-interest endpoint). AsterDEX's `note` field carries a standing caveat: DefiLlama flagged its self-reported volume for a wash-trading-like correlation with Binance's perp volume in Oct 2025. Refreshed every 5 minutes; the `/exchanges/lighter` and `/exchanges/asterdex` detail routes show the same figures.
 
 `/exchanges/{slug}` wraps the same `ExchangeInfo` object as `{exchange, disclosure}`.
 
@@ -67,9 +68,11 @@ curl "https://cryptodataapi.com/api/v1/exchanges/asterdex"
 - [[asterdex]] — entity page citing this endpoint's `/exchanges/asterdex` detail route
 - [[lighter]] — entity page citing this endpoint's `/exchanges/lighter` detail route
 - [[hyperliquid]] — the venue with the richest profile in the current directory (specs, referral link)
+- [[cryptodataapi-derivatives]] — the BTC-only cross-exchange `/open-interest` and `/funding-rates` endpoints that `stats` is distinct from
 
 ## Sources
 
 - https://cryptodataapi.com/api/docs (fetched 2026-09-03)
 - https://cryptodataapi.com/api (raw OpenAPI JSON; `ExchangeListResponse`, `ExchangeDetailResponse`, `ExchangeInfo`, `ExchangeSpecs` schemas confirmed live, 2026-09-03)
 - Live `GET /api/v1/exchanges` and `GET /api/v1/exchanges/asterdex` responses (fetched 2026-09-03) — confirmed public access, field shapes, and the current 7-slug set
+- https://cryptodataapi.com/api (raw OpenAPI JSON; `ExchangeStats` schema — `open_interest_usd`, `volume_24h_usd`, `funding_rate_apr_pct`, `market_count`, `note`, `source` — confirmed live on `ExchangeInfo.stats`, fetched 2026-09-15)
