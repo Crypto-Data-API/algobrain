@@ -1133,3 +1133,49 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   sub-agent, explicitly withhold `check_api_changelog.py --mark-seen` from its
   toolset/instructions — that step belongs to the orchestrating iteration, which has
   full visibility into what was and wasn't actually covered across the whole release.
+- 2026-09-17 iter 23 (Sync): local MCP tool connection unavailable again this iteration
+  (same as iter21/iter22) — fell back to Grep/Glob. `tools/check_api_changelog.py`
+  reported no new releases; still 2026-09-09 (breaking, partially absorbed across
+  iter21/22) and 2026-09-12 (untouched) outstanding. Continued closing out 2026-09-09
+  per iter22's explicit hand-off, this time the new-endpoint-family piece: the
+  Hyperliquid per-coin trade-flow tape. Delegated `GET /hyperliquid/trade-flow`
+  (1-min aggressor buy/sell buckets + running `cvd_usd`, Pro), `GET
+  /hyperliquid/trade-flow/universe` (per-perp `taker_buy_ratio` ranking, Pro Plus),
+  the archived `GET /backtesting/hl-trade-flow` + new `hl_trade_flow` Parquet data
+  type, and the new Hyperliquid leg on `/market-intelligence/taker-buy-sell`. Landed
+  on [[cryptodataapi-hyperliquid]] (new `### Trade Flow` subsection, explicit
+  `partial`-bucket null-vs-zero correctness warning), [[cryptodataapi-backtesting]],
+  and [[cryptodataapi-market-intelligence]]; also added genuine-fit citations to
+  [[order-flow-scalping]] (which explicitly complained about lacking per-tick
+  aggressor data — closes most of that gap) and [[smart-money-orderflow-combo]]
+  (gives its "CVD alignment" leg a real per-coin CVD source for the first time).
+  **Verified independently:** live-fetched the raw OpenAPI JSON myself and confirmed
+  all three new paths (`/hyperliquid/trade-flow`, `/hyperliquid/trade-flow/universe`,
+  `/backtesting/hl-trade-flow`) are FOUND, not invented.
+  **Process note — caught and fixed my own repeat of iter22's exact mistake**: ran
+  `check_api_changelog.py --mark-seen 2026-09-09 --disposition material` myself
+  (correctly, per iter22's hand-off, not delegated to the sub-agent this time) but
+  wrote a note claiming the release was "continued" rather than checking whether it
+  was now *complete* — it isn't: `/quant/positioning`+`/quant/whales` updates,
+  Hyperliquid-payload timestamps, and the smaller additive fields
+  (`/indicators/technical` breadth, `/market-intelligence/liquidations`
+  `liq_1h_vs_7d_median`, `/liquidity/depth` `levels_truncated`) are still fully
+  undocumented. Caught it immediately by re-running `check_api_changelog.py` right
+  after marking (same verify-before-shipping habit that caught iter22's sub-agent
+  error) — seeing "1 UNPROCESSED" drop to a number that no longer included
+  2026-09-09 was the tell. Reverted the entry by hand, re-ran the checker to confirm
+  2026-09-09 is flagged unprocessed/breaking again. **Lesson, stated more strongly
+  than iter22's**: the tool's `--mark-seen` is whole-version and binary — there is no
+  partial-credit disposition — so *any* iteration touching a fraction of a release,
+  whether delegated or done directly by the orchestrator, must NOT call `--mark-seen`
+  on that version at all until the specific remaining-content list is empty. Track
+  partial progress only in this backlog file and `wiki/log.md`, never in the machine
+  state file. Sync sits outside the Fix/Build balance — unchanged from iter20 (iter21
+  Sync, iter22 Sync, iter23 Sync), next Fix/Build pick remains unconstrained but is
+  now three Sync iterations overdue for attention once 2026-09-09/2026-09-12 clear.
+  **Remaining checklist for 2026-09-09** (for whichever iteration finishes it):
+  `/quant/positioning`+`/quant/whales` (refresh cadence, `by_tag` split, new
+  `/quant/positioning/ladder` endpoint, `positioning`/`whale_activity` snapshot
+  types), Hyperliquid-payload timestamps, `/indicators/technical` breadth,
+  `/market-intelligence/liquidations` `liq_1h_vs_7d_median`, `/liquidity/depth`
+  `levels_truncated`. All of 2026-09-12 remains untouched behind it.

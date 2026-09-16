@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Hyperliquid"
 type: source
 created: 2026-07-13
-updated: 2026-09-02
+updated: 2026-09-17
 status: good
 tags: [data-provider, crypto, api, hyperliquid, perpetual-futures, order-book, funding-rates, open-interest]
 aliases: ["CryptoDataAPI Hyperliquid", "CDA Hyperliquid", "Hyperliquid Perps Data API"]
@@ -27,6 +27,8 @@ The Hyperliquid category of [[cryptodataapi]] exposes [[hyperliquid]] perp-marke
 | GET | /api/v1/hyperliquid/summary | All-in-one perp data (now includes volume-multiplier fields) | coin | — |
 | GET | /api/v1/volume/scanner | Every HL perp ranked by 24h-vs-30d volume multiplier | band, min_multiplier, sort, limit | Free: top 20 by 24h volume; Pro/Pro Plus: full universe |
 | GET | /api/v1/volume/scanner/{symbol} | One perp's multiplier + 30d daily notional history | symbol | Pro/Pro Plus |
+| GET | /api/v1/hyperliquid/trade-flow | 1-min taker buy/sell buckets for one perp (aggressor-side notional, CVD) | coin, minutes 1-1440 | Pro |
+| GET | /api/v1/hyperliquid/trade-flow/universe | Every HL perp's taker_buy_ratio, notionals, large_fill_share over one window | window (15m/1h/4h) | Pro Plus |
 
 Tier "—" = not marked with a plan gate in the API docs; standard plan rate limits apply.
 
@@ -38,9 +40,15 @@ Tier "—" = not marked with a plan gate in the API docs; standard plan rate lim
 
 `/hyperliquid/summary` gained three additive fields from the same release: `avg_volume_30d`, `volume_multiplier`, and `volume_band` — all null until the 30-day baseline is built or the coin is too newly listed.
 
+### Trade Flow
+
+**Trade flow (added 2026-09-09):** `/hyperliquid/trade-flow?coin=&minutes=` (Pro; `minutes` up to 1440) returns 1-minute taker buy/sell buckets built from HL's public `trades` stream — `buy_notional`/`sell_notional` are USD notional by AGGRESSOR side (HL `B` = taker bought, `A` = taker sold; their sum is the minute's total traded notional), plus `n_trades`, `vwap` (notional-weighted price for the minute), `max_fill_usd`, `large_fill_share` (share of notional from fills ≥ $25k; `null` when none qualify), and a running `cvd_usd` from `window_start` (resets per request — only compare rows within one response). **`partial: true` means the collector's socket did not watch the whole minute (a reconnect, a deploy); such minutes come back with `null` notional fields and are NOT back-filled — HL's public stream carries no replay. Do not treat a `partial` bucket's `null` notional as a zero.** A covered minute with no fills is a genuine `0.0` (`partial: false`, `vwap`/`large_fill_share` null). `stream.coverage_pct` reports the share of the trailing 60 minutes fully watched; the endpoint returns `503 trade_flow_warming` until the first bucket closes (~1 minute after the collector starts) and `404` for a coin HL does not list. The current, still-open minute is never included.
+
+`/hyperliquid/trade-flow/universe?window=15m|1h|4h` (Pro Plus) ranks every HL perp with fills in the window by `taker_buy_ratio` (buy / (buy+sell), 0..1, `null` for a coin with no fills), `buy_notional`/`sell_notional`, `n_trades`, and `large_fill_share`, biggest first. `partial_minutes` counts the window's minutes the socket did not fully watch — the same value on every row, since coverage is per connection, not per coin. Coins with zero fills in the window are omitted. Forward-only from 2026-09-09.
+
 ## Historical Data
 
-`/hyperliquid/funding-rates` returns current plus historical funding (up to `limit` 100 records per coin), and `/hyperliquid/candles` serves up to 1,000 OHLCV bars per request at a chosen interval. For point-in-time daily snapshots of the full ~230-perp universe, see `/api/v1/daily/hyperliquid` and the [[cryptodataapi-backtesting]] archive.
+`/hyperliquid/funding-rates` returns current plus historical funding (up to `limit` 100 records per coin), and `/hyperliquid/candles` serves up to 1,000 OHLCV bars per request at a chosen interval. For point-in-time daily snapshots of the full ~230-perp universe, see `/api/v1/daily/hyperliquid` and the [[cryptodataapi-backtesting]] archive. The trade-flow tape archives forward from 2026-09-09 via `/api/v1/backtesting/hl-trade-flow` and the daily `hl_trade_flow` Parquet data type — see [[cryptodataapi-backtesting]].
 
 ## Trading Applications
 
@@ -50,6 +58,7 @@ Tier "—" = not marked with a plan gate in the API docs; standard plan rate lim
 - Signal research — `/hyperliquid/candles` provides the OHLCV backbone for backtesting [[perpetual-futures]] strategies on Hyperliquid listings
 - Execution context — pull `/hyperliquid/summary` before entries placed through [[hyperliquid-api-and-sdk]] to sanity-check funding, OI, and price in one call
 - Relative-volume screening — `/volume/scanner?band=surging&sort=multiplier` ranks the whole HL perp universe by how far current activity has departed from its own 30-day norm, a cleaner breakout/momentum filter than raw `volume_24h` since it is normalized per-asset rather than biased toward already-large-cap perps
+- Aggressor-flow confirmation — `/hyperliquid/trade-flow` gives per-minute taker buy/sell notional and a running `cvd_usd` per perp, the closest this API gets to tick-level CVD without a raw trade WebSocket; useful as an entry-timing confirmation for [[order-flow-scalping]] and the flow leg of [[smart-money-orderflow-combo]]
 
 ## Example
 
@@ -73,3 +82,4 @@ curl -H "X-API-Key: $CDA_KEY" \
 ## Sources
 
 - https://cryptodataapi.com/api/docs (fetched 2026-07-13)
+- https://cryptodataapi.com/api (live OpenAPI JSON; `/hyperliquid/trade-flow`, `/hyperliquid/trade-flow/universe`, `HLTradeFlowResponse`/`HLTradeFlowBucket`/`HLTradeFlowUniverseResponse` schemas confirmed live, fetched 2026-09-17)

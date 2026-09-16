@@ -2,12 +2,51 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-09-16
+updated: 2026-09-17
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-09-17 — Sync: new Hyperliquid per-coin trade-flow endpoint family
+
+**Scope:** the last new-endpoint-family piece of the still-open 2026-09-09 changelog
+release (SIGNUM RGG, exchange stats, GEX v2/HMM dwell/volatility regime were synced
+2026-09-15/16). Every path was checked against the live raw OpenAPI JSON
+(`https://cryptodataapi.com/api`) before writing, and independently re-verified after
+the sub-agent's report (`/hyperliquid/trade-flow`, `/hyperliquid/trade-flow/universe`,
+`/backtesting/hl-trade-flow` all confirmed present).
+
+- **`GET /hyperliquid/trade-flow?coin=&minutes=`** (Pro) — 1-minute taker buy/sell
+  buckets by aggressor side, `n_trades`, `vwap`, `large_fill_share`, and a running
+  `cvd_usd`. Documented the `partial: true` / null-vs-zero-notional distinction as an
+  explicit correctness warning (a `partial` bucket must not be read as a quiet minute).
+  **`GET /hyperliquid/trade-flow/universe?window=`** (Pro Plus) ranks every perp by
+  `taker_buy_ratio`.
+- **`GET /backtesting/hl-trade-flow`** archives the tape (live bucket minus `cvd_usd`);
+  the new **`hl_trade_flow`** daily Parquet data type joins `/backtesting/archives`
+  alongside `hl_liquidations`.
+- **`/market-intelligence/taker-buy-sell`** gains a Hyperliquid leg (was Binance/BTC
+  only) — absent leg means warming, not zero HL trades.
+
+Pages updated: [[cryptodataapi-hyperliquid]] (new `### Trade Flow` subsection),
+[[cryptodataapi-backtesting]], [[cryptodataapi-market-intelligence]]. Added genuine-fit
+citations to [[order-flow-scalping]] (previously stated CryptoDataAPI had no per-tick
+aggressor data for Hyperliquid — this closes most of that gap) and
+[[smart-money-orderflow-combo]] (gives its CVD-alignment leg a real per-coin source for
+the first time, replacing reliance on the coarse 4h ratio).
+
+**Still deferred from 2026-09-09** (not touched this iteration): `/quant/positioning` +
+`/quant/whales` updates (refresh cadence, `by_tag` split, new
+`/quant/positioning/ladder` endpoint, new snapshot types), Hyperliquid-payload
+timestamps, and small additive fields on `/indicators/technical`,
+`/market-intelligence/liquidations`, and `/liquidity/depth`. All of 2026-09-12 remains
+untouched. See `.claude/wiki-improvement-backlog.md`'s iter23 entry for the full
+remaining checklist and a process note on a changelog-state mistake caught and
+reverted before shipping.
+
+**Claims:** 0 new source ingestion (API-changelog sync, not a document ingest).
 
 ## 2026-09-16 — Sync: `/quant/gex` regime-rule change, HMM dwell, volatility regime additive fields
 

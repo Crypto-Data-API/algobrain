@@ -4,6 +4,25 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-09-17 — Sync: new Hyperliquid per-coin trade-flow data family
+
+**Added:** Documented a new per-minute, per-coin taker buy/sell flow feed for
+Hyperliquid perpetuals — aggressor-side notional, large-fill share, and a running
+cumulative volume delta — plus a ranked whole-market view and a matching backtesting
+archive. The existing cross-exchange taker-ratio feed now carries a Hyperliquid leg
+as well, where previously it covered one exchange only.
+
+**Notes:** Sync-track iteration, continuing absorption of the same upstream release
+behind the previous two entries. Two order-flow strategy pages were updated to cite
+the new feed where it closes a gap they explicitly called out (one previously stated
+this data source had no per-tick aggressor data for this venue). Every endpoint path
+was independently re-verified against the live API schema after the initial write-up.
+Caught and reverted a same-day slip where the release was briefly marked fully
+processed in internal tracking before its remaining, still-undocumented content
+(a positioning/whale classifier update and some smaller additive fields) was
+accounted for — no wiki content was affected, only the internal changelog-tracking
+state.
+
 ## 2026-09-16 — Sync: gamma-exposure regime rules, HMM dwell, volatility regime fields
 
 **Changed:** The perp gamma-exposure classifier's positioning read now scores from a

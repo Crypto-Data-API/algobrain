@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Market Intelligence"
 type: source
 created: 2026-07-13
-updated: 2026-09-04
+updated: 2026-09-17
 status: good
 tags: [data-provider, crypto, api, etf-flows, liquidations, options, cycle-indicators, coinbase-premium, market-intelligence]
 aliases: ["CryptoDataAPI Market Intelligence", "CDA Market Intelligence", "Market Intelligence API"]
@@ -33,7 +33,7 @@ The Market Intelligence category of [[cryptodataapi]] aggregates the institution
 | GET | /api/v1/market-intelligence/open-interest | Cross-exchange OI (top coins, default HL) | — | — |
 | ~~GET~~ | ~~/api/v1/market-intelligence/grayscale/holdings~~ | **RETIRED** (verified 2026-09-04) — Grayscale fund holdings; no replacement | — | — |
 | ~~GET~~ | ~~/api/v1/market-intelligence/grayscale/premium~~ | **RETIRED** (verified 2026-09-04) — Grayscale BTC premium/discount (through Jan 2024); no replacement | — | — |
-| GET | /api/v1/market-intelligence/taker-buy-sell | Taker buy/sell ratio by exchange, 4h window, per-coin | — | — |
+| GET | /api/v1/market-intelligence/taker-buy-sell | Taker buy/sell ratio by exchange, 4h window, per-coin (Binance + Hyperliquid legs) | — | — |
 | GET | /api/v1/market-intelligence/liquidations/by-exchange | Liquidations by venue, BTC only, 4h — streamed-venue subset only | — | — |
 | GET | /api/v1/market-intelligence/squeeze-alerts | Coins with one-sided, abnormal forced-liquidation flow right now (`direction`, `severity`, `triggered`, `suppressed_by`) | symbol, window_s, min_severity, include_quiet, limit | Free = BTC only; Pro/Pro Plus = full universe |
 | ~~GET~~ | ~~/api/v1/market-intelligence/borrow-interest~~ | **RETIRED** (verified 2026-09-04) — margin borrow rate, BTC/Binance, 4h; no replacement, use perp funding as a leverage-cost proxy instead | — | — |
@@ -51,6 +51,8 @@ Tier "—" = not marked with a plan gate in the API docs; standard plan rate lim
 **`/etf/btc/aum` is a reconstructed estimate, not a bare total.** It has no `aum_usd` field. It derives AUM by accumulating flows over time and returns `aum_usd_from_flows`, `btc_held_from_flows`, `btc_price_usd`, `cumulative_net_flow_usd`, `price_appreciation_usd`, `as_of`, `since`, `flow_days`, plus `method`, `source`, `excludes`, and `caveats` metadata fields describing the reconstruction. The `_from_flows` suffix is deliberate: GBTC's conversion from a closed-end trust to an ETF carried over a pre-existing BTC stake that never shows up as a tracked inflow, so the figure understates the true complex by roughly that seed amount. `cumulative_net_flow_usd` is a *different* quantity from AUM — the gap between the two is `price_appreciation_usd` (the return on assets already held, not new money).
 
 **`/etf/{asset}/flows` supports BTC, ETH, and SOL only.** `xrp` now returns a `400` (previously it 503'd) — no free source publishes XRP spot-ETF flow data, so the API does not serve it. SOL flow coverage was dead from 2026-07-24 and came back live on 2026-08-22.
+
+**`/taker-buy-sell` gained a Hyperliquid leg (2026-09-09).** Previously the endpoint carried only a `Binance` leg (BTC only, from Binance's public taker-volume endpoint). It now adds a `Hyperliquid` exchange leg — `buy_ratio` as a percent (0-100) of taker volume that was buying, notional-weighted over the trailing 4h — for every HL perp with fills, sourced from the collector's own trade tape (see `/hyperliquid/trade-flow` on [[cryptodataapi-hyperliquid]]). A coin only HL lists gets its own top-level entry whose aggregate is the HL figure. **An absent Hyperliquid leg means the tape is still warming (or the pull is not configured) — never that HL had zero trades for that coin.**
 
 **`/liquidations/by-exchange` coverage caveat** (shared with `/liquidations`): rows only cover the streamed venue subset — OKX, Bybit, and Hyperliquid — because Binance geo-blocks its liquidation stream. Totals therefore run *under* a true all-exchange number. The endpoint was returning `503` on every call from 2026-07-24 until fixed 2026-08-22; a `503` today should only mean a cold start (first minutes after a deploy, before the trailing 4h window has venue-tagged events).
 
@@ -88,3 +90,4 @@ curl -H "X-API-Key: $CDA_KEY" \
 ## Sources
 
 - https://cryptodataapi.com/api/docs (fetched 2026-07-13)
+- https://cryptodataapi.com/api (live OpenAPI JSON; `/market-intelligence/taker-buy-sell` description confirming the Hyperliquid exchange leg added 2026-09-09, fetched 2026-09-17)

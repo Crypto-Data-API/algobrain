@@ -2,7 +2,7 @@
 title: "Smart-Money + Order-Flow Combo"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-20
+updated: 2026-09-17
 status: good
 tags: [combinations, meta-strategy, crypto, smart-money, order-flow, on-chain, hyperliquid, market-microstructure, informational-edge]
 aliases: ["Smart Money Order Flow", "On-Chain + Order Flow", "Whale-Follow with Flow Confirmation", "Copy-Trade with Tape Confirmation"]
@@ -267,7 +267,8 @@ Re-deploy when a freshly forward-screened watchlist clears the persistence gates
 - `GET /api/v1/hyperliquid/wallet-positions` — current positions for tracked wallets
 - `GET /api/v1/hyperliquid/trader-profiles` — win rate, PnL, classification (persistence screen)
 - `GET /api/v1/quant/whales` — >=$100k account whale activity summary (regime backdrop)
-- `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window)
+- `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window; now includes a Hyperliquid leg)
+- `GET /api/v1/hyperliquid/trade-flow?coin=ETH&minutes=30` — 1-min aggressor buy/sell notional and running `cvd_usd` per perp (Pro, added 2026-09-09) — a genuine per-coin CVD source for the "CVD alignment" confirmation leg, tighter than the 4h taker-buy-sell ratio; see [[cryptodataapi-hyperliquid]]
 - `GET /api/v1/hyperliquid/l2-book?coin=ETH` — L2 order-book snapshot (absorption check)
 - `GET /api/v1/liquidity/depth` — per-coin depth/spread at 10/25/50/100 bps (slippage estimation)
 
@@ -290,7 +291,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid-tra
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this combo end-to-end:
 
 - **Signal** — `GET /api/v1/hyperliquid/copy-signals` (one call: vetted traders with fresh entries/exits) plus `GET /api/v1/hyperliquid/wallet-signals` for the tracked-wallet stream
-- **Filter** — `GET /api/v1/hyperliquid/trader-profiles` screens for persistence (win rate, PnL, classification) before any signal is actionable; `GET /api/v1/market-intelligence/taker-buy-sell` confirms aggressive flow agrees
+- **Filter** — `GET /api/v1/hyperliquid/trader-profiles` screens for persistence (win rate, PnL, classification) before any signal is actionable; `GET /api/v1/hyperliquid/trade-flow?coin={COIN}&minutes=30` gives the CVD-alignment leg a real per-minute aggressor-notional source (running `cvd_usd`), with `GET /api/v1/market-intelligence/taker-buy-sell` as the coarser 4h cross-check
 - **Execution** — the `GET /api/v1/hyperliquid/l2-book?coin={COIN}` absorption check sizes the entry against visible depth
 - **Backtest** — `GET /api/v1/hyperliquid/wallet-trades/{address}` replays any candidate wallet's full history; `GET /api/v1/daily/hl-traders` gives the daily leaderboard record and `GET /api/v1/quant/whales/history?days=540` the whale-positioning backdrop
 - **Tips** — trigger `POST /api/v1/hyperliquid/trader-profiles/refresh` (15-30s) before the daily screen so profile stats are not stale; wallet alpha decays, so re-audit followed wallets weekly, not once
