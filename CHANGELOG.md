@@ -4,6 +4,30 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-09-18 — Sync: volatility-index history correction; positioning/whale updates
+
+**Fixed:** A market-wide realized-volatility history endpoint was serving values
+roughly twice too high for a one-month window last quarter, due to a since-fixed bug
+that let delisted trading pairs skew the calculation. Those historical values are now
+corrected retroactively. Documented that a separate raw-archive endpoint covering the
+same dates was **not** retroactively corrected and still returns the original inflated
+numbers — worth knowing before combining the two sources in any backtest. Also fixed:
+the same endpoint used to take up to 23 seconds per call and could time out entirely on
+longer lookback windows; it now responds in well under a second across its full range.
+
+**Added:** A per-coin liquidation-ladder endpoint for the positioning/whale-tracking
+family, binned by account class. Documented a smart-money/high-leverage tagging overlay
+on the existing positioning feed, a refresh-cadence fix that brings whale-tracking data
+onto the same 5-minute cycle as positioning data (previously a slower, separate cycle),
+and a version marker on the account-classification rules behind both.
+
+**Notes:** Sync-track iteration, continuing absorption of the same large upstream
+release behind several recent entries, combined with a small new release absorbed in
+full. Every endpoint path was independently re-verified against the live API schema.
+Some described response fields could not be independently confirmed from the API's
+published schema (untyped in a few places) and are documented on the strength of the
+source release notes alone, flagged for a future spot-check against a live response.
+
 ## 2026-09-17 — Sync: new Hyperliquid per-coin trade-flow data family
 
 **Added:** Documented a new per-minute, per-coin taker buy/sell flow feed for

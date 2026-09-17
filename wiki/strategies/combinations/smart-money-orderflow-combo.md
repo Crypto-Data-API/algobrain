@@ -2,7 +2,7 @@
 title: "Smart-Money + Order-Flow Combo"
 type: strategy
 created: 2026-04-06
-updated: 2026-09-17
+updated: 2026-09-18
 status: good
 tags: [combinations, meta-strategy, crypto, smart-money, order-flow, on-chain, hyperliquid, market-microstructure, informational-edge]
 aliases: ["Smart Money Order Flow", "On-Chain + Order Flow", "Whale-Follow with Flow Confirmation", "Copy-Trade with Tape Confirmation"]
@@ -266,7 +266,7 @@ Re-deploy when a freshly forward-screened watchlist clears the persistence gates
 - `GET /api/v1/hyperliquid/wallet-signals` — entry/exit/size-change signals for tracked wallets
 - `GET /api/v1/hyperliquid/wallet-positions` — current positions for tracked wallets
 - `GET /api/v1/hyperliquid/trader-profiles` — win rate, PnL, classification (persistence screen)
-- `GET /api/v1/quant/whales` — >=$100k account whale activity summary (regime backdrop)
+- `GET /api/v1/quant/whales` — >=$100k account whale activity summary (regime backdrop); per-coin `long_pct_pctile_30d` (added 2026-09-09) ranks the live long share against that coin's own trailing 30 days, sharpening the read on whether current whale positioning is coin-relative extreme rather than just its raw level
 - `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window; now includes a Hyperliquid leg)
 - `GET /api/v1/hyperliquid/trade-flow?coin=ETH&minutes=30` — 1-min aggressor buy/sell notional and running `cvd_usd` per perp (Pro, added 2026-09-09) — a genuine per-coin CVD source for the "CVD alignment" confirmation leg, tighter than the 4h taker-buy-sell ratio; see [[cryptodataapi-hyperliquid]]
 - `GET /api/v1/hyperliquid/l2-book?coin=ETH` — L2 order-book snapshot (absorption check)

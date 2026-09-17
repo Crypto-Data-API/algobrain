@@ -2,12 +2,52 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-09-17
+updated: 2026-09-18
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-09-18 — Sync: CVI history correction; `/quant/positioning`+`/quant/whales` updates
+
+**Scope:** the new 2026-09-17 release (small, fully absorbed) plus the
+`/quant/positioning`/`/quant/whales` piece of the still-open 2026-09-09 release. Every
+path was checked against the live raw OpenAPI JSON before writing, and independently
+re-verified after the sub-agent's report.
+
+- **`/volatility/index/history` correction (2026-09-17).** Performance fix (sub-second
+  responses across the full `days<=365` window, was ~23s/520-timeout before) plus a
+  **retroactive correction**: pre-2026-08-24 CVI values were served ~2x too high due to
+  delisted Binance pairs polluting the universe. `/history` now serves the corrected
+  values, but **`/backtesting/daily-snapshots` was not corrected** and still returns the
+  originally-published inflated numbers for the same dates — documented prominently as
+  a silent-corruption risk for anyone mixing the two sources in a backtest. New
+  `backfilled` field marks which points are reconstructed.
+- **`/quant/positioning` + `/quant/whales` (2026-09-09).** `positions_as_of` dedupe-key
+  change, whales' cadence fix (15min → 5min, matching positioning), the additive
+  `by_tag {smart_money, high_leverage}` overlay (orthogonal to `by_type`, not a
+  breakdown of it), `meta.classifier_version` on both, and the new
+  `GET /quant/positioning/ladder` endpoint (all-account-class liquidation ladder,
+  binned, Pro Plus).
+
+Pages updated: [[cryptodataapi-regimes]] (both callouts), one-sentence addition to
+[[smart-money-orderflow-combo]] citing the new whale `long_pct_pctile_30d` field.
+
+**Honestly flagged as unverifiable from the static OpenAPI spec** (untyped `{}`
+response schemas on `/quant/*`): `meta.classifier_version` on `/quant/whales`
+specifically, `realized_liq.coverage` gaining the Hyperliquid venue (string absent from
+the entire spec — skipped rather than guessed), and the exact `positioning`/
+`whale_activity` snapshot-type names. Documented on trust of the changelog text per
+instructions; flagged for a future live-response spot-check.
+
+**Still deferred from 2026-09-09**: the skipped `realized_liq.coverage` addendum,
+Hyperliquid-payload timestamps, and small additive fields on `/indicators/technical`,
+`/market-intelligence/liquidations`, and `/liquidity/depth`. All of 2026-09-12 remains
+untouched. See `.claude/wiki-improvement-backlog.md`'s iter24 entry for the full
+checklist.
+
+**Claims:** 0 new source ingestion (API-changelog sync, not a document ingest).
 
 ## 2026-09-17 — Sync: new Hyperliquid per-coin trade-flow endpoint family
 

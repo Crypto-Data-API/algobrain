@@ -1,7 +1,13 @@
 {
-  "last_checked": "2026-09-17",
-  "api_version_seen": "2026-09-15",
+  "last_checked": "2026-09-18",
+  "api_version_seen": "2026-09-17",
   "processed": [
+    {
+      "version": "2026-09-17",
+      "processed_on": "2026-09-18",
+      "disposition": "material",
+      "note": "Documented on cryptodataapi-regimes.md: /volatility/index/history performance fix (sub-second responses, full days<=365 window now works, was 23s/520-timeout before), the retroactive pre-2026-08-24 CVI correction (previously ~2x inflated from delisted-pair pollution -- e.g. 121.66 served vs 64.52 correct on 07-24), the critical discrepancy that /backtesting/daily-snapshots was NOT retroactively corrected and still returns the original inflated numbers (a real silent-corruption risk if both sources get mixed in a backtest), and the new backfilled bool field. Verified /api/v1/volatility/index/history exists live and matches the described schema."
+    },
     {
       "version": "2026-09-15",
       "processed_on": "2026-09-16",

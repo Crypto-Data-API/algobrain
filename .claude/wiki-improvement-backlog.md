@@ -1179,3 +1179,47 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   types), Hyperliquid-payload timestamps, `/indicators/technical` breadth,
   `/market-intelligence/liquidations` `liq_1h_vs_7d_median`, `/liquidity/depth`
   `levels_truncated`. All of 2026-09-12 remains untouched behind it.
+- 2026-09-18 iter 24 (Sync): local MCP tool connection unavailable again this
+  iteration (4th in a row) — fell back to Grep/Glob. `tools/check_api_changelog.py`
+  reported one new release (2026-09-17) alongside the still-open 2026-09-09
+  (breaking) and 2026-09-12. Triaged 2026-09-17 as material and small (single
+  endpoint, one page) — a performance fix plus, more importantly, a **retroactive
+  correction**: `/volatility/index/history`'s pre-2026-08-24 CVI values were
+  previously ~2x inflated from delisted Binance pairs polluting the universe, now
+  fixed in `/history` but explicitly NOT in `/backtesting/daily-snapshots`, which
+  still returns the original inflated numbers — a real silent-corruption risk for
+  anyone mixing both sources in a backtest. Documented this discrepancy prominently
+  on [[cryptodataapi-regimes]] alongside the new `backfilled` field. Combined it in
+  the same batch with the next-highest-leverage remaining piece of 2026-09-09 per
+  iter23's checklist: `/quant/positioning`+`/quant/whales` — the `positions_as_of`
+  dedupe-key change, the whales 15min→5min cadence fix, the additive `by_tag`
+  overlay (explicitly documented as orthogonal to `by_type`, not a breakdown of
+  it), `meta.classifier_version` on both, and the new
+  `GET /quant/positioning/ladder` endpoint (added to the table). Also added one
+  sentence to [[smart-money-orderflow-combo]] citing the new
+  `long_pct_pctile_30d` field. **Verified independently:** live-fetched the raw
+  OpenAPI JSON myself and confirmed `/quant/positioning/ladder` and
+  `/volatility/index/history` are both FOUND. The sub-agent honestly flagged what
+  it could NOT verify from the static (untyped `{}` schema) OpenAPI spec —
+  `meta.classifier_version` on `/quant/whales` specifically (prose silent on it,
+  unlike positioning/gex), `realized_liq.coverage` gaining the Hyperliquid venue
+  (the string doesn't appear anywhere in the spec at all — correctly skipped
+  rather than guessed), and the `positioning`/`whale_activity` snapshot-type names
+  plus the "~120 modelled seed points" figure (snapshot_type is a free-text param,
+  not an enum, so not enumerable without a live authenticated call) — all
+  documented on trust of the changelog text as instructed, flagged for a future
+  live-response spot-check rather than silently asserted as verified. **Did NOT
+  mark 2026-09-09 as processed** — `realized_liq.coverage`, Hyperliquid-payload
+  timestamps, and the `/indicators/technical`/`/market-intelligence/liquidations`/
+  `/liquidity/depth` smaller additive fields are still fully undocumented; only
+  2026-09-17 was marked material this iteration. Sync sits outside the Fix/Build
+  balance — unchanged from iter20 (iter21/22/23/24 all Sync), the Fix/Build track
+  is now four iterations overdue and should be the pick once 2026-09-09/2026-09-12
+  clear, or sooner if no more material releases land in the meantime. **Remaining
+  checklist for 2026-09-09**: `realized_liq.coverage` Hyperliquid-venue addendum
+  on `/quant/gex` (one line, skipped this iteration for lack of live-schema
+  verification), Hyperliquid-payload timestamps, `/indicators/technical` breadth,
+  `/market-intelligence/liquidations` `liq_1h_vs_7d_median`, `/liquidity/depth`
+  `levels_truncated`. All of 2026-09-12 remains untouched behind it — genuinely
+  its own future iteration given its size (grain/paging/coverage overhaul across
+  six backtesting range readers plus two new endpoints).
