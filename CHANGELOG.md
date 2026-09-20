@@ -4,6 +4,28 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-09-20 — Sync: Hyperliquid parameter-handling fix, native ATR, batch candles
+
+**Fixed:** Four Hyperliquid perp data routes previously ignored an unrecognized request
+parameter and silently returned Bitcoin's data instead of erroring — now that parameter
+works as an alias for the correct one, matching is case-insensitive, and a genuinely
+unrecognized parameter or coin now returns a clear error instead of failing silently.
+Checked the wiki's own documented examples for the buggy pattern first; none were
+affected.
+
+**Added:** OHLCV candle data for Hyperliquid perpetuals can now return a built-in
+Average True Range alongside each bar, removing the need to compute it by hand. A new
+endpoint fetches the same candle data for up to 25 coins in a single call. The exchange
+metadata endpoint now also returns Hyperliquid's published fee schedule as a
+cost-modeling reference.
+
+**Notes:** Sync-track iteration, absorbing part of a new large upstream release (the
+rest — two payment-flow fixes, a new funding-history endpoint, and a new hosted search
+API over this wiki itself — is deferred to a future iteration) alongside continuing
+older deferred work. Every endpoint path was independently re-verified against the live
+API schema. One described field could not be confirmed without an authenticated API
+call and was left undocumented rather than asserted on trust.
+
 ## 2026-09-18 — Sync: volatility-index history correction; positioning/whale updates
 
 **Fixed:** A market-wide realized-volatility history endpoint was serving values

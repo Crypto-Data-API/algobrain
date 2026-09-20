@@ -2,7 +2,7 @@
 title: "ATR Position Sizing"
 type: strategy
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-09-20
 status: good
 tags: [risk-management, technical-analysis, position-trading, volatility]
 aliases: ["ATR Position Sizing", "Volatility-Based Position Sizing", "Volatility Normalization", "ATR-Based Sizing"]
@@ -123,6 +123,8 @@ For crypto books, [[cryptodataapi|CryptoDataAPI]] supplies the OHLCV bars the AT
 
 **Historical data:**
 - `GET /api/v1/backtesting/klines` — full OHLCV archive (Binance spot 1h/4h/1d back to 2017-08; Hyperliquid daily to 2023) for ATR-sizing vs fixed-notional comparison backtests
+
+For Hyperliquid perp positions specifically, `GET /api/v1/hyperliquid/candles?atr=14` now returns a matching Wilder ATR natively on every bar in place of the hand-rolled calculation — see [[cryptodataapi-hyperliquid]].
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=100"

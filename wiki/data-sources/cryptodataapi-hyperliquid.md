@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Hyperliquid"
 type: source
 created: 2026-07-13
-updated: 2026-09-17
+updated: 2026-09-20
 status: good
 tags: [data-provider, crypto, api, hyperliquid, perpetual-futures, order-book, funding-rates, open-interest]
 aliases: ["CryptoDataAPI Hyperliquid", "CDA Hyperliquid", "Hyperliquid Perps Data API"]
@@ -18,13 +18,14 @@ The Hyperliquid category of [[cryptodataapi]] exposes [[hyperliquid]] perp-marke
 
 | Method | Path | Returns | Key Params | Tier |
 |--------|------|---------|------------|------|
-| GET | /api/v1/hyperliquid/meta | Exchange metadata | — | — |
+| GET | /api/v1/hyperliquid/meta | Exchange metadata + fee schedule | — | — |
 | GET | /api/v1/hyperliquid/prices | All mid prices | — | — |
-| GET | /api/v1/hyperliquid/funding-rates | Current + historical funding | coin, limit 1-100 | — |
+| GET | /api/v1/hyperliquid/funding-rates | Current + historical funding | coin/symbol, limit 1-100 | — |
 | GET | /api/v1/hyperliquid/open-interest | All-asset OI | — | — |
-| GET | /api/v1/hyperliquid/candles | OHLCV candles | coin, interval, limit 1-1000 | — |
-| GET | /api/v1/hyperliquid/l2-book | L2 order book snapshot | coin | — |
-| GET | /api/v1/hyperliquid/summary | All-in-one perp data (now includes volume-multiplier fields) | coin | — |
+| GET | /api/v1/hyperliquid/candles | OHLCV candles | coin/symbol, interval, limit 1-1000, atr | — |
+| GET | /api/v1/hyperliquid/candles/batch | OHLCV candles for up to 25 coins in one call | coins (comma list, ≤25), interval, limit 1-1000, atr | — |
+| GET | /api/v1/hyperliquid/l2-book | L2 order book snapshot | coin/symbol | — |
+| GET | /api/v1/hyperliquid/summary | All-in-one perp data (now includes volume-multiplier fields) | coin/symbol | — |
 | GET | /api/v1/volume/scanner | Every HL perp ranked by 24h-vs-30d volume multiplier | band, min_multiplier, sort, limit | Free: top 20 by 24h volume; Pro/Pro Plus: full universe |
 | GET | /api/v1/volume/scanner/{symbol} | One perp's multiplier + 30d daily notional history | symbol | Pro/Pro Plus |
 | GET | /api/v1/hyperliquid/trade-flow | 1-min taker buy/sell buckets for one perp (aggressor-side notional, CVD) | coin, minutes 1-1440 | Pro |
@@ -34,7 +35,7 @@ Tier "—" = not marked with a plan gate in the API docs; standard plan rate lim
 
 ## Live Data
 
-`/hyperliquid/prices` (all mids in one call), `/hyperliquid/open-interest` (every listed asset), `/hyperliquid/l2-book` (order-book depth snapshot per coin), `/hyperliquid/meta` (contract specs), and `/hyperliquid/summary` (the single-call current-state bundle for one coin) all return live state.
+`/hyperliquid/prices` (all mids in one call), `/hyperliquid/open-interest` (every listed asset), `/hyperliquid/l2-book` (order-book depth snapshot per coin), `/hyperliquid/meta` (contract specs, plus a published fee schedule — see below), and `/hyperliquid/summary` (the single-call current-state bundle for one coin) all return live state.
 
 **Volume scanner (added 2026-08-17):** `/volume/scanner` returns every Hyperliquid perp with live rolling-24h notional (`volume_24h`), a 30-settled-day baseline (`avg_volume_30d`/`median_volume_30d` — today's partial day is excluded), and `multiplier` (the ratio between them: 3.0 = trading at 3x normal volume). `multiplier_median` is the same ratio against the 30-day median instead of the mean, which is less distorted by one prior blow-off day. Each row also carries an activity `band` (`dormant`/`quiet`/`normal`/`elevated`/`surging`/`extreme`/`unknown`), `change_24h`, `open_interest_usd`, `funding_rate`, and `days_of_history`. Perps listed less than 7 days report `multiplier: null` and `band: "unknown"` rather than a spurious number. Filter with `band`/`min_multiplier`; sort with `sort` (`multiplier` default, or `volume_24h`/`symbol`/`change_24h`). `/volume/scanner/{symbol}` returns the same fields for one perp plus a 30-day daily-notional `history` series, and accepts Hyperliquid's thousand-unit tickers (`kBONK`, `kPEPE`, `kSHIB`) as aliases of the plain symbol.
 
@@ -46,9 +47,19 @@ Tier "—" = not marked with a plan gate in the API docs; standard plan rate lim
 
 `/hyperliquid/trade-flow/universe?window=15m|1h|4h` (Pro Plus) ranks every HL perp with fills in the window by `taker_buy_ratio` (buy / (buy+sell), 0..1, `null` for a coin with no fills), `buy_notional`/`sell_notional`, `n_trades`, and `large_fill_share`, biggest first. `partial_minutes` counts the window's minutes the socket did not fully watch — the same value on every row, since coverage is per connection, not per coin. Coins with zero fills in the window are omitted. Forward-only from 2026-09-09.
 
+### Parameter Handling, ATR & Batch Candles (2026-09-19)
+
+**Bug fix — `symbol` is now a real alias for `coin`.** `/hyperliquid/candles`, `/funding-rates`, `/l2-book`, and `/summary` all read a `coin` query parameter, while every other category in this API says `symbol`. Because FastAPI silently drops query parameters a route does not declare, sending `?symbol=SOL` to any of these four routes previously came back **200 with BTC's data** — the undeclared `symbol` was ignored and `coin` fell back to its default. As of this release: `symbol` is accepted as an alias for `coin` on all four routes (send one — sending both with different values is a 400 `conflicting_parameters`); the coin name is matched case-insensitively against Hyperliquid's live universe (`kpepe` → `kPEPE`) and tolerates a trailing `USDT` or `-PERP` suffix; any other unrecognised query parameter is now a 400 `unknown_parameter` listing the accepted names (keys starting with `_` are exempted, for cache-busters); and on `/hyperliquid/candles` a coin outside HL's universe is a 400 `unknown_coin` rather than a silent empty series. **If any workflow was sending `symbol=` to these four routes, it was silently reading BTC data back — audit and fix before trusting older pulls.**
+
+**Additive `atr` and `forming_bar_timestamp` on `/hyperliquid/candles`.** `?atr=14` adds a Wilder ATR to every bar as `atr`, computed on the exact series returned (seeded with the mean of the first N true ranges, then smoothed `(prev*(N-1)+TR)/N` — the same form as TradingView's `ta.atr`); `atr` is `null` for the first N bars of the window, so pull roughly 10x the period for a converged value. The response echoes the request as `atr_period` (`null` when `atr` was not requested, and bars then carry no `atr` key). `forming_bar_timestamp` names the `timestamp` of the last bar when it is still open (HL's current, unclosed bar) and is `null` when the last bar has closed — drop that last bar (and its `atr`) for completed-bar signals.
+
+**New `GET /hyperliquid/candles/batch?coins=ETH,SOL,BNB`** returns the same trailing candles for up to 25 coins in one call: `{interval, limit, series: {COIN: [bars]}, count, pending, atr_period, forming_bar_timestamp}` (it also accepts `atr`, applied identically across every coin in the request). An unknown coin is a 400 `unknown_coin` — nothing is silently dropped. On a cold cache, a coin whose series has not arrived within ~25s is listed in `pending` instead of holding up the whole response; its fetch keeps running and is cached, so retry just those coins a few seconds later. Trailing `limit` only — no `start`/`end` ranged queries (use the single-coin route for that).
+
+**Additive `fees` on `/hyperliquid/meta`.** Hyperliquid's published fee schedule as fractions of notional: base-tier `perps`/`spot` `{taker, maker}` (perps taker 0.00045 = 0.045%, maker 0.00015) and the full `volume_tiers` table, plus `as_of`/`source` for provenance. This is Hyperliquid's venue-wide published schedule — a cost-modeling reference for backtests — not any specific wallet's actual negotiated tier.
+
 ## Historical Data
 
-`/hyperliquid/funding-rates` returns current plus historical funding (up to `limit` 100 records per coin), and `/hyperliquid/candles` serves up to 1,000 OHLCV bars per request at a chosen interval. For point-in-time daily snapshots of the full ~230-perp universe, see `/api/v1/daily/hyperliquid` and the [[cryptodataapi-backtesting]] archive. The trade-flow tape archives forward from 2026-09-09 via `/api/v1/backtesting/hl-trade-flow` and the daily `hl_trade_flow` Parquet data type — see [[cryptodataapi-backtesting]].
+`/hyperliquid/funding-rates` returns current plus historical funding (up to `limit` 100 records per coin), and `/hyperliquid/candles` serves up to 1,000 OHLCV bars per request at a chosen interval (or a `start`/`end` range, paginated up to 15,000 bars); `/hyperliquid/candles/batch` serves the same trailing bars for up to 25 coins in one call, added 2026-09-19. For point-in-time daily snapshots of the full ~230-perp universe, see `/api/v1/daily/hyperliquid` and the [[cryptodataapi-backtesting]] archive. The trade-flow tape archives forward from 2026-09-09 via `/api/v1/backtesting/hl-trade-flow` and the daily `hl_trade_flow` Parquet data type — see [[cryptodataapi-backtesting]].
 
 ## Trading Applications
 
@@ -83,3 +94,4 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 - https://cryptodataapi.com/api/docs (fetched 2026-07-13)
 - https://cryptodataapi.com/api (live OpenAPI JSON; `/hyperliquid/trade-flow`, `/hyperliquid/trade-flow/universe`, `HLTradeFlowResponse`/`HLTradeFlowBucket`/`HLTradeFlowUniverseResponse` schemas confirmed live, fetched 2026-09-17)
+- https://cryptodataapi.com/api (live OpenAPI JSON; `symbol` alias, case-insensitive/`USDT`/`-PERP` coin matching, `unknown_parameter`/`unknown_coin`/`conflicting_parameters` errors, and `atr`/`atr_period`/`forming_bar_timestamp` on `/hyperliquid/candles`, `/hyperliquid/funding-rates`, `/hyperliquid/l2-book`, `/hyperliquid/summary`; `/hyperliquid/candles/batch` path and `HLCandleBatchResponse` schema; `fees` field on `HLMetaResponse` — all confirmed live, fetched 2026-09-20)

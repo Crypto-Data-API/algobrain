@@ -1223,3 +1223,45 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   `levels_truncated`. All of 2026-09-12 remains untouched behind it — genuinely
   its own future iteration given its size (grain/paging/coverage overhaul across
   six backtesting range readers plus two new endpoints).
+- 2026-09-20 iter 25 (Sync): local MCP tool connection unavailable again — fell
+  back to Grep/Glob. `tools/check_api_changelog.py` reported a new **BREAKING**
+  release (2026-09-19) landed on top of the still-open 2026-09-09 (breaking) and
+  2026-09-12. 2026-09-19 is itself large (Hyperliquid coin-route parameter bug
+  fix + ATR/batch-candles/fee-schedule additions, two x402 payment fixes, a new
+  `/backtesting/hl-funding-bars` endpoint, and a new hosted `/algobrain/search`
+  API serving this very wiki to agents that can't run the local MCP server) — too
+  much for one batch. Checked first whether the breaking bug (routes that only
+  read `coin` silently returning BTC data when sent `?symbol=X`) had corrupted
+  any of the wiki's OWN documented curl examples — grepped for the buggy pattern
+  across all four affected routes and confirmed every existing example correctly
+  uses `coin=`, so this was a "document the fix," not a "fix our own docs" task.
+  Scoped this iteration to the Hyperliquid candles/meta cluster (breaking fix +
+  new endpoint + additive fields, highest priority per the ordering rule):
+  documented the `symbol`-alias fix with an explicit bolded warning for anyone
+  who *was* sending `symbol=` to these routes, native Wilder `atr` +
+  `forming_bar_timestamp` on `/hyperliquid/candles`, the new
+  `GET /hyperliquid/candles/batch` endpoint, and the new `fees` schedule on
+  `/hyperliquid/meta`. Landed on [[cryptodataapi-hyperliquid]]; added one-sentence
+  citations to [[atr-trailing-stop]] and [[atr-position-sizing]] (native ATR now
+  available for HL perps instead of hand-rolling it), explicitly skipped
+  [[atr-scaled-grid]] since its data call computes ATR and ADX together from one
+  klines request and switching just the ATR half would fragment the source for
+  no benefit — a judgment call worth noting, not a blanket "cite everywhere."
+  **Verified independently:** live-fetched the raw OpenAPI JSON myself and
+  confirmed `/hyperliquid/candles/batch` is FOUND and `/hyperliquid/candles`
+  declares both `coin`/`symbol`/`atr` params live. The sub-agent also caught and
+  correctly declined to write one unverifiable claim: the changelog's `fees.note`
+  sub-field isn't confirmable from the untyped OpenAPI schema without an
+  authenticated call, and it explicitly chose not to mint a throwaway API key to
+  check (would have required sending the user's email to an external service
+  without being asked) — left `note` out of the wiki rather than assert it
+  unverified. Good judgment call, worth reinforcing in future sub-agent briefs.
+  **Did NOT mark 2026-09-19 as processed** — x402 fixes, `/backtesting/hl-funding-
+  bars`, and the new `/algobrain/search` family are all still fully undocumented.
+  Sync sits outside the Fix/Build balance — unchanged from iter20 (iter21-25 all
+  Sync), now five iterations overdue; genuinely consider forcing a Fix/Build pick
+  next iteration even if a new release lands, per the loop's own "urgent" escape
+  hatch, since lint health hasn't been checked at all since iter20. **Remaining
+  checklist**: 2026-09-19's x402 fixes + `/backtesting/hl-funding-bars` +
+  `/algobrain/search` family; 2026-09-09's `realized_liq.coverage`/timestamps/
+  smaller-fields tail; all of 2026-09-12.

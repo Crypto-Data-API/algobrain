@@ -2,12 +2,42 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-09-18
+updated: 2026-09-20
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-09-20 — Sync: Hyperliquid coin-route parameter fix, native ATR, batch candles
+
+**Scope:** the Hyperliquid candles/meta piece of the new 2026-09-19 (breaking) release.
+Every path/field was checked against the live raw OpenAPI JSON before writing, and
+independently re-verified after the sub-agent's report.
+
+- **Parameter-handling bug fix.** `/hyperliquid/candles`, `/funding-rates`, `/l2-book`,
+  and `/summary` previously silently dropped an unrecognised `symbol` query param and
+  returned BTC's data — now `symbol` is a real alias for `coin`, matching is
+  case-insensitive with suffix tolerance, and unrecognised params or unknown coins get
+  a proper 400. First checked whether this bug had corrupted any of the wiki's own
+  documented examples — confirmed none did, so this was pure forward documentation.
+- **Native `atr`/`atr_period`/`forming_bar_timestamp`** on `/hyperliquid/candles`.
+- **New `GET /hyperliquid/candles/batch`** — up to 25 coins per call.
+- **New `fees` field** on `/hyperliquid/meta` (Hyperliquid's published venue-wide
+  schedule, not a wallet-specific tier).
+
+Pages updated: [[cryptodataapi-hyperliquid]]; one-sentence citations added to
+[[atr-trailing-stop]] and [[atr-position-sizing]]. [[atr-scaled-grid]] deliberately
+skipped — its data call computes ATR and ADX together from one request, so switching
+only the ATR half would fragment the source for no benefit.
+
+**Still deferred from 2026-09-19**: two x402 payment fixes, the new
+`/backtesting/hl-funding-bars` endpoint, and a new hosted `/algobrain/search` API that
+serves this wiki to agents without local MCP access. Still deferred from 2026-09-09 and
+2026-09-12: see `.claude/wiki-improvement-backlog.md`'s iter25 entry for the full
+checklist. Sync has now run five iterations in a row — a Fix/Build pick is overdue.
+
+**Claims:** 0 new source ingestion (API-changelog sync, not a document ingest).
 
 ## 2026-09-18 — Sync: CVI history correction; `/quant/positioning`+`/quant/whales` updates
 

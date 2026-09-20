@@ -2,7 +2,7 @@
 title: "ATR Trailing Stop"
 type: strategy
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-09-20
 status: good
 tags: [technical-analysis, risk-management, trend-following, volatility, order-types]
 aliases: ["ATR Trailing Stop", "Chandelier Exit", "Volatility Stop", "ATR Stop"]
@@ -123,6 +123,8 @@ For crypto positions, [[cryptodataapi|CryptoDataAPI]] serves the OHLCV bars that
 
 **Historical data:**
 - `GET /api/v1/backtesting/klines` — full OHLCV archive (Binance spot 1h/4h/1d back to 2017-08) for testing multiples, whipsaw rates, and giveback across regimes
+
+For Hyperliquid perp positions specifically, `GET /api/v1/hyperliquid/candles?atr=14` now returns a matching Wilder ATR natively on every bar — no hand-rolled calculation needed — see [[cryptodataapi-hyperliquid]].
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=100"
