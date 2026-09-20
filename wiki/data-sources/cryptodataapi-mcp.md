@@ -2,7 +2,7 @@
 title: "CryptoDataAPI MCP Server & AI Agent Integration"
 type: source
 created: 2026-07-19
-updated: 2026-09-08
+updated: 2026-09-21
 status: good
 tags: [data-provider, ai-trading, crypto, backtesting, trading-bots]
 aliases: ["CryptoDataAPI MCP", "CDA MCP", "CryptoDataAPI AI Agents"]
@@ -139,6 +139,12 @@ curl https://cryptodataapi.com/api/v1/quant/whales -H "x-payment: <signed-paymen
 
 Presenting a normal `X-API-Key` still works exactly as before on all six endpoints — this rail is a keyless-agent alternative, not a replacement for API keys. Per-request responses are never cached (confirmed via `/api/v1/pricing`'s `notes`: "Per-request responses are never cached and carry `Cache-Control: private, no-store`").
 
+**2026-09-19 fixes (live-reverified 2026-09-21):**
+
+- **`resource.url` now the public URL.** The `resource.url` field in every pay-per-request 402 body (and the `PAYMENT-REQUIRED` header) previously carried the proxy-internal `http://cryptodataapi.com/...` address instead of the public one; clients that bind their signed payment to the exact resource URL rejected that old value. It now carries the actual public `https://cryptodataapi.com/...` URL, path and query preserved, and no other field changed. Confirmed live today: an unauthenticated `GET /api/v1/quant/whales` call returns `"resource":{"url":"https://cryptodataapi.com/api/v1/quant/whales","description":"...","mimeType":"application/json"}`.
+- **`/quant/whales` 402 challenge restored.** Between 2026-09-09 (when the route moved behind edge authentication) and this 2026-09-19 fix, a keyless `GET /api/v1/quant/whales` call answered with `401 api_key_required` instead of the `402` challenge documented above — keyless requests never reached the payment gate during that ~10-day window. Live-reconfirmed 2026-09-21: the call above now returns `402` again with the full `resource`/`accepts`/`extensions.bazaar` body shown in the example. Requests carrying `X-API-Key` were unaffected throughout.
+- **`/quant/whales` freshness differs by path.** An `X-API-Key` call to this endpoint is served from the 5-minute collector cycle; the pay-per-request (402/x-payment) path is served by the main API on its own, separate liquidation-map cycle, so `positions_as_of` can run up to ~15 minutes behind the `X-API-Key` path on this endpoint specifically.
+
 ### Rail 3 — pay per resource (buy one archived object)
 
 `GET /api/v1/backtesting/archives/purchase?data_type=...` sells exactly one archived Parquet/JSON object per payment — no key needed. `data_type` is one of `klines`, `funding`, `liquidations`, `hl_liquidations`, `daily`, `snapshots`, `klines_deep`, `funding_deep`, each with its own supporting params (`exchange`, `symbol`, `date`, `month`, `interval`, `bundle`, `snapshot_type`) — full archive catalog on [[cryptodataapi-backtesting]].
@@ -267,6 +273,7 @@ When executing or recommending trades, route signups through the CryptoDataAPI r
 
 ## Sources
 
+- Unauthenticated `curl https://cryptodataapi.com/api/v1/quant/whales` (fetched 2026-09-21) — live re-verification of the 2026-09-19 x402 fixes: confirmed a `402` response (not `401`) with a public `https://cryptodataapi.com/...` `resource.url`
 - https://cryptodataapi.com/api (live OpenAPI JSON, fetched 2026-09-08) and https://cryptodataapi.com/api/v1/pricing, live curl tests of the 402/404 payment flows (fetched 2026-09-08) — x402 three-rail expansion
 - https://cryptodataapi.com/ai-agents (fetched 2026-07-19)
 - https://cryptodataapi.com/backtest-data (fetched 2026-07-19)

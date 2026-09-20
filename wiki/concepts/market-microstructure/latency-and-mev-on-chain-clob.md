@@ -2,8 +2,8 @@
 title: "Latency, Block Timing & MEV on an On-Chain CLOB"
 type: concept
 created: 2026-06-20
-updated: 2026-06-20
-status: draft
+updated: 2026-09-21
+status: review
 tags: [crypto, market-microstructure, liquidity, slippage, derivatives]
 aliases: ["On-Chain CLOB Latency", "MEV on Hyperliquid", "Latency and MEV on Hyperliquid Order Books"]
 related: ["[[hyperliquid]]", "[[clob]]", "[[hypercore]]", "[[hyperbft]]", "[[hyperliquid-order-book-microstructure]]", "[[hlp]]", "[[latency]]", "[[latency-arbitrage]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-liquidation-engine]]", "[[hip-3-builder-deployed-perps]]", "[[market-microstructure]]", "[[slippage]]", "[[market-impact]]", "[[funding-rate]]"]
@@ -43,6 +43,8 @@ On a CEX, the matching engine is a sealed black box; you cannot see another part
 - **Observability cuts both ways.** Because the book and pending activity are on-chain (see [[hyperliquid-order-book-microstructure#On-Chain Transparency Effects]]), strategies that rely on hidden orders behave differently than on a CEX; legible mechanical actors like [[hlp|HLP]] are easier to anticipate.
 
 > Note: the grounding research raises front-/back-running and ordering as the relevant questions for an on-chain CLOB but does not enumerate specific exploit recipes or quantify ordering guarantees. Treat the mechanisms above as the *shape* of the problem; confirm current ordering behavior against the live Hyperliquid documentation before sizing latency-sensitive strategies.
+>
+> **Fact-check (live-reverified 2026-09-21):** the consensus-level framing this page relies on — HyperBFT as a HotStuff-inspired protocol delivering single-block finality, with order submission/cancellation/matching executed as part of consensus — was re-confirmed directly against Hyperliquid's current docs (see [[hyperbft]] and [[hypercore]] for the citations). The specific-exploit-mechanics gap flagged above is unchanged: no live source found quantifies ordering guarantees or enumerates concrete front-/back-running recipes on Hyperliquid, so that hedge stays in place rather than being resolved into a stated fact.
 
 ---
 
@@ -83,7 +85,7 @@ Hyperliquid is frequently cited as a venue for **primary price discovery** on ma
 ## Sources
 
 - (Source: [[2026-04-22-gap-finder-hyperliquid-order-books]]) — gap-finder research synthesis on Hyperliquid order books and on-chain CLOB trading.
-- Hyperliquid Docs — overview (HyperCore / HyperEVM / HyperBFT, single-block finality): https://hyperliquid.gitbook.io/hyperliquid-docs
+- Hyperliquid Docs — overview (HyperCore / HyperEVM / HyperBFT, single-block finality): https://hyperliquid.gitbook.io/hyperliquid-docs (re-fetched live 2026-09-21 — confirmed HotStuff-inspired consensus and one-block finality; no source found that quantifies ordering guarantees or MEV exploit mechanics, consistent with the hedge above)
 - Hyperliquid Docs — Order Book: https://hyperliquid.gitbook.io/hyperliquid-docs/trading/order-book
 - Hyperliquid Docs — Liquidations: https://hyperliquid.gitbook.io/hyperliquid-docs/trading/liquidations
 - Phemex Academy — Injective vs Hyperliquid (2026; "an exchange with an L1 wrapped around it"): https://phemex.com/academy/injective-vs-hyperliquid-defi-trading-network-2026

@@ -1,7 +1,13 @@
 {
-  "last_checked": "2026-09-20",
-  "api_version_seen": "2026-09-19",
+  "last_checked": "2026-09-21",
+  "api_version_seen": "2026-09-20",
   "processed": [
+    {
+      "version": "2026-09-20",
+      "processed_on": "2026-09-21",
+      "disposition": "noted",
+      "note": "POST /wallet/upgrade (Base/Ethereum dashboard payment flow) error-handling fixes -- 502->503 retry semantics on unreachable RPC nodes, improved 403 messaging for wrong-wallet payments. This endpoint and the dashboard wallet-upgrade UI flow are not documented anywhere in the wiki (grepped 'wallet/upgrade', zero hits) -- cryptodataapi-mcp.md's x402 section covers agent-subscribe/pay-per-request/pay-per-resource programmatic flows only, not this dashboard-only wallet flow. No wiki surface."
+    },
     {
       "version": "2026-09-17",
       "processed_on": "2026-09-18",

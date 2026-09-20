@@ -2,12 +2,50 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-09-20
+updated: 2026-09-21
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-09-21 — Sync + Fix: x402 fixes; 4 Hyperliquid concept pages completed
+
+**Scope:** the two small 2026-09-19 x402 payment fixes, combined with a Fix pass on
+four high-demand, schema-incomplete Hyperliquid concept pages surfaced by running
+`tools/lint.py` directly (the MCP server's tool connection has been unavailable for 6
+consecutive iterations; the standalone lint script works without it).
+
+- **x402 fixes** on [[cryptodataapi-mcp]]: `resource.url` in every 402 body is now the
+  actual public HTTPS URL (previously an internal proxy address some clients
+  rejected); `/quant/whales`'s pay-per-request 402 challenge is restored after a
+  ~10-day regression where it wrongly returned 401. Both live re-verified directly
+  with an unauthenticated curl call, not just trusted from the changelog text.
+- **Four Hyperliquid concept pages** — [[hip-3-builder-deployed-perps]], [[hypercore]],
+  [[hyperbft]], [[latency-and-mev-on-chain-clob]] — stuck at `status: draft` since
+  2026-06-20 despite 5-19 inbound links each. Added missing concept-page frontmatter
+  (`domain`/`prerequisites`/`difficulty`); live-refetched Hyperliquid's own current
+  docs to fact-check every claim (one real correction added: HIP-3 deployer fee share
+  is documented as 0-300%/0-100% in growth mode); deliberately preserved existing
+  "reported, not independently verified" hedges rather than strengthening them.
+  Added a `## Getting the Data (CryptoDataAPI)` section to 2 of the 4 where a genuine
+  endpoint mapping exists; correctly skipped it on the other 2 (pure consensus/MEV
+  internals with nothing queryable). Promoted `hypercore` to `good`, the other three
+  to `review`.
+
+Also worth noting: `tools/lint.py`'s stale-page check flagged 55 pages, but ~150+ of
+those are long-tail token pages that *self-disclose* their own staleness via an
+intentional "outside CoinGecko top 1000, treat as stale" banner from their
+bulk-creation batch — correctly recognized as by-design, not a real problem, and left
+untouched rather than churned for no benefit.
+
+**Still deferred**: 2026-09-19's `/backtesting/hl-funding-bars` endpoint and the new
+`/algobrain/search` hosted-search API; the tail of 2026-09-09 (`realized_liq.coverage`,
+Hyperliquid-payload timestamps, a few smaller additive fields); all of 2026-09-12. See
+`.claude/wiki-improvement-backlog.md`'s iter26 entry for the full checklist.
+
+**Claims:** 0 new source ingestion (changelog sync + wiki-health fix, not a document
+ingest).
 
 ## 2026-09-20 — Sync: Hyperliquid coin-route parameter fix, native ATR, batch candles
 

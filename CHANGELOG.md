@@ -4,6 +4,29 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-09-21 — Sync + Fix: payment-challenge fixes; Hyperliquid mechanics pages completed
+
+**Fixed:** A pay-per-call payment challenge was pointing signers at an internal address
+instead of the public URL they actually requested, which some wallets refused to sign.
+A separate whale-activity endpoint had been silently returning the wrong error type for
+about ten days for anyone paying per call instead of using an API key, due to an
+unrelated auth change; both are now confirmed working again via a direct live check.
+
+**Changed:** Completed four reference pages on Hyperliquid's on-chain matching and
+consensus mechanics that had substantial content but were missing standard schema
+fields and still marked as drafts months after being written, despite being some of
+the most-linked-to pages of their kind in the wiki. Fact-checked every claim against
+the exchange's current published documentation rather than relying on prior knowledge,
+and left honestly-hedged, vendor-reported figures hedged rather than overstating
+confidence in them.
+
+**Notes:** Combined a small piece of Sync work with a Fix pass, addressing a
+backlog note from recent iterations that non-Sync maintenance work was overdue. A
+health check run directly against the wiki's linting tool (bypassing a still-down
+local server connection) surfaced the target pages, and also surfaced a large cluster
+of low-cap token pages that flag their own staleness by design — correctly left alone
+rather than churned for no real benefit.
+
 ## 2026-09-20 — Sync: Hyperliquid parameter-handling fix, native ATR, batch candles
 
 **Fixed:** Four Hyperliquid perp data routes previously ignored an unrecognized request

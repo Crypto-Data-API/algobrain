@@ -1265,3 +1265,68 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   checklist**: 2026-09-19's x402 fixes + `/backtesting/hl-funding-bars` +
   `/algobrain/search` family; 2026-09-09's `realized_liq.coverage`/timestamps/
   smaller-fields tail; all of 2026-09-12.
+- 2026-09-21 iter 26 (Sync + Fix, combined): local MCP tool connection unavailable
+  again (6th iteration in a row) — fell back to Grep/Glob for changelog work, but
+  for the Fix half **ran `python tools/lint.py` directly**, which works standalone
+  without the MCP server and finally gave a real health read after iter20's gap.
+  `tools/check_api_changelog.py` reported one new release (2026-09-20, breaking) —
+  triaged immediately as **noted**: it's a dashboard-only `/wallet/upgrade`
+  error-handling fix (502→503 retry semantics, better 403 messaging), and the wiki
+  documents no dashboard wallet-payment flow at all (grepped `wallet/upgrade`,
+  zero hits) — only the programmatic x402 rails on `cryptodataapi-mcp.md`. Marked
+  noted immediately, no batch work needed.
+  With 2026-09-19/2026-09-12/2026-09-09 all still open and individually too large
+  for one batch, picked the smallest remaining Sync slice (the two 2026-09-19 x402
+  fixes — 1 page) explicitly so the loop's own "small Sync batch → also do a
+  normal Fix/Build pick" permission applied, directly addressing the overdue-Fix
+  flag from iter25's log. Combined into one sub-agent brief:
+  - **Sync**: documented both 2026-09-19 x402 fixes on `cryptodataapi-mcp.md` —
+    `resource.url` now the public HTTPS URL (was an internal proxy URL), and
+    `/quant/whales`'s pay-per-request 402 challenge restored after a ~10-day
+    regression (2026-09-09→09-19) where it wrongly 401'd. Live re-verified both
+    directly (`curl` with no auth on `/quant/whales` → confirmed `402` with a
+    public `resource.url`), not just trusted from the changelog text.
+  - **Fix**: `tools/lint.py`'s stale-page check (55 flagged, up from a stable
+    8-ish baseline several iterations back) surfaced a mostly-by-design pattern
+    first — ~150+ long-tail token pages self-disclose their own staleness via an
+    "outside CoinGecko top 1000, treat as stale" banner from their bulk-creation
+    batch, which is an intentional, honest disclosure, not a real problem worth
+    Fix-track attention. The genuinely high-leverage subset: 4 Hyperliquid
+    market-microstructure concept pages
+    ([[hip-3-builder-deployed-perps]], [[hypercore]], [[hyperbft]],
+    [[latency-and-mev-on-chain-clob]]) — substantial, well-sourced prose already,
+    but stuck at `status: draft` since 2026-06-20 despite 5-19 inbound links each
+    (real reader demand). This is the "deepen pages missing standard sections"
+    Build pattern doubling as the "stale" Fix lint category. Completed: added the
+    missing `domain`/`prerequisites`/`difficulty` concept-page frontmatter to all
+    4; live-refetched Hyperliquid's own current docs (order book, HIP-3,
+    overview, liquidations) to fact-check every claim rather than trusting
+    training knowledge, and deliberately left existing "reported, not verified"
+    hedges in place where the docs still don't independently confirm a figure
+    (the ~200k orders/sec throughput claim, MEV-exploit-mechanics specifics) —
+    one real correction found and added (HIP-3 deployer fee share is documented
+    as 0-300% / 0-100% in growth mode, sharpening a vaguer "can exceed 100%"
+    note). Added a `## Getting the Data (CryptoDataAPI)` section to 2 of the 4
+    ([[hypercore]], [[hip-3-builder-deployed-perps]] — `/hyperliquid/l2-book`,
+    `/hyperliquid/meta`, `/hyperliquid/summary`) and correctly skipped it on the
+    other 2 ([[hyperbft]], [[latency-and-mev-on-chain-clob]] — pure consensus/MEV
+    internals with no queryable market-data mapping) rather than forcing a weak
+    citation. Status: `hypercore` → `good` (core mechanics fully doc-confirmed),
+    the other 3 → `review` (each still carries at least one explicitly-flagged
+    unverified figure or thin sourcing).
+  **Verified independently:** spot-read all 5 changed pages' diffs myself before
+  shipping — confirmed the live re-verification claims are real (not just
+  asserted), frontmatter is schema-complete, and no existing hedge/caveat was
+  silently strengthened into an overconfident claim. Did not re-verify the
+  Hyperliquid docs fetches myself (out of scope for the orchestrator's review
+  pass; the sub-agent's own methodology — live-refetch before fact-checking —
+  is the right one here and was consistently applied across all 4 pages).
+  Sync sits outside the Fix/Build balance; this iteration's Fix half means the
+  next Fix/Build-balance window is iter20 Build / iter26 Fix (iter21-25 all
+  Sync, no balance debt from those) — next pick is unconstrained, could go
+  either way. **Remaining checklist**: 2026-09-19's `/backtesting/hl-funding-bars`
+  + `/algobrain/search` family; 2026-09-09's `realized_liq.coverage`/timestamps/
+  smaller-fields tail; all of 2026-09-12. Also worth a future Fix pass: the
+  `links`/`tags`/`orphans` lint counts (234/659/31) haven't moved since at least
+  iter19 and are worth a fresh look now that direct `lint.py` access confirms
+  they're stable, not stale-tool artifacts.

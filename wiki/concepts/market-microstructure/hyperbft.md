@@ -2,11 +2,14 @@
 title: "HyperBFT: HotStuff-Inspired Consensus for On-Chain Order Books"
 type: concept
 created: 2026-06-20
-updated: 2026-06-20
-status: draft
+updated: 2026-09-21
+status: review
 tags: [crypto, market-microstructure, liquidity, derivatives]
 aliases: ["HyperBFT", "Hyperliquid consensus", "Hyperliquid BFT"]
 related: ["[[hyperliquid]]", "[[hypercore]]", "[[clob]]", "[[hip-3-builder-deployed-perps]]", "[[econia]]", "[[market-microstructure]]", "[[decentralized-exchanges]]", "[[perpetual-futures]]"]
+domain: [market-microstructure, derivatives, crypto]
+prerequisites: ["[[hypercore]]", "[[hyperliquid]]"]
+difficulty: advanced
 ---
 
 HyperBFT is [[hyperliquid|Hyperliquid]]'s custom Byzantine-fault-tolerant consensus protocol, inspired by HotStuff and its successors, but optimized for the unique demand of an L1 whose primary workload is order-book matching. It targets single-block finality with block times low enough to sustain CEX-like order submission and cancellation, and it is the layer that orders [[hypercore|HyperCore]]'s on-chain [[clob|order-book]] state. (Source: [[2026-04-22-gap-finder-hyperliquid-order-books]])
@@ -26,6 +29,8 @@ Unlike a generic smart-contract chain where order-book logic runs at the applica
 | Ordering | Order placement and matching pass through consensus and are observable on-chain |
 
 These parameters are the levers that determine whether latency-sensitive strategies are viable on Hyperliquid. (Source: [[2026-04-22-gap-finder-hyperliquid-order-books]])
+
+**Fact-check (live-reverified 2026-09-21):** Hyperliquid's current docs confirm both headline claims directly — HyperBFT is described as "a custom consensus algorithm called HyperBFT inspired by HotStuff and its successors," and the docs state "one-block finality inherited from HyperBFT." No changes to the architecture description above were needed; the specific latency/throughput numbers this page avoids stating remain appropriately unquantified here (see [[hypercore]] for the one figure — orders/second — that Hyperliquid does publish, and its own hedging on that number).
 
 ## What it means for arbitrage, quoting, and MEV
 
@@ -66,6 +71,6 @@ For quants migrating from centralized venues, the shift from colocation-based la
 ## Sources
 
 - (Source: [[2026-04-22-gap-finder-hyperliquid-order-books]])
-- Hyperliquid Docs (overview): https://hyperliquid.gitbook.io/hyperliquid-docs
+- Hyperliquid Docs (overview): https://hyperliquid.gitbook.io/hyperliquid-docs (re-fetched live 2026-09-21 — confirmed "HotStuff and its successors" lineage and "one-block finality inherited from HyperBFT"; no contradictions found)
 - Hyperliquid Docs — Order Book: https://hyperliquid.gitbook.io/hyperliquid-docs/trading/order-book
 - Phemex Academy — Injective vs Hyperliquid (2026): https://phemex.com/academy/injective-vs-hyperliquid-defi-trading-network-2026

@@ -2,11 +2,14 @@
 title: "HIP-3: Builder-Deployed Perpetuals"
 type: concept
 created: 2026-06-20
-updated: 2026-06-20
-status: draft
+updated: 2026-09-21
+status: review
 tags: [crypto, market-microstructure, derivatives, liquidity]
 aliases: ["HIP-3", "Builder-deployed perps", "Builder-deployed perpetuals", "HIP-3 perps"]
 related: ["[[hyperliquid]]", "[[hypercore]]", "[[hyperbft]]", "[[clob]]", "[[econia]]", "[[hyperliquid-oracle-mechanics]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[market-microstructure]]", "[[decentralized-exchanges]]"]
+domain: [market-microstructure, derivatives, crypto]
+prerequisites: ["[[hyperliquid]]", "[[hypercore]]", "[[perpetual-futures]]", "[[clob]]"]
+difficulty: advanced
 ---
 
 HIP-3 (Hyperliquid Improvement Proposal 3) enables permissionless, builder-deployed perpetual-futures markets that share [[hypercore|HyperCore]]'s matching engine and margining stack but are configured by independent deployers who set their own oracle, contract specifications, leverage limits, settlement rules, and fee shares. It transforms [[hyperliquid|Hyperliquid]] from a tightly curated perp DEX into a platform where each HIP-3 DEX behaves as an independent perp venue layered on shared infrastructure. (Source: [[2026-04-22-gap-finder-hyperliquid-order-books]])
@@ -28,6 +31,8 @@ HIP-3 allows builders to deploy their own perp markets without permission. Each 
 | Consensus / finality | No (shared) | Inherited from HyperBFT |
 
 A "growth mode" is noted for HIP-3 perps in which protocol fees, rebates, and volume contributions are substantially reduced. (Source: [[2026-04-22-gap-finder-hyperliquid-order-books]])
+
+**Fact-check (live-reverified 2026-09-21):** current Hyperliquid documentation states the deployer fee share can be configured to **0-300% of the base fee (0-100% in growth mode)** — confirming and sharpening the "can exceed 100%" note above with the exact documented range. Docs also describe settlement as executed via a `haltTrading` action that cancels resting orders and settles open positions to mark price, and note that enabling cross-margin on a HIP-3 asset is irreversible and subject to validator oversight against manipulation. (Source: Hyperliquid Docs — HIP-3, fetched 2026-09-21, see Sources)
 
 ## Per-DEX backstop liquidation and "no-cross" margin
 
@@ -52,6 +57,16 @@ These figures are cited as reported by The Defiant and are not independently ver
 
 (Source: [[2026-04-22-gap-finder-hyperliquid-order-books]])
 
+## Getting the Data (CryptoDataAPI)
+
+`GET /api/v1/hyperliquid/meta` returns Hyperliquid's exchange metadata — the full listed asset universe with per-asset specs (max leverage, contract definitions) plus the venue-wide fee schedule. Because HIP-3 markets share the same API schema as core markets (see "Low integration cost" above), builder-deployed markets appear in this same universe listing alongside core assets; CryptoDataAPI's response schema does not expose a dedicated "is this a HIP-3 market / which deployer" flag, so treat the per-asset leverage and spec fields as applicable to both core and HIP-3 markets without assuming this endpoint can filter one from the other.
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/meta"
+```
+
+Auth: `X-API-Key` header (401 without one — confirmed live 2026-09-21). Full endpoint catalog: [[cryptodataapi-hyperliquid]].
+
 ## Related
 
 - [[hypercore]] — the shared matching engine HIP-3 markets inherit
@@ -64,8 +79,9 @@ These figures are cited as reported by The Defiant and are not independently ver
 ## Sources
 
 - (Source: [[2026-04-22-gap-finder-hyperliquid-order-books]])
-- Hyperliquid Docs — HIP-3 Builder-Deployed Perpetuals: https://hyperliquid.gitbook.io/hyperliquid-docs/hyperliquid-improvement-proposals-hips/hip-3-builder-deployed-perpetuals
+- Hyperliquid Docs — HIP-3 Builder-Deployed Perpetuals: https://hyperliquid.gitbook.io/hyperliquid-docs/hyperliquid-improvement-proposals-hips/hip-3-builder-deployed-perpetuals (re-fetched live 2026-09-21 — confirmed deployer control of oracle/specs/leverage/settlement, the 0-300%/0-100% fee-share range, shared HyperCore matching/margining, and the per-DEX backstop liquidator contract; no contradictions found)
 - Hyperliquid Docs — Margining: https://hyperliquid.gitbook.io/hyperliquid-docs/trading/margining
 - Hyperliquid Docs — Fees: https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees
 - Hyperliquid Docs — Liquidations: https://hyperliquid.gitbook.io/hyperliquid-docs/trading/liquidations
 - The Defiant — Builder-deployed perp markets push Hyperliquid to record share of global perps volume: https://thedefiant.io/news/defi/builder-deployed-perp-markets-push-hyperliquid-to-record-share-of-global-perps-volume
+- https://cryptodataapi.com/api (live OpenAPI JSON, fetched 2026-09-21) — verified `/api/v1/hyperliquid/meta` endpoint and its documented response schema

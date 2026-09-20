@@ -2,11 +2,14 @@
 title: "HyperCore: Hyperliquid's On-Chain Matching Engine"
 type: concept
 created: 2026-06-20
-updated: 2026-06-20
-status: draft
+updated: 2026-09-21
+status: good
 tags: [crypto, market-microstructure, liquidity, derivatives]
 aliases: ["HyperCore", "Hyperliquid Core", "Hyperliquid matching engine"]
 related: ["[[hyperliquid]]", "[[clob]]", "[[hyperbft]]", "[[hip-3-builder-deployed-perps]]", "[[econia]]", "[[hyperliquid-oracle-mechanics]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[market-microstructure]]", "[[perpetual-futures]]", "[[decentralized-exchanges]]"]
+domain: [market-microstructure, derivatives, crypto]
+prerequisites: ["[[clob]]", "[[hyperliquid]]"]
+difficulty: advanced
 ---
 
 HyperCore is the protocol-level execution engine of the [[hyperliquid|Hyperliquid]] layer-one (L1) that houses its fully on-chain perpetual-futures and spot [[clob|central limit order books]], together with margining and liquidations. It is not a smart contract running on top of a general-purpose chain; it is the part of the L1 whose state-transition logic *is* the order book and matching engine, run as part of consensus. A separate Ethereum-like smart-contract layer, the HyperEVM, composes with HyperCore's liquidity. (Source: [[2026-04-22-gap-finder-hyperliquid-order-books]])
@@ -29,6 +32,8 @@ HyperCore replicates the central-limit-order-book behaviour familiar from centra
 | Throughput (reported) | Cited "on the order of 200,000 orders/second," with ongoing optimization |
 
 The ~200,000 orders/second figure is reported by Hyperliquid documentation and third-party coverage and is cited here as reported, not independently verified. (Source: [[2026-04-22-gap-finder-hyperliquid-order-books]])
+
+**Fact-check (live-reverified 2026-09-21):** Hyperliquid's own current docs overview page states this figure directly ("currently supporting 200k orders/second") rather than only via third-party coverage, and price-time priority plus tick-size/lot-size enforcement were both re-confirmed against the live Order Book docs page. This is still a vendor-reported figure with no independent benchmark behind it in the sources this wiki has — the hedge above is intentionally left in place rather than restated as a fully verified fact.
 
 ## Margining and liquidations in state
 
@@ -56,6 +61,18 @@ Because order placement and matching are part of consensus (driven by [[hyperbft
 - Liquidations consume book depth via market orders, so depth profiles and "liquidity walls" govern how severe liquidation cascades become.
 - HyperCore's matching engine is shared by [[hip-3-builder-deployed-perps|HIP-3 builder-deployed perps]], so heterogeneous markets inherit the same execution core while differing in oracle, leverage, and fee settings.
 
+## Getting the Data (CryptoDataAPI)
+
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — L2 order-book snapshot (bids/asks by price level); the direct data view into HyperCore's on-chain book state that this page describes mechanically. `ts` is Hyperliquid's own snapshot timestamp; the collector dedupes identical requests for 3 seconds.
+- `GET /api/v1/hyperliquid/meta` — exchange metadata: per-asset specs and max leverage (the margining parameters HyperCore enforces at the protocol level) plus the venue-wide fee schedule.
+- `GET /api/v1/hyperliquid/summary?coin=BTC` — all-in-one perp snapshot (funding, OI, mark/oracle price, volume multiplier) reflecting HyperCore's margining and funding computation described above.
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/l2-book?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid]].
+
 ## Related
 
 - [[hyperliquid]] — the venue HyperCore powers
@@ -69,7 +86,8 @@ Because order placement and matching are part of consensus (driven by [[hyperbft
 ## Sources
 
 - (Source: [[2026-04-22-gap-finder-hyperliquid-order-books]])
-- Hyperliquid Docs — Order Book: https://hyperliquid.gitbook.io/hyperliquid-docs/trading/order-book
-- Hyperliquid Docs (overview): https://hyperliquid.gitbook.io/hyperliquid-docs
+- Hyperliquid Docs — Order Book: https://hyperliquid.gitbook.io/hyperliquid-docs/trading/order-book (re-fetched live 2026-09-21 — confirmed price-time priority, tick-size, and lot-size enforcement; no contradictions found)
+- Hyperliquid Docs (overview): https://hyperliquid.gitbook.io/hyperliquid-docs (re-fetched live 2026-09-21 — confirmed HyperCore/HyperEVM split and the "currently supporting 200k orders/second" throughput statement)
 - Hyperliquid Docs — Funding: https://hyperliquid.gitbook.io/hyperliquid-docs/trading/funding
-- Hyperliquid Docs — Liquidations: https://hyperliquid.gitbook.io/hyperliquid-docs/trading/liquidations
+- Hyperliquid Docs — Liquidations: https://hyperliquid.gitbook.io/hyperliquid-docs/trading/liquidations (re-fetched live 2026-09-21 — confirmed maintenance margin = half of initial margin at max leverage, 3-40x range, and market-order liquidation execution into the book)
+- https://cryptodataapi.com/api (live OpenAPI JSON, fetched 2026-09-21) — verified `/api/v1/hyperliquid/l2-book`, `/api/v1/hyperliquid/meta`, and `/api/v1/hyperliquid/summary` endpoints
