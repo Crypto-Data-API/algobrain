@@ -1330,3 +1330,49 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   `links`/`tags`/`orphans` lint counts (234/659/31) haven't moved since at least
   iter19 and are worth a fresh look now that direct `lint.py` access confirms
   they're stable, not stale-tool artifacts.
+- 2026-09-22 iter 27 (Sync): local MCP tool connection unavailable again (7th
+  iteration in a row) — fell back to Grep/Glob. `tools/check_api_changelog.py`
+  reported one new release (2026-09-21) on top of the still-open 2026-09-19/
+  2026-09-12/2026-09-09. Today's release centered on a major new endpoint —
+  `GET /indicators/heatmap`, a one-call full-universe scan joining SIGNUM colour
+  (daily + new 4h), rolling moves, 30d notional, and SMA200 position, served
+  entirely from data the API already holds (no exchange rate-limit spend). Paired
+  it with the naturally-adjacent still-deferred `/backtesting/hl-funding-bars`
+  (new endpoint from 2026-09-19, finally documented) since today's release also
+  shipped a backfill fix for that exact endpoint (three previously-missing
+  settled days self-healed). Scope: `/indicators/heatmap` (new endpoint, highest
+  priority per the ordering rule) + SIGNUM-on-4h additive fields (same page,
+  adjacent) + `/hyperliquid/candles/batch`'s timeout fix (25s→8s) and new
+  `retry_after_s` field (small, same family as recent work) + `/backtesting/hl-
+  funding-bars` (closes out the last new-endpoint gap from 2026-09-19 other than
+  `/algobrain/search`). Landed on [[cryptodataapi-indicators]],
+  [[cryptodataapi-hyperliquid]], [[cryptodataapi-backtesting]]; one clause added
+  to [[multi-strategy-crypto-portfolio]]'s momentum-sleeve bullet citing the
+  heatmap endpoint as a faster screen alternative — checked
+  `crypto-signal-library.md` too but correctly skipped it (no existing
+  multi-call-universe-scan pattern there to improve on). **Correctness catch
+  worth flagging**: the new heatmap endpoint and the existing SIGNUM-4h fields
+  both use the term "4h" but mean genuinely different things on the same
+  endpoint family — `h4_color`/`signum_4h` are calendar-aligned to the
+  00/04/08/12/16/20 UTC grid, while heatmap's `pct_4h` is a rolling window off
+  the last completed hourly close and is NOT aligned to that grid. Documented
+  this explicitly with a "conflating them will silently misalign a signal"
+  warning rather than leaving it implicit. **Verified independently:** live-
+  fetched the raw OpenAPI JSON myself and confirmed `/indicators/heatmap` and
+  `/backtesting/hl-funding-bars` are both FOUND; spot-checked the heatmap
+  endpoint's live description text, which confirmed the sub-agent's honestly-
+  flagged discrepancy — the changelog said "(Pro / Pro Plus)" but the live
+  description only says "(Pro)" — the sub-agent's resolution (documented as
+  "Pro+", this wiki's standing convention for "Pro tier and above", which is
+  consistent with either reading) was the right call, not overclaiming a
+  Pro-Plus-specific gate that isn't confirmable. Did NOT mark either
+  2026-09-21 or 2026-09-19 as processed — each still has exactly one item left
+  (404 `did_you_mean` for 09-21; `/algobrain/search` for 09-19) — consistent
+  with the whole-version-only marking rule established in iter22/23. Sync sits
+  outside the Fix/Build balance; unchanged from iter26 (iter20 Build, iter26
+  Fix — no debt), next pick remains unconstrained. **Remaining checklist**:
+  2026-09-21's 404 `did_you_mean` (small); 2026-09-19's `/algobrain/search`
+  family (moderate — new mini-category, needs its own page + registration);
+  2026-09-09's `realized_liq.coverage`/timestamps/smaller-fields tail; all of
+  2026-09-12 (still the single largest deferred block, unchanged for 10 days
+  now — genuinely due for its own dedicated iteration soon).

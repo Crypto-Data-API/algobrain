@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Backtesting Archive"
 type: source
 created: 2026-07-13
-updated: 2026-09-17
+updated: 2026-09-22
 status: good
 tags: [data-provider, crypto, api, backtesting, historical-data, point-in-time, parquet, klines, funding, liquidations]
 aliases: ["CryptoDataAPI Backtesting", "CDA Backtesting", "CryptoDataAPI Historical Archive", "CryptoDataAPI Archives"]
@@ -23,6 +23,7 @@ CryptoDataAPI's Backtesting section is the historical arm of the API: a full arc
 | GET | /api/v1/backtesting/liquidations | Liquidation records, historical (venue-merged, rolling window) | symbol, start*, end, bounds, limit | — |
 | GET | /api/v1/backtesting/hl-liquidations | Per-event Hyperliquid liquidation tape (exact fills: side, px, sz, USD notional, method, mark price) | coin, start*, end, bounds, limit | Pro |
 | GET | /api/v1/backtesting/hl-trade-flow | Archived 1-min HL taker buy/sell buckets per perp (same shape as live minus `cvd_usd`) | coin, start*, end, bounds, limit | Pro |
+| GET | /api/v1/backtesting/hl-funding-bars | Hyperliquid funding + open interest on the candle clock (per-bar `funding_sum`, OI, mark) | coin (≤25), interval (1h/4h/1d), start*, end, bounds, limit, cursor, format | Pro Plus |
 | GET | /api/v1/backtesting/news-events | Archived catalyst tape with measured market-response labels | start*, symbol, end, min_impact, bounds, limit | Pro Plus |
 | GET | /api/v1/backtesting/snapshots | Historical JSON snapshots for one data type, streamed | data_type*, start*, end, bounds, limit, universe | — |
 | GET | /api/v1/backtesting/snapshots/types | Available snapshot types with row counts and date ranges | — | — |
@@ -42,6 +43,10 @@ Historical depth: Parquet archive from 2020.
 `/backtesting/liquidations` vs `/backtesting/hl-liquidations`: the former is the general, cross-exchange liquidation-records archive (venue-merged, summary-level) already covered under Trading Applications below; `hl-liquidations` is Hyperliquid-specific and per-event — every exact liquidation fill (market and backstop) across the full HL perp universe, with side, price, size, USD notional, liquidation method, and mark price. `hl-liquidations` serves a local retention window of roughly 30 days rather than the full history; the full history is archived daily as the `hl_liquidations` data type (one Parquet per day, all coins) via `/backtesting/archives`. Use `liquidations` for cross-exchange summary flow, `hl-liquidations` when a strategy needs the exact fill tape on Hyperliquid. `hl-liquidations` moved from Pro Plus to **Pro** tier on 2026-09-07 (the underlying daily-Parquet archive stays Pro Plus).
 
 `/backtesting/hl-trade-flow` (Pro, same tier pattern as `hl-liquidations`) archives the Hyperliquid per-coin trade tape documented live on [[cryptodataapi-hyperliquid]]: 1-minute taker buy/sell buckets per perp, forward-only from 2026-09-09. Each archived row is the live `/hyperliquid/trade-flow` bucket shape minus the served-only `cvd_usd` field (which resets per live request and is not meaningful stored). Minutes with no fills are not stored. It serves a local retention window; the full history is archived daily as the `hl_trade_flow` data type (one Parquet per day, all coins) alongside `hl_liquidations` via `/backtesting/archives` (the archive itself stays Pro Plus).
+
+`/backtesting/hl-funding-bars` (Pro Plus, added 2026-09-19) returns Hyperliquid funding and open interest aligned to the candle clock — one row per closed bar per coin (`interval` 1h/4h/1d), with `time` equal to the matching `/hyperliquid/candles` `timestamp` so a funding/OI condition can be tested against the exact bar a price signal fires on. Per bar: `funding_sum` (carry actually settled in `(time, time + interval]`, summed across every settlement landing in the bar) with `n_settlements`; `funding_rate_mean` (mean live hourly rate over the bar's 5-min samples); `oi_open`/`oi_close`/`oi_change_pct` (base-coin units, first/last 5-min sample in the bar); `mark_close`; and `n_snapshots`. **`funding_sum: null` with `n_settlements: 0` means that day's settled prints are not yet archived — not zero carry** (settled prints are archived daily, for the previous UTC day; `funding_rate_mean` is available immediately since it doesn't depend on that archive step). Bars start **2026-03-30**: Hyperliquid publishes no historical open interest, so OI history is forward-only from CryptoDataAPI's own 5-minute capture and cannot be backfilled further back — older settled funding alone (no OI) is available further back via `/backtesting/funding?grain=hourly`. Coin list up to 25, window ≤ 93 days per call, cursor-paged, `format=csv` available.
+
+**Backfill fix (2026-09-21):** both `/backtesting/hl-funding-bars` and `/backtesting/funding?grain=hourly` collected settled funding prints once a day for the previous day only, so a missed collector run left that day's `funding_sum: null` / `n_settlements: 0` permanently — **2026-09-12, 2026-09-13, and 2026-09-19** were affected this way. The daily job now back-fills any of the last 10 settled days it finds missing, so a single missed run self-heals within that window without manual reconciliation. No response-shape change.
 
 ## Live Data
 
@@ -91,3 +96,4 @@ The dated daily snapshots are what make this rigorous: the same point-in-time fr
 - https://cryptodataapi.com/api/docs (fetched 2026-07-13)
 - https://cryptodataapi.com/api (raw OpenAPI JSON; `/api/v1/backtesting/signum-rgg` path, `date` param, and `SignumRggArchiveResponse` schema — `date`, `as_of`, `computed_from`, `summary`, `by_symbol` — confirmed live, fetched 2026-09-15)
 - https://cryptodataapi.com/api (raw OpenAPI JSON; `/api/v1/backtesting/hl-trade-flow` path and `BacktestHLTradeFlowResponse`/`BacktestHLTradeFlowBucket` schemas, plus the `hl_trade_flow` `data_type` value on `/api/v1/backtesting/archives`, confirmed live, fetched 2026-09-17)
+- https://cryptodataapi.com/api (raw OpenAPI JSON; `/api/v1/backtesting/hl-funding-bars` path, `BacktestHLFundingBar`/`BacktestHLFundingBarsResponse` schemas — `time`, `coin`, `funding_sum`, `n_settlements`, `funding_rate_mean`, `oi_open`/`oi_close`/`oi_change_pct`, `mark_close`, `n_snapshots` — its `coin`/`interval`/`start`/`end`/`bounds`/`limit`/`cursor`/`format` params, and the `grain=hourly` param on `/api/v1/backtesting/funding`, all confirmed live, fetched 2026-09-22)

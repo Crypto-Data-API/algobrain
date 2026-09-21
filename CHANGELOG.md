@@ -4,6 +4,29 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-09-22 — Sync: universe-scan endpoint, 4h trend colour, funding/OI history
+
+**Added:** Documented a new one-call market-wide scan that combines trend colour,
+short-term price moves, liquidity, and moving-average position for every covered
+asset in a single request, and a faster-cadence companion trend read aligned to
+4-hour bars. Documented a Hyperliquid funding-rate and open-interest history endpoint
+aligned to the same clock as candle data, useful for testing a signal against the
+exact carry and positioning conditions in effect at that bar.
+
+**Fixed:** Flagged a subtle naming collision between two data points that both get
+called "4-hour" on the new scan endpoint but measure genuinely different things — one
+aligned to a fixed clock grid, the other a rolling window — since conflating them
+would silently misalign a trading signal. Also documented a tightened response-time
+bound and a new retry hint on a bulk candle-fetch endpoint, and a backfill fix that
+retroactively repaired a handful of previously-missing days in the funding/OI history
+above.
+
+**Notes:** Sync-track iteration. Paired today's release with one leftover item from
+an earlier release that fit naturally alongside it. Every endpoint path was
+independently re-verified against the live API schema, including confirming a minor
+tier-labeling discrepancy between the release notes and the live schema before
+resolving it conservatively rather than overclaiming.
+
 ## 2026-09-21 — Sync + Fix: payment-challenge fixes; Hyperliquid mechanics pages completed
 
 **Fixed:** A pay-per-call payment challenge was pointing signers at an internal address

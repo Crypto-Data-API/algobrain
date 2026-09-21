@@ -2,12 +2,45 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-09-21
+updated: 2026-09-22
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-09-22 — Sync: `/indicators/heatmap`, SIGNUM 4h, candles/batch fix, hl-funding-bars
+
+**Scope:** the major new-endpoint piece of today's 2026-09-21 release, paired with the
+last still-deferred new endpoint from 2026-09-19. Every path/field was checked against
+the live raw OpenAPI JSON before writing, and independently re-verified after the
+sub-agent's report.
+
+- **New `GET /indicators/heatmap`** — a one-call full-universe scan joining SIGNUM
+  colour (daily + new 4h), rolling hourly moves, 30-day notional liquidity, and
+  SMA200 position, served entirely from data the API already holds (no exchange
+  rate-limit spend). Documented a real footgun: its `pct_4h` rolling window and the
+  new calendar-aligned `h4_color`/`signum_4h` fields both use the term "4h" but mean
+  different things on the same endpoint family — conflating them silently misaligns a
+  signal.
+- **SIGNUM on 4h** — `h4_color`/`h4_adx`/`h4_bars_in_color`/etc. on `/indicators/
+  signum-rgg`, calendar-aligned to the 00/04/08/12/16/20 UTC grid.
+- **`/hyperliquid/candles/batch`** — timeout tightened 25s→8s, new `retry_after_s`
+  field, plus a caching improvement applying to `/hyperliquid/candles` too.
+- **`GET /backtesting/hl-funding-bars`** — finally documented (new endpoint from
+  2026-09-19), paired with today's backfill fix on that same endpoint (three
+  previously-missing settled days self-healed).
+
+Pages updated: [[cryptodataapi-indicators]], [[cryptodataapi-hyperliquid]],
+[[cryptodataapi-backtesting]]; one clause added to [[multi-strategy-crypto-portfolio]]
+citing the heatmap endpoint as a faster momentum-screen alternative.
+
+**Still deferred**: 2026-09-21's 404 `did_you_mean` improvement; 2026-09-19's
+`/algobrain/search` hosted-search family; the tail of 2026-09-09; all of 2026-09-12
+(now the single largest deferred block, unchanged for 10 days). See
+`.claude/wiki-improvement-backlog.md`'s iter27 entry for the full checklist.
+
+**Claims:** 0 new source ingestion (API-changelog sync, not a document ingest).
 
 ## 2026-09-21 — Sync + Fix: x402 fixes; 4 Hyperliquid concept pages completed
 
