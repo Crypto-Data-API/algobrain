@@ -2,12 +2,48 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-09-22
+updated: 2026-09-23
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-09-23 — Sync: backtesting archive grain/paging/coverage overhaul
+
+**Scope:** 7 of 8 items from the 2026-09-12 release, the single largest deferred
+changelog block (untouched for 10 days). Every path/field was checked against the
+live raw OpenAPI JSON before writing, and independently re-verified after the
+sub-agent's report.
+
+- **New `grain` metadata block** on every backtesting range-reader response, stating
+  what one row actually IS (`event`/`bar`/`rate_snapshot`/`rolling_window`/
+  `settled_payment`). Documented with a `[!warning]` callout covering two real
+  footguns: summing `/backtesting/funding`'s default rate-snapshot rows overstates
+  carry ~12x, and `/backtesting/liquidations`' rolling-window rows can't be summed
+  or differenced at all.
+- **`/backtesting/funding?grain=hourly`** expanded into its full settled-payment
+  picture (vs. the default rate-snapshot shape) — a brief mention from last iteration
+  folded into this fuller treatment rather than duplicated.
+- **New `GET /backtesting/hl-liquidation-bars`** — bucketed, `audit`-traceable
+  Hyperliquid liquidation flow.
+- **Keyset paging** (`cursor`/`next_cursor`/`has_more`) with an explicit warning that
+  the old `start = last.time + 1` pattern silently drops rows on the per-event tapes
+  (one order sweeping N book levels = N rows at one millisecond). Grepped the whole
+  wiki for that unsafe pattern — zero matches, no other pages needed fixing.
+- **`coverage` field** plus the concrete `/backtesting/hl-liquidations` data-gap
+  dates (live from 2026-07-23; a real hole 2026-05-06→07-22).
+- **Comma-list scoping + `format=csv`**, and `/backtesting/status`'s new `limits`
+  block with concrete rate/concurrency numbers.
+
+Page updated: [[cryptodataapi-backtesting]].
+
+**Still deferred**: 2026-09-12's one leftover item (a new `/derivatives/hyperliquid/
+history` endpoint on a different page); 2026-09-21's 404 `did_you_mean`; 2026-09-19's
+`/algobrain/search` family; the tail of 2026-09-09. See
+`.claude/wiki-improvement-backlog.md`'s iter28 entry for the full checklist.
+
+**Claims:** 0 new source ingestion (API-changelog sync, not a document ingest).
 
 ## 2026-09-22 — Sync: `/indicators/heatmap`, SIGNUM 4h, candles/batch fix, hl-funding-bars
 

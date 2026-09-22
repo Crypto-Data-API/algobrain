@@ -4,6 +4,31 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-09-23 — Sync: backtesting archive row-type metadata, safer pagination
+
+**Fixed:** Documented a subtle correctness trap in the historical funding and
+liquidation data: naively summing the default funding series overstates actual carry
+paid by roughly 12x, because those rows are periodic rate samples, not settlement
+records, and a separate liquidation series is a rolling total that can't be summed
+or differenced at all. A new per-response field now states plainly what kind of row
+each series actually returns, so this is checkable rather than assumed. Also
+documented why an older, naive pagination technique could silently drop records on
+one of the historical data feeds, and confirmed nothing in this wiki was using that
+technique.
+
+**Added:** Documented a new bucketed liquidation-flow endpoint with a built-in audit
+trail back to the underlying fills, a new coverage field that tells you when a query
+window falls outside locally-held history (including the exact known gap in one
+historical feed), safer cursor-based pagination across the historical endpoints,
+batched multi-symbol queries and CSV export on several of them, and the concrete
+rate-limit numbers behind the historical data service.
+
+**Notes:** Sync-track iteration, finally giving a dedicated pass to the largest and
+oldest item in the sync backlog after flagging it as overdue in the previous
+iteration. Every endpoint and field was independently re-verified against the live
+API schema. One related item from the same upstream release -- a new funding/open-
+interest history endpoint that belongs on a different page -- remains deferred.
+
 ## 2026-09-22 — Sync: universe-scan endpoint, 4h trend colour, funding/OI history
 
 **Added:** Documented a new one-call market-wide scan that combines trend colour,

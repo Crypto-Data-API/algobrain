@@ -1376,3 +1376,45 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   2026-09-09's `realized_liq.coverage`/timestamps/smaller-fields tail; all of
   2026-09-12 (still the single largest deferred block, unchanged for 10 days
   now — genuinely due for its own dedicated iteration soon).
+- 2026-09-23 iter 28 (Sync): local MCP tool connection unavailable again (8th
+  iteration in a row) — fell back to Grep/Glob. `tools/check_api_changelog.py`
+  reported no new releases, so — per iter27's explicit flag that 2026-09-12
+  was "the single largest deferred block, unchanged for 10 days" — finally
+  gave it a dedicated iteration rather than continuing to pick fresher, smaller
+  items around it. 2026-09-12 is a correctness-critical overhaul of the
+  backtesting archive's range readers: a new `grain` metadata block on every
+  range-reader response stating what one row actually IS (`event`/`bar`/
+  `rate_snapshot`/`rolling_window`/`settled_payment`), guarding against two
+  real footguns — summing `/backtesting/funding`'s default rate-snapshot rows
+  overstates carry ~12x, and `/backtesting/liquidations`' rolling-window rows
+  can't be summed or differenced at all. Scoped to 7 of the release's 8 items
+  (everything except a new `/derivatives/hyperliquid/history` endpoint that
+  belongs on a different page — deferred separately): the `grain` block
+  itself + its two-trap warning callout, the existing brief `grain=hourly`
+  mention (from iter27) expanded into its full settled-payment-vs-rate-
+  snapshot picture, the new `GET /backtesting/hl-liquidation-bars` endpoint
+  (bucketed, `audit`-traceable liquidation flow), keyset paging (`cursor`/
+  `next_cursor`/`has_more`) with an explicit callout on why the old
+  `start = last.time + 1` pattern silently drops rows on event tapes, the new
+  `coverage` field (plus the concrete `hl-liquidations` data-gap dates:
+  live from 2026-07-23, a pilot backfill 2026-04-24→05-05, a real hole
+  2026-05-06→07-22), comma-list scoping + `format=csv`, and `/backtesting/
+  status`'s new `limits` block with concrete rate/concurrency numbers. All
+  landed on [[cryptodataapi-backtesting]] — used the wiki's existing
+  `[!warning]` Obsidian-callout convention (confirmed already in use on 2
+  other data-source pages, not invented for this) for the two-trap section
+  since bare prose undersells how easy it'd be to silently corrupt a backtest
+  with either mistake. Also grepped the whole wiki for the unsafe old
+  `start = last.time + 1` pagination pattern per the task brief — zero
+  matches, no other pages needed fixing. **Verified independently:** live-
+  fetched the raw OpenAPI JSON myself and confirmed `/backtesting/hl-
+  liquidation-bars`, `GrainDescriptor`, `CoverageInfo`, and `BacktestingLimits`
+  are all FOUND in the live schema, not invented. Sync sits outside the
+  Fix/Build balance; unchanged from iter26 (iter20 Build, iter26 Fix), next
+  pick remains unconstrained. **Remaining checklist**: 2026-09-12's one
+  leftover item (`GET /derivatives/hyperliquid/history`, on
+  [[cryptodataapi-derivatives]]); 2026-09-21's 404 `did_you_mean`; 2026-09-19's
+  `/algobrain/search` family; 2026-09-09's `realized_liq.coverage`/timestamps/
+  smaller-fields tail. With 2026-09-12 now down to a single small item, the
+  next Sync iteration could plausibly close out both 2026-09-12 and
+  2026-09-21 in one pass if no new release lands first.
