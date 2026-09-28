@@ -2,14 +2,14 @@
 title: "Crypto Idea Generation"
 type: concept
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-09-28
 status: good
 tags: [strategy-development, methodology, research, crypto, market-microstructure]
 aliases: ["Crypto Hypothesis Generation", "Mining Crypto Edges", "Crypto Strategy Ideation"]
 domain: [strategy-development]
 prerequisites: ["[[edge-taxonomy]]", "[[hypothesis-to-backtest-workflow]]"]
 difficulty: intermediate
-related: ["[[edge-taxonomy]]", "[[hypothesis-to-backtest-workflow]]", "[[crypto-signal-library]]", "[[research-checklist]]", "[[crypto-market-regime-taxonomy]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[reflexivity]]", "[[event-catalyst-regime]]", "[[on-chain-regime]]", "[[crypto-perp-backtesting-pitfalls]]", "[[deflated-sharpe-ratio]]"]
+related: ["[[edge-taxonomy]]", "[[hypothesis-to-backtest-workflow]]", "[[crypto-signal-library]]", "[[external-strategy-sources]]", "[[research-checklist]]", "[[crypto-market-regime-taxonomy]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[reflexivity]]", "[[event-catalyst-regime]]", "[[on-chain-regime]]", "[[crypto-perp-backtesting-pitfalls]]", "[[deflated-sharpe-ratio]]"]
 ---
 
 # Crypto Idea Generation
@@ -122,6 +122,8 @@ A generated hypothesis is only a ticket into [[hypothesis-to-backtest-workflow]]
 - **When it should fail** — the regime or condition under which the edge predicts *no* signal
 - **How to falsify** — the specific pre-registered test (a stress window, a decay check, a control bucket)
 
+Ideas don't have to be generated from scratch. Borrowed ideas from TradingView Community Scripts, the QuantConnect Strategy Library, Quantpedia and the Stonehill/NNFX indicator library enter at the same gate and need the same four-part artefact. They also need extra suspicion, because publication selects for flattering backtests. See [[external-strategy-sources]].
+
 If any of the four is missing, the idea returns to the notebook. A healthy crypto research funnel generates many ideas cheaply here and kills 95% of them downstream — the generation stage is supposed to be prolific *because* the pipeline is ruthless.
 
 ## Getting the Data (CryptoDataAPI)
@@ -146,6 +148,7 @@ Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-derivatives]], [[cryptod
 - [[edge-taxonomy]] — the six edge categories every generated idea must map to
 - [[hypothesis-to-backtest-workflow]] — where a written hypothesis goes next
 - [[crypto-signal-library]] — the catalogue of already-worked crypto signals
+- [[external-strategy-sources]] — borrowed ideas (TradingView, QuantConnect, Quantpedia, Stonehill) and the funnel that vets them
 - [[research-checklist]] — the pre-mortem that names the counterparty
 - [[crypto-market-regime-taxonomy]] — the 14 regimes an idea must survive
 - [[funding-rate]], [[funding-rate-arbitrage]] — the funding-dislocation source

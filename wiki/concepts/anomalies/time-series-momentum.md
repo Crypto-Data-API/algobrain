@@ -2,7 +2,7 @@
 title: "Time-Series Momentum"
 type: concept
 created: 2026-04-10
-updated: 2026-04-10
+updated: 2026-09-28
 status: good
 tags: [anomalies, momentum, time-series, trend-following]
 aliases: ["TSMOM", "Trend Anomaly", "Moskowitz-Ooi-Pedersen"]
@@ -122,6 +122,14 @@ The right implementation: multi-lookback, multi-asset, vol-targeted, with explic
 - [[moving-average-crossover]] — simplest trend signal
 - [[donchian-channel-breakout]] — breakout-based trend signal
 - [[supertrend]] — modern trend indicator
+
+## Variant / External Source: QuantConnect
+
+[[quantconnect|QuantConnect]]'s Strategy Library has an open-code "Time Series Momentum Effect" algorithm (a port of this anomaly; rules not re-verified here), plus "Asset Class Trend Following" and "Commodities Futures Trend Following". The code is a fast starting point; re-run it on current data with an explicit fee model before relying on any number (Source: [[quantconnect-strategy-library]]).
+
+## Variant / External Source: Quantpedia
+
+[[quantpedia|Quantpedia]] #0118 "Time Series Momentum Effect" summarises Moskowitz, Ooi & Pedersen (2012): long assets with positive trailing 12-month excess return, short negative, positions scaled inversely to (GARCH) volatility, monthly; card figures for 1965-2009 across 58 futures show Sharpe 1.31, 15.7% volatility and max drawdown −34% (pre-cost) (Source: [[quantpedia-strategy-encyclopedia]]). A single-asset crypto analogue from the same source is [[bitcoin-max-min-breakout]], whose trend leg survived the 2022-2024 out-of-sample test.
 
 ## Sources
 

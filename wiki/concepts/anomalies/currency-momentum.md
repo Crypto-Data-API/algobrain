@@ -2,7 +2,7 @@
 title: "Currency Momentum"
 type: concept
 created: 2026-04-11
-updated: 2026-06-11
+updated: 2026-09-28
 status: good
 tags: [anomalies, forex, momentum, macro, academic-research]
 aliases: ["FX Momentum", "Cross-Currency Momentum"]
@@ -51,12 +51,20 @@ Some decay since Okunev-White (2003) and especially post-2008. Developed-market 
 
 Tradeable by systematic FX funds, with capacity in the low billions. Typically combined with [[carry-anomaly]] and [[time-series-momentum]] in a composite systematic FX strategy.
 
+## Variant / External Source: QuantConnect
+
+[[quantconnect|QuantConnect]]'s Strategy Library has open-code FX versions of this anomaly: "Forex Momentum", "The Momentum Strategy Based on the Low Frequency Component of Forex Market" (momentum measured on a filtered, smoothed price series) and "Combining Mean Reversion and Momentum in Forex Market". They are useful as starting code, but note LEAN's default fee model charges nothing on Forex, so published results are gross of spreads (Source: [[quantconnect-strategy-library]]).
+
 ## Related Strategies
 
 - [[momentum-anomaly]] — equity analog
 - [[time-series-momentum]] — time-series version, applied to FX
 - [[carry-anomaly]] — complementary, low correlation
 - Systematic FX hedge fund strategies
+
+## Variant / External Source: Quantpedia
+
+[[quantpedia|Quantpedia]] #0008 "Currency Momentum Factor" gives the retail-implementable version: 10-20 currencies, long the 3 with the highest 12-month return vs USD, short the 3 lowest, monthly. Deutsche Bank index figures (1989-2009, pre-cost): 7.61% p.a., 10.2% volatility, Sharpe 0.30, max drawdown −46%; the card explicitly notes deteriorating out-of-sample alpha, consistent with the decay history above (Source: [[quantpedia-strategy-encyclopedia]]). Companion FX factors: [[currency-value-ppp]], [[dollar-carry-trade]].
 
 ## Sources
 

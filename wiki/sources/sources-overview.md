@@ -2,7 +2,7 @@
 title: "Source Summaries"
 type: index
 created: 2026-04-06
-updated: 2026-04-20
+updated: 2026-09-28
 status: good
 tags: [sources, index]
 ---
@@ -45,6 +45,15 @@ SORT source_date ASC
 ## Prediction Market Sources
 
 - [[polymarket-wiki-guide]] — Comprehensive Polymarket research guide covering founding, technology stack (Polygon, UMA oracle, CLOB), market categories, key milestones (2020-2026), trading strategies, notable traders (Theo $85M, Vitalik $70K), AI/LLM integration, controversies, Kalshi comparison, POLY token, developer ecosystem. 52 claims from 43 cited sources.
+
+## Strategy Library Sources
+
+Free public strategy libraries harvested 2026-09-28 (see [[external-strategy-sources]]):
+
+- [[quantpedia-strategy-encyclopedia]] — Quantpedia academic-anomaly encyclopedia (medium)
+- [[quantconnect-strategy-library]] — QuantConnect Strategy Library, LEAN code (medium)
+- [[tradingview-community-scripts]] — TradingView Community Scripts, Pine Script (medium)
+- [[stonehill-forex-nnfx]] — Stonehill Forex / NNFX method and indicator library (medium)
 
 ## By Confidence
 

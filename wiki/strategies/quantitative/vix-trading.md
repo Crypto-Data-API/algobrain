@@ -2,7 +2,7 @@
 title: "Crypto Volatility Trading (DVOL)"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-09-28
 status: review
 tags: [crypto, options, volatility, dvol, short-volatility, long-volatility, mean-reversion, quantitative, derivatives]
 aliases: ["DVOL Trading", "Crypto Vol Trading", "VIX Trading", "Volatility Trading", "Deribit Volatility Trading"]
@@ -167,6 +167,10 @@ DVOL trading capacity is bounded by Deribit's option depth for the specific stru
 - Short-vol: drawdown > 25% → halt new entries
 - Long-vol: annual cost > 3% of NAV without cascade payoff → re-spec
 - Rolling 6-month Sharpe < 0.3
+
+## Variant / External Source: QuantConnect
+
+[[quantconnect|QuantConnect]]'s Strategy Library publishes "Exploiting Term Structure of VIX Futures" (trade VIX futures on the basis between front futures and spot VIX) and "Volatility Risk Premium Effect" with open LEAN code. They are equity-volatility templates; for crypto the closest analogs remain the options-implied-volatility trades noted above (Source: [[quantconnect-strategy-library]]).
 
 ## Getting the Data (CryptoDataAPI)
 

@@ -2,7 +2,7 @@
 title: "Supertrend Indicator"
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-09-28
 status: good
 domain: [technical-analysis]
 prerequisites: ["[[atr]]", "[[trailing-stop]]"]
@@ -56,6 +56,10 @@ The `ATR` term is the only volatility input; most implementations compute it wit
 - **Adaptive Supertrend** — vary the multiplier with a [[volatility]] regime or a volatility ratio so the line loosens in expansions and tightens in compressions.
 - **Heikin-Ashi-sourced Supertrend** — compute it on [[heikin-ashi]] candles for smoother (but more lagging and more repaint-prone) flips.
 - **ATR-smoothing variants** — RMA vs. EMA vs. SMA ATR change sensitivity modestly.
+
+### Variant / external source: TradingView community scripts
+
+The most widely used open-source Pine implementation is **KivancOzbilgic**'s *SuperTrend* (https://www.tradingview.com/script/r6dAP7yi/). It lets the user switch the ATR between RMA (default) and SMA, and has a companion strategy script and a multi-ticker screener. Sibling ATR trend lines from the same library are [[ut-bot-alerts|UT Bot Alerts]] (close-anchored, 1× ATR by default, so it flips much more often) and [[halftrend|HalfTrend]] (flips on a swing-structure break instead of a close through an ATR band). Before trusting any community strategy wrapper, run it through the vetting checklist in [[tradingview-platform#Community Scripts as an Idea Source]] (Source: [[tradingview-community-scripts]]).
 
 ## Signals It Generates
 

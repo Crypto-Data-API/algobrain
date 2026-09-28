@@ -2,7 +2,7 @@
 title: "Hypothesis to Backtest Workflow"
 type: concept
 created: 2026-04-10
-updated: 2026-07-19
+updated: 2026-09-28
 status: excellent
 tags: [strategy-development, backtesting, methodology, research]
 aliases: ["Strategy Research Pipeline", "Idea to Production Workflow"]
@@ -86,6 +86,7 @@ Where do ideas come from? In rough order of usefulness:
 5. **Books and talks** — older the better, since fresh ideas are usually crowded
 6. **News events that "shouldn't" have moved markets the way they did**
 7. **Twitter/social** — almost always already priced in by the time you see it
+8. **Public strategy libraries** — TradingView Community Scripts, the QuantConnect Strategy Library, Quantpedia, Stonehill/NNFX. They're cheap and plentiful, but selected for flattering backtests, so port and re-test before believing anything. See [[external-strategy-sources]].
 
 Write the observation down in a notebook *before* you do any analysis. The exact form of the observation will bias your backtest later — if you don't lock it in, you'll unconsciously edit it to match what worked.
 
@@ -293,6 +294,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 
 - [[strategy-development-overview]]
 - [[research-checklist]]
+- [[external-strategy-sources]]
 - [[overfitting-detection]]
 - [[walk-forward-analysis]]
 - [[transaction-cost-modeling]]

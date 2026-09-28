@@ -2,7 +2,7 @@
 title: "Pine Script"
 type: concept
 created: 2026-04-15
-updated: 2026-06-12
+updated: 2026-09-28
 status: good
 tags: [technical-analysis, backtesting, algorithmic]
 aliases: ["Pine Script", "PineScript", "Pine"]
@@ -58,6 +58,10 @@ Pine Script's convenience hides several traps that make it unsuitable as a prima
 
 For production systematic work, traders typically move from Pine prototypes to [[python|Python]] frameworks (Backtrader, VectorBT, [[backtesting|backtesting.py]]) or platform-native languages — NinjaScript ([[ninjatrader]]), EasyLanguage ([[easylanguage]]), or C++ ACSIL ([[sierra-chart|Sierra Chart]]).
 
+## Community Scripts
+
+Most Pine code traders meet comes from TradingView's public **Community Scripts** library, not from their own editor. Open-source scripts there default to the Mozilla Public License 2.0, protected and invite-only scripts hide their code, and reuse is governed by TradingView's House Rules (Source: [[tradingview-community-scripts]]). Before using any community script, run it through the vetting checklist in [[tradingview-platform#Community Scripts as an Idea Source]]. The checklist covers `request.security()` lookahead, `calc_on_every_tick`, zero-commission Strategy Tester defaults, curve-fit inputs and trade counts, plus the LLM-assisted workflow for porting a script to [[python|Python]] on CryptoDataAPI klines. Widely used open-source examples now documented on the wiki include [[squeeze-momentum-indicator]], [[wavetrend-oscillator]], [[qqe]], [[ut-bot-alerts]], [[ssl-channel]] and [[halftrend]].
+
 ## Comparison to Other Strategy Languages
 
 | Language | Platform | Power | Use case |
@@ -76,6 +80,7 @@ For production systematic work, traders typically move from Pine prototypes to [
 - [[easylanguage]] — comparable retail strategy language
 - [[python]] — the upgrade path for serious systematic work
 - [[ninjatrader]], [[sierra-chart]] — alternative platforms with their own scripting
+- [[tradingview-community-scripts]] — the public script library and its licence rules
 
 ## Sources
 

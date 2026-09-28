@@ -2,7 +2,7 @@
 title: "AlgoBrain — Index"
 type: index
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-09-28
 status: good
 tags: [index, meta]
 ---
@@ -47,6 +47,11 @@ A comprehensive, LLM-maintained knowledge base for crypto trading strategy: cryp
 - [[stretch-revert|Stretch Revert (Strategy Family)]] — 14 baseline estimators, one reversion thesis: fade price's deviation from an adaptive mean. The estimator ([[frama|FRAMA]], [[vidya|VIDYA]], [[alma|ALMA]], [[kalman-filter-trading|Kalman]], [[theil-sen-regression|Theil-Sen]] …) is the whole design space; 10 members on the prod bot
 - Price-action / order-flow strategies: [[volume-profile-trading-strategy|Volume Profile Trading Strategy]] (value-area rotation, LVN breakouts, naked-POC retests) · [[arc-strategy|ARC (Area·Range·Candle)]] (box/swing levels + range filter + John Wick candle entries)
 - Crypto options & flow strategies: [[crypto-options-volatility-selling|Crypto Options Volatility Selling]] (Deribit BTC/ETH short vol, DVOL-gated, no §1256) · [[crypto-options-dispersion|Crypto Options Dispersion]] (index vs single-name IV, correlation mean-reversion) · [[etf-flow-directional|ETF Flow Directional]] (spot-ETF net-flow momentum, not the arb) · [[crypto-beta-rotation|Crypto Beta Rotation]] (DXY/Nasdaq risk-on/off de-beta overlay) · [[bitcoin-halving-cycle-timing|Bitcoin Halving Cycle Timing]] (MVRV/NUPL/realized-price cycle zones)
+- Harvested from free strategy libraries (2026-09-28, all `untested`; see [[external-strategy-sources]]):
+  - Quantpedia: [[bitcoin-overnight-seasonality]], [[crypto-rebalancing-premium]], [[bitcoin-max-min-breakout]], [[commodity-skewness-strategy]], [[volume-oi-conditioned-reversal]], [[currency-value-ppp]], [[dollar-carry-trade]]
+  - QuantConnect Strategy Library: [[dual-thrust]], [[dynamic-breakout-ii]], [[copula-pairs-trading]], [[paired-switching]], [[fx-skewness-risk-premia]], [[wti-brent-spread]], [[commodity-momentum-term-structure]]
+  - TradingView Community Scripts: [[squeeze-momentum-breakout]], [[wavetrend-reversal]]
+  - Stonehill / NNFX: [[nnfx-crypto-daily-system]]
 - AI/Macro themes:
   - [[crypto-ai-recession-shorts|Crypto AI Recession Shorts]] — BTC dominance long, alt + mining-equity + COIN shorts; expresses dispersion not direction
 
@@ -58,6 +63,8 @@ A comprehensive, LLM-maintained knowledge base for crypto trading strategy: cryp
 - [[overfitting-detection|Overfitting Detection]] — Walk-forward, CPCV, sensitivity
 - [[curve-fitting|Curve Fitting]] — The act that produces overfitting; forms and defenses
 - [[data-snooping-and-p-hacking|Data Snooping & P-Hacking]] — Multiple testing correction
+- [[external-strategy-sources|External Strategy Sources]] — TradingView, QuantConnect, Quantpedia, Stonehill: the vetting funnel for borrowed ideas
+- [[nnfx-method|NNFX Method]] — No Nonsense Forex system template (ATR, baseline, C1/C2, volume, exit) adapted to crypto
 - [[failure-modes|Strategy Failure Modes]] — How strategies die in the wild
 - [[strategy-monitoring|Strategy Monitoring & Alerting]] — Dashboard design, alert thresholds, kill criteria operationalization
 - [[arbitrage-opportunity-map|Arbitrage Opportunity Map]] — Cross-wiki synthesis of explicit, implicit, and hidden arbitrage opportunities
@@ -172,6 +179,7 @@ A comprehensive, LLM-maintained knowledge base for crypto trading strategy: cryp
 - [[anomalies-overview|Market Anomalies]] — Library of documented inefficiencies
 - Technical Analysis Foundations: [[dow-theory]], [[intermarket-analysis]], [[multiple-timeframe-analysis]], [[sector-rotation]]
 - Technical Indicators: [[indicators-overview|Indicators Overview]], [[rsi]], [[macd]], [[bollinger-bands]], [[ichimoku]], [[donchian-channels]], [[williams-percent-r]], [[aroon]], [[chaikin-money-flow]], [[money-flow-index]], [[mcclellan-oscillator]], [[arms-index]], [[point-and-figure]]
+- Community-script & NNFX indicators (2026-09-28): [[squeeze-momentum-indicator]], [[wavetrend-oscillator]], [[qqe]], [[ut-bot-alerts]], [[ssl-channel]], [[halftrend]], [[mcginley-dynamic]], [[schaff-trend-cycle]], [[vortex-indicator]], [[waddah-attar-explosion]], [[choppiness-index]] · backtesting hazard: [[repainting]]
 - Crisis Alpha & Tail Risk: [[crisis-alpha]], [[convexity]], [[dragon-portfolio]], [[trend-plus-tail-hedge]], [[tail-risk-hedging]], [[asymmetric-barbell]]
 - Dealer flow & gamma: [[gamma-exposure]] (GEX + gamma-flip + crypto-perp/liquidation analog & data spec, Jun 2026), [[dealer-gamma-hedging]], [[gamma-squeeze]], [[options-pinning]], [[max-pain]]
 - Options market-structure cluster:
@@ -265,6 +273,7 @@ A comprehensive, LLM-maintained knowledge base for crypto trading strategy: cryp
 - Technical Analysis Pioneers: [[j-welles-wilder]], [[gerald-appel]], [[john-bollinger]], [[goichi-hosoda]], [[george-lane]], [[larry-williams]], [[donald-lambert]], [[tushar-chande]], [[ralph-nelson-elliott]], [[robert-prechter]], [[munehisa-homma]], [[chester-keltner]], [[sherman-mcclellan]], [[marc-chaikin]], [[joseph-granville]], [[richard-arms]]
 - Options Educators & Platforms: [[tom-sosnoff]], tastytrade, optionalpha, optionstrat
 - Trading Platforms: [[thinkorswim]], [[ninjatrader]], [[sierra-chart]]
+- Strategy-idea libraries: [[quantpedia]], [[stonehill-forex]] (see also [[quantconnect]], [[tradingview-platform]])
 - Tail Risk Practitioners: [[mark-spitznagel]], [[universa-investments]], [[nassim-taleb]]
 - Behavioral Finance Pioneers: [[daniel-kahneman]], [[richard-thaler]]
 - Market Microstructure Pioneers: [[peter-steidlmayer]]

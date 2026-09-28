@@ -2,12 +2,39 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-09-23
+updated: 2026-09-28
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-09-28 — Ingested: four free strategy libraries (TradingView, Stonehill/NNFX, QuantConnect, Quantpedia)
+
+**Scope:** The user asked to improve the wiki from four free strategy-idea sources. They are documented as an *idea funnel* feeding [[hypothesis-to-backtest-workflow]], then harvested for crypto-, FX-, commodity- and futures-applicable strategies. Equity single-name content was skipped. Every harvested strategy is `status: draft`, `backtest_status: untested`, with source performance quoted only as dated, pre-cost claims.
+
+- **Sources:** [[quantpedia-strategy-encyclopedia]] (24 claims: 10 HIGH, 13 MEDIUM, 1 LOW), [[quantconnect-strategy-library]] (16: 4 HIGH, 12 MEDIUM), [[tradingview-community-scripts]] (18: 16 HIGH, 2 MEDIUM), [[stonehill-forex-nnfx]] (20: 11 HIGH, 8 MEDIUM, 1 LOW)
+- **Hub / methodology created:** [[external-strategy-sources]] (find → restate → translate → cost-on full backtest → overfit checks → forward test), [[nnfx-method]], [[repainting]]
+- **Entities created:** [[quantpedia]], [[stonehill-forex]]
+- **Strategies created (17):**
+  - Quantpedia: [[bitcoin-overnight-seasonality]], [[crypto-rebalancing-premium]], [[bitcoin-max-min-breakout]], [[commodity-skewness-strategy]], [[volume-oi-conditioned-reversal]], [[currency-value-ppp]], [[dollar-carry-trade]]
+  - QuantConnect: [[dual-thrust]], [[dynamic-breakout-ii]], [[copula-pairs-trading]], [[paired-switching]], [[fx-skewness-risk-premia]], [[wti-brent-spread]], [[commodity-momentum-term-structure]]
+  - TradingView: [[squeeze-momentum-breakout]], [[wavetrend-reversal]]
+  - NNFX: [[nnfx-crypto-daily-system]]
+- **Indicators created (11):** [[squeeze-momentum-indicator]], [[wavetrend-oscillator]], [[qqe]], [[ut-bot-alerts]], [[ssl-channel]], [[halftrend]], [[mcginley-dynamic]], [[schaff-trend-cycle]], [[vortex-indicator]], [[waddah-attar-explosion]], [[choppiness-index]]
+- **Pages updated:**
+  - New sections: [[quantconnect]] (Strategy Library as an Idea Source), [[tradingview-platform]] (Community Scripts as an Idea Source), [[pine-script]]
+  - Links to the hub: [[crypto-idea-generation]], [[hypothesis-to-backtest-workflow]], [[strategy-development-overview]]
+  - "Variant / External Source" notes (dedupe hits): [[carry-trade]], [[commodity-carry-strategy]], [[commodity-momentum]], [[currency-momentum]], [[time-series-momentum]], [[pairs-trading]], [[short-term-reversal]], [[vix-trading]], [[geographic-spread-trading]], [[rebalancing]], [[supertrend]], [[chandelier-exit]]
+  - "NNFX role" notes: [[atr]], [[kama]], [[hull-moving-average]], [[alma]], [[jurik-moving-average]], [[frama]], [[adx]], [[chandelier-exit]], [[ssl-channel]], [[qqe]]
+  - Cross-source notes: QuantConnect reference ports added to [[volume-oi-conditioned-reversal]] and [[dollar-carry-trade]]
+- **Indexes:** [[index]] (strategies, strategy development, indicators, entities), [[sources-overview]] (new Strategy Library Sources section)
+- **Notes:**
+  - The NNFX flow chart uses a 1.5x ATR stop and a 1x ATR first target.
+  - QuantConnect's default fee model is zero for crypto, FX and CFDs, so its published results in those markets are pre-cost.
+  - Quantpedia's free tier has only 2 crypto cards; Premium prices come from third-party reviews (MEDIUM).
+  - CryptoDataAPI has no FX-forward or commodity-futures data; those pages say so.
+  - No new tags were needed.
 
 ## 2026-09-23 — Sync: backtesting archive grain/paging/coverage overhaul
 

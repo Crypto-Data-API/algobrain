@@ -2,7 +2,7 @@
 title: "Chandelier Exit"
 type: concept
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-09-28
 status: excellent
 tags: [indicators, technical-analysis, volatility, trend-following]
 aliases: ["Chandelier Exit", "Chandelier Stop"]
@@ -80,11 +80,19 @@ The Chandelier Exit is primarily a **[[trend-following]]** exit, designed to kee
 - **Over-tight multipliers**: dropping below ~2× ATR in a normal trend converts the tool into a noise-triggered exit, defeating its purpose.
 - **Single-tool reliance**: it manages exits, not entries or position sizing; it should sit inside a complete plan, not replace one.
 
+## Variant / external source: Chandelier Exit [everget]
+
+On TradingView the most widely used open-source implementation is **everget**'s *Chandelier Exit* (https://www.tradingview.com/script/AqXxNS7j-Chandelier-Exit-everget/). It turns the exit into a two-state trend indicator with buy/sell labels. The direction only flips when the close crosses the *opposite* stop line, which adds hysteresis, and crypto traders often use it as a stop-and-reverse entry signal as well as an exit. Treat community strategy wrappers built on it as unvalidated until they are re-tested with fees on (see [[tradingview-platform#Community Scripts as an Idea Source]]). Related ATR tools from the same library: [[ut-bot-alerts]] and [[halftrend]] (Source: [[tradingview-community-scripts]]).
+
 ## Sources
 
 - Elder, Alexander. *Come Into My Trading Room: A Complete Guide to Trading.* Wiley, 2002.
 - Le Beau, Charles & Lucas, David W. *Technical Traders Guide to Computer Analysis of the Futures Markets.* McGraw-Hill, 1992.
 - StockCharts.com, "Chandelier Exit" (ChartSchool indicator reference).
+
+## NNFX role
+
+In the [[nnfx-method|NNFX]] framework a Chandelier-style ATR trail fits the **exit** slot or the runner's trailing stop: NNFX banks half at 1 x ATR, moves the second order to breakeven, and then trails it (commonly 1.5 x ATR once 2 x ATR in profit). A Chandelier Exit anchored to the highest high is a smoother alternative to that stepped trail (Source: [[stonehill-forex-nnfx]]).
 
 ## Getting the Data (CryptoDataAPI)
 

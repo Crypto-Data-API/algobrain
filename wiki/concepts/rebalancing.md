@@ -2,7 +2,7 @@
 title: "Rebalancing"
 type: concept
 created: 2026-04-15
-updated: 2026-06-22
+updated: 2026-09-28
 status: excellent
 tags: [portfolio-theory, risk-management, slippage]
 aliases: ["Rebalancing", "Portfolio Rebalancing"]
@@ -77,6 +77,10 @@ The decision to rebalance is a contest between the **rebalancing bonus** (and ri
 | Risk tolerance for drift | Low (want tight tracking) | High |
 
 Because over-trading reliably bleeds more than the bonus pays, the practical answer for most portfolios is *infrequent* rebalancing — annual or threshold-triggered — not monthly.
+
+## Variant / External Source: Quantpedia
+
+[[quantpedia|Quantpedia]] #0701 tests the rebalancing bonus directly in crypto: a daily-rebalanced equal-weight basket of 27 coins held long against 70% of a buy-and-hold equal-weight basket, 2018-2021, reportedly earned 7.65% p.a. at 2.6% volatility (pre-cost; the card's −99.99% drawdown figure is inconsistent and likely an error). Tradable write-up: [[crypto-rebalancing-premium]] (Source: [[quantpedia-strategy-encyclopedia]]).
 
 ## Trading Relevance
 

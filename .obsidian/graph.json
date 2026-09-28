@@ -1,6 +1,6 @@
 ﻿{
     "collapse-filter":  false,
-    "search":  "-tag:#meta stretch revert",
+    "search":  "-tag:#meta",
     "showTags":  false,
     "showAttachments":  false,
     "hideUnresolved":  false,
@@ -16,7 +16,7 @@
     "repelStrength":  20,
     "linkStrength":  0.9,
     "linkDistance":  148,
-    "scale":  0.32133638605034825,
+    "scale":  0.05932617187499626,
     "close":  false,
     "colorGroups":  [
                         {

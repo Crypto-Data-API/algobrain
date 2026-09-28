@@ -2,7 +2,7 @@
 title: "Pairs Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-09-28
 status: good
 tags: [mean-reversion, pairs-trading, statistical-arbitrage, market-neutral, quantitative, cointegration, crypto]
 aliases: ["Pairs Trade", "Statistical Pairs Trading", "Stat Arb Pairs", "Crypto Pairs"]
@@ -195,6 +195,10 @@ See [[when-to-retire-a-strategy]].
 - **Model risk** — wrong hedge ratio, lookback, or correlation-vs-cointegration confusion produces convincing but fake signals.
 - **Crowded** — the obvious pairs are traded by every quant desk; capacity and edge are shared.
 - **Capital-intensive** — market-neutral returns are modest per unit of capital, tempting operators into dangerous leverage.
+
+## Variant / External Source: QuantConnect
+
+[[quantconnect|QuantConnect]]'s Strategy Library publishes several pairs variants with open LEAN code: "Intraday Dynamic Pairs Trading using Correlation and Cointegration Approach" (pair re-selection by rolling correlation then a cointegration test), "Optimal Pairs Trading" (Ornstein-Uhlenbeck-based optimal entry/exit levels, see [[ornstein-uhlenbeck]]) and "Pairs Trading-Copula vs Cointegration", which is written up as [[copula-pairs-trading]]. All are tested on hand-picked ETF or stock pairs, so the pair choice itself carries hindsight bias (Source: [[quantconnect-strategy-library]]).
 
 ## Sources
 

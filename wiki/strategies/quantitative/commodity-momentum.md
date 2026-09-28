@@ -2,7 +2,7 @@
 title: "Commodity Momentum"
 type: strategy
 created: 2026-04-14
-updated: 2026-06-21
+updated: 2026-09-28
 status: excellent
 tags: [quantitative, momentum, commodities, futures, trend-following, position-trading]
 aliases: ["Commodity Cross-Sectional Momentum", "Commodity Momentum Factor"]
@@ -218,6 +218,14 @@ The momentum/value negative correlation is the key diversification result from A
 - **Crowding risk** from CTAs running similar signals
 - **Lookback sensitivity** -- performance varies with lookback window choice (6m vs. 12m vs. 12-1m)
 - **No fundamental anchor** -- pure price momentum can persist into bubbles and amplify crashes
+
+## Variant / External Source: QuantConnect
+
+[[quantconnect|QuantConnect]]'s Strategy Library carries several open-code implementations of this idea: "Momentum Effect in Commodities Futures", "Improved Momentum Strategy on Commodities Futures" and "Commodities Futures Trend Following". A further entry conditions momentum on curve shape — see [[commodity-momentum-term-structure]]. Treat the library's results as dated illustrations: most use small hand-picked futures lists and pre-2020 samples (Source: [[quantconnect-strategy-library]]).
+
+## Variant / External Source: Quantpedia
+
+[[quantpedia|Quantpedia]] #0021 "Momentum Effect in Commodities" lists cross-sectional commodity momentum at a headline 14.6% annual return (pre-cost, in-sample, card figure) (Source: [[quantpedia-strategy-encyclopedia]]). Quantpedia also catalogues the commodity skewness and return-asymmetry factors, summarised on [[commodity-skewness-strategy]], which the source reports as only loosely related to momentum and carry.
 
 ## Sources
 

@@ -2,7 +2,7 @@
 title: Average Directional Index (ADX)
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-09-28
 status: good
 tags: [adx, technical-analysis, indicators, trend-following]
 aliases: [ADX, Average Directional Movement Index]
@@ -88,6 +88,10 @@ One illustrative backtesting study across US equities reported ADX with a 53.6% 
 - John J. Murphy, *Technical Analysis of the Financial Markets* (NYIF, 1999) — covers ADX within Wilder's Directional Movement System and its use for strategy selection.
 - [[book-technical-analysis-of-the-financial-markets]] -- Murphy covers ADX in the context of Wilder's Directional Movement System, including the +DI/-DI framework, ADX interpretation for trend strength, and its role as a strategy selection tool
 - [[2026-04-20-comprehensive-guide-technical-trading-indicators]] — Turtle-style breakout stack, win-rate data, cross-market applicability
+
+## NNFX role
+
+In the [[nnfx-method|NNFX]] framework ADX is a classic **volume/volatility filter**: entries are allowed only when ADX shows enough trend strength (often ADX rising or above a threshold), since spot FX has no usable volume. [[stonehill-forex|Stonehill Forex]] profiled it in that role ("ADX as a Volume Indicator", 2021); [[choppiness-index]] and [[waddah-attar-explosion]] are common alternatives in the same slot (Source: [[stonehill-forex-nnfx]]).
 
 ## Getting the Data (CryptoDataAPI)
 

@@ -2,7 +2,7 @@
 title: "Short-Term Reversal"
 type: concept
 created: 2026-04-15
-updated: 2026-06-11
+updated: 2026-09-28
 status: good
 tags: [mean-reversion, quantitative, anomalies, market-microstructure]
 aliases: ["Short Term Reversal", "Short-Horizon Reversal", "Weekly Reversal", "Lehmann Reversal"]
@@ -54,6 +54,14 @@ Short-term reversal is the canonical example of a "real but uncapturable" anomal
 - **Use as a filter.** Many practitioners use the short-term reversal signal not as a standalone trade but to *time entries* into longer-horizon positions — avoid buying a name that has just spiked, prefer adding after a short-term pullback.
 
 See [[mean-reversion]] for the broader strategy family and [[statistical-arbitrage]] for the cost-aware implementation context.
+
+## Variant / External Source: Quantpedia
+
+[[quantpedia|Quantpedia]] #0071 (Wang & Yu 2004) sharpens the futures version with a trading-activity filter: reversal profits concentrate in contracts whose volume rose and open interest fell over the prior week. On 24 US futures, 1983-2000, the card reports 29.6% p.a., 31.4% volatility, Sharpe 0.82 and max drawdown −58.7% (pre-cost). The crypto-perp adaptation is [[volume-oi-conditioned-reversal]] (Source: [[quantpedia-strategy-encyclopedia]]).
+
+## Variant / External Source: QuantConnect
+
+[[quantconnect|QuantConnect]]'s Strategy Library includes "Short Term Reversal with Futures" alongside several equity reversal entries. The futures version is the relevant template for crypto perps: rank contracts by last-week return and fade the extremes. The volume- and open-interest-conditioned version of that paper is written up as [[volume-oi-conditioned-reversal]]. Its universe is a small fixed futures list, so treat results as illustrative (Source: [[quantconnect-strategy-library]]).
 
 ## Related
 

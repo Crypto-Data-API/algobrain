@@ -2,7 +2,7 @@
 title: "FRAMA (Fractal Adaptive Moving Average)"
 type: concept
 created: 2026-07-20
-updated: 2026-07-20
+updated: 2026-09-28
 status: draft
 tags: [indicators, technical-analysis, quantitative, crypto, market-regime, regime-detection]
 aliases: ["FRAMA", "Fractal Adaptive Moving Average", "Ehlers FRAMA"]
@@ -157,6 +157,10 @@ The honest summary: FRAMA reduces the trend-fade failure mode and, by the same m
 - The suppression problem above makes it a structurally awkward baseline for measuring fast dislocations, which is the very thing [[stretch-revert]] trades.
 - Little independent published validation. Ehlers' presentation is a design rationale, not a study; there is no widely replicated evidence that FRAMA outperforms a well-chosen fixed filter net of costs.
 
+## NNFX role
+
+[[stonehill-forex|Stonehill Forex]] profiled FRAMA as an [[nnfx-method|NNFX]] **baseline** in 2025, testing it at default settings on daily bars over 3 years across EUR/USD, BTC/USD, XAU/USD and SPX500 with 2% risk split into two trades and ATR stops. Stonehill published results only as screenshots and without a ranking against other baselines, so treat them as a default-settings, pre-cost observation (Source: [[stonehill-forex-nnfx]]).
+
 ## Getting the Data (CryptoDataAPI)
 
 **Live data:**
@@ -206,5 +210,6 @@ An agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can compute an
 
 - Ehlers, John F. — "FRAMA – Fractal Adaptive Moving Average" (2005). The original presentation: the two-half range estimator for `D`, the `alpha = exp(-4.6·(D−1))` mapping, and the design rationale for the 4.6 constant.
 - Ehlers, John F. — *Rocket Science for Traders* (2001) and *Cybernetic Analysis for Stocks and Futures* (2004). Background on the digital-filter approach to price smoothing that FRAMA sits within.
+- [[stonehill-forex-nnfx]] — Stonehill Forex NNFX indicator library and role testing (fetched 2026-09-28)
 
 No independent validation study of FRAMA has been reviewed in this vault. Comparative claims about lag and regime behaviour on this page follow from the arithmetic of the smoothing constant, not from a measured backtest.

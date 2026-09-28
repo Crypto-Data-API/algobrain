@@ -2,7 +2,7 @@
 title: "Carry Trade"
 type: reference
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-09-28
 status: good
 tags: [carry-trade, forex, interest-rates, macro, position-trading, yield-differential]
 aliases: ["Currency Carry Trade", "Interest Rate Carry", "JPY Carry Trade"]
@@ -98,6 +98,14 @@ The risk is catastrophic: carry trades unwind violently during [[risk-off]] even
 - **Central bank risk:** A single unexpected rate decision can eliminate the carry differential overnight
 - **Crowding risk:** When carry trades become very popular, the eventual unwind is more violent (2024 JPY unwind)
 - **Not suitable for small accounts:** Requires significant capital and low leverage to survive drawdowns
+
+## Variant / External Source: QuantConnect
+
+[[quantconnect|QuantConnect]]'s Strategy Library publishes a "Forex Carry Trade" algorithm with open LEAN code: long the currency with the highest interest rate, short the one with the lowest, rebalanced monthly. It is a two-currency toy version of the diversified carry basket described above, and it runs on LEAN's zero-fee Forex default, so any reported result is gross of spreads and financing. The same library's "Risk Premia in Forex Markets" entry frames carry as a negative-skew premium — see [[fx-skewness-risk-premia]] (Source: [[quantconnect-strategy-library]]).
+
+## Variant / External Source: Quantpedia
+
+[[quantpedia|Quantpedia]] #0005 "FX Carry Trade" codifies the cross-sectional version: from a 10-20 currency universe, long the 3 highest-rate and short the 3 lowest-rate currencies, rebalanced monthly, with idle margin at overnight rates. Its Deutsche Bank carry-index backtest (1989-2009, pre-cost) shows 7.27% p.a., 9.6% volatility, Sharpe 0.29 and max drawdown −32%, and the card stresses strong correlation with equity bear markets — carry is not a crisis diversifier. A timing variant that trades only the dollar factor is covered on [[dollar-carry-trade]]; the value leg of the carry/momentum/value trio is [[currency-value-ppp]] (Source: [[quantpedia-strategy-encyclopedia]]).
 
 ## See Also
 - [[forex]] -- the market where carry trades primarily operate

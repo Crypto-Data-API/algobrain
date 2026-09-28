@@ -2,7 +2,7 @@
 title: Average True Range (ATR)
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-09-28
 status: good
 tags: [atr, indicators, volatility]
 aliases: [ATR, average-true-range]
@@ -59,6 +59,10 @@ ATR's most famous application beyond basic stop-loss placement is as the "N" uni
 - John J. Murphy, *Technical Analysis of the Financial Markets* (NYIF, 1999) — covers True Range/ATR for stop placement and volatility measurement.
 - [[book-technical-analysis-of-the-financial-markets]] -- Murphy covers Wilder's True Range and ATR concepts, including their application to stop-loss placement and volatility measurement
 - [[2026-04-20-comprehensive-guide-technical-trading-indicators]] — Turtle "N" unit, Wilder's position sizing philosophy, cross-venue leverage context
+
+## NNFX role
+
+In the [[nnfx-method|NNFX]] framework ATR(14) is the **trade-management slot**: it sets the 1.5 x ATR stop, the 1 x ATR first take-profit, position size (1% risk per order divided by the stop distance), and the rule that entries must close within 1 x ATR of the baseline. [[stonehill-forex|Stonehill Forex]] tests every indicator with ATR-based stops of 1.25-1.5 x per asset; for crypto, [[nnfx-crypto-daily-system]] widens the stop to 2.0 x ATR (Source: [[stonehill-forex-nnfx]]).
 
 ## Getting the Data (CryptoDataAPI)
 

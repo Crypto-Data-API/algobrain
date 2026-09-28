@@ -2,7 +2,7 @@
 title: "Hull Moving Average (HMA)"
 type: concept
 created: 2026-07-20
-updated: 2026-07-20
+updated: 2026-09-28
 status: draft
 tags: [indicators, technical-analysis, quantitative, crypto]
 aliases: ["HMA", "Hull Moving Average", "Hull MA"]
@@ -133,6 +133,10 @@ Two secondary decisions matter more than they look:
 - **Rounding conventions differ across platforms**, so "HMA(20)" is not a fully specified object.
 - No peer-reviewed derivation exists; the construction is a heuristic that works, not a result.
 
+## NNFX role
+
+[[stonehill-forex|Stonehill Forex]] lists the Hull MA as a **baseline** candidate in its [[nnfx-method|NNFX]] library. In that role its low lag gives early baseline-cross entries, but it also produces more crosses in chop, so it depends more heavily on the volatility filter (e.g. [[choppiness-index]]) than slower baselines such as [[mcginley-dynamic]] (Source: [[stonehill-forex-nnfx]]).
+
 ## Getting the Data (CryptoDataAPI)
 
 **Live data:**
@@ -184,5 +188,6 @@ An agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with 
 
 - **Alan Hull (2005)** — original specification of the Hull Moving Average, published by Hull as a trading indicator rather than as academic work.
 - Lag figures on this page are derived from the centre-of-mass lag of a linearly weighted MA, `(n-1)/3`, applied to the nested construction above — not quoted from a source.
+- [[stonehill-forex-nnfx]] — Stonehill Forex NNFX indicator library and role testing (fetched 2026-09-28)
 
 *Verification note: no peer-reviewed publication or independent empirical evaluation of HMA has been reviewed for this vault. Statements about "best" periods circulating in trading communities are convention, not evidence, and the overshoot behaviour described here follows from the formula rather than from a published study.*

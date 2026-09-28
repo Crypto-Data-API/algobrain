@@ -2,7 +2,7 @@
 title: "Strategy Development"
 type: overview
 created: 2026-04-10
-updated: 2026-04-10
+updated: 2026-09-28
 status: good
 tags: [strategy-development, research, backtesting, methodology]
 aliases: ["Strategy R&D", "Strategy Research"]
@@ -45,6 +45,8 @@ A useful mental model: a backtest is a *biased estimator* of live performance. T
 - [[edge-taxonomy]] — Where do returns actually come from? Six categories of edge (five alpha sources + risk premia).
 - [[hypothesis-to-backtest-workflow]] — The full pipeline from idea to live capital.
 - [[research-checklist]] — Questions to answer *before* writing any code.
+- [[external-strategy-sources]] — Free strategy libraries (TradingView, QuantConnect, Quantpedia, Stonehill) and the vetting funnel for borrowed ideas.
+- [[nnfx-method]] — The No Nonsense Forex system template (ATR risk, baseline, confirmation, volume, exit), adapted to crypto.
 - [[data-snooping-and-p-hacking]] — Multiple testing, deflated Sharpe, the file-drawer problem.
 - [[overfitting-detection]] — Walk-forward, purged k-fold, parameter sensitivity, Bailey-Borwein-Lopez de Prado.
 - [[failure-modes]] — How strategies die in the wild. A catalog.

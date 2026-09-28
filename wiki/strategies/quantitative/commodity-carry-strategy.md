@@ -2,7 +2,7 @@
 title: "Commodity Carry Strategy"
 type: strategy
 created: 2026-04-14
-updated: 2026-06-21
+updated: 2026-09-28
 status: excellent
 tags: [quantitative, commodities, futures, position-trading]
 aliases: ["Commodity Carry", "Carry in Commodities", "Roll Yield Strategy"]
@@ -237,6 +237,14 @@ The binding constraint on carry is *not* cost but **negative skew**: the strateg
 - **Curve shape can be driven by non-informational factors** (storage economics, seasonal patterns) rather than risk premiums
 - **Performance concentration** -- a few commodities with extreme roll yields can dominate portfolio returns
 - **Correlated with other carry strategies** (FX carry, bond carry) during risk-off events -- less diversifying than it appears
+
+## Variant / External Source: QuantConnect
+
+[[quantconnect|QuantConnect]]'s Strategy Library has a "Term Structure Effect in Commodities" algorithm (open LEAN code) that ranks commodity futures by curve shape — backwardation versus contango — and trades the cross-section, essentially this page's roll-yield signal. A companion entry double-sorts the same roll signal with 21-day momentum; see [[commodity-momentum-term-structure]] (Source: [[quantconnect-strategy-library]]).
+
+## Variant / External Source: Quantpedia
+
+[[quantpedia|Quantpedia]] #0022 "Term Structure Effect in Commodities" is the same idea sorted by roll return: long the top-20% roll-yield (most backwardated) commodities, short the bottom 20%, equal-weight, monthly. Source paper Fuertes, Miffre & Rallis (2008); claimed 1979-2004 pre-cost 11.73% p.a., 23.8% volatility, Sharpe 0.49, max drawdown −78% — note the very deep drawdown relative to later implementations (Source: [[quantpedia-strategy-encyclopedia]]). A low-correlation companion factor is [[commodity-skewness-strategy]]; the carry-plus-momentum double sort from the same Fuertes-Miffre-Rallis paper is on [[commodity-momentum-term-structure]].
 
 ## Sources
 

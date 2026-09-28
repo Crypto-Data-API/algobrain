@@ -2,7 +2,7 @@
 title: "Jurik Moving Average (JMA)"
 type: concept
 created: 2026-07-20
-updated: 2026-07-20
+updated: 2026-09-28
 status: draft
 tags: [indicators, technical-analysis, quantitative, crypto]
 aliases: ["JMA", "Jurik MA", "Jurik Research Moving Average"]
@@ -149,6 +149,10 @@ Discipline:
 - **Does not solve trend risk** — like every member of the family, it dies in trends, and the regime gate is what protects it.
 - **Weakens the family's robustness argument** by contributing an uninterpretable data point to a comparison whose whole purpose is interpretability.
 
+## NNFX role
+
+The Jurik MA is a frequently cited **baseline** in the [[nnfx-method|NNFX]] community (the NNFX flow-chart tooling uses JMA for baseline examples). The reproducibility problem above matters doubly there: NNFX results built on a closed-source JMA port cannot be replicated elsewhere, so prefer an open baseline such as [[mcginley-dynamic]] or [[kama]] for crypto tests (Source: [[stonehill-forex-nnfx]]).
+
 ## Getting the Data (CryptoDataAPI)
 
 The API supplies the price series; the filter itself must come from the licensed library. Nothing here computes JMA.
@@ -192,5 +196,6 @@ An agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] should treat t
 - Jurik Research (Mark Jurik) — vendor documentation for the commercial JMA library: the parameter interface (`period`, `phase`, `power`) and the low-lag / high-smoothness / minimal-overshoot behavioural claims. The algorithm itself is undisclosed; these are the vendor's own claims and are not independently verified.
 - Open-filter comparisons on this page reference [[john-ehlers|Ehlers]]' published designs — "Time Warp – Without Space Travel" (2004) and *Cycle Analytics for Traders* (2013) — because those are inspectable and JMA is not. See [[laguerre-filter]] and [[supersmoother-filter]].
 - Strategy framing, regime dependence, and failure modes are drawn from vault pages: [[stretch-revert]], [[mean-reversion]], [[moving-averages]], [[microstructure-noise-low-timeframe]], [[overfitting]].
+- [[stonehill-forex-nnfx]] — Stonehill Forex NNFX indicator library and role testing (fetched 2026-09-28)
 
 **No independent or peer-reviewed evaluation of JMA has been reviewed in this vault, and no reproducible reference implementation exists.** No source-summary page exists for the Jurik Research material.

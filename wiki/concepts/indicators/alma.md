@@ -2,7 +2,7 @@
 title: "ALMA (Arnaud Legoux Moving Average)"
 type: concept
 created: 2026-07-20
-updated: 2026-07-20
+updated: 2026-09-28
 status: draft
 tags: [indicators, technical-analysis, quantitative, crypto]
 aliases: ["ALMA", "Arnaud Legoux Moving Average", "Gaussian Offset Moving Average"]
@@ -123,6 +123,10 @@ For [[stretch-revert]] specifically, the counter-intuitive move is worth stating
 - **O(n) per bar**, not O(1) recursive. Irrelevant at 15m bars; relevant if you are computing hundreds of assets on a 1s loop.
 - Being a low-lag filter, it responds quickly to bad ticks as well as to good information.
 
+## NNFX role
+
+[[stonehill-forex|Stonehill Forex]] lists ALMA as a **baseline** candidate in its [[nnfx-method|NNFX]] library, where it gates trade direction and defines the 1 x ATR entry band. Its offset parameter trades lag for smoothness and should be fixed before testing other slots, per the NNFX one-role-at-a-time protocol (Source: [[stonehill-forex-nnfx]]).
+
 ## Getting the Data (CryptoDataAPI)
 
 **Live data:**
@@ -173,5 +177,6 @@ An agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with 
 
 - **Arnaud Legoux and Dimitrios Kouzis-Loukas (2009)** — original ALMA specification, released publicly as an indicator rather than as a peer-reviewed paper. The `offset = 0.85, sigma = 6` defaults trace to that release.
 - Filter properties on this page (centre-of-mass lag, effective sample size, variance gain) are derived directly from the weight formula above rather than quoted from a source.
+- [[stonehill-forex-nnfx]] — Stonehill Forex NNFX indicator library and role testing (fetched 2026-09-28)
 
 *Verification note: no peer-reviewed publication for ALMA has been located, and no empirical study of its default parameters has been reviewed for this vault. Claims about optimal `offset`/`sigma` values circulating in trading communities should be treated as convention, not evidence.*

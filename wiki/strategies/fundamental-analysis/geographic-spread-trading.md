@@ -2,7 +2,7 @@
 title: "Geographic Spread Trading"
 type: strategy
 created: 2026-04-14
-updated: 2026-06-21
+updated: 2026-09-28
 status: excellent
 tags: [fundamental-analysis, commodities, futures, arbitrage, pairs-trading]
 aliases: ["Location Spread Trading", "Geographic Arbitrage", "Locational Basis Trading"]
@@ -208,6 +208,10 @@ The `breakeven_cost_bps: 25` and `expected_sharpe: 0.5` in frontmatter already e
 - **Structural break risk** -- infrastructure changes can permanently alter spread dynamics
 - **Limited universe** -- only a handful of liquid geographic spreads are tradable at scale
 - **Not purely systematic** -- significant discretionary judgment required for fundamental analysis
+
+## Variant / External Source: Quantpedia
+
+[[quantpedia|Quantpedia]] #0100 "Trading WTI/BRENT Spread" is a purely statistical version of the WTI-Brent trade (full page: [[wti-brent-spread]]): short the spread when it is above its 20-day SMA and long when below, exiting on the cross (source: Evans, Dunis & Laws; 1995-2004 claim 9.9% p.a., Sharpe 0.88, max drawdown −69%, pre-cost). The card reports *slightly negative* out-of-sample performance — evidence that the mechanical fade without the fundamental catalyst checks above has decayed (Source: [[quantpedia-strategy-encyclopedia]]).
 
 ## Sources
 

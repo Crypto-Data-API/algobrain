@@ -2,7 +2,7 @@
 title: "KAMA (Kaufman's Adaptive Moving Average)"
 type: concept
 created: 2026-07-20
-updated: 2026-07-20
+updated: 2026-09-28
 status: draft
 tags: [indicators, technical-analysis, quantitative, crypto, market-regime, regime-detection, scalping]
 aliases: ["KAMA", "Kaufman's Adaptive Moving Average", "Kaufman Adaptive Moving Average", "Efficiency Ratio"]
@@ -153,6 +153,10 @@ Mitigation used in practice: cap `SC` (equivalently, raise `fast` from 2 to 5–
 - The single-scale ER is a much cruder persistence estimate than [[hurst-exponent|Hurst]] and should not be used as a regime gate on its own.
 - No independent validation reviewed in this vault. Kaufman's presentation is a design rationale; there is no widely replicated evidence that KAMA beats a well-chosen fixed filter net of costs.
 
+## NNFX role
+
+[[stonehill-forex|Stonehill Forex]] lists KAMA among the **baseline** candidates in its [[nnfx-method|NNFX]] indicator library: price must close on the KAMA's side to trade in that direction, a close across it is a baseline-cross entry or runner exit, and entries more than 1 x ATR from it are skipped. KAMA's near-frozen low-ER state is useful there, since it suppresses whipsaw crosses in ranges (Source: [[stonehill-forex-nnfx]]).
+
 ## Getting the Data (CryptoDataAPI)
 
 **Live data:**
@@ -203,5 +207,6 @@ An agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can compute KA
 
 - Kaufman, Perry J. — *Smarter Trading: Improving Performance in Changing Markets* (McGraw-Hill, 1995). Original presentation of the Efficiency Ratio, the squared smoothing-constant mapping, and the `fast = 2` / `slow = 30` / `n = 10` defaults.
 - Kaufman, Perry J. — *Trading Systems and Methods* (Wiley, multiple editions). Extended treatment of KAMA within the broader adaptive-filter and trend-system literature.
+- [[stonehill-forex-nnfx]] — Stonehill Forex NNFX indicator library and role testing (fetched 2026-09-28)
 
 No independent validation study of KAMA has been reviewed in this vault. The equivalent-EMA figures in the lag table are computed directly from the smoothing-constant formula, not measured from a backtest, and the suppression arithmetic is likewise a property of the recursion rather than an empirical result.
