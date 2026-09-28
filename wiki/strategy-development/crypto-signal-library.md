@@ -2,7 +2,7 @@
 title: "Crypto Signal Library"
 type: index
 created: 2026-07-14
-updated: 2026-09-04
+updated: 2026-09-28
 status: good
 tags: [meta, crypto, quantitative, methodology, data-provider]
 aliases: ["Signal Library", "Crypto Signal Menu", "Signal Primitives"]
@@ -37,7 +37,7 @@ related: ["[[feature-engineering-crypto]]", "[[information-coefficient]]", "[[si
 | **Fear & Greed** ([[fear-and-greed-index]]) | `/api/v1/sentiment/fear-greed` | 0-100 index; contrarian bands | Extreme fear (<20) → buy; extreme greed (>80) → trim | Days, **medium** | Contrarian overlay / regime gate |
 | **Taker buy/sell** | `/api/v1/market-intelligence/taker-buy-sell` | 4h ratio; z-score | Aggressive taker-buy dominance → short-term up; extreme → exhaustion | Minutes-hours, **very fast** | Intraday flow / execution timing |
 | **Coinbase premium** ([[coinbase-premium]]) | `/api/v1/market-intelligence/coinbase-premium` | Premium index in bps | Positive → US-institutional net demand (bullish confirm) | Hours-days, **fast** | Spot-led trend confirmation |
-| **ETF flows** | `/api/v1/market-intelligence/etf/{asset}/flows` | Daily net flow; z-score; multi-day sum | Sustained inflows → structural bid (bullish); outflows → distribution | Days-weeks, **slow** | BTC/ETH structural basket |
+| **ETF flows** | `/api/v1/market-intelligence/etf/{asset}/flows?days=N` | Daily net flow per settled `trade_date` (default = latest day only; settled-only since 2026-09-25); z-score; multi-day sum | Sustained inflows → structural bid (bullish); outflows → distribution | Days-weeks, **slow** | BTC/ETH structural basket |
 | **Liquidations** ([[liquidation-cascade]]) | `/api/v1/market-intelligence/liquidations` | Liq notional; OI-normalized; by-exchange | Long-liq cascade → forced selling exhaustion, local bottom; short-liq → local top | Minutes-hours, **very fast** | Reversal / mean-reversion |
 | **Basis** ([[basis]]) | `/api/v1/derivatives/summary?coin=BTC` + `/api/v1/hyperliquid/summary?coin=BTC` | Perp-spot (and futures) basis, annualized bps | High +ve basis → leveraged-long crowding; harvest carry or fade | Hours-days, **medium** | [[basis-trading]]; carry basket |
 | **Altcoin breadth** | `/api/v1/market-health/altcoin-breadth` | % of coins above MA (default 200d) | Rising breadth → broad bull (rotate to alts); narrowing → BTC-only risk-off | Days-weeks, **slow** | Regime gate; alt-rotation basket |

@@ -250,6 +250,7 @@ A comprehensive, LLM-maintained knowledge base for crypto trading strategy: cryp
 ### Data Sources
 - [[data-sources-overview|Data Sources]] — Free, paid, alternative, crypto, options, macro, news data providers
 - [[cryptodataapi|CryptoDataAPI]] — **Canonical data layer for this wiki**: 190+ endpoints for prices, funding, OI, liquidations, regimes, on-chain, sentiment, whale tracking, and backtesting archives
+- [[cryptodataapi-strategy-library|CryptoDataAPI Strategy & Indicator Library]] — this wiki served as JSON: `/strategies`, `/indicators/catalog`, hosted `/algobrain/search`
 - [[cryptodataapi-mcp|CryptoDataAPI MCP & AI Agents]] — Hosted MCP server, agent workflow loop, free keys/x402, backtest data availability; every applicable strategy/indicator page carries an "AI agent workflow" block linking here
 - [[exchange-api-reference|Exchange API Reference]] — Normalized API endpoints for arbitrage across Binance, Coinbase, Hyperliquid, OKX, Bybit, Kraken
 - [[historical-spread-data|Historical Spread Data]] — Funding rate, basis, cross-exchange spread, and IV surface data sources for arb backtesting

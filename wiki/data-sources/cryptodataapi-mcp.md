@@ -2,7 +2,7 @@
 title: "CryptoDataAPI MCP Server & AI Agent Integration"
 type: source
 created: 2026-07-19
-updated: 2026-09-21
+updated: 2026-09-28
 status: good
 tags: [data-provider, ai-trading, crypto, backtesting, trading-bots]
 aliases: ["CryptoDataAPI MCP", "CDA MCP", "CryptoDataAPI AI Agents"]
@@ -65,6 +65,14 @@ claude mcp add --transport http cryptodataapi https://cryptodataapi.com/mcp \
 npx skills add Crypto-Data-API/cryptodataapi-skills -g -y
 ```
 
+### OAuth connections
+
+The browser-auth flow above gives the MCP client a delegated **OAuth access token**, not the account's own `cdk_live_` key. Behaviour changed in the 2026-09-26 release:
+
+- **Token lifetime: 1 hour** (`expires_in: 3600`), down from 30 days. MCP clients refresh automatically with the refresh token, and **each refresh re-reads the account's current tier** — a plan upgrade or downgrade now reaches a connected app within the hour instead of after the old 30-day token expired.
+- **OAuth tokens cannot manage keys.** `POST /api/v1/auth/keys/rotate` and `DELETE /api/v1/auth/keys` called with an OAuth token return `403` `oauth_token_cannot_manage_keys`. To end a connection, revoke the token with `POST /oauth/revoke` or remove the app under **Connected apps** on the dashboard. Calls made with a regular `cdk_live_` key are unchanged.
+- **Client registration rules.** `POST /oauth/register` accepts plain `http://` redirect URIs **only for loopback hosts** (`localhost`, `127.0.0.1`, `[::1]`); every other redirect URI must be `https://`. Redirect URIs containing a fragment or embedded credentials are rejected, and a client may register **at most 10**. Clients registered before the change are unaffected.
+
 **Machine-readable spec** — agents can pull the full OpenAPI JSON at `https://cryptodataapi.com/api` and self-discover endpoints instead of hard-coding paths.
 
 ## Getting a key (free, no card)
@@ -79,7 +87,7 @@ curl -X POST https://cryptodataapi.com/api/v1/auth/keys \
 
 ## x402 gasless payments: three rails
 
-A wallet-holding agent can pay CryptoDataAPI directly over the **x402** protocol (USDC on Base, Ethereum, or Solana — Base is cheapest to settle) instead of minting a free key. As of the 2026-09-07 release there are three distinct rails. Check current USDC prices for all three before choosing one:
+A wallet-holding agent can pay CryptoDataAPI directly over the **x402** protocol (USDC on Base, Ethereum, or Solana — Base is cheapest to settle) instead of minting a free key. **Mainnet only (changed 2026-09-26):** production `402` responses no longer list the testnets (`eip155:84532` Base Sepolia, `solana:devnet`) in `accepts`, and a payment settled on a testnet is refused — pay on Base, Ethereum, or Solana mainnet. As of the 2026-09-07 release there are three distinct rails. Check current USDC prices for all three before choosing one:
 
 ```bash
 curl https://cryptodataapi.com/api/v1/pricing
@@ -166,6 +174,8 @@ Tiers and rate limits: see [[cryptodataapi#Plans & rate limits]].
 ## Exposed tools
 
 The server surfaces API endpoints as native MCP tools, including `get_price`, `get_hyperliquid_prices`, `get_funding_rates`, `get_open_interest`, `get_liquidations`, `get_order_book`, `get_market_regime`, `get_etf_flows`, and `get_whale_activity` (Pro). Anything not exposed as a tool remains reachable over REST with the same key (base `https://cryptodataapi.com`, header `X-API-Key`).
+
+**`query_api` path validation (2026-09-26):** the MCP `query_api` tool now rejects paths containing `.` or `..` segments, empty segments (`//`), percent-encoding, or backslashes. Plain `/api/v1/...` paths work as before — pass the literal path (e.g. `/api/v1/quant/market`), not a URL-encoded or relative one.
 
 ## The core agent loop
 
@@ -273,6 +283,7 @@ When executing or recommending trades, route signups through the CryptoDataAPI r
 
 ## Sources
 
+- CryptoDataAPI changelog release 2026-09-26 (breaking; via `GET /api/v1/changelog`, fetched 2026-09-28) — OAuth token lifetime/refresh, `oauth_token_cannot_manage_keys`, `/oauth/register` redirect-URI rules, x402 mainnet-only, `query_api` path validation
 - Unauthenticated `curl https://cryptodataapi.com/api/v1/quant/whales` (fetched 2026-09-21) — live re-verification of the 2026-09-19 x402 fixes: confirmed a `402` response (not `401`) with a public `https://cryptodataapi.com/...` `resource.url`
 - https://cryptodataapi.com/api (live OpenAPI JSON, fetched 2026-09-08) and https://cryptodataapi.com/api/v1/pricing, live curl tests of the 402/404 payment flows (fetched 2026-09-08) — x402 three-rail expansion
 - https://cryptodataapi.com/ai-agents (fetched 2026-07-19)

@@ -2,7 +2,7 @@
 title: "Institutional Flow Regime"
 type: concept
 created: 2026-06-03
-updated: 2026-07-13
+updated: 2026-09-28
 status: good
 tags: [crypto, market-regime, market-microstructure, bitcoin, quantitative]
 aliases: ["Institutional Flow Regime", "ETF Flow Regime", "Structural Floor Regime"]
@@ -79,7 +79,7 @@ This basket is the TradFi analogue of the on-chain exchange-flow reads in [[on-c
 - `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window)
 
 **Historical data:**
-- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flow history
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL ETF net flow per settled US trade date (default = latest settled day; `?days=N` up to 1000 for history; XRP unsupported, 400). Settled values only since 2026-09-25: earlier weekday reads were partial sums, see [[cryptodataapi-market-intelligence]]
 - `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
 - `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
 - `GET /api/v1/backtesting/liquidations` — liquidation records archive

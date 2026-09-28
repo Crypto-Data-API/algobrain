@@ -9,7 +9,7 @@ aliases: ["Strategy Idea Sources", "Free Strategy Sources", "Strategy Idea Funne
 domain: [strategy-development, backtesting]
 prerequisites: ["[[edge-taxonomy]]", "[[hypothesis-to-backtest-workflow]]"]
 difficulty: intermediate
-related: ["[[crypto-idea-generation]]", "[[hypothesis-to-backtest-workflow]]", "[[tradingview-platform]]", "[[pine-script]]", "[[quantconnect]]", "[[quantpedia]]", "[[stonehill-forex]]", "[[nnfx-method]]", "[[repainting]]", "[[overfitting-detection]]", "[[transaction-cost-modeling]]", "[[alpha-decay]]", "[[crypto-forward-testing]]", "[[cryptodataapi-backtesting]]"]
+related: ["[[crypto-idea-generation]]", "[[hypothesis-to-backtest-workflow]]", "[[tradingview-platform]]", "[[pine-script]]", "[[quantconnect]]", "[[quantpedia]]", "[[stonehill-forex]]", "[[nnfx-method]]", "[[repainting]]", "[[overfitting-detection]]", "[[transaction-cost-modeling]]", "[[alpha-decay]]", "[[crypto-forward-testing]]", "[[cryptodataapi-backtesting]]", "[[cryptodataapi-strategy-library]]"]
 ---
 
 # External Strategy Sources
@@ -63,6 +63,7 @@ A Quantpedia-style "short-term reversal in cryptocurrencies" entry states a mech
 
 Every funnel step after "Find" runs on the [[cryptodataapi-backtesting|CryptoDataAPI backtesting archive]] rather than on the source platform's own data or tester:
 
+- **Duplicate check first:** this wiki's own catalogue is queryable via `GET /api/v1/strategies` (317 strategies, 22 groups) and `GET /api/v1/algobrain/search?q=...&type=strategy` ([[cryptodataapi-strategy-library]]). Search it before harvesting a candidate so the funnel doesn't re-derive a strategy the wiki already has. The hosted index lags the repo, so also grep `wiki/strategies/` locally.
 - **Historical OHLCV:** `GET /api/v1/backtesting/klines`, for the full-history, cost-on re-test of any ported script
 - **Perp carry:** `GET /api/v1/backtesting/funding`, needed to cost any strategy that holds perps across funding windows
 - **Point-in-time universe:** `GET /api/v1/backtesting/daily-snapshots/{date}` plus `GET /api/v1/backtesting/symbols`, for survivorship-free cross-sectional tests (the Quantpedia and QuantConnect universes)

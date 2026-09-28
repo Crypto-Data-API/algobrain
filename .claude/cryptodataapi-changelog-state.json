@@ -1,12 +1,54 @@
 {
-  "last_checked": "2026-09-23",
-  "api_version_seen": "2026-09-21",
+  "last_checked": "2026-09-28",
+  "api_version_seen": "2026-09-28",
   "processed": [
+    {
+      "version": "2026-09-28",
+      "processed_on": "2026-09-28",
+      "disposition": "material",
+      "note": "Created cryptodataapi-strategy-library.md (/strategies, /strategies/groups, /strategies/{slug}, /indicators/catalog + groups + {slug}; live-verified 22 groups/317 strategies, 12 groups/187 indicators, indicator_not_found 404); hub category row; notes on strategies-overview, indicators-overview, external-strategy-sources."
+    },
+    {
+      "version": "2026-09-27",
+      "processed_on": "2026-09-28",
+      "disposition": "material",
+      "note": "candles/batch closed_only/wait/complete/symbols alias + 500-bar 4h prewarm (cryptodataapi-hyperliquid); heatmap pct_4h_bar/bar_4h_as_of/moves + signum-rgg ?h4=true h4_history (cryptodataapi-indicators; live note: last h4_history entry may be the forming bar); algobrain/search strategy filters (cryptodataapi-strategy-library; live: filters are single-value)."
+    },
+    {
+      "version": "2026-09-26",
+      "processed_on": "2026-09-28",
+      "disposition": "material",
+      "note": "Auth/OAuth (403 oauth_token_cannot_manage_keys, 1h tokens, redirect-URI rules), SIWE wallet sign-in, exact-amount Solana/Tron payments, webhook limits, billing, trial-once-per-mailbox on cryptodataapi.md; OAuth/x402 mainnet/query_api path rules on cryptodataapi-mcp; refreshed:false semantics on regimes/market-health/hyperliquid-traders/indicators. Also corrected trader-profiles & leaderboard refresh tier to Pro+ per spec."
+    },
+    {
+      "version": "2026-09-25",
+      "processed_on": "2026-09-28",
+      "disposition": "material",
+      "note": "ETF flows settled-trade-date breaking change (trade_date/status/source/latest/in_progress/?days=N, SOL no 0s, aum settled-only) on cryptodataapi-market-intelligence; archive caveat on cryptodataapi-backtesting; semantics fixed on btc-etf, spot-etf-flows, institutional-flow-regime, etf-flow-directional, etf-and-institutional-flow, crypto-ai-recession-shorts, crypto-signal-library; removed unsupported XRP from 17 endpoint descriptions (live: btc/eth/sol only)."
+    },
+    {
+      "version": "2026-09-23",
+      "processed_on": "2026-09-28",
+      "disposition": "material",
+      "note": "funding-rates hyperliquid.history_available/history_status (cryptodataapi-derivatives); liquidations real count/source + grain/row_count_meaning, never-sum-polls warning (cryptodataapi-market-intelligence, cryptodataapi-backtesting)."
+    },
+    {
+      "version": "2026-09-21",
+      "processed_on": "2026-09-28",
+      "disposition": "material",
+      "note": "Absorbed by earlier loop Sync commit 1a12690 (+ 09-22 log entry): /indicators/heatmap, SIGNUM 4h h4_* fields, did_you_mean 404s, candles/batch ~8s bound + retry_after_s, hl-funding-bars backfill — on cryptodataapi-indicators/-hyperliquid/-backtesting. Verified coverage 2026-09-28."
+    },
     {
       "version": "2026-09-20",
       "processed_on": "2026-09-21",
       "disposition": "noted",
       "note": "POST /wallet/upgrade (Base/Ethereum dashboard payment flow) error-handling fixes -- 502->503 retry semantics on unreachable RPC nodes, improved 403 messaging for wrong-wallet payments. This endpoint and the dashboard wallet-upgrade UI flow are not documented anywhere in the wiki (grepped 'wallet/upgrade', zero hits) -- cryptodataapi-mcp.md's x402 section covers agent-subscribe/pay-per-request/pay-per-resource programmatic flows only, not this dashboard-only wallet flow. No wiki surface."
+    },
+    {
+      "version": "2026-09-19",
+      "processed_on": "2026-09-28",
+      "disposition": "material",
+      "note": "Most items absorbed earlier (commits 7fb12a1/c61785b: HL coin-param fix, atr, forming_bar_timestamp, candles/batch, hl/meta fees, hl-funding-bars). Gap filled 2026-09-28: /algobrain/search, /page, /stats documented on new cryptodataapi-strategy-library."
     },
     {
       "version": "2026-09-17",
@@ -25,6 +67,18 @@
       "processed_on": "2026-09-15",
       "disposition": "material",
       "note": "Documented the new additive stats object (open_interest_usd, volume_24h_usd, funding_rate_apr_pct, market_count, note, source) on GET /exchanges and /exchanges/{slug} in cryptodataapi-exchanges.md, incl. lighter/asterdex-only population, AsterDEX null-OI and DefiLlama wash-trading-correlation caveat, 5-min refresh, and the distinction from the BTC-only cross-exchange /derivatives/open-interest+funding-rates feeds. Added one-line stats mentions to lighter.md and asterdex.md entity pages. Verified against live OpenAPI JSON."
+    },
+    {
+      "version": "2026-09-12",
+      "processed_on": "2026-09-28",
+      "disposition": "material",
+      "note": "Most items absorbed earlier (commit f589892: grain, cursor paging, coverage, hl-liquidation-bars, comma lists, csv, status limits). Gap filled 2026-09-28: GET /derivatives/hyperliquid/history documented on cryptodataapi-derivatives."
+    },
+    {
+      "version": "2026-09-09",
+      "processed_on": "2026-09-28",
+      "disposition": "material",
+      "note": "Absorbed by earlier loop Sync commits (225796e, 9686d95, ec6b015): SIGNUM completed-bar breaking change, HL trade-flow family + hl_trade_flow archive, gex rules v2/coverage/levels/history, positioning ladder/by_tag, vol multiplier_at_floor, HMM dwell — on cryptodataapi-indicators/-hyperliquid/-regimes/-backtesting. State watermark was not recorded at the time; verified coverage 2026-09-28."
     },
     {
       "version": "2026-09-07",

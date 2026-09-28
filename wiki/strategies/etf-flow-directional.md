@@ -2,7 +2,7 @@
 title: "ETF Flow Directional"
 type: strategy
 created: 2026-07-14
-updated: 2026-07-19
+updated: 2026-09-28
 status: good
 tags: [quantitative, momentum, crypto, bitcoin, ethereum, event-driven, market-regime, on-chain]
 aliases: ["ETF Flow Momentum", "Spot ETF Flow Trading", "BTC ETF Flow Signal", "Institutional Flow Directional", "ETF Net-Flow Momentum"]
@@ -193,7 +193,7 @@ The dominant *risk* is not cost — it is the **daily granularity of the signal*
 ## Capacity Limits
 
 - The tradeable universe is **BTC and ETH spot/perp** — the two deepest crypto markets — so capital capacity is high relative to the options strategies. An individual/small-fund operator can run **tens to a few hundred million** before market impact at 20%-NAV sizing matters; reflected in `capacity_usd: 250000000`.
-- Above that, the operator's own directional flow starts to move the same spot the ETF flow is moving, and slippage erodes the edge. SOL/XRP ETF flows exist (`/etf/{asset}/flows` covers SOL/XRP) but those underlying markets are thinner, so the flow-directional expression there is lower-capacity and noisier.
+- Above that, the operator's own directional flow starts to move the same spot the ETF flow is moving, and slippage erodes the edge. SOL ETF flows exist (`/etf/{asset}/flows` covers BTC/ETH/SOL; XRP returns 400, since no free source publishes it) but those underlying markets are thinner, so the flow-directional expression there is lower-capacity and noisier.
 - Systemic capacity is bounded by how much *other* capital is already trading the same public flow signal — the more systematic desks price the autocorrelation, the faster price reacts to the print and the smaller the residual edge (see decay note).
 
 ## What Kills This Strategy
@@ -253,13 +253,13 @@ Re-deploy: flow autocorrelation positive again, hit rate back above 55%, and a c
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding, for spot-vs-perp instrument selection
 
 **Historical data:**
-- `GET /api/v1/market-intelligence/etf/btc/flows` — BTC ETF net-flow history (the core signal)
-- `GET /api/v1/market-intelligence/etf/eth/flows` — ETH ETF net-flow history
+- `GET /api/v1/market-intelligence/etf/btc/flows?days=N` — settled BTC ETF net flow per US `trade_date`, the core signal (default returns only the latest settled day; N up to 1000, back to 2024-01-11)
+- `GET /api/v1/market-intelligence/etf/eth/flows?days=N` — settled ETH ETF net flow per `trade_date` (back to 2024-07-23)
 - `GET /api/v1/on-chain/exchange-flows/BTC` — CEX inflow/outflow windows (1h/6h/24h/7d) for accumulation reads
 - `GET /api/v1/market-intelligence/btc/cycle-indicators` — cycle context for the regime scalar
 
 ```bash
-curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/etf/btc/flows"
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/etf/btc/flows?days=30"
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]].
@@ -270,12 +270,12 @@ Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]].
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
-- **Signal** — `GET /api/v1/market-intelligence/etf/btc/flows` (and `/etf/eth/flows`) daily after the issuer prints: compute the 20-day z-score and 5-day EMA slope directly from the returned series; `GET /api/v1/market-intelligence/etf/btc/aum` for the AUM trend confirmation.
+- **Signal** — `GET /api/v1/market-intelligence/etf/btc/flows?days=30` (and `/etf/eth/flows?days=30`) daily after the issuer prints: compute the 20-day z-score and 5-day EMA slope from `flows` (settled days only, oldest first). Key the signal on `trade_date`, not on `time`. Never fold in `in_progress`, which is the partial day still reporting (settled-only since 2026-09-25); `GET /api/v1/market-intelligence/etf/btc/aum` for the AUM trend confirmation.
 - **Confirmation** — `GET /api/v1/market-intelligence/coinbase-premium` (US institutional bid) + `GET /api/v1/on-chain/exchange-flows/BTC` (coins leaving exchanges corroborate accumulation) before acting on a z-score entry.
 - **Regime gate** — `GET /api/v1/regimes/current` + `GET /api/v1/quant/market`: scale up in BTC-led/broad-bull states; prefer flat over short while the structural-bull label holds, per the entry rules above.
 - **Execution** — `GET /api/v1/derivatives/funding-rates?coin=BTC` decides spot vs perp expression (do not pay rich positive funding on a long the flow signal already favours).
-- **Backtest** — the `/etf/{asset}/flows` history is the full life of the signal (US spot BTC ETFs launched Jan 2024); join it to `GET /api/v1/backtesting/klines` for forward-return tests, and use `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time flow/regime states in the recent window to avoid lookahead.
-- **Tips** — poll the cached `GET /api/v1/daily` bundle hourly (it includes ETF flows) rather than hammering individual endpoints; remember the signal is end-of-day — the hard stop, not the flow exit, is the only defence against intraday macro gaps.
+- **Backtest** — `/etf/{asset}/flows?days=1000` is the full settled life of the signal (US spot BTC ETFs launched Jan 2024). Join it on `trade_date` to `GET /api/v1/backtesting/klines` for forward-return tests, and lag by one day, since a US trade date settles after the US close. Use `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time *regime* states only. **Do not take the flow value from snapshots dated before 2026-09-25**: those snapshots, like the `coinglass_etf_flows` snapshot type, hold the partial weekday sums the endpoint served before its 2026-09-25 rebuild.
+- **Tips** — one `?days=30` call per day after the US close is enough for the flow leg, and `in_progress` shows whether today is still reporting (`funds_reported` / `funds_total`). Poll the cached `GET /api/v1/daily` bundle hourly for the other inputs rather than hammering individual endpoints; remember the signal is end-of-day — the hard stop, not the flow exit, is the only defence against intraday macro gaps.
 
 ## Related
 

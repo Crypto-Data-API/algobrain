@@ -306,7 +306,7 @@ These are deliberately tight. The strategy is too easy to over-trust in calm reg
 - `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window)
 
 **Historical data:**
-- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flow history
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL ETF flow history
 - `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
 - `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
 - `GET /api/v1/backtesting/liquidations` — liquidation records archive

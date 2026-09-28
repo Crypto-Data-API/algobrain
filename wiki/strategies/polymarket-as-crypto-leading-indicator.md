@@ -231,7 +231,7 @@ The Polymarket signal itself comes from [[polymarket-api]] (Gamma REST, CLOB Web
 **Live data:**
 - `GET /api/v1/event/calendar` — filterable forward catalysts up to 30 days out (macro prints, unlocks, depeg risk, with directional bias): the event windows this strategy trades into
 - `GET /api/v1/event/regime/score` — Event Risk composite 0-100 (baseline 0)
-- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flows: confirmation for the ETF-approval trade family
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL ETF flows: confirmation for the ETF-approval trade family
 - `GET /api/v1/quant/market` — HMM regime probabilities for sizing the crypto leg
 - `GET /api/v1/hyperliquid/prices` — execution context for the perp leg
 

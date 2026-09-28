@@ -9,6 +9,34 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-09-28 — Sync: absorbed CryptoDataAPI releases 2026-09-09 → 2026-09-28 (9 releases)
+
+**Scope:** User-requested changelog sync. `tools/check_api_changelog.py` reported 9 unprocessed releases (4 breaking). Releases 09-09 and 09-21 were already fully documented by earlier loop commits whose state was never recorded, so they were verified and marked. Releases 09-12 and 09-19 were mostly documented but each had one gap, and both gaps are now filled. Releases 09-23 → 09-28 were new work. Every path, parameter and field was checked against the live OpenAPI spec and with live calls.
+
+- **Created:** [[cryptodataapi-strategy-library]] documents `/strategies` (22 groups, 317 strategies), `/indicators/catalog` (12 groups, 187 indicators), and `/algobrain/search`, `/page` and `/stats`.
+  - Live findings: the search filters accept a single value only. Unknown slugs return a 404 `indicator_not_found`. The hosted index was built from commit bc587c5, so it lags the repo.
+- **ETF flows (breaking 09-25):** [[cryptodataapi-market-intelligence]] now covers settled trade-date semantics, `?days=N`, `latest` and `in_progress`.
+  - [[cryptodataapi-backtesting]] carries an archive caveat: snapshots before 2026-09-25 hold partial weekday figures.
+  - Semantics fixed on [[btc-etf]], [[spot-etf-flows]], [[institutional-flow-regime]], [[etf-flow-directional]], [[etf-and-institutional-flow]], [[crypto-ai-recession-shorts]] and [[crypto-signal-library]].
+  - Removed XRP from 17 endpoint descriptions (live: btc/eth/sol only).
+- **Account/auth (breaking 09-26):**
+  - [[cryptodataapi]]: OAuth 403 on key management, SIWE wallet sign-in, exact-amount Solana/Tron payments, webhook limits, billing rules, trial granted once per mailbox.
+  - [[cryptodataapi-mcp]]: 1h OAuth tokens, redirect-URI rules, x402 on mainnet only, `query_api` path validation.
+  - `refreshed: false` semantics on [[cryptodataapi-regimes]], [[cryptodataapi-market-health]], [[cryptodataapi-hyperliquid-traders]] and [[cryptodataapi-indicators]].
+- **Market data:**
+  - [[cryptodataapi-derivatives]]: `history_status` on funding-rates, and `/derivatives/hyperliquid/history` (09-12 gap).
+  - [[cryptodataapi-market-intelligence]]: liquidations now report real `count` and `source`, plus `grain`.
+  - [[cryptodataapi-hyperliquid]]: `candles/batch` gains `closed_only`, `wait`, `complete` and a `symbols` alias; the 4h pre-warm now fetches 500 bars.
+  - [[cryptodataapi-indicators]]: heatmap `pct_4h_bar` and `moves`; `signum-rgg ?h4=true`. Live note: the last `h4_history` entry can be the still-forming bar.
+- **Catalogue links:** [[strategies-overview]], [[indicators-overview]] and [[external-strategy-sources]] now point to the API.
+- **Fixes:**
+  - Trader-profiles and leaderboard refresh routes corrected to Pro+ (per spec).
+  - Duplicate "News & Catalysts" hub row merged.
+  - [[mythos-release-window-exploit-short]]: `backtest_status: speculative` → `untested` (not in the schema enum).
+- **Deferred / follow-ups:**
+  - [[hlp-cascade-alongside-playbook]] and [[liquidation-depth-cascade-sizing]] could use the liquidations `liq_1h_vs_7d_median` field.
+  - The API catalogue lists 317 strategies against 363 `type: strategy` pages; it will catch up when the hosted index is rebuilt.
+
 ## 2026-09-28 — Ingested: four free strategy libraries (TradingView, Stonehill/NNFX, QuantConnect, Quantpedia)
 
 **Scope:** The user asked to improve the wiki from four free strategy-idea sources. They are documented as an *idea funnel* feeding [[hypothesis-to-backtest-workflow]], then harvested for crypto-, FX-, commodity- and futures-applicable strategies. Equity single-name content was skipped. Every harvested strategy is `status: draft`, `backtest_status: untested`, with source performance quoted only as dated, pre-cost claims.

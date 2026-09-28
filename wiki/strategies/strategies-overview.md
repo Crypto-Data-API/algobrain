@@ -2,11 +2,11 @@
 title: "Trading Strategies"
 type: overview
 created: 2026-04-06
-updated: 2026-06-21
+updated: 2026-09-28
 status: excellent
 tags: [methodology, education, options, volatility]
 aliases: ["Strategy Catalog", "Strategies"]
-related: ["[[edge-taxonomy]]", "[[regime-matrix]]", "[[live-journal]]", "[[strategy-development-overview]]", "[[failure-modes]]", "[[multi-strategy-portfolio]]", "[[kelly-for-strategies]]", "[[market-impact-models]]", "[[barbell-portfolio]]"]
+related: ["[[edge-taxonomy]]", "[[regime-matrix]]", "[[live-journal]]", "[[strategy-development-overview]]", "[[failure-modes]]", "[[multi-strategy-portfolio]]", "[[kelly-for-strategies]]", "[[market-impact-models]]", "[[barbell-portfolio]]", "[[cryptodataapi-strategy-library]]"]
 ---
 
 # Trading Strategies
@@ -191,6 +191,10 @@ A strategy is only the *signal*. Turning it into a deployable sleeve requires th
 | Survival | What caps the downside when the edge decays or the regime flips? | [[barbell-portfolio]], [[long-vol-overlay]], [[hedging-program-failure-modes]], [[when-to-retire-a-strategy]] |
 
 The recurring lesson across the catalog: most retail-attractive edges are real but *capacity-limited* — the [[market-impact-models#Capacity Implications|square-root impact law]] eats the alpha well before institutional size — and most short-premium income edges are real but *tail-exposed*, requiring an explicit convex overlay (the [[barbell-portfolio|barbell]] / [[long-vol-vs-short-vol|long-vol-overlay]] logic) to survive the regime in which they break.
+
+## Query This Catalogue via API
+
+Since 2026-09-28 this catalogue can be queried as JSON. `GET /api/v1/strategies` on [[cryptodataapi]] serves 317 of these strategy pages in 22 groups, with each strategy's indicators, feeding endpoints and AI-agent build and backtest prompts. Any API key works, Free included. `backtest_status` and `expected_sharpe` in the API are the page authors' labels, not measured results, and the hosted index lags this repo. See [[cryptodataapi-strategy-library]].
 
 ## All Strategy Pages
 

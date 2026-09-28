@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Market & Quant Regimes"
 type: source
 created: 2026-07-13
-updated: 2026-09-18
+updated: 2026-09-28
 status: good
 tags: [data-provider, crypto, api, market-regime, regime-detection, hmm, volatility, liquidity, gamma-exposure, event-risk]
 aliases: ["CryptoDataAPI Regimes", "CDA Regimes", "CryptoDataAPI Quant Probabilities", "CryptoDataAPI Regime Engine"]
@@ -176,6 +176,8 @@ Regulatory and macro-policy shock detection built on GDELT news flow, cross-asse
 
 Every family's base endpoint returns current state: `/regimes/current` for the 10-state cycle label, `/quant/market` for live HMM probabilities (15-min refresh), and the `/regime` + `/regime/score` pairs for volatility, liquidity, meme, event, security, and policy. `/liquidity/depth` and `/policy/headlines` are live feeds; the POST `/refresh` endpoints force an immediate recompute when you cannot wait for the next scheduled cycle.
 
+**Refresh de-duplication (changed 2026-09-26):** on `/quant/refresh` and the volatility, meme, event, security, and policy `/regime/refresh` routes, a call made while a rebuild is already running now **waits for that rebuild** instead of starting a second one, and a call within **5 minutes** of the last completed rebuild returns the current data with `refreshed: false`. Response shapes are unchanged, but `refreshed` can now be `false` — an agent should read it rather than assume a POST always recomputed, and should not hammer the route in a loop (it will just get the cached state back).
+
 ## Historical Data
 
 History is concentrated in the quant family at the Pro Plus tier: `/quant/history` serves point-in-time probability records for backtests, `/quant/regimes/history` downloads the full 6-regime Parquet archive (2020-yesterday), `/quant/timeline` gives daily market regime labels back to 2019, and `/quant/whales/history` covers 7-540 days of whale positioning. Per-symbol detail endpoints for volatility, meme, and the indicators family include a rolling 60d history; `/liquidity/depth/{coin}` keeps a 24h rolling window at 1-min resolution. For anything deeper, pair these with [[cryptodataapi-backtesting]].
@@ -206,4 +208,5 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/market"
 
 ## Sources
 
+- CryptoDataAPI changelog release 2026-09-26 (via `GET /api/v1/changelog`, fetched 2026-09-28) — force-refresh wait / `refreshed: false` semantics
 - https://cryptodataapi.com/api/docs (fetched 2026-07-13)

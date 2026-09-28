@@ -2,11 +2,11 @@
 title: "Technical Indicators"
 type: index
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-09-28
 status: excellent
 tags: [indicators, concepts, index]
 aliases: ["Technical Indicators", "Indicators Overview", "Indicator Index"]
-related: ["[[indicators-ta-primer]]", "[[triple-screen-system]]", "[[regime-matrix]]", "[[rsi]]", "[[macd]]", "[[bollinger-bands]]", "[[vwap]]", "[[cryptodataapi]]"]
+related: ["[[indicators-ta-primer]]", "[[triple-screen-system]]", "[[regime-matrix]]", "[[rsi]]", "[[macd]]", "[[bollinger-bands]]", "[[vwap]]", "[[cryptodataapi]]", "[[cryptodataapi-strategy-library]]"]
 ---
 
 # Technical Indicators
@@ -206,6 +206,8 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/indicators/techn
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-indicators]].
+
+**Query this catalogue via API (since 2026-09-28):** `GET /api/v1/indicators/catalog` serves 187 of these indicator definitions in 12 groups. Each carries aliases and the endpoints behind it, and `/indicators/catalog/{slug}` adds the strategies that use it (`used_by`) and a compute prompt. It holds definitions only, so live values stay on `/indicators/technical`. Any key works, Free included. See [[cryptodataapi-strategy-library]].
 **Live dashboards:** [technical structure](https://cryptodataapi.com/technical-structure) · [SIGNUM RGG](https://cryptodataapi.com/signum-rgg-coin-trend-indicator)
 
 

@@ -4,6 +4,38 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-09-28 — Sync: 9 API releases absorbed; free strategy-library harvest
+
+**Added:** A new page documenting CryptoDataAPI's strategy and indicator library
+endpoints, which serve this wiki's own strategies and indicators as structured data
+together with ready-made AI-agent prompts, plus the hosted wiki search that shipped
+earlier and had never been documented. A daily Hyperliquid funding and open-interest
+history endpoint that had been deferred is now documented too. Separately, the wiki
+now covers four free strategy-idea sources (TradingView Community Scripts, the
+QuantConnect Strategy Library, Quantpedia, Stonehill Forex/NNFX) through a vetting-
+funnel hub page, the NNFX method, a repainting page, 17 untested strategy pages and
+11 indicator pages.
+
+**Changed:** ETF flow data now reports settled US trade days, not partial same-day
+sums. This was a breaking fix upstream: the old weekday figures were often a
+fraction of the real total. Every page that reads or backtests ETF flows now uses
+the settled history, and archived pre-2026-09-25 snapshots are flagged as partial.
+Also documented: account and connection security changes (1-hour OAuth tokens,
+wallet sign-in, exact-amount crypto payments, webhook limits), closed-bar-only
+batch candles, clock-aligned 4h moves on the heatmap, per-bar 4h trend history,
+real counts on the liquidations feed, and refresh-route behaviour.
+
+**Fixed:** Removed XRP from 17 descriptions of the ETF flow endpoint, which only
+supports BTC, ETH and SOL. Corrected two trader-data refresh routes to the Pro Plus
+tier they actually require. Merged a duplicated category row on the API hub page.
+Normalised one invalid strategy validation label.
+
+**Notes:** Sync-track iteration. The changelog state had not recorded four releases
+that earlier iterations had already documented, so they were verified and marked
+rather than redone. Every endpoint, parameter and field was checked against the
+live API schema and with live calls. The watermark is now level with the API
+changelog.
+
 ## 2026-09-23 — Sync: backtesting archive row-type metadata, safer pagination
 
 **Fixed:** Documented a subtle correctness trap in the historical funding and

@@ -2,7 +2,7 @@
 title: "Spot ETF Launches & Daily Flows — Narrative Impact"
 type: concept
 created: 2026-06-04
-updated: 2026-08-24
+updated: 2026-09-28
 status: good
 tags: [crypto, bitcoin, ethereum, event-driven, market-regime, liquidity, market-microstructure, behavioral-finance, narrative-impact]
 aliases: ["Bitcoin ETF Flows", "ETH ETF Flows", "IBIT Flows", "GBTC Outflows", "Spot ETF Net Flow Signal"]
@@ -122,7 +122,7 @@ Analog mechanisms (for cross-narrative tagging): `sentiment-shock`, `reflexive-d
 - `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window)
 
 **Historical data:**
-- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL ETF flow history. **XRP is not supported** (`400`) — no free source publishes XRP spot-ETF flow data, so a future XRP ETF launch (see "Recurrence" above) would need a different data source
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL ETF net flow per settled US `trade_date`. The default is the latest settled day; `?days=N` (1-1000) returns settled history back to 2024-01-11 (BTC), 2024-07-23 (ETH) and 2025-10-28 (SOL). The day still reporting comes back separately as `in_progress` (`status: "partial"`) and must not be added to totals. **Changed 2026-09-25:** before then, the route served a partial sum on most weekdays, because issuers were still reporting (IBIT and FBTC last). Archived `coinglass_etf_flows` snapshots and daily-snapshot ETF values from before that date carry those partial figures, so build `daily_net_etf_flow_usd` from `?days=N` instead (see [[cryptodataapi-backtesting]]). **XRP is not supported** (`400`) — no free source publishes XRP spot-ETF flow data, so a future XRP ETF launch (see "Recurrence" above) would need a different data source
 - `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
 - `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
 - `GET /api/v1/backtesting/liquidations` — liquidation records archive

@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Hyperliquid Traders"
 type: source
 created: 2026-07-13
-updated: 2026-07-20
+updated: 2026-09-28
 status: good
 tags: [data-provider, crypto, api, hyperliquid, copy-trading, smart-money, wallet-tracking, leaderboard]
 aliases: ["CryptoDataAPI Hyperliquid Traders", "CDA Hyperliquid Traders", "HL Traders API", "Hyperliquid Trader Tracking"]
@@ -22,8 +22,8 @@ The Hyperliquid Traders category of [[cryptodataapi]] tracks the humans behind [
 | GET | /api/v1/hyperliquid/wallet-positions | Current positions for tracked wallets | — | — |
 | GET | /api/v1/hyperliquid/wallet-signals | Entry/exit/size-change signals | — | — |
 | GET | /api/v1/hyperliquid/trader-profiles | Win rate, PnL, classification | — | Pro |
-| POST | /api/v1/hyperliquid/trader-profiles/refresh | Sync all profiles (15-30s) | — | Pro |
-| POST | /api/v1/hyperliquid/leaderboard/refresh | Fetch full leaderboard (~25-30s) | — | Pro |
+| POST | /api/v1/hyperliquid/trader-profiles/refresh | Sync all profiles (15-30s) | — | | Pro+ |
+| POST | /api/v1/hyperliquid/leaderboard/refresh | Fetch full leaderboard (~25-30s) | — | | Pro+ |
 | GET | /api/v1/hyperliquid/wallets/search | Search top-leaderboard pool by gates | — | — |
 | GET | /api/v1/hyperliquid/watchlist | List watchlisted addresses | — | — |
 | POST | /api/v1/hyperliquid/watchlist | Add addresses | — | Pro+ |
@@ -39,7 +39,7 @@ Tier "—" = not marked with a plan gate in the API docs; standard plan rate lim
 
 ## Live Data
 
-`/hyperliquid/top-traders`, `/hyperliquid/wallet-positions`, `/hyperliquid/wallet-signals`, `/hyperliquid/copy-signals`, and the watchlist endpoints all describe current state — who ranks now, what tracked wallets hold now, and which entries/exits/size changes just fired. The POST refresh endpoints force a re-sync of profiles or the full leaderboard.
+`/hyperliquid/top-traders`, `/hyperliquid/wallet-positions`, `/hyperliquid/wallet-signals`, `/hyperliquid/copy-signals`, and the watchlist endpoints all describe current state — who ranks now, what tracked wallets hold now, and which entries/exits/size changes just fired. The POST refresh endpoints force a re-sync of profiles or the full leaderboard. **Changed 2026-09-26 (`/hyperliquid/trader-profiles/refresh` only):** a call made while a profile rebuild is already running waits for that rebuild instead of starting another, and a call within 5 minutes of the last completed rebuild returns the current data with `refreshed: false` (response shape unchanged). The release notes do not list `/hyperliquid/leaderboard/refresh` under this change.
 
 ## Historical Data
 
@@ -73,4 +73,5 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 ## Sources
 
+- CryptoDataAPI changelog release 2026-09-26 (via `GET /api/v1/changelog`, fetched 2026-09-28) — force-refresh wait / `refreshed: false` semantics
 - https://cryptodataapi.com/api/docs (fetched 2026-07-13)

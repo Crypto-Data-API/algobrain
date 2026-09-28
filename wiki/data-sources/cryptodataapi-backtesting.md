@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Backtesting Archive"
 type: source
 created: 2026-07-13
-updated: 2026-09-23
+updated: 2026-09-28
 status: good
 tags: [data-provider, crypto, api, backtesting, historical-data, point-in-time, parquet, klines, funding, liquidations]
 aliases: ["CryptoDataAPI Backtesting", "CDA Backtesting", "CryptoDataAPI Historical Archive", "CryptoDataAPI Archives"]
@@ -69,6 +69,13 @@ Across the six endpoints that carry it: `/backtesting/klines` rows are `bar`; `/
 **`coverage` on every range reader (additive).** Each response also carries `local_first` / `local_last` (ms, the requested scope's local retention edges) and `archive_hint` (a string, else `null`, populated when the window starts before local retention — those rows live in the daily Parquet archive via `/backtesting/archives` instead). An empty `data` array is no longer silent: check `coverage` to tell "genuinely no events" from "before local retention, check the archive." For `/backtesting/hl-liquidations` specifically: live capture began **2026-07-23**; the archive also holds a pilot backfill for **2026-04-24 → 2026-05-05**; nothing exists for **2026-05-06 → 2026-07-22** — a real gap, not a collector fault, worth knowing before researching historical HL liquidations in that window.
 
 **Comma-list scoping and CSV.** `symbol` / `coin` accept up to 25 comma-separated values on `/liquidations`, `/hl-liquidations`, `/hl-liquidation-bars`, and `/hl-trade-flow` — each value rides its own index in the response (`422 too_many_values` above that). `format=csv` is now available on `/funding`, `/liquidations`, `/hl-liquidations`, `/hl-liquidation-bars`, and `/hl-trade-flow` (`/klines` already had it); in CSV mode the response has no JSON envelope, so paging state moves to the `X-Has-More` / `X-Next-Cursor` response headers instead of body fields.
+
+The live `/market-intelligence/liquidations` route has carried the same `grain` block since 2026-09-23 (`kind: rolling_window`, `sum_ok: false`), plus `row_count_meaning: "liquidation_events_24h"`. Its rows are trailing-window levels, so do not sum successive polls of it. Use `/backtesting/hl-liquidation-bars` for flow. See [[cryptodataapi-market-intelligence]].
+
+### ETF flow snapshots before 2026-09-25 are partial figures
+
+> [!warning] Do not backtest on archived ETF flow snapshots from before 2026-09-25
+> Until 2026-09-25, `/market-intelligence/etf/{asset}/flows` read Farside's newest row while issuers were still reporting (IBIT and FBTC last), so on most weekdays it served a **partial sum** stamped with the fetch time. For example, it served +$32.4M for the 2026-09-23 BTC trade date, against a settled Total of +$346.9M. The `coinglass_etf_flows` data type on `/backtesting/snapshots`, and the ETF values inside `/backtesting/daily-snapshots/{date}`, are point-in-time copies of what was served. Most weekday rows before 2026-09-25 therefore hold the partial figure, and **they are not being rewritten**. This is the rare case where the point-in-time copy is the wrong input for a flow backtest, because the live system itself was reading a wrong number. For settled history, use `GET /market-intelligence/etf/{asset}/flows?days=N` (up to 1000 settled trade days: BTC from 2024-01-11, ETH from 2024-07-23, SOL from 2025-10-28), keyed by `trade_date`. Snapshots from 2026-09-25 onward carry `trade_date`, `status` and `source`, so each row states which trade date it covers and whether it was settled. See [[cryptodataapi-market-intelligence]] for the rebuilt response.
 
 ## Live Data
 

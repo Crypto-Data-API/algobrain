@@ -148,7 +148,7 @@ Attention/flow reads for the crypto expression of narrative trading. Raw social-
 - `GET /api/v1/dex/trending` — trending pools per chain (Solana/Ethereum/Base/BSC/Arbitrum): where retail attention is concentrating right now
 - `GET /api/v1/meme/regime/score` — market-wide meme-hype 0-100 + meme_season flag (narrative-froth / saturation gauge)
 - `GET /api/v1/sentiment/fear-greed` — sentiment extremes for exhaustion timing
-- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flows: the institutional leg of an adoption narrative
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL ETF flows: the institutional leg of an adoption narrative
 
 **Historical data:**
 - `GET /api/v1/market-intelligence/fear-greed-history` — sentiment timeseries for exhaustion-pattern research

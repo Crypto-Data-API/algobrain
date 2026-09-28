@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Market Health"
 type: source
 created: 2026-07-13
-updated: 2026-07-13
+updated: 2026-09-28
 status: good
 tags: [data-provider, crypto, api, market-health, market-breadth, composite-score]
 aliases: ["CDA Market Health", "CryptoDataAPI Market Health", "cryptodataapi altcoin breadth", "cryptodataapi dual score"]
@@ -31,7 +31,7 @@ Tier "—" means the docs list no tier restriction for that endpoint.
 
 ## Live Data
 
-`/market-health`, `/market-health/summary`, `/market-health/components`, and `/market-health/component/{name}` all return the **current** dual-score state — the full breakdown, a trimmed scores-plus-sentiment view (with a markdown format for reports), or individual components. `/market-health/altcoin-breadth` reads current breadth against a chosen MA period (5-365 days, default 200). Pro+ keys can `POST /market-health/refresh` to force a recalculation.
+`/market-health`, `/market-health/summary`, `/market-health/components`, and `/market-health/component/{name}` all return the **current** dual-score state — the full breakdown, a trimmed scores-plus-sentiment view (with a markdown format for reports), or individual components. `/market-health/altcoin-breadth` reads current breadth against a chosen MA period (5-365 days, default 200). Pro+ keys can `POST /market-health/refresh` to force a recalculation. **Changed 2026-09-26:** a refresh call made while a rebuild is already running waits for that rebuild instead of starting another, and a call within 5 minutes of the last completed rebuild returns the current scores with `refreshed: false` (response shape unchanged; check `refreshed` before assuming a recompute happened).
 
 ## Historical Data
 
@@ -62,4 +62,5 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-health/al
 
 ## Sources
 
+- CryptoDataAPI changelog release 2026-09-26 (via `GET /api/v1/changelog`, fetched 2026-09-28) — force-refresh wait / `refreshed: false` semantics
 - https://cryptodataapi.com/api/docs (fetched 2026-07-13)
