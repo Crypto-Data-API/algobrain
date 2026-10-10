@@ -21,6 +21,45 @@ crowding_risk: low
 expected_sharpe: 0.6
 expected_max_drawdown: 0.40
 breakeven_cost_bps: 32
+gates:
+  - id: payments_use_case
+    role: universe
+    rule: "Primary use case is payments, remittances or on-chain settlement (XRP, XLM, XNO, CELO, REQ)"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: categories
+    note: "Keep a coin whose CoinGecko categories include Payment Solutions. No curated payments group exists on /coins/category-groups, and the primary-use-case call is a human read."
+  - id: operational_network
+    role: universe
+    rule: "An operational payment network, not just a theoretical whitepaper"
+    runnable: false
+    note: "No payment-volume or network-usage data is served."
+  - id: min_day_volume
+    role: universe
+    rule: "Live Hyperliquid perp with 24h volume at least $2M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    note: "A constituent with no row has no live HL perp (delisted perps are excluded); the page flags XNO, CELO and REQ coverage as uncertain."
+  - id: equal_weight_weekly
+    role: sizing
+    rule: "Equal-weight the constituents and rebalance weekly"
+    runnable: true
+    input: position
+  - id: adoption_news_rebalance
+    role: sizing
+    rule: "Rebalance on major payments adoption or regulatory news (e.g. a Ripple SEC resolution, new financial-institution partnerships)"
+    runnable: partial
+    endpoint: /api/v1/news/coin/{symbol}?hours=24
+    field: events[].category
+    note: "Classified news per coin (e.g. legal_resolution, partnership, constructive_policy); whether it is major is a human read."
+  - id: policy_regime
+    role: filter
+    rule: "Regulatory backdrop for cross-border payments: favour a pro-crypto policy tilt"
+    runnable: partial
+    endpoint: /api/v1/policy/regime
+    field: policy_tilt
+    note: "From the page's agent workflow and Regime Character; -1 is restrictive, +1 pro-crypto, and the page sets no cutoff."
 kill_criteria: |
   - basket drawdown > 40% from peak on a rolling 6-month basis
   - rolling 6-month Sharpe < 0 on minimum 10 completed trades

@@ -21,6 +21,132 @@ crowding_risk: medium
 expected_sharpe: 0.65
 expected_max_drawdown: 0.20
 breakeven_cost_bps: 35
+gates:
+  - id: unlock_size
+    role: universe
+    rule: "A cliff unlock releasing at least 5% of circulating supply (pct_of_float at least 0.05)"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={coin}
+    field: items[].pct_of_float
+    note: "A cliff calendar (linear vesting excluded) from DefiLlama emissions, not on-chain vesting reads; absence is not proof of no unlock. One row per coin, its soonest cliff only. Free tier sees 7 days ahead, Pro 30."
+  - id: hl_perp_listed
+    role: universe
+    rule: "The token has a live Hyperliquid perpetual"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+  - id: min_day_volume
+    role: universe
+    rule: "At least $5M of 24h Hyperliquid perp volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: unlock_window
+    role: entry
+    rule: "Open the short 7 to 14 days before the unlock date"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={coin}
+    field: items[].days_until
+  - id: funding_not_crowded_short
+    role: entry
+    rule: "Funding at entry at or above -0.02% per 8h (-0.0025%/h, -0.000025 hourly), so shorts are not already crowded"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: not_prepriced
+    role: entry
+    rule: "Price has not already fallen more than 25% over the prior 14 days"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=16
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: no_overlap
+    role: filter
+    rule: "Never hold the pre-event short and the post-unlock long together; flatten the short before the relief long"
+    runnable: true
+    input: position
+  - id: size_by_unlock
+    role: sizing
+    rule: "0.5-1.5% of book, scaled within the band by the unlock's share of circulating supply"
+    runnable: partial
+    endpoint: /api/v1/supply/unlocks?symbol={coin}
+    field: items[].pct_of_float
+    note: "The page gives no mapping from unlock size to a point in the band."
+  - id: atr_scale
+    role: sizing
+    rule: "Scale size by ATR over a 14-day lookback (atr-position-sizing)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30&atr=14
+    field: candles[].atr
+  - id: per_name_cap
+    role: sizing
+    rule: "Never more than 2% of book in one unlock trade; 2-4x isolated leverage on the short"
+    runnable: true
+    input: position
+  - id: exit_after_unlock
+    role: exit
+    rule: "Close the short on the unlock date or one day after it if it is in profit"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "Record the unlock date at entry: the unlock feeds are forward-only and drop an unlock once it passes."
+  - id: stop_loss
+    role: stop
+    rule: "Stop out when price is 15% above the short's entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: funding_crowded_tp
+    role: exit
+    rule: "Take profit when funding drops below -0.08% per 8h (-0.01%/h, -0.0001 hourly): the crowd has arrived and squeeze risk is up"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: unlock_just_passed
+    role: entry
+    rule: "Relief long: the unlock date passed within the last 2 days"
+    runnable: partial
+    endpoint: /api/v1/supply/unlocks?symbol={coin}
+    field: items[].date
+    note: "The feed is forward-only: record the date while the unlock is upcoming, because it drops off once it passes. Point-in-time boards are archived as /backtesting/snapshots data_type=token_unlocks."
+  - id: relief_predrop
+    role: entry
+    rule: "Relief long: price fell more than 15% in the 14 days before the unlock date"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    field: candles[].close
+    note: "start = 14 days before the unlock date."
+  - id: relief_stabilised
+    role: entry
+    rule: "Relief long: no further breakdown after the unlock; price stabilises or bounces within 24-48 hours"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=48
+    field: candles[].close
+    note: "The page does not define stabilising (the pseudocode calls price_stabilizing over 36h); the test is the desk's."
+  - id: relief_size
+    role: sizing
+    rule: "Relief long: 0.5-1.0% of book at 2-3x isolated leverage"
+    runnable: true
+    input: position
+  - id: relief_tp
+    role: exit
+    rule: "Relief long: take profit 15% above the entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: relief_time_stop
+    role: stop
+    rule: "Relief long: exit after 7 days, whichever comes first with relief_tp"
+    runnable: true
+    input: position
 kill_criteria: |
   - rolling 3-month strategy drawdown > 20%
   - 4 consecutive unlock shorts produce < 0 net P&L after costs (edge priced in)

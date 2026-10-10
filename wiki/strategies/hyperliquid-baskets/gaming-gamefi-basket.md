@@ -21,6 +21,48 @@ crowding_risk: medium
 expected_sharpe: 0.6
 expected_max_drawdown: 0.50
 breakeven_cost_bps: 40
+gates:
+  - id: gaming_sector
+    role: universe
+    rule: "Has an active blockchain game or gaming platform, not a gaming-adjacent infrastructure token"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].symbol
+    note: "Membership of the group with id gaming (CoinGecko gaming / play-to-earn tags plus a seed list); HL names differ from tickers for a few coins. Whether a token has a live game rather than gaming infrastructure is the desk's call."
+  - id: min_day_volume
+    role: universe
+    rule: "Hyperliquid perp 24h volume of at least $2M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: min_history_6m
+    role: universe
+    rule: "At least 6 months of trading history (no first-week listing pumps)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200
+    field: candles[].timestamp
+    note: "Eligible when the first daily bar is at least ~183 days old. This is Hyperliquid perp history; a coin traded longer elsewhere but new to HL fails."
+  - id: risk_on_regime
+    role: filter
+    rule: "Deploy only in a confirmed risk-on / alt-season regime"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "The committed regime is already confirmation-gated. broad_bull_alt_expansion and speculative_euphoria are alt-season; whether broadening_bull counts as risk-on enough is the desk's call. History starts 2026-08-07."
+  - id: equal_weight
+    role: sizing
+    rule: "Equal weight across live constituents, rebalanced weekly"
+    runnable: true
+    input: position
+  - id: event_rebalance
+    role: sizing
+    rule: "Out-of-cycle rebalance on a major game launch or platform milestone"
+    runnable: partial
+    endpoint: /api/v1/news/coin/{symbol}
+    field: events[].category
+    note: "The tape tags upgrade, partnership and listing events per coin; it has no game-launch category, so judging a launch as major is the desk's call."
 kill_criteria: |
   - basket drawdown > 50% from peak on a rolling 6-month basis
   - gaming/metaverse narrative absent from top-20 crypto narratives for > 90 days

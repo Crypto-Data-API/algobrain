@@ -2,10 +2,10 @@
 title: "CryptoDataAPI — Indicators"
 type: source
 created: 2026-07-13
-updated: 2026-09-28
+updated: 2026-10-10
 status: good
 tags: [data-provider, crypto, api, indicators, adx, rsi, bollinger-bands, moving-average, technical-analysis]
-aliases: ["CryptoDataAPI Indicators", "CDA Indicators", "Signum RGG", "CryptoDataAPI Technical State"]
+aliases: ["CryptoDataAPI Indicators", "CDA Indicators", "Signum RGG", "CryptoDataAPI Technical State", "ADX endpoint"]
 source_type: data
 source_url: "https://cryptodataapi.com/api/docs"
 confidence: high
@@ -21,7 +21,8 @@ CryptoDataAPI's Indicators section serves two pre-computed technical families so
 | GET | /api/v1/indicators/signum-rgg | ADX(14)+DMI RED/GREY/GREEN | backfillable daily klines | Pro+ |
 | GET | /api/v1/indicators/signum-rgg/{symbol} | Per-asset detail + 60d history (opt-in 1h and 4h per-bar series) | symbol, intraday, h4 | Pro+ |
 | POST | /api/v1/indicators/signum-rgg/refresh | Force recompute | — | Pro |
-| GET | /api/v1/indicators/technical | Price-structure state (SMA/BB/RSI) | — | Pro+ |
+| GET | /api/v1/indicators/adx | ADX(14), +DI, -DI per asset on 1d, 4h or 1h bars, with direction, strength and optional per-bar history | coin, interval, source, min_adx, history | Pro+ |
+| GET | /api/v1/indicators/technical | Price-structure state (SMA/BB/RSI) | symbol | Pro+ |
 | GET | /api/v1/indicators/technical/{symbol} | Per-asset detail + 60d history | symbol | Pro+ |
 | POST | /api/v1/indicators/technical/refresh | Force recompute | — | Pro |
 | GET | /api/v1/indicators/heatmap | One-call universe scan: SIGNUM colour (daily + 4h), rolling moves, 30d notional, SMA200 position | source, min_notional_30, color, color_4h, above_sma200, sort, interval | Pro+ |
@@ -31,6 +32,8 @@ CryptoDataAPI's Indicators section serves two pre-computed technical families so
 The two base endpoints — `/indicators/signum-rgg` and `/indicators/technical` — return the current classification for the whole universe in one call: the live RGG colour per asset and the live SMA/BB/RSI structure state. The POST `/refresh` endpoints force an immediate recompute when you need the state updated ahead of the scheduled cycle.
 
 **Refresh semantics (changed 2026-09-26).** A call to `POST /indicators/signum-rgg/refresh` or `/indicators/technical/refresh` made while a rebuild is already running now waits for that rebuild instead of starting another. A call within 5 minutes of the last completed rebuild returns the current data with `refreshed: false`. The response shape (`refreshed`, `count`, `timestamp`) is unchanged, but `refreshed` can now be `false`, so do not treat `false` as an error. Polling refresh faster than every 5 minutes gains nothing.
+
+**ADX per interval, coin filters, SMA-20 (2026-10-10).** `GET /indicators/adx?coin=BTC&interval=4h` serves the ADX(14), +DI and -DI that SIGNUM colours from, as numbers, on `1d`, `4h` (completed bars on the 00/04/08/12/16/20 UTC grid) or `1h`. The 1h value includes the bar forming at the hourly sweep, so it reads `final: false`. Each row also carries `direction` (+DI vs -DI) and `strength` (`strong` at ADX >= 25, `weak` below 20). `history=N` attaches the last N completed bars; on 4h and 1h that needs `coin` with at most 5 symbols. `/indicators/technical` and `/indicators/signum-rgg` now filter by `symbol` (alias `coin`, a comma list) and list any names they do not cover in `not_covered`. Both now return **400 for a parameter they do not read**: `?coin=BTC&interval=4h` used to come back 200 with the whole daily universe. Every series on `/indicators/technical` is daily, and its `ma` block gains `sma_20`, `above_20` and `dist_from_20_pct`.
 
 **`sr` support/resistance field (added 2026-08-25):** the technical-structure block on `/indicators/technical` and `/indicators/technical/{symbol}` now carries an `sr` object — `sr.support` and `sr.resistance`, each up to 3 levels, nearest-to-price first. Every level is `{price, strength, dist_pct}`: `strength` is how many swing pivots clustered into that level, and `dist_pct` is the signed % distance from mark (negative for support, positive for resistance). Levels are derived from swing-pivot detection on the same 250-day daily series already backing the rest of the technical block (no new data source), clustered within 1.5% of each other, and dropped once more than 30% away from mark. An empty `[]` on either side is a genuine "no clean level" read, not missing data — `sr` defaults to `{support: [], resistance: []}` when nothing clusters.
 

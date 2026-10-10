@@ -21,6 +21,46 @@ crowding_risk: medium
 expected_sharpe: 0.7
 expected_max_drawdown: 0.42
 breakeven_cost_bps: 28
+gates:
+  - id: is_layer1
+    role: universe
+    rule: "A Layer-1 blockchain with its own consensus, not an L2 or rollup"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].symbol
+    note: "Membership of the group with id platform (CoinGecko smart-contract-platform / layer-1 tags plus a seed list). The tags also catch non-L1s, so own consensus is the desk's check."
+  - id: general_purpose_contracts
+    role: universe
+    rule: "Supports general-purpose smart contracts"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: categories
+    note: "CoinGecko's Smart Contract Platform tag is the served signal, but it is loose (BTC carries it), so the desk confirms."
+  - id: min_day_volume
+    role: universe
+    rule: "Hyperliquid perp 24h volume of at least $5M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: tvl_above_100m
+    role: universe
+    rule: "Verifiable on-chain TVL above $100M"
+    runnable: false
+    note: "No chain-TVL feed is served."
+  - id: alt_season_rotation
+    role: filter
+    rule: "Deploy on the BTC-led bull to broadening bull rotation; stand down when BTC dominance turns back up"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "From the page's agent workflow (the body calls the basket an alt-season proxy without a hard gate): deploy on btc_led_bull to broadening_bull, stand down on rising dominance (signals.btc_dom on the same call, level only). History starts 2026-08-07."
+  - id: equal_weight
+    role: sizing
+    rule: "Equal weight across constituents, rebalanced weekly"
+    runnable: true
+    input: position
 kill_criteria: |
   - basket drawdown > 42% from peak on a rolling 6-month basis
   - rolling 6-month Sharpe < 0 on minimum 10 completed trades

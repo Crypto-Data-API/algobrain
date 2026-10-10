@@ -21,6 +21,39 @@ crowding_risk: low
 expected_sharpe: 0.7
 expected_max_drawdown: 0.35
 breakeven_cost_bps: 25
+gates:
+  - id: infrastructure_sector
+    role: universe
+    rule: "A cross-ecosystem infrastructure protocol (oracle, data availability, indexing, restaking, identity, middleware) serving at least 2 blockchain networks"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: categories
+    note: "CoinGecko categories show the sector (e.g. Oracle, Data Availability, Restaking); counting the networks a protocol serves is the desk's check."
+  - id: onchain_usage_metrics
+    role: universe
+    rule: "Has verifiable on-chain usage metrics (oracle queries, indexer queries, data blobs)"
+    runnable: false
+    note: "No protocol-usage feed is served (oracle request counts, indexer queries, DA blob volume)."
+  - id: min_day_volume
+    role: universe
+    rule: "Hyperliquid perp 24h volume of at least $3M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: early_bull_regime
+    role: filter
+    rule: "Best in late bear / early bull as a quality-alt position; trim in peak speculative regimes"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "The page's agent workflow names bottoming_accumulation, early_recovery and btc_led_bull as the window and speculative_euphoria as the trim signal. 'Best in' is a preference, not a hard gate. History starts 2026-08-07."
+  - id: equal_weight
+    role: sizing
+    rule: "Equal weight across constituents, rebalanced weekly (monthly if costs bind)"
+    runnable: true
+    input: position
 kill_criteria: |
   - basket drawdown > 35% from peak on a rolling 6-month basis
   - rolling 6-month Sharpe < 0 on minimum 10 completed trades

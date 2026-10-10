@@ -21,6 +21,165 @@ crowding_risk: medium
 expected_sharpe: 0.75
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 45
+gates:
+  - id: min_day_volume
+    role: universe
+    rule: "Hyperliquid perp with more than $5M of daily volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: recent_high
+    role: universe
+    rule: "Made a local or cycle high within the past 2-8 weeks"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=90
+    field: candles[].high
+    note: "The cycle-high reading is the 90-bar maximum falling 14-56 bars back. Which swing high counts as 'local' is the desk's definition."
+  - id: failed_new_high
+    role: universe
+    rule: "Failed to make a new high on the next attempt after that high"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=90
+    field: candles[].high
+    note: "Every later bar's high stays below the recent_high peak. What counts as an 'attempt' (how close a rally must get) is the desk's call."
+  - id: not_clean_downtrend
+    role: universe
+    rule: "Ranging or grinding lower, not in a clean downtrend (that belongs to the full-bear short book)"
+    runnable: partial
+    endpoint: /api/v1/indicators/adx?coin={coin}&interval=1d
+    field: items[].strength
+    note: "A strong ADX with direction down reads as a clean downtrend. The page sets no threshold for where 'grinding lower' ends."
+  - id: at_resistance
+    role: entry
+    rule: "Price at a major resistance or all-time-high zone: within 3% (the pseudocode tolerance)"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={coin}
+    field: items[].sr.resistance[].dist_pct
+    note: "Levels are daily swing pivots, nearest first; dist_pct is signed % from mark. Levels more than 30% away are dropped."
+  - id: resistance_tested_twice
+    role: entry
+    rule: "That level has been tested at least twice"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={coin}
+    field: items[].sr.resistance[].strength
+    note: "strength = daily swing-pivot touches clustered into the level. The page also allows 4h tests, which need 4h candles."
+  - id: no_close_above
+    role: entry
+    rule: "No close above that level during the tests, on the 4h or daily chart"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=90
+    field: candles[].close
+    note: "Use interval=4h for the 4h reading."
+  - id: rsi_bearish_divergence
+    role: entry
+    rule: "Daily RSI(14) bearish divergence: a lower RSI high while price makes a higher or equal high"
+    runnable: true
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: history[].rsi_14
+    note: "Compare rsi_14 at the two most recent price highs; history[].close is in the same rows (last 60 daily bars)."
+  - id: oi_flat_or_falling
+    role: entry
+    rule: "Open interest flat or falling over the prior 5 days: 5-day change below +1% (pseudocode)"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_close
+    note: "start = 6 days ago; change = last oi_close over the oi_close 5 bars earlier."
+  - id: price_flat_or_up
+    role: entry
+    rule: "Price flat or slightly positive over the same 5 days"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=7
+    field: candles[].close
+    note: "The page sets no band for 'flat or slightly positive'; the desk picks it."
+  - id: bearish_candle
+    role: entry
+    rule: "A bearish pattern at or near resistance: evening star, bearish engulfing, shooting star or Wyckoff UTAD"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30
+    field: candles[].open
+    note: "The candle patterns follow from open, high, low and close in the same rows; a Wyckoff UTAD is a chart-reading judgement."
+  - id: funding_positive_declining
+    role: entry
+    rule: "Funding positive but declining: latest daily mean above 0 and the 8-day slope below 0"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].funding_rate_mean
+    note: "start = 8 days ago."
+  - id: risk_sizing
+    role: sizing
+    rule: "Risk 0.5-1.0% of capital per entry; size = risk / (1.5 x daily ATR(14))"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30&atr=14
+    field: candles[].atr
+  - id: max_concurrent
+    role: sizing
+    rule: "At most 4 concurrent positions in this basket, each at no more than 3x isolated leverage"
+    runnable: true
+    input: position
+  - id: entry_trigger
+    role: entry
+    rule: "Short on the close of the confirming 4h candle, or on a retest of the breakdown level from below"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30
+    field: candles[].close
+  - id: no_chase
+    role: entry
+    rule: "Skip the entry when price is already more than 1x ATR below the distribution zone"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30&atr=14
+    field: candles[].close
+    note: "Compare the latest close with the zone low minus that row's atr."
+  - id: stop_swing_high
+    role: stop
+    rule: "Stop above the most recent swing high in the distribution zone, typically 1.2-1.5x ATR above entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: reclaim_exit
+    role: stop
+    rule: "Exit regardless of the stop when price reclaims the distribution zone on a high-volume close"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30
+    field: candles[].volume
+    note: "The close back above the zone is candles[].close in the same rows. The page does not define 'high volume' (for example a multiple of the 20-bar average)."
+  - id: tp_supports
+    role: exit
+    rule: "Take a third at the first support and a third at the second support (typically 15-40% below the zone)"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={coin}
+    field: items[].sr.support[].price
+    note: "Levels are daily swing pivots within 30% of mark, nearest first; the pseudocode falls back to 1.5x and 3x ATR below entry."
+  - id: trail_final_third
+    role: stop
+    rule: "Trail the final third with a 2x ATR(14) trailing stop"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30&atr=14
+    field: candles[].atr
+  - id: onchain_reversal
+    role: exit
+    rule: "Close when on-chain signals reverse: exchange outflows or whale accumulation"
+    runnable: partial
+    endpoint: /api/v1/on-chain/exchange-flows/{symbol}
+    field: windows.24h.net
+    note: "A negative net means outflows; windows.7d.net is the weekly read. Coverage is BTC, ETH and about 90 chain/token pairs, so many HL alts have no row. Whale accumulation is not served (/api/v1/on-chain/whales/accumulation-score answers 503 coming_soon)."
+  - id: funding_deeply_negative
+    role: exit
+    rule: "Exit when funding flips deeply negative (crowded short, rising squeeze risk)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    note: "The pseudocode's threshold (-0.15 / 365) has no stated unit, so the desk sets the cut."
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: short_crowd_rising
+    role: exit
+    rule: "Exit before a squeeze when short open interest is rising fast"
+    runnable: partial
+    endpoint: /api/v1/quant/positioning?symbol={coin}
+    field: coins.{coin}.by_type.all.short_usd
+    note: "A point-in-time snapshot of tracked accounts (at least $100K). 'Rising fast' has no threshold, and the change needs readings the desk records itself."
 kill_criteria: |
   - Rolling 6-month drawdown > 25% on the strategy book
   - 3 consecutive losing short entries on confirmed distribution setups (pattern no longer firing)

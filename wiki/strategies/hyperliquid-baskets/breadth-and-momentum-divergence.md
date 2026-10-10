@@ -21,6 +21,145 @@ crowding_risk: medium
 expected_sharpe: 0.7
 expected_max_drawdown: 0.20
 breakeven_cost_bps: 35
+gates:
+  - id: breadth_universe
+    role: universe
+    rule: "Breadth is measured over the top 100 liquid Hyperliquid perps"
+    runnable: true
+    endpoint: /api/v1/indicators/heatmap?source=hyperliquid_perp&sort=notional_30&order=desc&limit=100
+    field: items[].symbol
+    note: "Ranked by notional_30, the 30-day mean daily USD volume."
+  - id: breadth_above_50d
+    role: filter
+    rule: "Breadth leg 1 (25 of 100 points): share of the breadth universe closing above its 50-day MA"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?source=hyperliquid_perp&limit=500
+    field: items[].ma.above_50
+    note: "Count true over the breadth_universe symbols."
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: breadth_momentum_14d
+    role: filter
+    rule: "Breadth leg 2 (25 points): share of the breadth universe with a positive 14-day close-to-close return"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles/batch?coins={coin}&interval=1d&limit=15&closed_only=true
+    field: series.{coin}[].close
+    note: "coins takes up to 25 names per call, so 4 calls cover the universe. Return = last close over the first."
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: breadth_uptrend_20d
+    role: filter
+    rule: "Breadth leg 3 (25 points): share of the breadth universe in a 20-day uptrend (higher high and higher low)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles/batch?coins={coin}&interval=1d&limit=40&closed_only=true
+    field: series.{coin}[].high
+    note: "Lows are in the same rows. The page does not say how the highs and lows are compared (for example the last 20 bars against the 20 before); that is the desk's choice."
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].high
+  - id: btc_dominance_trend
+    role: filter
+    rule: "Breadth leg 4 (25 points): 10-day slope of BTC dominance, inverted so rising dominance lowers the score"
+    runnable: true
+    endpoint: /api/v1/backtesting/snapshots?data_type=cycle_regime&start={start}&limit=1000
+    field: snapshots[].data.signals.btc_dom
+    note: "start = 10 days ago (about 580 samples at the 25-minute archive tick; Pro Plus). Archived from 2026-08-07 and not backfillable, so backtests before then have no dominance leg. Today's value alone is signals.btc_dom on /api/v1/regimes/current."
+  - id: btc_eth_trend
+    role: filter
+    rule: "BTC and ETH trend against the 50-day MA: up, flat or down"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical?symbol=BTC,ETH
+    field: items[].ma.dist_from_50_pct
+    note: "The page does not define the flat band around the MA; the desk sets it."
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: state_bullish_confirm
+    role: entry
+    rule: "Bullish confirm: BTC/ETH in an uptrend and breadth score above 60; full long allocation, no filter on directional baskets"
+    runnable: partial
+    input: derived
+    inputs: [btc_eth_trend, breadth_above_50d, breadth_momentum_14d, breadth_uptrend_20d, btc_dominance_trend]
+    note: "Breadth score = the four leg gates summed (0-100); trend from btc_eth_trend. Partial because btc_eth_trend and breadth_uptrend_20d leave definitions to the desk."
+  - id: state_neutral_watch
+    role: sizing
+    rule: "Neutral/watch: BTC/ETH trending with breadth score 40-60; cut leverage on directional longs (pseudocode scalar 0.65)"
+    runnable: partial
+    input: derived
+    inputs: [btc_eth_trend, breadth_above_50d, breadth_momentum_14d, breadth_uptrend_20d, btc_dominance_trend]
+    note: "Breadth score = the four leg gates summed (0-100); trend from btc_eth_trend. Partial because btc_eth_trend and breadth_uptrend_20d leave definitions to the desk."
+  - id: state_negative_divergence
+    role: entry
+    rule: "Negative divergence: BTC/ETH near highs or rising with breadth score below 40; cut longs (scalar 0.5) and activate the distribution short book"
+    runnable: partial
+    input: derived
+    inputs: [btc_eth_trend, breadth_above_50d, breadth_momentum_14d, breadth_uptrend_20d, btc_dominance_trend]
+    note: "Breadth score = the four leg gates summed (0-100); trend from btc_eth_trend. Partial because btc_eth_trend and breadth_uptrend_20d leave definitions to the desk."
+  - id: state_breadth_collapse
+    role: entry
+    rule: "Breadth collapse: BTC/ETH falling with breadth score below 25; full bear posture via the full-bear short book"
+    runnable: partial
+    input: derived
+    inputs: [btc_eth_trend, breadth_above_50d, breadth_momentum_14d, breadth_uptrend_20d, btc_dominance_trend]
+    note: "Breadth score = the four leg gates summed (0-100); trend from btc_eth_trend. Partial because btc_eth_trend and breadth_uptrend_20d leave definitions to the desk."
+  - id: state_breadth_expansion
+    role: entry
+    rule: "Breadth expansion: breadth score rises from below 35 to above 55 within 10 days; rotate into alt-rotation longs (pseudocode scalar 0.8)"
+    runnable: partial
+    input: derived
+    inputs: [breadth_above_50d, breadth_momentum_14d, breadth_uptrend_20d, btc_dominance_trend]
+    note: "Needs the score on each of the last 10 days: rebuild legs 1-3 per day from their daily-candle replays, and leg 4 from the dominance snapshots (archived from 2026-08-07). Partial because breadth_uptrend_20d is."
+  - id: btc_below_200d_bar
+    role: filter
+    rule: "While BTC is below its 200-day MA, a bullish confirm needs a higher breadth score"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical?symbol=BTC
+    field: items[].ma.above_200
+    note: "The page gives no higher threshold; the desk sets it."
+  - id: size_by_breadth
+    role: sizing
+    rule: "Scale directional size with breadth score: above 65 full size; 40-65 at 50-75%; below 40 at 25-50%, on hedged or short-biased positions only"
+    runnable: partial
+    input: derived
+    inputs: [breadth_above_50d, breadth_momentum_14d, breadth_uptrend_20d, btc_dominance_trend]
+    note: "Breadth score = the four leg gates summed (0-100). Partial because breadth_uptrend_20d leaves its high/low method to the desk."
+  - id: confirm_state_change
+    role: exit
+    rule: "Evaluate at end of day and trade at the next open; hold until the signal state has changed on at least 2 consecutive days"
+    runnable: partial
+    input: derived
+    inputs: [state_bullish_confirm, state_neutral_watch, state_negative_divergence, state_breadth_collapse, state_breadth_expansion]
+    note: "Record the state each evaluation; partial because the states are."
+  - id: min_hold_3d
+    role: exit
+    rule: "Minimum holding period of 3 days"
+    runnable: true
+    input: position
+  - id: thin_alt_shorts
+    role: universe
+    rule: "No breadth-signal shorts on perps trading under $5M a day"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: short_leg_funding
+    role: filter
+    rule: "Prefer short legs where funding is neutral to positive (longs paying)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: short_funding_flip_exit
+    role: exit
+    rule: "Exit a short leg when its funding flips negative (shorts paying)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: short_leverage_cap
+    role: sizing
+    rule: "Breadth-collapse short legs at 2-3x on majors and 1.5-2x on alts, isolated, sized to survive a 15-20% adverse move"
+    runnable: true
+    input: position
 kill_criteria: |
   - drawdown > 20% on the basket over rolling 6 months
   - rolling 6-month Sharpe < 0

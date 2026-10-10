@@ -21,6 +21,152 @@ crowding_risk: low
 expected_sharpe: 0.60
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 45
+gates:
+  - id: min_day_volume
+    role: universe
+    rule: "Hyperliquid perp with 24h volume of at least $15M (preferred floor)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: range_resistance
+    role: entry
+    rule: "An active range of at least 5 bars on 1h (or 4h) whose resistance has been tested at least twice"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=20
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].high
+    note: "Resistance = the cluster of bar highs over the last 20 closed bars (drop the forming bar named by forming_bar_timestamp). How close a high must come to count as a test is the desk's tolerance; the page names none."
+  - id: range_support
+    role: entry
+    rule: "The same range's support has been tested at least twice"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=20
+    field: candles[].low
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].low
+    note: "Support = the cluster of bar lows; touch tolerance is the desk's call, as for range_resistance. Range midpoint = halfway between the two levels."
+  - id: breakout_close
+    role: entry
+    rule: "A bar 1-3 bars ago closed beyond the range boundary after the bar before it closed inside"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=20
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].close
+  - id: reentry_close
+    role: entry
+    rule: "The latest closed bar closes back inside the range (below broken resistance, or above broken support); enter counter to the breakout at that close"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=20
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].close
+  - id: low_volume_breakout
+    role: entry
+    rule: "Quality filter: breakout-bar volume below 1.5x its 20-bar average (at least 2 of low_volume_breakout, flat_oi_breakout, trap_wick must pass)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=24
+    field: candles[].volume
+    note: "The pseudocode uses 1.5x; the Rules text calls more than 2x suspicious."
+  - id: flat_oi_breakout
+    role: entry
+    rule: "Quality filter: open interest did not expand on the breakout bar (its oi_close at most 1.05x the prior bar's oi_close)"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    field: data[].oi_close
+    note: "start = a few hours ago; rows are closed 1h bars on the candle clock (time == candle timestamp). The bar containing now is never served."
+  - id: trap_wick
+    role: entry
+    rule: "Quality filter: the breakout bar is wick-dominated (wick beyond the boundary more than 2x the body)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=20
+    field: candles[].high
+    note: "Upside: wick = high - max(open, close); downside: min(open, close) - low; body = |close - open|, all from the same bar."
+  - id: min_reward_risk
+    role: entry
+    rule: "Reward to risk at least 1.5: distance from entry to range midpoint over distance from entry to the stop"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=20&atr=14
+    field: candles[].close
+    note: "Stop and midpoint as in stop_beyond_extreme and tp_range_midpoint."
+  - id: suppress_strong_trend
+    role: filter
+    rule: "Hard suppress when the macro trend is strong in the breakout direction"
+    runnable: partial
+    endpoint: /api/v1/indicators/adx?coin={coin}&interval=1d
+    field: items[].adx
+    note: "Suppress when adx is at least 25 and direction (+DI vs -DI) matches the breakout. The page names no ADX level; 25 is the API's 'strong' band."
+  - id: suppress_oi_confirmed_trend
+    role: filter
+    rule: "Hard suppress while the oi-confirmed-trend basket is active in the breakout direction"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=4h&start={start}
+    field: data[].oi_change_pct
+    note: "Read as OI rising across recent 4h bars while mark_close moves in the breakout direction; that page's own gates define 'active'."
+  - id: suppress_persistent_funding
+    role: filter
+    rule: "Hard suppress when funding is persistently positive (upside break) or negative (downside break)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    note: "The page sets no level or duration for 'persistently'; e.g. every one of the last 24 hourly settlements with the breakout's sign."
+  - id: stop_beyond_extreme
+    role: stop
+    rule: "Stop when price goes back beyond the failed-breakout extreme plus 0.25x ATR(14)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=20&atr=14
+    field: candles[].atr
+    note: "Level = breakout-bar high + 0.25 x atr (failed upside) or low - 0.25 x atr (failed downside), fixed at entry; compare the live mark (/hyperliquid/open-interest assets[].mark_price)."
+  - id: stall_tighten_stop
+    role: stop
+    rule: "If price has not moved toward the target within 4 bars of entry and compresses near the breakout level, tighten the stop"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=6
+    field: candles[].close
+    note: "The page does not say how far to tighten."
+  - id: tp_range_midpoint
+    role: exit
+    rule: "Primary target: the range midpoint"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: tp_opposite_boundary
+    role: exit
+    rule: "Extended target: the opposite range boundary, only if the midpoint was reached with momentum and OI or funding have not turned strongly directional"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "'With momentum' and 'strongly directional' are judgements the page does not quantify."
+  - id: retest_exit
+    role: exit
+    rule: "Cover and exit if price re-tests the breakout level from inside the range; never average down"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=6
+    field: candles[].high
+    note: "Failed upside: a bar high back at broken resistance; failed downside: a bar low back at broken support (use candles[].low)."
+  - id: cascade_oi_drop
+    role: exit
+    rule: "Cover immediately on a liquidation cascade: open interest drops sharply (with cascade_funding_flip)"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    field: data[].oi_change_pct
+    note: "The page gives no size for 'sharply'."
+  - id: cascade_funding_flip
+    role: exit
+    rule: "Cover immediately on a liquidation cascade: funding flips violently (with cascade_oi_drop)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    note: "The page gives no size for 'violently'."
+  - id: risk_sizing
+    role: sizing
+    rule: "Risk 1% of equity between entry and stop, at 2-3x (2.5x) isolated leverage"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=20&atr=14
+    field: candles[].atr
 kill_criteria: |
   - Rolling 6-month drawdown > 25% of strategy book
   - Rolling 90-day net Sharpe < 0 over ≥ 25 completed trades

@@ -21,6 +21,115 @@ crowding_risk: medium
 expected_sharpe: 0.8
 expected_max_drawdown: 0.18
 breakeven_cost_bps: 30
+gates:
+  - id: sector_membership
+    role: universe
+    rule: "Assign each perp to a sector: L1, DeFi, AI/agent, L2 or infrastructure/oracle"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].symbol
+    note: "Map the page's sectors to the curated group ids platform, defi, ai, layer2 and oracle. The page calls its table a starting point to refine, so the final mapping is the desk's."
+  - id: min_day_volume
+    role: universe
+    rule: "Each ranked asset trades more than $3M a day on its Hyperliquid perp"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: min_sector_size
+    role: universe
+    rule: "Rank a sector only when at least 4 of its assets clear min_day_volume"
+    runnable: partial
+    input: derived
+    inputs: [sector_membership, min_day_volume]
+    note: "Count per sector; partial because sector_membership is."
+  - id: momentum_14d
+    role: entry
+    rule: "Momentum score (50% of the composite): 14-day close-to-close return, percentile-ranked within the sector"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=16
+    field: candles[].close
+    note: "Use closed bars; the newest row can be the forming bar (forming_bar_timestamp)."
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: funding_7d
+    role: entry
+    rule: "Funding score (25% of the composite): mean funding over the past 7 days, percentile-ranked within the sector and inverted so the highest funding ranks lowest"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].funding_rate_mean
+    note: "start = 7 days ago; average the 7 daily means. HL funding is hourly, so x8 gives the page's 8h unit."
+  - id: oi_change_14d
+    role: entry
+    rule: "OI score (25% of the composite): 14-day open-interest change in percent, percentile-ranked within the sector"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_close
+    note: "start = 14 days ago; change = last oi_close over the first row's oi_open, minus 1."
+  - id: quintile_book
+    role: sizing
+    rule: "Long the top quintile and short the bottom quintile of the composite (top and bottom 2 in a small sector), dollar-neutral per sector, 1-3% of book per side, 2-3x isolated per leg"
+    runnable: partial
+    input: derived
+    inputs: [sector_membership, min_sector_size, momentum_14d, funding_7d, oi_change_14d]
+    note: "Composite = 0.50 x momentum_14d + 0.25 x funding_7d + 0.25 x oi_change_14d, each a 0-1 rank within the sector. Partial because sector_membership is."
+  - id: neutrality_drift
+    role: sizing
+    rule: "After each rebalance keep long and short notional within 5% of each other; correct drift above 10%"
+    runnable: true
+    input: position
+  - id: rank_drift_exit
+    role: exit
+    rule: "Hold to the weekly rebalance unless a leg's rank moves by more than 2 positions; then trim or exit it"
+    runnable: partial
+    input: position
+    note: "Compare the leg's current rank (re-ranked within the sector from momentum_14d, funding_7d and oi_change_14d) with the rank recorded at entry. Partial because sector_membership is."
+  - id: stop_loss
+    role: stop
+    rule: "Exit a leg that moves more than 20% against the position within 5 days of entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: short_funding_exit
+    role: exit
+    rule: "Cover a short leg whose funding stays below -0.08%/8h (-0.0001 per hour)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    note: "The page gives 'persistently' no length; how many consecutive hourly settlements count is the desk's call."
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: short_funding_squeeze
+    role: exit
+    rule: "Consider covering a short leg early when its funding falls below -0.10%/8h (-0.000125 per hour)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+  - id: long_funding_expensive
+    role: exit
+    rule: "Consider rebalancing early when a long leg's funding exceeds +0.15%/8h (+0.0001875 per hour)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+  - id: spread_defer
+    role: filter
+    rule: "Defer a rebalance trade while the bid-ask spread is wider than 30 bps"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: asks[].price
+    note: "spread = (asks[0].price - bids[0].price) / mid; bids[] is in the same response."
+  - id: adl_loss_cap
+    role: sizing
+    rule: "Size long legs so a worst-case ADL close costs under 0.5% of book"
+    runnable: false
+    note: "No ADL queue position or HLP exposure is served, so the worst-case ADL loss is the desk's own estimate."
+  - id: btc_dominance_filter
+    role: filter
+    rule: "Watch BTC dominance as a strategy-level filter: rising dominance compresses intra-sector dispersion"
+    runnable: partial
+    endpoint: /api/v1/backtesting/snapshots?data_type=cycle_regime&start={start}&limit=1000
+    field: snapshots[].data.signals.btc_dom
+    note: "25-minute samples archived from 2026-08-07 (Pro Plus); start = the lookback. The page sets no threshold, so what counts as rising is the desk's call."
 kill_criteria: |
   - rolling 3-month strategy drawdown > 18%
   - rolling 6-month Sharpe < 0.2

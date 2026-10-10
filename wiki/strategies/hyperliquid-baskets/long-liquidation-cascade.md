@@ -21,6 +21,127 @@ crowding_risk: medium
 expected_sharpe: 1.0
 expected_max_drawdown: 0.32
 breakeven_cost_bps: 45
+gates:
+  - id: liquid_universe
+    role: universe
+    rule: "BTC, ETH and SOL first, then liquid Hyperliquid mid-caps; never thin pairs"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    note: "The page sets no volume floor (the pseudocode's MIN_LIQUIDITY is undefined), so what counts as liquid is the desk's call."
+  - id: not_memecoin
+    role: universe
+    rule: "No memecoin pairs"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: categories
+    note: "Exclude a coin whose categories include Meme (CoinGecko tags). A coin with no profile needs a human check."
+  - id: long_cluster_in_reach
+    role: entry
+    rule: "A long-liquidation cluster sits between 1 and 6 x ATR(14, 1h) below price: within reach, cascade not started"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.levels[].dist_pct
+    note: "levels[] are the 3 nearest non-empty 0.5%-of-mark clusters on each side; side long means longs are liquidated there (downside fuel) and dist_pct is signed % from mark. Convert the ATR band with atr_1h. A cluster beyond the third bin below mark is not listed, and the map covers HL accounts of $100K or more only."
+  - id: long_cluster_size
+    role: entry
+    rule: "That cluster's notional is at least 2x the pair's average daily liquidation volume"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.levels[].total_usd
+    note: "The baseline is avg_daily_liquidations. total_usd counts accounts of $100K or more only, so it is a lower bound on the cluster."
+  - id: avg_daily_liquidations
+    role: entry
+    rule: "Baseline for long_cluster_size: the pair's average daily liquidation volume"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=1h&start={start}
+    field: data[].total_usd
+    note: "start = 30 days ago; the daily average is the sum of total_usd over the hourly bars divided by 30. Hyperliquid's own liquidation tape, from 2026-07-23."
+  - id: atr_1h
+    role: entry
+    rule: "ATR(14) on 1-hour bars: sets the 1-6 ATR cluster band and the trailing stop"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=30&atr=14
+    field: candles[].atr
+  - id: funding_crowd_long
+    role: entry
+    rule: "Hourly funding positive or near zero, so the crowd is net long (optional; confirmation 1 of 3, see confirmations_2_of_3)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: momentum_toward_cluster
+    role: entry
+    rule: "Last 1-hour candle bearish or neutral (close at or below its open): price drifting toward the cluster"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=3
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].close
+    note: "Compare the last closed bar's close with its open; drop the forming bar named by forming_bar_timestamp."
+  - id: sell_flow_15m
+    role: entry
+    rule: "Taker sell volume exceeds buy volume over the last 15 minutes (confirmation 2 of 3, see confirmations_2_of_3)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=15
+    field: data[].cvd_usd
+    replay: /api/v1/backtesting/hl-trade-flow?coin={coin}&start={start}&end={end}
+    replay_field: data[].sell_notional
+    note: "cvd_usd on the last row is buy minus sell notional since window_start, so below 0 means sellers dominate (the pseudocode's buy/sell ratio below 0.97 is slightly stricter). Replay compares summed sell_notional with buy_notional."
+  - id: oi_elevated
+    role: entry
+    rule: "Open interest at least 1.2x its 7-day mean (confirmation 3 of 3, see confirmations_2_of_3)"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    field: data[].oi_close
+    note: "start = 7 days ago; latest oi_close over the mean of the hourly oi_close values."
+  - id: confirmations_2_of_3
+    role: entry
+    rule: "At least 2 of the 3 confirmations hold (funding, sell flow, open interest)"
+    runnable: true
+    input: derived
+    inputs: [funding_crowd_long, sell_flow_15m, oi_elevated]
+    note: "The pseudocode's count; the Rules section lists all five entry criteria without one."
+  - id: position_size
+    role: sizing
+    rule: "4-7% of basket equity per trade, market short at 3-5x isolated; max 1 concurrent position; never pyramid"
+    runnable: true
+    input: position
+  - id: tp_cluster_bottom
+    role: exit
+    rule: "Close 60% when price reaches the bottom of the identified cluster"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: tp_overshoot
+    role: exit
+    rule: "Close the remaining 40% when price is 2% below the cluster bottom"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: stop_loss
+    role: stop
+    rule: "Hard stop 5% above the entry fill"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: atr_trailing_stop
+    role: stop
+    rule: "Trailing stop 1.5 x ATR(14, 1h) above the current price, ratcheting down only"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=30&atr=14
+    field: candles[].atr
+    note: "The pseudocode pins this stop at entry + 1.5 ATR (it never trails); this gate follows the rule text."
+  - id: time_stop
+    role: stop
+    rule: "Exit after 4 hours in the trade: a cascade that has not fired by then is not firing from this setup"
+    runnable: true
+    input: position
 kill_criteria: |
   - Win rate drops below 48% over trailing 20 completed trades
   - Three consecutive full stop-outs (each > 10% drawdown on position)

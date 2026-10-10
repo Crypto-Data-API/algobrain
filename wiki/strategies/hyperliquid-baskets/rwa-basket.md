@@ -21,6 +21,44 @@ crowding_risk: low
 expected_sharpe: 0.7
 expected_max_drawdown: 0.38
 breakeven_cost_bps: 32
+gates:
+  - id: hl_perp_listed
+    role: universe
+    rule: "Constituent has a live Hyperliquid perp; confirm every week"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "assets[] lists live perps only; /hyperliquid/meta still carries delisted ones."
+  - id: rwa_sector
+    role: universe
+    rule: "Tokenises real-world assets (government bonds, private credit, real estate, commodities) or runs the infrastructure for regulated on-chain securities"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].symbol
+    note: "Members of the group with id rwa: seeded LINK, ONDO, MKR, PENDLE, ENA, OM, POLYX, RSR, CFG plus CoinGecko RWA tags. The group is broader than the page's list, so which members really tokenise assets is the desk's call."
+  - id: onchain_tvl_or_loan_book
+    role: universe
+    rule: "Has a verifiable on-chain TVL or loan book"
+    runnable: false
+    note: "We serve no per-protocol TVL or loan-book figure."
+  - id: min_day_volume
+    role: universe
+    rule: "At least $1.5M of 24h Hyperliquid perp volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: equal_weight
+    role: sizing
+    rule: "Equal-weight the constituents"
+    runnable: true
+    input: position
+  - id: institutional_event_rebalance
+    role: sizing
+    rule: "Rebalance out of cycle on a major institutional announcement (a tokenised-fund launch, a protocol upgrade, a regulatory approval)"
+    runnable: partial
+    endpoint: /api/v1/news/coin/{coin}?hours=24
+    field: events[].category
+    note: "Categories partnership, upgrade, etf_approval and constructive_policy carry these. How big an announcement must be is a human judgement."
 kill_criteria: |
   - basket drawdown > 38% from peak on a rolling 6-month basis
   - rolling 6-month Sharpe < 0 on minimum 10 completed trades

@@ -2,12 +2,21 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-09-28
+updated: 2026-10-10
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-10-10 — Runnable gates on the 51 Hyperliquid basket strategy pages
+
+**Scope:** A desk tester reported that strategy pages "name numbers the API does not serve" and asked for one endpoint and one field per gate, or a gate marked not runnable. Every condition on the 51 [[hyperliquid-baskets-overview|Hyperliquid basket]] strategy pages (universe, entry, filter, exit, stop, sizing) is now a `gates:` frontmatter entry: 659 gates, of which 417 are runnable, 207 partial and 35 not runnable. Schema in CLAUDE.md ("Gates"). Every route, query parameter and field was checked against the API's OpenAPI spec with `scripts/validate_algobrain_gates.py` (crypto-data-api repo), and against production with `--live`.
+
+- **Edits:** only frontmatter `gates:` blocks were added to the basket pages; no prose changed. `input: position` marks own-position rules (time stops, entry-fill stops), and `input: derived` + `inputs` marks composites built from other gates.
+- **Not runnable, and why:** the most common gaps are macro liquidity series (Fed/ECB/BoJ balance sheets, TGA, RRP, DXY, an equity index), per-protocol TVL and revenue, social-volume data, and HLP/ADL risk. Each gate's `note` names the missing data.
+- **Page contradictions found** (each recorded in the relevant gate `note`; the prose was not edited): rule text and pseudocode disagree on thresholds on several pages, e.g. failed-breakout's volume filter (2x vs 1.5x), range-mean-reversion's volume spike (2x vs 1.8x), trend-pullback's max hold (5 vs 10 days), oi-price-exhaustion's 20-day vs 20-bar high, and liquidity-vacuum's refill ratio. Several "trailing" stops in pseudocode never trail.
+- **API pages:** [[cryptodataapi-indicators]] documents `/indicators/adx`, the `symbol` filter and the SMA-20 fields. [[cryptodataapi-strategy-library]] documents the new search ranking (`match`) and `gates`.
 
 ## 2026-09-28 — Sync: absorbed CryptoDataAPI releases 2026-09-09 → 2026-09-28 (9 releases)
 

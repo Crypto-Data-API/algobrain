@@ -21,6 +21,73 @@ crowding_risk: medium
 expected_sharpe: 0.9
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 20
+gates:
+  - id: funding_rank_top
+    role: universe
+    rule: "Rank Hyperliquid perps by 7-day average funding, descending; take the top 5-8 that pass the other screens"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].funding_rate_mean
+    note: "start = 7 days ago; average the 7 daily funding_rate_mean values (hourly units). coin accepts a comma list of up to 25, so the full universe takes a few calls. Pro Plus."
+  - id: funding_7d_min
+    role: universe
+    rule: "7-day average funding at least +0.05%/8h (+0.00625%/h, 0.0000625 per hour)"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].funding_rate_mean
+  - id: min_day_volume
+    role: universe
+    rule: "Hyperliquid perp 24h volume of at least $5M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: short_side_share
+    role: universe
+    rule: "Short side at least 15% of open interest, else a squeeze is imminent and the perp is skipped"
+    runnable: partial
+    endpoint: /api/v1/quant/positioning?symbol={coin}
+    field: coins.{coin}.by_type.all.short_usd
+    note: "Perp OI is always equal long and short, so the rule only makes sense as a positioning share: short_usd over gross_usd across tracked Hyperliquid accounts (at least $100K account value), not every account."
+  - id: no_unlock_or_catalyst
+    role: universe
+    rule: "No imminent major unlock or catalyst within 7 days"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?symbol={coin}&window_days=7
+    field: items[].days_until
+    note: "The calendar covers scheduled unlocks, mints and macro prints; an unscheduled catalyst (partnership, listing) is the desk's call."
+  - id: equal_weight_shorts
+    role: sizing
+    rule: "Short the selected perps at equal notional, rebuilt weekly"
+    runnable: true
+    input: position
+  - id: btc_beta_hedge
+    role: sizing
+    rule: "Long BTC-PERP (or ETH-PERP) at 1:1 of total short notional to hedge BTC beta"
+    runnable: true
+    input: position
+    note: "The optional adjustment by 30-day BTC correlation needs daily closes (/hyperliquid/candles/batch?coins=X,BTC&interval=1d&limit=31)."
+  - id: exit_funding_low
+    role: exit
+    rule: "Exit a leg when its funding drops below +0.02%/8h (+0.0025%/h, 0.000025 per hour)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: exit_short_share
+    role: exit
+    rule: "Exit a leg when the short side drops below 10% of open interest (squeeze precondition)"
+    runnable: partial
+    endpoint: /api/v1/quant/positioning?symbol={coin}
+    field: coins.{coin}.by_type.all.short_usd
+    note: "Same positioning-share reading as short_side_share."
+  - id: squeeze_gap_stop
+    role: stop
+    rule: "Exit a leg immediately if it gaps more than 25% against the short in under 4 hours"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=5
+    field: candles[].high
+    note: "Highest high of the last 4 hourly bars vs the close 4 bars ago."
 kill_criteria: |
   - basket drawdown > 25% from peak on a rolling 6-month basis
   - rolling 6-month Sharpe < 0 on minimum 15 completed trades

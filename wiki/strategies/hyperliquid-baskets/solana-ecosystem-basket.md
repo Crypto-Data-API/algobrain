@@ -21,6 +21,46 @@ crowding_risk: high
 expected_sharpe: 0.7
 expected_max_drawdown: 0.50
 breakeven_cost_bps: 35
+gates:
+  - id: hl_perp_listed
+    role: universe
+    rule: "Constituent has a live Hyperliquid perp"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "Hyperliquid lists BONK as kBONK. assets[] lists live perps only."
+  - id: solana_native
+    role: universe
+    rule: "Primary activity is on Solana mainnet, not just Solana-adjacent"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].symbol
+    note: "Members of the group with id solana-eco: seeded SOL, JUP, JTO, RAY, PYTH, WIF, BONK, W, TNSR, DRIFT plus CoinGecko Solana Ecosystem tags. HNT is not seeded. Native versus adjacent is the desk's call."
+  - id: min_day_volume
+    role: universe
+    rule: "At least $3M of 24h Hyperliquid perp volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: solana_season_on
+    role: entry
+    rule: "Activate the basket only while SOL has outperformed ETH by more than 10% over the last 30 days (the SOL/ETH ratio rising)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles/batch?coins=SOL,ETH&interval=1d&limit=31&closed_only=true
+    field: series.{coin}[].close
+    note: "SOL/ETH = the SOL close over the ETH close; compare the latest ratio with the one 30 days back."
+  - id: solana_season_off
+    role: exit
+    rule: "Flat the whole basket when the SOL/ETH ratio falls more than 15% from its peak"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles/batch?coins=SOL,ETH&interval=1d&limit=365&closed_only=true
+    field: series.{coin}[].close
+    note: "Peak = the highest SOL/ETH close since activation; set limit to reach back to it."
+  - id: equal_weight
+    role: sizing
+    rule: "Equal-weight the constituents"
+    runnable: true
+    input: position
 kill_criteria: |
   - basket drawdown > 50% from peak on a rolling 6-month basis
   - SOL falls below its 90-day MA for > 20 consecutive days (Solana season is over)

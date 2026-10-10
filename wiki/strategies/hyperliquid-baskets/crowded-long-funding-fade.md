@@ -21,6 +21,99 @@ crowding_risk: medium
 expected_sharpe: 0.85
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 35
+gates:
+  - id: min_day_volume
+    role: universe
+    rule: "Hyperliquid perp with 24h volume above $20M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: min_open_interest
+    role: universe
+    rule: "Open interest above $10M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+  - id: not_memecoin
+    role: universe
+    rule: "Majors and liquid mid-caps only; no thin or memecoin perps"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: categories
+    note: "Exclude a coin whose categories include Meme. Which mid-caps count as liquid enough is the desk's call."
+  - id: funding_crowded
+    role: entry
+    rule: "Hourly funding above +0.05%/h (0.0005) on each of the last 2 settlements"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=2
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: oi_elevated
+    role: entry
+    rule: "Open interest at least 1.3x its 30-day mean: latest oi_close over the mean of the last 30 daily bars"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_close
+    note: "start = 30 days ago. Daily bars begin 2026-03-30 (no historical OI before that exists)."
+  - id: near_resistance
+    role: entry
+    rule: "Price within 5% below the nearest resistance (either this or extended_from_20d)"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={coin}
+    field: items[].sr.resistance[].dist_pct
+    note: "Levels are daily swing pivots, nearest first; dist_pct is signed % from mark."
+  - id: extended_from_20d
+    role: entry
+    rule: "Price more than 15% above its 20-day moving average (either this or near_resistance)"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={coin}
+    field: items[].ma.dist_from_20_pct
+  - id: no_bullish_catalyst
+    role: entry
+    rule: "No confirmed major bullish catalyst for the coin in the next 24 hours"
+    runnable: partial
+    endpoint: /api/v1/event/calendar
+    field: items[].days_until
+    note: "The calendar covers scheduled unlocks, mints and macro prints (rows whose symbols include the coin, days_until 0-1). An expected ETF decision or protocol upgrade not on it is a human judgement."
+  - id: tp_funding_normalised
+    role: exit
+    rule: "Close 50% when hourly funding falls below +0.01%/h (0.0001)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+  - id: tp_price_drop
+    role: exit
+    rule: "Close the remaining 50% when price is 8-12% below the entry fill"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: tp_oi_unwound
+    role: exit
+    rule: "Close all when open interest is back at its 30-day mean"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_close
+  - id: stop_loss
+    role: stop
+    rule: "Hard stop 8% above the entry fill"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: time_stop
+    role: stop
+    rule: "Exit after 4 calendar days in the trade"
+    runnable: true
+    input: position
+  - id: systemic_funding
+    role: sizing
+    rule: "Cut size to 2% when funding is strongly positive on more than 5 major pairs at once"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].funding_rate
+    note: "Count majors with funding above +0.05%/h; which pairs are majors (BTC, ETH, SOL, ...) is the desk's list."
 kill_criteria: |
   - Rolling 3-month Sharpe < 0 after minimum 15 trades
   - Three consecutive full stop-outs (each > 8% drawdown on position)

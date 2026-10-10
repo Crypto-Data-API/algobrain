@@ -21,6 +21,197 @@ crowding_risk: high
 expected_sharpe: 0.5
 expected_max_drawdown: 0.45
 breakeven_cost_bps: 55
+gates:
+  - id: btc_dominance_falling
+    role: filter
+    rule: "Regime vote 1 of 5 (see meme_regime_vote): BTC dominance down more than 3% over 14 days"
+    runnable: true
+    endpoint: /api/v1/backtesting/snapshots?data_type=cycle_regime&start={start}&limit=1000
+    field: snapshots[].data.signals.btc_dom
+    note: "start = 14 days ago (about 800 rows); compare the latest btc_dom with the first. Snapshots tick about every 25 minutes from 2026-08-07 (Pro Plus). btc_dom is BTC's % share of the tracked-coin market cap; the page does not say whether -3% is points or relative (the pseudocode's -0.03 reads as relative)."
+  - id: meme_mcap_rising
+    role: filter
+    rule: "Regime vote 2 of 5 (see meme_regime_vote): aggregate meme market cap up more than 30% over 7 days"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].price_change_7d_pct
+    note: "Use the group with id meme: its 7-day change is the market-cap-weighted mean of price_change_7d_pct (weights coins[].market_cap). That assumes supply did not change, and covers the top 100 tracked memes only; no meme market-cap series is served."
+  - id: social_volume_spike
+    role: filter
+    rule: "Regime vote 3 of 5 (see meme_regime_vote): social mention velocity more than 2 sigma above its 30-day baseline for at least 3 meme tokens"
+    runnable: false
+    note: "No social-volume or mention-velocity feed is served (Santiment-style). /meme/regime vol_spike is trading volume, not social."
+  - id: meme_funding_elevated
+    role: filter
+    rule: "Regime vote 4 of 5 (see meme_regime_vote): average funding across meme perps between +0.05% and +0.20% per 8h (0.0000625 to 0.00025 per hour)"
+    runnable: true
+    endpoint: /api/v1/meme/regime?source=hyperliquid_perp
+    field: items[].meme.funding_rate
+    note: "Mean of the hourly funding_rate across the rows. /meme/regime/score median_funding_rate is the outlier-proof variant."
+  - id: new_wallet_activity
+    role: filter
+    rule: "Regime vote 5 of 5 (see meme_regime_vote): Hyperliquid new-depositor count or new meme-token addresses more than 1 sigma above the 30-day baseline"
+    runnable: false
+    note: "No HL new-depositor series or on-chain new-address counts are served."
+  - id: meme_regime_vote
+    role: filter
+    rule: "Mandatory regime gate: the meme-speculative regime is confirmed when at least 3 of the 5 votes hold"
+    runnable: false
+    input: derived
+    inputs: [btc_dominance_falling, meme_mcap_rising, social_volume_spike, meme_funding_elevated, new_wallet_activity]
+    note: "Votes 3 (social volume) and 5 (new wallets) are not served, so the vote cannot be counted as written; the 3 computable votes all holding still confirms it. meme_season_flag is the API's own stand-in."
+  - id: meme_season_flag
+    role: filter
+    rule: "Stand-in for meme_regime_vote while votes 3 and 5 are not runnable: the API's own meme-season call"
+    runnable: partial
+    endpoint: /api/v1/meme/regime/score
+    field: meme_season
+    note: "meme_season is the API's composite (breadth heating, cross-meme correlation, funding), not the page's 5-condition vote."
+  - id: meme_universe
+    role: universe
+    rule: "Active Hyperliquid meme perps only"
+    runnable: true
+    endpoint: /api/v1/meme/regime?source=hyperliquid_perp
+    field: items[].hl_symbol
+  - id: min_day_volume
+    role: universe
+    rule: "24h perp volume at least $2M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: viral_social_moment
+    role: universe
+    rule: "Prefer tokens with a recent viral social moment (launch meme, celebrity mention, viral thread)"
+    runnable: false
+    note: "No social or influencer-mention feed is served."
+  - id: oi_rising_7d
+    role: universe
+    rule: "Open interest rising over 7 days"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_close
+    note: "start = 7 days ago; latest oi_close above the first bar's oi_open (or a positive slope across the bars)."
+  - id: funding_positive
+    role: universe
+    rule: "Funding positive: above +0.05%/8h (0.0000625/h)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: listing_recency
+    role: universe
+    rule: "Prefer fresh narratives: listed on HL under 6 months ago, or on a major CEX within 30 days"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1w&limit=30
+    field: candles[].timestamp
+    note: "HL bars start at the perp's listing, so a first weekly bar under 26 weeks old means a recent HL listing. CEX listing dates are not served."
+  - id: entry_window
+    role: entry
+    rule: "Enter within the first 72 hours of the social-volume spike and regime confirmation"
+    runnable: false
+    note: "The social-volume spike has no served timestamp (see social_volume_spike); only the regime-confirmation half can be timed."
+  - id: max_concurrent
+    role: sizing
+    rule: "At most 4 meme longs at once, 2-3x leverage, isolated margin on every leg"
+    runnable: true
+    input: position
+  - id: atr_sizing
+    role: sizing
+    rule: "0.5-1.5% of book per name, scaled by the 7-day ATR"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=20&atr=7
+    field: candles[].atr
+  - id: peak_funding_hot
+    role: exit
+    rule: "Peak signal 1 of 5 (see cycle_peak): basket-average funding above +0.25%/8h (0.0003125/h) and trending higher"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].funding_rate_mean
+    note: "start = 7 days ago, per held coin. Average the latest bar across the basket for the level; trending higher means it rose over the last bars."
+  - id: peak_short_oi_collapsed
+    role: exit
+    rule: "Peak signal 2 of 5 (see cycle_peak): short open interest under 10% of total on the basket (the squeeze is complete)"
+    runnable: partial
+    endpoint: /api/v1/quant/positioning?symbol={coin}
+    field: coins.{coin}.by_type.all.short_usd
+    note: "Short share = short_usd / gross_usd across held coins. It covers tracked HL accounts of $100K or more, not all open interest."
+  - id: peak_btc_dominance_recovering
+    role: exit
+    rule: "Peak signal 3 of 5 (see cycle_peak): BTC dominance up more than 2% over 7 days off its trough"
+    runnable: true
+    endpoint: /api/v1/backtesting/snapshots?data_type=cycle_regime&start={start}&limit=1000
+    field: snapshots[].data.signals.btc_dom
+    note: "start = 7 days ago (about 400 rows); compare the latest btc_dom with the window's minimum. Same 25-minute cadence, 2026-08-07 start and Pro Plus scope as btc_dominance_falling."
+  - id: peak_social_fading
+    role: exit
+    rule: "Peak signal 4 of 5 (see cycle_peak): the social-volume spike is more than 48 hours old and declining"
+    runnable: false
+    note: "No social-volume feed is served."
+  - id: peak_profit_100pct
+    role: exit
+    rule: "Peak signal 5 of 5 (see cycle_peak), and take profit: price more than 100% above the entry fill"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: cycle_peak
+    role: exit
+    rule: "Exit all longs within 4 hours when at least 3 of the 5 peak signals fire"
+    runnable: false
+    input: derived
+    inputs: [peak_funding_hot, peak_short_oi_collapsed, peak_btc_dominance_recovering, peak_social_fading, peak_profit_100pct]
+    note: "peak_social_fading is not served, so the count can miss a vote; any 3 of the other 4 firing still triggers the exit."
+  - id: hard_stop
+    role: stop
+    rule: "Hard stop 35% below the entry fill on any single position; never average down"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: regime_time_stop
+    role: stop
+    rule: "Exit all positions if the meme-speculative regime is not re-confirmed within 30 days of entry"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/meme/regime/score
+    field: meme_season
+    note: "Uses meme_season as the confirmation (see meme_season_flag), because meme_regime_vote cannot be fully computed."
+  - id: funding_stop
+    role: stop
+    rule: "Exit within the next 8 hours when funding on a held position exceeds +0.35%/8h (0.0004375/h)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+  - id: short_after_longs_exited
+    role: entry
+    rule: "Post-peak shorts only once the long book is fully exited"
+    runnable: true
+    input: position
+  - id: short_overextended
+    role: entry
+    rule: "Short the most overextended names: highest peak funding, largest gain since the cycle start, open interest furthest off its peak"
+    runnable: partial
+    endpoint: /api/v1/meme/regime?source=hyperliquid_perp
+    field: items[].meme.ret_30d
+    note: "ret_30d (or ret_90d) stands in for the gain since the cycle start, whose date is the desk's. Peak funding and OI off-peak come from /backtesting/hl-funding-bars (funding_rate_mean, oi_close)."
+  - id: short_size
+    role: sizing
+    rule: "Post-peak shorts at most 0.5% of book per name, 2x leverage"
+    runnable: true
+    input: position
+  - id: short_stop
+    role: stop
+    rule: "Cover a post-peak short 15% above the entry fill"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: short_time_stop
+    role: stop
+    rule: "Cover a post-peak short within 5 days"
+    runnable: true
+    input: position
 kill_criteria: |
   - single trade drawdown > 35% on any open meme long (hard stop — no exceptions)
   - portfolio drawdown on the basket > 40% peak-to-trough

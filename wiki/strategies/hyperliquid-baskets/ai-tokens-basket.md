@@ -21,6 +21,52 @@ crowding_risk: high
 expected_sharpe: 0.7
 expected_max_drawdown: 0.45
 breakeven_cost_bps: 35
+gates:
+  - id: in_ai_sector
+    role: universe
+    rule: "Token with an explicit AI or ML use case in the protocol design, not just an AI name"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].symbol
+    note: "Read the row whose id is ai (curated seed list plus CoinGecko AI tags). Whether the protocol really uses AI/ML rather than carrying an AI name is the desk's call. CoinGecko tickers can differ from HL perp names (RENDER vs RNDR)."
+  - id: min_day_volume
+    role: universe
+    rule: "At least $2M daily Hyperliquid perp volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    note: "Rolling 24h notional. A token missing from assets[] has no live HL perp."
+  - id: min_market_cap
+    role: universe
+    rule: "Market cap above $100M; micro-cap AI memes belong to the meme-coin basket"
+    runnable: true
+    endpoint: /api/v1/coins/{symbol}
+    field: market_cap
+  - id: equal_weight
+    role: sizing
+    rule: "Equal-weight across active constituents, rebalanced weekly"
+    runnable: partial
+    input: derived
+    inputs: [in_ai_sector, min_day_volume, min_market_cap]
+    note: "Weights the names that pass the universe gates; in_ai_sector leaves the AI-use-case call to the desk."
+  - id: spike_rebalance
+    role: sizing
+    rule: "Rebalance out of cycle when any constituent's 7-day return is above +40% or below -40%"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=9
+    field: candles[].close
+    note: "7-day return = latest closed bar's close over the close 7 bars earlier; the newest row can be the forming bar (forming_bar_timestamp)."
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: hmm_regime_gate
+    role: filter
+    rule: "Deploy in the strong_trend_bull market regime; stand down in choppy_high_vol and vol_spike"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    note: "From the page's agent workflow. It does not say what to do in range_low_vol, strong_trend_bear or squeeze; that is the desk's call."
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
 kill_criteria: |
   - basket drawdown > 45% from peak on a rolling 6-month basis
   - rolling 6-month Sharpe < 0 on minimum 10 completed trades

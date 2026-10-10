@@ -21,6 +21,70 @@ crowding_risk: medium
 expected_sharpe: 0.7
 expected_max_drawdown: 0.38
 breakeven_cost_bps: 28
+gates:
+  - id: in_defi_sector
+    role: universe
+    rule: "Token of an on-chain DeFi protocol: lending, DEX, derivatives or yield"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].symbol
+    note: "Read the rows whose id is defi, dex, lending or derivatives; the page's eight names span all four curated groups. Final membership is the desk's list."
+  - id: min_day_volume
+    role: universe
+    rule: "At least $3M daily Hyperliquid perp volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    note: "Rolling 24h notional. A token missing from assets[] has no live HL perp."
+  - id: protocol_revenue_or_tvl
+    role: universe
+    rule: "Verifiable on-chain protocol revenue or TVL; pure governance tokens with no revenue are secondary"
+    runnable: false
+    note: "No per-protocol TVL or revenue field is served."
+  - id: mainnet_12m
+    role: universe
+    rule: "At least 12 months of mainnet operation"
+    runnable: false
+    note: "No protocol launch or mainnet date is served; coin profiles carry ath/atl dates, not a genesis date."
+  - id: min_constituents
+    role: universe
+    rule: "At least 5 constituents must qualify for the basket to run"
+    runnable: partial
+    input: derived
+    inputs: [in_defi_sector, min_day_volume]
+    note: "Count the sector names that clear min_day_volume; fewer than 5 means stand down. Membership is partial (see in_defi_sector)."
+  - id: equal_weight
+    role: sizing
+    rule: "Equal-weight across active constituents; rebalance weekly, review eligibility monthly"
+    runnable: partial
+    input: derived
+    inputs: [in_defi_sector, min_day_volume, min_constituents]
+    note: "Weights the names that pass the served universe gates; protocol_revenue_or_tvl and mainnet_12m (not runnable) are human screens applied before weighting."
+  - id: vol_dispersion_switch
+    role: sizing
+    rule: "Optionally switch to vol-weighting when constituent volatility dispersion exceeds 2x (highest over lowest 30-day realised vol)"
+    runnable: true
+    endpoint: /api/v1/volatility/regime?limit=500
+    field: items[].vol.rv_gk_30
+    note: "Pick the constituent rows by symbol; rv_gk_30 is annualised Garman-Klass vol in percent."
+  - id: hmm_trend_bull
+    role: filter
+    rule: "The market HMM regime is strong_trend_bull, with ETH participating"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    note: "From the page's agent workflow. 'ETH participation' has no measure on the page; regime.label from /api/v1/quant/coins/ETH is one reading."
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+  - id: cycle_broad_bull
+    role: filter
+    rule: "Cycle regime is Broadening Bull or Broad Bull: broadening_bull or broad_bull_alt_expansion"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    note: "From the page's agent workflow. History starts 2026-08-07 and cannot be backfilled."
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
 kill_criteria: |
   - basket drawdown > 38% from peak on a rolling 6-month basis
   - rolling 6-month Sharpe < 0 on minimum 10 completed trades

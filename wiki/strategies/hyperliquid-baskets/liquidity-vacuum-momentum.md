@@ -21,6 +21,162 @@ crowding_risk: low
 expected_sharpe: 1.10
 expected_max_drawdown: 0.30
 breakeven_cost_bps: 60
+gates:
+  - id: min_open_interest
+    role: universe
+    rule: "Hyperliquid perp with open interest above $50M (never below $10M, where thin books are the norm)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+  - id: min_day_volume
+    role: universe
+    rule: "24h volume above $50M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: vacuum_ask_thin
+    role: entry
+    rule: "Ask depth within 0.5% of mid below 1/3 of bid depth: long signal (either this or vacuum_bid_thin)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: asks[].size
+    note: "Sum asks[].size priced at or below mid x 1.005 and divide by the same sum over bids[] (mid = (best bid + best ask) / 2). HL's snapshot is about 20 levels a side, which on BTC/ETH reaches only a few bps from mid, so the ratio covers the visible levels, not the full 0.5% band."
+  - id: vacuum_bid_thin
+    role: entry
+    rule: "Bid depth within 0.5% of mid below 1/3 of ask depth: short signal (either this or vacuum_ask_thin)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: bids[].size
+    note: "Mirror of vacuum_ask_thin: bids[].size priced at or above mid x 0.995 over the same sum for asks[]. Same ~20-level caveat."
+  - id: vacuum_persists
+    role: entry
+    rule: "The imbalance held on at least 2 consecutive 1-minute closes: thin-side / deep-side depth within 0.5% of mid below 1/3 on the last 2 samples"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth/{coin}?minutes=60
+    field: history[].depth_usd.ask.50bps
+    note: "Divide by history[].depth_usd.bid.50bps of the same sample (the reverse for bid-thin). The sampler targets one snapshot every 2 minutes but skips under load: on 2026-10-10 BTC had 4 samples in the last hour, so a 6-minute window is usually empty and 1-minute consecutiveness cannot be checked. Use the last 2 samples whatever their spacing. Covers only the top-25 HL perps by volume. levels_truncated.ask.50bps true means the ~20-level snapshot ran out before 0.5%, so that depth is a floor; history[].imbalance_10bps (+0.5 = ask/bid of 1/3) is the same test at 10bps."
+  - id: near_sr_level
+    role: entry
+    rule: "Price within 0.5% of a support or resistance cluster (one of three levels, see near_key_level)"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={coin}
+    field: items[].sr.resistance[].dist_pct
+    note: "Test |dist_pct| <= 0.5 on sr.resistance[] and sr.support[] alike. Levels are daily swing pivots, nearest first; dist_pct is signed % from price."
+  - id: near_4h_swing
+    role: entry
+    rule: "Price within 0.5% of a 4H swing high or swing low (one of three levels, see near_key_level)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60
+    field: candles[].high
+    note: "A swing high is a bar whose high tops the 2 bars either side; swing lows likewise on candles[].low."
+  - id: near_vwap
+    role: entry
+    rule: "Price within 0.5% of VWAP (one of three levels, see near_key_level)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=240
+    field: data[].vwap
+    note: "data[] holds one VWAP per minute; a window VWAP is their mean weighted by buy_notional + sell_notional. The page names no anchor (session, day, 4H), so the window is the desk's."
+  - id: near_key_level
+    role: entry
+    rule: "Price is near a key level: any of the S/R, 4H swing or VWAP tests holds"
+    runnable: partial
+    input: derived
+    inputs: [near_sr_level, near_4h_swing, near_vwap]
+    note: "near_sr_level and near_4h_swing are runnable on their own; only the VWAP leg needs the desk's anchor."
+  - id: catalyst_large_liquidation
+    role: entry
+    rule: "A liquidation above $500K notional on the opposing side in the prior 5 minutes: shorts liquidated for an ask-thin long, longs for a bid-thin short (catalyst 1 of 3, see confirming_catalyst)"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-liquidations?coin={coin}&start={start}
+    field: data[].usd
+    replay: /api/v1/backtesting/hl-liquidations?coin={coin}&start={start}&end={end}
+    replay_field: data[].usd
+    note: "start = 5 minutes ago. Exact Hyperliquid fills; data[].side is the liquidated side (long / short). One order sweeping several levels is several rows at one time, so sum rows that share a time. The tape begins 2026-07-23."
+  - id: catalyst_oi_spike
+    role: entry
+    rule: "Open interest up more than 2% in the prior 30 minutes (catalyst 2 of 3, see confirming_catalyst)"
+    runnable: true
+    endpoint: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&start={start}
+    field: data[].open_interest
+    note: "start = 35 minutes ago. Rows are 5-minute samples, so compare the latest open_interest with the one 30 minutes earlier."
+  - id: catalyst_funding_extreme
+    role: entry
+    rule: "Funding extreme on the crowded side: above +0.08%/8h (0.0001/h) or below -0.06%/8h (-0.000075/h) (catalyst 3 of 3, see confirming_catalyst)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "HL funding settles hourly, so the page's per-8h thresholds are divided by 8."
+  - id: confirming_catalyst
+    role: entry
+    rule: "At least one confirming catalyst: a large opposing liquidation, an OI spike or extreme funding"
+    runnable: true
+    input: derived
+    inputs: [catalyst_large_liquidation, catalyst_oi_spike, catalyst_funding_extreme]
+  - id: atr_live_market
+    role: filter
+    rule: "1-minute ATR(14) above its own 20-period mean (a live market, not a dead one)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=40&atr=14
+    field: candles[].atr
+    note: "Compare the last closed bar's atr with the mean of the 20 before it; drop the forming bar named by forming_bar_timestamp."
+  - id: entry_delay
+    role: entry
+    rule: "Enter within 3 seconds of the signal; skip the trade if delayed"
+    runnable: true
+    input: position
+  - id: risk_per_trade
+    role: sizing
+    rule: "Risk 0.5% of capital per trade: size = risk / (1.0 x 1-minute ATR)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=40&atr=14
+    field: candles[].atr
+  - id: max_concurrent
+    role: sizing
+    rule: "At most 2 concurrent positions in this basket, 5x isolated margin"
+    runnable: true
+    input: position
+  - id: stop_atr
+    role: stop
+    rule: "Stop 1.0 x 1-minute ATR adverse from the entry fill"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=40&atr=14
+    field: candles[].atr
+  - id: stop_hard
+    role: stop
+    rule: "Hard stop at a 2.0% adverse move from the entry fill, whatever the ATR"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/prices
+    field: prices.{coin}
+  - id: tp1_atr
+    role: exit
+    rule: "Target 1 at 1.5 x 1-minute ATR from the entry fill in the vacuum direction"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=40&atr=14
+    field: candles[].atr
+  - id: tp2_trailing
+    role: exit
+    rule: "Target 2 at 3.0 x 1-minute ATR while momentum continues, trailed by a 0.5 x ATR stop"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=40&atr=14
+    field: candles[].atr
+  - id: time_exit
+    role: exit
+    rule: "Close after 15 minutes in the trade regardless of P&L"
+    runnable: true
+    input: position
+  - id: book_refill_exit
+    role: exit
+    rule: "Exit as soon as the thin side refills to within 2:1 of the deep side, before target"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: asks[].size
+    note: "For a long, exit when ask depth / bid depth within 0.5% of mid is back to 0.5 or more (bids[].size over asks[] for a short). Same ~20-level caveat as vacuum_ask_thin. The pseudocode tests the ratio at 2.0, which contradicts the rule text; this gate follows the rule text."
 kill_criteria: |
   - Rolling 3-month drawdown > 30% on the strategy book
   - Win rate < 45% over trailing 50 trades (signal no longer identifying real vacuums)

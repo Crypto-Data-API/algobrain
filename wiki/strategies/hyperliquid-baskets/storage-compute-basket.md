@@ -21,6 +21,56 @@ crowding_risk: medium
 expected_sharpe: 0.7
 expected_max_drawdown: 0.42
 breakeven_cost_bps: 35
+gates:
+  - id: hl_perp_listed
+    role: universe
+    rule: "Constituent has a live Hyperliquid perp"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "assets[] lists live perps only; /hyperliquid/meta still carries delisted ones."
+  - id: storage_compute_sector
+    role: universe
+    rule: "Provides decentralised storage or compute infrastructure (FIL, AR, RNDR, AKT, IO, STORJ)"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].symbol
+    note: "Storage names sit in the group with id storage (FIL, AR, STORJ, SC, BTT); compute names in depin (RENDER, AKT, IO) or ai. No single group is storage plus compute, so the cut is the desk's. Render is RENDER there, not RNDR."
+  - id: verifiable_utilisation
+    role: universe
+    rule: "Network utilisation is verifiable (storage filled, compute hours sold)"
+    runnable: false
+    note: "We serve no network-utilisation metrics for storage or compute networks."
+  - id: active_paying_users
+    role: universe
+    rule: "Has active paying users, not just a testnet"
+    runnable: false
+    note: "We serve no protocol revenue or paying-user counts."
+  - id: min_day_volume
+    role: universe
+    rule: "At least $2M of 24h Hyperliquid perp volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: equal_weight
+    role: sizing
+    rule: "Equal-weight the constituents by default"
+    runnable: true
+    input: position
+  - id: vol_weighting
+    role: sizing
+    rule: "Optionally vol-weight, to balance the high-volatility AI-compute legs against the calmer storage legs"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: vol.vol_target_multiplier
+    note: "Scale each leg by its multiplier (a 60% annual vol target over 30-day realized vol)."
+  - id: ai_demand_rebalance
+    role: sizing
+    rule: "Rebalance out of cycle on an AI-demand event (a major GPU shortage, a large model-training capacity milestone)"
+    runnable: partial
+    endpoint: /api/v1/news/market-moving?hours=24
+    field: events[].title
+    note: "The news classifier has no AI or GPU category, so spotting these events in the headlines is a human judgement."
 kill_criteria: |
   - basket drawdown > 42% from peak on a rolling 6-month basis
   - rolling 6-month Sharpe < 0 on minimum 10 completed trades

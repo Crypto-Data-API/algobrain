@@ -25,8 +25,8 @@ The Strategy & Indicator Library family of [[cryptodataapi]] serves **this wiki*
 | GET | /api/v1/indicators/catalog/groups | `groups[]` (`slug`, `name`, `description`, `indicator_count`, `endpoints[]`), `group_count`, `indicator_count`, `source` | — | Any key |
 | GET | /api/v1/indicators/catalog | `indicators[]` (`slug`, `name`, `group`, `summary`, `aliases[]`, `endpoints[]`), `group`, `count`, `source` | group | Any key |
 | GET | /api/v1/indicators/catalog/{slug} | List-row fields plus `tags[]`, `difficulty`, `used_by[]` (up to 12 strategies), `wiki_path`, `prompts[]` | slug (path) | Any key |
-| GET | /api/v1/algobrain/search | `results[]` (`path`, `title`, `type`, `status`, `category`, `tags`, `updated`, `snippet`, `score`, `strategy`, `read`, `url`), `query`, `count`, `license`, `source` | q (≤200 chars), type, tag, category, backtest_status, horizon, strategy_type, complexity, crowding_risk, market, limit (1-50, default 10) | Any key |
-| GET | /api/v1/algobrain/page | One page: `path`, `title`, `type`, `status`, `category`, `tags`, `updated`, `markdown`, `url`, `license` | path (required, ≤300 chars) | Any key |
+| GET | /api/v1/algobrain/search | `results[]` (`path`, `title`, `type`, `status`, `category`, `tags`, `updated`, `snippet`, `score`, `match`, `strategy`, `read`, `url`), `query`, `count`, `license`, `source` | q (≤200 chars), type, tag, category, backtest_status, horizon, strategy_type, complexity, crowding_risk, market, runnable, limit (1-50, default 10) | Any key |
+| GET | /api/v1/algobrain/page | One page: `path`, `title`, `type`, `status`, `category`, `tags`, `updated`, `markdown`, `url`, `strategy`, `gates`, `license` | path (required, ≤300 chars) | Any key |
 | GET | /api/v1/algobrain/stats | `total_pages`, `built_at` (unix s), `source_commit`, `by_category`, `by_type`, `by_backtest_status`, `license`, `source` | — | Any key |
 
 "Any key" means a valid `X-API-Key` on any plan. A keyless call returns 401 (checked on `/strategies/groups`, 2026-09-28).
@@ -43,6 +43,8 @@ The Strategy & Indicator Library family of [[cryptodataapi]] serves **this wiki*
 - **`used_by`** on an indicator lists up to 12 catalogue strategies as `{slug, name, group}`. `rsi` returned exactly 12 on 2026-09-28, so a popular indicator's list is truncated.
 - **`strategy`** on a search result holds the page's frontmatter: `backtest_status`, `horizon`, `strategy_type`, `complexity`, `crowding_risk`, `markets`, `edge_source`, `expected_sharpe`, `expected_max_drawdown`, `breakeven_cost_bps` and `expected_sharpe_source: "author_estimate"`. It is null on non-strategy pages. `score` is null when only filters were given.
 - **`read`** on a search result is the `/algobrain/page` URL for that result. `url` is the GitHub blob URL.
+- **Ranking (2026-10-10).** Results come in tiers, named by `match`. First is a page named by the query (`exact_title`: its title, an acronym in its title like "(ADX)", or an alias). Then come the query as a phrase in a title or alias (`title_phrase`), every term in titles/aliases (`title_terms`), every term anywhere (`all_terms`) and any term (`any_term`). Concept and strategy pages rank above generated coin pages within a tier, so "ADX" returns [[adx]] before the coin whose ticker it was. `score` orders results only within a tier.
+- **`gates` (2026-10-10)** on `/algobrain/page` maps every condition a strategy checks to one endpoint and one field, or marks it `partial` / not runnable with a `note`. The format is in the repo's CLAUDE.md under "Gates". On search, `strategy.runnable` (`all` / `partial` / `none`) and `strategy.gate_counts` summarise them, and `runnable=all` finds pages an agent can run end to end. The Hyperliquid basket pages ([[hyperliquid-baskets-overview]]) are mapped first.
 
 ### Search filters (added 2026-09-27)
 

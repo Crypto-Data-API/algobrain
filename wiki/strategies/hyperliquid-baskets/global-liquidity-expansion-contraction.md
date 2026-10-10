@@ -21,6 +21,66 @@ crowding_risk: low
 expected_sharpe: 0.6
 expected_max_drawdown: 0.30
 breakeven_cost_bps: 20
+gates:
+  - id: dxy_trend
+    role: filter
+    rule: "DXY 20-week SMA slope: falling is easing (bullish), rising is tightening (bearish); scores -25 to +25"
+    runnable: partial
+    endpoint: /api/v1/sentiment/macro
+    field: eur_usd_30d_change_pct
+    note: "No DXY series is served. EUR/USD is about 58% of DXY, so a rising EUR/USD is a falling-dollar proxy, but only 7d and 30d changes exist, not a 20-week SMA slope."
+  - id: dxy_risk_off_level
+    role: filter
+    rule: "DXY above the ~104-106 risk-off band adds an extra bearish weight"
+    runnable: false
+    note: "No DXY level is served (only EUR/USD, gold and Treasury yields at /sentiment/macro)."
+  - id: g4_balance_sheet
+    role: filter
+    rule: "13-week rate of change of a blended Fed + ECB + BoJ + PBoC balance sheet in USD: positive is bullish; scores -25 to +25"
+    runnable: false
+    note: "No central-bank balance-sheet series is served."
+  - id: tga_flow
+    role: filter
+    rule: "US Treasury General Account weekly change: a drawdown injects liquidity (bullish)"
+    runnable: false
+    note: "No TGA balance series is served."
+  - id: rrp_flow
+    role: filter
+    rule: "Reverse-repo weekly change: a drain injects liquidity (bullish)"
+    runnable: false
+    note: "No reverse-repo (ON RRP) balance series is served."
+  - id: btc_equity_correlation
+    role: filter
+    rule: "BTC 20-week rolling correlation with a broad equity index; above 0.5 gives the signal full weight, a collapse downweights it (weight 0.4-1.0)"
+    runnable: false
+    note: "BTC weekly closes are served (/hyperliquid/candles?coin=BTC&interval=1w), but no equity index (SPY, S&P 500) series is."
+  - id: composite_expansion
+    role: entry
+    rule: "Composite liquidity score above +40 is expansion: 70% long above +40, 100% long (BTC 60 / ETH 30 / high-beta alts 10) above +60"
+    runnable: false
+    note: "The composite needs g4_balance_sheet, tga_flow, rrp_flow and btc_equity_correlation, none of which are served."
+  - id: composite_contraction
+    role: exit
+    rule: "Composite liquidity score below -40 is contraction: cut to 0-10% net below -40, 0% long (optional 1-2x BTC short) below -60"
+    runnable: false
+    note: "Same missing inputs as composite_expansion."
+  - id: neutral_allocation
+    role: sizing
+    rule: "Composite between -40 and +40: 30% long BTC/ETH only, no alts"
+    runnable: false
+    note: "Same missing inputs as composite_expansion."
+  - id: min_hold_two_weeks
+    role: sizing
+    rule: "Hold each signal state at least 2 weeks before acting on a change; evaluate weekly at the Monday close"
+    runnable: true
+    input: position
+  - id: macro_catalyst_rescore
+    role: filter
+    rule: "Re-score off-cycle when a major macro catalyst fires"
+    runnable: partial
+    endpoint: /api/v1/policy/regime
+    field: items[].days_until
+    note: "Scheduled FOMC and macro prints with days_until 0; which unscheduled events count as major is the desk's call."
 kill_criteria: |
   - drawdown > 30% over rolling 12 months
   - rolling 12-month Sharpe < 0 after 2 full liquidity cycles

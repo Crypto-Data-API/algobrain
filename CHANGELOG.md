@@ -4,6 +4,23 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-10-10 — Runnable gates on the Hyperliquid basket strategies
+
+**Added:** Every condition on the 51 Hyperliquid basket strategy pages is now mapped to
+the exact CryptoDataAPI endpoint and response field that measures it, as `gates:` in the
+page frontmatter. A condition nothing we serve can measure is marked partial or not
+runnable, with the reason. That covers 659 conditions: 417 fully runnable, 207 partial
+and 35 not runnable. The hosted API serves them on `/api/v1/algobrain/page`, so an agent
+can run a strategy page without guessing which numbers exist. The schema is documented
+in CLAUDE.md under "Gates".
+
+**Changed:** The CryptoDataAPI indicators and strategy-library pages now document the
+new ADX endpoint, coin filters and SMA-20 fields, and the hosted search's new ranking.
+
+**Notes:** Mapping the rules surfaced several pages whose rule text and pseudocode
+disagree on a threshold. Each case is recorded in the relevant gate's note; the prose is
+unchanged pending a review.
+
 ## 2026-09-28 — Sync: 9 API releases absorbed; free strategy-library harvest
 
 **Added:** A new page documenting CryptoDataAPI's strategy and indicator library

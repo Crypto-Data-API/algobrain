@@ -21,6 +21,158 @@ crowding_risk: medium
 expected_sharpe: 0.6
 expected_max_drawdown: 0.40
 breakeven_cost_bps: 40
+gates:
+  - id: live_hl_perp
+    role: universe
+    rule: "Every leg (Tier A BTC/ETH, Tier B SOL/BNB/XRP, Tier C picks) is a live Hyperliquid perp"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "Rows exclude delisted perps."
+  - id: tier_c_min_volume
+    role: universe
+    rule: "Tier C: skip any name with Hyperliquid 24h volume below $10M (JELLY guard)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: tier_c_oi_vs_depth
+    role: universe
+    rule: "Tier C: open interest high relative to order-book depth"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: bids[].size
+    note: "Depth = sum of price x size within a band of mid; divide open_interest_usd from /hyperliquid/open-interest by it. The page sets no 'high' ratio. /liquidity/depth/{coin} has both numbers per row but tracks only the top 25 perps."
+  - id: tier_c_negative_onchain
+    role: universe
+    rule: "Tier C: negative on-chain metrics (net exchange inflow)"
+    runnable: partial
+    endpoint: /api/v1/on-chain/exchange-flows/{symbol}/history?start={start}
+    field: points[].net_24h
+    note: "start = 7 days ago; sum one net_24h per UTC day for the 7-day net (positive = more flowing into exchanges than out). Exchange flows cover about 90 chain/token pairs, so many mid-caps have no data; which other on-chain metrics count is not stated."
+  - id: bear_btc_lower_highs
+    role: filter
+    rule: "Bear confirmation: BTC weekly highs lower for at least 3 consecutive weeks"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin=BTC&interval=1w&limit=5
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin=BTC&interval=1w&start={start}
+    replay_field: candles[].high
+    note: "Use closed weeks only (drop the bar named by forming_bar_timestamp)."
+  - id: bear_btc_lower_lows
+    role: filter
+    rule: "Bear confirmation: BTC weekly lows lower for at least 3 consecutive weeks"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin=BTC&interval=1w&limit=5
+    field: candles[].low
+    replay: /api/v1/hyperliquid/candles?coin=BTC&interval=1w&start={start}
+    replay_field: candles[].low
+  - id: bear_exchange_inflows
+    role: filter
+    rule: "Bear confirmation: exchange inflows above their 60-day median on at least 10 of the last 14 days"
+    runnable: true
+    endpoint: /api/v1/on-chain/exchange-flows/BTC/history?start={start}
+    field: points[].inflow_24h
+    replay: /api/v1/on-chain/exchange-flows/BTC/history?start={start}&end={end}
+    replay_field: points[].inflow_24h
+    note: "BTC flows (the page names no asset). start = 74 days ago (at most 93 days per call); take one inflow_24h per UTC day, e.g. the 00:00 point. History begins 2026-05-28."
+  - id: bear_oi_into_falling_price
+    role: filter
+    rule: "Bear confirmation: aggregate OI flat or rising into falling price on at least 2 of the 3 tiers"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_change_pct
+    note: "Per tier, sum oi_change_pct (or oi_close) over the tier's coins while mark_close falls; coin accepts a comma list of up to 25. The page names neither the window nor what counts as 'flat'."
+  - id: bear_btc_dominance
+    role: filter
+    rule: "Bear confirmation: BTC dominance stable or rising"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: signals.btc_dom
+    replay: /api/v1/backtesting/snapshots?data_type=cycle_regime&start={start}
+    replay_field: snapshots[].data.signals.btc_dom
+    note: "The live call gives the level only; the trend comes from successive readings, which the cycle_regime snapshots (replay) hold at ~25-minute cadence. That history starts 2026-08-08. The page sets no window or tolerance for 'stable'."
+  - id: skip_crowded_short
+    role: entry
+    rule: "Skip a leg when its funding is below -0.10%/8h (-0.0125%/h, -0.000125 per hour): the crowd is already short"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: entry_at_resistance
+    role: entry
+    rule: "Prefer limit entries on short-term bounces into prior broken support (now resistance), in low-volatility hours"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical?symbol={coin}
+    field: items[].sr.resistance[].dist_pct
+    note: "Levels are daily swing pivots, nearest first. A preference, not a hard gate; avoiding the Asia-open cascade window is a clock rule the page does not define."
+  - id: tier_sizing
+    role: sizing
+    rule: "Tier A 5% of book per leg at 2-2.5x; Tier B 3% per name at 1.5x; Tier C at most 2% per name at 1-1.5x; isolated margin"
+    runnable: true
+    input: position
+  - id: book_cap
+    role: sizing
+    rule: "Total short book 20-30% of portfolio notional, never above 30%"
+    runnable: true
+    input: position
+  - id: trail_10d_high
+    role: stop
+    rule: "Trail each leg's stop at its most recent 10-day high"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=10
+    field: candles[].high
+    note: "The page trails the mark price; Hyperliquid daily candles are trade prices, the closest served daily series."
+  - id: capitulation_funding
+    role: exit
+    rule: "Take profit on 50% of the book on capitulation: funding deeply negative for at least 3 days (with capitulation_oi_drop)"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].funding_rate_mean
+    note: "The page sets no 'deeply negative' level; the -0.10%/8h (-0.000125/h) crowding line it uses elsewhere is a reasonable default."
+  - id: capitulation_oi_drop
+    role: exit
+    rule: "Take profit on 50% of the book on capitulation: open interest down more than 15% (with capitulation_funding)"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_close
+    note: "The page does not say over what window the 15% drop is measured (from entry, from the recent peak, or over N days)."
+  - id: policy_catalyst_exit
+    role: exit
+    rule: "Exit all positions within the session on a pro-crypto policy catalyst (executive order, sovereign ETF approval)"
+    runnable: partial
+    endpoint: /api/v1/news/market-moving
+    field: events[].category
+    note: "Rows with category constructive_policy, etf_approval or legal_resolution are candidates; whether one is large enough to flip the bear is the desk's call."
+  - id: btc_higher_weekly_high
+    role: exit
+    rule: "Exit all positions within the session when BTC prints a higher weekly high"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin=BTC&interval=1w&limit=3
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin=BTC&interval=1w&start={start}
+    replay_field: candles[].high
+  - id: leg_stop
+    role: stop
+    rule: "Cover any leg that moves more than 20% against its entry (isolated margin); never average down"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: jelly_squeeze_move
+    role: stop
+    rule: "Cover a leg immediately when it is up more than 30% against the short (with jelly_thin_volume)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "The kill criteria add 'in under 4 hours'; check /hyperliquid/candles 1h highs for the speed."
+  - id: jelly_thin_volume
+    role: stop
+    rule: "JELLY guard applies when the leg's Hyperliquid 24h volume is below $50M (with jelly_squeeze_move)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
 kill_criteria: |
   - Basket drawdown > 40% on rolling 6-month basis
   - Rolling 6-month Sharpe < -0.5

@@ -21,6 +21,141 @@ crowding_risk: medium
 expected_sharpe: 0.9
 expected_max_drawdown: 0.22
 breakeven_cost_bps: 30
+gates:
+  - id: min_day_volume
+    role: universe
+    rule: "More than $15M of 24h volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: macro_trend_bias
+    role: filter
+    rule: "In a bull macro-trend regime favour long pullbacks, in a bear one favour short rally fades"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "The 10-state cycle regime the wiki's macro-trend page points to. Which states count as bull or bear (btc_led_bull through speculative_euphoria vs established_bear, capitulation, distribution_post_peak) is the desk's mapping. History starts 2026-08-07."
+  - id: trend_ema50
+    role: entry
+    rule: "Price above the 50-period daily EMA for a long bias, below it for a short bias"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=150
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Compute EMA(50) on the closes. /indicators/technical serves an SMA-50 (ma.above_50), not an EMA."
+  - id: swing_structure
+    role: entry
+    rule: "Higher highs and higher lows for a long, lower highs and lower lows for a short"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].high
+    note: "Swing points from candles[].high and candles[].low. The page gives no pivot definition; the technical endpoint's S/R uses a 3-bar fractal."
+  - id: oi_confirmed_trend_recent
+    role: filter
+    rule: "Preferred: the oi-confirmed-trend signal fired on this coin within the last 5 days"
+    runnable: true
+    input: position
+    note: "Reads the desk's own oi-confirmed-trend signal log; that page's gates define the signal."
+  - id: at_fib_level
+    role: entry
+    rule: "Pullback reaches within 0.5% of the 0.5-0.618 retracement of the latest swing leg (either this, at_ema_level or at_session_vwap)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].low
+    note: "The leg runs from the swing low (candles[].low) to the swing high (candles[].high); picking the swing points is the desk's call, as in swing_structure."
+  - id: at_ema_level
+    role: entry
+    rule: "Pullback reaches within 0.5% of the 20- or 50-period daily EMA (either this, at_fib_level or at_session_vwap)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=150
+    field: candles[].close
+  - id: at_session_vwap
+    role: entry
+    rule: "Pullback reaches within 0.5% of the prior session VWAP (either this, at_fib_level or at_ema_level)"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-trade-flow?coin={coin}&start={start}&end={end}
+    field: data[].vwap
+    note: "Crypto has no session close; reading it as the prior UTC day (start and end on its bounds) is our interpretation. Weight each minute's vwap by buy_notional + sell_notional."
+  - id: rsi_4h_exhaustion
+    role: entry
+    rule: "4h RSI(14) between 40 and 50 and turning up for a long, between 50 and 60 and rolling over for a short"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+  - id: oi_not_building
+    role: entry
+    rule: "Open interest stable or easing during the move: the last 4h change no more than +1%"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=4h&start={start}
+    field: data[].oi_change_pct
+  - id: base_size
+    role: sizing
+    rule: "2% of book per signal at 2x isolated leverage, never above 3x"
+    runnable: true
+    input: position
+  - id: size_up_strong_trend
+    role: sizing
+    rule: "Scale to 3% only when oi_confirmed_trend_recent holds and the coin is clearly trending"
+    runnable: partial
+    endpoint: /api/v1/indicators/adx?coin={coin}&interval=1d
+    field: items[].strength
+    note: "strong (ADX at or above 25) is the plain reading of clearly trending; the page names no threshold."
+  - id: stop_fib_786
+    role: stop
+    rule: "Stop at the 0.786 retracement of the swing leg, or at stop_atr if that is tighter"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].low
+    note: "Same swing-point judgement as at_fib_level."
+  - id: stop_atr
+    role: stop
+    rule: "Stop 2x ATR(14, daily) from the entry, or at stop_fib_786 if that is tighter"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30&atr=14
+    field: candles[].atr
+  - id: tp_swing_extreme
+    role: exit
+    rule: "Close 50% at the prior swing high (long) or swing low (short) recorded at entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: tp_atr_trail
+    role: exit
+    rule: "Run the other 50% on an ATR trailing stop recomputed at each 4h close"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30&atr=14
+    field: candles[].atr
+    note: "The page gives no ATR multiple for this trail."
+  - id: reclaim_time_exit
+    role: exit
+    rule: "Exit if price is back at the entry level without reaching the first target after 5 days (the pseudocode caps any hold at 10 days)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: macro_flip_exit
+    role: exit
+    rule: "Close every position when the macro-trend regime flips direction"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    note: "Same bull/bear mapping as macro_trend_bias."
+  - id: adverse_backstop
+    role: stop
+    rule: "Cover any position that moves more than 25% against the entry (beyond the ATR stop buffer)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
 kill_criteria: |
   - Basket drawdown > 22% on rolling 6-month basis
   - Rolling 6-month Sharpe < -0.4

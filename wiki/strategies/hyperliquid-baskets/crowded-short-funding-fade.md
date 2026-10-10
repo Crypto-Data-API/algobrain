@@ -21,6 +21,104 @@ crowding_risk: medium
 expected_sharpe: 0.9
 expected_max_drawdown: 0.22
 breakeven_cost_bps: 35
+gates:
+  - id: min_day_volume
+    role: universe
+    rule: "Hyperliquid perp with 24h volume above $20M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: min_open_interest
+    role: universe
+    rule: "Open interest above $10M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+  - id: cex_spot_market
+    role: universe
+    rule: "A meaningful spot market on at least one major CEX; purely HL-listed assets are excluded"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/24hr?symbol={symbol}USDT
+    field: quote_volume
+    note: "Binance spot 24h volume in USDT; a 404 means no Binance spot pair. Other CEXs and the 'meaningful' threshold are the desk's call."
+  - id: funding_crowded
+    role: entry
+    rule: "Hourly funding below -0.05%/h (-0.0005) on each of the last 2 settlements"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=2
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: oi_elevated
+    role: entry
+    rule: "Open interest at least 1.3x its 30-day mean: latest oi_close over the mean of the last 30 daily bars"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_close
+    note: "start = 30 days ago. Daily bars begin 2026-03-30 (no historical OI before that exists)."
+  - id: near_support
+    role: entry
+    rule: "Price within 5% of a notable support level"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={coin}
+    field: items[].sr.support[].dist_pct
+    note: "Levels are daily swing pivots, nearest first; dist_pct is signed % from mark (negative = below). The page derives support from 4h swing lows, and strength counts the pivots behind a level."
+  - id: no_macro_risk_event
+    role: entry
+    rule: "No confirmed macro risk event (FOMC, CPI, major protocol exploit) in the next 24 hours"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=macro_print&window_days=2
+    field: items[].days_until
+    note: "Skip when a FOMC/CPI/NFP/PCE/PPI print has days_until 0 or 1. An exploit is never scheduled: /api/v1/security/events lists ones already under way, and anticipating one is a human judgement."
+  - id: tp_funding_normalised
+    role: exit
+    rule: "Close 50% when hourly funding rises above -0.01%/h (-0.0001)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+  - id: tp_pre_crowd_price
+    role: exit
+    rule: "Close the remaining 50% when price recovers to the pre-crowd level: the last price before funding first crossed -0.05%/h"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "Record the level at entry: in 1h /api/v1/backtesting/hl-funding-bars rows, the mark_close of the bar before funding_rate_mean first fell below -0.0005."
+  - id: tp_oi_unwound
+    role: exit
+    rule: "Close all when open interest falls back to its 30-day mean"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_close
+  - id: stop_loss
+    role: stop
+    rule: "Hard stop 8% below the entry fill"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: time_stop
+    role: stop
+    rule: "Exit after 4 calendar days in the trade"
+    runnable: true
+    input: position
+  - id: position_size
+    role: sizing
+    rule: "3-6% of basket equity per trade, at 2-3x isolated leverage and never above 3x"
+    runnable: true
+    input: position
+  - id: max_concurrent
+    role: sizing
+    rule: "No more than 2 concurrent open positions across all tickers"
+    runnable: true
+    input: position
+  - id: systemic_funding
+    role: sizing
+    rule: "Cut to 1x leverage and 2% size when funding is strongly negative on more than 5 major pairs at once"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].funding_rate
+    note: "Count majors with funding below -0.05%/h; which pairs are majors (BTC, ETH, SOL, ...) is the desk's list."
 kill_criteria: |
   - Rolling 3-month Sharpe < 0 after minimum 15 trades
   - Three consecutive full stop-outs (each > 8% drawdown on position)

@@ -21,6 +21,88 @@ crowding_risk: medium
 expected_sharpe: 0.7
 expected_max_drawdown: 0.30
 breakeven_cost_bps: 45
+gates:
+  - id: unlock_size
+    role: universe
+    rule: "A single cliff unlock of at least 5% of circulating supply (pct_of_float at least 0.05)"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={coin}
+    field: items[].pct_of_float
+    note: "A cliff calendar (linear vesting excluded) from DefiLlama emissions; absence is not proof of no unlock. One row per coin, its soonest cliff only, so a bigger cliff behind a nearer small one is hidden. Free tier sees 7 days ahead, Pro 30."
+  - id: insider_recipients
+    role: universe
+    rule: "The unlock goes to insiders, investors or team, not community or staking rewards"
+    runnable: partial
+    endpoint: /api/v1/supply/unlocks?symbol={coin}
+    field: items[].categories[]
+    note: "DefiLlama recipient categories: insiders for team, privateSale for investors. Same-day tranches are merged, so a mixed-recipient cliff cannot be split by category; how much non-insider share to tolerate is the desk's call."
+  - id: min_day_volume
+    role: universe
+    rule: "An active Hyperliquid perp with at least $3M of 24h volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: unlock_window
+    role: entry
+    rule: "Unlock is 7 to 14 days away; enter only from T-14 to T-7"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={coin}
+    field: items[].days_until
+  - id: funding_not_crowded_long
+    role: filter
+    rule: "Hyperliquid funding below 0.10% per 8h (0.0125%/h, 0.000125 hourly), so the short does not pay excessive carry"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: short_side_share
+    role: filter
+    rule: "Short side holds at least 15% of open interest; skip below 15%"
+    runnable: partial
+    endpoint: /api/v1/quant/positioning?symbol={coin}
+    field: coins.{coin}.by_type.all.short_usd
+    note: "Every perp contract has a long and a short, so read this as short_usd over gross_usd across tracked accounts worth $100k or more, not the whole book. The rule also reads inverted: the page calls a share below 15% crowded shorts, but it means shorts are scarce. The desk must settle the intent."
+  - id: no_governance_squeeze
+    role: filter
+    rule: "No live governance proposal that could squeeze the short"
+    runnable: partial
+    endpoint: /api/v1/news/coin/{coin}?hours=72
+    field: events[].category
+    note: "Category governance (or fee_switch, buyback_burn) flags proposals that reached the news. Whether one could squeeze the short is a judgement, and on-chain proposals that never make the news are missed."
+  - id: bull_regime_size_down
+    role: sizing
+    rule: "Size down in a confirmed bull-market regime, where buyers absorb unlocks faster"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    note: "strong_trend_bull is the bull label. The page does not say how much to size down."
+  - id: position_size
+    role: sizing
+    rule: "0.5-1.0% of book per token at equal notional, at most 2x isolated leverage, and at most 4 concurrent unlock shorts"
+    runnable: true
+    input: position
+  - id: exit_t_minus_1
+    role: exit
+    rule: "Exit by T-1, the day before the unlock, whatever the P&L"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={coin}
+    field: items[].days_until
+    note: "Re-read daily: a delayed or cancelled unlock moves or removes the row."
+  - id: tp_pre_unlock_move
+    role: exit
+    rule: "Take profit when price is 10% below the entry fill (the average pre-unlock move)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: stop_loss
+    role: stop
+    rule: "Stop out when price moves more than 15% against the short"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
 kill_criteria: |
   - basket drawdown > 30% from peak on a rolling 6-month basis
   - rolling 6-month Sharpe < 0 on minimum 10 completed unlock trades

@@ -21,6 +21,156 @@ crowding_risk: medium
 expected_sharpe: 0.65
 expected_max_drawdown: 0.20
 breakeven_cost_bps: 35
+gates:
+  - id: min_day_volume
+    role: universe
+    rule: "Hyperliquid perp with at least $10M of 24h volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: min_open_interest
+    role: universe
+    rule: "Skip perps with open interest below $2M (the JELLY thin-alt screen)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+  - id: range_defined
+    role: entry
+    rule: "Price held a bounded range for at least 5 bars on the 4h or daily chart, each boundary tested at least twice"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=60&atr=14
+    field: candles[].high
+    note: "interval = 4h or 1d. Resistance is the cluster of bar highs and support the cluster of bar lows in the same rows. The page gives no touch tolerance and no test for a 'clearly defined' boundary; the desk picks both."
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&start={start}
+    replay_field: candles[].high
+  - id: range_height_atr
+    role: entry
+    rule: "Range height (resistance minus support) is at least 1x ATR(14)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=60&atr=14
+    field: candles[].atr
+    note: "Compare with the latest closed bar's atr."
+  - id: breakout_close
+    role: entry
+    rule: "A bar closes above resistance (long) or below support (short) on the reference timeframe"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=60&atr=14
+    field: candles[].close
+    note: "Closed bars only; forming_bar_timestamp marks the open one."
+  - id: breakout_oi_expansion
+    role: filter
+    rule: "Optional: open interest expands at least 10% on the breakout bar"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval={interval}&start={start}
+    field: data[].oi_change_pct
+    note: "Take the row whose time equals the breakout candle's timestamp; oi_change_pct is that bar's open-to-close OI change in percent."
+  - id: breakout_volume
+    role: filter
+    rule: "Optional: breakout bar volume at least 1.5x its 20-bar average"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=60&atr=14
+    field: candles[].volume
+  - id: retest_touch
+    role: entry
+    rule: "Within 3-8 bars of the breakout, a bar's low comes within 0.5% of the broken resistance (mirror with the high for shorts)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=60&atr=14
+    field: candles[].low
+    note: "No retest by bar 8 means a failed breakout; skip it."
+  - id: retest_holds
+    role: entry
+    rule: "The retest bar does not close back inside the range"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=60&atr=14
+    field: candles[].close
+  - id: bounce_entry
+    role: entry
+    rule: "Enter on the close of the first bullish (long) or bearish (short) bar off the retest"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=60&atr=14
+    field: candles[].close
+    note: "Bullish = close above open in the same row."
+  - id: min_reward_risk
+    role: entry
+    rule: "Reward-to-risk of at least 1.5: measured-move target against the range re-entry stop"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=60&atr=14
+    field: candles[].close
+    note: "target = breakout level + range height; stop = breakout level - 0.25 x atr; rr = (target - close) / (close - stop). Mirror for shorts."
+  - id: no_ranging_regime
+    role: filter
+    rule: "Enter only in technical/structural or early-trending regimes; suppress in confirmed ranging regimes"
+    runnable: partial
+    endpoint: /api/v1/quant/coins/{coin}
+    field: regime.label
+    note: "Skip when the coin's HMM regime is range_low_vol (the page's workflow also names choppy_high_vol as the retest-failure state). The page defines neither 'early-trending' nor 'confirmed ranging'; items[].strength from /api/v1/indicators/adx is another reading."
+    replay: /api/v1/quant/history?scope={coin}&start={start}
+    replay_field: entries[].regime_label
+  - id: no_conflict_range_book
+    role: filter
+    rule: "Skip an asset the range-mean-reversion basket already holds"
+    runnable: true
+    input: position
+  - id: leverage
+    role: sizing
+    rule: "2-4x isolated margin, at the low end when volatility is compressed; never above 5x on an overnight hold"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "regime compressed = use the low end."
+  - id: risk_per_trade
+    role: sizing
+    rule: "Risk 1% of equity per trade at the stop distance"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=60&atr=14
+    field: candles[].atr
+    note: "size = 0.01 x equity / (entry - stop), stop from stop_range_reentry."
+  - id: thin_name_cap
+    role: sizing
+    rule: "Cap per-leg size at 0.5% of the strategy book for names outside the top 20 by open interest"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+    note: "Rank assets[] by open_interest_usd."
+  - id: stop_range_reentry
+    role: stop
+    rule: "Stop when a bar closes back inside the range by at least 0.25x ATR(14) past the breakout level"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=60&atr=14
+    field: candles[].close
+    note: "Breakout level and ATR are recorded at entry."
+  - id: tp_measured_move
+    role: exit
+    rule: "Take profit at the measured move: range height projected from the breakout level"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: atr_trailing_stop
+    role: stop
+    rule: "Once at least 1x ATR(14) in profit, trail the stop at 2x ATR(14)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=60&atr=14
+    field: candles[].atr
+  - id: funding_adverse
+    role: exit
+    rule: "Tighten the stop or take partial profit when funding runs against the held side by more than 0.05%/8h (0.0000625 per hour)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    note: "HL funding is hourly; positive = longs pay. The page writes 'flips sharply negative (longs paying ...)', which contradicts itself; this reads it as adverse to the position."
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: cover_on_close_back
+    role: exit
+    rule: "Cover on a close back through the breakout level"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=60&atr=14
+    field: candles[].close
 kill_criteria: |
   - Rolling 6-month drawdown > 20% of strategy book
   - Rolling 12-month net Sharpe < 0 over ≥ 30 completed trades

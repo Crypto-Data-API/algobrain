@@ -21,6 +21,132 @@ crowding_risk: medium
 expected_sharpe: 0.75
 expected_max_drawdown: 0.18
 breakeven_cost_bps: 30
+gates:
+  - id: min_day_volume
+    role: universe
+    rule: "At least $10M of 24h volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: range_defined
+    role: entry
+    rule: "Price held inside a range for at least 8 bars on the 4h chart (within the last 30), with at least 3 tests of each boundary"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60&atr=14
+    field: candles[].high
+    note: "Resistance from candles[].high, support from candles[].low. The page gives no touch tolerance, so what counts as a test is the desk's parameter."
+  - id: range_height_atr
+    role: entry
+    rule: "Range height between 2x and 8x ATR(14) on the 4h chart"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60&atr=14
+    field: candles[].atr
+  - id: volume_standby
+    role: filter
+    rule: "No new entries while the last 4h bar's volume is above 2x its 20-bar average (the pseudocode uses 1.8x)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=25
+    field: candles[].volume
+  - id: at_boundary
+    role: entry
+    rule: "Price within 0.3x ATR(14) of the upper boundary for the short (of the lower boundary for the long)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60&atr=14
+    field: candles[].close
+  - id: bollinger_extreme
+    role: entry
+    rule: "Close at or outside the upper Bollinger Band (20, 2) for the short, the lower for the long; the page also accepts a narrow band"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "Compute the bands on the 4h closes."
+  - id: rsi_extreme
+    role: entry
+    rule: "RSI(14) on the 4h chart at or above 70 for the short, at or below 30 for the long"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+  - id: tight_boundary_close
+    role: entry
+    rule: "Close within 0.1x ATR(14) of the boundary"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60&atr=14
+    field: candles[].close
+  - id: two_of_three
+    role: entry
+    rule: "Enter when at_boundary holds and at least 2 of bollinger_extreme, rsi_extreme and tight_boundary_close hold"
+    runnable: true
+    input: derived
+    inputs: [at_boundary, bollinger_extreme, rsi_extreme, tight_boundary_close]
+  - id: min_reward_risk
+    role: filter
+    rule: "Reward to risk of at least 1.2 to the range midpoint, with the stop 0.5x ATR beyond the boundary (pseudocode)"
+    runnable: partial
+    input: derived
+    inputs: [range_defined, range_height_atr, at_boundary]
+    note: "Partial because the range levels (range_defined) are."
+  - id: stop_beyond_boundary
+    role: stop
+    rule: "Exit on a close beyond the range boundary by at least 0.5x ATR(14), without exception"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=20&atr=14
+    field: candles[].close
+  - id: breakout_signal_exit
+    role: exit
+    rule: "Exit at once when the range-breakout-breakdown basket signals on the coin"
+    runnable: true
+    input: position
+    note: "Reads the desk's own range-breakout-breakdown signal; that page's gates define it."
+  - id: tp_midpoint
+    role: exit
+    rule: "Close (or scale out half) at the range midpoint"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: tp_extended
+    role: exit
+    rule: "Hold for the opposite boundary only if the midpoint is reached with 4h RSI(14) still between 40 and 60 and no breakout warnings"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60
+    field: candles[].close
+  - id: volume_spike_exit
+    role: exit
+    rule: "Close an open position when a boundary touch comes on volume above 2x the 20-bar average (a breakout warning)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=25
+    field: candles[].volume
+  - id: funding_directional_tighten
+    role: stop
+    rule: "Tighten stops when funding runs one way above 0.05% per 8h (0.00625%/h) for 3 or more consecutive 8h periods"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    note: "Group the 24 hourly settlements into three 8h windows and sum each. How far to tighten is not stated."
+  - id: leverage_by_vol
+    role: sizing
+    rule: "1-3x isolated leverage, lower in high-volatility environments or when the range is narrower than 3x ATR"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "Reading vol_shock or expanding as high-volatility is the natural mapping, not one the page states. The range-width half comes from range_height_atr."
+  - id: risk_per_trade
+    role: sizing
+    rule: "Risk 1.0% of equity per trade at the stop distance"
+    runnable: true
+    input: position
+  - id: max_concurrent
+    role: sizing
+    rule: "At most 4 range-fade positions, one per coin, and one entry per boundary touch"
+    runnable: true
+    input: position
 kill_criteria: |
   - Rolling 6-month drawdown > 18% of strategy book
   - Rolling 90-day net Sharpe < 0 over ≥ 25 completed trades

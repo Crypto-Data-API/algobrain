@@ -21,6 +21,60 @@ crowding_risk: medium
 expected_sharpe: 0.7
 expected_max_drawdown: 0.40
 breakeven_cost_bps: 30
+gates:
+  - id: min_day_volume
+    role: universe
+    rule: "Active Hyperliquid perp with 24h volume of at least $3M; drop any constituent that falls below"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: min_constituents
+    role: universe
+    rule: "At least 5 constituents pass the screens, else the basket stands down"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    note: "Count the constituents that clear min_day_volume and is_ethereum_l2."
+  - id: is_ethereum_l2
+    role: universe
+    rule: "Classified as an Ethereum Layer-2 scaling solution, not a standalone L1 or a sidechain without ZK or optimistic proofs"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].symbol
+    note: "Membership of the group with id layer2 (CoinGecko Layer 2 / optimistic rollup / ZK / scaling tags plus a seed list). The scaling and Polygon-ecosystem tags also catch sidechains, so 'has proofs' is the desk's check."
+  - id: live_mainnet_rollup
+    role: universe
+    rule: "A production rollup (or credible rollup) with live mainnet"
+    runnable: false
+    note: "No rollup-status feed is served (proof system live, mainnet stage)."
+  - id: min_history_30d
+    role: universe
+    rule: "A replacement needs at least 30 days of Hyperliquid perp history before inclusion"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=31
+    field: candles[].timestamp
+    note: "Eligible when the first daily bar is at least 30 days old. The new_listing flag on /quant/coins covers only 7 days."
+  - id: btc_dominance_falling
+    role: filter
+    rule: "Alt-season gate before directional deployment: BTC dominance falling"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: signals.btc_dom
+    replay: /api/v1/backtesting/snapshots?data_type=cycle_regime&start={start}
+    replay_field: snapshots[].data.signals.btc_dom
+    note: "The live call gives the level only; the trend comes from successive readings, which the cycle_regime snapshots (replay) hold at ~25-minute cadence. That history starts 2026-08-08."
+  - id: altcoin_breadth_rising
+    role: filter
+    rule: "Alt-season gate before directional deployment: altcoin breadth rising"
+    runnable: partial
+    endpoint: /api/v1/market-health/altcoin-breadth
+    field: breadth_pct
+    note: "Live level of the share of our top-30 list (Binance spot, includes BTC) above the 200-day MA; 'rising' needs the desk to keep readings. The alt-season-momentum-gate page also wants it at least 45%."
+  - id: equal_weight
+    role: sizing
+    rule: "Equal notional across active constituents, rebalanced weekly; eligibility reviewed monthly"
+    runnable: true
+    input: position
 kill_criteria: |
   - basket drawdown > 40% from peak on a rolling 6-month basis
   - rolling 6-month Sharpe < 0 on a minimum of 10 completed trades

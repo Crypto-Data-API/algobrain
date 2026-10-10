@@ -21,6 +21,65 @@ crowding_risk: high
 expected_sharpe: 0.6
 expected_max_drawdown: 0.60
 breakeven_cost_bps: 40
+gates:
+  - id: min_day_volume
+    role: universe
+    rule: "Hyperliquid perp 24h volume of at least $3M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: max_market_cap
+    role: universe
+    rule: "Market cap below $5B (mid-caps; large caps are lower beta)"
+    runnable: true
+    endpoint: /api/v1/coins/{symbol}
+    field: market_cap
+    note: "HL names differ from tickers for a few coins (kPEPE is PEPE)."
+  - id: not_stable_lst_wrapped
+    role: universe
+    rule: "Not a stablecoin, liquid-staking token or wrapped asset"
+    runnable: true
+    endpoint: /api/v1/coins/{symbol}
+    field: categories
+    note: "Exclude a coin whose CoinGecko categories include Stablecoins, Liquid Staking Tokens or Wrapped-Tokens."
+  - id: beta_top_quintile
+    role: universe
+    rule: "30-day beta vs BTC from daily returns in the top quintile of eligible perps, at most 6 names"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles/batch?coins={coin},BTC&interval=1d&limit=31&closed_only=true
+    field: series.{coin}[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "beta = cov(coin returns, BTC returns) / var(BTC returns) over 30 daily closes; up to 25 coins per batch call, so rank the eligible list in a few calls."
+  - id: altcoin_breadth
+    role: filter
+    rule: "Alt-season gate: altcoin breadth (share of alts above their 200-day MA) at least 45%"
+    runnable: partial
+    endpoint: /api/v1/market-health/altcoin-breadth
+    field: breadth_pct
+    note: "breadth_pct covers our top-30 list on Binance spot daily closes and includes BTC, not the top-50 alts the alt-season-momentum-gate page defines. Close proxy, different universe."
+  - id: btc_dominance_falling
+    role: filter
+    rule: "Alt-season gate: BTC dominance falling"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: signals.btc_dom
+    replay: /api/v1/backtesting/snapshots?data_type=cycle_regime&start={start}
+    replay_field: snapshots[].data.signals.btc_dom
+    note: "The live call gives the level only; the 14-day rate of change (the gate page wants at most -0.5 pp/week, and dominance below its 50-day MA) comes from successive readings, which the cycle_regime snapshots (replay) hold at ~25-minute cadence. That history starts 2026-08-08."
+  - id: btc_above_50d
+    role: filter
+    rule: "BTC above its 50-day moving average; flat when this or the alt-season gate fails"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol=BTC
+    field: items[].ma.above_50
+    replay: /api/v1/hyperliquid/candles?coin=BTC&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: equal_weight
+    role: sizing
+    rule: "Equal weight across selected constituents, rebuilt weekly"
+    runnable: true
+    input: position
 kill_criteria: |
   - basket drawdown > 60% from peak on a rolling 6-month basis
   - BTC dominance rises > 3 pp over 14 days (alt-season rotation reversing)

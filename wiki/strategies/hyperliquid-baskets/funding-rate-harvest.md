@@ -21,6 +21,81 @@ crowding_risk: high
 expected_sharpe: 1.0
 expected_max_drawdown: 0.18
 breakeven_cost_bps: 25
+gates:
+  - id: min_day_volume
+    role: universe
+    rule: "Hyperliquid 24h volume above $5M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: funding_collect_short
+    role: entry
+    rule: "Short-collect: hourly funding above +0.015%/h (0.00015) on each of the last 3 settlements (either this or funding_collect_long)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=3
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: funding_collect_long
+    role: entry
+    rule: "Long-collect: hourly funding below -0.015%/h (-0.00015) on each of the last 3 settlements (either this or funding_collect_short)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=3
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: survive_20pct_move
+    role: sizing
+    rule: "Leverage low enough that a 20% adverse move does not liquidate (2x isolated by default)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/meta
+    field: universe[].maxLeverage
+    note: "Liquidation distance is about 1/leverage minus maintenance margin; Hyperliquid's base-tier maintenance margin is half the initial margin at max leverage, 1/(2 x maxLeverage)."
+  - id: spot_hedge_available
+    role: sizing
+    rule: "Near-neutral construction (perp plus a 50-80% spot hedge, 65% default) only where the asset has deep CEX spot liquidity; otherwise single-leg"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/24hr?symbol={symbol}USDT
+    field: quote_volume
+    note: "Binance spot 24h quote volume; a 404 means no Binance USDT pair. The page sets no 'deep' level, and Bybit/Coinbase spot are not served."
+  - id: size_per_position
+    role: sizing
+    rule: "3-8% of basket equity per near-neutral position (6% default), 1-2% per single-leg position (1.5% default)"
+    runnable: true
+    input: position
+  - id: meme_size_cap
+    role: sizing
+    rule: "Size FARTCOIN-class memecoins at no more than 0.5% of basket equity"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: categories
+    note: "A coin whose CoinGecko categories include Meme gets the cap; HL names differ from tickers for some coins (kPEPE is PEPE). Which other high-squeeze names count is the desk's call."
+  - id: basket_notional_cap
+    role: sizing
+    rule: "Aggregate basket notional capped at 40% of equity; no new entries at the cap"
+    runnable: true
+    input: position
+  - id: carry_normalised
+    role: exit
+    rule: "Close all legs when hourly funding is back within 20% of its 30-day mean"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    field: data[].funding_rate_mean
+    note: "start = 30 days ago (about 720 rows). The newest closed bar is the current rate; the mean of all rows is the baseline."
+  - id: carry_ratio_stop
+    role: stop
+    rule: "Close all legs when the perp leg's directional loss exceeds 3x the funding collected"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "Funding collected comes from the position record. The Rules text says '3 months of collected funding income'; the pseudocode's 3x cumulative carry is used here."
+  - id: time_stop
+    role: stop
+    rule: "Exit after 14 days in the trade if funding has not normalised"
+    runnable: true
+    input: position
 kill_criteria: |
   - Rolling 30-day annualised funding yield falls below 8% APY across the basket (carry has compressed; edge arb'd away)
   - Drawdown > 15% on this basket over rolling 6 months

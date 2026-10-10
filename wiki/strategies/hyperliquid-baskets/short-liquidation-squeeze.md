@@ -21,6 +21,114 @@ crowding_risk: medium
 expected_sharpe: 1.1
 expected_max_drawdown: 0.30
 breakeven_cost_bps: 45
+gates:
+  - id: liquid_universe
+    role: universe
+    rule: "Majors first (BTC, ETH, SOL), then liquid mid-caps"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    note: "The page sets no volume floor; which mid-caps are liquid enough is the desk's list."
+  - id: book_not_thin
+    role: universe
+    rule: "Avoid perps with very thin order books, where oracle manipulation can fake a heatmap cluster"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: bids[].size
+    note: "Depth is the sum of price x size per side over the served levels. The page gives no thin-book threshold."
+  - id: cluster_in_reach
+    role: entry
+    rule: "A short-liquidation cluster sits between 1 and 6 ATR(14, 1h) above the current price"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.levels[].dist_pct
+    note: "Take levels with side short and positive dist_pct (% above mark). Convert with ATR from /hyperliquid/candles?coin={coin}&interval=1h&limit=30&atr=14. Clusters come from tracked accounts worth $100k or more, and only the 3 nearest above mark are served, so this is not a full heatmap."
+  - id: cluster_size
+    role: entry
+    rule: "That cluster's notional is at least 2x the coin's average daily liquidation volume"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.levels[].total_usd
+    note: "Baseline: sum data[].total_usd from /backtesting/hl-liquidation-bars?coin={coin}&interval=1h&start={start} over the last 7 days and divide by 7. The cluster counts tracked accounts only, so it understates the full book."
+  - id: funding_short_side
+    role: entry
+    rule: "Optional but preferred: current hourly funding is negative or near zero, so the crowd is net short"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: momentum_toward_cluster
+    role: entry
+    rule: "The last closed 1h candle is bullish or neutral (close at or above open)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=3
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].close
+    note: "Compare with candles[].open of the same bar; skip the forming bar named by forming_bar_timestamp."
+  - id: buy_flow
+    role: entry
+    rule: "Taker buy notional exceeds sell notional over the last 15 minutes (pseudocode: ratio above 1.05)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=15
+    field: data[].buy_notional
+    replay: /api/v1/backtesting/hl-trade-flow?coin={coin}&start={start}
+    replay_field: data[].buy_notional
+    note: "Sum buy_notional and sell_notional over the 15 rows."
+  - id: oi_elevated
+    role: entry
+    rule: "Open interest at least 1.2x its 7-day mean, so the short book is still populated"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    field: data[].oi_close
+    note: "start = 7 days ago; latest oi_close over the mean of the 168 hourly bars."
+  - id: two_confirmations
+    role: entry
+    rule: "Enter long when a qualifying cluster exists (cluster_in_reach, cluster_size) and at least 2 of funding_short_side, buy_flow and oi_elevated hold"
+    runnable: partial
+    input: derived
+    inputs: [cluster_in_reach, cluster_size, funding_short_side, buy_flow, oi_elevated]
+    note: "Partial because the cluster gates are; the three confirmations are runnable."
+  - id: tp_cluster_top
+    role: exit
+    rule: "Close 60% when price reaches the top of the cluster recorded at entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: tp_overshoot
+    role: exit
+    rule: "Close the remaining 40% when price is 2% above the cluster top"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: stop_loss
+    role: stop
+    rule: "Hard stop 5% below the entry fill"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: atr_stop
+    role: stop
+    rule: "Exit when price falls 1.5x ATR(14, 1h) below the entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=30&atr=14
+    field: candles[].atr
+    note: "The page calls this a trailing stop, but the pseudocode anchors it at the entry price."
+  - id: time_stop
+    role: stop
+    rule: "Exit after 4 hours in the trade"
+    runnable: true
+    input: position
+  - id: size_concurrency
+    role: sizing
+    rule: "4-7% of basket equity at 3-5x isolated leverage, with at most 1 position open"
+    runnable: true
+    input: position
 kill_criteria: |
   - Win rate drops below 48% over trailing 20 completed trades
   - Three consecutive full stop-outs (each > 10% drawdown on position)

@@ -21,6 +21,49 @@ crowding_risk: medium
 expected_sharpe: 0.7
 expected_max_drawdown: 0.40
 breakeven_cost_bps: 30
+gates:
+  - id: in_dex_sector
+    role: universe
+    rule: "Governance or utility token of a decentralised exchange: AMM, perp DEX or aggregator"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].symbol
+    note: "Read the rows whose id is dex and derivatives (perp DEXs such as DYDX and GMX sit in both). Final membership is the desk's list."
+  - id: onchain_volume_metrics
+    role: universe
+    rule: "The DEX has verifiable on-chain volume metrics"
+    runnable: false
+    note: "No per-DEX trading volume is served; /api/v1/dex/* covers pools and new tokens, not protocol volumes."
+  - id: min_day_volume
+    role: universe
+    rule: "At least $2M daily Hyperliquid perp volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    note: "Rolling 24h notional. A token missing from assets[] has no live HL perp."
+  - id: equal_weight
+    role: sizing
+    rule: "Equal-weight across active constituents, rebalanced weekly"
+    runnable: partial
+    input: derived
+    inputs: [in_dex_sector, min_day_volume]
+    note: "Weights the names that pass the served universe gates; onchain_volume_metrics (not runnable) is a human screen applied before weighting."
+  - id: upgrade_rebalance
+    role: sizing
+    rule: "Rebalance out of cycle on a major DEX protocol upgrade or a new chain launch that captures significant volume share"
+    runnable: partial
+    endpoint: /api/v1/news/coin/{symbol}?hours=168
+    field: events[].category
+    note: "An upgrade event on the token covers the protocol-upgrade half. The volume share a new chain launch captures is not measured (no per-DEX volume)."
+  - id: hmm_volume_rich
+    role: filter
+    rule: "Favour the strong_trend_bull and choppy_high_vol market regimes over range_low_vol"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    note: "From the page's agent workflow. 'Favour' sets no size, and the other states are the desk's call."
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
 kill_criteria: |
   - basket drawdown > 40% from peak on a rolling 6-month basis
   - rolling 6-month Sharpe < 0 on minimum 10 completed trades

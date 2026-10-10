@@ -21,6 +21,101 @@ crowding_risk: medium
 expected_sharpe: 0.7
 expected_max_drawdown: 0.35
 breakeven_cost_bps: 50
+gates:
+  - id: listed_within_7d
+    role: universe
+    rule: "Perp listed on Hyperliquid within the prior 7 days"
+    runnable: true
+    endpoint: /api/v1/quant/coins?limit=300
+    field: items[].new_listing
+    note: "new_listing is true while the coin's earliest HL candle is under 7 days old."
+  - id: min_day_volume
+    role: universe
+    rule: "24h perp volume at least $1M (below it, oracle risk is too high)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: near_listing_close
+    role: universe
+    rule: "Mark within +/-20% of the listing day's close (not after a 20%+ pump or dump)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=15
+    field: candles[].close
+    note: "The first bar is the listing day, because HL serves bars only from listing."
+  - id: not_meme_microcap
+    role: universe
+    rule: "Not a known meme-coin micro-cap (route those to meme-coin-cycle)"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: categories
+    note: "Exclude a coin whose categories include Meme. Fresh listings often have no CoinGecko profile yet (404), which leaves a human check."
+  - id: max_concurrent
+    role: sizing
+    rule: "At most 3 concurrent new-listing positions"
+    runnable: true
+    input: position
+  - id: position_size
+    role: sizing
+    rule: "0.5% of book per listing at most (never scaled by conviction), leverage 2x or less, isolated"
+    runnable: true
+    input: position
+  - id: bear_market_size
+    role: sizing
+    rule: "Cut to 0.25% of book per trade in bear markets"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    note: "Which labels count as a bear market is the desk's call (the agent workflow halves size unless trend-bull states dominate)."
+  - id: funding_crowded
+    role: entry
+    rule: "Funding above 0.15%/8h (0.0001875/h): crowded longs paying carry"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: moved_from_listing_close
+    role: entry
+    rule: "Price already more than 15% from the listing day's close; enter short at market, isolated"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=15
+    field: candles[].close
+    note: "With near_listing_close this leaves a 15-20% window."
+  - id: exit_funding_normal
+    role: exit
+    rule: "Exit when funding normalises below 0.05%/8h (0.0000625/h)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+  - id: exit_reverted
+    role: exit
+    rule: "Exit when price reverts to within 5% of the listing day's close"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=15
+    field: candles[].close
+  - id: time_stop_14d
+    role: stop
+    rule: "Exit regardless of P&L 14 days after the listing date"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=15
+    field: candles[].timestamp
+    note: "The listing date is the first daily bar's timestamp."
+  - id: drawdown_stop
+    role: stop
+    rule: "Exit when the position's drawdown exceeds 20%"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: squeeze_guard
+    role: stop
+    rule: "JELLY guard: price up more than 30% against the short in under 4 hours on thin volume, exit at market"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=5
+    field: candles[].high
+    note: "The move is measurable from the 1h highs; the page sets no number for thin volume (candles[].volume in the same response)."
 kill_criteria: |
   - basket drawdown > 35% from peak on a rolling 3-month basis
   - rolling 3-month Sharpe < 0 on minimum 8 completed new-listing trades

@@ -21,6 +21,151 @@ crowding_risk: high
 expected_sharpe: 0.7
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 45
+gates:
+  - id: live_hl_perp
+    role: universe
+    rule: "The announced asset has a live (not delisted) Hyperliquid perp"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "Rows exclude delisted perps (coverage.delisted_excluded counts them)."
+  - id: listing_min_volume
+    role: universe
+    rule: "Listing long: Hyperliquid 24h volume of at least $1M (JELLY guard)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: delisting_min_volume
+    role: universe
+    rule: "Delisting short: Hyperliquid 24h volume of at least $500K, else hard skip"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: min_open_interest
+    role: universe
+    rule: "Hard skip any perp with open interest below $1M (thin-perp squeeze guard)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+  - id: listing_announcement
+    role: entry
+    rule: "Enter long within 120 seconds of a confirmed listing announcement from Binance, Coinbase, OKX, Bybit or Kraken"
+    runnable: partial
+    endpoint: /api/v1/news/market-moving?symbol={coin}&hours=1
+    field: events[].category
+    replay: /api/v1/backtesting/news-events?symbol={coin}&start={start}
+    replay_field: data[].category
+    note: "Rows with category exchange_listing (or hl_listing for a new Hyperliquid perp) name the coin; the title names the venue and events[].published is the source time. The tape refreshes every 5 minutes from OKX's announcement API and news RSS (Binance's and Bybit's announcement feeds are not reachable from our egress), so it cannot meet a 120-second window: it confirms an announcement, it is not the low-latency trigger."
+  - id: delisting_announcement
+    role: entry
+    rule: "Enter short on a confirmed delisting announcement from Binance, Coinbase, OKX, Bybit or Kraken"
+    runnable: partial
+    endpoint: /api/v1/news/market-moving?symbol={coin}&hours=1
+    field: events[].category
+    replay: /api/v1/backtesting/news-events?symbol={coin}&start={start}
+    replay_field: data[].category
+    note: "Rows with category delisting (or hl_delisting) name the coin. Same 5-minute refresh and venue coverage as listing_announcement; whether the source is the exchange's official channel is the desk's check."
+  - id: oi_spike_leak
+    role: entry
+    rule: "Possible leak: 5-minute open-interest growth above 3 sigma; enter only if a confirming catalyst follows within 60 seconds"
+    runnable: partial
+    endpoint: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&start={start}
+    field: data[].open_interest
+    note: "Rows are 5-minute snapshots of Hyperliquid OI; the page names no baseline window for the sigma, so the trailing window (e.g. 24h of 5-minute changes) is the desk's choice. The 60-second confirmation cannot come from our 5-minute news tape."
+  - id: listing_not_crowded
+    role: entry
+    rule: "Skip a listing long when funding is already above +0.10%/8h (+0.0125%/h, 0.000125 per hour)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: perp_age_48h
+    role: sizing
+    rule: "No large position on a perp listed less than 48 hours ago"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=48
+    field: candles[].timestamp
+    note: "Fewer than 48 hourly bars, or a first bar younger than 48h, means the perp is under 48 hours old."
+  - id: book_depth_confirmed
+    role: sizing
+    rule: "On a perp under 48 hours old, size up only once order-book depth is confirmed"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: asks[].size
+    note: "Sum price x size of the levels within your slippage band. The page sets no depth level; its disconfirming evidence treats more than 100 bps slippage on standard size as too thin."
+  - id: tp_trailing_peak
+    role: exit
+    rule: "Listing long: once the move is more than 15% above entry, trail a 20% drawdown from the peak"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: tp_funding_spike
+    role: exit
+    rule: "Listing long: take profit immediately when funding rises above +0.15%/8h (+0.01875%/h, 0.0001875 per hour)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+  - id: time_exit_24h
+    role: exit
+    rule: "Listing long: exit after 24 hours if the move has not materialised"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "'Not materialised' = the 15% trailing-stop trigger in tp_trailing_peak never armed."
+  - id: listing_stop
+    role: stop
+    rule: "Listing long: hard stop 10% below the entry fill"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: delisting_cover_target
+    role: exit
+    rule: "Delisting short: cover 20-40% below the announcement price (30% default), or when selling visibly exhausts on the 15m chart"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=15m&limit=16
+    field: candles[].close
+    note: "The desk records the announcement price. Where in 20-40% to cover depends on the coin's liquidity profile, and 'selling exhausts' is a chart judgement."
+  - id: delisting_negative_carry
+    role: exit
+    rule: "Delisting short: cover when funding falls below -0.15%/8h (-0.0001875 per hour), the short paying carry"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+  - id: delisting_stop
+    role: stop
+    rule: "Delisting short: hard stop 15% above the entry fill (thin-perp squeeze guard)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: survive_20pct_move
+    role: sizing
+    rule: "Leverage low enough that a 20% adverse move does not liquidate: 3-5x listing longs, 2-3x delisting shorts, isolated margin"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/meta
+    field: universe[].maxLeverage
+    note: "Liquidation distance is about 1/leverage minus maintenance margin; Hyperliquid's base-tier maintenance margin is half the initial margin at max leverage, 1/(2 x maxLeverage)."
+  - id: size_listing_long
+    role: sizing
+    rule: "Listing long: 0.5-1.5% of book in the named asset"
+    runnable: true
+    input: position
+  - id: size_delisting_short
+    role: sizing
+    rule: "Delisting short: 0.5-1.0% of book"
+    runnable: true
+    input: position
+  - id: event_position_caps
+    role: sizing
+    rule: "Never more than 2% of book in one listing or delisting name, and at most 2 event positions open at once"
+    runnable: true
+    input: position
 kill_criteria: |
   - rolling 3-month strategy drawdown > 25%
   - 3 consecutive listing trades produce < 0 net P&L after costs

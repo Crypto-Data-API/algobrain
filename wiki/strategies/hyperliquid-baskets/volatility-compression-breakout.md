@@ -21,6 +21,168 @@ crowding_risk: medium
 expected_sharpe: 0.60
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 40
+gates:
+  - id: min_day_volume
+    role: universe
+    rule: "At least $15M of 24h volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: min_history
+    role: universe
+    rule: "At least 30 bars of ATR(14) history on the 4h chart (90 or more for the percentile ranks)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=130&atr=14
+    field: candles[].atr
+  - id: bbw_squeeze
+    role: entry
+    rule: "Bollinger Band width (20, 2) at its lowest of the last 20 bars and below the 15th percentile of its last 90 bars"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=130
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "Width = (upper - lower) / middle on the 4h closes. /indicators/technical serves the same squeeze on daily bars (bollinger.squeeze_percentile)."
+  - id: atr_compressed
+    role: entry
+    rule: "ATR(14) on the 4h chart at or below the 10th percentile of its last 90 bars"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=130&atr=14
+    field: candles[].atr
+  - id: volume_compressed
+    role: entry
+    rule: "5-bar average volume falling and below the 25th percentile of its last 90 bars"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=130
+    field: candles[].volume
+  - id: compression_signal
+    role: entry
+    rule: "Compression confirmed: any 2 of bbw_squeeze, atr_compressed and volume_compressed hold on 2 or more consecutive 4h bars"
+    runnable: true
+    input: derived
+    inputs: [bbw_squeeze, atr_compressed, volume_compressed]
+  - id: vol_not_expanded
+    role: filter
+    rule: "Suppress when volatility has already expanded: 4h ATR percentile above 60 (pseudocode)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=130&atr=14
+    field: candles[].atr
+  - id: range_mr_not_full
+    role: filter
+    rule: "Suppress while the range-mean-reversion basket is fully deployed"
+    runnable: true
+    input: position
+  - id: trend_ema50
+    role: filter
+    rule: "Direction bias: close above EMA(50) leans long, below leans short (scores +1 or -1)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=130
+    field: candles[].close
+    note: "The pseudocode takes EMA(50) on the 4h closes."
+  - id: above_200d_ma
+    role: filter
+    rule: "Direction bias: price above the 200-day moving average supports a long lean"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={coin}
+    field: items[].ma.above_200
+  - id: oi_growing
+    role: filter
+    rule: "Direction bias: open interest growing while the compression holds"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=4h&start={start}
+    field: data[].oi_change_pct
+  - id: positioning_skew
+    role: filter
+    rule: "Direction bias: the dominant positioning side on Hyperliquid (scores +1 net long, -1 net short)"
+    runnable: partial
+    endpoint: /api/v1/quant/positioning?symbol={coin}
+    field: coins.{coin}.by_type.all.net_usd
+    note: "Net of tracked accounts worth $100k or more, not the whole book. The page does not say how large a net counts as dominant."
+  - id: funding_sign
+    role: filter
+    rule: "Direction tiebreaker: positive funding scores +1 (long lean), negative -1"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    note: "The page asks for persistent positive funding; the pseudocode reads only the latest rate."
+  - id: preposition
+    role: sizing
+    rule: "Pre-position at half the target size (risk 0.5% at 1.5-2x isolated) when trend_ema50 + funding_sign + positioning_skew score +2 or more (long) or -2 or less (short)"
+    runnable: partial
+    input: derived
+    inputs: [trend_ema50, funding_sign, positioning_skew]
+    note: "Partial because positioning_skew is."
+  - id: preposition_stop
+    role: stop
+    rule: "Pre-position stop 1.0x ATR(14) from the entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30&atr=14
+    field: candles[].atr
+  - id: breakout_bb_close
+    role: entry
+    rule: "Full-size entry on the first 4h close outside the 20-period Bollinger Band (either this or breakout_20bar)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+  - id: breakout_20bar
+    role: entry
+    rule: "Full-size entry on the first 4h close beyond the 20-bar high or low (either this or breakout_bb_close)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=25
+    field: candles[].high
+    note: "The 20-bar high is the max of candles[].high over the 20 bars before the breakout bar (the low uses candles[].low)."
+  - id: breakout_size
+    role: sizing
+    rule: "Breakout entry risks 1.0% at 2.5x isolated, adding to any pre-position up to full size"
+    runnable: true
+    input: position
+  - id: breakout_stop
+    role: stop
+    rule: "Breakout stop 0.5x ATR(14) beyond the breakout bar's close"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30&atr=14
+    field: candles[].atr
+  - id: tp_atr_target
+    role: exit
+    rule: "Target 1.5-3x ATR(14) from the entry (pseudocode: 2x) (either this or tp_structural)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30&atr=14
+    field: candles[].atr
+  - id: tp_structural
+    role: exit
+    rule: "Or target a visible structural level, the prior swing high or low (either this or tp_atr_target)"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/indicators/technical?symbol={coin}
+    field: items[].sr.resistance[].price
+    note: "Daily swing pivots (support for the short). Which level is visible enough is the desk's call."
+  - id: atr_trail
+    role: stop
+    rule: "Once 1x ATR in profit, switch to a 2x ATR(14) trailing stop"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30&atr=14
+    field: candles[].atr
+  - id: stale_compression
+    role: stop
+    rule: "If compression persists more than 10 bars after the signal without expanding, tighten the pre-position stop to 0.5x ATR"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=130&atr=14
+    field: candles[].atr
+    note: "Still compressed = the entry criteria (bbw_squeeze, atr_compressed, volume_compressed) still hold."
+  - id: opposite_break
+    role: exit
+    rule: "If the opposite side breaks first, close the pre-position and reverse on the breakout-entry rules"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60
+    field: candles[].close
 kill_criteria: |
   - Rolling 6-month drawdown > 25% of strategy book
   - Rolling 12-month net Sharpe < 0 over ≥ 20 completed trades

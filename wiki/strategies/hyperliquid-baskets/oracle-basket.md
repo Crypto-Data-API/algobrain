@@ -21,6 +21,45 @@ crowding_risk: low
 expected_sharpe: 0.7
 expected_max_drawdown: 0.38
 breakeven_cost_bps: 30
+gates:
+  - id: oracle_network
+    role: universe
+    rule: "Operates an oracle network that feeds external data to smart contracts (LINK, PYTH, API3, BAND, UMA)"
+    runnable: true
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].symbol
+    note: "Members of the group with id oracle (CoinGecko Oracle tags plus a curated seed)."
+  - id: verifiable_integrations
+    role: universe
+    rule: "Verifiable on-chain integrations (number of data feeds, protocols using the oracle)"
+    runnable: false
+    note: "No oracle integration counts or data-feed counts are served."
+  - id: min_day_volume
+    role: universe
+    rule: "Live Hyperliquid perp with 24h volume at least $2M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    note: "A constituent with no row has no live HL perp (delisted perps are excluded). The smaller oracles sit close to the floor."
+  - id: equal_weight_weekly
+    role: sizing
+    rule: "Equal-weight the constituents and rebalance weekly"
+    runnable: true
+    input: position
+  - id: integration_news_rebalance
+    role: sizing
+    rule: "Rebalance out of cycle on major oracle integration announcements (new protocol adoption, cross-chain expansion)"
+    runnable: partial
+    endpoint: /api/v1/news/coin/{symbol}?hours=24
+    field: events[].category
+    note: "Classified news per coin (e.g. partnership, upgrade); whether an announcement is major is a human read."
+  - id: trend_regime
+    role: filter
+    rule: "Favour trend-bull market states; skip range_low_vol, where the sector drifts with no catalyst"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    note: "From the page's agent workflow; how much to tilt toward trend-bull states is the desk's call."
 kill_criteria: |
   - basket drawdown > 38% from peak on a rolling 6-month basis
   - rolling 6-month Sharpe < 0 on minimum 10 completed trades

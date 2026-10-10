@@ -21,6 +21,39 @@ crowding_risk: low
 expected_sharpe: 0.5
 expected_max_drawdown: 0.45
 breakeven_cost_bps: 40
+gates:
+  - id: hl_perp_listed
+    role: universe
+    rule: "Constituent has a live Hyperliquid perp at screen time; re-verify every weekly screen"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "assets[] lists live perps only. /hyperliquid/meta, which the page cites, still lists delisted perps."
+  - id: privacy_sector
+    role: universe
+    rule: "Primary design objective is financial privacy or confidential computation (XMR, ZEC, SCRT, ROSE, DUSK)"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].symbol
+    note: "Members of the group with id privacy: seeded XMR, ZEC, DASH, ZEN, SCRT, ROSE, DUSK plus CoinGecko privacy tags. Whether privacy is a coin's primary objective is the desk's call."
+  - id: min_day_volume
+    role: universe
+    rule: "At least $1M of 24h Hyperliquid perp volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: equal_weight_cap
+    role: sizing
+    rule: "Equal-weight the constituents, with no single name above 25% of basket notional"
+    runnable: true
+    input: position
+  - id: regulatory_action_exit
+    role: exit
+    rule: "Rebalance at once on a major regulatory action against a constituent (OFAC designation, major-exchange delisting, FATF guidance); on a designation or delisting, drop that name and halve basket exposure"
+    runnable: partial
+    endpoint: /api/v1/news/coin/{coin}?hours=24
+    field: events[].category
+    note: "React to delisting, hl_delisting, enforcement or ban. Whether a headline is an OFAC or FATF action of that weight is a human judgement. A Hyperliquid delisting also removes the coin from hl_perp_listed."
 kill_criteria: |
   - basket drawdown > 45% from peak on a rolling 6-month basis
   - any constituent receives OFAC designation or major exchange delisting → immediate remove that constituent and halve basket exposure

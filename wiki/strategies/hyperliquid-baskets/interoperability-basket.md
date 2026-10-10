@@ -21,6 +21,56 @@ crowding_risk: low
 expected_sharpe: 0.6
 expected_max_drawdown: 0.42
 breakeven_cost_bps: 35
+gates:
+  - id: interop_sector
+    role: universe
+    rule: "Operates a cross-chain bridge, messaging protocol or interoperability layer"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].symbol
+    note: "Membership of the group with id interoperability (CoinGecko interoperability / cross-chain / bridge tags plus a seed list); HL names differ from tickers for a few coins. Whether the protocol runs a live bridge or messaging layer is the desk's check."
+  - id: tvl_and_volume
+    role: universe
+    rule: "Has verifiable TVL and cross-chain transaction volume"
+    runnable: false
+    note: "No bridge TVL or cross-chain transfer-volume feed is served."
+  - id: no_hack_12m
+    role: universe
+    rule: "No major hack in the prior 12 months (requalify after 12 clean months)"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack&symbol={coin}
+    field: items[].days_ago
+    note: "The security feed looks back 10 days at most, so a 12-month record needs the desk to log hacks as they appear. Rows name symbols only when the source maps the hacked protocol to its token."
+  - id: min_day_volume
+    role: universe
+    rule: "Hyperliquid perp 24h volume of at least $2M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: hack_removal
+    role: exit
+    rule: "Remove a constituent immediately on a bridge hack (material: above $50M)"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack&symbol={coin}
+    field: items[].amount_usd
+    note: "Rows name symbols only when the source maps the hacked protocol to its token; check title and target_type for a bridge hit under another name."
+  - id: hack_news_suppression
+    role: filter
+    rule: "Stand the sector down while bridge-hack news is fresh: one major hack can suppress the whole basket for weeks"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack
+    field: security_stress_score
+    note: "The page sets no stress level or stand-down length."
+  - id: security_review
+    role: universe
+    rule: "Quarterly security-credibility review: bridge audit status, TVL and slashing events"
+    runnable: false
+    note: "No audit-status, bridge-TVL or slashing-event feed is served."
+  - id: equal_weight
+    role: sizing
+    rule: "Equal weight across constituents, rebalanced weekly"
+    runnable: true
+    input: position
 kill_criteria: |
   - basket drawdown > 42% from peak on a rolling 6-month basis
   - rolling 6-month Sharpe < 0 on minimum 10 completed trades

@@ -21,6 +21,52 @@ crowding_risk: medium
 expected_sharpe: 0.7
 expected_max_drawdown: 0.38
 breakeven_cost_bps: 30
+gates:
+  - id: sector_member
+    role: universe
+    rule: "A liquid staking or restaking protocol token (LDO, RPL, ETHFI, REZ, SSV, SWELL, KEP)"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: categories
+    note: "Keep a coin whose CoinGecko categories mention Liquid Staking or Restaking. The curated liquid-staking group on /coins/category-groups does not match restaking tags. Whether a protocol fits the thesis is the desk's call."
+  - id: verifiable_tvl
+    role: universe
+    rule: "Verifiable on-chain TVL and staking mechanics"
+    runnable: false
+    note: "No per-protocol TVL or staking-mechanics data is served (no DefiLlama protocol TVL endpoint)."
+  - id: min_day_volume
+    role: universe
+    rule: "Live Hyperliquid perp with 24h volume at least $2M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    note: "A constituent with no row has no live HL perp (delisted perps are excluded)."
+  - id: equal_weight_weekly
+    role: sizing
+    rule: "Equal-weight the constituents and rebalance weekly"
+    runnable: true
+    input: position
+  - id: young_listing_weight
+    role: sizing
+    rule: "Do not weight up a younger restaking name flagged insufficient_history or new_listing"
+    runnable: true
+    endpoint: /api/v1/quant/coins?limit=300
+    field: items[].insufficient_history
+    note: "From the page's agent workflow. new_listing (listed under 7 days ago) is in the same row."
+  - id: exploit_removal
+    role: exit
+    rule: "Remove a constituent the same day it suffers a material smart-contract exploit"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack&symbol={coin}&window_days=2
+    field: items[].amount_usd
+    note: "What counts as material is the desk's call; the kill criterion's 5%-of-TVL bar needs protocol TVL, which is not served."
+  - id: eth_bull_regime
+    role: filter
+    rule: "Deploy in ETH-bullish trend states: market regime strong_trend_bull, with ETH momentum confirming"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    note: "From the page's agent workflow; Regime Character names no threshold. The ETH momentum confirmation is a read of ETH candles that the page does not define."
 kill_criteria: |
   - basket drawdown > 38% from peak on a rolling 6-month basis
   - rolling 6-month Sharpe < 0 on minimum 10 completed trades

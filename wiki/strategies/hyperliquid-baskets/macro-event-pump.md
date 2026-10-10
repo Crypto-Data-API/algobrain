@@ -21,6 +21,109 @@ crowding_risk: high
 expected_sharpe: 0.8
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 50
+gates:
+  - id: scheduled_macro_print
+    role: universe
+    rule: "A scheduled FOMC decision or CPI, PCE or NFP print in the next 72 hours (event classes Fed/rates and CPI/macro data)"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=macro_print&window_days=3
+    field: items[].macro_class
+    note: "Rows carry the date (days_until) but no release time, so the desk supplies it (CPI, NFP and PCE at 8:30 ET; FOMC at 14:00 ET). Fed Chair press conferences off decision days and Jackson Hole are not listed."
+  - id: etf_flow_outlier
+    role: universe
+    rule: "A large single-day spot BTC or ETH ETF flow outlier (event class ETF flows)"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/etf/{asset}/flows?days=30
+    field: flows[].flow_usd
+    note: "Settled trade dates only (the partial day is in_progress, never in flows[]). Rows are oldest first: test the last row against the 29 before it; the page sets no outlier threshold, so the desk does."
+  - id: regulatory_event
+    role: universe
+    rule: "A regulatory or policy event: SEC decision, crypto legislation, offshore exchange enforcement (event class regulatory/policy)"
+    runnable: partial
+    endpoint: /api/v1/news/market-moving?hours=24
+    field: events[].category
+    note: "Unscheduled and news-classified (categories such as ban, legal_resolution, constructive_policy, etf_approval). Whether a story is this kind of event is a human read."
+  - id: consensus_expectation
+    role: entry
+    rule: "The consensus expectation and the likely surprise: Fed funds futures implied cut/hold/hike, CPI consensus vs the prior read"
+    runnable: false
+    note: "No consensus or forecast data is served: no Fed funds futures probabilities and no economist consensus. The calendar carries dates and a risk_flag bias only, so the contrarian long/short score cannot be computed."
+  - id: crowding_skip
+    role: filter
+    rule: "Skip the event when BTC open interest rose more than 30% in the 48 hours before it"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin=BTC&interval=1h&start={start}
+    field: data[].oi_close
+    note: "start = 48 hours before the print; compare the latest oi_close with the first bar's oi_open."
+  - id: positioning_bias
+    role: entry
+    rule: "Market bias from BTC funding: long-crowded above +0.05, short-crowded below -0.05, otherwise neutral (no pre-position)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin=BTC&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin=BTC&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "The page's 0.05 has no unit; read as 0.05%/8h it is 0.0000625 on HL's hourly rate. Turning the bias into a long or short pre-position also needs the expected outcome (consensus_expectation, not served)."
+  - id: contrarian_setup
+    role: entry
+    rule: "Score the setup: contrarian long (market short, dovish surprise likely), contrarian short (market long, hawkish or in-line likely) or neutral; pre-position only on a contrarian score"
+    runnable: false
+    input: derived
+    inputs: [positioning_bias, consensus_expectation, crowding_skip]
+    note: "consensus_expectation is not served, so the likely outcome is the desk's read; positioning and crowding are measurable."
+  - id: pre_position_size
+    role: sizing
+    rule: "Pre-position 0.5-1% of book, entered 24 hours before the print"
+    runnable: true
+    input: position
+  - id: close_pre_position
+    role: exit
+    rule: "Close the pre-position on the print, or at the scheduled time"
+    runnable: true
+    input: position
+  - id: overshoot_fade
+    role: entry
+    rule: "Fade when the first 5-minute move after the print exceeds 2x the historical median absolute 5-minute move for that event class"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=5m&limit=3
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}&end={end}
+    replay_field: klines[].c
+    note: "The 5-minute move is the first post-print bar's close against its open. The historical median needs past print timestamps, which are not served (the calendar is forward-looking and dates only); given the desk's list of past prints, replay their 1m bars (archive from 2026-03-30)."
+  - id: fade_scale_in
+    role: sizing
+    rule: "Fade with 1-2% of book: 50% at T+5min, 25% at T+15min if price is still moving the same way, 25% held back"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=5m&limit=4
+    field: candles[].close
+  - id: fade_target
+    role: exit
+    rule: "Take profit at a 50-80% retracement of the initial move"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: fade_stop
+    role: stop
+    rule: "Hard stop 1.5 x daily ATR(14) beyond the initial move's extreme"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30&atr=14
+    field: candles[].atr
+  - id: fade_time_stop
+    role: stop
+    rule: "Close the fade within 4 hours of the print unless it keeps trending (then it is not a fade: exit or reverse)"
+    runnable: partial
+    input: position
+    note: "The 4-hour close is mechanical; deciding that the move is still trending is a judgement."
+  - id: no_overnight_through_event
+    role: exit
+    rule: "Never hold a fade overnight through a subsequent event"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=macro_print&window_days=2
+    field: items[].days_until
+    note: "Covers scheduled macro prints only; ETF-flow and regulatory events are not scheduled."
 kill_criteria: |
   - drawdown > 25% on the basket over rolling 6 months
   - rolling 6-month Sharpe < 0

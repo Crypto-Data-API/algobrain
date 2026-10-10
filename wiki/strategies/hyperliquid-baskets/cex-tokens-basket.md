@@ -21,6 +21,56 @@ crowding_risk: medium
 expected_sharpe: 0.7
 expected_max_drawdown: 0.40
 breakeven_cost_bps: 28
+gates:
+  - id: in_cex_sector
+    role: universe
+    rule: "Native utility or governance token of an actively operating centralised exchange"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].symbol
+    note: "Read the row whose id is exchange (seed list plus CoinGecko exchange-token tags). Whether the exchange is operating normally is a judgement; no_exchange_distress covers recent distress news."
+  - id: min_day_volume
+    role: universe
+    rule: "At least $3M daily Hyperliquid perp volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    note: "Rolling 24h notional. A token missing from assets[] has no live HL perp. The page warns that OKB, KCS, GT and MX do not always have one."
+  - id: no_exchange_distress
+    role: universe
+    rule: "The exchange is operational: no insolvency, withdrawal halt or regulatory shutdown"
+    runnable: partial
+    endpoint: /api/v1/news/coin/{symbol}?hours=336
+    field: events[].category
+    note: "Disqualify on an insolvency, enforcement, ban, outage or exchange_hack event in the last 14 days (the window maximum). News resolves to the token by ticker or name, so a story that names only the exchange can be missed."
+  - id: no_hack_or_closure_12m
+    role: universe
+    rule: "No major hack or regulatory closure at the exchange in the prior 12 months"
+    runnable: partial
+    endpoint: /api/v1/backtesting/news-events?symbol={symbol}&start={start}
+    field: data[].category
+    note: "start = 12 months ago; look for exchange_hack, hack, theft, insolvency, enforcement or ban. The news archive starts when the pipeline shipped (August 2026) and cannot be backfilled, so most of the 12 months is a human check."
+  - id: equal_weight
+    role: sizing
+    rule: "Equal-weight across active constituents, rebalanced weekly"
+    runnable: partial
+    input: derived
+    inputs: [in_cex_sector, min_day_volume, no_exchange_distress, no_hack_or_closure_12m]
+    note: "Weights the names that pass the universe gates, which leave exchange health partly to the desk."
+  - id: distress_deweight
+    role: exit
+    rule: "De-weight a constituent immediately on exchange-insolvency or major regulatory-action news"
+    runnable: partial
+    endpoint: /api/v1/news/coin/{symbol}?hours=24
+    field: events[].category
+    note: "Trigger on insolvency, enforcement, ban or exchange_hack. Which regulatory action is major is the desk's call, and a story naming only the exchange may not resolve to its token."
+  - id: security_stress_degross
+    role: sizing
+    rule: "De-gross the basket when market-wide security stress spikes"
+    runnable: partial
+    endpoint: /api/v1/security/regime/score
+    field: security_stress_score
+    note: "From the page's agent workflow, which gives no threshold or cut size. The served band (quiet, elevated, heavy, critical) is the natural trigger."
 kill_criteria: |
   - basket drawdown > 40% from peak on a rolling 6-month basis
   - rolling 6-month Sharpe < 0 on minimum 10 completed trades

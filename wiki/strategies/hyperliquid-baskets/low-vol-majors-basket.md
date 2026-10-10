@@ -21,6 +21,59 @@ crowding_risk: low
 expected_sharpe: 0.6
 expected_max_drawdown: 0.28
 breakeven_cost_bps: 15
+gates:
+  - id: min_market_cap
+    role: universe
+    rule: "Market cap at least $2B (large caps only, so low vol reflects stability, not illiquidity)"
+    runnable: true
+    endpoint: /api/v1/coins/{symbol}
+    field: market_cap
+  - id: min_day_volume
+    role: universe
+    rule: "Hyperliquid perp with 24h volume at least $10M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: rank_realized_vol
+    role: universe
+    rule: "Rank eligible perps by 30-day realised vol (annualised std of daily close returns), ascending"
+    runnable: true
+    endpoint: /api/v1/volatility/regime?source=hyperliquid_perp&limit=500
+    field: items[].vol.rv_cc_30
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "rv_cc_30 is the close-to-close 30-day vol, annualised %. A replay recomputes it from the 31 daily closes ending on the screen date."
+  - id: bottom_quintile_book
+    role: universe
+    rule: "Hold the bottom quintile of the ranked eligible perps (market cap and volume filters passed), at most 6 names"
+    runnable: true
+    input: derived
+    inputs: [min_market_cap, min_day_volume, rank_realized_vol]
+  - id: vol_regime_eligible
+    role: filter
+    rule: "Constituent's vol regime is compressed, normal or mean_reverting; skip expanding and vol_shock names"
+    runnable: true
+    endpoint: /api/v1/volatility/regime?source=hyperliquid_perp&limit=500
+    field: items[].regime
+  - id: inverse_vol_weight
+    role: sizing
+    rule: "Weight each constituent by 1 / realised vol, normalised to sum to 1"
+    runnable: true
+    input: derived
+    inputs: [bottom_quintile_book, rank_realized_vol]
+  - id: monthly_rebalance
+    role: sizing
+    rule: "Reconstitute and reweight monthly; otherwise hold constituents for the full month"
+    runnable: true
+    input: position
+  - id: vol_spike_replace
+    role: exit
+    rule: "Replace a constituent whose realised vol rises above 2x its vol at entry with the next-lowest-vol name"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: vol.rv_cc_30
+    note: "The page does not name the vol window. rv_cc_30 matches the screen; rv_cc_7 in the same response reacts faster to a spike."
 kill_criteria: |
   - basket drawdown > 28% from peak on a rolling 6-month basis
   - rolling 6-month Sharpe < 0 on a minimum of 8 completed holding periods

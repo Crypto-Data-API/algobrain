@@ -138,7 +138,28 @@ kill_criteria: |
   - rolling 6-month Sharpe < 0
 last_review: 2026-04-10
 next_review: 2026-05-10
+
+# Runnable gates (see "Gates" below) — every condition the rules check
+gates:
+  - id: funding_crowded            # snake_case, unique on the page
+    role: entry                    # universe | entry | filter | exit | stop | sizing
+    rule: "Hourly funding > +0.05%/h on each of the last 2 settlements"
+    runnable: true                 # true | partial | false
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=2
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
 ```
+
+**Gates** (added 2026-10-10). A strategy page lists every condition its rules check (universe, entry, filter, exit, stop, sizing) under `gates:`, each mapped to ONE CryptoDataAPI `endpoint` and ONE response `field`. An agent can then run the page without guessing which numbers we serve. The API serves them on `/api/v1/algobrain/page` (`gates`) and summarises them on search (`strategy.runnable`, `runnable=all`).
+- Put the threshold in `rule` and make `field` the value it is compared against. Two numbers make two gates. For "A or B", write two gates and say "(either this or <id>)" in each.
+- `runnable: partial`: the endpoint measures part of the condition. `note` says what a human still judges, for example an expected ETF decision that is not on the event calendar.
+- `runnable: false`: nothing we serve measures it. Name no endpoint or field, and say in `note` what data is missing. A wrong `true` is worse than an honest `false`.
+- `input: position` marks a condition on the trader's own position, such as a time stop or a distance from the entry fill. Name an endpoint only for the market side, such as the current mark.
+- `input: derived` with `inputs: [gate ids]` marks a condition built from other gates on the same page, such as a composite score or a construction rule like a quintile book. It needs no endpoint of its own, and it can be no more runnable than its weakest input.
+- `replay` / `replay_field` are optional: a history endpoint that reproduces the field for past dates, for backtests.
+- Field paths use `a.b`, `a[].b` (list items) and `a.{coin}.b` (coin-keyed maps). Placeholders are `{coin}`, `{symbol}`, `{asset}`, `{start}`, `{end}`, `{date}`, `{interval}`, `{category}` and `{chain}`.
+- **Validate before committing:** `python scripts/validate_algobrain_gates.py --only <page>` in the crypto-data-api repo. It checks every route, query parameter and field against the API's OpenAPI spec; add `--live` to also check them against production.
 
 **Strategy page sections** — every strategy page should follow this structure (in addition to standard frontmatter and lead paragraph):
 

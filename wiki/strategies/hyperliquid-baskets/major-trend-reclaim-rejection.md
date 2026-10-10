@@ -21,6 +21,140 @@ crowding_risk: medium
 expected_sharpe: 0.7
 expected_max_drawdown: 0.28
 breakeven_cost_bps: 35
+gates:
+  - id: level_sma_200
+    role: entry
+    rule: "Level (highest strength): the 200-day SMA of the daily close"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={coin}
+    field: items[].ma.sma_200
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "A replay recomputes the SMA from the 200 daily closes ending on the signal date."
+  - id: level_weekly_ema_50
+    role: entry
+    rule: "Level (high): the 50-period weekly EMA (BTC, ETH, large caps)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1w&limit=100
+    field: candles[].close
+    note: "EMA of the weekly closes; drop the forming week. HL weekly bars start at the perp's listing, so only coins listed 50+ weeks ago have this level."
+  - id: level_weekly_ema_20
+    role: entry
+    rule: "Level (medium): the 20-period weekly EMA (all large caps)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1w&limit=60
+    field: candles[].close
+    note: "EMA of the weekly closes; drop the forming week."
+  - id: level_major_sr
+    role: entry
+    rule: "Level (high when fresh): major historical S/R such as the prior-cycle ATH, bear-market lows, annual pivots (BTC, ETH, SOL)"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: ath
+    note: "ath is the all-time high (CoinGecko). Bear-market lows and annual pivots are levels the desk lists by hand; HL candles only go back to 2023."
+  - id: level_monthly_close
+    role: entry
+    rule: "Level (medium): the prior month's close (BTC, ETH)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=62
+    field: candles[].close
+    note: "The close of the last daily bar of the previous calendar month (UTC)."
+  - id: reclaim_closes_above
+    role: entry
+    rule: "Reclaim: daily close above the level on each of the last 1-2 completed daily bars (no one-wick break)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=5
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Drop the forming bar named by forming_bar_timestamp."
+  - id: reclaim_oi_expansion
+    role: entry
+    rule: "Reclaim: open interest up at least 5% on the confirmation close"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_change_pct
+    note: "start = a few days back; read the confirmation day's bar. OI history begins 2026-03-30."
+  - id: volume_above_20d
+    role: entry
+    rule: "Volume on the reclaim or rejection close above its 20-day average"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=22
+    field: candles[].volume
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].volume
+    note: "Compare the signal bar's volume with the mean of the 20 completed bars before it."
+  - id: reclaim_funding_not_crowded
+    role: entry
+    rule: "Reclaim: funding below +0.08%/8h (0.0001/h); a crowd already long means the covering is done"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: reclaim_retest_entry
+    role: entry
+    rule: "Reclaim entry: limit just above the level on the first candle that retests it from above; with no retest within 3 days, enter at market with 75% of planned size"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=72
+    field: candles[].low
+  - id: rejection_test
+    role: entry
+    rule: "Rejection: price tested the level from below (a daily high at or above it within the last 3 days)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=5
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].high
+  - id: rejection_close_below
+    role: entry
+    rule: "Rejection: daily close back below the level after the test (2 closes in the pseudocode)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=5
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: rejection_oi_expansion
+    role: entry
+    rule: "Rejection: open interest up at least 3% on the rejection bar (new shorts, not just covering)"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_change_pct
+  - id: rejection_funding_not_crowded
+    role: entry
+    rule: "Rejection: funding above -0.08%/8h (-0.0001/h); do not short into a crowded short"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: position_size
+    role: sizing
+    rule: "Reclaim long 3-4% of book at 2-2.5x; rejection short 2-3% of book at 2x; isolated margin"
+    runnable: true
+    input: position
+  - id: tp_next_level
+    role: exit
+    rule: "Target the next major structural level: above for a reclaim (e.g. prior-cycle ATH), the prior swing low or next level below for a rejection"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical?symbol={coin}
+    field: items[].sr.resistance[].price
+    note: "sr.resistance[] (sr.support[] for a rejection) are daily swing-pivot clusters, nearest first; which of them is major is the desk's call."
+  - id: atr_trailing_stop
+    role: stop
+    rule: "ATR trailing stop at 1.5 x the 14-day ATR"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30&atr=14
+    field: candles[].atr
+  - id: level_failure_stop
+    role: stop
+    rule: "Exit at market on a daily close back below the level (reclaim fails) or back above it (rejection fails)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=3
+    field: candles[].close
 kill_criteria: |
   - Basket drawdown > 28% on rolling 6-month basis
   - Rolling 6-month Sharpe < -0.4

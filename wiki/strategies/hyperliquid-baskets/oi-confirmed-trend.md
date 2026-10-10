@@ -21,6 +21,134 @@ crowding_risk: medium
 expected_sharpe: 0.8
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 35
+gates:
+  - id: min_day_volume
+    role: universe
+    rule: "Hyperliquid perp with 24h volume above $20M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: min_open_interest
+    role: universe
+    rule: "Open interest above $5M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+  - id: market_cap_scope
+    role: universe
+    rule: "Top 20 by market cap while the macro regime is unclear; widen to the top 50 when the macro trend regime is clearly trending"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: market_cap_rank
+    note: "The rank is served; whether the macro regime is clearly trending is the desk's read (e.g. /regimes/current)."
+  - id: atr_band_breakout
+    role: entry
+    rule: "4-hour close outside a 4-hour ATR band: above it for a long, below it for a short (breakout from consolidation or a key level)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60&atr=14
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "ATR(14) is in candles[].atr. The page never defines the band (its centre and multiple), so the desk sets them."
+  - id: oi_rise_3pct
+    role: entry
+    rule: "Open interest up at least 3% within the same 4-hour bar (long or short)"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=4h&start={start}
+    field: data[].oi_change_pct
+    note: "Read the bar whose time matches the signal candle. OI history begins 2026-03-30."
+  - id: long_funding_not_crowded_short
+    role: entry
+    rule: "Long: funding not deeply negative, above -0.08%/8h (-0.0001/h)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: short_funding_not_crowded_long
+    role: entry
+    rule: "Short: funding not deeply positive, below +0.10%/8h (0.000125/h)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: triad_crowded_basis
+    role: filter
+    rule: "Fragility leg 1 of 3: a crowded basis (a rich, persistent perp premium)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].premium
+    note: "premium is the perp mark over the oracle price. The page sets no red level and no persistence window."
+  - id: triad_funding_record_oi
+    role: filter
+    rule: "Fragility leg 2 of 3: persistent positive funding with record open interest"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_close
+    note: "Record = the latest oi_close at the window's maximum; funding_rate_mean in the same rows gives the persistence. The window and the red bar are the desk's; OI history begins 2026-03-30."
+  - id: triad_oi_outrunning_depth
+    role: filter
+    rule: "Fragility leg 3 of 3: open interest growing faster than resting book depth"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth/{coin}?minutes=1440
+    field: history[].open_interest_usd
+    note: "Compare the 24h change in open_interest_usd with the change in total_depth_25bps_usd (same rows). Top-25 HL perps only; the page sets no red ratio."
+  - id: fragility_triad_not_red
+    role: filter
+    rule: "Long: skip when all three fragility legs are red (the trend move is likely a bear trap)"
+    runnable: partial
+    input: derived
+    inputs: [triad_crowded_basis, triad_funding_record_oi, triad_oi_outrunning_depth]
+    note: "No triad composite is served, and every leg needs a desk-set red threshold."
+  - id: macro_allows_short
+    role: filter
+    rule: "Short: the macro trend regime allows shorting (not a confirmed early-bull phase)"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: anchor
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].anchor
+    note: "Treat early-recovery, btc-led-bull and broadening-bull as early bull; the mapping is the desk's. History begins 2026-08-07."
+  - id: oi_size_multiplier
+    role: sizing
+    rule: "Base 2% of book per signal, scaled by the OI rise: 3-5% = 1x, 5-10% = 1.25x, above 10% = 1.5x"
+    runnable: true
+    input: derived
+    inputs: [oi_rise_3pct]
+  - id: exposure_caps
+    role: sizing
+    rule: "At most 10% of book long and 10% short at once; 2-3x isolated, never above 3x"
+    runnable: true
+    input: position
+  - id: atr_stop
+    role: stop
+    rule: "Hard stop 1.5 x ATR(14) from the entry fill"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30&atr=14
+    field: candles[].atr
+  - id: atr_trailing_stop
+    role: exit
+    rule: "Primary exit: ATR trailing stop at 1.5 x ATR(14), recomputed each close"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30&atr=14
+    field: candles[].atr
+  - id: oi_declining_take_half
+    role: exit
+    rule: "Take 50% off a profitable position when open interest starts declining (the pseudocode uses a 4-hour OI change below -2%)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=4h&start={start}
+    field: data[].oi_change_pct
+  - id: squeeze_guard
+    role: stop
+    rule: "Cover a leg immediately when it moves 30% or more against the position on a thin perp (24h volume under $50M)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
 kill_criteria: |
   - Basket drawdown > 25% on rolling 6-month basis
   - Rolling 6-month Sharpe < -0.3

@@ -21,6 +21,103 @@ crowding_risk: low
 expected_sharpe: 0.5
 expected_max_drawdown: 0.35
 breakeven_cost_bps: 15
+gates:
+  - id: sol_depth
+    role: universe
+    rule: "Include SOL-PERP only when its order-book depth carries the target size without meaningful impact"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth/{coin}
+    field: history[].total_depth_25bps_usd
+    note: "coin = SOL. How small a share of the 25 bps depth the order must be is the desk's call. BTC and ETH need no check."
+  - id: macro_regime_active
+    role: filter
+    rule: "Active only in an accumulation, early-bull, range or bear-but-stabilising macro regime"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    note: "Map the page's phases onto the 10-state ids: capitulation, bottoming_accumulation, early_recovery and btc_led_bull are the nearest (the page's workflow names Capitulation, Bottoming and Early Recovery). The mapping is the desk's."
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+  - id: vol_regime_scalar
+    role: sizing
+    rule: "Allocation scalar from the volatility regime: 1.0 when compressed, 0.5 when expanding (the page's cut to 50% in expansion), 0.75 otherwise"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    note: "symbol = BTC, the basket's anchor. Per the pseudocode, vol_shock and the other states take 0.75."
+  - id: not_distribution
+    role: filter
+    rule: "Reduce when the BTC cycle is in confirmed distribution (rising OI, stalling price, negative ETF flows)"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    note: "distribution_post_peak is the served distribution state; the classifier combines the page's three inputs. The page does not say how far to reduce."
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+  - id: leverage_per_leg
+    role: sizing
+    rule: "BTC-PERP at 1.5-2x, ETH-PERP at 1-1.5x, SOL-PERP at 1x, each in isolated margin"
+    runnable: true
+    input: position
+  - id: build_in_thirds
+    role: entry
+    rule: "Build each leg in thirds over 3 days"
+    runnable: true
+    input: position
+  - id: vwap_limit_entry
+    role: entry
+    rule: "Enter with limit orders near the prior session's VWAP; never chase"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=1440
+    field: data[].vwap
+    note: "Session VWAP = sum(vwap x (buy_notional + sell_notional)) / sum(buy_notional + sell_notional) over the 1,440 one-minute rows of the trailing 24h. How near is 'near' is the desk's call."
+  - id: book_allocation
+    role: sizing
+    rule: "Allocate 20-35% of total book capital to the basket while it is active"
+    runnable: true
+    input: position
+  - id: atr_scaler
+    role: sizing
+    rule: "Scale down (pseudocode: x0.6) when 14-day ATR exceeds 1.5x its 90-day median"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=120&atr=14
+    field: candles[].atr
+    note: "Median of the last 90 atr values; the first 14 rows are null."
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}&atr=14
+    replay_field: candles[].atr
+  - id: btc_below_200d
+    role: exit
+    rule: "Cut to the minimum (1% of book per leg) when BTC closes below its 200-day MA for 10 consecutive days"
+    runnable: true
+    endpoint: /api/v1/indicators/technical/{symbol}
+    field: history[].above_200
+    note: "symbol = BTC; history holds the last 60 daily bars. The pseudocode also requires 2+ weeks of negative ETF flows (etf_outflows)."
+  - id: full_bear_regime
+    role: exit
+    rule: "Full exit when the macro regime confirms a full bear phase and etf_outflows holds; hand off to the full-bear short book"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    note: "established_bear is the nearest served state; whether structural_shock_crisis also counts is the desk's call."
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+  - id: etf_outflows
+    role: exit
+    rule: "ETF flows persistently negative: net spot-ETF flow below zero in each of the last 2 weeks"
+    runnable: true
+    endpoint: /api/v1/market-intelligence/etf/{asset}/flows?days=10
+    field: flows[].flow_usd
+    note: "asset = btc. Settled trade days only, oldest first; sum each 5-day week. The 2-week reading comes from the pseudocode (etf_flows_negative_weeks >= 2)."
+    replay: /api/v1/market-intelligence/etf/{asset}/flows?days=1000
+    replay_field: flows[].flow_usd
+  - id: funding_trim
+    role: sizing
+    rule: "Trim a BTC or ETH leg to 50% while its funding exceeds +0.10%/8h (+0.000125 per hour)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
 kill_criteria: |
   - Basket drawdown > 35% from peak on a rolling 6-month basis
   - BTC closes below the 200-day MA for more than 20 consecutive days with negative ETF flows → reduce to minimum size

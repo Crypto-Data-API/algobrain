@@ -21,6 +21,129 @@ crowding_risk: medium
 expected_sharpe: 1.0
 expected_max_drawdown: 0.28
 breakeven_cost_bps: 35
+gates:
+  - id: hl_perp_listed
+    role: universe
+    rule: "Any live Hyperliquid perp; the basket is event-driven, so there is no volume floor (thin pairs are sized down instead)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "assets[] lists live perps only; /hyperliquid/meta still carries delisted ones."
+  - id: liq_spike
+    role: entry
+    rule: "Liquidation notional in the latest closed 5-minute bar at least 3x the mean 5-minute bar over the trailing 24 hours"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=5m&start={start}
+    field: data[].total_usd
+    note: "start = 24 hours ago. Bars with no liquidations are omitted, so the mean is the 24h sum over 288. Read long_usd for a long flush and short_usd for a short squeeze. Hyperliquid's own liquidation tape; the forming bar is never served."
+  - id: price_move_15m
+    role: entry
+    rule: "Price down at least 3% over the trailing 15 minutes for the long entry (up at least 3% for the post-squeeze short)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=16
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}
+    replay_field: klines[].c
+    note: "Hyperliquid trade bars. The page says mark price; 5-minute mark samples are in /backtesting/funding data[].mark_price."
+  - id: rsi_15m_extreme
+    role: entry
+    rule: "RSI(14) on 15-minute candles at or below 28 at the flush for the long entry (at or above 72 for the short)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=15m&limit=60
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}
+    replay_field: klines[].c
+    note: "Wilder RSI(14) on the closes. The replay serves 1-minute bars: resample to 15m first."
+  - id: cvd_exhaustion
+    role: entry
+    rule: "Preferred, not required: the cumulative volume delta slope has flattened, so aggressive selling (buying, after a squeeze) is decelerating"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=60
+    field: data[].cvd_usd
+    note: "Per-minute running CVD from the Hyperliquid trade tape. The page sets CVD_FLATTEN_RATIO = 0.3 but no windows; which minutes count as the flush and which as the flattening is the desk's call."
+  - id: oi_contraction
+    role: entry
+    rule: "Open interest at least 5% below its pre-cascade level (the sample at spike onset)"
+    runnable: true
+    endpoint: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&start={start}
+    field: data[].open_interest
+    note: "5-minute Hyperliquid OI samples; start = 30 minutes before the spike. The newest sample lags live by up to about 5 minutes."
+  - id: no_coin_credit_event
+    role: filter
+    rule: "No protocol collapse, de-peg or credit event is the cause of the cascade"
+    runnable: partial
+    endpoint: /api/v1/news/coin/{coin}?hours=24
+    field: events[].category
+    note: "Skip when a recent event is hack, exchange_hack, theft, depeg, insolvency or outage. Whether that event caused this cascade is a human judgement."
+  - id: funding_flip_confirm
+    role: filter
+    rule: "Preferred confirmation: the in-progress hourly funding has normalised or flipped toward the rebound (negative after a long flush, positive after a short squeeze)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=2
+    field: current_rate
+    note: "current_rate is the live predicted rate for the unsettled hour (the page's predictedFundings check)."
+  - id: adl_insurance_risk
+    role: filter
+    rule: "Extra caution when the cascade drained Hyperliquid's insurance backstop (HLP) and auto-deleveraging risk is elevated"
+    runnable: false
+    note: "Nothing we serve measures HLP vault equity, its drawdown during a cascade, or the ADL queue."
+  - id: tp_precascade_vwap
+    role: exit
+    rule: "Take profit at the pre-cascade VWAP: the VWAP of the 15 minutes before the liquidation spike fired"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=60
+    field: data[].vwap
+    replay: /api/v1/backtesting/hl-trade-flow?coin={coin}&start={start}
+    replay_field: data[].vwap
+    note: "Capture it at entry: weight each minute's vwap by buy_notional + sell_notional over the 15 minutes before spike onset. Then compare the live mark against it."
+  - id: tp_fib_618
+    role: exit
+    rule: "If the pre-cascade VWAP looks out of reach within the time stop, target a 61.8% retracement of the cascade from peak to trough instead"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=120
+    field: candles[].low
+    note: "Trough = lowest candles[].low and peak = highest candles[].high over the cascade. Whether the VWAP is reachable inside 6 hours is the desk's call."
+  - id: stop_loss
+    role: stop
+    rule: "Hard stop 5% against the entry fill (below it for the long, above it for the short)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: atr_trail
+    role: stop
+    rule: "Once in profit, trail the stop 1.5x ATR behind price"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=15m&limit=60&atr=14
+    field: candles[].atr
+    note: "The page names no ATR timeframe or period; 15m and 14 match the entry RSI."
+  - id: time_stop
+    role: stop
+    rule: "Exit after 6 hours in the trade"
+    runnable: true
+    input: position
+  - id: base_size
+    role: sizing
+    rule: "3-6% of basket equity per trade at 2-3x isolated leverage, with at most 2 concurrent positions"
+    runnable: true
+    input: position
+  - id: thin_pair_size
+    role: sizing
+    rule: "Cut size to 2% when the cascade is on a thin-cap pair"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+    note: "The page sets no cut-off for thin; open interest (or day_volume on the same row) is the measure, the threshold is the desk's."
+  - id: bear_misclassification_size
+    role: sizing
+    rule: "Cut size to 1% when the macro context points to a bear-regime repricing rather than an overshoot (de-peg risk, credit-event news)"
+    runnable: partial
+    endpoint: /api/v1/security/regime/score
+    field: band
+    note: "Market-wide security stress from hacks, exchange flows and de-pegs. Reading an elevated band as bear-regime risk is a judgement."
 kill_criteria: |
   - Win rate drops below 52% over trailing 25 completed trades
   - Three consecutive full stop-outs (each > 8% loss on position)

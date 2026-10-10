@@ -21,6 +21,116 @@ crowding_risk: medium
 expected_sharpe: 0.85
 expected_max_drawdown: 0.20
 breakeven_cost_bps: 40
+gates:
+  - id: min_open_interest
+    role: universe
+    rule: "Hyperliquid perp with open interest above $10M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+  - id: min_day_volume
+    role: universe
+    rule: "24h perp volume above $20M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: trend_10d
+    role: universe
+    rule: "A trend has been running for at least 10 days (no flat or choppy markets)"
+    runnable: partial
+    endpoint: /api/v1/indicators/signum-rgg?symbol={coin}
+    field: items[].days_in_color
+    note: "The page does not define the trend. SIGNUM colour green or red held for 10+ days (days_in_color, with color in the same row) is a stand-in; grey means no trend."
+  - id: new_extreme
+    role: entry
+    rule: "A new 20-day high or 20-day low within the past 2 four-hour candles"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=125
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "20 days = 120 four-hour bars. The pseudocode compares closes over 20 bars, not 20 days; this gate follows the rule text."
+  - id: oi_off_peak
+    role: entry
+    rule: "Open interest at or below 95% of its 10-day peak"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=4h&start={start}
+    field: data[].oi_close
+    note: "start = 10 days ago; latest oi_close over the max oi_close in the window. OI history begins 2026-03-30."
+  - id: oi_divergence
+    role: entry
+    rule: "Open interest flat or falling for at least 3 consecutive 4-hour candles while price kept advancing"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=4h&start={start}
+    field: data[].oi_change_pct
+    note: "start = 1 day ago; each of the last 3 bars at or below +1% (the pseudocode's 1.01 tolerance). Price is mark_close in the same rows."
+  - id: funding_extreme
+    role: entry
+    rule: "Funding extreme in the trend direction: above +0.08%/8h (0.0001/h) to fade an uptrend, below -0.06%/8h (-0.000075/h) to fade a downtrend"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: within_2atr_of_extreme
+    role: entry
+    rule: "Price still within 2 x ATR(14, 4H) of the new high or low (not already reversing)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=125&atr=14
+    field: candles[].atr
+  - id: no_catalyst_48h
+    role: filter
+    rule: "No major catalyst (earnings, listing, unlock) expected within 48 hours"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?symbol={coin}&window_days=2
+    field: items[].days_until
+    note: "Covers scheduled unlocks, mints and macro prints. Listings and other unscheduled catalysts are not on the calendar."
+  - id: not_with_oi_confirmed_trend
+    role: filter
+    rule: "Never run this basket and oi-confirmed-trend on the same asset at once"
+    runnable: true
+    input: position
+  - id: risk_sizing
+    role: sizing
+    rule: "Risk 0.75% of capital per entry: size = risk / (1.5 x ATR(14, 4H)); at most 5 concurrent positions, 3x isolated"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30&atr=14
+    field: candles[].atr
+  - id: stop_beyond_entry_day
+    role: stop
+    rule: "Stop 0.5 x ATR(14, 4H) beyond the entry day's high (short) or low (long)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=3
+    field: candles[].high
+    note: "candles[].low for a long; the ATR is within_2atr_of_extreme's. The pseudocode sizes the stop at 1.5 ATR from the close instead."
+  - id: oi_reexpansion_exit
+    role: stop
+    rule: "Exit regardless of price when open interest re-expands more than 5% above its level at entry (thesis false)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest
+    note: "open_interest is in coins, so a price move does not fake an OI change."
+  - id: tp_ema20
+    role: exit
+    rule: "Primary target: mean reversion to the 20-period EMA on the 4H chart"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60
+    field: candles[].close
+  - id: tp_half_retrace
+    role: exit
+    rule: "Secondary target: a 50% retracement of the exhausted trend leg"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=125
+    field: candles[].close
+    note: "Leg = the 20-day range of closes at entry, as in the pseudocode."
+  - id: max_hold
+    role: stop
+    rule: "Exit after 10 days if the reversal has not come"
+    runnable: true
+    input: position
 kill_criteria: |
   - Rolling 6-month drawdown > 20% on the strategy book
   - OI divergence signal shows < 40% hit rate over trailing 30 signals (quantified)

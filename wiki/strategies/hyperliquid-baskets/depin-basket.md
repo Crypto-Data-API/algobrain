@@ -21,6 +21,49 @@ crowding_risk: medium
 expected_sharpe: 0.7
 expected_max_drawdown: 0.42
 breakeven_cost_bps: 35
+gates:
+  - id: in_depin_sector
+    role: universe
+    rule: "Operates a real physical-world infrastructure network (wireless, compute, storage, energy, mobility, sensing) with verifiable nodes"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].symbol
+    note: "Read the row whose id is depin (seed list plus CoinGecko DePIN and IoT tags). Verifying that the nodes are real is a human check."
+  - id: token_has_utility
+    role: universe
+    rule: "The token provides genuine network utility, not just governance"
+    runnable: false
+    note: "Judgement: no served field classifies a token's role in its network."
+  - id: min_day_volume
+    role: universe
+    rule: "At least $2M daily Hyperliquid perp volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    note: "Rolling 24h notional. A token missing from assets[] has no live HL perp."
+  - id: equal_weight
+    role: sizing
+    rule: "Equal-weight across active constituents; rebalance weekly, review eligibility monthly for new HL DePIN listings"
+    runnable: partial
+    input: derived
+    inputs: [in_depin_sector, min_day_volume]
+    note: "Weights the names that pass the served universe gates; token_has_utility (not runnable) is a human screen applied before weighting."
+  - id: hmm_trend_bull
+    role: filter
+    rule: "Deploy in trend-bull market regimes; avoid range_low_vol"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    note: "From the page's agent workflow. strong_trend_bull is the trend-bull state; the other states are the desk's call."
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+  - id: alt_breadth
+    role: filter
+    rule: "Deploy only with alt breadth behind the trend"
+    runnable: partial
+    endpoint: /api/v1/market-health/altcoin-breadth
+    field: breadth_pct
+    note: "From the page's agent workflow, which gives no threshold. breadth_pct is the share of the top 30 Binance coins above their 200-day MA (ma_period changes the MA)."
 kill_criteria: |
   - basket drawdown > 42% from peak on a rolling 6-month basis
   - rolling 6-month Sharpe < 0 on minimum 10 completed trades

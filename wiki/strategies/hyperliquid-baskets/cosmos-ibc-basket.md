@@ -21,6 +21,51 @@ crowding_risk: low
 expected_sharpe: 0.6
 expected_max_drawdown: 0.42
 breakeven_cost_bps: 35
+gates:
+  - id: in_cosmos_sector
+    role: universe
+    rule: "A Cosmos SDK chain or IBC-connected protocol"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].symbol
+    note: "Read the row whose id is cosmos-eco (seed list plus the CoinGecko Cosmos Ecosystem tag). Names outside the seed list, such as DYDX and AXL, appear only if CoinGecko tags them Cosmos Ecosystem; otherwise membership is a human check."
+  - id: min_day_volume
+    role: universe
+    rule: "At least $2M daily Hyperliquid perp volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    note: "Rolling 24h notional. A token missing from assets[] has no live HL perp."
+  - id: ibc_activity
+    role: universe
+    rule: "Verifiable IBC transaction volume or on-chain activity"
+    runnable: false
+    note: "No Cosmos or IBC data is served: no IBC transfer volume and no per-chain activity for Cosmos chains."
+  - id: equal_weight
+    role: sizing
+    rule: "Equal-weight across active constituents, rebalanced weekly"
+    runnable: partial
+    input: derived
+    inputs: [in_cosmos_sector, min_day_volume]
+    note: "Weights the names that pass the served universe gates; ibc_activity (not runnable) is a human screen applied before weighting."
+  - id: risk_on_trend
+    role: filter
+    rule: "Deploy only when the market HMM's trend probabilities favour risk-on"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: probabilities.directional.strong_up
+    note: "From the page's agent workflow, which gives no threshold. Compare strong_up + mild_up with strong_down + mild_down in the same object."
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].p_dir_strong_up
+  - id: alt_friendly_cycle
+    role: filter
+    rule: "Cycle regime is BTC-Led Bull or later: btc_led_bull, broadening_bull, broad_bull_alt_expansion or speculative_euphoria"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    note: "Reads 'or later' as the four bull states (ids 6-9), since distribution_post_peak is not alt-friendly. History starts 2026-08-07 and cannot be backfilled."
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
 kill_criteria: |
   - basket drawdown > 42% from peak on a rolling 6-month basis
   - rolling 6-month Sharpe < 0 on minimum 10 completed trades

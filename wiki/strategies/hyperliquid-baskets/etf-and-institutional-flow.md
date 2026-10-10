@@ -21,6 +21,62 @@ crowding_risk: low
 expected_sharpe: 0.65
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 20
+gates:
+  - id: etf_flow_7d
+    role: entry
+    rule: "7-day net spot-ETF flow, BTC and ETH combined: above +$300M strong accumulation; +$50M to +$300M mild accumulation; within $50M of zero neutral; -$50M to -$300M mild distribution; below -$300M strong distribution"
+    runnable: true
+    endpoint: /api/v1/market-intelligence/etf/{asset}/flows?days=7
+    field: flows[].flow_usd
+    note: "Call for asset btc and eth and sum the 14 settled trade days (the pseudocode sums the last 7 daily flows). Never add the in_progress partial day. The thresholds are the page's illustrative ones, to calibrate at deploy."
+    replay: /api/v1/market-intelligence/etf/{asset}/flows?days=1000
+    replay_field: flows[].flow_usd
+  - id: coinbase_premium_7d
+    role: entry
+    rule: "7-day average Coinbase premium: above +0.05% bullish, below -0.05% bearish, otherwise neutral"
+    runnable: true
+    endpoint: /api/v1/backtesting/snapshots?data_type=coinglass_coinbase_premium&start={start}&limit=1000
+    field: snapshots[].data[].premium_rate
+    note: "start = 7 days ago (Pro Plus). Each 5-minute snapshot holds the live endpoint's rolling list of its last 30 samples, so de-duplicate on data[].time, and page past 1,000 rows by moving start beyond the last snapshot's time. premium_rate is in percent, so 0.05 is the page's 0.05%. Live value: /api/v1/market-intelligence/coinbase-premium."
+  - id: custody_flow_7d
+    role: filter
+    rule: "Secondary: 7-day net flow of Coinbase Custody wallets; outflows are bullish, inflows bearish"
+    runnable: partial
+    endpoint: /api/v1/on-chain/exchange-flows/{symbol}?exchange=coinbase
+    field: windows.7d.net
+    note: "Covers Coinbase's tagged EVM wallets (hot wallets plus one Custody and one Prime address), so it reads for ETH. Coinbase BTC wallets are not tracked (BTC reads 0.0), and this is not the full Custody cluster the page means."
+  - id: allocation_matrix
+    role: sizing
+    rule: "Allocate by the matrix: strong accumulation + bullish = BTC 70% / ETH 30% at 1.5x; mild accumulation + bullish = BTC 50% / ETH 20% at 1.2x; mild accumulation + neutral = BTC 40% at 1.1x; distribution + bearish = no longs, optional BTC short 20-30%; anything else = BTC 20% at 1x"
+    runnable: true
+    input: derived
+    inputs: [etf_flow_7d, coinbase_premium_7d]
+  - id: min_hold_5d
+    role: exit
+    rule: "Hold at least 5 trading days after each state change"
+    runnable: true
+    input: position
+  - id: funding_overcrowded
+    role: filter
+    rule: "Add no leverage on a bullish flow signal when funding is already above 0.15%/8h (0.0001875 per hour)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    note: "coin = BTC or ETH."
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: funding_carry_review
+    role: sizing
+    rule: "Re-evaluate long size when funding exceeds 0.05%/8h (0.0000625 per hour) during a hold"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    note: "The page does not say how much to cut."
+  - id: short_leg_leverage
+    role: sizing
+    rule: "Hold any short leg at no more than 1.5-2x leverage, in isolated margin"
+    runnable: true
+    input: position
 kill_criteria: |
   - drawdown > 25% over rolling 12 months
   - rolling 12-month Sharpe < 0

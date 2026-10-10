@@ -21,6 +21,78 @@ crowding_risk: high
 expected_sharpe: 0.6
 expected_max_drawdown: 0.50
 breakeven_cost_bps: 40
+gates:
+  - id: pure_meme
+    role: universe
+    rule: "A pure social/meme token with no utility claim (DOGE, SHIB, PEPE, BONK, WIF, FLOKI, BRETT)"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].symbol
+    note: "Members of the group with id meme (CoinGecko Meme tags plus a curated seed). Ruling out a utility claim (AI or gaming memes) is a human read."
+  - id: min_history_6m
+    role: universe
+    rule: "At least 6 months of continuous trading history"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1w&limit=30
+    field: candles[].timestamp
+    note: "HL bars start at the perp's listing, so 26+ weekly bars proves the history. A token older than its HL perp needs another source; token genesis dates are not served."
+  - id: peak_market_cap
+    role: universe
+    rule: "Reached a market cap of at least $500M at some historical peak"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: ath
+    note: "Peak market cap is approximately ath x circulating_supply (same response), which uses today's supply. A true historical market-cap peak is not served."
+  - id: min_day_volume
+    role: universe
+    rule: "Hyperliquid perp with 24h volume at least $3M"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+  - id: meme_season
+    role: filter
+    rule: "Deploy only in a confirmed meme-speculative regime: high meme hype score with meme_season true"
+    runnable: true
+    endpoint: /api/v1/meme/regime/score
+    field: meme_season
+  - id: btc_dominance_declining
+    role: filter
+    rule: "Regime check: BTC dominance declining"
+    runnable: partial
+    endpoint: /api/v1/backtesting/snapshots?data_type=cycle_regime&start={start}&limit=1000
+    field: snapshots[].data.signals.btc_dom
+    note: "The page gives no window or threshold; meme-coin-cycle uses down more than 3% over 14 days (start = 14 days ago, about 800 rows). Snapshots tick about every 25 minutes from 2026-08-07 (Pro Plus); btc_dom is BTC's % share of the tracked-coin market cap."
+  - id: meme_mcap_rising
+    role: filter
+    rule: "Regime check: meme total market cap rising"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].price_change_7d_pct
+    note: "Group id meme: the market-cap-weighted mean of price_change_7d_pct (weights coins[].market_cap) approximates the 7-day change. The page gives no threshold."
+  - id: funding_elevated_not_extreme
+    role: filter
+    rule: "Regime check: meme funding elevated but not extreme"
+    runnable: partial
+    endpoint: /api/v1/meme/regime/score
+    field: median_funding_rate
+    note: "Hourly rate. The page gives no band; meme-coin-cycle uses +0.05% to +0.20% per 8h (0.0000625 to 0.00025 per hour)."
+  - id: equal_weight
+    role: sizing
+    rule: "Equal-weight the constituents, rebalanced weekly; vol-weighting only in a confirmed meme regime with strong signals"
+    runnable: true
+    input: position
+  - id: out_of_cycle_rebalance
+    role: sizing
+    rule: "Rebalance out of cycle when any constituent moves 50% or more either way in 7 days"
+    runnable: true
+    endpoint: /api/v1/meme/regime/{symbol}
+    field: meme.ret_7d
+  - id: lifecycle_exit
+    role: exit
+    rule: "Exit a name whose meme lifecycle state turns distribution or bleeding"
+    runnable: true
+    endpoint: /api/v1/meme/regime/{symbol}
+    field: regime
 kill_criteria: |
   - basket drawdown > 50% from peak on a rolling 6-month basis
   - meme-speculative regime not confirmed for > 30 consecutive days
