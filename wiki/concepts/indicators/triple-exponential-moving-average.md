@@ -2,7 +2,7 @@
 title: "Triple Exponential Moving Average (TEMA)"
 type: concept
 created: 2026-07-20
-updated: 2026-07-20
+updated: 2026-10-17
 status: draft
 tags: [indicators, technical-analysis, quantitative, crypto]
 aliases: ["TEMA", "Triple Exponential Moving Average", "Mulloy TEMA", "DEMA", "Double Exponential Moving Average"]
@@ -159,7 +159,7 @@ Other decisions that matter:
 - `GET /api/v1/derivatives/open-interest?coin=X` — OI expanding into a curvature spike argues acceleration, i.e. the fade TEMA is most likely to get wrong
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — OHLCV archive, deep enough to warm up three recursion levels before scoring
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV archive, deep enough to warm up three recursion levels before scoring
 - `GET /api/v1/quant/regimes/history` — hourly HMM regime labels, so TEMA fades are scored only inside historically range-labelled states
 
 ```bash

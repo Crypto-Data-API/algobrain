@@ -2,7 +2,7 @@
 title: "Grid Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [mean-reversion, grid-trading, automation, bots, range-trading, quantitative, market-microstructure, crypto]
 aliases: ["Grid Bot", "Grid Strategy", "Grid Bot Trading", "Range-Bound Grid", "ADX-Filtered Grid"]
@@ -335,7 +335,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Regime gate (the entire edge)** — `GET /api/v1/indicators/signum-rgg` (deploy only in GREY — the ADX-based chop state) cross-checked with `GET /api/v1/volatility/regime` (`compressed` ≈ BBW bottom quintile); compute the exact ADX < 20 / BBW percentile thresholds from `GET /api/v1/market-data/klines?interval=1h`
 - **Execution context** — `GET /api/v1/hyperliquid/l2-book` to keep each level below ~25% of resting depth, and `GET /api/v1/derivatives/funding-rates` to detect the funding bleed that kills neutral grids holding one-sided inventory
-- **Backtest** — `GET /api/v1/backtesting/klines`: Binance spot 1h back to 2017-08 for the regime-filter study; execution-grade fill simulation needs 1m klines, which exist only since 2026-03-30 (grows forward) — earlier grid backtests on 1h bars overstate cycle counts
+- **Backtest** — `GET /api/v1/backtesting/klines`: Binance spot 1h back to 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09) for the regime-filter study; execution-grade fill simulation needs 1m klines, which exist only since 2026-03-30 (grows forward) — earlier grid backtests on 1h bars overstate cycle counts
 - **Backtest (funding)** — `GET /api/v1/backtesting/funding` — Hyperliquid hourly since 2023-05, Binance daily since 2026-03-30 — to replay the funding-drain kill criterion
 - **Tips** — simulate the 2.0× ATR break-cancel explicitly (it is the loss cap, not a detail); re-check the regime gate hourly and cancel the grid the moment ADX/BBW invalidate, rather than waiting for the break
 - **Prompt library** — the "Bot Entry Signal Evaluator" prompt (Pro tier, [prompt library](https://cryptodataapi.com/prompts)) returns a strict per-candle JSON verdict (confidence + blockers) usable as this grid's arm/disarm gate

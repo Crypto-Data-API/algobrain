@@ -2,7 +2,7 @@
 title: "Vortex Indicator"
 type: concept
 created: 2026-09-28
-updated: 2026-09-28
+updated: 2026-10-17
 status: draft
 tags: [indicators, technical-analysis, trend-following, momentum, crypto]
 aliases: ["VI", "Vortex", "VI+ VI-"]
@@ -50,7 +50,7 @@ It is conceptually close to the directional-movement lines of [[adx]] (+DI/−DI
 ## Getting the Data (CryptoDataAPI)
 
 **Live data:** `GET /api/v1/market-data/klines?symbol=SOLUSDT&interval=1d&limit=500` — high/low/close for VM and TR.
-**Historical data:** `GET /api/v1/backtesting/klines` — multi-year daily bars for crossover testing.
+**Historical data:** `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — daily bars for crossover testing.
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=SOLUSDT&interval=1d&limit=500"

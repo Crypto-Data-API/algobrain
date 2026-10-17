@@ -282,7 +282,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — `GET /api/v1/on-chain/miners/hash-ribbon` returns the capitulation/recovery/normal state pre-computed (the 30d-vs-60d hashrate cross), with `GET /api/v1/on-chain/miners/reserves` for the forced-selling-exhausted check
 - **Confluence** — `GET /api/v1/on-chain/dormancy/btc` (MVRV zone, capitulation→euphoria) and `GET /api/v1/on-chain/score` (On-Chain Health composite) — remember the rule: all four conditions must agree, no single metric fires the trade
 - **Regime gate** — `GET /api/v1/regimes/current`: accumulate only when the 10-state cycle label sits in `Capitulation`/`Bottoming`; the same signature mid-`Established Bear` is the false-positive case
-- **Backtest** — `GET /api/v1/market-intelligence/btc/cycle-indicators` (historical cycle-indicator series) plus daily BTC from `GET /api/v1/backtesting/klines` (Binance spot to 2017-08 — only ~2 completed halving cycles; the small-sample caveat is binding, not decorative)
+- **Backtest** — `GET /api/v1/market-intelligence/btc/cycle-indicators` (historical cycle-indicator series) plus daily BTC from `GET /api/v1/backtesting/klines` (Binance spot back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09 — only ~2 completed halving cycles; the small-sample caveat is binding, not decorative)
 - **Tips** — this is a zone signal: poll daily, ladder buys in tranches, and never let an agent convert the Hash Ribbon recovery into a single all-in market order
 
 ## Related

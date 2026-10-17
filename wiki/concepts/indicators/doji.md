@@ -2,7 +2,7 @@
 title: "Doji"
 type: concept
 created: 2026-07-01
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [indicators, technical-analysis]
 aliases: ["Doji", "Doji Candle", "Doji Candlestick", "Gravestone Doji", "Dragonfly Doji", "Long-Legged Doji"]
@@ -99,7 +99,7 @@ The key distinction from a hammer or spinning top is the **absence of a real bod
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV for pattern scans
-- `GET /api/v1/backtesting/klines` — deep kline archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=2"
@@ -113,7 +113,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Compute** — flag bars where |close − open| / (high − low) < ~0.1 in `GET /api/v1/market-data/klines` output, then classify the variant from wick geometry (dragonfly, gravestone, long-legged)
 - **Context gate** — only score dojis after an extended run or at a tested level; quantify "extended" as N consecutive closes in one direction before the doji
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) measures confirmation-candle follow-through rates by variant and context
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) measures confirmation-candle follow-through rates by variant and context
 - **Tip** — 24/7 crypto daily bars are arbitrary UTC slices with no true session close, so weigh a daily doji more lightly than its equity equivalent and always require the next-candle confirmation, as the page insists
 
 ## Related

@@ -372,7 +372,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Phase 1 gates** — `GET /api/v1/derivatives/open-interest?coin=BTC`, `GET /api/v1/derivatives/funding-rates?coin=BTC`, `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — the three stress gates that arm the pre-positioned hedge
 - **Phase 2/3 signal** — `GET /api/v1/market-intelligence/liquidations?coin=BTC` (cascade confirmation, then the 30m deceleration check) + `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=200` for real-time price monitoring
 - **Regime gate** — `GET /api/v1/regimes/current` before the Phase 3 fade — no fades inside Structural Shock
-- **Backtest** — `GET /api/v1/backtesting/liquidations` (Hyperliquid only, since 2026-03-30) + 1m bars from `GET /api/v1/backtesting/klines` (also since 2026-03-30) for phase-timing replays — the cascade archive is short, so treat event-frequency statistics as provisional; deeper 1h/1d context reaches back to 2017-08
+- **Backtest** — `GET /api/v1/backtesting/liquidations` (Hyperliquid only, since 2026-03-30) + 1m bars from `GET /api/v1/backtesting/klines` (also since 2026-03-30) for phase-timing replays — the cascade archive is short, so treat event-frequency statistics as provisional; deeper 1h/1d context reaches back to 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09)
 - **Tips** — cache the slow Phase 1 gates hourly via `GET /api/v1/daily`, and only escalate to 1-minute liquidation polling once the gates arm
 
 ## Related

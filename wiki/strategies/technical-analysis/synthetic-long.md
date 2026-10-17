@@ -2,7 +2,7 @@
 title: "Synthetic Long (Crypto)"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, synthetic, replication, leverage, derivatives, bitcoin, ethereum]
 aliases: ["Synthetic Short", "Combo", "Crypto Synthetic Long", "Synthetic Forward"]
@@ -133,7 +133,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Carry read** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — the floating rate the fixed options forward competes with; its sign and level decide options-synthetic versus perp.
 - **Positioning** — `GET /api/v1/derivatives/open-interest?coin=BTC` — crowded OI stretches the basis that the reversal trade captures.
 - **Pin/margin watch** — `GET /api/v1/market-intelligence/options` (max pain near expiry, the main expiry hazard) + `GET /api/v1/volatility/regime` (a vol spike inflates short-put margin).
-- **Backtest** — `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) reconstructs the funding leg of historical reversal trades; `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) supplies the spot path.
+- **Backtest** — `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) reconstructs the funding leg of historical reversal trades; `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) supplies the spot path.
 - **Tips** — the reversal is a convergence trade: re-check the options-vs-perp basis each funding interval on the hedge leg rather than holding blind to expiry.
 
 ## Related

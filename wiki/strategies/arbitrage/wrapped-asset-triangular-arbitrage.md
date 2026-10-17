@@ -2,7 +2,7 @@
 title: "Wrapped Asset Triangular Arbitrage"
 type: strategy
 created: 2026-04-26
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [arbitrage, defi, crypto, bitcoin, ethereum]
 aliases: ["WBTC Arb", "Synthetic Asset Triangulation", "Cross-Wrapper Arbitrage"]
@@ -227,7 +227,7 @@ Custodian attestations and redemption-rail status are issuer/bridge sources; [[c
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — perp funding for hedging underlying exposure through multi-day KYC/redemption delays
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — OHLCV archive (Binance spot 1h/4h/1d to 2017-08) for deviation and event studies
+- `GET /api/v1/backtesting/klines` — OHLCV archive (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for deviation and event studies
 - `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time market state around recent wrapper events (since 2026-03-02)
 
 ```bash

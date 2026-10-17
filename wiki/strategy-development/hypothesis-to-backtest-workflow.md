@@ -2,7 +2,7 @@
 title: "Hypothesis to Backtest Workflow"
 type: concept
 created: 2026-04-10
-updated: 2026-09-28
+updated: 2026-10-17
 status: excellent
 tags: [strategy-development, backtesting, methodology, research]
 aliases: ["Strategy Research Pipeline", "Idea to Production Workflow"]
@@ -280,7 +280,7 @@ This makes it trivial to see at a glance which strategies are research-quality v
 
 ## Getting the Data (CryptoDataAPI)
 
-The pipeline's data legs run on the [[cryptodataapi-backtesting|CryptoDataAPI backtesting archive]]: `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d since 2017-08), `GET /api/v1/backtesting/funding`, `GET /api/v1/backtesting/daily-snapshots` (point-in-time full-market snapshots since 2026-03-02), and `GET /api/v1/quant/regimes/history` (hourly regime probabilities since 2020).
+The pipeline's data legs run on the [[cryptodataapi-backtesting|CryptoDataAPI backtesting archive]]: `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09), `GET /api/v1/backtesting/funding`, `GET /api/v1/backtesting/daily-snapshots` (point-in-time full-market snapshots since 2026-03-02), and `GET /api/v1/quant/regimes/history` (hourly regime probabilities since 2020).
 
 ### AI agent workflow
 

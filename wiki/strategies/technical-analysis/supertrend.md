@@ -2,7 +2,7 @@
 title: "Supertrend Indicator"
 type: concept
 created: 2026-04-06
-updated: 2026-09-28
+updated: 2026-10-17
 status: good
 domain: [technical-analysis]
 prerequisites: ["[[atr]]", "[[trailing-stop]]"]
@@ -195,7 +195,7 @@ Supertrend is computed from OHLCV (median price + ATR) — pull klines and calcu
 - `GET /api/v1/indicators/signum-rgg` — ADX(14)+DMI RED/GREY/GREEN trend-strength state.
 
 **Historical archive (backtesting):**
-- `GET /api/v1/backtesting/klines` — full OHLCV archive (Parquet since 2020) for backtesting Supertrend flips on closed bars.
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for backtesting Supertrend flips on closed bars.
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
@@ -214,7 +214,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run a S
 - **MTF gate** — a second klines pull at `interval=1d` supplies the higher-timeframe Supertrend colour — the single filter that lifts the bare system from coin-flip toward a workable trend follower.
 - **Chop filter** — `GET /api/v1/indicators/signum-rgg` — take flips only in GREEN/RED ADX states; GREY marks the whipsaw range regime.
 - **Regime gate** — `GET /api/v1/quant/market` — mute flips in `range_low_vol`/`choppy_high_vol`.
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08; Hyperliquid daily to 2023) for (period, multiplier) robustness across trend/chop mixes — distrust any setting that only wins in one regime.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09; Hyperliquid daily to 2023) for (period, multiplier) robustness across trend/chop mixes — distrust any setting that only wins in one regime.
 - **Tips** — one universe-wide klines sweep per cycle powers the cross-asset flip scanner; respect `insufficient_history` flags on new listings before trusting ATR(10).
 
 ## Key Takeaways

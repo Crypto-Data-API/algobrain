@@ -2,7 +2,7 @@
 title: "Backspread"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, backspread, long-volatility, directional, crypto, derivatives, advanced]
 aliases: ["Call Backspread", "Put Backspread", "Reverse Ratio Spread"]
@@ -112,7 +112,7 @@ The [[deribit#DVOL Index — The "VIX of Crypto"|DVOL]] level and strike/wing pr
 
 **Historical data:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive to study tail frequency and payoff
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history to study tail frequency and payoff
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime/score"
@@ -128,7 +128,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Signal** — enter when `GET /api/v1/volatility/regime` reads `compressed` and `GET /api/v1/event/calendar` shows a binary catalyst inside the option tenor — the cheap-convexity-into-expansion setup this structure exists for
 - **Regime gate** — `GET /api/v1/quant/market`: rising `vol_spike`/`squeeze` probabilities support paying for tail exposure; a settled `range_low_vol` book with no catalyst is pure theta bleed on the long wings
-- **Backtest** — study tail-move frequency with `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); replay entry timing against point-in-time vol/event scores in `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) to avoid lookahead
+- **Backtest** — study tail-move frequency with `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); replay entry timing against point-in-time vol/event scores in `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) to avoid lookahead
 - **Tips** — the 60-day history on `/api/v1/volatility/regime/{symbol}` shows how long `compressed` states persist — enter late in the compression, not early; a short-dealer-gamma read from `/api/v1/quant/gex` is the amplifier the backspread wants behind its breakout.
 
 ## Related

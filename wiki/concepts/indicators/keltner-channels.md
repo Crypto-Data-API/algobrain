@@ -2,7 +2,7 @@
 title: "Keltner Channels"
 type: concept
 created: 2026-04-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [technical-analysis, indicators, volatility]
 aliases: ["Keltner Channel", "Keltner Bands"]
@@ -108,7 +108,7 @@ The Squeeze is powerful because it identifies the transition from low [[volatili
 - `GET /api/v1/hyperliquid/candles?coin=BTC&interval=4h&limit=100` — the same construction on Hyperliquid perp listings
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08) for breakout, pullback, and squeeze backtests
+- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for breakout, pullback, and squeeze backtests
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=100"
@@ -124,7 +124,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Compute** — from `GET /api/v1/market-data/klines`: EMA(20) of closes for the centerline, ATR(10) from high/low/close for band width, bands at ±1.5–2.0× ATR
 - **Squeeze detection** — compute Bollinger Bands (SMA + standard deviation) from the same payload and flag bars where they sit inside the Keltner Channels; the squeeze firing is the volatility-expansion trigger
-- **Backtest** — replay all three setups above over `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08); crypto's frequent gap-free 24/7 bars make ATR cleaner than in gapping markets, but liquidation wicks inflate it — consider median-filtered ATR
+- **Backtest** — replay all three setups above over `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); crypto's frequent gap-free 24/7 bars make ATR cleaner than in gapping markets, but liquidation wicks inflate it — consider median-filtered ATR
 - **Tip** — regime-gate the two modes: trade band *breakouts* only when trend context is confirmed and band *fades* only in ranges — `GET /api/v1/indicators/signum-rgg` (ADX/DMI RED/GREY/GREEN, Pro+) is a ready-made switch between the two
 
 ## Related

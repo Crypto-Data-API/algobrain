@@ -2,7 +2,7 @@
 title: "Low-Leverage Vol Selling"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-03
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, options, volatility, derivatives, open-interest, funding-rate, risk-management, behavioral-finance, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Deleveraged-State Vol Selling", "Structural-Leverage-Absent Short Vol", "Zero-Cascade-Fuel Vol Entry", "Clean-Book Vol Selling"]
@@ -368,7 +368,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Leverage gates (1–3)** — `GET /api/v1/derivatives/binance/summary?symbol=BTCUSDT` — one call covers OI, funding, and long/short for the clean-book check
 - **Vol gate (4)** — `GET /api/v1/volatility/implied` + 15m klines for the 20-day realized-vol comparison
 - **Regime context** — `GET /api/v1/regimes/current` — reduce size in `Trending_Momentum`
-- **Backtest** — `GET /api/v1/derivatives/binance/history?days=90` for gate calibration; post-window realized-vol outcomes from `GET /api/v1/backtesting/klines` (back to 2017-08); funding context from `GET /api/v1/backtesting/funding` (HL hourly since 2023-05; Binance daily since 2026-03-30)
+- **Backtest** — `GET /api/v1/derivatives/binance/history?days=90` for gate calibration; post-window realized-vol outcomes from `GET /api/v1/backtesting/klines` (back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); funding context from `GET /api/v1/backtesting/funding` (HL hourly since 2023-05; Binance daily since 2026-03-30)
 - **Tips** — clean-book windows are rare: run the four gates as a daily screen off the single `/derivatives/binance/summary` call and alert on all-clear rather than streaming every input
 
 ## Related

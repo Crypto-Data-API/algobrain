@@ -2,7 +2,7 @@
 title: "ATR Trailing Stop"
 type: strategy
 created: 2026-04-15
-updated: 2026-09-20
+updated: 2026-10-17
 status: good
 tags: [technical-analysis, risk-management, trend-following, volatility, order-types]
 aliases: ["ATR Trailing Stop", "Chandelier Exit", "Volatility Stop", "ATR Stop"]
@@ -21,6 +21,73 @@ crowding_risk: low
 expected_sharpe: 0.0
 expected_max_drawdown: 0.0
 breakeven_cost_bps: 0
+gates:
+  - id: atr_input
+    role: stop
+    rule: "Wilder ATR over 14 or 22 bars of the trading timeframe; LeBeau's Chandelier default is 22"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=100&atr=22
+    field: candles[].atr
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&start={start}&atr=22
+    replay_field: candles[].atr
+    note: "atr=14 for the shorter lookback. Wilder-smoothed on the same series; null for the first atr bars, so limit must exceed the period. Use the last closed bar's atr (drop the bar named by forming_bar_timestamp)."
+  - id: long_trailing_stop
+    role: stop
+    rule: "Long stop = highest high since entry minus 3x ATR (2.5-3.5x allowed); it only ratchets up"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=100&atr=22
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&start={start}&atr=22
+    replay_field: candles[].high
+    note: "High-water mark from the bars since the entry fill; ATR from atr_input on the same rows. The pseudocode and example use 3x."
+  - id: short_trailing_stop
+    role: stop
+    rule: "Short stop = lowest low since entry plus 3x ATR (2.5-3.5x allowed); it only ratchets down"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=100&atr=22
+    field: candles[].low
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&start={start}&atr=22
+    replay_field: candles[].low
+  - id: close_through_stop
+    role: exit
+    rule: "Close the position when a bar closes through the trailing stop"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=100&atr=22
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&start={start}&atr=22
+    replay_field: candles[].close
+    note: "The pseudocode tests the bar close. The Rules allow a trade-through fill convention instead; a resting stop on Hyperliquid triggers on assets[].mark_price from /api/v1/hyperliquid/open-interest."
+  - id: initial_risk_stop
+    role: sizing
+    rule: "At entry the trailing stop is the initial risk stop, and the distance to it sets size per atr-position-sizing"
+    runnable: true
+    input: position
+    note: "Example: entry $100, ATR $2.00, 3x gives a $94 stop and $6 of risk per unit."
+  - id: optional_tightening
+    role: stop
+    rule: "Optional: reduce the ATR multiple as the trade ages or nears a target"
+    runnable: partial
+    input: position
+    note: "The page names the idea but sets no schedule: no age, no target distance and no tighter multiple. The pseudocode does not tighten."
+  - id: multiple_by_vol_regime
+    role: stop
+    rule: "Widen the multiple when the coin's volatility regime is expanding; tighten it when mean_reverting"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    note: "From the page's agent workflow. It gives no widened or tightened multiple; the desk sets them inside the 2.5-3.5x band or outside it."
+  - id: whipsaw_regime
+    role: filter
+    rule: "In range_low_vol or choppy_high_vol market regimes, widen the band or stand aside"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's agent workflow. Whether to widen (and by how much) or stand aside is the desk's call."
 ---
 
 An ATR trailing stop is an exit rule that places a stop a fixed multiple of the [[average-true-range|Average True Range (ATR)]] away from the most favorable price reached since entry, ratcheting in the direction of the trade but never against it. Because the stop distance scales with volatility, it gives a position "room to breathe" in volatile conditions while tightening automatically as volatility falls. The best-known formulation is Chuck LeBeau's **Chandelier Exit**, which hangs the stop a multiple of ATR below the highest high since entry (for longs). Like [[atr-position-sizing]], it is an overlay that shapes exits rather than a standalone return-generating signal.

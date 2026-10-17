@@ -2,7 +2,7 @@
 title: "JIT Liquidity"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: draft
 tags: [crypto, defi, liquidity, uniswap, mev, concentrated-liquidity, amm, just-in-time, ethereum, algorithmic]
 aliases: ["Just-In-Time Liquidity", "JIT LP", "JIT Liquidity Provision", "Sandwich-Free LP"]
@@ -212,7 +212,7 @@ CryptoDataAPI does not stream the raw mempool (use a node / Flashbots mempool st
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1m&limit=1000` — OHLCV to model single-swap LVR
-- `GET /api/v1/backtesting/klines` — deep archive for backtesting JIT economics across regimes
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — history for backtesting JIT economics across regimes
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending?chain=ethereum"

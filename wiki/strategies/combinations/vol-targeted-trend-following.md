@@ -2,7 +2,7 @@
 title: "Vol-Targeted Trend Following"
 type: strategy
 created: 2026-07-18
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, trend-following, momentum, volatility, risk-management, position-sizing, quantitative, crypto, perpetual-futures]
 aliases: ["Volatility-Scaled Trend Following", "Risk-Parity Trend Crypto", "Vol-Normalised Momentum", "Crypto CTA with Vol Targeting"]
@@ -313,7 +313,7 @@ See [[when-to-retire-a-strategy]].
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=365` — OHLCV for realized-vol computation
-- `GET /api/v1/backtesting/klines?symbol=BTCUSDT&interval=1d` — deep historical klines for walk-forward vol estimates
+- `GET /api/v1/backtesting/klines?symbol=BTCUSDT&interval=1d` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — historical klines for walk-forward vol estimates
 - `GET /api/v1/backtesting/funding` — funding history for funding-drag cost overlay in backtests
 
 ```bash
@@ -331,8 +331,8 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — daily klines drive the trend rules and the realised-vol estimate that sets position size
 - **Throttle** — `GET /api/v1/volatility/regime/score` acts as the global sizing throttle on top of per-asset vol targeting; `GET /api/v1/volatility/regime` flags `vol_shock` states where trailing vol lags realised risk
 - **Filter** — `GET /api/v1/derivatives/funding-rates?coin=BTC` gates long entries; `GET /api/v1/derivatives/open-interest?coin=BTC` confirms trend participation
-- **Backtest** — walk-forward vol estimates on `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08); funding-drag overlay from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30); regime-conditioned performance via `GET /api/v1/quant/regimes/history` (hourly since 2020, Pro Plus)
-- **Tips** — cap leverage when the vol estimate compresses: the 2017-08+ archive contains several gap regimes where trailing realised vol badly understated forward risk
+- **Backtest** — walk-forward vol estimates on `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); funding-drag overlay from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30); regime-conditioned performance via `GET /api/v1/quant/regimes/history` (hourly since 2020, Pro Plus)
+- **Tips** — cap leverage when the vol estimate compresses: the 2017-08+ `klines_deep` archive contains several gap regimes where trailing realised vol badly understated forward risk
 - **Prompt library** — the "Volatility-Aware Position Sizer" prompt (Pro tier, [prompt library](https://cryptodataapi.com/prompts)) is a ready-made implementation of this strategy's sizing leg
 
 ## Related

@@ -2,7 +2,7 @@
 title: "Reverse Iron Condor"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, derivatives, volatility, breakout, bitcoin, ethereum]
 aliases: ["RIC", "Reverse Iron Condor Spread", "Long Iron Condor"]
@@ -115,7 +115,7 @@ DVOL and the raw IV surface come from **Deribit / [[greeks-live]]**, not CryptoD
 **Historical:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history (spot compressed-vol windows)
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for realized-vol/range context
-- `GET /api/v1/backtesting/klines` — deep kline archive for backtesting breakout timing
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for backtesting breakout timing
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime"
@@ -132,7 +132,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Setup screen** — `GET /api/v1/volatility/regime` (want `compressed`) + `GET /api/v1/volatility/regime/score` (a low reading = cheap vol to buy).
 - **Catalyst trigger** — `GET /api/v1/event/calendar` — filter unlock/macro/depeg events landing inside the tenor; compressed vol plus a dated catalyst is the entry condition.
 - **Cascade context** — `GET /api/v1/quant/gex` — short-dealer-gamma regimes are cascade-prone, the favorable backdrop for long gamma; `GET /api/v1/market-intelligence/options` warns of OI walls that could pin price and stall the breakout.
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) to measure breakout frequency and magnitude after compression windows vs the debit paid; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) replays regime + event context point-in-time.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) to measure breakout frequency and magnitude after compression windows vs the debit paid; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) replays regime + event context point-in-time.
 - **Tips** — automate the time-stop: if the calendar's catalyst passes with no expansion, salvage the residual debit instead of bleeding theta into a dead structure.
 
 ## Related

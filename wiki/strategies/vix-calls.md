@@ -2,7 +2,7 @@
 title: "Crypto Long-Vol Overlay (DVOL / Deribit)"
 type: strategy
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [options, derivatives, volatility, risk-management, crypto, dvol, hedging]
 aliases: ["Crypto Long-Vol Overlay", "DVOL Long Vol", "Deribit Straddle Hedge", "VIX Calls", "Crypto Volatility Hedge", "BTC Put Wings"]
@@ -286,7 +286,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can automat
 - **Tranche entry** — buy put wings only when `GET /api/v1/volatility/regime` reads `compressed` AND `GET /api/v1/derivatives/funding-rates?coin=BTC` shows richly positive funding (the call-skew regime where downside puts are cheap); otherwise hold the tranche in stablecoin per the entry table
 - **Monetization trigger** — `GET /api/v1/market-intelligence/liquidations` spiking with `GET /api/v1/quant/gex` short-gamma is the cascade signature; the agent should execute the 3×/5×/8× scale-out immediately — crypto vol reverts in hours, and "monetization failure" is the page's number-one killer
 - **Regime suspend** — `GET /api/v1/volatility/regime/score` persistently elevated maps to the "DVOL > 80th percentile for 21+ days → suspend new tranches" kill criterion
-- **Backtest** — bleed-vs-payoff replays use `GET /api/v1/backtesting/klines` (1h/4h/1d to 2017-08, covering 2020-03/LUNA/FTX) for the RV leg and `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime states; option-mark history is Deribit's
+- **Backtest** — bleed-vs-payoff replays use `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09, covering 2020-03/LUNA/FTX) for the RV leg and `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime states; option-mark history is Deribit's
 - **Tips** — enforce the annual-budget cap as a hard constraint in the agent's order layer; never let a spike already underway trigger a chase-buy (the entry table's "do not initiate" rows)
 
 ## Sources

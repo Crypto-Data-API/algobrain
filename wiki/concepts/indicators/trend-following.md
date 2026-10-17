@@ -2,7 +2,7 @@
 title: Trend Following
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [trend-following, momentum, technical-analysis, algorithmic, position-trading]
 aliases: ["Trend Trading", "Riding the Trend", "trend-following"]
@@ -69,7 +69,7 @@ Trend following has one of the longest documented track records of any systemati
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV for Donchian channels, MA crosses, and ATR sizing
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — deep kline archive for multi-year trend-system backtests
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for multi-year trend-system backtests
 - `GET /api/v1/indicators/signum-rgg/{symbol}` — per-asset detail + 60d RGG history
 
 ```bash
@@ -86,7 +86,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Live state** — `GET /api/v1/indicators/signum-rgg` is a ready-made trend gate: take longs only in GREEN, shorts or flat in RED, stand aside in GREY chop
 - **Compute** — the illustrative Donchian/ATR logic on this page runs directly on `GET /api/v1/market-data/klines` bars (highest-high channels, ATR from true ranges)
-- **Backtest** — replay breakout and MA-cross systems against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 — spanning full trending and ranging cycles)
+- **Backtest** — replay breakout and MA-cross systems against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09 — spanning full trending and ranging cycles)
 - **Tip** — layer the HMM state from `GET /api/v1/quant/market` over RGG: whipsaw losses concentrate where the regime reads `range_low_vol`/`choppy_high_vol`, exactly the chop a trend book should sit out
 
 ## Related

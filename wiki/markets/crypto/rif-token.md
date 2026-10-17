@@ -132,7 +132,7 @@ Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=RIFUSDT&interval=1d&limit=200` — Binance spot OHLCV
 - `GET /api/v1/derivatives/binance/funding-rates?symbol=RIFUSDT` — Binance perp funding history
-- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for backtests
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=RIF"

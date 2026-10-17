@@ -2,7 +2,7 @@
 title: "VWAP Trading (Crypto Intraday)"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [vwap, day-trading, crypto, intraday, market-microstructure, mean-reversion, perpetual-futures]
 aliases: ["Crypto VWAP", "Anchored VWAP", "VWAP Execution", "VWAP Mean Reversion", "VWAP Reclaim"]
@@ -248,7 +248,7 @@ VWAP is computed from OHLCV+volume, which CryptoDataAPI klines provide directly 
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding for the hold-cost check
 
 **Historical data (VWAP backtest):**
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive (from 2020) for anchored-VWAP backtests
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for anchored-VWAP backtests
 - `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=5m&limit=1000` — 5-minute bars for ATR-stop sizing
 
 ```bash
@@ -266,7 +266,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Compute** — anchored VWAP and σ bands from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1m&limit=1000` (typical price × volume, cumulated from the chosen anchor); `GET /api/v1/hyperliquid/candles?interval=1m` for perp-side VWAP
 - **Anchor selection** — anchor to events, not just the UTC open: a liquidation-cascade low from `GET /api/v1/market-intelligence/liquidations` or a funding flip from `GET /api/v1/derivatives/funding-rates?coin=BTC` makes a far stronger cost-basis anchor than an arbitrary session start
 - **Regime gate** — `GET /api/v1/quant/market`: first-touch reversion works in `strong_trend_*` regimes; `choppy_high_vol` is the >10-crosses-per-session whipsaw regime where the strategy stands down (its dominant loss source)
-- **Backtest** — `GET /api/v1/backtesting/klines`: full-resolution intraday VWAP backtests are constrained to the 1m window (since 2026-03-30, grows forward); 1h bars back to 2017-08 support only coarse anchored-VWAP level studies
+- **Backtest** — `GET /api/v1/backtesting/klines`: full-resolution intraday VWAP backtests are constrained to the 1m window (since 2026-03-30, grows forward); 1h bars back to 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09) support only coarse anchored-VWAP level studies
 - **Tips** — funding check before holding across a stamp; the wide 40-120 bps targets make this far more fee-tolerant than scalping, so maker entry is preferred but not existential
 
 ## Related

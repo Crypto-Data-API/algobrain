@@ -2,7 +2,7 @@
 title: Trend
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [trend-following, technical-analysis, momentum, indicators]
 aliases: ["Uptrend", "Downtrend", "Sideways Trend", "Market Trend", "trend"]
@@ -81,7 +81,7 @@ How traders actually use trend in practice:
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — bars for swing-structure and MA-based trend reads
-- `GET /api/v1/backtesting/klines` — deep kline archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/btc-price-history?days=365"

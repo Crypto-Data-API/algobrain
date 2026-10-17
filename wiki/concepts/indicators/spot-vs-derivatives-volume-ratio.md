@@ -2,7 +2,7 @@
 title: "Spot vs Derivatives Volume Ratio"
 type: concept
 created: 2026-05-16
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [crypto, indicators, derivatives, market-microstructure, volatility]
 aliases: ["Spot/Derivatives Ratio", "Spot vs Perp Ratio", "Derivatives Dominance"]
@@ -101,7 +101,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Compute** — build the spot leg from `GET /api/v1/market-data/volume-history?days=90` (Binance daily volume + buy ratio) or klines volume, and the perp leg from `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1d` volume; the ratio is `spot_vol / perp_vol` over a matched window
 - **Live state** — `GET /api/v1/derivatives/summary?coin=BTC` supplies the funding + OI context that turns a low ratio into a crowded-positioning read
-- **Backtest** — `GET /api/v1/backtesting/klines` holds both Binance spot (1h/4h/1d back to 2017-08) and Hyperliquid candles (daily to 2023), so the ratio is reconstructable historically from one archive
+- **Backtest** — `GET /api/v1/backtesting/klines` holds both Binance spot (1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) and Hyperliquid candles (daily to 2023), so the ratio is reconstructable historically from one archive
 - **Tip** — compute both legs over identical UTC windows; the ratio swings intraday with sessions, so a daily aggregate hides exactly the spot-led-vs-perp-led signal this page describes
 
 ## Related

@@ -2,7 +2,7 @@
 title: "Grid with Tail Hedge"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-03
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, grid-trading, market-making, options, volatility, hedging, derivatives, risk-management, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Hedged Grid", "Grid OTM Hedge", "Budgeted Grid Hedge", "Income-Financed Tail Hedge"]
@@ -361,7 +361,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Grid leg** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=168` for range setting and ADX; 15m bars for fill monitoring
 - **Halt gates** — `GET /api/v1/derivatives/open-interest?coin=BTC` (12h OI build) + `GET /api/v1/regimes/current` (halt on `Trending_Momentum`)
 - **Hedge leg** — `GET /api/v1/volatility/implied` — the DVOL 52-week percentile times put purchases (strike pricing itself on Deribit)
-- **Backtest** — `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08) for grid cycles and gap-event frequency; 1m fill simulation only since 2026-03-30; overlay hedge cost from the DVOL series
+- **Backtest** — `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for grid cycles and gap-event frequency; 1m fill simulation only since 2026-03-30; overlay hedge cost from the DVOL series
 - **Tips** — the hedge budget is the strategy's fixed cost: track realized grid revenue vs cumulative put spend per cycle so the agent can prove the overlay is paying for itself
 
 ## Related

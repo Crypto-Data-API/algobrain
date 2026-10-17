@@ -2,7 +2,7 @@
 title: "Median Absolute Deviation (MAD)"
 type: concept
 created: 2026-07-20
-updated: 2026-07-20
+updated: 2026-10-17
 status: draft
 tags: [quantitative, statistics, volatility, risk-management, crypto, indicators]
 aliases: ["MAD", "Median Absolute Deviation", "Robust Scale", "Robust Z-Score", "MAD-Z"]
@@ -150,7 +150,7 @@ The correct next step is not to swap it live. It is to compute both scales in pa
 - `GET /api/v1/derivatives/open-interest?coin=X` — OI expansion alongside a large robust z argues the displacement is real flow rather than a print
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — the archive for the comparison that actually matters: σ versus `1.4826 × MAD` on identical residuals across full cycles
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — the archive for the comparison that actually matters: σ versus `1.4826 × MAD` on identical residuals across full cycles
 - `GET /api/v1/quant/regimes/history` — hourly HMM regime labels since 2020, for stratifying the divergence between the two scales by regime
 
 ```bash

@@ -197,7 +197,7 @@ What the archive actually holds (Source: https://cryptodataapi.com/backtest-data
 | Dataset | Coverage | Format |
 |---------|----------|--------|
 | Minute klines (1m) | Binance 450+ USDT-perp markets and all 229 Hyperliquid perps, since 2026-03-30 (grows forward) | daily Parquet |
-| Deep klines (1h/4h/1d) | Binance spot back to 2017-08 (BTCUSDT); Hyperliquid daily candles to 2023 launch, 1h/4h several months back | monthly Parquet |
+| Deep klines (1h/4h/1d) | Binance spot back to 2017-08 only in the `klines_deep` archive (BTCUSDT; the REST route starts 2026-05-09); Hyperliquid daily candles to 2023 launch, 1h/4h several months back | monthly Parquet |
 | Funding rates | Hyperliquid hourly since 2023-05; Binance daily (incl. mark price + OI) since 2026-03-30 | Parquet + REST |
 | Liquidations | Hyperliquid perps, per-symbol long/short flow, since 2026-03-30 | daily Parquet |
 | Daily market snapshots | Full `/daily` payload (health, derivatives, sentiment, macro, ETF flows, cycles) since 2026-03-02 | JSON |

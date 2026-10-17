@@ -2,7 +2,7 @@
 title: "Bitcoin MAX/MIN Breakout (10-Day High Trend, 10-Day Low Reversion)"
 type: strategy
 created: 2026-09-28
-updated: 2026-09-28
+updated: 2026-10-17
 status: draft
 tags: [crypto, bitcoin, quantitative, trend-following, mean-reversion, breakout, swing-trading]
 aliases: ["BTC MAX strategy", "BTC MIN strategy", "Bitcoin 10-day high/low", "Quantpedia Bitcoin trend and reversion"]
@@ -133,7 +133,7 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klin
 - **Signal** — compute the 10-day rolling max/min from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=60` at each daily close
 - **Regime gate** — take MAX entries only when `GET /api/v1/regimes/current` is not in a range/chop state; never run MIN when the regime is trending-bear
 - **Carry check** — if expressing on perps, read `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT`; high positive funding erodes a long-breakout hold
-- **Backtest** — replay from `GET /api/v1/backtesting/klines` and reproduce the source's in/out-of-sample split (2022-02 boundary) before extending
+- **Backtest** — replay from `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) and reproduce the source's in/out-of-sample split (2022-02 boundary) before extending
 - Run via [[cryptodataapi-mcp]]
 
 ## Related

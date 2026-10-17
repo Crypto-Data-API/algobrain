@@ -2,7 +2,7 @@
 title: "Short Put Spread"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, derivatives, volatility, swing-trading, bitcoin, ethereum]
 aliases: ["Bull Put Spread", "Put Credit Spread", "Vertical Put Credit Spread", "Short Put Vertical", "Crypto Bull Put Spread"]
@@ -139,7 +139,7 @@ Every Greek sits **between** a naked short put and a fully neutral condor: less 
 **Historical:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=90` — OHLCV for realized-vol vs DVOL
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive for backtesting
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for backtesting
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=ETH"
@@ -157,7 +157,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can gate an
 - **Skew signal** — `GET /api/v1/derivatives/funding-rates?coin=ETH`: a funding flip after a selloff flags the put-skew fattening that makes the short put rich to sell — the page's specific edge
 - **Bullish-thesis check** — `GET /api/v1/quant/market`: sustained strong_trend_bear probability contradicts the bullish tilt (the strategy's weakness is a persistent bear, not a single capped shock)
 - **Down-gap warning** — `GET /api/v1/market-intelligence/liquidations` + `GET /api/v1/quant/gex` watch for the cascade that gaps through the long wing and maxes the loss
-- **Backtest** — replay short-strike breach frequency on `GET /api/v1/backtesting/klines` (1h/4h/1d to 2017-08) with point-in-time regimes from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Backtest** — replay short-strike breach frequency on `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) with point-in-time regimes from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02)
 - **Tips** — automate the one-roll-only rule: log rolls per position and hard-stop the second roll attempt
 
 ## Related

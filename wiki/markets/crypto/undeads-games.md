@@ -4,6 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-06-12
 status: draft
+generated: true
 tags: [crypto, nft]
 aliases: ["UDS"]
 entity_type: protocol

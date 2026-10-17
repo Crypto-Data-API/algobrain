@@ -2,7 +2,7 @@
 title: "Delta-Neutral Yield Farming"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, delta-neutral, yield-farming, funding-rate, defi, market-neutral, quantitative, staking]
 aliases: ["Delta-Neutral Yield", "Hedged Staking", "Synthetic Dollar Farm", "Market-Neutral Yield Farm"]
@@ -306,7 +306,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Hedge-income leg** — `GET /api/v1/derivatives/funding-rates?coin=ETH` + `GET /api/v1/hyperliquid/funding-rates?coin=ETH` — short-perp funding is half the yield stack; HL's hourly cadence re-prices fastest
 - **Flow confirm** — `GET /api/v1/derivatives/open-interest?coin=ETH` — verify real long flow sits behind positive funding before relying on the carry
 - **Tail monitor** — `GET /api/v1/security/regime` — exploit/depeg stress on the yield leg
-- **Backtest** — `GET /api/v1/backtesting/funding` — Hyperliquid hourly since 2023-05 (Binance daily since 2026-03-30) covers the carry leg honestly; ETH price paths for delta-drift modelling from `GET /api/v1/backtesting/klines` (daily back to 2017-08)
+- **Backtest** — `GET /api/v1/backtesting/funding` — Hyperliquid hourly since 2023-05 (Binance daily since 2026-03-30) covers the carry leg honestly; ETH price paths for delta-drift modelling from `GET /api/v1/backtesting/klines` (daily back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09)
 - **Tips** — the position is only neutral between rebalances: schedule delta checks on funding settlement boundaries, and treat sustained negative funding as a regime change (exit trigger), not noise
 
 ## Related

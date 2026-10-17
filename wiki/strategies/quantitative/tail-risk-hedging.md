@@ -2,7 +2,7 @@
 title: "Tail Risk Hedging"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [tail-risk, black-swan, hedging, put-options, crash-protection, asymmetric-payoff, quantitative, crypto, options]
 aliases: ["Tail Risk Strategy", "Black Swan Hedging", "Crash Protection", "Crypto Tail Hedge", "Deribit Put Overlay"]
@@ -162,7 +162,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Entry timing** — `GET /api/v1/volatility/regime` + `GET /api/v1/volatility/regime/score`: add hedges while vol is `compressed`/low-percentile and `GET /api/v1/derivatives/funding-rates?coin=BTC` shows richly positive funding (call-skew regime → downside puts relatively cheap)
 - **Tail watch** — `GET /api/v1/security/regime/score` and `GET /api/v1/security/events` for the hack/depeg/black-swan overlay that price puts alone cannot see; `GET /api/v1/market-intelligence/liquidations` as the cascade-in-progress tape
 - **Monetization trigger** — a `vol_shock` flip on `/volatility/regime` plus a liquidation spike is the sell-into-the-spike window; crypto vol mean-reverts within days, so automate the partial-monetization rule rather than deliberating mid-cascade
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily back to 2017-08) catalogs every >10%-daily and >30%-weekly drawdown for hedge-payoff modelling; `GET /api/v1/backtesting/liquidations` (HL, since 2026-03-30) adds cascade microstructure for the recent window
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) catalogs every >10%-daily and >30%-weekly drawdown for hedge-payoff modelling; `GET /api/v1/backtesting/liquidations` (HL, since 2026-03-30) adds cascade microstructure for the recent window
 - **Tips** — this is a negative-carry program: track the annual premium budget as a hard ledger and pause adds when the vol-stress score sits above its 85th percentile for 30+ days (buying insurance at the peak)
 
 ## See Also / Related

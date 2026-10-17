@@ -2,7 +2,7 @@
 title: "Long Call (Crypto)"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, derivatives, volatility, bitcoin, ethereum]
 aliases: ["Long Call", "Buy Call", "Crypto Long Call"]
@@ -117,7 +117,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Catalyst check** — `GET /api/v1/event/calendar` (unlocks/macro events up to 30 days out, with directional bias): confirm a credible up-move catalyst falls inside the option's life before paying theta for it.
 - **Pin awareness** — `GET /api/v1/market-intelligence/options`: max-pain and OI concentration near the 08:00 UTC expiry can pin spot away from the strike in the final days.
 - **Perp comparison** — `GET /api/v1/derivatives/funding-rates?coin=BTC`: when funding is low or negative, the perp long may be the cheaper bullish vehicle; the call earns its premium when funding is punishing longs.
-- **Backtest** — realized-move distributions from `GET /api/v1/backtesting/klines` (Binance 1h/4h/1d since 2017-08) test whether the implied move was beatable in past regimes; premium histories come from Deribit — CDA holds no options-chain archive.
+- **Backtest** — realized-move distributions from `GET /api/v1/backtesting/klines` (Binance 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) test whether the implied move was beatable in past regimes; premium histories come from Deribit — CDA holds no options-chain archive.
 - **Tips** — enforce the time stop mechanically: if the catalyst passes without the move, exit rather than feed theta; append `?format=markdown` for cleaner context.
 
 ## Related

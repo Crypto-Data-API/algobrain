@@ -2,7 +2,7 @@
 title: "MEV Session Density Filter"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, execution, algorithmic, market-microstructure, quantitative, crypto, ethereum]
 aliases: ["MEV Session Filter", "Session-Aware MEV Scheduling", "MEV Time-of-Day Overlay", "MEV Density Clock"]
@@ -298,7 +298,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Vol override** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=2` — a large 15m BTC move forces HIGH density regardless of session
 - **Regime trigger** — `GET /api/v1/regimes/current` — `Structural_Shock` arms liquidation-MEV density
-- **Calibration** — hourly OHLCV by UTC session from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=8760`, extended by `GET /api/v1/backtesting/klines` (1h back to 2017-08)
+- **Calibration** — hourly OHLCV by UTC session from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=8760`, extended by `GET /api/v1/backtesting/klines` (1h back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09)
 - **Tips** — CryptoDataAPI covers only the market-volatility half of this strategy: join session-density calibration to your own bundle-log timestamps (Flashbots relay data) for the payoff half
 
 ## Related

@@ -2,7 +2,7 @@
 title: "Bull Put Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, derivatives, bull-put-spread, credit-spread, bullish, defined-risk, volatility, ethereum]
 aliases: ["Put Credit Spread", "Short Put Spread", "Crypto Bull Put Spread", "Deribit Put Credit Spread"]
@@ -121,7 +121,7 @@ DVOL and the raw IV/skew surface come from **Deribit / [[greeks-live]]**, not Cr
 **Historical:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=90` — OHLCV for realized-vol and support mapping
-- `GET /api/v1/backtesting/klines` — deep kline archive for backtesting the structure
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for backtesting the structure
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/options"
@@ -137,7 +137,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Signal** — sell the put spread when `GET /api/v1/volatility/regime` reads elevated/`expanding` (not `vol_shock`) and `GET /api/v1/market-intelligence/options` shows the put-OI wall below which to park the short strike
 - **Regime gate** — `GET /api/v1/quant/market`: stand down while `strong_trend_bear`/`vol_spike` probabilities climb — the downside tail is the only thing that breaks this structure
-- **Backtest** — short-strike breach frequency per tenor on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); tag cascade days with `/api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) to study the flush scenario separately
+- **Backtest** — short-strike breach frequency per tenor on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); tag cascade days with `/api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) to study the flush scenario separately
 - **Tips** — while short, poll `/api/v1/market-intelligence/liquidations`: close the spread into the first long-liquidation flush rather than waiting to see whether the wing holds — the credit never justifies riding a cascade.
 
 ## Related

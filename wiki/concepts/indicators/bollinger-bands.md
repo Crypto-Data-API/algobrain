@@ -2,7 +2,7 @@
 title: Bollinger Bands
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [bollinger-bands, indicators, volatility]
 aliases: [BB]
@@ -108,7 +108,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Live state** — `GET /api/v1/indicators/technical` classifies the price structure (SMA/BB/RSI) of the whole universe in one call — screen for band-stretched or squeezed assets without computing anything; `GET /api/v1/indicators/technical/{symbol}` adds per-asset detail plus a 60-day history
 - **Compute** — pull `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200` and derive the 20-period SMA ± 2σ bands, %b, and BandWidth for custom settings or intraday bars
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) supports full-cycle tests of squeeze-breakout and band-to-band mean-reversion rules; 1m bars exist only since 2026-03-30
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) supports full-cycle tests of squeeze-breakout and band-to-band mean-reversion rules; 1m bars exist only since 2026-03-30
 - **Tip** — condition band trades on trend state from `GET /api/v1/indicators/signum-rgg`: fade the bands in GREY (range) but don't fight band-walking in GREEN/RED trends
 
 ## Related

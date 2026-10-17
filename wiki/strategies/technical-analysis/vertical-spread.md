@@ -2,7 +2,7 @@
 title: "Vertical Spread"
 type: strategy
 created: 2026-04-13
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, derivatives, vertical-spread, credit-spread, debit-spread, defined-risk, volatility]
 aliases: ["Vertical Spreads", "Bull Call Spread", "Bear Put Spread", "Bull Put Spread", "Bear Call Spread", "Debit Vertical Spread", "Credit Vertical Spread", "Crypto Vertical Spread"]
@@ -142,7 +142,7 @@ DVOL and the raw IV/skew surface come from **Deribit / [[greeks-live]]**, not Cr
 **Historical:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for trend, realized-vol, and level mapping
-- `GET /api/v1/backtesting/klines` — deep kline archive for backtesting the structures
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for backtesting the structures
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime"
@@ -159,7 +159,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Flavour selector** — `GET /api/v1/volatility/regime`: `compressed` → debit verticals (long vega, cheap entry); `expanding`/`normal` with rich DVOL → credit verticals; `vol_shock` → stand down.
 - **Strike placement** — `GET /api/v1/market-intelligence/options` (OI walls, max pain) + `GET /api/v1/quant/gex` for pin-vs-cascade context; `GET /api/v1/derivatives/funding-rates?coin=BTC` says which skew wing is firm (bear call vs bull put credit).
 - **Early warning** — `GET /api/v1/market-intelligence/liquidations` — the move that breaks a credit vertical usually announces itself as forced flow first.
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) for short-strike breach rates at candidate widths and tenors; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) keeps the DVOL-regime selector point-in-time.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for short-strike breach rates at candidate widths and tenors; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) keeps the DVOL-regime selector point-in-time.
 - **Tips** — codify the management triad (50% profit / ~21-DTE roll / 2× credit stop) as scheduled checks; verticals die from unmanaged short strikes, not from entries.
 
 ## Related

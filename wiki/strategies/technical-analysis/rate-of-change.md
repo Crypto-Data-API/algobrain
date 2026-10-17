@@ -2,7 +2,7 @@
 title: Rate of Change (ROC) Strategy
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags:
   - momentum
@@ -153,7 +153,7 @@ ROC-based momentum trading in BTC/ETH perps has no meaningful capacity constrain
 - `GET /api/v1/indicators/technical` — pre-computed SMA/EMA trend state for the 50-period MA filter
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — deep archive for N optimization and regime-segmented backtesting
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — history for N optimization and regime-segmented backtesting
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=50"
@@ -170,7 +170,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=50` → ROC(12) zero-line / ±2% crossings on closed candles; `GET /api/v1/indicators/technical` supplies the 50-MA trend state pre-computed.
 - **Alignment** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — take crossovers only when the funding sign agrees with the signal direction.
 - **Regime gate** — `GET /api/v1/quant/market` — in `range_low_vol`/`choppy_high_vol` raise the threshold to ±3% or stand down (the ADX < 20 kill criterion).
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) for N-optimization, segmented by regime via `GET /api/v1/quant/regimes/history` (hourly since 2020, Pro Plus).
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for N-optimization, segmented by regime via `GET /api/v1/quant/regimes/history` (hourly since 2020, Pro Plus).
 - **Tips** — ROC doubles as the cross-sectional ranking stat: one `GET /api/v1/daily/prices` snapshot ranks ~2,500 spot pairs for [[momentum-rotation]] without per-symbol calls.
 
 ## Related

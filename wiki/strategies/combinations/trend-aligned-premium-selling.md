@@ -2,7 +2,7 @@
 title: "Trend-Aligned Premium Selling"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-03
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, options, volatility, derivatives, trend-following, mean-reversion, behavioral-finance, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Trend-Selective Wing Selling", "Directional Premium Seller", "Trend-Conditioned Vol Selling", "Wing-Selective Short Vol"]
@@ -381,7 +381,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run eve
 - **Trend gate** — daily klines (SMA20 distance), 4h klines (RSI), and `GET /api/v1/derivatives/funding-rates?coin=BTC` 7-day average must all agree before any premium is sold
 - **Vol gate** — `GET /api/v1/volatility/implied` supplies the 52-week IV percentile that decides whether premium is worth selling at all
 - **Regime gate** — `GET /api/v1/regimes/current`; `Structural_Shock` closes the strategy regardless of trend and IV state
-- **Backtest** — regime-classified wing P&L from DVOL history joined to `GET /api/v1/backtesting/klines` (1d/4h back to 2017-08); pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) so past trend-gate states are point-in-time
+- **Backtest** — regime-classified wing P&L from DVOL history joined to `GET /api/v1/backtesting/klines` (1d/4h back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) so past trend-gate states are point-in-time
 - **Tips** — strikes and fills live on Deribit; re-check all three trend gates at roll time, not just entry — trend decay mid-position is this strategy's main bleed
 
 ## Related

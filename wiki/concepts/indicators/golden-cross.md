@@ -2,7 +2,7 @@
 title: "Golden Cross"
 type: concept
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [indicators, technical-analysis, trend-following, momentum]
 aliases: ["Golden Cross", "golden crossover"]
@@ -82,7 +82,7 @@ The golden cross pairs naturally with the broader [[moving-average-crossover]] f
 - `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1d&limit=250` — the perp-side equivalent for Hyperliquid listings
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08) for multi-cycle crossover backtests
+- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for multi-cycle crossover backtests
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=250"
@@ -96,7 +96,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Compute** — pull 250+ daily closes from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=250`, compute SMA(50) and SMA(200), and flag the bar where the short average crosses above the long
 - **Shortcut** — `GET /api/v1/market-data/btc-price-history` ships the 200D MA precomputed for BTC, so only the 50-day needs deriving
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily bars back to 2017-08) covers three full crypto cycles of golden/death crosses — enough to measure the whipsaw rate honestly
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily bars back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) covers three full crypto cycles of golden/death crosses — enough to measure the whipsaw rate honestly
 - **Tip** — crypto's 24/7 sessions make the "daily close" convention arbitrary; anchor daily bars to 00:00 UTC consistently in both live checks and backtests, or the cross date can shift by a day
 
 ## Sources

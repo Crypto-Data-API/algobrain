@@ -2,7 +2,7 @@
 title: "Swing Low"
 type: concept
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [indicators, technical-analysis, price-action]
 aliases: ["Swing Low", "Pivot Low", "Local Low"]
@@ -93,7 +93,7 @@ As with swing highs, confirmation lags by `n` bars, so traders separate a *provi
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=500` — OHLC bars for fractal pivot detection
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — deep kline archive for structure studies across full cycles
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for structure studies across full cycles
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=500"
@@ -106,7 +106,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
 
 - **Compute** — apply the fractal rule to `GET /api/v1/market-data/klines` lows: `low[i] < low[i±k] for k in 1..n`, confirming only after `n` subsequent bars close
-- **Backtest** — trailing-stop-under-higher-lows and breakdown rules replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08), deriving pivots point-in-time per bar
+- **Backtest** — trailing-stop-under-higher-lows and breakdown rules replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09), deriving pivots point-in-time per bar
 - **Tip** — crypto's stop-hunt wicks make the equal-lows liquidity-pool warning above operational: set structural stops a buffer below the confirmed low, and treat a wick-only breach that closes back above as a sweep, not a break of structure
 
 ## Related

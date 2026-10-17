@@ -2,7 +2,7 @@
 title: "Seagull Option"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, seagull, hedging, directional, three-leg, low-cost, skew]
 aliases: ["Seagull Spread", "Bullish Seagull", "Bearish Seagull", "Crypto Seagull"]
@@ -138,7 +138,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Funding-leg selection** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — sell whichever wing funding says is rich: positive funding firms call skew (a bearish seagull's short call funds well), post-crash put skew funds the bullish build.
 - **Naked-leg watch** — `GET /api/v1/quant/gex` + `GET /api/v1/derivatives/open-interest?coin=BTC` — dealer gamma and crowded positioning flag cascade risk into the short funding leg; size it for a Black-Thursday gap, not an average session.
 - **Regime gate** — `GET /api/v1/volatility/regime` — do not initiate the naked wing in `vol_shock`.
-- **Backtest** — `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` plus `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) for the skew-driver history; `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) for how often spot breaches the funding-leg strike within tenor.
+- **Backtest** — `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` plus `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) for the skew-driver history; `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for how often spot breaches the funding-leg strike within tenor.
 - **Tips** — automate a spot-vs-short-wing distance alert; the whole risk of a "zero-cost" seagull lives in that one leg.
 
 ## Related

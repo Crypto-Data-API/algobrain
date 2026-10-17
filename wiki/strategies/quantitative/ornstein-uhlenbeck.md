@@ -2,7 +2,7 @@
 title: "Ornstein-Uhlenbeck Process"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [ornstein-uhlenbeck, mean-reversion, stochastic-process, half-life, statistical-arbitrage, quantitative, pairs-trading, crypto]
 aliases: ["OU Process Trading", "Mean-Reverting Stochastic Process", "OU Model"]
@@ -216,7 +216,7 @@ See [[when-to-retire-a-strategy]].
 - `GET /api/v1/derivatives/funding-rates?coin=ETH` — short-leg funding carry (the half-life cost filter)
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — full OHLCV archive for OU fitting and half-life backtests
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for OU fitting and half-life backtests
 - `GET /api/v1/backtesting/funding` — funding history for the carry overlay
 - `GET /api/v1/backtesting/symbols` — symbols with backtest-grade history
 
@@ -235,7 +235,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — build the spread from `GET /api/v1/market-data/klines?interval=4h` (leg A) and `GET /api/v1/hyperliquid/candles?interval=4h` (leg B), run the AR(1) fit, and trade the stationary z-score; `GET /api/v1/derivatives/funding-rates` prices the carry that the 1-20-day half-life filter exists to control
 - **Catalyst filter** — `GET /api/v1/event/calendar` for unlocks/listings/upgrades that shift μ structurally (the OU model's blind spot)
 - **Regime gate** — `GET /api/v1/quant/market`: suspend entries in `strong_trend_*` states, where realized half-lives stretch far past the modeled value and the trade becomes a funding bleed
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08; HL daily to 2023) for OU-fit and half-life-stability studies across regimes; `GET /api/v1/backtesting/funding` (HL hourly since 2023-05, Binance daily since 2026-03-30) for the carry overlay
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09; HL daily to 2023) for OU-fit and half-life-stability studies across regimes; `GET /api/v1/backtesting/funding` (HL hourly since 2023-05, Binance daily since 2026-03-30) for the carry overlay
 - **Tips** — automate the weekly re-fit and auto-retire any spread with b ≥ 1 or realized half-life > 2× modeled over the trailing sample; `GET /api/v1/backtesting/symbols` keeps delisted names in the historical spread universe
 
 ## Related

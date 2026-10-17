@@ -2,7 +2,7 @@
 title: "Fibonacci Trading"
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [fibonacci, retracement, extension, golden-ratio, golden-pocket, technical-analysis, support-resistance, crypto]
 aliases: ["Fibonacci Retracement", "Fib Trading", "Golden Ratio Trading", "Fib Levels", "Golden Pocket"]
@@ -200,7 +200,7 @@ Single levels are weak; **stacked** levels are the professional application:
 Fibonacci levels are computed geometrically from swing highs and lows on the price series; the chart itself is usually rendered on an exchange feed or TradingView. [[cryptodataapi|CryptoDataAPI]] provides the **OHLCV klines** that supply those swings, plus the derivatives context that improves confirmation at a level.
 
 - **Live OHLCV (to locate swings and draw levels):** `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=500` — see [[cryptodataapi-market-data]].
-- **Historical OHLCV (full archive, for backtesting Fib rules):** `GET /api/v1/backtesting/klines` — see [[cryptodataapi-backtesting]].
+- **Historical OHLCV (full archive, for backtesting Fib rules):** `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — see [[cryptodataapi-backtesting]].
 - **Confirmation context at the level:** `GET /api/v1/derivatives/funding-rates?coin=ETH` (funding reset toward neutral into the golden pocket) and `GET /api/v1/market-intelligence/liquidations` (long-liquidation wick into the level).
 
 ```bash
@@ -217,7 +217,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Compute** — swing pivots and retracement/extension grids from `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=500`; recompute only on confirmed swing pivots, not every bar
 - **Signal** — confluence at the level: funding resetting toward neutral on `GET /api/v1/derivatives/funding-rates?coin=ETH` and a liquidation wick into the golden pocket on `GET /api/v1/market-intelligence/liquidations`
 - **Regime gate** — `GET /api/v1/quant/market`: in `strong_trend` states expect shallow 0.382 holds; in `choppy_high_vol` expect deep 0.786 or full retraces — the page's regime rule, made machine-readable
-- **Backtest** — golden-pocket hold rates by regime from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) joined with `/api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus)
+- **Backtest** — golden-pocket hold rates by regime from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) joined with `/api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus)
 - **Tips** — the edge is the stack, not the ratio: score each level by how many independent signals (Fib, funding reset, liquidation wick, S/R) align, and size to the score.
 
 ## Related

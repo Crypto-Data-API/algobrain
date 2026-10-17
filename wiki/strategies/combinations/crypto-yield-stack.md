@@ -2,7 +2,7 @@
 title: "Crypto Yield Stack"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, crypto, defi, yield-farming, staking, restaking, liquidity, on-chain]
 aliases: ["Yield Stacking", "Crypto Yield Stacking Strategy", "Layered DeFi Yield", "Restaking Stack"]
@@ -294,7 +294,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Tail monitor** — `GET /api/v1/security/regime` + `GET /api/v1/security/events` — the stacked book's exploit/depeg early-warning system
 - **Health gates** — `GET /api/v1/on-chain/score` + `GET /api/v1/sentiment/stablecoins` — on-chain health and dry-powder context for the lending layer
 - **P&L driver** — `GET /api/v1/market-data/ticker/price?symbol=ETHUSDT` — ETH spot dominates USD-denominated returns of the whole stack
-- **Backtest** — `GET /api/v1/backtesting/klines?symbol=ETHUSDT&interval=1d` (back to 2017-08) for the ETH leg; `GET /api/v1/market-intelligence/stablecoin-history` for supply cycles — pool-level APR history is not on CryptoDataAPI and must come from DeFiLlama or subgraphs
+- **Backtest** — `GET /api/v1/backtesting/klines?symbol=ETHUSDT&interval=1d` (back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for the ETH leg; `GET /api/v1/market-intelligence/stablecoin-history` for supply cycles — pool-level APR history is not on CryptoDataAPI and must come from DeFiLlama or subgraphs
 - **Tips** — when Security Stress spikes, de-risk the whole stack rather than one layer (the layers share tail events); poll `GET /api/v1/daily` hourly and hit per-layer endpoints only when the composite moves
 
 ## Related

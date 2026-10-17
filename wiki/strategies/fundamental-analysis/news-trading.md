@@ -2,7 +2,7 @@
 title: "News Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-09-04
+updated: 2026-10-17
 status: review
 tags: [news-trading, event-driven, volatility, crypto, fundamental-analysis, execution, day-trading]
 aliases: ["News-Based Trading", "Event-Driven Trading", "Headline Trading", "Catalyst Trading"]
@@ -192,7 +192,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Catalyst tape** — `GET /api/v1/news/market-moving?symbol=BTC` (or omit `symbol`, or pass `MARKET` for market-wide stories) surfaces already-qualified events with `match_mode`/`confidence`, so the agent skips its own headline-parsing step; treat `min_impact` above the 0.45 pipeline floor and `corroboration >= 2` as the multi-source real-story gate
 - **Confirmation** — `GET /api/v1/derivatives/funding-rates?coin=BTC` for the post-release funding repricing (momentum live vs exhausted) and `GET /api/v1/market-intelligence/liquidations` for the forced-flow exhaustion that arms the fade entry
 - **Regime gate** — `GET /api/v1/volatility/regime`: a `compressed` pre-event state implies larger moves on surprise (the highest-EV events); already-`vol_shock` tape means the move is underway and only the fade applies
-- **Backtest** — event studies on 1m bars from `GET /api/v1/backtesting/klines` are possible only since 2026-03-30 (1m grows forward); 1h bars back to 2017-08 cover coarser reaction windows. `GET /api/v1/backtesting/liquidations` (HL, since 2026-03-30) replays post-event cascades
+- **Backtest** — event studies on 1m bars from `GET /api/v1/backtesting/klines` are possible only since 2026-03-30 (1m grows forward); 1h bars back to 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09) cover coarser reaction windows. `GET /api/v1/backtesting/liquidations` (HL, since 2026-03-30) replays post-event cascades
 - **Tips** — accept that the first 30-second momentum leg is not winnable via REST polling; the agent's realistic edge is the 5-15-minute fade decision, where funding + liquidation reads beat headline speed
 
 ## Related

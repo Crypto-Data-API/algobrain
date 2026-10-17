@@ -2,7 +2,7 @@
 title: "DeFi Yield / LP Regime Gate"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-04
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, defi, yield-farming, volatility, market-regime, regime-detection, quantitative, crypto, impermanent-loss]
 aliases: ["DeFi LP Regime Filter", "LP Vol-Regime Gate", "Yield Farm Regime Gate", "IL-Aware LP Deployment"]
@@ -317,7 +317,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Gate signal** — `GET /api/v1/volatility/implied` — one call's `items[]` covers both BTC and ETH — the DVOL threshold that switches LP capital in and out
 - **Pause triggers** — `GET /api/v1/regimes/current` (Structural Shock / Crash) + `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=3` (acute 24h move)
 - **Leading indicator** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding buildup often precedes the vol expansion that hurts LPs
-- **Backtest** — `GET /api/v1/volatility/implied` calibrates gate thresholds over a year; `GET /api/v1/backtesting/klines` (daily back to 2017-08) extends the price-path / IL replay across full cycles — LP fee income must be modelled from external pool data
+- **Backtest** — `GET /api/v1/volatility/implied` calibrates gate thresholds over a year; `GET /api/v1/backtesting/klines` (daily back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) extends the price-path / IL replay across full cycles — LP fee income must be modelled from external pool data
 - **Tips** — make gate flips sticky (hysteresis) by evaluating on daily closes, not intraday DVOL prints, so LP capital is not whipsawed in and out
 
 ## Related

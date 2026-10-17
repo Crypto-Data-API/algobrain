@@ -2,7 +2,7 @@
 title: Stop Hunting & Liquidity Sweeps
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [combinations, market-microstructure, liquidity, breakout, crypto, perpetual-futures, execution]
 aliases: ["Stop Hunt Reversal", "Liquidity Sweep", "Liquidity Grab Reversal"]
@@ -183,7 +183,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Signal** — `GET /api/v1/market-intelligence/liquidations` clustering around a wick is the sweep confirmation; `GET /api/v1/market-data/short-term-price` reads whether the post-wick tape is reverting or continuing
 - **Filter** — `GET /api/v1/liquidity/depth` identifies the thin zones where sweeps are cheapest to manufacture; `GET /api/v1/derivatives/funding-rates?coin=BTC` flags the crowded side whose stops are the target
-- **Backtest** — wick-level replay needs 1m bars, available from `GET /api/v1/backtesting/klines` only since 2026-03-30; 1h bars reach 2017-08 for coarse sweep-zone statistics, and `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) supplies the cascade-cluster join
+- **Backtest** — wick-level replay needs 1m bars, available from `GET /api/v1/backtesting/klines` only since 2026-03-30; 1h bars reach 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09) for coarse sweep-zone statistics, and `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) supplies the cascade-cluster join
 - **Tips** — the fine-grained archive accumulates forward from March 2026 — treat sweep statistics as provisional and refresh the study monthly as the 1m/liquidation record grows
 
 ## Related

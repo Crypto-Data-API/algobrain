@@ -2,7 +2,7 @@
 title: "Prediction Market Trading Strategies"
 type: strategy
 created: 2026-04-14
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [prediction-markets, crypto, defi, arbitrage, behavioral-finance]
 aliases: ["Prediction Market Strategies", "Polymarket Strategies", "Event Market Trading"]
@@ -303,7 +303,7 @@ Prediction-market odds, books, and resolution data come from the venues' own API
 - `GET /api/v1/sentiment/fear-greed` — crowd-state context for the favorite-longshot fade on crypto-flavored markets
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — Binance spot 1h/4h/1d back to 2017-08: the sample for calibrating threshold-probability models against realized outcomes
+- `GET /api/v1/backtesting/klines` — Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09): the sample for calibrating threshold-probability models against realized outcomes
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
@@ -318,7 +318,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can supply the fair-value side of these strategies (the venue APIs supply the odds):
 
-- **Fair-value model** — fit threshold-crossing base rates from `GET /api/v1/backtesting/klines` (nine years of daily BTC data) and feed them into the `fade_longshot` routine above; note that AI agents already arbitrage crypto price-threshold markets (see [[ai-prediction-markets]]), so the residual edge is thin there
+- **Fair-value model** — fit threshold-crossing base rates from `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive; nine years of daily BTC data) and feed them into the `fade_longshot` routine above; note that AI agents already arbitrage crypto price-threshold markets (see [[ai-prediction-markets]]), so the residual edge is thin there
 - **Term-structure check** — the same klines-derived vol estimates flag inverted "BTC > $X by June vs December" market pairs worth the structural spread trade
 - **Catalyst timing** — `GET /api/v1/event/calendar` dates the crypto/macro catalysts behind Fed/macro-signal and event-market trades
 - **Sizing discipline** — fractional-Kelly with the 2-3% cap is agent-enforceable; the tail on fade strategies is a full $1 loss per share

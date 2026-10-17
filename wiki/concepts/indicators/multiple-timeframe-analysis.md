@@ -2,7 +2,7 @@
 title: "Multiple Timeframe Analysis"
 type: concept
 created: 2026-04-14
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [technical-analysis, indicators, day-trading, methodology]
 aliases: ["Multiple Timeframe Analysis", "Multi-Timeframe Analysis", "MTF Analysis", "Triple Screen", "Top-Down Analysis"]
@@ -175,7 +175,7 @@ By aligning a trade with the higher timeframe, a trader positions alongside the 
 - `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=500` — the perp-side equivalent for a Hyperliquid 1h → 15m → 5m stack
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — Binance spot 1h/4h/1d back to 2017-08; 1m klines (Binance USDT-perps and Hyperliquid) only since 2026-03-30, which bounds how far back low-timeframe MTF backtests can go
+- `GET /api/v1/backtesting/klines` — Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09); 1m klines (Binance USDT-perps and Hyperliquid) only since 2026-03-30, which bounds how far back low-timeframe MTF backtests can go
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=200"
@@ -189,7 +189,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Fetch** — pull each rung of the stack as a separate `GET /api/v1/market-data/klines` call (e.g. `interval=1d`, `4h`, `1h`); resample locally only when an interval is unavailable, and always downward (aggregate up from finer bars, never interpolate down)
 - **Align** — join higher-timeframe features to lower-timeframe bars with an as-of join on *bar-close* timestamps, exactly as the look-ahead-trap section prescribes; the still-forming HTF bar is never usable
-- **Backtest** — `GET /api/v1/backtesting/klines` supports 1h/4h/1d stacks back to 2017-08; anything requiring 1m entry bars is limited to the archive growing forward from 2026-03-30 — do not silently pad older history with resampled coarser data
+- **Backtest** — `GET /api/v1/backtesting/klines` supports 1h/4h/1d stacks back to 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09); anything requiring 1m entry bars is limited to the archive growing forward from 2026-03-30 — do not silently pad older history with resampled coarser data
 - **Tip** — pick round timeframe ratios (4-6×) a priori and freeze them; if the agent is allowed to search ratios, log every combination tried so the final result can be deflated for multiple testing
 
 ## Related

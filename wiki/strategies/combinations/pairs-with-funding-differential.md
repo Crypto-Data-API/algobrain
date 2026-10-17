@@ -2,7 +2,7 @@
 title: "Pairs with Funding Differential"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, pairs-trading, arbitrage, funding-rate, perpetual-futures, quantitative, behavioral-finance, crypto]
 aliases: ["Funding-Enhanced Pairs", "Perp-Expressed Pairs with Carry", "Funding Differential Spread"]
@@ -332,7 +332,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — `GET /api/v1/derivatives/funding-rates?coin={LEG}` for each leg; one cross-exchange call per coin yields the funding differential that tilts spread entries
 - **Filter** — `GET /api/v1/derivatives/open-interest?coin={LEG}` and the long/short ratio guard against entering a spread whose short leg is squeeze fuel
 - **Spread engine** — 4h klines (`GET /api/v1/market-data/klines?symbol={LEG}USDT&interval=4h&limit=200`) maintain the z-score
-- **Backtest** — `GET /api/v1/backtesting/funding` for differential history (honest windows: Hyperliquid hourly since 2023-05, Binance daily since 2026-03-30) joined to spread replay on `GET /api/v1/backtesting/klines` (1d/4h back to 2017-08)
+- **Backtest** — `GET /api/v1/backtesting/funding` for differential history (honest windows: Hyperliquid hourly since 2023-05, Binance daily since 2026-03-30) joined to spread replay on `GET /api/v1/backtesting/klines` (1d/4h back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09)
 - **Tips** — the funding differential accrues only while both legs stay open across settlement timestamps; log per-settlement accruals rather than assuming continuous carry
 
 ## Related

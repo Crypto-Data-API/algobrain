@@ -2,7 +2,7 @@
 title: "Triple Screen Trading System"
 type: concept
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [crypto, technical-analysis, trend-following, momentum, indicators, methodology, multi-timeframe]
 aliases: ["Triple Screen System", "Triple Screen", "Elder Triple Screen"]
@@ -106,7 +106,7 @@ Retirement in practice: reassess if the rolling win rate falls below ~40% while 
 
 Triple Screen needs OHLCV on two aligned timeframes for the trend and oscillator screens, plus the crypto confluence layer (funding, OI, liquidations) and a volatility-regime gate. See [[cryptodataapi-market-data]], [[cryptodataapi-derivatives]], and [[cryptodataapi-regimes]].
 
-- **OHLCV on both timeframes** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1w&limit=200` (Screen 1) and `interval=1d` (Screens 2-3), live; `GET /api/v1/backtesting/klines` (archive from 2020) to validate the filter across the 2021 bull and 2022 bear.
+- **OHLCV on both timeframes** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1w&limit=200` (Screen 1) and `interval=1d` (Screens 2-3), live; `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) to validate the filter across the 2021 bull and 2022 bear.
 - **Depth for stop-entry realism** — `GET /api/v1/liquidity/depth/BTC` to estimate slippage at the buy-stop level (exactly where the book thins).
 - **Screen-2 confluence** — `GET /api/v1/derivatives/funding-rates?coin=BTC` and `GET /api/v1/derivatives/open-interest?coin=BTC` flag a short-heavy discount; `GET /api/v1/market-intelligence/liquidations` locates the long-liquidation flush the pullback bottoms into.
 - **Regime gate** — `GET /api/v1/volatility/regime` to stand aside in vol-shock regimes where whipsaw and slippage spike.
@@ -130,7 +130,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run all
 - **Screens 2-3 (wave/ripple)** — the same endpoint at `interval=1d` (or `4h`) for the oscillator and the trailing stop-entry bar
 - **Confluence** — `GET /api/v1/derivatives/funding-rates?coin=BTC` + `GET /api/v1/derivatives/open-interest?coin=BTC` + `GET /api/v1/market-intelligence/liquidations`: negative funding, elevated OI, and a fresh long-liquidation flush upgrade a routine pullback to the highest-conviction discount
 - **Regime gate** — `GET /api/v1/volatility/regime`: stand aside in `vol_shock` (the whipsaw/slippage regime); `GET /api/v1/liquidity/depth/BTC` checks the book at the buy-stop level before sizing
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) validates the filter across the 2021 bull and 2022 bear; pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime gating
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) validates the filter across the 2021 bull and 2022 bear; pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime gating
 - **Tips** — apply the BTC regime overlay before any alt setup: one BTC-trend call from the weekly klines invalidates most alt longs in one check
 
 ## Related

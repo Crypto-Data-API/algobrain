@@ -2,7 +2,7 @@
 title: "ARC (Area-Range-Candle) Strategy"
 type: strategy
 created: 2026-06-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [technical-analysis, day-trading, breakout, mean-reversion, momentum]
 aliases: ["ARC Strategy", "Area Range Candle", "Area-Range-Candle", "ARC day trading"]
@@ -200,7 +200,7 @@ For the crypto application, [[cryptodataapi|CryptoDataAPI]] serves the intraday 
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=5m&limit=288` — execution-timeframe candles for the John-Wick trigger
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — OHLCV archive for encoding and testing the rules (Binance 1h/4h/1d back to 2017-08; 1m bars only since 2026-03-30, so wick-level tests are limited to that window)
+- `GET /api/v1/backtesting/klines` — OHLCV archive for encoding and testing the rules (Binance 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09; 1m bars only since 2026-03-30, so wick-level tests are limited to that window)
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=48"
@@ -217,7 +217,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Level construction** — daily at 00:00 UTC: pull `GET /api/v1/market-data/klines?interval=1h` for the prior UTC day, set box high/low, scan back for the nearest swing high/low beyond the box.
 - **Trigger loop** — on each 1-5m bar: check the 20%-of-range move filter, then the long-wick candle at a level; the subjective inputs ("unabated move", "John Wick" candle) must be encoded numerically first — this is where most of the apparent edge tends to evaporate, so test before trusting.
 - **Regime gate** — `GET /api/v1/quant/market`: ARC is a fade — trade only when `range_low_vol`/`mean_reverting`-type probabilities dominate; a `strong_trend` state is the run-over regime from the regime-fit table above.
-- **Backtest** — 1h boxes test back to 2017-08 on `GET /api/v1/backtesting/klines`, but honest wick-level entry/stop simulation needs 1m bars, available only since 2026-03-30 (growing forward).
+- **Backtest** — 1h boxes test back to 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09) on `GET /api/v1/backtesting/klines`, but honest wick-level entry/stop simulation needs 1m bars, available only since 2026-03-30 (growing forward).
 - **Tips** — cost sensitivity is acute: model spread plus stop-zone slippage explicitly; `GET /api/v1/liquidity/depth/{coin}` (24h rolling depth, 1-min samples; BTC free) reveals the thin-book windows where swept-stop slippage is worst.
 
 ## Related

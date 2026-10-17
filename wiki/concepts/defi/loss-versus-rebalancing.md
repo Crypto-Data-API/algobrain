@@ -2,7 +2,7 @@
 title: "Loss-Versus-Rebalancing (LVR)"
 type: concept
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-10-17
 status: good
 tags: [defi, crypto, liquidity, amm, market-microstructure, adverse-selection, risk-management, volatility]
 aliases: ["LVR", "Loss Versus Rebalancing", "Loss-vs-Rebalancing", "Rebalancing Loss"]
@@ -143,7 +143,7 @@ LVR is driven almost entirely by realized volatility (the σ in σ²/8) and by t
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1h&limit=1000` — OHLCV to compute realized σ for the σ²/8 estimate
-- `GET /api/v1/backtesting/klines` — deep archive for backtesting LVR vs fee APR across regimes
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — history for backtesting LVR vs fee APR across regimes
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset detail plus 60-day vol history
 
 ```bash

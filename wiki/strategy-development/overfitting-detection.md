@@ -2,7 +2,7 @@
 title: "Overfitting Detection"
 type: concept
 created: 2026-04-10
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [strategy-development, backtesting, overfitting, validation, methodology]
 aliases: ["Backtest Overfitting", "Curve Fitting Detection"]
@@ -219,7 +219,7 @@ No single threshold guarantees robustness, but a reasonable composite of quantit
 
 ## Getting the Data (CryptoDataAPI)
 
-Overfitting checks need the raw replay data: `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d since 2017-08) for re-running the strategy on perturbed windows, and `GET /api/v1/quant/regimes/history` (hourly regime probabilities since 2020) for [[regime-conditional-validation|regime-conditional]] splits. Catalog: [[cryptodataapi-backtesting]].
+Overfitting checks need the raw replay data: `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for re-running the strategy on perturbed windows, and `GET /api/v1/quant/regimes/history` (hourly regime probabilities since 2020) for [[regime-conditional-validation|regime-conditional]] splits. Catalog: [[cryptodataapi-backtesting]].
 
 ### AI agent workflow
 

@@ -2,7 +2,7 @@
 title: "Stonehill Forex"
 type: entity
 created: 2026-09-28
-updated: 2026-09-28
+updated: 2026-10-17
 status: draft
 tags: [company, education, forex, indicators, methodology, backtesting]
 aliases: ["Stonehill", "stonehillforex.com"]
@@ -42,7 +42,7 @@ Stonehill's current protocol (2025–2026 profiles) tests each indicator on the 
 
 ## Getting the Data (CryptoDataAPI)
 
-Stonehill's per-indicator test can be replicated on crypto with daily OHLCV. Live: `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000`. Historical: `GET /api/v1/backtesting/klines` (archive since 2020) and `GET /api/v1/backtesting/funding` to add perp carry, which Stonehill's FX tests do not model. See [[cryptodataapi-market-data]] and [[cryptodataapi-backtesting]].
+Stonehill's per-indicator test can be replicated on crypto with daily OHLCV. Live: `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000`. Historical: `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) and `GET /api/v1/backtesting/funding` to add perp carry, which Stonehill's FX tests do not model. See [[cryptodataapi-market-data]] and [[cryptodataapi-backtesting]].
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000"

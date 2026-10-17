@@ -2,7 +2,7 @@
 title: "Multi-Timeframe Confluence"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [combinations, meta-strategy, multi-timeframe, confluence, trend-alignment, technical-analysis, crypto]
 strategy_type: hybrid
@@ -150,7 +150,7 @@ Multi-timeframe confluence is a regime-neutral signal framework. Capacity scales
 - `GET /api/v1/on-chain/exchange-flows/BTC` — accumulation/distribution corroboration for weekly-zone theses
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive (Binance spot 1h/4h/1d back to 2017-08) for backtesting confluence-zone hit rates
+- `GET /api/v1/backtesting/klines` — deep OHLCV archive (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for backtesting confluence-zone hit rates
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
@@ -168,5 +168,5 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — one klines endpoint at three intervals (`1d` resampled to weekly, `4h`, `15m`) rebuilds the full triple-screen stack from a single data source with consistent timestamps
 - **Filter** — `GET /api/v1/derivatives/funding-rates?coin=BTC` and `GET /api/v1/derivatives/open-interest?coin=BTC` add the crypto-native third axis: skip confluence longs when funding shows leveraged-long crowding at the zone
 - **Regime gate** — `GET /api/v1/regimes/current`; headline-driven regimes (`Structural Shock`) are exactly when confluence zones fail, so stand down rather than trust the levels
-- **Backtest** — zone hit-rate studies on `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08); minute-level entry-precision replay is limited — 1m bars exist only since 2026-03-30
+- **Backtest** — zone hit-rate studies on `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); minute-level entry-precision replay is limited — 1m bars exist only since 2026-03-30
 - **Tips** — fetch the higher timeframes on a slow clock (daily) and only poll 15m data when price is inside a pre-computed zone; this cuts API load by an order of magnitude

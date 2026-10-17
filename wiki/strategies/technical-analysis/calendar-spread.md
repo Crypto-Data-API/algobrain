@@ -2,7 +2,7 @@
 title: "Calendar Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, derivatives, volatility, swing-trading, bitcoin, ethereum]
 aliases: ["Calendar Spread", "Time Spread", "Horizontal Spread", "Crypto Calendar Spread"]
@@ -138,7 +138,7 @@ Strike/expiry selection, the [[dvol|DVOL]] level and its **term structure** come
 **Historical:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for realized-vol computation vs DVOL
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive for roll/backtest studies
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for roll/backtest studies
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime"
@@ -154,7 +154,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Signal** — enter when `GET /api/v1/volatility/regime` reads `compressed` (cheap back-month vega) and `GET /api/v1/market-intelligence/options` max pain pins near the chosen strike
 - **Regime gate** — `GET /api/v1/quant/market`: the ideal sequence is `range_low_vol` now with `vol_spike`/`squeeze` probability building later; an in-progress vol shock means the vega is already repriced
-- **Backtest** — replay strike-vs-path outcomes with `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); the IV term structure itself is not archived by CDA, so validate the regime-timing leg against `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Backtest** — replay strike-vs-path outcomes with `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); the IV term structure itself is not archived by CDA, so validate the regime-timing leg against `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
 - **Tips** — the 60-day `/api/v1/volatility/regime/{symbol}` history reveals the typical compressed→expanding cycle length — match the front expiry to it; funding spikes on `/api/v1/derivatives/funding-rates?coin=BTC` warn of the term-structure inversion that hurts a long calendar.
 
 ## Related

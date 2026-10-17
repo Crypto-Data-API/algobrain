@@ -2,7 +2,7 @@
 title: "Smart Money Concepts"
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [crypto, smart-money, market-microstructure, order-blocks, fair-value-gap, liquidity-sweep, methodology, technical-analysis]
 aliases: ["SMC", "Smart Money Concepts", "Institutional Order Flow", "SMC Trading"]
@@ -72,7 +72,7 @@ SMC's imagery maps onto crypto microstructure more directly than onto any other 
 
 SMC in crypto needs price structure to mark blocks/FVGs/sweeps, depth to distinguish a real level from a sweepable wick, and liquidation/derivatives data to locate and validate the liquidity pool. See [[cryptodataapi-market-data]], [[cryptodataapi-market-intelligence]], and [[cryptodataapi-derivatives]].
 
-- **OHLCV to mark structure** — `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=15m&limit=500` (live) and `GET /api/v1/backtesting/klines` (archive from 2020 for base-rate testing of sweep→reversal).
+- **OHLCV to mark structure** — `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=15m&limit=500` (live) and `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive; for base-rate testing of sweep→reversal).
 - **Depth to validate an order block** — `GET /api/v1/liquidity/depth/ETH` shows whether real resting size backs a zone or it is a thin wick.
 - **The liquidity pool** — `GET /api/v1/market-intelligence/liquidations` (cross-exchange) maps the forced-order clusters SMC calls liquidity pools; `GET /api/v1/backtesting/liquidations` for history.
 - **Sweep quality** — `GET /api/v1/derivatives/funding-rates?coin=ETH` and `GET /api/v1/derivatives/open-interest?coin=ETH` separate a genuine squeeze sweep from a trend-continuation trap.
@@ -96,7 +96,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run an 
 - **Liquidity map** — `GET /api/v1/market-intelligence/liquidations` — the literal liquidity pools SMC trades toward; `GET /api/v1/liquidity/depth/ETH` distinguishes a real order block from a thin, sweepable wick.
 - **Sweep grade** — `GET /api/v1/derivatives/funding-rates?coin=ETH` + `GET /api/v1/derivatives/open-interest?coin=ETH` — negative funding with elevated OI into the sweep = squeeze reversal; a funding blow-off with OI still building = continuation trap, skip.
 - **Regime gate** — `GET /api/v1/quant/market` — sweep-reversal entries get run over in `strong_trend_*` states; the framework wants structured range-to-trend conditions.
-- **Backtest** — `GET /api/v1/backtesting/klines` (1m klines only since 2026-03-30 — the honest window for 15m sweep mechanics; 1h back to 2017-08 for coarser structure) plus `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) to base-rate the sweep→reversal claim rather than trusting back-marked examples.
+- **Backtest** — `GET /api/v1/backtesting/klines` (1m klines only since 2026-03-30 — the honest window for 15m sweep mechanics; 1h back to 2017-08 for coarser structure — only in the `klines_deep` archive, while the REST route starts 2026-05-09) plus `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) to base-rate the sweep→reversal claim rather than trusting back-marked examples.
 
 ## Related
 

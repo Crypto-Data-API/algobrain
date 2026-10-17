@@ -2,7 +2,7 @@
 title: Structural Forced Selling
 type: strategy
 created: 2026-04-06
-updated: 2026-09-04
+updated: 2026-10-17
 status: review
 tags: [combinations, market-microstructure, liquidations, funding-rate, crypto, perpetual-futures, structural, event-driven]
 aliases: ["Forced Seller Flow", "Mandatory Liquidation", "Crypto Forced Selling"]
@@ -175,7 +175,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Signal** — `GET /api/v1/market-intelligence/liquidations` (forced-flow volume) with `GET /api/v1/derivatives/funding-rates?coin=BTC` deeply negative marks seller exhaustion
 - **Filter** — `GET /api/v1/derivatives/open-interest` distinguishes shorts loading (avoid) from shorts covering (fade window); `GET /api/v1/on-chain/exchange-flows/spike-alerts` confirms whether coins are still moving onto exchanges to be sold (per-symbol detail via `/on-chain/exchange-flows/{symbol}` is EVM-chain + Solana only — it does not cover native BTC)
-- **Backtest** — post-cascade recovery from `GET /api/v1/backtesting/klines` (1d back to 2017-08) and funding exhaustion from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30); direct liquidation replay only since 2026-03-30 (Hyperliquid)
+- **Backtest** — post-cascade recovery from `GET /api/v1/backtesting/klines` (1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) and funding exhaustion from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30); direct liquidation replay only since 2026-03-30 (Hyperliquid)
 - **Tips** — structural selling (fund unwinds, treasury sales) often precedes the liquidation print; watch `GET /api/v1/on-chain/exchange-flows/spike-alerts` as the leading leg of the sequence
 
 ## Related

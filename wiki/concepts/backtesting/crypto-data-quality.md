@@ -2,7 +2,7 @@
 title: "Crypto Data Quality"
 type: concept
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-10-17
 status: good
 tags: [backtesting, crypto, data-provider, methodology, market-microstructure, point-in-time]
 aliases: ["Crypto GIGO Checklist", "Crypto Backtest Data Quality", "Crypto Data Cleaning"]
@@ -117,7 +117,7 @@ CryptoDataAPI's backtesting archive is built for the point-in-time discipline th
 
 - **Point-in-time universe & snapshots** — `GET /api/v1/backtesting/daily-snapshots/{date}` (state frozen as of that day), `GET /api/v1/backtesting/symbols` (what was tradeable) for survivorship-free rosters
 - **Volume sanity** — `GET /api/v1/market-data/volume-history?days=90` (daily volume + buy ratio) and `GET /api/v1/liquidity/depth` to cross-check volume against real book depth
-- **Clean archives** — `GET /api/v1/backtesting/klines`, `GET /api/v1/backtesting/funding`, `GET /api/v1/backtesting/liquidations`, plus Parquet via `GET /api/v1/backtesting/archives` (since 2020)
+- **Clean archives** — `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive), `GET /api/v1/backtesting/funding`, `GET /api/v1/backtesting/liquidations`, plus Parquet via `GET /api/v1/backtesting/archives`
 - **Stablecoin denomination** — `GET /api/v1/sentiment/stablecoins/history` to detect depeg windows in the quote unit
 - **Collector status** — `GET /api/v1/backtesting/status` reveals gaps/outages in the archive itself
 

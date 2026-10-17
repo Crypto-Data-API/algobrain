@@ -2,7 +2,7 @@
 title: Average True Range (ATR)
 type: concept
 created: 2026-04-06
-updated: 2026-09-28
+updated: 2026-10-17
 status: good
 tags: [atr, indicators, volatility]
 aliases: [ATR, average-true-range]
@@ -72,7 +72,7 @@ In the [[nnfx-method|NNFX]] framework ATR(14) is the **trade-management slot**: 
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV bars for True Range / ATR computation
-- `GET /api/v1/backtesting/klines` — deep kline archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200"
@@ -86,7 +86,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Compute** — from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200`, take TR = max(H−L, |H−prevC|, |L−prevC|) and Wilder-smooth over 14 bars
 - **Size** — divide the per-trade risk budget by ATR to normalise position size across assets — the Turtle "N" unit this page describes, computed from live data
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) validates ATR-multiple stops and N-unit sizing across full cycles; 1m bars exist only since 2026-03-30
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) validates ATR-multiple stops and N-unit sizing across full cycles; 1m bars exist only since 2026-03-30
 - **Tip** — crypto trades 24/7 with no session gaps, so TR usually equals plain high−low; the gap-correction clauses matter mainly around venue outages and thin weekend liquidity
 
 ## Related

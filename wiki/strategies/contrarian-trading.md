@@ -2,7 +2,7 @@
 title: "Contrarian Trading"
 type: strategy
 created: 2026-06-22
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [behavioral-finance, mean-reversion, crypto, swing-trading]
 aliases: ["Contrarian Investing", "Fading the Crowd", "Sentiment Fade", "Contrarianism"]
@@ -163,7 +163,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Turn confirmation** — `GET /api/v1/market-intelligence/liquidations`: a liquidation-spike washout followed by exhaustion is the "extreme is turning" trigger; enter after it, never into the accelerating move.
 - **Regime gate** — `GET /api/v1/regimes/current`: in `Established Bear`/`Capitulation` states the crowd is often *right* — fade only in range/bull regimes, or at a fraction of normal size.
 - **Value floor** — `GET /api/v1/on-chain/dormancy/btc` (MVRV capitulation zone) as the crypto stand-in for the fundamental margin-of-safety check.
-- **Backtest** — join `GET /api/v1/market-intelligence/fear-greed-history` to `GET /api/v1/backtesting/klines` (Binance daily since 2017-08) to test forward returns conditioned on pre-specified extremes — the null-hypothesis test above; use `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time sentiment in the recent window to avoid lookahead.
+- **Backtest** — join `GET /api/v1/market-intelligence/fear-greed-history` to `GET /api/v1/backtesting/klines` (Binance daily back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) to test forward returns conditioned on pre-specified extremes — the null-hypothesis test above; use `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time sentiment in the recent window to avoid lookahead.
 - **Tips** — exit when the crowd flips (Fear & Greed percentile > 60), not at a new extreme; log every falling-knife loss against the kill criteria — two >2R knife losses is a listed pause trigger.
 
 ## Sources

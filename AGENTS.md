@@ -81,6 +81,9 @@ related: ["[[page-one]]", "[[page-two]]"]
 | `tags` | list | yes | Flat tag list for filtering |
 | `aliases` | list | no | Alternative names (enables Obsidian alias search) |
 | `related` | list | no | Explicit wikilinks to related pages |
+| `generated` | bool | no | `true` marks untouched generator output (e.g. `tools/generate_crypto_pages.py` coin pages); lint's stale check skips these pages. Put it on the line after `status:` |
+
+Whoever hand-enriches a page marked `generated: true` removes that line in the same edit.
 
 ### Status Levels
 
@@ -288,7 +291,7 @@ Periodically check wiki health:
 1. **Frontmatter completeness**: every page has all required fields
 2. **Broken wikilinks**: links to pages that do not exist (flag pages with >5 broken links)
 3. **Orphan pages**: pages with no inbound links
-4. **Stale pages**: pages not updated in >90 days with status below `good`
+4. **Stale pages**: pages not updated in >90 days with status below `good`, excluding pages marked `generated: true` (lint prints how many it skipped)
 5. **Missing source citations**: wiki pages with no `(Source: [[...]])` references
 6. **Empty pages**: pages with no content beyond frontmatter
 7. **Index sync**: verify `wiki/index.md` lists all major pages that exist

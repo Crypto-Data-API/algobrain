@@ -2,7 +2,7 @@
 title: "Convex Tail-Hedge Arbitrage"
 type: strategy
 created: 2026-04-28
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [arbitrage, derivatives, options, risk-management, behavioral-finance, ai-trading]
 aliases: ["Cheap-Convexity Trade", "Tail Hedge Arbitrage", "Implied-Vol-Cheap Strategy", "Ackman-style Hedge"]
@@ -308,7 +308,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Cheap-vol screen** — `GET /api/v1/volatility/regime/score` + `/volatility/regime/{symbol}` flag the `compressed` state that is the crypto entry condition for BTC/ETH IV-cheap puts and stablecoin-depeg structures; confirm against a native DVOL/BVIV read before buying the put.
 - **Confirming indicator** — `GET /api/v1/derivatives/funding-rates?coin=BTC` (compressed funding + building leverage) is the late-cycle confirmation.
 - **Catalyst / payoff** — `GET /api/v1/security/regime/score` and `GET /api/v1/event/regime/score` mark the hack/depeg and unlock/macro catalysts the convex leg monetises.
-- **Backtest** — `GET /api/v1/quant/regimes/history` (hourly HMM since 2020) + `GET /api/v1/backtesting/klines` to study cheap-vol-regime entries against realised drawdowns.
+- **Backtest** — `GET /api/v1/quant/regimes/history` (hourly HMM since 2020) + `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) to study cheap-vol-regime entries against realised drawdowns.
 - **Tip** — the composite is a vol-stress proxy, not option-implied vol; it screens *when* to look, not the exact strike.
 
 ## Related

@@ -2,7 +2,7 @@
 title: "Hammer"
 type: concept
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [indicators, technical-analysis]
 aliases: ["Hammer", "Hammer Candlestick", "Inverted Hammer", "Hanging Man"]
@@ -91,7 +91,7 @@ The same geometry carries opposite meaning depending on the preceding trend — 
 - `GET /api/v1/market-data/volume-history?days=30` — daily volume with buy ratio to confirm real participation on the rejection candle
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08) for pattern-frequency and hit-rate studies
+- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for pattern-frequency and hit-rate studies
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=100"
@@ -107,7 +107,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Detect** — fetch bars via `GET /api/v1/market-data/klines` and apply the geometry checklist above (lower wick ≥ 2× body, body in the upper third, minimal upper wick) plus the mandatory prior-downtrend context test
 - **Confirm** — only signal after the next candle closes above the hammer body; compare the hammer bar's volume to its 20-bar average from the same kline payload
-- **Backtest** — replay detection over `GET /api/v1/backtesting/klines` (1h/4h/1d Binance spot back to 2017-08) and score follow-through against the "failed hammer" base rate per timeframe
+- **Backtest** — replay detection over `GET /api/v1/backtesting/klines` (1h/4h/1d Binance spot back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) and score follow-through against the "failed hammer" base rate per timeframe
 - **Tip** — crypto wicks are frequently liquidation artifacts; cross-check large lower wicks against `GET /api/v1/market-intelligence/liquidations` — a wick made of forced selling is the strongest version of the rejection story
 
 ## Sources

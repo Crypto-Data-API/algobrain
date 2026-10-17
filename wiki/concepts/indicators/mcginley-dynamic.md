@@ -2,7 +2,7 @@
 title: "McGinley Dynamic"
 type: concept
 created: 2026-09-28
-updated: 2026-09-28
+updated: 2026-10-17
 status: draft
 tags: [indicators, technical-analysis, trend-following, crypto]
 aliases: ["McGinley Dynamic Indicator", "MD", "McGinley MA"]
@@ -51,7 +51,7 @@ The fourth-power term is the adaptive part. When price runs **below** the line, 
 ## Getting the Data (CryptoDataAPI)
 
 **Live data:** `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500` — daily closes for the recursion; `GET /api/v1/volatility/regime/{symbol}` — volatility state the MD cannot see.
-**Historical data:** `GET /api/v1/backtesting/klines` — multi-year archive to measure baseline-cross whipsaw rate versus an EMA.
+**Historical data:** `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history to measure baseline-cross whipsaw rate versus an EMA.
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500"

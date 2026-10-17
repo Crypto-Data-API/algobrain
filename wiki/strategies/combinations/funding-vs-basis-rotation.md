@@ -2,7 +2,7 @@
 title: "Funding vs Basis Rotation"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, arbitrage, funding-rate, derivatives, perpetual-futures, quantitative, crypto]
 aliases: ["Carry Rotation", "Funding-Basis Switcher", "Perp-vs-Dated Carry Rotation"]
@@ -327,7 +327,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Cross-venue confirm** — `GET /api/v1/market-intelligence/funding-rates` + `GET /api/v1/market-intelligence/open-interest` — where leveraged-long demand is concentrating
 - **Basis leg** — dated-futures prices come from exchange APIs (Binance, CME, Deribit); the agent computes annualised basis externally and compares it with the funding carry
 - **Regime kill** — `GET /api/v1/regimes/current` — the crash-regime exit
-- **Backtest** — `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) for the perp side; spot paths from `GET /api/v1/backtesting/klines` (daily back to 2017-08); dated-futures basis history must be sourced externally
+- **Backtest** — `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) for the perp side; spot paths from `GET /api/v1/backtesting/klines` (daily back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); dated-futures basis history must be sourced externally
 - **Tips** — rotation is a slow decision (days): poll the cached `GET /api/v1/daily` bundle hourly and switch only when the annualised-carry gap exceeds round-trip switching costs
 
 ## Related

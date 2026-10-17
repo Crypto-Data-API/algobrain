@@ -2,7 +2,7 @@
 title: "Bear Put Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, derivatives, bear-put-spread, debit-spread, bearish, defined-risk, ethereum]
 aliases: ["Put Debit Spread", "Long Put Spread", "Crypto Bear Put Spread", "Deribit Put Debit Spread"]
@@ -122,7 +122,7 @@ DVOL and the raw IV/skew surface come from **Deribit / [[greeks-live]]**, not Cr
 **Historical:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history (find low-DVOL entry windows)
 - `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=90` — OHLCV for trend context and resistance mapping
-- `GET /api/v1/backtesting/klines` — deep kline archive for backtesting the structure
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for backtesting the structure
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime"
@@ -138,7 +138,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Signal** — buy the debit spread when `GET /api/v1/volatility/regime` reads `compressed` (vol is cheap) while `GET /api/v1/derivatives/funding-rates?coin=ETH` stays positive — crowded longs are the fuel for the down-move the spread needs
 - **Regime gate** — `GET /api/v1/quant/market`: rising `strong_trend_bear` or `vol_spike` probability supports entry; a stable `range_low_vol` state means the debit decays unspent
-- **Backtest** — measure how often N%-down moves complete within the tenor using `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); pair each simulated entry with point-in-time regime state from `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Backtest** — measure how often N%-down moves complete within the tenor using `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); pair each simulated entry with point-in-time regime state from `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
 - **Tips** — `/api/v1/market-intelligence/liquidations` shows the deleveraging flush the spread profits from — take profits into the cascade rather than holding for max value; use the 60-day `/api/v1/volatility/regime/{symbol}` history to confirm the vol window is genuinely cheap, not just recently crushed.
 
 ## Related

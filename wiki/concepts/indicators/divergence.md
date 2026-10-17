@@ -2,7 +2,7 @@
 title: Divergence
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [technical-analysis, indicators, momentum]
 aliases: ["bullish divergence", "bearish divergence", "hidden divergence", "regular divergence"]
@@ -100,7 +100,7 @@ The same two-pivot logic applies to many non-price series. Traders watch for div
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=1000` — OHLCV for computing price pivots and oscillators
-- `GET /api/v1/backtesting/klines` — deep kline archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/indicators/technical/BTC"
@@ -116,7 +116,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Compute** — pull `GET /api/v1/market-data/klines`, compute the oscillator (RSI/MACD/CCI), detect price and indicator swing pivots, and compare the two slopes programmatically
 - **Live state** — the RSI leg comes served in `GET /api/v1/indicators/technical/{symbol}` with a 60-day history — enough to check recent pivot pairs without recomputing
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) supports failure-rate studies: measure how often divergences resolve by the oscillator catching up rather than price reversing
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) supports failure-rate studies: measure how often divergences resolve by the oscillator catching up rather than price reversing
 - **Tip** — encode the pivot definition (lookback, minimum swing size) explicitly; divergence is notoriously subjective, and an agent that fixes the definition can measure the true hit rate humans hand-wave
 
 ## Related

@@ -2,7 +2,7 @@
 title: "Triple-Barrier Labeling"
 type: concept
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-10-17
 status: good
 tags: [ai-trading, machine-learning, backtesting, volatility]
 aliases: ["Triple-Barrier Method", "Triple Barrier Labeling", "Triple-Barrier", "TBM"]
@@ -96,7 +96,7 @@ Triple-barrier labeling needs high-resolution OHLCV (for the path) and volatilit
 - `GET /api/v1/volatility/regime` — per-asset volatility regime (compressed/expanding/vol_shock) to condition barrier widths
 
 **Historical data (for building the label set):**
-- `GET /api/v1/backtesting/klines` — full OHLCV archive (Parquet since 2020) for path resolution
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for path resolution
 - `GET /api/v1/backtesting/liquidations` — historical liquidations to sanity-check stop-barrier touches
 - `GET /api/v1/market-data/btc-price-history?days=730` — long BTC series with 200D MA
 

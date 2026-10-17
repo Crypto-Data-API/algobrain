@@ -2,7 +2,7 @@
 title: "0DTE Options Trading"
 type: strategy
 created: 2026-04-13
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [options, crypto, day-trading, scalping, gamma, 0dte, derivatives]
 aliases: ["Crypto 0DTE", "Same-Day Crypto Options", "BTC 0DTE", "Daily-Expiry Options Trading"]
@@ -184,7 +184,7 @@ A 0DTE short condor is the most concave bet on the surface (maximum negative gam
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=5m&limit=1000` — intraday OHLCV for short-dated realized-vol vs the implied move
-- `GET /api/v1/backtesting/klines` — deep archive for intraday backtesting
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — history for intraday backtesting
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/gex"
@@ -200,7 +200,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Signal** — at session open, `GET /api/v1/quant/gex` + `GET /api/v1/market-intelligence/options` classify the day (pin vs cascade) and locate the max-pain magnet; `GET /api/v1/market-data/short-term-price` supplies the intraday directional read
 - **Regime gate** — `GET /api/v1/volatility/regime`: a `vol_shock` reading vetoes short-gamma 0DTE outright; `GET /api/v1/quant/market` (15-min refresh) separates squeeze days from range days before structure selection
-- **Backtest** — intraday replay needs `GET /api/v1/backtesting/klines` 1m bars, available only since 2026-03-30 (the 1h/4h/1d archive back to 2017-08 is too coarse for same-day expiry); tag cascade days with `/api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30)
+- **Backtest** — intraday replay needs `GET /api/v1/backtesting/klines` 1m bars, available only since 2026-03-30 (the 1h/4h/1d archive back to 2017-08 is too coarse for same-day expiry — only in the `klines_deep` archive, while the REST route starts 2026-05-09); tag cascade days with `/api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30)
 - **Tips** — poll `/api/v1/market-intelligence/liquidations` throughout the session: a cascade against a short-gamma book is the flatten-now trigger, consistent with the DVOL-spike kill rule above. Append `?format=markdown` to keep high-frequency polling light on context.
 
 ## Related

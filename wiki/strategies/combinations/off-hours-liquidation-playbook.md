@@ -2,7 +2,7 @@
 title: "Off-Hours Liquidation Playbook"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, liquidations, mean-reversion, market-microstructure, perpetual-futures, crypto, quantitative, behavioral-finance]
 aliases: ["Session-Aware Cascade Fade", "Weekend Liquidation Fade", "Thin-Book Cascade Playbook", "Off-Hours Cascade Fade"]
@@ -475,7 +475,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — poll `GET /api/v1/market-intelligence/liquidations` through the off-hours window (Asia weekend / US overnight UTC buckets); a cascade spike in a thin session arms the fade entry
 - **Filter** — `GET /api/v1/liquidity/depth` confirms the session is genuinely thin, and `GET /api/v1/derivatives/funding-rates?coin=BTC` checks momentum mid-hold
 - **Execution** — venue context from `GET /api/v1/market-intelligence/liquidations/by-exchange` tells the agent which book absorbed the flow before it sizes the fade
-- **Backtest** — `GET /api/v1/backtesting/liquidations` (Hyperliquid only, since 2026-03-30) joined to `GET /api/v1/backtesting/klines` 1m bars (also since 2026-03-30) for wick-level cascade replay; 1h bars reach back to 2017-08 for coarser session statistics
+- **Backtest** — `GET /api/v1/backtesting/liquidations` (Hyperliquid only, since 2026-03-30) joined to `GET /api/v1/backtesting/klines` 1m bars (also since 2026-03-30) for wick-level cascade replay; 1h bars reach back to 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09) for coarser session statistics
 - **Tips** — the liquidation archive is only months deep, so session-conditional edge estimates carry wide error bars; treat this as a forward-accumulating dataset and re-fit quarterly
 
 ## Related

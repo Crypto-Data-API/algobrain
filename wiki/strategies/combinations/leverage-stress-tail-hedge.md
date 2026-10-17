@@ -2,7 +2,7 @@
 title: "Leverage Stress Tail Hedge"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-03
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, options, volatility, derivatives, open-interest, risk-management, tail-risk, behavioral-finance, quantitative, crypto, bitcoin]
 aliases: ["Stress-Timed Tail Buying", "OI-Conditional Tail Hedge", "Leverage-Preconditioned Crash Hedge", "Stress-Metric Tail Accumulation"]
@@ -387,7 +387,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Stress gates** — `GET /api/v1/derivatives/open-interest?coin=BTC` (OI/MC, Gate 1), `GET /api/v1/derivatives/funding-rates?coin=BTC` (7d average, Gate 2), `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` (crowding, Gate 3)
 - **IV check** — `GET /api/v1/volatility/implied` — hedge only while IV has not yet spiked
 - **Context** — `GET /api/v1/regimes/current` — regime framing for gate interpretation
-- **Backtest** — `GET /api/v1/derivatives/binance/history?days=180` + `GET /api/v1/backtesting/klines` (daily back to 2017-08) to measure drawdowns following stress-composite triggers; cascade outcomes are only verifiable via `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30)
+- **Backtest** — `GET /api/v1/derivatives/binance/history?days=180` + `GET /api/v1/backtesting/klines` (daily back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) to measure drawdowns following stress-composite triggers; cascade outcomes are only verifiable via `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30)
 - **Tips** — the gates move at daily cadence: one hourly `GET /api/v1/daily` poll covers all three stress inputs — reserve per-endpoint calls for threshold-crossing moments
 
 ## Related

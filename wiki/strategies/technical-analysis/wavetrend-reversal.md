@@ -2,7 +2,7 @@
 title: "WaveTrend Reversal"
 type: strategy
 created: 2026-09-28
-updated: 2026-09-28
+updated: 2026-10-17
 status: draft
 tags: [mean-reversion, momentum, technical-analysis, swing-trading, crypto]
 aliases: ["WaveTrend Cross Strategy", "WT Oversold Cross", "WaveTrend Mean Reversion"]
@@ -130,7 +130,7 @@ Retire or pause (see [[when-to-retire-a-strategy]]) if any of these hold:
 - `GET /api/v1/indicators/signum-rgg/{symbol}`: ADX(14)+DMI RED/GREY/GREEN trend filter with 60-day history
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines`: deep archive for crosses, per-asset band calibration and the matched-random null test
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive): history for crosses, per-asset band calibration and the matched-random null test
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/indicators/signum-rgg/ETH"

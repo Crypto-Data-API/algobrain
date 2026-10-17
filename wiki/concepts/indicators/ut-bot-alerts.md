@@ -2,7 +2,7 @@
 title: "UT Bot Alerts"
 type: concept
 created: 2026-09-28
-updated: 2026-09-28
+updated: 2026-10-17
 status: draft
 tags: [indicators, technical-analysis, trend-following, volatility, crypto]
 aliases: ["UT Bot", "UT Bot Alerts", "UTBot"]
@@ -66,7 +66,7 @@ buy  = (src > stop) & (src.shift(1) <= pd.Series(stop).shift(1).values)
 - `GET /api/v1/hyperliquid/candles?coin=BTC&interval=15m&limit=500`: perp bars when executing on Hyperliquid
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines`: deep kline archive for sweeping Key Value and ATR period
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive): kline history for sweeping Key Value and ATR period
 - `GET /api/v1/backtesting/funding`: historical funding to charge carry on held perp positions
 
 ```bash

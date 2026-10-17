@@ -2,7 +2,7 @@
 title: Volatility
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [volatility, indicators, risk-management, derivatives]
 aliases: [vol, volatility-trading]
@@ -77,7 +77,7 @@ Professional portfolio managers apply a systematic approach to calculating and u
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=60` — OHLC bars for computing any vol estimator
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — deep kline archive for multi-year volatility series
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for multi-year volatility series
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset detail with rolling 60d history
 
 ```bash
@@ -92,7 +92,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Compute** — annualized stdev of log returns (or Parkinson/Garman-Klass/Yang-Zhang from full OHLC) over `GET /api/v1/market-data/klines`; use √365 for crypto's continuous calendar rather than √252
 - **Live state** — `GET /api/v1/volatility/regime` gives a server-side classification when the agent needs a state label for position sizing; the `/score` variant collapses the market to one 0-100 number
-- **Backtest** — vol-targeted sizing rules (weight ∝ target vol / trailing vol) replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08)
+- **Backtest** — vol-targeted sizing rules (weight ∝ target vol / trailing vol) replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09)
 - **Tip** — volatility clustering means the current estimate decays slowly: when the regime flips to `vol_shock`, shrink size immediately rather than waiting for the trailing window to catch up
 
 ## Related

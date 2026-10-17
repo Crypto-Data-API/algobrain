@@ -2,7 +2,7 @@
 title: "Pair Universe Specification"
 type: reference
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [quantitative, pairs-trading, statistical-arbitrage, crypto, hyperliquid, perpetual-futures, methodology, backtesting, market-microstructure, correlation]
 aliases: ["Pair Universe", "AlgoBrain Pair Universe", "Tradeable Pair Universe", "Crypto Pairs Candidate Universe"]
@@ -158,7 +158,7 @@ All data used in the funnel is available from [[cryptodataapi|CryptoDataAPI]]. N
 - `GET /api/v1/derivatives/funding-rates?coin=X` — 8h funding for Gate 5
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — full OHLCV archive for rolling re-estimation and walk-forward screening
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for rolling re-estimation and walk-forward screening
 - `GET /api/v1/backtesting/funding` — historical funding for Gate 5 back-validation
 
 ```bash

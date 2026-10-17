@@ -2,7 +2,7 @@
 title: "DeFi Yield / LP × Sentiment-Extreme Filter"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, defi, yield-farming, sentiment, behavioral-finance, contrarian, liquidity, quantitative, crypto, impermanent-loss]
 aliases: ["DeFi LP Sentiment Entry", "Panic LP Deploy", "Fear-Extreme LP Entry", "DeFi Yield Contrarian Deployment", "LP Capital-Flight Entry"]
@@ -330,7 +330,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Entry gate** — `GET /api/v1/sentiment/fear-greed` — ≤ 20 for 2 consecutive days is the trigger (Gate 1)
 - **Confirmation** — `GET /api/v1/volatility/regime/{symbol}` (enter only in `mean_reverting` / `normal`) + `GET /api/v1/sentiment/stablecoins` (dry powder building)
 - **Recovery check** — `GET /api/v1/market-health/summary` — health scores as the recovery-trend confirmation
-- **Backtest** — `GET /api/v1/market-intelligence/fear-greed-history` reconstructs every extreme-fear episode; forward outcomes proxied with `GET /api/v1/backtesting/klines` (daily back to 2017-08); pool APR history from DeFiLlama
+- **Backtest** — `GET /api/v1/market-intelligence/fear-greed-history` reconstructs every extreme-fear episode; forward outcomes proxied with `GET /api/v1/backtesting/klines` (daily back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); pool APR history from DeFiLlama
 - **Tips** — extreme fear clusters, so enforce the 2-consecutive-day persistence rule verbatim rather than acting on a single print
 
 ## Related

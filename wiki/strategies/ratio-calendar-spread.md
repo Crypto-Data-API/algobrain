@@ -2,7 +2,7 @@
 title: "Ratio Calendar Spread"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, derivatives, volatility, swing-trading, bitcoin, ethereum]
 aliases: ["Ratio Calendar Spread", "Asymmetric Calendar", "Unbalanced Calendar", "Ratio Time Spread", "Crypto Ratio Calendar"]
@@ -143,7 +143,7 @@ The [[dvol|DVOL]] level, its **term structure**, and per-strike IV come from **D
 **Historical:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for realized-vol vs DVOL
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive for roll/backtest studies
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for roll/backtest studies
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime/score"
@@ -160,7 +160,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can pick th
 - **Tilt selection** — `GET /api/v1/volatility/regime`: `compressed` with expected expansion favours the long-heavy 1:2 build; `mean_reverting`/range states favour the short-heavy income build (small, per the crypto tail warning)
 - **Catalyst placement** — `GET /api/v1/event/calendar` (events up to 30 days out) finds the catalyst that must land *after* the near expiry and *before* the far one — the defining condition of the long-heavy trade
 - **Gap watch** — `GET /api/v1/market-intelligence/liquidations` + `GET /api/v1/quant/gex` are the early warning for the fast gap that breaks a short-heavy ratio before its slow far wing responds
-- **Backtest** — replay spot paths across near/far windows with `GET /api/v1/backtesting/klines` (1h/4h/1d to 2017-08); the DVOL *term structure* that sets entry economics is Deribit data, so full P&L replays need the Deribit surface
+- **Backtest** — replay spot paths across near/far windows with `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); the DVOL *term structure* that sets entry economics is Deribit data, so full P&L replays need the Deribit surface
 - **Tips** — re-check the vol regime at near-leg expiry before deciding the residual position's fate — the Greeks phase-flip documented above is where mis-hedges happen
 
 ## Related

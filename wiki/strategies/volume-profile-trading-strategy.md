@@ -2,7 +2,7 @@
 title: "Volume Profile Trading Strategy"
 type: strategy
 created: 2026-06-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [technical-analysis, market-microstructure, indicators, mean-reversion, breakout, volume]
 aliases: ["Volume Profile Strategy", "Value Area Rotation", "POC Reversion", "VPVR Strategy"]
@@ -205,7 +205,7 @@ True tick, footprint, and CVD data come from the venue tape (Sierra Chart / exch
 - `GET /api/v1/hyperliquid/l2-book?coin=BTC` — live depth at a computed level before fading it (is the HVN actually defended?)
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — 1m klines for Binance USDT-perps and all Hyperliquid perps **only since 2026-03-30** (grows forward), which caps how far back minute-resolution profiles can be reconstructed; the deeper 1h/4h/1d archive (Binance spot to 2017-08) supports only coarse composite profiles
+- `GET /api/v1/backtesting/klines` — 1m klines for Binance USDT-perps and all Hyperliquid perps **only since 2026-03-30** (grows forward), which caps how far back minute-resolution profiles can be reconstructed; the deeper 1h/4h/1d archive (Binance spot back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) supports only coarse composite profiles
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \

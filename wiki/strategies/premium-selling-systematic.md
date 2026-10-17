@@ -2,7 +2,7 @@
 title: "Systematic Premium Selling (Crypto)"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [options, crypto, derivatives, volatility, quantitative, algorithmic, risk-management, bitcoin, ethereum]
 aliases: ["Systematic Premium Selling", "Mechanical Premium Selling", "Systematic Short Vol", "Crypto Systematic Premium Selling"]
@@ -307,7 +307,7 @@ DVOL and the IV surface come from Deribit / [[greeks-live]]; [[cryptodataapi]] s
 **Historical data:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for realized-vol computation
-- `GET /api/v1/backtesting/klines` — deep kline archive for VRP backtesting
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for VRP backtesting
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime/score"
@@ -325,7 +325,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] is the natu
 - **Catalyst blackout** — `GET /api/v1/event/calendar` (filterable events up to 30 days out: macro prints, unlocks) automates entry rule 6, "no major catalyst within 7 days"
 - **Kill switch** — `GET /api/v1/volatility/regime/score` + `GET /api/v1/market-intelligence/liquidations` polled each cycle as the automated DVOL-shock flatten trigger; `GET /api/v1/quant/gex` flags the dealer-short-gamma states where a spike cascades fastest
 - **Wing tilt** — `GET /api/v1/derivatives/funding-rates?coin=BTC` drives the `skew_tilt` branch in the pseudocode
-- **Backtest** — replay the mechanical loop on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08) with point-in-time regime states from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) — validating against today's regime labels is lookahead bias
+- **Backtest** — replay the mechanical loop on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) with point-in-time regime states from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) — validating against today's regime labels is lookahead bias
 - **Tips** — the "discretionary deviation ≥ 3×/quarter → halt" kill criterion is best enforced by logging every agent decision against the written rules; append `?format=markdown` for cleaner context
 
 ## Sources

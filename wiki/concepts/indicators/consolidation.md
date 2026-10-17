@@ -2,7 +2,7 @@
 title: "Consolidation"
 type: concept
 created: 2026-04-13
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [technical-analysis, indicators, volatility]
 aliases: ["Consolidation", "Trading Range", "Sideways Market", "Base"]
@@ -99,7 +99,7 @@ The main risk is whipsaw: choppy ranges generate frequent false signals for tren
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=1000` — OHLCV for range detection (highs/lows, ATR, band width)
-- `GET /api/v1/backtesting/klines` — deep kline archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=500"
@@ -115,7 +115,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Detect** — from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=500`, measure range height, touch count, and contracting ATR/BandWidth to score a maturing consolidation
 - **Live state** — `GET /api/v1/indicators/technical` reports the SMA/BB/RSI price structure for every covered asset in one call — screen the universe for coiling ranges without computing anything
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) supports range-resolution studies: how often tight ranges break with volume, and how far measured moves carry
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) supports range-resolution studies: how often tight ranges break with volume, and how far measured moves carry
 - **Tip** — gate breakout entries on the volume surge from `GET /api/v1/market-data/volume-history`; thin-volume breaks out of crypto ranges fail disproportionately, exactly as the pitfalls above warn
 
 ## Related

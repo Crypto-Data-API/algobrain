@@ -282,7 +282,7 @@ Verified [[cryptodataapi|CryptoDataAPI]] endpoints for peg monitoring (auth via 
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=TUSDUSDT&interval=1h&limit=1000` — peg history / past depegs
-- `GET /api/v1/backtesting/klines` — deep archive for depeg backtests
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for depeg backtests
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=TUSDUSDT"

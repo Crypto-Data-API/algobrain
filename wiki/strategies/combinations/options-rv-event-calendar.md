@@ -2,7 +2,7 @@
 title: "Options Relative-Value × Event Calendar"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-04
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, options-structures, derivatives, volatility, event-driven, term-structure, crypto, deribit, quantitative]
 aliases: ["Options RV Event Calendar", "Term-Structure Event Positioning", "Calendar Event Vol-of-Vol Premium", "Event-Anchored Options RV"]
@@ -314,7 +314,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Signal context** — `GET /api/v1/volatility/index`'s `majors[].vrp` (implied − realized, pre-computed) establishes whether event IV is rich before the calendar spread goes on
 - **Event leg** — `GET /api/v1/event/calendar` (filterable up to 30d out) gives the agent machine-readable macro and unlock event dates to anchor expiry selection
 - **Filter** — `GET /api/v1/derivatives/funding-rates?coin=BTC`; elevated funding raises delta-hedge carry costs and shrinks the trade's edge
-- **Backtest** — `GET /api/v1/volatility/implied`'s `items[].history` (Pro Plus) for event-window vol-premium behaviour, joined to daily klines back to 2017-08 from `GET /api/v1/backtesting/klines`
+- **Backtest** — `GET /api/v1/volatility/implied`'s `items[].history` (Pro Plus) for event-window vol-premium behaviour, joined to daily klines back to 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09) from `GET /api/v1/backtesting/klines`
 - **Tips** — per-expiry IV and the actual spread legs come from Deribit's public API; use CryptoDataAPI for regime and vol context, Deribit for pricing, and keep the two clocks synchronized when logging fills
 
 ## Related

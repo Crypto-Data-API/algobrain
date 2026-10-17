@@ -2,7 +2,7 @@
 title: "Order Flow Scalping (Crypto Perps)"
 type: strategy
 created: 2026-04-06
-updated: 2026-09-17
+updated: 2026-10-17
 status: good
 tags: [scalping, order-flow, crypto, perpetual-futures, market-microstructure, day-trading, hyperliquid, liquidations]
 aliases: ["CVD Scalping", "Footprint Scalping", "Tape Reading (Crypto)", "Delta Divergence Scalp", "Order Flow Trading"]
@@ -257,7 +257,7 @@ CryptoDataAPI provides L2 book snapshots, taker buy/sell ratios, liquidation flo
 **Historical data:**
 - `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1m&limit=1000` — 1-minute perp OHLCV
 - `GET /api/v1/backtesting/liquidations` — liquidation records archive
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/l2-book?coin=BTC"

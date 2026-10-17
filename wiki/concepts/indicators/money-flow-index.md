@@ -2,7 +2,7 @@
 title: "Money Flow Index"
 type: concept
 created: 2026-04-20
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [indicators, technical-analysis, volume, momentum]
 aliases: ["MFI", "Money Flow Index", "money-flow-index"]
@@ -112,7 +112,7 @@ MFI incorporates volume, making it more sensitive to institutional activity. In 
 - `GET /api/v1/market-data/volume-history?days=90` — daily volume with buy ratio as a sanity check on the volume input
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08) for MFI threshold and divergence backtests
+- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for MFI threshold and divergence backtests
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=100"
@@ -126,7 +126,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Compute** — from `GET /api/v1/market-data/klines`: typical price = (H+L+C)/3, raw money flow = TP × volume, then the 14-bar positive/negative flow ratio into the RSI-form index exactly as above
 - **Signal** — flag divergences (price high with lower MFI peak) rather than raw 80/20 touches; in crypto trends MFI pins at extremes for long stretches, so extremes alone are continuation evidence, not fade signals
-- **Backtest** — replay over `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08) and compare MFI-filtered entries against plain RSI entries — the volume term is only earning its keep if the two disagree profitably
+- **Backtest** — replay over `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) and compare MFI-filtered entries against plain RSI entries — the volume term is only earning its keep if the two disagree profitably
 - **Tip** — the page's wash-trading caveat is the crypto-specific failure mode: restrict MFI to major Binance pairs where volume is credible, and cross-check suspicious flow readings against `GET /api/v1/market-intelligence/taker-buy-sell` (aggressive buy/sell split by exchange)
 
 ## Sources

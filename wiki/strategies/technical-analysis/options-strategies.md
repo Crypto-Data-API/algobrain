@@ -2,7 +2,7 @@
 title: "Options Strategies (Crypto)"
 type: reference
 created: 2026-04-13
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, derivatives, volatility, swing-trading, bitcoin, ethereum]
 aliases: ["Option Strategies", "Options Structures", "Option Spreads", "Crypto Options Strategies", "options-strategies-overview"]
@@ -251,7 +251,7 @@ DVOL and the IV surface come from Deribit / [[greeks-live]]; [[cryptodataapi]] s
 **Historical data:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for realized-vol computation
-- `GET /api/v1/backtesting/klines` — deep kline archive for VRP backtesting
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for VRP backtesting
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/options"
@@ -268,7 +268,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can drive s
 - **Family selector** — `GET /api/v1/volatility/regime`: `compressed` → debit/long-vol structures ([[straddle-strangle]]); `expanding`/`normal` with rich DVOL → credit structures ([[iron-condor]], verticals); `vol_shock` → hedging / long convexity only.
 - **Strike context** — `GET /api/v1/market-intelligence/options` (OI, max pain) + `GET /api/v1/quant/gex` for pin-vs-breakout reads; `GET /api/v1/derivatives/funding-rates?coin=BTC` for which wing skew has overbid.
 - **Regime gate** — `GET /api/v1/quant/market` maps onto the Regime Fit table above: range states favor income, trend states favor directional spreads.
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) supplies the realized-vol leg for VRP validation; pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime labels.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) supplies the realized-vol leg for VRP validation; pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime labels.
 - **Tips** — `GET /api/v1/event/calendar` (catalysts up to 30d out) is the calendar every entry rule here references — automate the "no short premium across binary events" check.
 
 ## Sources

@@ -2,7 +2,7 @@
 title: "Leveraged Yield Farming"
 type: strategy
 created: 2026-04-22
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [crypto, defi, leverage, algorithmic]
 aliases: ["Leveraged LP Farming", "Levered Yield Farming"]
@@ -181,7 +181,7 @@ Farm APRs, borrow rates, and utilization come from the lending/farm protocols an
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=CAKEUSDT&interval=1d&limit=90` — reward-token 30d return and drawdown
-- `GET /api/v1/backtesting/klines` — deep archive for reward-token collapse studies across cycles
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — history for reward-token collapse studies across cycles
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/security/regime"
@@ -198,7 +198,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Exit triggers** — automate the kill rules: reward-token 30d return from `GET /api/v1/market-data/klines`, exploit/depeg alerts from `GET /api/v1/security/regime/score` — both are hard exits in this page's rules
 - **IL model** — `GET /api/v1/volatility/regime/{symbol}` (60d history) estimates pair-divergence risk; leverage multiplies whatever σ implies
 - **Regime gate** — `GET /api/v1/quant/market` — running 3x leverage into rising `vol_spike`/`strong_trend_bear` probabilities is how liquidation cascades find you
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08) for reward-token and pair paths; borrow-rate history must be archived from the protocols — no API archive covers it
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for reward-token and pair paths; borrow-rate history must be archived from the protocols — no API archive covers it
 - **Tips** — the debt-ratio monitor belongs on-chain against the protocol contract in a fast loop; poll CryptoDataAPI security/vol state hourly as the slower outer loop
 
 ## Related

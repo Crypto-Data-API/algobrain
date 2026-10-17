@@ -2,7 +2,7 @@
 title: "Skew"
 type: concept
 created: 2026-05-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, volatility, statistics, portfolio-theory, indicators, disambiguation]
 aliases: ["Skew", "Skewness", "Statistical Skew", "Third Moment"]
@@ -126,7 +126,7 @@ The API serves the *statistical* skew half of this page — realized-return skew
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=365` — return series for the sample-skewness estimator `g_1`
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — multi-year archive for skewness across full market cycles
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for skewness across full market cycles
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=365"
@@ -139,7 +139,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
 
 - **Compute** — the `g_1` sample estimator above runs on log returns from `GET /api/v1/market-data/klines`; compute it per strategy P&L series too, since negative skew is a property of strategies, not just assets
-- **Backtest** — score candidate strategies on `GET /api/v1/backtesting/klines` replays (Binance spot back to 2017-08) and report skewness beside Sharpe — the sample-underestimation caveat above means a calm-window backtest hides the left tail
+- **Backtest** — score candidate strategies on `GET /api/v1/backtesting/klines` replays (Binance spot back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) and report skewness beside Sharpe — the sample-underestimation caveat above means a calm-window backtest hides the left tail
 - **Tip** — sample skewness is dominated by whether the worst event happened inside the window: prefer the longest available archive sample and stress-check against known crash dates rather than trusting a 90-day estimate
 
 ## Related

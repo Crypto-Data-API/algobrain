@@ -2,7 +2,7 @@
 title: "Christmas Tree Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, derivatives, volatility, bitcoin, ethereum]
 aliases: ["Ladder Spread", "Christmas Tree", "Call Ladder", "Put Ladder", "Crypto Christmas Tree"]
@@ -131,7 +131,7 @@ The IV surface used to price the ladder comes from **Deribit / [[greeks-live]]**
 **Historical:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for realized-vol / range context and target sizing
-- `GET /api/v1/backtesting/klines` — deep kline archive for backtesting the move distribution
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for backtesting the move distribution
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"
@@ -147,7 +147,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Signal** — place K1/K2 against the OI walls from `GET /api/v1/market-intelligence/options`; sell the ladder only when `GET /api/v1/volatility/regime` is elevated but *not* `expanding` — the naked leg cannot afford an in-progress expansion
 - **Regime gate** — `GET /api/v1/quant/market`: any rise in `strong_trend`/`vol_spike` probability toward the naked side is a no-trade regardless of premium — this structure does not survive the runaway move
-- **Backtest** — study the move distribution beyond K2/K3 with `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); tag cascade days via `/api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) — those are the days that define the tail
+- **Backtest** — study the move distribution beyond K2/K3 with `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); tag cascade days via `/api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) — those are the days that define the tail
 - **Tips** — automate a hard exit on `/api/v1/market-intelligence/liquidations` cascades toward the naked leg; check `/api/v1/quant/gex` daily — dealer short gamma near the naked strike is squeeze fuel pointed at your worst-case band.
 
 ## Related

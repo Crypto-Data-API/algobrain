@@ -2,7 +2,7 @@
 title: DCA + Technical Analysis Hybrid
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [combinations, meta-strategy, dca, dollar-cost-averaging, technical-analysis, accumulation, beginner-friendly, mean-reversion]
 strategy_type: hybrid
@@ -278,7 +278,7 @@ Effectively unlimited. This strategy operates on scheduled retail-sized purchase
 - `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=60` — the same filters for the ETH accumulation leg
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — Binance spot daily candles back to 2017-08 (BTCUSDT), enough for multi-cycle cost-basis comparison of the hybrid vs vanilla DCA
+- `GET /api/v1/backtesting/klines` — Binance spot daily candles back to 2017-08 only in the `klines_deep` archive (BTCUSDT; the REST route starts 2026-05-09), enough for multi-cycle cost-basis comparison of the hybrid vs vanilla DCA
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
@@ -292,7 +292,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]], 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
 - **Signal** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=60` once per scheduled buy date: compute the 50d MA, RSI(14), support proximity, and weekly candle locally; any single triggered condition deploys the stacked cash reserve
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily back to 2017-08) — replay hybrid vs vanilla DCA cost basis across the 2018 and 2022 bears *and* the 2020–21 melt-up, which is the strategy's known failure regime (cash drag)
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) — replay hybrid vs vanilla DCA cost basis across the 2018 and 2022 bears *and* the 2020–21 melt-up, which is the strategy's known failure regime (cash drag)
 - **Tips** — this is a weekly-cadence strategy: one kline call per buy date is all it needs — no polling loop; measure the cost-basis edge on your own asset and period before trusting the 5–18% figures quoted above
 
 ## Related

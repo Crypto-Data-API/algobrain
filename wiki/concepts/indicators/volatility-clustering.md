@@ -2,7 +2,7 @@
 title: "Volatility Clustering"
 type: concept
 created: 2026-07-03
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [volatility, quantitative, market-regime, indicators, risk-management]
 aliases: ["Volatility Clustering", "volatility-clustering", "Vol Clustering"]
@@ -94,7 +94,7 @@ Volatility clustering is the empirical foundation for treating volatility as a *
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — return series for measuring the autocorrelation of squared returns
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — deep kline archive for fitting GARCH/EWMA on multi-year series
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for fitting GARCH/EWMA on multi-year series
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset detail with rolling 60d history
 
 ```bash
@@ -109,7 +109,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Compute** — the clustering fingerprint is one klines pull away: autocorrelation of $r_t^2$ over lags from `GET /api/v1/market-data/klines` closes; fit GARCH(1,1) or EWMA on the same series for a clustering-aware vol forecast
 - **Live state** — `GET /api/v1/volatility/regime` reports which cluster each asset currently sits in without any model fitting; the `vol_shock` and `compressed` labels bracket this page's turbulent and calm states
-- **Backtest** — vol-scaled sizing rules that monetize clustering replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 — long enough to span several full calm-to-crisis cycles)
+- **Backtest** — vol-scaled sizing rules that monetize clustering replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09 — long enough to span several full calm-to-crisis cycles)
 - **Tip** — act on the transition, not the level: de-risk when the regime label flips out of `compressed`, because by the time a trailing GARCH forecast has caught up the spike has already paid the worst prices
 
 ## Related

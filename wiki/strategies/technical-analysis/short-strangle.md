@@ -2,7 +2,7 @@
 title: "Short Strangle"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, short-strangle, premium-selling, volatility, neutral, derivatives]
 aliases: ["Crypto Short Strangle", "BTC Short Strangle", "Selling the Strangle", "OTM Premium Selling"]
@@ -134,7 +134,7 @@ Do not sell into a spiking DVOL — that is shorting vega into the tail. Skew-aw
 **Historical data:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for [[realized-volatility]] (compare RV to DVOL)
-- `GET /api/v1/backtesting/klines` — deep kline archive for RV backtesting
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for RV backtesting
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime"
@@ -152,7 +152,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Wing placement** — `GET /api/v1/market-intelligence/options` (OI walls pin monthlies — useful strike anchors) + `GET /api/v1/derivatives/funding-rates?coin=BTC` to weight the short toward the overbid wing.
 - **Catalyst gate** — `GET /api/v1/event/calendar` — never carry both wings across a dated catalyst; `GET /api/v1/quant/gex` says whether dealers will dampen or amplify the tape.
 - **Kill switch** — `GET /api/v1/volatility/regime/score` > 75 or a `GET /api/v1/market-intelligence/liquidations` cascade = flatten or convert to the [[iron-condor]]; automate the poll.
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) for strike-breach frequency at 15-25-delta-equivalent distances; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) keeps the regime filter point-in-time.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for strike-breach frequency at 15-25-delta-equivalent distances; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) keeps the regime filter point-in-time.
 
 ## Related
 

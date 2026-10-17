@@ -2,7 +2,7 @@
 title: "Liquidation-Price-Aware Sizing"
 type: concept
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-10-17
 status: good
 tags: [crypto, risk-management, position-sizing, leverage, margin, liquidations, perpetual-futures]
 aliases: ["Liquidation-Aware Sizing", "Liquidation-Distance Sizing", "Stress-Move Position Sizing", "Liquidation Price Sizing"]
@@ -113,7 +113,7 @@ The position is sized so that even a 40% mark crash leaves a ~20% cushion before
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — daily candles to measure realized σ and the asset's worst historical wick
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive (2020-) to locate named wicks (Black Thursday, May 2021, Aug 2024)
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history to locate named wicks (Black Thursday, May 2021, Aug 2024)
 - `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidation flow (cascade context)
 
 ```bash

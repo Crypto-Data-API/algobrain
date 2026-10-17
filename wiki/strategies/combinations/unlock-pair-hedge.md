@@ -2,7 +2,7 @@
 title: "Unlock Pair Hedge"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, pairs-trading, event-driven, perpetual-futures, derivatives, arbitrage, quantitative, crypto, altcoins]
 aliases: ["Beta-Hedged Unlock Short", "Pair-Expressed Unlock Short", "Unlock Supply Pairs Trade", "Market-Neutral Unlock Short"]
@@ -356,7 +356,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Event leg** — `GET /api/v1/event/calendar?type=unlock` surfaces upcoming unlock catalysts (cross-check external unlock trackers for cliff size and vesting detail per the note above)
 - **Gate** — `GET /api/v1/derivatives/funding-rates?coin={TOKEN}` and `GET /api/v1/derivatives/open-interest?coin={TOKEN}` on both legs; a crowded short on the unlock leg kills the entry
 - **Regime gate** — `GET /api/v1/regimes/current` blocks entries in `Structural_Shock`, when sector correlations converge to 1 and the hedge stops hedging
-- **Backtest** — beta stability and unlock-event studies on `GET /api/v1/backtesting/klines` (1d back to 2017-08 for Binance-listed pairs); funding-cost overlay from the archive (Hyperliquid hourly since 2023-05)
+- **Backtest** — beta stability and unlock-event studies on `GET /api/v1/backtesting/klines` (1d back to 2017-08 for Binance-listed pairs — only in the `klines_deep` archive, while the REST route starts 2026-05-09); funding-cost overlay from the archive (Hyperliquid hourly since 2023-05)
 - **Tips** — respect `insufficient_history` on the unlock leg: a 60-day-old token has no stable beta, so widen the hedge-ratio band or skip
 
 ## Related

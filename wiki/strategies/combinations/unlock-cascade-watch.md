@@ -2,7 +2,7 @@
 title: "Unlock Cascade Watch"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, event-driven, liquidations, open-interest, funding-rate, on-chain, perpetual-futures, risk-management, quantitative, crypto, altcoins]
 aliases: ["Unlock Liquidation Window", "Unlock-Triggered Cascade Setup", "Unlock OI Watch", "Unlock Cascade Risk Framework"]
@@ -375,7 +375,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Event gate** — `GET /api/v1/event/calendar?type=unlock&days=14` seeds the watchlist (cross-check external trackers for low-caps); per-token risk classification comes from the OI, funding, and long/short reads above
 - **Trigger** — `GET /api/v1/market-intelligence/liquidations` real-time volume confirms an actual cascade before the fade arms; 4h klines measure the decline leg
 - **Regime gate** — `GET /api/v1/regimes/current`; `Structural_Shock` de-risks the entire watchlist immediately
-- **Backtest** — cascade replay only since 2026-03-30 (`GET /api/v1/backtesting/liquidations`, Hyperliquid); price behaviour around historical unlock dates goes deeper via `GET /api/v1/backtesting/klines` (1d/4h back to 2017-08 for Binance-listed names)
+- **Backtest** — cascade replay only since 2026-03-30 (`GET /api/v1/backtesting/liquidations`, Hyperliquid); price behaviour around historical unlock dates goes deeper via `GET /api/v1/backtesting/klines` (1d/4h back to 2017-08 for Binance-listed names — only in the `klines_deep` archive, while the REST route starts 2026-05-09)
 - **Tips** — most unlocks produce no cascade, so the agent's job is mostly to stand down; log every armed-but-untriggered event to keep the trigger threshold calibrated
 
 ## Related

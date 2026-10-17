@@ -2,7 +2,7 @@
 title: "Realized Volatility"
 type: concept
 created: 2026-04-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [volatility, quantitative, risk-management]
 aliases: ["Historical Volatility", "Realized Vol", "RV", "Realized Variance"]
@@ -119,7 +119,7 @@ The table below maps the IV-vs-RV relationship to the typical positioning. The c
 - `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — deep kline archive for multi-year RV series
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for multi-year RV series
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset detail with rolling 60d history
 
 ```bash
@@ -134,7 +134,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Compute** — klines carry full OHLC, so any estimator in the table above is available: close-to-close from closes, Parkinson from high/low, Yang-Zhang from all four columns plus the prior close; annualize with √365 for crypto's continuous calendar, not √252
 - **Live state** — `GET /api/v1/volatility/regime/{symbol}` gives a pre-classified vol state with 60d history when the agent needs a label rather than a number
-- **Backtest** — RV-conditioned rules (vol targeting, RV-spike de-risking) replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); high-frequency RV from 1m klines is only possible since 2026-03-30, when the minute archive starts
+- **Backtest** — RV-conditioned rules (vol targeting, RV-spike de-risking) replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); high-frequency RV from 1m klines is only possible since 2026-03-30, when the minute archive starts
 - **Tip** — clean the series first per the pitfalls list: one stale or missing bar enters the sum squared, and crypto's 24/7 tape means no overnight gap — Parkinson/Garman-Klass lose their usual blind spot but still assume continuous trading through low-liquidity weekend hours
 
 ## Related

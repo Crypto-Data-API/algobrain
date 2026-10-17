@@ -2,7 +2,7 @@
 title: "Options Premium Selling (Crypto)"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [options, crypto, derivatives, volatility, risk-management, premium-selling, bitcoin, ethereum]
 aliases: ["Premium Selling", "Theta Gang", "Short Vol Core", "Selling Premium", "Crypto Premium Selling"]
@@ -309,7 +309,7 @@ DVOL and the IV surface come from Deribit / [[greeks-live]]; [[cryptodataapi]] s
 **Historical data:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for realized-vol computation
-- `GET /api/v1/backtesting/klines` — deep kline archive for VRP backtesting
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for VRP backtesting
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime/score"
@@ -327,7 +327,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Regime gate** — `GET /api/v1/volatility/regime` (skip `vol_shock`/`expanding` states) plus `GET /api/v1/quant/gex` for dealer-gamma context: short-gamma dealer positioning means cascade-prone spot, argue for condor wings over naked strangles
 - **Vol-shock kill** — monitor `GET /api/v1/volatility/regime/score` and `GET /api/v1/market-intelligence/liquidations` as the automated trigger for the flatten-short-vega rule
 - **Wing tilt** — `GET /api/v1/derivatives/funding-rates?coin=BTC`; funding > ~0.03%/8h → tilt the short toward the call wing per the skew-aware rule
-- **Backtest** — replay the VRP with `GET /api/v1/backtesting/klines` (1h/4h/1d to 2017-08, covering 2020-03, LUNA, FTX) paired with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) so regime labels are point-in-time, not today's
+- **Backtest** — replay the VRP with `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09, covering 2020-03, LUNA, FTX) paired with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) so regime labels are point-in-time, not today's
 - **Tips** — batch BTC+ETH state via the cached `GET /api/v1/daily` bundle hourly instead of per-endpoint polling
 
 ## Sources

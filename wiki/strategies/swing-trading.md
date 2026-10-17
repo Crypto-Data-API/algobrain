@@ -2,7 +2,7 @@
 title: "Swing Trading"
 type: strategy
 created: 2026-04-13
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [swing-trading, technical-analysis, momentum, risk-management]
 aliases: ["Swing Trader", "Swing Trade"]
@@ -229,7 +229,7 @@ For the crypto expression of the pullback playbook, [[cryptodataapi|CryptoDataAP
 - `GET /api/v1/event/calendar` — scheduled unlocks/macro prints up to 30 days out: crypto's version of the "no entries within 5 days of earnings" rule
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — Binance spot 1h/4h/1d back to 2017-08 for expectancy measurement across full bull/bear cycles
+- `GET /api/v1/backtesting/klines` — Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09) for expectancy measurement across full bull/bear cycles
 - `GET /api/v1/quant/timeline` — daily market regime labels (2019-now) to condition expectancy by regime
 - `GET /api/v1/backtesting/daily-snapshots` — point-in-time market state per day since 2026-03-02
 

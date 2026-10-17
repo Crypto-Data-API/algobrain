@@ -2,7 +2,7 @@
 title: "RSI Mean Reversion"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [mean-reversion, rsi, oversold, overbought, quantitative, larry-connors, crypto, behavioral-finance, indicators]
 aliases: ["RSI Reversion", "RSI Oversold Bounce", "Connors RSI Strategy", "Connors RSI(2)", "Oversold Bounce"]
@@ -31,6 +31,85 @@ breakeven_cost_bps: 20
 decay_evidence: "Connors' original SPY edge has compressed since 2010 publication; crypto adaptation may still have edge (recent academic work suggests behavioral biases are stronger in retail-dominated crypto)"
 
 related: ["[[rsi]]", "[[bollinger-band-reversion]]", "[[mean-reversion]]", "[[moving-average-crossover]]", "[[200-day-moving-average]]", "[[overreaction-anomaly]]", "[[sentiment]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[loss-aversion]]", "[[herding]]", "[[cryptodataapi]]"]
+gates:
+  - id: majors_universe
+    role: universe
+    rule: "BTCUSDT, ETHUSDT and SOLUSDT only; no alts, no memecoins"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=250
+    field: symbol
+    note: "These gates map Variant C, the reference bot. Variants A (RSI(14), any liquid stock) and B (Connors on SPY and S&P 500 names) are kept on the page as lineage and are not gated."
+  - id: above_200d_sma
+    role: filter
+    rule: "Spot daily close above its 200-day SMA, each asset on its own"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=250
+    field: klines[].close
+    replay: /api/v1/backtesting/klines?symbol={symbol}USDT&interval=1d&start={start}
+    replay_field: klines[].c
+    note: "Binance spot, evaluated once per UTC day after the 00:00 close: drop the last row while its close_time is in the future. items[].ma.above_200 on /api/v1/indicators/technical?symbol=BTC,ETH,SOL is the same test on the Hyperliquid perp series (these three are not on its binance_spot source). The replay archive holds local 1m bars from 2026-05-09; earlier days come from /api/v1/backtesting/archives."
+  - id: fear_greed_below_30
+    role: filter
+    rule: "Crypto Fear & Greed Index below 30 (Fear or Extreme Fear), read once a day after the daily close"
+    runnable: partial
+    endpoint: /api/v1/sentiment/fear-greed
+    field: value
+    replay: /api/v1/backtesting/snapshots?data_type=fear_greed&start={start}&limit=1000
+    replay_field: snapshots[].data.value
+    note: "The page names alternative.me's index. Our value is an average of two or three unnamed sources (individual_values), not alternative.me's reading alone, although the page's agent workflow calls it the same index. Whether 30 on the blend stands in for 30 on alternative.me is the desk's call. Snapshots run hourly from 2026-05-09."
+  - id: rsi2_below_10
+    role: entry
+    rule: "Wilder RSI(2) on the daily close below 10"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=250
+    field: klines[].close
+    replay: /api/v1/backtesting/klines?symbol={symbol}USDT&interval=1d&start={start}
+    replay_field: klines[].c
+    note: "Closed daily bars only. /indicators/technical serves RSI(14), not RSI(2), so the trigger is computed from the closes with the pseudocode's alpha = 1/2 smoothing."
+  - id: long_only
+    role: entry
+    rule: "Long only; no short signals"
+    runnable: true
+    input: position
+  - id: cooldown_24h
+    role: entry
+    rule: "No re-entry on the same asset for 24 hours after any exit"
+    runnable: true
+    input: position
+    note: "The Rules list this cooldown; the pseudocode does not implement it."
+  - id: position_size
+    role: sizing
+    rule: "5% of equity per trade at 3x leverage (about 15% notional)"
+    runnable: true
+    input: position
+  - id: max_positions
+    role: sizing
+    rule: "At most 3 concurrent positions (45% gross notional)"
+    runnable: true
+    input: position
+  - id: rsi2_above_70_exit
+    role: exit
+    rule: "Exit when RSI(2) closes above 70 (whichever of the three exits comes first)"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=250
+    field: klines[].close
+    replay: /api/v1/backtesting/klines?symbol={symbol}USDT&interval=1d&start={start}
+    replay_field: klines[].c
+  - id: timeout_5d
+    role: exit
+    rule: "Exit after 5 days in the trade"
+    runnable: true
+    input: position
+    note: "The Rules say 5 trading days; in a 24/7 market the pseudocode counts 5 daily bars."
+  - id: regime_stop
+    role: stop
+    rule: "Hard regime stop: exit when the spot daily close falls below the 200-day SMA of the entry asset"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=250
+    field: klines[].close
+    replay: /api/v1/backtesting/klines?symbol={symbol}USDT&interval=1d&start={start}
+    replay_field: klines[].c
+    note: "Checked at the daily close only, as the page says (an intraday break is not acted on)."
 ---
 
 The **RSI Mean Reversion** strategy buys assets that have suffered short, sharp pullbacks inside an established uptrend, betting that the panic-driven selling will reverse within a few days. The canonical formulation is **Larry Connors' RSI(2)** rule from *Short Term Trading Strategies That Work* (2009): go long when RSI(2) drops below 10 while price is above its 200-day SMA, and exit when RSI(2) closes above 70. The reference live bot extends this to large-cap crypto by stacking a **Crypto Fear & Greed < 30** sentiment filter on top of the classic Connors trigger, restricting the universe to BTC/ETH/SOL on AsterDEX with 3x leverage.

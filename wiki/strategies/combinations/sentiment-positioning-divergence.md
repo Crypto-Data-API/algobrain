@@ -2,7 +2,7 @@
 title: "Sentiment-Positioning Divergence"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, behavioral-finance, funding-rate, perpetual-futures, sentiment, mean-reversion, quantitative, contrarian, crypto, bitcoin, ethereum]
 aliases: ["Talk vs Money Divergence", "Fear-Greed vs Funding Divergence", "Sentiment vs Positioning Gap", "Stated-vs-Actual Positioning"]
@@ -368,7 +368,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — `GET /api/v1/sentiment/fear-greed` (extreme fear) diverging against `GET /api/v1/derivatives/funding-rates?coin=BTC` + `GET /api/v1/derivatives/binance/long-short-ratio` (positioning already washed out) is the core two-leg read
 - **Structure filter** — trailing daily closes (`GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=12`) must print the higher-low before entry
 - **Regime gate** — `GET /api/v1/regimes/current`; halve size in bear-trend or shock labels
-- **Backtest** — `GET /api/v1/market-intelligence/fear-greed-history` joined to `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) and daily klines back to 2017-08; use `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time sentiment/positioning alignment
+- **Backtest** — `GET /api/v1/market-intelligence/fear-greed-history` joined to `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) and daily klines back to 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09); use `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time sentiment/positioning alignment
 - **Tips** — this is a slow signal; polling the cached `GET /api/v1/daily` bundle hourly is sufficient and avoids burning rate limit on 8h-cadence data
 
 ## Related

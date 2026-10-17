@@ -2,7 +2,7 @@
 title: "Beta"
 type: concept
 created: 2026-04-13
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [portfolio-theory, risk-management, indicators, correlation]
 aliases: ["Beta", "Beta Coefficient", "market beta", "β"]
@@ -68,7 +68,7 @@ Beta is load-bearing in several practical contexts:
 - `GET /api/v1/daily/prices` — ~2,500 Binance spot pairs in one call for universe-wide beta tables
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — deep kline archive for long-window beta estimation
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for long-window beta estimation
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=90"
@@ -84,7 +84,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Compute** — fetch daily closes for the asset and BTC via `GET /api/v1/market-data/klines`, convert to returns, and take Cov(asset, BTC) / Var(BTC) — in crypto, beta is conventionally measured against BTC rather than an equity index
 - **Batch** — `GET /api/v1/daily/prices` snapshots ~2,500 pairs in one call, enough to rebuild a whole-universe beta table daily without per-symbol loops
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily bars back to 2017-08) supports rolling-beta stability studies across full market regimes
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily bars back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) supports rolling-beta stability studies across full market regimes
 - **Tip** — alt betas to BTC rise sharply in selloffs (the crypto version of "correlation goes to one"); re-estimate on rolling windows and check the regime from `GET /api/v1/regimes/current` before hedging off a static beta
 
 ## Related

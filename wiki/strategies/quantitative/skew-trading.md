@@ -2,7 +2,7 @@
 title: "Skew Trading (Crypto Options)"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, quantitative, volatility, crypto, derivatives, deribit, vol-trading]
 aliases: ["Crypto Skew Trading", "Risk Reversal Trading", "Deribit Skew", "Volatility Skew Harvest", "RR25 Trading"]
@@ -281,7 +281,7 @@ CryptoDataAPI provides BTC options **summary** and realised-vol/vol-regime conte
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=730` — daily OHLCV for realised-vol estimation
 - `GET /api/v1/volatility/regime/BTC` — per-asset vol-regime detail + 60d history
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive for realised-vol / VRP backtests
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for realised-vol / VRP backtests
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/options"
@@ -298,7 +298,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Signal context** — `GET /api/v1/market-intelligence/options` for BTC options OI/volume/max-pain; compute the VRP denominator (30-day realized vol) from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90`
 - **Regime gate** — `GET /api/v1/volatility/regime` + `GET /api/v1/volatility/regime/score`: skip entries when vol-stress is top-decile (the "don't sell wings into an accelerating vol regime" filter), and treat a `vol_shock` flip as the close-all trigger
 - **Hedge leg** — `GET /api/v1/derivatives/funding-rates?coin=BTC` prices the perp delta-hedge carry, and funding direction doubles as the skew-side tell (rich positive funding → call wing likely overbid)
-- **Backtest** — realized-vol and VRP studies from `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08); condition skew-regime studies on `GET /api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus) — crypto skew flips sign across regimes, so unconditioned backtests mis-sign the trade
+- **Backtest** — realized-vol and VRP studies from `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); condition skew-regime studies on `GET /api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus) — crypto skew flips sign across regimes, so unconditioned backtests mis-sign the trade
 - **Tips** — re-estimate the RR25 mean/std window continuously rather than on a fixed 90-day lookback; wing quotes are thin, so CDA sizes the regime and Deribit's book sizes the order
 
 ## Related

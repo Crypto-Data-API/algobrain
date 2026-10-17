@@ -2,7 +2,7 @@
 title: "Event Vol Buying"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-04
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, options, volatility, derivatives, event-driven, behavioral-finance, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Scheduled-Event Straddle", "Catalyst IV Buying", "Event Straddle Strategy", "Pre-Catalyst Long Vol"]
@@ -347,7 +347,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **IV gate** — `GET /api/v1/volatility/implied` — current IV vs the 30-day DVOL average: the "IV not yet moved" entry condition
 - **Catalyst feed** — `GET /api/v1/event/calendar?window_days=30` + `GET /api/v1/event/regime/score` — candidate catalysts with directional bias to buy vol into
 - **Regime gate** — `GET /api/v1/regimes/current` — no entries in `Structural_Shock` (vol has already repriced)
-- **Backtest** — replay the IV gate across past catalysts with the same DVOL series; realized-vol outcomes from `GET /api/v1/backtesting/klines` (daily back to 2017-08); straddle-level pricing history stays on Deribit
+- **Backtest** — replay the IV gate across past catalysts with the same DVOL series; realized-vol outcomes from `GET /api/v1/backtesting/klines` (daily back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); straddle-level pricing history stays on Deribit
 - **Tips** — cheapness is relative: score IV against both the 30d DVOL average and realized vol computed from klines before paying for the straddle
 
 ## Related

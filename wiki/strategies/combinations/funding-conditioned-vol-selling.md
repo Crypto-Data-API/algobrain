@@ -2,7 +2,7 @@
 title: "Funding-Conditioned Vol Selling"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, options, volatility, funding-rate, derivatives, perpetual-futures, quantitative, crypto, behavioral-finance]
 aliases: ["Funding-Gated Vol Selling", "Crowding-Confirmed Short Vol", "Leverage-Proxy Vol Entry"]
@@ -282,7 +282,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 **Historical data:**
 - `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding history for conditioning-gate backtest
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for realized-vol computation
-- `GET /api/v1/backtesting/klines` — deep kline archive for multi-regime RV backtesting
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for multi-regime RV backtesting
 
 Note: DVOL itself (Deribit's implied-vol index) and the live options surface must be sourced from Deribit's API or [[greeks-live]]; CryptoDataAPI does not currently document a DVOL timeseries endpoint. The options-OI and max-pain endpoint (`/market-intelligence/options`) covers dealer positioning context.
 
@@ -301,7 +301,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Conditioning gate** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — the funding read that permits or blocks premium selling
 - **Vol kill-monitor** — `GET /api/v1/volatility/regime` + `GET /api/v1/volatility/regime/score` — a `vol_shock` label or spiking stress composite is the exit
 - **Dealer context** — `GET /api/v1/quant/gex` + `GET /api/v1/market-intelligence/options` — GEX and max-pain at entry; `GET /api/v1/market-intelligence/liquidations` as the vol-shock early warning
-- **Backtest** — `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) reconstructs the conditioning gate; realized-vol outcomes from `GET /api/v1/backtesting/klines` (back to 2017-08); DVOL / options-surface history stays on Deribit
+- **Backtest** — `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) reconstructs the conditioning gate; realized-vol outcomes from `GET /api/v1/backtesting/klines` (back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); DVOL / options-surface history stays on Deribit
 - **Tips** — the gate exists to keep you out: treat any missing or stale funding print as "no entry", never as a default-pass
 
 ## Related

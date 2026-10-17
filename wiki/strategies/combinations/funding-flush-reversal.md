@@ -2,7 +2,7 @@
 title: "Funding Flush Reversal"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, mean-reversion, funding-rate, perpetual-futures, behavioral-finance, quantitative, crypto]
 aliases: ["Funding-Confirmed Dip Buy", "Post-Flush Funding Reversion", "Deleveraging-Confirmed Mean Reversion"]
@@ -332,7 +332,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Flush signal** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — the deeply negative funding print (z-scored against trailing history) that defines the flush
 - **Deleveraging confirm** — `GET /api/v1/derivatives/open-interest?coin=BTC` (OI drop) + `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` (post-flush positioning)
 - **Regime gate** — `GET /api/v1/regimes/current` — no fades in Structural Shock / Established Bear
-- **Backtest** — `GET /api/v1/backtesting/funding` — Hyperliquid hourly since 2023-05 catches every HL flush; Binance daily archive starts 2026-03-30, so older Binance flushes come from `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` paging; entry/exit paths from `GET /api/v1/backtesting/klines` (4h back to 2017-08)
+- **Backtest** — `GET /api/v1/backtesting/funding` — Hyperliquid hourly since 2023-05 catches every HL flush; Binance daily archive starts 2026-03-30, so older Binance flushes come from `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` paging; entry/exit paths from `GET /api/v1/backtesting/klines` (4h back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09)
 - **Tips** — flushes cluster with liquidation cascades: cross-check `GET /api/v1/market-intelligence/liquidations` before catching the knife, and respect `insufficient_history` flags on thin alts
 
 ## Related

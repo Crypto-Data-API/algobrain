@@ -2,7 +2,7 @@
 title: "Long Volatility Strategies"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, volatility, risk-management, derivatives, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Long Vol", "Long Volatility", "Net Long Options Strategies", "Crypto Long Vol"]
@@ -330,7 +330,7 @@ DVOL and the raw IV surface come from **Deribit** / [[greeks-live|Greeks.live]].
 **Historical data:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for realized-vol / carry tracking
-- `GET /api/v1/backtesting/klines` — deep kline archive to backtest the overlay across 2020-03/LUNA/FTX/2025-10-10
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history to backtest the overlay across 2020-03/LUNA/FTX/2025-10-10
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime/score"
@@ -347,7 +347,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Structuring inputs** — `GET /api/v1/volatility/regime` + `GET /api/v1/volatility/regime/score`: the fixed premium budget buys more protection in `compressed` regimes; DVOL percentile itself comes from Deribit.
 - **Monetisation triggers** — `GET /api/v1/market-intelligence/liquidations` + `GET /api/v1/quant/gex`: cascades and short-gamma dealer inventory mark the forced-bid windows to sell appreciated convexity into — the 5x/10x harvesting rule is where the realised edge lives.
 - **Regime gate** — `GET /api/v1/quant/market`: `vol_spike` probability doubling is the machine-readable analogue of the DVOL-double monetisation trigger; `GET /api/v1/derivatives/funding-rates?coin=BTC` extremes flag the pre-cascade leverage crowd.
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance 1h/4h/1d since 2017-08 spans all four canonical tail events) plus `GET /api/v1/quant/regimes/history` (hourly HMM probabilities since 2020, Parquet, Pro Plus) for regime-conditional payoff studies; there is no options-chain archive on CDA — premium series come from Deribit.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance 1h/4h/1d back to 2017-08 spans all four canonical tail events — only in the `klines_deep` archive, while the REST route starts 2026-05-09) plus `GET /api/v1/quant/regimes/history` (hourly HMM probabilities since 2020, Parquet, Pro Plus) for regime-conditional payoff studies; there is no options-chain archive on CDA — premium series come from Deribit.
 - **Tips** — the always-on design suits an agent loop: poll the cached `GET /api/v1/daily` bundle hourly, act only on the mechanical roll/monetisation rules, and never size-adjust on bleed — abandonment-before-payoff is failure mode #1.
 
 ## Sources

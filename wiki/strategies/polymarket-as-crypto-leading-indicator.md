@@ -2,7 +2,7 @@
 title: "Polymarket as a Crypto Leading Indicator"
 type: strategy
 created: 2026-05-14
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [crypto, behavioral-finance, arbitrage, event-driven, news]
 aliases: ["Polymarket Leading Indicator", "Prediction Market Crypto Signal", "Polymarket Crypto Alpha"]
@@ -236,7 +236,7 @@ The Polymarket signal itself comes from [[polymarket-api]] (Gamma REST, CLOB Web
 - `GET /api/v1/hyperliquid/prices` — execution context for the perp leg
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — OHLCV archive (Binance spot 1h/4h/1d back to 2017-08) for measuring post-catalyst crypto returns
+- `GET /api/v1/backtesting/klines` — OHLCV archive (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for measuring post-catalyst crypto returns
 - `GET /api/v1/backtesting/daily-snapshots` — full point-in-time market state per day since 2026-03-02
 
 ```bash

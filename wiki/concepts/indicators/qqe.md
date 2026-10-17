@@ -2,7 +2,7 @@
 title: "QQE (Quantitative Qualitative Estimation)"
 type: concept
 created: 2026-09-28
-updated: 2026-09-28
+updated: 2026-10-17
 status: draft
 tags: [indicators, technical-analysis, momentum, trend-following, crypto]
 aliases: ["QQE", "Quantitative Qualitative Estimation", "QQE MOD", "QQE Mod"]
@@ -63,7 +63,7 @@ The blue/red "both agree" bar is what the crypto trading community uses as the a
 - `GET /api/v1/hyperliquid/candles?coin=SOL&interval=1h&limit=500`: perp bars for Hyperliquid coins
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines`: deep archive for testing blue/red-bar persistence and grey-bar filtering
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive): history for testing blue/red-bar persistence and grey-bar filtering
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=500"

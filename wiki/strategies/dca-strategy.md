@@ -2,7 +2,7 @@
 title: "Dollar-Cost Averaging"
 type: strategy
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [position-trading, portfolio-theory, education]
 aliases: ["DCA", "DCA Strategy", "Dollar Cost Averaging", "Systematic Investment Plan", "SIP", "Regular Investment"]
@@ -191,7 +191,7 @@ For a crypto DCA program (BTC/ETH recurring buys), [[cryptodataapi|CryptoDataAPI
 - `GET /api/v1/market-data/btc-price-history?days=730` — BTC with the 200D MA precomputed: the input for valuation-tilted variants only, not DCA proper
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — full OHLCV archive (Binance spot daily back to 2017-08, spanning two full crypto cycles) for DCA-vs-lump-sum studies on BTC/ETH
+- `GET /api/v1/backtesting/klines` — full OHLCV archive (Binance spot daily back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09, spanning two full crypto cycles) for DCA-vs-lump-sum studies on BTC/ETH
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=BTCUSDT"
@@ -208,7 +208,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Execution** — on the fixed schedule, one `GET /api/v1/market-data/ticker/price` call per asset → compute quantity → place the buy. The decision function must ignore every other data point: any "skip this month, market looks high" logic converts DCA into discretionary market timing and forfeits the behavioral edge.
 - **Record-keeping** — append each fill to a cost-basis ledger; `GET /api/v1/market-data/klines` daily closes cover reporting and the annual rebalance-band check.
 - **No regime gate — by design** — endpoints like `GET /api/v1/regimes/current` are context for reporting only; gating contributions on regimes is the "enhanced DCA" variant with its own timing risk, not DCA proper.
-- **Backtest** — DCA vs lump-sum path studies on `GET /api/v1/backtesting/klines` (Binance spot daily since 2017-08).
+- **Backtest** — DCA vs lump-sum path studies on `GET /api/v1/backtesting/klines` (Binance spot daily back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09).
 - **Tips** — automation *is* the strategy: schedule the agent, cap crypto at the policy weight (5-10% of flow), and alert only on the kill criteria (>80% drawdown plus a broken thesis on a single-asset program, or fee creep above the 0.75%/yr ceiling).
 
 ## Sources

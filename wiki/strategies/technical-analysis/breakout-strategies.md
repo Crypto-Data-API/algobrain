@@ -2,7 +2,7 @@
 title: "Breakout Strategies"
 type: concept
 created: 2026-04-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [technical-analysis, momentum, breakout, volatility, liquidity, liquidations, crypto]
 aliases: ["Breakout Trading", "Breakout Strategy", "breakout-trading"]
@@ -113,7 +113,7 @@ The primary risk is the false breakout — price briefly pierces the level, trig
 
 Breakout work needs OHLCV to define levels and detect the break, plus derivatives data to confirm participation and locate the liquidation fuel. See [[cryptodataapi-market-data]], [[cryptodataapi-market-intelligence]], and [[cryptodataapi-derivatives]].
 
-- **OHLCV levels and breaks** — `GET /api/v1/market-data/klines` (live) and `GET /api/v1/backtesting/klines` (archive from 2020) to build ranges/channels and backtest triggers.
+- **OHLCV levels and breaks** — `GET /api/v1/market-data/klines` (live) and `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) to build ranges/channels and backtest triggers.
 - **Liquidation fuel** — `GET /api/v1/market-intelligence/liquidations` shows the forced-order clusters that amplify or reverse a break.
 - **Participation / crowding** — `GET /api/v1/derivatives/open-interest` (rising OI = new money behind the break) and `GET /api/v1/derivatives/funding-rates` for positioning bias.
 
@@ -133,7 +133,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — build ranges/channels and detect breaks from `GET /api/v1/market-data/klines`; confirm participation with rising `GET /api/v1/derivatives/open-interest` and `GET /api/v1/market-intelligence/liquidations` clusters firing in the break direction
 - **Compute** — `GET /api/v1/indicators/signum-rgg` (pre-computed ADX/DMI RED/GREY/GREEN) screens the whole universe for assets leaving GREY chop — the breakout candidate list — in one call
 - **Regime gate** — `GET /api/v1/quant/market`: breakout families pay in `strong_trend_*` and `squeeze` states and bleed in `choppy_high_vol`; stand down while chop probability leads
-- **Backtest** — `GET /api/v1/backtesting/klines`: Binance spot 1h/4h/1d back to 2017-08, Hyperliquid daily to 2023 (1m bars only since 2026-03-30); join hourly HMM labels from `/api/v1/quant/regimes/history` (since 2020, Pro Plus) to test the regime filter point-in-time
+- **Backtest** — `GET /api/v1/backtesting/klines`: Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09), Hyperliquid daily to 2023 (1m bars only since 2026-03-30); join hourly HMM labels from `/api/v1/quant/regimes/history` (since 2020, Pro Plus) to test the regime filter point-in-time
 - **Tips** — trigger only on closed candles; batch universe scans via `/api/v1/quant/coins/risk` instead of per-symbol loops, and respect `new_listing` flags — young listings produce meaningless "range highs".
 
 ## Related

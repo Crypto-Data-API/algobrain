@@ -2,7 +2,7 @@
 title: Cross-Asset Signals
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [combinations, alpha-edge, intermarket-analysis, cross-asset, macro, correlation, regime-detection, crypto]
 strategy_type: hybrid
@@ -169,5 +169,5 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — `GET /api/v1/sentiment/macro` — the EUR/USD, gold, and yields snapshot behind the DXY / risk-off read
 - **Crowding filter** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — skip divergence entries when crypto positioning is already crowded in the signalled direction
 - **Regime gate** — `GET /api/v1/regimes/current` + `GET /api/v1/volatility/regime/score` — trade the macro signal only in macro-coupled regimes; stand down when crypto-specific flows (ETF, regulatory) dominate
-- **Backtest** — `GET /api/v1/backtesting/daily-snapshots` (full daily payload including the macro block, since 2026-03-02) replays the signal point-in-time; crypto-side returns from `GET /api/v1/backtesting/klines` (daily back to 2017-08); deeper DXY/yield history needs an external macro source
+- **Backtest** — `GET /api/v1/backtesting/daily-snapshots` (full daily payload including the macro block, since 2026-03-02) replays the signal point-in-time; crypto-side returns from `GET /api/v1/backtesting/klines` (daily back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); deeper DXY/yield history needs an external macro source
 - **Tips** — poll the cached `GET /api/v1/daily` bundle hourly (it includes the macro snapshot); the DXY-BTC correlation is regime-dependent, so re-estimate it against `GET /api/v1/quant/regimes/history` labels rather than assuming a fixed sign

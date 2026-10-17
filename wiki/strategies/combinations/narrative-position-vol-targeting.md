@@ -2,7 +2,7 @@
 title: "Narrative Position Vol Targeting"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-04
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, momentum, volatility, risk-management, behavioral-finance, memecoins, event-driven, quantitative, crypto, altcoins]
 aliases: ["Narrative Book Vol Sizing", "Vol-Scaled Narrative Trading", "Risk-Contribution Narrative Sizing", "Meme-Vol Risk Budget"]
@@ -364,7 +364,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Sizing** — `GET /api/v1/market-data/klines?symbol={TOKEN}USDT&interval=1d&limit=30` per token feeds the 20-day realised-vol input; position weight = target vol / realised vol, capped by the book heat limit
 - **Regime gate** — `GET /api/v1/regimes/current` plus the Fear & Greed read cut the heat cap in risk-off states before any per-token sizing runs
 - **Batch sizing** — `GET /api/v1/quant/coins/risk?horizon=24h` returns per-coin vol-target multipliers for 180+ coins in one call — a ready-made cross-check on locally computed vol weights
-- **Backtest** — replay sizing decisions on `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) and pair them with point-in-time regime state from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) to avoid lookahead in the heat-cap rules
+- **Backtest** — replay sizing decisions on `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) and pair them with point-in-time regime state from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) to avoid lookahead in the heat-cap rules
 - **Tips** — respect `insufficient_history` flags: a narrative token with fewer than 30 daily bars gets the sector-average vol floor, not its own noisy estimate
 - **Prompt library** — the "Volatility-Aware Position Sizer" prompt (Pro tier, [prompt library](https://cryptodataapi.com/prompts)) handles the vol-targeting leg; layer the narrative filter on top
 

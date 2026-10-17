@@ -2,7 +2,7 @@
 title: "200-Day Moving Average"
 type: concept
 created: 2026-04-10
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [technical-analysis, indicators, moving-averages, trend]
 aliases: ["200-day MA", "200-day SMA", "200-day moving average", "200-day-MA", "200 DMA", "200 Day Moving Average", "200-day-moving-average"]
@@ -66,7 +66,7 @@ The standard 200 DMA uses a [[simple-moving-average|simple moving average]] (SMA
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — daily OHLCV to compute the 200D MA for any pair
-- `GET /api/v1/backtesting/klines` — deep kline archive for long-horizon tests
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for long-horizon tests
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/btc-price-history?days=730"
@@ -83,7 +83,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 - **Fetch** — `GET /api/v1/market-data/btc-price-history?days=730` returns BTC with the 200D MA already computed — no rolling-window math needed for the majors' trend read
 - **Compute** — for any other pair, average the last 200 daily closes from `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=200`
 - **Live state** — `GET /api/v1/market-health/altcoin-breadth?period=200` turns the filter into a market-wide gauge: the % of coins above their own 200D MA
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily bars back to 2017-08) covers multiple full crypto cycles for above/below-200DMA filter tests
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily bars back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) covers multiple full crypto cycles for above/below-200DMA filter tests
 - **Tip** — BTC's 200D MA is the classic crypto bull/bear line; cross-check the binary filter against regime probabilities from `GET /api/v1/regimes/current` before scaling exposure
 
 ## Related

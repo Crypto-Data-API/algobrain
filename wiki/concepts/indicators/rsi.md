@@ -2,7 +2,7 @@
 title: Relative Strength Index (RSI)
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [rsi, indicators, technical-analysis]
 aliases: [RSI, relative-strength-index]
@@ -103,7 +103,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Live state** — `GET /api/v1/indicators/technical` returns the pre-computed SMA/BB/RSI structure state for the whole universe in one call; `GET /api/v1/indicators/technical/{symbol}` adds per-asset detail with a rolling 60d history
 - **Compute** — for non-default lookbacks (e.g. Connors RSI-2), pull `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` and apply Wilder smoothing to the closes
-- **Backtest** — replay RSI rules against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08; Hyperliquid daily to 2023, 1m only since 2026-03-30)
+- **Backtest** — replay RSI rules against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09; Hyperliquid daily to 2023, 1m only since 2026-03-30)
 - **Tip** — gate mean-reversion entries with the HMM state from `GET /api/v1/quant/market`: fading overbought RSI inside a `strong_trend_bull` regime is the classic failure mode this page warns about
 
 ## Related

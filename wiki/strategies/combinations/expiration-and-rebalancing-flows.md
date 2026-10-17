@@ -2,7 +2,7 @@
 title: Expiration & Rebalancing Flows
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [combinations, alpha-edge, calendar-effects, options-expiration, rebalancing, passive-flows, structural, crypto, derivatives]
 strategy_type: hybrid
@@ -173,5 +173,5 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — `GET /api/v1/market-intelligence/options` — BTC options OI, volume, and the [[max-pain]] strike ahead of each Deribit expiry
 - **Size check** — `GET /api/v1/derivatives/open-interest` — cross-venue OI confirming the expiry notional is large enough to exert a pin
 - **Regime gate** — `GET /api/v1/regimes/current` — stand down when a macro catalyst overlaps OpEx day (the documented macro-override failure mode)
-- **Backtest** — expiry-window price paths from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h back to 2017-08; 1m bars only since 2026-03-30 for the final-hour pin) — historical per-strike OI is not archived on CryptoDataAPI, so pin statistics need Deribit history
+- **Backtest** — expiry-window price paths from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09; 1m bars only since 2026-03-30 for the final-hour pin) — historical per-strike OI is not archived on CryptoDataAPI, so pin statistics need Deribit history
 - **Tips** — the trade lives in a narrow calendar window: schedule the agent on the Deribit expiry calendar (last Friday of the month, 08:00 UTC) rather than polling continuously

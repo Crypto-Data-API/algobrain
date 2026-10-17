@@ -2,7 +2,7 @@
 title: "Trend-Aware Carry"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, funding-rate, perpetual-futures, trend-following, risk-management, quantitative, crypto, bitcoin, derivatives]
 aliases: ["Trend-Throttled Carry", "Carry Book Trend Gate", "Trend-Conditional Funding Carry", "Momentum-Filtered Carry"]
@@ -332,7 +332,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — `GET /api/v1/derivatives/funding-rates?coin=BTC` 7-day average is the carry leg; the trend score comes from daily (SMA20) and 4h (RSI) klines
 - **Throttle** — the funding-kill condition and the `GET /api/v1/derivatives/open-interest?coin=BTC` stretch check scale the carry book down as trend and positioning diverge
 - **Regime gate** — `GET /api/v1/regimes/current` blocks re-entry in `Structural_Shock`
-- **Backtest** — carry replay from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05 — the deepest honest funding archive; Binance daily since 2026-03-30) joined to `GET /api/v1/backtesting/klines` (1d back to 2017-08) for the trend overlay
+- **Backtest** — carry replay from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05 — the deepest honest funding archive; Binance daily since 2026-03-30) joined to `GET /api/v1/backtesting/klines` (1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for the trend overlay
 - **Tips** — accrue funding per settlement timestamp in the backtest; averaging it daily hides exactly the settlement-window spikes the throttle exists to catch
 
 ## Related

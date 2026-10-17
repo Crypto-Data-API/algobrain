@@ -2,7 +2,7 @@
 title: "Bitcoin Overnight Seasonality (22:00-00:00 UTC)"
 type: strategy
 created: 2026-09-28
-updated: 2026-09-28
+updated: 2026-10-17
 status: draft
 tags: [crypto, bitcoin, quantitative, calendar-effects, day-trading, market-microstructure]
 aliases: ["BTC 22-00 UTC effect", "Bitcoin intraday seasonality", "Bitcoin hour-of-day effect", "Quantpedia #0753"]
@@ -117,7 +117,7 @@ BTC 2-hour volume at 22:00-00:00 UTC runs in the billions on major venues; a sle
 
 ## Getting the Data (CryptoDataAPI)
 
-Live data: `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h` — hourly bars for the entry/exit clock. Historical: `GET /api/v1/backtesting/klines` (1h bars back to 2017-08) for hour-of-day return studies. See [[cryptodataapi-market-data]] and [[cryptodataapi-backtesting]].
+Live data: `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h` — hourly bars for the entry/exit clock. Historical: `GET /api/v1/backtesting/klines` (1h bars back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for hour-of-day return studies. See [[cryptodataapi-market-data]] and [[cryptodataapi-backtesting]].
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=500"
@@ -125,7 +125,7 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klin
 
 ### AI agent workflow
 
-- **Re-test first** — pull 1h bars from `GET /api/v1/backtesting/klines` and compute the mean return per UTC hour for 2022-present, i.e. strictly post-publication, before trading anything
+- **Re-test first** — pull 1h bars from `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) and compute the mean return per UTC hour for 2022-present, i.e. strictly post-publication, before trading anything
 - **Regime gate** — skip entries when `GET /api/v1/volatility/regime` reports an extreme/high-vol state, where a two-hour window's variance swamps a few-bps drift
 - **Funding stamp** — check `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT`; if running on perps and funding is strongly positive, exit at 23:59 to avoid paying the 00:00 stamp
 - **Execution** — post maker bids before 22:00 UTC; the edge does not survive two taker fills at retail tiers

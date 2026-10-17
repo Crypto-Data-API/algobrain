@@ -2,7 +2,7 @@
 title: "Elliott Wave Theory"
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [elliott-wave, wave-theory, fractal, fibonacci, impulse-wave, corrective-wave, technical-analysis, crypto]
 aliases: ["Elliott Wave", "Wave Theory", "EWT", "The Wave Principle", "Elliott Wave Principle"]
@@ -219,7 +219,7 @@ Elliott Wave is best treated as a *structural overlay* rather than a standalone 
 Elliott Wave is drawn on the OHLCV price series; the wave labels are analyst overlays, so charts are typically rendered on an exchange feed or TradingView. [[cryptodataapi|CryptoDataAPI]] supplies the underlying **klines (OHLCV)** used to locate swing highs/lows and compute the Fibonacci wave targets, plus the derivatives context that confirms wave personality.
 
 - **Live OHLCV (charting substrate):** `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1w&limit=1000` — see [[cryptodataapi-market-data]].
-- **Historical OHLCV (full archive since 2020, for counting past cycles):** `GET /api/v1/backtesting/klines` — see [[cryptodataapi-backtesting]].
+- **Historical OHLCV (archive, for counting past cycles):** `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — see [[cryptodataapi-backtesting]].
 - **Wave-personality context:** `GET /api/v1/derivatives/funding-rates?coin=BTC` and `GET /api/v1/derivatives/open-interest?coin=BTC` (extreme funding + OI unwind confirm Wave 5 / A-C); `GET /api/v1/market-intelligence/liquidations` (long-liquidation cascades mark the sharp corrective legs).
 
 ```bash
@@ -236,7 +236,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Compute** — swing highs/lows for the count from `GET /api/v1/market-data/klines` (weekly for cycle degree, daily for intermediate); project Fibonacci wave targets from the same series
 - **Signal** — wave personality from derivatives: extreme `GET /api/v1/derivatives/funding-rates?coin=BTC` plus a `GET /api/v1/derivatives/open-interest` unwind for Wave-5 tops; `GET /api/v1/market-intelligence/liquidations` cascades marking sharp C-wave lows
 - **Regime gate** — cross-check the count against `GET /api/v1/regimes/current` (10-state cycle label): a "Wave 3" count during Distribution/Deleveraging deserves a recount
-- **Backtest** — count past cycles on `GET /api/v1/backtesting/klines` (Binance spot back to 2017-08 — two full halving cycles) and label them with `/api/v1/quant/timeline` daily regime labels (2019-now, Pro Plus)
+- **Backtest** — count past cycles on `GET /api/v1/backtesting/klines` (Binance spot back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09 — two full halving cycles) and label them with `/api/v1/quant/timeline` daily regime labels (2019-now, Pro Plus)
 - **Tips** — wave labels are analyst overlays: log the count and its invalidation level *before* pulling confirmation data, then let funding/OI/liquidations argue with the count rather than decorate it.
 
 ## Related

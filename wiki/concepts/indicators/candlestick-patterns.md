@@ -2,7 +2,7 @@
 title: Candlestick Patterns
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [technical-analysis, indicators]
 aliases: ["candle patterns", "candlestick charting", "japanese candlesticks", "hammer", "doji", "red candle", "green candle", "morning star", "evening star", "shooting star"]
@@ -97,7 +97,7 @@ Candlestick patterns are most reliable when confirmed by [[trading-volume]], key
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV klines
 - `GET /api/v1/market-data/btc-price-history?days=730` — BTC history + 200D MA
 - `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
-- `GET /api/v1/backtesting/klines` — deep kline archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=500"
@@ -111,7 +111,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Fetch** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=500` returns the OHLC bodies and wicks every pattern here is defined on; Hyperliquid perps via `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=500`
 - **Compute** — pattern detection is pure OHLC arithmetic (body size, wick ratios, engulfing overlap); run it over the fetched bars — no pre-computed pattern endpoint exists
-- **Backtest** — `GET /api/v1/backtesting/klines` serves Binance spot 1h/4h/1d back to 2017-08 for pattern hit-rate studies; 1m bars exist only since 2026-03-30
+- **Backtest** — `GET /api/v1/backtesting/klines` serves bars from 2026-05-09 only; Binance spot 1h/4h/1d back to 2017-08 lives in the `klines_deep` archive for pattern hit-rate studies; 1m bars exist only since 2026-03-30
 - **Tip** — confirm patterns with the buy ratio from `GET /api/v1/market-data/volume-history` — an engulfing candle backed by one-sided taker flow carries more weight than one on thin volume
 
 ## Related

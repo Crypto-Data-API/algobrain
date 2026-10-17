@@ -2,7 +2,7 @@
 title: "Ichimoku Cloud"
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [ichimoku, kumo, cloud, japanese-analysis, trend-following, support-resistance, technical-analysis, crypto]
 aliases: ["Ichimoku Kinko Hyo", "Ichimoku Cloud", "Kumo Trading", "Ichimoku System"]
@@ -219,7 +219,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Compute** — Tenkan/Kijun/Senkou spans from period highs/lows in `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500` (the 52-period span plus 26-bar displacement needs ~80 bars minimum; pull 200+)
 - **Signal** — the layered read (TK cross, Kumo breakout, Chikou clearance) all derives from one klines call; confirm cloud breakouts with rising `GET /api/v1/derivatives/open-interest?coin=BTC` and healthy `GET /api/v1/derivatives/funding-rates?coin=BTC`
 - **Regime gate** — `GET /api/v1/quant/market`: flat-Kumo chop maps to `choppy_high_vol`/`range_low_vol` probability, where Ichimoku signals should be ignored entirely
-- **Backtest** — 9/26/52 defaults vs crypto-tuned settings on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); split results by regime via `/api/v1/quant/regimes/history` (hourly since 2020, Pro Plus) before concluding either wins
+- **Backtest** — 9/26/52 defaults vs crypto-tuned settings on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); split results by regime via `/api/v1/quant/regimes/history` (hourly since 2020, Pro Plus) before concluding either wins
 - **Tips** — the 26-bar forward displacement of the cloud is the classic implementation bug (and a lookahead trap in backtests); validate the pipeline against a charting platform once before trusting it.
 
 ## Related

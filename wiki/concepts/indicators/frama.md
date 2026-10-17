@@ -2,7 +2,7 @@
 title: "FRAMA (Fractal Adaptive Moving Average)"
 type: concept
 created: 2026-07-20
-updated: 2026-09-28
+updated: 2026-10-17
 status: draft
 tags: [indicators, technical-analysis, quantitative, crypto, market-regime, regime-detection]
 aliases: ["FRAMA", "Fractal Adaptive Moving Average", "Ehlers FRAMA"]
@@ -171,7 +171,7 @@ The honest summary: FRAMA reduces the trend-fade failure mode and, by the same m
 - `GET /api/v1/derivatives/open-interest?coin=X` — OI expansion alongside falling `D` distinguishes a real trend from a range break that will fail
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — OHLCV archive for replaying `D` and `alpha` across full cycles
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV archive for replaying `D` and `alpha` across full cycles
 - `GET /api/v1/quant/regimes/history` — hourly regime labels since 2020, for scoring FRAMA's `D` against labelled trend/range states
 
 ```bash

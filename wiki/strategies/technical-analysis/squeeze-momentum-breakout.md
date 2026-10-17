@@ -2,7 +2,7 @@
 title: "Squeeze Momentum Breakout"
 type: strategy
 created: 2026-09-28
-updated: 2026-09-28
+updated: 2026-10-17
 status: draft
 tags: [breakout, volatility, momentum, technical-analysis, crypto, perpetual-futures]
 aliases: ["Squeeze Momentum Strategy", "TTM Squeeze Breakout", "SQZMOM Strategy", "Squeeze Fire Strategy"]
@@ -137,7 +137,7 @@ Retire or pause (see [[when-to-retire-a-strategy]]) if any of these hold:
 - `GET /api/v1/volatility/regime`: per-asset volatility regime for the pre-fire compression check
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines`: deep kline archive for fire detection
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive): kline history for fire detection
 - `GET /api/v1/backtesting/funding`: historical funding for the filter and carry cost
 
 ```bash

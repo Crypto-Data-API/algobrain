@@ -2,7 +2,7 @@
 title: "Vol-Balanced Pairs"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, pairs-trading, arbitrage, volatility, risk-management, position-sizing, quantitative, statistics, crypto]
 aliases: ["Volatility-Neutral Pairs", "Vol-Scaled Spread Trading", "Risk-Budget Pairs", "Vol-Weighted Stat Arb"]
@@ -411,7 +411,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Sizing** — `GET /api/v1/quant/coins/risk` returns per-coin vol-target multipliers in one batch call — a direct cross-check on locally computed leg weights
 - **Filter** — the funding differential (`GET /api/v1/derivatives/funding-rates?coin={LEG}`) and short-leg OI growth (`GET /api/v1/derivatives/open-interest?coin={LEG}`) guard the carry and squeeze dimensions
 - **Regime gate** — `GET /api/v1/regimes/current`; flatten all spreads in `Structural_Shock`
-- **Backtest** — spread and vol-weighting replay on `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08); pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime states at rebalance dates
+- **Backtest** — spread and vol-weighting replay on `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime states at rebalance dates
 - **Tips** — re-estimate vol weights on a fixed weekly schedule, not on every poll — intraday vol-chasing turns a pairs book into a churn machine
 
 ## Related

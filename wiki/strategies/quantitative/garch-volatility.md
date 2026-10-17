@@ -2,7 +2,7 @@
 title: "GARCH Volatility Timing (Crypto)"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [quantitative, volatility, crypto, position-sizing, risk-management, backtesting, machine-learning]
 aliases: ["GARCH Volatility Forecasting", "GARCH Position Scaling", "Volatility-Managed Crypto Book", "Conditional Heteroskedasticity Timing", "Crypto Vol Targeting"]
@@ -240,7 +240,7 @@ See [[when-to-retire-a-strategy]]. GARCH timing is pausable, not retirable — v
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=1000` — hourly bars for the intraday model
 - `GET /api/v1/market-data/btc-price-history?days=730` — BTC history + 200D MA
 - `GET /api/v1/volatility/regime/BTC` — per-asset vol-regime detail + 60d history
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive (from 2020) for full walk-forward
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for full walk-forward
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000"
@@ -257,7 +257,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Compute** — fit the weekly GJR-GARCH on `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` and the intraday model on `interval=1h`; `GET /api/v1/market-data/ticker/price` supplies the live return for the daily forecast step
 - **Regime gate** — `GET /api/v1/volatility/regime` as the independent cross-check: if the classifier reads `vol_shock` while the GARCH forecast is still calm, trust the classifier and apply the top-decile leverage cap (jumps are exactly what GARCH cannot see)
 - **Carry overlay** — `GET /api/v1/derivatives/funding-rates?coin=BTC` to net funding against the vol-scaled perp exposure ([[funding-aware-position-sizing]])
-- **Backtest** — `GET /api/v1/backtesting/klines` — Binance spot 1h/4h/1d back to 2017-08 spans multiple vol regimes for out-of-sample QLIKE validation against the EWMA baseline; pair exposure decisions with point-in-time regimes from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) rather than today's labels
+- **Backtest** — `GET /api/v1/backtesting/klines` — Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09) spans multiple vol regimes for out-of-sample QLIKE validation against the EWMA baseline; pair exposure decisions with point-in-time regimes from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) rather than today's labels
 - **Tips** — log persistence (α+β) at every refit and auto-revert to EWMA above 0.999; the 15% rebalance band means the agent should *decide* daily but *trade* only a few times a month
 
 ## Related

@@ -2,7 +2,7 @@
 title: "Darvas Box Theory"
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 domain: [technical-analysis]
 prerequisites: ["[[support-and-resistance]]", "[[volume]]"]
@@ -193,7 +193,7 @@ Darvas boxes are derived from the OHLCV series (rolling highs/lows to find new h
 - `GET /api/v1/hyperliquid/candles?coin=SOL&interval=1d&limit=1000` — Hyperliquid perp OHLCV.
 
 **Historical archive (backtesting):**
-- `GET /api/v1/backtesting/klines` — full OHLCV archive (Parquet since 2020) for testing box breakouts and trail rules across cycles.
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for testing box breakouts and trail rules across cycles.
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
@@ -210,7 +210,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Compute** — box detection is rolling-high/low logic on `GET /api/v1/market-data/klines` (spot) or `GET /api/v1/hyperliquid/candles` (perps); confirm box-top breaks on closed candles with above-average volume from the same bars
 - **Regime gate** — `GET /api/v1/quant/market`: stack boxes only while `strong_trend_bull` probability leads; per-asset, `GET /api/v1/indicators/signum-rgg` GREEN is the machine-readable version of Darvas's "buy strength" rule
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08; Hyperliquid daily to 2023) to test box thresholds and trail rules across cycles; hourly regimes from `/api/v1/quant/regimes/history` (since 2020, Pro Plus) validate the bull-gate point-in-time
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09; Hyperliquid daily to 2023) to test box thresholds and trail rules across cycles; hourly regimes from `/api/v1/quant/regimes/history` (since 2020, Pro Plus) validate the bull-gate point-in-time
 - **Tips** — screen for fresh new-high candidates across the universe in one `/api/v1/indicators/technical` call; respect `new_listing` flags — a coin with 30 days of history cannot form a valid box sequence.
 
 ## Key Takeaways

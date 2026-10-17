@@ -9,6 +9,25 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-10-17 — Fix: backtesting klines depth claims; gates on mean reversion
+
+**Scope:** About 870 pages said `/backtesting/klines` serves 1h/4h/1d bars back to 2017-08 (or Hyperliquid daily candles back to 2023). That depth exists only in the Parquet archives. The REST route starts 2026-05-09, and an earlier `start` returns no rows except `coverage.archive_hint` (checked live 2026-10-17 for BTCUSDT 2020).
+
+- **Pages:** 481 coin pages in `wiki/markets/crypto/` (two templated lines) and about 390 concept, indicator and strategy pages. Each now names the REST start date and points deep history at the `klines_deep` archive (or the daily `klines` archive for 1m days from 2026-03-30). No other prose changed.
+- **Gates:** [[mean-reversion]] now has 25 gates (18 runnable, 7 partial, 0 not runnable). `tools/check_endpoints.py` reports 0 errors on the page. The partial gates are thresholds the page leaves undefined.
+
+## 2026-10-17 — Lint: generated coin pages marked and left out of the stale check
+
+**Scope:** The stale check flagged 1,778 pages, and 1,658 of them were coin pages in `wiki/markets/crypto/` that `tools/generate_crypto_pages.py` wrote and nobody has edited since. They buried the concept and strategy pages that really need review. Those untouched pages now carry `generated: true`, and the stale check skips them.
+
+- **How pages were picked:** A page was marked only if both tests passed:
+  - **Git history.** Every commit that touched it was the vault import, the generator run (`53b874d`), or a sweep that only changed tags or links.
+  - **Content.** It still has the generator's frontmatter (`entity_type: protocol`, `headquarters: "Decentralized"`, status `draft` or `stub`), only the generator's sections, the untouched whale and news placeholders, and no hand-written notes or links in the body.
+  - Anything in doubt was left unmarked. That includes the Phase 2 enriched pages, the 12 pages that merged entity content on 2026-07-19, hand-written Bittensor subnet overviews, and pages with hand-added incident or disambiguation notes.
+- **Result:** 1,492 of 2,407 pages in `wiki/markets/crypto/` are marked and 915 are not. The only change to each marked file is the one added frontmatter line; `updated:` was left alone because the content did not change.
+- **Stale check:** It drops from 1,778 to 251 pages and prints one line giving the number of generated pages skipped. 166 of the remaining pages are in `markets/crypto`: 104 enriched pages at `review` and 62 hand-written drafts.
+- **Tooling and schema:** The generator writes `generated: true` on new pages and never adds it when it merges into an existing page. `generated` is now an optional field in `CLAUDE.md` and `AGENTS.md`. Whoever hand-enriches a generated page removes the line.
+
 ## 2026-10-17 — Sync: absorbed CryptoDataAPI releases 2026-10-02 → 2026-10-14 (5 releases)
 
 **Scope:** `tools/check_api_changelog.py` reported 5 unprocessed releases, 3 of them breaking (10-02, 10-10, 10-14). Part of 10-10 was already documented by the gates commit: `/indicators/adx`, the `symbol`/`not_covered` filters, SMA-20, search tiers and `gates`. Only the rest was added. Every path, parameter and field was checked against the live OpenAPI spec, which had 226 paths on 2026-10-17, and the key behaviours were confirmed with live calls.

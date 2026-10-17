@@ -2,7 +2,7 @@
 title: "Long Volatility Overlay"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, derivatives, volatility, risk-management, portfolio-theory, crypto, bitcoin, ethereum]
 aliases: ["Long Vol Overlay", "Tail Overlay", "Convex Overlay", "Vol Sleeve", "Crypto Tail Overlay"]
@@ -259,7 +259,7 @@ DVOL and the raw IV surface come from **Deribit** / [[greeks-live|Greeks.live]].
 **Historical data:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for the drawdown-tracker triggers
-- `GET /api/v1/backtesting/klines` — deep kline archive to backtest overlay monetization across 2020-03/LUNA/FTX/2025-10-10
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history to backtest overlay monetization across 2020-03/LUNA/FTX/2025-10-10
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime/score"
@@ -277,7 +277,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Roll timing** — `GET /api/v1/volatility/regime`: add monthly tranches in `compressed`/`normal` states when convexity is cheapest.
 - **Cascade early warning** — `GET /api/v1/quant/gex` + `GET /api/v1/derivatives/funding-rates?coin=BTC`: short-gamma dealers plus extreme positive funding describe the leveraged crowd whose deleveraging the overlay monetises against.
 - **Regime gate** — `GET /api/v1/quant/market`: a jump in `vol_spike` probability is the machine-readable analogue of "DVOL doubles from entry".
-- **Backtest** — replay monetisation paths across 2020-03/LUNA/FTX/2025-10-10 on `GET /api/v1/backtesting/klines` (Binance 1h/4h/1d since 2017-08) with point-in-time regimes from `GET /api/v1/quant/regimes/history` (hourly HMM probabilities since 2020, Parquet, Pro Plus); option premiums come from Deribit.
+- **Backtest** — replay monetisation paths across 2020-03/LUNA/FTX/2025-10-10 on `GET /api/v1/backtesting/klines` (Binance 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) with point-in-time regimes from `GET /api/v1/quant/regimes/history` (hourly HMM probabilities since 2020, Parquet, Pro Plus); option premiums come from Deribit.
 - **Tips** — this strategy is rules-not-forecasts: the agent's whole value is enforcing the written roll/monetisation/floor rules 24/7 — exactly the discretionary-drift failure mode ("premium drift", "failure to monetize") the page lists as its killers.
 
 ## Sources

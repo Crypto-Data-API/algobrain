@@ -2,7 +2,7 @@
 title: "DeFi Yield Farming"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [crypto, defi, yield-farming, liquidity-mining, staking, impermanent-loss, curve, aave, quantitative]
 aliases: ["Yield Farming", "Liquidity Mining", "DeFi Yield Strategies", "LP Farming"]
@@ -276,7 +276,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Kill-switch watch** — `GET /api/v1/security/regime` + `GET /api/v1/security/regime/score` automate the exploit/depeg exit triggers; poll them more often than the yield scan
 - **Hedge costing** — `GET /api/v1/derivatives/funding-rates?coin=ETH` re-prices the delta-neutral overlay every funding period
 - **Regime gate** — `GET /api/v1/quant/market` — emissions-heavy APYs decay fastest in bear states; scale the farm book with the HMM bull/bear probabilities
-- **Backtest** — replay reward-token price paths via `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08) paired with point-in-time state from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) so exploit-adjusted EV estimates avoid lookahead
+- **Backtest** — replay reward-token price paths via `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) paired with point-in-time state from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) so exploit-adjusted EV estimates avoid lookahead
 - **Tips** — respect `new_listing` flags on farm/reward tokens; batch peg and market checks through the cached `/api/v1/daily` bundle hourly
 
 ## Related

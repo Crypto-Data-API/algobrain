@@ -2,7 +2,7 @@
 title: "5% OTM Put Overlay (Crypto)"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [options, risk-management, crypto, indicators, derivatives, volatility, hedging]
 aliases: ["5% OTM Put Overlay", "BTC Put Overlay", "Deribit Put Overlay", "Shallow OTM Put Hedge", "Crypto Put Protection Program"]
@@ -274,7 +274,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Entry/roll timing** — `GET /api/v1/volatility/regime/score` + `GET /api/v1/derivatives/funding-rates?coin=BTC`: buy or roll tranches while the vol composite is calm and funding is richly positive (call-skew euphoria cheapens downside puts — the best entry window).
 - **Monetisation watch** — `GET /api/v1/market-intelligence/liquidations` plus `GET /api/v1/volatility/regime` flipping to `vol_shock`: the cascade signature that fires the partial-monetisation and re-strike plan without hesitation.
 - **Regime gate** — `GET /api/v1/quant/market`: when `vol_spike` probability is elevated, puts are rich — trim size 25-50% or float the strike deeper OTM per the rules above.
-- **Backtest** — replay drawdown paths and roll schedules on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08, spanning 2020-03/LUNA/FTX); pair with point-in-time states from `GET /api/v1/backtesting/daily-snapshots` (full snapshots since 2026-03-02) to keep trigger rules free of [[lookahead-bias]]. CDA holds no options-chain archive — premium histories come from Deribit.
+- **Backtest** — replay drawdown paths and roll schedules on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09, spanning 2020-03/LUNA/FTX); pair with point-in-time states from `GET /api/v1/backtesting/daily-snapshots` (full snapshots since 2026-03-02) to keep trigger rules free of [[lookahead-bias]]. CDA holds no options-chain archive — premium histories come from Deribit.
 - **Tips** — poll the cached `GET /api/v1/daily` bundle hourly for funding + vol + liquidation context in one call; the overlay's main failure mode is unreviewed drift, so have the agent verify coverage ratio and DTE ladder on the weekly checklist above.
 
 ## Sources

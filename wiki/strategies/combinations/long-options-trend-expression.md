@@ -2,7 +2,7 @@
 title: "Long Options Trend Expression"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-03
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, trend-following, options, volatility, derivatives, options-structures, risk-management, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Trend via Long Options", "Convex Trend Expression", "IV-Cheap Trend Options", "Calls-Instead-of-Futures Trend"]
@@ -392,7 +392,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Trend gate** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=60` (50d EMA, new-20d-low check) + 4h bars for RSI
 - **Crowd confirm** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — 7-day average funding as trend-crowd confirmation
 - **IV-cheap filter** — `GET /api/v1/volatility/implied` — DVOL 52-week percentile; call pricing at specific strikes stays on Deribit
-- **Backtest** — trend-gate replay from `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08); IV-side history from the DVOL series; realized vol from 15m klines for the IV/RV comparison
+- **Backtest** — trend-gate replay from `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); IV-side history from the DVOL series; realized vol from 15m klines for the IV/RV comparison
 - **Tips** — the position pays theta while waiting: check the trend-failure exit (new 20d low) daily, and only roll strikes when both the trend and IV gates re-confirm
 
 ## Related

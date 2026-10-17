@@ -4,6 +4,20 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-10-17 — Fix: stale-page signal and backtest-depth claims
+
+**Changed:** 1,492 coin pages that are untouched generator output now carry
+`generated: true`, and the stale check skips them, printing a count instead. Stale pages
+went from 1,778 to 248, which is now a real review queue. The generator marks new
+pages the same way, and the schema files document the field: whoever hand-enriches a
+generated page removes it.
+
+**Fixed:** About 870 pages said the backtesting klines endpoint serves bars back to 2017.
+The REST route starts in May 2026, and older history comes from the Parquet archive, so
+a backtest following the old text silently got no data. Each page now says so.
+
+**Added:** Runnable gates on the mean-reversion strategy page (25 conditions).
+
 ## 2026-10-17 — Tooling: endpoint checker; local search matches hosted search
 
 **Added:** `tools/check_endpoints.py` checks every API path, query parameter and value

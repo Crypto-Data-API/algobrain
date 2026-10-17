@@ -2,7 +2,7 @@
 title: "Ratio Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, ratio-spread, directional, volatility, crypto, derivatives, advanced]
 aliases: ["Call Ratio Spread", "Put Ratio Spread", "Ratio Vertical"]
@@ -111,7 +111,7 @@ Strike/wing selection and [[deribit#DVOL Index — The "VIX of Crypto"|DVOL]] co
 
 **Historical data:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive for realized-vol / payoff backtesting
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for realized-vol / payoff backtesting
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime"
@@ -128,7 +128,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can manage 
 - **Entry timing** — `GET /api/v1/volatility/regime` — the short-vega structure wants an `expanding`/`normal` read likely to mean-revert down; never open into `vol_shock`.
 - **Wing selection** — `GET /api/v1/derivatives/funding-rates?coin=ETH` — sell the wing the leveraged crowd has overbid (richly positive funding → the call side).
 - **Naked-leg watch** — `GET /api/v1/quant/gex` + `GET /api/v1/market-intelligence/liquidations` — short dealer gamma plus cascade activity is the overshoot scenario that blows through the short strike; use it to trigger the buy-the-further-wing conversion to a [[broken-wing-butterfly]].
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) to measure how often BTC/ETH overshoot the short-strike distance within candidate tenors — the tail frequency the naked leg is underwriting.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) to measure how often BTC/ETH overshoot the short-strike distance within candidate tenors — the tail frequency the naked leg is underwriting.
 - **Tips** — automate a spot-vs-short-strike distance alert and the ~21-DTE management rule as scheduled jobs, not discretionary checks.
 
 ## Related

@@ -2,7 +2,7 @@
 title: "Credit Spread"
 type: strategy
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, derivatives, volatility, swing-trading, bitcoin, ethereum]
 aliases: ["Credit Spread", "Credit Spreads", "Vertical Credit Spread", "Bull Put Spread", "Bear Call Spread", "Crypto Credit Spread"]
@@ -144,7 +144,7 @@ Bull put spread (bear call is the delta-mirror):
 **Historical:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for realized-vol computation
-- `GET /api/v1/backtesting/klines` — deep kline archive for backtesting the structure
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for backtesting the structure
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/options"
@@ -162,7 +162,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Side selection** — `GET /api/v1/derivatives/funding-rates?coin=BTC`: richly positive funding firms call skew (sell the bear call spread); post-selloff bid put skew pays the bull put spread better.
 - **Strike placement** — `GET /api/v1/market-intelligence/options` + `GET /api/v1/quant/gex`: keep short strikes clear of max-pain pin zones and cascade-prone short-gamma pockets.
 - **Kill switch** — `GET /api/v1/quant/market`: a jump in `vol_spike` probability is the machine-readable form of the "DVOL +50% in a session" flatten rule; pair with `GET /api/v1/market-intelligence/liquidations` while a short strike is being tested.
-- **Backtest** — spot paths from `GET /api/v1/backtesting/klines` (Binance 1h/4h/1d since 2017-08) with point-in-time regime states from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) to test the entry gate honestly; option credits must come from Deribit history — CDA has no options-chain archive.
+- **Backtest** — spot paths from `GET /api/v1/backtesting/klines` (Binance 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) with point-in-time regime states from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) to test the entry gate honestly; option credits must come from Deribit history — CDA has no options-chain archive.
 - **Tips** — poll the cached `GET /api/v1/daily` bundle hourly between management checks; append `?format=markdown` for cleaner context windows.
 
 ## Related

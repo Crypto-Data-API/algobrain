@@ -2,7 +2,7 @@
 title: "DeFi Yield / LP × Unlock/Event Calendar"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, defi, yield-farming, event-driven, liquidity, risk-management, quantitative, crypto, impermanent-loss]
 aliases: ["DeFi LP Event Calendar", "LP Unlock Calendar Gate", "DeFi Yield Catalyst De-Risk", "LP Pre-Event Withdrawal"]
@@ -343,7 +343,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Event leg** — `GET /api/v1/event/calendar?type=unlock&days=30` + `GET /api/v1/event/regime/{symbol}` — the forward unlock calendar that schedules LP withdrawals
 - **Vol re-entry leg** — `GET /api/v1/volatility/regime/{symbol}` + `GET /api/v1/volatility/regime/score` — re-enter pools only after per-asset vol normalises
 - **Regime gate** — `GET /api/v1/regimes/current` — extend the re-entry delay in Structural Shock or bear states
-- **Backtest** — post-unlock price paths from `GET /api/v1/backtesting/klines` (daily back to 2017-08); point-in-time event and vol state from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02); pool-level TVL/fee history stays external (DeFiLlama, The Graph)
+- **Backtest** — post-unlock price paths from `GET /api/v1/backtesting/klines` (daily back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); point-in-time event and vol state from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02); pool-level TVL/fee history stays external (DeFiLlama, The Graph)
 - **Tips** — alert on `GET /api/v1/event/regime/score` > 60 as the portfolio-level pre-withdrawal tripwire; the 60d cap on per-symbol vol history bounds how far back re-entry thresholds can be calibrated from the live endpoint
 
 ## Related

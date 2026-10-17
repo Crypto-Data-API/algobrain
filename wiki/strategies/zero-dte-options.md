@@ -2,7 +2,7 @@
 title: "Zero DTE Options"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [options, crypto, derivatives, volatility, scalping, market-microstructure]
 aliases: ["Zero DTE", "Same-Day Crypto Options", "Daily-Expiry Options", "Crypto 0DTE Overview"]
@@ -174,7 +174,7 @@ Because [[dvol|DVOL]] is a 30-day index and 0DTE has no time for implied vol to 
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=5m&limit=1000` — intraday OHLCV for short-dated realized-vol vs the implied move
-- `GET /api/v1/backtesting/klines` — deep archive for intraday backtesting
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — history for intraday backtesting
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/gex"

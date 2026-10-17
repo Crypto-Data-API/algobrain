@@ -2,7 +2,7 @@
 title: "Delta-Hedged Options (Crypto)"
 type: strategy
 created: 2026-06-22
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [options, crypto, derivatives, volatility, risk-management, bitcoin]
 aliases: ["Delta-Hedged Options", "Delta-Neutral Options", "Volatility Isolation", "Crypto Delta-Hedged Options"]
@@ -147,7 +147,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Hedge carry** — `GET /api/v1/derivatives/funding-rates?coin=BTC` on every funding interval: the perp hedge's live P&L line; a funding flip on a net-long hedge can dwarf the vol premium being captured.
 - **Configuration choice** — `GET /api/v1/volatility/regime` (`compressed` favours long-gamma ahead of expansion; `normal`/`mean_reverting` with rich DVOL favours short-gamma) plus `GET /api/v1/quant/gex` for the dealer-flow environment the re-hedges will trade into (short-gamma dealers amplify realized vol — friendly to long gamma).
 - **Regime gate** — `GET /api/v1/quant/market`: flatten short-gamma when `vol_spike` probability jumps — the machine-readable DVOL-shock kill from the frontmatter criteria.
-- **Backtest** — realized-vol and hedge-path replay on `GET /api/v1/backtesting/klines` (Binance 1h/4h/1d since 2017-08; 1m bars only since 2026-03-30, so fine-grained hedge-band studies are limited to that window) plus `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) for hedge carry. Option marks come from Deribit — no options archive on CDA.
+- **Backtest** — realized-vol and hedge-path replay on `GET /api/v1/backtesting/klines` (Binance 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09; 1m bars only since 2026-03-30, so fine-grained hedge-band studies are limited to that window) plus `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) for hedge carry. Option marks come from Deribit — no options archive on CDA.
 - **Tips** — batch per-coin risk via `GET /api/v1/quant/coins/risk` for multi-asset books; respect `insufficient_history` flags on newer perps before extending the book beyond BTC/ETH.
 
 ## Related

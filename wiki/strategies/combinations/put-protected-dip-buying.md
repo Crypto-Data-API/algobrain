@@ -2,7 +2,7 @@
 title: "Put-Protected Dip Buying"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-03
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, options, derivatives, mean-reversion, tail-risk, risk-management, behavioral-finance, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Defined-Stop Dip Buy", "OTM-Put-Hedged Capitulation Entry", "Knife-Catch with Floor", "Protected Mean-Reversion Buy"]
@@ -392,7 +392,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — capitulation detection across `GET /api/v1/derivatives/funding-rates?coin=BTC` (sustained negative), `GET /api/v1/derivatives/open-interest?coin=BTC` (decline from 5d peak), and `GET /api/v1/on-chain/exchange-flows/spike-alerts` (whale deposits)
 - **Filter** — `GET /api/v1/market-intelligence/liquidations?coin=BTC` must show the cascade has cleared; `GET /api/v1/volatility/implied` sets the put-premium budget gate
 - **Regime gate** — `GET /api/v1/regimes/current`; defer while `Structural_Shock` persists
-- **Backtest** — post-capitulation recovery paths from `GET /api/v1/backtesting/klines` (1d back to 2017-08); the cascade-clear condition replays only since 2026-03-30 (`GET /api/v1/backtesting/liquidations`, Hyperliquid), so older backtests must proxy it from funding and OI alone
+- **Backtest** — post-capitulation recovery paths from `GET /api/v1/backtesting/klines` (1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); the cascade-clear condition replays only since 2026-03-30 (`GET /api/v1/backtesting/liquidations`, Hyperliquid), so older backtests must proxy it from funding and OI alone
 - **Tips** — the protective put is priced on Deribit; re-check the DVOL percentile at fill time — premium budgets set at signal time go stale fast in post-panic tape
 
 ## Related

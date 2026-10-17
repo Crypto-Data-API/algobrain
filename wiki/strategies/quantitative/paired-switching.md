@@ -2,7 +2,7 @@
 title: "Paired Switching"
 type: strategy
 created: 2026-09-28
-updated: 2026-09-28
+updated: 2026-10-17
 status: draft
 tags: [momentum, quantitative, position-trading, diversification, crypto, bitcoin, macro]
 aliases: ["Paired Switching Strategy", "Two-Asset Relative Momentum Switch"]
@@ -128,7 +128,7 @@ Via the [[cryptodataapi-mcp|CryptoDataAPI MCP]]:
 
 - **Signal** — at each quarter end, compute the 90-day BTC (or ETH) return from daily `/market-data/klines` and compare to the other leg
 - **Regime gate** — optionally consult `GET /api/v1/regimes/current` before switching into the crypto leg; a bear regime reading argues for waiting on the defensive side
-- **Backtest** — `/backtesting/klines` daily since 2017 gives ~35 quarterly decisions; that is a small sample, so report the confidence interval, not just the mean
+- **Backtest** — daily BTC bars back to 2017-08 in the `klines_deep` archive (the REST `/backtesting/klines` route only starts 2026-05-09) give ~35 quarterly decisions; that is a small sample, so report the confidence interval, not just the mean
 - **Tips** — test several lookbacks (60/90/120) and rebalance dates; if results flip sign across them, the edge is noise
 
 ## Sources

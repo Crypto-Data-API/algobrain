@@ -2,7 +2,7 @@
 title: Support and Resistance Breakout Strategy
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags:
   - breakout
@@ -157,7 +157,7 @@ Support/resistance breakout trading in BTC/ETH perps has essentially no capacity
 - `GET /api/v1/volatility/regime` — vol-regime filter; skip breakout entries in vol_shock regime
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — deep archive for identifying historically significant levels
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — history for identifying historically significant levels
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"
@@ -175,7 +175,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Break quality** — `GET /api/v1/market-intelligence/liquidations` — separates a genuine breakout from a cascade-driven overshoot; a live cascade means no retest buying (kill criterion three).
 - **Bias** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding direction biases which side of the range to arm.
 - **Regime gate** — `GET /api/v1/volatility/regime` — `vol_shock` suspends entries per the kill criteria; `GET /api/v1/quant/market` distinguishes trend-continuation breaks from range fakeouts.
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) for level significance and false-break rates across cycles; pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) so regime filters stay point-in-time.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for level significance and false-break rates across cycles; pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) so regime filters stay point-in-time.
 
 ## Related
 

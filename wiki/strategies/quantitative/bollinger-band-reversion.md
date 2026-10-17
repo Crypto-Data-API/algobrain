@@ -2,7 +2,7 @@
 title: "Bollinger Band Reversion"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [mean-reversion, bollinger-bands, volatility, quantitative, john-bollinger, crypto]
 aliases: ["Bollinger Band Mean Reversion", "Bollinger Bounce", "BB Reversion Strategy"]
@@ -188,7 +188,7 @@ See [[when-to-retire-a-strategy]].
 **Historical data:**
 - `GET /api/v1/indicators/technical/{symbol}` — per-asset detail + 60d history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=1000` — raw OHLCV to compute your own bands
-- `GET /api/v1/backtesting/klines` — full OHLCV archive for backtesting band + regime filters
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for backtesting band + regime filters
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/indicators/technical"
@@ -204,7 +204,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Signal** — `GET /api/v1/indicators/technical` classifies the whole universe's SMA/BB/RSI structure in one call: screen for lower-band touches with oversold RSI instead of recomputing bands per coin, then confirm the touch-and-recover on `GET /api/v1/market-data/klines?symbol=...&interval=1h`
 - **Regime gate** — `GET /api/v1/volatility/regime` (trade only `mean_reverting`/`normal`, never `vol_shock`) plus `GET /api/v1/indicators/signum-rgg` — GREY is the tradeable chop; RED/GREEN flags the trending regimes where bands get walked
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) covers the strategy's 1h design timeframe across multiple range/trend cycles; pair entries with point-in-time regimes from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) to avoid [[lookahead-bias]]
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) covers the strategy's 1h design timeframe across multiple range/trend cycles; pair entries with point-in-time regimes from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) to avoid [[lookahead-bias]]
 - **Tips** — `/indicators/technical/{symbol}` carries a 60-day state history to measure how long oversold readings persist before committing a rule; respect `insufficient_history` flags on newly listed coins before trusting a 20-bar σ
 
 ## Related

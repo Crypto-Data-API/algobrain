@@ -2,7 +2,7 @@
 title: "Flat Base"
 type: concept
 created: 2026-04-13
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [technical-analysis, indicators, breakout]
 domain: [indicators]
@@ -79,7 +79,7 @@ Traders using flat bases as entry signals look for stocks with strong [[relative
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500` — daily OHLCV for base depth/duration measurement
 - `GET /api/v1/market-data/volume-history?days=90` — volume dry-up and breakout confirmation
-- `GET /api/v1/backtesting/klines` — deep kline archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500"
@@ -95,7 +95,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Detect** — from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500`, test the checklist mechanically: prior advance of 20-30%+, range depth ≤ ~15%, at least five weeks sideways, pivot = intra-base high
 - **Confirm** — require breakout volume well above average via `GET /api/v1/market-data/volume-history`, and compute relative strength as the coin/BTC ratio from two kline series
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily bars back to 2017-08) covers several cycles of base breakouts and failures
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily bars back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) covers several cycles of base breakouts and failures
 - **Tip** — O'Neil's "confirmed market uptrend" filter maps cleanly to the regime read from `GET /api/v1/regimes/current`; flat-base breakouts against a risk-off regime fail disproportionately
 
 ## Related

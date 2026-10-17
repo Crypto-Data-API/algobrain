@@ -2,7 +2,7 @@
 title: "Restaking Token Arbitrage"
 type: strategy
 created: 2026-04-26
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [arbitrage, defi, ethereum, crypto]
 aliases: ["LRT Arbitrage", "Restaking Triangle", "EigenLayer LRT-LST Arb"]
@@ -243,7 +243,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Signal** — poll `GET /api/v1/dex/token/{chain}/{address}` across the LRT universe each cycle, compute observed-vs-NAV deviations, and fire when pair dispersion exceeds 25 bp per the Rules.
 - **Catalyst check** — `GET /api/v1/event/calendar?type=unlock` before entry: an LRT-protocol token unlock inside the expected convergence window invalidates the trade setup.
 - **Regime gate** — `GET /api/v1/security/regime/score` and `GET /api/v1/quant/market`: depeg buys are knife-catches during elevated security stress; the mechanical-convergence thesis only holds when the shock is flow-driven, not protocol-failure-driven.
-- **Backtest** — replay dispersion entries against `GET /api/v1/backtesting/klines` with hedge costs from `GET /api/v1/backtesting/funding` (HL hourly since 2023-05 spans the full 2024 boom-and-compression arc — the decay curve is the key output); pair with `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time state.
+- **Backtest** — replay dispersion entries against `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) with hedge costs from `GET /api/v1/backtesting/funding` (HL hourly since 2023-05 spans the full 2024 boom-and-compression arc — the decay curve is the key output); pair with `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time state.
 - **Tips** — track the rolling dispersion median explicitly: the kill criterion (below 10 bp for 90 days) is measurable from the same polling loop; points-multiplier changes remain a manual/protocol-blog input with no API anywhere.
 
 ## Related

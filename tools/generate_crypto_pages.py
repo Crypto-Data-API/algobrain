@@ -429,6 +429,9 @@ def generate_page_content(data, hl_assets):
     lines.append(f"created: {TODAY}")
     lines.append(f"updated: {TODAY}")
     lines.append("status: draft")
+    # Marks untouched generator output; lint's stale check skips it. Whoever
+    # hand-enriches the page removes this line (see CLAUDE.md frontmatter schema).
+    lines.append("generated: true")
     lines.append(f"tags: [{tag_str}]")
     lines.append(f'aliases: ["{symbol}"]')
     lines.append("entity_type: protocol")
@@ -767,6 +770,10 @@ def merge_page(existing_content, generated_content):
     # --- Merge frontmatter ---
     merged_fm = dict(ex_fm)
     for key, val in gen_fm.items():
+        if key == "generated":
+            # Never stamp an existing page as generated: it may be hand-enriched.
+            # A page that already carries the flag keeps it via ex_fm.
+            continue
         if key not in merged_fm or not merged_fm[key]:
             merged_fm[key] = val
         elif key == "related":

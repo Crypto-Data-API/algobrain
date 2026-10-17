@@ -2,7 +2,7 @@
 title: Statistical Arbitrage
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags:
   - quantitative
@@ -36,6 +36,138 @@ kill_criteria: |
   - fraction of pairs/baskets failing weekly cointegration re-test > 40% for 2 consecutive weeks
   - average realized half-life > 2x modeled over a 60-trade sample
   - median realized round-trip cost > 30 bps for a full month
+gates:
+  - id: economic_link
+    role: universe
+    rule: "Only legs with an economic reason to co-move: same sector, derivative vs underlying, or a coin vs its factor basket"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: categories
+    note: "Call once per leg and look for a shared sector tag. A shared tag is only a screen: whether the link is economic rather than shared BTC-beta is the desk's call."
+  - id: exitable_legs
+    role: universe
+    rule: "Exclude thin alt perps you cannot exit"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    note: "The page sets no volume or depth floor; the desk picks one. Book depth per coin is on /api/v1/liquidity/depth/{coin}."
+  - id: cointegrated
+    role: universe
+    rule: "Engle-Granger or Johansen cointegration at p below 0.05 on 60-180 days of 1h or 1d closes; re-test weekly"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=180
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "One call per leg, joined on candles[].timestamp; the pseudocode uses 90 days. For 1h bars use interval=1h&start={start} (180 days is about 4,320 bars, inside the 15,000-bar cap). Test the BTC-neutralised residuals, not raw prices, as the page's null hypothesis requires."
+  - id: hedge_ratio
+    role: sizing
+    rule: "Hedge ratio beta by OLS over the test window or a Kalman filter; spread S = P_A - beta x P_B"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=180
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: btc_factor_residual
+    role: entry
+    rule: "Alternative to the pair spread: the residual of each coin's returns against its BTC-factor fit (either this or hedge_ratio)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=1000
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].close
+    note: "Call once for the coin and once with coin=BTC (add ETH for the two-factor version the page mentions)."
+  - id: half_life_window
+    role: filter
+    rule: "Ornstein-Uhlenbeck half-life of the spread between 2 and 20 days; discard slower relationships"
+    runnable: true
+    input: derived
+    inputs: [hedge_ratio]
+  - id: no_vol_spike
+    role: filter
+    rule: "No new spreads while the HMM market regime is vol_spike"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's Indicators list and agent workflow, not its Rules. The Indicators list words it as the vol taxonomy's vol_shock; per leg that label is regime on /api/v1/volatility/regime/{symbol}."
+  - id: short_leg_funding
+    role: filter
+    rule: "Pre-screen funding on every short leg; persistently expensive shorts kill a spread"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "Hourly settled prints; positive means the short leg receives. The page sets no threshold (its cost table puts carry at plus or minus 1-4 bps/day), so how expensive is too expensive is the desk's call."
+  - id: z_short_entry
+    role: entry
+    rule: "Short A and long beta x B when the 60-bar rolling z-score of the spread is at or above +2.0 (either this or z_long_entry)"
+    runnable: true
+    input: derived
+    inputs: [hedge_ratio]
+  - id: z_long_entry
+    role: entry
+    rule: "Long A and short beta x B when the 60-bar rolling z-score is at or below -2.0 (either this or z_short_entry)"
+    runnable: true
+    input: derived
+    inputs: [hedge_ratio]
+  - id: z_within_half
+    role: exit
+    rule: "Take profit when |z| is back within 0.5 (either this or z_cross_zero)"
+    runnable: true
+    input: derived
+    inputs: [hedge_ratio]
+    note: "The pseudocode closes here."
+  - id: z_cross_zero
+    role: exit
+    rule: "Take profit when z crosses 0 (either this or z_within_half)"
+    runnable: true
+    input: derived
+    inputs: [hedge_ratio]
+  - id: z_break_stop
+    role: stop
+    rule: "Close the spread when |z| reaches 3.0 (the Rules allow 3.0-3.5): a structural break, not noise"
+    runnable: true
+    input: derived
+    inputs: [hedge_ratio]
+  - id: retest_failed_stop
+    role: stop
+    rule: "Close the spread when the weekly cointegration re-test fails (p above 0.05)"
+    runnable: true
+    input: derived
+    inputs: [cointegrated]
+  - id: time_stop
+    role: stop
+    rule: "Close after 2x the estimated half-life with no convergence"
+    runnable: true
+    input: position
+    note: "Half-life from half_life_window; days held from the position record."
+  - id: neutral_legs
+    role: sizing
+    rule: "Size the legs as short A against long beta x B (the Rules call it dollar-neutral)"
+    runnable: true
+    input: derived
+    inputs: [hedge_ratio]
+    note: "With beta away from 1 the two aims differ: the example shorts $25,000 of A against $22,500 of B (beta 0.9), which is beta-weighted, not dollar-neutral, yet calls it dollar-neutral. Prose unchanged."
+  - id: risk_per_spread
+    role: sizing
+    rule: "Risk at most 0.5-1% of equity per spread"
+    runnable: true
+    input: position
+    note: "The pseudocode uses 0.5%."
+  - id: concurrent_spreads
+    role: sizing
+    rule: "Run 15-40 spreads at once"
+    runnable: true
+    input: position
+    note: "The Instrument Structures section says a full book runs 5-15 concurrent pairs, which contradicts the Rules' 15-40. Prose unchanged."
+  - id: gross_leverage
+    role: sizing
+    rule: "Cap gross leverage at 2-4x"
+    runnable: true
+    input: position
 ---
 
 # Statistical Arbitrage

@@ -2,7 +2,7 @@
 title: "Conversion & Reversal Arbitrage"
 type: strategy
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [arbitrage, options, crypto, derivatives, market-microstructure, bitcoin, ethereum]
 aliases: ["Conversion Reversal Arbitrage", "Conversion Arbitrage", "Reversal Arbitrage", "Synthetic Arbitrage", "Crypto Conversion Reversal"]
@@ -189,7 +189,7 @@ Live option quotes, per-strike IV/[[skew]], and the exact forward come from **De
 **Historical:**
 - `GET /api/v1/backtesting/funding` — historical funding for basis/carry backtests
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — spot OHLCV to reconstruct the basis series
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
@@ -206,7 +206,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Carry leg** — `GET /api/v1/derivatives/funding-rates?coin=BTC`: the funding/basis that *is* the locked P&L on a perp-hedged build; poll it before entry and on every funding interval while a package is open — a funding flip is the strategy's main mid-trade drift.
 - **Dislocation triggers** — `GET /api/v1/market-intelligence/liquidations` + `GET /api/v1/market-intelligence/options`: forced-unwind flow and heavy per-strike OI mark where parity gaps are most likely to open next.
 - **Regime gate** — `GET /api/v1/quant/market`: `vol_spike`/`choppy_high_vol` states widen violations but also widen leg risk and spreads — cut per-trade size rather than chase the fatter gaps.
-- **Backtest** — carry/basis studies on `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) joined to spot from `GET /api/v1/backtesting/klines`; the option legs cannot be replayed from CDA (no options-chain archive — use Deribit history).
+- **Backtest** — carry/basis studies on `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) joined to spot from `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive); the option legs cannot be replayed from CDA (no options-chain archive — use Deribit history).
 - **Tips** — be honest about the edge: an MCP agent is realistic for monitoring funding-regime flips and flagging candidate windows, not for winning the microsecond execution race against co-located market makers.
 
 ## Related

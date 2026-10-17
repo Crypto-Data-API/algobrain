@@ -2,7 +2,7 @@
 title: "Crypto Volatility Trading (DVOL)"
 type: strategy
 created: 2026-04-06
-updated: 2026-09-28
+updated: 2026-10-17
 status: review
 tags: [crypto, options, volatility, dvol, short-volatility, long-volatility, mean-reversion, quantitative, derivatives]
 aliases: ["DVOL Trading", "Crypto Vol Trading", "VIX Trading", "Volatility Trading", "Deribit Volatility Trading"]
@@ -202,7 +202,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 
 - **Signal** — the central problem is classifying a DVOL spike as event-driven (fade) or regime break (stand down): read `GET /api/v1/quant/market` (`vol_spike` vs a transition into `strong_trend_bear`), `GET /api/v1/volatility/regime` per asset, and `GET /api/v1/market-intelligence/liquidations` (cascade subsiding = fade window opening)
 - **Positioning proxy** — `GET /api/v1/derivatives/funding-rates?coin=BTC` substitutes for the missing vol-futures curve: deeply positive funding flags the leveraged-long fragility that precedes downside DVOL spikes; `GET /api/v1/quant/gex` reads whether dealers are short gamma (cascade-prone)
-- **Backtest** — compute realized vol from `GET /api/v1/backtesting/klines` (Binance spot 1h/1d to 2017-08) for DVOL−RV spread studies, and condition spike-fade statistics on `GET /api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus) — the fade only works on event-driven spikes, so unconditioned stats mix in the regime-break losses
+- **Backtest** — compute realized vol from `GET /api/v1/backtesting/klines` (Binance spot 1h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for DVOL−RV spread studies, and condition spike-fade statistics on `GET /api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus) — the fade only works on event-driven spikes, so unconditioned stats mix in the regime-break losses
 - **Tips** — encode the new-high-above-spike-peak stop as an automated flatten rule; `/volatility/regime/{symbol}` carries a 60-day state history to check how long past `vol_shock` states persisted before reverting
 
 ## See Also / Related

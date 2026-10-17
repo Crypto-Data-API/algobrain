@@ -2,7 +2,7 @@
 title: "Gamma Explosion"
 type: concept
 created: 2026-05-07
-updated: 2026-08-24
+updated: 2026-10-17
 status: excellent
 tags: [options, indicators, market-microstructure, volatility, derivatives]
 aliases: ["Gamma Spike", "Terminal Gamma", "End-of-Life Gamma"]
@@ -151,7 +151,7 @@ Crypto perp and options markets run their own version of the dealer-hedging feed
 - `GET /api/v1/market-intelligence/options` — BTC options open interest, volume, and max pain; strike-level OI concentration is the raw material of pin behaviour into expiry
 
 **Historical data:**
-- The backtesting archive now includes a `gamma_exposure` snapshot type (5-min cadence, Pro Plus) via `GET /api/v1/backtesting/snapshots?data_type=gamma_exposure&start=...`, archiving the `/quant/gex` MM-lens per-coin map — otherwise, study price behaviour through past gamma regimes with `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08)
+- The backtesting archive now includes a `gamma_exposure` snapshot type (5-min cadence, Pro Plus) via `GET /api/v1/backtesting/snapshots?data_type=gamma_exposure&start=...`, archiving the `/quant/gex` MM-lens per-coin map — otherwise, study price behaviour through past gamma regimes with `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09)
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/gex"
@@ -167,7 +167,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Live state** — `GET /api/v1/quant/gex` before any short-dated premium or breakout entry: long MM gamma → expect a dampened, pin-prone tape; short MM gamma → hedging amplifies moves
 - **Strike map** — `GET /api/v1/market-intelligence/options` for BTC strike-level OI concentration and the max-pain strike, the magnet zone in the final hours before expiry
-- **Backtest** — `GET /api/v1/backtesting/snapshots?data_type=gamma_exposure&start=...` (5-min cadence, Pro Plus) now archives the GEX MM-lens map for point-in-time replay; otherwise validate pin/anti-pin hypotheses by replaying `GET /api/v1/backtesting/klines` (1h bars back to 2017-08) around known Deribit weekly/monthly expiry timestamps
+- **Backtest** — `GET /api/v1/backtesting/snapshots?data_type=gamma_exposure&start=...` (5-min cadence, Pro Plus) now archives the GEX MM-lens map for point-in-time replay; otherwise validate pin/anti-pin hypotheses by replaying `GET /api/v1/backtesting/klines` (1h bars back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) around known Deribit weekly/monthly expiry timestamps
 - **Tip** — treat the liquidation profile in the GEX payload as the crypto analogue of dealer short gamma: clustered liquidation levels act like a short-gamma strike band that accelerates any move passing through it
 
 ## Related

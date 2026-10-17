@@ -2,7 +2,7 @@
 title: "Gamma Risk"
 type: concept
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, derivatives, risk-management, indicators]
 aliases: ["Gamma Risk", "Gamma Trap", "Gamma Exposure Risk"]
@@ -130,7 +130,7 @@ For the crypto-market version of this risk — market-maker gamma positioning an
 - `GET /api/v1/market-intelligence/options` — BTC options OI, volume, and max pain for strike-concentration context
 
 **Historical data:**
-- No dedicated GEX archive — replay price behaviour through past gamma regimes with `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08)
+- No dedicated GEX archive — replay price behaviour through past gamma regimes with `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09)
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/gex"

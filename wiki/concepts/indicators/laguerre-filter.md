@@ -2,7 +2,7 @@
 title: "Laguerre Filter"
 type: concept
 created: 2026-07-20
-updated: 2026-07-20
+updated: 2026-10-17
 status: draft
 tags: [indicators, technical-analysis, quantitative, crypto]
 aliases: ["Laguerre", "Ehlers Laguerre Filter", "Laguerre RSI Filter", "Four-Element Laguerre"]
@@ -128,7 +128,7 @@ Practical discipline:
 - `GET /api/v1/derivatives/open-interest?coin=X` — OI expanding into the stretch argues trend, not dislocation
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — OHLCV archive for replaying the filter across full cycles
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV archive for replaying the filter across full cycles
 - `GET /api/v1/quant/regimes/history` — hourly HMM regime labels for scoring fades only inside historically-labelled range states
 
 ```bash

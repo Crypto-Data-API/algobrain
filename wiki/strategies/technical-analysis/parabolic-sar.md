@@ -2,7 +2,7 @@
 title: "Parabolic SAR"
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 domain: [technical-analysis]
 prerequisites: ["[[trailing-stop]]", "[[adx]]"]
@@ -185,7 +185,7 @@ Parabolic SAR is computed from the OHLC series (highs/lows drive the EP and the 
 - `GET /api/v1/indicators/signum-rgg` — ADX(14)+DMI RED/GREY/GREEN state, useful as the SAR trend filter.
 
 **Historical archive (backtesting):**
-- `GET /api/v1/backtesting/klines` — full OHLCV archive (Parquet since 2020) for backtesting SAR flips on closed bars.
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for backtesting SAR flips on closed bars.
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
@@ -203,7 +203,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run a S
 - **Compute** — `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=4h&limit=1000` (or `GET /api/v1/hyperliquid/candles?coin=ETH&interval=4h&limit=1000` for perps) → run the AF recursion on closed candles only; the live bar's dot is provisional.
 - **Trend filter** — `GET /api/v1/indicators/signum-rgg` — the pre-computed ADX(14)+DMI state is exactly Wilder's own SAR gate: act on flips only in GREEN/RED, never in GREY chop.
 - **Regime gate** — `GET /api/v1/quant/market` — suppress flips in `range_low_vol`/`choppy_high_vol`, where SAR's ping-pong failure mode lives.
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08; Hyperliquid daily candles to 2023) to test AF settings and the ADX filter across regimes on closed bars.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09; Hyperliquid daily candles to 2023) to test AF settings and the ADX filter across regimes on closed bars.
 - **Tips** — batch the flip scan from one universe-wide klines/indicators pull per cycle instead of per-symbol polling; respect `insufficient_history` flags before trusting ADX(14) on new listings.
 
 ## Key Takeaways

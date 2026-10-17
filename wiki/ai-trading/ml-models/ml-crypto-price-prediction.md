@@ -2,7 +2,7 @@
 title: "ML Crypto Price Prediction"
 type: concept
 created: 2026-07-14
-updated: 2026-09-03
+updated: 2026-10-17
 status: good
 tags: [ai-trading, machine-learning, backtesting, crypto]
 aliases: ["ML Crypto Price Prediction", "Crypto ML Pipeline", "Machine Learning Crypto Prediction"]
@@ -96,7 +96,7 @@ The whole pipeline is feedable from the CryptoDataAPI market, derivatives, on-ch
 - `GET /api/v1/market-intelligence/liquidations` — liquidation imbalance
 
 **Historical (training, labeling, and backtests):**
-- `GET /api/v1/backtesting/klines` — full OHLCV archive (Parquet since 2020)
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history
 - `GET /api/v1/backtesting/funding` — funding archive
 - `GET /api/v1/backtesting/liquidations` — historical liquidations
 - `GET /api/v1/quant/history` — point-in-time regime probability records

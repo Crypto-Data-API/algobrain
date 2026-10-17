@@ -2,7 +2,7 @@
 title: "OI-Confirmed Trend (Hyperliquid Basket)"
 type: strategy
 created: 2026-06-16
-updated: 2026-07-20
+updated: 2026-10-17
 status: good
 tags: [crypto, perpetual-futures, hyperliquid, algorithmic, trend-following, derivatives, quantitative, momentum]
 aliases: ["Open Interest Trend Confirmation", "OI Trend Filter Basket", "Capital-Committed Trend Following", "OI-Momentum Basket"]
@@ -424,7 +424,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — the cross-exchange `GET /api/v1/derivatives/open-interest?coin=X` and funding calls above deliver the price+OI confirmation pair; `GET /api/v1/liquidity/oi-divergence` (1h/4h/24h windows) computes the OI-vs-price alignment server-side, saving the agent the divergence math
 - **Regime gate** — `GET /api/v1/quant/market`: this is a trend-following book, so require strong_trend_bull or strong_trend_bear dominance and stand down in choppy_high_vol where OI-confirmed entries whipsaw
 - **Sizing** — `GET /api/v1/quant/coins/risk?horizon=24h` batches per-coin regime and vol-target multipliers across all open legs (4 concurrent positions in the live book)
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08; HL daily to 2023) for price legs, but honest OI history is shallow: `GET /api/v1/derivatives/binance/history` covers only 90 days and archived Binance OI (with funding/mark) starts 2026-03-30 — long-window OI-confirmation replays cannot be fully validated before that
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09; HL daily to 2023) for price legs, but honest OI history is shallow: `GET /api/v1/derivatives/binance/history` covers only 90 days and archived Binance OI (with funding/mark) starts 2026-03-30 — long-window OI-confirmation replays cannot be fully validated before that
 - **Tips** — `GET /api/v1/derivatives/summary?coin=X&format=markdown` gives the whole confirmation picture in one clean call per candidate; pair regime gating in backtests with `GET /api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus)
 - **Prompt library** — the "Open Interest Divergence Scanner" prompt (Free tier, [prompt library](https://cryptodataapi.com/prompts)) classifies price/OI into the four quadrants this strategy trades (fresh conviction vs unwinding)
 

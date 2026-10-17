@@ -2,7 +2,7 @@
 title: "Supply and Demand Zones"
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [supply-demand, demand-zones, supply-zones, order-flow, liquidity, market-microstructure, rally-base-rally, drop-base-drop, technical-analysis, crypto]
 aliases: ["Supply and Demand Trading", "S/D Zones", "Demand Zone Strategy", "Supply Zone Strategy"]
@@ -113,7 +113,7 @@ Supply/demand translates unusually well to crypto because the microstructure tha
 
 Supply/demand analysis needs price structure to draw zones, order-book depth to validate them, and liquidation data to locate the pooled liquidity the zones feed on. See [[cryptodataapi-market-data]], [[cryptodataapi-regimes]], and [[cryptodataapi-market-intelligence]].
 
-- **OHLCV to draw zones** — `GET /api/v1/market-data/klines` (live, `limit` up to 1000) and `GET /api/v1/backtesting/klines` (full archive from 2020 for systematic zone testing).
+- **OHLCV to draw zones** — `GET /api/v1/market-data/klines` (live, `limit` up to 1000) and `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive; for systematic zone testing).
 - **Order-book depth to validate the base** — `GET /api/v1/liquidity/depth` (per-coin depth/spread at 10/25/50/100 bps) and `GET /api/v1/liquidity/depth/{coin}` (24h rolling 1-minute depth history) confirm whether real resting size sits at a proposed zone versus a thin, sweepable level.
 - **Liquidation pools around zones** — `GET /api/v1/market-intelligence/liquidations` (cross-exchange) shows where forced orders cluster, the strongest confirmation that a zone will react.
 
@@ -134,7 +134,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run a z
 - **Zone validation** — `GET /api/v1/liquidity/depth/ETH` — real resting size versus a thin, sweepable level; `GET /api/v1/liquidity/depth` for the whole-universe read.
 - **Liquidity pools** — `GET /api/v1/market-intelligence/liquidations` — zones coinciding with liquidation clusters are the highest-conviction setups; `GET /api/v1/derivatives/funding-rates?coin=ETH` + `GET /api/v1/derivatives/open-interest?coin=ETH` grade the squeeze potential at a demand zone.
 - **Regime gate** — `GET /api/v1/quant/market` — continuation zones get sliced in `strong_trend_*` against you; fresh reversal zones want range-to-trend transitions.
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) to base-rate first-touch reactions versus second/third touches; `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) for the cluster overlay.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) to base-rate first-touch reactions versus second/third touches; `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) for the cluster overlay.
 
 ## Related
 - [[smart-money-concepts]] — the modern evolution with order blocks, fair value gaps, and liquidity concepts

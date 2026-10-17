@@ -2,7 +2,7 @@
 title: "Turtle Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [trend-following, breakout, position-sizing, systematic, turtle-traders, richard-dennis, crypto, perpetual-futures]
 aliases: ["Turtle Trading System", "Turtle Breakout", "Dennis Turtle Strategy"]
@@ -165,7 +165,7 @@ The Turtle system scales very favorably because it is perp-based trend following
 
 Everything the system needs derives from OHLCV (Donchian highs/lows, N/ATR), plus derivatives data for the crypto-specific funding and liquidation overlays. See [[cryptodataapi-market-data]], [[cryptodataapi-backtesting]], and [[cryptodataapi-derivatives]].
 
-- **OHLCV for channels, N and backtests** — `GET /api/v1/market-data/klines` (live) and `GET /api/v1/backtesting/klines` (full archive from 2020) to compute 20/55/10-day extremes and ATR(20), and to backtest the two-system rule set.
+- **OHLCV for channels, N and backtests** — `GET /api/v1/market-data/klines` (live) and `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) to compute 20/55/10-day extremes and ATR(20), and to backtest the two-system rule set.
 - **Funding carry** — `GET /api/v1/derivatives/funding-rates` to net perp holding cost into trend-trade expectancy; historical funding via `GET /api/v1/backtesting/funding`.
 - **Liquidation/stop-collision context** — `GET /api/v1/market-intelligence/liquidations` to see cascade risk around the 2N stop.
 
@@ -186,7 +186,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Funding overlay** — `GET /api/v1/derivatives/funding-rates?coin=BTC` on every day a pyramid is held; exit regardless of signal when annualized funding cost exceeds 20% (the kill criterion the commodity Turtles never needed).
 - **Stop-collision check** — `GET /api/v1/market-intelligence/liquidations` — verify the 2N stop sits well inside the exchange liquidation price before each pyramid add.
 - **Regime gate** — `GET /api/v1/quant/market` — the ~35-40% win rate collapses in `choppy_high_vol`; run System 2 only (or stand down) outside the trend states.
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 — several full trend/chop cycles) + `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) to net funding drag into expectancy honestly.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09 — several full trend/chop cycles) + `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) to net funding drag into expectancy honestly.
 - **Tips** — enforce the correlation caps with one `GET /api/v1/quant/coins/risk` batch call; correlated alts count as near-duplicate units, not diversification.
 
 ## Related

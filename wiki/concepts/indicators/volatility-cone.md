@@ -2,7 +2,7 @@
 title: "Volatility Cone"
 type: concept
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [options, derivatives, volatility, indicators]
 aliases: ["Volatility Cone", "Vol Cone", "Volatility Cones"]
@@ -76,7 +76,7 @@ The realized-volatility half of the cone builds entirely from klines; the API do
 - `GET /api/v1/volatility/regime/{symbol}` — current per-asset vol state to note which regime the live reading sits in
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — multi-year kline archive so the cone's sample spans full calm-and-crisis cycles
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history so the cone's sample spans full calm-and-crisis cycles
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000"
@@ -89,7 +89,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
 
 - **Compute** — pull daily klines, compute every overlapping n-day annualized realized vol for n ∈ {10, 30, 60, 90, 180} (√365 annualization for crypto), and take the 5th/25th/50th/75th/95th percentiles per window — that is the whole cone
-- **Sample depth** — `GET /api/v1/backtesting/klines` reaches back to 2017-08 on Binance spot, so a BTC cone can include the 2018, 2020, and 2022 vol tails rather than a calm-only sample — the regime-dependence pitfall above
+- **Sample depth** — `GET /api/v1/backtesting/klines` reaches back to 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09) on Binance spot, so a BTC cone can include the 2018, 2020, and 2022 vol tails rather than a calm-only sample — the regime-dependence pitfall above
 - **Backtest** — replay "current 30d RV vs its own cone percentile" signals (e.g. vol-expansion entries from below the 25th percentile) against the same archive
 - **Tip** — overlapping windows are serially correlated: treat cone percentile bands as descriptive context in agent decisions, never as independent confidence intervals for statistical tests
 

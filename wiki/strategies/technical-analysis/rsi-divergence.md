@@ -2,7 +2,7 @@
 title: RSI Divergence Strategy
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags:
   - momentum
@@ -170,7 +170,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Confirmation** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — bearish divergence + positive funding (crowded longs) is the highest-probability short; bullish divergence + negative funding sets up the squeeze.
 - **Cascade check** — `GET /api/v1/market-intelligence/liquidations` — the amplifier of the reversal, and also the risk that invalidates a bullish divergence at support mid-cascade; size the stop for one cascade leg.
 - **Regime gate** — `GET /api/v1/quant/market` — divergences stack and fail in `strong_trend_*` states (the divergence trap); prefer `range_low_vol` reversion conditions.
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) with the three-filter rule (level + extreme RSI + price trigger) coded exactly as specified — raw divergence alone cannot reject the null.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) with the three-filter rule (level + extreme RSI + price trigger) coded exactly as specified — raw divergence alone cannot reject the null.
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Options Liquidity Screening"
 type: concept
 created: 2026-05-07
-updated: 2026-07-14
+updated: 2026-10-17
 status: good
 tags: [options, derivatives, crypto, market-microstructure, liquidity, slippage]
 markets: [crypto, options]
@@ -233,7 +233,7 @@ Per-strike bid-ask lives on the [[deribit|Deribit]] book and [[greeks-live|Greek
 - `GET /api/v1/liquidity/depth/{coin}` — 24h rolling depth history for the underlying
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive for modeling realized round-trip costs
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for modeling realized round-trip costs
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/options"

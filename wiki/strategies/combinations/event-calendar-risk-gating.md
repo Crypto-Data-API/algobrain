@@ -2,7 +2,7 @@
 title: "Event Calendar Risk Gating"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-03
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, event-driven, risk-management, market-making, funding-rate, volatility, grid-trading, perpetual-futures, quantitative, crypto, methodology]
 aliases: ["Event-Pause Framework", "Binary-Event Pause Protocol", "Scheduled-Event De-sizing", "Calendar-Gated Strategy Pause"]
@@ -394,7 +394,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Monitor set** — `GET /api/v1/volatility/implied`, `GET /api/v1/derivatives/funding-rates?coin=BTC`, `GET /api/v1/derivatives/open-interest?coin=BTC` — the resume-condition dashboard during each event window
 - **Cascade check** — `GET /api/v1/market-intelligence/liquidations` — real-time forced-flow detection while the book is gated down
 - **Event feed** — `GET /api/v1/event/calendar?type=unlock&days=30` + `GET /api/v1/event/regime/score` — a native forward catalyst calendar (unlocks, macro prints, depeg risk) to cross-check the external calendar sources noted above
-- **Backtest** — gate-window P&L replay from `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08); `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) preserves what the derivatives/vol dashboard actually showed on each historical date
+- **Backtest** — gate-window P&L replay from `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) preserves what the derivatives/vol dashboard actually showed on each historical date
 - **Tips** — this overlay's failure mode is resuming too early: encode resume conditions as explicit data checks (DVOL back under threshold, funding normalised, price range held) and let the agent enforce the full waiting period
 
 ## Related

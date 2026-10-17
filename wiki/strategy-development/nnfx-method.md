@@ -2,7 +2,7 @@
 title: "NNFX Method (No Nonsense Forex Algorithm)"
 type: concept
 created: 2026-09-28
-updated: 2026-09-28
+updated: 2026-10-17
 status: draft
 tags: [strategy-development, methodology, risk-management, position-sizing, trend-following, indicators, backtesting, forex, crypto]
 aliases: ["NNFX", "No Nonsense Forex", "NNFX Algorithm", "NNFX Way", "Baseline C1 C2 Volume Exit"]
@@ -175,7 +175,7 @@ def on_daily_close(sym, bars, book):
 - `GET /api/v1/event/calendar` — scheduled catalysts for the news-avoidance rule
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — full OHLCV archive (Parquet since 2020) for multi-year, per-role indicator tests
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for multi-year, per-role indicator tests
 - `GET /api/v1/backtesting/funding` — historical funding to charge runners realistically
 - `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time universe for survivorship-free baskets
 

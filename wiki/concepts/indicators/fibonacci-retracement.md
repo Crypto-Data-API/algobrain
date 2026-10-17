@@ -2,7 +2,7 @@
 title: "Fibonacci Retracement"
 type: concept
 created: 2026-04-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [technical-analysis, indicators]
 aliases: ["Fibonacci Levels", "Fib Retracement", "Fibonacci", "Fibonacci Retracements", "Fib Retracements", "Fib Levels"]
@@ -106,7 +106,7 @@ When multiple Fibonacci retracements from different swings converge at the same 
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500` — OHLCV for swing detection and level placement
-- `GET /api/v1/backtesting/klines` — deep kline archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500"
@@ -120,7 +120,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Compute** — detect the impulse swing (low to high) in `GET /api/v1/market-data/klines` output and lay the 23.6/38.2/50/61.8/78.6% levels across it
 - **Confluence** — cross-reference each level against moving averages computed from the same series and prior S/R pivots; only confluence-backed levels earn entries, per this page's guidance
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) supports bounce-rate studies per level — control against random levels, since five lines will catch *something* by chance
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) supports bounce-rate studies per level — control against random levels, since five lines will catch *something* by chance
 - **Tip** — codify swing selection (pivot lookback, minimum swing %) so backtest and live agree; subjective swing choice is the tool's greatest weakness
 
 ## Related

@@ -2,7 +2,7 @@
 title: "Diagonal Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, diagonal-spread, directional, theta, income, crypto, derivatives]
 aliases: ["Poor Man's Covered Call", "PMCC", "Diagonal Calendar", "Crypto PMCC"]
@@ -112,7 +112,7 @@ Strike/expiry selection, the [[deribit#DVOL Index — The "VIX of Crypto"|DVOL]]
 **Historical data:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
 - `GET /api/v1/market-data/btc-price-history?days=180` — BTC price + 200D MA for the multi-month directional backdrop
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive for roll/backtest studies
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for roll/backtest studies
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/options"
@@ -128,7 +128,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Signal** — time each short-call roll with `GET /api/v1/volatility/regime` (sell into elevated/`expanding` reads) and place the strike against `GET /api/v1/market-intelligence/options` max pain
 - **Regime gate** — `GET /api/v1/quant/market`: the PMCC wants a grinding bull — high `strong_trend_bull` with low `vol_spike` probability; a bear-regime flip threatens the deep-ITM long leg itself, not just the roll income
-- **Backtest** — replay roll-cycle economics on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) with `GET /api/v1/market-data/btc-price-history` (200D MA) as the directional backdrop; pin entries to point-in-time regimes via `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Backtest** — replay roll-cycle economics on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) with `GET /api/v1/market-data/btc-price-history` (200D MA) as the directional backdrop; pin entries to point-in-time regimes via `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
 - **Tips** — at every roll, compare option carry against perp carry via `/api/v1/derivatives/funding-rates?coin=BTC`: when funding runs deeply positive, a perp long can replicate the long leg more cheaply than the LEAPS-style call.
 
 ## Related

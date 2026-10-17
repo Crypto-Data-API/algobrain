@@ -2,7 +2,7 @@
 title: Mean Reversion
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags:
   - quantitative
@@ -35,6 +35,196 @@ kill_criteria: |
   - hit rate < 48% over trailing 200 trades
   - rolling 30-day Hurst exponent of the traded universe > 0.55 for 6 consecutive weeks
   - median realized round-trip cost > 25 bps for a full month
+gates:
+  - id: liquid_universe
+    role: universe
+    rule: "Liquid coins only: top ~30 by perp open interest and CEX spot volume"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+    note: "Rank assets[] by open_interest_usd (Hyperliquid perps). Spot volume per coin is quote_volume on /api/v1/market-data/ticker/24hr?symbol={symbol}USDT (Binance). The page does not say how the two rankings combine, and '~30' is approximate; both are the desk's call."
+  - id: no_catalyst
+    role: filter
+    rule: "Skip a coin with a token unlock, mainnet/upgrade date, exchange listing or macro print (FOMC, CPI) inside the 10-bar holding window"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?symbol={symbol}
+    field: items[].days_until
+    note: "A row with days_until inside the holding window blocks entry; macro prints are type=macro_print rows. The calendar holds scheduled unlocks, mints, depegs and macro prints up to 30 days out. Listings and protocol upgrades are not on it, so those stay a human check. On 1h bars the window is 10 hours, finer than the calendar's day grain."
+  - id: hurst_below_half
+    role: filter
+    rule: "Rolling Hurst exponent of the coin's series below 0.5 on the last N bars"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=250
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&start={start}
+    replay_field: candles[].close
+    note: "interval = 1h or 1d, the trading timeframe. The page never sets N (the kill criteria use a 30-day Hurst for the universe), so the window is the desk's."
+  - id: adf_stationary
+    role: filter
+    rule: "ADF test rejects a unit root (p below 0.05) on the last N bars"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=250
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&start={start}
+    replay_field: candles[].close
+    note: "The 0.05 level is from the page's diagnostics table. N is not set anywhere on the page; the desk picks it."
+  - id: no_vol_shock
+    role: filter
+    rule: "Skip the coin while its volatility regime is vol_shock"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    note: "Per-asset daily volatility label. No history of the label is served for replay; vol.rv_z_30 on the same row is the raw stretch."
+  - id: no_strong_trend
+    role: filter
+    rule: "Skip the coin while the HMM regime is strong_trend_bull or strong_trend_bear"
+    runnable: true
+    endpoint: /api/v1/quant/coins/{symbol}
+    field: regime.label
+    replay: /api/v1/quant/history?scope={symbol}&start={start}
+    replay_field: entries[].regime_label
+    note: "Per-coin label, matching the pseudocode's per-coin vol_regime(coin) check. Its code comment also names /quant/market, the whole-market label; which one gates a single coin is the desk's reading. Coins with under 60 days of history come back flagged meta.insufficient_history."
+  - id: z_long_entry
+    role: entry
+    rule: "Buy when z = (close - 20-bar SMA) / 20-bar standard deviation is at or below -2.0 (either this or z_short_entry)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=250
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&start={start}
+    replay_field: candles[].close
+    note: "interval = 1h or 1d (20h or 20d). Closed bars only: drop the bar named by forming_bar_timestamp. The Instrument Structures section describes single-asset reversion as a z-score of returns over a 5-20 day window; the Rules and pseudocode use price against a 20-bar SMA, which this gate follows."
+  - id: z_short_entry
+    role: entry
+    rule: "Short when the 20-bar z-score is at or above +2.0 (either this or z_long_entry); used sparingly"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=250
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&start={start}
+    replay_field: candles[].close
+  - id: btc_uptrend_long_bias
+    role: filter
+    rule: "Prefer the long side in a BTC uptrend and be far more cautious shorting strength"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical?symbol=BTC
+    field: items[].ma.above_200
+    note: "The page defines neither a BTC uptrend nor how much more cautious the short side should be. BTC above its 200-day SMA is one reading; the size or veto on shorts is the desk's."
+  - id: rsi2_long_confirm
+    role: filter
+    rule: "Longs need 2-period RSI below 10"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=250
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&start={start}
+    replay_field: candles[].close
+    note: "Wilder RSI(2) on the trading-timeframe closes. /indicators/technical serves RSI(14) only, so the 2-period value is computed from the closes."
+  - id: rsi2_short_confirm
+    role: filter
+    rule: "Shorts need 2-period RSI above 90"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=250
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&start={start}
+    replay_field: candles[].close
+  - id: sma200_long_side
+    role: filter
+    rule: "Longs only while the close is above the 200-bar SMA of the trading timeframe"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=250
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&start={start}
+    replay_field: candles[].close
+    note: "On 1d bars the same test is items[].ma.above_200 on /api/v1/indicators/technical?symbol={symbol}. The example reads the 200-hour SMA on 1h bars, so the closes are the general source."
+  - id: sma200_short_side
+    role: filter
+    rule: "Shorts only while the close is below the 200-bar SMA"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=250
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&start={start}
+    replay_field: candles[].close
+  - id: funding_long_ok
+    role: filter
+    rule: "Longs only while funding is above -0.05% per 8h (-0.00625% per hour on Hyperliquid)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "Threshold from the pseudocode (fund > -0.0005 on 8h funding). The Rules say 'deeply negative and still falling'; the pseudocode tests only the level, and the page gives no window for 'still falling'."
+  - id: funding_short_ok
+    role: filter
+    rule: "Shorts only while funding is below +0.05% per 8h (+0.00625% per hour on Hyperliquid)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "Threshold from the pseudocode (fund < 0.0005 on 8h funding)."
+  - id: z_reverted
+    role: exit
+    rule: "Take profit when z crosses back through 0 (price back at the 20-bar mean)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=250
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&start={start}
+    replay_field: candles[].close
+  - id: time_stop
+    role: stop
+    rule: "Exit after 10 bars of the trading timeframe (10 days on 1d, 10 hours on 1h)"
+    runnable: true
+    input: position
+  - id: hard_stop
+    role: stop
+    rule: "Exit when price has moved a further 1.5 sigma against the entry fill (sigma = the 20-bar standard deviation at entry)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "Sigma is recorded at entry from z_long_entry or z_short_entry."
+  - id: cascade_against_stop
+    role: stop
+    rule: "Exit on any liquidation-cascade acceleration against the position"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&window_s=300&include_quiet=true
+    field: alerts[].spike_ratio
+    note: "The page sets no cascade threshold. direction on the same row says which side is being flushed (long_flush is against a long). A 3x spike over the 24h mean is the cutoff liquidation-cascade-fade uses; the desk sets this one."
+  - id: risk_per_position
+    role: sizing
+    rule: "Risk 0.5% of equity per position to the hard stop"
+    runnable: true
+    input: position
+    note: "The example says it risks 0.5% of a $60k book, but $3,000 of SOL at a $6 stop risks $120 (0.2%): the 5% coin cap binds first. Its +1.7R is also about 1.17R on that stop ($7 gain over $6 risk). Prose unchanged."
+  - id: coin_cap
+    role: sizing
+    rule: "Cap any single coin at 5% of the book"
+    runnable: true
+    input: position
+  - id: concurrent_positions
+    role: sizing
+    rule: "Run 8-20 concurrent positions"
+    runnable: true
+    input: position
+  - id: vol_regime_scale
+    role: sizing
+    rule: "Cut gross exposure by 50% while the volatility regime is expanding or vol_shock"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    note: "The page does not say whose regime scales the whole book: BTC's label, each coin's, or a market reading such as composite_score on /api/v1/volatility/regime/score. That choice is the desk's."
+  - id: btc_rv_scale
+    role: sizing
+    rule: "Cut gross exposure by 50% while BTC 20-bar realized vol on 1h bars exceeds 2x its 90-day (2,160-bar) median"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin=BTC&interval=1h&start={start}
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin=BTC&interval=1h&start={start}
+    replay_field: candles[].close
+    note: "start = 90 days plus 20 hours ago (about 2,180 bars, inside the 15,000-bar range cap). Rolling 20-bar stdev of log returns, compared with the median of that series. The Rules write '~2x'; the pseudocode uses exactly 2."
+  - id: gross_leverage
+    role: sizing
+    rule: "Keep notional at 1-2x"
+    runnable: true
+    input: position
 ---
 
 # Mean Reversion

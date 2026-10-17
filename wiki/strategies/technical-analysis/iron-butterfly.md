@@ -2,7 +2,7 @@
 title: "Iron Butterfly"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, derivatives, volatility, mean-reversion, bitcoin, ethereum]
 aliases: ["Iron Fly", "Ironfly", "Crypto Iron Butterfly", "ATM Iron Condor"]
@@ -128,7 +128,7 @@ DVOL and the raw IV surface come from **Deribit / [[greeks-live]]**, not CryptoD
 **Historical:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for realized-vol computation
-- `GET /api/v1/backtesting/klines` — deep kline archive for backtesting
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for backtesting
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/options"
@@ -144,7 +144,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Signal** — body on the `GET /api/v1/market-intelligence/options` max-pain strike; sell only when `GET /api/v1/volatility/regime` is elevated but not `vol_shock`, so the ATM straddle credit is rich without an expansion underway
 - **Regime gate** — `GET /api/v1/quant/market` `range_low_vol` probability plus long dealer gamma from `/api/v1/quant/gex` is the pin regime the fly monetises; either flipping is the exit cue
-- **Backtest** — expiry-week pin behavior from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); entry vol states from `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) keep the timing test point-in-time
+- **Backtest** — expiry-week pin behavior from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); entry vol states from `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) keep the timing test point-in-time
 - **Tips** — enforce the profit-take mechanically (25% of max): the ATM body means gamma losses arrive faster than for a condor, and a `/api/v1/market-intelligence/liquidations` cascade is the flatten-now trigger.
 
 ## Related

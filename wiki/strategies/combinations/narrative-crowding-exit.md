@@ -2,7 +2,7 @@
 title: "Narrative Crowding Exit"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, narrative-impact, event-driven, momentum, funding-rate, perpetual-futures, open-interest, behavioral-finance, quantitative, crypto, altcoins, memecoins]
 aliases: ["Narrative Exit Discipline", "Crowding-Triggered Narrative Exit", "Funding-OI Narrative Distribution Gate", "Late-Stage Narrative Exit"]
@@ -336,7 +336,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — poll `GET /api/v1/derivatives/funding-rates?coin={TOKEN}` and `GET /api/v1/derivatives/open-interest?coin={TOKEN}` per held narrative token each hour; two crowding gates firing together triggers the scale-out
 - **Filter** — `GET /api/v1/derivatives/binance/long-short-ratio` for the optional Gate 3 triple-confirmation before a full (rather than partial) exit
 - **Regime gate** — `GET /api/v1/regimes/current`; a `Structural Shock` label overrides all gates and exits every narrative position immediately
-- **Backtest** — replay funding gates from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) against exit-day forward returns from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08)
+- **Backtest** — replay funding gates from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) against exit-day forward returns from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09)
 - **Tips** — batch the whole narrative basket through `GET /api/v1/quant/coins/risk` instead of looping per token; respect `new_listing` flags — young narrative tokens rarely have enough funding history to calibrate the crowding percentile
 
 ## Related

@@ -2,7 +2,7 @@
 title: "Crypto Trading Sessions (Asia / London / New York)"
 type: concept
 created: 2026-05-16
-updated: 2026-07-13
+updated: 2026-10-17
 status: good
 tags: [crypto, market-microstructure, liquidity, day-trading]
 aliases: ["Crypto Sessions", "Asia London New York Crypto", "Crypto Intraday Sessions", "LNY Overlap"]
@@ -83,7 +83,7 @@ For most retail-scale work, CoinGlass and CryptoQuant are the practical starting
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV klines
 - `GET /api/v1/market-data/btc-price-history?days=730` — BTC history + 200D MA
 - `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
-- `GET /api/v1/backtesting/klines` — deep kline archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=500"

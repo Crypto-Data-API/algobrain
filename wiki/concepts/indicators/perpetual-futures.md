@@ -2,7 +2,7 @@
 title: "Perpetual Futures"
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 confidence: medium
 tags: [derivatives, crypto, futures, perpetual-futures]
@@ -262,7 +262,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Fetch** — `GET /api/v1/hyperliquid/summary?coin=BTC` bundles price, funding, and OI for one perp in a single call; `GET /api/v1/hyperliquid/prices` and `GET /api/v1/hyperliquid/open-interest` cover all ~230 Hyperliquid perps at once, with Binance-side positioning via `GET /api/v1/derivatives/summary`
 - **Candles** — `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=1000` is the perp OHLCV backbone; `GET /api/v1/hyperliquid/l2-book` adds an order-book depth snapshot before execution
-- **Backtest** — `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30), `GET /api/v1/backtesting/klines` (Hyperliquid daily to 2023 launch, 1h/4h several months; Binance spot to 2017-08), `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) — model funding payments and liquidation risk explicitly, not just price P&L
+- **Backtest** — `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30), `GET /api/v1/backtesting/klines` (Hyperliquid daily to 2023 launch, 1h/4h several months; Binance spot back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09), `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) — model funding payments and liquidation risk explicitly, not just price P&L
 - **Tip** — perp backtests fail most often on the funding leg: charge/credit funding every interval the position is open, and segment results by funding regime — 2021-style persistent positive funding does not extrapolate
 
 ## Sources

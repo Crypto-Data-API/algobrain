@@ -2,7 +2,7 @@
 title: "Options Income (Crypto)"
 type: strategy
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [options, crypto, income, premium-selling, volatility, derivatives, bitcoin, ethereum, theta]
 aliases: ["Options Income", "Crypto Options Income", "Income from Options", "Premium Income", "Options Income Overlay", "Yield Enhancement", "Premium Selling Overlay"]
@@ -323,7 +323,7 @@ DVOL and the raw IV surface come from Deribit / [[greeks-live]]; [[cryptodataapi
 **Historical data:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for realized-vol computation
-- `GET /api/v1/backtesting/klines` — deep kline archive for VRP backtesting
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for VRP backtesting
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime/score"
@@ -340,7 +340,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Entry gate** — `GET /api/v1/volatility/regime` must read `normal` or `mean_reverting` (never `vol_shock` or `expanding`) before opening condors/strangles; `GET /api/v1/market-intelligence/options` supplies the OI walls and [[max-pain]] strike for wing placement
 - **Kill switch** — poll `GET /api/v1/volatility/regime/score` plus `GET /api/v1/market-intelligence/liquidations` every cycle; a score surge with a liquidation burst is the machine-readable proxy for the "DVOL +50% in a session → flatten" rule
 - **Skew read** — `GET /api/v1/derivatives/funding-rates?coin=BTC`; richly positive funding flags the overbid call wing to lean the short toward
-- **Backtest** — compute realized vol from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) and replay entries against point-in-time regimes from `GET /api/v1/backtesting/daily-snapshots` (full payload since 2026-03-02) to avoid lookahead bias; DVOL history itself must come from Deribit
+- **Backtest** — compute realized vol from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) and replay entries against point-in-time regimes from `GET /api/v1/backtesting/daily-snapshots` (full payload since 2026-03-02) to avoid lookahead bias; DVOL history itself must come from Deribit
 - **Tips** — append `?format=markdown` for cleaner context windows; respect `insufficient_history` flags on per-asset vol-regime reads before trusting a gate signal
 
 ## Sources

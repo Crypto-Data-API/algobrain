@@ -2,7 +2,7 @@
 title: "Post-Panic Vol Selling"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-03
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, options, volatility, derivatives, behavioral-finance, sentiment, mean-reversion, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Post-Event Short Vol", "Fear-Extreme Vol Selling", "Panic-Spike Premium Harvesting", "Stabilisation-Confirmed Vol Entry"]
@@ -355,7 +355,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run all
 - **Gate stack** — `GET /api/v1/sentiment/fear-greed` (consecutive extreme-fear), `GET /api/v1/volatility/implied` (spike percentile), and `GET /api/v1/market-intelligence/liquidations?coin=BTC` (no fresh cascade) are polled together each hour post-panic
 - **Signal** — 15m klines compute realised vol rolling over (Gate 3) — the actual entry trigger
 - **Regime gate** — `GET /api/v1/regimes/current`; `Structural_Shock` defers entry no matter how stretched DVOL is
-- **Backtest** — `GET /api/v1/market-intelligence/fear-greed-history` + DVOL history + `GET /api/v1/backtesting/klines` (1d back to 2017-08) replay the gates across past panics; the cascade-clear condition (Gate 4) replays only since 2026-03-30 via `GET /api/v1/backtesting/liquidations`
+- **Backtest** — `GET /api/v1/market-intelligence/fear-greed-history` + DVOL history + `GET /api/v1/backtesting/klines` (1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) replay the gates across past panics; the cascade-clear condition (Gate 4) replays only since 2026-03-30 via `GET /api/v1/backtesting/liquidations`
 - **Tips** — the short-put execution itself lives on Deribit; CryptoDataAPI covers all five gates, so let the agent hold the full gate state and only call Deribit when armed
 
 ## Related

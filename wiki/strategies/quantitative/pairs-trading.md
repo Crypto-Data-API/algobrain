@@ -2,7 +2,7 @@
 title: "Pairs Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-09-28
+updated: 2026-10-17
 status: good
 tags: [mean-reversion, pairs-trading, statistical-arbitrage, market-neutral, quantitative, cointegration, crypto]
 aliases: ["Pairs Trade", "Statistical Pairs Trading", "Stat Arb Pairs", "Crypto Pairs"]
@@ -351,7 +351,7 @@ See [[when-to-retire-a-strategy]].
 - `GET /api/v1/event/calendar` — unlocks / listings / upgrades that break cointegration
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — full OHLCV archive for cointegration + spread backtests
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for cointegration + spread backtests
 - `GET /api/v1/backtesting/funding` — funding history for the carry overlay
 - `GET /api/v1/backtesting/symbols` — which symbols have backtest-grade history
 
@@ -370,7 +370,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — spread, β, and z-score from `GET /api/v1/market-data/klines?interval=1h` (CEX legs) and `GET /api/v1/hyperliquid/candles?interval=1h` (alt-perp legs); `GET /api/v1/derivatives/funding-rates` per leg is the crypto "borrow cost" that decides whether a slow spread is worth holding
 - **Catalyst filter** — `GET /api/v1/event/calendar` before entry: an unlock or listing on either leg inside the half-life window is a cointegration-break waiting to happen
 - **Regime gate** — `GET /api/v1/quant/market`: stand down in `vol_spike` (correlated deleveraging widens every crowded spread at once) and treat BTC-dominance rotations as re-test triggers
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08; HL daily to 2023) for out-of-sample cointegration re-tests; `GET /api/v1/backtesting/funding` (HL hourly since 2023-05) for the short-leg carry; `GET /api/v1/backtesting/symbols` + dated `GET /api/v1/backtesting/daily-snapshots/{date}` (since 2026-03-02) keep delisted legs in the test universe
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09; HL daily to 2023) for out-of-sample cointegration re-tests; `GET /api/v1/backtesting/funding` (HL hourly since 2023-05) for the short-leg carry; `GET /api/v1/backtesting/symbols` + dated `GET /api/v1/backtesting/daily-snapshots/{date}` (since 2026-03-02) keep delisted legs in the test universe
 - **Tips** — schedule the weekly Engle-Granger re-test as an automated job and close any pair that fails it (p > 0.05) the same day; batch the pair universe against `GET /api/v1/quant/coins/risk` for per-leg sizing
 
 ## Instrument Structures

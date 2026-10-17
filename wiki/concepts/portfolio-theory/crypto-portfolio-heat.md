@@ -2,7 +2,7 @@
 title: "Crypto Portfolio Heat"
 type: concept
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-10-17
 status: good
 tags: [crypto, portfolio-theory, risk-management, correlation, altcoins, bitcoin, position-sizing]
 aliases: ["Crypto Portfolio Heat", "Beta-Weighted Crypto Exposure", "Crypto Directional Heat", "BTC-Beta Budgeting"]
@@ -113,7 +113,7 @@ The book *feels* like $1M of exposure with a hedge; in stress it is **1.33× NAV
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=SOLUSDT&interval=1d&limit=365` — daily returns to estimate each asset's beta to BTC (calm and stressed windows)
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive to fit crash-window betas across drawdowns
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history to fit crash-window betas across drawdowns
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-health/altcoin-breadth"

@@ -2,7 +2,7 @@
 title: "Triangular Arbitrage"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [arbitrage, forex, crypto, triangular, currency-pairs, algorithmic, market-neutral, cross-rate]
 aliases: ["Tri Arb", "Three-Way Arbitrage", "Cross-Rate Arbitrage"]
@@ -321,7 +321,7 @@ Execution is a sub-millisecond latency race that needs native exchange WebSocket
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=<SYM>&interval=1m&limit=1000` — recent bars for deviation-frequency studies per triplet
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive (Binance spot 1h/4h/1d to 2017-08; 1m only since 2026-03-30)
+- `GET /api/v1/backtesting/klines` — deep OHLCV archive (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09; 1m only since 2026-03-30)
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/daily/prices"

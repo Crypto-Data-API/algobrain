@@ -2,7 +2,7 @@
 title: "Alt-Season Momentum Gate (Dominance / Alt-Season Gate)"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, momentum, bitcoin, altcoins, market-regime, regime-detection, quantitative, crypto, behavioral-finance]
 aliases: ["Alt Season Momentum", "Dominance-Gated Momentum", "BTC Dominance Rotation Gate", "Alt-Season Cross-Sectional Gate", "Dominance Regime Momentum"]
@@ -548,7 +548,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Gate leg** — `GET /api/v1/market-health/altcoin-breadth?period=200` + `GET /api/v1/market-health/summary` — recompute the dominance mode (alt-season / BTC-only / ambiguous) daily; the mode decides which book runs
 - **Momentum leg** — `GET /api/v1/market-data/klines?symbol={SYMBOL}USDT&interval=1d&limit=60` across the alt universe for the risk-adjusted momentum ranking; `GET /api/v1/derivatives/funding-rates?coin={symbol}` drops alts with 8h funding ≥ +0.06%
 - **Regime gate** — `GET /api/v1/quant/market` — suppress alt deployments while `choppy_high_vol` leads the HMM probabilities, even inside alt-season mode
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) for basket returns; `GET /api/v1/market-health/history?days=730` caps the dominance-gate replay at ~2 years; `GET /api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus) extends the regime overlay further back
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for basket returns; `GET /api/v1/market-health/history?days=730` caps the dominance-gate replay at ~2 years; `GET /api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus) extends the regime overlay further back
 - **Tips** — batch the alt screen via `GET /api/v1/quant/coins/risk` instead of looping symbols; respect `insufficient_history` / `new_listing` flags before admitting a recently listed alt to the basket
 
 ## Related

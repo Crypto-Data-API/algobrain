@@ -2,7 +2,7 @@
 title: "Dynamic Breakout II"
 type: strategy
 created: 2026-09-28
-updated: 2026-09-28
+updated: 2026-10-17
 status: draft
 tags: [breakout, technical-analysis, trend-following, volatility, forex, crypto]
 aliases: ["Dynamic Breakout 2", "Adaptive Lookback Breakout"]
@@ -145,7 +145,7 @@ On the [[cryptodataapi-mcp|CryptoDataAPI MCP]]:
 
 - **Signal** — pull 100 daily klines per major, recompute N, bands and channel once per UTC day
 - **Regime gate** — cross-check the adaptive N against `/volatility/regime`; skip entries in a vol-shock regime where band breaks are liquidation noise
-- **Backtest** — `/backtesting/klines` daily since 2017 covers several crypto trend and chop cycles; include funding from `/backtesting/funding`
+- **Backtest** — daily bars back to 2017-08 in the `klines_deep` archive cover several crypto trend and chop cycles (the REST `/backtesting/klines` route only starts 2026-05-09); include funding from `/backtesting/funding`
 - **Tips** — log N each day; if it sits at the 60 cap for months, the adaptation has stopped doing anything
 
 ## Sources

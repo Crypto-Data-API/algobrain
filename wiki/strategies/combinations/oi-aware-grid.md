@@ -2,7 +2,7 @@
 title: "OI-Aware Grid"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, grid-trading, open-interest, market-microstructure, perpetual-futures, quantitative, risk-management, crypto]
 aliases: ["OI-Gated Grid", "Open-Interest Filtered Grid", "Leverage-Aware Grid Bot", "OI-Build Grid Pause"]
@@ -358,7 +358,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Gate** — `GET /api/v1/derivatives/open-interest?coin=BTC` (12h/24h OI change rate) is the pause trigger; `GET /api/v1/derivatives/binance/open-interest` separates Binance-driven from Hyperliquid-driven builds
 - **Signal** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=50` (ATR) and `interval=4h&limit=30` (ADX) keep the vol/trend gates current between grid re-centres
 - **Regime gate** — `GET /api/v1/regimes/current` forces a full pause in trending or shock regimes; `GET /api/v1/derivatives/funding-rates?coin=BTC` adds the funding-extreme pause
-- **Backtest** — simulate grid fills on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h back to 2017-08); the OI leg is shallower — `/derivatives/binance/history` covers ~90 days over REST and the Binance daily archive in `GET /api/v1/backtesting/funding` (which includes OI) starts 2026-03-30, so calibrate OI thresholds on rolling recent windows, not multi-year fits
+- **Backtest** — simulate grid fills on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); the OI leg is shallower — `/derivatives/binance/history` covers ~90 days over REST and the Binance daily archive in `GET /api/v1/backtesting/funding` (which includes OI) starts 2026-03-30, so calibrate OI thresholds on rolling recent windows, not multi-year fits
 - **Tips** — append `?format=markdown` on summary reads for cleaner agent context; respect `Cache-Control` headers rather than re-polling OI every minute
 - **Prompt library** — the "Open Interest Divergence Scanner" prompt (Free tier, [prompt library](https://cryptodataapi.com/prompts)) supplies the OI-quadrant read that arms or disarms this grid
 

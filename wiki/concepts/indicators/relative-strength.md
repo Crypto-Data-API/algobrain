@@ -2,7 +2,7 @@
 title: Relative Strength
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [technical-analysis, momentum, sector-rotation]
 aliases: [RS, comparative relative strength, relative performance, relative-strength]
@@ -96,7 +96,7 @@ Relative strength is central to [[momentum-trading]] strategies. Stocks showing 
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=1000` — pull each leg's closes and divide to build the RS line
-- `GET /api/v1/backtesting/klines` — deep kline archive for long-lookback RS studies
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for long-lookback RS studies
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=365"
@@ -110,7 +110,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Compute** — the RS line is two `GET /api/v1/market-data/klines` pulls divided close-by-close (e.g. ETHUSDT over BTCUSDT); the return-spread variant subtracts benchmark return over the same lookback
 - **Live state** — `GET /api/v1/daily/prices` snapshots the full Binance spot universe once, replacing thousands of per-symbol calls when ranking a whole universe by RS
-- **Backtest** — replay top-decile RS rotation against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08), and use `GET /api/v1/backtesting/symbols` plus dated `GET /api/v1/backtesting/daily-snapshots/{date}` to keep delisted coins in the ranked universe — RS screens are especially exposed to survivorship bias
+- **Backtest** — replay top-decile RS rotation against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09), and use `GET /api/v1/backtesting/symbols` plus dated `GET /api/v1/backtesting/daily-snapshots/{date}` to keep delisted coins in the ranked universe — RS screens are especially exposed to survivorship bias
 - **Tip** — in crypto the natural benchmark is BTC rather than an index: a coin/BTC RS line rising while BTC itself trends up is the standard altcoin-leadership read
 
 ## Related

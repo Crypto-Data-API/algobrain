@@ -364,7 +364,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — `GET /api/v1/on-chain/whales/accumulation-score/BTC` (7-day accumulation score) is the smart-money leg; `GET /api/v1/on-chain/exchange-flows/spike-alerts` confirms outflows in real time
 - **Crowd leg** — `GET /api/v1/derivatives/funding-rates?coin=BTC` + `GET /api/v1/derivatives/binance/long-short-ratio` establish that the crowd is positioned opposite the whales
 - **Regime gate** — `GET /api/v1/regimes/current`; skip or halve size in `Structural_Shock` / bear-trend labels
-- **Backtest** — the whale-score endpoint returns its own historical timeseries; join it to daily klines back to 2017-08 (`GET /api/v1/backtesting/klines`) and to point-in-time snapshots (`GET /api/v1/backtesting/daily-snapshots`, since 2026-03-02) for the crowd side
+- **Backtest** — the whale-score endpoint returns its own historical timeseries; join it to daily klines back to 2017-08 only in the `klines_deep` archive (`GET /api/v1/backtesting/klines`; the REST route starts 2026-05-09) and to point-in-time snapshots (`GET /api/v1/backtesting/daily-snapshots`, since 2026-03-02) for the crowd side
 - **Tips** — the whole `/on-chain/whales*` family (including `accumulation-score`) currently returns "coming soon"; run the pipeline on `spike-alerts` + an external whale source and re-probe the family monthly instead of failing the run
 - **Prompt library** — the "Whale Positioning Monitor" prompt (Pro tier, [prompt library](https://cryptodataapi.com/prompts)) gives the smart-money side of this divergence read
 

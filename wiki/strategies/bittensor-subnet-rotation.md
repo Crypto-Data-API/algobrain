@@ -2,7 +2,7 @@
 title: "Bittensor Subnet Rotation"
 type: strategy
 created: 2026-04-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [crypto, defi, bittensor, ai-trading, momentum, algorithmic]
 aliases: ["dTAO Subnet Rotation", "Alpha Rotation"]
@@ -202,7 +202,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **TAO-beta hedge** — `GET /api/v1/derivatives/funding-rates?coin=TAO` + `GET /api/v1/market-data/ticker/price?symbol=TAOUSDT`: size and carry-cost a TAO perp short against the alpha book's TAO exposure during rebalances and leg gaps.
 - **Regime gate** — `GET /api/v1/quant/market`: cut gross rotation exposure when `strong_trend_bear`/`vol_spike` probabilities rise — alpha tokens are TAO-denominated, so rotation alpha does not survive a TAO cascade unhedged.
 - **Kill-risk monitor** — `GET /api/v1/quant/coins/TAO` (per-coin probability matrix, Pro): the machine-readable version of the TAO-drawdown kill criterion.
-- **Backtest** — the TAO legs replay from `GET /api/v1/backtesting/klines` and `GET /api/v1/backtesting/funding` (Hyperliquid hourly funding, from TAO's listing — not the 2023-05 archive start); emission-share history must come from taostats — CDA holds no Subtensor data.
+- **Backtest** — the TAO legs replay from `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) and `GET /api/v1/backtesting/funding` (Hyperliquid hourly funding, from TAO's listing — not the 2023-05 archive start); emission-share history must come from taostats — CDA holds no Subtensor data.
 - **Tips** — respect `insufficient_history` flags on TAO derivatives data; the rotation signal updates block-by-block (12s), so pair CDA's cached hourly `GET /api/v1/daily` context with a direct Subtensor subscription for the alpha side.
 
 ## Related

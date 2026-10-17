@@ -2,7 +2,7 @@
 title: "Momentum Screening"
 type: concept
 created: 2026-04-10
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [momentum, technical-analysis, quantitative]
 aliases: ["momentum screening", "momentum screen", "momentum stock screen", "Momentum Screening"]
@@ -92,7 +92,7 @@ The same screen structure ports directly to the crypto universe (relative streng
 - `GET /api/v1/indicators/technical` — universe-wide SMA/BB/RSI structure state (Pro+) as the trend filter
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — kline archive (Binance spot 1h/4h/1d back to 2017-08) for computing 6/12-month lookback returns and backtesting the composite score
+- `GET /api/v1/backtesting/klines` — kline archive (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for computing 6/12-month lookback returns and backtesting the composite score
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/short-term-price"

@@ -2,7 +2,7 @@
 title: "WaveTrend Oscillator"
 type: concept
 created: 2026-09-28
-updated: 2026-09-28
+updated: 2026-10-17
 status: draft
 tags: [indicators, technical-analysis, momentum, mean-reversion, crypto]
 aliases: ["WaveTrend", "WT", "WaveTrend [LazyBear]", "WaveTrend Oscillator [WT]", "WT_LB"]
@@ -78,7 +78,7 @@ LazyBear's own description says crossovers are only some of the useful signals. 
 - `GET /api/v1/indicators/signum-rgg`: ADX/DMI trend colour, a ready-made trend gate for WT reversal signals
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines`: deep archive for calibrating per-asset bands and testing crosses
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive): history for calibrating per-asset bands and testing crosses
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=ETHUSDT&interval=4h&limit=200"

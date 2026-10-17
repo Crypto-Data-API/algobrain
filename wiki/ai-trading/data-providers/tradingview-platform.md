@@ -2,7 +2,7 @@
 title: "TradingView"
 type: entity
 created: 2026-04-06
-updated: 2026-09-28
+updated: 2026-10-17
 status: good
 tags: [data-provider, platform, crypto, forex, technical-analysis, options]
 entity_type: company
@@ -144,7 +144,7 @@ A practical route from a community script to a research-grade test:
 
 1. **Copy the open-source Pine code** and give it to an LLM. Ask it to explain every input, list any repainting or lookahead risks it finds (`request.security`, `calc_on_every_tick`, pivots), and state the exact entry and exit rules in plain English.
 2. **Ask for "fees on, full history".** Have the LLM rewrite the `strategy()` header with explicit `commission_type = strategy.commission.percent`, a realistic `commission_value` and `slippage`, fixed-fraction sizing, and `request.security(..., lookahead = barmerge.lookahead_off)` or offset HTF calls. Re-run on the longest history your plan allows, and compare against the author's headline.
-3. **Port to Python.** Have the LLM translate the logic into [[python|Python]] (pandas, or [[vectorbt]] / [[backtrader]]) and compute signals only from confirmed bars. Feed it [[cryptodataapi-backtesting|CryptoDataAPI]] klines (`GET /api/v1/backtesting/klines` for the deep archive, `GET /api/v1/market-data/klines` for recent bars) and add perp funding from `GET /api/v1/backtesting/funding` if the strategy holds leveraged positions.
+3. **Port to Python.** Have the LLM translate the logic into [[python|Python]] (pandas, or [[vectorbt]] / [[backtrader]]) and compute signals only from confirmed bars. Feed it [[cryptodataapi-backtesting|CryptoDataAPI]] klines (`GET /api/v1/backtesting/klines` for history from 2026-05-09, the `klines_deep` archive for older 1h/4h/1d bars, and `GET /api/v1/market-data/klines` for recent bars) and add perp funding from `GET /api/v1/backtesting/funding` if the strategy holds leveraged positions.
 4. **Validate the port.** Check that the Python signal series matches the TradingView plot bar-for-bar on a recent window before you trust any statistic. Then run [[walk-forward-analysis]], parameter-sensitivity sweeps and a cost overlay, and hand the result to the [[overfitting-detection]] checklist.
 5. **Document the result.** Record the port on the wiki with `backtest_status: untested` until it passes, crediting the original author by TradingView username.
 

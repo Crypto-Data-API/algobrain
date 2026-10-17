@@ -2,7 +2,7 @@
 title: "Volatility Arbitrage"
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, volatility, arbitrage, implied-volatility, realized-volatility, variance, vol-trading, derivatives, crypto]
 aliases: ["Vol Arb", "Volatility Trading", "IV vs RV Trading"]
@@ -114,7 +114,7 @@ Vol arb needs the options surface (IV, OI, positioning), a realized-vol series, 
 
 - **BTC options surface** — `GET /api/v1/market-intelligence/options` (BTC options open interest, volume, and max-pain) to gauge positioning and the implied side of the spread.
 - **Volatility regime** — `GET /api/v1/volatility/regime` and `GET /api/v1/volatility/regime/{symbol}` (compressed / expanding / vol-shock / mean-reverting) to time long vs short vol; the market-wide `GET /api/v1/volatility/regime/score` for a 0–100 vol-stress composite.
-- **Realized vol input** — `GET /api/v1/market-data/klines` (and `GET /api/v1/backtesting/klines` from 2020) to compute close-to-close / Parkinson RV for the IV–RV comparison.
+- **Realized vol input** — `GET /api/v1/market-data/klines` (and `GET /api/v1/backtesting/klines`, whose REST bars start 2026-05-09, with older 1h/4h/1d bars in the `klines_deep` archive) to compute close-to-close / Parkinson RV for the IV–RV comparison.
 - **Crypto vol drivers** — `GET /api/v1/derivatives/funding-rates` (crowded-leverage / carry signal) and `GET /api/v1/market-intelligence/liquidations` (cascade risk to a short-gamma book).
 
 ```bash
@@ -133,7 +133,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **RV leg** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` → close-to-close / Parkinson RV for the IV−RV spread; `GET /api/v1/market-intelligence/options` supplies OI/positioning around the implied side.
 - **Regime gate** — `GET /api/v1/volatility/regime` and `GET /api/v1/volatility/regime/{symbol}` — short vol in `mean_reverting`/`normal`, long vol from `compressed`, flatten in `vol_shock`.
 - **Cascade watch** — `GET /api/v1/derivatives/funding-rates?coin=BTC` (crowded leverage precedes vol expansion) + `GET /api/v1/market-intelligence/liquidations` (the RV explosion that breaks a short-gamma book).
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) for multi-cycle RV estimation; `GET /api/v1/quant/regimes/history` (hourly HMM probabilities since 2020, Pro Plus) to condition the premium harvest on regime. No historical IV surface on CDA — that series comes from Deribit.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for multi-cycle RV estimation; `GET /api/v1/quant/regimes/history` (hourly HMM probabilities since 2020, Pro Plus) to condition the premium harvest on regime. No historical IV surface on CDA — that series comes from Deribit.
 - **Tips** — hedge slippage is the quiet killer: model re-hedge costs from live `GET /api/v1/liquidity/depth` reads rather than assuming mid fills.
 
 ## Related

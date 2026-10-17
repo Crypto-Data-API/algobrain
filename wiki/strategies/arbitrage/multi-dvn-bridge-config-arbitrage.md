@@ -2,7 +2,7 @@
 title: "Multi-DVN Bridge Configuration Arbitrage"
 type: strategy
 created: 2026-04-28
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [arbitrage, crypto, defi, risk-management, ai-trading]
 aliases: ["DVN Configuration Pair Trade", "Bridge Verifier RV", "1-of-1 vs Multi-DVN Pair"]
@@ -271,7 +271,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Universe** — `GET /api/v1/hyperliquid/meta` filters the config-scored universe down to names with listed perps; `GET /api/v1/liquidity/depth` caps per-name size against actual book depth.
 - **Carry management** — batch `GET /api/v1/derivatives/funding-rates?coin=<COIN>` across both baskets each funding cycle; the structure is negative-carry, so a funding drift past the 60 bps breakeven is a rebalance trigger, not noise.
 - **Event trigger** — poll `GET /api/v1/security/events` and `GET /api/v1/security/regime/score`: a hack print on a short-basket name is the payoff moment — pre-plan the exit because exploit freezes make fills partial.
-- **Backtest** — `GET /api/v1/backtesting/funding` (HL hourly since 2023-05) prices historical basket carry; replay exploit events (KelpDAO Apr 2026 and earlier) against `GET /api/v1/backtesting/klines` and point-in-time `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) to estimate per-event payoff without [[lookahead-bias]].
+- **Backtest** — `GET /api/v1/backtesting/funding` (HL hourly since 2023-05) prices historical basket carry; replay exploit events (KelpDAO Apr 2026 and earlier) against `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) and point-in-time `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) to estimate per-event payoff without [[lookahead-bias]].
 - **Tips** — keep the on-chain config score and the CDA carry/depth reads in one loop so basket membership and sizing never desync; respect `new_listing` flags on freshly listed bridge-app perps where funding and depth are least reliable.
 
 ## Related

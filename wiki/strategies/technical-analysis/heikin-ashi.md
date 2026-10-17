@@ -2,7 +2,7 @@
 title: "Heikin-Ashi Charts"
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 domain: [technical-analysis]
 prerequisites: ["[[candlestick-patterns]]"]
@@ -190,7 +190,7 @@ Heikin-Ashi is a transform of OHLCV — pull raw klines and compute the four HA 
 - `GET /api/v1/hyperliquid/candles?coin=BTC&interval=4h&limit=500` — Hyperliquid perp OHLCV.
 
 **Historical archive (backtesting):**
-- `GET /api/v1/backtesting/klines` — full OHLCV archive (Parquet since 2020) for building HA series across history.
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for building HA series across history.
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
@@ -208,7 +208,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Compute** — pull raw OHLCV from `GET /api/v1/market-data/klines` (spot) or `GET /api/v1/hyperliquid/candles` (perps) and derive the four HA series locally on closed candles only — HA is a transform, not an endpoint
 - **Signal** — the color flip / flat-edged-candle read on 4h-daily HA; execute entries and stops on the *standard* candle series from the same klines call, never on synthetic HA prices
 - **Regime gate** — HA whipsaws in chop by construction: require `GET /api/v1/quant/market` `strong_trend` probability to lead before honoring flips, or use `GET /api/v1/indicators/signum-rgg` as the per-asset trend gate
-- **Backtest** — rebuild HA across history from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08; Hyperliquid daily to 2023); split flip-following results by regime via `/api/v1/quant/regimes/history` (since 2020, Pro Plus)
+- **Backtest** — rebuild HA across history from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09; Hyperliquid daily to 2023); split flip-following results by regime via `/api/v1/quant/regimes/history` (since 2020, Pro Plus)
 - **Tips** — never map stops to HA levels — the synthetic open/close are untradeable; place exits on real candles and check book depth before sizing.
 
 ## Key Takeaways

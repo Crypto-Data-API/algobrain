@@ -4,6 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: draft
+generated: true
 tags: [crypto]
 aliases: ["MBG"]
 entity_type: protocol

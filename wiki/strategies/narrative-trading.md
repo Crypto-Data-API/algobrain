@@ -2,7 +2,7 @@
 title: "Narrative Trading"
 type: strategy
 created: 2026-06-22
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [behavioral-finance, momentum, crypto, swing-trading]
 aliases: ["Trade the Narrative", "Story Trading", "Theme Trading", "Narrative Rotation"]
@@ -152,7 +152,7 @@ Attention/flow reads for the crypto expression of narrative trading. Raw social-
 
 **Historical data:**
 - `GET /api/v1/market-intelligence/fear-greed-history` — sentiment timeseries for exhaustion-pattern research
-- `GET /api/v1/backtesting/klines` — OHLCV archive (Binance spot 1h/4h/1d back to 2017-08) for narrative-leader momentum tests
+- `GET /api/v1/backtesting/klines` — OHLCV archive (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for narrative-leader momentum tests
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"

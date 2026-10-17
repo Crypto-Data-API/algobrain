@@ -2,7 +2,7 @@
 title: "Perp DEX Aggregation & Cross-Venue Routing"
 type: strategy
 created: 2026-06-20
-updated: 2026-07-20
+updated: 2026-10-17
 status: draft
 tags: [crypto, derivatives, arbitrage, liquidity, slippage, algorithmic]
 aliases: ["Perp DEX Aggregation", "Cross-Venue Perp Routing", "Perpetual DEX Aggregator Strategy"]
@@ -189,7 +189,7 @@ See [[failure-modes]]. The most likely:
 
 **Historical data:**
 - `GET /api/v1/backtesting/funding` — Hyperliquid hourly funding since 2023-05; Binance daily (with mark price + OI) since 2026-03-30 — the cross-venue funding-dispersion replay
-- `GET /api/v1/backtesting/klines` — OHLCV archive for both venues (Binance spot to 2017-08; HL daily to 2023)
+- `GET /api/v1/backtesting/klines` — OHLCV archive for both venues (Binance spot back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09; HL daily to 2023)
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \

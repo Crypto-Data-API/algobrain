@@ -2,7 +2,7 @@
 title: "Cointegration"
 type: concept
 created: 2026-04-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [quantitative, pairs-trading, mean-reversion, statistics]
 aliases: ["Cointegrated", "Cointegration Test"]
@@ -87,7 +87,7 @@ Extension of pairs trading to large portfolios. Identify clusters of cointegrate
 - `GET /api/v1/daily/prices` — ~2,500 Binance spot pairs for universe-wide pair screening
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — deep kline archive for long-window tests
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for long-window tests
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=500"
@@ -101,7 +101,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Compute** — pull two (or more) daily close series from `GET /api/v1/market-data/klines`, run Engle-Granger (OLS + ADF on residuals) or Johansen for baskets, and estimate the spread's half-life
 - **Screen** — `GET /api/v1/daily/prices` snapshots ~2,500 pairs in one call; accumulated daily, it becomes the price matrix for scanning candidate crypto pairs (L1s, exchange tokens, correlated alts)
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) provides the multi-year windows this test needs — cointegration found on short samples rarely survives out-of-sample
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) provides the multi-year windows this test needs — cointegration found on short samples rarely survives out-of-sample
 - **Tip** — crypto cointegration breaks on narrative rotations and delistings; re-test on rolling windows and use `GET /api/v1/backtesting/symbols` plus dated snapshots to keep dead pairs in the research universe
 
 ## Related

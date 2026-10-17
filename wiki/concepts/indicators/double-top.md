@@ -2,7 +2,7 @@
 title: "Double Top and Double Bottom"
 type: concept
 created: 2026-06-30
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [indicators, technical-analysis]
 aliases: ["Double Top", "Double Bottom", "M pattern", "W pattern", "double-bottom", "double top and bottom"]
@@ -101,7 +101,7 @@ A stock tops out after an extended uptrend:
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500` — OHLCV for swing-pivot detection
 - `GET /api/v1/market-data/volume-history?days=90` — volume for peak and break confirmation
-- `GET /api/v1/backtesting/klines` — deep kline archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500"
@@ -115,7 +115,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Detect** — find swing pivots in `GET /api/v1/market-data/klines` output and flag two highs within a small tolerance (~2-3%) separated by a trough; confirm only on a close below the trough
 - **Confirm** — compare the second peak's volume against the first via `GET /api/v1/market-data/volume-history`; a lighter second peak is the early divergence warning described above
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) measures completion rates and measured-move accuracy over full cycles
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) measures completion rates and measured-move accuracy over full cycles
 - **Tip** — crypto's stop-hunting around obvious trough levels is severe; test entering on the retest of the broken level rather than the first break to filter the fakeouts the page warns about
 
 ## Related

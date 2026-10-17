@@ -2,7 +2,7 @@
 title: "Short Straddle"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, short-straddle, premium-selling, volatility, neutral, derivatives]
 aliases: ["Crypto Short Straddle", "BTC Short Straddle", "Selling the Straddle", "ATM Premium Selling"]
@@ -135,7 +135,7 @@ Do not sell into an already-spiking DVOL — that is selling a falling knife of 
 **Historical data:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for [[realized-volatility]] (compare RV to DVOL to judge whether vol is rich)
-- `GET /api/v1/backtesting/klines` — deep kline archive for RV backtesting
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for RV backtesting
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime"
@@ -153,7 +153,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Catalyst check** — `GET /api/v1/event/calendar` — no ATM straddles across unlocks/macro prints unless the post-event crush is the explicit trade.
 - **Pin context** — `GET /api/v1/market-intelligence/options` (max pain, OI walls) + `GET /api/v1/quant/gex` — long-gamma dealers dampen the tape the straddle wants pinned.
 - **Kill switch** — poll `GET /api/v1/volatility/regime/score` and `GET /api/v1/market-intelligence/liquidations`; a score spike or live cascade = flatten, never average down — automate it, weekend gaps do not wait.
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) for realized-move distributions vs credit widths; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime replay. CDA has no options-chain history — premium series come from Deribit.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for realized-move distributions vs credit widths; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime replay. CDA has no options-chain history — premium series come from Deribit.
 
 ## Related
 

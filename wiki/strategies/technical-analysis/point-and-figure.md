@@ -2,7 +2,7 @@
 title: "Point and Figure Charts"
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 domain: [technical-analysis]
 prerequisites: ["[[support-and-resistance]]"]
@@ -191,7 +191,7 @@ P&F is constructed from price alone — pull klines and build the X/O grid yours
 - `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1d&limit=1000` — Hyperliquid perp OHLCV.
 
 **Historical archive (backtesting):**
-- `GET /api/v1/backtesting/klines` — full OHLCV archive (Parquet since 2020) for building long-horizon P&F charts and testing count-based targets.
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for building long-horizon P&F charts and testing count-based targets.
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
@@ -210,7 +210,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run a P
 - **Screen** — the same klines pulls feed P&F relative-strength charts (asset ÷ BTC) for the leadership screen; `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1d&limit=1000` covers the perp universe.
 - **Volume cross-check** — `GET /api/v1/market-data/volume-history` — P&F is volume-blind, so verify a Double/Triple Top broke on real participation before acting.
 - **Regime gate** — `GET /api/v1/quant/market` — demand Triple (not Double) breakouts in `range_low_vol`/`choppy_high_vol`; take Doubles with the 45-degree trend line in trend states.
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) for multi-cycle testing of box/reversal settings and count-target hit rates.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for multi-cycle testing of box/reversal settings and count-target hit rates.
 
 ## Key Takeaways
 

@@ -2,7 +2,7 @@
 title: Commodity Channel Index (CCI)
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [cci, indicators, technical-analysis, momentum]
 aliases: [CCI, "Commodity Channel Index"]
@@ -114,7 +114,7 @@ Like most [[oscillators]], CCI generates frequent false signals in strongly tren
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV bars (high, low, close feed the typical price)
-- `GET /api/v1/backtesting/klines` — deep kline archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=100"
@@ -130,7 +130,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Compute** — from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=100`, form TP = (H+L+C)/3 and apply Lambert's formula with n = 20 and the 0.015 constant
 - **Regime gate** — condition ±100 crosses on trend state from `GET /api/v1/indicators/signum-rgg`: follow crosses in GREEN/RED trends, fade extremes only in GREY chop — the trend-vs-range flip this page stresses
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) covers full cycles; expect the low-win-rate, fat-winner profile documented above
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) covers full cycles; expect the low-win-rate, fat-winner profile documented above
 - **Tip** — CCI is unbounded, so normalise extremes per asset (e.g. a rolling percentile of readings) before comparing signals across the universe
 
 ## Related

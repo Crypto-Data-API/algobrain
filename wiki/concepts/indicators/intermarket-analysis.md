@@ -2,7 +2,7 @@
 title: "Intermarket Analysis"
 type: concept
 created: 2026-04-14
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [technical-analysis, indicators, commodities, portfolio-theory]
 aliases: ["Intermarket Analysis", "Intermarket Technical Analysis", "Cross-Asset Analysis"]
@@ -103,7 +103,7 @@ For the crypto leg of the cross-asset picture — the "fifth asset class" noted 
 
 **Historical data:**
 - `GET /api/v1/backtesting/daily-snapshots` — full daily payload including the macro snapshot, point-in-time since 2026-03-02
-- `GET /api/v1/backtesting/klines` — crypto price history (Binance spot daily back to 2017-08) to join against externally sourced DXY/SPX/CRB series
+- `GET /api/v1/backtesting/klines` — crypto price history (Binance spot daily back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) to join against externally sourced DXY/SPX/CRB series
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/sentiment/macro"
@@ -117,7 +117,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Fetch** — `GET /api/v1/sentiment/macro` each session for gold, EUR/USD, and yields; pair with daily BTC/ETH closes from `GET /api/v1/market-data/klines` to maintain rolling cross-asset correlations
 - **Compute** — 30/90-day rolling correlations of crypto vs gold and yields classify which mode BTC is trading in ("risk asset" vs "digital gold" per the post-2008 section above)
-- **Backtest** — `GET /api/v1/backtesting/daily-snapshots` freezes the macro read per date since 2026-03-02; deeper studies need external DXY/SPX/CRB history joined to crypto prices from `GET /api/v1/backtesting/klines`
+- **Backtest** — `GET /api/v1/backtesting/daily-snapshots` freezes the macro read per date since 2026-03-02; deeper studies need external DXY/SPX/CRB history joined to crypto prices from `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive)
 - **Tip** — intermarket relationships unfold over weeks to months; resample to weekly bars before computing correlations, or daily noise swamps the lead/lag reads Murphy's chain depends on
 
 ## Related

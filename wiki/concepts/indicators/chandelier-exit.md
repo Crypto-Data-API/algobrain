@@ -2,7 +2,7 @@
 title: "Chandelier Exit"
 type: concept
 created: 2026-04-15
-updated: 2026-09-28
+updated: 2026-10-17
 status: excellent
 tags: [indicators, technical-analysis, volatility, trend-following]
 aliases: ["Chandelier Exit", "Chandelier Stop"]
@@ -102,7 +102,7 @@ In the [[nnfx-method|NNFX]] framework a Chandelier-style ATR trail fits the **ex
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV for backfilling the stop path
-- `GET /api/v1/backtesting/klines` — deep kline archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=30"
@@ -117,7 +117,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
 
 - **Compute** — from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=30`, take the highest high since entry minus 3 × ATR(22), ratcheting the stop upward only
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) lets you sweep multiplier/period settings across full cycles — recompute the stop bar-by-bar to avoid the repainting/look-ahead trap flagged above
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) lets you sweep multiplier/period settings across full cycles — recompute the stop bar-by-bar to avoid the repainting/look-ahead trap flagged above
 - **Tune** — widen the multiplier when `GET /api/v1/volatility/regime/{symbol}` reads a high-volatility regime; crypto's vol clustering makes a static 3× either too tight in storms or too loose in calm
 - **Tip** — crypto has no overnight gaps but does have liquidation-cascade wicks; on leveraged perps, pair the chandelier trail with a hard stop to cap wick-through risk
 

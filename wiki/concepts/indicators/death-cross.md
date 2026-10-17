@@ -2,7 +2,7 @@
 title: "Death Cross"
 type: concept
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [indicators, technical-analysis, trend-following]
 aliases: ["Death Cross"]
@@ -86,7 +86,7 @@ Traders rarely treat the death cross as a standalone short trigger. Common refin
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — daily closes for computing both averages on any pair
-- `GET /api/v1/backtesting/klines` — deep kline archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/btc-price-history?days=730"
@@ -101,7 +101,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this signal directly:
 
 - **Compute** — from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=250`, compute SMA(50) and SMA(200) and flag the cross; for BTC the 200D leg comes precomputed via `GET /api/v1/market-data/btc-price-history`
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily bars back to 2017-08) covers every BTC death/golden cross since 2017 — enough to measure the lag and whipsaw profile this page describes on crypto data
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily bars back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) covers every BTC death/golden cross since 2017 — enough to measure the lag and whipsaw profile this page describes on crypto data
 - **Confirm** — check the 200D slope and volume from `GET /api/v1/market-data/volume-history` before acting; a cross against a still-rising 200D is the classic whipsaw setup
 - **Tip** — treat it as a regime filter, not a short trigger: pair the cross with regime probabilities from `GET /api/v1/regimes/current` and de-risk rather than flipping short mechanically
 

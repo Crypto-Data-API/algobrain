@@ -2,7 +2,7 @@
 title: "Tail Hedging"
 type: strategy
 created: 2026-06-22
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [risk-management, options, volatility, derivatives, hedging, crypto]
 aliases: ["Tail Risk Hedging", "Convex Hedging", "Tail Protection", "Crypto Tail Hedge"]
@@ -198,7 +198,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Cheap-protection window** — `GET /api/v1/volatility/regime` reading `compressed` plus positive funding from `GET /api/v1/derivatives/funding-rates?coin=BTC` is the machine-readable "low DVOL percentile + call-skew regime" entry condition (the crowd is bidding calls; puts are unloved)
 - **Black-swan overlay** — `GET /api/v1/security/regime/score` (hack/depeg stress) covers the crypto-native tails an index-style price hedge misses
 - **Monetization trigger** — a spike in `GET /api/v1/market-intelligence/liquidations` with `GET /api/v1/quant/gex` showing dealers short gamma marks the cascade window; crypto vol reverts in days-to-hours, so the agent should scale out of the hedge into the spike, not after it
-- **Backtest** — compute the DVOL−RV spread's RV leg from `GET /api/v1/backtesting/klines` (1h/4h/1d to 2017-08; covers 2020-03, LUNA, FTX) and replay hedge-budget bleed vs cascade payoffs with point-in-time context from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Backtest** — compute the DVOL−RV spread's RV leg from `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09; covers 2020-03, LUNA, FTX) and replay hedge-budget bleed vs cascade payoffs with point-in-time context from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02)
 - **Tips** — the kill criterion "payoff not monetized within the spike window" is a process rule an agent can enforce with a hard timer once the liquidation trigger fires
 
 ## Related

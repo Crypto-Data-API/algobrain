@@ -2,7 +2,7 @@
 title: "Crypto Options Dispersion"
 type: strategy
 created: 2026-07-14
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [quantitative, options, volatility, correlation, derivatives, crypto, bitcoin, ethereum]
 aliases: ["Crypto Dispersion Trade", "Implied Correlation Trade", "Crypto Correlation Dispersion", "BTC-ETH Dispersion", "Index vs Single-Name Vol"]
@@ -266,7 +266,7 @@ Implied vols/surfaces and DVOL come from Deribit / [[greeks-live]]. [[cryptodata
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=SOLUSDT&interval=1d&limit=90` — OHLCV per name for realized-vol and realized-correlation computation
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol regime + 60-day history
-- `GET /api/v1/backtesting/klines` — deep multi-asset kline archive for correlation backtests
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — multi-asset kline history for correlation backtests
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=SOLUSDT&interval=1d&limit=90"
@@ -283,7 +283,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Compute** — pull `GET /api/v1/market-data/klines?symbol=...&interval=1d` per name (BTC/ETH/SOL) and compute 5/30-day realized correlation — the RC leg of the IC−RC entry gate; `GET /api/v1/coins/top?limit=20` sets basket weights
 - **Regime gate** — `GET /api/v1/volatility/regime/score` plus `GET /api/v1/market-intelligence/liquidations` as the correlation-spike early warning; automate the flatten trigger on 5-day realized correlation ≥ 0.95
 - **Hedge legs** — `GET /api/v1/derivatives/funding-rates?coin=SOL` per name to budget the perp delta-hedge carry on each leg separately
-- **Backtest** — `GET /api/v1/backtesting/klines` gives multi-asset Binance spot 1h/4h/1d back to 2017-08 for realized-correlation regime studies (which regimes deliver dispersion vs correlation-pinning); implied-correlation history must come from Deribit
+- **Backtest** — `GET /api/v1/backtesting/klines` gives bars from 2026-05-09 only; multi-asset Binance spot 1h/4h/1d back to 2017-08 lives in the `klines_deep` archive for realized-correlation regime studies (which regimes deliver dispersion vs correlation-pinning); implied-correlation history must come from Deribit
 - **Tips** — `GET /api/v1/volatility/regime` classifies every leg's vol state in one batched call; `?format=markdown` keeps the multi-leg context compact in the agent's window
 
 ## Related

@@ -2,7 +2,7 @@
 title: Volume
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [volume, indicators]
 aliases: [trading-volume]
@@ -94,7 +94,7 @@ Confirming breakouts with volume is even more critical in commodity markets than
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — per-bar volume alongside OHLC
-- `GET /api/v1/backtesting/klines` — deep kline archive (volume column included)
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history (volume column included)
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/volume-history?days=90"
@@ -108,7 +108,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Fetch** — `GET /api/v1/market-data/volume-history?days=90` returns daily volume plus buy ratio, so the four price/volume conviction cases in the table above are computable without tick data
 - **Compute** — a volume moving average from klines' volume column flags "above-average volume" for breakout confirmation; [[obv]] and [[vwap]] derive from the same bars
-- **Backtest** — volume-confirmed breakout rules replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); minute-level volume exists only since 2026-03-30
+- **Backtest** — volume-confirmed breakout rules replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); minute-level volume exists only since 2026-03-30
 - **Tip** — crypto reported volume is wash-trade-prone off the majors: keep the volume leg on Binance spot (this API's source) rather than mixing venues with unaudited tape
 
 ## Related

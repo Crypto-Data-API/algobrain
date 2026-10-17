@@ -2,7 +2,7 @@
 title: "Latency Arbitrage (Crypto)"
 type: strategy
 created: 2026-04-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [arbitrage, crypto, latency, hft, co-location, market-microstructure, speed, market-neutral]
 aliases: ["Latency Arb", "Speed Arbitrage", "Crypto HFT Arbitrage", "Stale-Quote Picking"]
@@ -252,7 +252,7 @@ CryptoDataAPI is **polling-latency and cannot be used for execution** in a laten
 
 **Historical / research:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1m&limit=1000` — Binance OHLCV for lead-lag studies
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/l2-book?coin=BTC"

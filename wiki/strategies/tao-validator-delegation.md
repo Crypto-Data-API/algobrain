@@ -2,7 +2,7 @@
 title: "TAO Validator Delegation"
 type: strategy
 created: 2026-04-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [crypto, defi, bittensor, yield, staking]
 aliases: ["Bittensor Validator Staking", "TAO Delegation", "Dividend Farming (Bittensor)"]
@@ -244,7 +244,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can automat
 - **Yield comparison** — each epoch, compare blended delegation APY (from taostats) against annualized TAO short-perp funding from `GET /api/v1/hyperliquid/funding-rates?coin=TAO`; a sustained crossover fires the kill criterion in favour of the basis trade
 - **Drawdown guard** — `GET /api/v1/quant/coins/TAO` regime probabilities flag deteriorating TAO price risk on the staked principal; the 7-day unstaking delay means de-risking decisions must lead the move, not follow it
 - **USD overlay** — mark the TAO+alpha position to USD with `GET /api/v1/market-data/ticker/price?symbol=TAOUSDT` so yield-in-TAO never masks USD losses
-- **Backtest** — replay flat-price vs drawdown scenarios with `GET /api/v1/backtesting/klines` and funding regimes with `GET /api/v1/backtesting/funding` (HL hourly since 2023-05)
+- **Backtest** — replay flat-price vs drawdown scenarios with `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) and funding regimes with `GET /api/v1/backtesting/funding` (HL hourly since 2023-05)
 - **Tips** — respect `insufficient_history`/`new_listing` flags on TAO-adjacent reads; alpha-token bonding-curve depth is on-chain data the agent must source from Subtensor, not this API
 
 ## Related

@@ -2,7 +2,7 @@
 title: "Renko Charts"
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 domain: [technical-analysis]
 prerequisites: ["[[support-and-resistance]]", "[[atr]]"]
@@ -191,7 +191,7 @@ Renko is built entirely from OHLCV closes — pull klines and construct bricks y
 - `GET /api/v1/hyperliquid/candles?coin=ETH&interval=1h&limit=1000` — Hyperliquid perp OHLCV.
 
 **Historical archive (backtesting):**
-- `GET /api/v1/backtesting/klines` — full OHLCV archive (Parquet since 2020) for constructing repaint-safe Renko series across history.
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for constructing repaint-safe Renko series across history.
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
@@ -209,7 +209,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run a R
 - **Compute** — `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1h&limit=1000` (or `GET /api/v1/hyperliquid/candles?coin=ETH&interval=1h&limit=1000`) → build bricks bar-by-bar from closes, with the brick size fixed or ATR locked at bar close — never a full-history ATR (the repaint trap in code form).
 - **Trend filter** — `GET /api/v1/indicators/signum-rgg` — gate brick-flip entries on GREEN/RED; alternating single bricks plus a GREY read = the brick-wall range, stand aside.
 - **Regime gate** — `GET /api/v1/volatility/regime` — `vol_shock` prints brick bursts from liquidation wicks that mean nothing; require `normal`/`expanding` before trusting a multi-brick diagonal.
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08; 1m only since 2026-03-30) — construct repaint-safe brick series over history and validate against a candlestick backtest of the same logic.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09; 1m only since 2026-03-30) — construct repaint-safe brick series over history and validate against a candlestick backtest of the same logic.
 - **Tips** — model costs on brick *events*, not bricks (several bricks can print from one fast candle without a fill at each); heed `insufficient_history` flags when ATR-sizing bricks on new listings.
 
 ## Key Takeaways

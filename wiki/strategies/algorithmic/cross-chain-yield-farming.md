@@ -2,7 +2,7 @@
 title: "Cross-Chain Yield Farming"
 type: strategy
 created: 2026-04-22
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [defi, crypto, arbitrage, liquidity, risk-management]
 strategy_type: algorithmic
@@ -242,7 +242,7 @@ Pool-level APYs and TVL come from DefiLlama and protocol dashboards — CryptoDa
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=<TOKEN>USDT&interval=1d&limit=365` — incentive-token price paths (the sell-slippage haircut input)
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive for reward-token behaviour across past incentive cycles
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for reward-token behaviour across past incentive cycles
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/security/regime"
@@ -259,7 +259,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Screening** — score DefiLlama pool candidates, then gate each through `GET /api/v1/dex/security/{chain}/{address}` and drop any chain with active incidents on `GET /api/v1/security/events`
 - **Exit trigger** — poll `GET /api/v1/security/regime/score` (45% hack-weighted) every cycle; a spike is the automated version of this page's "bridge anomaly → exit" rule
 - **Regime gate** — rotate aggressively only in risk-on states from `GET /api/v1/quant/market`; in `vol_spike` regimes bridge latency and depeg risk both worsen exactly when you need the exit
-- **Backtest** — reward-token dump curves from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08); pool APY/TVL history must come from archived DefiLlama data — no CryptoDataAPI archive covers pool yields
+- **Backtest** — reward-token dump curves from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); pool APY/TVL history must come from archived DefiLlama data — no CryptoDataAPI archive covers pool yields
 - **Tips** — re-estimate the EV model's incentive-token haircut from live klines, not the quoted APY; keep the security poll on a tighter schedule than the yield scan
 
 ## Related

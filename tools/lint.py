@@ -199,15 +199,23 @@ def check_orphans(pages: list[dict]) -> list[dict]:
 
 
 def check_stale(pages: list[dict]) -> list[dict]:
-    """Find pages not updated in >90 days with status below good."""
+    """Find pages not updated in >90 days with status below good.
+
+    Pages marked `generated: true` (untouched generator output, e.g. from
+    tools/generate_crypto_pages.py) are skipped and reported as one summary line.
+    """
     issues = []
     cutoff = datetime.now() - timedelta(days=90)
+    generated_skipped = 0
 
     for page in pages:
         fm = page["frontmatter"]
         updated = fm.get("updated", "")
         status = fm.get("status", "")
         if status in ("good", "excellent"):
+            continue
+        if fm.get("generated", "").lower() == "true":
+            generated_skipped += 1
             continue
         try:
             updated_date = datetime.strptime(updated, "%Y-%m-%d")
@@ -220,6 +228,15 @@ def check_stale(pages: list[dict]) -> list[dict]:
                 })
         except ValueError:
             pass
+    if generated_skipped:
+        # Own check name so per-check "stale" tallies stay exact; listed first.
+        issues.insert(0, {
+            "check": "stale-generated",
+            "severity": "info",
+            "path": "(summary)",
+            "message": f"Skipped {generated_skipped} pages marked generated: true "
+                       "(untouched generator output; not in the review queue)",
+        })
     return issues
 
 

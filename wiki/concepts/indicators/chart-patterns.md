@@ -2,7 +2,7 @@
 title: "Chart Patterns"
 type: concept
 created: 2026-04-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [technical-analysis, indicators]
 aliases: ["Chart Pattern Recognition", "ascending-triangle", "Ascending Triangle"]
@@ -99,7 +99,7 @@ These targets are guidelines, not guarantees. Many traders use them for initial 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=1000` — OHLCV bars for pattern scans
 - `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio for breakout confirmation
-- `GET /api/v1/backtesting/klines` — deep kline archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=1000"
@@ -113,7 +113,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Fetch** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=1000` supplies the swing highs/lows that pattern-recognition code (pivot detection, trendline fitting) runs on
 - **Confirm** — validate breakouts against `GET /api/v1/market-data/volume-history`: the volume-contraction-then-surge signature this page requires
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) is deep enough to measure pattern completion rates and measured-move accuracy across full cycles
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) is deep enough to measure pattern completion rates and measured-move accuracy across full cycles
 - **Tip** — codify each pattern as explicit pivot-geometry rules before backtesting; eyeballed patterns cannot be validated, and loose definitions data-mine themselves into false edges (see the pitfalls above)
 
 ## Related

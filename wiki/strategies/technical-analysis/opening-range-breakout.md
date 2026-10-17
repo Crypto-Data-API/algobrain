@@ -2,7 +2,7 @@
 title: Opening Range Breakout Strategy
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags:
   - breakout
@@ -358,7 +358,7 @@ Intraday BTC/ETH perp ORB trades can comfortably scale to $5–50M per position.
 - `GET /api/v1/volatility/regime` — vol-regime filter (skip ORB in vol_shock regime)
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — deep archive for backtesting the 08:00 UTC window vs other windows
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — history for backtesting the 08:00 UTC window vs other windows
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=50"
@@ -375,7 +375,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=50` at 08:30 UTC to fix the 08:00-08:30 Deribit-settle reference range (or the 14:30-15:00 window on US macro days); require window volume above the 24h hourly average before the range counts.
 - **Bias** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — positive funding arms the long-side ORB, negative the short side.
 - **Regime gate** — `GET /api/v1/volatility/regime` + `GET /api/v1/market-intelligence/liquidations` — no entries in `vol_shock` or while a cascade is running through the reference window (the range it prints is untradeable).
-- **Backtest** — `GET /api/v1/backtesting/klines`: 1m klines exist only since 2026-03-30, which is exactly what window-level ORB replays need — treat the deeper 1h archive (back to 2017-08) as coarse hour-of-day evidence, not ORB validation.
+- **Backtest** — `GET /api/v1/backtesting/klines`: 1m klines exist only since 2026-03-30, which is exactly what window-level ORB replays need — treat the deeper 1h archive (back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) as coarse hour-of-day evidence, not ORB validation.
 - **Tips** — `GET /api/v1/event/calendar` tells you in advance which days carry the macro prints that make the US-open variant fire; skip weekends, where the 08:00 UTC window rarely passes the volume filter.
 
 ## Related

@@ -2,7 +2,7 @@
 title: "Options Selling Strategies (Crypto)"
 type: strategy
 created: 2026-04-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [options, crypto, income, premium-selling, volatility, derivatives, bitcoin, ethereum, theta]
 aliases: ["Premium Selling", "Selling Premium", "Crypto Options Income", "Options Income Strategies"]
@@ -188,7 +188,7 @@ DVOL and the IV surface come from Deribit / [[greeks-live]]; [[cryptodataapi]] s
 **Historical data:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for realized-vol computation
-- `GET /api/v1/backtesting/klines` — deep kline archive for VRP backtesting
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for VRP backtesting
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime/score"
@@ -205,7 +205,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Entry screen** — `GET /api/v1/volatility/regime` plus realized vol computed from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — sell only in `expanding`/`normal` states with a live VRP; never into `vol_shock`.
 - **Strike context** — `GET /api/v1/market-intelligence/options` (OI walls, max pain) and `GET /api/v1/quant/gex` (dealer gamma) locate pin zones for short strikes; `GET /api/v1/derivatives/funding-rates?coin=BTC` says which wing the leveraged crowd overbid.
 - **Kill switch** — poll `GET /api/v1/volatility/regime/score` and `GET /api/v1/market-intelligence/liquidations`; score > 75 or a live cascade = flatten short vega per the kill criteria — automate this check, do not eyeball it.
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) supplies the RV leg of DVOL−RV studies; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) replays the full market context point-in-time. CDA holds no options-chain history — IV series come from Deribit.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) supplies the RV leg of DVOL−RV studies; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) replays the full market context point-in-time. CDA holds no options-chain history — IV series come from Deribit.
 - **Tips** — an hourly poll of the cached `GET /api/v1/daily` bundle covers regime + funding + liquidation state in one call between management windows.
 
 ## Related

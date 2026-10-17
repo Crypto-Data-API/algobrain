@@ -2,7 +2,7 @@
 title: "Measured Move"
 type: concept
 created: 2026-07-01
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [indicators, technical-analysis]
 aliases: ["Measured Move", "Measured Move Target", "Price Projection", "Measured Objective", "Price Target Projection"]
@@ -87,7 +87,7 @@ If the trader enters at $50.50 with a stop below the flag at $48.80, the risk is
 - `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1d&limit=200` — the same on Hyperliquid perp listings
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08) for target-hit-rate studies
+- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for target-hit-rate studies
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200"
@@ -102,7 +102,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
 
 - **Compute** — from `GET /api/v1/market-data/klines`, detect the pattern (swing pivots or flagpole leg), measure the height, and project `target = launch_point ± height` from the actual breakout bar, not the pattern extreme
-- **Backtest** — over `GET /api/v1/backtesting/klines` (daily bars to 2017-08), score what fraction of projected targets get touched before the entry-invalidating stop — Bulkowski-style hit-rate statistics, but on crypto data
+- **Backtest** — over `GET /api/v1/backtesting/klines` (daily bars back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09), score what fraction of projected targets get touched before the entry-invalidating stop — Bulkowski-style hit-rate statistics, but on crypto data
 - **Context check** — before trusting a target, scan the projection path for prior swing highs/lows in the same kline history; a target sitting beyond a major untested level deserves a reduced size or a scaled exit
 - **Tip** — crypto impulse legs frequently overshoot measured targets in trends and undershoot in chop; conditioning hit-rates on a trend filter such as `GET /api/v1/indicators/signum-rgg` (Pro+) turns one blended statistic into two usable ones
 

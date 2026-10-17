@@ -2,7 +2,7 @@
 title: "Long Put (Crypto)"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, derivatives, volatility, risk-management, bitcoin, ethereum]
 aliases: ["Long Put", "Buy Put", "Protective Put", "Crypto Long Put"]
@@ -115,7 +115,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Skew driver** — `GET /api/v1/derivatives/funding-rates?coin=BTC`: richly positive funding marks the call-skew regime where downside puts are relatively cheap — the best hedging windows.
 - **Regime gate** — `GET /api/v1/quant/market`: rising `strong_trend_bear`/`vol_spike` probabilities argue for rolling protection up on schedule and monetising fast into spikes rather than holding through the V-recovery.
 - **Expiry context** — `GET /api/v1/market-intelligence/options`: max-pain and OI concentration before making expiry-week hold/roll decisions.
-- **Backtest** — hedge-payoff studies on `GET /api/v1/backtesting/klines` (Binance 1h/4h/1d since 2017-08 covers 2020-03, LUNA, and FTX); pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time trigger states. Put premiums come from Deribit — CDA has no options archive.
+- **Backtest** — hedge-payoff studies on `GET /api/v1/backtesting/klines` (Binance 1h/4h/1d back to 2017-08 covers 2020-03, LUNA, and FTX — only in the `klines_deep` archive, while the REST route starts 2026-05-09); pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time trigger states. Put premiums come from Deribit — CDA has no options archive.
 - **Tips** — for continuous protection, have the agent roll monthly regardless of the tape; discretionary de-hedging in calm markets is the classic failure this page warns against.
 
 ## Related

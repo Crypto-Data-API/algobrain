@@ -2,7 +2,7 @@
 title: "Momentum Rotation"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [momentum, crypto, quantitative, cross-sectional, portfolio-rotation, factor-investing, altcoins]
 aliases: ["Cross-Sectional Crypto Momentum", "Crypto Momentum Rotation", "Altcoin Rotation", "Relative-Strength Rotation"]
@@ -267,7 +267,7 @@ The basket structure changes the mechanics: position sizing is per-basket-notion
 - `GET /api/v1/liquidity/depth` — per-coin depth/spread at 10/25/50/100 bps (cost screen)
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines?symbol=SOLUSDT&interval=1d` — full OHLCV archive for the ranking backtest
+- `GET /api/v1/backtesting/klines?symbol=SOLUSDT&interval=1d` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for the ranking backtest
 - `GET /api/v1/backtesting/symbols` — backtest-available universe
 - `GET /api/v1/quant/timeline` — daily market-regime labels (2019-now) for regime-conditioned backtests
 
@@ -286,7 +286,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Universe** — `GET /api/v1/coins/top?limit=50` for the cap ranking, screened by `GET /api/v1/liquidity/depth` (drop any name whose round-trip cost at your clip size exceeds the ~35 bps breakeven — the cost screen *is* the strategy)
 - **Signal** — 4-week skip-3-day formation returns from daily `GET /api/v1/market-data/klines` per name, de-meaned against the universe; crash filter from `GET /api/v1/market-data/btc-price-history?days=365` (200D MA precomputed)
 - **Regime gate** — `GET /api/v1/market-health/altcoin-breadth?period=200` for dispersion/participation context; halve gross when BTC is below its 200D MA
-- **Backtest** — `GET /api/v1/backtesting/klines` (daily to 2017-08 for majors; alt histories are shorter) with universes rebuilt from `GET /api/v1/backtesting/symbols` and dated `GET /api/v1/backtesting/daily-snapshots/{date}` (since 2026-03-02) — top-N *as of each date*, never today's top-N back-applied, or the backtest is pure [[survivorship-bias]]
+- **Backtest** — `GET /api/v1/backtesting/klines` (daily back to 2017-08 for majors — only in the `klines_deep` archive, while the REST route starts 2026-05-09; alt histories are shorter) with universes rebuilt from `GET /api/v1/backtesting/symbols` and dated `GET /api/v1/backtesting/daily-snapshots/{date}` (since 2026-03-02) — top-N *as of each date*, never today's top-N back-applied, or the backtest is pure [[survivorship-bias]]
 - **Tips** — batch inverse-vol sizing via `GET /api/v1/quant/coins/risk`; log realised rebalance cost per week and pause when it exceeds the modelled gross spread (kill criterion #2)
 
 ## Related

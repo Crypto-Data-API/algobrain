@@ -2,7 +2,7 @@
 title: "Head and Shoulders"
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [indicators, technical-analysis]
 aliases: ["H&S", "head and shoulders top", "inverse head and shoulders"]
@@ -114,7 +114,7 @@ Head and shoulders is among the most-studied patterns in [[technical-analysis]],
 - `GET /api/v1/market-data/volume-history?days=90` — daily volume with buy ratio for the declining-volume divergence into the head and right shoulder
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08) for pattern-reliability studies across cycles
+- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for pattern-reliability studies across cycles
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200"
@@ -128,7 +128,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Detect** — pull daily bars via `GET /api/v1/market-data/klines`, extract swing pivots (e.g. fractal or zigzag with a fixed % threshold), and test the three-peak geometry: middle peak highest, flanking peaks lower, two troughs defining the neckline
 - **Confirm** — signal only on a *close* through the neckline; check that volume from the same kline payload contracted into the right shoulder and expanded on the break
-- **Backtest** — replay pivot extraction and pattern matching over `GET /api/v1/backtesting/klines` (daily bars to 2017-08) and score break follow-through vs the failed-break rate; daily patterns test far better than intraday, matching the page's caveat
+- **Backtest** — replay pivot extraction and pattern matching over `GET /api/v1/backtesting/klines` (daily bars back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) and score break follow-through vs the failed-break rate; daily patterns test far better than intraday, matching the page's caveat
 - **Tip** — fix the pivot-detection threshold *before* scanning history; tuning it per chart until patterns "appear" is the H&S version of overfitting, and the neckline stop-hunt zone means entries on the retest backtest more robustly than entries on first touch
 
 ## Sources

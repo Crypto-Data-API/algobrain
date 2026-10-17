@@ -2,7 +2,7 @@
 title: "Cup and Handle"
 type: concept
 created: 2026-04-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [technical-analysis, breakout, momentum]
 aliases: ["Cup with Handle", "Cup & Handle Pattern"]
@@ -90,7 +90,7 @@ A failed breakout that reverses below the buy point triggers the 7-8% stop-loss 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500` — daily OHLCV for base detection (cups form over weeks to months)
 - `GET /api/v1/market-data/volume-history?days=90` — volume contraction/surge confirmation
-- `GET /api/v1/backtesting/klines` — deep kline archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500"
@@ -106,7 +106,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Detect** — scan daily bars from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500` for the U-shaped base: 12-35% correction depth, rounded recovery, then a shallow handle in the upper half of the cup
 - **Confirm** — require the breakout bar's volume well above average using `GET /api/v1/market-data/volume-history` — O'Neil's essential condition, automated
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily bars back to 2017-08) spans several full crypto cycles for base-breakout completion studies
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily bars back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) spans several full crypto cycles for base-breakout completion studies
 - **Tip** — O'Neil's screen leaned on fundamentals; in crypto, substitute relative strength versus BTC and the market regime from `GET /api/v1/regimes/current` — breakouts in weak regimes fail like breakouts in bear markets
 
 ## Related

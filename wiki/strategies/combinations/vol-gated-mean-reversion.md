@@ -2,7 +2,7 @@
 title: "Vol-Gated Mean Reversion"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, mean-reversion, volatility, risk-management, position-sizing, quantitative, derivatives, crypto, behavioral-finance]
 aliases: ["Vol-Conditioned Reversion", "Vol-Aware Mean Reversion", "Selective Vol-Scaled Reversion", "Conditional Vol Reversion"]
@@ -380,7 +380,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — daily klines classify the vol regime (20-day realised vol) and 1h klines run the RSI oversold trigger
 - **Gate** — `GET /api/v1/derivatives/funding-rates?coin=BTC`, `GET /api/v1/derivatives/open-interest?coin=BTC` (flush vs build), and the long/short ratio separate HIGH-VOL-GOOD (flush — fade it) from HIGH-VOL-BAD (build — stand aside)
 - **Regime gate** — `GET /api/v1/regimes/current`; no reversion entries in `Structural_Shock`
-- **Backtest** — vol-regime replay on `GET /api/v1/backtesting/klines` (1d/1h back to 2017-08); the GOOD/BAD classification replays via `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) — before 2023 only the price leg is testable
+- **Backtest** — vol-regime replay on `GET /api/v1/backtesting/klines` (1d/1h back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); the GOOD/BAD classification replays via `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) — before 2023 only the price leg is testable
 - **Tips** — the GOOD/BAD split is the edge; log the classification at every entry so live hit-rates per class can be compared against the backtest split
 
 ## Related

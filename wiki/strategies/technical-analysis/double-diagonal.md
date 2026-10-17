@@ -2,7 +2,7 @@
 title: "Double Diagonal"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, double-diagonal, diagonal-spread, income, theta, crypto, derivatives]
 aliases: ["Double Diagonal Spread", "Calendarized Iron Condor"]
@@ -117,7 +117,7 @@ Strike/expiry selection and the [[deribit#DVOL Index — The "VIX of Crypto"|DVO
 
 **Historical data:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive to study realized range vs the profit tent
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history to study realized range vs the profit tent
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime"
@@ -133,7 +133,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Signal** — sell the front strangle when `GET /api/v1/volatility/regime` reads `mean_reverting`/`normal` and `GET /api/v1/market-intelligence/options` max pain sits inside the intended range
 - **Regime gate** — `GET /api/v1/quant/market`: leading `range_low_vol` probability is the range thesis; rising `squeeze`/`vol_spike` reads mean widen the strikes or stand down
-- **Backtest** — realized range vs the profit tent from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); vol-state timing validated point-in-time against `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Backtest** — realized range vs the profit tent from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); vol-state timing validated point-in-time against `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
 - **Tips** — `/api/v1/quant/gex` decides front-leg management: long dealer gamma favors letting the shorts decay, short gamma favors rolling early; treat a `/api/v1/market-intelligence/liquidations` cascade as the breakout early-warning for the wings.
 
 ## Related

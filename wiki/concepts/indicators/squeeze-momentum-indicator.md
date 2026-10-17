@@ -2,7 +2,7 @@
 title: "Squeeze Momentum Indicator"
 type: concept
 created: 2026-09-28
-updated: 2026-09-28
+updated: 2026-10-17
 status: draft
 tags: [indicators, technical-analysis, volatility, momentum, breakout, crypto]
 aliases: ["Squeeze Momentum", "SQZMOM_LB", "Squeeze Momentum Indicator [LazyBear]", "TTM Squeeze", "BB/KC Squeeze"]
@@ -86,7 +86,7 @@ The squeeze itself is **directionless**. It says volatility is likely to expand,
 - `GET /api/v1/indicators/technical`: server-side SMA/BB/RSI structure state, useful for screening the universe for tight bands before computing KC locally
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines`: deep kline archive for measuring squeeze frequency and fire outcomes across cycles
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive): kline history for measuring squeeze frequency and fire outcomes across cycles
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=200"
@@ -101,7 +101,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 - **Screen**: pull `GET /api/v1/indicators/technical` to shortlist assets with contracted Bollinger structure, then fetch `GET /api/v1/market-data/klines` per shortlist symbol and compute the full BB-inside-KC state locally
 - **Signal**: flag the first bar where the squeeze releases after ≥ 6 consecutive squeeze bars. Read direction from the sign and slope of the linreg histogram on the closed bar only
 - **Regime gate**: `GET /api/v1/volatility/regime` reads a compressed regime as the precondition. Skip fires that occur while the asset is already in a high-vol state
-- **Backtest**: `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08) to count fires per year and measure forward 5/10/20-bar returns by histogram sign, net of fees
+- **Backtest**: `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) to count fires per year and measure forward 5/10/20-bar returns by histogram sign, net of fees
 
 ## Related
 

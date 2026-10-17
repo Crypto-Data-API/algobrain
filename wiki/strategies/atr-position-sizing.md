@@ -2,7 +2,7 @@
 title: "ATR Position Sizing"
 type: strategy
 created: 2026-04-15
-updated: 2026-09-20
+updated: 2026-10-17
 status: good
 tags: [risk-management, technical-analysis, position-trading, volatility]
 aliases: ["ATR Position Sizing", "Volatility-Based Position Sizing", "Volatility Normalization", "ATR-Based Sizing"]
@@ -21,6 +21,60 @@ crowding_risk: low
 expected_sharpe: 0.0
 expected_max_drawdown: 0.0
 breakeven_cost_bps: 0
+gates:
+  - id: risk_fraction
+    role: sizing
+    rule: "Risk 0.5-2% of equity per trade (the Turtles used about 1%)"
+    runnable: true
+    input: position
+  - id: atr_input
+    role: sizing
+    rule: "Wilder ATR over 14 or 20 bars"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=100&atr=14
+    field: candles[].atr
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&start={start}&atr=14
+    replay_field: candles[].atr
+    note: "interval = 1d for the page's daily bars; atr=20 for the longer lookback. Use the last closed bar's atr at the entry (drop the bar named by forming_bar_timestamp)."
+  - id: atr_stop_distance
+    role: stop
+    rule: "Stop 2x ATR below the entry for a long (above it for a short)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval={interval}&limit=100&atr=14
+    field: candles[].atr
+    note: "The 2x multiple is the page's example; atr-trailing-stop governs the stop once the trade runs. Hyperliquid stop orders trigger on assets[].mark_price from /api/v1/hyperliquid/open-interest."
+  - id: size_formula
+    role: sizing
+    rule: "size = (equity x risk_fraction) / (ATR_multiple x ATR)"
+    runnable: true
+    input: derived
+    inputs: [risk_fraction, atr_input]
+  - id: notional_cap
+    role: sizing
+    rule: "Cap one position's notional at 20% of equity (max_position_frac in the pseudocode)"
+    runnable: true
+    input: position
+    note: "The example sizes Stock A at 500 shares, $25,000 notional on $100,000 equity, which breaks this 20% cap (400 shares, $20,000). Prose unchanged."
+  - id: resize_each_entry
+    role: sizing
+    rule: "Recompute size at each new entry from current equity and current ATR; no pyramiding beyond the volatility budget"
+    runnable: true
+    input: position
+  - id: cluster_cap
+    role: sizing
+    rule: "Cap total risk per correlated cluster: sum the risk across a cluster and scale down when it exceeds the budget"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].symbol
+    note: "The page sets no cluster budget and does not define a cluster (its Indicators list an optional correlation matrix; its agent workflow groups coins by theme). The theme rows are one clustering; a return-correlation matrix from candles[].close on /api/v1/hyperliquid/candles is another. Both choices and the budget are the desk's."
+  - id: compressed_vol_warning
+    role: sizing
+    rule: "When the coin's volatility regime is compressed, widen the stop multiple or cap size before the expansion"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    note: "From the page's agent workflow, which gives neither the wider multiple nor the size cap."
 ---
 
 ATR position sizing is a risk-management overlay that sets position size so that a fixed fraction of account equity is at risk on each trade, using the [[average-true-range|Average True Range (ATR)]] as the measure of expected per-unit price movement. Instead of buying a round number of shares or a fixed dollar amount, the trader sizes each position inversely to the instrument's volatility, so a low-volatility name and a high-volatility name carry the same dollar risk. It is the sizing backbone of most systematic [[trend-following-cta|trend-following]] and [[managed-futures]] programs and was popularized for retail traders by the Turtle Traders' "unit" sizing scheme.

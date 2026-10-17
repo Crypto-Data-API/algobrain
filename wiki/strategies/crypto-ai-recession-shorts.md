@@ -2,7 +2,7 @@
 title: "Crypto Shorts in an AI-Driven Recession"
 type: strategy
 created: 2026-05-05
-updated: 2026-09-28
+updated: 2026-10-17
 status: good
 tags: [crypto, bitcoin, risk-management, ai-trading, behavioral-finance]
 aliases: ["AI Recession Crypto Shorts", "Crypto AI Recession Playbook"]
@@ -219,7 +219,7 @@ The equity legs (MSTR/miners/COIN) and the BLS/VC data come from equity and macr
 - `GET /api/v1/sentiment/macro` — yields, gold, EUR/USD backdrop for the risk-off read
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — OHLCV archive (Binance spot 1h/4h/1d since 2017-08) for BTC-vs-alt dispersion backtests
+- `GET /api/v1/backtesting/klines` — OHLCV archive (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for BTC-vs-alt dispersion backtests
 - `GET /api/v1/backtesting/funding` — funding history (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) for the funding-fade leg
 
 ```bash
@@ -238,7 +238,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Funding-fade leg** — poll `GET /api/v1/derivatives/funding-rates` for BTC/ETH/SOL against the +20% APR trigger; stand down as funding normalises.
 - **Kill-switch watch** — `GET /api/v1/market-intelligence/etf/btc/flows` daily: sustained net creations are the BTC-decouples-up scenario that flattens the book before the drawdown limits are hit.
 - **Regime gate** — `GET /api/v1/regimes/current` + `GET /api/v1/policy/regime/score`: the thesis needs risk-off macro; a `Broad Bull` label with low policy-risk score argues the dispersion regime is not active — size down or stay flat.
-- **Backtest** — dispersion legs on `GET /api/v1/backtesting/klines`, the funding fade on `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05); pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime states. Take ETF-flow history from `GET /api/v1/market-intelligence/etf/btc/flows?days=N` (settled trade days), not from snapshots: snapshot ETF values before 2026-09-25 hold partial weekday sums (see [[cryptodataapi-backtesting]]).
+- **Backtest** — dispersion legs on `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive), the funding fade on `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05); pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime states. Take ETF-flow history from `GET /api/v1/market-intelligence/etf/btc/flows?days=N` (settled trade days), not from snapshots: snapshot ETF values before 2026-09-25 hold partial weekday sums (see [[cryptodataapi-backtesting]]).
 - **Tips** — batch per-coin regime risk via `GET /api/v1/quant/coins/risk` before the monthly rebalance; the equity shorts (MSTR, miners, COIN) and AI-token option legs are outside CDA — source and monitor separately.
 
 ## Sources

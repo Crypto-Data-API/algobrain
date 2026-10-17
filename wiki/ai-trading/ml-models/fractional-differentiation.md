@@ -2,7 +2,7 @@
 title: "Fractional Differentiation"
 type: concept
 created: 2026-07-14
-updated: 2026-09-03
+updated: 2026-10-17
 status: good
 tags: [ai-trading, machine-learning, quantitative, mean-reversion]
 aliases: ["Fractional Differentiation", "Fractional Differencing", "Frac-Diff", "Fixed-Width Window Frac-Diff", "FFD"]
@@ -93,7 +93,7 @@ Fractional differentiation is applied to raw price and persistent on-chain/deriv
 **Price series:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — daily OHLCV to build a log-price series
 - `GET /api/v1/market-data/btc-price-history?days=730` — long BTC history with 200D MA
-- `GET /api/v1/backtesting/klines` — full OHLCV archive (Parquet since 2020) for long, stable estimation of `d`
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for long, stable estimation of `d`
 
 **Persistent on-chain / derivatives level series:**
 - `GET /api/v1/on-chain/whales/accumulation-score/BTC` — whale accumulation score timeseries (long-memory)

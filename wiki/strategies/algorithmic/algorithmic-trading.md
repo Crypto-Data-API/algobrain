@@ -2,7 +2,7 @@
 title: "Algorithmic Trading"
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [algorithmic, quantitative, market-microstructure, backtesting, machine-learning]
 domain: [market-microstructure, technical-analysis]
@@ -78,7 +78,7 @@ For the crypto side of algorithmic trading, CryptoDataAPI is this wiki's canonic
 - `GET /api/v1/daily` — the full daily market bundle (health, derivatives, sentiment, macro) in one call
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive (Binance spot 1h/4h/1d back to 2017-08; 1m only since 2026-03-30)
+- `GET /api/v1/backtesting/klines` — deep OHLCV archive (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09; 1m only since 2026-03-30)
 - `GET /api/v1/backtesting/funding` — funding archive (Hyperliquid hourly since 2023-05)
 - `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time daily snapshots (since 2026-03-02) for lookahead-free validation
 

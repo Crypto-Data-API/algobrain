@@ -2,7 +2,7 @@
 title: "Donchian Channel Breakout"
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [trend-following, breakout, channels, donchian, richard-donchian, technical-analysis, crypto]
 aliases: ["Donchian Breakout", "Channel Breakout", "Donchian Channel Strategy"]
@@ -110,7 +110,7 @@ Risk a fixed fraction (1–2%) of equity per trade. Use [[atr|ATR]] to normalise
 
 The channel is computed entirely from OHLCV; derivatives data adds the participation/liquidation context that separates a durable break from a fakeout. See [[cryptodataapi-market-data]], [[cryptodataapi-backtesting]], and [[cryptodataapi-derivatives]].
 
-- **OHLCV for the channel** — `GET /api/v1/market-data/klines` (live) and `GET /api/v1/backtesting/klines` (full archive from 2020) to compute N-period highs/lows and backtest lookback choices. ATR for stops/sizing derives from the same candles.
+- **OHLCV for the channel** — `GET /api/v1/market-data/klines` (live) and `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) to compute N-period highs/lows and backtest lookback choices. ATR for stops/sizing derives from the same candles.
 - **Break confirmation** — `GET /api/v1/derivatives/open-interest` (rising OI behind a break) and `GET /api/v1/market-intelligence/liquidations` (cascade fuel).
 
 ```bash
@@ -126,7 +126,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Signal** — N-period highs/lows and ATR straight from `GET /api/v1/market-data/klines`; `GET /api/v1/indicators/signum-rgg` supplies a pre-computed ADX/DMI trend gate per asset without rebuilding indicators
 - **Regime gate** — `GET /api/v1/quant/market`: Donchian entries during `choppy_high_vol` are the classic whipsaw bleed — wait for `strong_trend`/`squeeze` probability to lead before honoring channel breaks
-- **Backtest** — compare 20/55-day lookbacks on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08; Hyperliquid daily to 2023); join hourly HMM labels from `/api/v1/quant/regimes/history` (since 2020, Pro Plus) for the regime-filtered variant
+- **Backtest** — compare 20/55-day lookbacks on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09; Hyperliquid daily to 2023); join hourly HMM labels from `/api/v1/quant/regimes/history` (since 2020, Pro Plus) for the regime-filtered variant
 - **Execution** — before committing size, confirm the break with rising `GET /api/v1/derivatives/open-interest` and same-direction `GET /api/v1/market-intelligence/liquidations` flow
 - **Tips** — the edge needs a diversified basket: batch the universe scan through `/api/v1/quant/coins/risk` rather than looping symbols.
 

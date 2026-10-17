@@ -2,7 +2,7 @@
 title: "Babylon Bitcoin Staking Arbitrage"
 type: strategy
 created: 2026-04-26
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [arbitrage, crypto, bitcoin, defi]
 aliases: ["BTC Staking Arb", "Babylon Restaking", "Bitcoin LST Arbitrage"]
@@ -184,7 +184,7 @@ CryptoDataAPI serves the BTC NAV anchor, the on-chain LBTC prices that drive cro
 - `GET /api/v1/security/regime` + `GET /api/v1/security/regime/score` — hack/depeg overlay for the novel Bitcoin-slashing / custody tail
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — BTC OHLCV (1h/4h/1d back to 2017-08) for basis studies
+- `GET /api/v1/backtesting/klines` — BTC OHLCV (1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for basis studies
 - DEX is live-only — poll `/dex/token` and store to build LBTC-dispersion history
 
 ```bash

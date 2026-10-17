@@ -2,7 +2,7 @@
 title: "Speculative Positioning"
 type: concept
 created: 2026-04-14
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [commodities, futures, indicators]
 aliases: ["Managed Money Positioning", "Non-Commercial Positioning", "Speculative Sentiment"]
@@ -202,7 +202,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Live state** — `GET /api/v1/derivatives/summary?coin=BTC` reads long/short ratio, funding, and OI together: extreme ratio + extreme positive funding + rising OI is the crypto version of this page's "crowded long" percentile read
 - **Compute** — apply the percentile-of-range crowding metric to the long/short and funding series from `GET /api/v1/derivatives/binance/history?days=90` rather than eyeballing raw levels
-- **Backtest** — funding-extreme fade rules replay against `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05); pair with `GET /api/v1/backtesting/klines` for the price leg
+- **Backtest** — funding-extreme fade rules replay against `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05); pair with `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) for the price leg
 - **Tip** — unlike COT's Tuesday-snapshot/Friday-release lag, these positioning reads are near-real-time — but the core caveat transfers unchanged: crowding is a condition, not a timing signal, so require a price or liquidation trigger before fading
 
 ## Related

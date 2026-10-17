@@ -2,7 +2,7 @@
 title: Alternative Data Alpha
 type: strategy
 created: 2026-04-06
-updated: 2026-09-04
+updated: 2026-10-17
 status: review
 tags: [combinations, alpha-edge, alternative-data, quantitative, informational-edge, data-science, satellite-data, crypto]
 strategy_type: hybrid
@@ -180,5 +180,5 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` (per-token accumulation `signal`, ERC-20 only) + `GET /api/v1/on-chain/exchange-flows/{symbol}` (1h–7d net-flow windows) — the two on-chain legs of the composite
 - **Confluence filter** — `GET /api/v1/sentiment/fear-greed` + `GET /api/v1/on-chain/exchange-flows/spike-alerts` (≥ $1M whale deposits to CEXs) — require 3+ confirming signals before sizing, per the rules above
 - **Regime gate** — `GET /api/v1/regimes/current` — down-weight bullish on-chain composites in Established Bear / Capitulation states
-- **Backtest** — `GET /api/v1/backtesting/daily-snapshots/{date}` replays the full daily payload (health, sentiment, flows) point-in-time since 2026-03-02; forward returns from `GET /api/v1/backtesting/klines` (Binance spot daily back to 2017-08); `GET /api/v1/market-intelligence/fear-greed-history` extends the sentiment leg further back
+- **Backtest** — `GET /api/v1/backtesting/daily-snapshots/{date}` replays the full daily payload (health, sentiment, flows) point-in-time since 2026-03-02; forward returns from `GET /api/v1/backtesting/klines` (Binance spot daily back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); `GET /api/v1/market-intelligence/fear-greed-history` extends the sentiment leg further back
 - **Tips** — the entire `/on-chain/whales*` family (top-holders and accumulation-score alike) currently returns the API's "coming soon" placeholder; run on `exchange-flows` + `spike-alerts` alone until it re-enables, and re-probe monthly. Poll the cached `GET /api/v1/daily` bundle hourly rather than hitting each signal endpoint per tick

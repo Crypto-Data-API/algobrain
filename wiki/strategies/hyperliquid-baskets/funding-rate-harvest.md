@@ -2,7 +2,7 @@
 title: "Funding-Rate Harvest (Hyperliquid Basket)"
 type: strategy
 created: 2026-06-16
-updated: 2026-07-20
+updated: 2026-10-17
 status: good
 tags: [crypto, perpetual-futures, hyperliquid, funding-rate, quantitative, derivatives, risk-management]
 aliases: ["Perp Funding Carry", "Funding Yield Harvest", "Delta-Neutral Funding Collect", "HL Carry Basket"]
@@ -414,7 +414,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — the cross-exchange `GET /api/v1/derivatives/funding-rates?coin=X` call above ranks persistent funding payers across Binance and Hyperliquid in one response; `GET /api/v1/hyperliquid/funding-rates?coin=X&limit=100` adds the per-coin history for the persistence screen
 - **Regime gate** — `GET /api/v1/quant/market`: the carry earns best in range_low_vol with elevated leverage; a vol_spike transition is the exit signal before adverse price moves swamp the funding income
 - **Sizing** — `GET /api/v1/quant/coins/risk?horizon=24h` batches per-coin risk across every carry leg; isolated-margin discipline plus vol multipliers keeps the single-leg-liquidation kill criterion remote
-- **Backtest** — `GET /api/v1/backtesting/funding` is the core replay set: Hyperliquid hourly funding since 2023-05 (a full cycle of carry compression and expansion) and Binance daily only since 2026-03-30; join with `GET /api/v1/backtesting/klines` to mark the hedged legs
+- **Backtest** — `GET /api/v1/backtesting/funding` is the core replay set: Hyperliquid hourly funding since 2023-05 (a full cycle of carry compression and expansion) and Binance daily only since 2026-03-30; join with `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) to mark the hedged legs
 - **Tips** — compute the rolling 30-day APY kill metric directly from the funding archive each week; `GET /api/v1/derivatives/summary?coin=X&format=markdown` is the cheapest one-call health check per open position
 - **Prompt library** — the "Funding Rate Extremes Scanner" prompt (Free tier, [prompt library](https://cryptodataapi.com/prompts)) is a ready-made screen for harvest candidates across the perp universe
 

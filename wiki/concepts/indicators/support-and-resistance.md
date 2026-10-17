@@ -2,7 +2,7 @@
 title: Support and Resistance
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [technical-analysis, indicators]
 aliases: [support, resistance, "S/R", "support-resistance", "Support Level", "Resistance Level", "S/R Levels"]
@@ -83,7 +83,7 @@ Place stops **beyond** the level, not exactly at it, to allow room for wicks and
 - `GET /api/v1/liquidity/depth` — per-coin depth/spread at 10/25/50/100 bps
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — deep kline archive for long-memory levels
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for long-memory levels
 - `GET /api/v1/liquidity/depth/{coin}` — 24h rolling depth history at 1-min samples (BTC free)
 
 ```bash
@@ -100,7 +100,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Compute** — extract candidate levels programmatically from `GET /api/v1/market-data/klines`: cluster swing highs/lows within a tolerance band and rank by touch count and recency, mirroring the identification checklist above
 - **Live state** — `GET /api/v1/hyperliquid/l2-book?coin=BTC` shows whether resting orders actually defend a chart-derived level today; a level with no book depth behind it is a line, not a wall
-- **Backtest** — bounce-vs-break rules replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08), re-deriving levels point-in-time per test date to avoid drawing them with hindsight
+- **Backtest** — bounce-vs-break rules replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09), re-deriving levels point-in-time per test date to avoid drawing them with hindsight
 - **Tip** — treat levels as zones in code too: match within a percentage band (e.g. ±0.3%) rather than exact prices, and expire levels untested for N bars per the staleness warning above
 
 ## Related

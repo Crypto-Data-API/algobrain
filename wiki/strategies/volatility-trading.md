@@ -2,7 +2,7 @@
 title: "Volatility Trading"
 type: strategy
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, derivatives, volatility, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Volatility Trading", "Vol Trading", "Volatility Strategies", "Crypto Vol Trading"]
@@ -289,7 +289,7 @@ DVOL and the raw IV surface are published by **Deribit** directly (and mirrored 
 **Historical data:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for realized-vol computation
-- `GET /api/v1/backtesting/klines` — deep kline archive for RV backtesting
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for RV backtesting
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime/score"
@@ -307,7 +307,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can operate
 - **Regime gate** — `GET /api/v1/volatility/regime` (per-asset state) plus `GET /api/v1/quant/market` (HMM probabilities): no short-premium entries in `vol_shock`/`expanding` or when vol_spike probability is rising
 - **Skew and positioning** — `GET /api/v1/derivatives/funding-rates?coin=BTC` + perp OI reveal the overbid wing; `GET /api/v1/quant/gex` shows dealer-gamma sign (dampened vs cascade-prone spot)
 - **Kill switch** — `GET /api/v1/volatility/regime/score` + `GET /api/v1/market-intelligence/liquidations` polled each cycle automate the DVOL-shock flatten and the "RV > IV for 20+ days → suspend" checks
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08) supplies the RV history; `GET /api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus) enables the regime-conditional P&L table above to be measured rather than assumed
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) supplies the RV history; `GET /api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus) enables the regime-conditional P&L table above to be measured rather than assumed
 - **Tips** — pair any vol-strategy replay with point-in-time snapshots from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02); using today's regime labels on old trades is lookahead bias
 
 ## Sources

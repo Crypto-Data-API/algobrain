@@ -2,7 +2,7 @@
 title: "Correlation-Regime Pairs"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, pairs-trading, arbitrage, regime-detection, mean-reversion, quantitative, crypto, derivatives, correlation]
 aliases: ["Regime-Gated Stat Arb", "Cointegration-Regime Pairs", "Correlation-Conditional Spread Trading"]
@@ -355,7 +355,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — `GET /api/v1/market-data/klines?symbol={SYMBOL}USDT&interval=1h&limit=720` for both legs — rolling correlation, spread z-score, ADF, and OU half-life are computed locally (no derived-statistic endpoint exists)
 - **Funding confirm** — `GET /api/v1/derivatives/funding-rates?coin=BTC` and `?coin=ETH` — the optional funding-differential gate on the pair
 - **Regime gate** — `GET /api/v1/regimes/current` — block entries in `Structural_Shock`
-- **Backtest** — `GET /api/v1/backtesting/klines` — Binance spot 1h/4h/1d back to 2017-08 gives multi-cycle cointegration samples for both legs; join `GET /api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus) to test correlation-regime conditioning
+- **Backtest** — `GET /api/v1/backtesting/klines` — Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09) gives multi-cycle cointegration samples for both legs; join `GET /api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus) to test correlation-regime conditioning
 - **Tips** — re-estimate the cointegration statistics on a schedule, not per tick; a correlation-regime flip mid-position is the kill signal, so alert on the correlation series rather than on price
 
 ## Instrument Structures

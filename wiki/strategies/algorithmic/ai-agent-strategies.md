@@ -2,7 +2,7 @@
 title: "AI Agent Trading Strategies"
 type: strategy
 created: 2026-04-09
-updated: 2026-07-20
+updated: 2026-10-17
 status: excellent
 tags: [ai-trading, algorithmic, machine-learning, news]
 aliases: ["AI Agent Strategies", "LLM Trading Strategies", "Agentic Trading"]
@@ -295,7 +295,7 @@ The news/transcript feeds the sentiment variant scores are not a CryptoDataAPI p
 - `GET /api/v1/trading-strategy-baskets` — 50 regime-mapped strategy baskets for the agent's strategy-selection step
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — OHLCV archive (Binance spot 1h/4h/1d back to 2017-08)
+- `GET /api/v1/backtesting/klines` — OHLCV archive (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09)
 - `GET /api/v1/backtesting/daily-snapshots/{date}` — full daily payload frozen per date (since 2026-03-02), the post-cutoff validation substrate
 
 ```bash
@@ -313,7 +313,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Core loop** — read regime (`GET /api/v1/regimes/current` + `GET /api/v1/quant/market`), select strategies (`GET /api/v1/trading-strategy-baskets`), size risk (`GET /api/v1/quant/coins/risk?horizon=24h`), then act — the four-step loop documented on [[cryptodataapi-mcp]]
 - **Signal overlay** — the agent's own LLM sentiment scores join market state from `GET /api/v1/daily`; the day-return "already priced" filter comes from `/api/v1/market-data/klines`
 - **Regime gate** — halve gross when `vol_spike`/`choppy_high_vol` probabilities dominate `GET /api/v1/quant/market` — the crypto equivalent of this page's VIX > 30 gate
-- **Backtest** — `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) gives post-LLM-training-cutoff, point-in-time market state — the only honest substrate for validating a strategy whose model has already "read" older outcomes; deeper price history via `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08)
+- **Backtest** — `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) gives post-LLM-training-cutoff, point-in-time market state — the only honest substrate for validating a strategy whose model has already "read" older outcomes; deeper price history via `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09)
 - **Tips** — poll the cached `/api/v1/daily` hourly instead of per-tick endpoints (API cost telemetry is a first-class P&L input for this strategy); append `?format=markdown` to keep tool outputs cheap in the context window
 - **Prompt library** — https://cryptodataapi.com/prompts ships 14 production prompts across AI agents, backtesting, market analysis, and trading bots (start with the Free-tier "MCP Market Analyst" on /api/v1/daily); source: github.com/Crypto-Data-API/cryptodataapi-prompt-library
 

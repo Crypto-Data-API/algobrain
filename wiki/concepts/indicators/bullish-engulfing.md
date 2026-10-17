@@ -2,7 +2,7 @@
 title: "Bullish Engulfing"
 type: concept
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [technical-analysis, indicators]
 aliases: ["Bullish Engulfing", "Bullish Engulfing Pattern", "bullish-engulfing-candle"]
@@ -30,7 +30,7 @@ A bullish engulfing is a confirmation signal, not a forecast. Its practical valu
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV bars for pattern scans
-- `GET /api/v1/backtesting/klines` — deep kline archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=2"
@@ -44,7 +44,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Compute** — two-bar logic over `GET /api/v1/market-data/klines`: prior candle closes red, current candle closes green with its body spanning the prior body (close ≥ prior open, open ≤ prior close)
 - **Confirm** — check the engulfing bar's volume against the average from `GET /api/v1/market-data/volume-history` — the page's volume-confirmation rule, automated
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) supports hit-rate and expectancy studies with location filters (support proximity, trend context)
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) supports hit-rate and expectancy studies with location filters (support proximity, trend context)
 - **Tip** — crypto trades 24/7, so the "opens below prior close" gap element rarely occurs on continuous bars; most crypto implementations relax the condition to pure body-engulfment
 
 ## Sources

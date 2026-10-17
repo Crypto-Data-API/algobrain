@@ -2,7 +2,7 @@
 title: "Bull Call Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, derivatives, bull-call-spread, debit-spread, bullish, defined-risk, bitcoin]
 aliases: ["Call Debit Spread", "Call Spread", "Crypto Bull Call Spread", "Deribit Call Spread"]
@@ -121,7 +121,7 @@ DVOL and the raw IV surface come from **Deribit / [[greeks-live]]**, not CryptoD
 **Historical:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history (find low-DVOL entry windows)
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for trend context and realized-vol computation
-- `GET /api/v1/backtesting/klines` — deep kline archive for backtesting the structure
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for backtesting the structure
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime"
@@ -137,7 +137,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Signal** — buy the spread when `GET /api/v1/volatility/regime` reads `compressed` (the debit is cheap) and trend context from `GET /api/v1/market-data/klines` supports the bullish thesis; place the sold strike against the `GET /api/v1/market-intelligence/options` call wall
 - **Regime gate** — `GET /api/v1/quant/market`: enter on rising `strong_trend_bull` probability; `choppy_high_vol` chews the debit through whipsaw without ever reaching the short strike
-- **Backtest** — how often does the underlying reach the short strike within the tenor? Replay on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08), pairing entries with point-in-time regimes from `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Backtest** — how often does the underlying reach the short strike within the tenor? Replay on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09), pairing entries with point-in-time regimes from `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
 - **Tips** — the 60-day `/api/v1/volatility/regime/{symbol}` history separates genuinely cheap vol from freshly-crushed vol; positive funding on `/api/v1/derivatives/funding-rates?coin=BTC` richens the sold upper strike and cuts the net debit.
 
 ## Related

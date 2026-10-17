@@ -2,7 +2,7 @@
 title: "OI-Gated Pairs"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, pairs-trading, arbitrage, open-interest, perpetual-futures, risk-management, quantitative, statistics, derivatives, crypto]
 aliases: ["OI-Filtered Stat Arb", "Squeeze-Protected Pairs", "OI-Conditional Spread Trading", "Short-Squeeze Proof Pairs"]
@@ -412,7 +412,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — daily klines for both legs (`GET /api/v1/market-data/klines?symbol={LEG}USDT&interval=1d&limit=90`) maintain the rolling correlation, cointegration state, and log-spread z-score
 - **Gate** — before shorting the rich leg, `GET /api/v1/derivatives/open-interest?coin={LEG}` (7d/24h/4h OI change), `GET /api/v1/derivatives/funding-rates?coin={LEG}`, and the long/short ratio check squeeze fuel on the short side
 - **Regime gate** — `GET /api/v1/regimes/current`; `Structural_Shock` blocks new spreads regardless of z-score
-- **Backtest** — spread replay on `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 spans several cointegration regimes); OI-gate replay is limited to `/derivatives/binance/history` (90d) and the Binance daily archive since 2026-03-30 — backtest the pairs logic deep, but validate the OI gate on recent data only
+- **Backtest** — spread replay on `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 spans several cointegration regimes — only in the `klines_deep` archive, while the REST route starts 2026-05-09); OI-gate replay is limited to `/derivatives/binance/history` (90d) and the Binance daily archive since 2026-03-30 — backtest the pairs logic deep, but validate the OI gate on recent data only
 - **Tips** — batch both legs (and candidate substitutes) through `GET /api/v1/quant/coins/risk` in one call rather than sequential per-coin polls
 
 ## Related

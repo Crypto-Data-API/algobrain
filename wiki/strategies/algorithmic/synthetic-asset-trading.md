@@ -2,7 +2,7 @@
 title: "Synthetic Asset Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [crypto, defi, synthetic-assets, synthetix, perpetual-futures, oracle, funding-rate, derivatives, algorithmic]
 aliases: ["Synthetic Assets", "DeFi Synthetics", "On-Chain Synthetic Trading", "Synthetix Perps Trading"]
@@ -291,7 +291,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — the funding differential: `GET /api/v1/derivatives/funding-rates?coin=ETH` (Binance + Hyperliquid benchmark leg in one call) against the synth venue's skew-funding read from its contracts
 - **Guards** — `GET /api/v1/market-data/ticker/price` for the oracle-divergence check; `GET /api/v1/sentiment/stablecoins` for settlement-collateral peg before and during every hold
 - **Regime gate** — `GET /api/v1/quant/market` — skew-funding richness clusters in trending states, while `vol_spike` regimes raise oracle-lag and depeg tails simultaneously
-- **Backtest** — funding-differential history from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05 — deep enough for full-cycle carry studies; Binance daily only since 2026-03-30) with price legs from `GET /api/v1/backtesting/klines`
+- **Backtest** — funding-differential history from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05 — deep enough for full-cycle carry studies; Binance daily only since 2026-03-30) with price legs from `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive)
 - **Tips** — re-hedge on funding timestamps, not price ticks; the synth venue's dynamic-fee state must be read on-chain — no REST mirror exists
 
 ## Related

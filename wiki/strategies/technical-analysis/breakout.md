@@ -2,7 +2,7 @@
 title: "Breakout"
 type: strategy
 created: 2026-06-22
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [technical-analysis, breakout, momentum, trend-following, crypto]
 aliases: ["Breakout Pattern", "Price Breakout", "Range Breakout"]
@@ -173,7 +173,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Signal** — N-day high/low channels and volume ratios computed from `GET /api/v1/market-data/klines`; a close beyond the level on ≥1.5x average volume is the trigger
 - **Regime gate** — `GET /api/v1/quant/market`: suppress entries while `choppy_high_vol` dominates; `GET /api/v1/volatility/regime` reading `compressed` marks the coiled ranges worth watching
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); run the shuffled-series null test the page prescribes, and validate the regime filter with `/api/v1/quant/regimes/history` (hourly since 2020, Pro Plus)
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); run the shuffled-series null test the page prescribes, and validate the regime filter with `/api/v1/quant/regimes/history` (hourly since 2020, Pro Plus)
 - **Tips** — respect `insufficient_history`/`new_listing` flags — freshly listed coins print fake "N-day highs" with no real range behind them; the retest entry fills better than chasing the break candle in thin pairs.
 
 ## Related

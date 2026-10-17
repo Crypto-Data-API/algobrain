@@ -2,7 +2,7 @@
 title: "Fractal Dimension"
 type: concept
 created: 2026-07-20
-updated: 2026-07-20
+updated: 2026-10-17
 status: draft
 tags: [indicators, technical-analysis, quantitative, statistics, crypto, market-regime, regime-detection]
 aliases: ["Fractal Dimension", "Fractal Dimension Index", "FDI", "Box-Counting Dimension", "Path Roughness"]
@@ -129,7 +129,7 @@ Compare [[vidya|VIDYA]], which adapts to volatility level and is blind to path s
 - `GET /api/v1/hyperliquid/l2-book?coin=X` — spread and depth; on thin books the high-low ranges driving `D` are partly spread, not price structure
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — OHLCV archive for replaying the `D` series across full cycles
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV archive for replaying the `D` series across full cycles
 - `GET /api/v1/quant/regimes/history` — hourly regime labels since 2020, for scoring `D` against labelled trend/range states
 
 ```bash

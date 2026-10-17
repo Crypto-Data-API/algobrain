@@ -2,7 +2,7 @@
 title: "Whale Copy-Flow Funding Filter"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-03
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, on-chain, funding-rate, behavioral-finance, informational-edge, momentum, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Whale Follow Funding Gate", "Copy-Flow Funding Filter", "Informed Flow Anti-Crowding Gate", "Whale Accumulation Uncrowded Entry"]
@@ -348,7 +348,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — the `GET /api/v1/on-chain/whales/accumulation-score/BTC` accumulation reading plus `GET /api/v1/on-chain/exchange-flows/spike-alerts` outflow confirmation form the whale leg
 - **Funding filter** — the `GET /api/v1/derivatives/funding-rates?coin=BTC` 7-day average must show the crowd is NOT already long before mirroring the whales
 - **Exit monitor** — `GET /api/v1/derivatives/binance/long-short-ratio` polled through the hold; crowd convergence onto the trade is the partial-exit trigger
-- **Backtest** — the whale-score endpoint's own historical timeseries joined to daily klines back to 2017-08 (`GET /api/v1/backtesting/klines`) and the funding archive (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30)
+- **Backtest** — the whale-score endpoint's own historical timeseries joined to daily klines back to 2017-08 only in the `klines_deep` archive (`GET /api/v1/backtesting/klines`; the REST route starts 2026-05-09) and the funding archive (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30)
 - **Tips** — the whole `/on-chain/whales*` family (including `accumulation-score`) is currently disabled upstream; run the pipeline on Nansen/Arkham + `spike-alerts` and treat any future re-enable of `accumulation-score` as a new data source to validate (ERC-20-only scope, categorical `signal` not a 0-100 number) rather than silently merging it back into the Gate 1 threshold as written
 - **Prompt library** — the "Whale Positioning Monitor" prompt (Pro tier, [prompt library](https://cryptodataapi.com/prompts)) tracks >$100k Hyperliquid accounts and separates market-maker hedging from the directional conviction this strategy copies
 

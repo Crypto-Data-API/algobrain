@@ -2,7 +2,7 @@
 title: "Complacency Vol Buying"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-03
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, volatility, options, derivatives, sentiment, behavioral-finance, risk-management, tail-risk, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Greed-Top Vol Insurance", "Sentiment-Gated Tail Buying", "Complacency Straddle", "Cheap-Vol at Market-Top Buying"]
@@ -386,7 +386,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Sentiment gate** — `GET /api/v1/sentiment/fear-greed` — sustained greed readings mark the complacency window (Gate 1)
 - **Vol gate** — `GET /api/v1/volatility/implied` — DVOL 52-week percentile confirms vol is cheap enough to own (Gate 2) and drives the DVOL-spike exit
 - **Leverage gate** — `GET /api/v1/derivatives/funding-rates?coin=BTC` + `GET /api/v1/derivatives/open-interest?coin=BTC` — leverage quietly building under the calm surface (Gate 3)
-- **Backtest** — `GET /api/v1/market-intelligence/fear-greed-history` + the DVOL series reconstruct historical complacency windows; forward P&L from `GET /api/v1/backtesting/klines` (Binance spot daily back to 2017-08); point-in-time gating via `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Backtest** — `GET /api/v1/market-intelligence/fear-greed-history` + the DVOL series reconstruct historical complacency windows; forward P&L from `GET /api/v1/backtesting/klines` (Binance spot daily back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); point-in-time gating via `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02)
 - **Tips** — long-vol positions bleed theta while waiting: automate the DVOL-spike exit check on every poll rather than reviewing manually; `?format=markdown` keeps the fear-greed payload compact
 
 ## Related

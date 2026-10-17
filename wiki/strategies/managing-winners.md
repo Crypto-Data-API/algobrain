@@ -2,7 +2,7 @@
 title: "Managing Winners (Crypto)"
 type: concept
 created: 2026-05-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, derivatives, volatility, risk-management, methodology, bitcoin, ethereum]
 aliases: ["50% Profit Rule", "Manage Winners", "Tastytrade Management", "21 DTE Rule", "Crypto Managing Winners"]
@@ -260,7 +260,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Daily management loop** — mark every open short-premium position against its profit target (50% strangles/condors, 25% flies) and the 10-14 DTE time stop; position marks come from the venue (Deribit), while `GET /api/v1/volatility/regime` calibrates the target (25% in richer regimes, 75%+ on thin credits).
 - **Kill switch** — `GET /api/v1/volatility/regime/score` spiking plus `GET /api/v1/market-intelligence/liquidations`: the DVOL-shock signature that flattens short vega regardless of profit state — the mandatory complement to the winner rule.
 - **Regime gate** — `GET /api/v1/quant/market`: in `range_low_vol` the 50% target and time stop collide (the "when the rule hurts" case) — shift to longer DTE or hold to 75%; `GET /api/v1/derivatives/funding-rates?coin=BTC` supplies the skew context.
-- **Backtest** — time-to-50% and realised-distribution studies need option marks from Deribit history; CDA contributes the spot paths (`GET /api/v1/backtesting/klines`, Binance 1h/4h/1d since 2017-08) and point-in-time regime states (`GET /api/v1/backtesting/daily-snapshots`, since 2026-03-02) for regime-conditional rule calibration.
+- **Backtest** — time-to-50% and realised-distribution studies need option marks from Deribit history; CDA contributes the spot paths (`GET /api/v1/backtesting/klines`, Binance 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) and point-in-time regime states (`GET /api/v1/backtesting/daily-snapshots`, since 2026-03-02) for regime-conditional rule calibration.
 - **Tips** — the rule is mechanical-or-nothing: an agent that closes at 50% / 12 DTE without discretion is the ideal operator; have it log the override rate — above 10% of trades is a listed kill criterion.
 
 ## Sources

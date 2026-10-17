@@ -2,7 +2,7 @@
 title: "Concentrated Liquidity"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: draft
 tags: [crypto, defi, uniswap, liquidity, concentrated-liquidity, impermanent-loss, amm, lp-management, rebalancing, algorithmic]
 aliases: ["Concentrated Liquidity Management", "Active LP Management", "Uniswap V3 LP Strategy", "CL LP"]
@@ -248,7 +248,7 @@ Concentrated-liquidity economics are driven by pool volume/TVL (fee APR) and rea
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1h&limit=1000` — OHLCV to estimate realized σ for range sizing and LVR
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset detail + 60d vol history
-- `GET /api/v1/backtesting/klines` — deep archive for backtesting range/rebalance/hedge across regimes
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — history for backtesting range/rebalance/hedge across regimes
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending?chain=ethereum"
@@ -266,7 +266,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — realized σ from `GET /api/v1/volatility/regime/{symbol}` (60d history) feeds the LVR ≈ σ²/8 estimate that decides whether fee income clears the true cost
 - **Regime gate** — enter/widen ranges in `compressed` vol states, cut or hedge in `expanding`/`vol_shock` per `GET /api/v1/volatility/regime`
 - **Hedge leg** — `GET /api/v1/derivatives/funding-rates?coin=ETH` prices the perp-overlay carry before committing to the hedged variant
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08) replays range width, rebalance cadence, and hedge P&L across vol regimes; pool-level fee income has no archive — reconstruct it from your own sampling
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) replays range width, rebalance cadence, and hedge P&L across vol regimes; pool-level fee income has no archive — reconstruct it from your own sampling
 - **Tips** — respect `insufficient_history` flags on newer pair tokens; hourly polling suffices — LVR accrues with σ², not with your polling frequency
 
 ## Related

@@ -2,7 +2,7 @@
 title: MACD Crossover Strategy
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags:
   - momentum
@@ -150,7 +150,7 @@ Everything the system needs is OHLCV-based with a funding-rate overlay for crypt
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding rate (directional bias filter)
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — deep archive for parameter optimization and backtesting
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — history for parameter optimization and backtesting
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=100"
@@ -167,7 +167,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=100` → compute MACD(12,26,9) on closed daily candles; the 200-EMA trend filter comes from the same series (or `GET /api/v1/market-data/btc-price-history`, which ships the 200D MA pre-computed for BTC).
 - **Funding filter** — `GET /api/v1/derivatives/funding-rates?coin=BTC` before every entry; skip shorts when funding > 0.1%/8h per the kill criteria.
 - **Regime gate** — `GET /api/v1/quant/market` — take crossovers only in `strong_trend_bull`/`strong_trend_bear`; stand down in `choppy_high_vol`, where whipsaws dominate.
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) for parameter sweeps; pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime states to avoid [[lookahead-bias]].
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for parameter sweeps; pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime states to avoid [[lookahead-bias]].
 - **Tips** — batch the universe via `GET /api/v1/quant/coins/risk` rather than looping per symbol; respect `insufficient_history` flags on recently listed perps before trusting a 26-period EMA.
 
 ## Related

@@ -2,7 +2,7 @@
 title: "OI / Price Exhaustion (Hyperliquid Basket)"
 type: strategy
 created: 2026-06-16
-updated: 2026-07-20
+updated: 2026-10-17
 status: good
 tags: [crypto, perpetual-futures, hyperliquid, quantitative, swing-trading, mean-reversion, derivatives, market-microstructure, momentum]
 aliases: ["OI Exhaustion", "Price-OI Divergence Short", "Open-Interest Trend Exhaustion", "OI Fade"]
@@ -444,7 +444,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — `GET /api/v1/liquidity/oi-divergence` is purpose-built for this basket: it scores OI-vs-price divergence over 1h/4h/24h windows, replacing hand-rolled exhaustion detection; confirm with the cross-exchange OI and long-short calls above
 - **Fragility check** — `GET /api/v1/liquidity/regime` (Pro+) adds the fragility score: an exhausted trend on a fragile book rolls over harder, improving the fade's expectancy
 - **Regime gate** — `GET /api/v1/quant/market`: the kill criterion (confirmed strong trend with expanding OI) maps to sustained strong_trend probabilities — automate the disable rule from this endpoint
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08; HL daily to 2023) for the 4h price legs; OI-divergence replays are constrained by shallow OI history — `GET /api/v1/derivatives/binance/history` reaches 90 days and archived OI starts 2026-03-30, so quantify the 40%-hit-rate kill metric on the forward-growing window
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09; HL daily to 2023) for the 4h price legs; OI-divergence replays are constrained by shallow OI history — `GET /api/v1/derivatives/binance/history` reaches 90 days and archived OI starts 2026-03-30, so quantify the 40%-hit-rate kill metric on the forward-growing window
 - **Tips** — never run this and [[oi-confirmed-trend]] on the same asset simultaneously; a shared `GET /api/v1/derivatives/summary?coin=X` read per cycle keeps both baskets' state consistent from one payload
 - **Prompt library** — the "Open Interest Divergence Scanner" prompt (Free tier, [prompt library](https://cryptodataapi.com/prompts)) detects the price-up/OI-down exhaustion quadrant this fade waits for
 

@@ -2,7 +2,7 @@
 title: "Gaming Tokens"
 type: concept
 created: 2026-07-19
-updated: 2026-08-20
+updated: 2026-10-17
 status: draft
 tags: [crypto, gamefi, nft]
 aliases: ["Gaming Token", "Blockchain Gaming Token", "GameFi Token"]
@@ -51,7 +51,7 @@ Because gaming tokens sit at the intersection of [[nft|NFT]] markets and token e
 
 **Historical data:**
 - `GET /api/v1/market-data/klines` — OHLCV history for backtesting individual gaming-token price behavior
-- `GET /api/v1/backtesting/klines` — deeper kline archive (since 2020) for longer-horizon gaming-sector backtests
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for longer-horizon gaming-sector backtests
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/coins/category-groups"

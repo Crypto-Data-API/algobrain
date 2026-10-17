@@ -2,7 +2,7 @@
 title: "Put Spread"
 type: strategy
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, derivatives, put-spread, debit-spread, bearish, defined-risk, ethereum]
 aliases: ["Vertical Put Spread", "Bear Put Spread", "Long Put Spread", "Put Debit Spread", "Crypto Put Spread", "Deribit Put Spread"]
@@ -119,7 +119,7 @@ DVOL and the raw IV/skew surface come from **Deribit / [[greeks-live]]**, not Cr
 **Historical:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history (find low-DVOL entry windows)
 - `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=90` — OHLCV for trend context and support/resistance mapping
-- `GET /api/v1/backtesting/klines` — deep kline archive for backtesting the structure
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for backtesting the structure
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime"
@@ -136,7 +136,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can time an
 - **Entry timing** — `GET /api/v1/volatility/regime` reading `compressed` is the buy-cheap-vol gate for a debit spread; `GET /api/v1/volatility/regime/{symbol}` (60-day history) finds how rare the current low-vol window is
 - **Downside map** — `GET /api/v1/quant/gex` + `GET /api/v1/market-intelligence/liquidations` locate the liquidation fuel below spot that would carry price toward strike B
 - **Regime gate** — `GET /api/v1/quant/market`: rising strong_trend_bear / vol_spike probabilities support the bearish thesis; a strong_trend_bull print argues to stand down
-- **Backtest** — test the bounded-down-move thesis on `GET /api/v1/backtesting/klines` (ETHUSDT/BTCUSDT 1h/4h/1d back to 2017-08); strike-level IV and skew history are Deribit's, so P&L replays of the option legs need Deribit data
+- **Backtest** — test the bounded-down-move thesis on `GET /api/v1/backtesting/klines` (ETHUSDT/BTCUSDT 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); strike-level IV and skew history are Deribit's, so P&L replays of the option legs need Deribit data
 - **Tips** — poll the funding endpoint after a selloff: fattened put skew makes *new* spreads better financed, but marks existing long legs richer — a natural profit-take check
 
 ## Related

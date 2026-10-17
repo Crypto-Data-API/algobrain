@@ -2,7 +2,7 @@
 title: "Implementation Shortfall"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [futures, execution, institutional, slippage, market-impact, algorithmic-execution, benchmark, vwap, twap]
 aliases: ["Implementation Shortfall Algorithm", "IS Algorithm", "Arrival Price Algorithm", "Execution Cost Minimization"]
@@ -153,7 +153,7 @@ The equity examples above run on broker/venue market data; for the crypto applic
 
 **Historical data:**
 - `GET /api/v1/liquidity/depth/{coin}` — 24h rolling depth history at 1-min samples (BTC free; full universe Pro+) for intraday liquidity curves
-- `GET /api/v1/backtesting/klines` — archive for TCA baselines (1m klines only since 2026-03-30; 1h/4h/1d Binance spot to 2017-08)
+- `GET /api/v1/backtesting/klines` — archive for TCA baselines (1m klines only since 2026-03-30; 1h/4h/1d Binance spot back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09)
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/liquidity/depth"
@@ -170,7 +170,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run cry
 - **Pre-trade model** — `GET /api/v1/liquidity/depth` calibrates expected impact per slice size; `GET /api/v1/hyperliquid/l2-book?coin=BTC` gives the live book the child orders will hit
 - **Urgency setting** — short-horizon σ from 1m `GET /api/v1/market-data/klines` sets the timing-risk penalty; `GET /api/v1/liquidity/oi-divergence` flags when the tape is one-sided against the order
 - **Regime gate** — `GET /api/v1/liquidity/regime` fragility score: high fragility → smaller slices, longer horizon, or postpone the parent order entirely
-- **Backtest / TCA** — replay schedules on `GET /api/v1/backtesting/klines` — honest window: 1m bars only since 2026-03-30, so minute-level TCA baselines are shallow; 1h/4h/1d reach 2017-08 for coarser studies
+- **Backtest / TCA** — replay schedules on `GET /api/v1/backtesting/klines` — honest window: 1m bars only since 2026-03-30, so minute-level TCA baselines are shallow; 1h/4h/1d reach 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09) for coarser studies
 - **Tips** — sample `GET /api/v1/liquidity/depth/{coin}` (1-min, 24h rolling) through the execution window to time slices into deep-book periods; log realized shortfall vs the pre-trade estimate on every parent order — the feedback loop is the product
 
 ## Related

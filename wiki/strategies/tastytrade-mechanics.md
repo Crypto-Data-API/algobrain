@@ -2,7 +2,7 @@
 title: "tastytrade Mechanics (Crypto)"
 type: concept
 created: 2026-05-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, derivatives, volatility, methodology, premium-selling, education, bitcoin, ethereum]
 aliases: ["tastytrade Playbook", "tastytrade Rules", "Sosnoff Mechanics", "45-DTE 50% 21-DTE", "tastytrade Methodology"]
@@ -265,7 +265,7 @@ DVOL and the IV surface come from Deribit / [[greeks-live]]; [[cryptodataapi]] s
 **Historical data:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for realized-vol computation
-- `GET /api/v1/backtesting/klines` — deep kline archive
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime/score"
@@ -282,7 +282,7 @@ The index-card rule set is a natural agent policy — an AI agent connected to t
 - **Entry filter** — `GET /api/v1/volatility/regime` (skip `vol_shock`) + realized vol from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` for the DVOL−RV > 5 check; the DVOL percentile itself comes from Deribit
 - **Wing tilt** — `GET /api/v1/derivatives/funding-rates?coin=BTC` drives the `skew_tilt` branch in the pseudocode (funding > 0.03%/8h → lean the short toward the call wing)
 - **Kill switch** — poll `GET /api/v1/volatility/regime/score` + `GET /api/v1/market-intelligence/liquidations` each cycle; a joint spike is the automated stand-in for the "DVOL +50% in a session" flatten rule the equity playbook lacks
-- **Backtest** — replay the 50%-winner / 10-14-DTE / 2x-credit rules on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08) with point-in-time regimes from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02); a sample that excludes 2020-03 or 2022 is calm-regime-biased by construction
+- **Backtest** — replay the 50%-winner / 10-14-DTE / 2x-credit rules on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) with point-in-time regimes from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02); a sample that excludes 2020-03 or 2022 is calm-regime-biased by construction
 - **Tips** — enforce "trade small, trade often" as hard per-trade caps in the agent's order layer; the playbook's known failure mode (rolling losers) is precisely what mechanical execution exists to prevent
 
 ## Sources

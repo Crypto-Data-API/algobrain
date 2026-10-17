@@ -2,7 +2,7 @@
 title: "Narrative with Trend Confirmation"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, momentum, behavioral-finance, technical-analysis, trend-following, crypto, swing-trading, quantitative]
 aliases: ["Trend-Gated Narrative Trade", "Narrative Breakout Confluence", "Narrative Momentum Filter"]
@@ -346,7 +346,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Regime gate** — `GET /api/v1/regimes/current` and `GET /api/v1/quant/market` run first: no narrative long entries in `Established Bear` / `Structural Shock` or on high `strong_trend_bear` probability
 - **Signal** — `GET /api/v1/market-data/klines?symbol={TOKEN}USDT&interval=1d&limit=100` computes the Donchian/SMA50/ATR trend confirmation that qualifies the externally sourced narrative signal
 - **Sentiment filter** — `GET /api/v1/sentiment/fear-greed`; narratives propagate faster in greed regimes, so widen the position count only above neutral
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) for the trend leg plus `GET /api/v1/market-intelligence/fear-greed-history` for sentiment context; use `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime labels
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for the trend leg plus `GET /api/v1/market-intelligence/fear-greed-history` for sentiment context; use `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime labels
 - **Tips** — the narrative-identification leg stays external (LunarCrush/Santiment); the agent should only autonomously manage the CDA-verifiable trend and regime half, and flag `new_listing` tokens for manual review
 
 ## Related

@@ -2,7 +2,7 @@
 title: "Pullback Trading (Crypto)"
 type: strategy
 created: 2026-06-30
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [technical-analysis, trend-following, swing-trading, momentum, crypto]
 aliases: ["pullback trading", "buy the dip", "dip buying", "pullback", "retracement entry", "buying pullbacks", "buy the dip crypto"]
@@ -176,7 +176,7 @@ Pullback trading needs price structure and moving averages to define the trend a
 - `GET /api/v1/market-intelligence/liquidations` — where the long-liquidation flush clusters below support.
 
 **Historical data (backtest across regimes — the whole point):**
-- `GET /api/v1/backtesting/klines` — full OHLCV archive from 2020 to test the trend filter through the 2021 bull and 2022 bear.
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history to test the trend filter through the 2021 bull and 2022 bear.
 - `GET /api/v1/backtesting/funding` and `GET /api/v1/backtesting/liquidations` — reconstruct the funding/liquidation context of historical dips.
 
 ```bash
@@ -197,7 +197,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=500` → trend filter (50/200 MA) and pullback zone; enter only on the reclaim candle, never the falling knife.
 - **Dip quality** — `GET /api/v1/derivatives/funding-rates?coin=ETH` + `GET /api/v1/derivatives/open-interest?coin=ETH` + `GET /api/v1/liquidity/oi-divergence` — negative funding with elevated OI at support = squeeze-ready dip; `GET /api/v1/market-intelligence/liquidations` locates the flush pocket the stop must sit beyond.
 - **Regime gate** — `GET /api/v1/quant/market` — buy dips only in `strong_trend_bull`; a flip toward `strong_trend_bear` is the wholesale-exit signal for alt pullback longs (BTC breaks, alts follow).
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 — spans the 2018 and 2022 bears that kill unfiltered dip-buying); dip context from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) and `GET /api/v1/backtesting/liquidations` (since 2026-03-30).
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09 — spans the 2018 and 2022 bears that kill unfiltered dip-buying); dip context from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) and `GET /api/v1/backtesting/liquidations` (since 2026-03-30).
 - **Tips** — pair backtests with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) so the trend/regime filter is point-in-time, not today's labels back-applied.
 
 ## Related

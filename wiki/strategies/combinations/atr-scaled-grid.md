@@ -2,7 +2,7 @@
 title: "ATR-Scaled Grid"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, grid-trading, volatility, risk-management, position-sizing, market-microstructure, quantitative, indicators, crypto]
 aliases: ["Vol-Adaptive Grid", "ATR-Adjusted Grid Spacing", "Volatility-Scaled Grid", "Dynamic Grid Spacing"]
@@ -369,7 +369,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Signal** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=20` — recompute ATR(14, 4h) each recalibration cycle and rescale grid spacing to `k × ATR`
 - **Halt gate** — `GET /api/v1/derivatives/open-interest?coin=BTC` (pause on ≥ +5% 12h OI build) + `GET /api/v1/volatility/regime` — a `vol_shock` label is the regime-stop that ATR scaling alone cannot catch
-- **Backtest** — `GET /api/v1/backtesting/klines` — Binance spot 1h/4h back to 2017-08 covers full vol cycles for optimising the spacing multiplier `k`; 1m klines exist only since 2026-03-30 if fill simulation needs intrabar paths
+- **Backtest** — `GET /api/v1/backtesting/klines` — Binance spot 1h/4h back to 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09) covers full vol cycles for optimising the spacing multiplier `k`; 1m klines exist only since 2026-03-30 if fill simulation needs intrabar paths
 - **Tips** — recalibrate only on closed 4h candles to avoid intra-bar spacing flapping; append `?format=markdown` to trim kline payloads for LLM context
 
 ## Related

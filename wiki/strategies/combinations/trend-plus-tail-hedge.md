@@ -2,7 +2,7 @@
 title: "Trend Following + Tail Risk Hedge"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [combinations, meta-strategy, trend-following, hedging, crisis-alpha, perpetual-futures, crypto, derivatives, options]
 aliases: ["Trend + Tail", "CTA Plus Tail Hedge", "Dragon Portfolio Crypto"]
@@ -199,7 +199,7 @@ The trend component scales to the perp market's capacity — BTC perps alone hav
 - `GET /api/v1/quant/market` — HMM regime probabilities; is the market in a sustained trend or chop?
 
 **Historical:**
-- `GET /api/v1/backtesting/klines` — deep OHLCV archive for MA crossover backtesting
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for MA crossover backtesting
 - `GET /api/v1/backtesting/funding` — historical funding to net against trend expectancy
 - `GET /api/v1/backtesting/liquidations` — historical cascade data to backtest tail-hedge monetization timing
 
@@ -218,7 +218,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run bot
 - **Signal** — daily klines run the MA-crossover trend engine and ATR sizing
 - **Hedge timing** — `GET /api/v1/volatility/regime` (`compressed` = cheap wings) and `GET /api/v1/market-intelligence/liquidations` (cascade early-warning) time tail-hedge entry and monetization
 - **Regime gate** — `GET /api/v1/quant/market` HMM probabilities separate sustained trend from chop before the trend leg deploys
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) for the trend leg, `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) for carry drag, and `GET /api/v1/backtesting/liquidations` (since 2026-03-30) for hedge-monetization triggers
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for the trend leg, `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) for carry drag, and `GET /api/v1/backtesting/liquidations` (since 2026-03-30) for hedge-monetization triggers
 - **Tips** — the hedge leg is priced on Deribit, not CDA; run the monetization decision off CDA cascade data but verify option marks before selling wings into a spike
 
 ## Related

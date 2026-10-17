@@ -2,7 +2,7 @@
 title: "Post-Hack Incident Response Arbitrage"
 type: strategy
 created: 2026-04-28
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [arbitrage, crypto, defi, risk-management, event-driven, ai-trading]
 aliases: ["Incident-Response Arb", "Post-Disclosure Arb", "0-72h Hack Arb"]
@@ -270,7 +270,7 @@ First-second detection still needs the Twitter/Telegram anomaly feeds above; [[c
 - `GET /api/v1/liquidity/depth` — perp book depth for sizing the short ladder
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — price paths around past exploit events (Binance spot 1h/4h/1d to 2017-08)
+- `GET /api/v1/backtesting/klines` — price paths around past exploit events (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09)
 - `GET /api/v1/backtesting/funding` — Hyperliquid hourly funding since 2023-05 (panic-funding replay)
 - `GET /api/v1/backtesting/liquidations` — Hyperliquid liquidation flow since 2026-03-30
 - `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time market state per event date (since 2026-03-02)
@@ -290,7 +290,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can automat
 - **Detection cross-check** — on any anomaly-feed alert, hit `GET /api/v1/security/events` and `GET /api/v1/security/regime/score`; a confirmed print in the structured feed is the multi-source confirmation gate before scaling past 50% of limit.
 - **Signal (funding/liquidation legs)** — `GET /api/v1/derivatives/funding-rates?coin=<COIN>` flags the panic-funding condition (< -100bp annualized = forced-long cascade underway) and `GET /api/v1/market-intelligence/liquidations` confirms the cascade the perp-discount leg trades against.
 - **Sizing** — `GET /api/v1/liquidity/depth` caps the short ladder at the depth available inside 0.5% slippage (the per-event capacity constraint).
-- **Backtest** — replay the ~25-event 2023-2025 sample with `GET /api/v1/backtesting/klines` for T+15min drift measurement, `GET /api/v1/backtesting/funding` (HL hourly since 2023-05) for the funding leg, and `/api/v1/backtesting/liquidations` for post-2026-03 events; grade entries against point-in-time `/api/v1/backtesting/daily-snapshots` state to avoid [[lookahead-bias]].
+- **Backtest** — replay the ~25-event 2023-2025 sample with `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) for T+15min drift measurement, `GET /api/v1/backtesting/funding` (HL hourly since 2023-05) for the funding leg, and `/api/v1/backtesting/liquidations` for post-2026-03 events; grade entries against point-in-time `/api/v1/backtesting/daily-snapshots` state to avoid [[lookahead-bias]].
 - **Tips** — the structured security feed lags raw Twitter feeds by minutes; use CDA for confirmation and sizing, not first detection, and log T+15min drift per event — its compression to zero is the kill criterion.
 
 ## Related

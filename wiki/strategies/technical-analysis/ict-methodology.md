@@ -2,7 +2,7 @@
 title: "ICT Methodology"
 type: concept
 created: 2026-04-10
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [crypto, technical-analysis, market-microstructure, methodology, smart-money, price-action]
 aliases: ["ICT", "Inner Circle Trader", "ICT-methodology", "ICT concepts"]
@@ -123,7 +123,7 @@ ICT's imagery translates to crypto more literally than to any other market, whic
 
 Applying ICT in crypto needs raw price structure to mark blocks/FVGs/sweeps, order-book depth to tell a real level from a sweepable one, and — the crypto-native edge — liquidation and derivatives data to locate the actual liquidity pool the "draw" feeds on. See [[cryptodataapi-market-data]], [[cryptodataapi-market-intelligence]], and [[cryptodataapi-derivatives]].
 
-- **OHLCV to mark structure** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=500` (live) and `GET /api/v1/backtesting/klines` (archive from 2020 for systematic testing of sweep→reversal base rates).
+- **OHLCV to mark structure** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=500` (live) and `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive; for systematic testing of sweep→reversal base rates).
 - **Depth to validate a level** — `GET /api/v1/liquidity/depth/BTC` shows whether real resting size sits at a proposed order block versus a thin, sweepable wick.
 - **The liquidity pool itself** — `GET /api/v1/market-intelligence/liquidations` (cross-exchange) is the crypto-native map of the "draw on liquidity"; `GET /api/v1/backtesting/liquidations` for historical study.
 - **Sweep context** — `GET /api/v1/derivatives/open-interest?coin=BTC` and `GET /api/v1/derivatives/funding-rates?coin=BTC` separate a genuine short-squeeze sweep from a trend-continuation trap.
@@ -146,7 +146,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — mark structure (order blocks, FVGs, sweep levels) on `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m`; the "draw on liquidity" is machine-readable via `GET /api/v1/market-intelligence/liquidations`
 - **Execution** — `GET /api/v1/liquidity/depth/BTC` distinguishes a defended level (real resting size) from a sweepable wick before the retrace limit is placed
 - **Regime gate** — `GET /api/v1/quant/market`: sweep-reversal setups fire best in ranging states; when `strong_trend` probability leads, "sweeps" are usually plain continuation and the reversal entry is the trap
-- **Backtest** — sweep→reversal base rates need minute resolution for kill-zone logic: `GET /api/v1/backtesting/klines` 1m bars exist only since 2026-03-30 (1h reaches 2017-08 for coarser tests); pair with `/api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30)
+- **Backtest** — sweep→reversal base rates need minute resolution for kill-zone logic: `GET /api/v1/backtesting/klines` 1m bars exist only since 2026-03-30 (1h reaches 2017-08 for coarser tests — only in the `klines_deep` archive, while the REST route starts 2026-05-09); pair with `/api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30)
 - **Tips** — pre-register each setup (sweep level, displacement threshold, invalidation) before the kill zone opens, then let `/api/v1/derivatives/funding-rates` and `/api/v1/derivatives/open-interest` argue with it — untracked discretion is where ICT backtests quietly rot.
 
 ## Related

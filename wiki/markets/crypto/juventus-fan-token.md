@@ -153,7 +153,7 @@ Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=JUVUSDT&interval=1d&limit=1000` — OHLCV klines
 - `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
-- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for backtests
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=JUVUSDT&interval=1d&limit=1000"

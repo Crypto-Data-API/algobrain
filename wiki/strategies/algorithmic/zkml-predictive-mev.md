@@ -2,7 +2,7 @@
 title: "ZKML Predictive MEV"
 type: strategy
 created: 2026-04-26
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [arbitrage, defi, crypto, machine-learning, algorithmic]
 aliases: ["Conditional MEV", "Predictive Arb", "ZK-Proof MEV"]
@@ -160,7 +160,7 @@ Pool-state, oracle, and mempool training feeds come from nodes and oracle networ
 
 **Historical data:**
 - `GET /api/v1/backtesting/funding` — Hyperliquid hourly funding since 2023-05: the labelled training set for the funding-prediction variant
-- `GET /api/v1/backtesting/klines` — price features (1m only since 2026-03-30; 1h/4h/1d Binance spot to 2017-08)
+- `GET /api/v1/backtesting/klines` — price features (1m only since 2026-03-30; 1h/4h/1d Binance spot back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09)
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/backtesting/funding?symbol=BTC&exchange=hyperliquid&start=2023-06-01"
@@ -174,7 +174,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid]] (
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can build and monitor the funding-prediction variant end-to-end:
 
-- **Training corpus** — `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) provides roughly three years of labelled funding outcomes; price/vol features from `GET /api/v1/backtesting/klines`
+- **Training corpus** — `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) provides roughly three years of labelled funding outcomes; price/vol features from `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive)
 - **Live features** — `GET /api/v1/hyperliquid/l2-book` imbalance plus `GET /api/v1/liquidity/oi-divergence` at inference time
 - **Regime gate** — `GET /api/v1/quant/market` — condition deployment on regime and track hit-rate per regime, since model decay can hide inside a favourable regime mix
 - **Backtest** — score out-of-sample predictions against the archived funding series; the oracle and cross-chain use cases (candidates 1-2) need node-level data no REST archive serves

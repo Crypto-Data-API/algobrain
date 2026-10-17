@@ -2,7 +2,7 @@
 title: "Pivot Points"
 type: concept
 created: 2026-06-30
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [indicators, technical-analysis, day-trading]
 aliases: ["Pivot Point", "Floor Trader Pivots", "PP", "pivot-point"]
@@ -81,7 +81,7 @@ Next session, a trader treats 100.33 as the pivot: trading above it leans bullis
 - `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1d&limit=2` — the same for Hyperliquid perp sessions
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08); daily bars supply the level inputs, 1h bars test intraday reactions at those levels
+- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); daily bars supply the level inputs, 1h bars test intraday reactions at those levels
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=2"
@@ -95,7 +95,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Compute** — take yesterday's H/L/C from `GET /api/v1/market-data/klines?interval=1d&limit=2`, apply the PP/S1-S3/R1-R3 formulas, and hold the levels static for the session
 - **Session convention** — crypto has no floor close; Binance daily bars roll at 00:00 UTC, so define "prior day" as the last completed UTC daily bar and keep the same convention in backtests (the page's 24/7 caveat, made executable)
-- **Backtest** — compute levels from daily bars and replay reactions on 1h bars from `GET /api/v1/backtesting/klines` (both to 2017-08); score fade-at-S1/R1 vs breakout-through-R1 separately — they are opposite trades on the same level
+- **Backtest** — compute levels from daily bars and replay reactions on 1h bars from `GET /api/v1/backtesting/klines` (both back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); score fade-at-S1/R1 vs breakout-through-R1 separately — they are opposite trades on the same level
 - **Tip** — pivots earn their keep in confluence: check the level against the prior day's high/low and round numbers from the same data before treating a touch as signal
 
 ## Sources

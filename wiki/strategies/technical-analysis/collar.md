@@ -2,7 +2,7 @@
 title: "Collar (Crypto)"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, hedging, collar, defined-risk, risk-management, derivatives, bitcoin, ethereum]
 aliases: ["Zero-Cost Collar", "Protective Collar", "Collar Strategy", "Crypto Collar", "collar-strategy"]
@@ -132,7 +132,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Signal** — strike the collar off `GET /api/v1/derivatives/funding-rates?coin=BTC` (positive funding richens the sold call, tightening the zero-cost cap) with `GET /api/v1/market-intelligence/options` max pain/OI walls locating natural cap and floor strikes
 - **Regime gate** — `GET /api/v1/quant/market`: rising `strong_trend_bear`/`vol_spike` probability argues for collaring *now*; `GET /api/v1/volatility/regime` reading `compressed` makes the bought put cheap — the best moment to add the floor
-- **Backtest** — replay floor/cap outcomes per roll cycle on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); validate hedge-timing rules against point-in-time regimes in `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Backtest** — replay floor/cap outcomes per roll cycle on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); validate hedge-timing rules against point-in-time regimes in `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
 - **Tips** — a collar is maintenance-light: fold checks into an hourly cached `GET /api/v1/daily` poll and act only at roll dates or on a `/api/v1/market-intelligence/liquidations` tail event that tests the floor.
 
 ## Related

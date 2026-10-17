@@ -2,7 +2,7 @@
 title: "Simple Moving Average"
 type: concept
 created: 2026-04-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [technical-analysis, indicators, trend-following]
 aliases: ["SMA"]
@@ -107,7 +107,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Live state** — `GET /api/v1/indicators/technical` reports SMA position within the pre-computed price-structure state, universe-wide in one call
 - **Compute** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` for arbitrary SMA lengths; `GET /api/v1/market-data/btc-price-history?days=730` ships BTC with the 200D MA already computed
-- **Backtest** — run golden-cross/death-cross and trend-filter rules over `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08)
+- **Backtest** — run golden-cross/death-cross and trend-filter rules over `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09)
 - **Tip** — a 200-SMA needs 200 bars of warm-up: request `limit=1000` and discard the seed window instead of acting on partial averages, and expect crossover whipsaws when `GET /api/v1/quant/market` shows `range_low_vol` or `choppy_high_vol`
 
 ## Related

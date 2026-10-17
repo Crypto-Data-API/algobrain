@@ -2,7 +2,7 @@
 title: "NNFX Crypto Daily System"
 type: strategy
 created: 2026-09-28
-updated: 2026-09-28
+updated: 2026-10-17
 status: draft
 tags: [trend-following, technical-analysis, algorithmic, swing-trading, crypto, perpetual-futures, funding-rate, position-sizing, risk-management, indicators]
 aliases: ["Crypto NNFX", "NNFX Crypto", "McGinley-STC-Vortex System"]
@@ -193,7 +193,7 @@ See frontmatter; retire or pause per [[when-to-retire-a-strategy]]: drawdown > 2
 - `GET /api/v1/volatility/regime/{symbol}` — optional volatility-shock veto
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — daily archive since 2020 for the full backtest
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — daily archive for the full backtest
 - `GET /api/v1/backtesting/funding` — historical funding to charge runners
 - `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time universe (volume filter as of each date)
 
@@ -207,7 +207,7 @@ Catalogs: [[cryptodataapi-market-data]], [[cryptodataapi-derivatives]], [[crypto
 
 Via the [[cryptodataapi-mcp|CryptoDataAPI MCP]]:
 
-- **Backtest honestly first** — rebuild the stack on `/api/v1/backtesting/klines` (2020–2025 in-sample, 2026 held out), charge fees plus `/api/v1/backtesting/funding`, and compare with the random-entry and EMA-cross nulls before any live use.
+- **Backtest honestly first** — rebuild the stack on `/api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive; 2020–2025 in-sample, 2026 held out), charge fees plus `/api/v1/backtesting/funding`, and compare with the random-entry and EMA-cross nulls before any live use.
 - **Run the daily decision at 00:00 UTC** — fetch the closed bar from `/api/v1/market-data/klines`, compute STC/VI/CHOP/McGinley, and emit orders only for entries that pass all gates.
 - **Apply the event veto** — query `/api/v1/event/calendar` for the asset and macro events within 24h; skip new entries, keep managing open ones.
 - **Enforce the beta cap** — compute 60-day beta to BTC from the same klines and reject orders breaching the 3% same-side cap.

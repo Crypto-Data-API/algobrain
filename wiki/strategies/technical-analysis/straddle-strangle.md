@@ -2,7 +2,7 @@
 title: "Straddle & Strangle"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [options, crypto, volatility, straddle, strangle, event-driven, long-volatility, derivatives]
 aliases: ["Long Straddle", "Long Strangle", "Buying Volatility", "Crypto Straddle", "BTC Straddle"]
@@ -144,7 +144,7 @@ Avoid buying into an already-elevated DVOL right before the event — the crowd 
 **Historical data:**
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for [[realized-volatility]] (compare RV to DVOL to judge whether vol is cheap)
-- `GET /api/v1/backtesting/klines` — deep kline archive for RV backtesting
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history for RV backtesting
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime"
@@ -161,7 +161,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Setup screen** — `GET /api/v1/volatility/regime` — buy only from a `compressed` read; a low `GET /api/v1/volatility/regime/score` flags cheap convexity market-wide.
 - **Catalyst timing** — `GET /api/v1/event/calendar` — enter *before* the vol bid arrives for dated unlocks/macro/listings; the post-event IV crush is the modal loss path.
 - **Amplifier check** — `GET /api/v1/quant/gex` — short-gamma dealers amplify exactly the move a straddle wants; `GET /api/v1/derivatives/funding-rates?coin=BTC` leans strangle strike selection toward the cheap wing.
-- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) for realized-move distributions after compression windows versus breakeven widths; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) replays the compressed-regime flag point-in-time.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for realized-move distributions after compression windows versus breakeven widths; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) replays the compressed-regime flag point-in-time.
 - **Tips** — automate the IV-crush exit: catalyst passed + muted move = cut immediately rather than nursing theta and falling vega.
 
 ## Related

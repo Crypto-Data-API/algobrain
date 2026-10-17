@@ -2,7 +2,7 @@
 title: "SuperSmoother Filter"
 type: concept
 created: 2026-07-20
-updated: 2026-07-20
+updated: 2026-10-17
 status: draft
 tags: [indicators, technical-analysis, quantitative, crypto]
 aliases: ["SuperSmoother", "Super Smoother", "Ehlers SuperSmoother", "Two-Pole SuperSmoother", "Butterworth Smoother"]
@@ -139,7 +139,7 @@ Discipline that applies specifically here:
 - `GET /api/v1/derivatives/open-interest?coin=X` — OI building into the stretch argues trend rather than dislocation
 
 **Historical data:**
-- `GET /api/v1/backtesting/klines` — OHLCV archive for replaying the filter over full cycles
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV archive for replaying the filter over full cycles
 - `GET /api/v1/volatility/regime/{symbol}` — volatility state, since a fixed `n` has no defence against a vol regime change
 - `GET /api/v1/quant/regimes/history` — hourly HMM labels for regime-stratified scoring
 

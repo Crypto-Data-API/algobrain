@@ -2,7 +2,7 @@
 title: "Volume Analysis"
 type: concept
 created: 2026-04-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [technical-analysis, indicators, market-microstructure]
 aliases: ["Volume Studies", "Volume-Based Analysis"]
@@ -101,7 +101,7 @@ Large institutional orders move markets and leave footprints in volume data. Unu
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — per-bar volume for OBV, MFI, A/D-line construction
-- `GET /api/v1/backtesting/klines` — deep kline archive with the volume column
+- `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — kline history with the volume column
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/volume-history?days=90"
@@ -115,7 +115,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Compute** — every derived study on this page (OBV, A/D line, MFI, Chaikin Money Flow, volume MAs) builds from the OHLCV columns of `GET /api/v1/market-data/klines`; the buy ratio in `GET /api/v1/market-data/volume-history` adds the up-vs-down split without tick data
 - **Screen** — a breakout filter like "volume ≥ 1.5× 50-day average" is one klines pull plus a rolling mean; apply it before accepting any pattern-breakout signal
-- **Backtest** — volume-confirmation rules replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08)
+- **Backtest** — volume-confirmation rules replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09)
 - **Tip** — this page's crypto caveat is operational: stay on Binance-sourced volume (this API's tape) and treat cross-venue aggregated volume as unverified before feeding it to a signal
 
 ## Related

@@ -2,7 +2,7 @@
 title: "Volatility Spike"
 type: concept
 created: 2026-05-07
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [volatility, indicators, options, risk-management, vix]
 aliases: ["Vol Spike", "Volatility Spike", "VIX Spike", "Vol Shock"]
@@ -174,7 +174,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 
 - **Live state** — poll `GET /api/v1/quant/market` for the `vol_spike` probability and `GET /api/v1/volatility/regime/score` for the market-wide stress read; in crypto the forced-flow leg of the checklist is liquidations, visible via `GET /api/v1/quant/gex` liquidation profiles (Pro+)
 - **Detect** — an agent's crypto version of this page's checklist: `vol_spike` probability jumping + liquidity fragility score rising + realized 24h vol from klines outrunning its 30d mean — treat any 2-of-3 as de-risk-now
-- **Backtest** — spike-vs-regime-shift classification replays against `GET /api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus) joined to `GET /api/v1/backtesting/klines`; liquidation-driven spikes are only replayable since 2026-03-30
+- **Backtest** — spike-vs-regime-shift classification replays against `GET /api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus) joined to `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive); liquidation-driven spikes are only replayable since 2026-03-30
 - **Tip** — mirror the asymmetry rule mechanically: cheap to de-gross on a false spike signal, ruinous to ride a true one — so wire the detector to sizing before the spike, not to an alert a human reads after it
 
 ## Related
