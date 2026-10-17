@@ -23,7 +23,7 @@ See [[bitcoin-etfs]].
 **Historical data:**
 - `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL ETF net flow per settled US trade date (default = latest settled day; `?days=N` up to 1000 for history; XRP unsupported, 400). Settled values only since 2026-09-25: earlier weekday reads were partial sums, see [[cryptodataapi-market-intelligence]]
 - `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
-- `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
+- `GET /api/v1/market-intelligence/btc/cycle-indicators` — the ten BTC cycle indicators (MVRV-Z, NUPL, Puell, Pi Cycle, 200-week MA, AHR999 and more), daily from 2010-2014
 - `GET /api/v1/backtesting/liquidations` — liquidation records archive
 
 ```bash

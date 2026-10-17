@@ -125,7 +125,7 @@ If the insurance fund is depleted, **socialized losses** distribute bad debt amo
 **Historical data:**
 - `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL ETF flow history
 - `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
-- `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
+- `GET /api/v1/market-intelligence/btc/cycle-indicators` — the ten BTC cycle indicators (MVRV-Z, NUPL, Puell, Pi Cycle, 200-week MA, AHR999 and more), daily from 2010-2014
 - `GET /api/v1/backtesting/liquidations` — liquidation records archive
 
 ```bash

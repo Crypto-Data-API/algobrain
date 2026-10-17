@@ -195,7 +195,7 @@ For the crypto expression (long-horizon BTC/ETH holding), [[cryptodataapi|Crypto
 **Live data:**
 - `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` — spot price for rebalance-band checks
 - `GET /api/v1/market-data/btc-price-history?days=730` — BTC price with the 200D MA precomputed (long-cycle context only — the strategy deliberately does not trade it)
-- `GET /api/v1/market-intelligence/btc/cycle-indicators` — the 8 BTC cycle indicators for long-horizon reporting
+- `GET /api/v1/market-intelligence/btc/cycle-indicators` — the ten BTC cycle indicators for long-horizon reporting
 
 **Historical data:**
 - `GET /api/v1/backtesting/klines` — full OHLCV archive (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09 — BTC's full Binance history) for drawdown-endurance studies

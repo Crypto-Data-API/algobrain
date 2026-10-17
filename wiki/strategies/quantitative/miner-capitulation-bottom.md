@@ -53,8 +53,12 @@ gates:
   - id: puell_low
     role: filter
     rule: "Puell Multiple (daily miner USD revenue / its 365-day MA) in the low band, below 0.5"
-    runnable: false
-    note: "Not served live: the Puell series came from CoinGlass and stopped on 2026-07-22, and /market-intelligence/btc/cycle-indicators/puell_multiple now answers not yet available. For backtests, the full daily history from 2010 sits in /api/v1/backtesting/snapshots?data_type=coinglass_cycle_indicators (data.puell_multiple[].puell_multiple) in snapshots up to 2026-07-21. issuance_usd_24h on /api/v1/on-chain/dormancy/btc is the subsidy part of the numerator only, with no 365-day history."
+    runnable: true
+    endpoint: /api/v1/market-intelligence/btc/cycle-indicators/puell_multiple?days=1
+    field: data[].puell_multiple
+    replay: /api/v1/market-intelligence/btc/cycle-indicators/puell_multiple?days=0
+    replay_field: data[].puell_multiple
+    note: "Daily issuance in USD over its 365-day mean, from Coin Metrics (usually yesterday's value), back to 2011. It matched CoinGlass's series to within 0.04% on 2026-07-18; fees are not in the numerator."
   - id: reserves_stable
     role: filter
     rule: "Miner reserves flat-to-rising over a multi-week window (a non-negative 28-day slope): forced reserve selling has exhausted"
@@ -67,10 +71,10 @@ gates:
   - id: accumulate_confluence
     role: entry
     rule: "ACCUMULATE only when ribbon_recovery, price_confirm, puell_low and reserves_stable all hold; no single metric fires the trade"
-    runnable: false
+    runnable: partial
     input: derived
     inputs: [ribbon_recovery, price_confirm, puell_low, reserves_stable]
-    note: "puell_low is not served live, so the four-way confluence cannot be checked. Running the other three without it is a different rule, and the desk's call."
+    note: "Three legs are runnable; reserves_stable is partial (five pools' reward addresses only)."
   - id: cycle_regime_gate
     role: filter
     rule: "Accumulate only while the cycle regime is Capitulation or Bottoming; the same miner signature during Established Bear is the false-positive case"
@@ -93,8 +97,12 @@ gates:
   - id: puell_take_profit
     role: exit
     rule: "Hold into the next expansion; scale out in tranches once the Puell Multiple climbs into its high band (above 3 in the pseudocode; the text says roughly 3-4)"
-    runnable: false
-    note: "Same gap as puell_low: no live Puell Multiple is served."
+    runnable: true
+    endpoint: /api/v1/market-intelligence/btc/cycle-indicators/puell_multiple?days=1
+    field: data[].puell_multiple
+    replay: /api/v1/market-intelligence/btc/cycle-indicators/puell_multiple?days=0
+    replay_field: data[].puell_multiple
+    note: "Same series as puell_low; the pseudocode's 3 is the line."
   - id: invalidation
     role: stop
     rule: "INVALIDATE: the 30-day hashrate MA crosses back below the 60-day, price makes a new cycle low and miner reserves resume a sustained decline; halt accumulation and reset the flag"

@@ -124,7 +124,7 @@ Analog mechanisms (for cross-narrative tagging): `sentiment-shock`, `reflexive-d
 **Historical data:**
 - `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL ETF net flow per settled US `trade_date`. The default is the latest settled day; `?days=N` (1-1000) returns settled history back to 2024-01-11 (BTC), 2024-07-23 (ETH) and 2025-10-28 (SOL). The day still reporting comes back separately as `in_progress` (`status: "partial"`) and must not be added to totals. **Changed 2026-09-25:** before then, the route served a partial sum on most weekdays, because issuers were still reporting (IBIT and FBTC last). Archived `coinglass_etf_flows` snapshots and daily-snapshot ETF values from before that date carry those partial figures, so build `daily_net_etf_flow_usd` from `?days=N` instead (see [[cryptodataapi-backtesting]]). **XRP is not supported** (`400`) — no free source publishes XRP spot-ETF flow data, so a future XRP ETF launch (see "Recurrence" above) would need a different data source
 - `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
-- `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
+- `GET /api/v1/market-intelligence/btc/cycle-indicators` — the ten BTC cycle indicators (MVRV-Z, NUPL, Puell, Pi Cycle, 200-week MA, AHR999 and more), daily from 2010-2014
 - `GET /api/v1/backtesting/liquidations` — liquidation records archive
 
 ```bash

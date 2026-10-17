@@ -45,32 +45,46 @@ gates:
   - id: mvrv_band
     role: filter
     rule: "MVRV band: below 1.0 deep capitulation, 1.0-1.5 accumulation, 1.5-2.5 neutral, 2.5-3.5 distribution, above 3.5 euphoria"
-    runnable: partial
+    runnable: true
     endpoint: /api/v1/on-chain/dormancy/btc
     field: metrics.mvrv
-    note: "mvrv_signal.zone in the same response classifies these exact bands. On 2026-10-17 both came back empty (mvrv null, zone unknown, reason no_data), so check mvrv_signal.reason before trusting a read; the same gap removes MVRV from /on-chain/score."
+    replay: /api/v1/market-intelligence/btc/cycle-indicators/mvrv_zscore?days=0
+    replay_field: data[].mvrv
+    note: "mvrv_signal.zone in the same response classifies these exact bands, and metric_dates.mvrv says which day the value is from (Coin Metrics publishes it about a day late). The replay is the same daily MVRV from 2010."
   - id: mvrv_z_band
     role: filter
     rule: "MVRV-Z band (the pseudocode's zone driver): below 0 deep capitulation, 0-2 accumulation, 2-4 neutral, 4-5.5 distribution, above 5.5 euphoria"
-    runnable: false
-    note: "MVRV-Z is not served: /market-intelligence/btc/cycle-indicators currently returns only pi_cycle_top and golden_ratio. Needs an on-chain provider (Glassnode, CoinMetrics, LookIntoBitcoin)."
+    runnable: true
+    endpoint: /api/v1/market-intelligence/btc/cycle-indicators/mvrv_zscore?days=1
+    field: data[].mvrv_zscore
+    replay: /api/v1/market-intelligence/btc/cycle-indicators/mvrv_zscore?days=0
+    replay_field: data[].mvrv_zscore
+    note: "Daily from Coin Metrics, usually yesterday's value. The standard deviation is the expanding one (every day up to that one), so the replay has no lookahead; charts that use the all-history deviation read a little different."
   - id: nupl_band
     role: filter
     rule: "NUPL band: below 0 capitulation, 0-0.25 hope/fear, 0.25-0.5 optimism, 0.5-0.75 belief/greed, above 0.75 euphoria"
-    runnable: false
-    note: "NUPL is not served; it needs realized cap from an on-chain provider."
+    runnable: true
+    endpoint: /api/v1/market-intelligence/btc/cycle-indicators/nupl?days=1
+    field: data[].nupl
+    replay: /api/v1/market-intelligence/btc/cycle-indicators/nupl?days=0
+    replay_field: data[].nupl
+    note: "NUPL = 1 - 1/MVRV, daily from Coin Metrics (usually yesterday's value)."
   - id: realized_price_position
     role: filter
     rule: "Price versus realized price: below it (deep capitulation), at or near it (accumulation), far above it (distribution, euphoria)"
-    runnable: false
-    note: "Realized price is not served. BTC price and its 200-day MA are on /api/v1/market-data/btc-price-history, a coarser trend context the page also lists."
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/btc/cycle-indicators/mvrv_zscore?days=1
+    field: data[].mvrv
+    replay: /api/v1/market-intelligence/btc/cycle-indicators/mvrv_zscore?days=0
+    replay_field: data[].mvrv
+    note: "Realized price = price / mvrv on the same entry (both daily from Coin Metrics), so below is exact. The page gives no number for near or far above."
   - id: cycle_zone
     role: entry
     rule: "Act only when the four metrics agree on the zone, using each metric's percentile within the current cycle's range rather than fixed lines (thresholds drift lower each cycle)"
-    runnable: false
+    runnable: partial
     input: derived
     inputs: [mvrv_band, mvrv_z_band, nupl_band, realized_price_position]
-    note: "Three of the four inputs are not served, and no cycle-length history of any of them is."
+    note: "All four metrics are served daily back to 2010, so each one's percentile within a cycle is computable. The page does not say where the current cycle starts (the halving or the cycle low), and realized_price_position's near has no number."
   - id: halving_window
     role: filter
     rule: "Halving timing prior: 60-90 days before a halving accumulation bias; 0-6 months after neutral; 6-18 months after the top window; 12-15 months before the next halving the bottom window"
@@ -80,14 +94,14 @@ gates:
   - id: zone_scaled_dca
     role: sizing
     rule: "Monthly DCA clip = 2% of NAV x zone scale (deep capitulation 1.5, accumulation 1.0, neutral 0, distribution -1.0, euphoria -1.5), x1.25 when the halving window agrees, capped at 1.5x; sells scale by the tactical fraction"
-    runnable: false
+    runnable: partial
     input: derived
     inputs: [cycle_zone, halving_window]
     note: "Only as runnable as cycle_zone."
   - id: scale_out_zones
     role: exit
     rule: "Scale out across the distribution and euphoria zones into strength; never try to nail the top"
-    runnable: false
+    runnable: partial
     input: derived
     inputs: [cycle_zone]
     note: "Only as runnable as cycle_zone."
@@ -118,14 +132,14 @@ gates:
     runnable: true
     endpoint: /api/v1/on-chain/score
     field: score
-    note: "The composite renormalises over components with data; MVRV was excluded (no data) on 2026-10-17."
+    note: "The composite renormalises over the components that have data."
   - id: structural_kill
     role: stop
     rule: "Abandon the core only when the cycle thesis breaks: price below realized price, on-chain health below 30 and realized price trending down"
-    runnable: false
+    runnable: partial
     input: derived
     inputs: [realized_price_position, onchain_health_collapse]
-    note: "Realized price is not served, so two of the three legs cannot be checked."
+    note: "All three legs are computable: realized price (price / mvrv) has a daily history from 2010. The page gives no window for trending down."
 ---
 
 # Bitcoin Halving Cycle Timing
@@ -353,8 +367,8 @@ Re-engage: zones and halving overlay realign with a completed cycle turn, and on
 - `GET /api/v1/regimes/current` — current long-horizon 10-state market regime
 
 **Historical data:**
-- `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical (the cycle-timing battery)
-- `GET /api/v1/market-intelligence/btc/cycle-indicators/{indicator}` — single indicator by name (e.g. MVRV-Z), historical
+- `GET /api/v1/market-intelligence/btc/cycle-indicators` — ten BTC cycle indicators daily from 2010-2014 (MVRV-Z, NUPL, Puell, Pi Cycle, 200-week MA, AHR999 and more; the cycle-timing battery)
+- `GET /api/v1/market-intelligence/btc/cycle-indicators/{indicator}` — single indicator by name (e.g. `mvrv_zscore`, `nupl`), `days=0` for the whole series; realized price is `price / mvrv` on the `mvrv_zscore` entries
 - `GET /api/v1/market-data/btc-price-history?days=730` — BTC price history + 200-day MA
 - ~~`GET /api/v1/on-chain/whales/accumulation-score/BTC` — whale accumulation score timeseries (accumulation-zone corroboration)~~ — **disabled** (503 `coming_soon`; unlisted from the spec since 2026-10-09). Working substitute (2026-10-17): `GET /api/v1/on-chain/exchange-flows/BTC/history` — hourly CEX inflow/outflow/`net_24h` since 2026-05-28 (up to 93 days per call). The accumulation score never covered native BTC (ERC-20 only), and net exchange outflow is a proxy, not the same measure
 
@@ -371,7 +385,7 @@ Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-on-chain]]; cycle indica
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
 - **Signal** — `GET /api/v1/on-chain/dormancy/btc` returns the MVRV/supply-shock zone classification (capitulation → euphoria) directly — the agent reads the zone rather than recomputing MVRV-Z from raw realized cap
-- **Confluence** — `GET /api/v1/market-intelligence/btc/cycle-indicators` batches all 8 BTC cycle indicators with history (drill into one via `/{indicator}`); `GET /api/v1/on-chain/miners/hash-ribbon` corroborates the accumulation zone, `GET /api/v1/on-chain/score` is the structural-kill input
+- **Confluence** — `GET /api/v1/market-intelligence/btc/cycle-indicators` batches the ten BTC cycle indicators with history (drill into one via `/{indicator}`); `GET /api/v1/on-chain/miners/hash-ribbon` corroborates the accumulation zone, `GET /api/v1/on-chain/score` is the structural-kill input
 - **Regime gate** — `GET /api/v1/regimes/current`: the 10-state cycle label (`Capitulation`/`Bottoming` vs `Speculative Euphoria`/`Distribution`) should agree with the on-chain zone before any tranche is placed
 - **Backtest** — daily BTC from `GET /api/v1/backtesting/klines` (Binance spot back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) covers only ~2 completed halving cycles — the archive cannot cure the strategy's defining small-sample problem, so treat all backtested zone thresholds as priors
 - **Tips** — run monthly, not intraday: compute the zone, scale the DCA clip by it, and log the action; use percentile-within-cycle for thresholds (they drift lower each cycle) and never let the agent convert a zone read into a single lump-sum order

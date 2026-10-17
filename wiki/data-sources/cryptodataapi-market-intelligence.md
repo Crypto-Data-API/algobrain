@@ -21,7 +21,7 @@ The Market Intelligence category of [[cryptodataapi]] aggregates the institution
 
 | Method | Path | Returns | Key Params | Tier |
 |--------|------|---------|------------|------|
-| GET | /api/v1/market-intelligence/btc/cycle-indicators | All 8 BTC cycle indicators, historical | — | — |
+| GET | /api/v1/market-intelligence/btc/cycle-indicators | Ten BTC cycle indicators (MVRV-Z, NUPL, Puell, Pi Cycle, 200-week MA, AHR999 and more), daily from 2010-2014 | — | — |
 | GET | /api/v1/market-intelligence/btc/cycle-indicators/{indicator} | Single indicator by name, historical | indicator | — |
 | GET | /api/v1/market-intelligence/etf/btc/aum | BTC ETF AUM, reconstructed estimate from cumulative flows (settled days only since 2026-09-25) | — | — |
 | GET | /api/v1/market-intelligence/etf/{asset}/flows | BTC/ETH/SOL ETF net flow per settled US trade date; default = latest settled day (XRP unsupported — 400) | asset, days (1-1000, default 1) | — |
@@ -83,7 +83,7 @@ The response also carries `as_of`, `coverage` (venues, the Binance exclusion, wi
 
 ## Historical Data
 
-Historical series come from `/btc/cycle-indicators` (all 8 indicators, or one via `{indicator}`), `/etf/{asset}/flows?days=N` (BTC/ETH/SOL, up to 1000 settled trade days — the only source of settled history, see the 2026-09-25 note above), `/coinbase-premium`, `/fear-greed-history`, and `/stablecoin-history`. (`/grayscale/premium`, formerly the source for Jan-2024-and-earlier Grayscale discount history, is retired — see warning above.) For liquidation records back through the archive, use `/api/v1/backtesting/liquidations` on [[cryptodataapi-backtesting]].
+Historical series come from `/btc/cycle-indicators` (the ten indicators, or one via `{indicator}`), `/etf/{asset}/flows?days=N` (BTC/ETH/SOL, up to 1000 settled trade days — the only source of settled history, see the 2026-09-25 note above), `/coinbase-premium`, `/fear-greed-history`, and `/stablecoin-history`. (`/grayscale/premium`, formerly the source for Jan-2024-and-earlier Grayscale discount history, is retired — see warning above.) For liquidation records back through the archive, use `/api/v1/backtesting/liquidations` on [[cryptodataapi-backtesting]].
 
 **Observed caveat (2026-10-17): `/fear-greed-history` returned only today's row.** Two live calls on 2026-10-17 returned `{"history": [{"date": "2026-10-17", "value": 52, "classification": "Neutral"}], "count": 1}`, a single row, not a timeseries. The route takes no query parameters in the spec, so `?days=30` changed nothing. Until it serves history again, read past values from the `fear_greed` snapshot type on `/api/v1/backtesting/snapshots` (hourly rows, `snapshots[].data.value`; it answered for 2026-10-01 onward on the same day) or from `/backtesting/daily-snapshots/{date}` (`snapshot.fear_greed.value`). The live reading is `/api/v1/sentiment/fear-greed` ([[cryptodataapi-sentiment]]).
 
@@ -92,7 +92,7 @@ Historical series come from `/btc/cycle-indicators` (all 8 indicators, or one vi
 - [[spot-etf-flows]] — daily settled BTC/ETH/SOL ETF flow series (no XRP), keyed by US `trade_date`, plus the reconstructed live BTC AUM estimate quantify the institutional bid that has driven post-2024 cycles
 - [[max-pain]] — `/options` returns BTC options OI, volume, and the max-pain strike for expiry-pinning and dealer-positioning analysis
 - [[liquidation]] cascades — cross-exchange and per-venue liquidation feeds identify forced-flow events and stop-hunt zones, subject to the streamed-venue coverage caveat above; `/squeeze-alerts` adds a real-time cascade tripwire on top, ahead of the 15-45 minute lag on [[cryptodataapi-news]]
-- Cycle timing — the 8 BTC cycle indicators plus Coinbase premium (US institutional spot demand vs offshore) and exchange BTC balance frame where we sit in the [[bitcoin-cycle-regime]] map
+- Cycle timing — the ten BTC cycle indicators plus Coinbase premium (US institutional spot demand vs offshore) and exchange BTC balance frame where we sit in the [[bitcoin-cycle-regime]] map
 - Demand quality — taker buy/sell ratio separates aggressive spot demand from leverage-driven rallies, complementing [[cryptodataapi-derivatives]] funding data (the margin borrow-interest endpoint that used to sit alongside it is retired — see warning above)
 
 ## Example

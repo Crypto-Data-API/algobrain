@@ -68,7 +68,7 @@ gates:
     runnable: partial
     endpoint: /api/v1/on-chain/dormancy/btc
     field: mvrv_signal.zone
-    note: "BTC only, and raw MVRV (market cap over realized cap), not MVRV-Z; zone is capitulation, accumulation, neutral, elevated or euphoria. SOPR is not served. The page gives no thresholds for these legs."
+    note: "BTC only, and the raw-MVRV zone (capitulation, accumulation, neutral, elevated or euphoria); MVRV-Z itself is /api/v1/market-intelligence/btc/cycle-indicators/mvrv_zscore (data[].mvrv_zscore). SOPR is not served. The page gives no thresholds for these legs."
   - id: cex_deposit_spikes
     role: filter
     rule: "Confluence check: large (at least $1M) transfers into exchanges, a bearish leading signal"

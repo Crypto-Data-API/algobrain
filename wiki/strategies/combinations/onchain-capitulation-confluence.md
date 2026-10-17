@@ -51,8 +51,12 @@ gates:
   - id: mvrv_z_below_zero
     role: entry
     rule: "On-chain sub-signal C: MVRV-Z score below 0 (market at or below its realised value)"
-    runnable: false
-    note: "No MVRV-Z is served. /on-chain/dormancy/btc has a plain mvrv field, not the Z-score, and it returned null (zone unknown, no_data) on 2026-10-17. Needs Glassnode, CryptoQuant or similar."
+    runnable: true
+    endpoint: /api/v1/market-intelligence/btc/cycle-indicators/mvrv_zscore?days=1
+    field: data[].mvrv_zscore
+    replay: /api/v1/market-intelligence/btc/cycle-indicators/mvrv_zscore?days=0
+    replay_field: data[].mvrv_zscore
+    note: "Daily from Coin Metrics, usually yesterday's value. The standard deviation is the expanding one (every day up to that one), so the replay has no lookahead; charts that use the all-history deviation read a little different."
   - id: onchain_capitulation
     role: entry
     rule: "Signal 1 fires when any one of sub-signals A, B or C fires"
@@ -66,7 +70,7 @@ gates:
     runnable: true
     endpoint: /api/v1/on-chain/score
     field: score
-    note: "From the page's indicator list and agent workflow, not its Rules section. The mvrv component carries weight 0 while MVRV has no data. Point-in-time history only in /backtesting/daily-snapshots."
+    note: "From the page's indicator list and agent workflow, not its Rules section. Point-in-time history only in /backtesting/daily-snapshots."
   - id: fear_greed_extreme
     role: entry
     rule: "Signal 2: Fear & Greed index at or below 20 today and for at least 2 consecutive days"
@@ -107,10 +111,9 @@ gates:
   - id: high_conviction_size
     role: sizing
     rule: "Size each tranche 1.2x when the MVRV-Z sub-signal is the trigger"
-    runnable: false
+    runnable: true
     input: derived
     inputs: [mvrv_z_below_zero]
-    note: "From the pseudocode. Depends on MVRV-Z, which is not served."
   - id: max_allocation
     role: sizing
     rule: "At most 10% of the portfolio in any single bottom-fishing setup, leverage at most 2x on a perp, and 20% of the portfolio held in stablecoins throughout"
@@ -119,8 +122,12 @@ gates:
   - id: mvrv_z_exit
     role: exit
     rule: "Begin trimming when MVRV-Z recovers above +1"
-    runnable: false
-    note: "No MVRV-Z is served (see mvrv_z_below_zero)."
+    runnable: true
+    endpoint: /api/v1/market-intelligence/btc/cycle-indicators/mvrv_zscore?days=1
+    field: data[].mvrv_zscore
+    replay: /api/v1/market-intelligence/btc/cycle-indicators/mvrv_zscore?days=0
+    replay_field: data[].mvrv_zscore
+    note: "Same series as mvrv_z_below_zero."
   - id: sentiment_normalised_exit
     role: exit
     rule: "Trim 50% when the Fear & Greed index is above 50 for 5 consecutive days"
@@ -342,7 +349,7 @@ The production system adds: on-chain data polling via CryptoDataAPI endpoints; a
 
 - **Exchange netflow (BTC)** — `/api/v1/on-chain/exchange-flows/BTC`: rolling 7-day netflow vs 180-day percentile. Primary sub-signal A.
 - **SOPR (7-day smoothed)** — `/api/v1/on-chain/dormancy/btc` returns MVRV and dormancy zone. For raw SOPR, supplement with [[glassnode]] or [[cryptoquant]]; CryptoDataAPI provides the MVRV and zone classification (capitulation zone = SOPR-equivalent distress signal).
-- **MVRV-Z score** — `/api/v1/on-chain/dormancy/btc`: the zone classification includes the capitulation-to-euphoria scale; the MVRV-Z < 0 sub-signal corresponds to the "capitulation zone" classification in this endpoint.
+- **MVRV-Z score** — `/api/v1/market-intelligence/btc/cycle-indicators/mvrv_zscore` (`data[].mvrv_zscore`, daily from 2010, as-of each day). `/api/v1/on-chain/dormancy/btc` adds the raw-MVRV zone (capitulation to euphoria).
 - **[[fear-and-greed-index]]** — `/api/v1/sentiment/fear-greed`: live Fear & Greed reading; `/api/v1/market-intelligence/fear-greed-history` for historical series.
 - **On-Chain Health composite** — `/api/v1/on-chain/score`: the 0-100 composite that collapses all on-chain signals; a score ≤ 20 is consistent with confluence conditions.
 - **Stablecoin dry-powder z-score** — `/api/v1/on-chain/stablecoin-reserves/dry-powder`: optional higher-conviction confirmation.
@@ -424,7 +431,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - **Very few signals per cycle:** the dual-signal requirement means the strategy may fire once or twice in an entire bear cycle. In bullish regimes (most of a cycle), the strategy is inactive.
 - **Wide hard stop required:** a -25% hard stop from entry is necessary to allow for retests of the capitulation low, but it means a failed entry costs 0.6-1.5% of total portfolio depending on allocation. Over multiple cycles, a loss sequence is survivable but psychologically demanding.
 - **ETF-era degradation of exchange-inflow signal:** as custody rails mature, the exchange-inflow spike sub-signal weakens. Monitoring the signal's hit rate and pivoting to SOPR and MVRV-Z if exchange flows lose predictive power is an ongoing maintenance task.
-- **Vendor dependency for SOPR:** raw SOPR data is not currently available via a verified CryptoDataAPI endpoint; it must be sourced from [[glassnode]], [[cryptoquant]], or a blockchain analytics provider. The MVRV-Z equivalent (the dormancy zone classification) is available via CryptoDataAPI `/on-chain/dormancy/btc`.
+- **Vendor dependency for SOPR:** raw SOPR data is not currently available via a verified CryptoDataAPI endpoint; it must be sourced from [[glassnode]], [[cryptoquant]], or a blockchain analytics provider. MVRV-Z itself is served: `/api/v1/market-intelligence/btc/cycle-indicators/mvrv_zscore`.
 - **Slow thesis:** position-trading setups on multi-month timeframes require accepting a 60-90 day time stop. Operators with shorter-horizon mandates cannot implement this strategy.
 
 ## Sources
@@ -441,7 +448,8 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/on-chain/exchange-flows/BTC` — CEX inflow/outflow, 1h/6h/24h/7d windows; primary sub-signal A (exchange-inflow spike)
 - `GET /api/v1/on-chain/exchange-flows/{symbol}/history` (new 2026-10-08) — archived trailing 1h/24h `inflow`/`outflow`/`net` plus `per_exchange_1h`, hourly (`interval=1h`) from 2026-05-28, ≤93 days per call. Amounts are in native token units (USD for USDT/USDC/DAI). This is the replay source for netflow rules; a 180-day netflow percentile can only be built from it once 180 days exist (from about 2026-11-24)
 - `GET /api/v1/backtesting/snapshots?data_type=exchange_flow_spikes` — every spike alert archived from 2026-10-08 00:25 UTC. Live, add `source=transfer` to `/on-chain/exchange-flows/spike-alerts` to drop `balance_delta` rows, which can be an exchange moving funds between its own hot and cold wallets
-- `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + dormancy zone classification (capitulation/accumulation/euphoria); primary sub-signal C (MVRV-Z floor)
+- `GET /api/v1/market-intelligence/btc/cycle-indicators/mvrv_zscore` — daily MVRV-Z and MVRV from 2010; primary sub-signal C (MVRV-Z floor) and the +1 exit
+- `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + dormancy zone classification (capitulation/accumulation/euphoria)
 - `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100); a score ≤ 20 is consistent with capitulation confluence
   - **Caveat (2026-10-08 API fix):** before 2026-10-08 the score's `exchange_flow` component summed every tracked token's 24h flow in its own native units, so it pinned at 20 or 80. Any composite reading, or any threshold calibrated on readings, from before that date is biased. The component now scores the USDT/USDC/DAI 24h net only. Components with no data, currently `whale_accumulation`, carry weight 0 and the rest are renormalised; they are not scored a neutral 50. See [[cryptodataapi-on-chain]].
 - `GET /api/v1/sentiment/fear-greed` — live Fear & Greed index reading; Signal 2
@@ -454,7 +462,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/on-chain/exchange-flows/spike-alerts` — large transfers (≥$1M); additional whale-movement context
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200` — daily OHLCV for drawdown and entry tracking
 
-Note: raw SOPR data (sub-signal B) is not currently documented as a CryptoDataAPI endpoint. Source from [[glassnode]] (`/v1/metrics/indicators/sopr`), [[cryptoquant]], or equivalent on-chain analytics provider. The MVRV-Z zone classification via `/on-chain/dormancy/btc` is the closest CryptoDataAPI equivalent.
+Note: raw SOPR data (sub-signal B) is not currently documented as a CryptoDataAPI endpoint. Source from [[glassnode]] (`/v1/metrics/indicators/sopr`), [[cryptoquant]], or equivalent on-chain analytics provider. MVRV-Z is served directly at `/api/v1/market-intelligence/btc/cycle-indicators/mvrv_zscore`.
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/on-chain/dormancy/btc"

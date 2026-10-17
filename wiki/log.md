@@ -21,6 +21,7 @@ Chronological, append-only record of all wiki operations. Newest entries at the 
 - **Gate notes updated for API fixes shipped the same day:**
   - `/dex/security` now returns `null` (not 0) for holder counts, top-10 share and LP fields on a token GoPlus has not indexed. Notes on [[jito-bundle-sniping]], [[memecoin-sniping]], [[token-migration-sniping]], [[on-chain-smart-money-tracking]], [[telegram-bot-trading]] and [[liquidity-sniping]] say so.
   - The Binance derivative routes now resolve a bare coin to its USDT perp and answer 400 for an unlisted symbol. Gates keep `symbol={coin}USDT`.
+  - `/market-intelligence/btc/cycle-indicators` serves ten indicators again (daily from 2010-2014, computed from Coin Metrics), so MVRV-Z, NUPL, Puell and realized price (`price / mvrv`) gates are mapped: [[onchain-capitulation-confluence]] (mvrv_z_below_zero, mvrv_z_exit and the sizing rule now runnable), [[bitcoin-halving-cycle-timing]] (mvrv_band, mvrv_z_band, nupl_band runnable; realized_price_position, cycle_zone and its children partial on undefined thresholds), [[miner-capitulation-bottom]] (puell_low, puell_take_profit runnable; the confluence partial only on reserves). 20 pages that said "all 8 BTC cycle indicators" now name the ten.
 
 ## 2026-10-17 — Runnable gates on every remaining strategy page
 
