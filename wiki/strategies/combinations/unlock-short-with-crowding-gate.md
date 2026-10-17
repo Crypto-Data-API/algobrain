@@ -299,7 +299,7 @@ Re-deploy when gate acceptance rate normalises and rolling Sharpe is positive on
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding rate (crowding gate, generalise to token's coin param)
 - `GET /api/v1/derivatives/open-interest?coin=BTC` — OI level and trend (OI spike gate)
 - `GET /api/v1/event/regime` — forward catalyst calendar including unlock events
-- `GET /api/v1/event/calendar?type=unlock&days=14` — filterable unlock calendar with directional bias
+- `GET /api/v1/event/calendar?type=unlock&window_days=14` — filterable unlock calendar with directional bias
 - `GET /api/v1/regimes/current` — current market regime (macro gate)
 
 **Historical data:**
@@ -318,7 +318,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]], [[cr
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
-- **Event leg** — `GET /api/v1/event/calendar?type=unlock&days=14` finds qualifying unlocks with directional bias attached
+- **Event leg** — `GET /api/v1/event/calendar?type=unlock&window_days=14` finds qualifying unlocks with directional bias attached
 - **Crowding gate** — `GET /api/v1/derivatives/funding-rates?coin={TOKEN}` and `GET /api/v1/derivatives/open-interest?coin={TOKEN}`; already-negative funding or an OI spike means the short is crowded and the trade is skipped
 - **Regime gate** — `GET /api/v1/regimes/current` macro overlay before any short deploys
 - **Backtest** — funding-crowding replay from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) against unlock-window price paths from `GET /api/v1/backtesting/klines` (1d/4h back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09)

@@ -2,7 +2,7 @@
 title: "Spent Output Profit Ratio (SOPR)"
 type: concept
 created: 2026-06-24
-updated: 2026-09-03
+updated: 2026-10-17
 status: draft
 tags: [crypto, bitcoin, indicators, valuation, market-microstructure, behavioral-finance]
 aliases: ["SOPR", "Spent Output Profit Ratio", "aSOPR", "Adjusted SOPR", "spent-output-profit-ratio"]
@@ -68,7 +68,7 @@ During an established [[bitcoin]] uptrend, price dips and aSOPR falls toward 1.0
 - `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
 
 **Historical data:**
-- `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score timeseries
+- ~~`GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score timeseries~~ — **disabled** (503 `coming_soon`; unlisted from the spec since 2026-10-09). Working substitute (2026-10-17): `GET /api/v1/on-chain/exchange-flows/{symbol}/history` — archived CEX inflow/outflow/net since 2026-05-28 (up to 93 days per call); sustained net outflow is a proxy for accumulation, not a holder-balance measure
 - `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
 
 ```bash

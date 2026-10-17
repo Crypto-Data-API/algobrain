@@ -273,7 +273,7 @@ See [[failure-modes]]. Most likely:
 **On-chain:**
 - `GET /api/v1/on-chain/exchange-flows/{symbol}` — CEX inflow/outflow
 - `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + supply-shock zones
-- `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score
+- ~~`GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score~~ — **disabled** (503 `coming_soon`; unlisted from the spec since 2026-10-09). Working substitute (2026-10-17): `GET /api/v1/on-chain/exchange-flows/{symbol}` — CEX net flow over 1h/6h/24h/7d windows (net outflow is an accumulation proxy, not a holder-balance measure)
 - `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` — dry-powder z-score
 
 **Memecoin:**

@@ -320,7 +320,7 @@ The production system adds: a weekly scheduler that triggers the rebalance decis
 - **Open interest** — `GET /api/v1/derivatives/open-interest?coin=BTC`; correlated with carry P&L vol (high OI = elevated basis blowout risk). When OI/market-cap rises above 2.5%, treat as an independent HIGH-VOL signal even if the 20-day carry vol estimate has not yet risen.
 
 **For basis/cash-and-carry:**
-- **Binance quarterly futures mark price / spot price** — `GET /api/v1/derivatives/binance/summary?coin=BTC`; the basis (futures − spot) computed from this data; daily basis changes are the primary P&L driver and thus the primary vol input.
+- **Binance quarterly futures mark price / spot price** — `GET /api/v1/derivatives/binance/summary?symbol=BTCUSDT` *(corrected 2026-10-17: the param is `symbol`, and the response carries only perp `funding`, `open_interest` and `long_short` blocks — no quarterly futures mark, so the futures leg has to come from the exchange's own API; spot from `/api/v1/market-data/klines`)*; the basis (futures − spot) computed from this data; daily basis changes are the primary P&L driver and thus the primary vol input.
 - **Funding rates (for basis convergence rate monitoring)** — `GET /api/v1/derivatives/funding-rates?coin=BTC`; the perp funding rate influences the quarterly futures basis (cash-and-carry arbitrage pressure).
 
 **Regime context:**
@@ -417,7 +417,7 @@ See [[when-to-retire-a-strategy]] and [[failure-modes]] for the broader framewor
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — 8h funding settlements; primary input for funding carry P&L stream (income leg); also used to flag HIGH-VOL regime independently of the vol estimate when funding ≥ 0.04%/8h
 - `GET /api/v1/derivatives/funding-rates?coin=ETH` — ETH funding carry P&L input (if running ETH carry book)
 - `GET /api/v1/derivatives/open-interest?coin=BTC` — OI monitoring; independent HIGH-VOL override when OI/market-cap ≥ 2.5%
-- `GET /api/v1/derivatives/binance/summary?coin=BTC` — quarterly futures mark price for basis/C&C P&L computation (futures − spot = basis; daily basis changes = primary P&L driver)
+- `GET /api/v1/derivatives/binance/summary?symbol=BTCUSDT` — quarterly futures mark price for basis/C&C P&L computation (futures − spot = basis; daily basis changes = primary P&L driver)
 - `GET /api/v1/regimes/current` — regime context; `Structural_Shock` → reduce to minimum notional immediately
 
 **Historical data:**
@@ -437,7 +437,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], 
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this sizing engine end-to-end:
 
-- **Signal** — the `GET /api/v1/derivatives/funding-rates?coin=BTC` settlement stream is the carry P&L input; `GET /api/v1/derivatives/binance/summary?coin=BTC` marks the basis leg
+- **Signal** — the `GET /api/v1/derivatives/funding-rates?coin=BTC` settlement stream is the carry P&L input; `GET /api/v1/derivatives/binance/summary?symbol=BTCUSDT` marks the basis leg
 - **Sizing** — the carry-vol estimate from 22-day klines scales notional; `GET /api/v1/quant/coins/risk` supplies an independent per-coin vol-target multiplier as a sanity check
 - **Override** — `GET /api/v1/derivatives/open-interest?coin=BTC` (OI/mcap threshold) and `GET /api/v1/regimes/current` (`Structural_Shock`) force HIGH-VOL minimum sizing regardless of the estimate
 - **Backtest** — carry-vol replay from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05 gives per-settlement granularity; Binance daily since 2026-03-30) joined to daily klines back to 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09) for the spot-vol cold-start proxy

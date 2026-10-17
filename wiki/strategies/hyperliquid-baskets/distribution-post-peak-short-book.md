@@ -163,7 +163,7 @@ gates:
     runnable: partial
     endpoint: /api/v1/on-chain/exchange-flows/{symbol}
     field: windows.24h.net
-    note: "A negative net means outflows; windows.7d.net is the weekly read. Coverage is BTC, ETH and about 90 chain/token pairs, so many HL alts have no row. Whale accumulation is not served (/api/v1/on-chain/whales/accumulation-score answers 503 coming_soon)."
+    note: "A negative net means outflows; windows.7d.net is the weekly read. Coverage is BTC, ETH and about 90 chain/token pairs, so many HL alts have no row. Whale accumulation is not served (the /api/v1/on-chain/whales/accumulation-score route is disabled and answers 503 coming_soon)."
   - id: funding_deeply_negative
     role: exit
     rule: "Exit when funding flips deeply negative (crowded short, rising squeeze risk)"

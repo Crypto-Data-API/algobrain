@@ -4,6 +4,31 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-10-17 — Runnable gates on 20 more strategies; 3 new strategies; endpoint citations fixed
+
+**Added:**
+- **Gates:** runnable gates on 19 more of the most-linked strategy pages: trend, breakout,
+  mean reversion, ATR stops and sizing, statistical arbitrage, regime detection, momentum,
+  range, options vol selling and more. Each condition maps to the exact endpoint and
+  field that measures it, or is marked partial or not runnable with the reason. 81 pages
+  now carry 1,141 gates.
+- **New strategies:** three strategy pages built on recently shipped data: a
+  liquidation-density magnet, an exchange-flow spike reaction, and a forced-flow
+  exhaustion fade on the live event stream. They are the wiki's first **fully runnable**
+  strategies, meaning every condition is served. Their exploratory counts show no edge
+  yet, and the pages say so plainly. Each page also says how much more data a real test
+  needs.
+
+**Fixed:** All 155 endpoint citations the new checker flagged are corrected. They covered
+parameters the API ignores or now rejects, limits above the allowed maximum, and links
+to the disabled whale-tracking routes. Those links are now marked disabled, with a
+working substitute where one exists. The checker now reports zero errors. The README's
+Pro Plus rate limit (120/min) and its email-confirmation description are corrected.
+
+**Notes:** Mapping the rules turned up contradictions on several pages, where the rules,
+pseudocode and example disagree on a threshold. Each is recorded in the relevant gate's
+note, and the prose is unchanged pending review.
+
 ## 2026-10-17 — Fix: stale-page signal and backtest-depth claims
 
 **Changed:** 1,492 coin pages that are untouched generator output now carry

@@ -96,7 +96,7 @@ Fractional differentiation is applied to raw price and persistent on-chain/deriv
 - `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for long, stable estimation of `d`
 
 **Persistent on-chain / derivatives level series:**
-- `GET /api/v1/on-chain/whales/accumulation-score/BTC` — whale accumulation score timeseries (long-memory)
+- ~~`GET /api/v1/on-chain/whales/accumulation-score/BTC` — whale accumulation score timeseries (long-memory)~~ — **disabled** (503 `coming_soon`; unlisted from the spec since 2026-10-09). Working substitute (2026-10-17): `GET /api/v1/on-chain/exchange-flows/BTC/history` — hourly CEX inflow/outflow/`net_24h` since 2026-05-28 (up to 93 days per call). The accumulation score never covered native BTC (ERC-20 only), and net exchange outflow is a proxy, not the same measure
 - `GET /api/v1/on-chain/exchange-flows/BTC` — CEX inflow/outflow (netflow levels)
 - `GET /api/v1/on-chain/dormancy/btc` — MVRV + supply-shock, zone classification
 - `GET /api/v1/backtesting/funding` — funding-level archive

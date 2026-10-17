@@ -249,7 +249,7 @@ Re-deploy when markout is positive, inventory mean-reverts in paper, and the fee
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1m&limit=1000` — OHLCV to estimate short-horizon realized σ
-- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding history for carry backtests
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=100` — funding history for carry backtests (`limit` caps at 100, about 33 days of 8h prints; corrected 2026-10-17. For longer Binance history use `GET /api/v1/backtesting/funding?symbol=BTCUSDT&exchange=binance&start=...`, archived since 2026-03-30)
 - `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — history for backtesting the quoter across regimes
 
 ```bash

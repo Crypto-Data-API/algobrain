@@ -2,7 +2,7 @@
 title: Contrarian Extremes
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [combinations, alpha-edge, contrarian, sentiment, mean-reversion, behavioral-edge, fear-greed, risk-bearing]
 strategy_type: hybrid
@@ -19,6 +19,155 @@ crowding_risk: low
 min_capital_usd: 10000
 capacity_usd: 50000000
 related: ["[[structural-forced-selling]]", "[[risk-on-risk-off-framework]]", "[[cross-asset-signals]]", "[[asymmetric-barbell]]", "[[mean-reversion]]", "[[behavioral-finance-overview]]"]
+gates:
+  - id: aaii_spread
+    role: filter
+    rule: "Composite input (20%): AAII bull-bear spread; extreme fear above 60% bearish, extreme greed above 60% bullish"
+    runnable: false
+    note: "AAII survey data is not served; the page says to source it separately."
+  - id: vix_level
+    role: filter
+    rule: "Composite input (20%): VIX; extreme fear above 40, extreme greed below 12"
+    runnable: false
+    note: "No VIX is served. /api/v1/volatility/implied (BTC/ETH DVOL) is crypto implied vol, not VIX, and the page gives no DVOL cutoffs."
+  - id: cnn_fear_greed
+    role: filter
+    rule: "Composite input (15%): CNN Fear & Greed; extreme fear below 15, extreme greed above 85"
+    runnable: false
+    note: "The CNN (equity) index is not served."
+  - id: equity_put_call
+    role: filter
+    rule: "Composite input (15%): equity-only put/call ratio; extreme fear above 1.3, extreme greed below 0.5"
+    runnable: false
+    note: "Equity options are not served. /api/v1/market-intelligence/options carries a BTC options put_call_ratio (Deribit), a different market from the equity-only ratio the cutoffs are calibrated on."
+  - id: naaim_exposure
+    role: filter
+    rule: "Composite input (15%): NAAIM Exposure Index; extreme fear below 25, extreme greed above 105"
+    runnable: false
+    note: "NAAIM data is not served."
+  - id: crypto_fear_greed
+    role: filter
+    rule: "Composite input (15%, crypto only): Crypto Fear & Greed; extreme fear below 10, extreme greed above 90"
+    runnable: partial
+    endpoint: /api/v1/sentiment/fear-greed
+    field: value
+    replay: /api/v1/backtesting/snapshots?data_type=fear_greed&start={start}
+    replay_field: snapshots[].data.value
+    note: "Ours is a multi-source average (individual_values shows 2-3 anonymised sources), not the alternative.me index the page's sources and cutoffs refer to; averaging damps extremes, so a reading below 10 is rarer. Snapshots start 2026-05-09. /api/v1/market-intelligence/fear-greed-history, the page's history route, returned a single row (today) on 2026-10-17."
+  - id: funding_greed
+    role: filter
+    rule: "Crypto overlay: funding above +0.1% per 8h (+0.0125% per hour on Hyperliquid) marks a greed extreme"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin=BTC&limit=8
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin=BTC&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "The overlay has no weight in the composite; how it moves the score is not defined."
+  - id: funding_fear
+    role: filter
+    rule: "Crypto overlay: deeply negative funding marks a fear extreme"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin=BTC&limit=8
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin=BTC&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "'Deeply negative' has no number; the example calls -0.018% per 8h deeply negative."
+  - id: composite_score
+    role: entry
+    rule: "Composite = 0.20 AAII + 0.20 VIX + 0.15 CNN + 0.15 put/call + 0.15 NAAIM + 0.15 crypto F&G, each normalised 0-100"
+    runnable: false
+    input: derived
+    inputs: [aaii_spread, vix_level, cnn_fear_greed, equity_put_call, naaim_exposure, crypto_fear_greed]
+    note: "Five of the six inputs are equity sentiment series we do not serve, and the page does not define the 0-100 normalisation of each. Every composite threshold below inherits this."
+  - id: tranche_1
+    role: entry
+    rule: "Buy the first 25% of the intended position when the composite is below 20, near support and after a reversal candle"
+    runnable: false
+    input: derived
+    inputs: [composite_score, near_support, reversal_candle]
+  - id: tranche_2
+    role: entry
+    rule: "Buy the next 25% when the composite hits 15 or 3 trading days have passed since tranche 1"
+    runnable: false
+    input: derived
+    inputs: [composite_score]
+    note: "The time branch is a position check; the composite branch is not runnable. The Rules require a reversal candle before every tranche; the pseudocode checks it for tranche 1 only."
+  - id: tranche_3
+    role: entry
+    rule: "Buy the next 25% when the composite hits 10 or 3 more trading days pass"
+    runnable: false
+    input: derived
+    inputs: [composite_score]
+  - id: tranche_4
+    role: entry
+    rule: "Complete the position when the composite hits 5 or 5 more trading days pass"
+    runnable: false
+    input: derived
+    inputs: [composite_score]
+  - id: greed_tranches
+    role: exit
+    rule: "Sell or hedge 25% at each of composite 80, 85, 90 and 95"
+    runnable: false
+    input: derived
+    inputs: [composite_score]
+  - id: near_support
+    role: filter
+    rule: "Execute each buy tranche near a support level, Fibonacci retracement or high-volume node"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical?symbol={symbol}
+    field: items[].sr.support[].dist_pct
+    note: "Daily swing-pivot supports with their signed distance from mark. 'Near' has no number, and Fibonacci levels and volume nodes are not served."
+  - id: reversal_candle
+    role: filter
+    rule: "Require a reversal candle (hammer, bullish engulfing, morning star) before each tranche"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=10
+    field: candles[].close
+    note: "Computable from daily OHLC, but the page gives no pattern definitions."
+  - id: rsi_divergence
+    role: filter
+    rule: "Highest-conviction entry: price makes a new low while RSI does not (bullish divergence)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].close
+    note: "A confirmation, not a requirement, and the page sets no lookback for the two lows."
+  - id: structural_crisis
+    role: sizing
+    rule: "Halve the tranche size when credit spreads are blowing out and the composite is below 15"
+    runnable: false
+    input: derived
+    inputs: [composite_score]
+    note: "Credit spreads are not served. The agent workflow substitutes /api/v1/regimes/current (Structural Shock) and /api/v1/security/regime/score. The Risk Management section applies the cut whenever sentiment is extreme; the pseudocode only below 15 and only on tranche 1."
+  - id: neutral_exit
+    role: exit
+    rule: "Close when the composite returns to the 40-60 neutral range"
+    runnable: false
+    input: derived
+    inputs: [composite_score]
+  - id: profit_target
+    role: exit
+    rule: "Take profit at 30-60% above the average entry for crypto (15-25% for equities)"
+    runnable: true
+    input: position
+    note: "The pseudocode closes at a 20% unrealized gain, the equity figure, which contradicts the Rules' 30-60% for crypto. Prose unchanged."
+  - id: stop_loss
+    role: stop
+    rule: "Stop 10% below the lowest tranche entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "The pseudocode stops on a 10% unrealized loss on the whole position, which sits above the Rules' level once tranches are averaged in."
+  - id: time_stop
+    role: stop
+    rule: "Exit at market after 60 days with no profit"
+    runnable: true
+    input: position
+  - id: max_allocation
+    role: sizing
+    rule: "At most 30% of the portfolio in contrarian-extreme trades; each tranche is a quarter of that"
+    runnable: true
+    input: position
 ---
 
 # Contrarian Extremes

@@ -2,7 +2,7 @@
 title: "Stretch Revert (Strategy Family)"
 type: strategy
 created: 2026-07-20
-updated: 2026-07-20
+updated: 2026-10-17
 status: draft
 tags: [crypto, quantitative, mean-reversion, perpetual-futures, hyperliquid, indicators, trading-bots]
 aliases: ["Stretch Revert Group", "Stretch Reversion", "Baseline Deviation Fade", "Stretch Fade"]
@@ -28,6 +28,109 @@ kill_criteria: |
   - Rolling 6-month drawdown > 25% of family book
   - Any member's realised round-trip slippage > 45 bps on three consecutive trades — measured stretch was bid-ask bounce, not dislocation
   - Win rate holds above 70% while net P/L is negative over >= 20 trades — payoff asymmetry has inverted (the theilsen failure signature)
+gates:
+  - id: deep_book_universe
+    role: universe
+    rule: "Hyperliquid perps deep enough that a measured stretch is a real dislocation, not bid-ask bounce"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    note: "The page sets no depth or volume floor. Rank assets[] by day_volume (or open_interest_usd) and check the book with /api/v1/hyperliquid/l2-book?coin={coin}; where to cut is the desk's call."
+  - id: hurst_gate
+    role: filter
+    rule: "Hurst exponent of the coin's closes below ~0.50 (cfg.hurst_max); above it, flatten the member on that coin"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=15m&limit=500
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=15m&start={start}
+    replay_field: klines[].c
+    note: "The window comes from the example, Hurst(96) on 15m bars (one day); the pseudocode leaves it as cfg.hurst_window. Use interval=1m (or 5m) for fast_kama_stretch_revert. The REST replay starts 2026-05-09; earlier 1m days are in the klines Parquet archive."
+  - id: hmm_range_regime
+    role: filter
+    rule: "The coin's trend/range classification is range or chop (state.regime(asset) in cfg.permitted_regimes)"
+    runnable: partial
+    endpoint: /api/v1/quant/coins/{symbol}
+    field: regime.label
+    replay: /api/v1/quant/history?scope={symbol}&start={start}
+    replay_field: entries[].regime_label
+    note: "The Rules name the technical-structural overlay and the pseudocode a permitted-regimes list, but neither names the passing states. range_low_vol and choppy_high_vol are the HMM's range and chop labels; whether both pass is the desk's call. The agent workflow uses the whole-market /api/v1/quant/market as a family-level switch instead."
+  - id: vol_regime_ok
+    role: filter
+    rule: "The volatility-regime overlay permits a fade on the coin"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    note: "Labels are compressed, normal, expanding, vol_shock and mean_reverting, refreshed daily. The page names the overlay but not which labels pass."
+  - id: spread_ok
+    role: filter
+    rule: "Skip the entry when the bid-ask spread exceeds cfg.max_spread_bps"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: asks[].price
+    note: "Spread = best ask (asks[0].price) minus best bid (bids[0].price), over the mid. The page never sets cfg.max_spread_bps; the example trades at 3 bps."
+  - id: stretch_long_entry
+    role: entry
+    rule: "Buy when z = (close - baseline) / rolling std of (close - baseline) is at or below -cfg.entry_z (either this or stretch_short_entry)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=15m&limit=500
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=15m&start={start}
+    replay_field: klines[].c
+    note: "The baseline is the member's estimator (FRAMA, KAMA, HMA and so on), computed from closes. The page never sets cfg.entry_z, cfg.period or cfg.z_window; the example enters at -2.6 sigma. Closed bars only: drop the bar named by forming_bar_timestamp."
+  - id: stretch_short_entry
+    role: entry
+    rule: "Short when z is at or above +cfg.entry_z (either this or stretch_long_entry)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=15m&limit=500
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=15m&start={start}
+    replay_field: klines[].c
+    note: "Same undefined cfg.entry_z as stretch_long_entry."
+  - id: reward_risk_floor
+    role: filter
+    rule: "Skip unless the distance to the target (the baseline) is at least 1.5x the distance to the stop"
+    runnable: partial
+    input: derived
+    inputs: [stretch_long_entry, stretch_short_entry, hard_stop]
+    note: "Partial because the entry and stop multiples (cfg.entry_z, cfg.stop_mult) are undefined."
+  - id: reverted_exit
+    role: exit
+    rule: "Close when z crosses back through zero (its sign differs from the entry z), or when |z| falls below cfg.exit_z"
+    runnable: partial
+    input: derived
+    inputs: [stretch_long_entry, stretch_short_entry]
+    note: "The zero cross is defined; cfg.exit_z is not, so the earlier exit inside the band is the desk's number."
+  - id: time_stop
+    role: stop
+    rule: "Scratch the trade after cfg.max_bars bars without reverting (12 bars of 15m in the example), sized from the half-life"
+    runnable: true
+    input: position
+    note: "The Rules size it from the half-life and warn that one half-life scratches most winners (full reversion takes 3-4); the example uses 12 bars."
+  - id: hard_stop
+    role: stop
+    rule: "Exit at baseline + sign(z) x cfg.stop_mult x sigma beyond the band (-4.0 sigma in the example)"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "Sigma and the baseline are recorded at entry. cfg.stop_mult is set only by the example (4.0 sigma)."
+  - id: regime_stop
+    role: stop
+    rule: "Flatten if the trend filter flips while in position"
+    runnable: partial
+    input: derived
+    inputs: [hurst_gate, hmm_range_regime, vol_regime_ok]
+  - id: leverage
+    role: sizing
+    rule: "Run ~3-5x leverage on 15m candles (theilsen_stretch_revert at 1x), isolated margin"
+    runnable: true
+    input: position
+  - id: liquidation_aware_size
+    role: sizing
+    rule: "Size from equity x cfg.risk_pct to the stop, checked against the isolated-margin liquidation price"
+    runnable: partial
+    input: position
+    note: "The page never sets cfg.risk_pct."
 ---
 
 # Stretch Revert (Strategy Family)

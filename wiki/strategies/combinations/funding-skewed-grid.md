@@ -370,7 +370,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/liquidity/depth` — order-book depth to confirm adequate liquidity for grid maker fills
 
 **Historical data:**
-- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding history for skew-calibration backtest
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=100` — funding history for skew-calibration backtest (`limit` caps at 100, about 33 days of 8h prints; corrected 2026-10-17. For longer Binance history use `GET /api/v1/backtesting/funding?symbol=BTCUSDT&exchange=binance&start=...`, archived since 2026-03-30)
 - `GET /api/v1/derivatives/binance/history?days=90` — daily derivatives series (funding + OI) for regime and carry analysis
 - `GET /api/v1/backtesting/funding` — deep funding archive (2020+) for multi-regime skew performance
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=200` — OHLCV for ADX, ATR, Bollinger Bandwidth computation

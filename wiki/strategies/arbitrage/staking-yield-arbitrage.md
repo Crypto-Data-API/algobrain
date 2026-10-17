@@ -265,7 +265,7 @@ Native ETH staking yields and DeFi (Aave/Morpho) borrow rates come from on-chain
 
 **Historical / research:**
 - `GET /api/v1/backtesting/funding` — deep funding archive (delta-neutral carry backtest)
-- `GET /api/v1/derivatives/binance/funding-rates?symbol=ETHUSDT&limit=500` — ETH funding history
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ETHUSDT&limit=100` — ETH funding history (`limit` caps at 100, about 33 days of 8h prints; corrected 2026-10-17. For longer Binance history use `GET /api/v1/backtesting/funding?symbol=ETHUSDT&exchange=binance&start=...`, archived since 2026-03-30)
 - `GET /api/v1/backtesting/klines` — OHLCV archive for LST/ETH basis studies
 
 ```bash

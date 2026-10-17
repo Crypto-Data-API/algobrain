@@ -481,6 +481,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 ## Related
 
 - [[liquidation-cascade-fade]] — the underlying cascade-fade primitive; this page adds session conditioning on top
+- [[forced-flow-exhaustion-fade]] — the same fade keyed off the live event stream and gated on falling open interest
 - [[long-liquidation-cascade]] — the Hyperliquid-focused long cascade basket; session parameters from this playbook apply
 - [[post-liquidation-rebound]] — the extended recovery phase after the cascade trough
 - [[session-overlap-momentum]] — session-driven momentum at peak overlap; the liquidity framework from the opposite strategy direction

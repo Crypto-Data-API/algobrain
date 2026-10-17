@@ -73,7 +73,7 @@ The funnel runs in five sequential gates. A pair must pass all five to enter the
 
 **Filter:** both legs must individually pass:
 1. Average **daily perpetual volume ≥ $5M** (7-day trailing average): ensures the position can be built and unwound at a target notional of up to $250K without moving the market more than ~5 bps.
-2. **Bid-side depth within 25 bps ≥ $100K** at the time of the weekly screen: from `/api/v1/liquidity/depth?coin=X&type=bid&bps=25`.
+2. **Bid-side depth within 25 bps ≥ $100K** at the time of the weekly screen: from `/api/v1/liquidity/depth/{coin}` — the latest `history[]` row's `depth_usd.bid["25bps"]` (check `levels_truncated.bid["25bps"]`: if true the band saturated the returned book and the figure is a floor). Only the top 25 Hyperliquid perps by 24h notional are tracked; an untracked coin returns 404. *Corrected 2026-10-17: `/api/v1/liquidity/depth` takes no query params, so `coin`/`type`/`bps` were ignored.*
 
 - The $5M volume floor and $100K depth floor are conservative minimums for a book targeting $50K–$500K per pair. Scale these proportionally for larger or smaller books.
 - This gate is the hardest practical bottleneck for the long tail of HL-listed tokens. Approximately half of the ~206 HL perps have < $5M daily volume. Applied to Gate 3 survivors: **estimated ~200–600 pairs** pass.
@@ -154,7 +154,7 @@ All data used in the funnel is available from [[cryptodataapi|CryptoDataAPI]]. N
 - `GET /api/v1/hyperliquid/meta` — full list of current HL perp markets (for candidate pool enumeration)
 - `GET /api/v1/hyperliquid/candles?coin=X&interval=1h&limit=720` — 30 days of 1h klines for Gate 1 correlation
 - `GET /api/v1/hyperliquid/candles?coin=X&interval=1d&limit=120` — 90+ days of daily klines for Gate 2 cointegration
-- `GET /api/v1/liquidity/depth?coin=X&type=bid&bps=25` — bid-side depth for Gate 4
+- `GET /api/v1/liquidity/depth/{coin}` — bid-side depth for Gate 4: `history[].depth_usd.bid["25bps"]` (no `type`/`bps` params; corrected 2026-10-17)
 - `GET /api/v1/derivatives/funding-rates?coin=X` — 8h funding for Gate 5
 
 **Historical data:**

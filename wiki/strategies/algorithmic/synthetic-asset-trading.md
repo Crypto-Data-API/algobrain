@@ -272,7 +272,7 @@ Re-deploy when a synth market re-develops a skew-funding advantage ≥ 10% APY o
 - `GET /api/v1/sentiment/macro` — EUR/USD, gold, yields (context for macro-linked synth underlyings)
 
 **Historical data:**
-- `GET /api/v1/derivatives/binance/funding-rates?symbol=ETHUSDT&limit=500` — funding-rate history for the differential backtest
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ETHUSDT&limit=100` — funding-rate history for the differential backtest (`limit` caps at 100, about 33 days of 8h prints; corrected 2026-10-17. For longer Binance history use `GET /api/v1/backtesting/funding?symbol=ETHUSDT&exchange=binance&start=...`, archived since 2026-03-30)
 - `GET /api/v1/backtesting/funding` — deep funding archive
 - `GET /api/v1/backtesting/klines` — OHLCV archive for the underlying
 

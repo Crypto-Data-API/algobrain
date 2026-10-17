@@ -2,7 +2,7 @@
 title: Market Breadth
 type: concept
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [indicators, technical-analysis, market-internals, market-breadth]
 aliases: ["breadth indicators", "advance-decline", "market internals", "Market Breadth"]
@@ -116,7 +116,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-health]]
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
 
-- **Live state** — `GET /api/v1/market-health/altcoin-breadth?period=200` is the crypto analogue of "% of members above the 200-day MA"; the `period` parameter (5-365d) lets you read fast and slow breadth from the same endpoint
+- **Live state** — `GET /api/v1/market-health/altcoin-breadth?ma_period=200` is the crypto analogue of "% of members above the 200-day MA"; the `ma_period` parameter (5-365d; the param name was corrected 2026-10-17 from `period`, which the API ignores) lets you read fast and slow breadth from the same endpoint
 - **Compute** — for advance/decline-style counts, snapshot `GET /api/v1/daily/prices` (~2,500 Binance spot pairs) daily and tally advancers vs decliners yourself; cumulative net advances gives a crypto A/D line
 - **Backtest** — `GET /api/v1/market-health/history?days=730` provides two years of health-score history; point-in-time universe breadth reconstructs from `GET /api/v1/backtesting/daily-snapshots` (full daily payload since 2026-03-02)
 - **Tip** — crypto breadth is mechanically dragged around by BTC beta; read breadth *relative* to BTC's own trend (e.g. breadth collapsing while BTC holds its 200D MA is the narrow-leadership warning this page describes)

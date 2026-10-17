@@ -244,7 +244,7 @@ Anyone building or evaluating a perp-based strategy should treat the standard pi
 - `GET /api/v1/derivatives/summary?coin=BTC` — all-in-one derivatives overview (markdown format available)
 
 **Historical data:**
-- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding-rate history
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=100` — funding-rate history (`limit` caps at 100, about 33 days of 8h prints; corrected 2026-10-17. For longer Binance history use `GET /api/v1/backtesting/funding?symbol=BTCUSDT&exchange=binance&start=...`, archived since 2026-03-30)
 - `GET /api/v1/derivatives/binance/history?days=90` — daily derivatives series (funding, OI, long/short)
 - `GET /api/v1/backtesting/funding` — deep funding archive for backtests
 

@@ -265,7 +265,7 @@ The production system adds: a real-time vol-regime classification that runs at e
 - **8h funding rate** — `GET /api/v1/derivatives/funding-rates?coin=BTC`; key distinguisher between HIGH-VOL-GOOD (flush, negative funding) and HIGH-VOL-BAD (crowded longs, positive funding).
 - **7-day average funding** — computed from the same funding-rates endpoint over the past 21 8h periods.
 - **Open interest (24h and 48h change)** — `GET /api/v1/derivatives/open-interest?coin=BTC`; OI flush confirmation for HIGH-VOL-GOOD; OI build warning for HIGH-VOL-BAD.
-- **Long/short ratio** — `GET /api/v1/derivatives/binance/long-short-ratio?coin=BTC`; contrarian sentiment confirmation in the HIGH-VOL-GOOD regime.
+- **Long/short ratio** — `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT`; contrarian sentiment confirmation in the HIGH-VOL-GOOD regime.
 - **1h OHLCV (for RSI)** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=16`; RSI(14, 1h) oversold check for HIGH-VOL-GOOD supplementary confirmation.
 - **Regime context** — `GET /api/v1/regimes/current`; if `Structural_Shock`, no reversion entries regardless of vol regime classification.
 
@@ -356,7 +356,7 @@ See [[when-to-retire-a-strategy]] and [[failure-modes]] for the broader framewor
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=22` — 20-day daily OHLCV for realized vol computation (vol regime classification input)
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — 8h funding rate; key HIGH-VOL-GOOD vs HIGH-VOL-BAD distinguisher
 - `GET /api/v1/derivatives/open-interest?coin=BTC` — OI 24h and 48h change; flush confirmation (GOOD) or build warning (BAD)
-- `GET /api/v1/derivatives/binance/long-short-ratio?coin=BTC` — L/S ratio; contrarian positioning confirmation in HIGH-VOL-GOOD
+- `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — L/S ratio; contrarian positioning confirmation in HIGH-VOL-GOOD
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=16` — 1h OHLCV for RSI(14, 1h) oversold check
 - `GET /api/v1/regimes/current` — regime context; `Structural_Shock` → no reversion entries
 

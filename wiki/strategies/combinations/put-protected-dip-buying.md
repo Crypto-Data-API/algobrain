@@ -257,7 +257,7 @@ The production system adds: Deribit WebSocket for live put pricing and delta-hed
 - **Fear & Greed index** — `GET /api/v1/sentiment/fear-greed` (Method C: sentiment extreme gate; also provides context for put timing)
 - **DVOL** — `GET /api/v1/volatility/implied`; current DVOL used to estimate put premium budget gate and compare to 30-day average for context
 - **4h OHLCV** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=50`; recent price action for entry timing and 5-day high reference
-- **Liquidations** — `GET /api/v1/market-intelligence/liquidations?coin=BTC`; context check — if cascades are still occurring, defer entry even if capitulation signal fires
+- **Liquidations** — `GET /api/v1/market-intelligence/liquidations?symbol=BTC`; context check — if cascades are still occurring, defer entry even if capitulation signal fires
 - **Regime** — `GET /api/v1/regimes/current`; if `Structural_Shock`, defer entry (ongoing systemic shock)
 - **OTM put pricing (Deribit)** — specific strike pricing NOT available via CryptoDataAPI; source from [[deribit]] API directly (`GET /api/v2/public/get_order_book?instrument_name=BTC-{date}-{strike}-P`)
 
@@ -366,7 +366,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/on-chain/exchange-flows/spike-alerts` — Method C: real-time large transfer alerts for whale deposits (on-chain capitulation signal)
 - `GET /api/v1/sentiment/fear-greed` — Method C: consecutive extreme-fear readings
 - `GET /api/v1/volatility/implied` — put premium budget gate; DVOL percentile context
-- `GET /api/v1/market-intelligence/liquidations?coin=BTC` — cascade-clear confirmation before entry
+- `GET /api/v1/market-intelligence/liquidations?symbol=BTC` — cascade-clear confirmation before entry
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=50` — entry timing and 5-day high reference
 - `GET /api/v1/regimes/current` — structural shock check; defer entry if `Structural_Shock`
 
@@ -390,7 +390,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
 - **Signal** — capitulation detection across `GET /api/v1/derivatives/funding-rates?coin=BTC` (sustained negative), `GET /api/v1/derivatives/open-interest?coin=BTC` (decline from 5d peak), and `GET /api/v1/on-chain/exchange-flows/spike-alerts` (whale deposits)
-- **Filter** — `GET /api/v1/market-intelligence/liquidations?coin=BTC` must show the cascade has cleared; `GET /api/v1/volatility/implied` sets the put-premium budget gate
+- **Filter** — `GET /api/v1/market-intelligence/liquidations?symbol=BTC` must show the cascade has cleared; `GET /api/v1/volatility/implied` sets the put-premium budget gate
 - **Regime gate** — `GET /api/v1/regimes/current`; defer while `Structural_Shock` persists
 - **Backtest** — post-capitulation recovery paths from `GET /api/v1/backtesting/klines` (1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); the cascade-clear condition replays only since 2026-03-30 (`GET /api/v1/backtesting/liquidations`, Hyperliquid), so older backtests must proxy it from funding and OI alone
 - **Tips** — the protective put is priced on Deribit; re-check the DVOL percentile at fill time — premium budgets set at signal time go stale fast in post-panic tape

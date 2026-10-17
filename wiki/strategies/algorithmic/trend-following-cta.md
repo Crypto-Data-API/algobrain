@@ -2,7 +2,7 @@
 title: "Trend Following CTA"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [trend-following, CTA, managed-futures, systematic, time-series-momentum, breakout, commodities]
 aliases: ["Managed Futures", "CTA", "CTA Strategy", "CTA Strategies", "Commodity Trading Advisor", "Systematic Trend Following", "Time-Series Momentum"]
@@ -33,6 +33,140 @@ kill_criteria: |
   - rolling 24-month Sharpe < 0.2 after costs
   - drawdown > 30% from equity peak
   - signal frequency / number of regime transitions doubles vs historical norm (over-whipsawing regime)
+gates:
+  - id: futures_universe
+    role: universe
+    rule: "Trade 50-100 liquid futures: agricultural, metals and energy commodities, currencies, government bonds and equity indices (either this or crypto_perp_universe)"
+    runnable: false
+    note: "We serve no CME/ICE futures; the page's own data section says those come from futures data vendors. The signal gates below run on the crypto application instead."
+  - id: crypto_perp_universe
+    role: universe
+    rule: "Crypto application: BTC/ETH and alt perps (either this or futures_universe)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+    note: "BTC and ETH are named. The page has no rule for which alt perps join; it only says alt perp markets hold $20M-$200M before impact dominates and the crypto book should stop near $100M. Ranking assets[] by open_interest_usd is one screen; the cut-off is the desk's."
+  - id: ma_cross_long
+    role: entry
+    rule: "Long while the 50-day SMA is above the 200-day SMA (one of three signals; see signal_flip_entry)"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={symbol}
+    field: items[].ma.sma_50
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Compare with items[].ma.sma_200 on the same row: daily SMAs on the Hyperliquid perp series (the default source). A symbol listed in not_covered needs the SMAs computed from 200+ closed daily closes on /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=250. Replay: start at least 200 days before the test window."
+  - id: ma_cross_short
+    role: entry
+    rule: "Short while the 50-day SMA is below the 200-day SMA (one of three signals; see signal_flip_entry)"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={symbol}
+    field: items[].ma.sma_50
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Same comparison as ma_cross_long, with items[].ma.sma_200."
+  - id: channel_breakout_long
+    role: entry
+    rule: "Long when price breaks above the highest high of the past 100 days (one of three signals; see signal_flip_entry)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=110
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].high
+    note: "N = 100 is the page's example ('e.g., 100 days') and the window its example trade uses; the Turtle 20/55-day channels are the other common choice. The page does not say whether a close or a trade through the level counts; the channel excludes the forming bar named by forming_bar_timestamp."
+  - id: channel_breakout_short
+    role: entry
+    rule: "Short when price breaks below the lowest low of the past 100 days (one of three signals; see signal_flip_entry)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=110
+    field: candles[].low
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].low
+  - id: tsmom_long
+    role: entry
+    rule: "Long when the 12-month return is positive (one of three signals; see signal_flip_entry)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=400
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Last closed daily close against the close 365 bars earlier. A coin listed on Hyperliquid less than a year ago has no 12-month return yet."
+  - id: tsmom_short
+    role: entry
+    rule: "Short when the 12-month return is negative (one of three signals; see signal_flip_entry)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=400
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: multi_lookback_blend
+    role: filter
+    rule: "Confirm with several lookbacks (20, 60 and 200 days) and blend their signals to smooth entries"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=250
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "The closes give all three windows. The page says neither which signal each window runs (MA, channel or return sign) nor how the blend is weighted or thresholded; the desk sets both."
+  - id: signal_flip_entry
+    role: entry
+    rule: "Enter when the chosen signal flips from neutral or opposite to the new direction, with a limit order at the next session's open"
+    runnable: true
+    input: derived
+    inputs: [ma_cross_long, ma_cross_short, channel_breakout_long, channel_breakout_short, tsmom_long, tsmom_short]
+    note: "Crypto has no session; the next daily bar's open at 00:00 UTC is our reading. Which signal runs, or which blend (multi_lookback_blend), is the desk's choice."
+  - id: signal_reversal_exit
+    role: exit
+    rule: "Exit when the trend signal flips to the opposite direction (for the MA signal, the 50-day SMA crosses back through the 200-day)"
+    runnable: true
+    input: derived
+    inputs: [ma_cross_long, ma_cross_short, channel_breakout_long, channel_breakout_short, tsmom_long, tsmom_short]
+  - id: atr_trailing_stop
+    role: stop
+    rule: "Trail the stop 2-3x ATR from the best price to lock in profit before a full signal reversal"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=100&atr=14
+    field: candles[].atr
+    note: "The page never gives the ATR period; atr=14 is Wilder's default. The example's first stop is 2.4x ATR ($78 on a $72 short with ATR $2.50). Use the last closed bar's atr."
+  - id: vol_doubling_derisk
+    role: exit
+    rule: "If realized volatility doubles, reduce position size or exit"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: vol.rv_cc_30
+    note: "history[].rv_cc_30 on the same response holds 60 daily values to compare against. The page sets no vol window, no baseline for 'doubles' and no size cut; whether to trim or exit is the desk's call."
+  - id: risk_per_position
+    role: sizing
+    rule: "Size = target risk / (ATR x point value), targeting 1% risk per position"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=100&atr=14
+    field: candles[].atr
+    note: "On a linear perp the point value is 1 unit of the coin. The 1% is the page's example ('if targeting 1%'), and it names no ATR period; atr=14 is our reading."
+  - id: portfolio_vol_target
+    role: sizing
+    rule: "Scale the whole book to 10-15% annualized volatility; scale every position down proportionally when the estimate is above target"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=250
+    field: candles[].close
+    note: "Book volatility comes from the positions and a return covariance of the daily closes. The page gives no estimation window, so that is the desk's."
+  - id: correlation_cluster_cut
+    role: sizing
+    rule: "Reduce exposure when many markets trend in the same direction"
+    runnable: partial
+    input: derived
+    inputs: [ma_cross_long, ma_cross_short, channel_breakout_long, channel_breakout_short, tsmom_long, tsmom_short]
+    note: "Count the open signals pointing the same way. The page sets no count or share that triggers the cut, and no size for the cut."
+  - id: choppy_regime_delever
+    role: sizing
+    rule: "De-lever while choppy_high_vol or range_low_vol dominates the HMM market regime"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's agent workflow, not its Rules. It gives neither a probability for 'dominate' nor how far to de-lever."
 ---
 
 # Trend Following CTA

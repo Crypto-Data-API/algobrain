@@ -2,7 +2,7 @@
 title: "Range Trading"
 type: strategy
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [technical-analysis, mean-reversion, swing-trading, indicators, volatility]
 aliases: ["Range Trading", "Channel Trading", "Range-Bound Trading", "Sideways Market Trading"]
@@ -21,6 +21,117 @@ crowding_risk: medium
 expected_sharpe: 0.6
 expected_max_drawdown: 0.20
 breakeven_cost_bps: 15
+gates:
+  - id: adx_weak
+    role: filter
+    rule: "Trade only while ADX(14) is at or below 25; above 25, stand aside and flatten"
+    runnable: true
+    endpoint: /api/v1/indicators/adx?coin={coin}&interval=4h
+    field: items[].adx
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "The page names no timeframe; 4h follows its data section. The Rules and table say 'below 20-25', the pseudocode stands aside only above 25, so 25 is the operative cap and 20 the stricter reading. Replay rebuilds Wilder ADX from the same rows' high, low and close."
+  - id: range_channel
+    role: entry
+    rule: "Range = the 20-bar high/low channel with at least 2 confirmed touches of each boundary"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60&atr=14
+    field: candles[].high
+    note: "Resistance from candles[].high, support from candles[].low. The page gives no touch tolerance or confirmation rule, so what counts as a touch is the desk's parameter. The Rules also allow a Bollinger band as the boundary."
+  - id: min_channel_width
+    role: filter
+    rule: "Channel width at least ~3x ATR(14)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60&atr=14
+    field: candles[].atr
+    note: "From the parameter table; the pseudocode never checks it."
+  - id: near_support
+    role: entry
+    rule: "Long setup: the bar's low is within 0.25x ATR(14) of support (either this or near_resistance)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60&atr=14
+    field: candles[].low
+  - id: near_resistance
+    role: entry
+    rule: "Short setup: the bar's high is within 0.25x ATR(14) of resistance (either this or near_support)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60&atr=14
+    field: candles[].high
+  - id: rsi_long_confirm
+    role: entry
+    rule: "Long confirmation: RSI(14) below 35 and turning up"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "The table and pseudocode use 35; the Rules text says 'RSI < 30 turning up' and the example buys at 28. Prose unchanged. /indicators/technical serves RSI(14) on 1d and 1h only, so the 4h value is computed from the closes."
+  - id: rsi_short_confirm
+    role: entry
+    rule: "Short confirmation: RSI(14) above 65 and turning down"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "The table and pseudocode use 65; the Rules text says 'RSI > 70 turning down'."
+  - id: reversal_candle
+    role: entry
+    rule: "A bullish (bearish) reversal candle on the boundary bar"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60
+    field: candles[].open
+    note: "reversal_up(bar) and reversal_down(bar) are never defined; the example names a hammer. The Rules accept RSI turning, a reversal candle or a band tag as alternatives, but the pseudocode requires RSI and a reversal candle together. Prose unchanged."
+  - id: band_tag_confirm
+    role: entry
+    rule: "Alternative confirmation: a lower (upper) Bollinger Band tag with a close back inside"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60
+    field: candles[].close
+    note: "The page gives no band length or width; 20 bars and 2 standard deviations is the usual default. The pseudocode does not use this path."
+  - id: target_boundary
+    role: exit
+    rule: "Take profit at the opposite boundary, or at the range midpoint for the faster variant"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: stop_beyond_boundary
+    role: stop
+    rule: "Stop 0.75x ATR(14) beyond the boundary the trade faded"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "0.75 is the pseudocode's value; the Rules and table allow 0.5-1.0x ATR."
+  - id: breakout_close_exit
+    role: stop
+    rule: "Flatten on a close more than 0.5x ATR(14) outside the range (the failed-range exit)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=20&atr=14
+    field: candles[].close
+  - id: risk_per_trade
+    role: sizing
+    rule: "Risk 0.5-1% of equity per trade, measured from entry to stop"
+    runnable: true
+    input: position
+  - id: size_vs_channel_volume
+    role: sizing
+    rule: "Keep per-trade size below ~1-2% of the average dollar volume traded inside the channel"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60
+    field: candles[].volume
+    note: "From the Capacity section. volume is in coin units; multiply by close for dollars, averaged over the channel's bars."
+  - id: hmm_range_home
+    role: filter
+    rule: "Trade only while the HMM puts high probability on range_low_vol"
+    runnable: partial
+    endpoint: /api/v1/quant/coins/{symbol}
+    field: regime.label
+    replay: /api/v1/quant/history?scope={symbol}&start={start}
+    replay_field: entries[].regime_label
+    note: "From the agent workflow, not the Rules. 'High probability' has no number; the label (and regime.confidence on the same row) is the closest read. The workflow names the whole-market /api/v1/quant/market; the per-coin route matches a per-symbol range."
 ---
 
 Range trading buys near a well-defined [[support-resistance|support]] level and sells (or shorts) near a well-defined resistance level, betting that price will continue oscillating inside a horizontal channel rather than breaking out. It is the canonical [[mean-reversion]] strategy for *balanced* or *sideways* markets — periods when no trend dominates and price reverts to the middle of a band. The entire edge depends on correctly identifying that the market is range-bound (a [[market-regime]] judgment) and exiting fast when it is not. Range trading is the regime-complement of [[trend-following]] and [[breakout-trading]]: the same boundary that a range trader fades is the trigger a breakout trader buys, so the two strategies profit in opposite regimes and a complete book usually runs both with a regime switch between them.

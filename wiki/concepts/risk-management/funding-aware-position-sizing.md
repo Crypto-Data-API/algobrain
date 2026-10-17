@@ -2,7 +2,7 @@
 title: "Funding-Aware Position Sizing"
 type: concept
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-10-17
 status: good
 tags: [crypto, risk-management, position-sizing, kelly, funding-rate, perpetual-futures, derivatives]
 aliases: ["Funding-Aware Sizing", "Funding-Adjusted Kelly", "Carry-Adjusted Position Sizing", "Funding-Adjusted Sizing"]
@@ -110,7 +110,7 @@ The *same* bullish price view produces sizes ranging from a large long to no pos
 - `GET /api/v1/derivatives/summary?coin=ETH` — all-in-one derivatives overview (funding, OI, long/short)
 
 **Historical data:**
-- `GET /api/v1/derivatives/binance/funding-rates?symbol=ETHUSDT&limit=500` — funding history for backtesting the carry term
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ETHUSDT&limit=100` — funding history for backtesting the carry term (`limit` caps at 100, about 33 days of 8h prints; corrected 2026-10-17. For longer Binance history use `GET /api/v1/backtesting/funding?symbol=ETHUSDT&exchange=binance&start=...`, archived since 2026-03-30)
 - `GET /api/v1/backtesting/funding` — deep funding archive
 - `GET /api/v1/derivatives/binance/history?days=90` — daily funding/OI/long-short series
 

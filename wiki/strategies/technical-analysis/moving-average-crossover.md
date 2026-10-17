@@ -2,7 +2,7 @@
 title: "Moving Average Crossover"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [trend-following, moving-averages, technical-analysis, crossover, momentum, indicators]
 aliases: ["MA Crossover", "Golden Cross Strategy", "Death Cross Strategy", "Golden/Death Cross", "50/200 SMA System"]
@@ -22,6 +22,102 @@ expected_max_drawdown: 0.30
 breakeven_cost_bps: 25
 decay_evidence: "Brock et al 1992 edge largely arbitraged out post-publication. Time-series momentum (Moskowitz 2012) still robust in cross-asset universes but compressed in single-asset settings."
 related: ["[[supertrend]]", "[[ichimoku-cloud]]", "[[parabolic-sar]]", "[[exponential-moving-average]]", "[[simple-moving-average]]", "[[macd]]", "[[atr]]", "[[trend-following]]", "[[time-series-momentum]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[live-journal]]", "[[book-technical-analysis-of-the-financial-markets]]", "[[cryptodataapi]]"]
+gates:
+  - id: golden_cross_long
+    role: entry
+    rule: "Long when the 50-day SMA closes above the 200-day SMA (a cross on the last closed daily bar)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=250
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Closed bars only: drop the bar named by forming_bar_timestamp. The pseudocode fires on the cross bar alone, not on every day the 50 sits above the 200. /indicators/technical has the SMA-50 and SMA-200 levels but its last_cross fields cover price vs the 200 and the 50/100 pair, not 50/200, so the cross comes from the closes."
+  - id: death_cross_short
+    role: entry
+    rule: "Short (or close the long) when the 50-day SMA closes below the 200-day SMA"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=250
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: v1_sma200_stop
+    role: stop
+    rule: "Variant 1: initial stop at the 200-day SMA (either this or v1_atr_trail)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/indicators/technical?symbol={symbol}
+    field: items[].ma.sma_200
+  - id: v1_atr_trail
+    role: stop
+    rule: "Variant 1: an ATR-based trailing stop once a defined profit is reached (either this or v1_sma200_stop)"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200&atr=14
+    field: candles[].atr
+    note: "Neither the profit level that arms the trail nor the ATR multiple is given for Variant 1."
+  - id: v1_risk_per_trade
+    role: sizing
+    rule: "Variant 1: risk a fixed 1-2% of capital per trade"
+    runnable: true
+    input: position
+  - id: inverse_vol_size
+    role: sizing
+    rule: "Variant 2: notional = equity x 0.5% / (ATR(14) / price)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200&atr=14
+    field: candles[].atr
+    note: "The served atr is Wilder's; the pseudocode's ATR is a 14-bar simple mean of true range. For an exact match, recompute it from the same rows' high, low and close."
+  - id: asset_cap
+    role: sizing
+    rule: "Variant 2: cap any asset at 8% of equity"
+    runnable: true
+    input: position
+  - id: gross_leverage_cap
+    role: sizing
+    rule: "Variant 2: skip a new entry that would push gross notional above 2x equity"
+    runnable: true
+    input: position
+  - id: atr_trailing_stop
+    role: stop
+    rule: "Variant 2: exit when price falls 2.0x ATR(14) below the high-water mark (longs) or rises 2.0x ATR above the low-water mark (shorts)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200&atr=14
+    field: candles[].close
+    note: "The bot checks the stop on the daily close and fills at the next bar; ATR is the inverse_vol_size series. The high-water mark starts at the entry fill."
+  - id: v3_ema_9_21
+    role: entry
+    rule: "Variant 3: 9-period EMA crossing the 21-period EMA, on 4h or daily bars"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=200
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+  - id: v4_ema_20_50
+    role: entry
+    rule: "Variant 4: 20 EMA crossing the 50 EMA"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200
+    field: candles[].close
+    note: "The page gives no timeframe for Variant 4; daily is one reading."
+  - id: signum_chop_filter
+    role: filter
+    rule: "Skip fresh crosses while the asset's SIGNUM colour is grey (ADX(14)+DMI chop)"
+    runnable: true
+    endpoint: /api/v1/indicators/signum-rgg?symbol={symbol}
+    field: items[].color
+    replay: /api/v1/backtesting/signum-rgg?date={date}
+    replay_field: by_symbol.{coin}.color
+    note: "From the page's agent workflow, not the bot's rules (the bot has no chop filter)."
+  - id: trend_regime_gate
+    role: filter
+    rule: "Take the 50/200 cross only in strong_trend_bull or strong_trend_bear; treat range_low_vol and choppy_high_vol as the whipsaw regime"
+    runnable: true
+    endpoint: /api/v1/quant/coins/{symbol}
+    field: regime.label
+    replay: /api/v1/quant/history?scope={symbol}&start={start}
+    replay_field: entries[].regime_label
+    note: "From the agent workflow, which names the whole-market /api/v1/quant/market; the per-coin label matches a per-asset signal. Not part of the bot's rules."
 ---
 
 # Moving Average Crossover

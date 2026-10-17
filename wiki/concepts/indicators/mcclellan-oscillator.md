@@ -2,7 +2,7 @@
 title: "McClellan Oscillator"
 type: concept
 created: 2026-04-20
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [indicators, technical-analysis, market-breadth, market-internals]
 aliases: ["McClellan", "McClellan Osc", "McClellan Oscillator", "NYMO"]
@@ -101,7 +101,7 @@ There is no exchange-published advance/decline feed for crypto, but the inputs a
 
 **Live data:**
 - `GET /api/v1/daily/prices` — ~2,500 Binance spot pairs in one call; count advancers vs decliners against the prior snapshot for daily net advances
-- `GET /api/v1/market-health/altcoin-breadth?period=200` — pre-computed % of coins above an N-day MA, a related market-wide breadth read
+- `GET /api/v1/market-health/altcoin-breadth?ma_period=200` — pre-computed % of coins above an N-day MA, a related market-wide breadth read
 
 **Historical data:**
 - `GET /api/v1/backtesting/daily-snapshots` — full daily payload, point-in-time since 2026-03-02, for reconstructing historical net-advance series with the correct dated universe

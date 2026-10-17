@@ -93,12 +93,12 @@ Currently not rejected (`backtest_status: untested`). Testable prediction: compu
 
 **Condition 3: No major news or liquidation cascade in the prior 2 hours**
 - No liquidation spike (24h liquidation volume not ≥ 2× 7d average in the 2-hour pre-window).
-- Source: `GET /api/v1/market-intelligence/liquidations?interval=1h`.
+- Source: `GET /api/v1/market-intelligence/liquidations?symbol=BTC` — the row's `liquidation_usd_1h`/`_4h`/`_24h` windows plus `liq_1h_vs_7d_median`; there is no 7d-average field, so the 2× test needs a baseline from `/api/v1/backtesting/hl-liquidation-bars?coin=BTC&interval=1h&start=...` (corrected 2026-10-17: `interval=1h` is not a parameter).
 - *Rationale:* a cascade in the pre-window means the microstructure is dominated by forced flow, not settlement positioning. The settlement drift is overwhelmed.
 
 **Condition 4 (Hyperliquid hourly variant): HL hourly funding is diverging from next CEX settlement**
 - HL 1h funding (annualised) is in the **opposite direction** from the Binance 8h funding that will settle within the next 3 hours.
-- Source: `GET /api/v1/hyperliquid/funding-rates` and `GET /api/v1/derivatives/funding-rates?coin=BTC&exchange=binance`.
+- Source: `GET /api/v1/hyperliquid/funding-rates` and `GET /api/v1/derivatives/funding-rates?coin=BTC` (read the `binance` block; corrected 2026-10-17: the route takes only `coin`, so `exchange=binance` was ignored).
 - *Rationale:* when HL hourly and Binance 8h funding are in the same direction, both cadences reinforce the same positioning incentive. When they diverge, there is an opportunity to be on the receiving side of HL hourly while simultaneously hedging via the Binance 8h direction — or to trade each settlement separately on its own venue.
 
 ### Entry
@@ -246,7 +246,7 @@ The production system adds: a real-time UTC clock integrated with the settlement
 - **Funding rates** — `GET /api/v1/derivatives/funding-rates?coin=BTC` (and ETH); current 8h rate, sign, and magnitude. Core filter (Condition 1). Also used for HL vs CEX comparison (Condition 4).
 - **Hyperliquid funding rates** — `GET /api/v1/hyperliquid/funding-rates`; hourly funding for the HL settlement variant and the CEX/HL cadence divergence check.
 - **Open interest** — `GET /api/v1/derivatives/open-interest?coin=BTC`; current OI and 30-day history for OI percentile calculation (Condition 2).
-- **Liquidations** — `GET /api/v1/market-intelligence/liquidations?interval=1h`; 1h liquidation volume vs 7d average to detect and avoid cascades (Condition 3).
+- **Liquidations** — `GET /api/v1/market-intelligence/liquidations?symbol=BTC` (`liquidation_usd_1h`, `liq_1h_vs_7d_median`); 1h liquidation volume vs 7d average to detect and avoid cascades (Condition 3).
 - **Intraday OHLCV (15m)** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=8`; last 2 hours of 15m bars for context and stop-level setting.
 - **Long/short ratio** — `GET /api/v1/derivatives/binance/long-short-ratio`; supporting context for directionality of the pre-settlement repositioning.
 - **Regime** — `GET /api/v1/regimes/current`; if `Structural_Shock`, skip all window trades for the session.
@@ -351,15 +351,15 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — current 8h CEX funding rate and history; magnitude and sign check (Condition 1)
 - `GET /api/v1/hyperliquid/funding-rates` — HL hourly funding rate; HL variant trigger and cross-cadence divergence check (Condition 4)
 - `GET /api/v1/derivatives/open-interest?coin=BTC` — current OI and 30-day history for OI percentile (Condition 2)
-- `GET /api/v1/market-intelligence/liquidations?interval=1h` — 1h liquidation volume vs baseline; cascade avoidance (Condition 3)
+- `GET /api/v1/market-intelligence/liquidations?symbol=BTC` — `liquidation_usd_1h` vs the `liq_1h_vs_7d_median` baseline; cascade avoidance (Condition 3)
 - `GET /api/v1/derivatives/binance/long-short-ratio` — current positioning context; directional confirmation
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=8` — trailing 2h of 15m bars for entry context
 - `GET /api/v1/regimes/current` — session-level regime check; skip in Structural_Shock
 
 **Historical data:**
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — extended funding history for settlement drift calibration (requires regime_direction parameter estimation)
-- `GET /api/v1/derivatives/binance/history?days=180` — 6-month derivatives history for pre-settlement drift statistical analysis
-- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=2000` — extended 15m bars for pre/post-settlement return analysis
+- `GET /api/v1/derivatives/binance/history?days=90` — derivatives history for pre-settlement drift statistical analysis. `days` caps at 90 (corrected 2026-10-17 from 180); for the 6-month window use `GET /api/v1/derivatives/hyperliquid/history?symbol=BTC&days=180` (daily HL funding + OI, up to 180 days) or `GET /api/v1/backtesting/funding?symbol=BTCUSDT&exchange=binance&start=...` (Binance 5-minute rate snapshots since 2026-03-30)
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=1000` — extended 15m bars for pre/post-settlement return analysis (`limit` caps at 1000, about 10.4 days; corrected 2026-10-17 from 2000). For the multi-month settlement sample use `GET /api/v1/backtesting/klines?symbol=BTCUSDT&interval=15m&start=...` (up to 10,000 rows per call, cursor-paged)
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
@@ -375,7 +375,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
 - **Signal** — `GET /api/v1/derivatives/funding-rates?coin=BTC` (8h CEX cadence) + `GET /api/v1/hyperliquid/funding-rates` (hourly HL cadence) — magnitude, sign, and the cross-cadence divergence around settlement
-- **Gates** — `GET /api/v1/derivatives/open-interest?coin=BTC` (OI percentile, Condition 2) + `GET /api/v1/market-intelligence/liquidations?interval=1h` (cascade avoidance, Condition 3)
+- **Gates** — `GET /api/v1/derivatives/open-interest?coin=BTC` (OI percentile, Condition 2) + `GET /api/v1/market-intelligence/liquidations?symbol=BTC` (cascade avoidance, Condition 3)
 - **Regime gate** — `GET /api/v1/regimes/current` — skip settlement windows flagged `Structural_Shock`
 - **Backtest** — `GET /api/v1/backtesting/funding` — HL hourly since 2023-05 is ideal for settlement-window studies; the Binance daily archive (since 2026-03-30) is too coarse for intraday drift, so pair funding stamps with 15m bars from `GET /api/v1/market-data/klines` and 1m bars from `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; earlier 1m days from 2026-03-30 are in the daily `klines` Parquet archive; since 2026-03-30)
 - **Tips** — settlement times are fixed (00:00/08:00/16:00 UTC on Binance; hourly on HL): schedule the agent on those stamps instead of polling continuously

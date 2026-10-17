@@ -314,7 +314,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200` — long daily OHLCV for SMA calibration and throttle-event backtest
-- `GET /api/v1/derivatives/binance/history?days=365` — extended funding and derivatives history for throttle-vs-flush-event analysis
+- `GET /api/v1/derivatives/binance/history?days=90` — extended funding and derivatives history for throttle-vs-flush-event analysis. `days` caps at 90 (corrected 2026-10-17 from 365). For a longer flush-event sample use `GET /api/v1/backtesting/funding?symbol=BTC&exchange=hyperliquid&grain=hourly&start=...` (settled Hyperliquid funding back to 2024); Binance funding is archived only since 2026-03-30
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \

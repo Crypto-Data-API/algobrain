@@ -2,7 +2,7 @@
 title: "Stablecoin Pair Arbitrage"
 type: strategy
 created: 2026-04-24
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [arbitrage, crypto, defi, mean-reversion, event-driven]
 aliases: ["Stablecoin Depeg Arb", "USDC Arb", "Stable Pair Trade", "Stable Basis Arb"]
@@ -22,6 +22,95 @@ expected_max_drawdown: 0.15
 breakeven_cost_bps: 20
 decay_evidence: "Major depeg events ~1-2 per year; profile depends on banking/regulatory environment."
 related: ["[[funding-rate-arbitrage]]", "[[lst-depeg-arbitrage]]", "[[depeg-risk]]", "[[curve-finance]]", "[[2022-05-terra-luna-depeg-arb]]", "[[circle]]", "[[tether-limited|Tether]]", "[[makerdao]]", "[[ethena]]", "[[synthetic-stablecoin-depeg-arbitrage]]", "[[cross-chain-contagion-hedge]]", "[[ai-amplified-exploit-arbitrage]]", "[[stablecoin-depeg-profit-capture]]", "[[2017-2020-tether-banking-premium]]", "[[2020-03-dai-black-thursday]]", "[[2023-02-busd-wind-down]]", "[[2026-04-kelp-stable-sympathy-depeg]]", "[[stablecoin-depeg-history]]"]
+gates:
+  - id: stable_off_peg
+    role: entry
+    rule: "A stablecoin trades more than 50 bps off its $1 peg"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "Binance spot, real time, but quoted against USDT, not USD: in the SVB weekend USDT itself traded at 1.025, so a USDT-quoted read overstates USDC's drop. The USD read is current_price on /api/v1/coins/{symbol}, but its last_updated was about 8 hours old when checked on 2026-10-17, too slow for a weekend depeg. DAIUSDT returns price 0.0 (use the inverse USDTDAI pair). FRAX on /coins is the former governance token (about $0.30); the stablecoin is FRXUSD and has no Binance pair. The API's own depeg detector is items[].deviation_bps on /api/v1/security/events?type=depeg, but its trigger level is not documented."
+  - id: widest_spread
+    role: entry
+    rule: "Pseudocode trigger: the richest minus the cheapest of USDC, USDT, DAI, FRAX and USDe is above 0.005 ($0.005, 50 bps)"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "One call per stable, with USDT fixed at 1.0 as the quote leg; DAI via USDTDAI inverted. FRAX (the stablecoin) is not on Binance, so the five-coin set is four. The Rules test one coin against $1; the pseudocode tests the spread between two coins. Both are 50 bps but they are different conditions."
+  - id: catalyst_present
+    role: entry
+    rule: "A clear catalyst exists: a banking issue, a depeg, or an exchange halt"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=depeg
+    field: items[].event_type
+    note: "Covers the depeg leg only (up to 10 days back, with deviation_bps and severity per row). Banking failures and exchange withdrawal halts are not served; a human confirms them."
+  - id: redemption_channel_ok
+    role: filter
+    rule: "The issuer's redemption channel is working (Circle attestations, Tether banking, Maker collateral health)"
+    runnable: false
+    note: "No issuer redemption status, reserve attestation, banking-partner status or Maker PSM data is served."
+  - id: not_death_spiral
+    role: filter
+    rule: "Skip algorithmic stables in a death spiral (UST in May 2022 was a value trap)"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: categories
+    note: "CoinGecko categories separate fiat-backed from algorithmic stables (USDC carries 'Fiat-backed Stablecoin'). Whether a falling algorithmic stable is in a spiral is not measured; the page gives no test."
+  - id: curve_depth_cap
+    role: sizing
+    rule: "Cap size at the depth available without more than 0.5% slippage on Curve 3pool"
+    runnable: false
+    note: "No Curve 3pool composition or slippage curve is served. /api/v1/dex/token/{chain}/{address} lists a token's top pools with reserve_usd and price_usd, which is pool size, not a slippage model."
+  - id: per_stable_cap
+    role: sizing
+    rule: "Cap each stable at 25% of arb capital"
+    runnable: true
+    input: position
+  - id: scale_in
+    role: sizing
+    rule: "Scale in: 25% at the first threshold, up to 50% at deeper thresholds, the last 25% at capitulation lows"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "Only the first threshold (50 bps) is defined. The page gives no number for the deeper thresholds or for a capitulation low."
+  - id: peg_restored
+    role: exit
+    rule: "Close when the stable is back within 30 bps of $1.00"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "Same USDT-quote caveat as stable_off_peg. The pseudocode instead holds until the richest-minus-cheapest spread is at or below 0.0005 (5 bps), which is a much tighter exit than the Rules' 30 bps; see spread_converged. Prose unchanged."
+  - id: spread_converged
+    role: exit
+    rule: "Pseudocode exit: unwind both legs once the spread is at or below 0.0005 (5 bps)"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "Contradicts the Rules' 30 bps peg-restoration exit (peg_restored). Same coverage gaps as widest_spread."
+  - id: redeem_on_reopen
+    role: exit
+    rule: "Redeem the cheap stable through the issuer when the channel reopens"
+    runnable: false
+    note: "Redemption-channel status is not served."
+  - id: catalyst_resolved
+    role: exit
+    rule: "Close on catalyst resolution: an FDIC announcement, a replacement banking partner, an audit publication"
+    runnable: false
+    note: "Needs a reading of news or regulator statements; nothing served classifies a catalyst as resolved."
+  - id: depeg_doubled_stop
+    role: stop
+    rule: "Stop out when the depeg is twice as deep as at entry (together with redemption_impaired_stop)"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "Depth is measured from the entry fill's distance to $1. Partial because of the USDT-quote caveat on stable_off_peg."
+  - id: redemption_impaired_stop
+    role: stop
+    rule: "Stop out only when the redemption mechanism is also materially impaired (together with depeg_doubled_stop)"
+    runnable: false
+    note: "Redemption status is not served, so the stop's second condition is a human call."
 ---
 
 # Stablecoin Pair Arbitrage

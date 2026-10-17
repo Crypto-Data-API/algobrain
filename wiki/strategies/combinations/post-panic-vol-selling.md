@@ -98,7 +98,7 @@ Currently not rejected (`backtest_status: untested`). Testable prediction: ident
 
 **Gate 4: No fresh cascade in 12 hours**
 - Liquidation volume in the prior 12 hours is below **1.5× its 7-day rolling average**.
-- Source: `/api/v1/market-intelligence/liquidations?coin=BTC`.
+- Source: `/api/v1/market-intelligence/liquidations?symbol=BTC` — `liquidation_usd_12h` is the 12h window; the response has no 7-day average, so build the baseline from `/api/v1/backtesting/hl-liquidation-bars?coin=BTC&interval=1h&start=...` (Hyperliquid fills; param corrected 2026-10-17).
 - *Rationale:* a fresh cascade would restart the fear cycle and invalidate the stabilization thesis. This gate ensures the entry is truly post-panic, not mid-panic.
 
 **Gate 5: Price has not made a new 7-day local low in the prior 4 hours**
@@ -226,7 +226,7 @@ The production system adds: a Deribit WebSocket feed for live DVOL and options p
 - **Fear & Greed index** — `/api/v1/sentiment/fear-greed` (CryptoDataAPI sentiment layer) or alternative.me API. Consecutive ≤ 20 readings (Gate 1).
 - **DVOL** — `/api/v1/volatility/implied`; current DVOL, 5-day-ago level, 30-day trailing average, and 52-week percentile (Gates 2, and profit-exit target).
 - **Realized vol (24h and 48h peak)** — computed from `/api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=200`; Yang-Zhang or close-to-close log-return vol over trailing 24h window. Gate 3 (rolling over).
-- **Liquidations (12h)** — `/api/v1/market-intelligence/liquidations?coin=BTC`; 12h aggregated liquidation volume vs 7-day average. Gate 4 (no fresh cascade).
+- **Liquidations (12h)** — `/api/v1/market-intelligence/liquidations?symbol=BTC` (`liquidation_usd_12h`); 12h aggregated liquidation volume vs 7-day average. Gate 4 (no fresh cascade).
 - **4h OHLCV** — `/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=50`; check for new 168-hour low in the most recent candle. Gate 5.
 - **Funding rates** — `/api/v1/derivatives/funding-rates?coin=BTC`; context check — if funding has inverted deeply negative (panic-driven mass shorting), that is a secondary warning that the vol entry may be premature.
 - **Regime** — `/api/v1/regimes/current`; if `Structural_Shock`, defer entry even if all gates pass (ongoing systemic shock may produce multiple cascade waves).
@@ -329,7 +329,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/volatility/implied` — DVOL history; Gate 2 (percentile + spike magnitude) and profit-exit target
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=200` — 15m OHLCV; compute 24h realized vol and Gate 3 (rolling over)
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=50` — 4h OHLCV; Gate 5 (no new 7-day low)
-- `GET /api/v1/market-intelligence/liquidations?coin=BTC` — liquidation volume; Gate 4 (no fresh cascade)
+- `GET /api/v1/market-intelligence/liquidations?symbol=BTC` — liquidation volume; Gate 4 (no fresh cascade)
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding context check
 - `GET /api/v1/regimes/current` — macro regime; defer entry in `Structural_Shock`
 
@@ -352,7 +352,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intellig
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run all five gates end-to-end:
 
-- **Gate stack** — `GET /api/v1/sentiment/fear-greed` (consecutive extreme-fear), `GET /api/v1/volatility/implied` (spike percentile), and `GET /api/v1/market-intelligence/liquidations?coin=BTC` (no fresh cascade) are polled together each hour post-panic
+- **Gate stack** — `GET /api/v1/sentiment/fear-greed` (consecutive extreme-fear), `GET /api/v1/volatility/implied` (spike percentile), and `GET /api/v1/market-intelligence/liquidations?symbol=BTC` (no fresh cascade) are polled together each hour post-panic
 - **Signal** — 15m klines compute realised vol rolling over (Gate 3) — the actual entry trigger
 - **Regime gate** — `GET /api/v1/regimes/current`; `Structural_Shock` defers entry no matter how stretched DVOL is
 - **Backtest** — `GET /api/v1/market-intelligence/fear-greed-history` + DVOL history + `GET /api/v1/backtesting/klines` (1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) replay the gates across past panics; the cascade-clear condition (Gate 4) replays only since 2026-03-30 via `GET /api/v1/backtesting/liquidations`

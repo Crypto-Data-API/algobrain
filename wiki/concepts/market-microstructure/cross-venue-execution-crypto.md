@@ -2,7 +2,7 @@
 title: "Cross-Venue Execution (Crypto)"
 type: concept
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-10-17
 status: good
 tags: [crypto, market-microstructure, liquidity, slippage, algorithmic-trading, funding-rate, hyperliquid]
 aliases: ["Cross-Venue Execution", "Crypto Venue Routing", "Multi-Venue Order Routing", "Cross-Exchange Execution"]
@@ -111,7 +111,7 @@ Cross-venue execution is a *cost-minimization* discipline layered under any dire
 
 **Historical data:**
 - `GET /api/v1/liquidity/depth/{coin}` — 24h rolling depth history, 1-min samples (backtest the depth-proportional split)
-- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — Binance funding history
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=100` — Binance funding history (`limit` caps at 100, about 33 days of 8h prints; corrected 2026-10-17. For longer Binance history use `GET /api/v1/backtesting/funding?symbol=BTCUSDT&exchange=binance&start=...`, archived since 2026-03-30)
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/liquidity/depth"

@@ -2,7 +2,7 @@
 title: "Breakout Trading"
 type: strategy
 created: 2026-04-13
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [technical-analysis, breakout, trend-following]
 aliases: ["Breakouts", "Range Breakout"]
@@ -21,6 +21,142 @@ expected_sharpe: 0.5
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 30
 related: ["[[support-resistance]]", "[[consolidation]]", "[[flat-base]]", "[[volume]]", "[[technical-analysis]]", "[[support]]", "[[resistance]]", "[[average-true-range]]", "[[trend-following]]", "[[donchian-channels]]"]
+gates:
+  - id: range_touches
+    role: entry
+    rule: "A consolidation zone with flat support and resistance, each tested at least 2-3 times"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=120&atr=14
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}&atr=14
+    replay_field: candles[].high
+    note: "Resistance is the cluster of daily highs and support the cluster of daily lows in the same rows. The pseudocode needs 2 touches; the Rules say 2-3. Neither gives a touch tolerance or a test for 'flat', so the desk picks both. items[].sr on /api/v1/indicators/technical?symbol={symbol} serves daily pivot levels with a strength count, which is one ready-made reading."
+  - id: range_min_duration
+    role: entry
+    rule: "The consolidation has lasted at least 4 weeks (pseudocode min_weeks=4)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=120&atr=14
+    field: candles[].timestamp
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}&atr=14
+    replay_field: candles[].timestamp
+    note: "Count the closed daily bars since the range began (28 or more). The Rules give no minimum; the 4 weeks is the pseudocode's, and the example's range ran six weeks."
+  - id: range_max_width
+    role: entry
+    rule: "Range height (resistance minus support) at most 10% of price (pseudocode max_range_pct=0.10)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=120&atr=14
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}&atr=14
+    replay_field: candles[].close
+    note: "Levels from range_touches. The pseudocode does not say which price the 10% is measured against; the example's $48-$52 range is 8.3% of support and 7.7% of resistance, inside either reading."
+  - id: long_breakout_close
+    role: entry
+    rule: "Long when a daily bar closes above resistance (either this or short_breakdown_close)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=120&atr=14
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}&atr=14
+    replay_field: candles[].close
+    note: "Closed bars only: drop the bar named by forming_bar_timestamp. Daily bars close at 00:00 UTC."
+  - id: short_breakdown_close
+    role: entry
+    rule: "Short when a daily bar closes below support (either this or long_breakout_close)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=120&atr=14
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}&atr=14
+    replay_field: candles[].close
+  - id: breakout_volume
+    role: entry
+    rule: "Breakout bar volume at least 1.5x its 20-day average"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=120&atr=14
+    field: candles[].volume
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}&atr=14
+    replay_field: candles[].volume
+    note: "Average the 20 closed bars before the breakout bar. Volume is in coin units, which is fine for a ratio on one coin."
+  - id: retest_entry
+    role: entry
+    rule: "Alternative entry: buy a pullback to the broken resistance (now support) that holds"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=120&atr=14
+    field: candles[].low
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}&atr=14
+    replay_field: candles[].low
+    note: "Mirror with candles[].high for shorts. The page sets no distance that counts as touching the level, no bar window for the pullback and no test for 'holds'; breakout-and-retest uses 0.5% within 3-8 bars, but those numbers are that page's, not this one's."
+  - id: compressed_range_filter
+    role: filter
+    rule: "Optional: only trade breakouts where the range is narrow relative to ATR (compressed volatility)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=120&atr=14
+    field: candles[].atr
+    note: "The page gives no range-to-ATR ratio. items[].bollinger.in_squeeze on /api/v1/indicators/technical is a served compression flag, but it is a different test."
+  - id: trend_aligned_long
+    role: filter
+    rule: "Optional: take long breakouts only above the 200-day SMA"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={symbol}
+    field: items[].ma.above_200
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "above_200 compares the live mark with the daily SMA-200; a symbol in not_covered needs the SMA from 200+ daily closes. Replay: start at least 200 days before the test window."
+  - id: trend_aligned_short
+    role: filter
+    rule: "Optional: take short breakdowns only below the 200-day SMA"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={symbol}
+    field: items[].ma.above_200
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Require above_200 false."
+  - id: no_chop_regime
+    role: filter
+    rule: "Skip entries in the choppy_high_vol market regime; take them as squeeze or strong-trend probabilities rise"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's agent workflow, not its Rules. Skipping on the choppy_high_vol label is runnable; 'probabilities rise' has no level or window, so that half is the desk's."
+  - id: oi_confirms
+    role: filter
+    rule: "At the break, confirm participation with rising open interest"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_change_pct
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].oi_change_pct
+    note: "From the page's agent workflow. Take the row whose time equals the breakout candle's timestamp; it is served once that bar has closed. The page sets no minimum rise."
+  - id: stop_back_inside
+    role: stop
+    rule: "Stop 0.5-1x ATR(14) below the breakout level for a long (above it for a short): a close back inside the range kills the thesis"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=120&atr=14
+    field: candles[].close
+    note: "ATR and the level are recorded at entry, using the last closed bar's atr. The pseudocode sets the stop at resistance minus 1.0x ATR and exits on a close below it."
+  - id: tp_measured_move
+    role: exit
+    rule: "Take profit at the range height projected from the breakout level (either this or atr_trailing_exit)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "The pseudocode exits on a daily close at or beyond the target rather than on the mark."
+  - id: atr_trailing_exit
+    role: stop
+    rule: "Alternatively trail the stop 2x ATR(14) below the highest close since entry (either this or tp_measured_move)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=120&atr=14
+    field: candles[].atr
+    note: "The pseudocode runs the trail alongside the target, not instead of it."
+  - id: risk_per_trade
+    role: sizing
+    rule: "Size so the stop distance risks at most 1-2% of the portfolio"
+    runnable: true
+    input: position
+    note: "The pseudocode risks 1%: size = 0.01 x equity / (close - stop)."
 ---
 
 # Breakout Trading

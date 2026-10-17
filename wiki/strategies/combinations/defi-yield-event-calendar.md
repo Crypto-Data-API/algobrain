@@ -216,7 +216,7 @@ def can_reenter(pool: PoolState, days_since_event: int) -> tuple[bool, list[str]
 
 ## Indicators / data used
 
-- **Event calendar** — `GET /api/v1/event/calendar?type=unlock&days=30` — filterable 30-day forward event schedule; filter by `type=unlock` for token unlock events and `type=upgrade` for protocol upgrades. Source: [[cryptodataapi-regimes]] event/catalyst regime family.
+- **Event calendar** — `GET /api/v1/event/calendar?type=unlock&window_days=30` — filterable 30-day forward event schedule; filter by `type=unlock` for token unlock events. *(Corrected 2026-10-17: the window param is `window_days`, max 30; `days` was ignored. `type` accepts only `unlock`, `macro_print`, `depeg` and `mint`, so there is no `type=upgrade` — protocol upgrades need an external calendar.)* Source: [[cryptodataapi-regimes]] event/catalyst regime family.
 - **Per-symbol event detail** — `GET /api/v1/event/regime/{symbol}` — pending catalysts for a specific token; use this to check whether the pool's underlying asset has a catalyst within the next 30 days.
 - **Event Risk score** — `GET /api/v1/event/regime/score` — composite 0–100 event risk index; elevated score (> 60) indicates multiple catalysts active, suggesting heightened withdrawal posture across all LP positions.
 - **Volatility regime** — `GET /api/v1/volatility/regime/{symbol}` — per-asset vol regime label and 60-day history; used to confirm post-event vol stabilisation before re-entry.
@@ -313,7 +313,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 ## Getting the Data (CryptoDataAPI)
 
 **Live data:**
-- `GET /api/v1/event/calendar?type=unlock&days=30` — 30-day forward token unlock calendar; primary event detection
+- `GET /api/v1/event/calendar?type=unlock&window_days=30` — 30-day forward token unlock calendar; primary event detection
 - `GET /api/v1/event/regime/{symbol}` — per-symbol pending catalysts (Pro+); verify specific pool tokens
 - `GET /api/v1/event/regime/score` — composite event risk 0–100; use as portfolio-level alert when > 60
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol regime label and 60-day history; re-entry condition check
@@ -329,7 +329,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
-  "https://cryptodataapi.com/api/v1/event/calendar?type=unlock&days=30"
+  "https://cryptodataapi.com/api/v1/event/calendar?type=unlock&window_days=30"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
@@ -340,7 +340,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
-- **Event leg** — `GET /api/v1/event/calendar?type=unlock&days=30` + `GET /api/v1/event/regime/{symbol}` — the forward unlock calendar that schedules LP withdrawals
+- **Event leg** — `GET /api/v1/event/calendar?type=unlock&window_days=30` + `GET /api/v1/event/regime/{symbol}` — the forward unlock calendar that schedules LP withdrawals
 - **Vol re-entry leg** — `GET /api/v1/volatility/regime/{symbol}` + `GET /api/v1/volatility/regime/score` — re-enter pools only after per-asset vol normalises
 - **Regime gate** — `GET /api/v1/regimes/current` — extend the re-entry delay in Structural Shock or bear states
 - **Backtest** — post-unlock price paths from `GET /api/v1/backtesting/klines` (daily back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); point-in-time event and vol state from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02); pool-level TVL/fee history stays external (DeFiLlama, The Graph)

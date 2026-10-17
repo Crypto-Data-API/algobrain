@@ -119,7 +119,7 @@ The **skew** that decides which wing self-finances a seagull — the 25-delta ri
 - `GET /api/v1/volatility/regime` — vol regime (context for wing pricing)
 
 **Historical data:**
-- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding history (skew-driver backtest)
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=100` — funding history (skew-driver backtest) (`limit` caps at 100, about 33 days of 8h prints; corrected 2026-10-17. For longer Binance history use `GET /api/v1/backtesting/funding?symbol=BTCUSDT&exchange=binance&start=...`, archived since 2026-03-30)
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for [[realized-volatility]]
 
@@ -138,7 +138,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Funding-leg selection** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — sell whichever wing funding says is rich: positive funding firms call skew (a bearish seagull's short call funds well), post-crash put skew funds the bullish build.
 - **Naked-leg watch** — `GET /api/v1/quant/gex` + `GET /api/v1/derivatives/open-interest?coin=BTC` — dealer gamma and crowded positioning flag cascade risk into the short funding leg; size it for a Black-Thursday gap, not an average session.
 - **Regime gate** — `GET /api/v1/volatility/regime` — do not initiate the naked wing in `vol_shock`.
-- **Backtest** — `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` plus `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) for the skew-driver history; `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for how often spot breaches the funding-leg strike within tenor.
+- **Backtest** — `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=100` (latest 100 prints, about 33 days; `limit` caps at 100, corrected 2026-10-17) plus `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) for the skew-driver history; `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for how often spot breaches the funding-leg strike within tenor.
 - **Tips** — automate a spot-vs-short-wing distance alert; the whole risk of a "zero-cost" seagull lives in that one leg.
 
 ## Related

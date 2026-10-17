@@ -266,7 +266,7 @@ The production system adds: a real-time OI feed polling every 4 hours during act
 
 - **Open interest (both legs)** — `GET /api/v1/derivatives/open-interest?coin=BTC` and `?coin=ETH`; the primary squeeze-precondition signal; 7d change, 24h change, and 4h change are all computed from this feed.
 - **Funding rates (short leg primarily)** — `GET /api/v1/derivatives/funding-rates?coin=BTC` and `?coin=ETH`; the funding direction on the short leg is the second dimension of the squeeze-precondition gate.
-- **Long/short ratio (short leg)** — `GET /api/v1/derivatives/binance/long-short-ratio?coin=BTC`; confirms crowd positioning on the short leg; supplements the OI and funding signals.
+- **Long/short ratio (short leg)** — `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT`; confirms crowd positioning on the short leg; supplements the OI and funding signals.
 - **Daily OHLCV (both legs)** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90`; rolling correlation, cointegration test, z-score calculation (standard pairs inputs).
 - **4h OHLCV** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=42`; higher-frequency z-score monitoring and mid-trade OI check timing.
 - **Regime context** — `GET /api/v1/regimes/current`; if `Structural_Shock` or `High_Leverage_Stress`, all pairs flat — no new entries regardless of OI gate status.
@@ -387,8 +387,8 @@ The mechanical change from [[pairs-trading]]: before entering the short leg, OI 
 - `GET /api/v1/derivatives/open-interest?coin=ETH` — ETH short-leg OI (or whichever asset is the short leg)
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — short-leg 8h funding rate; primary squeeze-fuel signal
 - `GET /api/v1/derivatives/funding-rates?coin=ETH` — ETH funding rate for short-leg check
-- `GET /api/v1/derivatives/binance/long-short-ratio?coin=BTC` — L/S ratio for crowd-positioning confirmation
-- `GET /api/v1/derivatives/binance/long-short-ratio?coin=ETH` — ETH L/S ratio
+- `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — L/S ratio for crowd-positioning confirmation
+- `GET /api/v1/derivatives/binance/long-short-ratio?symbol=ETHUSDT` — ETH L/S ratio
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=42` — 4h OHLCV for z-score monitoring and mid-trade OI check timing
 - `GET /api/v1/regimes/current` — regime context; `Structural_Shock` → no new entries regardless of OI gate
 

@@ -356,7 +356,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
 - **Signal** — daily klines (`GET /api/v1/market-data/klines?symbol={TOKEN}USDT&interval=1d&limit=200`) compute the Donchian/EMA/ROC momentum stack
-- **Event gate** — `GET /api/v1/event/calendar?type=unlock&days=14` and `GET /api/v1/event/regime/score` flatten momentum longs ahead of qualifying unlocks
+- **Event gate** — `GET /api/v1/event/calendar?type=unlock&window_days=14` and `GET /api/v1/event/regime/score` flatten momentum longs ahead of qualifying unlocks
 - **Re-entry filter** — `GET /api/v1/derivatives/funding-rates?coin={TOKEN}` and `GET /api/v1/derivatives/open-interest?coin={TOKEN}` must normalize before the position is restored post-unlock
 - **Backtest** — momentum replay on `GET /api/v1/backtesting/klines` (1d back to 2017-08 for majors — only in the `klines_deep` archive, while the REST route starts 2026-05-09; Hyperliquid daily candles only reach the 2023 launch); funding-gate replay windows: Hyperliquid hourly since 2023-05, Binance daily since 2026-03-30
 - **Tips** — unlock names are usually recent listings — expect `new_listing` / `insufficient_history` flags, and cross-check the CDA calendar against an external unlock tracker for low-cap tokens

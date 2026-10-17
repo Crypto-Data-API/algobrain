@@ -2,7 +2,7 @@
 title: "Crypto Options Volatility Selling"
 type: strategy
 created: 2026-07-14
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [quantitative, options, volatility, derivatives, crypto, bitcoin, ethereum, mean-reversion]
 aliases: ["Crypto Short Vol", "Deribit Vol Selling", "BTC/ETH Premium Selling", "Crypto VRP Harvesting", "DVOL Volatility Selling"]
@@ -41,6 +41,121 @@ last_review: 2026-07-14
 next_review: 2026-08-14
 
 related: ["[[volatility-carry]]", "[[variance-risk-premium]]", "[[short-volatility-strategies]]", "[[options-premium-selling]]", "[[short-strangle]]", "[[iron-condor]]", "[[delta-hedging]]", "[[gamma-scalping]]", "[[skew-trading]]", "[[risk-reversal]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[volatility-surface]]", "[[realized-volatility]]", "[[gamma-exposure]]", "[[section-1256-contracts]]", "[[tail-risk-hedging]]", "[[funding-rate]]", "[[crypto-options-dispersion]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[crowding-risk]]", "[[cryptodataapi]]"]
+gates:
+  - id: dvol_percentile_band
+    role: filter
+    rule: "Open new short vol only while DVOL sits between the 40th and 90th percentile of its trailing 1-year distribution"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "BTC and ETH DVOL (Deribit), with a daily history that starts 2026-04-20 (181 points on 2026-10-17), so a full 1-year percentile is not yet possible; history is Pro Plus. items[].dvol is today's level. The page's agent tip points at the 60-day /volatility/regime history, which holds realized, not implied, vol."
+  - id: vrp_above_5
+    role: filter
+    rule: "DVOL minus 30-day realized vol above 5 vol points"
+    runnable: true
+    endpoint: /api/v1/volatility/index
+    field: majors[].vrp
+    note: "vrp = implied_dvol - realized_30 per major (BTC on Free, ETH added on Pro). No history of vrp itself is served; for backtests rebuild it from the DVOL history on /api/v1/volatility/implied and realized vol from daily klines."
+  - id: tenor_window
+    role: entry
+    rule: "Enter at 21-45 DTE (target 35); no weeklies, nothing beyond 60 DTE"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "Lists the live Deribit expiries with days to expiry and ATM IV (Pro Plus), enough to pick the expiry. Strikes on that expiry are not served (see short_wings)."
+  - id: short_wings
+    role: entry
+    rule: "Sell ~15-25 delta wings (20-delta in the pseudocode) as a strangle or, preferred, an iron condor with 10-delta protective wings"
+    runnable: false
+    note: "No per-strike option chain, per-strike IV or greeks are served, so strike_at_delta cannot be evaluated, and no option order routing exists. /api/v1/market-intelligence/options is aggregate BTC options OI, volume, put/call ratio and max pain."
+  - id: skew_call_tilt
+    role: entry
+    rule: "Weight the short toward the call wing when perp funding is richly positive (pseudocode: above 0.03% per 8h, about 0.00375% per hour)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "Hyperliquid hourly funding stands in for 'perp funding'; Deribit perp funding is not served (/api/v1/derivatives/funding-rates covers Binance and Hyperliquid). This gate decides the tilt, not the strikes (see short_wings)."
+  - id: risk_reversal_25d
+    role: entry
+    rule: "Read the 25-delta risk reversal: sell the wing the crowd has overbid (puts after a selloff, calls in a leveraged bull)"
+    runnable: false
+    note: "No 25-delta skew, risk reversal or volatility surface is served; term_structure is ATM only."
+  - id: regime_stand_down
+    role: filter
+    rule: "Open new short vega only while the coin's volatility regime is normal or mean_reverting; vol_shock or expanding is an automatic stand-down"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    note: "From the page's agent workflow, not its Rules. A daily realized-vol label on the underlying."
+  - id: vega_budget
+    role: sizing
+    rule: "Short vega at most 1% of NAV per 1 vol point of DVOL"
+    runnable: partial
+    input: position
+    note: "Book vega needs option greeks, which only the venue (Deribit) reports; CryptoDataAPI serves no option greeks or per-strike IV to compute or check them."
+  - id: max_expiries
+    role: sizing
+    rule: "At most 4 laddered expiries"
+    runnable: true
+    input: position
+  - id: expiry_vega_share
+    role: sizing
+    rule: "No single expiry above 40% of total short vega"
+    runnable: partial
+    input: position
+    note: "Same venue-greeks dependency as vega_budget."
+  - id: margin_headroom
+    role: sizing
+    rule: "Keep initial margin utilisation at or below 25% of Deribit portfolio margin"
+    runnable: partial
+    input: position
+    note: "Margin comes from the Deribit account; we serve neither option marks nor a margin model."
+  - id: delta_hedge_band
+    role: sizing
+    rule: "Re-hedge with the perp whenever net delta drifts beyond +/-0.5% of NAV-equivalent notional"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "The perp leg's mark is served; the options' delta is a venue greek we do not serve."
+  - id: funding_boundary_hedge
+    role: sizing
+    rule: "Re-hedge at least once per 8-hour funding boundary"
+    runnable: true
+    input: position
+  - id: continuous_hedge_on_shock
+    role: sizing
+    rule: "Switch to continuous hedging on vol-shock days (DVOL +25% intraday)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol_change_24h
+    note: "dvol_change_24h is a rolling 24-hour change (the spec does not say whether in points or percent), not an intraday or session move. Intraday DVOL ticks are not served."
+  - id: profit_target
+    role: exit
+    rule: "Close at 50% of the maximum credit"
+    runnable: partial
+    input: position
+    note: "Needs the condor's current option marks, which come from the venue; CryptoDataAPI serves no option prices."
+  - id: dte_time_stop
+    role: exit
+    rule: "Close at 10-14 DTE (12 in the pseudocode)"
+    runnable: true
+    input: position
+  - id: dvol_shock_kill
+    role: stop
+    rule: "Flatten all short vega when DVOL rises more than 50% in a session"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol_change_24h
+    note: "Same rolling-24h caveat as continuous_hedge_on_shock. The page also never defines a 'session' for a 24/7 market."
+  - id: delta_2x_kill
+    role: stop
+    rule: "Close a position when its delta exceeds 2x its entry delta"
+    runnable: partial
+    input: position
+    note: "Position delta is a venue greek we do not serve."
 ---
 
 # Crypto Options Volatility Selling

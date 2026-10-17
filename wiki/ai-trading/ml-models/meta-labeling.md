@@ -2,7 +2,7 @@
 title: "Meta-Labeling"
 type: concept
 created: 2026-07-14
-updated: 2026-09-03
+updated: 2026-10-17
 status: good
 tags: [ai-trading, machine-learning, quantitative]
 aliases: ["Meta-Labeling", "Meta Labeling", "Secondary ML Filter", "Bet Sizing Model"]
@@ -108,7 +108,7 @@ Features for the secondary model come from the derivatives, positioning, regime,
 - `GET /api/v1/backtesting/klines` — OHLCV path for triple-barrier resolution
 - `GET /api/v1/backtesting/funding` — funding archive for the primary signal
 - `GET /api/v1/quant/whales/history?days=90` — whale positioning timeseries
-- `GET /api/v1/on-chain/whales/accumulation-score/BTC` — historical whale accumulation score
+- ~~`GET /api/v1/on-chain/whales/accumulation-score/BTC` — historical whale accumulation score~~ — **disabled** (503 `coming_soon`; unlisted from the spec since 2026-10-09). Working substitute (2026-10-17): `GET /api/v1/on-chain/exchange-flows/BTC/history` — hourly CEX inflow/outflow/`net_24h` since 2026-05-28 (up to 93 days per call). The accumulation score never covered native BTC (ERC-20 only), and net exchange outflow is a proxy, not the same measure
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/liquidity/oi-divergence"

@@ -289,7 +289,7 @@ Re-deploy: all clear plus 14-day basis back above 10% annualised on at least thr
 
 **Historical data:**
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500` — spot OHLCV for basis reconstruction
-- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding history
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=100` — funding history (`limit` caps at 100, about 33 days of 8h prints; corrected 2026-10-17. For longer Binance history use `GET /api/v1/backtesting/funding?symbol=BTCUSDT&exchange=binance&start=...`, archived since 2026-03-30)
 - `GET /api/v1/derivatives/binance/history?days=90` — daily derivatives series (funding, OI, long/short)
 - `GET /api/v1/backtesting/funding` — deep funding archive
 - `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive) — OHLCV history for the spot leg

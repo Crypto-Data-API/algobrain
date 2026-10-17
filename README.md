@@ -84,7 +84,7 @@ should use `manage_mcp.py` on every operating system.
 
 | Area | Content |
 |------|---------|
-| `wiki/strategies/` | ~470 strategy pages: funding-rate harvesting, basis/carry, liquidation plays, MEV, memecoin sniping, grid/mean-reversion/momentum, a 51-basket Hyperliquid signal library, 100+ page arbitrage encyclopedia, a complete 270-cell combination-strategy matrix, and a documented pair universe — **1.55M+ distinct, specifiable strategy configurations** (computed from wiki state by `tools/count_configurations.py`, conservative assumptions printed; validation discipline applies — see Disclaimer) |
+| `wiki/strategies/` | ~470 strategy pages: funding-rate harvesting, basis/carry, liquidation plays, MEV, memecoin sniping, grid/mean-reversion/momentum, a 51-basket Hyperliquid signal library, 100+ page arbitrage encyclopedia, a complete 270-cell combination-strategy matrix, and a documented pair universe — **1.55M+ distinct, specifiable strategy configurations** (computed from wiki state by `tools/count_configurations.py`, conservative assumptions printed; validation discipline applies — see Disclaimer). 81 strategy pages carry **runnable gates**, 1,141 conditions in all, each mapped to the exact CryptoDataAPI endpoint and field that measures it, or marked partial or not runnable with the reason |
 | `wiki/strategy-development/` | Methodology for *producing* strategies: edge taxonomy, hypothesis-to-backtest workflow, overfitting & p-hacking detection, capacity/failure-mode analysis, and per-venue trading maps (Hyperliquid, low-cap, arbitrage) |
 | `wiki/concepts/` | ~1,050 concept pages: microstructure, indicators, risk, portfolio theory, backtesting, behavioral finance, on-chain metrics, options mechanics |
 | `wiki/markets/` | 2,400+ crypto asset pages + commodities/forex/bonds macro context |
@@ -146,11 +146,11 @@ curl -X POST https://cryptodataapi.com/api/v1/auth/keys \
   -d '{"email":"you@example.com"}'
 ```
 
-Rate limits: Free 10 req/min · Pro 30 · Pro Plus 60.
+Rate limits: Free 10 req/min · Pro 30 · Pro Plus 120.
 
 The free tier is 1,000 requests/day once you **confirm your email** (100/day until you do).
-That confirmation click also switches on 24 hours of full Pro access and emails you a
-discount code — all on the same key, nothing to re-install.
+That confirmation click also switches on 24 hours of full Pro access, once per inbox, on
+the same key, with nothing to re-install. It no longer sends a discount code.
 
 ## The LLM Wiki pattern
 

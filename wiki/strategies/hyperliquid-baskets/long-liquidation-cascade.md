@@ -469,3 +469,5 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 ## Related
 
 [[hyperliquid]] · [[hyperliquid-baskets-overview]] · [[trading-strategy-baskets]] · [[perpetual-futures]] · [[market-regime]] · [[short-liquidation-squeeze]] · [[post-liquidation-rebound]] · [[crowded-long-funding-fade]] · [[liquidation-cascade-fade]] · [[hyperliquid-liquidation-engine]] · [[hyperliquid-funding-rate-microstructure]] · [[2025-10-crypto-liquidation-cascade]] · [[2024-03-hyperliquid-cascade]] · [[2025-03-jellyjelly-hlp-attack]] · [[long-liquidation]] · [[liquidation]] · [[open-interest]] · [[leverage]] · [[order-flow]] · [[funding-rate]] · [[atr-position-sizing]] · [[atr-trailing-stop]] · [[coinglass]] · [[hypurrscan]] · [[derivatives-native-regime]] · [[liquidity-depth-regime]] · [[edge-taxonomy]] · [[failure-modes]] · [[when-to-retire-a-strategy]]
+
+[[liquidation-density-magnet]] — the two-sided, density-percentile test of whether price is drawn toward a cluster; it exits at or before the sweep

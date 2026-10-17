@@ -312,7 +312,7 @@ The key mechanical difference from standard [[pairs-trading]]: the entry z-score
 - `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=4h&limit=200` — OHLCV for spread z-score computation
 
 **Historical data:**
-- `GET /api/v1/derivatives/binance/funding-rates?symbol=SOLUSDT&limit=500` — funding history per leg for backtest spread entry reconstruction
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=SOLUSDT&limit=100` — funding history per leg for backtest spread entry reconstruction (`limit` caps at 100, about 33 days of 8h prints; corrected 2026-10-17. For longer Binance history use `GET /api/v1/backtesting/funding?symbol=SOLUSDT&exchange=binance&start=...`, archived since 2026-03-30)
 - `GET /api/v1/derivatives/binance/history?days=90` — daily derivatives series (funding + OI) for both legs
 - `GET /api/v1/backtesting/funding` — deep funding archive (2020+) for multi-regime cointegration and carry backtests
 

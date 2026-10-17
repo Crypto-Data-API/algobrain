@@ -233,7 +233,7 @@ Numeric halt conditions (see [[when-to-retire-a-strategy]]):
   - **Caveat (2026-10-08 API fix):** before 2026-10-08 the score's `exchange_flow` component summed every tracked token's 24h flow in its own native units, so it pinned at 20 or 80. Any composite reading, or any threshold calibrated on readings, from before that date is biased. The component now scores the USDT/USDC/DAI 24h net only. Components with no data, currently `whale_accumulation`, carry weight 0 and the rest are renormalised; they are not scored a neutral 50. See [[cryptodataapi-on-chain]].
 
 **Historical data:**
-- `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score timeseries
+- ~~`GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score timeseries~~ — **disabled** (503 `coming_soon`; unlisted from the spec since 2026-10-09). Working substitute (2026-10-17): `GET /api/v1/on-chain/exchange-flows/{symbol}/history` — archived CEX inflow/outflow/net since 2026-05-28 (up to 93 days per call); sustained net outflow is a proxy for accumulation, not a holder-balance measure
 - `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
 
 ```bash
@@ -251,11 +251,12 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Signal** — `GET /api/v1/on-chain/exchange-flows/BTC` (1h-7d windows) + `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` for the flow/dry-powder composite; `GET /api/v1/on-chain/miners/hash-ribbon` and `GET /api/v1/on-chain/dormancy/btc` for the slower cycle legs
 - **Spike watch** — `GET /api/v1/on-chain/exchange-flows/spike-alerts` (>= $1M transfers) as the real-time whale-deposit trigger
 - **Regime gate** — combine `GET /api/v1/on-chain/score` with `GET /api/v1/quant/market`; flow signals lead price by weeks, so act only when the HMM state agrees with the flow direction
-- **Backtest** — point-in-time discipline is this page's core requirement: replay against `GET /api/v1/backtesting/daily-snapshots/{date}` (full daily payload since 2026-03-02) and `GET /api/v1/quant/regimes/history` (hourly HMM probabilities since 2020, Parquet, Pro Plus); `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` carries its own accumulation timeseries
+- **Backtest** — point-in-time discipline is this page's core requirement: replay against `GET /api/v1/backtesting/daily-snapshots/{date}` (full daily payload since 2026-03-02) and `GET /api/v1/quant/regimes/history` (hourly HMM probabilities since 2020, Parquet, Pro Plus); ~~`GET /api/v1/on-chain/whales/accumulation-score/{symbol}` carries its own accumulation timeseries~~ (**disabled**: 503 `coming_soon`, unlisted from the spec since 2026-10-09) — replay the flow leg with `GET /api/v1/on-chain/exchange-flows/{symbol}/history` instead (since 2026-05-28, up to 93 days per call; 2026-10-17)
 - **Tips** — the weeks-lead cadence means hourly polling of the cached `/api/v1/daily` bundle is plenty; never validate old signals against re-labelled current data — label revision is this strategy's lookahead trap
 
 ## Related
 
+- [[exchange-flow-spike-reaction]] — per-event study of single large deposits (stablecoin dry powder, BTC/ETH inflows) with tape confirmation
 - [[on-chain-regime]]
 - [[crypto-market-regime-taxonomy]]
 - [[on-chain-analysis]]

@@ -86,7 +86,7 @@ Currently untested (not rejected). Adjacent evidence: [[smart-money-vs-crowd-div
 **Gate 1: Whale / large-wallet accumulation signal active**
 - Whale accumulation score (7-day rolling) ≥ **60/100** (active accumulation; lower threshold than smart-money-vs-crowd-divergence's 65 because we do not require simultaneous crowd-short positioning).
 - OR: Nansen/Arkham "smart money" category net-bought the asset in the trailing 48 hours by ≥ 0.5% of trailing 30-day average daily volume.
-- Source: `GET /api/v1/on-chain/whales/accumulation-score/BTC` (primary); Nansen or Arkham Intelligence (supplementary, manual check).
+- Source: ~~`GET /api/v1/on-chain/whales/accumulation-score/BTC` (primary)~~ — **disabled** (503 `coming_soon`; unlisted from the spec since 2026-10-09), and ERC-20 only even when live; Nansen or Arkham Intelligence (supplementary, manual check). Closest working CryptoDataAPI read (2026-10-17): `GET /api/v1/quant/whales` — the `top_coins[]` row for BTC (`directional_net_usd`, `net_bias`, `n_long`/`n_accounts`), which is Hyperliquid perp positioning of ≥$100k accounts. That is a different measure from on-chain accumulation, so the ≥ 60/100 threshold does not carry over; Gate 1's on-chain confirmation stays with the exchange-flow reads below.
 - *Rationale:* the whale signal must show genuine accumulation, not noise. Score ≥ 60 is above neutral (50) but does not require the strong 65+ threshold needed for the smart-money-vs-crowd-divergence setup because the funding gate compensates for the lower-conviction whale signal threshold.
 
 **Gate 2: Derivative crowd has NOT yet followed**
@@ -317,7 +317,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 ## Getting the Data (CryptoDataAPI)
 
 **Live data:**
-- `GET /api/v1/on-chain/whales/accumulation-score/BTC` — Gate 1: 7-day rolling whale accumulation score (0–100)
+- ~~`GET /api/v1/on-chain/whales/accumulation-score/BTC` — Gate 1: 7-day rolling whale accumulation score (0–100)~~ — **disabled** (503 `coming_soon`; unlisted from the spec since 2026-10-09). Gate 1 stand-in (2026-10-17): `GET /api/v1/quant/whales` — the `top_coins[]` row for BTC (`directional_net_usd`, `net_bias`, `n_long`/`n_accounts`) (Pro; perp positioning, not on-chain accumulation)
 - `GET /api/v1/on-chain/exchange-flows/BTC` — Gate 1 secondary: 24h exchange flow direction confirmation
 - `GET /api/v1/on-chain/exchange-flows/spike-alerts` — Gate 1 real-time: large outflow confirmation
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — Gate 2: 8h funding rate and 7-day average
@@ -326,15 +326,16 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/regimes/current` — regime context: reduce size in Bear_Trend or Structural_Shock
 
 **Historical data:**
-- `GET /api/v1/on-chain/whales/accumulation-score/BTC` — historical score timeseries for signal frequency and threshold calibration
-- `GET /api/v1/derivatives/funding-rates?coin=BTC&historical=true&days=365` — annual funding history for gate threshold calibration
+- ~~`GET /api/v1/on-chain/whales/accumulation-score/BTC` — historical score timeseries for signal frequency and threshold calibration~~ — **disabled** (503 `coming_soon`; unlisted from the spec since 2026-10-09). Substitutes: `GET /api/v1/quant/whales/history?days=180&live_only=true` (daily whale net notional; Pro Plus; observed from 2026-06-29) and `GET /api/v1/on-chain/exchange-flows/BTC/history` (CEX net flow since 2026-05-28)
+- `GET /api/v1/derivatives/hyperliquid/history?symbol=BTC&days=180` — daily funding history for gate threshold calibration (180 days is the cap). For a full year use `GET /api/v1/backtesting/funding?symbol=BTC&exchange=hyperliquid&grain=hourly&start=...` (settled Hyperliquid funding back to 2024). *Corrected 2026-10-17: `/api/v1/derivatives/funding-rates` takes only `coin`; `historical=true&days=365` was ignored and returned the live snapshot.*
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=730` — 2-year daily for higher-low pattern backtesting
 
 *Note (2026-09 recheck): `/on-chain/whales`, `/on-chain/whales/{symbol}`, AND `/on-chain/whales/accumulation-score/{symbol}` are all currently disabled ("coming soon") per the live spec — the accumulation-score route is not a working fallback right now. Use `/on-chain/exchange-flows/spike-alerts` for the live on-chain leg. Nansen (nansen.ai) and Arkham Intelligence (arkhamintelligence.com) are the de facto primary source for Gate 1 until the CryptoDataAPI family re-enables.*
 
 ```bash
+# 2026-10-17: was /api/v1/on-chain/whales/accumulation-score/BTC, disabled (503 coming_soon); Gate 1 stand-in below
 curl -H "X-API-Key: $CDA_KEY" \
-  "https://cryptodataapi.com/api/v1/on-chain/whales/accumulation-score/BTC"
+  "https://cryptodataapi.com/api/v1/quant/whales"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]], [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
@@ -345,10 +346,10 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]], [[c
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
-- **Signal** — the `GET /api/v1/on-chain/whales/accumulation-score/BTC` accumulation reading plus `GET /api/v1/on-chain/exchange-flows/spike-alerts` outflow confirmation form the whale leg
+- **Signal** — the ~~`GET /api/v1/on-chain/whales/accumulation-score/BTC` accumulation reading~~ (**disabled**: 503 `coming_soon`, unlisted from the spec since 2026-10-09; stand-in: `GET /api/v1/quant/whales` BTC `directional_net_usd`) plus `GET /api/v1/on-chain/exchange-flows/spike-alerts` outflow confirmation form the whale leg
 - **Funding filter** — the `GET /api/v1/derivatives/funding-rates?coin=BTC` 7-day average must show the crowd is NOT already long before mirroring the whales
 - **Exit monitor** — `GET /api/v1/derivatives/binance/long-short-ratio` polled through the hold; crowd convergence onto the trade is the partial-exit trigger
-- **Backtest** — the whale-score endpoint's own historical timeseries joined to daily klines back to 2017-08 only in the `klines_deep` archive (`GET /api/v1/backtesting/klines`; the REST route starts 2026-05-09) and the funding archive (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30)
+- **Backtest** — the whale-score endpoint's own historical timeseries (unavailable while the route is disabled; stand-in as of 2026-10-17: `GET /api/v1/quant/whales/history?days=180&live_only=true`) joined to daily klines back to 2017-08 only in the `klines_deep` archive (`GET /api/v1/backtesting/klines`; the REST route starts 2026-05-09) and the funding archive (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30)
 - **Tips** — the whole `/on-chain/whales*` family (including `accumulation-score`) is currently disabled upstream; run the pipeline on Nansen/Arkham + `spike-alerts` and treat any future re-enable of `accumulation-score` as a new data source to validate (ERC-20-only scope, categorical `signal` not a 0-100 number) rather than silently merging it back into the Gate 1 threshold as written
 - **Prompt library** — the "Whale Positioning Monitor" prompt (Pro tier, [prompt library](https://cryptodataapi.com/prompts)) tracks >$100k Hyperliquid accounts and separates market-maker hedging from the directional conviction this strategy copies
 

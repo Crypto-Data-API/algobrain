@@ -236,9 +236,9 @@ The production system adds: Deribit API for OTM put pricing and real-time DVOL m
 - **Cascade trigger monitoring (Phase 2)**:
   - Real-time price: `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=10`
   - DVOL expansion: `GET /api/v1/volatility/implied`
-  - Liquidation flow (6h): `GET /api/v1/market-intelligence/liquidations?coin=BTC`
+  - Liquidation flow (6h): `GET /api/v1/market-intelligence/liquidations?symbol=BTC` — the row carries 1h/4h/12h/24h trailing windows, no 6h; bracket it with `liquidation_usd_4h` and `liquidation_usd_12h` (param and window corrected 2026-10-17)
 - **Rotation gate (Phase 3)**:
-  - Liquidation flow (30m): `GET /api/v1/market-intelligence/liquidations?coin=BTC`
+  - Liquidation flow (30m): `GET /api/v1/market-intelligence/liquidations?symbol=BTC` — shortest served window is `liquidation_usd_1h`; for a true 30m deceleration read compare the last two closed 15m buckets from `GET /api/v1/backtesting/hl-liquidation-bars?coin=BTC&interval=15m&start=...` (Hyperliquid fills only; corrected 2026-10-17)
   - CVD (15m): computed from tick/trade data or 15m klines; not a direct CryptoDataAPI endpoint — computed from `/api/v1/market-data/klines` OHLCV.
   - Regime: `GET /api/v1/regimes/current`
 - **OTM put pricing (Deribit)** — specific strike and delta options pricing NOT available via CryptoDataAPI; source from [[deribit]] directly.
@@ -346,19 +346,19 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — Phase 1: funding Gate 2 and kill condition
 - `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — Phase 1: directional crowding Gate 3
 - `GET /api/v1/volatility/implied` — Phase 1: DVOL not-yet-spiked gate; Phase 2: DVOL expansion trigger
-- `GET /api/v1/market-intelligence/liquidations?coin=BTC` — Phase 2: 6h liquidation cascade confirmation; Phase 3: 30m liquidation deceleration gate
+- `GET /api/v1/market-intelligence/liquidations?symbol=BTC` — Phase 2: liquidation cascade confirmation (windows are 1h/4h/12h/24h, so the 6h read is bracketed by `liquidation_usd_4h`/`liquidation_usd_12h`); Phase 3: deceleration gate (30m buckets come from `/api/v1/backtesting/hl-liquidation-bars`). Param corrected 2026-10-17: `coin` was silently ignored, `symbol` is the filter
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=200` — Phase 2/3: real-time price monitoring; CVD approximation from volume-at-price
 - `GET /api/v1/regimes/current` — Phase 3: regime check before fade entry
 
 **Historical data:**
-- `GET /api/v1/derivatives/binance/history?days=365` — extended derivatives series for stress-composite backtest across historical cascade events
+- `GET /api/v1/derivatives/binance/history?days=90` — extended derivatives series for stress-composite backtest across historical cascade events. `days` caps at 90 (corrected 2026-10-17 from 365). No route serves a year of Binance funding/OI/L-S: Binance funding is archived only since 2026-03-30 (`GET /api/v1/backtesting/funding?symbol=BTCUSDT&exchange=binance&start=...`), so a longer cascade sample has to use Hyperliquid funding history (`GET /api/v1/backtesting/funding?symbol=BTC&exchange=hyperliquid&grain=hourly&start=...`, back to 2024)
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200` — daily OHLCV for cascade event identification and recovery-target backtesting
 
 *Note: 10-delta BTC put pricing for Phase 1 requires [[deribit]] API access directly. DVOL index history and derivatives data are available via CryptoDataAPI.*
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
-  "https://cryptodataapi.com/api/v1/market-intelligence/liquidations?coin=BTC"
+  "https://cryptodataapi.com/api/v1/market-intelligence/liquidations?symbol=BTC"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]], [[cryptodataapi-derivatives]], [[cryptodataapi-regimes]].
@@ -370,7 +370,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intellig
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
 - **Phase 1 gates** — `GET /api/v1/derivatives/open-interest?coin=BTC`, `GET /api/v1/derivatives/funding-rates?coin=BTC`, `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — the three stress gates that arm the pre-positioned hedge
-- **Phase 2/3 signal** — `GET /api/v1/market-intelligence/liquidations?coin=BTC` (cascade confirmation, then the 30m deceleration check) + `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=200` for real-time price monitoring
+- **Phase 2/3 signal** — `GET /api/v1/market-intelligence/liquidations?symbol=BTC` (cascade confirmation, then the 30m deceleration check) + `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=200` for real-time price monitoring
 - **Regime gate** — `GET /api/v1/regimes/current` before the Phase 3 fade — no fades inside Structural Shock
 - **Backtest** — `GET /api/v1/backtesting/liquidations` (Hyperliquid only, since 2026-03-30) + 1m bars from `GET /api/v1/backtesting/klines` (also since 2026-03-30) for phase-timing replays — the cascade archive is short, so treat event-frequency statistics as provisional; deeper 1h/1d context reaches back to 2017-08 only in the `klines_deep` archive (the REST route starts 2026-05-09)
 - **Tips** — cache the slow Phase 1 gates hourly via `GET /api/v1/daily`, and only escalate to 1-minute liquidation polling once the gates arm

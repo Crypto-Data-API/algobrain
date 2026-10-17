@@ -2,7 +2,7 @@
 title: "Options Relative-Value × Funding Filter"
 type: strategy
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, options-structures, derivatives, volatility, funding-rate, perpetual-futures, quantitative, crypto, deribit, behavioral-finance]
 aliases: ["Options RV Funding Gate", "Funding-Confirmed Skew Trading", "Perp-Funding Skew Signal", "Funding-Gated Vol Surface Entry"]
@@ -326,7 +326,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/event/regime/score` — Gate 4: event risk score (exclude when > 40)
 
 **Historical data (available via CryptoDataAPI):**
-- `GET /api/v1/derivatives/funding-rates?coin=BTC&historical=true&days=365` — annual funding history for gate threshold calibration
+- `GET /api/v1/derivatives/hyperliquid/history?symbol=BTC&days=180` — daily funding history for gate threshold calibration (180 days is the cap). For a full year use `GET /api/v1/backtesting/funding?symbol=BTC&exchange=hyperliquid&grain=hourly&start=...` (settled Hyperliquid funding back to 2024). *Corrected 2026-10-17: `/api/v1/derivatives/funding-rates` takes only `coin`; `historical=true&days=365` was ignored and returned the live snapshot.*
 
 **Deribit API (required — not available via CryptoDataAPI):**
 - `GET /api/v2/public/get_order_book` with `instrument_name=BTC-DDMMMYY-STRIKE-C/P` — live options bid/ask for RR25 construction

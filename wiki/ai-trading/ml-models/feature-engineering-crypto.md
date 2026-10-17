@@ -2,7 +2,7 @@
 title: "Feature Engineering for Crypto ML"
 type: concept
 created: 2026-07-14
-updated: 2026-09-03
+updated: 2026-10-17
 status: good
 tags: [ai-trading, machine-learning, crypto, on-chain, funding-rate]
 aliases: ["Crypto Feature Engineering", "Crypto ML Features"]
@@ -87,7 +87,7 @@ Estimated per-feature rank-IC for durable crypto features sits in the 0.02-0.06 
 - `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase-vs-Binance premium (US-institutional proxy)
 - `GET /api/v1/on-chain/exchange-flows/{symbol}` — CEX inflow/outflow (1h/6h/24h/7d)
 - `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + dormancy zone
-- `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score
+- ~~`GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score~~ — **disabled** (503 `coming_soon`; unlisted from the spec since 2026-10-09). Working substitute (2026-10-17): `GET /api/v1/on-chain/exchange-flows/{symbol}` — CEX net flow over 1h/6h/24h/7d windows (net outflow is an accumulation proxy, not a holder-balance measure)
 - `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` — dry-powder z-score
 
 **Historical / point-in-time (for a leakage-free training panel):**

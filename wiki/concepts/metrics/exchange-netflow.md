@@ -72,7 +72,7 @@ Suppose, over several weeks, the exchange reserve for [[bitcoin]] steadily decli
   - **Caveat (2026-10-08 API fix):** before 2026-10-08 the score's `exchange_flow` component summed every tracked token's 24h flow in its own native units, so it pinned at 20 or 80. Any composite reading, or any threshold calibrated on readings, from before that date is biased. The component now scores the USDT/USDC/DAI 24h net only. Components with no data, currently `whale_accumulation`, carry weight 0 and the rest are renormalised; they are not scored a neutral 50. See [[cryptodataapi-on-chain]].
 
 **Historical data:**
-- `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score timeseries
+- ~~`GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score timeseries~~ — **disabled** (503 `coming_soon`; unlisted from the spec since 2026-10-09). Working substitute (2026-10-17): `GET /api/v1/on-chain/exchange-flows/{symbol}/history` — archived CEX inflow/outflow/net since 2026-05-28 (up to 93 days per call); sustained net outflow is a proxy for accumulation, not a holder-balance measure
 - `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
 
 ```bash
@@ -83,6 +83,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]].
 
 ## Related
 
+- [[exchange-flow-spike-reaction]] — strategy that trades single large exchange deposits, with an internal-shuffle filter
 - [[on-chain-analysis]]
 - [[hodl-waves]]
 - [[mvrv]]

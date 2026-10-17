@@ -2,7 +2,7 @@
 title: "Regime Detection"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [regime-detection, hidden-markov-model, hmm, clustering, market-regimes, quantitative, adaptive-allocation, crypto]
 aliases: ["Regime Switching", "Market Regime Detection", "HMM Trading", "Regime-Based Allocation"]
@@ -27,6 +27,93 @@ kill_criteria: |
   - drawdown > 25% (the overlay failed to detect the crisis regime in time)
   - regime label disagreement across models/horizons > 50% for a sustained period (unstable classification)
 related: ["[[trend-following]]", "[[mean-reversion]]", "[[momentum]]", "[[volatility]]", "[[kalman-filter-trading]]", "[[market-regime]]", "[[liquidation-cascade-fade]]", "[[funding-rate-arbitrage]]", "[[risk-budgeting]]", "[[book-the-man-who-solved-the-market]]", "[[book-probabilistic-ml-for-finance]]", "[[cryptodataapi]]"]
+gates:
+  - id: top_posterior_state
+    role: filter
+    rule: "Each period, take the highest-posterior state of the 6-regime HMM"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label_raw
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "These gates follow the Rules' 'consume the CDA taxonomy' branch; training your own HMM is not gated. label_raw is the top state before the API's own hysteresis; regime.label already applies one (regime.hysteresis: 2 bars, 0.70 override), so applying this page's rule on top of label would filter twice. horizon=4h or 24h (default); the page names both and picks neither. Replay rows come every 15 minutes; entries[].regime_label is the served label, and the raw top state is the largest of post_label_0..5."
+  - id: posterior_above_70
+    role: filter
+    rule: "Switch only when the new regime's posterior is above 70%"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.confidence_raw
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_0
+    note: "confidence_raw is the posterior of label_raw. Replay: post_label_0..5 are the six posteriors in the /api/v1/quant/model labels order (strong_trend_bull, strong_trend_bear, range_low_vol, choppy_high_vol, vol_spike, squeeze)."
+  - id: two_period_confirm
+    role: filter
+    rule: "The new regime holds above 70% for at least 2 consecutive refreshes before the overlay rebalances"
+    runnable: true
+    input: derived
+    inputs: [top_posterior_state, posterior_above_70]
+    note: "The engine refreshes every 15 minutes, so two refreshes can fall inside one hourly bar (regime.candles_in_regime counts bars)."
+  - id: trend_book
+    role: filter
+    rule: "strong_trend_bull or strong_trend_bear: run trend-following / momentum (the bear state on the short or defensive side)"
+    runnable: true
+    input: derived
+    inputs: [two_period_confirm]
+  - id: trend_exposure_up
+    role: sizing
+    rule: "In a trend regime, raise directional exposure"
+    runnable: partial
+    input: derived
+    inputs: [two_period_confirm]
+    note: "The page gives no exposure level or multiple."
+  - id: range_book
+    role: filter
+    rule: "range_low_vol: run mean-reversion, pairs-trading and Bollinger-band reversion"
+    runnable: true
+    input: derived
+    inputs: [two_period_confirm]
+  - id: chop_size_cut
+    role: sizing
+    rule: "In the range/chop regime, cut size; in choppy_high_vol run smaller mean-reversion with wider stops"
+    runnable: partial
+    input: derived
+    inputs: [two_period_confirm]
+    note: "The page sets no size cut and no stop width. The Rules cut size across the whole range/chop regime; the pseudocode cuts it only in choppy_high_vol and runs range_low_vol at full mean-reversion size. Prose unchanged."
+  - id: squeeze_flat
+    role: filter
+    rule: "squeeze: stay flat and wait for the break"
+    runnable: true
+    input: derived
+    inputs: [two_period_confirm]
+    note: "From the pseudocode; the Rules' three-state model has no squeeze state."
+  - id: vol_spike_derisk
+    role: filter
+    rule: "vol_spike: stand down directional books, de-risk to stablecoins or hedge, and arm liquidation-cascade-fade for the snapback"
+    runnable: true
+    input: derived
+    inputs: [two_period_confirm]
+    note: "Which of de-risk, hedge or fade to use is the desk's choice from the page's list."
+  - id: vol_stress_corroborates
+    role: filter
+    rule: "Corroborate a vol_spike read with the market-wide volatility-stress score before de-risking real positions"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    note: "From the page's agent workflow, which sets no level. The API bands 70 or more as stressed. No history of the composite is served for replay."
+  - id: liquidity_fragility_corroborates
+    role: filter
+    rule: "Corroborate a vol_spike read with the liquidity fragility score before de-risking real positions"
+    runnable: partial
+    endpoint: /api/v1/liquidity/regime/score
+    field: composite_score
+    note: "From the page's agent workflow, which sets no level. A 0-100 fragility composite; no history is served for replay."
+  - id: model_version_check
+    role: filter
+    rule: "Re-validate the state-to-book mapping before trusting a new HMM engine version"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: meta.model_version
+    note: "From the page's agent workflow. /api/v1/quant/model gives the full model card (sha256, last_retrain). How the mapping is re-validated is the desk's process."
 ---
 
 # Regime Detection

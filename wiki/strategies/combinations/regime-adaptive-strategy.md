@@ -2,7 +2,7 @@
 title: "Regime-Adaptive Strategy"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags: [combinations, meta-strategy, regime-detection, adaptive, volatility, market-conditions, crypto]
 strategy_type: hybrid
@@ -32,6 +32,149 @@ kill_criteria: |
   - regime mis-classification rate > 40% for 3 consecutive months (validate against CryptoDataAPI /regimes/current)
   - rolling 12-month Sharpe < 0.4 after all costs and strategy switches
   - drawdown > 20% from equity peak while correctly classified in a "range" or "low-vol" regime
+gates:
+  - id: vol_low
+    role: filter
+    rule: "Low-vol range regime, vol leg: VIX below 15 (together with adx_low)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "No VIX is served. The page's crypto stack translates VIX into a DVOL percentile but gives no DVOL cutoffs, so 15 has no crypto equivalent on the page. items[].history[].dvol holds about 180 daily points (from 2026-04-20) for a percentile; the history is Pro Plus."
+  - id: adx_low
+    role: filter
+    rule: "Low-vol range regime, trend leg: ADX(14) below 20 on the market index"
+    runnable: true
+    endpoint: /api/v1/indicators/adx?coin=BTC&interval=1d
+    field: items[].adx
+    replay: /api/v1/backtesting/signum-rgg?date={date}
+    replay_field: by_symbol.{coin}.adx
+    note: "The Rules read ADX on the S&P 500; BTC's daily ADX is the crypto market stand-in. The SIGNUM archive's adx is the same daily ADX(14) that /indicators/adx serves for interval=1d."
+  - id: vol_normal
+    role: filter
+    rule: "Normal trend regime, vol leg: VIX between 15 and 25 (together with adx_trend)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "Same missing DVOL translation as vol_low."
+  - id: adx_trend
+    role: filter
+    rule: "Normal trend regime, trend leg: ADX(14) above 25"
+    runnable: true
+    endpoint: /api/v1/indicators/adx?coin=BTC&interval=1d
+    field: items[].adx
+    replay: /api/v1/backtesting/signum-rgg?date={date}
+    replay_field: by_symbol.{coin}.adx
+    note: "ADX between 20 and 25 falls in neither regime; the page treats mixed signals as Transitional."
+  - id: vol_crisis_level
+    role: filter
+    rule: "High-vol crisis: VIX above 25 (either this or vol_crisis_jump)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "Same missing DVOL translation as vol_low."
+  - id: vol_crisis_jump
+    role: filter
+    rule: "High-vol crisis: VIX up more than 30% in a week (either this or vol_crisis_level)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "A 30% weekly jump in DVOL is computable from the daily history, but the page never says the VIX rule carries over to DVOL unchanged."
+  - id: rv_percentile
+    role: filter
+    rule: "Check 20-day realized volatility against its 1-year percentile rank"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin=BTC&interval=1d&limit=400
+    field: candles[].close
+    note: "Computable from daily closes, but the page lists the check without a cutoff or a regime it decides."
+  - id: crypto_regime_switch
+    role: filter
+    rule: "Crypto stack: deploy carry/short-vol in a high-funding bull, trend in a confirmed trend with rising OI, mean reversion in a capitulation or low-vol range, protection in a leverage-stressed cascade"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "The page names /regimes/current and /quant/market as the switch but maps none of their labels to its four crypto regimes, and gives no funding or OI-change cutoffs. range_low_vol, strong_trend_* and vol_spike are the obvious matches; the mapping is the desk's."
+  - id: transitional_half_size
+    role: sizing
+    rule: "When signals conflict or no regime is clear, cut every strategy to half size and wait 3-5 trading days"
+    runnable: partial
+    input: derived
+    inputs: [vol_low, adx_low, vol_normal, adx_trend, vol_crisis_level, vol_crisis_jump]
+  - id: range_rsi_long
+    role: entry
+    rule: "Low-vol range book: buy RSI(14) oversold (below 30 in the example)"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={symbol}
+    field: items[].rsi.rsi_14_1d
+    note: "The Rules say 'RSI oversold' without a number; the example uses 30 and 70."
+  - id: range_rsi_short
+    role: entry
+    rule: "Low-vol range book: sell RSI(14) overbought (above 70 in the example)"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={symbol}
+    field: items[].rsi.rsi_14_1d
+  - id: range_bollinger
+    role: entry
+    rule: "Low-vol range book: use the Bollinger Bands for entry and exit (sell the extremes)"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical?symbol={symbol}
+    field: items[].bollinger.upper
+    note: "Daily bands; items[].bollinger.lower is the other side. The page does not say how a band touch combines with the RSI rule."
+  - id: range_short_options
+    role: entry
+    rule: "Low-vol range book: sell iron condors or credit spreads (10-delta wings in the example)"
+    runnable: false
+    note: "No per-strike option chain, greeks or order routing is served. /api/v1/market-intelligence/options is aggregate BTC options OI, put/call ratio and max pain."
+  - id: trend_above_50
+    role: entry
+    rule: "Trend book: long above the 50-day MA, short below (together with trend_above_200)"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={symbol}
+    field: items[].ma.above_50
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "The example buys 'above its 20-day MA' instead (items[].ma.above_20). Prose unchanged."
+  - id: trend_above_200
+    role: entry
+    rule: "Trend book: long above the 200-day MA, short below (together with trend_above_50)"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={symbol}
+    field: items[].ma.above_200
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: trend_macd_confirm
+    role: filter
+    rule: "Trend book: use MACD for trend confirmation"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200
+    field: candles[].close
+    note: "Computable from closes, but the page gives no MACD settings or confirming condition."
+  - id: trend_trailing_stop
+    role: stop
+    rule: "Trend book: let winners run with trailing stops"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "No trail distance is given."
+  - id: crisis_half_size
+    role: sizing
+    rule: "Crisis book: cut all position sizes by 50%"
+    runnable: partial
+    input: derived
+    inputs: [vol_crisis_level, vol_crisis_jump]
+  - id: crisis_close_short_options
+    role: exit
+    rule: "Crisis book: close any short options positions"
+    runnable: partial
+    input: derived
+    inputs: [vol_crisis_level, vol_crisis_jump]
+  - id: crisis_buy_puts
+    role: sizing
+    rule: "Crisis book: buy protective puts (5% OTM in the example) and consider VIX calls or long volatility"
+    runnable: false
+    note: "No option chain or order routing is served, and VIX calls have no crypto listing named on the page."
 
 ---
 

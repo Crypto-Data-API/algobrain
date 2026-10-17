@@ -118,7 +118,7 @@ The **skew inputs** a risk reversal trades — the 25-delta risk-reversal number
 - `GET /api/v1/volatility/regime` — vol regime (context for wing pricing)
 
 **Historical data:**
-- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding history (skew-driver backtest)
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=100` — funding history (skew-driver backtest) (`limit` caps at 100, about 33 days of 8h prints; corrected 2026-10-17. For longer Binance history use `GET /api/v1/backtesting/funding?symbol=BTCUSDT&exchange=binance&start=...`, archived since 2026-03-30)
 - `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for [[realized-volatility]]
 
@@ -137,7 +137,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 - **Skew driver** — `GET /api/v1/derivatives/funding-rates?coin=BTC` + `GET /api/v1/derivatives/open-interest?coin=BTC` — richly positive funding with crowded OI flags call skew rich (favors the bearish RR as a credit); post-crash negative funding flags rich put skew (the bullish RR pays).
 - **Tail watch** — `GET /api/v1/quant/gex` + `GET /api/v1/market-intelligence/liquidations` — cascade risk into the naked short wing; trigger the [[seagull-option]] conversion when it builds.
 - **Regime gate** — `GET /api/v1/volatility/regime` — do not initiate the short wing into `vol_shock`.
-- **Backtest** — `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` and `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) to test funding as a skew-mean-reversion predictor; `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for the spot-path outcomes below the short put.
+- **Backtest** — `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=100` (latest 100 prints, about 33 days; `limit` caps at 100, corrected 2026-10-17) and `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) to test funding as a skew-mean-reversion predictor; `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for the spot-path outcomes below the short put.
 - **Tips** — the funding read is the automatable half of the trade: schedule it before every entry rather than assuming equity-style static put skew.
 
 ## Related

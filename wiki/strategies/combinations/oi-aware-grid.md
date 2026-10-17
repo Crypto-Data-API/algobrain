@@ -244,7 +244,7 @@ The production system adds: a real-time OI monitor on a 15-minute polling cycle 
 - **1h OHLCV** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=50`; compute ATR(14) on 1h candles for vol-regime gate.
 - **4h OHLCV** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=30`; compute ADX(14) on 4h candles for trend-regime gate.
 - **Regime** — `GET /api/v1/regimes/current`; if `Trending_Momentum` or `Structural_Shock`, override to forced pause regardless of OI reading.
-- **Liquidations** — `GET /api/v1/market-intelligence/liquidations?coin=BTC`; spike in liquidation volume confirms that a pause was warranted (directional move accompanied by forced exits); use retrospectively for gate calibration.
+- **Liquidations** — `GET /api/v1/market-intelligence/liquidations?symbol=BTC`; spike in liquidation volume confirms that a pause was warranted (directional move accompanied by forced exits); use retrospectively for gate calibration.
 
 ## Example trade
 
@@ -335,7 +335,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — auxiliary pause gate (funding extremes); also confirms OI-build direction
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=50` — compute ATR(14, 1h) for vol-regime gate
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=30` — compute ADX(14, 4h) for trend-regime gate
-- `GET /api/v1/market-intelligence/liquidations?coin=BTC` — post-hoc confirmation that OI build preceded a breakout cascade
+- `GET /api/v1/market-intelligence/liquidations?symbol=BTC` — post-hoc confirmation that OI build preceded a breakout cascade
 - `GET /api/v1/regimes/current` — regime override: forced pause if `Trending_Momentum` or `Structural_Shock`
 
 **Historical data:**

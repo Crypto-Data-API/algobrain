@@ -230,7 +230,7 @@ The production system adds: a Deribit connection for real-time put pricing to ev
 - **Open interest** — `GET /api/v1/derivatives/open-interest?coin=BTC`; 12h OI change as the grid-halt signal (same as [[oi-aware-grid]] runtime check).
 - **Funding rates** — `GET /api/v1/derivatives/funding-rates?coin=BTC`; funding context for grid centre-price adjustment and cost monitoring.
 - **DVOL** — `GET /api/v1/volatility/implied`; DVOL percentile for put-purchase timing (Condition: DVOL ≤ 70th percentile).
-- **Realized vol (20-day)** — computed from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=2000`; IV−RV spread context for put pricing validation.
+- **Realized vol (20-day)** — computed from `GET /api/v1/backtesting/klines?symbol=BTCUSDT&interval=15m&start=...` (20 days = 1,920 bars in one call; corrected 2026-10-17, since `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=1000` caps at 1000 bars, about 10.4 days); IV−RV spread context for put pricing validation.
 - **Regime** — `GET /api/v1/regimes/current`; if `Trending_Momentum`, halt grid and defer put purchases.
 - **OTM put pricing (Deribit)** — specific strike/delta put pricing NOT available via CryptoDataAPI; source from [[deribit]] API directly for budget-to-coverage calculation.
 

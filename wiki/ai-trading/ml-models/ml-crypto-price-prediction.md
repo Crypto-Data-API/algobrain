@@ -100,7 +100,7 @@ The whole pipeline is feedable from the CryptoDataAPI market, derivatives, on-ch
 - `GET /api/v1/backtesting/funding` — funding archive
 - `GET /api/v1/backtesting/liquidations` — historical liquidations
 - `GET /api/v1/quant/history` — point-in-time regime probability records
-- `GET /api/v1/on-chain/whales/accumulation-score/BTC` — whale-score timeseries
+- ~~`GET /api/v1/on-chain/whales/accumulation-score/BTC` — whale-score timeseries~~ — **disabled** (503 `coming_soon`; unlisted from the spec since 2026-10-09). Working substitute (2026-10-17): `GET /api/v1/on-chain/exchange-flows/BTC/history` — hourly CEX inflow/outflow/`net_24h` since 2026-05-28 (up to 93 days per call). The accumulation score never covered native BTC (ERC-20 only), and net exchange outflow is a proxy, not the same measure. A separate feature, Hyperliquid ≥$100k-account perp positioning, is `GET /api/v1/quant/whales/history?days=180&live_only=true` (daily `net_usd`; Pro Plus)
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=1000"

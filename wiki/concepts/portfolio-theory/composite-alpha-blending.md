@@ -2,7 +2,7 @@
 title: "Composite Alpha Blending"
 type: concept
 created: 2026-07-14
-updated: 2026-09-03
+updated: 2026-10-17
 status: good
 tags: [portfolio-theory, quantitative, algorithmic, machine-learning]
 aliases: ["Composite Alpha Blending", "Signal Blending", "Alpha Combination", "Signal Ensemble", "Composite Score"]
@@ -121,7 +121,7 @@ The component signals are pulled from derivatives, liquidity, on-chain, regime, 
 **Historical data (for IC estimation and blend backtests):**
 - `GET /api/v1/backtesting/funding` — funding archive
 - `GET /api/v1/quant/history` — point-in-time regime probability records
-- `GET /api/v1/on-chain/whales/accumulation-score/BTC` — historical on-chain conviction series
+- ~~`GET /api/v1/on-chain/whales/accumulation-score/BTC` — historical on-chain conviction series~~ — **disabled** (503 `coming_soon`; unlisted from the spec since 2026-10-09). Working substitute (2026-10-17): `GET /api/v1/on-chain/exchange-flows/BTC/history` — hourly CEX inflow/outflow/`net_24h` since 2026-05-28 (up to 93 days per call). The accumulation score never covered native BTC (ERC-20 only), and net exchange outflow is a proxy, not the same measure
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/trading-strategy-baskets"

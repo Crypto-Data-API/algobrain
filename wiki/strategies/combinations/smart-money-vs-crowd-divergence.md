@@ -83,7 +83,7 @@ Currently not rejected (`backtest_status: untested`). Testable prediction: ident
 
 **Gate 1: On-chain smart-money accumulation active**
 - Whale accumulation score (7-day rolling) is ≥ **65/100** (elevated accumulation, not neutral).
-- Source: `GET /api/v1/on-chain/whales/accumulation-score/BTC`.
+- Source: ~~`GET /api/v1/on-chain/whales/accumulation-score/BTC`~~ — **disabled** (503 `coming_soon`; unlisted from the spec since 2026-10-09), and ERC-20 only even when live. Substitute (2026-10-17): `GET /api/v1/quant/whales` — the `top_coins[]` row for BTC (`directional_net_usd`, `net_bias`, `long_pct_pctile_30d`) and `summary.by_tag_usd.smart_money.net_usd`. That is Hyperliquid perp positioning of ≥$100k accounts, not on-chain holder accumulation, so the ≥ 65/100 threshold does not carry over and needs recalibrating. Exchange flows are not used here because Gate 2 already reads them.
 - *Rationale:* the whale-score measures large non-exchange wallet balance changes; scores ≥ 65 indicate net accumulation by the large-holder cohort over the trailing 7 days.
 
 **Gate 2: Exchange outflows confirming off-exchange accumulation**
@@ -331,7 +331,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 ## Getting the Data (CryptoDataAPI)
 
 **Live data:**
-- `GET /api/v1/on-chain/whales/accumulation-score/BTC` — Gate 1: 7-day rolling whale accumulation score (primary on-chain signal)
+- ~~`GET /api/v1/on-chain/whales/accumulation-score/BTC` — Gate 1: 7-day rolling whale accumulation score (primary on-chain signal)~~ — **disabled** (503 `coming_soon`; unlisted from the spec since 2026-10-09). Gate 1 substitute (2026-10-17): `GET /api/v1/quant/whales` — the `top_coins[]` row for BTC (`directional_net_usd`, `net_bias`, `long_pct_pctile_30d`) and `summary.by_tag_usd.smart_money.net_usd` (Pro; perp positioning, not on-chain accumulation)
 - `GET /api/v1/on-chain/exchange-flows/BTC` — Gate 2: 24h inflow/outflow and 7-day net flow
 - `GET /api/v1/on-chain/exchange-flows/spike-alerts` — Gate 2 real-time: large transfer alerts for rapid exchange-outflow confirmation
 - `GET /api/v1/on-chain/score` — secondary: on-chain health composite score (context check)
@@ -342,15 +342,16 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/regimes/current` — regime override: reduce size or skip in `Structural_Shock` or `Bear_Trend`
 
 **Historical data:**
-- `GET /api/v1/on-chain/whales/accumulation-score/BTC` — historical accumulation score timeseries for signal calibration
+- ~~`GET /api/v1/on-chain/whales/accumulation-score/BTC` — historical accumulation score timeseries for signal calibration~~ — **disabled** (503 `coming_soon`; unlisted from the spec since 2026-10-09). Substitute: `GET /api/v1/quant/whales/history?days=180&live_only=true` (daily whale long/short/net notional and top coins by net; Pro Plus; observed points start 2026-06-29, earlier points are modeled)
 - `GET /api/v1/derivatives/binance/history?days=90` — extended funding and long/short history for threshold calibration
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=365` — annual daily OHLCV for divergence-signal backtesting
 
 *Note (2026-09 recheck): `/on-chain/whales`, `/on-chain/whales/{symbol}`, AND `/on-chain/whales/accumulation-score/{symbol}` are all currently disabled ("coming soon") per the live spec. Use `/on-chain/exchange-flows/spike-alerts` as the live on-chain signal until the family re-enables.*
 
 ```bash
+# 2026-10-17: was /api/v1/on-chain/whales/accumulation-score/BTC, disabled (503 coming_soon); Gate 1 substitute below
 curl -H "X-API-Key: $CDA_KEY" \
-  "https://cryptodataapi.com/api/v1/on-chain/whales/accumulation-score/BTC"
+  "https://cryptodataapi.com/api/v1/quant/whales"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]], [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
@@ -361,10 +362,10 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]], [[c
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this divergence read end-to-end:
 
-- **Signal** — `GET /api/v1/on-chain/whales/accumulation-score/BTC` (7-day accumulation score) is the smart-money leg; `GET /api/v1/on-chain/exchange-flows/spike-alerts` confirms outflows in real time
+- **Signal** — ~~`GET /api/v1/on-chain/whales/accumulation-score/BTC` (7-day accumulation score)~~ (**disabled**: 503 `coming_soon`, unlisted from the spec since 2026-10-09) was the smart-money leg; until it returns, `GET /api/v1/quant/whales` (BTC `directional_net_usd` and the `smart_money` tag) stands in as a perp-positioning proxy; `GET /api/v1/on-chain/exchange-flows/spike-alerts` confirms outflows in real time
 - **Crowd leg** — `GET /api/v1/derivatives/funding-rates?coin=BTC` + `GET /api/v1/derivatives/binance/long-short-ratio` establish that the crowd is positioned opposite the whales
 - **Regime gate** — `GET /api/v1/regimes/current`; skip or halve size in `Structural_Shock` / bear-trend labels
-- **Backtest** — the whale-score endpoint returns its own historical timeseries; join it to daily klines back to 2017-08 only in the `klines_deep` archive (`GET /api/v1/backtesting/klines`; the REST route starts 2026-05-09) and to point-in-time snapshots (`GET /api/v1/backtesting/daily-snapshots`, since 2026-03-02) for the crowd side
+- **Backtest** — the whale-score endpoint's own historical timeseries is unavailable while the route is disabled (2026-10-17); calibrate the stand-in with `GET /api/v1/quant/whales/history?days=180&live_only=true` and join it to daily klines back to 2017-08 only in the `klines_deep` archive (`GET /api/v1/backtesting/klines`; the REST route starts 2026-05-09) and to point-in-time snapshots (`GET /api/v1/backtesting/daily-snapshots`, since 2026-03-02) for the crowd side
 - **Tips** — the whole `/on-chain/whales*` family (including `accumulation-score`) currently returns "coming soon"; run the pipeline on `spike-alerts` + an external whale source and re-probe the family monthly instead of failing the run
 - **Prompt library** — the "Whale Positioning Monitor" prompt (Pro tier, [prompt library](https://cryptodataapi.com/prompts)) gives the smart-money side of this divergence read
 

@@ -86,7 +86,7 @@ Currently not rejected (`backtest_status: untested`). Testable prediction: ident
 
 **Condition 1: Cascade is in progress**
 - Hyperliquid 1h liquidation volume ≥ **3× its 7-day average** (concentrated liquidation event in progress).
-- Source: `GET /api/v1/market-intelligence/liquidations?interval=1h` (combined and by venue if available).
+- Source: `GET /api/v1/market-intelligence/liquidations?symbol=BTC` — `liquidation_usd_1h` plus `liq_1h_vs_7d_median` (trailing 1h vs the median hourly notional over the prior 7 days, from the exact Hyperliquid tape — a median, not the 7d average; `null` with under 24h of tape). Totals combine OKX, Bybit and Hyperliquid; Binance is excluded and there is no per-venue split. *Corrected 2026-10-17: `interval=1h` is not a parameter; the windows are already in the response.*
 - *Rationale:* 3× the 7d average confirms a genuine cascade, not a routine elevated-volatility period.
 
 **Condition 2: Price dislocation is present and measurable**
@@ -214,7 +214,7 @@ The production system requires: a co-located or low-latency connection to both H
 
 ## Indicators / data used
 
-- **Liquidation volume** — `GET /api/v1/market-intelligence/liquidations?interval=1h`; 1h liquidation volume vs 7d average to confirm cascade trigger (Condition 1). Cross-venue breakdown if available.
+- **Liquidation volume** — `GET /api/v1/market-intelligence/liquidations?symbol=BTC` (`liquidation_usd_1h`, `liq_1h_vs_7d_median`); 1h liquidation volume vs 7d average to confirm cascade trigger (Condition 1). Cross-venue breakdown if available.
 - **Mark prices (cross-venue)** — Hyperliquid mark price via `GET /api/v1/hyperliquid/summary?coin=BTC` (`mark_price` field); Binance mark price via `GET /api/v1/derivatives/binance/summary?symbol=BTCUSDT`; real-time spread computation (Condition 2).
 - **Funding rates** — `GET /api/v1/derivatives/funding-rates?coin=BTC` and `GET /api/v1/hyperliquid/funding-rates`; both venues' funding at entry and hold for carry cost monitoring.
 - **Open interest** — `GET /api/v1/derivatives/open-interest?coin=BTC`; cascade magnitude context; large OI + large liquidations = potential larger and longer dislocation.
@@ -319,7 +319,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 ## Getting the Data (CryptoDataAPI)
 
 **Live data:**
-- `GET /api/v1/market-intelligence/liquidations?interval=1h` — Condition 1: 1h liquidation volume and 7d average for cascade trigger detection
+- `GET /api/v1/market-intelligence/liquidations?symbol=BTC` — Condition 1: `liquidation_usd_1h` and `liq_1h_vs_7d_median` for cascade trigger detection
 - `GET /api/v1/hyperliquid/summary?coin=BTC` — Condition 2 (HL leg): HL BTC perp mark price (`mark_price` field) for real-time spread computation
 - `GET /api/v1/derivatives/binance/summary?symbol=BTCUSDT` — Condition 2 (Binance leg): Binance BTC perp mark price
 - `GET /api/v1/hyperliquid/funding-rates` — funding carry cost monitoring for HL leg while position is held
@@ -329,13 +329,13 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/regimes/current` — macro context; Structural_Shock = reduce size
 
 **Historical data:**
-- `GET /api/v1/market-intelligence/liquidations?interval=1h` — extended liquidation history for cascade frequency and magnitude analysis; threshold calibration
+- `GET /api/v1/backtesting/hl-liquidation-bars?coin=BTC&interval=1h&start=...` — extended liquidation history for cascade frequency and magnitude analysis; threshold calibration (corrected 2026-10-17: the live `/api/v1/market-intelligence/liquidations` route serves only trailing windows, not history; these incremental Hyperliquid bars are safe to sum)
 - `GET /api/v1/derivatives/binance/history?days=90` — extended cross-venue mark price history for dislocation magnitude analysis
-- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1m&limit=10000` — 1m bars for cascade timing and price-gap analysis
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1m&limit=1000` — 1m bars for cascade timing and price-gap analysis (`limit` caps at 1000, about 16.7 hours of 1m bars; corrected 2026-10-17 from 10000). For longer 1m windows around past cascades use `GET /api/v1/backtesting/klines?symbol=BTCUSDT&interval=1m&start=...` (up to 10,000 rows per call, cursor-paged)
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
-  "https://cryptodataapi.com/api/v1/market-intelligence/liquidations?interval=1h"
+  "https://cryptodataapi.com/api/v1/market-intelligence/liquidations?symbol=BTC"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]], [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
@@ -346,7 +346,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intellig
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
-- **Trigger** — `GET /api/v1/market-intelligence/liquidations?interval=1h` — 1h liquidation volume vs the 7d average arms the trade
+- **Trigger** — `GET /api/v1/market-intelligence/liquidations?symbol=BTC` — `liq_1h_vs_7d_median` (1h liquidations vs the prior-7-day hourly median) arms the trade
 - **Spread legs** — `GET /api/v1/hyperliquid/summary?coin=BTC` (`mark_price` field) vs `GET /api/v1/derivatives/binance/summary?symbol=BTCUSDT` — the real-time HL–Binance dislocation both entries and exits key off
 - **Carry monitor** — `GET /api/v1/hyperliquid/funding-rates` + `GET /api/v1/derivatives/funding-rates?coin=BTC` while the paired position is held
 - **Backtest** — `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) + 1m bars from `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; earlier 1m days from 2026-03-30 are in the daily `klines` Parquet archive; since 2026-03-30) — only recent cascades are covered, so dislocation-frequency estimates are provisional; `GET /api/v1/backtesting/funding` (HL hourly since 2023-05) covers the carry-cost side further back

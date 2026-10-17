@@ -287,7 +287,7 @@ Re-deploy when all clear and projected net carry again clears risk-free + 300 bp
 - `GET /api/v1/security/regime` — recent hacks/depegs + Security Stress score (yield-leg tail-risk monitor)
 
 **Historical data:**
-- `GET /api/v1/derivatives/binance/funding-rates?symbol=ETHUSDT&limit=500` — funding history for carry backtests
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ETHUSDT&limit=100` — funding history for carry backtests (`limit` caps at 100, about 33 days of 8h prints; corrected 2026-10-17. For longer Binance history use `GET /api/v1/backtesting/funding?symbol=ETHUSDT&exchange=binance&start=...`, archived since 2026-03-30)
 - `GET /api/v1/backtesting/funding` — deep funding archive
 - `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=365` — ETH price for delta-hedge modelling
 

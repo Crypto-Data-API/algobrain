@@ -423,6 +423,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the
 
 ## Related
 
+- [[forced-flow-exhaustion-fade]] — minute-level live-stream version that only fades when open interest is falling
 - [[liquidation]] — the underlying mechanic
 - [[liquidation-cascade-arbitrage]] — the **opposite-side** MEV-liquidator strategy
 - [[liquidation-risk]] — risk-management framing

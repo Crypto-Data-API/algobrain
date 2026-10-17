@@ -9,6 +9,109 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-10-17 — Three new strategy pages on the 2026-10 data releases
+
+**Scope:** Three new strategy pages, each built on a feed that had no strategy page yet. All are `draft` and `untested`, and each had a full `gates:` block from the start: 48 gates in all, 47 runnable and 1 partial.
+
+- **Pages created:**
+  - [[liquidation-density-magnet]]: tests whether price is drawn toward a one-sided Hyperliquid liquidation cluster 1-2% from the mark, using `/backtesting/liquidation-density`. 16 gates (15 runnable, 1 partial). It is two-sided and exits at or before the sweep; [[short-liquidation-squeeze]] and [[long-liquidation-cascade]] ride through it.
+  - [[exchange-flow-spike-reaction]]: trades single large exchange deposits, going long BTC on stablecoin dry powder and short BTC/ETH on coin deposits, after a 60-minute tape check. 17 gates (all runnable). It is the per-event study under [[on-chain-flow-trading]].
+  - [[forced-flow-exhaustion-fade]]: a long-only fade built on `/api/v1/stream`. It needs a fast drop, a burst of Hyperliquid long liquidations and falling open interest in the same 5 minutes. 15 gates (all runnable). The page includes a table mapping each stream event type to its archived equivalent for backtesting.
+- **What the data showed:** none of the three ideas shows an edge yet. Exploratory counts (not backtests) on the live archives:
+  - Density magnet: across 160 dense, one-sided hours, price hit the cluster first 59 times and moved away first 62 times.
+  - Spike reaction: in the hourly flow history since 2026-05-28, BTC rose an average of 0.39% in the 24 hours after big stablecoin inflows (18 events). After big BTC inflows it rose an average of 0.35%, so the short lost money (19 events).
+  - Exhaustion fade: the two-sided version lost 0.30% per event over 33 events. Each page states how many events it needs to reach statistical significance, which is between one and three years at current rates.
+- **Data findings recorded on the pages:**
+  - Every BTC and ETH spike alert archived since 2026-10-08 is `source: balance_delta`. Filtering to `transfer` therefore removes every BTC and ETH signal.
+  - In the biggest BTC inflow hours, the net flow was about 2% of the gross. Most giant inflows are exchanges moving coins between their own wallets.
+  - Spike alerts and the flow history give timestamps in seconds, not milliseconds. The alert archive also holds alerts under $1M and some exact duplicates.
+  - The stream's replay buffer reached back about 14 minutes when tested, not the ~2 hours the spec describes. The keyless `/stream/delayed` preview covered a 3-minute window, not 5 minutes.
+  - No `/hyperliquid/*` route serves a liquidation map. The live map is `/quant/positioning/ladder`.
+- **Checks:** `tools/check_endpoints.py` reports 0 errors on all three pages. Fields the spec leaves free-form were confirmed with live calls: stream events, the ladder, GEX, open interest and snapshot rows. Lint counts are unchanged (234 link issues, 31 orphans), and the new pages have no broken links.
+- **Pages updated:** [[index]] and [[quantitative-overview]] list the new pages. One backlink line was added to the Related section of each of [[short-liquidation-squeeze]], [[long-liquidation-cascade]], [[on-chain-flow-trading]], [[exchange-netflow]], [[liquidation-cascade-fade]] and [[off-hours-liquidation-playbook]].
+
+## 2026-10-17 — Runnable gates on ten more strategy pages
+
+**Scope:** Ten strategy pages had no gates. Each now has a `gates:` block, 158 gates in all: 65 runnable, 66 partial, 27 not runnable.
+
+- **Pages:**
+  - [[stablecoin-pair-arbitrage]]: 14 gates (1 runnable, 8 partial, 5 not runnable).
+  - [[stretch-revert]]: 14 gates (3 runnable, 11 partial).
+  - [[range-trading]]: 15 gates (11 runnable, 4 partial).
+  - [[crypto-beta-rotation]]: 12 gates (3 runnable, 4 partial, 5 not runnable).
+  - [[momentum-investing]]: 13 gates (9 runnable, 4 partial).
+  - [[regime-adaptive-strategy]]: 20 gates (6 runnable, 12 partial, 2 not runnable).
+  - [[contrarian-extremes]]: 23 gates (5 runnable, 5 partial, 13 not runnable).
+  - [[kalman-filter-trading]]: 16 gates (9 runnable, 7 partial).
+  - [[moving-average-crossover]]: 13 gates (11 runnable, 2 partial).
+  - [[crypto-options-volatility-selling]]: 18 gates (7 runnable, 9 partial, 2 not runnable).
+- **Fully runnable:** none. [[moving-average-crossover]] comes closest. Its canonical bot (Variant 2) is fully runnable. The two partial gates are Variant 1's trailing stop, which arms at an undefined profit, and Variant 4, which has no stated timeframe.
+- **Edits:** only frontmatter `gates:` blocks were added and `updated:` was set; no prose changed. `tools/check_endpoints.py` reports 0 errors on all ten pages, with no gate field or gate structure errors. Fields the spec leaves free-form were confirmed with live calls on 2026-10-17: candle rows (including `atr`), `assets[]` on open interest, L2 book levels, kline rows, funding history, SIGNUM archive rows, and the macro and Fear & Greed snapshots.
+- **Not runnable, and why:**
+  - We serve no equity or macro sentiment series: no Nasdaq (the master gate on [[crypto-beta-rotation]]), no VIX, AAII, CNN Fear & Greed, equity put/call or NAAIM (five of the six inputs to the [[contrarian-extremes]] composite), and no credit spreads.
+  - Nothing we serve measures a hawkish or dovish rates stance. `policy_tilt` on `/policy/regime` is the tone of crypto-regulation news, not rates.
+  - We serve no stablecoin redemption-channel status, issuer attestations or Curve 3pool slippage.
+  - We serve no per-strike option chain, 25-delta skew, greeks or option order routing. `/volatility/implied` serves DVOL, VRP and the ATM term structure (Pro Plus), which covers the DVOL, VRP and tenor gates.
+- **Partial, mostly for one of these reasons:**
+  - The page leaves a number undefined. Examples: every `cfg.*` threshold on [[stretch-revert]], the touch tolerance on [[range-trading]], DVOL cutoffs for the VIX levels on [[regime-adaptive-strategy]], and the whiteness test and cointegration window on [[kalman-filter-trading]].
+  - Option-position gates (vega budget, delta band, 50%-credit target, margin) need option marks and greeks that only the venue reports.
+  - Stablecoin pegs are read on Binance against USDT, not USD. `/coins/{symbol}` prices were about 8 hours old when checked. `DAIUSDT` returns 0.0, so DAI is read through `USDTDAI`. `/coins/FRAX` is the former governance token (about $0.30); the stablecoin is `FRXUSD`.
+  - The DVOL history starts 2026-04-20 (181 days), so the 1-year percentile gate cannot be computed yet. `dvol_change_24h` is a rolling 24-hour change, not a session move.
+  - Our Fear & Greed is a multi-source average, not alternative.me's index. `/market-intelligence/fear-greed-history` returned only today's row on 2026-10-17, so replay uses `fear_greed` snapshots (from 2026-05-09).
+- **Page contradictions found** (each recorded in the relevant gate `note`; the prose was not edited):
+  - [[range-trading]]: the Rules text confirms longs at RSI < 30 and shorts at > 70, but the table and pseudocode use 35 and 65. The Rules accept RSI, a reversal candle or a band tag as alternatives; the pseudocode requires RSI and a reversal candle together.
+  - [[stablecoin-pair-arbitrage]]: the Rules exit within 30 bps of $1, but the pseudocode holds until the spread is 5 bps. The Rules trigger on one coin's distance from $1; the pseudocode triggers on the spread between the richest and cheapest coin.
+  - [[contrarian-extremes]]: the pseudocode takes profit at 20%, the equity figure, against the Rules' 30-60% for crypto. Its stop is a 10% loss on the averaged position, not 10% below the lowest tranche. It checks the reversal candle on tranche 1 only, though the Rules require one before every tranche.
+  - [[regime-adaptive-strategy]]: the trend rule uses the 50- and 200-day MAs, but the example buys above the 20-day MA.
+  - [[momentum-investing]]: on the page's 100-coin crypto universe a top decile is about 10 names, below the 30-100 names its sizing rule asks for.
+  - [[crypto-options-volatility-selling]]: the agent tip validates the DVOL gate against the 60-day `/volatility/regime` history, which holds realized vol, not DVOL.
+
+## 2026-10-17 — Runnable gates on nine more strategy pages
+
+**Scope:** Nine core strategy pages now have a `gates:` block, 120 gates in all: 78 runnable, 37 partial, 5 not runnable. Four of them ([[rsi-mean-reversion]], [[atr-trailing-stop]], [[statistical-arbitrage]], [[atr-position-sizing]]) already had gates from the previous commit, which the log did not record. They were reviewed against their pages and left unchanged. The other five are new.
+
+- **Pages:**
+  - [[rsi-mean-reversion]]: 11 gates (10 runnable, 1 partial).
+  - [[atr-trailing-stop]]: 8 gates (5 runnable, 3 partial).
+  - [[statistical-arbitrage]]: 19 gates (16 runnable, 3 partial).
+  - [[atr-position-sizing]]: 8 gates (6 runnable, 2 partial).
+  - [[trend-following-cta]]: 17 gates (8 runnable, 8 partial, 1 not runnable).
+  - [[breakout-trading]]: 16 gates (11 runnable, 5 partial).
+  - [[volatility-breakout]]: 18 gates (13 runnable, 5 partial).
+  - [[regime-detection]]: 12 gates (8 runnable, 4 partial).
+  - [[liquidation-cascade-arbitrage]]: 11 gates (1 runnable, 6 partial, 4 not runnable).
+- **Fully runnable:** none. [[rsi-mean-reversion]] comes closest. Its one partial gate is the Fear & Greed filter, because our index blends several sources and is not alternative.me's reading alone.
+- **Edits:** only frontmatter `gates:` blocks were added and `updated:` was set; no prose changed. `tools/check_endpoints.py` reports 0 errors on all nine pages, with no gate field or gate structure errors. Fields the spec leaves free-form were confirmed with live calls on 2026-10-17: candle rows, `assets[]` on open interest, kline rows, Fear & Greed snapshots, funding history and DEX `top_pools[]`.
+- **Not runnable, and why:**
+  - We serve no CME/ICE futures, which is the CTA page's own universe. Its crypto-perp reading is gated as an alternative.
+  - The liquidation keeper needs data we do not serve: a lending-position graph, Chainlink/Pyth oracle ticks, health factors, and gas or builder-bid prices.
+- **Partial, mostly for one of these reasons:**
+  - The page leaves a number undefined: the ATR period on the CTA page, touch tolerance and retest distance on the breakout page, size cuts on the regime and CTA pages, and the risk fraction and squeeze test on the volatility-breakout page.
+  - A condition comes from a page's agent workflow and has no threshold (regime probabilities, fragility or stress scores, funding agreement).
+  - We serve only Hyperliquid's liquidation tape, not lending-protocol events. The DEX pool price has no stated refresh rate.
+- **Readings recorded in the gate notes:**
+  - On [[regime-detection]], the page's 70%/2-refresh hysteresis is applied to `regime.label_raw`. `regime.label` already carries the API's own hysteresis, so using it would filter twice.
+  - SMA tests read `/indicators/technical`, which serves daily SMAs on the Hyperliquid perp series. ATR and channel tests read `/hyperliquid/candles?atr=14`.
+- **Page contradictions found** (each recorded in the relevant gate `note`; the prose was not edited):
+  - [[volatility-breakout]]: "Risk per trade = 2x ATR" holds only at X = 1. At the example's X = 0.6 the stop is 1.2x ATR away. The example's trail also anchors on the 1R price, not the highest close.
+  - [[liquidation-cascade-arbitrage]]: the Rules trigger on the count OR the 5% overshoot. The pseudocode requires both.
+  - [[regime-detection]]: the Rules cut size across the whole range/chop regime. The pseudocode cuts it only in `choppy_high_vol`.
+  - Already noted on the four earlier pages:
+    - [[atr-position-sizing]]: the example breaks the 20% notional cap.
+    - [[statistical-arbitrage]]: the example calls a beta-weighted spread dollar-neutral, and the page gives 15-40 concurrent spreads in one section and 5-15 in another.
+    - [[rsi-mean-reversion]]: the 24h cooldown is in the Rules but not in the pseudocode.
+
+## 2026-10-17 — Fix: every endpoint-checker error on content pages
+
+**Scope:** `tools/check_endpoints.py` reported 155 errors on 88 pages: 34 unknown paths, 67 unknown params and 54 out-of-range values. 154 are fixed on 87 pages and 1 is left (see below). Every replacement was checked against the live OpenAPI spec and confirmed with a live call on 2026-10-17. Each change carries a dated note, and wrong claims are corrected in place rather than deleted.
+
+- **Disabled whale routes (33 citations, 27 pages):** `/on-chain/whales/accumulation-score*` answers 503 `coming_soon` and has been out of the spec since 2026-10-09. Each citation is now struck through, marked disabled and given a working substitute. Concept, ML and on-chain strategy pages point at `/on-chain/exchange-flows/{symbol}/history` or the live windows (large CEX transfers, an accumulation proxy). [[smart-money-vs-crowd-divergence]] and [[whale-copy-flow-funding-filter]] point at `/quant/whales`, because their Gate 2 already reads exchange flows. Every note says the substitute measures something different, and the old 0-100 thresholds no longer apply.
+- **Wrong param names:** liquidations `coin` → `symbol`, and `interval=1h` dropped, since the 1h/4h/12h/24h windows and `liq_1h_vs_7d_median` are already in the response (6 pages). Also altcoin-breadth `period`/`ma` → `ma_period` (7 pages), event calendar `days` → `window_days` (5 pages), and Binance long-short and summary `coin` → `symbol=BTCUSDT` (3 pages). `exchange=` is gone from `/derivatives/funding-rates`.
+- **Swapped routes:** history that `/derivatives/funding-rates` never served now comes from `/derivatives/hyperliquid/history` (up to 180 days) or `/backtesting/funding?grain=hourly` (2 pages). Fear & Greed history now uses `/market-intelligence/fear-greed-history`, which returned only one entry when checked. The page notes that a 2-year series is not available. Pair-universe depth now reads `/liquidity/depth/{coin}` → `depth_usd.bid["25bps"]`.
+- **Out-of-range values:** Binance funding `limit=500` → 100, about 33 days (34 pages). The claim that this route pages through older Binance history is corrected: Binance funding is archived only since 2026-03-30. Klines `limit` above 1000 now uses 1000 or `/backtesting/klines` (5 pages), and `binance/history` `days` above 90 now uses 90 plus a route for the longer window (5 pages).
+- **Other corrections:** [[leverage-stress-tail-hedge]] said `/on-chain/score` has market-cap inputs. It does not, and market cap now comes from `/coins/BTC`. [[vol-scaled-carry-sizing]] now says `/derivatives/binance/summary` has no quarterly futures mark. [[defi-yield-event-calendar]] no longer offers `type=upgrade`. README now gives Pro Plus as 120/min, and the email-confirmation line no longer promises a discount code.
+- **Left open:** 1 error is in the `gates:` frontmatter of [[distribution-post-peak-short-book]]. It is a note that already says the route answers 503, and gate blocks were out of scope for this pass.
+
 ## 2026-10-17 — Fix: backtesting klines depth claims; gates on mean reversion
 
 **Scope:** About 870 pages said `/backtesting/klines` serves 1h/4h/1d bars back to 2017-08 (or Hyperliquid daily candles back to 2023). That depth exists only in the Parquet archives. The REST route starts 2026-05-09, and an earlier `start` returns no rows except `coverage.archive_hint` (checked live 2026-10-17 for BTCUSDT 2020).

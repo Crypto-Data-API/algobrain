@@ -236,7 +236,7 @@ The production system adds: on-chain data polling via CryptoDataAPI endpoints; a
 - **[[fear-and-greed-index]]** — `/api/v1/sentiment/fear-greed`: live Fear & Greed reading; `/api/v1/market-intelligence/fear-greed-history` for historical series.
 - **On-Chain Health composite** — `/api/v1/on-chain/score`: the 0-100 composite that collapses all on-chain signals; a score ≤ 20 is consistent with confluence conditions.
 - **Stablecoin dry-powder z-score** — `/api/v1/on-chain/stablecoin-reserves/dry-powder`: optional higher-conviction confirmation.
-- **Whale accumulation score** — `/api/v1/on-chain/whales/accumulation-score/BTC`: rising whale accumulation in the capitulation window is a positive confluence signal.
+- **Whale accumulation score** — ~~`/api/v1/on-chain/whales/accumulation-score/BTC`~~ (**disabled**: 503 `coming_soon`, unlisted from the spec since 2026-10-09; ERC-20 only even when live): rising whale accumulation in the capitulation window is a positive confluence signal. Until it returns (2026-10-17), read the nearest working proxy: a negative `windows.7d.net` on `/api/v1/on-chain/exchange-flows/BTC` plus outflow alerts from `/api/v1/on-chain/exchange-flows/spike-alerts?symbol=BTC&direction=outflow`. That measures coins leaving exchanges, not whale wallet balances.
 - **Regime classification** — `/api/v1/regimes/current`: reject entries in `Structural_Shock` regime.
 
 ## Example trade
@@ -336,7 +336,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
   - **Caveat (2026-10-08 API fix):** before 2026-10-08 the score's `exchange_flow` component summed every tracked token's 24h flow in its own native units, so it pinned at 20 or 80. Any composite reading, or any threshold calibrated on readings, from before that date is biased. The component now scores the USDT/USDC/DAI 24h net only. Components with no data, currently `whale_accumulation`, carry weight 0 and the rest are renormalised; they are not scored a neutral 50. See [[cryptodataapi-on-chain]].
 - `GET /api/v1/sentiment/fear-greed` — live Fear & Greed index reading; Signal 2
 - `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` — stablecoin dry-powder z-score; optional higher-conviction confirmation
-- `GET /api/v1/on-chain/whales/accumulation-score/BTC` — whale accumulation score timeseries; secondary bullish signal
+- ~~`GET /api/v1/on-chain/whales/accumulation-score/BTC` — whale accumulation score timeseries; secondary bullish signal~~ — **disabled** (503 `coming_soon`; unlisted from the spec since 2026-10-09). Working substitute (2026-10-17): `GET /api/v1/on-chain/exchange-flows/BTC/history` — hourly CEX inflow/outflow/`net_24h` since 2026-05-28 (up to 93 days per call). The accumulation score never covered native BTC (ERC-20 only), and net exchange outflow is a proxy, not the same measure
 - `GET /api/v1/regimes/current` — regime classification; blocks entry in `Structural_Shock`
 
 **Historical data:**

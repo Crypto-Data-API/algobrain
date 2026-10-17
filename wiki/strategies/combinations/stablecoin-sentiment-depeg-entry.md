@@ -2,7 +2,7 @@
 title: "Stablecoin Depeg Sentiment Entry"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-04
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, stablecoins, arbitrage, behavioral-finance, mean-reversion, sentiment, crypto, defi]
 aliases: ["Stablecoin Panic Entry", "Depeg Sentiment Filter", "Fear-Driven Depeg Buy", "Stablecoin Sentiment-Extreme Gate"]
@@ -304,7 +304,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/on-chain/exchange-flows/USDC` — stablecoin exchange flow context; large USDC exchange inflows signal redemption pressure
 
 **Historical data:**
-- `GET /api/v1/sentiment/fear-greed?historical=true&days=730` — 2-year Fear & Greed history for backtesting; align with stablecoin-depeg-history events to calibrate the ≤ 15 threshold
+- `GET /api/v1/market-intelligence/fear-greed-history` — Fear & Greed history for backtesting; align with stablecoin-depeg-history events to calibrate the ≤ 15 threshold. *Corrected 2026-10-17: `/api/v1/sentiment/fear-greed` takes only `format`, so `historical=true&days=730` was ignored. `fear-greed-history` takes no params and returned a single dated entry when checked on 2026-10-17; the deepest served series is `GET /api/v1/backtesting/snapshots?data_type=fear_greed&start=...` (since 2026-05-09). A 2-year history is not available from CryptoDataAPI, so the past depeg events (2022-2023) need an external index archive such as alternative.me.*
 
 *Note: stablecoin spot prices (USDC/USD, USDT/USD on multiple venues) are NOT in CryptoDataAPI. Use exchange REST APIs directly: Binance `GET /api/v3/ticker/price?symbol=USDCUSDT`, Coinbase `GET /api/v3/brokerage/products/USDC-USD/ticker`. Curve pool composition: Curve Finance subgraph or DefiLlama. Issuer redemption status: Circle blog (`circle.com/blog`), Tether transparency (`tether.to/transparency`), MakerDAO governance forum.*
 

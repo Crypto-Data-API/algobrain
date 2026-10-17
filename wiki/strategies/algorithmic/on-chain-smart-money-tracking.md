@@ -2,7 +2,7 @@
 title: "On-Chain Smart Money Tracking"
 type: strategy
 created: 2026-05-04
-updated: 2026-09-03
+updated: 2026-10-17
 status: excellent
 tags: [crypto, algorithmic, scalping]
 aliases: ["Smart Wallet Tracking", "On-Chain Copy Trading", "Wallet Alpha"]
@@ -260,7 +260,7 @@ See [[when-to-retire-a-strategy]].
 - `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
 
 **Historical data:**
-- `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score timeseries
+- ~~`GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score timeseries~~ — **disabled** (503 `coming_soon`; unlisted from the spec since 2026-10-09). Working substitutes (2026-10-17): `GET /api/v1/on-chain/exchange-flows/spike-alerts?direction=outflow` (individual CEX transfers ≥ $1M by default) and `GET /api/v1/on-chain/exchange-flows/{symbol}/history` (net flow since 2026-05-28). Both track large CEX transfers, not the balances of non-exchange holder wallets
 - `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
 
 ```bash

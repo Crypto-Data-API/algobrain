@@ -276,7 +276,7 @@ CryptoDataAPI does **not** serve the full dated-quarterly-futures curve — asse
 - ~~`GET /api/v1/market-intelligence/borrow-interest`~~ — **retired**, no replacement (verified 2026-09-04, see [[cryptodataapi-market-intelligence]]); read the short-leg margin/borrow rate directly from the exchange instead
 
 **Historical / research:**
-- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding-rate history
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=100` — funding-rate history (`limit` caps at 100, about 33 days of 8h prints; corrected 2026-10-17. For longer Binance history use `GET /api/v1/backtesting/funding?symbol=BTCUSDT&exchange=binance&start=...`, archived since 2026-03-30)
 - `GET /api/v1/derivatives/binance/history?days=90` — daily derivatives series (funding, OI, long/short)
 - `GET /api/v1/backtesting/funding` — deep funding archive for basis backtests
 - `GET /api/v1/backtesting/klines` — OHLCV archive (spot vs futures basis studies)

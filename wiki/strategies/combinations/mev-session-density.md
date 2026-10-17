@@ -279,7 +279,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/regimes/current` — macro regime; Structural_Shock triggers HIGH density for liquidation MEV
 
 **Historical data:**
-- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=8760` — annual hourly OHLCV for session density calibration (volatility by UTC hour)
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=1000` — hourly OHLCV for session density calibration (volatility by UTC hour). `limit` caps at 1000, about 41 days (corrected 2026-10-17 from 8760); a full year of hourly bars comes from `GET /api/v1/backtesting/klines?symbol=BTCUSDT&interval=1h&start=...` (REST rows start 2026-05-09) plus the `klines_deep` 1h archive for earlier months
 
 *Note: MEV-specific data (bundle success rate, gross MEV revenue by block/hour, strategy breakdown) is not available via CryptoDataAPI. Use Flashbots Relay API (`boost-relay.flashbots.net/relay/v1/data/bidtraces`), Dune Analytics MEV dashboards, and the operator's own bundle execution log for session-density calibration.*
 
@@ -298,7 +298,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - **Vol override** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=2` — a large 15m BTC move forces HIGH density regardless of session
 - **Regime trigger** — `GET /api/v1/regimes/current` — `Structural_Shock` arms liquidation-MEV density
-- **Calibration** — hourly OHLCV by UTC session from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=8760`, extended by `GET /api/v1/backtesting/klines` (1h back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09)
+- **Calibration** — hourly OHLCV by UTC session from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=1000` (the cap; about 41 days, corrected 2026-10-17 from 8760), extended by `GET /api/v1/backtesting/klines` (1h back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09)
 - **Tips** — CryptoDataAPI covers only the market-volatility half of this strategy: join session-density calibration to your own bundle-log timestamps (Flashbots relay data) for the payoff half
 
 ## Related

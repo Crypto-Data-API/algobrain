@@ -282,7 +282,7 @@ Testable: split all [[momentum-rotation]] deployment dates into (a) falling-domi
 - BTC dominance 14-day RoC ≤ **−0.5 percentage points/week** (dominance falling)
 - AND BTC dominance ≤ its **50-day MA** (structural downtrend in dominance)
 - AND altcoin breadth ≥ **45%** of top-50 alts above their 200-day MA (broad participation)
-- Source: `GET /api/v1/market-health/altcoin-breadth?period=200` (breadth); BTC dominance from `GET /api/v1/market-health/summary` or `GET /api/v1/market-health/components`.
+- Source: `GET /api/v1/market-health/altcoin-breadth?ma_period=200` (breadth); BTC dominance from `GET /api/v1/market-health/summary` or `GET /api/v1/market-health/components`.
 
 **BTC-only mode (deploy BTC-only momentum; suppress alt-basket):**
 - BTC dominance 14-day RoC ≥ **+0.5 pp/week** (dominance rising)
@@ -419,7 +419,7 @@ def deployment_decision(mode: DominanceMode,
 ## Indicators / data used
 
 - **BTC dominance** — `GET /api/v1/market-health/components` or `GET /api/v1/market-health/component/btc_dominance` — BTC market cap as fraction of total crypto market cap; use `history` variant for 50-day MA calculation. Source: [[cryptodataapi-market-health]].
-- **Altcoin breadth** — `GET /api/v1/market-health/altcoin-breadth?period=200` — percentage of top-50 alts above their 200-day MA; used to confirm broad alt participation (Gate: alt-season mode requires ≥ 45%). Source: [[cryptodataapi-market-health]].
+- **Altcoin breadth** — `GET /api/v1/market-health/altcoin-breadth?ma_period=200` — percentage of top-50 alts above their 200-day MA; used to confirm broad alt participation (Gate: alt-season mode requires ≥ 45%). Source: [[cryptodataapi-market-health]].
 - **Market health history** — `GET /api/v1/market-health/history?days=90` — 90-day health score timeseries; compute 50-day MA of dominance component from this history.
 - **Meme regime** — `GET /api/v1/meme/regime` and `/meme/regime/score` — meme lifecycle (euphoric/ignition/distribution/dormant) helps identify within-alt-season sector rotation (meme-coin phase = ignition/euphoric; L1 blue-chip phase = earlier). Useful for sub-selecting which alts to include in the basket.
 - **Quant regime** — `GET /api/v1/quant/market` — HMM 6-regime classification; use to exclude `choppy_high_vol` regime from alt-momentum deployments even within alt-season mode (high-chop kills cross-sectional momentum).
@@ -520,7 +520,7 @@ The critical mechanic is the mode switch itself: the 14-day rate of change in BT
 ## Getting the Data (CryptoDataAPI)
 
 **Live data:**
-- `GET /api/v1/market-health/altcoin-breadth?period=200` — Alt-season gate: % of top-50 alts above 200d MA (≥ 45% required)
+- `GET /api/v1/market-health/altcoin-breadth?ma_period=200` — Alt-season gate: % of top-50 alts above 200d MA (≥ 45% required)
 - `GET /api/v1/market-health/summary` — BTC dominance current reading (component in summary)
 - `GET /api/v1/market-health/history?days=90` — 90-day health history for 50d MA computation
 - `GET /api/v1/meme/regime/score` — meme-hype score; use to sub-select meme alts during meme-season within broader alt-season
@@ -534,7 +534,7 @@ The critical mechanic is the mode switch itself: the 14-day rate of change in BT
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \
-  "https://cryptodataapi.com/api/v1/market-health/altcoin-breadth?period=200"
+  "https://cryptodataapi.com/api/v1/market-health/altcoin-breadth?ma_period=200"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-health]], [[cryptodataapi-regimes]], [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
@@ -545,7 +545,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-health]]
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
-- **Gate leg** — `GET /api/v1/market-health/altcoin-breadth?period=200` + `GET /api/v1/market-health/summary` — recompute the dominance mode (alt-season / BTC-only / ambiguous) daily; the mode decides which book runs
+- **Gate leg** — `GET /api/v1/market-health/altcoin-breadth?ma_period=200` + `GET /api/v1/market-health/summary` — recompute the dominance mode (alt-season / BTC-only / ambiguous) daily; the mode decides which book runs
 - **Momentum leg** — `GET /api/v1/market-data/klines?symbol={SYMBOL}USDT&interval=1d&limit=60` across the alt universe for the risk-adjusted momentum ranking; `GET /api/v1/derivatives/funding-rates?coin={symbol}` drops alts with 8h funding ≥ +0.06%
 - **Regime gate** — `GET /api/v1/quant/market` — suppress alt deployments while `choppy_high_vol` leads the HMM probabilities, even inside alt-season mode
 - **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) for basket returns; `GET /api/v1/market-health/history?days=730` caps the dominance-gate replay at ~2 years; `GET /api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus) extends the regime overlay further back

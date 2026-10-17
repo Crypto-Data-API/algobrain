@@ -82,7 +82,7 @@ Currently not rejected (`backtest_status: untested`). Testable prediction: ident
 
 **Gate 1: OI/Market-cap stress**
 - BTC (or ETH) perpetual open interest / spot market cap ≥ **3.0%** (elevated leverage load).
-- Source: computed from `/api/v1/derivatives/open-interest?coin=BTC` and BTC market cap (from `/api/v1/on-chain/score` or coingecko).
+- Source: computed from `/api/v1/derivatives/open-interest?coin=BTC` and BTC market cap (from the `market_cap` field of `/api/v1/coins/BTC`, or coingecko). *Corrected 2026-10-17: `/api/v1/on-chain/score` carries no market-cap input; its components are `hash_ribbon`, `mvrv`, `stablecoin_dry_powder`, `whale_accumulation`, `exchange_flow` and `miner_flow`.*
 - *Rationale:* the OI/MC ratio normalises OI by the size of the asset, making it comparable across market cycles. Above 3.0% has historically preceded notable corrections.
 
 **Gate 2: Funding stretched**
@@ -252,7 +252,7 @@ The production system adds: Deribit API polling for OTM put pricing and delta ca
 
 ## Indicators / data used
 
-- **Open interest / market cap** — OI: `/api/v1/derivatives/open-interest?coin=BTC` (24h rolling); market cap: `/api/v1/on-chain/score` includes market-cap inputs, or supplement from coingecko/coinmarketcap. The ratio OI/MC is computed from these two.
+- **Open interest / market cap** — OI: `/api/v1/derivatives/open-interest?coin=BTC` (24h rolling); market cap: the `market_cap` field of `/api/v1/coins/BTC`, or supplement from coingecko/coinmarketcap. *(Corrected 2026-10-17: an earlier version said `/api/v1/on-chain/score` includes market-cap inputs. It does not: its six components are `hash_ribbon`, `mvrv`, `stablecoin_dry_powder`, `whale_accumulation`, `exchange_flow` and `miner_flow`, and the `mvrv` component reports the ratio, not a cap.)* The ratio OI/MC is computed from these two.
 - **Funding rate (7-day average)** — `/api/v1/derivatives/funding-rates?coin=BTC`; 7-day average of 8h funding readings.
 - **Long/short ratio** — `/api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT`; directional crowding confirmation (Gate 3).
 - **DVOL** — `/api/v1/volatility/implied`; current DVOL vs 30-day trailing average for the "IV not yet spiked" gate.
@@ -366,7 +366,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/regimes/current` — macro regime classification; context for gate interpretation
 
 **Historical data:**
-- `GET /api/v1/derivatives/binance/history?days=180` — extended derivatives context (OI, funding, long/short historical series) for stress-composite backtest
+- `GET /api/v1/derivatives/binance/history?days=90` — extended derivatives context (OI, funding, long/short historical series) for stress-composite backtest. `days` caps at 90 (corrected 2026-10-17 from 180); for a 6-month OI + funding window use `GET /api/v1/derivatives/hyperliquid/history?symbol=BTC&days=180` (Hyperliquid, no long/short ratio)
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200` — daily OHLCV for realized-vol baseline and drawdown measurement from stress-window entries
 
 *Note: OTM put pricing (10-delta BTC put, specific strike and expiry) requires [[deribit]] API access directly — not currently documented as a CryptoDataAPI endpoint. DVOL index (the aggregate vol level) is available via CryptoDataAPI and serves as the IV baseline check.*
@@ -387,7 +387,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Stress gates** — `GET /api/v1/derivatives/open-interest?coin=BTC` (OI/MC, Gate 1), `GET /api/v1/derivatives/funding-rates?coin=BTC` (7d average, Gate 2), `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` (crowding, Gate 3)
 - **IV check** — `GET /api/v1/volatility/implied` — hedge only while IV has not yet spiked
 - **Context** — `GET /api/v1/regimes/current` — regime framing for gate interpretation
-- **Backtest** — `GET /api/v1/derivatives/binance/history?days=180` + `GET /api/v1/backtesting/klines` (daily back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) to measure drawdowns following stress-composite triggers; cascade outcomes are only verifiable via `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30)
+- **Backtest** — `GET /api/v1/derivatives/binance/history?days=90` (the cap; corrected 2026-10-17 from 180) or `GET /api/v1/derivatives/hyperliquid/history?symbol=BTC&days=180` for a 6-month window + `GET /api/v1/backtesting/klines` (daily back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09) to measure drawdowns following stress-composite triggers; cascade outcomes are only verifiable via `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30)
 - **Tips** — the gates move at daily cadence: one hourly `GET /api/v1/daily` poll covers all three stress inputs — reserve per-endpoint calls for threshold-crossing moments
 
 ## Related

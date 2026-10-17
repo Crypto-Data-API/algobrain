@@ -271,7 +271,7 @@ Re-engage: zones and halving overlay realign with a completed cycle turn, and on
 - `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical (the cycle-timing battery)
 - `GET /api/v1/market-intelligence/btc/cycle-indicators/{indicator}` — single indicator by name (e.g. MVRV-Z), historical
 - `GET /api/v1/market-data/btc-price-history?days=730` — BTC price history + 200-day MA
-- `GET /api/v1/on-chain/whales/accumulation-score/BTC` — whale accumulation score timeseries (accumulation-zone corroboration)
+- ~~`GET /api/v1/on-chain/whales/accumulation-score/BTC` — whale accumulation score timeseries (accumulation-zone corroboration)~~ — **disabled** (503 `coming_soon`; unlisted from the spec since 2026-10-09). Working substitute (2026-10-17): `GET /api/v1/on-chain/exchange-flows/BTC/history` — hourly CEX inflow/outflow/`net_24h` since 2026-05-28 (up to 93 days per call). The accumulation score never covered native BTC (ERC-20 only), and net exchange outflow is a proxy, not the same measure
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/on-chain/dormancy/btc"

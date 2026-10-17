@@ -349,7 +349,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 
 **Historical data:**
 - `GET /api/v1/sentiment/fear-greed` — extended Fear & Greed history for divergence-pattern back-test
-- `GET /api/v1/derivatives/binance/history?days=180` — 6-month funding and long/short history for threshold calibration
+- `GET /api/v1/derivatives/binance/history?days=90` — funding and long/short history for threshold calibration. `days` caps at 90 (corrected 2026-10-17 from 180); for a 6-month funding window use `GET /api/v1/derivatives/hyperliquid/history?symbol=BTC&days=180` (Hyperliquid, not Binance; it carries no long/short ratio)
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=365` — annual daily closes for washout-episode analysis
 
 ```bash

@@ -62,6 +62,9 @@ Quantitative strategies use mathematics and statistics to identify patterns, tes
 
 - [[liquidation-cascade-fade]] — Buying forced-liquidation overshoots in crypto perpetuals.
 - [[miner-capitulation-bottom]] — Timing Bitcoin cycle bottoms from miner stress indicators.
+- [[liquidation-density-magnet]] — Testing whether price is drawn toward a one-sided Hyperliquid liquidation cluster near the mark.
+- [[exchange-flow-spike-reaction]] — Trading single large exchange deposits: stablecoin dry powder (long) and BTC/ETH deposits (short).
+- [[forced-flow-exhaustion-fade]] — Fading liquidation-driven drops off the live event stream, only when open interest is falling.
 
 ### Calendar, Sentiment & Equity
 

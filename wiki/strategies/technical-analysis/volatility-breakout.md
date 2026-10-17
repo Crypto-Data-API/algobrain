@@ -2,7 +2,7 @@
 title: Volatility Breakout Strategy
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: review
 tags:
   - breakout
@@ -48,6 +48,148 @@ kill_criteria: |
   - NR7 expansion fails (false breakout) > 55% of the time over rolling 20 signals → tighten the contraction filter (require Bollinger squeeze simultaneously)
   - rolling 90-day P&L negative → pause; assess if ATR multiplier needs adjustment for current crypto vol regime
   - DVOL in vol_shock regime → pause new entries; the "contraction" may be artificial pre-spike suppression
+gates:
+  - id: nr7_contraction
+    role: entry
+    rule: "Setup: the latest closed daily range (high - low) is the narrowest of the last 7 days (NR7) (either this or squeeze_contraction)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60&atr=14
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}&atr=14
+    replay_field: candles[].high
+    note: "Range = high - low on the same row; compare the last closed bar with the 6 before it and drop the bar named by forming_bar_timestamp."
+  - id: atr_declining
+    role: entry
+    rule: "ATR(14) has declined on at least 2 consecutive days (half of squeeze_contraction)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60&atr=14
+    field: candles[].atr
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}&atr=14
+    replay_field: candles[].atr
+    note: "Closed bars only. The Rules do not name the ATR period here; the Indicators table's ATR is 14-period."
+  - id: bb_squeezing
+    role: entry
+    rule: "Bollinger Bands (20, 2.0) squeezing (half of squeeze_contraction)"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical?symbol={symbol}
+    field: items[].bollinger.in_squeeze
+    note: "Daily 20-period bands. The page gives no squeeze test: its example uses a band width at a 30-day low, and the kill criteria add the squeeze as a required filter without defining it. in_squeeze is the API's own percentile flag (bandwidth_pct and squeeze_percentile sit on the same row), so whether it matches the page's squeeze is the desk's call."
+  - id: squeeze_contraction
+    role: entry
+    rule: "Alternative setup: ATR declining for 2+ days while the Bollinger Bands squeeze (either this or nr7_contraction)"
+    runnable: partial
+    input: derived
+    inputs: [atr_declining, bb_squeezing]
+  - id: buy_stop_level
+    role: entry
+    rule: "Next day, buy stop at the previous daily close + X x ATR(14), X between 0.5 and 1.0 (the example and kill criteria use 0.6)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60&atr=14
+    field: candles[].atr
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}&atr=14
+    replay_field: candles[].atr
+    note: "Level = the last closed bar's close + X x its atr. The trigger is price trading through the level: a resting stop order, or assets[].mark_price on /api/v1/hyperliquid/open-interest (Hyperliquid stops trigger on mark). Intraday replay needs 1m bars from /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid, which start 2026-03-30."
+  - id: sell_stop_level
+    role: entry
+    rule: "Next day, sell stop at the previous daily close - X x ATR(14)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60&atr=14
+    field: candles[].atr
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}&atr=14
+    replay_field: candles[].atr
+    note: "Same level and trigger as buy_stop_level, mirrored."
+  - id: breakout_volume
+    role: filter
+    rule: "The breakout bar's volume above 1.5x the 20-day average volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60&atr=14
+    field: candles[].volume
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}&atr=14
+    replay_field: candles[].volume
+    note: "The stop fills inside the breakout bar, so its full daily volume is known only after the bar closes. The page does not say what to do with a filled trade whose bar then misses the 1.5x."
+  - id: trend_up_buy_only
+    role: filter
+    rule: "Daily close above the 50-period SMA: place only the buy stop"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={symbol}
+    field: items[].ma.above_50
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "above_50 compares the live mark with the daily SMA-50; for the page's close-based test compare the last closed daily close with items[].ma.sma_50. A symbol in not_covered needs the SMA from the daily closes."
+  - id: trend_down_sell_only
+    role: filter
+    rule: "Daily close below the 50-period SMA: place only the sell stop"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={symbol}
+    field: items[].ma.above_50
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Require above_50 false."
+  - id: vol_shock_pause
+    role: filter
+    rule: "No new entries while the volatility regime is vol_shock"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    note: "Per-asset daily label, as the kill criteria's 'CryptoDataAPI vol-regime = vol_shock' reads. The frontmatter words it as DVOL's regime; DVOL itself is on /api/v1/volatility/index. No history of the label is served for replay."
+  - id: compressed_entry
+    role: filter
+    rule: "Enter from the compressed volatility regime (the compressed to expanding transition)"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    note: "From the page's agent workflow, not its Rules. vol.days_compressed on the same row says how long the coin has been compressed."
+  - id: funding_agrees
+    role: filter
+    rule: "Arm the buy stop only when funding agrees with the trend filter; skip the counter side"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "From the agent workflow and the example (+0.006% per 8h read as 'no strong short pressure'). The page never says what 'agrees' means: a sign, or a band. HL funding is hourly; divide per-8h figures by 8."
+  - id: catalyst_present
+    role: filter
+    rule: "Skip an NR7 with no dated catalyst while universe volatility is depressed"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?symbol={symbol}
+    field: items[].days_until
+    note: "From the agent workflow's tips. The page sets no catalyst window and no level for 'depressed'; composite_score on /api/v1/volatility/regime/score (dormant below 30) is one reading. The calendar holds scheduled unlocks, mints, depegs and macro prints up to 30 days out."
+  - id: atr_target
+    role: exit
+    rule: "Take profit at the entry price + 2-3x ATR(14) for a long (minus for a short)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60&atr=14
+    field: candles[].atr
+    note: "ATR recorded at entry; the example uses 2x."
+  - id: time_exit
+    role: exit
+    rule: "Exit at market if the trade has not reached 1R profit within 3-5 bars"
+    runnable: true
+    input: position
+  - id: initial_stop_opposite
+    role: stop
+    rule: "Initial stop at the opposite breakout level: a long's stop sits at the sell-stop level"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "The Rules also say 'Risk per trade = 2x ATR', which holds only at X = 1. At the example's X = 0.6 the gap between the two levels is 1.2x ATR ($2,520; $2,560 from the $66,500 fill). Prose unchanged."
+  - id: chandelier_trail
+    role: stop
+    rule: "After 1R in profit, trail the stop at 2x ATR(14) below the highest close"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60&atr=14
+    field: candles[].atr
+    note: "The example anchors its trail at the 1R price ($69,060) rather than the highest close."
+  - id: risk_per_trade
+    role: sizing
+    rule: "Size each trade by ATR so the stop distance is the risk"
+    runnable: partial
+    input: position
+    note: "The page never sets the share of equity to risk per trade; it only says ATR sizing shrinks crypto units."
 ---
 
 # Volatility Breakout Strategy

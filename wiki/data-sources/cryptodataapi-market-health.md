@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Market Health"
 type: source
 created: 2026-07-13
-updated: 2026-09-28
+updated: 2026-10-17
 status: good
 tags: [data-provider, crypto, api, market-health, market-breadth, composite-score]
 aliases: ["CDA Market Health", "CryptoDataAPI Market Health", "cryptodataapi altcoin breadth", "cryptodataapi dual score"]
@@ -48,7 +48,7 @@ Tier "—" means the docs list no tier restriction for that endpoint.
 ## Example
 
 ```bash
-curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-health/altcoin-breadth?period=200"
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-health/altcoin-breadth?ma_period=200"
 ```
 
 ## Related

@@ -2,7 +2,7 @@
 title: "Liquidation Cascade Arbitrage"
 type: strategy
 created: 2026-04-24
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [arbitrage, crypto, defi, algorithmic]
 aliases: ["Liquidation Bot", "Cascade Front-Run", "Keeper Arbitrage", "MEV Liquidations", "Liquidator Strategy"]
@@ -22,6 +22,78 @@ expected_max_drawdown: 0.10
 breakeven_cost_bps: 50
 decay_evidence: "Liquidation bonuses unchanged since 2018-2020; competition extreme; ~$1B+ extracted across DeFi history."
 related: ["[[mev-strategies]]", "[[flash-loan-arbitrage]]", "[[funding-rate-arbitrage]]", "[[aave]]", "[[compound]]", "[[makerdao]]", "[[liquity]]", "[[gmx]]", "[[hyperliquid]]", "[[2022-05-terra-luna-depeg-arb]]", "[[counterparty-stress-arbitrage]]", "[[2006-09-amaranth-natural-gas-blowup]]", "[[fastest-profitable-trades]]", "[[cryptodataapi]]"]
+gates:
+  - id: position_index
+    role: universe
+    rule: "Keeper: index every open position on the target protocols (Aave V2/V3, Compound V2/V3, Maker, Liquity, GMX, Hyperliquid)"
+    runnable: false
+    note: "We serve no lending-position graph or per-position collateral and debt for any of these protocols. Hyperliquid liquidation levels are served only as aggregated bands (/api/v1/backtesting/liquidation-density), not as positions."
+  - id: oracle_ticks
+    role: entry
+    rule: "Keeper: recompute on every oracle price update (Chainlink, Pyth, internal oracles)"
+    runnable: false
+    note: "No Chainlink or Pyth tick feed and no mempool are served. Hyperliquid's own oracle_price on /api/v1/hyperliquid/open-interest is a polled snapshot, and Hyperliquid liquidations go to its HLP vault rather than to outside keepers (the page's own bonus table)."
+  - id: health_factor_below_1
+    role: entry
+    rule: "Keeper: liquidate when a position's health factor falls below 1"
+    runnable: false
+    note: "Needs the position graph from position_index and the oracle ticks from oracle_ticks; we serve neither."
+  - id: bonus_exceeds_gas
+    role: filter
+    rule: "Keeper: submit only when the expected bonus exceeds gas cost x a safety margin"
+    runnable: false
+    note: "No gas price or builder-bid data is served, and the pseudocode never sets the safety margin. The bonus rates are in the page's table."
+  - id: keeper_exit_atomic
+    role: exit
+    rule: "Keeper: the exit is atomic, inside the same transaction as the liquidation"
+    runnable: true
+    input: position
+  - id: cascade_count_1m
+    role: entry
+    rule: "Follower: more than 10 liquidations in 1 minute on a single protocol (either this or dex_overshoot_5pct)"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-liquidations?coin={coin}&start={start}
+    field: data[].time
+    replay: /api/v1/backtesting/hl-liquidations?coin={coin}&start={start}&end={end}
+    replay_field: data[].time
+    note: "start = 60 seconds ago; omit coin for every Hyperliquid perp. One liquidation order that sweeps several book levels is several rows at one time, so count distinct (time, liquidated_user) pairs, not rows. Only Hyperliquid's tape is served (from 2026-07-23); the lending protocols' and GMX's liquidation events are not, so the count covers one of the page's protocols."
+  - id: dex_overshoot_5pct
+    role: entry
+    rule: "Follower: DEX price more than 5% below the CEX index (either this or cascade_count_1m)"
+    runnable: partial
+    endpoint: /api/v1/dex/token/{chain}/{asset}
+    field: top_pools[].price_usd
+    note: "{asset} here is the token's contract address on {chain}. Compare the pool price with last_price on /api/v1/market-data/ticker/24hr?symbol={symbol}USDT (Binance spot, the pseudocode's index). The route does not state how often the pool price refreshes, and a cascade overshoot lasts seconds to minutes. The Rules make this OR the count; the pseudocode requires both (count above 10 AND DEX below 0.95 x CEX). Prose unchanged."
+  - id: spread_close_exit
+    role: exit
+    rule: "Follower: exit both legs when the DEX/CEX spread is back within 30 bps"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/dex/token/{chain}/{asset}
+    field: top_pools[].price_usd
+    note: "Same pool-price and index caveats as dex_overshoot_5pct. The pseudocode's 0.003 matches the 30 bps."
+  - id: follower_size
+    role: sizing
+    rule: "Follower: size the DEX buy and the matching perp hedge"
+    runnable: partial
+    input: position
+    note: "The page never sizes the trade (the pseudocode's amount); its Capacity section caps a cascade-follower trade near $10M per event."
+  - id: fragility_gate
+    role: filter
+    rule: "Follower: skip entries in high-depth, low-fragility conditions"
+    runnable: partial
+    endpoint: /api/v1/liquidity/regime/score
+    field: composite_score
+    note: "From the page's agent workflow, which sets no level on the 0-100 fragility score. No history of the score is served for replay."
+  - id: vol_spike_crosscheck
+    role: filter
+    rule: "Follower: cross-check the HMM market regime for vol_spike"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_4
+    note: "From the page's agent workflow, which gives no probability cut-off. post_label_4 is the vol_spike posterior in the replay rows; live, probabilities.regime_transitions.to_vol_spike is the chance of moving into it."
 ---
 
 # Liquidation Cascade Arbitrage

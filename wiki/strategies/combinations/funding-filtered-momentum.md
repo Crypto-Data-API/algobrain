@@ -291,7 +291,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/regimes/current` — current 10-state market regime for regime kill
 
 **Historical data:**
-- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding history for backtest signal reconstruction
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=100` — funding history for backtest signal reconstruction (`limit` caps at 100, about 33 days of 8h prints; corrected 2026-10-17. For longer Binance history use `GET /api/v1/backtesting/funding?symbol=BTCUSDT&exchange=binance&start=...`, archived since 2026-03-30)
 - `GET /api/v1/derivatives/binance/history?days=90` — daily derivatives series (funding + OI together)
 - `GET /api/v1/backtesting/funding` — deep funding archive (2020+) for multi-regime backtests
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=200` — OHLCV for momentum signal computation
@@ -311,7 +311,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Momentum leg** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=200` — the breakout/momentum signal computation
 - **Funding filter** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — enter only while the crowd is not yet positioned (funding below the cap); `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` as the secondary crowding check
 - **Regime gate** — `GET /api/v1/regimes/current` — the regime kill from the rules above
-- **Backtest** — `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) × `GET /api/v1/backtesting/klines` (4h back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); older Binance funding via `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` paging
+- **Backtest** — `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) × `GET /api/v1/backtesting/klines` (4h back to 2017-08 only in the `klines_deep` archive, while the REST route starts 2026-05-09); older Binance funding is not served. *(Corrected 2026-10-17: an earlier version said to page `GET /api/v1/derivatives/binance/funding-rates` with a limit of 500; that route caps `limit` at 100, about 33 days of 8h prints, and does not page.)*
 - **Tips** — pair replays with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) so the funding filter sees point-in-time values; batch multi-coin screens through `GET /api/v1/quant/coins/risk` instead of per-symbol loops
 
 ## Related

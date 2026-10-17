@@ -2,7 +2,7 @@
 title: "Crypto Beta Rotation"
 type: strategy
 created: 2026-07-14
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [quantitative, crypto, bitcoin, market-regime, regime-detection, correlation, risk-management, macro]
 aliases: ["Crypto Risk-On/Off Rotation", "Crypto Macro Regime Rotation", "Crypto Beta Hedging Overlay", "DXY Nasdaq Crypto Rotation", "Risk-Regime De-Beta"]
@@ -41,6 +41,87 @@ last_review: 2026-07-14
 next_review: 2026-08-14
 
 related: ["[[crypto-macro-correlation-regime]]", "[[macro-trend-regime]]", "[[bitcoin-cycle-regime]]", "[[dxy]]", "[[correlation]]", "[[vix]]", "[[gold]]", "[[regime-detection]]", "[[momentum-rotation]]", "[[macro-relative-value]]", "[[yen-carry-trade]]", "[[tail-risk-hedging]]", "[[funding-rate]]", "[[bitcoin]]", "[[ethereum]]", "[[position-sizing]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi-sentiment]]", "[[cryptodataapi]]"]
+gates:
+  - id: corr_gate
+    role: filter
+    rule: "Overlay active only while the 30-day BTC-Nasdaq rolling correlation is at or above 0.40; below it, hold static exposure"
+    runnable: false
+    note: "We serve no Nasdaq or other equity-index series, so the master gate cannot be computed. The BTC leg is on /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=60 (klines[].close); the page itself says the Nasdaq series stays external."
+  - id: dxy_risk_off
+    role: filter
+    rule: "Score +1 while DXY is above its 50-day MA and rising, otherwise -1"
+    runnable: partial
+    endpoint: /api/v1/sentiment/macro
+    field: eur_usd_latest
+    replay: /api/v1/backtesting/snapshots?data_type=macro&start={start}
+    replay_field: snapshots[].data.eur_usd_latest
+    note: "No DXY is served. EUR/USD is the proxy the page names (inverse: EUR/USD below its 50-day MA and falling reads as dollar strength), but EUR is only about 58% of DXY. The 50-day MA comes from the macro snapshots (from 2026-05-09). 'Rising' has no window; eur_usd_7d_change_pct on the live call is one reading."
+  - id: vol_stress_high
+    role: filter
+    rule: "Score +1 while the crypto vol-stress composite is above 60"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    replay: /api/v1/volatility/index/history?days=365
+    replay_field: points[].composite_score
+    note: "The pseudocode tests the level; the Rules also say 'rising'. The CVI history carries the same 0-100 composite (both read 53.0 on 2026-10-17), one point per day (Pro Plus); days before 2026-08-24 are reconstructed and flagged backfilled."
+  - id: vix_spike
+    role: filter
+    rule: "Score +1 on an equity VIX spike"
+    runnable: false
+    note: "No VIX is served, and the page defines no spike size. /api/v1/volatility/index is crypto realized and implied vol, not VIX."
+  - id: policy_tilt
+    role: filter
+    rule: "Score +1 when the policy/rates tilt is hawkish (hawkish rate calendar, rising real yields), -1 when dovish"
+    runnable: false
+    note: "Nothing served measures a hawkish or dovish rates stance. /api/v1/policy/regime lists scheduled rate decisions (items[].days_until) with bias risk_flag only, and its policy_tilt is the tone of crypto-regulation news (pro-crypto vs restrictive), not rates. treasury_yield on /api/v1/sentiment/macro is a nominal Treasury rate, not a real yield."
+  - id: funding_collapsing
+    role: filter
+    rule: "Score +1 when funding is collapsing (together with liquidity_fragile)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin=BTC&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin=BTC&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "The page gives no size or window for 'collapsing'; its example describes funding falling from positive toward zero."
+  - id: liquidity_fragile
+    role: filter
+    rule: "Liquidity fragility is rising (together with funding_collapsing)"
+    runnable: partial
+    endpoint: /api/v1/liquidity/regime/score
+    field: composite_score
+    note: "Higher composite_score is healthier, so fragility rising is the score falling. The page sets no threshold. Forward-only: the per-coin regime is archived as liquidity_regime snapshots from 2026-05-30."
+  - id: risk_regime_score
+    role: filter
+    rule: "Score at or above 3 is RISK_OFF, at or below -1 is RISK_ON, otherwise NEUTRAL"
+    runnable: false
+    input: derived
+    inputs: [dxy_risk_off, vol_stress_high, vix_spike, policy_tilt, funding_collapsing, liquidity_fragile]
+    note: "Not runnable because two of its five terms (VIX, policy tilt) are not served."
+  - id: target_beta
+    role: sizing
+    rule: "Target crypto beta 1.0 risk-on, 0.6 neutral, 0.15 risk-off (plus a hedge); hold static exposure when decoupled"
+    runnable: false
+    input: derived
+    inputs: [corr_gate, risk_regime_score]
+    note: "The pseudocode's point values sit inside the table's ranges (0.5-0.7 neutral, 0.0-0.3 risk-off)."
+  - id: hysteresis_band
+    role: sizing
+    rule: "Change target beta only when it is at least 0.25 away from the current beta"
+    runnable: true
+    input: position
+  - id: rebalance_cadence
+    role: sizing
+    rule: "Rebalance target beta daily to weekly; no intraday churn"
+    runnable: true
+    input: position
+  - id: hedge_cost_cap
+    role: sizing
+    rule: "Hedge (short BTC/ETH perp) only when the funding/basis cost over the expected risk-off window is below the modelled drawdown avoided; otherwise reduce longs or stand down"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: current_rate
+    note: "Funding on the hedge leg is served (hourly on Hyperliquid). The expected window and the drawdown avoided are model outputs the page does not define."
 ---
 
 # Crypto Beta Rotation

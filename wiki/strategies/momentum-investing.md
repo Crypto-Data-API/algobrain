@@ -2,7 +2,7 @@
 title: "Momentum Investing"
 type: strategy
 created: 2026-04-15
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [quantitative, momentum, trend-following, backtesting]
 aliases: ["Momentum Investing", "Momentum Strategy", "Cross-Sectional Momentum", "Momentum Stocks", "Stock Momentum", "Momentum Trading", "momo trading"]
@@ -21,6 +21,91 @@ crowding_risk: high
 expected_sharpe: 0.5
 expected_max_drawdown: 0.50
 breakeven_cost_bps: 50
+gates:
+  - id: mcap_floor
+    role: universe
+    rule: "Liquid names only: market cap above $1B"
+    runnable: true
+    endpoint: /api/v1/coins/top?limit=100
+    field: coins[].market_cap
+    note: "The Rules define the universe in equity terms (S&P 500 / Russell 1000, or $1B cap and $10M median dollar volume); the page's crypto expression uses the top 100 coins by market cap, and the $1B floor is the pseudocode's. limit tops out at 100. Drop stablecoins (categories) before ranking."
+  - id: median_dollar_volume
+    role: universe
+    rule: "Median daily dollar volume above $10M"
+    runnable: partial
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=365
+    field: klines[].quote_volume
+    note: "Binance spot USDT volume per day. The page sets no window for the median (the pseudocode just reads s.median_dollar_vol); the 12-month signal window is one reading."
+  - id: momentum_signal
+    role: entry
+    rule: "Signal = cumulative return from month t-12 to month t-2 (12-month lookback, skip the latest month)"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=365
+    field: klines[].close
+    replay: /api/v1/backtesting/klines?symbol={symbol}USDT&interval=1d&start={start}
+    replay_field: klines[].c
+    note: "The pseudocode counts 21 trading days per month (equity calendar); crypto trades every day, so a month is about 30 bars and the window 365. The REST replay starts 2026-05-09, too short for a 12-month signal; deeper daily history is in the klines_deep Parquet archive. A coin listed under a year ago has no signal."
+  - id: top_decile_long
+    role: entry
+    rule: "At month-end, buy the top decile by the signal (top quintile for a lower-turnover book), equal or vol weighted"
+    runnable: true
+    input: derived
+    inputs: [mcap_floor, momentum_signal]
+    note: "On a 100-coin universe the top decile is about 10 names, below the 30-100 names the sizing rule asks for (name_count)."
+  - id: bottom_decile_short
+    role: entry
+    rule: "Long-short variant: also short the bottom decile, sized to dollar or beta neutrality"
+    runnable: true
+    input: derived
+    inputs: [mcap_floor, momentum_signal]
+  - id: monthly_rebalance
+    role: exit
+    rule: "Rebalance monthly: sell names that leave the top decile or quintile, buy new entrants; the rank is the only exit"
+    runnable: true
+    input: derived
+    inputs: [top_decile_long]
+  - id: hold_band
+    role: exit
+    rule: "Hold-band variant: sell a holding only when it drops below the top 20%"
+    runnable: true
+    input: derived
+    inputs: [momentum_signal]
+  - id: name_cap
+    role: sizing
+    rule: "Equal weight, capped at 5% per name"
+    runnable: true
+    input: position
+  - id: name_count
+    role: sizing
+    rule: "Hold 30-100 names"
+    runnable: true
+    input: position
+  - id: vol_scaling
+    role: sizing
+    rule: "Scale gross exposure by min(1, 12% target vol / trailing 6-month realized strategy vol)"
+    runnable: true
+    input: position
+    note: "Realized vol of the strategy's own returns."
+  - id: bear_market
+    role: sizing
+    rule: "Crash guard, part one: the trailing 24-month market return is negative (together with high_market_vol)"
+    runnable: partial
+    endpoint: /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000
+    field: klines[].close
+    note: "The page's 'market' is an equity index. BTC daily closes (730 bars) are one crypto stand-in; a cap-weighted coin index is another. Which one is the desk's call. The agent workflow maps the whole guard to strong_trend_bear and vol_spike on /api/v1/quant/market instead."
+  - id: high_market_vol
+    role: sizing
+    rule: "Crash guard, part two: market volatility is in its top quintile (63-day realized-vol percentile above 0.80)"
+    runnable: partial
+    endpoint: /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000
+    field: klines[].close
+    note: "Same market-proxy choice as bear_market. The page does not say over what history the percentile is ranked."
+  - id: crash_derisk
+    role: sizing
+    rule: "When bear_market and high_market_vol both hold, halve gross exposure and drop the short leg"
+    runnable: partial
+    input: derived
+    inputs: [bear_market, high_market_vol]
 ---
 
 Momentum investing is a strategy that buys assets that have performed well over a recent period (typically 3-12 months) and sells or avoids assets that have performed poorly. It is one of the most thoroughly researched anomalies in finance, with academic evidence spanning over a century of data across dozens of markets worldwide. The strategy exploits the empirical tendency of asset returns to persist in the intermediate term -- past winners continue to outperform past losers for periods of several months before eventually reversing. It is the cross-sectional cousin of [[trend-following]] (time-series momentum) and a core member of the [[factor-investing|factor]] zoo alongside value and size.

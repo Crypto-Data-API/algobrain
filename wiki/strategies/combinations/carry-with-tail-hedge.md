@@ -2,7 +2,7 @@
 title: "Carry with Tail Hedge"
 type: strategy
 created: 2026-07-18
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, funding-rate, arbitrage, derivatives, risk-management, tail-risk, market-neutral, quantitative, crypto]
 aliases: ["Hedged Carry", "Tail-Hedged Funding Carry", "Carry Book with Convexity", "Funded Tail Protection"]
@@ -256,7 +256,7 @@ Re-deploy when funding recovers above 0.015%/8h average, hedge IV/RV drops below
 - `GET /api/v1/derivatives/summary?coin=BTC` — combined carry book snapshot
 
 **Historical data:**
-- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding history for budget projection
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=100` — funding history for budget projection (`limit` caps at 100, about 33 days of 8h prints; corrected 2026-10-17. For longer Binance history use `GET /api/v1/backtesting/funding?symbol=BTCUSDT&exchange=binance&start=...`, archived since 2026-03-30)
 - `GET /api/v1/backtesting/funding` — deep funding archive for hedge-budget calibration backtests
 - `GET /api/v1/market-intelligence/options` — BTC options OI, volume, max pain (complement to Deribit data for hedge sizing)
 
@@ -275,7 +275,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - **Carry leg** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — cross-exchange funding drives both carry entries and the rolling hedge budget
 - **Crowding filter** — `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` + `GET /api/v1/derivatives/open-interest?coin=BTC` — skip carry entries into crowded, OI-stretched books
 - **Hedge leg** — `GET /api/v1/market-intelligence/options` — BTC options OI / max-pain context for put-strike selection (strike-level pricing itself comes from Deribit)
-- **Backtest** — `GET /api/v1/backtesting/funding` — Hyperliquid hourly funding since 2023-05, Binance daily since 2026-03-30; older Binance funding via `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` paging
+- **Backtest** — `GET /api/v1/backtesting/funding` — Hyperliquid hourly funding since 2023-05, Binance daily since 2026-03-30; older Binance funding is not served. *(Corrected 2026-10-17: an earlier version said to page `GET /api/v1/derivatives/binance/funding-rates` with a limit of 500; that route caps `limit` at 100, about 33 days of 8h prints, and does not page.)*
 - **Tips** — replay the hedge-budget rules against point-in-time states from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) so "when the hedge was cheap" is judged without lookahead
 
 ## Related

@@ -2,7 +2,7 @@
 title: "Kalman Filter Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [kalman-filter, adaptive, signal-processing, noise-reduction, quantitative, pairs-trading, dynamic-estimation, crypto]
 aliases: ["Kalman Filter Strategy", "Adaptive Filter Trading", "KF Signal Extraction"]
@@ -28,6 +28,118 @@ kill_criteria: |
   - realized half-life of the filtered residual > 2x modeled over a 40-trade sample
   - median realized round-trip cost > 30 bps for a full month
 related: ["[[pairs-trading]]", "[[mean-reversion]]", "[[statistical-arbitrage]]", "[[ornstein-uhlenbeck]]", "[[moving-averages]]", "[[regime-detection]]", "[[cointegration]]", "[[cryptodataapi]]"]
+gates:
+  - id: cointegrated
+    role: universe
+    rule: "Trade a pair only after a cointegration test rejects at p below 0.05"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1h&start={start}
+    replay_field: klines[].c
+    note: "One call per leg, joined on candles[].timestamp. The page sets no test window; the example tunes Q/R on 6 months of 1h data (about 4,380 bars, inside the 15,000-bar range cap). The data section feeds ETH from Binance klines and BTC from Hyperliquid; both legs are Hyperliquid perps, so one venue is used here. The REST replay starts 2026-05-09; deeper history is in the klines Parquet archive."
+  - id: kalman_beta
+    role: sizing
+    rule: "Hedge ratio beta is the Kalman state (a slow random walk), updated every bar; Q and R tuned by maximum likelihood on history and validated out of sample (pseudocode defaults Q=1e-5, R=1e-3)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1h&start={start}
+    replay_field: klines[].c
+    note: "Closed bars only: drop the bar named by forming_bar_timestamp. In the pseudocode leg A is the one regressed on leg B (a = beta x b), so in the ETH/BTC example A is BTC and B is ETH, beta about 14.8 ETH per BTC."
+  - id: z_long_entry
+    role: entry
+    rule: "Long the spread when the normalised innovation z = innovation / sqrt(innovation variance) is at or below -2.0 (either this or z_short_entry)"
+    runnable: true
+    input: derived
+    inputs: [kalman_beta]
+  - id: z_short_entry
+    role: entry
+    rule: "Short the spread when z is at or above +2.0 (either this or z_long_entry)"
+    runnable: true
+    input: derived
+    inputs: [kalman_beta]
+  - id: z_reverted
+    role: exit
+    rule: "Close both legs when z returns to 0"
+    runnable: true
+    input: derived
+    inputs: [kalman_beta]
+  - id: z_partial_exit
+    role: exit
+    rule: "Take a partial exit when |z| is back within 0.5"
+    runnable: true
+    input: derived
+    inputs: [kalman_beta]
+  - id: z_divergence_stop
+    role: stop
+    rule: "Close both legs when |z| reaches 3.0 (the Rules allow 3.0-3.5)"
+    runnable: true
+    input: derived
+    inputs: [kalman_beta]
+  - id: whiteness_stop
+    role: stop
+    rule: "Halt a spread when its innovation sequence fails a rolling whiteness test (re-checked weekly)"
+    runnable: partial
+    input: derived
+    inputs: [kalman_beta]
+    note: "The page names no test (Ljung-Box is the usual one), lag count, window or significance level."
+  - id: half_life_time_stop
+    role: stop
+    rule: "Close after 2x the Ornstein-Uhlenbeck half-life of the filtered residual"
+    runnable: true
+    input: position
+    note: "The half-life is fitted on the residual from kalman_beta; days held come from the position record."
+  - id: no_vol_or_trend_regime
+    role: filter
+    rule: "Open no new spreads while the HMM market regime is vol_spike, strong_trend_bull or strong_trend_bear"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's agent workflow, not its Rules: in those states beta breaks rather than drifts."
+  - id: uncertainty_scaled_size
+    role: sizing
+    rule: "Scale size down as the filter's posterior variance widens"
+    runnable: partial
+    input: derived
+    inputs: [kalman_beta]
+    note: "The posterior variance P is served by the recursion, but the page gives no mapping from variance to size."
+  - id: risk_per_spread
+    role: sizing
+    rule: "Risk at most 0.5-1% of equity per spread"
+    runnable: true
+    input: position
+  - id: gross_leverage
+    role: sizing
+    rule: "Keep gross leverage modest"
+    runnable: partial
+    input: position
+    note: "No number is given."
+  - id: kalman_ma_long
+    role: entry
+    rule: "Adaptive-MA mode: long when price crosses above the Kalman level estimate (either this or kalman_ma_short)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=500
+    field: candles[].close
+    note: "A separate trend tool, not the pairs edge. The page gives only qualitative Q/R guidance (high = fast, low = smooth) and no values for this mode."
+  - id: kalman_ma_short
+    role: entry
+    rule: "Adaptive-MA mode: short when price crosses below the Kalman level estimate (either this or kalman_ma_long)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=500
+    field: candles[].close
+    note: "Same undefined Q/R as kalman_ma_long."
+  - id: kalman_ma_regime_gate
+    role: filter
+    rule: "Adaptive-MA mode: gate it by regime detection"
+    runnable: partial
+    endpoint: /api/v1/quant/coins/{symbol}
+    field: regime.label
+    replay: /api/v1/quant/history?scope={symbol}&start={start}
+    replay_field: entries[].regime_label
+    note: "The page names no regime that permits the trend mode."
 ---
 
 # Kalman Filter Trading
