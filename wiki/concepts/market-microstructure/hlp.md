@@ -2,8 +2,8 @@
 title: "HLP (Hyperliquidity Provider)"
 type: concept
 created: 2026-06-20
-updated: 2026-07-13
-status: draft
+updated: 2026-10-17
+status: review
 tags: [crypto, market-microstructure, liquidity, derivatives, defi]
 aliases: ["Hyperliquidity Provider", "HLP Vault", "HLP"]
 related: ["[[hyperliquid]]", "[[hyperliquid-vault-architecture]]", "[[hlp-withdrawal-mechanics]]", "[[hyperliquid-hlp-basis-arbitrage]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-order-book-microstructure]]", "[[latency-and-mev-on-chain-clob]]", "[[clob]]", "[[market-microstructure]]", "[[funding-rate]]", "[[hypercore]]", "[[hip-3-builder-deployed-perps]]", "[[cryptodataapi]]"]
@@ -66,7 +66,7 @@ Hyperliquid's fee design routes trading fees back to the community rather than t
 | **Community direction** | Fees flow to HLP, assistance fund, and deployers (no fees to a corporate operator) | Makes HLP returns a function of platform fee volume |
 | **HIP-3 fee shares** | Deployers of HIP-3 markets can configure their own fee shares | HIP-3 markets have separate fee economics from the core protocol that funds HLP |
 
-Because HLP captures both maker rebates on its own fills and a community share of protocol fees, its return profile scales with Hyperliquid's overall volume and liquidation activity. See [[hyperliquid-funding-rate-microstructure]] for how funding — the third revenue leg — is computed from order-book impact prices.
+Because HLP captures both maker rebates on its own fills and a community share of protocol fees, its return profile scales with Hyperliquid's overall volume and liquidation activity. *(Caveat 2026-10-17: other wiki pages put the large majority of platform fees into the **Assistance Fund's HYPE buybacks** ([[hype-token]]: "up to ~97%"), which would leave HLP's direct fee share small. Its returns would then come mainly from its own market-making spread, rebates, liquidations and funding. See Contradictions.)* See [[hyperliquid-funding-rate-microstructure]] for how funding — the third revenue leg — is computed from order-book impact prices.
 
 ---
 
@@ -77,6 +77,34 @@ Because HLP captures both maker rebates on its own fills and a community share o
 - **[[hyperliquid-hlp-basis-arbitrage]]** — the trader's side: strategies that run *alongside* HLP, depositing for carry while hedging the tail elsewhere. Read this for *how to trade around HLP*.
 
 This page (HLP) is the orientation hub that links the three; it deliberately summarizes rather than duplicates them.
+
+### Strategies that trade with or around HLP
+
+| Strategy | Relationship to HLP |
+|---|---|
+| [[hyperliquid-hlp-basis-arbitrage]] | Deposit for carry and hedge the tail elsewhere |
+| [[hlp-cascade-alongside-playbook]] | Size and time HLP deposits around expected cascade windows |
+| [[hyperliquid-market-making]] | Competes with HLP for the same spread and rebates |
+| [[multi-venue-capital-management]] | Treats HLP's lock-up as an illiquid sleeve in cross-venue capital planning |
+| [[liquidation-density-magnet]] / [[long-liquidation-cascade]] | Trade the liquidation flow HLP backstops |
+
+### Key risks for a depositor (dated record)
+
+- **Thin-pair manipulation:** JELLYJELLY, March 2025, was the canonical case; validators intervened and settled the market ([[2025-03-jellyjelly-hlp-attack]], [[hyperliquid-oracle-mechanics]]).
+- **System-wide cascades:** in the October 10-11, 2025 event, ADL ran across Hyperliquid ([[2025-10-crypto-liquidation-cascade]]). HLP's backstop and ADL ordering decide who absorbs a gap.
+- **Discretionary intervention:** validators have shown they will override market outcomes under stress. This bounds HLP losses, but it is a governance risk to price.
+- **Lock-up:** 4 days. Capital stays at risk during the lock, and the trigger rule is disputed ([[hlp-withdrawal-mechanics]]).
+
+### Contradictions
+
+> **Claim A** (Source: [[2026-04-22-gap-finder-hyperliquid-order-books]], confidence: HIGH, citing Hyperliquid fee docs): fees "are directed to the community (HLP, assistance fund, deployers)". This page originally read this as making HLP "one of the primary recipients of protocol revenue".
+> **Claim B** (Source: [[hype-token]], [[hyperliquid-vs-asterdex-vs-tiger-brokers]], confidence: MEDIUM): "up to ~97% of platform fees" go to the Assistance Fund for HYPE buybacks; [[narrative-signals]] cites ~99%.
+> **Resolution**: The claims are compatible on recipients but not on emphasis. Claim B implies HLP's *direct* fee share is small. Pending the current split from the Hyperliquid fee docs. Until then, model HLP returns from its trading P&L, not from a fee share.
+
+> **Claim A** (Source: [[hyperliquid-vault-architecture]], [[hypurrscan]], confidence: MEDIUM): JELLYJELLY cost HLP a ~$13M paper loss before intervention.
+> **Claim B** (Source: [[lp-vault-comparison]], confidence: LOW): "~25% on JELLYJELLY incident" in its vault table.
+> **Claim C** (Source: [[hlp-withdrawal-mechanics]], confidence: LOW): uses "-15%" as the worst plausible JELLYJELLY-style drawdown for sizing.
+> **Resolution**: Claim A is favoured. It is a dollar figure repeated on two pages. A ~25% vault-level drawdown is inconsistent with a ~$13M loss on a vault of hundreds of millions of dollars. Claim C is a sizing assumption, not a measurement.
 
 ---
 
@@ -92,12 +120,16 @@ This page (HLP) is the orientation hub that links the three; it deliberately sum
 - `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=1000` — OHLCV candles
 - `GET /api/v1/hyperliquid/funding-rates?coin=BTC&limit=100` — current + historical funding
 - `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+- `GET /api/v1/backtesting/hl-liquidation-bars?coin=BTC&interval=15m&start=2026-01-01` — incremental Hyperliquid liquidation flow from exact fills (the volume HLP's liquidator leg works against)
+- `GET /api/v1/backtesting/liquidation-density?coin=ETH&start=2026-07-01` — liquidation density near mark, split by `trader_type` (including `vault`) and leverage bucket (history from 2026-06-26)
+
+**HLP's own book:** `GET /api/v1/hyperliquid/trader-profile/{address}?days=90` computes fill-history stats for *any* Hyperliquid address, including the public HLP vault address (take it from the Hyperliquid UI or an explorer such as [[hypurrscan]]). `GET /api/v1/hyperliquid/wallet-positions?address=...` shows its current positions, which is the concentration check in the risk list above.
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BTC"
 ```
 
-Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid]].
+Auth: `X-API-Key` header. Full endpoint catalogs: [[cryptodataapi-hyperliquid]], [[cryptodataapi-hyperliquid-traders]], [[cryptodataapi-backtesting]].
 
 ## Related
 

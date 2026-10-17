@@ -86,7 +86,7 @@ Live check on 2026-10-17 (BTC, 2026-10-16 00:00 to 02:00 UTC, 1h): mark 82,225.5
 
 ### Snapshot types added by the 2026-10 releases
 
-- **`exchange_flow_spikes` (new 2026-10-08).** Every row of `/on-chain/exchange-flows/spike-alerts` is archived. Each 5-minute snapshot holds only the rows first seen in that tick, so a range lists each transfer once. History starts **2026-10-08 00:25 UTC**. The live endpoint keeps only the last 500 rows (about 10 hours), so this archive is the only way to backtest spike alerts. Rows carry the new `source` field (`transfer` or `balance_delta`). See [[cryptodataapi-on-chain]].
+- **`exchange_flow_spikes` (new 2026-10-08).** Every row of `/on-chain/exchange-flows/spike-alerts` is archived. Each 5-minute snapshot holds only the rows first seen in that tick, so a range lists each transfer once. History starts **2026-10-08 00:25 UTC**. The live endpoint keeps only the last 500 rows (about 10 hours), so this archive is the only way to backtest spike alerts. Rows carry the new `source` field (`transfer` or `balance_delta`). Each row's `ts` is unix **seconds**, while the snapshot `time` is milliseconds (verified 2026-10-17). See [[cryptodataapi-on-chain]].
 - **`whale_activity` universe widened (2026-10-14).** From 2026-10-14 the snapshot carries the 100 coins in `/quant/whales` `top_coins`. Snapshots before 2026-10-14 hold **at most 60**. A coin missing from a pre-10-14 snapshot may simply have ranked 61-100, so do not read its absence as "no whale positioning". A coin new to the list reports `long_pct_pctile_30d: null` until it has 48 hourly samples. See [[cryptodataapi-regimes]].
 
 ### Archive listing cache (2026-10-09)

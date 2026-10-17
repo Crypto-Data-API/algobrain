@@ -4,7 +4,7 @@ type: news
 created: 2026-05-07
 updated: 2026-06-12
 status: good
-tags: [history, crash, volatility, options, portfolio-insurance, dynamic-hedging, sp500]
+tags: [history, crashes, volatility, options, portfolio-insurance, dynamic-hedging, sp500]
 aliases: ["Black Monday", "1987 Crash", "October 19 1987", "1987 Stock Market Crash", "1987-black-monday", "1987-stock-market-crash", "1987-crash", "Crash of 1987", "crash-of-1987"]
 event_date: 1987-10-19
 markets_affected: [stocks, options, futures, sp500, dow-jones]

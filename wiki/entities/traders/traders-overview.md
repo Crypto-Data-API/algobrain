@@ -66,10 +66,12 @@ SORT updated DESC
 ## Fundamental & Value Investors
 
 - [[howard-marks]] -- Oaktree Capital, distressed debt, second-level thinking and market cycles
+- [[david-tepper]] -- Appaloosa Management (1993), distressed debt, the early-2009 bank-stock trade
 
 ## Momentum & Swing Traders
 
 - [[mark-minervini]] -- SEPA methodology, two-time US Investing Championship winner (155% in 1997, 334.8% in 2021)
+- [[nicolas-darvas]] -- Darvas Box breakout method; reportedly turned about $36,000 into $2M+ in 1957-1959
 - [[linda-raschke]] -- 40+ year career, swing trading futures, Holy Grail and Turtle Soup patterns, Market Wizards
 
 ## Retail & Information-Arbitrage Traders

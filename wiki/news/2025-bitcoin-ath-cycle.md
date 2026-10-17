@@ -4,7 +4,7 @@ type: news
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [news, bitcoin, ath, bull-market, etf, institutional, microstrategy, digital-gold, halving]
+tags: [news, bitcoin, ath, bull-markets, etf, institutional, microstrategy, digital-gold, halving]
 event_date: 2025-01-01
 markets_affected: [crypto]
 impact: high

@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-15
 updated: 2026-04-24
 status: good
-tags: [crypto, ai-trading, machine-learning, defi, ai, protocol]
+tags: [crypto, ai-trading, machine-learning, defi, ai, protocols]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://bittensor.com/"

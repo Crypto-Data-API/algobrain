@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, real-world-assets, tokenization, yield]
+tags: [crypto, real-world-assets, yield]
 aliases: ["MHYPER", "mHYPER"]
 entity_type: protocol
 headquarters: "Decentralized"

@@ -9,6 +9,97 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-10-17 — Stale-queue review: the 15 most-linked concept and strategy pages
+
+**Scope:** Ranked the stale queue (not updated in over 90 days, status below `good`) by inbound wikilinks, excluding `wiki/markets/crypto/`, sources, news, history, redirects, empty pages and the six gates-agent pages. Reviewed the top 15. On each page: fixed dated and factual errors against the rest of the wiki, filled trader-facing gaps, linked the strategy pages that use the concept, and added a `## Getting the Data (CryptoDataAPI)` section wherever a real endpoint serves the data (every path and parameter checked against the 2026-10-17 OpenAPI spec). All 15 set to `updated: 2026-10-17`. Tags lines untouched.
+
+- **Pages (inbound links; status before → after):** [[layer-1]] (122; draft → review), [[liquidations]] (117; draft → review), [[market-regime]] (112; review → review), [[crypto-fear-and-greed-index]] (111; draft → review), [[depin]] (71; draft → review), [[governance-token]] (51; draft → review), [[gamefi]] (43; draft → review), [[mev]] (33; draft → review), [[tokenized-treasuries]] (28; draft → review), [[privacy-coins]] (24; draft → review), [[nft-arbitrage]] (21; review → review), [[zero-knowledge-proofs]] (21; draft → review), [[ai-agents]] (21; draft → review), [[play-to-earn]] (18; draft → review), [[hlp]] (16; draft → review). None was raised to `good`: most still cite no source summary.
+- **Factual corrections (marked inline, old text preserved):**
+  - [[liquidations]]: the May 19, 2021 move was ~$43K → $30K, not $58K → $30K. The HLP stress event was JELLYJELLY in March 2025, not "Q4 2024 HIP-3", because HIP-3 activated in October 2025. ADL targets the highest-ranked profitable leveraged positions; it does not spread losses across all holders. The page also mislabelled [[liquidation-cascade-arbitrage]] (it is the keeper/MEV strategy; the post-flush fade is [[liquidation-cascade-fade]]). Added the October 10-11, 2025 cascade.
+  - [[crypto-fear-and-greed-index]]: the record low is 6 (June 2022), not 8 (March 2020). The "January 2023 = 6" reading is misdated. No January 2018 reading exists, because the series starts in February 2018. [[contrarian-extremes]] uses bands of below 10 and above 90.
+  - [[governance-token]]: UNI fee switch activated by UNIfication (Dec 2025). The UNI peak arithmetic was wrong. MKR is migrating to SKY. Euler was hacked in March 2023 and the attacker returned funds voluntarily; there was no governance vote.
+  - [[tokenized-treasuries]]: the BUIDL AUM claim is contradicted by other pages. BENJI is retail-accessible. USDM status is flagged as unverified. sUSDS added.
+  - [[privacy-coins]]: added Zcash shielded supply above 30%, the Tornado Cash delisting (2025-03-21), the XMR all-time high (2026-01-14) and the ZEC Orchard bug (2026-06-05).
+  - [[zero-knowledge-proofs]]: the STRK, ZK and SCR airdrops are complete (2024). dYdX v3 is historical. Clarified what "finality" means for ZK-rollups.
+  - [[ai-agents]]: the agent-token wave started October 2024, not 2023. HYPE is not an AI token.
+  - [[mev]]: added MEV-Boost and order-flow auctions. Jito share and sandwich-rate figures flagged as unverified.
+  - [[nft-arbitrage]]: the garbled heading and missing lead are fixed. X2Y2 closed on 2025-04-30.
+- **Strategy-page structure ([[nft-arbitrage]]):** added the lead, position sizing, implementation pseudocode, performance characteristics (cost overlay), strategy-level numeric kill criteria, a correction to the AI-workflow history (`/nfts/collections/{slug}?days=3650`), Sources and Related. No `gates:` block.
+- **Contradictions recorded (CLAUDE.md format):**
+  - [[liquidations]]: JELLYJELLY date and HIP-3 label; also flags that [[hyperliquid-liquidation-engine]] calls JELLYJELLY a HIP-3 listing. The $19B vs $20B October 2025 total.
+  - [[crypto-fear-and-greed-index]]: historical extreme readings vs [[alternative-me]].
+  - [[tokenized-treasuries]]: BUIDL AUM vs [[blackrock]] and [[securitize]].
+  - [[privacy-coins]]: Zcash shielded share.
+  - [[nft-arbitrage]]: Blur fee (0.5% vs zero); X2Y2 closure year (2025 vs 2026).
+  - [[hlp]]: HLP vs Assistance Fund fee share; JELLYJELLY loss (~$13M vs "~25%").
+- **Checks:** `tools/check_endpoints.py`, whole wiki and each page with `--only`, reported 0 errors. No new broken wikilinks. Stale count fell 244 → 221.
+
+## 2026-10-17 — Gates on six funding and carry pages; data-source corrections
+
+**Scope:** Added `gates:` blocks to six high-traffic funding and carry strategy pages, with no changes to their prose or rules. Recorded dated corrections and observed caveats on the CryptoDataAPI data-source pages. Every gate's path, parameters and field were checked against the 2026-10-17 OpenAPI spec, and every field the spec leaves free-form was confirmed with a live call.
+
+- **Gates (116 in all; true / partial / false):**
+  - [[cash-and-carry]]: 18 (7 / 3 / 8).
+  - [[hl-vs-cex-funding-divergence]]: 20 (11 / 7 / 2).
+  - [[funding-rate-arbitrage]]: 20 (7 / 7 / 6).
+  - [[basis-trading]]: 21 (5 / 7 / 9).
+  - [[momentum-rotation]]: 16 (14 / 2 / 0).
+  - [[market-making-strategy]]: 21 (5 / 13 / 3).
+  - None of the six is fully runnable. [[momentum-rotation]] comes closest: only its spread-cost screen (the API serves Hyperliquid perp books, not spot books) and its optional short leg ("cheap" borrow is not defined) are partial.
+- **Why gates are false or partial:**
+  - No dated or quarterly futures price, expiry or days-to-expiry is served. `/derivatives/binance/summary` has funding, OI and long/short only, so every dated-basis gate is `false`. Perp basis is served on Hyperliquid (`mark_price`, `oracle_price` and `premium` on `/hyperliquid/open-interest`).
+  - A live Binance perp mark is not served; `rates[].mark_price` is per settlement only.
+  - AsterDEX, Bybit and OKX funding are not served.
+  - The borrow-rate route is retired, and venue health and insurance funds are not served.
+  - Binance fee tiers are not served. `/hyperliquid/meta` `fees` (taker 0.045%) prices only the Hyperliquid leg.
+- **Contradictions recorded in gate notes:**
+  - [[cash-and-carry]]: the Rules set an 8-10% hurdle for majors; the pseudocode uses 10%.
+  - [[funding-rate-arbitrage]]: the entry oracle check is 50 bps; the exit rule and kill criteria use 100 bps for 30 minutes.
+  - [[hl-vs-cex-funding-divergence]]: the pseudocode exits after 7 HL periods, but the worked example holds about 24.
+  - [[basis-trading]]: the perp entry is 12% in the Rules but about 11% (0.0001 per 8h) in the pseudocode, which also nets a 4% borrow (about 14% gross for dated entry). The compression exit is "net of borrow" in the Rules and gross AND a funding test in the pseudocode.
+  - [[momentum-rotation]]: the crash filter is "halve or go to cash"; the Instrument Structures section ranks within sectors while the Rules rank the whole universe.
+  - [[market-making-strategy]]: the flatten timer N is never set, while the kill criteria use 10 minutes.
+- **Data findings:** `current_rate` on the Binance funding routes is the last settled 8h print, not the predicted next one. `/backtesting/funding?exchange=binance` rows are 5-minute samples of the live rate (`sum_ok: false`), not daily rows. `cross_exchange[]` on `/derivatives/funding-rates` was empty for ETH and SOL. `/coins/top` held no wrapped or liquid-staking tokens in its top 100.
+- **Data-source corrections (each re-verified live on 2026-10-17):**
+  - [[cryptodataapi]]: the `/stream` replay buffer is not a ~2h ring. A `since_id` replay began about 14 minutes back at 06:13 UTC. Re-measured at 11:09-11:10 UTC, it began 4.8-5.9 minutes back, with about 450-500 events replayed from `since_id=1`, from 30 minutes back and from 120 minutes back. It behaves like a cap of about 500 events. `/stream/delayed` served a 180 s window (229 events at 76.3 per minute) that ended 30.0 minutes before `server_now`. The spec still says 5 minutes and ~2h; the 2026-09-28 changelog narrowed the window to 3 minutes.
+  - [[cryptodataapi-on-chain]] and [[cryptodataapi-backtesting]]: spike-alert `ts`/`as_of` and flow-history `points[].ts` are unix seconds. In the archive, the snapshot `time` is milliseconds.
+  - [[cryptodataapi-hyperliquid]]: none of the 22 `/hyperliquid/*` routes serves a liquidation map, and three guessed paths return 404. The live map is `/quant/positioning/ladder`, plus `/quant/gex` `levels`. Dated correction notes were added to the API bullets on [[short-liquidation-squeeze]] and [[long-liquidation-cascade]], which named `/quant/gex` as the closest analogue.
+  - Observed caveats: `/market-intelligence/fear-greed-history` returned only today's row ([[cryptodataapi-market-intelligence]], [[cryptodataapi-sentiment]]; the `fear_greed` snapshots still serve history). `/coins/FRAX` returned "Legacy Frax Dollar" at $0.29, and the stablecoin is `FRXUSD` ([[cryptodataapi-coins]]). Binance `DAIUSDT` returned price 0.0, with exchange-info `status: BREAK` ([[cryptodataapi-market-data]]).
+- **Checks:** `tools/check_endpoints.py` reports 0 errors for each of the six pages and for the whole wiki (1,257 gates on 87 pages). `tools/lint.py` raised no new issue on any edited page; the only flags on them are pre-existing non-approved tags.
+
+## 2026-10-17 — Lint fix: empty pages, orphans, and rename-mismatch links
+
+**Scope:** Cleared the `empty` (38) and `orphans` (31) lint categories and rewrote six broken link targets that are renames of existing pages. Edits were limited to page bodies, links, `related:`/`aliases:` and `updated:`; no `tags:` lines or `gates:` blocks were touched.
+
+- **Empty pages: 4 expanded.** [[meme-coins]], [[account-abstraction]], [[payments]] and [[socialfi]] are now `draft` concept pages, each with a Trading relevance section linking strategy pages. [[meme-coins]] had been a redirect to `[[memecoins]]`, which does not exist; it is now the canonical page. It has a CryptoDataAPI section citing `/meme/regime`, `/meme/regime/score`, `/meme/regime/{symbol}`, `/dex/new-pools`, `/dex/security/{chain}/{address}` and `/backtesting/klines`. [[payments]] has one citing `/sentiment/stablecoins` and the two stablecoin-history endpoints. `tools/check_endpoints.py` reports 0 errors on both.
+- **Empty pages: 2 false positives.** [[kraken]] and [[sushiswap]] were full pages, but `lint.py` strips every line that starts with `*` or `-`, which includes bold lead paragraphs. Each got a prose paragraph linking the strategies it informs.
+- **Empty pages: 31 redirects.**
+  - 2 stubs became redirects: [[liquid-restaking]] → [[restaking]] (which already covers LRTs) and the duplicate [[cronos]] stub → [[crypto-com-chain]].
+  - 2 redirects were retargeted to skip a second hop: [[meme-coin]] → [[meme-coins]] and [[treasury-bills]] → [[treasury-bonds]] (`treasuries` is itself a redirect).
+  - 27 existing redirects got a one-sentence description of what the target covers, replacing a bare "See [[x]]."
+- **Deleted (3), none with inbound links:** `mentor` (pointed at a personal page removed on 2026-07-13), `one-pager` (pointed at a removed personal template) and `sharp-ratio` (a misspelling; [[sharpe-ratio]] already carries the "Sharp Ratio" alias).
+- **Orphans:** 27 got 1-2 inline or Related links from the most relevant page. [[telegram]] is linked from [[meme-coins]]. [[coin-index-a-z]] linked `[[contango]]`, `[[liquidity]]` and `[[uranium]]` (now concept and commodity pages) for three renamed tokens; those links now point at [[contango-token]], [[liquidity-token]] and [[uranium-token]]. [[david-tepper]] and [[nicolas-darvas]] were added to [[traders-overview]], and [[bond-analysis]] to [[bonds-overview]].
+- **Rename-mismatch links (no date bumps):**
+  - `[[depeg]]` → `[[depeg-risk]]`: 43 files, 135 refs.
+  - `[[leaps]]` → [[long-dated-options]]: 8 files, 17 refs.
+  - `[[maker]]` → [[makerdao]]: 6 files, 16 refs.
+  - `[[buidl]]` → [[blackrock-usd-institutional-digital-liquidity-fund]]: 6 files, 16 refs.
+  - `[[2008-financial-crisis]]` → [[2008-global-financial-crisis]]: 5 files, 7 refs.
+  - `[[cognitive-bias]]` → [[cognitive-biases]]: 5 files, 11 refs.
+  - Display text was preserved, so a bare `[[depeg]]` became `[[depeg-risk|depeg]]`. Pipes are escaped inside tables, and duplicate `related:` entries created by the rewrite were dropped.
+- **Lint:** links 234 → 218, orphans 31 → 0, empty 38 → 0. The tags and stale counts also moved, but those changes came from the concurrent tag-audit and stale-review passes.
+- **Index:** [[index]] lists the four expanded concept pages.
+
+## 2026-10-17 — Tag audit batch 4
+
+**Scope:** Every non-approved tag used on 3 or more pages (118 tags) was classified as adopt, consolidate or skip. Only `tags:` frontmatter lines changed; `updated:` dates were not bumped.
+
+- **Adopted (49):** the new tags are listed under "Adopted 2026-10-17 (tag audit batch 4)" in CLAUDE.md and AGENTS.md, and in `APPROVED_TAGS` in `tools/lint.py`. They include DeFi and crypto terms (airdrop, bridges, flash-loans, impermanent-loss, hard-fork, algorithmic-stablecoin, pump-fun, pfp, tokenized-treasuries), venues and chains (binance, deribit, base, terra, cex), options terms (debit-spread, credit-spread, directional, long-volatility, implied-volatility, term-structure), quant and execution terms (statistical-arbitrage, cointegration, bayesian, reinforcement-learning, market-impact, transaction-costs, adverse-selection, market-breadth) and macro terms (inflation, tariffs, emerging-markets, employment, japan, carry, precious-metals, commodity-spread, seasonality, contagion).
+- **Consolidated (40 tag names, 120 pages):** each tag was rewritten to the approved spelling, and no line ended up with the same tag twice. Mappings: latency/high-frequency-trading→hft, fed/federal-reserve→monetary-policy, sec→regulation, government→regulators, intraday→day-trading, crash→crashes, bull-market→bull-markets, algorithmic-trading→algorithmic, alpha→alpha-edge, asset-allocation/multi-strategy→portfolio-construction, carry-trade→carry, deployment→infrastructure, metrics→performance, overfitting→validation, source→sources, trade-war→tariffs, market-internals→market-breadth, seasonal→seasonality, ai-agents/ai-agent-tokens→agents, decentralized-ai/technology→ai, automated-market-maker→amm, automation→trading-bots, data-providers→data-provider, fear-greed→sentiment, funding-rates→funding-rate, gaming→gamefi, lrt→restaking, luna→terra, macroeconomics→macro, tokenization→real-world-assets, llms→llm, flash-loan→flash-loans, airdrops→airdrop. Two tags were changed only where the meaning fit: fork→hard-fork on [[replay-attack]] and [[terra-luna-2]] (but not on the SushiSwap code-fork page), and protocol→protocols on [[balancer]] and [[bittensor]] (but not on [[fix-protocol]]).
+- **Skipped (35):** research, banking and economics, which batch 3 also skipped. Generic tags: academic-research, pricing, trading, analytics, platform, tools, strategy, classic, advanced, blue-chip, marketplace, supply, speculation, collapse, systematic, bearish. Tags with mixed meanings: smart-money (ICT price action vs on-chain wallet tracking) and time-series (momentum vs ML data). Single-entity or person names: trump, telegram, hlp, coinbase, uniswap, aave. Single indicator or option-strategy names: rsi, bollinger-bands, moving-averages, vwap, fibonacci, covered-call, protective-put. Equity-style: value-investing.
+- **Excluded:** six strategy pages being edited at the same time for `gates:` (cash-and-carry, hl-vs-cex-funding-divergence, funding-rate-arbitrage, basis-trading, momentum-rotation, market-making-strategy). None of them carried a tag that was consolidated.
+- **Lint:** tags 659→511. All other categories are unchanged: 234 links, 38 empty, 31 orphans, 244 stale.
+
 ## 2026-10-17 — Three new strategy pages on the 2026-10 data releases
 
 **Scope:** Three new strategy pages, each built on a feed that had no strategy page yet. All are `draft` and `untested`, and each had a full `gates:` block from the start: 48 gates in all, 47 runnable and 1 partial.

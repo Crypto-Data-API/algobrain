@@ -6,7 +6,7 @@ updated: 2026-10-17
 status: excellent
 tags: [volatility, indicators, options, risk-management, vix]
 aliases: ["Vol Spike", "Volatility Spike", "VIX Spike", "Vol Shock"]
-related: ["[[vix]]", "[[vix-futures]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[volatility-regime]]", "[[volatility-regime-classification]]", "[[volatility-regime-switching]]", "[[vol-regime-detection]]", "[[vol-of-vol]]", "[[vvix]]", "[[volatility-term-structure]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[covid-crash]]", "[[options-risk-budgeting]]", "[[vega-budgeting]]", "[[long-vol-vs-short-vol]]", "[[gamma-explosion]]", "[[second-order-greeks]]", "[[vanna]]", "[[vega]]", "[[gamma]]", "[[leaps]]"]
+related: ["[[vix]]", "[[vix-futures]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[volatility-regime]]", "[[volatility-regime-classification]]", "[[volatility-regime-switching]]", "[[vol-regime-detection]]", "[[vol-of-vol]]", "[[vvix]]", "[[volatility-term-structure]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[covid-crash]]", "[[options-risk-budgeting]]", "[[vega-budgeting]]", "[[long-vol-vs-short-vol]]", "[[gamma-explosion]]", "[[second-order-greeks]]", "[[vanna]]", "[[vega]]", "[[gamma]]", "[[long-dated-options]]"]
 domain: [volatility, indicators, options]
 prerequisites: ["[[implied-volatility]]", "[[vix]]"]
 difficulty: intermediate
@@ -108,7 +108,7 @@ Common instruments for capturing or hedging a spike, and what each is exposed to
 | Instrument | Primary exposure | Spike payoff | Main drawback |
 |------------|------------------|--------------|----------------|
 | Long [[vix]] calls | VIX + [[vega]] convexity | very high (convex) | severe theta/roll bleed in calm |
-| Long index puts (incl. [[leaps]] puts) | [[delta]] + [[vega]] | high on selloff | path-dependent; vega crush after |
+| Long index puts (incl. [[long-dated-options\|leaps]] puts) | [[delta]] + [[vega]] | high on selloff | path-dependent; vega crush after |
 | Long VIX futures | front-month VIX | linear, no convexity | roll cost in contango |
 | Long [[long-dated-options]] straddles | [[gamma]] + vega | moderate, durable | expensive carry; long-dated [[vega]] |
 | Tail funds / put spreads | defined convexity | capped but cheaper | cap limits the big-spike payoff |
@@ -198,7 +198,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work wi
 - [[long-vol-vs-short-vol]] — the posture spectrum
 - [[second-order-greeks]] — vanna/vomma dominate P&L during spikes
 - [[vanna]] — the delta-vs-vol flow that reinforces the spike
-- [[leaps]] — long-dated puts as a slow-bleed spike hedge
+- [[long-dated-options|leaps]] — long-dated puts as a slow-bleed spike hedge
 
 ## Sources
 

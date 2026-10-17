@@ -85,6 +85,8 @@ The response also carries `as_of`, `coverage` (venues, the Binance exclusion, wi
 
 Historical series come from `/btc/cycle-indicators` (all 8 indicators, or one via `{indicator}`), `/etf/{asset}/flows?days=N` (BTC/ETH/SOL, up to 1000 settled trade days — the only source of settled history, see the 2026-09-25 note above), `/coinbase-premium`, `/fear-greed-history`, and `/stablecoin-history`. (`/grayscale/premium`, formerly the source for Jan-2024-and-earlier Grayscale discount history, is retired — see warning above.) For liquidation records back through the archive, use `/api/v1/backtesting/liquidations` on [[cryptodataapi-backtesting]].
 
+**Observed caveat (2026-10-17): `/fear-greed-history` returned only today's row.** Two live calls on 2026-10-17 returned `{"history": [{"date": "2026-10-17", "value": 52, "classification": "Neutral"}], "count": 1}`, a single row, not a timeseries. The route takes no query parameters in the spec, so `?days=30` changed nothing. Until it serves history again, read past values from the `fear_greed` snapshot type on `/api/v1/backtesting/snapshots` (hourly rows, `snapshots[].data.value`; it answered for 2026-10-01 onward on the same day) or from `/backtesting/daily-snapshots/{date}` (`snapshot.fear_greed.value`). The live reading is `/api/v1/sentiment/fear-greed` ([[cryptodataapi-sentiment]]).
+
 ## Trading Applications
 
 - [[spot-etf-flows]] — daily settled BTC/ETH/SOL ETF flow series (no XRP), keyed by US `trade_date`, plus the reconstructed live BTC AUM estimate quantify the institutional bid that has driven post-2024 cycles

@@ -2,8 +2,8 @@
 title: "Crypto Fear & Greed Index"
 type: concept
 created: 2026-07-17
-updated: 2026-07-19
-status: draft
+updated: 2026-10-17
+status: review
 tags: [crypto, market-regime, sentiment, behavioral-finance, indicators]
 aliases: ["Crypto F&G Index", "Fear and Greed Index", "Alternative.me Fear & Greed"]
 domain: [behavioral-finance, market-microstructure]
@@ -46,6 +46,12 @@ The composite is recalculated daily and published at approximately UTC midnight.
 - **November 2021 (top):** Index reached 84 with BTC at $69,000. The market entered a year-long bear market following this Extreme Greed reading, with BTC falling 76% to $15,500 by November 2022.
 - **January 2018 (top):** Index near 95 as BTC hit ~$17,000 in mid-January. The subsequent correction was −66% over three months.
 
+*Review note (2026-10-17):* three of the readings above conflict with the wiki's dated record. See [[#Contradictions]].
+- The **lowest** reading on record is **6 in June 2022** (LUNA/3AC, BTC ~$20K), not March 2020's 8.
+- The **January 2023** "6 for three days at $16-17K" belongs to June 2022 or November 2022 (FTX: ~20). By mid-January 2023 BTC was rallying and the index had left Extreme Fear.
+- The index history starts in **February 2018** (Alternative.me API, `limit=0`), so no reading exists for the mid-January 2018 top.
+- Another miss: from March 17, 2020, BTC reached $69K about 20 months later, not "eighteen months".
+
 These examples illustrate the contrarian principle but are not a systematic backtest — cherry-picked extremes do not constitute statistical evidence. A proper test would require measuring conditional vs. unconditional forward returns across all readings (see [[contrarian-extremes#Null Hypothesis]]).
 
 ## Trading Relevance
@@ -58,6 +64,48 @@ The Crypto Fear & Greed Index is used across several AlgoBrain strategies:
 - **[[prediction-market-strategies]]:** Sentiment extremes can misprice prediction-market outcomes — a "No" bias fade (selling overpriced "Yes" shares) is more likely to be profitable when the broader market is in Extreme Fear and retail is emotionally reactive.
 
 **Limitations:** The index is a lagging/coincident indicator, not a leading one. Markets can remain in Extreme Fear for weeks as a trend continues (2022 bear market had multiple sub-20 readings during an ongoing downtrend). It is most reliable as a *confirmation* tool for other signals (technical levels, funding rates, on-chain data) rather than as a standalone trigger.
+
+*Precision on the [[contrarian-extremes]] rule (2026-10-17):* that strategy's composite uses the crypto index at 15% weight, with its own bands: extreme fear **below 10** and extreme greed **above 90**. The 20/80 cut-offs used elsewhere in the wiki are not its thresholds.
+
+### Other strategies that gate on the index
+
+| Strategy | Use of F&G |
+|---|---|
+| [[rsi-mean-reversion]] | Entry filter: RSI(2) < 10 only counts when F&G < 30 |
+| [[sentiment-positioning-divergence]] | Compares F&G ≤ 20 (≥ 2 days) with funding. Fear plus washed-out funding means go long. Fear while funding is still ≥ +0.010%/8h is an incomplete capitulation: stay flat or short. |
+| [[stablecoin-sentiment-depeg-entry]] | Buys depegs only at F&G ≤ 15 |
+| [[defi-yield-sentiment-entry]] | Deploys LP capital at F&G ≤ 20 for 2+ days; de-risks at ≥ 75 |
+| [[onchain-capitulation-confluence]] | F&G as one leg of a capitulation confluence |
+| [[post-panic-vol-selling]] / [[put-protected-dip-buying]] | Fear spikes as the trigger for selling rich vol or for hedged dip entries |
+| [[crypto-beta-rotation]] / [[sentiment-trading]] | Sentiment as a beta-dial input |
+
+### Practical caveats
+
+- **Daily resolution.** The index updates once a day, so it cannot time intraday cascades. Pair it with [[funding-rate]] and [[liquidations]] data for intraday work.
+- **Persistence matters more than level.** Several strategies above need *N consecutive days* in a band. A single print is noise.
+- **Vendor variants differ.** The Alternative.me index, the CNN equity index ([[fear-and-greed-index]]) and aggregator composites are different numbers. CryptoDataAPI's `/sentiment/fear-greed` is a *multi-source average*, so it will not match Alternative.me exactly. Backtest and trade on the same series.
+- **Regime-dependence.** In the 2026 "Established Bear Market" regime, the index sat at 21-23 for weeks (see coin snapshots dated 2026-06-21/22 across the wiki) without marking a bottom. That is the 2022 pattern again.
+
+## Contradictions
+
+> **Claim A** (Source: this page, pre-2026-10-17 text, confidence: LOW): "March 17, 2020: Index hit 8, the lowest recorded reading"; "January 2023: Index printed 6 for three consecutive days"; "January 2018: Index near 95".
+> **Claim B** (Source: [[alternative-me]], confidence: MEDIUM): June 2022 (LUNA/3AC) reading of 6 at BTC ~$20K; November 2022 (FTX) reading ~20; full history available "since February 2018".
+> **Resolution**: Claim B is favoured. A reading of 6 in June 2022 means 8 was not the lowest. A February 2018 start means no January 2018 reading exists. The January 2023 "6" is most likely misdated. Pending verification against the raw `api.alternative.me/fng/?limit=0` series.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/sentiment/fear-greed` — current Fear & Greed reading (multi-source averaged)
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/fear-greed-history` — dated Fear & Greed history for conditional-return tests
+- `GET /api/v1/backtesting/daily-snapshots` — point-in-time daily payloads, for pairing F&G with the regime and funding state *as it was known that day*
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/sentiment/fear-greed"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-sentiment]]. The raw Alternative.me series (free, no key) is documented on [[alternative-me]].
 
 ## Related
 

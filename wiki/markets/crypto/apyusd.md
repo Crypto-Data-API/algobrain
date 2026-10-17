@@ -9,7 +9,7 @@ aliases: ["APYUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://apyx.fi"
-related: ["[[crypto-markets]]", "[[depeg]]", "[[ethena-usde]]", "[[ethereum]]", "[[morpho]]", "[[pendle]]", "[[stablecoins]]"]
+related: ["[[crypto-markets]]", "[[depeg-risk]]", "[[ethena-usde]]", "[[ethereum]]", "[[morpho]]", "[[pendle]]", "[[stablecoins]]"]
 ---
 
 # apyUSD
@@ -90,7 +90,7 @@ apyUSD sits at the intersection of two hot narratives: **yield-bearing dollars**
 - **Custodial risk:** Reliance on **Anchorage Digital** and **BitGo** for collateral custody — a custodian failure threatens the backing.
 - **Redemption-gating risk:** Exit is to apxUSD then to the dollar value of preferred-share dividends, not instant fiat — redemption can lag if the underlying RWA is illiquid.
 - **Smart-contract / integration risk:** ERC-4626 vault plus [[pendle|Pendle]] and [[morpho|Morpho]] integrations add composability and exploit surface.
-- **De-peg risk on apxUSD:** If the base apxUSD loses its dollar peg, apyUSD's value falls proportionally (the ATL $1.064 shows the wrapper has compressed before). See [[depeg]].
+- **De-peg risk on apxUSD:** If the base apxUSD loses its dollar peg, apyUSD's value falls proportionally (the ATL $1.064 shows the wrapper has compressed before). See [[depeg-risk|depeg]].
 - **Regulatory risk:** Tokenised equity-backed dollars sit in an unsettled securities/stablecoin regulatory area.
 
 ## Trading / Usage Playbook
@@ -115,7 +115,7 @@ Native chain: [[ethereum|Ethereum]]. Also on Base.
 - [[stablecoins]] — category overview
 - [[ethena-usde]] — peer yield-bearing synthetic dollar (sUSDe analogue)
 - [[pendle]], [[morpho]] — DeFi integrations
-- [[depeg]] — peg-failure mechanics
+- [[depeg-risk|depeg]] — peg-failure mechanics
 - [[crypto-markets]]
 
 ## Sources

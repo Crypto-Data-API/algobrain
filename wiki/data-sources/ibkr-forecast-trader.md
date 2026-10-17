@@ -25,7 +25,7 @@ Forecast Trader contracts cover macro and labor-market indicators that are diffi
 - **Nonfarm payroll prints** — over/under contracts tied to scheduled BLS releases (see [[bls-benchmark-revisions]])
 - **Inflation prints** — CPI / PPI surprise contracts
 - **Interest-rate decisions** — outcome contracts on FOMC actions
-- Other scheduled macro events and political outcomes
+- Other [[economic-events|scheduled macro events]] and political outcomes
 
 Each contract resolves to $1 (yes) or $0 (no), and the traded price between 0 and 1 is interpretable as the market-implied probability of the event.
 

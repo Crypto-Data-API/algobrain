@@ -38,6 +38,117 @@ kill_criteria: |
   - short-leg margin buffer breached without ability to top up before liquidation
 
 related: ["[[funding-rate-arbitrage]]", "[[calendar-spread-arbitrage]]", "[[basis-trade]]", "[[fork-futures-spot-basis]]", "[[gbtc-discount-arbitrage]]", "[[cross-exchange-arbitrage]]", "[[contango]]", "[[backwardation]]", "[[basis]]", "[[futures]]", "[[perpetual-futures]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+
+gates:
+  - id: basis_hurdle_major
+    role: entry
+    rule: "Majors: annualised basis ((F - S) / S) x (365 / DTE) on the dated future is at least 10% above the funding hurdle (either this or basis_hurdle_alt)"
+    runnable: false
+    note: "No dated or quarterly futures price, expiry list or days-to-expiry is served. /derivatives/binance/summary carries funding, OI and long/short only; /hyperliquid/* is perps only (mark_price, oracle_price, premium). Spot S is served (spot_leg), F is not. The Rules say 8-10% for majors; the pseudocode uses 10% (HURDLE_APY_MAJOR) on top of funding_hurdle_apy."
+  - id: basis_hurdle_alt
+    role: entry
+    rule: "Alts: annualised basis on the dated future is at least 15% above the funding hurdle (either this or basis_hurdle_major)"
+    runnable: false
+    note: "Same gap as basis_hurdle_major: no dated-futures price is served."
+  - id: funding_hurdle
+    role: entry
+    rule: "The hurdle the basis must clear: cost of funding the short leg's margin plus both-leg fees, anchored on perp funding (fair carry)"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Annualise the 8h fraction as rate x 3 x 365; hyperliquid.current_rate on the same row is hourly (x 24 x 365). current_rate is the last settled Binance print, not the predicted next one. The margin-borrow rate that the hurdle also needs is not served (/market-intelligence/borrow-interest is retired) and fees are venue-specific, so the full hurdle is the desk's. Replay rows are 5-minute samples of the live 8h rate: average them, never sum."
+  - id: spot_leg
+    role: entry
+    rule: "Buy the underlying spot on a trusted venue"
+    runnable: true
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    replay: /api/v1/backtesting/klines?symbol={symbol}USDT&exchange=binance&interval=1h&start={start}
+    replay_field: klines[].c
+    note: "Binance spot. A spot ETF or self-custody leg is priced elsewhere."
+  - id: dated_short_leg
+    role: entry
+    rule: "Short equal notional of the nearest liquid dated expiry (quarterly is standard) at the premium"
+    runnable: false
+    note: "Dated futures prices, expiries and their liquidity are not served; assemble the curve from the venue (Deribit, CME, Binance delivery)."
+  - id: same_index_settlement
+    role: filter
+    rule: "Both legs reference the same asset and the future settles to the index the spot tracks"
+    runnable: false
+    note: "Contract settlement specs are not served; a human check of the venue's contract page."
+  - id: futures_liquidity
+    role: filter
+    rule: "Enough futures liquidity on the short leg (pseudocode mkt.oi_ok)"
+    runnable: partial
+    endpoint: /api/v1/derivatives/open-interest?coin={coin}
+    field: binance.current_oi
+    note: "Serves PERP open interest (Binance + Hyperliquid), not dated-future OI. The page sets no OI threshold."
+  - id: regime_pause
+    role: filter
+    rule: "Pause fresh carry while the whole-market HMM regime is strong_trend_bear or vol_spike"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "Stated in the AI agent workflow, not in Rules or the pseudocode."
+  - id: margin_rip_buffer
+    role: sizing
+    rule: "Post short margin of notional x (0.50 + 0.005) so a +50% rip does not liquidate, unless spot cross-collateralises the short on the same venue"
+    runnable: true
+    input: position
+  - id: per_venue_cap
+    role: sizing
+    rule: "Exposure on one venue at most 25% of the book"
+    runnable: true
+    input: position
+    note: "Position sizing says 20-25%; the pseudocode uses 0.25."
+  - id: counterparty_flag
+    role: exit
+    rule: "Emergency unwind on a counterparty flag (withdrawal halt, solvency concern, unscheduled maintenance over 4h) on a venue holding either leg"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack
+    field: items[].title
+    note: "The security feed lists confirmed hacks and exploits (10 days back) with affected symbols. Withdrawal halts, solvency scares and maintenance windows are not served; they stay a human check."
+  - id: margin_health
+    role: stop
+    rule: "Top up or unwind when short-leg margin health is below 0.15 and spot is not cross-collateral"
+    runnable: true
+    input: position
+    note: "The trader's own margin account on the futures venue."
+  - id: basis_inverted
+    role: exit
+    rule: "Unwind when the held expiry's basis is below 0 (backwardation)"
+    runnable: false
+    note: "Needs the dated-future price, which is not served."
+  - id: basis_compressed
+    role: exit
+    rule: "Exit early when annualised basis is at or below 3% (compressed to carry)"
+    runnable: false
+    note: "Threshold from the pseudocode (EARLY_EXIT_APY); the Rules say only 'near-carry well before expiry'. Needs the dated-future price."
+  - id: at_expiry
+    role: exit
+    rule: "At DTE of 1 day or less, settle or roll"
+    runnable: true
+    input: position
+    note: "DTE comes from the contract the desk holds."
+  - id: roll_target
+    role: exit
+    rule: "Roll to a further-dated expiry only if its basis is attractive"
+    runnable: false
+    note: "No dated curve is served, and 'attractive' is not defined beyond the entry hurdles."
+  - id: basis_below_hurdle_30d
+    role: exit
+    rule: "Kill: annualised basis on the chosen expiry below the margin-funding + fee hurdle for 30 consecutive days"
+    runnable: false
+    note: "Needs dated-future history, which is not served."
+  - id: sleeve_drawdown
+    role: stop
+    rule: "Kill: sleeve drawdown over 6% in any rolling 30-day window"
+    runnable: true
+    input: position
 ---
 
 # Cash and Carry Arbitrage

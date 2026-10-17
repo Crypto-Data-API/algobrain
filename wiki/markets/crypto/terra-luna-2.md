@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, fork, luna, terra, altcoins]
+tags: [crypto, defi, hard-fork, terra, altcoins]
 aliases: ["LUNA", "LUNA 2.0", "Terra 2.0", "Terra v2"]
 entity_type: protocol
 headquarters: "Decentralized"

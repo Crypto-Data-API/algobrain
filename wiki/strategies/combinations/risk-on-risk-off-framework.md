@@ -4,7 +4,7 @@ type: reference
 created: 2026-04-06
 updated: 2026-07-14
 status: good
-tags: [combinations, meta-strategy, macro, regime-switching, risk-management, asset-allocation]
+tags: [combinations, meta-strategy, macro, regime-switching, risk-management, portfolio-construction]
 strategy_type: hybrid
 markets: [crypto, bonds, commodities]
 complexity: intermediate

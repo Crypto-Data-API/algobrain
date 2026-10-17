@@ -4,7 +4,7 @@ type: strategy
 created: 2026-04-06
 updated: 2026-07-19
 status: good
-tags: [sentiment, crypto, fear-greed, funding-rate, social, contrarian, momentum, quantitative, on-chain, behavioral-finance]
+tags: [sentiment, crypto, funding-rate, social, contrarian, momentum, quantitative, on-chain, behavioral-finance]
 aliases: ["Crypto Sentiment Strategy", "Fear and Greed Trading", "Social Sentiment Trading", "Sentiment Composite"]
 strategy_type: quantitative
 timeframe: swing

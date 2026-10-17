@@ -1,19 +1,14 @@
 ---
 title: "Liquid Restaking"
-type: concept
+type: redirect
 created: 2026-07-19
-updated: 2026-07-19
-status: stub
+updated: 2026-10-17
+status: good
 tags: [crypto, defi]
+aliases: ["Liquid Restaking", "Liquid Restaking Tokens", "LRT", "LRTs"]
+related: ["[[restaking]]"]
 ---
 
 # Liquid Restaking
 
-**Liquid restaking tokens (LRTs)** wrap EigenLayer-style restaked positions into liquid tokens (ether.fi, Renzo) — stacking staking yield, restaking rewards, and points, with correlated slashing/depeg risks.
-
-## Related
-
-- [[eigenlayer]]
-- [[ether-fi]]
-- [[renzo]]
-- [[restaking-strategies]]
+See [[restaking]] — the canonical page, which covers liquid restaking tokens (LRTs) from issuers such as [[ether-fi]] and [[renzo]] alongside [[eigenlayer]] restaking mechanics, risks, and trading relevance. Restaking strategies are on [[restaking-strategies]].

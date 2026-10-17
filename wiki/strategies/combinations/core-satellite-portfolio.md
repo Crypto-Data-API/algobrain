@@ -4,7 +4,7 @@ type: reference
 created: 2026-04-06
 updated: 2026-04-06
 status: good
-tags: [combinations, meta-strategy, portfolio-construction, passive-investing, active-management, asset-allocation]
+tags: [combinations, meta-strategy, portfolio-construction, passive-investing, active-management]
 strategy_type: hybrid
 timeframe: long-term core, varies for satellites
 markets: [crypto, bonds]

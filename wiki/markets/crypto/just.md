@@ -131,7 +131,7 @@ Investment framing: *JST = a deflating governance claim on JustLend/USDD protoco
 
 - **Real-yield / fee-switch proxy** — JST is closest to a "value-accrual" token: protocol revenue (JustLend net income, USDD profits >$10M) funds buyback-and-burns, so JST can be valued on a *burn-yield* basis — annualised burn ÷ market cap as an implied buyback yield.
 - **Tron-activity beta** — demand scales with JustLend TVL and USDD usage; rising Tron DeFi activity grows revenue and therefore burns.
-- **Comparable set** — closer to [[maker|MKR/SKY]] and [[aave|AAVE]] fee-switch dynamics than to exchange tokens; the trade is "real revenue funds deflation," not "exchange volume funds discounts."
+- **Comparable set** — closer to [[makerdao|MKR/SKY]] and [[aave|AAVE]] fee-switch dynamics than to exchange tokens; the trade is "real revenue funds deflation," not "exchange volume funds discounts."
 - **Governance-policy risk discount** — the burn is a DAO policy that can be amended, so the implied yield should be discounted for policy reversibility and Sun-entity influence.
 
 ---
@@ -162,7 +162,7 @@ Investment framing: *JST = a deflating governance claim on JustLend/USDD protoco
 | Token | Ecosystem | Mkt cap | Type | Value accrual | Liquidity |
 |---|---|---|---|---|---|
 | **JST** | Tron DeFi | $706.1M | Lending + stablecoin gov | Revenue buyback-burn | Multi-venue, $26M/day |
-| [[maker\|MKR/SKY]] | Ethereum DeFi | (larger) | CDP stablecoin gov | Surplus buyback / fee-switch | Deep |
+| [[makerdao\|MKR/SKY]] | Ethereum DeFi | (larger) | CDP stablecoin gov | Surplus buyback / fee-switch | Deep |
 | [[aave\|AAVE]] | Multi-chain DeFi | (larger) | Lending gov | Fee-switch / safety module | Deep |
 | [[sun-token\|SUN]] | Tron DeFi | (smaller) | AMM/yield gov | Tron DeFi | Tron-centric |
 | [[tron\|TRX]] | Tron L1 | (much larger) | Base layer | Network/burn | Deep |
@@ -205,7 +205,7 @@ Investment framing: *JST = a deflating governance claim on JustLend/USDD protoco
 - [[justin-sun]]
 - [[defi]]
 - [[stablecoins]] — USDJ sunset / USDD context
-- [[maker]] — contrasting DeFi buyback/fee-switch model
+- [[makerdao|maker]] — contrasting DeFi buyback/fee-switch model
 - [[aave]] — lending-protocol comparable
 - [[gho|GHO]] — contrasting DeFi stablecoin model
 - [[sun-token]] — Tron DeFi peer

@@ -57,7 +57,7 @@ The peg is maintained through a **mint/redeem arbitrage loop** anchored at par:
 - **Mint** — A user deposits USD with Gemini and receives newly issued GUSD 1:1, withdrawable to any Ethereum address.
 - **Redeem** — GUSD returned to Gemini is burned and the corresponding USD credited back to the user's account 1:1.
 
-Because users can create or destroy GUSD at par, secondary-market deviations create arbitrage incentives that pull GUSD back toward $1. Mint/redeem flows through the Gemini exchange account (KYC-gated), so retail typically obtains GUSD on venues rather than minting directly. The current price of $0.998303 reflects ordinary secondary-market micro-deviation (spread, thin liquidity), not a meaningful [[depeg]].
+Because users can create or destroy GUSD at par, secondary-market deviations create arbitrage incentives that pull GUSD back toward $1. Mint/redeem flows through the Gemini exchange account (KYC-gated), so retail typically obtains GUSD on venues rather than minting directly. The current price of $0.998303 reflects ordinary secondary-market micro-deviation (spread, thin liquidity), not a meaningful [[depeg-risk|depeg]].
 
 ---
 
@@ -112,7 +112,7 @@ GUSD sits in the **regulated fiat-backed dollar stablecoin** category. Catalysts
 - **Liquidity risk** — Low circulating supply and volume can widen spreads and increase slippage versus larger stablecoins.
 - **Smart-contract risk** — Audited ERC-20 contract, but upgradeable/pausable design concentrates control with the issuer.
 
-See [[stablecoins]] and [[depeg]] for the general failure-mode taxonomy.
+See [[stablecoins]] and [[depeg-risk|depeg]] for the general failure-mode taxonomy.
 
 ---
 
@@ -120,7 +120,7 @@ See [[stablecoins]] and [[depeg]] for the general failure-mode taxonomy.
 
 - **As a parking asset** — A regulated, fully-reserved dollar; in the current bottoming regime, treat stablecoin balances as dry powder.
 - **Venue choice** — GUSD is most liquid on/around Gemini; on-chain depth is limited, so size DEX trades to pool depth.
-- **Peg reads** — Treat $0.997–$1.001 as normal micro-deviation; only a sustained, widening discount with redemption friction signals a genuine [[depeg]].
+- **Peg reads** — Treat $0.997–$1.001 as normal micro-deviation; only a sustained, widening discount with redemption friction signals a genuine [[depeg-risk|depeg]].
 - **Headline sensitivity** — Watch NYDFS / U.S. stablecoin policy and Gemini corporate news, which move regulated issuers more than offshore peers.
 
 ---
@@ -133,7 +133,7 @@ See [[stablecoins]] and [[depeg]] for the general failure-mode taxonomy.
 - [[usdt|Tether]]
 - [[paxos-standard]]
 - [[paypal-usd]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[collateralization]]
 - [[ethereum]]
 - [[crypto-markets]]

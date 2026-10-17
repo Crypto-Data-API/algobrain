@@ -64,7 +64,7 @@ NEAR's defining technical primitive is **Nightshade sharding** — an approach t
 | **Consensus** | Thresholded Proof-of-Stake (Doomslug for near-instant finality, plus a Nightshade BFT finality layer) |
 | **Sharding model** | Nightshade — single logical chain, state split into shards/chunks; dynamic resharding adds/removes shards with demand |
 | **Shards (2026)** | Expanded from 6 to 9 in 2025 (+50% throughput); a public test using live core code hit ~1 million TPS |
-| **Smart contracts** | WebAssembly (Wasm) runtime; contracts written in Rust and JavaScript/TypeScript |
+| **Smart contracts** | [[webassembly\|WebAssembly (Wasm)]] runtime; contracts written in Rust and JavaScript/TypeScript |
 | **Account model** | Human-readable named accounts (e.g. `alice.near`), access keys, account abstraction by design |
 | **Finality** | Sub-second optimistic finality via Doomslug; full BFT finality in a few blocks |
 

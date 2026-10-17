@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-10
 updated: 2026-04-10
 status: good
-tags: [backtesting, metrics, statistics, performance]
+tags: [backtesting, statistics, performance]
 aliases: ["PSR"]
 domain: [backtesting, statistics]
 difficulty: advanced

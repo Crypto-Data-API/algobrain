@@ -49,7 +49,7 @@ The Grossman-Stiglitz paradox (1980) showed that perfectly efficient markets are
 
 3. **Quantitative Track Records** -- [[jim-simons|Jim Simons's]] Renaissance Technologies (Medallion Fund) has compounded at approximately 66% annually before fees since 1988. Warren Buffett has beaten the market for over 60 years. Ed Thorp, D.E. Shaw, and other quants have generated persistent alpha. These track records are extraordinarily difficult to explain as luck.
 
-4. **Anomalies and Factors** -- Academic research has documented persistent return patterns that violate EMH: the value premium (cheap stocks outperform), momentum (winners keep winning), the size effect (small caps outperform), and low-volatility anomaly (less volatile stocks earn higher risk-adjusted returns). Whether these are "risk premia" or genuine inefficiencies remains debated.
+4. **Anomalies and Factors** -- Academic research has documented persistent return patterns that violate EMH: the value premium (cheap stocks outperform), momentum (winners keep winning), the size effect (small caps outperform), and [[low-volatility|low-volatility anomaly]] (less volatile stocks earn higher risk-adjusted returns). Whether these are "risk premia" or genuine inefficiencies remains debated.
 
 5. **Market Crashes and Bubbles** -- The dot-com bubble (1999-2000), the housing/credit crisis (2007-2009), and the meme stock mania (2021) are difficult to reconcile with the idea that prices always reflect fundamental value.
 

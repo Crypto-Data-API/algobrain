@@ -4,7 +4,7 @@ type: news
 created: 2026-05-07
 updated: 2026-06-12
 status: good
-tags: [history, crash, volatility, covid, vix, options, circuit-breakers, fed]
+tags: [history, crashes, volatility, covid, vix, options, circuit-breakers, monetary-policy]
 aliases: ["COVID Crash", "COVID-19 Crash", "March 2020 Crash", "Pandemic Crash", "Coronavirus Crash", "Pandemic", "pandemic"]
 event_date: 2020-03-16
 markets_affected: [stocks, options, credit, treasuries, oil, crypto]

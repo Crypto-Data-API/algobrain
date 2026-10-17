@@ -67,7 +67,7 @@ See [[securitize]] for the issuer and [[real-world-assets]] for the asset class;
 | **[[securitize-tokenized-aaa-clo-fund\|STAC]]** | Securitize + BNY | AAA-rated USD CLO tranches | Senior, high-grade structured credit | Price-accruing (~$1,021) |
 | **[[midas-mf-one\|mF-ONE]]** | Midas + Fasanara | Private credit + delta-neutral crypto | Private-credit + strategy risk | Price-accruing (~$1.10) |
 | **JAAA (tokenized)** | Tokenized Janus Henderson AAA CLO | AAA CLO tranches | Senior structured credit | Price/NAV |
-| **[[buidl]]** (BUIDL) | BlackRock + Securitize | U.S. Treasuries | Near risk-free cash | $1.00 NAV (rebasing) |
+| **[[blackrock-usd-institutional-digital-liquidity-fund\|buidl]]** (BUIDL) | BlackRock + Securitize | U.S. Treasuries | Near risk-free cash | $1.00 NAV (rebasing) |
 
 ACRED is differentiated by its **diversified, actively-managed credit mandate** (not just senior/AAA tranches), which means higher expected income but meaningfully more credit-cycle risk than Treasury or AAA-CLO peers.
 

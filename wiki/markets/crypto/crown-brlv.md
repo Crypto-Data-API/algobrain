@@ -9,7 +9,7 @@ aliases: ["BRLV"]
 entity_type: protocol
 headquarters: "São Paulo, Brazil (Crown)"
 website: "https://crown-brlv.com"
-related: ["[[base]]", "[[brazilian-real]]", "[[brla-digital-brla]]", "[[brz]]", "[[crypto-markets]]", "[[depeg]]", "[[forex]]", "[[stablecoins]]"]
+related: ["[[base]]", "[[brazilian-real]]", "[[brla-digital-brla]]", "[[brz]]", "[[crypto-markets]]", "[[depeg-risk]]", "[[forex]]", "[[stablecoins]]"]
 ---
 
 # Crown BRLV
@@ -115,7 +115,7 @@ BRLV is a **regional / FX-denominated stablecoin** aimed squarely at the **insti
 ## Risks
 
 - **FX risk (not a stablecoin flaw, but a holder risk)**: a US-dollar-based holder is exposed to BRL depreciation; the token holds its BRL peg but its USD value moves with BRL/USD.
-- **De-peg risk**: failure of the bond-redemption process, reserve shortfalls, or loss of confidence could push BRLV away from R$1.00 ([[depeg]]).
+- **De-peg risk**: failure of the bond-redemption process, reserve shortfalls, or loss of confidence could push BRLV away from R$1.00 ([[depeg-risk|depeg]]).
 - **Collateral / sovereign risk**: backing is Brazilian government bonds, so the peg carries **Brazilian sovereign credit and rate risk** — a bond-price or sovereign shock is a reserve-value shock.
 - **Issuer / custodial risk**: reserves and the rewards calculation are issuer-controlled and partly off-chain; holders depend on the bankruptcy-remote structure being honored in practice.
 - **Yield-asymmetry risk**: secondary holders carry the token but cannot claim the BRLY yield, which accrues to primary holders.

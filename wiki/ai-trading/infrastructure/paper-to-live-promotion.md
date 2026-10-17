@@ -4,7 +4,7 @@ type: concept
 created: 2026-07-14
 updated: 2026-07-14
 status: good
-tags: [ai-trading, algorithmic, backtesting, risk-management, deployment, crypto]
+tags: [ai-trading, algorithmic, backtesting, risk-management, infrastructure, crypto]
 aliases: ["Promotion Ladder", "Canary Deployment", "Backtest to Live", "Going Live Gates"]
 domain: [risk-management, market-microstructure]
 prerequisites: ["[[backtesting]]", "[[paper-trading]]", "[[deployment]]"]

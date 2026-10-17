@@ -4,7 +4,7 @@ type: reference
 created: 2026-04-06
 updated: 2026-04-06
 status: good
-tags: [seasonal, spread-trading, calendar-spread, commodity-cycles, agriculture, energy, seasonality]
+tags: [spread-trading, calendar-spread, commodity-cycles, agriculture, energy, seasonality]
 aliases: ["Seasonal Commodity Spreads", "Calendar Spread Trading", "Seasonal Futures Trading"]
 strategy_type: fundamental
 timeframe: swing|position

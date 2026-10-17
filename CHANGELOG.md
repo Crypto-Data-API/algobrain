@@ -4,6 +4,33 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-10-17 — Funding/carry gates; empty, orphan and stale cleanup; tag audit
+
+**Added:** Runnable gates on six funding and carry pages: cash-and-carry,
+funding-rate arbitrage, Hyperliquid-vs-CEX funding divergence, basis trading, momentum
+rotation and market making. 87 pages now carry 1,257 gates. Most carry conditions stay
+partial or not runnable, because the API serves no dated-futures prices, borrow rates or
+non-Hyperliquid perp funding. The pages say so plainly.
+
+**Changed:**
+- **Stale pages:** the 15 most-linked stale concept and strategy pages were brought
+  current, with factual corrections and contradictions recorded rather than overwritten.
+  The queue fell from 244 to 221.
+- **Empty pages:** all 38 were resolved: 4 expanded, 31 turned into redirects that
+  describe their target, and dead pages removed.
+- **Orphans:** all 31 now have inbound links.
+- **Links:** six families of broken links now point to the pages they meant, including
+  135 `depeg` links.
+- **Tags:** a fourth tag audit adopted 49 tags and merged 40 near-duplicates, taking tag
+  issues from 659 to 511.
+
+**Fixed:** The data-source pages now record what live checks showed:
+- The live stream's replay buffer holds minutes of events, not the two hours documented
+  upstream.
+- Exchange-flow timestamps are in seconds.
+- Fear and greed history currently returns one row, and two coin lookups return wrong
+  data.
+
 ## 2026-10-17 — Runnable gates on 20 more strategies; 3 new strategies; endpoint citations fixed
 
 **Added:**

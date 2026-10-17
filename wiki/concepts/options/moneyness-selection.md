@@ -32,7 +32,7 @@ related:
   - "[[credit-spread]]"
   - "[[debit-spread]]"
   - "[[iron-condors]]"
-  - "[[leaps]]"
+  - "[[long-dated-options]]"
   - "[[iv-crush]]"
   - "[[volatility-risk-premium]]"
   - "[[probability-of-profit]]"
@@ -314,7 +314,7 @@ Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; f
 - [[volatility-risk-premium]] — structural reason OTM buyers lose on average
 - [[probability-of-profit]] — moneyness expressed as a probability
 - [[long-call]], [[long-put]], [[credit-spread]], [[debit-spread]], [[iron-condors]] — strategies with canonical moneyness choices
-- [[leaps]] — deep-ITM moneyness is the standard for stock replacement
+- [[long-dated-options|leaps]] — deep-ITM moneyness is the standard for stock replacement
 
 ## Sources
 

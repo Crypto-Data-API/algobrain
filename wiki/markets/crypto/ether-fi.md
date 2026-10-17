@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-20
 status: excellent
-tags: [crypto, defi, ethereum, lrt, lst, restaking, staking, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
+tags: [crypto, defi, ethereum, lst, restaking, staking, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["ETHFI", "Ether.fi", "EtherFi", "ether.fi", "etherfi"]
 entity_type: protocol
 founded: 2022

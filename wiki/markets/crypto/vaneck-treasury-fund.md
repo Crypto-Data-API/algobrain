@@ -9,7 +9,7 @@ aliases: ["VBILL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://securitize.io/primary-market/vaneck-vbill"
-related: ["[[buidl]]", "[[crypto-markets]]", "[[ethereum]]", "[[ousg]]", "[[real-world-assets]]", "[[tokenized-treasuries]]"]
+related: ["[[blackrock-usd-institutional-digital-liquidity-fund]]", "[[crypto-markets]]", "[[ethereum]]", "[[ousg]]", "[[real-world-assets]]", "[[tokenized-treasuries]]"]
 ---
 
 # VanEck Treasury Fund
@@ -59,7 +59,7 @@ VBILL is a tokenized share in a money-market-style fund, with VanEck as asset ma
 | Product | Issuer / Manager | Unit / NAV model | Yield distribution | Notable trait |
 |---|---|---|---|---|
 | **VBILL** | VanEck + Securitize | $1.00 NAV (rebasing) | New tokens (rebase) | Multi-chain; stablecoin in-kind subscriptions |
-| **[[buidl]]** (BUIDL) | BlackRock + Securitize | $1.00 NAV (rebasing) | New tokens (rebase) | Largest tokenized-Treasury fund; deep ecosystem |
+| **[[blackrock-usd-institutional-digital-liquidity-fund\|buidl]]** (BUIDL) | BlackRock + Securitize | $1.00 NAV (rebasing) | New tokens (rebase) | Largest tokenized-Treasury fund; deep ecosystem |
 | **[[ousg]]** (OUSG) | Ondo Finance | Price-accruing (~$100+) | NAV price-accretion | Instant mint/redeem via USDC; BUIDL-backed |
 | **[[hashnote-usyc]]** (USYC) | Hashnote / Circle | Price-accruing | NAV price-accretion | Repo-focused; Circle-integrated collateral |
 | **USTB** | Superstate | Price-accruing | NAV price-accretion | Short-duration Treasuries, 40-Act-style fund |
@@ -85,7 +85,7 @@ VBILL sits in the fast-growing **tokenized Treasuries / tokenized cash** segment
 
 - **Rates regime:** Demand for tokenized T-bill yield scales with the level of short-term U.S. rates — higher front-end yields make products like VBILL more attractive as on-chain cash.
 - **Institutional adoption:** VanEck's brand and Securitize's regulated rails lower the trust barrier for institutions entering on-chain cash management.
-- **RWA tokenization wave:** VBILL is part of a broader push (alongside [[buidl]], [[ousg]], and others) to bring trillions in real-world fixed-income on-chain.
+- **RWA tokenization wave:** VBILL is part of a broader push (alongside [[blackrock-usd-institutional-digital-liquidity-fund|buidl]], [[ousg]], and others) to bring trillions in real-world fixed-income on-chain.
 - **Stablecoin integration:** Support for stablecoin/atomic-swap subscriptions positions VBILL as a yield-bearing alternative to idle stablecoin balances.
 
 ### History / Timeline
@@ -133,7 +133,7 @@ VBILL sits in the fast-growing **tokenized Treasuries / tokenized cash** segment
 
 - [[real-world-assets]]
 - [[tokenized-treasuries]]
-- [[ousg]], [[buidl]], [[hashnote-usyc]] — peer tokenized Treasury / MMF products
+- [[ousg]], [[blackrock-usd-institutional-digital-liquidity-fund|buidl]], [[hashnote-usyc]] — peer tokenized Treasury / MMF products
 - [[securitize]] — tokenization platform / transfer agent
 - [[crypto-markets]]
 - [[ethereum]]

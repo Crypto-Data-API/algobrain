@@ -9,7 +9,7 @@ aliases: ["BRZ"]
 entity_type: protocol
 headquarters: "Brazil / Switzerland (Transfero Group)"
 website: "https://transfero.com/stablecoins/brz/"
-related: ["[[brazilian-real]]", "[[brla-digital-brla]]", "[[crown-brlv]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[forex]]", "[[stablecoins]]"]
+related: ["[[brazilian-real]]", "[[brla-digital-brla]]", "[[crown-brlv]]", "[[crypto-markets]]", "[[depeg-risk]]", "[[ethereum]]", "[[forex]]", "[[stablecoins]]"]
 ---
 
 # Brazilian Digital
@@ -93,7 +93,7 @@ BRZ sits in the **regional / FX-denominated stablecoin** category. Catalysts tha
 - **Issuer / reserve-counterparty risk:** As a centrally issued fiat-backed coin, holders rely on Transfero actually holding sufficient reserves and on its banking counterparties; reserve-attestation transparency is the key consideration.
 - **Regulatory risk:** Brazilian (Drex/central-bank stablecoin rules) and international stablecoin regulation is evolving and could affect issuance or redemption.
 - **Redemption-gating risk:** Par redemption depends on KYC clearance and the off-ramp staying open; a freeze would break the arbitrage that holds the peg.
-- **Liquidity / depeg risk:** With ~$52M market cap and modest 24h volume, large trades can push BRZ away from peg on-chain ([[depeg]] risk).
+- **Liquidity / depeg risk:** With ~$52M market cap and modest 24h volume, large trades can push BRZ away from peg on-chain ([[depeg-risk|depeg]] risk).
 - **Multi-chain bridge risk:** BRZ exists on many chains; a bridge or contract vulnerability on any single chain could affect that chain's supply.
 
 ## Trading / Usage Playbook

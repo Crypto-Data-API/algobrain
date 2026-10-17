@@ -9,7 +9,7 @@ aliases: ["Helio Protocol", "LISTA", "Lista"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://lista.org/"
-related: ["[[bnb-chain]]", "[[bnb]]", "[[cdp]]", "[[crypto-markets]]", "[[defi]]", "[[hyperliquid]]", "[[liquid-staking]]", "[[maker]]", "[[stablecoins]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[liquidation-cascade-fade]]"]
+related: ["[[bnb-chain]]", "[[bnb]]", "[[cdp]]", "[[crypto-markets]]", "[[defi]]", "[[hyperliquid]]", "[[liquid-staking]]", "[[makerdao]]", "[[stablecoins]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Lista DAO
@@ -25,7 +25,7 @@ related: ["[[bnb-chain]]", "[[bnb]]", "[[cdp]]", "[[crypto-markets]]", "[[defi]]
 Lista DAO operates two tightly linked product lines on [[bnb-chain|BNB Chain]]:
 
 - **Liquid staking (slisBNB)** — users stake BNB and receive **slisBNB**, a [[liquid-staking|liquid-staking]] token that accrues BNB staking rewards while remaining usable as collateral and across DeFi. This lets stakers keep liquidity instead of locking BNB.
-- **lisUSD CDP stablecoin** — users deposit collateral (including slisBNB and other approved assets) into vaults and mint **lisUSD**, a soft-pegged [[stablecoins]] redeemable against the underlying collateral. The system is over-collateralized, with liquidation mechanics protecting the peg, similar in spirit to [[maker|MakerDAO]]'s DAI but native to BNB Chain.
+- **lisUSD CDP stablecoin** — users deposit collateral (including slisBNB and other approved assets) into vaults and mint **lisUSD**, a soft-pegged [[stablecoins]] redeemable against the underlying collateral. The system is over-collateralized, with liquidation mechanics protecting the peg, similar in spirit to [[makerdao|MakerDAO]]'s DAI but native to BNB Chain.
 
 The combination is the protocol's edge: a user can stake BNB into slisBNB to earn yield, then use that yield-bearing token as collateral to mint lisUSD, layering staking yield with stablecoin liquidity ("looping").
 
@@ -90,11 +90,11 @@ Lista competes for BNB liquid-staking share (against other BNB LST providers) an
 | Protocol | Niche | vs Lista | Trade-off |
 |---|---|---|---|
 | **Lista DAO** | BNB LST (slisBNB) + lisUSD CDP stable | Integrated stake→borrow loop, Binance distribution | Single-chain / BNB concentration; dilution |
-| **[[maker|MakerDAO / Sky]]** | DAI/USDS multi-collateral CDP (Ethereum) | Largest decentralized CDP stable, deep liquidity | Not BNB-native; different collateral set |
+| **[[makerdao|MakerDAO / Sky]]** | DAI/USDS multi-collateral CDP (Ethereum) | Largest decentralized CDP stable, deep liquidity | Not BNB-native; different collateral set |
 | **Lido** (analog) | Liquid staking (ETH stETH) | Category leader for LSTs, but no native CDP stable | Not on BNB; no integrated stable mint |
 | **Venus** | BNB-chain money market + VAI stable | BNB-native lending leader | Less LST-integrated than Lista |
 
-See [[liquid-staking]], [[cdp]], [[stablecoins]], and [[maker]].
+See [[liquid-staking]], [[cdp]], [[stablecoins]], and [[makerdao|maker]].
 
 ---
 
@@ -303,7 +303,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can trade L
 - [[liquid-staking]]
 - [[stablecoins]]
 - [[cdp]]
-- [[maker]]
+- [[makerdao|maker]]
 - [[defi]]
 
 ---

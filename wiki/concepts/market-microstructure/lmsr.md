@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-14
 updated: 2026-06-11
 status: good
-tags: [prediction-markets, market-microstructure, automated-market-maker, behavioral-finance]
+tags: [prediction-markets, market-microstructure, amm, behavioral-finance]
 aliases: ["LMSR", "Hanson Scoring Rule", "Log Market Scoring Rule"]
 domain: [market-microstructure]
 prerequisites: ["[[prediction-markets]]", "[[market-microstructure]]"]

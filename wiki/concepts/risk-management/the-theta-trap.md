@@ -123,7 +123,7 @@ VIX averaged ~15.4 in 2019 H2. A second cohort of premium-selling traders had re
 On **February 24, 2020**, COVID-related selling began. Between Feb 19 and March 23:
 
 - SPX fell **~34%**.
-- VIX rose from 14.38 (Feb 12) to 82.69 (March 16) — a 475% expansion, briefly exceeding the [[2008-financial-crisis|2008 GFC]] peak.
+- VIX rose from 14.38 (Feb 12) to 82.69 (March 16) — a 475% expansion, briefly exceeding the [[2008-global-financial-crisis|2008 GFC]] peak.
 - 30-day implied volatility on the SPX option chain rose from ~12% to ~80%.
 
 Damage to short-premium books:

@@ -46,9 +46,9 @@ THBILL is a tokenized fund interest issued through Theo's institutional tokeniza
 - **Fund structure & issuer:** **Theo** operates the tokenization platform and issues the fund interest as an on-chain token representing an economic claim on the underlying short-duration Treasury fund (not a bearer asset).
 - **Underlying assets:** Short-duration **U.S. Treasury bills**, cash, and repurchase agreements collateralized by Treasuries — the standard portfolio for a short-duration Treasury / money-market-style fund, holding front-end paper to minimize duration and credit risk.
 - **Custody:** Underlying Treasuries are held with regulated off-chain custodians; the on-chain token mirrors that custodied position 1:1 (market cap equals fully diluted valuation, MC/FDV = 1.00).
-- **Eligible-investor gating:** Like peer tokenized Treasury products ([[ousg|OUSG]], [[hashnote-usyc|USYC]], [[buidl|BUIDL]]), primary subscription and redemption are gated to KYC/AML-screened, whitelisted — typically non-U.S. or qualified — investors under securities-law exemptions (Reg S / Reg D). Retail open-market access is generally restricted.
+- **Eligible-investor gating:** Like peer tokenized Treasury products ([[ousg|OUSG]], [[hashnote-usyc|USYC]], [[blackrock-usd-institutional-digital-liquidity-fund|BUIDL]]), primary subscription and redemption are gated to KYC/AML-screened, whitelisted — typically non-U.S. or qualified — investors under securities-law exemptions (Reg S / Reg D). Retail open-market access is generally restricted.
 - **Mint / redeem flow & settlement:** Whitelisted participants mint and redeem against the underlying fund through Theo's primary issuance flow. The multi-chain deployment lets the same economic interest move across [[ethereum|Ethereum]], Base, Arbitrum One, and HyperEVM, settling on-chain.
-- **Yield source & distribution:** Yield comes from the T-bill / repo portfolio and is delivered via **price accretion** — the token's NAV rises as income accrues, rather than minting new tokens (non-rebasing). This is the opposite design choice from rebasing $1.00-NAV peers like [[buidl|BUIDL]] and [[vaneck-treasury-fund|VBILL]].
+- **Yield source & distribution:** Yield comes from the T-bill / repo portfolio and is delivered via **price accretion** — the token's NAV rises as income accrues, rather than minting new tokens (non-rebasing). This is the opposite design choice from rebasing $1.00-NAV peers like [[blackrock-usd-institutional-digital-liquidity-fund|BUIDL]] and [[vaneck-treasury-fund|VBILL]].
 - **Oracle / NAV feed:** The token is designed to track the value of the short-duration Treasury portfolio plus accrued yield; on secondary venues, price can deviate from accrued NAV due to on-chain supply/demand and arbitrage friction.
 - **Transfer restrictions / whitelist:** Transfers are restricted to the permissioned holder set maintained by the issuer; non-whitelisted addresses cannot hold the token.
 
@@ -61,7 +61,7 @@ THBILL is a tokenized fund interest issued through Theo's institutional tokeniza
 | **THBILL** | Theo | Price-accruing (~$1.02+) | Ethereum, Base, Arbitrum, HyperEVM | DeFi-composable from launch; multi-L2 |
 | **[[ousg]]** (OUSG) | Ondo Finance | Price-accruing | Multi-chain | Instant USDC mint/redeem; BUIDL-backed |
 | **[[hashnote-usyc]]** (USYC) | Hashnote / Circle | Price-accruing | Multi-chain | Repo-focused; Circle collateral integration |
-| **[[buidl]]** (BUIDL) | BlackRock + Securitize | $1.00 NAV (rebasing) | Multi-chain | Largest tokenized-Treasury fund |
+| **[[blackrock-usd-institutional-digital-liquidity-fund\|buidl]]** (BUIDL) | BlackRock + Securitize | $1.00 NAV (rebasing) | Multi-chain | Largest tokenized-Treasury fund |
 | **[[vaneck-treasury-fund\|VBILL]]** | VanEck + Securitize | $1.00 NAV (rebasing) | Multi-chain | Stablecoin in-kind subscriptions |
 
 THBILL's positioning emphasizes Layer-2 / multi-chain reach (Base, Arbitrum, HyperEVM) and DeFi composability, in contrast to the rebasing $1.00-NAV brand-name funds.
@@ -85,7 +85,7 @@ THBILL sits in the **tokenized Treasuries** segment of the RWA narrative, with a
 
 - **Rates regime:** Front-end U.S. yields drive the product's appeal; richer T-bill yields make on-chain Treasury tokens more attractive than idle stablecoins.
 - **Multi-chain / L2 growth:** Deployment on Base, Arbitrum, and HyperEVM positions THBILL to capture DeFi-native demand for yield-bearing cash collateral.
-- **Institutional RWA adoption:** Part of the broader wave bringing regulated fixed-income on-chain alongside [[ousg]], [[hashnote-usyc]], and [[buidl]].
+- **Institutional RWA adoption:** Part of the broader wave bringing regulated fixed-income on-chain alongside [[ousg]], [[hashnote-usyc]], and [[blackrock-usd-institutional-digital-liquidity-fund|buidl]].
 - **DeFi composability:** Native usability as collateral/cash in DeFi differentiates it from purely hold-to-NAV permissioned funds.
 
 ### History / Timeline
@@ -133,7 +133,7 @@ THBILL sits in the **tokenized Treasuries** segment of the RWA narrative, with a
 
 - [[real-world-assets]]
 - [[tokenized-treasuries]]
-- [[ousg]], [[hashnote-usyc]], [[buidl]], [[vaneck-treasury-fund]] — peer tokenized Treasury / MMF products
+- [[ousg]], [[hashnote-usyc]], [[blackrock-usd-institutional-digital-liquidity-fund|buidl]], [[vaneck-treasury-fund]] — peer tokenized Treasury / MMF products
 - [[crypto-markets]]
 - [[ethereum]]
 

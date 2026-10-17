@@ -18,7 +18,7 @@ related: ["[[avalanche-2]]", "[[avalanche]]", "[[collateral]]", "[[crypto-market
 
 Unlike the fiat-backed ([[usdh-2|USDH]]) or reinsurance-RWA ([[re-protocol-reusd|reUSD]]) dollars elsewhere in this category, NXUSD is **endogenously collateralized** — its backing is volatile crypto held inside the Nereus money market, and its peg is sustained by over-collateralization, price oracles, and arbitrage rather than by any off-chain reserve. That makes it structurally closer to a [[makerdao|MakerDAO]]-style crypto-backed dollar than to a reserve coin, and explains why, at low liquidity, it currently trades at a modest discount to par rather than dead-on $1.
 
-> *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).* NXUSD trades at **$0.981737** (rank **#854**, market cap **$18,617,508**, 24h **+1.42%**, 7d **-0.72%**). This is a mild **~1.8% soft-peg discount** to the $1.00 target — common for low-liquidity crypto-backed stablecoins and not a severe [[depeg]] event, though it does signal weak secondary-market demand and thin arbitrage activity at this size.
+> *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).* NXUSD trades at **$0.981737** (rank **#854**, market cap **$18,617,508**, 24h **+1.42%**, 7d **-0.72%**). This is a mild **~1.8% soft-peg discount** to the $1.00 target — common for low-liquidity crypto-backed stablecoins and not a severe [[depeg-risk|depeg]] event, though it does signal weak secondary-market demand and thin arbitrage activity at this size.
 
 ---
 
@@ -105,7 +105,7 @@ NXUSD belongs to the **crypto-collateralized (CDP) stablecoin** lineage — the 
 
 ## Risks
 
-- **Soft-peg / [[depeg]] risk** — the present ~1.8% discount illustrates how low-cap crypto-backed stablecoins can drift from par when arbitrage is uneconomic at small size; the historical $0.0344 ATL and $2.43 ATH show the deviations can be extreme under thin liquidity.
+- **Soft-peg / [[depeg-risk|depeg]] risk** — the present ~1.8% discount illustrates how low-cap crypto-backed stablecoins can drift from par when arbitrage is uneconomic at small size; the historical $0.0344 ATL and $2.43 ATH show the deviations can be extreme under thin liquidity.
 - **Collateral risk** — backing is volatile crypto assets; sharp drawdowns can push positions below the liquidation threshold, stressing the peg (the algorithmic/crypto-backed-stablecoin failure mode; see [[algorithmic-stablecoin]]).
 - **Oracle / smart-contract risk** — mispriced or stale oracles can allow undercollateralised mints or unfair liquidations; flash-borrow functionality widens the attack surface for oracle-manipulation exploits.
 - **Liquidity risk** — minimal secondary-market depth (~$2.7K/24h) makes large redemptions slippage-prone and weakens the peg-restoring arbitrage loop.

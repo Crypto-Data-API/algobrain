@@ -2,7 +2,7 @@
 title: "Kraken"
 type: entity
 created: 2026-04-15
-updated: 2026-06-10
+updated: 2026-10-17
 status: good
 tags: [exchange, crypto, bitcoin, regulation]
 entity_type: exchange
@@ -39,6 +39,8 @@ related: ["[[coinbase]]", "[[binance]]", "[[bitcoin]]", "[[ethereum]]", "[[sec]]
 - **Regulated US derivatives**: via Kraken Futures (Crypto Facilities, FCA-regulated, acquired 2019) and NinjaTrader (CFTC), Kraken offers one of the few regulated paths for US retail to trade both crypto perps-style products and CME futures from one stack.
 - **Everything-exchange convergence trade**: Kraken's equities + tokenized-stock rollout, alongside [[robinhood|Robinhood]]'s crypto push, defines the 2025–2026 broker/exchange convergence theme; its IPO (when it prices) will be a key comp for [[coinbase|Coinbase]] valuation.
 - **Proof-of-reserves and counterparty risk**: Kraken pioneered proof-of-reserves audits (first in 2014), relevant to post-[[ftx|FTX]] exchange counterparty-risk assessment.
+
+In strategy terms, Kraken is mainly a venue leg rather than a signal source. Its deep EUR books make it a natural leg for [[triangular-arbitrage]] across USD, EUR and stablecoin quotes, and for [[cross-exchange-arbitrage]] against offshore venues. Kraken Futures supports [[basis-trading]] and [[cash-and-carry]] positions held at a regulated counterparty. New spot listings on Kraken, as on other major venues, feed the [[exchange-listing-delisting]] event playbook.
 
 ## Related
 

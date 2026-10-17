@@ -14,7 +14,7 @@ related:
   - "[[disposition-effect]]"
   - "[[prospect-theory]]"
   - "[[framing-effects]]"
-  - "[[cognitive-bias]]"
+  - "[[cognitive-biases]]"
   - "[[overtrading]]"
   - "[[tail-risk]]"
   - "[[book-thinking-fast-and-slow]]"
@@ -23,7 +23,7 @@ related:
 
 # Loss Aversion
 
-Loss aversion is the [[cognitive-bias|cognitive bias]], identified by Daniel Kahneman and Amos Tversky in their [[prospect-theory|Prospect Theory]] (1979), whereby people experience the pain of a loss roughly twice as intensely as the pleasure of an equivalent gain. It is one of the most consequential biases in [[behavioral-finance]] because trading P&L is, by definition, a stream of gains and losses, so the asymmetry distorts almost every discretionary decision a trader makes.
+Loss aversion is the [[cognitive-biases|cognitive bias]], identified by Daniel Kahneman and Amos Tversky in their [[prospect-theory|Prospect Theory]] (1979), whereby people experience the pain of a loss roughly twice as intensely as the pleasure of an equivalent gain. It is one of the most consequential biases in [[behavioral-finance]] because trading P&L is, by definition, a stream of gains and losses, so the asymmetry distorts almost every discretionary decision a trader makes.
 
 ## The Science
 

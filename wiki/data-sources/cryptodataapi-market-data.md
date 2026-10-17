@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Market Data"
 type: source
 created: 2026-07-13
-updated: 2026-07-20
+updated: 2026-10-17
 status: good
 tags: [data-provider, crypto, api, market-data, ohlcv, binance, spot, volume]
 aliases: ["CDA Market Data", "CryptoDataAPI Market Data", "cryptodataapi klines", "cryptodataapi daily snapshot"]
@@ -36,6 +36,8 @@ Tier "—" means the docs list no tier restriction for that endpoint.
 ## Live Data
 
 Current-state endpoints: `/market-data/ticker/price` (spot price now), `/market-data/ticker/24hr` (rolling 24hr stats), `/market-data/short-term-price` (short-term momentum metrics), and `/market-data/exchange-info` (pair specs). The Daily Snapshot family (`/daily`, `/daily/prices`, `/daily/hyperliquid`, `/daily/hl-traders`) bulk-exports the latest values across the whole universe in single calls — the efficient way to refresh a local database once a day.
+
+**Observed caveat (2026-10-17): a halted pair returns zeros, not an error.** `/ticker/price?symbol=DAIUSDT` answered `200` with `price: 0.0`, and `/ticker/24hr` returned 0 for every field (`trades: 0`). `/klines?symbol=DAIUSDT` came back empty, and `/exchange-info?symbol=DAIUSDT` showed `status: "BREAK"`, so Binance is not trading the pair. Treat a price of 0 as missing data, and check `exchange-info` `status` is `TRADING` before using a pair as a stablecoin peg read or a spot leg.
 
 ## Historical Data
 

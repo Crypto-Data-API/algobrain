@@ -4,7 +4,7 @@ type: concept
 created: 2026-07-14
 updated: 2026-10-17
 status: good
-tags: [crypto, market-microstructure, liquidity, slippage, algorithmic-trading, funding-rate, hyperliquid]
+tags: [crypto, market-microstructure, liquidity, slippage, algorithmic, funding-rate, hyperliquid]
 aliases: ["Cross-Venue Execution", "Crypto Venue Routing", "Multi-Venue Order Routing", "Cross-Exchange Execution"]
 domain: [market-microstructure]
 prerequisites: ["[[best-execution]]", "[[depth-of-market]]", "[[smart-order-routing]]"]

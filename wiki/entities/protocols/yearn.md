@@ -158,7 +158,7 @@ Yearn's yields are not guaranteed and fluctuate with DeFi market conditions. Dur
 
 ### Fee Drag
 
-Yearn's 2% management fee + 20% performance fee is among the highest in DeFi yield aggregation. On a 10% gross APY, net yield to depositors is approximately 8.4% after fees. Competing aggregators (e.g., Beefy Finance, Sommelier) may offer similar strategies with lower fees.
+Yearn's 2% management fee + 20% performance fee is among the highest in DeFi yield aggregation. On a 10% gross APY, net yield to depositors is approximately 8.4% after fees. Competing aggregators (e.g., [[beefy|Beefy Finance]], Sommelier) may offer similar strategies with lower fees.
 
 ### Governance Risk
 

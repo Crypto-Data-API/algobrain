@@ -4,7 +4,7 @@ type: source
 created: 2026-04-15
 updated: 2026-04-15
 status: good
-tags: [crypto, defi, source, meta]
+tags: [crypto, defi, sources, meta]
 source_type: article
 source_url: ""
 source_author: "Compiled research guide"

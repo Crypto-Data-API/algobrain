@@ -4,7 +4,7 @@ type: strategy
 created: 2026-04-06
 updated: 2026-10-17
 status: good
-tags: [vwap, day-trading, crypto, intraday, market-microstructure, mean-reversion, perpetual-futures]
+tags: [vwap, day-trading, crypto, market-microstructure, mean-reversion, perpetual-futures]
 aliases: ["Crypto VWAP", "Anchored VWAP", "VWAP Execution", "VWAP Mean Reversion", "VWAP Reclaim"]
 strategy_type: technical
 timeframe: intraday

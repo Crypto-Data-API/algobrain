@@ -67,7 +67,7 @@ See [[securitize]] for the issuer, [[real-world-assets]] for the asset class, an
 | **JAAA (tokenized)** | Tokenized Janus Henderson AAA CLO ETF | AAA CLO tranches | Senior, AAA | Price/NAV |
 | **[[apollo-diversified-credit-securitize-fund\|ACRED]]** | Securitize + Apollo | Diversified private + public credit | Mixed/mid-grade | Price-accruing (~$1,099) |
 | **[[midas-mf-one\|mF-ONE]]** | Midas + Fasanara | Private credit + delta-neutral crypto | Private credit | Price-accruing (~$1.10) |
-| **[[buidl]]** (BUIDL) | BlackRock + Securitize | U.S. Treasuries | Near risk-free | $1.00 NAV (rebasing) |
+| **[[blackrock-usd-institutional-digital-liquidity-fund\|buidl]]** (BUIDL) | BlackRock + Securitize | U.S. Treasuries | Near risk-free | $1.00 NAV (rebasing) |
 
 STAC's distinguishing trait is its **AAA-only, senior-tranche mandate** with a top-tier bank (BNY) as custodian/servicer — positioning it as the highest-grade structured-credit option among tokenized credit funds, with lower expected yield but materially lower credit risk than diversified-credit peers like ACRED.
 

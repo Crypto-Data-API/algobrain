@@ -1,18 +1,13 @@
 ---
 title: "Cronos"
-type: entity
+type: redirect
 created: 2026-07-19
-updated: 2026-07-19
-status: stub
+updated: 2026-10-17
+status: good
 tags: [crypto]
-entity_type: protocol
+related: ["[[crypto-com-chain]]"]
 ---
 
 # Cronos
 
-**Cronos (CRO)** is Crypto.com's ecosystem chain and exchange token.
-
-## Related
-
-- [[crypto-com-chain]]
-- [[exchange-tokens]]
+See [[crypto-com-chain]] — the canonical Cronos (CRO) page: Crypto.com's exchange token and EVM-compatible chain, its tokenomics, the 2025-2026 developments, and trading notes.

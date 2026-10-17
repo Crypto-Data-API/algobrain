@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-06
 updated: 2026-06-21
 status: excellent
-tags: [regulators, government, futures, derivatives, commodities, crypto]
+tags: [regulators, futures, derivatives, commodities, crypto]
 aliases: ["Commodity Futures Trading Commission"]
 entity_type: regulator
 founded: 1974

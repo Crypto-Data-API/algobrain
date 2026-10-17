@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-07
 updated: 2026-06-21
 status: excellent
-tags: [nft, crypto, ethereum, gaming, history]
+tags: [nft, crypto, ethereum, gamefi, history]
 aliases: ["CryptoKitties", "Crypto Kitties"]
 entity_type: protocol
 founded: 2017

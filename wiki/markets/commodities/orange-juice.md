@@ -4,7 +4,7 @@ type: market
 created: 2026-04-15
 updated: 2026-06-22
 status: excellent
-tags: [commodities, futures, seasonal]
+tags: [commodities, futures, seasonality]
 aliases: ["Orange Juice", "OJ", "FCOJ", "Frozen Concentrated Orange Juice"]
 related: ["[[coffee]]", "[[sugar]]", "[[cocoa]]", "[[cotton]]", "[[commodities]]", "[[commodity-seasonality-patterns]]", "[[geopolitical-risk-premium]]", "[[commodities-overview]]", "[[futures]]", "[[liquidity]]", "[[volatility]]", "[[diversification]]"]
 ---

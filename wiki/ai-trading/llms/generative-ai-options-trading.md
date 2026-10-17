@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-07
 updated: 2026-06-12
 status: good
-tags: [ai-trading, llms, generative-ai, options, derivatives, machine-learning]
+tags: [ai-trading, llm, generative-ai, options, derivatives, machine-learning]
 aliases: ["GenAI Options Trading", "LLM Options Analysis", "AI Options Copilot"]
 domain: [ai-trading, options, generative-ai]
 prerequisites: ["[[options]]", "[[options-greeks]]", "[[implied-volatility]]", "[[llm-market-analysis]]", "[[generative-ai-overview]]"]

@@ -107,3 +107,4 @@ Every alpha model is subject to [[alpha-decay]]: as a signal becomes known and c
 - Grinold, Richard, and Ronald Kahn. *Active Portfolio Management* (2000) — the Fundamental Law and the IC/breadth decomposition.
 - Narang, Rishi. *Inside the Black Box: A Simple Guide to Quantitative and High-Frequency Trading* (2013) — the alpha / risk / cost three-module architecture.
 - Qian, Hua, Sorensen. *Quantitative Equity Portfolio Management* (2007).
+- Chincarini, L. & Kim, D. *Quantitative Equity Portfolio Management* (2006) — a separate textbook of the same name; see [[book-quantitative-equity-portfolio-management]].

@@ -9,7 +9,7 @@ aliases: ["LUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.liquity.org/"
-related: ["[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[liquity-bold-2]]", "[[liquity]]", "[[maker]]", "[[stablecoins]]"]
+related: ["[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[defi]]", "[[depeg-risk]]", "[[ethereum]]", "[[liquity-bold-2]]", "[[liquity]]", "[[makerdao]]", "[[stablecoins]]"]
 ---
 
 # Liquity USD
@@ -82,7 +82,7 @@ LUSD competes among decentralized, crypto-backed stablecoins on the axes of dece
 | Stablecoin | Backing | Key trait | vs LUSD |
 |---|---|---|---|
 | **LUSD** | ETH only, immutable | 0% interest, 110% min CR, governance-free | Most "credibly neutral"; ETH-only collateral |
-| **DAI / USDS** ([[maker|Maker/Sky]]) | Multi-collateral incl. RWAs/USDC | Largest decentralized stable | More centralized collateral; far larger |
+| **DAI / USDS** ([[makerdao|Maker/Sky]]) | Multi-collateral incl. RWAs/USDC | Largest decentralized stable | More centralized collateral; far larger |
 | **[[liquity-bold-2|BOLD]]** (Liquity V2) | ETH + LSTs | User-set rates, LST collateral | Same lineage, more flexible, newer |
 | **crvUSD / GHO** | Multi-collateral lending | DEX/lending-native stables | Different issuance mechanics |
 
@@ -221,7 +221,7 @@ LUSD trades on Ethereum DEXs (Uniswap, Sushiswap, Balancer) and is bridged to se
 
 ## Risks
 
-- **Depeg risk.** Although redemptions provide a hard floor near $1, LUSD can briefly trade away from peg during liquidity crunches or extreme ETH volatility (see [[depeg]]). It has historically traded slightly above $1 due to its supply cap and the value of redemption optionality.
+- **Depeg risk.** Although redemptions provide a hard floor near $1, LUSD can briefly trade away from peg during liquidity crunches or extreme ETH volatility (see [[depeg-risk|depeg]]). It has historically traded slightly above $1 due to its supply cap and the value of redemption optionality.
 - **Collateral (ETH) volatility.** Backing is volatile [[ethereum]]; a fast ETH crash can push Troves into liquidation en masse, stressing the Stability Pool.
 - **Stability Pool exhaustion / redistribution.** If the Stability Pool is depleted during a crash, liquidated debt is redistributed to remaining borrowers, raising their effective leverage and risk.
 - **Immutability cuts both ways.** Governance-free, non-upgradeable contracts eliminate admin-key risk but mean bugs or suboptimal parameters cannot be patched in the original protocol.
@@ -259,8 +259,8 @@ LUSD trades on Ethereum DEXs (Uniswap, Sushiswap, Balancer) and is bridged to se
 - [[stablecoins]]
 - [[collateralization]]
 - [[cdp]]
-- [[depeg]]
-- [[maker]]
+- [[depeg-risk|depeg]]
+- [[makerdao|maker]]
 - [[ethereum]]
 - [[defi]]
 - [[crypto-markets]]

@@ -236,7 +236,7 @@ Strategies unique to the blockchain and DeFi ecosystem.
 | [[lst-depeg-arbitrage]] | stETH/rETH/cbETH exit-queue depeg trades (June 2022 +6.5% spread) | Crypto, staking |
 | [[stablecoin-pair-arbitrage]] | USDC/USDT/DAI spreads around depeg events (SVB March 2023) | Crypto, stables |
 | [[liquidation-cascade-arbitrage]] | Front-run / follow liquidations on Aave, Compound, MakerDAO, Liquity | DeFi |
-| [[curve-gauge-wars-arbitrage]] | veCRV / vlCVX bribe farming via Votium, Hidden Hand | DeFi, governance |
+| [[curve-gauge-wars-arbitrage]] | veCRV / [[cvx\|vlCVX]] bribe farming via Votium, Hidden Hand | DeFi, governance |
 | [[vampire-attack-arbitrage]] | Farm forked protocol rewards during LP migration (SushiSwap, Blur) | DeFi |
 | [[token-unlock-arbitrage]] | Short VC/team cliff unlocks; post-unlock mean reversion | Crypto |
 | [[bankruptcy-claim-arbitrage]] | Trade Mt. Gox / FTX / Celsius / Voyager claims at OTC discount | Crypto, distressed |

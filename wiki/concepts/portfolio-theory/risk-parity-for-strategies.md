@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-10
 updated: 2026-06-21
 status: excellent
-tags: [portfolio-theory, risk-parity, multi-strategy, position-sizing]
+tags: [portfolio-theory, risk-parity, portfolio-construction, position-sizing]
 aliases: ["Strategy Risk Parity", "Equal Risk Contribution"]
 domain: [portfolio-theory]
 difficulty: intermediate

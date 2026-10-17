@@ -75,7 +75,7 @@ Major exchanges have delisted or de-emphasized BUSD spot pairs since the wind-do
 - **Regulatory risk (realized)** — BUSD is itself the example: NYDFS ordered minting to stop and the SEC alleged it was a security.
 - **Smart-contract risk** — Standard ERC-20 exposure.
 
-See [[stablecoins]] and [[depeg]] for the general framework, and [[paxos-standard|USDP/Pax Dollar]] for the issuer's still-active dollar stablecoin.
+See [[stablecoins]] and [[depeg-risk|depeg]] for the general framework, and [[paxos-standard|USDP/Pax Dollar]] for the issuer's still-active dollar stablecoin.
 
 ---
 
@@ -86,7 +86,7 @@ See [[stablecoins]] and [[depeg]] for the general framework, and [[paxos-standar
 - [[paxos-standard]]
 - [[usdt|Tether]]
 - [[usdc]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[collateralization]]
 - [[ethereum]]
 - [[crypto-markets]]

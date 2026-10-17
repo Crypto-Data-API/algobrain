@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-06
 updated: 2026-07-20
 status: good
-tags: [ai, bittensor, crypto, decentralized-ai, machine-learning, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
+tags: [ai, bittensor, crypto, machine-learning, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 entity_type: protocol
 aliases: ["Bittensor", "TAO", "bittensor-tao"]
 website: "https://bittensor.com"

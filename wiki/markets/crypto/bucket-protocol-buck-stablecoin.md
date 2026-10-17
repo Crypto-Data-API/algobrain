@@ -9,7 +9,7 @@ aliases: ["BUCK"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://bucketprotocol.io/"
-related: ["[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[depeg]]", "[[liquidation]]", "[[stablecoins]]", "[[sui]]"]
+related: ["[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[depeg-risk]]", "[[liquidation]]", "[[stablecoins]]", "[[sui]]"]
 ---
 
 # Bucket Protocol BUCK Stablecoin
@@ -182,7 +182,7 @@ BUCK is a play on **Sui-ecosystem DeFi** and the **decentralized stablecoin** ca
 
 ## Risks
 
-- **Depeg risk.** Like all crypto-backed stablecoins, BUCK can trade off-peg during liquidity stress or collateral crashes (see [[depeg]]); the brief ATL print illustrates how thin liquidity can produce extreme momentary deviations.
+- **Depeg risk.** Like all crypto-backed stablecoins, BUCK can trade off-peg during liquidity stress or collateral crashes (see [[depeg-risk|depeg]]); the brief ATL print illustrates how thin liquidity can produce extreme momentary deviations.
 - **Multi-collateral volatility.** Backing spans SUI, BTC, ETH, and LSTs; a sharp drop in any major collateral asset (especially the more volatile or less liquid ones) can trigger mass liquidations.
 - **Liquidation / oracle risk.** Solvency depends on timely liquidations and reliable price oracles for each collateral type; oracle failure or a fast crash can leave the system under-collateralized.
 - **Stability-pool depletion.** If the stability pool is drained during a large liquidation cascade, the protocol must fall back to redistribution mechanisms, raising contagion risk among borrowers.
@@ -219,7 +219,7 @@ BUCK is a play on **Sui-ecosystem DeFi** and the **decentralized stablecoin** ca
 - [[collateralization]]
 - [[cdp]]
 - [[liquidation]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[crypto-markets]]
 
 ---

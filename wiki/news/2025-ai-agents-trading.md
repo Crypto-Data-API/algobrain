@@ -4,7 +4,7 @@ type: news
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [news, ai, agents, llm, trading-bots, automation, gpt, claude, machine-learning]
+tags: [news, ai, agents, llm, trading-bots, gpt, claude, machine-learning]
 event_date: 2025-03-01
 markets_affected: [crypto, stocks]
 impact: medium

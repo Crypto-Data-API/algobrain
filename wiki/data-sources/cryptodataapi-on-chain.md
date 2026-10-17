@@ -49,7 +49,7 @@ Tier "—" = not marked with a plan gate in the API docs; standard plan rate lim
 
 **`GET /on-chain/exchange-flows/{symbol}/history`** archives the rolling windows of the live `/exchange-flows/{symbol}` route. They have been sampled roughly every 30 minutes since **2026-05-28** (the changelog says every ~10-40 minutes). Each point carries:
 
-- `ts`.
+- `ts`, in unix **seconds**, not milliseconds (verified live 2026-10-17: BTC points read `ts: 1792110244`, and the response's `start` / `end` echo seconds too). Most other CryptoDataAPI routes stamp milliseconds, so convert before joining to candles or funding bars.
 - The trailing **1h** and **24h** `inflow_*`, `outflow_*` and `net_*`, summed across chains, and across exchanges unless `exchange` is given.
 - `chains`, the list of chains summed.
 - `per_exchange_1h`, the 1h window per exchange.
@@ -62,6 +62,7 @@ Tier "—" = not marked with a plan gate in the API docs; standard plan rate lim
 
 - Each alert now has **`source`**. `transfer` is a decoded Transfer event with a real counterparty address. `balance_delta` is inferred from a CEX wallet's balance change, and can be the exchange moving funds between its own hot and cold wallets. Live rows on 2026-10-17 showed `balance_delta` alerts with `counterparty: "balance_delta"`. **Filter to `source=transfer` for a signal about real deposits and withdrawals.**
 - New optional filters: `symbol`, `exchange`, `chain`, `direction` (`inflow` / `outflow`) and `source`, alongside `min_amount` (USD, default $1M) and `limit`.
+- **Timestamps are unix seconds (verified 2026-10-17).** `alerts[].ts` and the top-level `as_of` are seconds (`ts: 1792235340`), not milliseconds. In the `exchange_flow_spikes` archive the snapshot `time` is milliseconds while each row's `data[].ts` stays in seconds.
 - **Archived.** Every alert is written to the new `exchange_flow_spikes` snapshot type on `/backtesting/snapshots`, from **2026-10-08 00:25 UTC**. Each 5-minute snapshot holds only the rows first seen in that tick. The live route keeps only the last 500 rows (about 10 hours). See [[cryptodataapi-backtesting]].
 
 ### On-Chain Health score: `exchange_flow` fix and weighting (2026-10-08)

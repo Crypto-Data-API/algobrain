@@ -61,7 +61,7 @@ Maintaining two physically separate accounts (or at least two separate mental an
 - **Caps active risk** — sizing the trading book at a fixed fraction (Fred's 15-20%) is a [[position-sizing]] rule that bounds how much of total wealth is exposed to speculative drawdowns, regardless of conviction in any single idea.
 - **Cleaner performance attribution** — separating the compounding engine from the active book makes it possible to honestly measure whether the trading activity actually adds value over simply leaving the capital in the core.
 
-This mirrors the institutional **core-satellite** construction, where a passive/strategic core (often index or high-quality dividend compounders) is paired with satellite sleeves that pursue tactical alpha — the satellite's job is to add return without letting its volatility dominate the total portfolio.
+This mirrors the institutional **[[core-satellite-portfolio|core-satellite]]** construction, where a passive/strategic core (often index or high-quality dividend compounders) is paired with satellite sleeves that pursue tactical alpha — the satellite's job is to add return without letting its volatility dominate the total portfolio.
 
 ## Related
 

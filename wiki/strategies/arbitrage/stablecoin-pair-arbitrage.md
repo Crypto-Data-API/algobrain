@@ -302,7 +302,7 @@ Sub-percent deviations rarely clear these costs after slippage; the durable oppo
 - **High Sharpe** when opportunities arise
 - **Issuer redemption** provides a non-market exit route
 - **Short timeframe:** typical resolution in 24–96 hours
-- **Composable:** can lever via [[aave]] / [[maker]] PSM
+- **Composable:** can lever via [[aave]] / [[makerdao|maker]] PSM
 - **Asymmetric:** the long leg has a hard floor at the redemption price (if redemption works)
 
 ## Disadvantages

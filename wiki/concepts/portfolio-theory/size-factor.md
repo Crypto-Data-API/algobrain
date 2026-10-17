@@ -65,7 +65,7 @@ A series of papers from the late 1990s documented that the raw small-cap premium
 
 ### The revival: Asness et al. (2018) — *"Size Matters, If You Control Your Junk"*
 
-Cliff Asness, Andrea Frazzini, Ronen Israel, Tobias Moskowitz, and Lasse Pedersen (*Journal of Financial Economics*) showed the size premium **reappears strongly** when one controls for **quality** (using a quality-minus-junk QMJ factor). Pure size is contaminated by an outsized weight to junk small caps (low-profitability, distressed, financially weak names) which destroy the average. After removing the worst-quality small caps, the size premium is large, persistent, and consistent across markets.
+Cliff Asness, Andrea Frazzini, Ronen Israel, Tobias Moskowitz, and Lasse Pedersen (*Journal of Financial Economics*) showed the size premium **reappears strongly** when one controls for **[[quality]]** (using a quality-minus-junk QMJ factor). Pure size is contaminated by an outsized weight to junk small caps (low-profitability, distressed, financially weak names) which destroy the average. After removing the worst-quality small caps, the size premium is large, persistent, and consistent across markets.
 
 ## Empirical Evidence
 

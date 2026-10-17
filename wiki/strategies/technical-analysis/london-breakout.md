@@ -4,7 +4,7 @@ type: strategy
 created: 2026-04-06
 updated: 2026-10-17
 status: good
-tags: [crypto, session-trading, volatility-breakout, breakout, intraday, technical-analysis, asia-session, london-open]
+tags: [crypto, session-trading, volatility-breakout, breakout, day-trading, technical-analysis, asia-session, london-open]
 aliases: ["London Breakout", "Crypto London Breakout", "Asia Range Breakout", "Session Breakout", "Crypto Session Breakout"]
 strategy_type: technical
 timeframe: intraday

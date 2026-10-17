@@ -4,7 +4,7 @@ type: source
 created: 2026-07-13
 updated: 2026-10-17
 status: good
-tags: [data-provider, crypto, api, hyperliquid, perpetual-futures, order-book, funding-rates, open-interest]
+tags: [data-provider, crypto, api, hyperliquid, perpetual-futures, order-book, funding-rate, open-interest]
 aliases: ["CryptoDataAPI Hyperliquid", "CDA Hyperliquid", "Hyperliquid Perps Data API"]
 source_type: data
 source_url: "https://cryptodataapi.com/api/docs"
@@ -36,6 +36,8 @@ Tier "—" = not marked with a plan gate in the API docs; standard plan rate lim
 ## Live Data
 
 `/hyperliquid/prices` (all mids in one call), `/hyperliquid/open-interest` (every listed asset), `/hyperliquid/l2-book` (order-book depth snapshot per coin), `/hyperliquid/meta` (contract specs, plus a published fee schedule — see below), and `/hyperliquid/summary` (the single-call current-state bundle for one coin) all return live state.
+
+**No liquidation map in this family (checked 2026-10-17).** None of the 22 `/api/v1/hyperliquid/*` routes in the 2026-10-17 spec serves a liquidation map or liquidation levels, and guessed paths such as `/hyperliquid/liquidation-map`, `/hyperliquid/liquidations` and `/hyperliquid/liquidation-levels` return 404. The live Hyperliquid liquidation map is **`/api/v1/quant/positioning/ladder?symbol=`** (Pro Plus: `bins`, `bins_directional`, `bins_by_class` and the nearest `levels`). `/api/v1/quant/gex` carries the same kind of per-coin `levels` (up to 3 clusters above and below the mark). History is `/backtesting/liquidation-density` or the `liquidation_map` / `liquidation_levels` snapshot types. See [[cryptodataapi-regimes]] and [[cryptodataapi-backtesting]].
 
 **Volume scanner (added 2026-08-17):** `/volume/scanner` returns every Hyperliquid perp with live rolling-24h notional (`volume_24h`), a 30-settled-day baseline (`avg_volume_30d`/`median_volume_30d` — today's partial day is excluded), and `multiplier` (the ratio between them: 3.0 = trading at 3x normal volume). `multiplier_median` is the same ratio against the 30-day median instead of the mean, which is less distorted by one prior blow-off day. Each row also carries an activity `band` (`dormant`/`quiet`/`normal`/`elevated`/`surging`/`extreme`/`unknown`), `change_24h`, `open_interest_usd`, `funding_rate`, and `days_of_history`. Perps listed less than 7 days report `multiplier: null` and `band: "unknown"` rather than a spurious number. Filter with `band`/`min_multiplier`; sort with `sort` (`multiplier` default, or `volume_24h`/`symbol`/`change_24h`). `/volume/scanner/{symbol}` returns the same fields for one perp plus a 30-day daily-notional `history` series, and accepts Hyperliquid's thousand-unit tickers (`kBONK`, `kPEPE`, `kSHIB`) as aliases of the plain symbol.
 

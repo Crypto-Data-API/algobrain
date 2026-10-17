@@ -103,7 +103,7 @@ CFG is a **governance/staking claim on an RWA tokenization platform**, so its fu
 | **CFG** (this page) | On-chain private credit / RWA pools | #291 | ~$88M | Uncapped, ~56% circ | Longest track record; blue-chip backers |
 | [[plume\|Plume]] | RWA-focused L1 / chain | mid-cap | mid-cap | Capped | Purpose-built RWA chain |
 | [[ondo-finance\|Ondo (ONDO)]] | Tokenized treasuries / funds | larger-cap | larger-cap | Large overhang | Institutional T-bill products |
-| [[maker\|Maker / Sky]] | RWA-backed stablecoin (DAI) | large-cap | large-cap | — | Uses RWA as collateral for DAI |
+| [[makerdao\|Maker / Sky]] | RWA-backed stablecoin (DAI) | large-cap | large-cap | — | Uses RWA as collateral for DAI |
 
 Centrifuge differentiates on **originated private credit** (invoices, structured credit) rather than purely tokenized treasuries, and on its **maturity** as one of the oldest RWA protocols — but it is a smaller-cap token competing against larger, better-capitalized RWA platforms.
 

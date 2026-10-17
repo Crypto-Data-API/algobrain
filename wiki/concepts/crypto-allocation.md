@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-15
 updated: 2026-06-11
 status: good
-tags: [crypto, portfolio-theory, risk-management, bitcoin, asset-allocation]
+tags: [crypto, portfolio-theory, risk-management, bitcoin, portfolio-construction]
 aliases: ["Crypto Allocation", "Cryptocurrency Allocation", "Crypto Exposure", "Cryptocurrency Exposure", "Crypto Portfolio Allocation"]
 related: ["[[asset-allocation]]", "[[portfolio-diversification]]", "[[bitcoin]]", "[[ethereum]]", "[[correlation]]", "[[volatility]]", "[[position-sizing]]", "[[rebalancing]]", "[[risk-parity]]", "[[kelly-criterion]]"]
 domain: [portfolio-theory, risk-management]

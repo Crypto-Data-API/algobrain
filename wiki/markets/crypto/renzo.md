@@ -9,7 +9,7 @@ aliases: ["REZ", "Renzo Protocol", "ezETH"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.renzoprotocol.com/"
-related: ["[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[eigenlayer]]", "[[ethereum]]", "[[governance-token]]", "[[liquid-restaking]]", "[[liquid-staking]]", "[[restaking]]", "[[slashing]]", "[[smart-contract-risk]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[depeg-risk]]", "[[eigenlayer]]", "[[ethereum]]", "[[governance-token]]", "[[liquid-restaking]]", "[[liquid-staking]]", "[[restaking]]", "[[slashing]]", "[[smart-contract-risk]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Renzo
@@ -175,7 +175,7 @@ REZ is Renzo's [[governance-token]]. It is used to vote on protocol parameters, 
 
 ## Risks
 
-- **ezETH [[depeg]] risk** — This is the headline risk for any LRT and has materialised for Renzo before. In April 2024, ezETH temporarily lost its peg in secondary markets around the REZ airdrop/listing as some holders rushed to exit; thin on-chain liquidity caused a sharp, brief depeg that liquidated leveraged ezETH positions on lending markets. The episode is a textbook illustration of LRT liquidity/[[depeg]] fragility.
+- **ezETH [[depeg-risk|depeg]] risk** — This is the headline risk for any LRT and has materialised for Renzo before. In April 2024, ezETH temporarily lost its peg in secondary markets around the REZ airdrop/listing as some holders rushed to exit; thin on-chain liquidity caused a sharp, brief depeg that liquidated leveraged ezETH positions on lending markets. The episode is a textbook illustration of LRT liquidity/[[depeg-risk|depeg]] fragility.
 - **Layered [[smart-contract-risk]]** — Funds pass through Renzo contracts *and* [[eigenlayer]] contracts *and* (often) an underlying [[liquid-staking]] protocol. A bug in any layer endangers deposits; restaking stacks risk on top of staking risk.
 - **[[restaking]] / [[slashing]] risk** — Restaked ETH secures multiple AVSs. New, more aggressive slashing conditions introduced as EigenLayer matures mean restaked capital can be penalised for operator misbehavior across services — a correlated, still-evolving tail risk.
 - **AVS reward uncertainty** — The restaking yield premium depends on AVS demand and fees that remain immature; promised "extra" yield may underdeliver.
@@ -220,7 +220,7 @@ REZ is Renzo's [[governance-token]]. It is used to vote on protocol parameters, 
 - **Venue/liquidity concentration** — Despite two venues, real depth is limited at a ~#796 rank; large orders move price and spreads widen fast in stress.
 - **Token unlock / emissions overhang** — Max supply is 10B REZ with circulating well below total (market-cap/FDV ≈ 0.83), leaving vesting/unlock supply overhang that can pressure price.
 - **Narrative dependence** — Value hinges on the restaking/LRT thesis and real AVS fee capture; if the narrative cools, REZ can bleed independent of BTC/ETH.
-- **ezETH depeg contagion** — A recurrence of the April 2024 ezETH [[depeg]] dynamic (protocol-level, not the REZ token itself) can trigger sharp, headline-driven REZ selloffs and volatility spikes.
+- **ezETH depeg contagion** — A recurrence of the April 2024 ezETH [[depeg-risk|depeg]] dynamic (protocol-level, not the REZ token itself) can trigger sharp, headline-driven REZ selloffs and volatility spikes.
 - **Perp funding dislocations** — Low float plus high leverage make funding prone to violent swings around catalysts; crowded positioning can flip funding hard and force liquidation cascades.
 
 ## Getting the Data (CryptoDataAPI)
@@ -269,7 +269,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can trade R
 - [[smart-contract-risk]]
 - [[governance-token]]
 - [[defi]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 
 ---
 

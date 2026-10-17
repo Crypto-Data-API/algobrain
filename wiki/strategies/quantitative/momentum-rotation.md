@@ -40,6 +40,120 @@ kill_criteria: |
   - top-decile turnover persistently churns without follow-through (win rate < 45% for 60 days)
 
 related: ["[[sentiment-trading]]", "[[momentum]]", "[[trend-following]]", "[[factor-investing]]", "[[mean-reversion]]", "[[volatility-targeting]]", "[[momentum-crashes]]", "[[funding-rate]]", "[[short-term-reversal]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+
+gates:
+  - id: top_cap_universe
+    role: universe
+    rule: "Top 20-40 coins by market cap (the example uses 30)"
+    runnable: true
+    endpoint: /api/v1/coins/top?limit=50
+    field: coins[].market_cap_rank
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.coins.coins[].rank
+    note: "Rebuild the universe as of each date for backtests (snapshots since 2026-03-02, 100 coins, no categories field), never today's top-N back-applied. The 2026-10-17 top 40 also held tokenised assets (XAUT, FIGR_HELOC) and exchange tokens with no Binance pair; the page does not say whether to drop them, but the volume screen removes names Binance does not list."
+  - id: no_stables_wrapped
+    role: universe
+    rule: "Exclude stablecoins and wrapped assets"
+    runnable: true
+    endpoint: /api/v1/coins/top?limit=50
+    field: coins[].categories
+    note: "Drop rows whose categories include 'Stablecoins'. No wrapped or liquid-staking token (WBTC, WETH, stETH) appeared in the top 100 on 2026-10-17, so the list already leaves them out."
+  - id: spot_volume_floor
+    role: universe
+    rule: "Spot volume above $50M per day"
+    runnable: true
+    endpoint: /api/v1/market-data/ticker/24hr?symbol={symbol}USDT
+    field: quote_volume
+    replay: /api/v1/backtesting/klines?symbol={symbol}USDT&exchange=binance&interval=1d&start={start}
+    replay_field: klines[].qv
+    note: "Binance spot, rolling 24h USDT volume. The pseudocode compares an average daily $ volume (adv) whose window it does not set; quote_volume on daily /market-data/klines rows gives the average. coins[].total_volume on /coins/top is all-venue volume, not spot on one venue."
+  - id: spread_cost_screen
+    role: universe
+    rule: "Spread tight enough to keep round-trip cost under the ~35 bp breakeven budget"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth
+    field: coins[].spread_bps
+    note: "Serves the top 25 Hyperliquid PERP books, not the spot books this long-only rotation trades. Fees and slippage at the desk's clip are not served for Binance spot."
+  - id: formation_return
+    role: entry
+    rule: "Formation return over the trailing 28 days, skipping the most recent 3: close[t-3] / close[t-31] - 1"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=62
+    field: klines[].close
+    replay: /api/v1/backtesting/klines?symbol={symbol}USDT&exchange=binance&interval=1d&start={start}
+    replay_field: klines[].c
+    note: "Binance spot daily bars, oldest first; the last row is the forming day (close_time in the future), so drop it. REST backtesting bars start 2026-05-09; older daily bars are in the klines_deep archive."
+  - id: demeaned_score
+    role: entry
+    rule: "Score = formation return minus the equal-weight universe mean"
+    runnable: true
+    input: derived
+    inputs: [formation_return, top_cap_universe, no_stables_wrapped, spot_volume_floor]
+    note: "Rules also allow BTC as the benchmark; the pseudocode uses the equal-weight mean."
+  - id: top_quintile
+    role: entry
+    rule: "Hold the top 20% by score (at least 1 name); sell a name that drops out at the weekly rebalance"
+    runnable: true
+    input: derived
+    inputs: [demeaned_score]
+    note: "Rebalance weekly. The Instrument Structures section describes ranking within sector baskets; the Rules rank the whole universe."
+  - id: inverse_vol_weight
+    role: sizing
+    rule: "Weight top-quintile names by 1 / 60-day realised volatility, each capped at 15% of the sleeve"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=62
+    field: klines[].close
+    replay: /api/v1/backtesting/klines?symbol={symbol}USDT&exchange=binance&interval=1d&start={start}
+    replay_field: klines[].c
+    note: "Stdev of 60 closed daily log returns. The pseudocode caps weights without redistributing the excess, which leaves the remainder in cash; the page does not say otherwise."
+  - id: short_leg
+    role: entry
+    rule: "Long-short variant: short the bottom quintile only if borrow or a perp short is available and cheap"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    note: "Perp availability and funding cost on Hyperliquid; 'cheap' is not defined and spot borrow is not served."
+  - id: crash_filter
+    role: sizing
+    rule: "When BTC closes below its 200-day MA, cut gross exposure by 50%"
+    runnable: true
+    endpoint: /api/v1/market-data/btc-price-history?days=365
+    field: history[].ma200
+    replay: /api/v1/market-data/btc-price-history?days=730
+    replay_field: history[].ma200
+    note: "Compare history[].price on the last CLOSED day with ma200 (today's row is intraday). The Rules also allow moving fully to cash; the pseudocode halves. items[].ma.above_200 on /api/v1/indicators/technical?symbol=BTC is the same test."
+  - id: drawdown_throttle
+    role: sizing
+    rule: "Sleeve drawdown over 20%: halve position sizes"
+    runnable: true
+    input: position
+  - id: no_leverage
+    role: sizing
+    rule: "No leverage on the long book; long-short at most 1x gross per side"
+    runnable: true
+    input: position
+  - id: kill_drawdown
+    role: stop
+    rule: "Kill: sleeve drawdown over 30%"
+    runnable: true
+    input: position
+  - id: kill_spread_negative
+    role: stop
+    rule: "Kill: net long-short (or long vs equal-weight) spread below 0 over the trailing 6 months, or realised round-trip cost above the modelled gross spread"
+    runnable: true
+    input: position
+    note: "Computed from the sleeve's own fills and the same formation series."
+  - id: kill_win_rate
+    role: stop
+    rule: "Kill: per-name win rate below 45% for 60 days"
+    runnable: true
+    input: position
+  - id: kill_filter_failure
+    role: stop
+    rule: "Kill: BTC below its 200-day MA and the crash filter failed to de-risk (execution or gap failure)"
+    runnable: true
+    input: position
+    note: "The market side is crash_filter; the failure is read from the sleeve's own exposure."
 ---
 
 # Momentum Rotation

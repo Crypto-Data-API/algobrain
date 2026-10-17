@@ -2,8 +2,8 @@
 title: "Play-to-Earn"
 type: concept
 created: 2026-07-17
-updated: 2026-07-19
-status: draft
+updated: 2026-10-17
+status: review
 tags: [crypto, nft, gamefi, behavioral-finance, on-chain]
 aliases: ["P2E", "Play to Earn", "Earn-to-Play"]
 domain: [crypto, market-microstructure]
@@ -47,6 +47,35 @@ P2E dynamics intersect with several AlgoBrain strategy approaches:
 - **[[governance-token]] vs reward token distinction:** In two-token P2E models, the governance token (AXS, GODS, ILV) often holds value better than the reward token (SLP, GST, FLUX). Traders who stay long governance tokens after exiting reward tokens capture the slower-decaying value while avoiding the emission-driven collapse.
 - **[[gamefi]] sector rotation:** P2E tokens exhibit strong sector-beta during crypto bull markets (new game announcements, viral growth stories) and disproportionate drawdowns in bear markets. The [[multi-strategy-crypto-portfolio]] memecoin/convexity sleeve might include early-stage P2E launches but requires hard cap sizing (≤ 3-5% NAV total) due to smart-contract and economic collapse risk.
 - **On-chain activity metrics:** P2E games generate high-frequency on-chain data — daily active wallets, token burn rates, NFT sales volume — that can be monitored as leading indicators of game health and token price direction before it appears in price action.
+- **Strategy pages:** [[gaming-gamefi-basket]] (sector perp basket), [[unlock-heavy-basket]] / [[unlock-aware-momentum]] (vesting cliffs, which most P2E governance tokens carry), and [[nft-trading]] (the entry-NFT layer).
+
+### A worked breakeven check
+
+Using this page's own Axie numbers: an entry team costing **$1,000** of NFTs, a scholar earning **150 SLP/day**, and SLP at **$0.25** give $37.50/day gross. An owner playing their own team breaks even in ~27 days. A manager keeping 30% of a scholar's earnings (~$11/day) needs ~89 days. At SLP $0.05, the owner-player needs ~133 days. At $0.005 (early-2022 levels) the owner-player needs ~3.7 years and the manager ~12 years, so no new player rationally enters. The reward-token price feeds back into the NFT floor, which is why P2E collapses are reflexive rather than gradual. *(Illustrative arithmetic only; the $1,000 team cost is an assumption, not a dated quote.)*
+
+### Kill signals for a P2E position
+
+1. Daily reward-token emission value exceeds daily burn value for **4+ consecutive weeks**.
+2. Entry-NFT floor falls while new-wallet growth is flat or negative: the onboarding funnel has stalled.
+3. A large vesting cliff (≥ 5% of float) falls within 30 days with no matching sink launch.
+4. A bridge or game-contract exploit. Exit first and reassess later (Ronin, March 2022: [[2022-03-ronin-bridge-hack]]).
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/coins/category-groups` — curated **gaming** group (AXS, PIXEL, GMT-type tokens) with price, market cap, rank and 24h/7d change
+- `GET /api/v1/supply/unlocks?symbol=PIXEL` — dated vesting cliffs sized against float (kill signal 3)
+- `GET /api/v1/nfts/volume?by=category` — daily NFT volume by category, including `gaming` (Pro)
+
+**Historical data:**
+- `GET /api/v1/nfts/collections/{slug}?days=3650` — per-collection daily volume, e.g. a game's entry-NFT collection
+- `GET /api/v1/backtesting/klines?symbol=AXSUSDT&interval=1d&start=2021-01-01` — governance and reward-token OHLCV
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/supply/unlocks?symbol=PIXEL"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalogs: [[cryptodataapi-coins]], [[cryptodataapi-supply]], [[cryptodataapi-nft]]. Player counts and burn and emission rates come from game dashboards or Dune, not CryptoDataAPI.
 
 ## Related
 

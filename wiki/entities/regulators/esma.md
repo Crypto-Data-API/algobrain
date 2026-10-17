@@ -34,7 +34,7 @@ The European Securities and Markets Authority (ESMA) is the European Union's pan
 
 ## Origins and Structure
 
-ESMA was created on 1 January 2011 as part of the European System of Financial Supervision, replacing the earlier and much weaker Committee of European Securities Regulators (CESR). The post-[[2008-financial-crisis|2008-crisis]] reform package recognised that CESR — a non-binding coordinating committee — had been structurally incapable of enforcing pan-EU consistency, and that the EU needed a regulator with direct rulemaking, supervisory, and intervention powers analogous to (though narrower than) the US [[sec|SEC]].
+ESMA was created on 1 January 2011 as part of the European System of Financial Supervision, replacing the earlier and much weaker Committee of European Securities Regulators (CESR). The post-[[2008-global-financial-crisis|2008-crisis]] reform package recognised that CESR — a non-binding coordinating committee — had been structurally incapable of enforcing pan-EU consistency, and that the EU needed a regulator with direct rulemaking, supervisory, and intervention powers analogous to (though narrower than) the US [[sec|SEC]].
 
 ESMA is one of three European Supervisory Authorities (ESAs) sitting under the European Systemic Risk Board ([[esrb|ESRB]]):
 

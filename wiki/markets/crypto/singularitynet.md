@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-agent-tokens, ai-trading, crypto, machine-learning]
+tags: [agents, ai-trading, crypto, machine-learning]
 aliases: ["AGIX", "SNET", "SingularityNET"]
 entity_type: protocol
 founded: 2017

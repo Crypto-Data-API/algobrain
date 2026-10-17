@@ -4,7 +4,7 @@ type: news
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [news, fed, interest-rates, monetary-policy, macro, bonds]
+tags: [news, interest-rates, monetary-policy, macro, bonds]
 event_date: 2024-09-18
 markets_affected: [stocks, crypto, bonds, forex]
 impact: high

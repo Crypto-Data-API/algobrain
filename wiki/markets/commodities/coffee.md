@@ -62,7 +62,7 @@ ICE-certified coffee stocks (warehouses in US, Europe, and occasionally origin) 
 ## Demand Dynamics
 
 - **Global consumption:** ~170 million bags annually, growing at ~2-3% per year
-- **Inelastic demand:** Coffee consumption is habitual; price elasticity of demand is estimated at -0.1 to -0.3 (a 10% price increase reduces consumption only 1-3%)
+- **Inelastic demand:** Coffee consumption is habitual; [[elasticity-of-demand|price elasticity of demand]] is estimated at -0.1 to -0.3 (a 10% price increase reduces consumption only 1-3%)
 - **Specialty coffee premium:** The "third wave" specialty movement has created a bifurcated market where premium single-origin coffees trade far above the C market
 - **Emerging market growth:** Per-capita consumption growth in China, India, and Southeast Asia is the long-term demand story
 - **Seasonal demand:** Roasting activity peaks ahead of the Northern Hemisphere winter (October-December)

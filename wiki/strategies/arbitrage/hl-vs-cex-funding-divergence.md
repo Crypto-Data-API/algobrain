@@ -21,6 +21,142 @@ expected_sharpe: 2.5
 expected_max_drawdown: 0.15
 breakeven_cost_bps: 25
 related: ["[[funding-rate-arbitrage]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-hlp-basis-arbitrage]]", "[[funding-rate]]", "[[hyperliquid]]", "[[cross-exchange-arbitrage]]", "[[hlp-cascade-alongside-playbook]]", "[[cryptodataapi]]"]
+gates:
+  - id: hl_funding
+    role: entry
+    rule: "Hyperliquid hourly funding, converted to 8h-equivalent as hl_hourly x 8"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=2
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "Hourly fraction. Settled hourly payments for replay are data[].funding_rate on /api/v1/backtesting/funding?symbol={symbol}&grain=hourly&start={start} (filled daily for the previous UTC day); funding_sum on hl-funding-bars is settled carry and is null for the latest day."
+  - id: cex_funding
+    role: entry
+    rule: "CEX 8h funding print (Binance, Bybit or OKX)"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance only: Bybit and OKX funding are not served. current_rate is the last SETTLED 8h print, so it is the smoothed reading the page contrasts with HL's instantaneous one, and it changes only every 8h. Both rates also come together on /api/v1/derivatives/funding-rates?coin={coin} (binance.current_rate, hyperliquid.current_rate). Binance replay rows are 5-minute samples of the live 8h rate since 2026-03-30: average them, never sum."
+  - id: spread_entry
+    role: entry
+    rule: "|hl_hourly x 8 - cex_8h| is above 5 bp (0.0005). HL higher: short HL, long CEX; CEX higher: long HL, short CEX"
+    runnable: true
+    input: derived
+    inputs: [hl_funding, cex_funding]
+  - id: spread_persistence
+    role: filter
+    rule: "The spread has held above 5 bp for at least the last 1 hour (one HL funding period)"
+    runnable: true
+    input: derived
+    inputs: [hl_funding, cex_funding]
+    note: "Use the last two HL settlements (history[].funding_rate with limit=2) against the Binance print in force at each."
+  - id: depth_3x
+    role: filter
+    rule: "Both venues have at least 3x the intended notional in top-of-book depth at the entry mark"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: bids[].size
+    note: "HL side only: sum price x size on the side you cross (about 20 levels). /api/v1/liquidity/depth gives HL depth in USD by band for the top 25 perps. The page does not define how deep 'top-of-book' reaches. The Binance perp book is not served."
+  - id: mark_sanity
+    role: filter
+    rule: "HL mark and CEX mark within 50 bps of each other"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "A live Binance PERP mark is not served: rates[].mark_price on /derivatives/binance/funding-rates is per 8h settlement only. Binance spot price on /api/v1/market-data/ticker/price?symbol={symbol}USDT is a proxy, not the rule's input."
+  - id: hl_volume_floor
+    role: universe
+    rule: "HL daily volume at least $50M (for the $25k-$1M size band)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    note: "USD notional, rolling 24h. 'Tighten further for larger sizes' has no number."
+  - id: round_trip_cost
+    role: filter
+    rule: "Round-trip cost (HL taker + CEX taker + slippage, both legs, both ways) inside the ~25 bp breakeven budget"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/meta
+    field: fees.perps.taker
+    note: "HL base-tier taker is 0.00045 (0.045%), maker 0.00015; volume_tiers holds the rest. Binance fee tiers and slippage are not served."
+  - id: convergence_exit
+    role: exit
+    rule: "Close both legs when |spread| falls below 2 bp"
+    runnable: true
+    input: derived
+    inputs: [hl_funding, cex_funding]
+  - id: inversion_exit
+    role: exit
+    rule: "Close immediately when the spread crosses zero against the entry direction"
+    runnable: true
+    input: derived
+    inputs: [hl_funding, cex_funding]
+  - id: mtm_stress_exit
+    role: stop
+    rule: "Close when unrealised loss on either leg exceeds 5% of that leg's margin"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "HL leg marks from this row; a live Binance perp mark is not served."
+  - id: max_hold
+    role: exit
+    rule: "After 7 funding periods, exit if the spread has not delivered the modelled carry"
+    runnable: partial
+    input: position
+    note: "'Modelled carry' is not defined. The rule says 7 periods (HL 7h; CEX 56h-equivalent) and the pseudocode exits at 7 HL hours, but the worked example holds 3.5 days (~24 HL periods) without exiting."
+  - id: venue_health
+    role: exit
+    rule: "Flatten on unscheduled maintenance, withdrawal halt, oracle issue or chain outage on either venue; kill if either is down over 4 hours"
+    runnable: false
+    note: "Venue status and liveness are not served."
+  - id: sizing_caps
+    role: sizing
+    rule: "1x isolated equal notional each leg; at most 25% of the sleeve per pair and 50% per venue; both legs fill within ~30 seconds"
+    runnable: true
+    input: position
+  - id: sleeve_drawdown
+    role: stop
+    rule: "Kill: sleeve drawdown over 15% in any rolling 30-day window"
+    runnable: true
+    input: position
+  - id: spread_dead_30d
+    role: stop
+    rule: "Kill: cross-venue spread on the monitored pairs averages under 3 bp for 30+ consecutive days"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].funding_rate_mean
+    note: "HL daily mean hourly rate x 8 against the Binance 8h prints for the same days (/api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=90)."
+  - id: mark_divergence_kill
+    role: stop
+    rule: "Emergency flatten: HL vs CEX mark divergence over 100 bps for over 10 minutes on a held position"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "Same gap as mark_sanity: no live Binance perp mark."
+  - id: formula_or_insurance_event
+    role: stop
+    rule: "Pause on a funding-formula change announcement or an insurance-fund socialised loss on either venue"
+    runnable: false
+    note: "Venue announcements and insurance-fund events are not served."
+  - id: regime_gate
+    role: sizing
+    rule: "Cut gross as the vol_spike probability rises"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "Stated in the AI agent workflow only, with no probability level or cut size."
+  - id: redeploy_14d
+    role: entry
+    rule: "Re-deploy: 14-day average spread back above 5 bp on at least 3 monitored pairs"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].funding_rate_mean
+    note: "Pair with Binance limit=42 prints for the same 14 days."
 ---
 
 # HL vs CEX Funding Divergence

@@ -55,7 +55,7 @@ These overlap with [[momentum-trading]], [[trend-following]], and [[arbitrage]];
 
 ## Role in Markets
 
-Speculators are not parasites on the market — they perform essential functions, a point economists from Holbrook Working to Milton Friedman have stressed:
+Speculators are not parasites on the market — they perform essential functions, a point economists from Holbrook Working to [[milton-friedman|Milton Friedman]] have stressed:
 
 - **Liquidity provision** — Speculators add [[trading-volume]] and tighten [[bid-ask-spread|bid-ask spreads]], so genuine hedgers and investors can transact at lower cost.
 - **Price discovery** — Speculative activity pulls new information into prices quickly, keeping quotes informative.

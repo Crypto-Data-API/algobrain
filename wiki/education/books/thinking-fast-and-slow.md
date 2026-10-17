@@ -12,7 +12,7 @@ related:
   - "[[overtrading]]"
   - "[[risk-management]]"
   - "[[prospect-theory]]"
-  - "[[cognitive-bias]]"
+  - "[[cognitive-biases]]"
   - "[[anchoring]]"
   - "[[overconfidence]]"
 ---
@@ -21,7 +21,7 @@ related:
 
 **Thinking, Fast and Slow** by Daniel Kahneman, published in 2011, is the definitive synthesis of decades of research into cognitive biases and decision-making under uncertainty. Kahneman, who won the Nobel Memorial Prize in Economic Sciences in 2002 for his work with Amos Tversky on [[prospect-theory]], presents a unified framework for understanding how the human mind makes judgments and decisions. The book's central metaphor — System 1 (fast, automatic, intuitive) versus System 2 (slow, deliberate, analytical) — has become one of the most influential mental models in behavioral science and is the intellectual cornerstone of [[behavioral-finance]].
 
-For traders and investors, this is arguably the most important book ever written. Every [[cognitive-bias]] Kahneman documents maps directly to a trading failure mode: [[loss-aversion]] causes traders to hold losers too long and cut winners too short; [[anchoring]] causes them to fixate on entry prices rather than current reality; [[overconfidence]] causes them to overtrade and underestimate risk; availability bias causes them to overweight recent market events in probability estimates. The book explains, with scientific rigor, why most discretionary traders lose money — and why the biases that destroy trading performance are features of human cognition, not bugs that willpower can fix.
+For traders and investors, this is arguably the most important book ever written. Every [[cognitive-biases|cognitive-bias]] Kahneman documents maps directly to a trading failure mode: [[loss-aversion]] causes traders to hold losers too long and cut winners too short; [[anchoring]] causes them to fixate on entry prices rather than current reality; [[overconfidence]] causes them to overtrade and underestimate risk; availability bias causes them to overweight recent market events in probability estimates. The book explains, with scientific rigor, why most discretionary traders lose money — and why the biases that destroy trading performance are features of human cognition, not bugs that willpower can fix.
 
 Kahneman's research has profound implications for both discretionary and systematic trading. For discretionary traders, the book is a catalog of traps to avoid. For systematic traders, it explains why rule-based systems outperform human judgment in most domains — and why the few exceptions (highly regular environments with rapid feedback) do not include financial markets. The book makes the strongest scientific case for why trading should be systematized whenever possible.
 
@@ -96,7 +96,7 @@ Kahneman's research provides the strongest scientific justification for algorith
 
 - [[behavioral-finance]] — Kahneman's research is the scientific foundation of the field
 - [[trading-psychology]] — Every cognitive bias maps to a specific trading failure mode
-- [[cognitive-bias]] — The systematic judgment errors catalogued in the book
+- [[cognitive-biases|cognitive-bias]] — The systematic judgment errors catalogued in the book
 - [[prospect-theory]] — The Kahneman–Tversky model of choice under risk (Nobel-winning work)
 - [[loss-aversion]] — The single most destructive bias for traders
 - [[anchoring]] — Why entry prices distort position evaluation

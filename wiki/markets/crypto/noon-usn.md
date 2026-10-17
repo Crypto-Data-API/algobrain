@@ -9,7 +9,7 @@ aliases: ["USN"]
 entity_type: protocol
 headquarters: "Decentralized (Noon Capital)"
 website: "https://www.noon.capital/"
-related: ["[[aegis-yusd]]", "[[basis-trade]]", "[[crypto-markets]]", "[[delta-neutral]]", "[[depeg]]", "[[ethena-usde]]", "[[ethereum]]", "[[funding-rate]]", "[[stablecoins]]", "[[synthetic-dollar]]"]
+related: ["[[aegis-yusd]]", "[[basis-trade]]", "[[crypto-markets]]", "[[delta-neutral]]", "[[depeg-risk]]", "[[ethena-usde]]", "[[ethereum]]", "[[funding-rate]]", "[[stablecoins]]", "[[synthetic-dollar]]"]
 ---
 
 # Noon USN
@@ -32,7 +32,7 @@ related: ["[[aegis-yusd]]", "[[basis-trade]]", "[[crypto-markets]]", "[[delta-ne
 | **7d Change** | -0.04% |
 | **Currency tracked** | US dollar (USD) |
 
-USN targets the US dollar, so ~$0.9986 is close to peg, sitting a few basis points under $1 — typical for a yield-bearing synthetic dollar. The negligible 24h/7d moves indicate the peg is holding within a tight band, not a [[depeg]].
+USN targets the US dollar, so ~$0.9986 is close to peg, sitting a few basis points under $1 — typical for a yield-bearing synthetic dollar. The negligible 24h/7d moves indicate the peg is holding within a tight band, not a [[depeg-risk|depeg]].
 
 ## Architecture — How Noon Works
 
@@ -87,7 +87,7 @@ USN sits in the **delta-neutral synthetic-dollar / "internet bond"** category, w
 
 - **Strategy / negative-carry risk:** If funding or the futures basis turns negative or compresses, the yield engine can stall or lose money.
 - **Hedge & venue risk:** The delta-neutral structure depends on liquid derivatives markets; liquidations, ADL, or venue outages during stress can break the hedge.
-- **Counterparty / custody risk:** Collateral and hedges held with exchanges or custodians carry insolvency and operational risk, which can trigger a [[depeg]].
+- **Counterparty / custody risk:** Collateral and hedges held with exchanges or custodians carry insolvency and operational risk, which can trigger a [[depeg-risk|depeg]].
 - **Peg / liquidity risk:** With ~$33M market cap and **very thin** on-chain trading volume, USN can dislocate from $1 on modest flow; redemption in a crisis may not clear at par.
 - **Smart-contract & admin risk:** Contract bugs or privileged-key compromise could threaten funds across its multi-chain deployment.
 - **Not a deposit:** USN has no deposit insurance; its yield is compensation for taking on real, non-trivial market and counterparty risk.
@@ -97,7 +97,7 @@ USN sits in the **delta-neutral synthetic-dollar / "internet bond"** category, w
 - **Watch the funding/basis regime first.** USN's yield is live carry — positive funding feeds it, negative funding starves it. The advertised rate is a snapshot, not a promise.
 - **Hold base USN for a dollar unit; stake only if you accept multi-strategy carry risk.**
 - **Account for multi-venue, multi-chain exposure.** Rotating across strategies and across Ethereum/zkSync/Starknet spreads risk but also multiplies the venues and bridges that can fail.
-- **Assume redemption can slow in stress** — at ~$33M with thin secondary liquidity, exit before volatility events, not during them; a crisis redemption may not clear at $1 ([[depeg]] risk).
+- **Assume redemption can slow in stress** — at ~$33M with thin secondary liquidity, exit before volatility events, not during them; a crisis redemption may not clear at $1 ([[depeg-risk|depeg]] risk).
 - **Size as a risk asset, not cash equivalent.**
 
 ## See Also

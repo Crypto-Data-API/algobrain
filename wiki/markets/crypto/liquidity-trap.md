@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-15
 updated: 2026-06-21
 status: excellent
-tags: [crypto, liquidity, market-microstructure, macroeconomics]
+tags: [crypto, liquidity, market-microstructure, macro]
 aliases: ["Liquidity Trap", "Liquidity Traps", "Honeypot"]
 related: ["[[liquidity]]", "[[slippage]]", "[[on-chain-trading]]", "[[market-microstructure]]", "[[monetary-policy]]"]
 domain: [crypto, market-microstructure, macroeconomics]

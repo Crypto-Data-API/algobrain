@@ -120,7 +120,7 @@ Pages that live directly in this section rather than a subcategory, grouped by t
 - [[calendar-spread]] — Selling near-dated against longer-dated options to harvest time decay
 - [[ratio-calendar-spread]] — Calendar with unequal legs for asymmetric payoff
 - [[put-tree]] — Multi-strike put structure for cheap downside convexity
-- [[leaps]] — Long-dated options as stock substitutes
+- [[long-dated-options|leaps]] — Long-dated options as stock substitutes
 - [[long-straddle]] — Buying call + put to profit from a large move either way
 
 ### Options — Hedging & Volatility

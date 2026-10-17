@@ -4,7 +4,7 @@ type: strategy
 created: 2026-04-06
 updated: 2026-10-17
 status: excellent
-tags: [mean-reversion, grid-trading, automation, bots, range-trading, quantitative, market-microstructure, crypto]
+tags: [mean-reversion, grid-trading, trading-bots, bots, range-trading, quantitative, market-microstructure, crypto]
 aliases: ["Grid Bot", "Grid Strategy", "Grid Bot Trading", "Range-Bound Grid", "ADX-Filtered Grid"]
 strategy_type: quantitative
 timeframe: intraday|swing

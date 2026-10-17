@@ -9,14 +9,14 @@ aliases: ["REUR", "Royal Euro Token"]
 entity_type: protocol
 headquarters: "Hong Kong (RIB Digital Holdings)"
 website: "https://www.rcoins.digital/"
-related: ["[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[euro]]", "[[forex]]", "[[royal-dollar]]", "[[stablecoins]]"]
+related: ["[[crypto-markets]]", "[[depeg-risk]]", "[[ethereum]]", "[[euro]]", "[[forex]]", "[[royal-dollar]]", "[[stablecoins]]"]
 ---
 
 # Royal Euro
 
 **Royal Euro (REUR)** is a **EUR-referenced fiat-backed [[stablecoins|stablecoin]]** — a crypto-asset designed to track a 1:1 value with the [[euro|Euro (EUR)]], subject to reserve sufficiency, redemption terms and market conditions. It is issued by **The RIB Digital Holdings Limited (Hong Kong)** under the **RCOINS** brand and settles across multiple public blockchains. Because it is pegged to the euro rather than the dollar, its USD quote moves with the EUR/USD [[forex|FX]] rate. REUR is the euro sibling of [[royal-dollar|Royal Dollar (RUSD)]] within the same issuer family.
 
-> *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).* REUR trades at **$1.15** (rank **#887**, market cap **$17,217,209**, 24h **-0.03%**, 7d **-1.15%**). The **~$1.15 USD price is the EUR-to-USD [[forex|FX]] peg, NOT a [[depeg]]**: at the time of snapshot roughly €1 ≈ US$1.15, so a euro-pegged token correctly prints around $1.15 in dollar terms while holding its 1:1 euro peg. The small 7d move tracks normal EUR/USD fluctuation, not peg instability.
+> *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).* REUR trades at **$1.15** (rank **#887**, market cap **$17,217,209**, 24h **-0.03%**, 7d **-1.15%**). The **~$1.15 USD price is the EUR-to-USD [[forex|FX]] peg, NOT a [[depeg-risk|depeg]]**: at the time of snapshot roughly €1 ≈ US$1.15, so a euro-pegged token correctly prints around $1.15 in dollar terms while holding its 1:1 euro peg. The small 7d move tracks normal EUR/USD fluctuation, not peg instability.
 
 ---
 
@@ -48,7 +48,7 @@ REUR is a **fiat-collateralised euro stablecoin**: reserves are intended to cove
 The issuer is a **Hong Kong** entity (RIB Digital Holdings), so REUR sits under Hong Kong's evolving digital-asset/stablecoin regime rather than the EU's. A euro-denominated stablecoin distributed into the EU additionally faces **MiCA** considerations (MiCA imposes specific rules on euro-referenced e-money tokens), which is a distribution/eligibility factor for any EUR coin not issued under an EU authorisation.
 
 ### Peg mechanism (why REUR quotes near $1.15)
-REUR's peg is to the **euro**, not the US dollar. It targets a fixed 1:1 ratio with EUR, so its **US-dollar price simply equals the EUR/USD exchange rate** — around **$1.15** on 2026-06-22 — and the dollar quote rises and falls with EUR/USD even while the euro peg holds firm. This makes REUR an [[forex|FX]]-exposed instrument from a USD investor's perspective: a stable euro and a *floating* dollar. A genuine REUR [[depeg]] would show as a gap between REUR's price and the prevailing EUR/USD rate, not as the price being above $1.00.
+REUR's peg is to the **euro**, not the US dollar. It targets a fixed 1:1 ratio with EUR, so its **US-dollar price simply equals the EUR/USD exchange rate** — around **$1.15** on 2026-06-22 — and the dollar quote rises and falls with EUR/USD even while the euro peg holds firm. This makes REUR an [[forex|FX]]-exposed instrument from a USD investor's perspective: a stable euro and a *floating* dollar. A genuine REUR [[depeg-risk|depeg]] would show as a gap between REUR's price and the prevailing EUR/USD rate, not as the price being above $1.00.
 
 ### Mint / redeem, KYC gating, on/off-ramp rails
 As a fiat-backed euro stablecoin, REUR is intended to be **minted on receipt of euro reserves and redeemed 1:1 for euros**, with peg maintenance via primary issuance/redemption and secondary-market arbitrage against the EUR/USD rate. Primary mint/redeem runs through the issuer's permissioned, KYC-gated channel; the RxBridge ecosystem is positioned to move value between the classic fiat framework and the on-chain Royal tokens.
@@ -156,7 +156,7 @@ REUR is a **regional / FX-denominated (euro) stablecoin** in the **bank-issuer /
 ## Risks
 
 - **FX risk (for USD holders)** — the dollar value tracks EUR/USD; euro weakness lowers the USD price even with a perfect euro peg.
-- **Reserve / off-chain dependency** — backing and redemption rely on the issuer holding sufficient euro reserves at banks; banking or custody disruption is the classic fiat-backed [[depeg]] trigger.
+- **Reserve / off-chain dependency** — backing and redemption rely on the issuer holding sufficient euro reserves at banks; banking or custody disruption is the classic fiat-backed [[depeg-risk|depeg]] trigger.
 - **Redemption-gating / issuer risk** — redemption at par depends on the issuer's terms and solvency; RIB Digital Holdings is a single Hong Kong entity, concentrating counterparty risk.
 - **Regulatory risk** — Hong Kong stablecoin licensing is evolving, and EU distribution of a euro stablecoin engages **MiCA**; either could affect issuance, redemption, or eligibility.
 - **Transparency risk** — peg confidence depends on the quality and frequency of reserve attestations (see [[stablecoin-attestations]]).

@@ -4,7 +4,7 @@ type: concept
 created: 2026-07-14
 updated: 2026-07-14
 status: good
-tags: [ai-trading, trading-bots, risk-management, exchange, deployment, crypto]
+tags: [ai-trading, trading-bots, risk-management, exchange, infrastructure, crypto]
 aliases: ["API Key Security", "API Key Management", "Key Scoping", "Withdrawal-Disabled Keys"]
 domain: [risk-management, market-microstructure]
 prerequisites: ["[[bot-architecture]]", "[[broker-api]]"]

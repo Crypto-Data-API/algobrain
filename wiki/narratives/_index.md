@@ -21,7 +21,7 @@ status, and downstream signals.
 See `_log.md` for the chronological ledger.
 
 Each narrative file lives at `wiki/narratives/<slug>.md` and follows the schema
-in `_schema.md`. A narrative can be created:
+in [[_schema|_schema.md]]. A narrative can be created:
 
 - by hand in the wiki (preferred for high-conviction theses);
 - by the `/narrative` Claude Code slash command (assists drafting);

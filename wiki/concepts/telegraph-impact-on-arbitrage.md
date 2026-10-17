@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-24
 updated: 2026-06-11
 status: good
-tags: [history, arbitrage, market-microstructure, latency]
+tags: [history, arbitrage, market-microstructure, hft]
 aliases: ["Transatlantic Cable Arbitrage", "Telegraph and Markets"]
 domain: [market-microstructure, history, arbitrage]
 prerequisites: ["[[arbitrage]]", "[[market-microstructure]]"]

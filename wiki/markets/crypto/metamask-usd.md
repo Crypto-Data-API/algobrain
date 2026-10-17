@@ -59,7 +59,7 @@ MetaMask (developed by Consensys) supplies everything the end user touches: in-w
 
 ### Peg-maintenance mechanism
 
-As a fiat-backed stablecoin, MUSD holds its peg through **mint/redeem at par** by the issuance partner: authorized parties create MUSD against deposited dollars and redeem it 1:1, so any secondary-market gap is arbitraged shut. There is no over-collateralization buffer and no algorithmic component — peg confidence rests entirely on the partner holding full reserves and honoring redemptions. The 2026-06-21 print of $0.999677 is consistent with that mechanism working smoothly. MUSD's all-time low (~$0.98 in the historical record) was a brief low-liquidity print shortly after launch, not a reserve-driven [[depeg]].
+As a fiat-backed stablecoin, MUSD holds its peg through **mint/redeem at par** by the issuance partner: authorized parties create MUSD against deposited dollars and redeem it 1:1, so any secondary-market gap is arbitraged shut. There is no over-collateralization buffer and no algorithmic component — peg confidence rests entirely on the partner holding full reserves and honoring redemptions. The 2026-06-21 print of $0.999677 is consistent with that mechanism working smoothly. MUSD's all-time low (~$0.98 in the historical record) was a brief low-liquidity print shortly after launch, not a reserve-driven [[depeg-risk|depeg]].
 
 ---
 
@@ -117,7 +117,7 @@ MUSD's primary venue is the **MetaMask wallet itself** — in-app swaps, ramps, 
 - **Smart-contract / framework risk** — Exposure to the M0 framework and the deployed ERC-20 contracts on Ethereum and Linea.
 - **Regulatory risk** — Stablecoin regulation could constrain branded/wallet-distributed dollars and their issuance partners.
 
-See [[stablecoins]] and [[depeg]] for the general framework.
+See [[stablecoins]] and [[depeg-risk|depeg]] for the general framework.
 
 ---
 
@@ -136,7 +136,7 @@ See [[stablecoins]] and [[depeg]] for the general framework.
 - [[usdc]]
 - [[usdt|Tether]]
 - [[pyusd]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[collateralization]]
 - [[ethereum]]
 - [[linea]]

@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-20
 updated: 2026-10-17
 status: excellent
-tags: [indicators, technical-analysis, market-breadth, market-internals]
+tags: [indicators, technical-analysis, market-breadth]
 aliases: ["McClellan", "McClellan Osc", "McClellan Oscillator", "NYMO"]
 domain: [indicators]
 prerequisites: ["[[market-breadth]]", "[[moving-averages]]"]

@@ -16,7 +16,7 @@ related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[stab
 
 **Compounding OpenDollar (cUSDO)** is a **yield-bearing, T-bill-backed dollar [[stablecoins|stablecoin]]** issued by OpenEden Digital ("OED"), a Bermuda Monetary Authority ("BMA")-licensed digital-asset issuer. It is the compounding wrapper of OpenEden's USDO: backing is held in high-quality, liquid reserves — primarily short-dated [[treasury-bonds|U.S. Treasury bills]] and reverse repurchase agreements — and the yield those reserves earn is rolled (compounded) into the token, making cUSDO a [[real-world-assets|real-world-asset (RWA)]] dollar.
 
-> *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).* cUSDO trades at **$1.05** (rank **#870**, market cap **$18,106,772**, 24h **+0.32%**, 7d **+0.04%**). The price **above $1.00 is by design, not a [[depeg]]**: as the underlying T-bill reserves accrue interest, that yield is **compounded into cUSDO's unit value**, so each token is worth progressively more than $1.00. The $1.05 quote therefore reflects accrued T-bill yield, and the tiny 24h/7d moves are consistent with steady, low-volatility yield accrual.
+> *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).* cUSDO trades at **$1.05** (rank **#870**, market cap **$18,106,772**, 24h **+0.32%**, 7d **+0.04%**). The price **above $1.00 is by design, not a [[depeg-risk|depeg]]**: as the underlying T-bill reserves accrue interest, that yield is **compounded into cUSDO's unit value**, so each token is worth progressively more than $1.00. The $1.05 quote therefore reflects accrued T-bill yield, and the tiny 24h/7d moves are consistent with steady, low-volatility yield accrual.
 
 ---
 
@@ -101,7 +101,7 @@ cUSDO sits at the center of the **tokenized US Treasury / yield-bearing stableco
 - **Off-chain / RWA custody risk** — backing is off-chain Treasuries and repo; custody, settlement and counterparty failures could impair reserves (see [[real-world-assets]]).
 - **Redemption-gating risk** — redemptions depend on the issuer's windows and reserve liquidity; primary redemption may not be instant, and forced secondary-market exits can trade below accrued value.
 - **Regulatory / issuer risk** — OED operates under a BMA licence; regulatory change or issuer distress is a live risk.
-- **[[depeg]] (downside) risk** — although the price floats upward with yield, a reserve impairment or confidence shock could push cUSDO below its accrued value; "compounding" does not guarantee the floor.
+- **[[depeg-risk|depeg]] (downside) risk** — although the price floats upward with yield, a reserve impairment or confidence shock could push cUSDO below its accrued value; "compounding" does not guarantee the floor.
 
 ---
 
@@ -194,7 +194,7 @@ cUSDO sits at the center of the **tokenized US Treasury / yield-bearing stableco
 - [[usp-yield-optimized-stablecoin]] — peer yield-bearing dollar
 - [[sygnum-fiusd-liquidity-fund]] — peer tokenized money-market dollar
 - [[base]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 
 ---
 

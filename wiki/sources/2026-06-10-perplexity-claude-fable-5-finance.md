@@ -4,7 +4,7 @@ type: source
 created: 2026-06-10
 updated: 2026-06-12
 status: good
-tags: [meta, source, ai-trading, machine-learning]
+tags: [meta, sources, ai-trading, machine-learning]
 aliases: ["Claude Fable 5 Research", "Fable 5 Finance Perplexity", "Fable 5 Deep Research"]
 source_type: data
 source_url: "n/a — Perplexity sonar-deep-research aggregating 59 named sources"

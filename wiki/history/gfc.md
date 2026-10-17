@@ -4,7 +4,7 @@ type: news
 created: 2026-05-07
 updated: 2026-06-21
 status: excellent
-tags: [history, crash, volatility, credit, gfc, sp500, mortgage-crisis, lehman, fed]
+tags: [history, crashes, volatility, credit, gfc, sp500, mortgage-crisis, lehman, monetary-policy]
 aliases: ["GFC", "2008 Financial Crisis", "Global Financial Crisis", "2008 GFC", "Subprime Crisis"]
 event_date: 2008-09-15
 markets_affected: [stocks, options, credit, mortgage, treasuries, commodities]

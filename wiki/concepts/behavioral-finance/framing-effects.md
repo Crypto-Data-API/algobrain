@@ -9,10 +9,10 @@ aliases: ["Framing Effects", "Framing Effect", "Framing Bias"]
 domain: [behavioral-finance]
 prerequisites: ["[[prospect-theory]]", "[[loss-aversion]]"]
 difficulty: beginner
-related: ["[[prospect-theory]]", "[[loss-aversion]]", "[[cognitive-bias]]", "[[cognitive-biases]]", "[[behavioral-finance]]", "[[anchoring-bias]]", "[[disposition-effect]]", "[[daniel-kahneman]]", "[[trading-psychology]]"]
+related: ["[[prospect-theory]]", "[[loss-aversion]]", "[[cognitive-biases]]", "[[behavioral-finance]]", "[[anchoring-bias]]", "[[disposition-effect]]", "[[daniel-kahneman]]", "[[trading-psychology]]"]
 ---
 
-A framing effect is the [[cognitive-bias|cognitive bias]] whereby people reach different decisions about the *same* underlying choice depending on how it is described — most notably, whether an outcome is presented as a gain or as a loss. It is a direct consequence of [[prospect-theory]]: because the value function is concave for gains and convex (steeper) for losses, identical economic propositions trigger risk-averse behavior when framed positively and risk-seeking behavior when framed negatively. Framing is, in effect, [[loss-aversion]] weaponized by wording.
+A framing effect is the [[cognitive-biases|cognitive bias]] whereby people reach different decisions about the *same* underlying choice depending on how it is described — most notably, whether an outcome is presented as a gain or as a loss. It is a direct consequence of [[prospect-theory]]: because the value function is concave for gains and convex (steeper) for losses, identical economic propositions trigger risk-averse behavior when framed positively and risk-seeking behavior when framed negatively. Framing is, in effect, [[loss-aversion]] weaponized by wording.
 
 ## Overview
 

@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-07
 updated: 2026-07-13
 status: good
-tags: [macro, federal-reserve, monetary-policy, volatility, options, calendar-effects]
+tags: [macro, monetary-policy, volatility, options, calendar-effects]
 aliases: ["FOMC", "Federal Open Market Committee", "FOMC Date"]
 domain: [macroeconomics, market-microstructure]
 prerequisites: ["[[federal-reserve]]", "[[interest-rates]]"]

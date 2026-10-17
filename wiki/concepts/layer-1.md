@@ -2,8 +2,8 @@
 title: "Layer 1"
 type: concept
 created: 2026-07-17
-updated: 2026-07-19
-status: draft
+updated: 2026-10-17
+status: review
 tags: [crypto, blockchain, ethereum, bitcoin]
 domain: [market-microstructure, crypto]
 difficulty: beginner
@@ -41,7 +41,34 @@ L1 dynamics matter directly to multiple AlgoBrain strategies:
 - **[[funding-rate-arbitrage]] and [[basis-trade]]:** L1 native tokens (ETH, SOL, AVAX) are the collateral and the underlying for the largest perpetual futures markets. L1 network upgrades (e.g., Ethereum's EIP-1559, the Merge) have historically been major catalysts for funding rate regime shifts.
 - **[[cross-chain-arbitrage]] and [[cross-l2-arbitrage]]:** Price discrepancies between the same asset on different L1s (or between an L1 and its L2s) are the direct source of cross-chain arb edge. Bridging latency and L1 finality times are key risk inputs.
 - **[[on-chain-analysis]] and [[on-chain-flow-trading]]:** L1 blockchains expose settlement data transparently — exchange flows, large wallet movements, MVRV, and staking yields are all L1-sourced on-chain signals.
-- **[[jito-solana-mev-arbitrage]] and [[mev-strategies]]:** MEV is L1-specific. Ethereum's PBS (Proposer-Builder Separation) via [[flashbots]] and Solana's Jito Block Engine are different L1 MEV architectures. Understanding which L1 you operate on determines the MEV toolchain.
+- **[[jito-solana-mev-arbitrage]] and [[mev-strategies]]:** MEV is L1-specific. Ethereum's PBS (Proposer-Builder Separation) via [[flashbots]] and Solana's Jito Block Engine are different L1 MEV architectures. Understanding which L1 you operate on determines the MEV toolchain. See [[mev]].
+
+### Trading L1 tokens as a sector
+
+L1 native tokens are also the largest *directional* sector after BTC itself, and several AlgoBrain strategies trade them as a group rather than as infrastructure:
+
+- **Sector basket:** [[l1-blockchains-basket]] holds alt-L1 perps as a group; [[solana-ecosystem-basket]] isolates the Solana beta. Both are high-beta to BTC — an alt-L1 sleeve is a leveraged BTC bet unless it is hedged.
+- **Relative value:** [[cross-sectional-relative-value]] and [[pairs-trading]] rank L1s against each other (e.g. long the strongest-momentum L1, short the weakest) to strip out the common crypto beta.
+- **Supply events:** newer L1s (launched 2020+) typically carry large insider and foundation allocations on vesting schedules. [[unlock-aware-momentum]] and [[token-unlock-supply-event]] trade the dated cliffs; see [[token-unlocks]].
+- **App-specific L1s:** [[hyperliquid]] runs its own L1 (HyperCore order books plus HyperEVM), so its token economics and outage risk are L1 risks, not L2 risks. When choosing a venue, chain halts and validator concentration count as counterparty risk.
+- **Outage risk:** L1 halts (Solana's September 2021 and January 2022 incidents above) freeze on-chain collateral and bridges. Any strategy holding on-chain collateral on a single L1 should size for a multi-hour halt.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/coins/category-groups` — curated themes including a Layer-1 / platform group, with each member's price, market cap, rank and 24h/7d change
+- `GET /api/v1/coins/{symbol}` — per-coin market data (e.g. `/api/v1/coins/SOL`)
+- `GET /api/v1/supply/unlocks?symbol=SUI` — forward vesting-cliff calendar, sized against float (a cliff calendar, not an emissions feed)
+- `GET /api/v1/market-health/altcoin-breadth` — share of alts above their moving average, a check on whether an alt-L1 rally is broad
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines?symbol=SOLUSDT&interval=1d&start=2021-01-01` — Binance OHLCV for L1 relative-value backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/coins/category-groups"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalogs: [[cryptodataapi-coins]], [[cryptodataapi-supply]], [[cryptodataapi-backtesting]].
 
 ## Related
 

@@ -171,7 +171,7 @@ fxUSD is a DeFi-native stablecoin and trades primarily on-chain (Curve-style poo
 - [[crvusd]] — closest CDP peer
 - [[felix-feusd]] — peer crypto-backed dollar (stability-pool model)
 - [[collateralized-debt-position]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[ethereum]]
 - [[base]]
 - [[crypto-markets]]

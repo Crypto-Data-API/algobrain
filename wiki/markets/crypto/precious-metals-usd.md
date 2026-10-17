@@ -9,7 +9,7 @@ aliases: ["PMUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://raac.io/"
-related: ["[[commodities]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[gold]]", "[[real-world-assets]]", "[[stablecoins]]", "[[stablecoins]]"]
+related: ["[[commodities]]", "[[crypto-markets]]", "[[depeg-risk]]", "[[ethereum]]", "[[gold]]", "[[real-world-assets]]", "[[stablecoins]]", "[[stablecoins]]"]
 ---
 
 # Precious Metals USD
@@ -205,7 +205,7 @@ PMUSD sits at the intersection of **RWA tokenization** and **commodity-backed st
 - [[stablecoins]] / [[stablecoins]]
 - [[real-world-assets]]
 - [[gold]] / [[commodities]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[crypto-markets]]
 - [[ethereum]]
 

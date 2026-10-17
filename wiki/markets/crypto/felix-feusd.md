@@ -206,7 +206,7 @@ feUSD's thesis is a **bet on Hyperliquid**: as HyperEVM accrues TVL and DeFi act
 - [[crvusd]] — closest architectural peer (CDP + stability mechanics)
 - [[f-x-protocol-fxusd]] — peer crypto-backed dollar
 - [[hyperliquid]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[crypto-markets]]
 
 ---

@@ -6,7 +6,7 @@ updated: 2026-06-21
 status: excellent
 tags: [crypto, stablecoins, payments, remittance, education]
 aliases: ["Stablecoin Use Cases", "Stablecoin Adoption"]
-related: ["[[stablecoins]]", "[[usdc]]", "[[usdt]]", "[[defi]]", "[[regulation]]", "[[stablecoin-regulation]]", "[[ethereum]]", "[[stablecoin-yields]]", "[[cbdc]]", "[[tether-limited]]", "[[circle]]", "[[pyusd]]", "[[depeg]]", "[[layer-2]]"]
+related: ["[[stablecoins]]", "[[usdc]]", "[[usdt]]", "[[defi]]", "[[regulation]]", "[[stablecoin-regulation]]", "[[ethereum]]", "[[stablecoin-yields]]", "[[cbdc]]", "[[tether-limited]]", "[[circle]]", "[[pyusd]]", "[[depeg-risk]]", "[[layer-2]]"]
 domain: [crypto, payments]
 difficulty: beginner
 ---
@@ -173,15 +173,15 @@ A use case is only as reliable as the peg behind it. The dominant stablecoins di
 |---|---|---|---|
 | Fiat-collateralised | 1:1 reserves in cash + short Treasuries | [[usdt\|USDT]], [[usdc\|USDC]], [[pyusd\|PYUSD]] | Reserve quality / issuer solvency; redemption freeze |
 | Crypto-collateralised | Over-collateralised by on-chain crypto | DAI (partly) | Collateral crash → liquidation cascades |
-| Algorithmic / under-collateralised | Supply-adjusting, minimal hard backing | TerraUSD (failed) | [[depeg]] death-spiral — the [[terra-luna-collapse\|UST]] failure wiped out ~$40B |
+| Algorithmic / under-collateralised | Supply-adjusting, minimal hard backing | TerraUSD (failed) | [[depeg-risk\|depeg]] death-spiral — the [[terra-luna-collapse\|UST]] failure wiped out ~$40B |
 
-For remittances and dollarisation, a [[depeg]] is the catastrophic tail: a migrant worker holding "digital dollars" that suddenly trade at $0.90 has lost 10% of savings with no recourse. The 2022 collapse of the algorithmic stablecoin TerraUSD (UST) is the canonical warning — it is why fiat-collateralised coins (USDT, USDC) dominate the real-world payment and savings use cases, and why algorithmic designs are largely absent from them.
+For remittances and dollarisation, a [[depeg-risk|depeg]] is the catastrophic tail: a migrant worker holding "digital dollars" that suddenly trade at $0.90 has lost 10% of savings with no recourse. The 2022 collapse of the algorithmic stablecoin TerraUSD (UST) is the canonical warning — it is why fiat-collateralised coins (USDT, USDC) dominate the real-world payment and savings use cases, and why algorithmic designs are largely absent from them.
 
 ## Risks and Limitations
 
 Stablecoins are not riskless dollars, and each use case inherits a distinct set of failure modes:
 
-1. **Depeg risk** — even fiat-backed coins have briefly traded off-peg (USDC dipped to ~$0.87 in March 2023 during the Silicon Valley Bank scare when ~$3.3B of Circle reserves were briefly stranded, before recovering). See [[depeg]].
+1. **Depeg risk** — even fiat-backed coins have briefly traded off-peg (USDC dipped to ~$0.87 in March 2023 during the Silicon Valley Bank scare when ~$3.3B of Circle reserves were briefly stranded, before recovering). See [[depeg-risk|depeg]].
 2. **Issuer / reserve risk** — holders are unsecured creditors of a private issuer ([[tether-limited\|Tether]], [[circle\|Circle]]). Reserve composition, audit quality, and redemption rights vary and have been the subject of regulatory action.
 3. **Smart-contract and bridge risk** — funds on-chain are exposed to contract exploits and cross-chain bridge hacks, a major historical source of crypto losses.
 4. **Off-ramp / liquidity risk** — the "last mile" of a remittance still depends on a local P2P market or exchange that can convert to local currency; in thin markets the off-ramp spread can erode the cost advantage.
@@ -227,7 +227,7 @@ Stablecoin adoption beyond trading has significant investment implications:
 - [[pyusd]] -- PayPal's stablecoin (mainstream adoption signal)
 - [[tether-limited]] -- Issuer of USDT
 - [[circle]] -- Issuer of USDC
-- [[depeg]] -- The key tail risk across every use case
+- [[depeg-risk|depeg]] -- The key tail risk across every use case
 - [[layer-2]] -- Lower-fee settlement rails for stablecoin transfers
 
 ## Sources

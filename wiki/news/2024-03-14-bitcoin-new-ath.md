@@ -4,7 +4,7 @@ type: news
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [news, bitcoin, ath, etf, bull-market]
+tags: [news, bitcoin, ath, etf, bull-markets]
 event_date: 2024-03-14
 markets_affected: [crypto]
 impact: high

@@ -4,7 +4,7 @@ type: concept
 created: 2026-07-14
 updated: 2026-07-14
 status: good
-tags: [backtesting, overfitting, validation, statistics, machine-learning, methodology]
+tags: [backtesting, validation, statistics, machine-learning, methodology]
 aliases: ["PBO", "CSCV", "Combinatorially-Symmetric Cross-Validation", "Backtest Overfitting Probability"]
 domain: [backtesting, statistics]
 prerequisites: ["[[overfitting-detection]]", "[[purged-kfold-cv]]"]

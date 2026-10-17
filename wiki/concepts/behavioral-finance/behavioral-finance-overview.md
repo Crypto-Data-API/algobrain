@@ -6,7 +6,7 @@ updated: 2026-06-22
 status: excellent
 tags: [behavioral-finance]
 aliases: ["Behavioral Finance Index", "Psychology of Trading"]
-related: ["[[behavioral-finance]]", "[[cognitive-biases]]", "[[cognitive-bias]]", "[[trading-psychology]]", "[[prospect-theory]]", "[[loss-aversion]]", "[[sentiment]]", "[[efficient-market-hypothesis]]"]
+related: ["[[behavioral-finance]]", "[[cognitive-biases]]", "[[trading-psychology]]", "[[prospect-theory]]", "[[loss-aversion]]", "[[sentiment]]", "[[efficient-market-hypothesis]]"]
 ---
 
 # Behavioral Finance Overview
@@ -41,7 +41,7 @@ These four properties together explain a large share of the "irrational" trading
 
 ## Catalog of Major Biases
 
-Each is a [[cognitive-bias]] with its own page; the table maps the bias to how it manifests at the trading desk and the market-level effect it produces.
+Each is a [[cognitive-biases|cognitive-bias]] with its own page; the table maps the bias to how it manifests at the trading desk and the market-level effect it produces.
 
 | Bias | What it is | Trading manifestation | Market-level effect |
 |------|-----------|-----------------------|---------------------|

@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-10
 updated: 2026-07-16
 status: draft
-tags: [amm, crypto, defi, dex, ethereum, liquidity, protocol]
+tags: [amm, crypto, defi, dex, ethereum, liquidity, protocols]
 entity_type: protocol
 founded: 2020
 headquarters: "Decentralized"

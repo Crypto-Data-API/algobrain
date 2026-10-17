@@ -4,7 +4,7 @@ type: strategy
 created: 2026-04-06
 updated: 2026-10-17
 status: excellent
-tags: [combinations, alpha-edge, contrarian, sentiment, mean-reversion, behavioral-edge, fear-greed, risk-bearing]
+tags: [combinations, alpha-edge, contrarian, sentiment, mean-reversion, behavioral-edge, risk-bearing]
 strategy_type: hybrid
 timeframe: swing
 markets: [crypto]

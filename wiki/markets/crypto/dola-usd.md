@@ -107,7 +107,7 @@ These episodes are why DOLA carries materially higher protocol/smart-contract ri
 - **Fixed-rate / DBR risk** — The DBR mechanism can leave borrowers under-provisioned if DBR runs out, forcing accruing debt and liquidation pressure.
 - **Governance risk** — DAO decisions on collateral parameters, DBR pricing, and Fed mint/burn directly affect peg stability and solvency.
 
-See [[stablecoins]], [[depeg]], and [[collateralization]] for the general framework.
+See [[stablecoins]], [[depeg-risk|depeg]], and [[collateralization]] for the general framework.
 
 ---
 
@@ -125,7 +125,7 @@ See [[stablecoins]], [[depeg]], and [[collateralization]] for the general framew
 - [[stablecoins]]
 - [[defi]]
 - [[collateralization]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[dai]]
 - [[crvusd]]
 - [[usdc]]

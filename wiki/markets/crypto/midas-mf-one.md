@@ -63,7 +63,7 @@ mF-ONE is a tokenized certificate built on Midas's **Liquid Yield Token** framew
 | **[[apollo-diversified-credit-securitize-fund\|ACRED]]** | Securitize + Apollo | Diversified private + public credit | Mid-grade credit-cycle | Permissioned collateral |
 | **[[securitize-tokenized-aaa-clo-fund\|STAC]]** | Securitize + BNY | AAA-rated USD CLO tranches | Senior, high-grade | Permissioned |
 | **[[ousg]]** (OUSG) | Ondo Finance | U.S. Treasuries | Near risk-free cash | Yes |
-| **[[buidl]]** (BUIDL) | BlackRock + Securitize | U.S. Treasuries | Near risk-free cash | Permissioned |
+| **[[blackrock-usd-institutional-digital-liquidity-fund\|buidl]]** (BUIDL) | BlackRock + Securitize | U.S. Treasuries | Near risk-free cash | Permissioned |
 
 mF-ONE is differentiated by its **DeFi-native composability** (usable on Morpho) combined with a higher-yield, higher-risk private-credit + delta-neutral-crypto mandate — versus the safer Treasury and AAA-CLO tokens.
 

@@ -9,7 +9,7 @@ aliases: ["RUSD"]
 entity_type: protocol
 headquarters: "Hong Kong (RIB Digital Holdings)"
 website: "https://www.rcoins.digital/"
-related: ["[[stablecoins]]", "[[crypto-markets]]", "[[ethereum]]", "[[usdt]]", "[[usdc]]", "[[royal-euro]]", "[[depeg]]"]
+related: ["[[stablecoins]]", "[[crypto-markets]]", "[[ethereum]]", "[[usdt]]", "[[usdc]]", "[[royal-euro]]", "[[depeg-risk]]"]
 ---
 
 # Royal Dollar
@@ -87,7 +87,7 @@ The tight $0.998–$1.002 band indicates peg stability to date. *(Exact launch d
 
 ## Risks
 
-- **De-peg risk:** Tight historical range ($0.998–$1.002) suggests stability to date, but a fiat-backed peg can break instantly if reserves are insufficient or redemptions are frozen ([[depeg]]).
+- **De-peg risk:** Tight historical range ($0.998–$1.002) suggests stability to date, but a fiat-backed peg can break instantly if reserves are insufficient or redemptions are frozen ([[depeg-risk|depeg]]).
 - **Collateral / reserve-counterparty risk:** Reserve composition and custody are not transparently attested in available data; quality and liquidity of reserves are unverified here.
 - **Issuer / custodial risk:** Single-issuer (RIB Digital Holdings, Hong Kong) centralised model — counterparty, governance, and solvency risk concentrate on one entity.
 - **Redemption-gating risk:** Par redemption is KYC-gated and issuer-controlled; a freeze would break the arbitrage that holds the peg.

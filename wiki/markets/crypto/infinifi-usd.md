@@ -9,7 +9,7 @@ aliases: ["IUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://docs.infinifi.xyz/"
-related: ["[[crypto-markets]]", "[[depeg]]", "[[ethena-usde]]", "[[ethereum]]", "[[stablecoins]]", "[[usdc]]", "[[usdt]]"]
+related: ["[[crypto-markets]]", "[[depeg-risk]]", "[[ethena-usde]]", "[[ethereum]]", "[[stablecoins]]", "[[usdc]]", "[[usdt]]"]
 ---
 
 # InfiniFi USD
@@ -108,7 +108,7 @@ Native chain: [[ethereum|Ethereum]].
 - [[stablecoins]] — category overview
 - [[ethena-usde]] — peer yield-bearing synthetic dollar
 - [[usdc]], [[usdt]] — fiat-backed peers
-- [[depeg]] — peg-failure mechanics
+- [[depeg-risk|depeg]] — peg-failure mechanics
 - [[crypto-markets]]
 
 ## Sources

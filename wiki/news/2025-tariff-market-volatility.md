@@ -4,7 +4,7 @@ type: news
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [news, tariffs, volatility, trade-war, inflation, china, consumer-prices, macro]
+tags: [news, tariffs, volatility, inflation, china, consumer-prices, macro]
 event_date: 2025-04-02
 markets_affected: [stocks, commodities, forex, crypto]
 impact: high

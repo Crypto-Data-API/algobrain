@@ -27,7 +27,7 @@ At its core, yield farming involves supplying capital that a protocol needs to f
 Yield farming returns are typically quoted as APY (Annual Percentage Yield) or APR (Annual Percentage Rate). The distinction matters:
 
 - **APR** — Simple interest. A 50% APR means you earn 50% of your principal over a year, without compounding.
-- **APY** — Compound interest. A 50% APR compounded daily equals roughly 64.8% APY.
+- **APY** — [[compound-interest|Compound interest]]. A 50% APR compounded daily equals roughly 64.8% APY.
 
 Advertised APYs in DeFi can be misleading because they often assume continuous compounding, stable token prices, and constant reward rates — none of which are guaranteed. A pool showing "500% APY" typically reflects a brief period of high rewards with new token emissions that will dilute rapidly.
 

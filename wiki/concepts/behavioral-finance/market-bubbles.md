@@ -61,7 +61,7 @@ There is no reliable real-time bubble detector — Eugene Fama disputes the term
 - **Contrarian framing** — extreme bubble conditions are the setup contrarian strategies seek, but timing is the killer: identifying a bubble and timing its collapse are entirely different problems.
 - **Riding vs fading** — trend-following and momentum profit from the boom and euphoria phases; the danger is overstaying. The asymmetry (slow grind up, violent crash down) means crash risk is poorly compensated near the top.
 - **Position sizing and leverage discipline** — bubbles destroy capital primarily through leverage and concentration. Surviving a bubble's collapse is mostly a [[risk-management|risk-management]] problem, not a forecasting one.
-- **Shorting hazards** — never short a parabola naively; borrow costs, squeezes (see [[short-squeeze]]), and "stay irrational longer than you stay solvent" dynamics mean defined-risk structures (puts) are usually safer than outright shorts.
+- **[[shorting|Shorting]] hazards** — never short a parabola naively; borrow costs, squeezes (see [[short-squeeze]]), and "stay irrational longer than you stay solvent" dynamics mean defined-risk structures (puts) are usually safer than outright shorts.
 
 ## Related
 

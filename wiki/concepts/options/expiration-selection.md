@@ -15,7 +15,6 @@ related:
   - "[[vega]]"
   - "[[weekly-options]]"
   - "[[long-dated-options]]"
-  - "[[leaps]]"
   - "[[0dte-impact-on-spx]]"
   - "[[options-selection-framework]]"
   - "[[strike-selection]]"
@@ -39,7 +38,7 @@ The full DTE spectrum can be carved into bands, each with a characteristic domin
 | **Sweet spot** (30-45) | balanced theta vs gamma | theta accelerating | credit spreads, condors, strangles | the consensus premium-selling band |
 | **Medium** (45-90) | [[vega]] meaningful, gamma low | slow theta | debit spreads, directional long premium | thesis-timing risk |
 | **Long** (90-365) | vega-dominant | minimal theta | long-dated thesis, calendar back-legs | IV path, [[interest-rate-options\|rates]] |
-| **[[leaps\|LEAPS]]** (12+ mo) | vega + delta | negligible theta | stock replacement, tail hedges | vega, rho, dividend assumptions |
+| **[[long-dated-options\|LEAPS]]** (12+ mo) | vega + delta | negligible theta | stock replacement, tail hedges | vega, rho, dividend assumptions |
 
 The single most important takeaway: **theta and gamma trade off against each other monotonically as DTE shrinks** — you cannot collect fast decay without taking on fast curvature. Selecting DTE is selecting your point on that trade-off curve.
 
@@ -141,7 +140,7 @@ A common error is buying 30-DTE calls "to save money on premium" when the direct
 
 ## LEAPS Considerations
 
-[[long-dated-options|Long-dated options]] / [[leaps|LEAPS]] (12+ months to expiration) live at the opposite end of the spectrum.
+[[long-dated-options|Long-dated options]] / [[long-dated-options|LEAPS]] (12+ months to expiration) live at the opposite end of the spectrum.
 
 **Characteristics**:
 
@@ -246,7 +245,7 @@ DTE selection is inseparable from [[non-linear-payoff|non-linearity]]. The theta
 - [[vega]] — IV sensitivity, dominates on long-dated structures
 - [[weekly-options]] — short-DTE specifics
 - [[long-dated-options]] — LEAPS specifics
-- [[leaps]] — 12+ month options for stock replacement and tail hedging
+- [[long-dated-options|leaps]] — 12+ month options for stock replacement and tail hedging
 - [[0dte-impact-on-spx]] — 0DTE market structure
 - [[options-selection-framework]] — DTE is filter 3 in the framework
 - [[strike-selection]] — paired decision (filter 5)

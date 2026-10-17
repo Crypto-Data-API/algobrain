@@ -9,7 +9,7 @@ aliases: ["LAYER", "sSOL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://solayer.org/network"
-related: ["[[crypto-markets]]", "[[depeg]]", "[[eigenlayer]]", "[[ethereum]]", "[[liquid-restaking]]", "[[liquid-staking]]", "[[restaking]]", "[[slashing]]", "[[smart-contract-risk]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[token-unlock-supply-event]]"]
+related: ["[[crypto-markets]]", "[[depeg-risk]]", "[[eigenlayer]]", "[[ethereum]]", "[[liquid-restaking]]", "[[liquid-staking]]", "[[restaking]]", "[[slashing]]", "[[smart-contract-risk]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[token-unlock-supply-event]]"]
 ---
 
 # Solayer
@@ -86,7 +86,7 @@ This pairing — a restaking security layer plus a high-throughput chain that co
 | **Solayer** | [[solana\|Solana]] | sSOL | Solana-native delegated security | Pairs restaking with the InfiniSVM high-throughput chain |
 | **EigenLayer** | [[ethereum\|Ethereum]] | (restaked ETH / LSTs) | AVS marketplace (the original model) | Largest restaking TVL; defined the category |
 | **Ether.fi** | Ethereum | eETH / weETH | LRT on top of EigenLayer | Leading liquid-restaking token by adoption |
-| **Renzo** | Ethereum | ezETH | LRT on top of EigenLayer | Suffered an ezETH [[depeg]] in April 2024 (cautionary case) |
+| **Renzo** | Ethereum | ezETH | LRT on top of EigenLayer | Suffered an ezETH [[depeg-risk\|depeg]] in April 2024 (cautionary case) |
 | **Jito (restaking)** | Solana | (JitoSOL + restaking) | Solana restaking + MEV/liquid staking | Dominant Solana LST; MEV-tipped yield |
 
 Solayer's edge versus other Solana restakers (e.g., Jito's restaking, Picasso) is its tight coupling to InfiniSVM; its disadvantage is that Solana restaking as a whole is younger and less battle-tested than Ethereum's, and Solayer competes for the same SOL deposits as the entrenched JitoSOL LST.
@@ -179,7 +179,7 @@ Solayer's edge versus other Solana restakers (e.g., Jito's restaking, Picasso) i
 
 ## Risks
 
-- **sSOL [[depeg]] risk** — Like any [[liquid-restaking]] token, sSOL can trade below its underlying redemption value in secondary markets during stress or thin liquidity, with knock-on liquidations for leveraged holders.
+- **sSOL [[depeg-risk|depeg]] risk** — Like any [[liquid-restaking]] token, sSOL can trade below its underlying redemption value in secondary markets during stress or thin liquidity, with knock-on liquidations for leveraged holders.
 - **[[restaking]] / [[slashing]] risk** — Restaked SOL backs additional services; misbehavior or restaking-layer faults can lead to penalties on the underlying stake. The restaking-on-Solana security model is younger and less battle-tested than Ethereum's.
 - **[[smart-contract-risk]]** — Solayer's restaking, sSOL, and InfiniSVM-related contracts/programs are complex and relatively new; a bug could endanger deposits.
 - **Supply overhang / unlock pressure** — Circulating LAYER is a small fraction of the 1B max supply (Mcap/FDV ~0.2 in earlier snapshots). Future token unlocks are a structural headwind for price.
@@ -266,7 +266,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can trade L
 - [[restaking]]
 - [[liquid-restaking]]
 - [[liquid-staking]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[smart-contract-risk]]
 
 ---

@@ -96,6 +96,7 @@ SORT updated DESC
 - [[corporate-bonds]] — IG vs high-yield company debt
 - [[yield-curve]] — the term structure and recession signal
 - [[duration]] — interest-rate sensitivity
+- [[bond-analysis]] — yield measures, duration and convexity, and credit assessment in one framework
 - [[credit-spread]] / [[credit-risk]] — default-risk compensation
 - [[interest-rate-risk]] — the rate dimension shared by all bonds
 - [[lqd]] / [[hyg]] — investment-grade and high-yield ETF proxies

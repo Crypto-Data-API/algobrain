@@ -14,7 +14,7 @@ related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[layer-2]]", "[
 
 # Astar
 
-**Astar** (ticker **ASTR**) is a multi-chain smart-contract platform originally launched as **Plasm Network** and best known as a leading [[polkadot]] parachain. It supports both EVM and WebAssembly (WASM) smart contracts, and has expanded into an Ethereum-aligned presence via **Astar zkEVM** (a [[layer-2]] built on Polygon's CDK). ASTR is the ecosystem's economic and governance token, and Astar is notable for its **dApp Staking** model, which directs a share of inflation to developers whose applications attract staked tokens — an attempt to align token emissions with real on-chain usage.
+**Astar** (ticker **ASTR**) is a multi-chain smart-contract platform originally launched as **Plasm Network** and best known as a leading [[polkadot]] parachain. It supports both EVM and [[webassembly|WebAssembly (WASM)]] smart contracts, and has expanded into an Ethereum-aligned presence via **Astar zkEVM** (a [[layer-2]] built on Polygon's CDK). ASTR is the ecosystem's economic and governance token, and Astar is notable for its **dApp Staking** model, which directs a share of inflation to developers whose applications attract staked tokens — an attempt to align token emissions with real on-chain usage.
 
 ---
 

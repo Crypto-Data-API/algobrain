@@ -8,7 +8,7 @@ tags: [behavioral-finance, risk-management]
 aliases: ["Behavioral Economics", "Behavioural Finance"]
 domain: [behavioral-finance]
 difficulty: beginner
-related: ["[[behavioral-finance-overview]]", "[[cognitive-biases]]", "[[cognitive-bias]]", "[[prospect-theory]]", "[[loss-aversion]]", "[[disposition-effect]]", "[[reflexivity]]", "[[bubble]]", "[[meme-stocks]]", "[[technical-analysis]]", "[[risk-management]]", "[[trading-psychology]]", "[[sentiment]]", "[[efficient-market-hypothesis]]"]
+related: ["[[behavioral-finance-overview]]", "[[cognitive-biases]]", "[[prospect-theory]]", "[[loss-aversion]]", "[[disposition-effect]]", "[[reflexivity]]", "[[bubble]]", "[[meme-stocks]]", "[[technical-analysis]]", "[[risk-management]]", "[[trading-psychology]]", "[[sentiment]]", "[[efficient-market-hypothesis]]"]
 ---
 
 # Behavioral Finance
@@ -33,7 +33,7 @@ Traditional finance assumes rational actors who process information efficiently.
 | **[[disposition-effect]]** | Selling winners early, holding losers | Asymmetric realization of gains vs losses |
 | **[[framing-effects\|Framing]]** | Same choice decided differently by description | Hit-rate framing over expectancy; entry-price framing |
 
-For the full catalog and how the biases interact, see [[cognitive-biases]] (each entry above is itself a [[cognitive-bias]] — a systematic deviation from rational judgment).
+For the full catalog and how the biases interact, see [[cognitive-biases]] (each entry above is itself a [[cognitive-biases|cognitive-bias]] — a systematic deviation from rational judgment).
 
 ### How the biases map to trading mistakes
 

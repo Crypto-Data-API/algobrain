@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [automated-market-maker, crypto, defi]
+tags: [amm, crypto, defi]
 aliases: ["SAUCE", "SaucerSwap Labs"]
 entity_type: protocol
 headquarters: "Decentralized"

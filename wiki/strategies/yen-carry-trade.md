@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-22
 updated: 2026-06-22
 status: good
-tags: [carry-trade, forex, macro, position-trading, leverage, risk-management]
+tags: [carry, forex, macro, position-trading, leverage, risk-management]
 aliases: ["JPY Carry Trade", "Yen Carry", "Japanese Yen Carry Trade"]
 strategy_type: fundamental
 timeframe: position

@@ -18,7 +18,7 @@ related: ["[[crypto-markets]]", "[[ethereum]]", "[[forex]]", "[[japanese-yen]]",
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
-JPYC trades at approximately **$0.0072221** because it tracks the **Japanese yen**, not the US dollar. At a USD/JPY rate near 138-140, one yen is worth about $0.0072 — so a ~$0.0072 quote means **1 JPYC ≈ ¥1**, exactly its intended [[forex]] peg. This is **not a [[depeg]]**: measured against the yen (its real reference asset), JPYC holds at ~¥1.00. Recent moves (24h -0.45%, 7d -0.33%) primarily reflect minor USD/JPY exchange-rate drift, not loss of peg. Market capitalization is roughly **$18.14M** (rank #870).
+JPYC trades at approximately **$0.0072221** because it tracks the **Japanese yen**, not the US dollar. At a USD/JPY rate near 138-140, one yen is worth about $0.0072 — so a ~$0.0072 quote means **1 JPYC ≈ ¥1**, exactly its intended [[forex]] peg. This is **not a [[depeg-risk|depeg]]**: measured against the yen (its real reference asset), JPYC holds at ~¥1.00. Recent moves (24h -0.45%, 7d -0.33%) primarily reflect minor USD/JPY exchange-rate drift, not loss of peg. Market capitalization is roughly **$18.14M** (rank #870).
 
 ---
 
@@ -242,7 +242,7 @@ JPYC sits within the **regulated non-USD stablecoin** narrative alongside euro t
 - [[stablecoins]]
 - [[japanese-yen]]
 - [[forex]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[monerium-eur-money]]
 - [[mica]]
 

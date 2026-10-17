@@ -4,7 +4,7 @@ type: reference
 created: 2026-04-10
 updated: 2026-06-21
 status: excellent
-tags: [data-provider, alternative-data, alpha]
+tags: [data-provider, alternative-data, alpha-edge]
 aliases: ["Alt Data", "Alternative Data Vendors"]
 related: ["[[data-sources-overview]]", "[[alternative-data]]", "[[alternative-data-alpha]]", "[[edge-taxonomy]]", "[[paid-data-providers]]", "[[free-data-sources]]", "[[crypto-data-sources]]", "[[informational-edge]]"]
 ---

@@ -9,7 +9,7 @@ aliases: ["CUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://cap.app/"
-related: ["[[crypto-markets]]", "[[dai]]", "[[depeg]]", "[[ethereum]]", "[[stablecoins]]", "[[usda-2]]", "[[usdc]]", "[[usdt]]"]
+related: ["[[crypto-markets]]", "[[dai]]", "[[depeg-risk]]", "[[ethereum]]", "[[stablecoins]]", "[[usda-2]]", "[[usdc]]", "[[usdt]]"]
 ---
 
 # Cap USD
@@ -82,7 +82,7 @@ cUSD sits in the **"institutional-grade reserve" + restaked-yield** narrative �
 
 ## Risks
 
-- **De-peg risk:** Despite trading on peg now, history shows a drop to $0.907 — thin liquidity makes transient [[depeg|de-pegs]] possible.
+- **De-peg risk:** Despite trading on peg now, history shows a drop to $0.907 — thin liquidity makes transient [[depeg-risk|de-pegs]] possible.
 - **Collateral / contagion risk:** Backing is itself other stablecoins/MMF tokens — a de-peg, freeze, or redemption halt of [[usdc|USDC]], [[usdt|USDT]], pyUSD, BUIDL, or BENJI would propagate **directly and simultaneously** into cUSD. The basket diversifies issuer risk but concentrates *systemic* stablecoin risk.
 - **Yield-source / operator counterparty risk:** stcUSD yield depends on the operator marketplace performing; "code-enforced downside protection" relies on operator-posted (re)staked collateral being sufficient and slashable in time. A correlated operator loss could exceed the backstop.
 - **Redemption-gating risk:** Redemption is for "any *available* reserve asset" — in stress a redeemer may receive a less-liquid constituent rather than their preferred dollar, an effective soft gate.
@@ -111,7 +111,7 @@ Native chain: [[ethereum|Ethereum]] (usable cross-network per the issuer).
 - [[usdc]], [[usdt]] — reserve constituents and fiat-backed peers
 - [[dai]], [[usda-2]] — alternative backing models
 - [[ethena-usde]] — single-strategy yield-dollar contrast
-- [[depeg]] — peg-failure mechanics
+- [[depeg-risk|depeg]] — peg-failure mechanics
 - [[crypto-markets]]
 
 ## Sources

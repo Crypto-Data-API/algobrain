@@ -9,7 +9,7 @@ aliases: ["MUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.mezo.org"
-related: ["[[bitcoin]]", "[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[liquity-usd]]", "[[stablecoins]]"]
+related: ["[[bitcoin]]", "[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[depeg-risk]]", "[[ethereum]]", "[[liquity-usd]]", "[[stablecoins]]"]
 ---
 
 # Mezo USD
@@ -116,7 +116,7 @@ MUSD sits at the intersection of two themes: **Bitcoin-DeFi / "productive BTC"**
 ## Risks
 
 - **Collateral (BTC) volatility.** Backing is volatile [[bitcoin]]; a sharp BTC drawdown can push positions into mass liquidation, the dominant solvency risk for any over-collateralized CDP stablecoin. This is especially pertinent in the current bear regime.
-- **Depeg risk.** Minor depegs have occurred (ATL ~$0.96, ATH ~$1.05); during liquidity stress or BTC crashes MUSD can trade off-peg (see [[depeg]]).
+- **Depeg risk.** Minor depegs have occurred (ATL ~$0.96, ATH ~$1.05); during liquidity stress or BTC crashes MUSD can trade off-peg (see [[depeg-risk|depeg]]).
 - **Liquidation / oracle risk.** The system depends on timely liquidations and a reliable BTC price oracle; oracle failure or a fast crash that outruns liquidations can leave the system under-collateralized.
 - **Reserve-counterparty / bridge risk.** MUSD is bridged to Ethereum and Base; bridge security and cross-chain representation add exposure beyond the core CDP.
 - **New-protocol / ecosystem risk.** Mezo is a relatively young Bitcoin-economy network; smart-contract, bridge, and adoption risks apply, and TVL/usage can be incentive-driven.
@@ -240,7 +240,7 @@ MUSD sits at the intersection of two themes: **Bitcoin-DeFi / "productive BTC"**
 - [[stablecoins]]
 - [[collateralization]]
 - [[cdp]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[liquity-usd]]
 - [[dai]]
 - [[crypto-markets]]

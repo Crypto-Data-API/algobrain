@@ -9,7 +9,7 @@ aliases: ["BOLD", "BOLD stablecoin", "Liquity BOLD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.liquity.org/"
-related: ["[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[liquid-staking]]", "[[liquity-usd]]", "[[liquity]]", "[[maker]]", "[[stablecoins]]"]
+related: ["[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[depeg-risk]]", "[[ethereum]]", "[[liquid-staking]]", "[[liquity-usd]]", "[[liquity]]", "[[makerdao]]", "[[stablecoins]]"]
 ---
 
 # BOLD
@@ -46,7 +46,7 @@ BOLD is a fully redeemable USD-pegged stablecoin issued by the [[liquity|Liquity
 
 ### Architecture — Collateral and backing
 
-BOLD is **fully crypto-backed and overcollateralized** — every BOLD in circulation is matched by more than $1 of ETH/LST collateral locked in Troves. There are no fiat reserves and no off-chain custodians; backing is verifiable on-chain. Liquity V2 separates collateral into distinct "branches" (one per collateral asset), so risk from any single asset is ring-fenced, and each branch has its own Stability Pool. This branched design is the structural upgrade over V1: a problem in one collateral type (e.g. an LST [[depeg|depeg]]) is contained to its branch rather than threatening the whole system.
+BOLD is **fully crypto-backed and overcollateralized** — every BOLD in circulation is matched by more than $1 of ETH/LST collateral locked in Troves. There are no fiat reserves and no off-chain custodians; backing is verifiable on-chain. Liquity V2 separates collateral into distinct "branches" (one per collateral asset), so risk from any single asset is ring-fenced, and each branch has its own Stability Pool. This branched design is the structural upgrade over V1: a problem in one collateral type (e.g. an LST [[depeg-risk|depeg]]) is contained to its branch rather than threatening the whole system.
 
 ### Peg-maintenance mechanism
 
@@ -56,7 +56,7 @@ BOLD holds its $1.00 [[collateralization|peg]] through **redemption arbitrage** 
 - **Soft ceiling (minting):** If BOLD trades above $1.00, borrowing becomes attractive (you receive a dollar's worth of BOLD for sub-dollar effective cost), so new minting increases supply and pulls the price back toward $1.00.
 - **Stability Pool & liquidations:** Under-collateralized Troves are liquidated; the Stability Pool burns BOLD to absorb the bad debt and receives the liquidated collateral at a discount, keeping the system solvent and total backing intact.
 
-The on-peg reading of $0.999084 on 2026-06-22 reflects this machinery functioning normally — a sub-0.1% discount is well within the band where redemption arbitrage operates and is not a [[depeg]] event.
+The on-peg reading of $0.999084 on 2026-06-22 reflects this machinery functioning normally — a sub-0.1% discount is well within the band where redemption arbitrage operates and is not a [[depeg-risk|depeg]] event.
 
 ### User-set interest rates — the V2 mechanism
 
@@ -86,7 +86,7 @@ BOLD competes among decentralized, crypto-backed stablecoins, differentiating on
 |---|---|---|---|
 | **BOLD** (Liquity V2) | ETH + wstETH + rETH (branches) | Yes (via Stability Pool) | Yield-bearing, LST collateral, user-set rates |
 | **[[liquity-usd|LUSD]]** (Liquity V1) | ETH only, immutable | None native | Same lineage; simpler, ETH-only, no yield |
-| **DAI / USDS** ([[maker|Maker/Sky]]) | Multi-collateral incl. RWA/USDC | Via savings rate | Larger, more centralized collateral |
+| **DAI / USDS** ([[makerdao|Maker/Sky]]) | Multi-collateral incl. RWA/USDC | Via savings rate | Larger, more centralized collateral |
 | **crvUSD** | ETH/LSTs (soft-liquidation LLAMMA) | Indirect | Different liquidation design |
 
 BOLD's edge is combining LST collateral, a borrowing-cost market, and native Stability-Pool yield while staying credibly decentralized; its constraint is small size (~$31.6M cap) and LST collateral risk.
@@ -109,7 +109,7 @@ BOLD is primarily an Ethereum-native stable with bridged presence on Optimism an
 
 - **Category:** Decentralized, yield-bearing, crypto-backed [[stablecoins]] — the "DeFi-native dollar with native yield" narrative.
 - **Bull catalysts:** Demand for decentralized stables that *pay* holders (via Stability Pool); growth of LST collateral (wstETH/rETH) deepening backing; migration of borrowing demand from V1 [[liquity-usd|LUSD]] to V2; integrations across DeFi.
-- **Bear catalysts:** LST [[depeg|depeg]] or smart-contract incidents impairing a branch; thin liquidity limiting large redemptions; competition from larger yield-bearing stables.
+- **Bear catalysts:** LST [[depeg-risk|depeg]] or smart-contract incidents impairing a branch; thin liquidity limiting large redemptions; competition from larger yield-bearing stables.
 - The peg's stability through Extreme-Fear tape is itself the headline: BOLD is functioning as designed in a stressed market.
 
 ---
@@ -224,7 +224,7 @@ BOLD is primarily an Ethereum-native stable with bridged presence on Optimism an
 ## Risks
 
 - **Collateral volatility:** Backing is ETH and LSTs, whose value swings with the crypto market. Sharp drawdowns can push Troves below their minimum ratio and trigger cascading liquidations.
-- **Liquid-staking-token risk:** wstETH and rETH carry their own smart-contract, slashing, and (in stress) [[depeg]] risk against ETH, which feeds through to BOLD's collateral quality.
+- **Liquid-staking-token risk:** wstETH and rETH carry their own smart-contract, slashing, and (in stress) [[depeg-risk|depeg]] risk against ETH, which feeds through to BOLD's collateral quality.
 - **Smart-contract risk:** As a fully on-chain protocol, BOLD depends on the correctness of Liquity V2 contracts; a bug could impair backing or redemptions.
 - **Redemption pressure on borrowers:** Borrowers who set low interest rates are first in line to be redeemed against, an intentional design that nonetheless can surprise users who do not actively manage their rate.
 - **Liquidity / capacity:** With a market cap near $31.6M and modest on-chain depth, large redemptions or swaps can incur slippage relative to fiat-backed majors like USDC or USDT.
@@ -236,7 +236,7 @@ BOLD is primarily an Ethereum-native stable with bridged presence on Optimism an
 ## Trading Playbook
 
 - **Regime behavior:** BOLD is a yield-bearing decentralized dollar. In risk-off tape it holds peg by design; the variable to watch is supply (contracts as borrowers close Troves when ETH/LST falls) and the Stability-Pool yield available to depositors. It does not appreciate directionally.
-- **What to watch:** peg deviation (sustained moves outside ~$0.99–$1.01); ETH and LST (wstETH/rETH) prices and any LST [[depeg]]; per-branch Stability Pool depth; the prevailing borrower interest-rate distribution (low-rate Troves are redemption-first); BOLD supply trend vs [[liquity-usd|LUSD]].
+- **What to watch:** peg deviation (sustained moves outside ~$0.99–$1.01); ETH and LST (wstETH/rETH) prices and any LST [[depeg-risk|depeg]]; per-branch Stability Pool depth; the prevailing borrower interest-rate distribution (low-rate Troves are redemption-first); BOLD supply trend vs [[liquity-usd|LUSD]].
 - **In this tape:** with ETH ~27% below its 200-day MA and Extreme Fear, the key risk is collateral stress — monitor LST pegs and branch-level Stability Pool adequacy. For a holder, the appeal is sitting in a decentralized dollar that pays yield via the Stability Pool; the trade is the yield and redemption arbitrage, not price.
 
 ---
@@ -247,7 +247,7 @@ BOLD is primarily an Ethereum-native stable with bridged presence on Optimism an
 - [[ethereum]]
 - [[liquity]] — the issuing protocol (V1 and V2) and LQTY token
 - [[liquity-usd]] — LUSD, the Liquity V1 stablecoin
-- [[stablecoins]] · [[collateralization]] · [[cdp]] · [[depeg]] · [[liquid-staking]] · [[maker]]
+- [[stablecoins]] · [[collateralization]] · [[cdp]] · [[depeg-risk|depeg]] · [[liquid-staking]] · [[makerdao|maker]]
 
 ---
 

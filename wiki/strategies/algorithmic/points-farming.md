@@ -4,7 +4,7 @@ type: strategy
 created: 2026-04-06
 updated: 2026-10-17
 status: good
-tags: [crypto, defi, points, airdrops, loyalty, sybil, protocols, farming, token-generation-event, expected-value]
+tags: [crypto, defi, points, airdrop, loyalty, sybil, protocols, farming, token-generation-event, expected-value]
 aliases: ["Points Meta", "Loyalty Points Farming", "Points Season", "Pre-TGE Farming"]
 strategy_type: hybrid
 timeframe: position

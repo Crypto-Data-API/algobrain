@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-agent-tokens, ai-trading, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
+tags: [agents, ai-trading, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["KITE", "Kite AI"]
 entity_type: protocol
 headquarters: "Decentralized"

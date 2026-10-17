@@ -168,7 +168,7 @@ For traders, the dual-governance upgrade is the headline change: it converts gov
 
 ### 4. stETH Yield + DeFi Stacking (Moderate difficulty)
 
-- **Mechanism**: Hold stETH, deposit into [[curve-finance]] stETH/ETH pool for swap fees, stake Curve LP tokens on Convex for CRV + CVX rewards
+- **Mechanism**: Hold stETH, deposit into [[curve-finance]] stETH/ETH pool for swap fees, stake Curve LP tokens on Convex for CRV + [[cvx|CVX]] rewards
 - **APY**: 7-15% total (stETH staking yield + Curve swap fees + CRV/CVX emissions)
 - **Capital requirement**: $20,000+ on mainnet
 - **Difficulty**: Intermediate -- requires multiple protocol interactions

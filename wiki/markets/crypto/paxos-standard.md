@@ -57,7 +57,7 @@ The peg is held by **primary-market mint/redeem at par**:
 - **Mint** — Vetted, KYC'd institutional customers wire USD to Paxos and receive USDP 1:1.
 - **Redeem** — USDP returned to Paxos is burned and USD released 1:1.
 
-This guaranteed convertibility lets arbitrageurs profit from any secondary-market deviation (buy USDP below $1, redeem for $1), pulling the secondary price back to peg. Mint/redeem is **gated to onboarded institutions**; retail users typically obtain USDP on exchanges rather than directly. The 2026-06-21 price of $0.998971 is ordinary micro-deviation, not a [[depeg]].
+This guaranteed convertibility lets arbitrageurs profit from any secondary-market deviation (buy USDP below $1, redeem for $1), pulling the secondary price back to peg. Mint/redeem is **gated to onboarded institutions**; retail users typically obtain USDP on exchanges rather than directly. The 2026-06-21 price of $0.998971 is ordinary micro-deviation, not a [[depeg-risk|depeg]].
 
 ---
 
@@ -112,7 +112,7 @@ USDP sits in the **regulated fiat-backed dollar stablecoin** category. Its forwa
 - **Liquidity risk** — Small supply and modest volume can widen spreads and slippage, especially on-chain.
 - **Smart-contract risk** — Standard audited ERC-20 exposure.
 
-See [[stablecoins]] and [[depeg]] for the general failure-mode taxonomy.
+See [[stablecoins]] and [[depeg-risk|depeg]] for the general failure-mode taxonomy.
 
 ---
 
@@ -120,7 +120,7 @@ See [[stablecoins]] and [[depeg]] for the general failure-mode taxonomy.
 
 - **As a parking asset** — A regulated, fully-reserved dollar suitable for risk-off positioning; in the current bottoming regime, treat stablecoin balances as dry powder.
 - **Mind the float** — At ~$32M, USDP is far thinner than [[usdc|USDC]]/[[usdt|USDT]]; size on-chain trades to pool depth to avoid slippage.
-- **Peg reads** — Treat $0.997–$1.001 as normal; only a sustained, widening discount with redemption friction signals a genuine [[depeg]].
+- **Peg reads** — Treat $0.997–$1.001 as normal; only a sustained, widening discount with redemption friction signals a genuine [[depeg-risk|depeg]].
 - **Regulatory headline sensitivity** — Watch NYDFS / U.S. federal stablecoin news, which moves regulated issuers like Paxos more than offshore peers.
 
 ---
@@ -134,7 +134,7 @@ See [[stablecoins]] and [[depeg]] for the general failure-mode taxonomy.
 - [[paypal-usd]]
 - [[usdc]]
 - [[usdt|Tether]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[collateralization]]
 - [[ethereum]]
 - [[crypto-markets]]
@@ -167,7 +167,7 @@ USDP is a fiat-reserve (custodial) stablecoin with monthly independent attestati
 
 ### Risk flags
 
-- **Depeg risk** — Thin liquidity and small supply can produce transient secondary-market deviations; only a sustained, widening discount signals a genuine [[depeg]].
+- **Depeg risk** — Thin liquidity and small supply can produce transient secondary-market deviations; only a sustained, widening discount signals a genuine [[depeg-risk|depeg]].
 - **Reserve / backing transparency** — Backing is cash plus short-dated Treasuries with monthly attestations; reserve-asset quality, custody, and banking-partner health remain the key trust assumptions.
 - **Redemption gating** — Direct par redemption is restricted to onboarded institutions, so retail holders depend on venue liquidity to exit at $1.
 - **Regulatory** — As the February 2023 [[binance-usd|BUSD]] halt showed, NYDFS can compel material changes to a Paxos-issued program; U.S. federal stablecoin policy is the dominant headline risk.

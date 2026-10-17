@@ -4,7 +4,7 @@ type: overview
 created: 2026-04-10
 updated: 2026-06-21
 status: excellent
-tags: [anomalies, factors, academic-research, alpha]
+tags: [anomalies, factors, academic-research, alpha-edge]
 aliases: ["Anomalies Library", "Market Inefficiencies"]
 related: ["[[edge-taxonomy]]", "[[strategy-development-overview]]", "[[momentum-anomaly]]", "[[value-anomaly]]", "[[low-volatility-anomaly]]"]
 ---

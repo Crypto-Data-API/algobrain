@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2016
 headquarters: "Decentralized"
 website: "https://waves.tech/"
-related: ["[[consensus-mechanism]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[harmony]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[stablecoins]]", "[[staking]]"]
+related: ["[[consensus-mechanism]]", "[[crypto-markets]]", "[[depeg-risk]]", "[[ethereum]]", "[[harmony]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[stablecoins]]", "[[staking]]"]
 ---
 
 # Waves
@@ -189,7 +189,7 @@ Waves built one of the earlier self-contained DeFi ecosystems, anchored by the n
 
 ## Major News & Events
 
-- **2022 — Neutrino USD (USDN) depeg:** Waves' ecosystem [[stablecoins]], **Neutrino USD (USDN)**, was an algorithmic stablecoin collateralized largely by the WAVES token (with NSBT as a secondary backing/governance asset). The mechanism let users mint USDN by locking WAVES, so the [[stablecoins]]'s solvency depended on WAVES's price — a **reflexive loop**: if WAVES fell, USDN's backing thinned, which could pressure the peg, which could trigger forced WAVES selling, which could push WAVES lower still. In early–mid 2022 USDN repeatedly **[[depeg|de-pegged]]** from $1, at one point trading well below peg (into the $0.70s–$0.80s region during the worst stretches). Critics — including prominent on-chain analysts — alleged the design was being gamed through leveraged loops and that the team's responses (parameter changes, intervention) were opaque; the Waves team publicly disputed the causes and accused others of a coordinated attack. The episode landed in the same window as the **May 2022 collapse of Terra/UST**, the much larger algorithmic [[stablecoins]] whose ~$40B implosion seared the fragility of token-backed stablecoins into the market's memory. USDN never durably reclaimed its peg and was later restructured/rebranded (toward an "XTN" index-token framing) rather than continuing as a $1 stablecoin. The affair inflicted lasting reputational and price damage on the Waves ecosystem. It is documented here transparently rather than omitted. (See [[depeg]] and [[stablecoins]] for the general mechanism.)
+- **2022 — Neutrino USD (USDN) depeg:** Waves' ecosystem [[stablecoins]], **Neutrino USD (USDN)**, was an algorithmic stablecoin collateralized largely by the WAVES token (with NSBT as a secondary backing/governance asset). The mechanism let users mint USDN by locking WAVES, so the [[stablecoins]]'s solvency depended on WAVES's price — a **reflexive loop**: if WAVES fell, USDN's backing thinned, which could pressure the peg, which could trigger forced WAVES selling, which could push WAVES lower still. In early–mid 2022 USDN repeatedly **[[depeg-risk|de-pegged]]** from $1, at one point trading well below peg (into the $0.70s–$0.80s region during the worst stretches). Critics — including prominent on-chain analysts — alleged the design was being gamed through leveraged loops and that the team's responses (parameter changes, intervention) were opaque; the Waves team publicly disputed the causes and accused others of a coordinated attack. The episode landed in the same window as the **May 2022 collapse of Terra/UST**, the much larger algorithmic [[stablecoins]] whose ~$40B implosion seared the fragility of token-backed stablecoins into the market's memory. USDN never durably reclaimed its peg and was later restructured/rebranded (toward an "XTN" index-token framing) rather than continuing as a $1 stablecoin. The affair inflicted lasting reputational and price damage on the Waves ecosystem. It is documented here transparently rather than omitted. (See [[depeg-risk|depeg]] and [[stablecoins]] for the general mechanism.)
 - **2022 all-time high:** WAVES peaked at **$61.30** on 2022-03-31, shortly before the USDN troubles and the broader market downturn; it has since fallen more than 99% from that peak. The proximity of the ATH to the USDN crisis is itself notable — the run-up was partly fueled by USDN/Neutrino activity that subsequently unwound.
 - **June 2026 rally:** WAVES is up **+8.2% over 7 days** (and +0.9% on the day) as of 2026-06-22, a firmer-than-tape move in an otherwise weak small-cap, extreme-fear environment — likely driven by token-specific flows rather than a market-wide trend; treat such moves cautiously given the asset's thin liquidity and history.
 
@@ -199,7 +199,7 @@ Waves built one of the earlier self-contained DeFi ecosystems, anchored by the n
 
 ## Risks
 
-- **Algorithmic-stablecoin legacy:** the USDN [[depeg]] is a cautionary case study in reflexive, token-backed collateral design (the same family of failure that destroyed Terra/UST); any revival of similar mechanisms warrants close scrutiny, and the episode permanently weighs on the project's credibility.
+- **Algorithmic-stablecoin legacy:** the USDN [[depeg-risk|depeg]] is a cautionary case study in reflexive, token-backed collateral design (the same family of failure that destroyed Terra/UST); any revival of similar mechanisms warrants close scrutiny, and the episode permanently weighs on the project's credibility.
 - **Governance / centralization concerns:** the project has faced repeated criticism over founder influence (Sasha Ivanov) and opaque, contested crisis-response decisions during the USDN events.
 - **Non-EVM adoption hurdle:** Ride and the Waves stack are not EVM-compatible, limiting the developer pool and composability with the dominant [[ethereum]]/EVM DeFi world.
 - **Ecosystem attrition:** TVL, active dApps, and developer activity contracted sharply after 2022; recovery depends on renewed, durable demand that has not materialized.
@@ -219,7 +219,7 @@ Waves built one of the earlier self-contained DeFi ecosystems, anchored by the n
 - [[smart-contracts]]
 - [[staking]]
 - [[stablecoins]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[harmony]]
 
 ---

@@ -73,7 +73,7 @@ The Great Depression established the intellectual foundation for modern [[centra
 
 ## Crash vs. Depression
 
-The [[1929-crash]] (the October 1929 stock-market collapse, Black Thursday through Black Tuesday — see [[stock-market-crash-of-1929]]) was the *trigger event*; the Great Depression was the *decade-long economic downturn* that followed. The crash alone did not cause the Depression — the policy errors that followed did. Milton Friedman and Anna Schwartz's *A Monetary History of the United States* argued that the [[federal-reserve|Federal Reserve]]'s failure to act as lender of last resort, allowing the money supply to contract by roughly a third, turned an ordinary recession into a catastrophe. Ben Bernanke (a Depression scholar before becoming Fed chair) explicitly invoked this lesson when designing the aggressive 2008-2009 response — the direct intellectual link between the two crises.
+The [[1929-crash]] (the October 1929 stock-market collapse, Black Thursday through Black Tuesday — see [[stock-market-crash-of-1929]]) was the *trigger event*; the Great Depression was the *decade-long economic downturn* that followed. The crash alone did not cause the Depression — the policy errors that followed did. [[milton-friedman|Milton Friedman]] and Anna Schwartz's *A Monetary History of the United States* argued that the [[federal-reserve|Federal Reserve]]'s failure to act as lender of last resort, allowing the money supply to contract by roughly a third, turned an ordinary recession into a catastrophe. Ben Bernanke (a Depression scholar before becoming Fed chair) explicitly invoked this lesson when designing the aggressive 2008-2009 response — the direct intellectual link between the two crises.
 
 ## Lessons for Traders
 

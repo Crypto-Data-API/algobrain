@@ -1418,3 +1418,31 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   smaller-fields tail. With 2026-09-12 now down to a single small item, the
   next Sync iteration could plausibly close out both 2026-09-12 and
   2026-09-21 in one pass if no new release lands first.
+
+- 2026-10-17 upgrade round (planner-led, not a loop iteration; Sync + Fix + Build):
+  Local main had diverged (1 unpushed sync commit vs 4 upstream commits incl. the
+  gates schema); backed it up to branch backup/local-sync-31d4dfd, reset to origin, and
+  ported the 2 unique strategy fixes. Sync: absorbed 2026-10-02..10-14 (5 releases).
+  New tools: tools/check_endpoints.py (paths, query params, value ranges, gate
+  structure + fields vs live OpenAPI; run it every iteration -- now 0 errors after
+  fixing 155 citations), and hosted-parity local search (tiered ranking, strategy and
+  runnable filters, cached index). Stale signal: 1,492 untouched generator coin pages
+  marked `generated: true` and skipped by the stale check (1,778 -> 221 after a
+  15-page stale review). ~870 pages corrected for the REST klines depth claim (REST
+  starts 2026-05-09; depth is in the Parquet archives). Gates: 87 pages / 1,257 gates;
+  first fully runnable pages are exchange-flow-spike-reaction and
+  forced-flow-exhaustion-fade (new; liquidation-density-magnet is 15/16). Empty 38 -> 0,
+  orphans 31 -> 0, links 234 -> 218, tags 659 -> 511. **Queued:** (1) lint.py
+  `check_empty` treats every line starting with `-`/`*` as non-content, so bullet-led
+  pages read as empty (kraken, sushiswap) -- fix the heuristic; (2) next stale pages:
+  expected-value, asymmetric-barbell, vanna, risk-reward-ratio, expectancy,
+  information-ratio, hyperliquid-order-book-microstructure, recency-bias,
+  fed-funds-futures, equity-risk-premium (scope check), charm,
+  hyperliquid-fee-tiers-and-maker-rebates, treynor-ratio, sunk-cost-fallacy,
+  gamblers-fallacy; (3) gates on the next ~260 ungated buildable strategy pages (rank
+  by inbound links; momentum-rotation and rsi-mean-reversion are 1-2 gates from fully
+  runnable); (4) the rule/pseudocode/example contradictions recorded in gate notes
+  (~25 pages) want a prose-review pass; (5) report upstream: fear-greed-history returns
+  1 row, /coins/FRAX resolves to the legacy token, DAIUSDT price 0.0, /stream replay is
+  ~500 events not ~2h; (6) generate_crypto_pages.py appends a duplicate generator block
+  when merging into a hand-written page (see 0fdbad1).

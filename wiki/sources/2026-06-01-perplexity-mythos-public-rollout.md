@@ -4,7 +4,7 @@ type: source
 created: 2026-06-01
 updated: 2026-06-12
 status: good
-tags: [meta, source, ai-trading]
+tags: [meta, sources, ai-trading]
 aliases: ["Mythos Public Rollout Research", "Claude Mythos Rollout Perplexity"]
 source_type: data
 source_url: "n/a — Perplexity API research aggregating 4 named sources"

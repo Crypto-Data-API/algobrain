@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Coins"
 type: source
 created: 2026-07-13
-updated: 2026-07-13
+updated: 2026-10-17
 status: good
 tags: [data-provider, crypto, api, coins, market-cap, screening]
 aliases: ["CDA Coins", "CryptoDataAPI Coins", "cryptodataapi coins endpoints"]
@@ -29,6 +29,8 @@ The Coins category of [[cryptodataapi]] serves aggregated profiles for 500+ cryp
 ## Live Data
 
 Every endpoint in this category returns **current state**: today's market-cap ordering (`/coins`, `/coins/top`), the present category taxonomy (`/coins/categories`, `/coins/category-groups`), and the latest profile snapshot for a single asset (`/coins/{symbol}`). Rankings and profiles reflect the market as of the request.
+
+**Observed caveat (2026-10-17): `/coins/FRAX` is not the Frax dollar stablecoin.** It returned `coingecko_id: "frax"`, name "Legacy Frax Dollar", a price of $0.2916, an all-time high of $1.66 on 2026-03-30 and 24h volume of about $116k, although its `categories` still list Stablecoins. That is the old token, not a $1 peg. The live dollar stablecoin is **`/coins/FRXUSD`** (`coingecko_id: "frax-usd"`, "Frax USD", $0.9998). Check `name` and `current_price` before treating a symbol hit as the asset you meant, and use `FRXUSD` for Frax's stablecoin.
 
 ## Historical Data
 

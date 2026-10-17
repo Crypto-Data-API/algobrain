@@ -4,7 +4,7 @@ type: concept
 created: 2026-07-01
 updated: 2026-10-17
 status: review
-tags: [indicators, technical-analysis, market-internals, market-breadth]
+tags: [indicators, technical-analysis, market-breadth]
 aliases: ["Advance-Decline Line", "A/D Line", "AD Line", "Advance/Decline Line", "Breadth Line"]
 related: ["[[market-breadth]]", "[[divergence]]", "[[mcclellan-oscillator]]", "[[arms-index]]", "[[breadth-thrust]]", "[[momentum-breadth]]", "[[trading-volume]]", "[[relative-strength]]", "[[trend]]", "[[cryptodataapi]]"]
 domain: [indicators]

@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, gaming, nft]
+tags: [crypto, gamefi, nft]
 aliases: ["WEMIX"]
 entity_type: protocol
 headquarters: "South Korea"

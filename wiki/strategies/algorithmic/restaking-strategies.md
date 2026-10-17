@@ -4,7 +4,7 @@ type: strategy
 created: 2026-04-06
 updated: 2026-10-17
 status: good
-tags: [crypto, defi, restaking, eigenlayer, staking, liquid-staking, avs, ethereum, yield, lrt, slashing]
+tags: [crypto, defi, restaking, eigenlayer, staking, liquid-staking, avs, ethereum, yield, slashing]
 aliases: ["Restaking", "EigenLayer Strategies", "Liquid Restaking", "LRT Strategies"]
 strategy_type: hybrid
 timeframe: position

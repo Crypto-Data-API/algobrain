@@ -9,7 +9,7 @@ aliases: ["MSUSD", "msUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://metronome.io/"
-related: ["[[collateralization]]", "[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[stablecoins]]"]
+related: ["[[collateralization]]", "[[crypto-markets]]", "[[defi]]", "[[depeg-risk]]", "[[ethereum]]", "[[stablecoins]]"]
 ---
 
 # Metronome Synth USD
@@ -181,7 +181,7 @@ msUSD sits in the **decentralized crypto-collateralized stablecoin** category â€
 
 ## Risks
 
-- **Synthetic-asset / depeg risk.** msUSD is a synthetic dollar without direct 1:1 fiat redemption, so it relies on collateral, arbitrage, and liquidity to hold peg; it can drift below $1 (currently ~$0.996) and is exposed to [[depeg]] under stress.
+- **Synthetic-asset / depeg risk.** msUSD is a synthetic dollar without direct 1:1 fiat redemption, so it relies on collateral, arbitrage, and liquidity to hold peg; it can drift below $1 (currently ~$0.996) and is exposed to [[depeg-risk|depeg]] under stress.
 - **Collateral volatility & liquidation risk.** Backing is volatile crypto collateral; sharp drawdowns can trigger mass liquidations and, in extreme cases, under-collateralization.
 - **Oracle risk.** Synthetic pricing and liquidations depend on price oracles; oracle failure or manipulation could break the peg or cause improper liquidations.
 - **Smart-contract / multi-chain risk.** Deployed across [[ethereum]], Optimism, Base, and Plasma; contract bugs and cross-chain/bridge exposure add risk.
@@ -205,7 +205,7 @@ msUSD sits in the **decentralized crypto-collateralized stablecoin** category â€
 
 - [[stablecoins]]
 - [[collateralization]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[ethereum]]
 - [[defi]]
 - [[crypto-markets]]

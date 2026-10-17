@@ -124,7 +124,7 @@ ICT's imagery translates to crypto more literally than to any other market, whic
 Applying ICT in crypto needs raw price structure to mark blocks/FVGs/sweeps, order-book depth to tell a real level from a sweepable one, and — the crypto-native edge — liquidation and derivatives data to locate the actual liquidity pool the "draw" feeds on. See [[cryptodataapi-market-data]], [[cryptodataapi-market-intelligence]], and [[cryptodataapi-derivatives]].
 
 - **OHLCV to mark structure** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=500` (live) and `GET /api/v1/backtesting/klines` (REST bars start 2026-05-09; older 1h/4h/1d bars are in the `klines_deep` archive; for systematic testing of sweep→reversal base rates).
-- **Depth to validate a level** — `GET /api/v1/liquidity/depth/BTC` shows whether real resting size sits at a proposed order block versus a thin, sweepable wick.
+- **Depth to validate a level** — `GET /api/v1/liquidity/depth/BTC` shows whether real resting size sits at a proposed [[order-block|order block]] versus a thin, sweepable wick.
 - **The liquidity pool itself** — `GET /api/v1/market-intelligence/liquidations` (cross-exchange) is the crypto-native map of the "draw on liquidity"; `GET /api/v1/backtesting/liquidations` for historical study.
 - **Sweep context** — `GET /api/v1/derivatives/open-interest?coin=BTC` and `GET /api/v1/derivatives/funding-rates?coin=BTC` separate a genuine short-squeeze sweep from a trend-continuation trap.
 

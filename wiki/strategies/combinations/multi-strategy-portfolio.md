@@ -4,7 +4,7 @@ type: reference
 created: 2026-04-06
 updated: 2026-04-06
 status: good
-tags: [combinations, meta-strategy, portfolio-construction, diversification, sharpe-ratio, hedge-fund, alpha]
+tags: [combinations, meta-strategy, portfolio-construction, diversification, sharpe-ratio, hedge-fund, alpha-edge]
 strategy_type: hybrid
 markets: [futures, crypto, bonds]
 complexity: advanced

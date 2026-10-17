@@ -4,7 +4,7 @@ type: source
 created: 2026-07-13
 updated: 2026-08-26
 status: good
-tags: [data-provider, crypto, api, sentiment, fear-greed, stablecoins, macro]
+tags: [data-provider, crypto, api, sentiment, stablecoins, macro]
 aliases: ["CDA Sentiment", "CryptoDataAPI Sentiment", "cryptodataapi fear greed", "cryptodataapi macro"]
 source_type: data
 source_url: "https://cryptodataapi.com/api/docs"
@@ -33,7 +33,7 @@ Tier "—" means the docs list no tier restriction for that endpoint.
 
 ## Historical Data
 
-`/sentiment/stablecoins/remote-history` serves up to 365 days of daily stablecoin history, and `/sentiment/stablecoins/history` the raw market-cap timeseries. For a Fear & Greed timeseries, the API exposes `/api/v1/market-intelligence/fear-greed-history` in the [[cryptodataapi-market-intelligence]] category.
+`/sentiment/stablecoins/remote-history` serves up to 365 days of daily stablecoin history, and `/sentiment/stablecoins/history` the raw market-cap timeseries. For a Fear & Greed timeseries, the API exposes `/api/v1/market-intelligence/fear-greed-history` in the [[cryptodataapi-market-intelligence]] category. **Observed 2026-10-17:** that route returned only the current day's row (`count: 1`); the `fear_greed` snapshot type on `/api/v1/backtesting/snapshots` still served hourly history. See the caveat on [[cryptodataapi-market-intelligence]].
 
 ## Trading Applications
 

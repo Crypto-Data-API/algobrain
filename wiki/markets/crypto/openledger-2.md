@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, data-provider, decentralized-ai, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
+tags: [crypto, data-provider, ai, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["OPEN", "OpenLedger AI"]
 entity_type: protocol
 headquarters: "Decentralized"

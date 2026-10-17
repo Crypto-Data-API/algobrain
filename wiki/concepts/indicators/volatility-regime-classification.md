@@ -99,7 +99,7 @@ Something has changed. Maybe credit is widening, maybe an event is approaching, 
 
 ### Stressed
 
-VIX > 30, backwardation, RV exceeding IV, credit blowing out, breadth collapsing. Short-vol structures are losing money structurally. Long-vol structures are printing. The right posture is *not* to short the spike — most spikes mean-revert, but the ones that don't ([[2008-financial-crisis|2008]], [[2020-covid-crash|March 2020]], [[2022-bear-market|2022 selloffs]]) destroy short-vol books that try to fade them. The right posture is to flatten short premium, hold cash, and own a small amount of explicit convexity (long puts, VIX calls).
+VIX > 30, backwardation, RV exceeding IV, credit blowing out, breadth collapsing. Short-vol structures are losing money structurally. Long-vol structures are printing. The right posture is *not* to short the spike — most spikes mean-revert, but the ones that don't ([[2008-global-financial-crisis|2008]], [[2020-covid-crash|March 2020]], [[2022-bear-market|2022 selloffs]]) destroy short-vol books that try to fade them. The right posture is to flatten short premium, hold cash, and own a small amount of explicit convexity (long puts, VIX calls).
 
 ## Historical Regime Episodes
 
@@ -162,7 +162,7 @@ Not every spike is a regime change.
 
 - **Single-day VIX spikes that mean-revert.** Most VIX spikes do mean-revert. The Feb 2018 [[volmageddon|Volmageddon]] is the textbook counterexample, but the base rate is that an isolated VIX spike retraces within 3–10 sessions.
 - **One-day backwardation that flips back.** Brief, single-session backwardation around an event (FOMC, NFP, election) frequently reverts. Wait for *sustained* backwardation (3+ sessions) before treating it as regime change.
-- **Sustained backwardation, however, is real risk.** Most of the worst short-vol drawdowns in history occurred during periods where backwardation persisted for weeks ([[2008-financial-crisis|Q4 2008]], [[2020-covid-crash|March 2020]]).
+- **Sustained backwardation, however, is real risk.** Most of the worst short-vol drawdowns in history occurred during periods where backwardation persisted for weeks ([[2008-global-financial-crisis|Q4 2008]], [[2020-covid-crash|March 2020]]).
 - **High IV rank in a single name during earnings.** That is event-IV, not macro regime. Do not confuse the two.
 - **Holiday-shortened weeks** can compress VIX artificially because of the way trading-day adjustments interact with the 30-day window. Use VIX9D as a sanity check.
 

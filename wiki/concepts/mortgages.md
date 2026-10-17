@@ -85,7 +85,7 @@ Mortgages matter to traders well beyond home-buyers:
 
 ## Historical Significance
 
-The mortgage market is at the centre of the largest financial crisis of the modern era. The 2007-2008 crisis began in subprime mortgages: lax underwriting, high-LTV lending, and the repackaging of poor-quality mortgages into highly-rated [[mortgage-backed-securities|MBS]] and [[collateralized-debt-obligations|CDOs]] propagated losses through the global financial system when house prices fell and borrowers defaulted. The episode is the canonical case study in how household leverage, securitisation, and mispriced tail risk interact (see [[subprime-mortgage]] and [[2008-financial-crisis]]).
+The mortgage market is at the centre of the largest financial crisis of the modern era. The 2007-2008 crisis began in subprime mortgages: lax underwriting, high-LTV lending, and the repackaging of poor-quality mortgages into highly-rated [[mortgage-backed-securities|MBS]] and [[collateralized-debt-obligations|CDOs]] propagated losses through the global financial system when house prices fell and borrowers defaulted. The episode is the canonical case study in how household leverage, securitisation, and mispriced tail risk interact (see [[subprime-mortgage]] and [[2008-global-financial-crisis|2008-financial-crisis]]).
 
 ## Related
 

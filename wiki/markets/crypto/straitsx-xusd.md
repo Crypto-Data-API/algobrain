@@ -9,7 +9,7 @@ aliases: ["XUSD"]
 entity_type: protocol
 headquarters: "Singapore (StraitsX)"
 website: "https://www.straitsx.com/xusd"
-related: ["[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[regulation]]", "[[stablecoins]]", "[[usdc]]", "[[xsgd]]", "[[binance]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-pair-arbitrage]]"]
+related: ["[[crypto-markets]]", "[[depeg-risk]]", "[[ethereum]]", "[[regulation]]", "[[stablecoins]]", "[[usdc]]", "[[xsgd]]", "[[binance]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-pair-arbitrage]]"]
 ---
 
 # StraitsX XUSD
@@ -97,7 +97,7 @@ XUSD is a **regulated, single-jurisdiction USD stablecoin** built for **ASEAN pa
 
 - **Issuer / reserve-counterparty risk:** As a centrally issued fiat-backed coin, holders rely on StraitsX maintaining full reserves and honoring redemptions; the strength of reserve attestations and DBS custody matters.
 - **Regulatory risk:** Singapore's stablecoin regime is still maturing; regulatory changes could affect issuance, redemption, or eligibility.
-- **Counterparty / banking risk:** Reserves held with banks or in short-term instruments carry counterparty exposure (a USD stablecoin can [[depeg]] if a reserve bank fails, as seen in past industry episodes — e.g. the USDC/SVB episode).
+- **Counterparty / banking risk:** Reserves held with banks or in short-term instruments carry counterparty exposure (a USD stablecoin can [[depeg-risk|depeg]] if a reserve bank fails, as seen in past industry episodes — e.g. the USDC/SVB episode).
 - **Redemption-gating risk:** Par redemption is KYC-gated through StraitsX's regulated ramp; access frictions or a freeze would impair the peg's arbitrage for non-onboarded holders.
 - **Liquidity / concentration risk:** With ~$47M market cap, depth is moderate; large redemptions or a venue outage could cause short-term price dislocation.
 - **Smart-contract risk:** Bugs in the token or bridge contracts on any deployment chain could affect supply.
@@ -125,7 +125,7 @@ XUSD is a USD-pegged stablecoin traded on [[binance]] (XUSD/USDT), plus on-chain
 XUSD is a fiat-collateralised dollar peg with reserves intended at ≥100% of circulation, DBS custody, and external audit, so day-to-day it trades in a razor-thin band around $1.00 (recent 24h range roughly $0.9999–$1.00). Peg tightness is maintained by par mint/redemption plus secondary-market arbitrage. Its price history shows the peg has not been perfectly static — it has recorded both an all-time low below par and a brief spike above par — indicating that thin liquidity, not the backing model, drives its rare deviations. Regime sensitivity is therefore about overall stablecoin demand and venue liquidity rather than crypto directionality; the coin carries no FX exposure.
 
 ### Risk flags
-- **Depeg risk** — a fiat-backed dollar coin can [[depeg]] if a reserve bank fails or during liquidity stress (cf. past industry episodes); thin depth amplifies short-term dislocations.
+- **Depeg risk** — a fiat-backed dollar coin can [[depeg-risk|depeg]] if a reserve bank fails or during liquidity stress (cf. past industry episodes); thin depth amplifies short-term dislocations.
 - **Reserve / backing transparency** — holders rely on StraitsX maintaining full reserves and on the quality/frequency of external attestations and DBS custody.
 - **Redemption gating** — par redemption is KYC-gated through StraitsX's regulated ramp; access frictions or a freeze impair peg arbitrage for non-onboarded holders.
 - **Regulatory** — Singapore's MAS stablecoin regime is still maturing; changes could affect issuance, redemption, or eligibility.
@@ -157,7 +157,7 @@ Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 - [[usdc]]
 - [[xsgd]]
 - [[regulation]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 
 ## Sources
 

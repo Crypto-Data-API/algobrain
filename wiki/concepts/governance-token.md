@@ -2,8 +2,8 @@
 title: "Governance Token"
 type: concept
 created: 2026-07-17
-updated: 2026-07-19
-status: draft
+updated: 2026-10-17
+status: review
 tags: [crypto, defi, governance-token, on-chain, behavioral-finance]
 aliases: ["Protocol Token", "DAO Token", "Governance Rights Token"]
 domain: [crypto, market-microstructure]
@@ -29,11 +29,11 @@ Governance in DeFi protocols works through three mechanisms:
 
 ## Concrete Examples
 
-- **UNI (Uniswap, Sep 2020):** UNI was airdropped to ~250,000 Uniswap users — 400 UNI per wallet, worth ~$1,200 at airdrop price and as much as $20,000 at peak ($12/UNI, May 2021). Governance controls Uniswap's fee switch — whether protocol fees are turned on and distributed to UNI holders vs. liquidity providers. The "fee switch" debate has been ongoing since 2020; as of 2025 it remains a core governance battleground.
+- **UNI (Uniswap, Sep 2020):** UNI was airdropped to ~250,000 Uniswap users — 400 UNI per wallet, worth ~$1,200 at airdrop price and as much as $20,000 at peak ($12/UNI, May 2021). Governance controls Uniswap's fee switch — whether protocol fees are turned on and distributed to UNI holders vs. liquidity providers. The "fee switch" debate has been ongoing since 2020; as of 2025 it remains a core governance battleground. *(Update 2026-10-17: the debate was settled in the **December 2025 "UNIfication" vote**. It passed with ~99.9% in favour, activated the protocol fee switch with fees routed to UNI burns, and burned 100M UNI (~$600M) immediately. See [[dao]] and [[tokenomics]]. Also, the peak figure above does not compute: 400 UNI × $12 = $4,800. UNI's May 2021 high was in the mid-$40s, which puts 400 UNI near $17-18K. Treat the "$20,000" figure as approximate and the "$12" figure as an error.)*
 - **COMP (Compound, Jun 2020):** The first major "governance farming" token. Compound distributed COMP tokens to lenders and borrowers proportional to their usage. This created the "yield farming" boom of Summer 2020 and the broader DeFi governance token meta.
 - **AAVE (formerly LEND, 2020 migration):** AAVE holders govern the Aave lending protocol (interest-rate models, collateral parameters, safety-module staking). AAVE stakers earn staking yield from protocol fees but also backstop the protocol in insolvency events.
 - **CRV (Curve, 2020):** Curve's governance token is deeply integrated with veCRV (vote-escrowed CRV) mechanics. Holders lock CRV for up to 4 years to receive veCRV, which earns boosted yields and voting rights on pool gauge weights — the "Curve Wars" dynamics.
-- **MKR (MakerDAO, 2017):** One of the oldest governance tokens. MKR holders govern DAI stability parameters. Uniquely, MKR is also burned when DAI generates surplus fees, giving it direct fee-capture value accrual.
+- **MKR (MakerDAO, 2017):** One of the oldest governance tokens. MKR holders govern DAI stability parameters. Uniquely, MKR is also burned when DAI generates surplus fees, giving it direct fee-capture value accrual. *(Update: in September 2024 MakerDAO rebranded to [[sky|Sky Protocol]]. DAI is migrating to [[usds|USDS]] and MKR to SKY at ~1 MKR ≈ 24,000 SKY, with both names coexisting during the transition. See [[makerdao]].)*
 
 ## Trading Relevance
 
@@ -41,10 +41,38 @@ Governance tokens sit at the intersection of several AlgoBrain strategy domains:
 
 - **[[curve-gauge-wars-arbitrage]]:** The Curve protocol's veCRV system created an entire sub-industry of governance token accumulation and vote selling (bribe markets via Convex and Votium). Locking CRV → veCRV → directing emissions to specific pools → earning bribes is a core yield strategy with its own competitive dynamics.
 - **[[vampire-attack-arbitrage]]:** Many vampire attacks use a new governance token as the bootstrap incentive. Understanding governance token emission schedules, cliff dates, and founding-team allocations is essential for timing entry and exit.
-- **[[governance-restitution-arbitrage]]:** When governance votes determine the outcome of a hack's restitution (e.g., Euler Finance's Feb 2023 hack and subsequent governance vote on the recovery deal), a specific arbitrage strategy trades the probability of the governance outcome.
+- **[[governance-restitution-arbitrage]]:** When governance votes determine the outcome of a hack's restitution (e.g., Euler Finance's Feb 2023 hack and subsequent governance vote on the recovery deal), a specific arbitrage strategy trades the probability of the governance outcome. *(Correction 2026-10-17: the Euler exploit was in **March 2023** (~$197M). [[governance-restitution-arbitrage]] files it as a *voluntary-return* case, where the attacker returned funds, not as one decided by a governance vote.)*
 - **[[liquidity-mining]]:** Much of 2020–2021 yield farming was fundamentally governance token distribution. Protocols gave governance tokens to liquidity providers to bootstrap TVL; sophisticated farmers harvested and sold these tokens.
 - **DAI / treasury value:** Some governance tokens give holders a claim on protocol treasury assets. MakerDAO's treasury held billions in real-world assets; an MKR holder is partly a claimant on those assets. This makes fundamental analysis relevant.
 - **Voter apathy discount:** Most governance tokens trade at a discount to their theoretical governance value because voter participation is low (typically 5-15% of circulating supply participates in any given vote). This creates a recurring dynamic where governance tokens are easier to capture for adversarial actors than protocol designers anticipated.
+
+### From "vote-only" to cash-flow tokens
+
+Since the 2024-25 cycle, the main repricing driver for governance tokens has been **value-accrual switches**: fee switches, buyback-and-burn programmes, and staking modules that pass on protocol revenue. Uniswap's UNIfication (Dec 2025) is the clearest example. A token's valuation lens moves from "narrative plus voting" to a revenue multiple once a switch is live. For trading:
+
+- **Governance votes are dated catalysts.** Proposal, snapshot, on-chain vote and timelock expiry are all on public calendars, and the outcome is often priced well before execution (see [[news-trading]]).
+- **Revenue-multiple screens.** Once fees flow to holders, compare annualised holder revenue with market cap across [[defi-bluechip-basket]] and [[dex-tokens-basket]] names, the same way as a buyback yield.
+- **Bribe markets.** In ve-token systems, vote prices are themselves tradable: see [[curve-gauge-wars-arbitrage]] and [[velodrome-aerodrome-bribe-arbitrage]].
+- **Emission and unlock overhang.** Team and investor allocations usually vest over 3-4 years. [[unlock-aware-momentum]] and [[token-unlocks]] cover the cliff trade, and [[points-farming]] / [[airdrop-farming]] cover the distribution phase.
+- **Governance attack risk.** Low turnout means a flash-loaned or accumulated position can pass hostile proposals. The April 2022 [[2022-04-beanstalk-governance-attack|Beanstalk exploit]] (~$182M) used flash-loaned voting power to pass a proposal that drained the treasury. Timelocks and vote-escrow lockups are the standard defences.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/coins/category-groups` — curated DeFi, DEX and lending groups (where most governance tokens sit) with price, market cap, rank and 24h/7d change
+- `GET /api/v1/supply/unlocks?symbol=UNI` — forward vesting cliffs sized against float
+- `GET /api/v1/supply/float?symbol=AAVE` — circulating vs locked supply
+- `GET /api/v1/news/coin/{symbol}?hours=168` — per-coin headlines, for tracking governance proposals and votes (e.g. `/api/v1/news/coin/UNI`)
+
+**Historical data:**
+- `GET /api/v1/backtesting/news-events?symbol=UNI&start=2025-11-01` — dated news events for event-study backtests of governance votes
+- `GET /api/v1/backtesting/klines?symbol=UNIUSDT&interval=1d&start=2025-11-01` — price around the event
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/supply/unlocks?symbol=UNI"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalogs: [[cryptodataapi-supply]], [[cryptodataapi-news]], [[cryptodataapi-coins]]. Proposal and vote data (Snapshot, Tally) are not served by CryptoDataAPI.
 
 ## Related
 

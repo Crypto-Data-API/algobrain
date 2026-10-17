@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-10
 updated: 2026-06-14
 status: excellent
-tags: [backtesting, metrics, statistics, validation, performance]
+tags: [backtesting, statistics, validation, performance]
 aliases: ["DSR", "Bailey-López de Prado Deflated Sharpe", "Deflated Sharpe"]
 domain: [backtesting, statistics]
 difficulty: advanced

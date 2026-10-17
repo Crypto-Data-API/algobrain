@@ -4,7 +4,7 @@ type: strategy
 created: 2026-04-06
 updated: 2026-10-17
 status: good
-tags: [arbitrage, crypto, cross-exchange, latency, market-neutral, dex, cex, market-microstructure]
+tags: [arbitrage, crypto, cross-exchange, hft, market-neutral, dex, cex, market-microstructure]
 aliases: ["Exchange Arb", "Spatial Arbitrage", "Inter-Exchange Arbitrage", "CEX-DEX Arb"]
 strategy_type: algorithmic
 timeframe: scalp

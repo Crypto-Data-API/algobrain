@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, real-world-assets, stablecoins, tokenization]
+tags: [crypto, real-world-assets, stablecoins]
 aliases: ["EUSD", "Electronic Dollar", "eUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://register.app/"
-related: ["[[crypto-markets]]", "[[dai]]", "[[depeg]]", "[[ethereum]]", "[[real-world-assets]]", "[[stablecoins]]", "[[tokenization]]", "[[treasuries]]", "[[usdc]]"]
+related: ["[[crypto-markets]]", "[[dai]]", "[[depeg-risk]]", "[[ethereum]]", "[[real-world-assets]]", "[[stablecoins]]", "[[tokenization]]", "[[treasuries]]", "[[usdc]]"]
 ---
 
 # Electronic USD
@@ -18,7 +18,7 @@ related: ["[[crypto-markets]]", "[[dai]]", "[[depeg]]", "[[ethereum]]", "[[real-
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
-As of 2026-06-21, eUSD trades at **$0.996636** with a market capitalization of **$23,273,339**, ranking **#752** by market cap. At roughly **$1.00 it is on-peg**, with a minor ~0.3% discount well within normal stablecoin trading bands. It was down **-0.22%** over 24 hours and **-0.49%** over the trailing week — typical micro-fluctuation around the dollar peg, not a [[depeg]]. The broader crypto market was in Extreme Fear (Fear & Greed 21; [[bitcoin|BTC]] ~$64,568), conditions under which small stablecoin discounts are common.
+As of 2026-06-21, eUSD trades at **$0.996636** with a market capitalization of **$23,273,339**, ranking **#752** by market cap. At roughly **$1.00 it is on-peg**, with a minor ~0.3% discount well within normal stablecoin trading bands. It was down **-0.22%** over 24 hours and **-0.49%** over the trailing week — typical micro-fluctuation around the dollar peg, not a [[depeg-risk|depeg]]. The broader crypto market was in Extreme Fear (Fear & Greed 21; [[bitcoin|BTC]] ~$64,568), conditions under which small stablecoin discounts are common.
 
 > *Informational only, not investment advice. Stablecoins can break their peg under collateral stress.*
 
@@ -151,7 +151,7 @@ Secondary liquidity is **moderate** and concentrated on-chain across Base, Ether
 - [[treasuries]]
 - [[dai]]
 - [[usdc]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[crypto-markets]]
 - [[ethereum]]
 

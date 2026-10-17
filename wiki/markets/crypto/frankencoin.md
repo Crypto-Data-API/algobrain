@@ -9,7 +9,7 @@ aliases: ["ZCHF"]
 entity_type: protocol
 headquarters: "Decentralized (Switzerland-aligned community)"
 website: "https://www.frankencoin.com"
-related: ["[[crypto-markets]]", "[[dai]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[forex]]", "[[stablecoins]]", "[[swiss-franc]]", "[[usda-2]]"]
+related: ["[[crypto-markets]]", "[[dai]]", "[[defi]]", "[[depeg-risk]]", "[[ethereum]]", "[[forex]]", "[[stablecoins]]", "[[swiss-franc]]", "[[usda-2]]"]
 ---
 
 # Frankencoin
@@ -98,7 +98,7 @@ Frankencoin sits in the **non-USD / FX stablecoin** and **oracle-free CDP** narr
 ## Risks
 
 - **FX risk for USD holders:** Because ZCHF tracks CHF, a USD-based holder is implicitly long the Swiss franc and exposed to CHF/USD [[forex]] moves — the single biggest reason the USD quote drifts.
-- **Collateral / liquidation risk:** As an over-collateralized crypto-backed coin, a sharp drop in collateral value or **failed/illiquid auctions** during a crash could under-collateralize the system and threaten the peg ([[depeg]] risk). FPS equity is the first-loss buffer; if losses exceed it, ZCHF holders bear the shortfall.
+- **Collateral / liquidation risk:** As an over-collateralized crypto-backed coin, a sharp drop in collateral value or **failed/illiquid auctions** during a crash could under-collateralize the system and threaten the peg ([[depeg-risk|depeg]] risk). FPS equity is the first-loss buffer; if losses exceed it, ZCHF holders bear the shortfall.
 - **Auction / mechanism risk:** The oracle-free model depends on challengers having capital and incentive to police bad positions; in thin markets or fast crashes, mispriced positions may go unchallenged.
 - **Yield-source / counterparty (FPS) risk:** FPS holders earn minter interest but absorb defaults; their return is compensation for genuine credit/liquidation risk, not a deposit rate.
 - **Redemption-gating risk:** There is no fiat redemption window — exiting at par relies on DEX liquidity and minter arbitrage, which can break down in stress.
@@ -125,7 +125,7 @@ Frankencoin sits in the **non-USD / FX stablecoin** and **oracle-free CDP** narr
 - [[crypto-markets]]
 - [[ethereum]]
 - [[defi]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 
 ## Sources
 

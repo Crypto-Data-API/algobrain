@@ -4,7 +4,7 @@ type: source
 created: 2026-04-20
 updated: 2026-04-20
 status: good
-tags: [technical-analysis, indicators, history, source, meta]
+tags: [technical-analysis, indicators, history, sources, meta]
 source_type: article
 source_url: ""
 source_author: "Compiled research guide"

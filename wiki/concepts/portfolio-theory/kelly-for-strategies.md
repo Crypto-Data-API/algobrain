@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-10
 updated: 2026-06-21
 status: excellent
-tags: [portfolio-theory, position-sizing, kelly, multi-strategy, risk-management]
+tags: [portfolio-theory, position-sizing, kelly, portfolio-construction, risk-management]
 aliases: ["Kelly Sizing", "Multi-Strategy Kelly", "Kelly Allocation"]
 domain: [portfolio-theory]
 difficulty: advanced

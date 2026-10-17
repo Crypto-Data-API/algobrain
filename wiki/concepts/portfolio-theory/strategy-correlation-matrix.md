@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-10
 updated: 2026-06-21
 status: excellent
-tags: [portfolio-theory, correlation, multi-strategy, diversification]
+tags: [portfolio-theory, correlation, portfolio-construction, diversification]
 aliases: ["Strategy Correlation", "Cross-Strategy Correlation"]
 domain: [portfolio-theory]
 difficulty: intermediate

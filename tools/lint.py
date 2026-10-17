@@ -71,6 +71,17 @@ APPROVED_TAGS = {
     "oracle", "payments", "performance", "portfolio-construction", "premium-selling",
     "price-action", "restaking", "short-selling", "smart-contracts", "staking", "vix",
     "yield-farming",
+    # Adopted 2026-10-17 (tag audit batch 4)
+    "adverse-selection", "airdrop", "algorithmic-stablecoin", "base", "basis-trade",
+    "bayesian", "binance", "bridges", "carry", "cex", "cointegration",
+    "commodity-spread", "contagion", "credit-spread", "crisis-alpha", "cycles",
+    "debit-spread", "deribit", "directional", "emerging-markets", "employment",
+    "flash-loans", "hard-fork", "impermanent-loss", "implied-volatility", "inflation",
+    "japan", "long-volatility", "market-breadth", "market-impact",
+    "market-manipulation", "narratives", "passive-investing", "pfp", "precious-metals",
+    "pump-fun", "reinforcement-learning", "retirement", "seasonality", "short-squeeze",
+    "social-media", "statistical-arbitrage", "structural", "support-resistance",
+    "tariffs", "term-structure", "terra", "tokenized-treasuries", "transaction-costs",
 }
 
 

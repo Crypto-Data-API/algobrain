@@ -4,7 +4,7 @@ type: concept
 created: 2026-07-14
 updated: 2026-07-14
 status: good
-tags: [ai-trading, trading-bots, risk-management, deployment, crypto]
+tags: [ai-trading, trading-bots, risk-management, infrastructure, crypto]
 aliases: ["Reconciliation", "State Reconciliation", "Position Sync", "Ledger Reconciliation"]
 domain: [risk-management, market-microstructure]
 prerequisites: ["[[bot-architecture]]", "[[broker-api]]"]

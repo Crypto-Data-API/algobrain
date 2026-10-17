@@ -32,7 +32,7 @@ related:
   - "[[cash-secured-puts]]"
   - "[[iron-condors]]"
   - "[[debit-spread]]"
-  - "[[leaps]]"
+  - "[[long-dated-options]]"
   - "[[skew]]"
   - "[[vix-calls]]"
   - "[[options-position-management]]"

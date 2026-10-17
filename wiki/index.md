@@ -123,7 +123,8 @@ A comprehensive, LLM-maintained knowledge base for crypto trading strategy: cryp
 - Key concepts: [[automated-market-maker]], [[defi-lending]], [[impermanent-loss]], [[loss-versus-rebalancing]], [[liquidity-pools]], [[smart-contracts]]
 - Strategies: [[defi-yield-farming]], [[mev-strategies]], [[crypto-yield-stack]], [[concentrated-liquidity]], [[jit-liquidity]], [[leveraged-yield-farming]], [[cross-chain-yield-farming]]
 - Protocols: [[uniswap]], [[aave]], [[makerdao]], [[lido]], [[hyperliquid]], [[curve-finance]], [[pendle]], [[jupiter-exchange-solana|Jupiter]], [[eigenlayer]], [[beefy-finance]], [[thorchain]], [[alpha-homora]]
-- Concepts: [[restaking]]
+- Concepts: [[restaking]], [[account-abstraction]]
+- Sector concepts: [[payments|Crypto Payments]], [[socialfi|SocialFi]], [[meme-coins|Meme Coins]]
 - Comparisons: [[centralized-vs-decentralized-finance]], [[cefi-yield-vs-defi-yield]]
 - Security: [[defi-hacks-and-exploits]], [[smart-contract-vulnerability-taxonomy]], [[ai-vulnerability-discovery]], [[ai-auditor-arms-race]], [[insurance-as-unreliable-signal]]
 
@@ -134,7 +135,7 @@ A comprehensive, LLM-maintained knowledge base for crypto trading strategy: cryp
 - Launchpads: [[pump-fun|Pump.fun]], [[letsbonk|LetsBonk.fun]], [[believe|Believe]], [[moonshot|Moonshot]], [[heaven-launchpad|Heaven]], [[sunpump|SunPump]] (TRON)
 - Launchpad comparison: [[pump-fun-vs-letsbonk-vs-believe-vs-moonshot-vs-heaven|Pump.fun vs LetsBonk vs Believe vs Moonshot vs Heaven]]
 - Venues: [[pump-fun]], [[pumpswap]], [[raydium]], [[jupiter-exchange-solana|Jupiter]]
-- Concepts: [[bonding-curve-analysis]], [[market-cap-level-trading]]
+- Concepts: [[meme-coins]], [[bonding-curve-analysis]], [[market-cap-level-trading]]
 - Risk frameworks: [[rug-detection-checklist]], [[holder-concentration-analysis]], [[rug-pulls]]
 - Analytics: [[birdeye]], [[dex-screener]], [[gmgn]], [[bitquery]], [[dune-analytics]]
 

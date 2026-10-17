@@ -2,8 +2,8 @@
 title: "MEV"
 type: concept
 created: 2026-07-17
-updated: 2026-07-19
-status: draft
+updated: 2026-10-17
+status: review
 tags: [crypto, defi, arbitrage, market-microstructure, execution, algorithmic]
 aliases: ["Maximal Extractable Value", "Miner Extractable Value", "Block Value Extraction"]
 domain: [market-microstructure, crypto]
@@ -34,6 +34,10 @@ Opportunity detected → Searcher constructs bundle → Builder assembles block 
 - **Validator:** Proposes the block built by the winning builder. The validator earns the MEV tip (priority fee) from the searcher's bundle.
 - **Relay (e.g. Flashbots):** Mediates trust between builder and validator — allows validators to accept blocks without seeing the contents (preventing front-running by validators).
 
+*Note (2026-10-17):* on Ethereum, PBS is still **off-protocol**. Since the September 2022 Merge it has run through the **MEV-Boost** sidecar and a small set of relays, and MEV-Boost builds most mainnet blocks (a figure commonly cited as ~90%, not verified in this wiki). Enshrined PBS (EIP-7732) has been proposed for a future upgrade. Until it ships, relays are trusted intermediaries, and a relay or builder outage changes inclusion behaviour. Builder share is highly concentrated in a few firms, which matters for anyone choosing where to send bundles.
+
+**Order-flow auctions and private RPCs.** Wallets and aggregators increasingly route user swaps through private mempools or order-flow auctions (MEV-Share, MEV Blocker-style RPCs, intent systems like CoW Swap and UniswapX). These return part of the back-run value to the user and shrink the public-mempool sandwich surface. For a searcher, the opportunity shifts from *seeing* the flow to *buying access* to it. See [[intent-based-trading]].
+
 ## MEV Types
 
 | Type | Mechanism | Who bears the cost |
@@ -47,9 +51,9 @@ Opportunity detected → Searcher constructs bundle → Builder assembles block 
 ## Concrete Examples
 
 - **Flashbots, launched Jan 2021:** Flashbots introduced "dark pool" bundle submission, allowing searchers to submit bundles to miners/builders without broadcasting to the public mempool. This eliminated most "gas wars" (where searchers bid ever-higher fees in a race to be included) and made MEV more efficient — but also more concentrated. By mid-2021, Flashbots was processing over 80% of Ethereum's MEV.
-- **The "sandwich tax":** Uniswap's own analytics have shown that popular tokens on V2/V3 can have effective sandwich-attack rates of 5-15% of volume during high-volatility periods. On-chain analysis by EigenPhi estimated total sandwich revenue to searchers at hundreds of millions of dollars annually across 2022-2023.
+- **The "sandwich tax":** Uniswap's own analytics have shown that popular tokens on V2/V3 can have effective sandwich-attack rates of 5-15% of volume during high-volatility periods. On-chain analysis by EigenPhi estimated total sandwich revenue to searchers at hundreds of millions of dollars annually across 2022-2023. *(Review note 2026-10-17: no source page in this wiki backs the "5-15% of volume" sandwich-rate figure, and it is not attributed to a specific Uniswap publication. Treat it as unverified.)*
 - **March 2020 MakerDAO liquidations:** During Black Thursday, Ethereum gas prices spiked so high that normal liquidation bots failed to submit. A single sophisticated searcher submitted zero-bid liquidation transactions (bidding $0 for collateral) during the chaos and received $8.3M in ETH collateral near-free — the most extreme MEV event in DeFi history.
-- **Jito on Solana (2022–):** Solana has no PBS system natively; Jito Labs built an off-protocol MEV infrastructure (Jito Block Engine) that handles ~50%+ of Solana validator stake. Jito tips (the Solana equivalent of Flashbots priority fees) generate tens of millions in revenue monthly.
+- **Jito on Solana (2022–):** Solana has no PBS system natively; Jito Labs built an off-protocol MEV infrastructure (Jito Block Engine) that handles ~50%+ of Solana validator stake. Jito tips (the Solana equivalent of Flashbots priority fees) generate tens of millions in revenue monthly. *(Update 2026-10-17: "~50%+" understates later adoption. The Jito-Solana validator client is commonly reported to run on the large majority of Solana stake from 2024 onward, but this wiki has no dated source for an exact share. [[jito-bundle-sniping]] uses "Jito stake share below 50%" as a kill criterion, so check the current figure before relying on bundle inclusion.)*
 
 ## Trading Relevance
 
@@ -61,6 +65,21 @@ MEV is central to multiple AlgoBrain strategies:
 - **[[flash-loan-arbitrage]]:** Flash loans eliminate the capital requirement for MEV arb — the searcher borrows, executes the arb, and repays in a single atomic transaction, with no net capital at risk.
 - **[[jito-solana-mev-arbitrage]]:** Solana-specific MEV via Jito Block Engine. Solana's sub-second blocks and low fees make micro-arbs viable that would be uneconomic on Ethereum mainnet.
 - **[[on-chain-flow-trading]]:** MEV activity data (from EigenPhi, Dune Analytics) is a real-time signal for on-chain activity levels, which correlates with network usage, gas prices, and token volatility.
+
+### Other strategy pages built on MEV infrastructure
+
+| Strategy | MEV mechanism |
+|---|---|
+| [[jito-bundle-sniping]] / [[memecoin-sniping]] / [[token-migration-sniping]] | Bundle-ordered first-block buys on new Solana pools and migrations |
+| [[jit-liquidity]] | Just-in-time concentrated liquidity around a large pending swap |
+| [[uniswap-v4-hooks-arbitrage]] | Arbitrage around v4 hook pools (dynamic fees, MEV-internalising hooks), live since 30 Jan 2025 |
+| [[mev-session-density]] | Concentrates searcher activity in the hours when MEV opportunity density peaks (major CEX session opens) |
+| [[telegram-bot-trading]] | Retail bots that buy MEV protection or bundle inclusion. The user pays the MEV fee rather than capturing it. |
+| [[zkml-predictive-mev]] | ML-predicted opportunities with ZK-proven model provenance |
+
+**Defensive view for every on-chain strategy:** any DEX leg of a non-MEV strategy (rebalancing, DEX hedges, LP management) pays MEV unless it is routed privately. Model slippage plus sandwich loss in cost assumptions, or use a protected RPC.
+
+**On Hyperliquid and other on-chain CLOBs,** ordering is set by the validator set and the matching engine, not by a public gas auction, so Ethereum-style sandwiching does not carry over directly. Latency and ordering edges still exist: see [[latency-and-mev-on-chain-clob]].
 
 ## Related
 

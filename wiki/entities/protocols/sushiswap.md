@@ -2,7 +2,7 @@
 title: "SushiSwap"
 type: entity
 created: 2026-04-15
-updated: 2026-06-10
+updated: 2026-10-17
 status: good
 tags: [crypto, defi, exchange]
 entity_type: protocol
@@ -39,6 +39,8 @@ related: ["[[uniswap]]", "[[decentralized-exchanges]]", "[[defi]]", "[[ethereum]
 - **Venue utility**: still useful for long-tail token access and cross-chain routing on chains where larger DEXs are absent; for [[decentralized-exchanges|DEX]] traders, Sushi's router can source liquidity competitive with major aggregators on some pairs.
 - **Governance/treasury risk**: Sushi's repeated treasury and leadership crises are a template for the "DAO operational risk" a trader should price into any DEX token.
 - The SUSHI token market page is at [[sushi]].
+
+The strategies this page informs are [[vampire-attack-arbitrage]], which uses the September 2020 Sushi migration (see [[2020-09-sushiswap-vampire-attack]]) as its reference case, and [[liquidity-mining]], where Sushi's emissions-driven TVL and its later decline show how quickly rented liquidity leaves. As a token, SUSHI trades like the DEX governance tokens in [[dex-tokens-basket]] (it is not a constituent): a high-beta bet on volume share rather than a cash-flow asset.
 
 ## Related
 

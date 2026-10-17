@@ -29,6 +29,142 @@ breakeven_cost_bps: 2
 decay_evidence: "Majors (BTC/ETH) on Binance/Bybit are saturated by professional MM firms (Wintermute, GSR, Jump, Amber) and exchange MM programs; retail cannot win the latency/rebate game there. Edge has migrated to thin/newly-listed alt perps where spreads are wide but adverse selection and inventory risk are far higher."
 
 related: ["[[hyperliquid-market-making]]", "[[market-making]]", "[[adverse-selection]]", "[[avellaneda-stoikov]]", "[[scalping]]", "[[order-flow-scalping]]", "[[vwap-trading]]", "[[statistical-arbitrage]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[vpin]]", "[[order-flow]]", "[[binance]]", "[[bybit]]", "[[inventory-risk]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[book-trading-and-exchanges]]", "[[book-algorithmic-and-high-frequency-trading]]", "[[book-high-frequency-trading-aldridge]]", "[[cryptodataapi]]"]
+
+gates:
+  - id: mid_price
+    role: entry
+    rule: "Mid s = (best bid + best ask) / 2 on the venue's perp book, the centre of the reservation price"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "Binance SPOT last price, polled. The Binance and Bybit perp books the page quotes on are not served; quoting needs the venue websocket. /api/v1/hyperliquid/l2-book serves only Hyperliquid's book."
+  - id: sigma_1s
+    role: entry
+    rule: "Short-horizon realised volatility (sigma per second) feeds the skew and the risk half-spread"
+    runnable: partial
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1m&limit=1000
+    field: klines[].close
+    replay: /api/v1/backtesting/klines?symbol={symbol}USDT&exchange=binance&interval=1m&start={start}
+    replay_field: klines[].c
+    note: "1-minute bars only, so sigma_1s is a scaled estimate (sigma_1m / sqrt(60)); the pseudocode wants a 1-second value. The page names no estimation window."
+  - id: reservation_and_spread
+    role: entry
+    rule: "Quote bid = r - half, ask = r + half with r = s - q x 8e-4 x sigma^2 x 300 and half = max(risk half-spread, 1 bp of mid), snapped to tick"
+    runnable: partial
+    input: derived
+    inputs: [mid_price, sigma_1s]
+  - id: fee_floor
+    role: entry
+    rule: "Min half-spread covers maker round-trip fees plus target edge (~1 bp on a rebate tier)"
+    runnable: false
+    note: "Binance and Bybit VIP / market-maker fee tiers are not served. /api/v1/hyperliquid/meta fees is Hyperliquid's own schedule (perps maker 0.00015, taker 0.00045 at tier 0) and does not price a CEX book."
+  - id: toxic_widen
+    role: filter
+    rule: "Triple the half-spread when maker-fill markout is below -0.8 bp"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "Markout is the mid 1s/5s/30s after each of the desk's own fills; a polled spot price is too coarse for 1-second markout. The venue feed is the real input."
+  - id: flow_toxicity
+    role: filter
+    rule: "Widen or pull on an order-flow toxicity (VPIN-style) trigger"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/taker-buy-sell
+    field: data[].exchange_list[].buy_ratio
+    note: "Per-venue taker buy ratio as a backdrop; no VPIN and no trigger level are defined, and trade prints for the CEX book are not served."
+  - id: funding_skew
+    role: sizing
+    rule: "If inventory sits on the paying side of 8h funding, shift r by 1.5 x funding_8h x mid toward flat"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance only; Bybit funding is not served. current_rate is the last settled print."
+  - id: requote_trigger
+    role: entry
+    rule: "Re-quote on a mid move over half a tick, an inventory change, or a toxicity trigger"
+    runnable: false
+    note: "Sub-second mid moves on the CEX book are not served."
+  - id: inventory_caps
+    role: sizing
+    rule: "Soft cap at half of q_max (widen far side, tighten near side); one-sided quotes at |q| of 3 BTC or more"
+    runnable: true
+    input: position
+  - id: hard_cap_flatten
+    role: stop
+    rule: "If inventory stays over q_max for more than N seconds, cross the spread to flatten"
+    runnable: partial
+    input: position
+    note: "N (N_MAX) is never set. The kill criteria separately use over q_max for more than 10 minutes, more than 3 times a session."
+  - id: daily_loss_stop
+    role: stop
+    rule: "Hard daily P&L stop: flatten and stand down on breach"
+    runnable: partial
+    input: position
+    note: "No loss level is given."
+  - id: clip_sizing
+    role: sizing
+    rule: "Clips of 0.05-0.3 BTC over 3-5 levels; total resting notional a small fraction of top-of-book depth"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth
+    field: coins[].total_depth_25bps_usd
+    note: "Hyperliquid perp depth for the top 25 coins, not the Binance or Bybit book. 'Small fraction' is not defined."
+  - id: margin_buffer
+    role: sizing
+    rule: "Margin sized to support q_max with a large buffer; never high leverage"
+    runnable: partial
+    input: position
+    note: "No buffer or leverage number is given."
+  - id: liquidity_regime
+    role: filter
+    rule: "Widen quotes or pull when the liquidity regime says the book cannot absorb a shock"
+    runnable: partial
+    endpoint: /api/v1/liquidity/regime
+    field: composite_score
+    note: "Stated in the AI agent workflow only, with no score cut. coins[].regime (depth_withdrawal, post_cascade_impaired) is per coin. Hyperliquid books, not CEX."
+  - id: oi_context
+    role: filter
+    rule: "Lean against long-skewed, liquidation-prone OI regimes"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/open-interest?symbol={symbol}USDT
+    field: oi_trend_30d_pct
+    note: "Context only; the page gives no threshold."
+  - id: kill_markout
+    role: stop
+    rule: "Kill quoting a symbol when rolling 30-minute markout on maker fills is below -0.5 bp"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "Own fills plus a post-fill mid; see toxic_widen."
+  - id: kill_inventory
+    role: stop
+    rule: "Kill: inventory above q_max for over 10 minutes more than 3 times in a session"
+    runnable: true
+    input: position
+  - id: kill_drawdown
+    role: stop
+    rule: "Kill: sleeve drawdown over 12% in any rolling 7-day window"
+    runnable: true
+    input: position
+  - id: kill_fee_tier
+    role: stop
+    rule: "Kill: net maker fee reverts positive (lost tier) and spreads cannot widen enough to stay above breakeven"
+    runnable: partial
+    input: position
+    note: "The account's own fee tier; 'cannot widen enough' is a judgement."
+  - id: kill_funding_drag
+    role: stop
+    rule: "Funding drag above spread income over a rolling 24h: reduce q_max toward zero"
+    runnable: true
+    input: position
+  - id: kill_exchange_halt
+    role: stop
+    rule: "Exchange halt or degraded matching: flatten all"
+    runnable: false
+    note: "Venue status is not served."
 ---
 
 # Market Making Strategy (CEX)

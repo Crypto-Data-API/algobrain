@@ -56,7 +56,7 @@ FDIT represents a tokenized claim on a Fidelity-managed pool of **short-duration
 - **Oracle / NAV feed:** Price is administratively pinned to a $1.00 NAV; there is no continuous on-chain price discovery because there is no meaningful secondary market.
 - **Transfer restrictions / whitelist:** Transfers are limited to the permissioned holder set at the contract / transfer-agent level.
 
-See [[tokenized-treasuries]] and [[real-world-assets]] for the broader category; peers include [[ousg]], [[hashnote-usyc]], and BlackRock's [[buidl]].
+See [[tokenized-treasuries]] and [[real-world-assets]] for the broader category; peers include [[ousg]], [[hashnote-usyc]], and BlackRock's [[blackrock-usd-institutional-digital-liquidity-fund|buidl]].
 
 ---
 
@@ -65,7 +65,7 @@ See [[tokenized-treasuries]] and [[real-world-assets]] for the broader category;
 | Product | Issuer / Manager | NAV model | Yield delivery | Notable trait |
 |---|---|---|---|---|
 | **FDIT** | Fidelity | $1.00 par NAV | Yield via token mechanism | Major U.S. asset manager; institutional cash |
-| **[[buidl]]** (BUIDL) | BlackRock + Securitize | $1.00 NAV (rebasing) | New tokens (rebase) | Largest tokenized-Treasury fund |
+| **[[blackrock-usd-institutional-digital-liquidity-fund\|buidl]]** (BUIDL) | BlackRock + Securitize | $1.00 NAV (rebasing) | New tokens (rebase) | Largest tokenized-Treasury fund |
 | **[[ousg]]** (OUSG) | Ondo Finance | Price-accruing | NAV price-accretion | Instant USDC mint/redeem |
 | **[[hashnote-usyc]]** (USYC) | Hashnote / Circle | Price-accruing | NAV price-accretion | Repo-focused; Circle collateral |
 | **[[vaneck-treasury-fund\|VBILL]]** | VanEck + Securitize | $1.00 NAV (rebasing) | New tokens (rebase) | Multi-chain; stablecoin subscriptions |
@@ -91,7 +91,7 @@ FDIT sits in the **tokenized money-market / tokenized cash** segment of the RWA 
 
 - **Institutional brand adoption:** Fidelity, like BlackRock with BUIDL, entering on-chain money-market issuance is a strong validation signal for tokenized cash management.
 - **Rates regime:** Demand scales with short-term U.S. rates — higher front-end yields make par-NAV tokenized cash more attractive than idle stablecoins.
-- **RWA tokenization wave:** Part of the broader move bringing regulated fixed-income on-chain alongside [[buidl]], [[ousg]], [[hashnote-usyc]], and [[vaneck-treasury-fund|VBILL]].
+- **RWA tokenization wave:** Part of the broader move bringing regulated fixed-income on-chain alongside [[blackrock-usd-institutional-digital-liquidity-fund|buidl]], [[ousg]], [[hashnote-usyc]], and [[vaneck-treasury-fund|VBILL]].
 - **On-chain treasury management:** Crypto-native funds, DAOs, and institutions seeking principal-stable, yield-bearing dollar exposure with blockchain settlement.
 
 ### History / Timeline
@@ -134,7 +134,7 @@ With the Crypto [[fear-and-greed-index|Fear & Greed Index]] at **21 ("Extreme Fe
 - [[tokenized-treasuries]]
 - [[ousg]]
 - [[hashnote-usyc]]
-- [[buidl]], [[vaneck-treasury-fund]] — peer tokenized cash / Treasury products
+- [[blackrock-usd-institutional-digital-liquidity-fund|buidl]], [[vaneck-treasury-fund]] — peer tokenized cash / Treasury products
 - [[crypto-markets]]
 - [[ethereum]]
 

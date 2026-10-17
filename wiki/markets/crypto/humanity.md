@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, decentralized-ai]
+tags: [crypto, ai]
 aliases: ["H", "Humanity Protocol"]
 entity_type: protocol
 headquarters: "Decentralized"

@@ -42,6 +42,140 @@ last_review: 2026-04-27
 next_review: 2026-05-27
 
 related: ["[[cash-and-carry]]", "[[basis-trading]]", "[[cross-exchange-arbitrage]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[delta-neutral]]", "[[basis]]", "[[ethena-usde]]", "[[hyperliquid]]", "[[asterdex]]", "[[binance]]", "[[ftx]]", "[[kelly-criterion]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[book-a-man-for-all-markets]]", "[[cryptodataapi]]"]
+
+gates:
+  - id: funding_entry
+    role: entry
+    rule: "8-hour funding is positive and above 0.03% (0.0003, about 33% APY)"
+    runnable: true
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance 8h fraction; current_rate is the last SETTLED print, not the predicted next one. The deployed sleeve trades AsterDEX, whose funding is not served: this gate runs the general rule on Binance, not the live bot's venue. Replay rows are 5-minute samples of the live 8h rate (archive since 2026-03-30): average them, never sum."
+  - id: funding_cross_check
+    role: filter
+    rule: "Cross-check the funding signal on at least one other major venue to rule out a venue-specific oracle anomaly"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: hyperliquid.current_rate
+    note: "Hyperliquid hourly rate; x 8 for the 8h equivalent. The page does not say how close the second venue must be. Bybit and OKX funding are not served; cross_exchange[] on this route was empty for ETH and SOL on 2026-10-17 and its funding_rate is on a different scale, so do not use it. hyperliquid.history_status can read warming; current_rate is still live then."
+  - id: funding_7d_positive
+    role: entry
+    rule: "7-day rolling average funding is positive (entry); exit when it turns negative"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "21 settled 8h prints = 7 days, oldest first. The same test on Hyperliquid is data[].funding_rate_mean on /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start} (last 7 closed days); /hyperliquid/funding-rates caps limit at 100 hours, too short for 7 days."
+  - id: funding_7d_trend
+    role: filter
+    rule: "The 7-day average is trending up or flat"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=42
+    field: rates[].funding_rate
+    note: "The page does not define the trend test (slope, window, or comparison to the prior week); the pseudocode checks only funding_7d_avg > 0."
+  - id: spot_leg_available
+    role: filter
+    rule: "The underlying is purchasable or borrowable on a venue with adequate liquidity for the notional"
+    runnable: partial
+    endpoint: /api/v1/market-data/exchange-info?symbol={symbol}USDT
+    field: status
+    note: "Binance spot pair status (TRADING). 'Adequate liquidity' is not defined; quote_volume on /api/v1/market-data/ticker/24hr is one read. Borrow availability is not served."
+  - id: oi_health
+    role: filter
+    rule: "Perp open interest is rising or stable; the pseudocode waits when the OI z-score is below -1.0"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/open-interest?symbol={symbol}USDT
+    field: history[].sum_open_interest
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].oi_close
+    note: "history[] is 30 daily points. The z-score window is not set on the page, so the -1.0 cut needs a desk-chosen lookback. Hyperliquid OI: replay route, base-coin units."
+  - id: no_insurance_draw
+    role: filter
+    rule: "No active insurance-fund drawdown on the venue"
+    runnable: false
+    note: "Exchange insurance-fund balances are not served."
+  - id: oracle_vs_cex_entry
+    role: filter
+    rule: "Oracle vs CEX spot deviation at most 50 bps at entry"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Compare with price on /api/v1/market-data/ticker/price?symbol={symbol}USDT (Binance spot). That covers a Hyperliquid perp; the AsterDEX index the deployed bot trades against is not served. Entry uses 50 bps, while the exit rule, kill criteria and pseudocode use 100 bps for 30 minutes."
+  - id: no_formula_change
+    role: filter
+    rule: "No funding-mechanism parameter change announced in the last 7 days"
+    runnable: false
+    note: "Venue announcements are not served."
+  - id: max_concurrent
+    role: sizing
+    rule: "At most 3 concurrent positions; per-asset cap 25% of the sleeve; 1x isolated on the perp short"
+    runnable: true
+    input: position
+  - id: funding_compressed_exit
+    role: exit
+    rule: "Exit when 8h funding falls below 0.01% (0.0001)"
+    runnable: true
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+  - id: basis_blowout_exit
+    role: exit
+    rule: "Exit when the perp's basis vs its index is wider than 100 bps for over 30 minutes"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "On a Hyperliquid perp, (mark_price - oracle_price) / oracle_price on the same row, polled each minute (60s snapshots). No minute history of mark vs oracle is served for replay. A live Binance perp mark is not served (rates[].mark_price on /derivatives/binance/funding-rates is per settlement only)."
+  - id: aster_oracle_kill
+    role: stop
+    rule: "Kill: AsterDEX index vs CEX spot divergence over 100 bps for over 30 minutes"
+    runnable: false
+    note: "AsterDEX index and mark prices are not served."
+  - id: counterparty_event
+    role: exit
+    rule: "Exit on a spot-leg counterparty event (withdrawal halt, ACH suspension, custody flag); kill on any withdrawal halt or unscheduled maintenance over 4 hours"
+    runnable: false
+    note: "Venue liveness is not served. /api/v1/security/events lists confirmed hacks only."
+  - id: aster_socialised_loss
+    role: stop
+    rule: "Kill: any AsterDEX insurance-fund socialised-loss event"
+    runnable: false
+    note: "Not served."
+  - id: sleeve_drawdown
+    role: stop
+    rule: "Kill: sleeve drawdown over 8% in any rolling 30-day window"
+    runnable: true
+    input: position
+  - id: majority_7d_negative
+    role: stop
+    rule: "Kill: 7-day funding average below 0 on more than half of the held positions"
+    runnable: true
+    input: derived
+    inputs: [funding_7d_positive]
+  - id: global_carry_baseline
+    role: stop
+    rule: "Kill: aggregate funding yield (Ethena + Resolv + Pendle PT-USDe) below the interest-rate baseline for 60+ days"
+    runnable: false
+    note: "sUSDe, RLP and PT-USDe yields are not served."
+  - id: regime_gate
+    role: filter
+    rule: "Cut size or exit as the whole-market HMM regime tilts to strong_trend_bear or vol_spike"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "Stated in the AI agent workflow only. How much to cut is not set."
+  - id: redeploy_14d
+    role: entry
+    rule: "Re-deploy: 14-day average funding above 0.015% per 8h on at least three eligible assets"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=42
+    field: rates[].funding_rate
+    note: "42 settled prints = 14 days. Run per asset and count the passes."
 ---
 
 # Funding Rate Arbitrage

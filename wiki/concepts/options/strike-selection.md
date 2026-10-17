@@ -83,7 +83,7 @@ A 50-delta call (or 50-delta put) is at-the-money — the strike equal to spot.
 A 70-delta call has ~0.70 of the underlying's directional exposure. At 80-delta and above, the call behaves nearly identically to the underlying for moderate moves.
 
 - Used as the long leg in deep-ITM debit call spreads
-- Used for stock replacement with [[long-dated-options|LEAPS]] (see [[leaps]])
+- Used for stock replacement with [[long-dated-options|LEAPS]] (see [[long-dated-options|leaps]])
 - Captures dividend exposure differently than stock — see dividend-adjustments
 - Lower vega than ATM, lower gamma — the position behaves more like delta-1 stock
 
@@ -187,7 +187,7 @@ A single table collapsing the canonical delta targets above. This expresses, in 
 | Bull/bear credit spread ([[credit-spread]]) | 16-30d | 5-10d | IVR-dependent |
 | Debit spread (bull call / bear put) | 25-40d | 50-70d long | Conviction-dependent |
 | Short strangle ([[short-strangle]]) | 10-16d both | n/a | IVR-dependent width |
-| Stock replacement ([[leaps]]) | n/a | 70-90d long | Delta-1 behaviour |
+| Stock replacement ([[long-dated-options\|leaps]]) | n/a | 70-90d long | Delta-1 behaviour |
 | Tail hedge / portfolio insurance | n/a | 5-16d long put | Cheap convexity |
 
 ## Standard Deviation Move from IV

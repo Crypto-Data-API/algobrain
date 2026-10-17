@@ -4,7 +4,7 @@ type: market
 created: 2026-04-14
 updated: 2026-06-21
 status: excellent
-tags: [crypto, ethereum, etf, institutional, sec, regulation]
+tags: [crypto, ethereum, etf, institutional, regulation]
 aliases: ["ETH ETF", "Ethereum Spot ETF", "Spot ETH ETF"]
 related: ["[[ethereum]]", "[[bitcoin-etfs]]", "[[2024-07-23-ethereum-spot-etf-launch]]", "[[2024-01-10-bitcoin-spot-etf-approval]]", "[[sec]]", "[[etf]]"]
 ---

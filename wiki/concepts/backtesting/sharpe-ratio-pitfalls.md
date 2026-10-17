@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-07
 updated: 2026-06-21
 status: excellent
-tags: [backtesting, metrics, statistics, validation, performance, risk-management]
+tags: [backtesting, statistics, validation, performance, risk-management]
 aliases: ["Sharpe Ratio Failure Modes", "Sharpe Ratio Limitations", "Why Sharpe Lies"]
 domain: [backtesting, statistics]
 difficulty: intermediate

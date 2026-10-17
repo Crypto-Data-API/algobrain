@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-06
 updated: 2026-10-17
 status: excellent
-tags: [indicators, technical-analysis, market-internals, market-breadth]
+tags: [indicators, technical-analysis, market-breadth]
 aliases: ["breadth indicators", "advance-decline", "market internals", "Market Breadth"]
 domain: [indicators]
 prerequisites: ["[[trend]]", "[[trading-volume]]"]

@@ -53,7 +53,7 @@ A tape reader watches the interaction between resting liquidity (the book) and a
 
 - **Lifting the offer / hitting the bid** — repeated prints at the ask signal aggressive buyers; repeated prints at the bid signal aggressive sellers. The ratio and clustering of the two is a real-time [[order-flow-imbalance|order-flow imbalance]] read.
 - **Absorption** — a large resting order that is repeatedly hit but does not move price reveals hidden supply or demand. When the aggressor finally exhausts, price often snaps in the opposite direction. This is the single most prized tape-reading pattern.
-- **Iceberg / reload detection** — a price level that keeps refilling with size after each execution suggests a hidden ([[iceberg-order|iceberg]]) order much larger than the displayed quantity.
+- **[[iceberg-detection|Iceberg / reload detection]]** — a price level that keeps refilling with size after each execution suggests a hidden ([[iceberg-order|iceberg]]) order much larger than the displayed quantity.
 - **Speed and urgency** — a sudden acceleration in print frequency (the tape "running") signals a shift from passive to aggressive participation, often around a [[support-and-resistance|key level]] or news.
 - **Block prints** — outsized single trades flag institutional activity; their location (at, above, or below the inside market) hints at intent.
 

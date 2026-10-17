@@ -4,7 +4,7 @@ type: news
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [news, regulation, sec, cftc, gensler, mica, stablecoins, coinbase]
+tags: [news, regulation, cftc, gensler, mica, stablecoins, coinbase]
 event_date: 2024-12-31
 markets_affected: [crypto]
 impact: medium

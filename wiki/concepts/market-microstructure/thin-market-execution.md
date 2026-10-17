@@ -4,7 +4,7 @@ type: concept
 created: 2026-07-14
 updated: 2026-07-14
 status: good
-tags: [crypto, market-microstructure, liquidity, slippage, algorithmic-trading, altcoins]
+tags: [crypto, market-microstructure, liquidity, slippage, algorithmic, altcoins]
 aliases: ["Thin Market Execution", "Illiquid Alt Execution", "Low-Liquidity Order Execution", "Executing in Thin Books"]
 domain: [market-microstructure]
 prerequisites: ["[[depth-of-market]]", "[[slippage]]", "[[market-impact]]"]

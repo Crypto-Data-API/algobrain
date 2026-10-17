@@ -9,7 +9,7 @@ aliases: ["WEMIX Dollar", "WEMIX USD", "WEMIX$"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.wemix.com/en"
-related: ["[[collateralization]]", "[[crypto-markets]]", "[[depeg]]", "[[gamefi]]", "[[stablecoins]]"]
+related: ["[[collateralization]]", "[[crypto-markets]]", "[[depeg-risk]]", "[[gamefi]]", "[[stablecoins]]"]
 ---
 
 # WEMIX Dollar
@@ -71,7 +71,7 @@ The 2026-06-22 price of $0.971286 represents a **mild soft discount**, consisten
 - **Thin liquidity:** WEMIX$ is a small, ecosystem-local stablecoin (market cap ~$14.1M) with limited venues, so even modest sell pressure can move price a few percent without deep arbitrage to snap it back.
 - **Concentration in one ecosystem:** demand is largely internal to WEMIX gaming/DeFi, so price reflects ecosystem sentiment more than a broad fiat-redemption backstop.
 
-This is a discount to watch, not a [[depeg]] crisis — but it does mean WEMIX$ should not be treated as a 1:1 dollar equivalent the way a deeply liquid, fully fiat-backed stablecoin would be.
+This is a discount to watch, not a [[depeg-risk|depeg]] crisis — but it does mean WEMIX$ should not be treated as a 1:1 dollar equivalent the way a deeply liquid, fully fiat-backed stablecoin would be.
 
 ### Ecosystem context: the 2023 Korean delisting controversy
 
@@ -183,7 +183,7 @@ In the 2026-06-24 backdrop — Fear & Greed 22 (Extreme Fear), an established be
 ## Risks
 
 - **Mild but persistent soft discount:** Trading ~2.9% below $1.00 as of 2026-06-22; WEMIX$ does not currently hold a tight peg and should not be assumed to be exactly 1:1 with USD.
-- **Thin liquidity / [[depeg]] risk:** Small market cap and ecosystem-local venues mean limited arbitrage depth; under stress the discount could widen.
+- **Thin liquidity / [[depeg-risk|depeg]] risk:** Small market cap and ecosystem-local venues mean limited arbitrage depth; under stress the discount could widen.
 - **Single-ecosystem concentration:** Value and demand are tightly coupled to the health of the WEMIX gaming/DeFi economy and to game publisher Wemade.
 - **Governance / disclosure history:** The 2023 DAXA delisting of the WEMIX token over supply-disclosure concerns is a reminder that transparency and reserve disclosure carry real weight for this ecosystem's assets.
 - **Reserve transparency:** Public, independently audited live reserve data for WEMIX$ is limited in this wiki; backing claims rest largely on protocol disclosures.
@@ -195,7 +195,7 @@ In the 2026-06-24 backdrop — Fear & Greed 22 (Extreme Fear), an established be
 ## See Also
 
 - [[crypto-markets]]
-- [[stablecoins]] · [[collateralization]] · [[depeg]] · [[gamefi]]
+- [[stablecoins]] · [[collateralization]] · [[depeg-risk|depeg]] · [[gamefi]]
 
 ---
 

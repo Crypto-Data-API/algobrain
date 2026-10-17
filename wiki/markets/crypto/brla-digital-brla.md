@@ -9,7 +9,7 @@ aliases: ["BRLA"]
 entity_type: protocol
 headquarters: "Brazil (BRLA Digital)"
 website: "https://brla.digital/"
-related: ["[[brazilian-real]]", "[[brz]]", "[[crown-brlv]]", "[[crypto-markets]]", "[[depeg]]", "[[forex]]", "[[polygon]]", "[[stablecoins]]"]
+related: ["[[brazilian-real]]", "[[brz]]", "[[crown-brlv]]", "[[crypto-markets]]", "[[depeg-risk]]", "[[forex]]", "[[polygon]]", "[[stablecoins]]"]
 ---
 
 # BRLA Digital BRLA
@@ -93,7 +93,7 @@ BRLA is a **regional / FX-denominated stablecoin** positioned at the **regulated
 - **Issuer / reserve-counterparty risk:** Holders depend on BRLA Digital (and reserve manager Avenia) maintaining full reserves and honoring redemptions; audit/attestation quality is central to trust.
 - **Regulatory risk:** Brazilian stablecoin and payments regulation (Drex, licensing) is evolving and could affect operations.
 - **Redemption-gating risk:** B2B-grade KYC/KYB gating means par redemption is permissioned; access frictions can impair the arbitrage that holds the peg for non-onboarded holders.
-- **Liquidity / depeg risk:** With ~$41M market cap and limited CEX presence, on-chain liquidity can be thin and prone to short-term [[depeg]] on large trades.
+- **Liquidity / depeg risk:** With ~$41M market cap and limited CEX presence, on-chain liquidity can be thin and prone to short-term [[depeg-risk|depeg]] on large trades.
 - **Smart-contract / multi-chain risk:** Contract or bridge issues across deployment chains could affect supply integrity.
 
 ## Trading / Usage Playbook

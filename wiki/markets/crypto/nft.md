@@ -117,7 +117,7 @@ The first NFT sales exceeding $100,000 became regular occurrences. Total NFT mar
 The NFT market has contracted significantly from 2021 peaks but has not disappeared:
 
 - **Blue-chip resilience**: [[cryptopunks|CryptoPunks]] continue to trade as the benchmark "store of value" NFT collection. While far below 2022 peak floors, they remain the most recognized NFT brand globally.
-- **Institutional digital art**: Christie's, Sotheby's, and Phillips continue to host NFT art auctions, albeit at lower volumes. Generative art (Art Blocks, fxhash) has found a niche audience among art collectors.
+- **Institutional digital art**: Christie's, Sotheby's, and Phillips continue to host NFT art auctions, albeit at lower volumes. Generative art (Art Blocks, [[fxhash]]) has found a niche audience among art collectors.
 - **Bitcoin Ordinals maturation**: The Ordinals ecosystem has developed its own marketplaces (Magic Eden, Gamma), standards, and collector communities, adding a second major blockchain for NFTs alongside Ethereum.
 - **Reduced speculation, more utility**: The market has shifted away from pure speculation toward NFTs with tangible utility — gaming assets, membership tokens, event tickets, and brand loyalty programs.
 - **Monthly volume**: Ethereum NFT trading volume has stabilized in the $200-500 million range through 2025-2026, with periodic spikes around new collections or Bitcoin Ordinals activity.

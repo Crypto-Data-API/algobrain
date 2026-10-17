@@ -4,7 +4,7 @@ type: reference
 created: 2026-04-06
 updated: 2026-04-06
 status: good
-tags: [black-litterman, portfolio-optimization, bayesian, asset-allocation, institutional, mean-variance, quantitative]
+tags: [black-litterman, portfolio-optimization, bayesian, portfolio-construction, institutional, mean-variance, quantitative]
 aliases: ["Black-Litterman Portfolio Model", "BL Model", "Bayesian Asset Allocation"]
 strategy_type: quantitative
 timeframe: position

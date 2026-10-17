@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-27
 updated: 2026-06-11
 status: good
-tags: [crypto, fork, security, market-microstructure]
+tags: [crypto, hard-fork, security, market-microstructure]
 aliases: ["Cross-Chain Replay", "Transaction Replay"]
 related: ["[[hard-fork]]", "[[fork-airdrop-triangulation]]", "[[2017-08-bitcoin-cash-fork-arbitrage]]", "[[2016-07-ethereum-dao-fork-arbitrage]]"]
 domain: [market-microstructure, security]

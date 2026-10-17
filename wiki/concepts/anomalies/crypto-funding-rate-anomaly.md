@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-11
 updated: 2026-10-17
 status: good
-tags: [anomalies, crypto, funding-rates, carry, derivatives]
+tags: [anomalies, crypto, funding-rate, carry, derivatives]
 aliases: ["Perpetual Funding Rate Anomaly", "Crypto Basis Trade", "Funding Carry"]
 domain: [anomalies]
 difficulty: advanced

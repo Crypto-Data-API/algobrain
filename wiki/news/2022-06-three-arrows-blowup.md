@@ -149,4 +149,4 @@ Six distinct trade setups emerged:
 
 ## Related
 
-[[liquidation-cascade-arbitrage]] · [[gbtc-discount-arbitrage]] · [[2022-06-steth-depeg]] · [[2022-05-terra-luna-depeg-arb]] · [[2021-2022-gbtc-discount]] · [[bankruptcy-claim-arbitrage]] · [[block-trade-flipping-arbitrage]] · [[archegos-blowup-2021]]
+[[liquidation-cascade-arbitrage]] · [[zipmex]] · [[gbtc-discount-arbitrage]] · [[2022-06-steth-depeg]] · [[2022-05-terra-luna-depeg-arb]] · [[2021-2022-gbtc-discount]] · [[bankruptcy-claim-arbitrage]] · [[block-trade-flipping-arbitrage]] · [[archegos-blowup-2021]]

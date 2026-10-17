@@ -224,7 +224,7 @@ Bitcoin competes less with other crypto assets and more with traditional store-o
 - **Regulatory** — adverse rulings on custody, ETFs, or mining can compress flows.
 - **Security budget** — long-run reliance on fee revenue as block subsidy decays.
 - **Concentration** — ETF/custodian concentration ([[coinbase]]) and large-holder ("whale") distribution risk.
-- **Quantum (long-tail)** — future cryptographic threats to ECDSA/SHA-256, mitigated by potential protocol upgrades.
+- **[[quantum|Quantum]] (long-tail)** — future cryptographic threats to ECDSA/SHA-256, mitigated by potential protocol upgrades.
 - **Volatility & leverage** — [[liquidation]] cascades on crowded [[perpetual-futures|perps]] amplify moves in both directions.
 
 > **Risk warning:** Crypto assets are highly volatile and speculative. Nothing here is investment advice. In the current Extreme-Fear / bear regime, leveraged directional exposure carries elevated liquidation risk.

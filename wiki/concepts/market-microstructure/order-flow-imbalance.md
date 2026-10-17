@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-07
 updated: 2026-06-11
 status: good
-tags: [market-microstructure, order-flow, hft, algorithmic-trading, ai-trading, indicators]
+tags: [market-microstructure, order-flow, hft, algorithmic, ai-trading, indicators]
 aliases: ["OFI", "Order Imbalance", "Order Flow Imbalance Signal"]
 domain: [market-microstructure, algorithmic-trading]
 prerequisites: ["[[order-book]]", "[[order-flow]]", "[[bid-ask-spread]]", "[[market-impact]]"]

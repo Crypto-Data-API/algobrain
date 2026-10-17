@@ -21,7 +21,7 @@ A **demand curve** slopes downward — buyers want more at lower prices. A **sup
 - **A shift in the curves** (a change in fundamentals — new mine output, a demand shock, a regulatory change) moves the equilibrium price to a new level.
 - **A movement along the curves** (a change in price without a change in fundamentals) re-balances quantity supplied and demanded.
 
-**Elasticity** governs how violently price responds. When supply or demand is inelastic — energy, grains, anything with no near-term substitute — a small imbalance produces a large price move. The April 2020 negative WTI crude print and recurrent natural-gas spikes are textbook inelastic-supply events (see [[crude-oil]], [[commodities-overview]]).
+**[[elasticity-of-demand|Elasticity]]** governs how violently price responds. When supply or demand is inelastic — energy, grains, anything with no near-term substitute — a small imbalance produces a large price move. The April 2020 negative WTI crude print and recurrent natural-gas spikes are textbook inelastic-supply events (see [[crude-oil]], [[commodities-overview]]).
 
 ### Shift vs. movement — and what moves each curve
 

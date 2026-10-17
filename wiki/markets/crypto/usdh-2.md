@@ -105,7 +105,7 @@ USDH rides two converging narratives: the **fiat-backed RWA-dollar** theme (rese
 ## Risks
 
 - **Reserve / counterparty risk** — dependence on banks, JP Morgan custody and tokenized-Treasury issuers (BlackRock, Superstate); a custodian or issuer failure could impair backing.
-- **Off-chain dependency** — redemption at par relies on off-chain banking rails and the issuer honouring redemptions; banking disruptions are the classic fiat-backed [[depeg]] trigger (cf. USDC during the March 2023 SVB episode; see [[stablecoin-depegs]]).
+- **Off-chain dependency** — redemption at par relies on off-chain banking rails and the issuer honouring redemptions; banking disruptions are the classic fiat-backed [[depeg-risk|depeg]] trigger (cf. USDC during the March 2023 SVB episode; see [[stablecoin-depegs]]).
 - **Attestation vs. audit** — monthly attestations are reviews, not full audits; reserve transparency is only as good as the attestor's scope.
 - **Concentration / ecosystem risk** — USDH is tightly coupled to Hyperliquid; stress in that single venue affects demand and liquidity, and a HyperEVM smart-contract or oracle failure would hit USDH directly.
 - **Regulatory risk** — yield-bearing/ecosystem-revenue mechanics and the reserve composition sit within evolving stablecoin and securities frameworks.

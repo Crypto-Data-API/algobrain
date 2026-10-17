@@ -4,7 +4,7 @@ type: news
 created: 2026-04-26
 updated: 2026-06-17
 status: good
-tags: [forex, history, crisis, japan, carry-trade]
+tags: [forex, history, crisis, japan, carry]
 aliases: ["Aug 5 Yen Crash", "Nikkei Crash 2024", "Carry Unwind 2024", "BoJ Hike Aftermath"]
 event_date: 2024-08-05
 markets_affected: [forex, equities, bonds]

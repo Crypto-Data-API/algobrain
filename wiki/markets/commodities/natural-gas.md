@@ -4,7 +4,7 @@ type: market
 created: 2026-04-06
 updated: 2026-06-12
 status: good
-tags: [commodities, energy, volatility, seasonal]
+tags: [commodities, energy, volatility, seasonality]
 aliases: ["nat gas", "NG", "Henry Hub"]
 related: ["[[commodities]]", "[[futures]]", "[[volatility]]", "[[seasonal-trading]]", "[[cftc]]", "[[crude-oil]]", "[[heating-oil]]", "[[cot-report-analysis]]", "[[commodity-seasonality-patterns]]", "[[eia-data]]", "[[inventory-cycle-analysis]]", "[[geopolitical-risk-premium]]"]
 ---

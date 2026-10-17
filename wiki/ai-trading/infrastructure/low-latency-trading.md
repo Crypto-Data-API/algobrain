@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-06
 updated: 2026-04-13
 status: good
-tags: [infrastructure, hft, latency, market-microstructure]
+tags: [infrastructure, hft, market-microstructure]
 aliases: ["Latency in Trading", "Low Latency", "Ultra-Low Latency"]
 domain: [market-microstructure]
 difficulty: advanced

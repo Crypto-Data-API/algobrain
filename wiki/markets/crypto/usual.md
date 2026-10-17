@@ -9,7 +9,7 @@ aliases: ["USUAL", "Usual", "Usual Money"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://usual.money/"
-related: ["[[collateralization]]", "[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[governance-token]]", "[[real-world-assets]]", "[[stablecoins]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
+related: ["[[collateralization]]", "[[crypto-markets]]", "[[defi]]", "[[depeg-risk]]", "[[ethereum]]", "[[governance-token]]", "[[real-world-assets]]", "[[stablecoins]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Usual
@@ -74,9 +74,9 @@ Usual's pitch — "ownership of the issuer," routing reserve yield to participan
 
 This event is central to understanding Usual and must be presented honestly. In **early January 2025**, Usual governance changed the redemption terms for **USD0++**. Many holders had treated USD0++ as effectively pegged to $1.00 and redeemable near par on demand. The protocol clarified/introduced an early-unstaking mechanism that allowed redemption at a **floor well below $1.00** (around **$0.87**) unless holders waited out the full 4-year lock to receive $1.00, with an alternative "1:1 exit" requiring forfeiture of accrued USUAL rewards.
 
-Markets reacted immediately: **USD0++ [[depeg|depegged]]**, trading down to roughly **$0.89–$0.90** and briefly lower on secondary markets, and the move triggered cascading unwinds in leveraged DeFi positions (notably on lending markets where USD0++ had been used as collateral and looped via the USUAL incentive trade). The USUAL governance token, already off its December 2024 high, sold off sharply, and TVL drained rapidly as the incentive flywheel reversed.
+Markets reacted immediately: **USD0++ [[depeg-risk|depegged]]**, trading down to roughly **$0.89–$0.90** and briefly lower on secondary markets, and the move triggered cascading unwinds in leveraged DeFi positions (notably on lending markets where USD0++ had been used as collateral and looped via the USUAL incentive trade). The USUAL governance token, already off its December 2024 high, sold off sharply, and TVL drained rapidly as the incentive flywheel reversed.
 
-**Honest framing:** the underlying **USD0** stablecoin remained substantially collateralized by its reserves; the breakdown was primarily in **USD0++**, a *time-locked bond product that the market had mistakenly priced as a par stablecoin*. The episode is widely cited as a case study in (a) [[depeg|depeg]] risk arising from term/liquidity mismatch, (b) the danger of treating a yield-bearing locked instrument as a cash-equivalent, and (c) governance changing redemption rules under stress. It illustrates that "stablecoin-adjacent" yield tokens can carry duration and exit risk that is not obvious from their price hovering near $1.00.
+**Honest framing:** the underlying **USD0** stablecoin remained substantially collateralized by its reserves; the breakdown was primarily in **USD0++**, a *time-locked bond product that the market had mistakenly priced as a par stablecoin*. The episode is widely cited as a case study in (a) [[depeg-risk|depeg]] risk arising from term/liquidity mismatch, (b) the danger of treating a yield-bearing locked instrument as a cash-equivalent, and (c) governance changing redemption rules under stress. It illustrates that "stablecoin-adjacent" yield tokens can carry duration and exit risk that is not obvious from their price hovering near $1.00.
 
 ---
 
@@ -168,7 +168,7 @@ Markets reacted immediately: **USD0++ [[depeg|depegged]]**, trading down to roug
 
 ## Risks
 
-- **Depeg risk** — demonstrated in practice. [[depeg|Depeg]] risk is acute for the USD0++ bond (term/liquidity mismatch) and is not zero for USD0 if reserve quality, custody, or redemption access deteriorate.
+- **Depeg risk** — demonstrated in practice. [[depeg-risk|Depeg]] risk is acute for the USD0++ bond (term/liquidity mismatch) and is not zero for USD0 if reserve quality, custody, or redemption access deteriorate.
 - **Governance / redemption-rule risk** — the protocol changed USD0++ redemption terms under stress, harming holders who assumed par redeemability. Future governance can alter incentives, fees, or exit terms again.
 - **RWA / collateral risk** — backing depends on tokenized off-chain Treasury instruments, introducing custody, issuer, legal, and tokenization-layer risk beyond pure on-chain [[collateralization|collateralization]].
 - **Incentive-flywheel / reflexivity risk** — much of the 2024 growth was driven by USUAL token emissions; when emissions value fell, demand for USD0++ unwound rapidly, a reflexive collapse that hit TVL and the USUAL price (~99% below its ATH).
@@ -188,7 +188,7 @@ Markets reacted immediately: **USD0++ [[depeg|depegged]]**, trading down to roug
 ## Major News & Events
 
 - **2024-12** — USUAL governance token reached its all-time high (~$1.61) amid rapid TVL growth driven by USD0++ incentives.
-- **2025-01** — USD0++ redemption-term change triggered a [[depeg]] (USD0++ to ~$0.89–$0.90) and a sharp unwind of leveraged positions; USUAL token sold off heavily and TVL drained. (See controversy section above.)
+- **2025-01** — USD0++ redemption-term change triggered a [[depeg-risk|depeg]] (USD0++ to ~$0.89–$0.90) and a sharp unwind of leveraged positions; USUAL token sold off heavily and TVL drained. (See controversy section above.)
 
 > *Additional events will be added through the wiki's source ingestion workflow as relevant articles are processed.*
 
@@ -259,7 +259,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can trade U
 
 - [[stablecoins]]
 - [[real-world-assets]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[collateralization]]
 - [[defi]]
 - [[liquity]]

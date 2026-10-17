@@ -13,7 +13,7 @@ website: "https://larvalabs.com"
 related: ["[[cryptopunks]]", "[[autoglyphs]]", "[[meebits]]", "[[nft]]", "[[yuga-labs]]"]
 ---
 
-Larva Labs is a two-person software studio founded by Matt Hall and John Watkinson in 2005 that became one of the most influential entities in NFT history. The studio created [[cryptopunks|CryptoPunks]] (2017), [[autoglyphs|Autoglyphs]] (2019), and [[meebits|Meebits]] (2021) — three landmark NFT collections that helped define the entire non-fungible token movement. In March 2022, Larva Labs sold the intellectual property rights to all three collections to [[yuga-labs|Yuga Labs]].
+Larva Labs is a two-person software studio founded by Matt Hall and [[john-watkinson|John Watkinson]] in 2005 that became one of the most influential entities in NFT history. The studio created [[cryptopunks|CryptoPunks]] (2017), [[autoglyphs|Autoglyphs]] (2019), and [[meebits|Meebits]] (2021) — three landmark NFT collections that helped define the entire non-fungible token movement. In March 2022, Larva Labs sold the intellectual property rights to all three collections to [[yuga-labs|Yuga Labs]].
 
 ## History
 

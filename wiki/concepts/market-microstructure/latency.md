@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-15
 updated: 2026-06-11
 status: good
-tags: [market-microstructure, high-frequency-trading, slippage, liquidity]
+tags: [market-microstructure, hft, slippage, liquidity]
 aliases: ["Latency", "Trading Latency", "Network Latency", "Tick-to-Trade Latency"]
 related: ["[[high-frequency-trading]]", "[[latency-arbitrage]]", "[[co-location]]", "[[order-book]]", "[[slippage]]", "[[queue-position]]", "[[liquidity-provider]]", "[[market-microstructure-overview]]"]
 domain: [market-microstructure]

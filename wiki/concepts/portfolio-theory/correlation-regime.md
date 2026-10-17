@@ -6,7 +6,7 @@ updated: 2026-07-13
 status: excellent
 tags: [portfolio-theory, risk-management, correlation, market-regime, diversification]
 aliases: ["Correlation Regime", "Correlation Spike", "Correlation Regimes"]
-related: ["[[correlation]]", "[[correlation-of-returns]]", "[[correlation-matrix]]", "[[implied-correlation]]", "[[diversification]]", "[[risk-parity]]", "[[modern-portfolio-theory]]", "[[options-risk-budgeting]]", "[[risk-budgeting]]", "[[volatility-regime]]", "[[volatility-regime-classification]]", "[[volatility-regime-switching]]", "[[fat-tails]]", "[[covid-crash]]", "[[2008-financial-crisis]]", "[[vix-august-2024-spike]]", "[[volmageddon]]", "[[cryptodataapi]]"]
+related: ["[[correlation]]", "[[correlation-of-returns]]", "[[correlation-matrix]]", "[[implied-correlation]]", "[[diversification]]", "[[risk-parity]]", "[[modern-portfolio-theory]]", "[[options-risk-budgeting]]", "[[risk-budgeting]]", "[[volatility-regime]]", "[[volatility-regime-classification]]", "[[volatility-regime-switching]]", "[[fat-tails]]", "[[covid-crash]]", "[[2008-global-financial-crisis]]", "[[vix-august-2024-spike]]", "[[volmageddon]]", "[[cryptodataapi]]"]
 domain: [portfolio-theory, risk-management]
 prerequisites: ["[[correlation]]", "[[correlation-of-returns]]"]
 difficulty: intermediate
@@ -196,7 +196,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 - [[volatility-regime-classification]] — operational vol-regime framework
 - [[volatility-regime-switching]] — formal regime models, applicable to correlations too
 - [[fat-tails]] — companion phenomenon: regime change brings both correlation spikes and tail events
-- [[2008-financial-crisis]] / [[covid-crash]] / [[vix-august-2024-spike]] / [[volmageddon]] — case studies
+- [[2008-global-financial-crisis|2008-financial-crisis]] / [[covid-crash]] / [[vix-august-2024-spike]] / [[volmageddon]] — case studies
 - [[reflexivity]] — the amplification mechanism that makes correlations overshoot
 
 ## Sources

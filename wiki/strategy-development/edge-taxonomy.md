@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-10
 updated: 2026-04-13
 status: excellent
-tags: [strategy-development, edge, alpha, market-microstructure, behavioral-finance, risk-premia]
+tags: [strategy-development, edge, alpha-edge, market-microstructure, behavioral-finance, risk-premia]
 aliases: ["Sources of Edge", "Where Alpha Comes From", "Six Sources of Edge"]
 domain: [strategy-development]
 difficulty: intermediate

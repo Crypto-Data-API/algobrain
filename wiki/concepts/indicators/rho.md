@@ -6,13 +6,13 @@ updated: 2026-06-11
 status: good
 tags: [options, derivatives, indicators]
 aliases: ["Rho", "interest-rate sensitivity", "rho greek"]
-related: ["[[options-greeks]]", "[[delta]]", "[[gamma]]", "[[theta]]", "[[vega]]", "[[black-scholes]]", "[[put-call-parity]]", "[[leaps]]"]
+related: ["[[options-greeks]]", "[[delta]]", "[[gamma]]", "[[theta]]", "[[vega]]", "[[black-scholes]]", "[[put-call-parity]]", "[[long-dated-options]]"]
 domain: [derivatives, risk-management]
 prerequisites: ["[[options-greeks]]", "[[interest-rates]]"]
 difficulty: intermediate
 ---
 
-**Rho** measures the sensitivity of an option's price to a change in the risk-free [[interest-rates|interest rate]], conventionally expressed as the change in option value for a 1-percentage-point (100 bps) move in rates. It is generally the least significant of the primary [[options-greeks]] for short-dated contracts, but becomes material for long-dated options such as [[leaps|LEAPS]] and in high-rate or rapidly shifting rate environments.
+**Rho** measures the sensitivity of an option's price to a change in the risk-free [[interest-rates|interest rate]], conventionally expressed as the change in option value for a 1-percentage-point (100 bps) move in rates. It is generally the least significant of the primary [[options-greeks]] for short-dated contracts, but becomes material for long-dated options such as [[long-dated-options|LEAPS]] and in high-rate or rapidly shifting rate environments.
 
 ## Overview
 
@@ -76,7 +76,7 @@ Professional desks aggregate net rho across the portfolio alongside the other Gr
 - [[vega]] — sensitivity to implied volatility
 - [[black-scholes]] — pricing model that produces rho
 - [[put-call-parity]] — relationship governing call vs put rho
-- [[leaps]] — long-dated options where rho is most relevant
+- [[long-dated-options|leaps]] — long-dated options where rho is most relevant
 - [[interest-rates]]
 
 ## Sources

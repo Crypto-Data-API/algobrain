@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-10
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum, lrt, lst, restaking, staking]
+tags: [crypto, defi, ethereum, lst, restaking, staking]
 entity_type: protocol
 founded: 2023
 headquarters: "Decentralized"

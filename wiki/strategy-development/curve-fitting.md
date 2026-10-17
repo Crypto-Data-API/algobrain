@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-13
 updated: 2026-06-20
 status: good
-tags: [strategy-development, backtesting, overfitting, methodology]
+tags: [strategy-development, backtesting, validation, methodology]
 aliases: ["Curve-Fitting", "Curve Fit", "Data Mining"]
 domain: [strategy-development]
 difficulty: intermediate

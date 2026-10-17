@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-10
 updated: 2026-10-17
 status: excellent
-tags: [strategy-development, backtesting, overfitting, validation, methodology]
+tags: [strategy-development, backtesting, validation, methodology]
 aliases: ["Backtest Overfitting", "Curve Fitting Detection"]
 domain: [strategy-development]
 difficulty: advanced

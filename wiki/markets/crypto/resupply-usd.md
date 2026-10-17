@@ -122,7 +122,7 @@ REUSD liquidity is concentrated in **[[defi|DeFi]] venues on [[ethereum|Ethereum
 - **Governance risk** — Parameter and emissions decisions (collateral types, rates, insurance-pool sizing) directly affect peg stability.
 - **Regulatory risk** — Evolving stablecoin rules may affect DeFi-native dollar issuance.
 
-See [[stablecoins]], [[depeg]], and [[collateralization]] for the general framework.
+See [[stablecoins]], [[depeg-risk|depeg]], and [[collateralization]] for the general framework.
 
 ---
 
@@ -143,7 +143,7 @@ See [[stablecoins]], [[depeg]], and [[collateralization]] for the general framew
 - [[curve]]
 - [[dola-usd]]
 - [[dai]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[usdc]]
 - [[ethereum]]
 - [[crypto-markets]]

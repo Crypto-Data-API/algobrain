@@ -9,7 +9,7 @@ aliases: ["RPL", "Rocket Pool ETH", "rETH"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.rocketpool.net"
-related: ["[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[governance-token]]", "[[lido]]", "[[liquid-staking]]", "[[slashing]]", "[[smart-contract-risk]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[depeg-risk]]", "[[ethereum]]", "[[governance-token]]", "[[lido]]", "[[liquid-staking]]", "[[slashing]]", "[[smart-contract-risk]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Rocket Pool
@@ -202,7 +202,7 @@ RPL inflation (historically ~5%/yr) is split among node operators (rewarding RPL
 
 ## Risks
 
-- **rETH [[depeg]] risk** — rETH should track its growing ETH redemption value, but in secondary markets it can trade at a discount during stress (forced selling, thin liquidity, or doubt about redeemability). A persistent discount can cascade for leveraged holders, even though protocol redemptions remain backed by real staked ETH.
+- **rETH [[depeg-risk|depeg]] risk** — rETH should track its growing ETH redemption value, but in secondary markets it can trade at a discount during stress (forced selling, thin liquidity, or doubt about redeemability). A persistent discount can cascade for leveraged holders, even though protocol redemptions remain backed by real staked ETH.
 - **[[slashing]] and validator penalties** — If node operators are slashed or go offline, penalties are absorbed first by the operator's ETH and RPL bond; the design is intended to insulate rETH holders, but a correlated slashing event (e.g., a client bug across many minipools) is a tail risk.
 - **[[smart-contract-risk]]** — Rocket Pool's deposit pool, minipool, and reward contracts are complex and immutable in parts; a bug could put staked ETH at risk. The protocol is heavily audited but not risk-free.
 - **RPL collateral volatility** — Because RPL is itself a volatile asset used as operator collateral, a sharp RPL drawdown (RPL is ~97% below its 2023 ATH) can push operators below minimum collateral thresholds, stressing the insurance model.
@@ -290,7 +290,7 @@ Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataap
 - [[smart-contract-risk]]
 - [[governance-token]]
 - [[defi]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 
 ---
 

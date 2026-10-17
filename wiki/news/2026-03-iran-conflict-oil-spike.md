@@ -4,7 +4,7 @@ type: news
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [news, iran, oil, geopolitics, inflation, fed, bonds, energy, defense, consumer-confidence]
+tags: [news, iran, oil, geopolitics, inflation, monetary-policy, bonds, energy, defense, consumer-confidence]
 event_date: 2026-03-09
 markets_affected: [stocks, commodities, bonds, forex]
 impact: high

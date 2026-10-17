@@ -18,7 +18,7 @@ related: ["[[crypto-markets]]", "[[ethereum]]", "[[euro]]", "[[forex]]", "[[gnos
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
-EURe trades at approximately **$1.15** because it is pegged to the **euro (EUR)**, not the US dollar. The ~$1.15 USD quote simply reflects the prevailing EUR/USD exchange rate — one EURe ≈ one euro ≈ $1.15. This is the intended [[forex]] peg, **not a [[depeg]]**: against its actual reference asset (the euro) EURe holds at ~€1.00. Market capitalization is roughly **$26.89M** (rank #689), with the token essentially flat over recent sessions (24h -0.08%, 7d -0.85%).
+EURe trades at approximately **$1.15** because it is pegged to the **euro (EUR)**, not the US dollar. The ~$1.15 USD quote simply reflects the prevailing EUR/USD exchange rate — one EURe ≈ one euro ≈ $1.15. This is the intended [[forex]] peg, **not a [[depeg-risk|depeg]]**: against its actual reference asset (the euro) EURe holds at ~€1.00. Market capitalization is roughly **$26.89M** (rank #689), with the token essentially flat over recent sessions (24h -0.08%, 7d -0.85%).
 
 ---
 
@@ -254,7 +254,7 @@ EURe sits at the intersection of three themes: **regulated stablecoins**, **MiCA
 - [[stablecoins]]
 - [[euro]]
 - [[forex]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[defi]]
 - [[mica]]
 

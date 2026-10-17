@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, forex, real-world-assets, stablecoins, tokenization]
+tags: [crypto, forex, real-world-assets, stablecoins]
 aliases: ["TGBP", "tGBP"]
 entity_type: protocol
 headquarters: "United Kingdom"
 website: "https://www.tokenisedgbp.com"
-related: ["[[british-pound]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[forex]]", "[[real-world-assets]]", "[[stablecoins]]", "[[tokenization]]", "[[treasuries]]"]
+related: ["[[british-pound]]", "[[crypto-markets]]", "[[depeg-risk]]", "[[ethereum]]", "[[forex]]", "[[real-world-assets]]", "[[stablecoins]]", "[[tokenization]]", "[[treasuries]]"]
 ---
 
 # Tokenised GBP
@@ -24,7 +24,7 @@ As of 2026-06-21, TGBP trades at **$1.32** with a market capitalization of **$31
 
 ## Reading the Price Correctly
 
-Because CoinGecko and most aggregators quote in USD, a GBP stablecoin will **always** display near the prevailing GBP/USD rate (historically ~$1.20–$1.40). A reading of $1.32 means **1 TGBP = £1.00 = ~$1.32**, which is the peg working as intended. A genuine [[depeg]] would show up as TGBP diverging from the GBP/USD rate — for example, trading materially below £1.00-equivalent. Do not interpret the USD figure as a 32% premium.
+Because CoinGecko and most aggregators quote in USD, a GBP stablecoin will **always** display near the prevailing GBP/USD rate (historically ~$1.20–$1.40). A reading of $1.32 means **1 TGBP = £1.00 = ~$1.32**, which is the peg working as intended. A genuine [[depeg-risk|depeg]] would show up as TGBP diverging from the GBP/USD rate — for example, trading materially below £1.00-equivalent. Do not interpret the USD figure as a 32% premium.
 
 ---
 
@@ -48,7 +48,7 @@ A fiat-backed sterling stablecoin holds its peg through a tight loop between **o
 3. **Arbitrage ("secondary market").** If TGBP trades below £1.00-equivalent on the open market, arbitrageurs buy the discount and redeem at par for a profit, lifting price back toward peg; if it trades above, they mint and sell. This arbitrage only works while the primary mint/redeem window is open, fully funded, and honored — which is why **frozen redemptions or reserve shortfalls are the canonical depeg trigger**.
 4. **Reserve income.** The short-dated UK Treasuries in reserve earn yield (the GBP risk-free rate), which is the issuer's primary revenue model — analogous to how USD stablecoin issuers monetize T-bill interest. This aligns issuer incentives with growing float but also makes reserve transparency/attestation central to trust.
 
-The economically meaningful question for a sterling holder is always **"is TGBP holding £1.00?"** — not what it prints in USD. A true [[depeg]] is TGBP diverging from the GBP reference rate, distinct from ordinary [[forex|GBP/USD]] movement.
+The economically meaningful question for a sterling holder is always **"is TGBP holding £1.00?"** — not what it prints in USD. A true [[depeg-risk|depeg]] is TGBP diverging from the GBP reference rate, distinct from ordinary [[forex|GBP/USD]] movement.
 
 ---
 
@@ -125,7 +125,7 @@ TGBP belongs to the **regulated fiat stablecoin / tokenization-of-money** narrat
 
 - **FX / quote confusion:** The USD quote tracks GBP/USD; users unfamiliar with the FX peg may misread normal currency moves as instability. The economic risk for a sterling holder is whether TGBP holds £1.00, not $1.32.
 - **Issuer / reserve risk:** Peg integrity depends on the issuer actually holding fully-backed, liquid GBP reserves and honoring 1:1 redemption. Reserve quality (cash + short UK Treasuries) is high but counterparty risk remains.
-- **Depeg risk:** Loss of confidence, reserve shortfall, or frozen redemptions could cause TGBP to trade below its sterling peg — a true [[depeg]] (distinct from FX movement).
+- **Depeg risk:** Loss of confidence, reserve shortfall, or frozen redemptions could cause TGBP to trade below its sterling peg — a true [[depeg-risk|depeg]] (distinct from FX movement).
 - **Liquidity risk:** Secondary liquidity is modest and concentrated (Kraken, Orca); large redemptions may rely on the issuer's primary window.
 - **Regulatory risk:** UK and global stablecoin regulation is evolving; FCA registration helps but does not eliminate regulatory change risk.
 - **Smart-contract / bridge risk:** Multi-chain deployment introduces bridge and contract risk across the supported networks.
@@ -150,7 +150,7 @@ Context: as of 2026-06-23 the wider crypto market reads **Extreme Fear (F&G 21)*
 - [[stablecoins]]
 - [[forex]]
 - [[british-pound]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[real-world-assets]]
 - [[crypto-markets]]
 

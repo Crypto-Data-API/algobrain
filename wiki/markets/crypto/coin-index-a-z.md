@@ -503,7 +503,7 @@ Alphabetical index of all **2407** pages in `wiki/markets/crypto/` — every coi
 - [[conscious-token|Conscious Token]] (CONSCIOUS)
 - [[constellation-labs|Constellation]] (Constellation Labs)
 - [[constitutiondao|ConstitutionDAO]] (PEOPLE)
-- [[contango|Contango]] (TANGO)
+- [[contango-token|Contango]] (TANGO)
 - [[convex-finance|Convex Finance]] (CVX) *(redirect)*
 - [[xpla|CONX]]
 - [[cookie|Cookie DAO]] (COOKIE)
@@ -1192,7 +1192,7 @@ Alphabetical index of all **2407** pages in `wiki/markets/crypto/` — every coi
 - [[linqai|LinqAI]] (LNQ)
 - [[liquid-euro|Liquid Euro]] (WEEUR)
 - [[liquid-mercury|Liquid Mercury]] (MERC)
-- [[liquidity|Liquidity]] (SN77)
+- [[liquidity-token|Liquidity]] (SN77)
 - [[liquidity-mining|Liquidity Mining]] (LM)
 - [[liquidity-pool|Liquidity Pool]] *(redirect)*
 - [[liquidity-pools|Liquidity Pools]]
@@ -2256,7 +2256,7 @@ Alphabetical index of all **2407** pages in `wiki/markets/crypto/` — every coi
 - [[unstable-coin|Unstable Coin]] (USDUC)
 - [[upland|Upland]] (SPARKLET)
 - [[uquid-coin|Uquid Coin]] (UQC)
-- [[uranium|Uranium]] (XU3O8)
+- [[uranium-token|Uranium]] (XU3O8)
 - [[us-sonic-dollar|US Sonic Dollar]] (USSD)
 - [[usa|USAT]] (USA)
 - [[uscr|USCR]]

@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-10
 updated: 2026-06-21
 status: excellent
-tags: [backtesting, metrics, performance, risk-adjusted-returns]
+tags: [backtesting, performance, risk-adjusted-returns]
 aliases: ["Sharpe Ratio", "Sortino Ratio", "sortino-ratio", "Calmar Ratio", "Risk-Adjusted Return Ratios"]
 domain: [backtesting, performance-measurement]
 difficulty: beginner

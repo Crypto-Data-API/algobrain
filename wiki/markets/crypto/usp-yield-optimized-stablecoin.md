@@ -16,7 +16,7 @@ related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoins]]", "[[yield-bear
 
 **USP** is a **yield-optimized (yield-bearing) [[stablecoins|stablecoin]]** issued within the Piku ecosystem and governed by PikuDAO on [[ethereum|Ethereum]]. It combines the stability of a dollar-pegged unit with the value growth of a yield-generating reserve basket. USP launches fully backed 1:1 by USD stablecoins (a $1.00 starting value); PikuDAO then diversifies that backing into an on- and off-chain basket of yield assets, and the accrued yield is reflected **directly in the token's price** rather than paid out separately.
 
-> *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).* USP trades at **$1.10** (rank **#865**, market cap **$18,279,292**, 24h **-0.08%**, 7d **+0.13%**). The price sitting **above $1.00 is by design, not a [[depeg]]**: USP is a value-accruing stablecoin, so accumulated yield raises the per-token unit value over time. The near-flat 24h/7d moves are consistent with a stable instrument whose price drifts upward only as yield accrues. See [[yield-bearing-stablecoin]] for how this "price-accrual" model differs from a fixed $1.00 [[rebasing]] design.
+> *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).* USP trades at **$1.10** (rank **#865**, market cap **$18,279,292**, 24h **-0.08%**, 7d **+0.13%**). The price sitting **above $1.00 is by design, not a [[depeg-risk|depeg]]**: USP is a value-accruing stablecoin, so accumulated yield raises the per-token unit value over time. The near-flat 24h/7d moves are consistent with a stable instrument whose price drifts upward only as yield accrues. See [[yield-bearing-stablecoin]] for how this "price-accrual" model differs from a fixed $1.00 [[rebasing]] design.
 
 ---
 
@@ -58,7 +58,7 @@ USP's defining feature is that its backing is **not a single asset class** but a
 ### Risks
 - **Yield-source risk** — returns and value-accrual depend on the underlying basket; weaker yields slow appreciation, and impaired assets can erode backing.
 - **Collateral / reserve risk** — the off-chain and on-chain assets backing USP carry counterparty, custody and [[real-world-assets|RWA]] credit risk.
-- **[[depeg]] (downside) risk** — although the price floats *upward* with yield, a loss of confidence or backing impairment could push USP *below* its accrued value; "value-accruing" protects against neither a reserve shortfall nor a liquidity crunch.
+- **[[depeg-risk|depeg]] (downside) risk** — although the price floats *upward* with yield, a loss of confidence or backing impairment could push USP *below* its accrued value; "value-accruing" protects against neither a reserve shortfall nor a liquidity crunch.
 - **Governance / smart-contract risk** — PikuDAO controls reserve composition and protocol parameters; governance capture or contract bugs are live risks.
 - **Redemption risk** — ability to redeem at fair (accrued) value depends on the issuer's redemption terms and reserve liquidity.
 
@@ -197,7 +197,7 @@ USP rides the **yield-bearing stablecoin** narrative — the fastest-growing sta
 - [[stablecoin-yields]]
 - [[compounding-open-dollar]] — peer T-bill-backed yield dollar
 - [[real-world-assets]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 
 ---
 

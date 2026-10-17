@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-14
 updated: 2026-04-14
 status: good
-tags: [regulators, government, macro, monetary-policy, interest-rates, japan, carry-trade, yield-curve-control]
+tags: [regulators, macro, monetary-policy, interest-rates, japan, carry, yield-curve-control]
 aliases: ["BOJ", "BoJ", "boj", "Nippon Ginkō"]
 entity_type: regulator
 founded: 1882

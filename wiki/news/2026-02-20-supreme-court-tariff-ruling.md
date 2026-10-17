@@ -4,7 +4,7 @@ type: news
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [news, tariffs, supreme-court, ieepa, trade-war, trump, regulation, legal, whipsaw]
+tags: [news, tariffs, supreme-court, ieepa, trump, regulation, legal, whipsaw]
 aliases: ["2026 02 Supreme Court Tariffs", "2026-02-supreme-court-tariffs"]
 event_date: 2026-02-20
 markets_affected: [stocks, commodities, forex]

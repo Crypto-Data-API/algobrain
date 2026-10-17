@@ -4,7 +4,7 @@ type: reference
 created: 2026-04-06
 updated: 2026-09-28
 status: good
-tags: [carry-trade, forex, interest-rates, macro, position-trading, yield-differential]
+tags: [carry, forex, interest-rates, macro, position-trading, yield-differential]
 aliases: ["Currency Carry Trade", "Interest Rate Carry", "JPY Carry Trade"]
 strategy_type: fundamental
 timeframe: position|long-term

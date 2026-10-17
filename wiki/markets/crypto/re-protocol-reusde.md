@@ -18,7 +18,7 @@ related: ["[[crypto-markets]]", "[[ethena-usde]]", "[[ethereum]]", "[[stablecoin
 
 reUSDe is the **junior, risk-bearing tier** of Re Protocol's two-token structure: it sits *below* the senior, principal-protected [[re-protocol-reusd|reUSD]] and **absorbs first-loss underwriting risk** in exchange for a higher, variable yield (advertised up to ~23% APR). In credit-structure terms, reUSD is the senior tranche and reUSDe is the junior/equity tranche over the same reinsurance cash-flow pool. Holders of reUSDe are effectively *providing the reinsurance capital* and being paid the underwriting premium for taking catastrophe risk — a real, off-chain, crypto-uncorrelated return source, but one that can be impaired or wiped out by a large insured-loss event.
 
-> *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).* reUSDe trades at **$1.35** (rank **#843**, market cap **$19,426,799**, 24h **+1.74%**, 7d **+2.88%**). The price **well above $1.00 is by design, not a [[depeg]]**: reUSDe is a value-accruing token, so accumulated yield is reflected directly in its unit value over time. The positive 24h/7d drift is consistent with ongoing accrual (and any mark-to-market of the underlying), not a broken peg.
+> *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).* reUSDe trades at **$1.35** (rank **#843**, market cap **$19,426,799**, 24h **+1.74%**, 7d **+2.88%**). The price **well above $1.00 is by design, not a [[depeg-risk|depeg]]**: reUSDe is a value-accruing token, so accumulated yield is reflected directly in its unit value over time. The positive 24h/7d drift is consistent with ongoing accrual (and any mark-to-market of the underlying), not a broken peg.
 
 ---
 
@@ -105,7 +105,7 @@ reUSDe rides the **insurance-linked / RWA-yield** narrative as its highest-octan
 ## Risks
 
 - **First-loss / yield-source risk** — as the junior tranche, reUSDe absorbs underwriting losses first; returns depend on reinsurance-contract performance, and large insured-loss events can reduce or wipe out returns and impair principal. This is a **materially higher** risk than the senior reUSD tier.
-- **Collateral / backing risk** — value depends on the protocol's collateral and strategy holding up; an impairment can push reUSDe below its accrued value (a downside [[depeg]] relative to NAV).
+- **Collateral / backing risk** — value depends on the protocol's collateral and strategy holding up; an impairment can push reUSDe below its accrued value (a downside [[depeg-risk|depeg]] relative to NAV).
 - **Off-chain dependency** — reinsurance exposure ties on-chain value to off-chain contracts, claims processes and counterparties.
 - **Liquidity / redemption-gating risk** — exiting at fair (accrued) value depends on redemption terms and secondary-market depth, which can be thin at this ~$19M market-cap size; the junior tier is the most exposed to gating during a loss event.
 - **Smart-contract & oracle risk** — complex contract architecture and reliance on accurate valuation of illiquid insurance positions.

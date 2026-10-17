@@ -4,7 +4,7 @@ type: news
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [news, bitcoin, etf, sec, institutional, blackrock, fidelity]
+tags: [news, bitcoin, etf, regulation, institutional, blackrock, fidelity]
 event_date: 2024-01-10
 markets_affected: [crypto, stocks]
 impact: high

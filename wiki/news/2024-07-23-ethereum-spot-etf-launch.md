@@ -4,7 +4,7 @@ type: news
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [news, ethereum, etf, sec, institutional]
+tags: [news, ethereum, etf, regulation, institutional]
 event_date: 2024-07-23
 markets_affected: [crypto]
 impact: medium

@@ -4,7 +4,7 @@ type: strategy
 created: 2026-04-07
 updated: 2026-10-17
 status: good
-tags: [arbitrage, crypto, latency, hft, co-location, market-microstructure, speed, market-neutral]
+tags: [arbitrage, crypto, hft, co-location, market-microstructure, speed, market-neutral]
 aliases: ["Latency Arb", "Speed Arbitrage", "Crypto HFT Arbitrage", "Stale-Quote Picking"]
 strategy_type: algorithmic
 timeframe: scalp

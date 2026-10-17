@@ -90,7 +90,7 @@ The goal: maximum convexity. Every dollar here must have the potential to return
 | 5% | Deep OTM SPY puts (3-6 month) | Crash protection. In a 2008-style event, 5% OTM puts return 15-30x | 15-30x |
 | 5% | Early-stage crypto tokens | Moonshot protocol bets. 90% go to zero, 10% return 50-100x | 0x or 50-100x |
 | 3% | Biotech pre-FDA plays | Binary outcomes. Approval = 3-5x. Rejection = -80% | 3-5x per winner |
-| 2% | Deep OTM call [[leaps]] on disruptive companies | Asymmetric upside if narrative shift occurs over 1-2 years | 5-20x |
+| 2% | Deep OTM call [[long-dated-options\|leaps]] on disruptive companies | Asymmetric upside if narrative shift occurs over 1-2 years | 5-20x |
 
 ### Rebalancing Rules
 

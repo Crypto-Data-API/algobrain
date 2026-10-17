@@ -64,7 +64,7 @@ Several platforms offer footprint chart functionality:
 - **Quantower**: Modern platform with clean footprint visualization. Supports futures, crypto, and forex. Competitive pricing.
 - **Bookmap**: Primarily a heatmap/depth visualization tool but includes footprint-style volume displays. Excels at showing order book depth alongside executed flow.
 - **ATAS (Order Flow Trading)**: Dedicated order flow platform with advanced footprint features and pattern detection.
-- **Exocharts**: Crypto-focused footprint tool with exchange-aggregated data.
+- **[[exocharts|Exocharts]]**: Crypto-focused footprint tool with exchange-aggregated data.
 
 Costs typically range from $50-200/month depending on the platform and data feed. Real-time exchange data fees (especially [[cme]] data) are an additional cost.
 

@@ -2,7 +2,7 @@
 title: "Market Regime"
 type: concept
 created: 2026-07-01
-updated: 2026-07-13
+updated: 2026-10-17
 status: review
 tags: [market-regime, regime-detection, quantitative, risk-management]
 aliases: ["Market Regime", "Market Regimes", "Trading Regime", "Regime"]
@@ -54,6 +54,25 @@ Because edges are *conditional*, regime awareness is really about **strategy sel
 - **Statistical models.** Hidden Markov models (HMMs), Gaussian mixture models, and change-point detectors infer a latent regime variable from returns, volatility, and breadth features — the core of [[market-regime-detection-ml]].
 - **Macro overlays.** Mapping regimes to the [[business-cycle]] (expansion, slowdown, recession, recovery) and to monetary policy, which drives [[sector-rotation]].
 
+## Crypto-Specific Regime Axes
+
+The generic axes above carry over to crypto, but crypto adds several axes of its own that often matter more for strategy selection:
+
+| Axis | Poles | Typical signal | Strategies most exposed |
+|------|-------|----------------|-------------------------|
+| **Leverage / positioning** | Crowded long ↔ crowded short ↔ flat | [[funding-rate]] level and persistence, [[open-interest]] vs price, long/short ratio | [[crowded-long-funding-fade]], [[crowded-short-funding-fade]], [[oi-price-exhaustion]], [[oi-confirmed-trend]] |
+| **Liquidation / deleveraging** | Orderly ↔ cascade | Realized [[liquidations]] bursts, liquidity fragility | [[long-liquidation-cascade]], [[post-liquidation-rebound]] |
+| **Breadth / alt rotation** | BTC-led ↔ broad alt participation | Altcoin breadth, BTC dominance | [[breadth-and-momentum-divergence]], [[meme-coin-cycle]] |
+| **Sentiment** | Extreme fear ↔ extreme greed | [[crypto-fear-and-greed-index]] | [[contrarian-extremes]], [[sentiment-positioning-divergence]] |
+| **Cycle phase** | Accumulation → markup → distribution → markdown | Long-horizon regime label | [[distribution-post-peak-short-book]], [[full-bear-short-book]], [[defensive-majors]] |
+| **Event / policy** | Quiet ↔ catalyst-dense | Event calendar, policy headline flow | [[macro-event-pump]], [[etf-and-institutional-flow]] |
+
+Two crypto features make regime work harder than in TradFi. First, the market trades 24/7 and regime shifts often start in thin weekend or Asia-session liquidity (see [[2025-10-crypto-liquidation-cascade]]). Second, leverage is visible and reflexive: funding and OI *are* the regime as well as describing it, because the positioning they measure is what gets liquidated at the transition.
+
+### Which strategies switch on which regime
+
+The canonical mapping is [[regime-matrix]]; the operational version is [[regime-strategy-playbook]] and [[regime-adaptive-strategy]]. Range regimes switch on [[range-mean-reversion]] and [[range-trading]]. Calm high-vol-premium regimes favour [[options-premium-selling]] and [[short-volatility-strategies]]. Trend regimes favour [[oi-confirmed-trend]], [[major-trend-reclaim-rejection]] and [[liquidity-vacuum-momentum]]. Carry ([[funding-rate-harvest]]) is a positioning-regime trade more than a direction trade. The [[multi-strategy-crypto-portfolio]] uses these labels to set sleeve weights.
+
 ## Regime Persistence and Transitions
 
 Regimes are **sticky** — volatility clusters, trends persist — which is what makes them useful. But the money is made and lost at the **transitions**, which are abrupt, asymmetric (vol spikes up faster than it falls), and only cleanly visible *after the fact*. Any regime label is a lagging, probabilistic estimate, so the practical discipline is to act on imperfect signals near suspected turns rather than waiting for confirmation that arrives too late.
@@ -77,6 +96,9 @@ Regimes are **sticky** — volatility clusters, trends persist — which is what
 - `GET /api/v1/quant/timeline` — daily market regime labels, 2019-now
 - `GET /api/v1/quant/regimes/history` — full 6-regime Parquet download (2020-yesterday)
 - `GET /api/v1/quant/history` — point-in-time probability records for backtests
+- `GET /api/v1/regimes/history?from=2024-01-01` — committed long-horizon regime transitions, with the exact commit instant and run length (Pro Plus). Use the commit time, not the first sample that observed the change, so labels stay causal.
+
+**Other regime axes:** `GET /api/v1/regimes` (current label plus the full taxonomy), `GET /api/v1/event/regime/score`, `GET /api/v1/policy/regime/score`, `GET /api/v1/meme/regime/score`, `GET /api/v1/security/regime/score`, and `GET /api/v1/sentiment/fear-greed` for the sentiment axis.
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"

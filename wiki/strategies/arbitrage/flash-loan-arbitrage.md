@@ -4,7 +4,7 @@ type: strategy
 created: 2026-04-07
 updated: 2026-07-19
 status: good
-tags: [arbitrage, crypto, defi, flash-loan, aave, dex, mev, atomic, ethereum]
+tags: [arbitrage, crypto, defi, flash-loans, aave, dex, mev, atomic, ethereum]
 aliases: ["Flash Loan Arb", "Atomic Arbitrage", "DeFi Flash Arb"]
 strategy_type: algorithmic
 timeframe: scalp

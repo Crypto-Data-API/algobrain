@@ -9,7 +9,7 @@ aliases: ["BOLD", "LQTY", "LUSD", "Liquity"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.liquity.org/"
-related: ["[[collateralization]]", "[[crypto-markets]]", "[[dai]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[frax-share]]", "[[governance-token]]", "[[liquid-staking]]", "[[stablecoins]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[oi-confirmed-trend]]"]
+related: ["[[collateralization]]", "[[crypto-markets]]", "[[dai]]", "[[defi]]", "[[depeg-risk]]", "[[ethereum]]", "[[frax-share]]", "[[governance-token]]", "[[liquid-staking]]", "[[stablecoins]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Liquity
@@ -186,7 +186,7 @@ In 2025, Liquity launched **v2**, introducing the **BOLD** stablecoin. Unlike v1
 
 ## Risks
 
-- **Depeg risk (LUSD).** Although the redemption mechanism gives LUSD a strong ~$1.00 floor, it has historically traded at a *premium* (above $1.00) during stress because it is a flight-to-safety decentralized asset; sustained premiums can hurt borrowers and reduce usability. Hard [[depeg|depegs]] below $1 are arbitraged away by redemptions but are not impossible under extreme conditions.
+- **Depeg risk (LUSD).** Although the redemption mechanism gives LUSD a strong ~$1.00 floor, it has historically traded at a *premium* (above $1.00) during stress because it is a flight-to-safety decentralized asset; sustained premiums can hurt borrowers and reduce usability. Hard [[depeg-risk|depegs]] below $1 are arbitraged away by redemptions but are not impossible under extreme conditions.
 - **Immutability trade-off.** Governance-free immutability removes admin/centralization risk but means a discovered bug in v1 **cannot be patched** — the only remedy is migration. This is a deliberate, double-edged design choice.
 - **ETH collateral / liquidation risk.** Troves at the 110% minimum are highly sensitive to ETH price drops; rapid declines can trigger liquidations, and during severe events the Stability Pool can be depleted, forcing debt redistribution onto remaining borrowers.
 - **Redemption risk for borrowers.** Low-collateral (v1) or low-interest (v2) Troves are redeemed first; a borrower can have their position partially closed against their wishes when LUSD/BOLD trades below peg.
@@ -268,7 +268,7 @@ Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataap
 
 - [[stablecoins]]
 - [[collateralization]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 - [[defi]]
 - [[dai]]
 - [[frax-share]]

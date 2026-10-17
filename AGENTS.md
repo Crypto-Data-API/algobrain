@@ -332,6 +332,9 @@ agents, alternative-data, api, bnb, compliance, deep-learning, depin, dex, energ
 
 # Adopted 2026-08-21 (tag audit batch 3)
 agricultural, ai, alpha-edge, amm, calendar-effects, contrarian, crisis, cross-chain, defined-risk, depeg, digital-art, diversification, factor-investing, fixed-income, gamma, governance, greeks, grid-trading, income, industrial-metals, informational-edge, institutional, launchpad, layer-2, lending, llm, mev, monetary-policy, nlp, open-source, oracle, payments, performance, portfolio-construction, premium-selling, price-action, restaking, short-selling, smart-contracts, staking, vix, yield-farming
+
+# Adopted 2026-10-17 (tag audit batch 4)
+adverse-selection, airdrop, algorithmic-stablecoin, base, basis-trade, bayesian, binance, bridges, carry, cex, cointegration, commodity-spread, contagion, credit-spread, crisis-alpha, cycles, debit-spread, deribit, directional, emerging-markets, employment, flash-loans, hard-fork, impermanent-loss, implied-volatility, inflation, japan, long-volatility, market-breadth, market-impact, market-manipulation, narratives, passive-investing, pfp, precious-metals, pump-fun, reinforcement-learning, retirement, seasonality, short-squeeze, social-media, statistical-arbitrage, structural, support-resistance, tariffs, term-structure, terra, tokenized-treasuries, transaction-costs
 ```
 
 ## Content Guidelines

@@ -9,7 +9,7 @@ aliases: ["YUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://app.aegis.im"
-related: ["[[basis-trade]]", "[[bitcoin]]", "[[crypto-markets]]", "[[delta-neutral]]", "[[depeg]]", "[[ethena-usde]]", "[[ethereum]]", "[[funding-rate]]", "[[noon-usn]]", "[[stablecoins]]", "[[synthetic-dollar]]"]
+related: ["[[basis-trade]]", "[[bitcoin]]", "[[crypto-markets]]", "[[delta-neutral]]", "[[depeg-risk]]", "[[ethena-usde]]", "[[ethereum]]", "[[funding-rate]]", "[[noon-usn]]", "[[stablecoins]]", "[[synthetic-dollar]]"]
 ---
 
 # Aegis YUSD
@@ -32,7 +32,7 @@ related: ["[[basis-trade]]", "[[bitcoin]]", "[[crypto-markets]]", "[[delta-neutr
 | **7d Change** | -0.05% |
 | **Currency tracked** | US dollar (USD) |
 
-YUSD targets the US dollar, so ~$0.9983 is close to peg but slightly under — normal for a synthetic dollar whose backing and hedge can drift a few basis points from par. The small 24h/7d moves are consistent with a peg that holds within a tight band rather than a full [[depeg]].
+YUSD targets the US dollar, so ~$0.9983 is close to peg but slightly under — normal for a synthetic dollar whose backing and hedge can drift a few basis points from par. The small 24h/7d moves are consistent with a peg that holds within a tight band rather than a full [[depeg-risk|depeg]].
 
 ## Architecture — How Aegis Works
 
@@ -86,7 +86,7 @@ YUSD sits in the **delta-neutral synthetic-dollar / "internet bond"** narrative 
 
 - **Negative funding risk:** If perpetual funding flips negative for an extended period, the short side **pays** instead of receiving, eroding yield and potentially the backing.
 - **Hedge / execution risk:** The delta-neutral hedge depends on liquid perp markets; gaps, liquidations, or auto-deleveraging on the venue can break the hedge during stress.
-- **Exchange / custody / counterparty risk:** Collateral sits with custodians and hedges sit on derivatives venues — a custodian failure or exchange insolvency can cause loss and a [[depeg]].
+- **Exchange / custody / counterparty risk:** Collateral sits with custodians and hedges sit on derivatives venues — a custodian failure or exchange insolvency can cause loss and a [[depeg-risk|depeg]].
 - **Peg / liquidity risk:** With ~$36M market cap and very low on-chain volume, YUSD can trade off peg; redemptions in a crunch may not clear at $1.
 - **Smart-contract & governance risk:** Bugs or admin-key compromise could threaten funds.
 - **Not a bank deposit:** YUSD carries no deposit insurance; the "yield" is compensation for real market risk borne by the holder.
@@ -96,7 +96,7 @@ YUSD sits in the **delta-neutral synthetic-dollar / "internet bond"** narrative 
 - **Track BTC perp funding before chasing the yield.** Positive/contango funding feeds returns; flat or negative funding starves them. The yield is a live read on the basis, not a fixed rate.
 - **Hold base YUSD for a dollar unit; stake only if you accept carry risk.** The staked variant is where the real market exposure lives.
 - **Assume redemption can slow in stress** — at ~$36M with thin secondary liquidity, plan exits before a volatility event, not during one.
-- **Watch venue and custody concentration** as the key tail risk; an exchange failure or custody breach is the classic way carry stablecoins [[depeg]].
+- **Watch venue and custody concentration** as the key tail risk; an exchange failure or custody breach is the classic way carry stablecoins [[depeg-risk|depeg]].
 - **Size as a risk asset, not cash equivalent.**
 
 ## See Also
@@ -111,7 +111,7 @@ YUSD sits in the **delta-neutral synthetic-dollar / "internet bond"** narrative 
 - [[bitcoin]]
 - [[crypto-markets]]
 - [[ethereum]]
-- [[depeg]]
+- [[depeg-risk|depeg]]
 
 ## Sources
 

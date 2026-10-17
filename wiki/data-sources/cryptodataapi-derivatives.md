@@ -4,7 +4,7 @@ type: source
 created: 2026-07-13
 updated: 2026-10-17
 status: good
-tags: [data-provider, crypto, api, derivatives, funding-rates, open-interest, binance, hyperliquid, perpetual-futures]
+tags: [data-provider, crypto, api, derivatives, funding-rate, open-interest, binance, hyperliquid, perpetual-futures]
 aliases: ["CryptoDataAPI Derivatives", "CDA Derivatives", "Derivatives API"]
 source_type: data
 source_url: "https://cryptodataapi.com/api/docs"
