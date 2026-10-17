@@ -36,6 +36,126 @@ related:
   - "[[funding-rate]]"
   - "[[perpetual-futures]]"
   - "[[spot-vs-derivatives-volume-ratio]]"
+gates:
+  - id: top20_universe
+    role: universe
+    rule: "BTC, ETH, or an alt ranked in the top 20 by market cap with a Hyperliquid perp; no microcaps"
+    runnable: true
+    endpoint: /api/v1/coins?per_page=40
+    field: coins[].market_cap_rank
+    note: "The page names no ranking; market cap is our reading. Drop rows whose categories include Stablecoins, then keep coins that appear in /api/v1/hyperliquid/open-interest assets[].coin. The page trades Binance USD-M perps; every price gate here reads Hyperliquid's own bars."
+  - id: asia_high
+    role: entry
+    rule: "Asia high AH = the highest 1m high from 00:00 to 07:00 UTC"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&start={start}&end={end}
+    field: candles[].high
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}&end={end}
+    replay_field: klines[].h
+    note: "Live: start = 00:00 UTC, end = 06:59 UTC (end is inclusive, so 07:00 would add the 07:00 bar). Replay: end = 07:00 UTC (exclusive); coverage.local_first says how far the 1m archive reaches. Hyperliquid itself serves only about 4 days of 1m bars."
+  - id: atr_asia
+    role: stop
+    rule: "atr_asia = Wilder ATR(14) on 1m bars as of the 07:00 UTC close"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&start={start}&end={end}&atr=14
+    field: candles[].atr
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}&end={end}
+    replay_field: klines[].h
+    note: "Same 00:00-06:59 UTC window as asia_high; read the atr on the 06:59 bar (the first 14 bars carry null). The replay serves raw bars: compute Wilder ATR(14) from h, l and c."
+  - id: breakout_above_asia_high
+    role: entry
+    rule: "Setup: a 1m close above AH between 08:00 and 10:00 UTC"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=3
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}&end={end}
+    replay_field: klines[].c
+    note: "Use the last closed bar; drop the forming bar named by forming_bar_timestamp. AH comes from asia_high."
+  - id: failed_breakout_entry
+    role: entry
+    rule: "Short when, within 60 minutes of the breakout bar, a later 1m close prints back below AH"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=3
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}&end={end}
+    replay_field: klines[].c
+    note: "Enter at that bar's close. No failure inside 60 minutes means no trade today."
+  - id: funding_not_negative
+    role: filter
+    rule: "Skip the short when the current funding rate is negative (below 0) at entry"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "Hyperliquid settles funding hourly, so a 09:30-21:00 UTC hold crosses about 11 settlements, not the single 16:00 UTC Binance stamp the page costs."
+  - id: spot_volume_24h
+    role: filter
+    rule: "Spot leg of the spot/derivatives ratio: the coin's 24h spot quote volume"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/24hr?symbol={symbol}USDT
+    field: quote_volume
+    replay: /api/v1/backtesting/klines?symbol={symbol}USDT&exchange=binance&interval=1h&start={start}
+    replay_field: klines[].qv
+    note: "Binance spot only (USDT). The ratio's usual spot leg spans several venues, and no multi-venue spot volume is served. Replay: sum 24 hourly qv values."
+  - id: perp_volume_24h
+    role: filter
+    rule: "Derivatives leg of the spot/derivatives ratio: the coin's 24h Hyperliquid perp notional volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1h&start={start}
+    replay_field: klines[].v
+    note: "Replay v is in coin units (qv is null for Hyperliquid): sum v x c over 24 hourly bars for USD."
+  - id: spot_led_day
+    role: filter
+    rule: "Skip when the 24h spot/derivatives volume ratio is unusually high (a spot-led, ETF-flow day)"
+    runnable: partial
+    input: derived
+    inputs: [spot_volume_24h, perp_volume_24h]
+    note: "No spot/derivatives ratio is served. The proxy is Binance spot over Hyperliquid perp volume, a cross-venue ratio whose level is not comparable to published ones. Judge 'unusually high' against the proxy's own history (e.g. a top-decile cutoff over 90 days, built from the replays); the cutoff is the desk's."
+  - id: late_asia_depth_check
+    role: filter
+    rule: "Abort if the late-Asia book is anomalously deep: depth within 25 bps of mid before entry, against its own 24h history"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth/{coin}?minutes=1440
+    field: history[].total_depth_25bps_usd
+    note: "About one sample every 2 minutes for the top 25 Hyperliquid perps (an untracked coin 404s). The page gives no threshold for 'freakishly high', so the cutoff is the desk's. No history before the trailing 24h is served for replay."
+  - id: tp1_asia_mid
+    role: exit
+    rule: "Close 50% at the Asia midpoint (AH + AL) / 2"
+    runnable: true
+    input: derived
+    inputs: [asia_high, tp2_asia_low]
+  - id: tp2_asia_low
+    role: exit
+    rule: "Close the remainder at the Asia low AL, the lowest 1m low from 00:00 to 07:00 UTC (either this or ny_close_exit, whichever comes first)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&start={start}&end={end}
+    field: candles[].low
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}&end={end}
+    replay_field: klines[].l
+    note: "Same window as asia_high: live end = 06:59 UTC (inclusive), replay end = 07:00 UTC (exclusive)."
+  - id: ny_close_exit
+    role: exit
+    rule: "Close any remainder at 21:00 UTC, the New York close (either this or tp2_asia_low, whichever comes first)"
+    runnable: true
+    input: position
+    note: "21:00 UTC as the page states. The NYSE closes at 20:00 UTC while the US is on daylight time."
+  - id: stop_atr_above_high
+    role: stop
+    rule: "Hard stop: a 1m close above AH + 1.0 x atr_asia"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=3
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}&end={end}
+    replay_field: klines[].c
+    note: "A close-based stop, not a mark-price trigger: check each closed bar. AH and atr_asia come from asia_high and atr_asia."
+  - id: risk_per_trade
+    role: sizing
+    rule: "Risk 1-2% of the account per trade: size = equity x risk% / (stop price - entry price), with leverage set by that size, not the venue maximum"
+    runnable: true
+    input: position
 ---
 
 # Session Overlap Momentum

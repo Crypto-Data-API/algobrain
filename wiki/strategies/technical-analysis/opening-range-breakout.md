@@ -46,6 +46,195 @@ kill_criteria: |
   - false-breakout rate > 60% over rolling 20 signals → add volume filter or widen reference window
   - rolling 30-day P&L negative → pause; crypto's 24/7 market may not produce a statistically reliable "open"
   - vol-shock regime or active liquidation cascade → no new ORB entries; the cascade dominates any ORB range
+gates:
+  - id: opening_range_high
+    role: entry
+    rule: "Opening-range high = the highest 1m high from 08:00 to 08:30 UTC (08:15 for the aggressive 15-minute range)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&start={start}&end={end}
+    field: candles[].high
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}&end={end}
+    replay_field: klines[].h
+    note: "Anchored at 08:00 UTC, the page's own crypto open (the Deribit settlement). On FOMC/CPI days the page moves it to the US cash open (us_macro_day_window). 00:00 UTC, the daily candle open, is the other common anchor; the anchor is the desk's choice. Live: start = 08:00, end = 08:29 UTC (end is inclusive). Replay: end = 08:30 UTC (exclusive). Hyperliquid serves only about 4 days of 1m bars; coverage.local_first says how far the archive reaches."
+  - id: opening_range_low
+    role: entry
+    rule: "Opening-range low = the lowest 1m low from 08:00 to 08:30 UTC (08:15 for the aggressive range)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&start={start}&end={end}
+    field: candles[].low
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}&end={end}
+    replay_field: klines[].l
+    note: "Same window and anchor as opening_range_high."
+  - id: us_macro_day_window
+    role: entry
+    rule: "On an FOMC or CPI day, take the range from the US cash open instead: 14:30-15:00 UTC per the page"
+    runnable: true
+    endpoint: /api/v1/event/calendar?type=macro_print&window_days=1
+    field: items[].macro_class
+    note: "A row with days_until 0 and macro_class FOMC or CPI makes today a macro day. The page's 14:30 UTC is the NYSE open in US winter; while the US is on daylight time the open is 13:30 UTC. The calendar is forward-only, so a backtest needs the desk's list of past print dates."
+  - id: weekend_skip
+    role: filter
+    rule: "Skip Saturday and Sunday (UTC) sessions"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&start={start}&end={end}
+    field: candles[].timestamp
+    note: "Read the UTC weekday from the first opening-range bar's timestamp (ms). The page allows 'stricter filters' instead of a skip, but its agent workflow skips weekends."
+  - id: range_window_volume
+    role: filter
+    rule: "The range only counts when 08:00-08:30 UTC volume exceeds the trailing 24h average for a 30-minute span (24h volume / 48)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&start={start}
+    field: candles[].volume
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}&end={end}&limit=1500
+    replay_field: klines[].v
+    note: "start = 24 hours before 08:30 UTC. The edge section asks for 'meaningfully above'; 1x is the floor the page's agent workflow uses, and the desk may raise it."
+  - id: range_width_min
+    role: filter
+    rule: "Skip when the opening-range width (high - low) is below 0.3x the daily ATR(14)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30&atr=14
+    field: candles[].atr
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}&atr=14
+    replay_field: candles[].atr
+    note: "Use the last closed daily bar's atr; drop the forming bar named by forming_bar_timestamp."
+  - id: range_not_manipulated
+    role: filter
+    rule: "Skip when the range high or low sits at an obviously manipulated pre-settlement level"
+    runnable: false
+    note: "No Deribit settlement or index print is served, and spotting a pinned level is a chart judgement."
+  - id: long_breakout
+    role: entry
+    rule: "Long when price trades above the opening-range high plus a 1-2 tick buffer, after 08:30 UTC (either this or short_breakdown)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=3
+    field: candles[].high
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}&end={end}
+    replay_field: klines[].h
+    note: "A resting buy-stop at the level does the same job. Tick size is the coin's Hyperliquid price precision."
+  - id: short_breakdown
+    role: entry
+    rule: "Short when price trades below the opening-range low minus a 1-2 tick buffer, after 08:30 UTC (either this or long_breakout)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=3
+    field: candles[].low
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}&end={end}
+    replay_field: klines[].l
+  - id: breakout_volume
+    role: entry
+    rule: "The breakout 1m bar's volume is above the trailing 24h average 1m volume (the page's 24h hourly average, per minute)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&start={start}
+    field: candles[].volume
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}&end={end}&limit=1500
+    replay_field: klines[].v
+    note: "start = 24 hours before the breakout bar; the baseline is the mean of the bars before it. The kill criteria raise this to 2x when false breakouts exceed 60%."
+  - id: gap_up_long_only
+    role: filter
+    rule: "When the 08:00 UTC price is more than 1% above the prior daily close, take only the long breakout"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=2
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Crypto has no overnight gap. Our reading: the prior close is the last completed daily bar (closed 00:00 UTC), compared with the first opening-range bar's open. The 1% threshold is the equity version's."
+  - id: gap_down_short_only
+    role: filter
+    rule: "When the 08:00 UTC price is more than 1% below the prior daily close, take only the short breakdown"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=2
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Same reading of the prior close as gap_up_long_only."
+  - id: funding_long_bias
+    role: filter
+    rule: "Take the long breakout only when current funding is positive (above 0)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "The page's crypto adaptation replaces the VWAP bias with the funding sign."
+  - id: funding_short_bias
+    role: filter
+    rule: "Take the short breakdown only when current funding is negative (below 0)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: vol_shock_skip
+    role: filter
+    rule: "No new entries while the volatility regime score is above 75"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    note: "A market-wide 0-100 composite. The coin's own label is regime on /api/v1/volatility/regime/{symbol} (vol_shock). No history of the composite is served for replay."
+  - id: cascade_skip
+    role: filter
+    rule: "No new entries while a liquidation cascade is running through the reference window"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=5m&start={start}
+    field: data[].total_usd
+    note: "Hyperliquid's own liquidation tape; bars with no liquidations are omitted. The page sets no cascade threshold. One reading is a 5m bar at 3x or more the trailing-24h mean (start = 24h ago, mean = sum / 288), as post-liquidation-rebound uses; the cutoff is the desk's."
+  - id: one_trade_per_day
+    role: entry
+    rule: "One trade per session: after the first breakout triggers, do not re-enter that day, even if stopped out"
+    runnable: true
+    input: position
+  - id: target_range_multiple
+    role: exit
+    rule: "Take profit 1.5x the opening-range width beyond the entry fill, 2x at most (either this or target_daily_atr)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "Width = opening_range_high - opening_range_low."
+  - id: target_daily_atr
+    role: exit
+    rule: "Take profit 1x the daily ATR(14) beyond the entry fill (either this or target_range_multiple)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30&atr=14
+    field: candles[].atr
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}&atr=14
+    replay_field: candles[].atr
+    note: "Use the last closed daily bar's atr."
+  - id: time_exit
+    role: exit
+    rule: "Close 4-6 hours after the breakout entry, and always before the next 08:00 UTC settlement"
+    runnable: true
+    input: position
+    note: "This replaces the equity version's 'close by 15:30', following the page's crypto adaptation."
+  - id: stop_opposite_side
+    role: stop
+    rule: "Stop at the opposite side of the opening range: a long exits below the range low, a short above the range high"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "Levels from opening_range_high and opening_range_low. Hyperliquid stop orders trigger on the mark price."
+  - id: trail_to_breakeven
+    role: stop
+    rule: "Once price has moved 1x the opening-range width in favour, move the stop to the entry price"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: trail_half_profit
+    role: stop
+    rule: "After the breakeven move, trail the stop to lock in 50% of the peak open profit"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: atr_trailing_stop
+    role: stop
+    rule: "Crypto adaptation: use an ATR trailing stop in place of the equity time exit"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30&atr=14
+    field: candles[].atr
+    note: "The page names neither the ATR multiple nor its timeframe. The daily ATR(14) is the only ATR the page uses; the multiple is the desk's."
 ---
 
 # Opening Range Breakout Strategy

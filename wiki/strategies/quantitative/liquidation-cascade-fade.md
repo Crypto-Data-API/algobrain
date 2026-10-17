@@ -22,6 +22,95 @@ expected_max_drawdown: 0.40
 breakeven_cost_bps: 25
 decay_evidence: "Cascades have become shorter and shallower as exchanges introduced partial liquidation, ADL, mark-price liquidations, and larger insurance funds (post-2020 BitMEX engineering changes). Compare BTC -50% in 24h on 2020-03-12 vs BTC -16% over ~36h on 2024-08-05 vs BTC -12% in 60s on 2025-10-10 — depth and recovery dynamics are not stationary."
 related: ["[[liquidation]]", "[[liquidation-cascade-arbitrage]]", "[[liquidation-risk]]", "[[insurance-fund]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[mean-reversion]]", "[[contrarian-extremes]]", "[[order-flow]]", "[[order-flow-analysis]]", "[[perpetual-futures]]", "[[leverage]]", "[[flash-crashes]]", "[[hyperliquid]]", "[[2020-03-12-black-thursday-crypto]]", "[[2022-05-terra-luna-depeg-arb]]", "[[2022-06-steth-depeg]]", "[[2022-06-three-arrows-blowup]]", "[[behavioral-finance]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: cascade_markets
+    role: universe
+    rule: "BTC and ETH perps; smaller-cap perps (SOL, AVAX, ARB) only when scaling past the ~$2M per-event capacity"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "BTC and ETH are the named markets. Which smaller caps to add, and when capacity is reached, is the desk's call."
+  - id: liq_spike_5m
+    role: entry
+    rule: "Liquidated notional over the trailing 5 minutes at least 3.0x the trailing-24h mean of 5-minute windows"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&window_s=300&include_quiet=true
+    field: alerts[].spike_ratio
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=5m&start={start}
+    replay_field: data[].total_usd
+    note: "spike_ratio is exactly this window over the coin's own 24h mean of equal windows, summed over OKX + Bybit + Hyperliquid. Binance liquidations are not captured (geo-blocked), so whether that subset stands in for the page's four-venue aggregate is the desk's call. No row means no liquidations in the window (no spike); trust the ratio only when baseline_span_h is near 24. Replay is Hyperliquid fills only (from 2026-07-23): the latest bar's total_usd over the 24h sum / 288, bars with no fills being omitted."
+  - id: long_only
+    role: entry
+    rule: "Long only: fade a downward cascade where longs are being liquidated, never an upward short squeeze"
+    runnable: true
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&window_s=300&include_quiet=true
+    field: alerts[].direction
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=5m&start={start}
+    replay_field: data[].long_usd
+    note: "Require direction long_flush (longs are the dominant liquidated side in the window). Replay: long_usd above short_usd in the spike bar."
+  - id: price_drop_15m
+    role: entry
+    rule: "Price down at least 2.0% over the trailing 15 minutes"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=16
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}
+    replay_field: klines[].c
+    note: "Compare the latest close with the close 15 bars earlier. These are Hyperliquid trade bars; the page prefers mark price, whose live value is assets[].mark_price on /hyperliquid/open-interest and whose 5-minute history is data[].mark_price on /backtesting/funding."
+  - id: cvd_flattening
+    role: entry
+    rule: "Selling pressure decelerating: absolute CVD slope over the latest 30 seconds at most 0.3x the absolute slope over the prior 30 seconds"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=5
+    field: data[].cvd_usd
+    replay: /api/v1/backtesting/hl-trade-flow?coin={coin}&start={start}&end={end}
+    replay_field: data[].sell_notional
+    note: "We serve closed 1-minute taker buckets, not ticks. The nearest version compares the last closed minute's buy-minus-sell with the minute before (at most 0.3x), which is coarser than 30 seconds and up to a minute late. The page itself warns bar-approximated CVD overstates edge by 15-30%. Replay from 2026-09-09: buy_notional minus sell_notional per minute."
+  - id: tp_precascade_vwap
+    role: exit
+    rule: "Take profit at the pre-cascade VWAP: the rolling 15-minute VWAP as it stood 15 minutes before the trigger fired"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=120
+    field: data[].vwap
+    replay: /api/v1/backtesting/hl-trade-flow?coin={coin}&start={start}&end={end}
+    replay_field: data[].vwap
+    note: "Capture it at the trigger: weight each minute's vwap by buy_notional + sell_notional over the 15 minutes ending 15 minutes before the trigger, then compare the live mark with it. The pseudocode simply uses the price 15 minutes before entry."
+  - id: time_stop
+    role: stop
+    rule: "Close 4 hours after entry regardless of P&L"
+    runnable: true
+    input: position
+  - id: hard_stop
+    role: stop
+    rule: "Hard stop 3.0% below the entry fill"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: position_size
+    role: sizing
+    rule: "5% of bot equity per trade at 3x leverage"
+    runnable: true
+    input: position
+  - id: max_concurrent
+    role: sizing
+    rule: "At most 2 open positions across all instruments"
+    runnable: true
+    input: position
+  - id: correlated_cascade
+    role: sizing
+    rule: "When BTC and ETH both fire within a few minutes, take the first signal and ignore the second"
+    runnable: partial
+    input: position
+    note: "The page does not define 'a few minutes', and which other pairs count as one correlated cascade is the desk's call."
+  - id: vol_scaled_size
+    role: sizing
+    rule: "Scale position size down by 1/sigma (realized volatility) in high-volatility regimes"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: vol.vol_target_multiplier
+    note: "vol_target_multiplier is 60 / 30-day realized vol, floored at 0.25: one reading of 1/sigma. The page names no sigma window or vol target; vol.rv_1h is a faster sigma."
 ---
 
 # Liquidation Cascade Fade

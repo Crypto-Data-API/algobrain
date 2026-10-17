@@ -33,6 +33,117 @@ kill_criteria: |
   - session classification is no longer predictive of cascade depth: t-test on post-cascade reversion (off-hours vs peak hours) yields p > 0.10 over 50+ signals (session overlay is not adding information)
 
 related: ["[[liquidation-cascade-fade]]", "[[long-liquidation-cascade]]", "[[post-liquidation-rebound]]", "[[session-overlap-momentum]]", "[[crypto-weekday-weekend-etf-era]]", "[[funding-flush-reversal]]", "[[contrarian-extremes]]", "[[market-microstructure]]", "[[liquidations]]", "[[perpetual-futures]]", "[[order-flow]]", "[[behavioral-finance-overview]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: session_window
+    role: filter
+    rule: "Classify the UTC session, which picks every threshold below: Peak = Mon-Fri 07:00-22:00 (EU 07:00-13:30, US 13:30-22:00); Asia/Overnight = 22:00-07:00 on weeknights; Weekend = Fri 22:00 to Mon 07:00"
+    runnable: true
+    input: derived
+    inputs: [price_drop_15m]
+    note: "Pure clock: read the UTC weekday and time from the latest candles[].timestamp the price_drop_15m gate already fetches, or from any UTC clock. A peak-hours cascade that passes book_depth_thin trades on the Asia/Overnight parameters."
+  - id: holiday_weekend_expansion
+    role: filter
+    rule: "Major US/EU public holidays (Christmas, Thanksgiving, NY-area holidays) extend the Weekend parameter set 12 hours either side of the holiday"
+    runnable: false
+    note: "No holiday calendar is served; the bot needs its own list of US/EU public holiday dates."
+  - id: liq_spike_15m
+    role: entry
+    rule: "Liquidated notional over the trailing 15 minutes at least 5x (peak), 3x (Asia/Overnight) or 2.5x (weekend) the trailing-24h mean of 15-minute windows"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&window_s=900&include_quiet=true
+    field: alerts[].spike_ratio
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=15m&start={start}
+    replay_field: data[].total_usd
+    note: "spike_ratio is exactly this window over the coin's own 24h mean of equal windows, summed over OKX + Bybit + Hyperliquid. Binance liquidations are not captured (geo-blocked), so whether that subset stands in for a cross-exchange feed is the desk's call. No row means no liquidations in the window (no spike); trust the ratio only when baseline_span_h is near 24. Replay is Hyperliquid fills only (from 2026-07-23): the latest bar's total_usd over the 24h sum / 96, bars with no fills being omitted."
+  - id: price_drop_15m
+    role: entry
+    rule: "Price down at least 2.5% (peak), 2.0% (Asia/Overnight) or 1.8% (weekend) over the trailing 15 minutes"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=16
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}
+    replay_field: klines[].c
+    note: "Compare the latest close with the close 15 bars earlier. These are Hyperliquid trade bars; the page says mark price, whose live value is assets[].mark_price on /hyperliquid/open-interest and whose 5-minute history is data[].mark_price on /backtesting/funding."
+  - id: cvd_flattening
+    role: entry
+    rule: "CVD shows aggressive selling flattening for at least 3 minutes (peak), 2 minutes (Asia/Overnight) or 1.5 minutes (weekend)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=15
+    field: data[].cvd_usd
+    replay: /api/v1/backtesting/hl-trade-flow?coin={coin}&start={start}&end={end}
+    replay_field: data[].sell_notional
+    note: "We serve closed 1-minute taker buckets, not ticks, so 1.5 minutes rounds to 2 closed minutes and the newest minute is up to a minute late. The page defines no per-minute flattening test (liquidation-cascade-fade uses a 0.3x slope ratio on 30-second tick windows); applying that per minute is the desk's call. Replay from 2026-09-09: buy_notional minus sell_notional per minute."
+  - id: entry_limit
+    role: entry
+    rule: "Enter long with a limit order 0.2-0.3% above the current mark, accepting partial fills"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: book_depth_thin
+    role: filter
+    rule: "Order-book depth within 1% of mid below the 30th percentile of its trailing-24h history: confirms the book is genuinely thin, and moves a peak-hours cascade onto the Asia/Overnight parameters"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth/{coin}?minutes=1440
+    field: history[].depth_usd.bid.100bps
+    note: "Rank the latest bid + ask 100bps depth against the ~2-minute samples of the last 24h. HL's 20-level snapshot rarely reaches 1% on majors: levels_truncated is usually true, so 100bps is the depth of the top 20 levels (a lower bound), not true 1% depth. Only the top 25 HL perps by volume are tracked."
+  - id: bb_bandwidth_liquidity
+    role: filter
+    rule: "Confirm the current liquidity state with 15-minute Bollinger Bandwidth alongside book depth; do not rely on the clock alone"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=15m&limit=40
+    field: candles[].close
+    note: "Bandwidth = (upper - lower) / middle of BB(20, 2) on the closed 15m closes. The page gives no bandwidth level that marks a thin session, so reading it is the desk's call."
+  - id: slippage_budget
+    role: sizing
+    rule: "Entry slippage against the mark within the session budget: 8-15 bps (peak), 15-25 bps (Asia/Overnight), 20-35 bps (weekend)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: asks[].price
+    note: "Walk asks[] (price x size) to the order size for the expected fill, and compare it with the mark. The 0.2-0.3% limit offset in entry_limit is wider than the peak budget, and the pseudocode uses single values (10 / 20 / 28 bps), so which one binds is the desk's call."
+  - id: session_size
+    role: sizing
+    rule: "Base size 0.5% of the sleeve times the session multiplier: 0.8x (peak), 1.0x (Asia/Overnight), 1.2x (weekend)"
+    runnable: true
+    input: position
+  - id: max_position_cap
+    role: sizing
+    rule: "Cap a position at 1.5% (peak), 1.0% (Asia/Overnight) or 0.75% (weekend) of the sleeve"
+    runnable: true
+    input: position
+  - id: drawdown_flat
+    role: filter
+    rule: "Stay flat while the sleeve's drawdown is above 35%"
+    runnable: true
+    input: position
+  - id: tp_session_reversion
+    role: exit
+    rule: "Take profit 1.0% (peak), 1.5% (Asia/Overnight) or 2.0% (weekend) above the cascade low: the low end of the page's target ranges, as the pseudocode does"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=30
+    field: candles[].low
+    note: "Cascade low = the lowest candles[].low since the trigger; compare the live mark with it. The ranges' upper ends (1.5 / 2.5 / 3.5%) are a stretch target. The worked example measures the target from the entry fill, which sits within a few bps of the low."
+  - id: funding_flush_reduce
+    role: exit
+    rule: "Reduce exposure if funding turns deeply negative mid-hold (shorts flooding in)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=2
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "current_rate is Hyperliquid's live predicted hourly rate. The page sets no level for 'deeply negative' and no size for the cut."
+  - id: time_stop
+    role: stop
+    rule: "Close 45 minutes (peak), 60 minutes (Asia/Overnight) or 90 minutes (weekend) after entry"
+    runnable: true
+    input: position
+  - id: stop_loss
+    role: stop
+    rule: "Stop 1.5% (peak and Asia/Overnight) or 2.0% (weekend) below the entry fill"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
 ---
 
 # Off-Hours Liquidation Playbook

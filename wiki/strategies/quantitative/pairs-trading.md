@@ -28,6 +28,141 @@ kill_criteria: |
   - average realized half-life > 2x modeled half-life over a 40-trade sample
   - any single pair: |z| >= 3.0, cointegration p > 0.05 on re-test, or 2x half-life time stop
 related: ["[[statistical-arbitrage]]", "[[mean-reversion]]", "[[bollinger-band-reversion]]", "[[ornstein-uhlenbeck]]", "[[kalman-filter-trading]]", "[[cointegration]]", "[[correlation]]", "[[market-neutral]]", "[[funding-rate-arbitrage]]", "[[book-algorithmic-trading-ernest-chan]]", "[[book-pairs-trading-vidyamurthy]]", "[[cryptodataapi]]"]
+gates:
+  - id: economic_link
+    role: universe
+    rule: "Pair two legs only when there is an economic reason to co-move: same sector (two L1s, two DEX tokens, two liquid-staking tokens), an asset vs its own perp, or a wrapped/staked derivative vs its underlying"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: categories
+    note: "Call once per leg and look for a shared sector tag (Layer 1 (L1), Layer 2 (L2), Decentralized Exchange (DEX), Liquid Staking and the like). A shared tag is only a screen: whether the link is economic rather than two BTC-beta legs is the desk's call."
+  - id: cointegrated
+    role: universe
+    rule: "Engle-Granger p-value below 0.05 (or a Johansen rejection) on 60-180 days of both legs' closes; re-test every week"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=180
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "One call per leg, joined on candles[].timestamp. For 1h bars use interval=1h&start={start}: 180 days is about 4,320 bars, inside the 15,000-bar range cap and Hyperliquid's own retention. A leg not listed on Hyperliquid (stETH) uses /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=180."
+  - id: hedge_ratio
+    role: sizing
+    rule: "Hedge ratio beta from an OLS regression of leg A's closes on leg B's over the test window, or a Kalman filter (preferred, since beta drifts); spread = P_A - beta * P_B"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=180
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: spread_stationary
+    role: filter
+    rule: "ADF test on the spread rejects a unit root at the 5% level"
+    runnable: true
+    input: derived
+    inputs: [hedge_ratio]
+  - id: half_life_window
+    role: filter
+    rule: "Ornstein-Uhlenbeck half-life of the spread between 2 and 20 days; retire the pair otherwise"
+    runnable: true
+    input: derived
+    inputs: [hedge_ratio]
+  - id: no_catalyst
+    role: filter
+    rule: "No unlock, listing or upgrade on either leg within the half-life window"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?symbol={symbol}
+    field: items[].days_until
+    note: "Call once per leg; a row with days_until at or below the half-life blocks entry. The calendar holds scheduled unlocks, mints, depegs and macro prints only, over up to 30 days (enough for a 20-day half-life). Listings and protocol upgrades are not on it, so those stay a human check."
+  - id: no_vol_spike
+    role: filter
+    rule: "Open no new pairs while the HMM market regime is vol_spike"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's agent workflow, not its Rules section: correlated deleveraging widens every crowded spread at once."
+  - id: dominance_rotation_retest
+    role: filter
+    rule: "Treat a BTC-dominance rotation as a trigger to re-run the cointegration test early"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: signals.btc_dom
+    replay: /api/v1/backtesting/snapshots?data_type=cycle_regime&start={start}&limit=1000
+    replay_field: snapshots[].data.signals.btc_dom
+    note: "From the page's agent workflow, which sets no size or window for a rotation, so what counts is the desk's call. The live call gives the level only; the trend comes from the cycle_regime snapshots (replay), about every 25 minutes from 2026-08-07, Pro Plus."
+  - id: funding_carry
+    role: filter
+    rule: "Check funding on both perp legs: a persistently adverse funding differential is a carry drag that can make a slow spread not worth holding"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hourly settled prints per leg: the long leg pays its rate and the short leg receives its own. The page sets no threshold (its cost table puts carry at plus or minus 1-4 bps/day), so whether the carry outweighs the expected convergence is the desk's call."
+  - id: z_long_entry
+    role: entry
+    rule: "Long the spread (buy A, short beta x B) when the 60-bar rolling z-score of the spread is at or below -2.0 (either this or z_short_entry)"
+    runnable: true
+    input: derived
+    inputs: [hedge_ratio]
+  - id: z_short_entry
+    role: entry
+    rule: "Short the spread (short A, buy beta x B) when the 60-bar rolling z-score of the spread is at or above +2.0 (either this or z_long_entry)"
+    runnable: true
+    input: derived
+    inputs: [hedge_ratio]
+  - id: z_reverted
+    role: exit
+    rule: "Close both legs when the z-score returns to 0"
+    runnable: true
+    input: derived
+    inputs: [hedge_ratio]
+  - id: z_partial_exit
+    role: exit
+    rule: "Partial close when |z| is back within 0.5 (the pseudocode closes the whole pair here)"
+    runnable: true
+    input: derived
+    inputs: [hedge_ratio]
+  - id: z_divergence_stop
+    role: stop
+    rule: "Close both legs when |z| reaches 3.0 (the rules allow up to 3.5): the spread is diverging and cointegration is likely breaking"
+    runnable: true
+    input: derived
+    inputs: [hedge_ratio]
+  - id: retest_failed_stop
+    role: stop
+    rule: "Close the pair the same day the weekly cointegration re-test fails (p above 0.05)"
+    runnable: true
+    input: derived
+    inputs: [cointegrated]
+  - id: time_stop
+    role: stop
+    rule: "Close if the spread has not reverted within 2x the modeled half-life"
+    runnable: true
+    input: position
+    note: "The half-life comes from half_life_window; days held come from the position record."
+  - id: hedge_ratio_sizing
+    role: sizing
+    rule: "Size the legs by the hedge ratio: B-leg notional = beta x A-leg notional, as in the worked example ($5,000 ARB against $5,750 OP at beta 1.15)"
+    runnable: true
+    input: derived
+    inputs: [hedge_ratio]
+    note: "The Rules line writes it the other way round (long-leg notional = short-leg notional x beta); the example and the spread definition P_A - beta * P_B both put beta on leg B."
+  - id: risk_per_pair
+    role: sizing
+    rule: "Risk at most 0.5-1% of equity per pair, measured at the |z| = 3 stop"
+    runnable: true
+    input: position
+  - id: max_pairs
+    role: sizing
+    rule: "Run 5-15 pairs at once"
+    runnable: true
+    input: position
+  - id: gross_leverage
+    role: sizing
+    rule: "Keep gross leverage across the book at 1-3x"
+    runnable: true
+    input: position
 ---
 
 # Pairs Trading

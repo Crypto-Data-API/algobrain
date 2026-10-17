@@ -2,12 +2,35 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-10-10
+updated: 2026-10-17
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-10-17 — Runnable gates on seven more strategy pages
+
+**Scope:** The same desk tester's bot read seven strategy pages outside the basket folder that had no gates, so it could not tell which conditions it can automate. Each one now has a `gates:` block, 131 gates in all: 93 runnable, 35 partial, 3 not runnable.
+
+- **Pages:** [[liquidation-cascade-fade]] (12), [[off-hours-liquidation-playbook]] (16), [[session-overlap-momentum]] (15), [[opening-range-breakout]] (24), [[pairs-trading]] (20), [[alt-season-momentum-gate]] (26), [[gamma-exposure-trading]] (18).
+- **Edits:** only frontmatter `gates:` blocks were added; no prose changed. Every route, query parameter and field passed `scripts/validate_algobrain_gates.py`, both against the OpenAPI spec and `--live` against production.
+- **Crypto readings recorded in the gate notes:**
+  - [[opening-range-breakout]] is anchored at 08:00 UTC, which is the crypto open the page itself names. 13:30 UTC and 00:00 UTC are noted as alternatives.
+  - [[gamma-exposure-trading]] maps to `/quant/gex`, which is a perp-positioning analog of dealer gamma, not options GEX. OpEx is Deribit's last Friday at 08:00 UTC.
+  - [[alt-season-momentum-gate]] reads BTC dominance from `/regimes/current` `signals.btc_dom` and its history from `cycle_regime` snapshots. The market-health routes its prose names do not carry dominance, and the breadth parameter is `ma_period`, not `period`.
+- **Not runnable, and why:**
+  - We serve no market-holiday calendar.
+  - We serve no per-strike options open interest.
+  - We serve no Deribit settlement print.
+- **Partial, mostly for one of these reasons:**
+  - Binance liquidations are not captured.
+  - CVD is served at a 1-minute grain, not 30 seconds.
+  - The page leaves a threshold undefined ("deeply", "unusually high").
+- **Page contradictions found** (each recorded in the relevant gate `note`; the prose was not edited):
+  - [[pairs-trading]]: the hedge-ratio leg differs between the rules and the example, and the z-exit differs between the rules and the pseudocode.
+  - [[off-hours-liquidation-playbook]]: the slippage budget does not match its limit offset, and the take-profit base differs between the table and the example.
+  - [[session-overlap-momentum]]: the NYSE close is given as 21:00 UTC. It is 20:00 UTC in US daylight time.
 
 ## 2026-10-10 — Runnable gates on the 51 Hyperliquid basket strategy pages
 

@@ -32,6 +32,146 @@ kill_criteria: |
   - crypto options market structure changes materially (e.g., Deribit loses dominant OI share)
   - drawdown > 15% while GEX signal is active
 
+gates:
+  - id: options_liquid_majors
+    role: universe
+    rule: "BTC and ETH only: the coins with a liquid Deribit options book, whose dealer hedging the edge relies on"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "/quant/gex (Pro) covers every Hyperliquid perp, about 230 coins, because it is a perp analog built from market-maker positioning, not from options. The options-side data is narrower: DVOL and the expiry list are BTC and ETH, max pain is BTC only."
+  - id: gex_read_has_mm_book
+    role: filter
+    rule: "Act on a coin's GEX read only when regime.coverage is full (a real market-maker book behind it), not funding_only or none"
+    runnable: true
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.coverage
+    note: "From the page's AI-agent workflow. regime.confidence (0-1) in the same block weights a thin-sample read."
+  - id: positive_gex_regime
+    role: filter
+    rule: "Positive-GEX regime (dealers stabilise): regime.score at or below -0.20, the API's dampen state. Only here sell premium, fade extremes and trade mean-reversion"
+    runnable: true
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    replay: /api/v1/quant/gex/history?symbol={coin}&from={start}
+    replay_field: points[].regime_score
+    note: "Crypto mapping: /quant/gex is the perp analog of options GEX (Hyperliquid market-maker inventory, liquidation clusters near mark, funding and OI), not Deribit options dealer gamma, and the page's SPX straddles and iron condors become Deribit BTC/ETH option legs, whose prices we do not serve. Thresholds are in meta.regime_rules. A score between -0.20 and 0.35 is transitional, which the page's table has no row for. The hourly history covers 30 days from 2026-09-09; older reads are in /backtesting/snapshots?data_type=gamma_exposure."
+  - id: negative_gex_regime
+    role: filter
+    rule: "Negative-GEX regime (dealers amplify): regime.score at or above 0.35, the API's amplify state. Trade momentum and breakouts, buy straddles, never fade the move"
+    runnable: true
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    replay: /api/v1/quant/gex/history?symbol={coin}&from={start}
+    replay_field: points[].regime_score
+    note: "Same perp analog as positive_gex_regime, not options dealer gamma."
+  - id: high_vs_low_positive_gex
+    role: sizing
+    rule: "High positive GEX: full premium-selling and fade size. Low positive GEX: directional trades at moderate size"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    replay: /api/v1/quant/gex/history?symbol={coin}&from={start}
+    replay_field: points[].regime_score
+    note: "Both rows sit inside the dampen state (score -1.0 to -0.20). The page draws no line between high and low positive GEX and gives no sizes, so the cut is the desk's call. distribution_context.regime_score_pctile ranks today's score against 30 days."
+  - id: deeply_negative_gex
+    role: sizing
+    rule: "Deeply negative GEX (crash or melt-up risk): maximum hedging and tail-risk plays"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    replay: /api/v1/quant/gex/history?symbol={coin}&from={start}
+    replay_field: points[].regime_score
+    note: "Inside the amplify state (score 0.35 to 1.0). The page gives no cutoff for 'deeply' and no hedge size, so both are the desk's call. regime.rationale says when a realized liquidation cascade is firing."
+  - id: price_above_flip
+    role: filter
+    rule: "Price above the gamma flip: range-bound, mean-reverting playbook (sell premium, fade extremes). dist_to_flip_pct below 0 means the flip is under the mark"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.dist_to_flip_pct
+    replay: /api/v1/quant/gex/history?symbol={coin}&from={start}
+    replay_field: points[].dist_to_flip_pct
+    note: "dist_to_flip_pct = (gamma_flip - mark) / mark x 100, null when there is no flip. Our gamma_flip is the perp analog: the price where market-maker long liquidations below balance short liquidations above, searched only near the mark. The API scores only the distance to it (within 2% = on the line), not which side price is on, so whether this line stands in for the options flip is the desk's call. positive_gex_regime is the served stabilise-or-amplify read."
+  - id: price_below_flip
+    role: filter
+    rule: "Price below the gamma flip: volatile, trending playbook (buy protection, trade breakouts, do not fade). dist_to_flip_pct above 0 means the flip is over the mark"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.dist_to_flip_pct
+    replay: /api/v1/quant/gex/history?symbol={coin}&from={start}
+    replay_field: points[].dist_to_flip_pct
+    note: "Same perp-analog caveat as price_above_flip. On 2026-10-17 BTC sat 27% below its flip while its regime read dampen, so the two reads can disagree."
+  - id: realized_vol_agrees
+    role: filter
+    rule: "Realized-vol state agrees with the GEX regime: mean_reverting with positive GEX, expanding with negative GEX"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "The page's AI-agent cross-check. The other states (compressed, normal, vol_shock) are not named by the page."
+  - id: technical_entry_timing
+    role: entry
+    rule: "GEX sets how to trade, not when: time each entry with technical analysis (fade range extremes in positive GEX, take breakouts in negative GEX)"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical?symbol={coin}
+    field: items[].range_state.zone
+    note: "The page names no indicator or level. zone near_high or near_low marks a range extreme to fade, and a close through it is the breakout. Which technical trigger to use is the desk's call."
+  - id: opex_window
+    role: entry
+    rule: "Open pinning trades 3-5 days before the monthly options expiry: expiry_days 3 to 5 on Deribit's last-Friday expiry"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "Crypto mapping: the page's third-Friday OpEx is the SPX calendar. Deribit's monthly and quarterly BTC/ETH options settle on the last Friday of the month at 08:00 UTC. Pick that row by its expiry code (30OCT26 is the last Friday of October); the list also holds daily and weekly expiries, nearest 12 only. term_structure is Pro Plus and is empty on lower tiers."
+  - id: max_pain_target
+    role: entry
+    rule: "In the OpEx window, price is expected to gravitate toward the max-pain strike: trade toward it or sell premium centred on it"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    replay: /api/v1/backtesting/snapshots?data_type=coinglass_options&start={start}
+    replay_field: snapshots[].data[].max_pain
+    note: "BTC only; no ETH max pain is served. It is computed on the Deribit expiry with the largest open interest, often the quarterly rather than the upcoming monthly, and the response does not name that expiry, so whether it is this OpEx's pin is the desk's call. Compare it with the mark from /quant/gex (coins.{coin}.mark)."
+  - id: largest_oi_strikes
+    role: entry
+    rule: "Identify the largest open-interest call strike and put strike for the expiry: the magnets around max pain"
+    runnable: false
+    note: "We serve no per-strike open interest. /market-intelligence/options carries BTC aggregate OI, the put/call ratio and one max-pain strike only; per-strike OI needs Deribit's book summary per instrument."
+  - id: opex_week_conviction
+    role: sizing
+    rule: "OpEx week is the highest-conviction GEX period: full size in it, smaller GEX positions the rest of the month"
+    runnable: partial
+    input: derived
+    inputs: [opex_window]
+    note: "OpEx week = expiry_days 0-6 on the monthly expiry. The page gives no size for the rest of the month."
+  - id: regime_turns_exit
+    role: exit
+    rule: "Stop selling premium and close fade trades as soon as GEX is no longer positive (regime.score above -0.20); switch to the momentum playbook once it reaches 0.35"
+    runnable: true
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    replay: /api/v1/quant/gex/history?symbol={coin}&from={start}
+    replay_field: points[].regime_score
+    note: "GEX can shift intraday: re-poll rather than read once a day. Positions behind the read refresh every 5-15 minutes; regime.since says when the current state was committed."
+  - id: pin_release_exit
+    role: exit
+    rule: "Close pin trades at the expiry settlement: the pin releases after it and suppressed moves often accelerate (the OpEx volatility pop)"
+    runnable: true
+    input: derived
+    inputs: [opex_window]
+    note: "The page's 'Monday after OpEx' is SPX. Deribit settles Friday 08:00 UTC, so the release starts then."
+  - id: cut_losses_negative_gex
+    role: stop
+    rule: "In negative GEX never average down, and cut losing trades fast: moves can run 2-3x the normal daily range"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    note: "Not adding to a loser while regime.score is at or above 0.35 is checkable from the position record. The page gives no stop distance for cutting fast, so that is the desk's call."
+  - id: max_position_size
+    role: sizing
+    rule: "At most 3% of the portfolio in any single GEX-based trade"
+    runnable: true
+    input: position
 ---
 
 # Gamma Exposure (GEX) Trading

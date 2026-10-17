@@ -33,6 +33,193 @@ kill_criteria: |
   - alt-universe liquidity below minimum (top-5-alt-basket 24h volume < $200M combined) — capacity insufficient for cost-efficient execution
 
 related: ["[[momentum-rotation]]", "[[crypto-beta-rotation]]", "[[funding-filtered-momentum]]", "[[vol-targeted-trend-following]]", "[[unlock-aware-momentum]]", "[[contrarian-extremes]]", "[[regime-adaptive-strategy]]", "[[spot-led-momentum-filter]]", "[[bitcoin-dominance-rotation]]", "[[btc-dominance]]", "[[market-breadth]]", "[[altcoins]]", "[[bitcoin]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi-market-health]]", "[[cryptodataapi-regimes]]", "[[cryptodataapi]]"]
+gates:
+  - id: dom_roc_falling
+    role: filter
+    rule: "Alt-season leg 1: BTC dominance 14-day rate of change at or below -0.5 percentage points per week, i.e. (btc_dom now - btc_dom 14 days ago) / 2 <= -0.5"
+    runnable: true
+    endpoint: /api/v1/backtesting/snapshots?data_type=cycle_regime&start={start}&limit=1000
+    field: snapshots[].data.signals.btc_dom
+    note: "start = 14 days ago (about 800 rows at the ~25-minute archive tick; Pro Plus). btc_dom is BTC's % share of the top-100 coins' market cap, so it reads a few points above total-market dominance charts; the pp thresholds apply to this series. Archived from 2026-08-07; before that, rebuild it from coin_profiles snapshots (BTC market_cap over the sum of the 100 rows, from 2026-05-09). Dominance is not on /market-health/summary or /components, which the page body names."
+  - id: dom_below_ma50
+    role: filter
+    rule: "Alt-season leg 2: BTC dominance at or below its 50-day moving average"
+    runnable: true
+    endpoint: /api/v1/backtesting/snapshots?data_type=cycle_regime&start={start}&limit=1000
+    field: snapshots[].data.signals.btc_dom
+    note: "start = 50 days ago: about 2,850 rows, so page with three calls (limit caps at 1,000; restart from the last row's time). Reduce to one value per UTC day before averaging. The series first covered 50 days on 2026-09-26; earlier backtests rebuild it from coin_profiles snapshots as in dom_roc_falling."
+  - id: breadth_min
+    role: filter
+    rule: "Alt-season leg 3: at least 45% of the top-50 alts above their 200-day moving average"
+    runnable: partial
+    endpoint: /api/v1/market-health/altcoin-breadth?ma_period=200
+    field: breadth_pct
+    replay: /api/v1/backtesting/snapshots?data_type=altcoin_breadth&start={start}&limit=1000
+    replay_field: snapshots[].data.details.breadth_pct
+    note: "Served breadth covers a fixed list of about 30 Binance large caps that includes BTC and ETH (coins[] names them), not the top-50 alts, and skips coins with under 200 daily bars. For the page's exact universe, count closes above the 200-day MA per alt from daily klines. The archive (replay) runs from 2026-05-09. The page body's ?period=200 is ma_period on the API."
+  - id: breadth_rising
+    role: filter
+    rule: "Alt-season confirmation: altcoin breadth rising"
+    runnable: partial
+    endpoint: /api/v1/backtesting/snapshots?data_type=altcoin_breadth&start={start}&limit=1000
+    field: snapshots[].data.details.breadth_pct
+    note: "From the page's quantitative-signal list; the Rules section and the pseudocode leave it out. No window is given for rising (for example against 7 days ago), so that is the desk's call. Same 30-coin universe as breadth_min; samples every ~25 minutes from 2026-05-09, Pro Plus."
+  - id: alt_season_mode
+    role: filter
+    rule: "Alt-season mode (deploy the full alt basket) when dom_roc_falling, dom_below_ma50 and breadth_min all hold"
+    runnable: partial
+    input: derived
+    inputs: [dom_roc_falling, dom_below_ma50, breadth_min]
+    note: "Only as runnable as breadth_min, whose served universe is not the page's top-50 alts."
+  - id: dom_roc_rising
+    role: filter
+    rule: "BTC-only leg 1: BTC dominance 14-day rate of change at or above +0.5 percentage points per week"
+    runnable: true
+    endpoint: /api/v1/backtesting/snapshots?data_type=cycle_regime&start={start}&limit=1000
+    field: snapshots[].data.signals.btc_dom
+    note: "Same series and window as dom_roc_falling."
+  - id: dom_above_ma50
+    role: filter
+    rule: "BTC-only leg 2: BTC dominance at or above its 50-day moving average"
+    runnable: true
+    endpoint: /api/v1/backtesting/snapshots?data_type=cycle_regime&start={start}&limit=1000
+    field: snapshots[].data.signals.btc_dom
+    note: "Same series and paging as dom_below_ma50."
+  - id: btc_only_mode
+    role: filter
+    rule: "BTC-only mode (no alt positions; run BTC trend only) when dom_roc_rising and dom_above_ma50 both hold"
+    runnable: true
+    input: derived
+    inputs: [dom_roc_rising, dom_above_ma50]
+  - id: dom_roc_sideways
+    role: filter
+    rule: "Ambiguous mode: absolute 14-day rate of change of BTC dominance below 0.5 percentage points per week (either this or dom_near_ma50)"
+    runnable: true
+    endpoint: /api/v1/backtesting/snapshots?data_type=cycle_regime&start={start}&limit=1000
+    field: snapshots[].data.signals.btc_dom
+    note: "Same series as dom_roc_falling. The text overlaps with alt-season mode near the MA; the pseudocode settles it: alt-season first, then BTC-only, and anything else is ambiguous."
+  - id: dom_near_ma50
+    role: filter
+    rule: "Ambiguous mode: BTC dominance within 1 percentage point of its 50-day moving average (either this or dom_roc_sideways)"
+    runnable: true
+    endpoint: /api/v1/backtesting/snapshots?data_type=cycle_regime&start={start}&limit=1000
+    field: snapshots[].data.signals.btc_dom
+    note: "Same series and paging as dom_below_ma50."
+  - id: no_choppy_regime
+    role: filter
+    rule: "Even in alt-season mode, deploy no alt momentum while the HMM market regime is choppy_high_vol"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's indicator list and agent workflow, not its Rules section."
+  - id: universe_top50_volume
+    role: universe
+    rule: "Top 50 alts (BTC excluded) by 30-day average daily USD volume on Hyperliquid perps"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles/batch?coins={coin}&interval=1d&limit=30&closed_only=true
+    field: series.{coin}[].volume
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].volume
+    note: "volume is in coin units: average volume x close over the 30 bars for USD. Take the coin list from assets[].coin on /api/v1/hyperliquid/open-interest (about 180 perps) and batch 25 coins per call."
+  - id: exclude_stable_wrapped
+    role: universe
+    rule: "Exclude stable proxies and wrapped tokens from the alt universe"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: categories
+    note: "Drop a coin whose categories include Stablecoins or Wrapped-Tokens. Whether an asset-backed token such as PAXG counts as a stable proxy is the desk's call, and Hyperliquid names that /coins does not resolve (kPEPE) need mapping first."
+  - id: momentum_score
+    role: entry
+    rule: "Risk-adjusted momentum = 4-week (28 daily bars) trailing return divided by the 20-day realised volatility of daily returns; rank descending"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles/batch?coins={coin}&interval=1d&limit=30&closed_only=true
+    field: series.{coin}[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: funding_cap
+    role: filter
+    rule: "Skip any alt whose 8h funding is at or above +0.06%: the sum of its last 8 hourly Hyperliquid settlements >= 0.0006"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hyperliquid settles hourly, so 8h funding is the sum of 8 settled prints, not 8x the current predicted rate. Hourly prints are served locally from 2024-01-01."
+  - id: top5_basket
+    role: entry
+    rule: "Long the top 5 eligible alts by momentum_score, replacing any that fail funding_cap with the next rank"
+    runnable: partial
+    input: derived
+    inputs: [universe_top50_volume, exclude_stable_wrapped, momentum_score, funding_cap]
+    note: "Only as runnable as exclude_stable_wrapped."
+  - id: vol_target_size
+    role: sizing
+    rule: "Vol-target each alt position to a 2% daily risk budget using its 20-day realised volatility"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles/batch?coins={coin}&interval=1d&limit=30&closed_only=true
+    field: series.{coin}[].close
+  - id: alt_book_cap
+    role: sizing
+    rule: "The alt-momentum book is at most 10% of the portfolio"
+    runnable: true
+    input: position
+  - id: btc_book_size
+    role: sizing
+    rule: "In BTC-only mode run the BTC trend book (vol-targeted-trend-following, funding-filtered-momentum for timing) at 5-8% of the portfolio"
+    runnable: true
+    input: derived
+    inputs: [btc_only_mode]
+    note: "The BTC entry and exit rules live on those two pages."
+  - id: ambiguous_half_size
+    role: sizing
+    rule: "In ambiguous mode cut every momentum position, alt and BTC, to 50% of its normal size"
+    runnable: true
+    input: derived
+    inputs: [dom_roc_sideways, dom_near_ma50]
+  - id: ambiguous_top3
+    role: sizing
+    rule: "In ambiguous mode hold only the top 3 alts by momentum_score instead of the top 5"
+    runnable: true
+    input: derived
+    inputs: [dom_roc_sideways, dom_near_ma50, momentum_score]
+  - id: ambiguous_funding_tighter
+    role: filter
+    rule: "In ambiguous mode tighten the funding filter below the +0.06%/8h cap"
+    runnable: partial
+    input: derived
+    inputs: [dom_roc_sideways, dom_near_ma50, funding_cap]
+    note: "The page gives no tighter threshold, so the level is the desk's call."
+  - id: rebalance_out_of_top10
+    role: exit
+    rule: "Weekly rebalance: replace any position that has dropped out of the top 10 by momentum_score"
+    runnable: true
+    input: derived
+    inputs: [momentum_score]
+  - id: trailing_stop
+    role: stop
+    rule: "Exit an alt position when price is 8% or more below its rolling 10-day high"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=10
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].high
+    note: "The 10 bars include the forming one; compare the current mark (assets[].mark_price on /api/v1/hyperliquid/open-interest) with 0.92 x the highest high."
+  - id: profit_target
+    role: exit
+    rule: "Take profit at +20% from the entry fill before the weekly rebalance"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: mode_switch_exit
+    role: exit
+    rule: "Exit all alt positions within 5 days of the mode switching from alt-season to BTC-only or ambiguous"
+    runnable: partial
+    input: derived
+    inputs: [alt_season_mode]
+    note: "Only as runnable as alt_season_mode (the breadth universe)."
 ---
 
 # Alt-Season Momentum Gate (Dominance / Alt-Season Gate)
