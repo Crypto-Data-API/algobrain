@@ -9,6 +9,19 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-10-17 — Gate notes completed, stale prose corrected, API fixes reflected
+
+**Scope:** Follow-up to the gating run below. Every gate now passes the validator, the out-of-date prose it found is corrected, and gate notes are updated where CryptoDataAPI fixed the behaviour they warned about.
+
+- **Notes added to 11 gates** that were partial or not runnable without saying why: [[contrarian-extremes]] (tranche_1, tranche_3, tranche_4, greed_tranches, neutral_exit), [[regime-adaptive-strategy]] (transitional_half_size, crisis_half_size, crisis_close_short_options), [[momentum-investing]] (crash_derisk), [[stretch-revert]] (regime_stop) and [[volatility-breakout]] (squeeze_contraction). Each names the input gate that limits it. The validator now reports 0 failing pages of 395.
+- **Prose corrected:**
+  - [[unlock-cascade-watch]]: the unlock calendar is `/api/v1/supply/unlocks` (DefiLlama cliffs, soonest per coin), with daily snapshots since 2026-08-20. The page said CryptoDataAPI had none.
+  - [[vix-calls]]: backwardation is 1-month implied vol above 3-month; the kill criterion had it reversed. The gate note no longer flags the conflict.
+  - [[5-percent-otm-put-overlay]] and [[event-vol-buying]]: DVOL, its daily history and each expiry's ATM IV are served (`/api/v1/volatility/implied`, `items[].term_structure[].atm_iv`, Pro Plus). Only per-strike IV, skew and option prices still come from Deribit.
+- **Gate notes updated for API fixes shipped the same day:**
+  - `/dex/security` now returns `null` (not 0) for holder counts, top-10 share and LP fields on a token GoPlus has not indexed. Notes on [[jito-bundle-sniping]], [[memecoin-sniping]], [[token-migration-sniping]], [[on-chain-smart-money-tracking]], [[telegram-bot-trading]] and [[liquidity-sniping]] say so.
+  - The Binance derivative routes now resolve a bare coin to its USDT perp and answer 400 for an unlisted symbol. Gates keep `symbol={coin}USDT`.
+
 ## 2026-10-17 — Runnable gates on every remaining strategy page
 
 **Scope:** After the gated pages below, 314 strategy pages still had no gates, so a bot reading them could not tell which conditions it can automate. Each now has a `gates:` block, 4,373 gates in all: 1,967 runnable, 1,381 partial and 1,025 not runnable. 1,249 are own-position rules (`input: position`), 381 are composites (`input: derived`) and 711 name a replay endpoint. The library now has 395 gated pages and 5,514 gates; every strategy page is mapped except the 13 listed below.

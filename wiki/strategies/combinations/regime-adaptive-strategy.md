@@ -101,6 +101,7 @@ gates:
     runnable: partial
     input: derived
     inputs: [vol_low, adx_low, vol_normal, adx_trend, vol_crisis_level, vol_crisis_jump]
+    note: "Partial because its volatility legs are: no VIX is served and the page gives no DVOL cutoffs, so a conflict can only be judged on the ADX legs. Halving size and waiting 3-5 days are position actions, not data checks."
   - id: range_rsi_long
     role: entry
     rule: "Low-vol range book: buy RSI(14) oversold (below 30 in the example)"
@@ -164,12 +165,14 @@ gates:
     runnable: partial
     input: derived
     inputs: [vol_crisis_level, vol_crisis_jump]
+    note: "Partial because vol_crisis_level and vol_crisis_jump are: no VIX is served and the page gives no DVOL translation. The size cut itself is a position action."
   - id: crisis_close_short_options
     role: exit
     rule: "Crisis book: close any short options positions"
     runnable: partial
     input: derived
     inputs: [vol_crisis_level, vol_crisis_jump]
+    note: "Partial for the same reason as crisis_half_size. The short options are the desk's own positions; no option chain is served to find them."
   - id: crisis_buy_puts
     role: sizing
     rule: "Crisis book: buy protective puts (5% OTM in the example) and consider VIX calls or long volatility"

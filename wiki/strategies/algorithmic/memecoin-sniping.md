@@ -34,7 +34,7 @@ gates:
     runnable: partial
     endpoint: /api/v1/dex/security/{chain}/{address}
     field: holder_info.top_10_pct
-    note: "Served as the top 10's share in percent, not the top 5's: top_10_pct at or under 50 guarantees the top 5 pass, but a higher value is not a fail. {address} is the mint from the bot's own Pump.fun stream (mint_event is not served) or pools[].base_token.address on /dex/new-pools?chain=solana once it lists. Whether the report covers a token still on the bonding curve is unverified, and fresh tokens can come back with holder_count 0 and top_10_pct 0 (not indexed yet): treat that as unknown, never as a pass."
+    note: "Served as the top 10's share in percent, not the top 5's: top_10_pct at or under 50 guarantees the top 5 pass, but a higher value is not a fail. {address} is the mint from the bot's own Pump.fun stream (mint_event is not served) or pools[].base_token.address on /dex/new-pools?chain=solana once it lists. Whether the report covers a token still on the bonding curve is unverified, and a token GoPlus has not indexed yet returns null holder_count and top_10_pct (0 before 2026-10-17): treat null as unknown, never as a pass."
   - id: dev_rug_history
     role: filter
     rule: "Reject if the dev wallet has more than 3 prior rug pulls"

@@ -36,7 +36,7 @@ gates:
     runnable: partial
     endpoint: /api/v1/dex/security/{chain}/{address}
     field: holder_info.top_10_pct
-    note: "{address} is the launch's token, pools[].base_token.address from contested_launches (chain solana). The report also has risk_flags (is_honeypot, is_mintable, is_freezable), ownership.creator_balance_pct and risk_score; the thresholds live on the wrapped sniping page, and dev-wallet rug history is not served. Fresh tokens can come back with holder_count 0 and top_10_pct 0 (not indexed yet): treat that as unknown, never as a pass."
+    note: "{address} is the launch's token, pools[].base_token.address from contested_launches (chain solana). The report also has risk_flags (is_honeypot, is_mintable, is_freezable), ownership.creator_balance_pct and risk_score; the thresholds live on the wrapped sniping page, and dev-wallet rug history is not served. A token GoPlus has not indexed yet returns null holder_count and top_10_pct (0 before 2026-10-17): treat null as unknown, never as a pass."
   - id: tip_percentile
     role: sizing
     rule: "Tip at the 75th percentile of recent winning tips for hot launches and graduations, the 50th for normal memecoin flow"

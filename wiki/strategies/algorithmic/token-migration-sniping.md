@@ -34,7 +34,7 @@ gates:
     runnable: partial
     endpoint: /api/v1/dex/security/{chain}/{address}
     field: holder_info.top_10_pct
-    note: "Exactly the page's metric, in percent (pass below 40), but {address} is a token still on the bonding curve, which only the bot's own Pump.fun watcher supplies (bond_progress_watch is not served), and whether the report covers pre-graduation tokens is unverified. On 2026-10-17 fresh Solana tokens came back with holder_count 0 and top_10_pct 0: that means not indexed yet, so treat it as unknown, never as a pass."
+    note: "Exactly the page's metric, in percent (pass below 40), but {address} is a token still on the bonding curve, which only the bot's own Pump.fun watcher supplies (bond_progress_watch is not served), and whether the report covers pre-graduation tokens is unverified. A token GoPlus has not indexed yet returns null holder_count and top_10_pct (0 before 2026-10-17): treat null as unknown, never as a pass."
   - id: dev_not_rugged
     role: filter
     rule: "Pre-filter: the dev wallet has not rugged before (rug database cross-reference)"

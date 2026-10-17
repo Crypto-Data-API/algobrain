@@ -36,7 +36,7 @@ gates:
     runnable: partial
     endpoint: /api/v1/dex/security/{chain}/{address}
     field: holder_info.top_10_pct
-    note: "{address} is the pasted contract, or pools[].base_token.address from candidate_source. The same report has risk_flags.is_mintable, risk_flags.is_freezable and risk_score (the served stand-in for a dev rug score); market cap and liquidity are top_pools[].market_cap_usd and reserve_usd on /dex/token/{chain}/{address}. The page sets no thresholds (its example passes at 22% top-10). holder_count 0 with top_10_pct 0 on a fresh token means not indexed yet, not a clean distribution."
+    note: "{address} is the pasted contract, or pools[].base_token.address from candidate_source. The same report has risk_flags.is_mintable, risk_flags.is_freezable and risk_score (the served stand-in for a dev rug score); market cap and liquidity are top_pools[].market_cap_usd and reserve_usd on /dex/token/{chain}/{address}. The page sets no thresholds (its example passes at 22% top-10). holder_count and top_10_pct are null on a token GoPlus has not indexed yet (0 before 2026-10-17), which is unknown, not a clean distribution."
   - id: paid_promotion
     role: filter
     rule: "Check which tokens are paying for visibility before treating a trending call as organic"

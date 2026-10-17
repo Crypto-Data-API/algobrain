@@ -80,6 +80,7 @@ gates:
     runnable: partial
     input: derived
     inputs: [atr_declining, bb_squeezing]
+    note: "Partial because bb_squeezing is: the page gives no squeeze test, so whether the API's in_squeeze flag matches it is the desk's call. atr_declining alone is runnable, and nr7_contraction is the fully runnable alternative."
   - id: buy_stop_level
     role: entry
     rule: "Next day, buy stop at the previous daily close + X x ATR(14), X between 0.5 and 1.0 (the example and kill criteria use 0.6)"

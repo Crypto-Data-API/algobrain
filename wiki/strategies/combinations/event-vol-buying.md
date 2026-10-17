@@ -337,7 +337,7 @@ The production system adds: Deribit WebSocket feeds for live IV monitoring on th
 - **Regime classification** — `GET /api/v1/regimes/current` — blocks entry in `Structural_Shock` regime.
 - **Options chain** — Deribit is the primary venue for BTC and ETH options with sufficient open interest in the relevant expiry. See [[deribit]] for API access.
 
-*Note: Options IV data for specific expiries and strikes is not currently available via a documented CryptoDataAPI endpoint. Use Deribit API directly (as in [[funding-conditioned-vol-selling]]). DVOL history (the index-level vol) is available via CryptoDataAPI and serves as the baseline IV comparison.*
+*Note: the ATM implied vol of each listed BTC and ETH expiry is `GET /api/v1/volatility/implied` (`items[].term_structure[].atm_iv`, nearest 12 expiries, Pro Plus), alongside DVOL and its daily history. Per-strike IV, skew and option prices are not served; use the Deribit API for those (as in [[funding-conditioned-vol-selling]]).*
 
 ## Example trade
 

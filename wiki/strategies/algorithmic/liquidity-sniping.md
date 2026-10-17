@@ -80,7 +80,7 @@ gates:
     runnable: partial
     endpoint: /api/v1/dex/security/{chain}/{address}
     field: lp_info.any_lp_locked
-    note: "{address} comes from new_pool_event. any_lp_locked says whether any LP is locked, not how much, and whether burned LP counts as locked is not stated, so a false on a Pump.fun migration (burned by design) needs a manual look; total_lp_holders 0 on a fresh pool means not indexed yet."
+    note: "{address} comes from new_pool_event. any_lp_locked says whether any LP is locked, not how much, and whether burned LP counts as locked is not stated, so a false on a Pump.fun migration (burned by design) needs a manual look; total_lp_holders and any_lp_locked are null on a pool GoPlus has not indexed yet (0 and false before 2026-10-17)."
   - id: tip_economics
     role: filter
     rule: "Skip when the clearing tip exceeds 30% of the expected gross edge (ticket x calibrated crowd markup, about 25% in the pseudocode)"

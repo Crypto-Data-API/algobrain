@@ -120,6 +120,7 @@ gates:
     runnable: partial
     input: derived
     inputs: [hurst_gate, hmm_range_regime, vol_regime_ok]
+    note: "Partial because two of its three inputs are: the page names neither the HMM states nor the volatility-regime labels that pass, so what counts as the filter flipping is the desk's call. hurst_gate alone is runnable."
   - id: leverage
     role: sizing
     rule: "Run ~3-5x leverage on 15m candles (theilsen_stretch_revert at 1x), isolated margin"

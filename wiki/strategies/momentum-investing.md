@@ -106,6 +106,7 @@ gates:
     runnable: partial
     input: derived
     inputs: [bear_market, high_market_vol]
+    note: "Partial because both inputs are: the page's 'market' is an equity index, so the crypto proxy (BTC or a cap-weighted index) and the history the volatility percentile ranks over are the desk's call."
 ---
 
 Momentum investing is a strategy that buys assets that have performed well over a recent period (typically 3-12 months) and sells or avoids assets that have performed poorly. It is one of the most thoroughly researched anomalies in finance, with academic evidence spanning over a century of data across dozens of markets worldwide. The strategy exploits the empirical tendency of asset returns to persist in the intermediate term -- past winners continue to outperform past losers for periods of several months before eventually reversing. It is the cross-sectional cousin of [[trend-following]] (time-series momentum) and a core member of the [[factor-investing|factor]] zoo alongside value and size.

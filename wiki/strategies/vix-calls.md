@@ -85,7 +85,7 @@ gates:
     runnable: partial
     endpoint: /api/v1/volatility/implied
     field: items[].term_structure[].atm_iv
-    note: "Backwardation conventionally means front above back: atm_iv of the ~30-day expiry above the ~90-day one. The page's kill criterion writes it as '3-month > 1-month', which is contango, so the desk must confirm the reading. The term structure is live-only: the bot logs it daily to count the days, and no history is served."
+    note: "Backwardation means front above back: atm_iv of the ~30-day expiry above the ~90-day one. The term structure is live-only: the bot logs it daily to count the days, and no history is served."
   - id: rv_over_iv_avoid
     role: filter
     rule: "Avoid initiating when realized vol has exceeded implied for weeks (a LUNA- or FTX-style regime break)"
@@ -365,7 +365,7 @@ The overlay is wing-buying so its constraint is **Deribit put-wing liquidity**, 
 - Any cascade payoff not partially monetized within 72 hours of the DVOL spike peak → process failure; address the execution/decision rule before deploying the next tranche.
 - Rolling 12-month bleed exceeds 2.5% of NAV → reduce tranche size by 50% or shift from put wings to put spreads (cap the upside payoff in exchange for lower premium).
 - Deribit access suspended due to regulatory action or operational outage → halt program until an alternative venue (e.g., CME micro futures, OTC dealer puts) is evaluated; do not shift to an untested venue under pressure.
-- DVOL term structure in sustained backwardation (3-month > 1-month) for > 30 days → suspend and reassess — this signals a structural vol regime where new additions are expensive and the spike-reversion thesis is less reliable.
+- DVOL term structure in sustained backwardation (1-month implied vol above 3-month) for > 30 days → suspend and reassess — this signals a structural vol regime where new additions are expensive and the spike-reversion thesis is less reliable.
 
 ## Advantages
 

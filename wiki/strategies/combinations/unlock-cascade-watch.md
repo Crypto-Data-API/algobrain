@@ -42,7 +42,7 @@ gates:
     field: items[].pct_of_float
     replay: /api/v1/backtesting/snapshots?data_type=token_unlocks&start={start}&limit=100
     replay_field: snapshots[].data[].next_unlock.pct_of_float
-    note: "A cliff calendar from DefiLlama emissions data (the page's claim that CryptoDataAPI has no unlock calendar is out of date). Absence is not proof of no unlock. One row per coin, its soonest cliff only. Replay from 2026-08-20."
+    note: "A cliff calendar from DefiLlama emissions data. Absence is not proof of no unlock. One row per coin, its soonest cliff only. Replay from 2026-08-20."
   - id: unlock_10_28d
     role: universe
     rule: "The cliff unlock falls 10 to 28 days from now"
@@ -426,7 +426,7 @@ The production system adds: an unlock calendar feed (via tokenunlocks.app API or
 
 ## Indicators / data used
 
-- **Token unlock calendar** — public data from tokenunlocks.app, Coinglass, or The Block unlock tracker. Not available via CryptoDataAPI; requires a separate data source. Cross-reference with on-chain vesting contract reads where available.
+- **Token unlock calendar** — `GET /api/v1/supply/unlocks?symbol={TOKEN}&window_days=35`: dated vesting cliffs from DefiLlama's emissions data, each sized in tokens, USD and share of float (the next 7 days on Free, 35 on Pro). Each coin lists its soonest cliff only, and coverage is DefiLlama's, so absence is not proof of no unlock; cross-check large positions against tokenunlocks.app or the vesting contracts.
 - **Open interest (per token)** — `GET /api/v1/derivatives/open-interest?coin={TOKEN}`; current OI, 30d percentile computation for risk classification and cascade-fade pre-condition.
 - **Funding rates (per token)** — `GET /api/v1/derivatives/funding-rates?coin={TOKEN}`; 7-day average 8h funding for risk classification and cascade-fade pre-condition.
 - **Long/short ratio** — `GET /api/v1/derivatives/binance/long-short-ratio`; supplemental leverage indicator for risk classification.
@@ -514,7 +514,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 
 ## Disadvantages
 
-- **Requires external token unlock calendar data.** CryptoDataAPI does not provide a token unlock schedule; this must be sourced from tokenunlocks.app, Coinglass, or on-chain vesting contract reads. This is an additional infrastructure dependency not required by other combination pages in this wiki.
+- **The unlock calendar has gaps.** `/api/v1/supply/unlocks` covers the protocols DefiLlama's emissions data tracks and lists each coin's soonest cliff only, so a second cliff inside the window, or an untracked token, needs tokenunlocks.app or a read of the vesting contract.
 - **Two-phase complexity (de-risk + fade) requires coordination.** Separately managing the de-risking of existing longs AND the cascade-fade order staging requires coordination. If the de-risking is done and then the cascade-fade orders are NOT placed (due to low OI at T − 1), the de-risked position has no mechanism for re-entry — the trader is simply out of the position without a plan to get back in.
 - **False-positive windows consume attention and de-risking transaction costs.** HIGH-risk unlock windows that do not produce cascades (the majority) still require de-risking transactions (selling 75% of the position at T − 7) and then re-entry after the window clears. Each such false-positive window costs 35–70 bps in round-trip transaction costs.
 - **Not applicable to tokens without perp markets.** The monitoring framework is inapplicable to the large universe of small-cap tokens with no perp market. Those tokens must be managed with price-based technical exits only.
@@ -535,12 +535,13 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/market-intelligence/liquidations` — real-time 1h liquidation volume for cascade-confirmation gate
 - `GET /api/v1/market-data/klines?symbol={TOKEN}USDT&interval=4h&limit=30` — 4h OHLCV for price-decline measurement and post-fill monitoring
 - `GET /api/v1/regimes/current` — regime override; Structural_Shock triggers immediate full de-risk
+- `GET /api/v1/supply/unlocks?symbol={TOKEN}&window_days=35` — the unlock date, size and share of float that anchor the window
 
 **Historical data:**
 - `GET /api/v1/derivatives/binance/history?days=60` — 2-month daily derivatives history for OI percentile calibration and cascade-episode analysis
 - `GET /api/v1/market-data/klines?symbol={TOKEN}USDT&interval=1d&limit=60` — daily closes for price-decline analysis around historical unlock dates
 
-*Note: the token unlock calendar itself is not available via CryptoDataAPI. Source from tokenunlocks.app, Coinglass unlock tracker, or on-chain vesting contract reads directly.*
+*The unlock calendar's daily snapshots since 2026-08-20 are `GET /api/v1/backtesting/snapshots?data_type=token_unlocks` (`snapshots[].data[].next_unlock`), for replaying past unlock windows.*
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" \

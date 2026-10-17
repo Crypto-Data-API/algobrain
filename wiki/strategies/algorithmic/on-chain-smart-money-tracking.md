@@ -62,7 +62,7 @@ gates:
     runnable: partial
     endpoint: /api/v1/dex/security/{chain}/{address}
     field: risk_flags.is_mintable
-    note: "Mint revoked = is_mintable false; holder_info.top_10_pct is the holder-distribution read, which the page does not threshold (its example passes at under 25%); holder_count 0 with top_10_pct 0 on a fresh token means not indexed yet. {address} is the token in the smart wallets' buy alert, which comes from the bot's own Solana feed (not served), or pools[].base_token.address on /dex/new-pools?chain=solana. The Hyperliquid analog needs no contract screen."
+    note: "Mint revoked = is_mintable false; holder_info.top_10_pct is the holder-distribution read, which the page does not threshold (its example passes at under 25%); holder_count and top_10_pct are null on a token GoPlus has not indexed yet (0 before 2026-10-17). {address} is the token in the smart wallets' buy alert, which comes from the bot's own Solana feed (not served), or pools[].base_token.address on /dex/new-pools?chain=solana. The Hyperliquid analog needs no contract screen."
   - id: no_smart_seller
     role: filter
     rule: "Skip when any wallet in the set is already selling the token within the last 10 minutes (you would be the exit liquidity)"

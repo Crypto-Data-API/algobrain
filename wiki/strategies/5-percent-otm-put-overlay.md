@@ -383,7 +383,7 @@ Run at least weekly (and intraday during a cascade):
 
 ## Getting the Data (CryptoDataAPI)
 
-The tradeable put chain, [[dvol|DVOL]], and IV surface come from **[[deribit|Deribit]]** / [[greeks-live|Greeks.live]] — CryptoDataAPI does **not** serve the option chain or DVOL. [[cryptodataapi|CryptoDataAPI]] supplies the volatility-regime, options-flow, funding, and liquidation context used to time, size, and monetise the overlay.
+The tradeable put chain and the per-strike IV surface come from **[[deribit|Deribit]]** / [[greeks-live|Greeks.live]] — CryptoDataAPI does **not** serve the option chain. It does serve [[dvol|DVOL]] and the ATM implied vol of each listed expiry for BTC and ETH: `GET /api/v1/volatility/implied` (`items[].dvol`, daily `items[].history[].dvol` from 2026-04-20, and `items[].term_structure[].atm_iv`; the history and term structure are Pro Plus). [[cryptodataapi|CryptoDataAPI]] also supplies the volatility-regime, options-flow, funding, and liquidation context used to time, size, and monetise the overlay.
 
 **Live:**
 - `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0–100)
@@ -400,7 +400,7 @@ The tradeable put chain, [[dvol|DVOL]], and IV surface come from **[[deribit|Der
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime/score"
 ```
 
-For DVOL and the full IV surface, use the Deribit API or [[greeks-live]]. Full catalog: [[cryptodataapi-market-intelligence]] and [[cryptodataapi-regimes]].
+For per-strike IV, skew and option marks, use the Deribit API or [[greeks-live]]; DVOL and per-expiry ATM IV are `GET /api/v1/volatility/implied`. Full catalog: [[cryptodataapi-market-intelligence]] and [[cryptodataapi-regimes]].
 
 **Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [short-term regimes](https://cryptodataapi.com/market-regimes)
 

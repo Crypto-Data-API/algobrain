@@ -85,6 +85,7 @@ gates:
     runnable: false
     input: derived
     inputs: [composite_score, near_support, reversal_candle]
+    note: "Not runnable because composite_score is not: five of its six inputs are equity sentiment series we do not serve. near_support and reversal_candle are partial on their own, since 'near' has no number and the candle patterns are not defined."
   - id: tranche_2
     role: entry
     rule: "Buy the next 25% when the composite hits 15 or 3 trading days have passed since tranche 1"
@@ -98,18 +99,21 @@ gates:
     runnable: false
     input: derived
     inputs: [composite_score]
+    note: "Not runnable because composite_score is not (equity sentiment inputs we do not serve). The time branch alone is a position-age check."
   - id: tranche_4
     role: entry
     rule: "Complete the position when the composite hits 5 or 5 more trading days pass"
     runnable: false
     input: derived
     inputs: [composite_score]
+    note: "Not runnable because composite_score is not (equity sentiment inputs we do not serve). The time branch alone is a position-age check."
   - id: greed_tranches
     role: exit
     rule: "Sell or hedge 25% at each of composite 80, 85, 90 and 95"
     runnable: false
     input: derived
     inputs: [composite_score]
+    note: "Not runnable: every threshold sits on composite_score, which is not runnable (equity sentiment inputs we do not serve)."
   - id: near_support
     role: filter
     rule: "Execute each buy tranche near a support level, Fibonacci retracement or high-volume node"
@@ -144,6 +148,7 @@ gates:
     runnable: false
     input: derived
     inputs: [composite_score]
+    note: "Not runnable: the 40-60 band sits on composite_score, which is not runnable (equity sentiment inputs we do not serve)."
   - id: profit_target
     role: exit
     rule: "Take profit at 30-60% above the average entry for crypto (15-25% for equities)"
