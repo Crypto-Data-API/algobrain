@@ -26,6 +26,92 @@ kill_criteria: |
   - rolling 40-trade expectancy < 0 after costs
   - rolling 6-month net Sharpe < 0
   - more than 60% of losing trades occur while the trend filter reads against the trade (filter broken)
+gates:
+  - id: wt_oversold_cross
+    role: entry
+    rule: "Long: on the closed 4h bar, WT1 crosses above WT2 while WT1 is below -53 (or below the asset's 10th-percentile WT1 for high-vol alts); enter at the next bar's open"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=200
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "Compute WaveTrend (n1 = 10, n2 = 21) from the bars' typical price (high + low + close) / 3; no WaveTrend series is served. Drop the forming bar. Which alts count as high-vol is the desk's list."
+  - id: wt_overbought_cross
+    role: entry
+    rule: "Short (mirror): WT1 crosses below WT2 while WT1 is above +53 (or above the asset's 90th-percentile WT1)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=200
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+  - id: daily_trend_filter
+    role: filter
+    rule: "The daily trend classifier is not against the trade: ADX/DMI not RED for longs (not GREEN for shorts), or the close is on the trade's side of the daily 100-EMA"
+    runnable: true
+    endpoint: /api/v1/indicators/signum-rgg/{coin}
+    field: color
+    replay: /api/v1/backtesting/signum-rgg?date={date}
+    replay_field: by_symbol
+    note: "color is the page's named classifier (SIGNUM RGG, ADX(14)+DMI on daily bars). The 100-EMA alternative is computable from daily candles. The replay is one archived day per call, keyed by symbol."
+  - id: wt_divergence
+    role: entry
+    rule: "Optional confluence: price makes a lower low while WT1 makes a higher low versus the prior oversold trough"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=200
+    field: candles[].low
+    note: "The page does not define how far back the prior trough may be; the trough-matching rule is the desk's."
+  - id: exit_target
+    role: exit
+    rule: "Exit at the next open when WT1 reaches +20 or the opposite (overbought) cross fires, whichever comes first"
+    runnable: true
+    input: derived
+    inputs: [wt_oversold_cross, wt_overbought_cross]
+  - id: stop_swing_low_atr
+    role: stop
+    rule: "Stop below the lowest low of the last 10 bars minus 0.5x ATR(14)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=40&atr=14
+    field: candles[].atr
+    note: "Set at entry from the last 10 closed 4h bars and their atr."
+  - id: time_stop_24_bars
+    role: exit
+    rule: "Close after 24 bars"
+    runnable: true
+    input: position
+  - id: risk_half_pct
+    role: sizing
+    rule: "Risk 0.5% of equity to the stop"
+    runnable: true
+    input: position
+  - id: halve_on_grey
+    role: sizing
+    rule: "Halve size when the daily trend filter reads GREY (neutral)"
+    runnable: true
+    endpoint: /api/v1/indicators/signum-rgg/{coin}
+    field: color
+  - id: macro_regime_warning
+    role: filter
+    rule: "Monitoring: a shift to a trending macro regime label is the early warning for this strategy's main failure mode"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    note: "From the page's AI-agent workflow, with no list of which labels count as trending and no action beyond watching."
+  - id: kill_expectancy
+    role: filter
+    rule: "Pause when the rolling 40-trade expectancy is below 0 after costs"
+    runnable: true
+    input: position
+  - id: kill_sharpe
+    role: filter
+    rule: "Pause when the rolling 6-month net Sharpe is below 0"
+    runnable: true
+    input: position
+  - id: kill_filter_broken
+    role: filter
+    rule: "Pause when more than 60% of losing trades occur while the trend filter reads against the trade"
+    runnable: true
+    input: position
 ---
 
 # WaveTrend Reversal

@@ -34,6 +34,139 @@ kill_criteria: |
   - Deribit halts BTC or ETH options trading (execution venue unavailable)
 
 related: ["[[trend-following-cta]]", "[[vol-targeted-trend-following]]", "[[event-vol-buying]]", "[[long-call]]", "[[volatility-breakout]]", "[[breakout-trading]]", "[[carry-with-tail-hedge]]", "[[trend-aligned-premium-selling]]", "[[leverage-stress-tail-hedge]]", "[[deribit]]", "[[dvol]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[open-interest]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_options
+    role: universe
+    rule: "BTC or ETH, the underlyings with Deribit options"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+  - id: ema50_extension
+    role: entry
+    rule: "Uptrend leg 1: daily close at least 12% above the 50-day EMA"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={coin}USDT&interval=1d&limit=200
+    field: klines[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}USDT&exchange=binance&interval=1d&start={start}
+    replay_field: klines[].c
+    note: "Binance spot, the page's source. The last kline is still forming (close_time in the future): drop it. Puts mirror: close at least 10% below the 50-day EMA."
+  - id: rsi_4h_momentum
+    role: entry
+    rule: "Uptrend leg 2: 4h RSI at or above 58 on at least 3 of the last 5 4h bars"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={coin}USDT&interval=4h&limit=100
+    field: klines[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}USDT&exchange=binance&interval=4h&start={start}
+    replay_field: klines[].c
+    note: "Wilder RSI(14) on closed 4h bars. Puts mirror: 4h RSI at or below 42."
+  - id: funding_7d_bullish
+    role: entry
+    rule: "Uptrend leg 3: 7-day average 8h funding at least +0.015%"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Mean of the last 21 settled Binance prints >= 0.00015. Puts mirror: at or below -0.0001. Replay averages 5-minute samples of the live rate from 2026-03-30."
+  - id: no_distribution_candle
+    role: filter
+    rule: "Uptrend leg 4: no new 14-day daily high printed on a bearish engulfing candle in the last 5 days"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={coin}USDT&interval=1d&limit=20
+    field: klines[].high
+    replay: /api/v1/backtesting/klines?symbol={coin}USDT&exchange=binance&interval=1d&start={start}
+    replay_field: klines[].h
+    note: "For each of the last 5 closed days: a bar whose high is the highest of the prior 14 days and whose body engulfs the prior day's body with close below open fails the gate. Not in the pseudocode."
+  - id: trend_confirmed
+    role: entry
+    rule: "Uptrend confirmed when ema50_extension, rsi_4h_momentum, funding_7d_bullish and no_distribution_candle all hold"
+    runnable: true
+    input: derived
+    inputs: [ema50_extension, rsi_4h_momentum, funding_7d_bullish, no_distribution_candle]
+  - id: dvol_below_avg
+    role: entry
+    rule: "IV-cheap check A: DVOL at or below 90% of its 30-day average"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Mean of the last 30 daily dvol values against items[].dvol. Pro Plus for the history."
+  - id: rv_above_iv
+    role: entry
+    rule: "IV-cheap check B: 20-day realized vol at least DVOL + 5 vol points"
+    runnable: true
+    endpoint: /api/v1/backtesting/klines?symbol={coin}USDT&exchange=binance&interval=15m&start={start}&limit=2000
+    field: klines[].c
+    replay: /api/v1/backtesting/klines?symbol={coin}USDT&exchange=binance&interval=15m&start={start}
+    replay_field: klines[].c
+    note: "start = 20 days ago (1,920 bars). Annualise the stdev of 15m log returns by sqrt(96 x 365) and compare with items[].dvol on /volatility/implied. Daily closes give a coarser version from one /market-data/klines call."
+  - id: dvol_low_percentile
+    role: entry
+    rule: "IV-cheap check C: DVOL at or below the 40th percentile of its trailing year"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "History runs from 2026-04-20 (about 180 days), not a full year. The text also calls this a 30-day percentile; which window is meant is the desk's call."
+  - id: iv_cheap
+    role: entry
+    rule: "Buy options only when IV is cheap: dvol_below_avg and rv_above_iv both hold, or dvol_low_percentile holds; otherwise do not buy options"
+    runnable: partial
+    input: derived
+    inputs: [dvol_below_avg, rv_above_iv, dvol_low_percentile]
+    note: "The pseudocode passes on any one of the three. The first branch is fully runnable; the percentile branch is partial."
+  - id: call_strike
+    role: entry
+    rule: "Buy a call 10-15% OTM from spot (or a 10%/20% OTM call spread when IV is only moderately cheap); never ATM"
+    runnable: false
+    note: "No option chain, strikes or option prices are served; the page sources them from Deribit."
+  - id: call_expiry
+    role: entry
+    rule: "Option expiry 35-55 days out on Deribit"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "Nearest 12 Deribit expiries, Pro Plus."
+  - id: premium_budget
+    role: sizing
+    rule: "Premium budget 1.5-2.5% of the portfolio per entry (2% in the pseudocode)"
+    runnable: true
+    input: position
+  - id: one_option_position
+    role: sizing
+    rule: "One active call (or call spread) at a time; no pyramiding within a trend"
+    runnable: true
+    input: position
+  - id: profit_target
+    role: exit
+    rule: "Close when the option has doubled (100% of premium in profit)"
+    runnable: true
+    input: position
+    note: "The option mark comes from the bot's own venue; it is not served here."
+  - id: vega_exit
+    role: exit
+    rule: "Close if DVOL rises 15 vol points or more above its entry level within 7 days of purchase"
+    runnable: true
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+  - id: trend_failure_exit
+    role: exit
+    rule: "Close the call when BTC makes a new 20-day daily low"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={coin}USDT&interval=1d&limit=21
+    field: klines[].low
+    replay: /api/v1/backtesting/klines?symbol={coin}USDT&exchange=binance&interval=1d&start={start}
+    replay_field: klines[].l
+    note: "The pseudocode reads a 20-day closing low instead; puts mirror with a new 20-day high."
+  - id: time_exit
+    role: exit
+    rule: "Close at 7 days before expiry"
+    runnable: true
+    input: position
+  - id: sleeve_drawdown_kill
+    role: stop
+    rule: "Pause when the sleeve drawdown exceeds 20% from its high-water mark"
+    runnable: true
+    input: position
 ---
 
 # Long Options Trend Expression

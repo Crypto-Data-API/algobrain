@@ -26,6 +26,70 @@ kill_criteria: |
   - drawdown > 25%
   - long-short skew spread collapses (rank dispersion of 12m skew in bottom decile of history) for 12 months
 related: ["[[quantpedia]]", "[[quantpedia-strategy-encyclopedia]]", "[[max-anomaly]]", "[[lottery-stock-anomaly]]", "[[commodity-carry-strategy]]", "[[commodity-momentum]]", "[[commodity-value-strategy]]", "[[hedging-pressure]]", "[[skew-trading]]"]
+gates:
+  - id: commodity_universe
+    role: universe
+    rule: "Source rules: 22 liquid commodity futures (energy, metals, grains, softs, livestock), front or most-liquid contract, rolled before delivery"
+    runnable: false
+    note: "No commodity futures are served (the page says so too). The crypto adaptation (perp_universe onward) is the runnable version."
+  - id: commodity_skew_signal
+    role: entry
+    rule: "Source rules: skewness of each contract's daily returns over the past 12 months (252 days)"
+    runnable: false
+    note: "Needs back-adjusted daily commodity futures returns; not served. perp_skew_signal is the page's crypto substitute."
+  - id: perp_universe
+    role: universe
+    rule: "Crypto adaptation: run the same sort on a perp universe, with point-in-time membership"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "The page sets no size or liquidity cut for the perp universe, so which perps qualify is the desk's call (open_interest_usd in the same rows ranks them). For point-in-time history the page points at /backtesting/daily-snapshots/{date}, whose snapshot.coins.coins list is the top 100 by market cap from late May 2026."
+  - id: perp_skew_signal
+    role: entry
+    rule: "Crypto adaptation: skewness of each perp's daily returns over the last 90-180 days"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=182
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Drop the forming bar, take daily log returns over the chosen window (fix one length inside 90-180) and compute sample skewness. The asymmetry variant (#0664: IE asymmetry over 260 daily returns, long bottom 7, short top 7) uses the same closes."
+  - id: skew_long_short_book
+    role: entry
+    rule: "Long the 3 lowest-skew (most negative) names and short the 3 highest-skew names, equal weight (1/6 each)"
+    runnable: partial
+    input: derived
+    inputs: [perp_universe, perp_skew_signal]
+    note: "The 3-and-3 count comes from the 22-contract source; on a larger perp universe the leg size is the desk's call, and the universe itself is open (perp_universe)."
+  - id: monthly_rebalance
+    role: exit
+    rule: "Re-rank and rebalance monthly, holding each book for one month"
+    runnable: true
+    input: position
+  - id: equal_risk_legs
+    role: sizing
+    rule: "Volatility-scale each leg to equal risk (the page's adaptation; the source is equal weight)"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: vol.rv_cc_30
+    note: "Weight each name by 1 / its realized vol and normalise per leg. The page names no volatility window; rv_cc_30 is 30-day close-to-close, or compute another window from the daily candles."
+  - id: short_leg_funding
+    role: filter
+    rule: "Check funding on the legs: shorting high-skew, memecoin-style names often earns funding, which changes the cost overlay"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "From the page's agent workflow. Hourly settled prints: the short leg receives positive funding and the long leg pays its own. The page sets no threshold, so how funding changes the book is the desk's call."
+  - id: meme_mania_skip
+    role: filter
+    rule: "Skip a rebalance while the meme regime flags a meme mania, when short-leg squeezes cluster"
+    runnable: partial
+    endpoint: /api/v1/meme/regime/score
+    field: meme_season
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.meme_regime.meme_season
+    note: "From the page's agent workflow, which does not define mania. meme_season (true or false) is the nearest served flag; sentiment and composite_score in the same response are the graded version. Replay is one daily read: live from about 2026-06-10, reconstructed back to March 2026 (those days list meme_regime in snapshot.backfilled_sections)."
 ---
 
 # Commodity Skewness Strategy

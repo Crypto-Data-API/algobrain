@@ -38,6 +38,105 @@ kill_criteria: |
   - 25-delta RR sits inside +/-1 historical std for > 30 days (no dislocation to fade)
 
 related: ["[[implied-volatility]]", "[[volatility-skew]]", "[[volatility-smile]]", "[[volatility-surface]]", "[[risk-reversal]]", "[[skew]]", "[[cboe-skew-index]]", "[[variance-risk-premium]]", "[[volatility-risk-premium]]", "[[options-greeks]]", "[[vega]]", "[[gamma]]", "[[delta-hedging]]", "[[gamma-scalping]]", "[[straddle]]", "[[strangle]]", "[[crypto-options-volatility-selling]]", "[[crypto-options-dispersion]]", "[[volatility-carry]]", "[[deribit]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[garch-volatility]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: underlyings
+    role: universe
+    rule: "Deribit BTC and ETH options (USDC-margined linear preferred)"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "DVOL, its daily history and ATM IV per expiry are served for BTC and ETH (history and term structure on Pro Plus), contrary to the page's data note. Per-strike IVs, deltas and quotes are not."
+  - id: expiry_14_45
+    role: entry
+    rule: "Trade an expiry 14-45 DTE"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+  - id: rr25_dislocation
+    role: entry
+    rule: "Enter when RR25 = IV(25-delta call) - IV(25-delta put) is beyond plus or minus 1.5 standard deviations of its trailing 90-day distribution for that asset and tenor; sell the rich wing, buy the cheap wing"
+    runnable: false
+    note: "25-delta wing IVs (the per-strike surface) are not served, and neither is any RR history; they come from Deribit or an options-analytics vendor (Laevitas, Amberdata, Greeks.live)."
+  - id: vrp_3_points
+    role: entry
+    rule: "VRP positive: ATM implied vol at the trade's expiry minus trailing 30-day realised vol above 3 vol points"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "Take atm_iv for the chosen expiry and subtract 30-day realised vol: rv_cc_30 (close-to-close) or rv_parkinson_30 (high-low) on /api/v1/volatility/regime/{symbol}, the page's two named measures. items[].vrp is the DVOL version (DVOL minus 30-day Garman-Klass)."
+  - id: dvol_not_spiking
+    role: filter
+    rule: "DVOL not in the top decile of its 1-year range, and flat-to-falling"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "The served DVOL history is about 180 daily values (from 2026-04-20), half the page's 1-year window; flat-to-falling has no stated window either. A full year needs Deribit's own DVOL history."
+  - id: vol_stress_top_decile
+    role: filter
+    rule: "Skip entries while market-wide vol stress is in its top decile"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    replay: /api/v1/volatility/index/history?days=365
+    replay_field: points[].composite_score
+    note: "From the page's agent workflow. Rank today's composite_score against the 365 daily values of the history."
+  - id: delta_neutral_entry
+    role: sizing
+    rule: "Hedge net delta to about zero at inception with the perp or a dated future"
+    runnable: true
+    input: position
+    note: "Option deltas come from the venue account; no option Greeks are served."
+  - id: delta_rehedge_band
+    role: sizing
+    rule: "Re-hedge on the perp when net delta drifts beyond plus or minus 0.05 per BTC of notional"
+    runnable: true
+    input: position
+  - id: vega_budget
+    role: sizing
+    rule: "Net short vega capped at 0.5% of NAV per 1 vol point, with no more than 30% of the vega budget in any single expiry"
+    runnable: true
+    input: position
+  - id: margin_reserve
+    role: sizing
+    rule: "Hold at least 40% of margin as a buffer for a Deribit margin call"
+    runnable: true
+    input: position
+  - id: skew_normalised_exit
+    role: exit
+    rule: "Primary exit: RR25 back inside plus or minus 0.5 standard deviations of its 90-day mean"
+    runnable: false
+    note: "Needs the same 25-delta wing IVs as rr25_dislocation; not served."
+  - id: vega_pnl_target
+    role: exit
+    rule: "Close at +50% of the premium collected on the risk reversal"
+    runnable: true
+    input: position
+  - id: time_exit
+    role: exit
+    rule: "Close with 7 DTE remaining"
+    runnable: true
+    input: position
+  - id: dvol_gap_stop
+    role: stop
+    rule: "Close everything if DVOL gaps more than 40% intraday"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol_change_24h
+    note: "dvol is today's forming daily DVOL bar (refreshed about every 5 minutes) and dvol_change_24h is its move in points since the previous UTC daily close, so dvol_change_24h / (dvol - dvol_change_24h) above 0.4 reads the rule per UTC day. A gap that straddles 00:00 UTC is split across two days; a rolling intraday window needs Deribit's DVOL feed."
+  - id: wing_iv_double_stop
+    role: stop
+    rule: "Close everything if the net-short wing's IV expands to 2x its entry level"
+    runnable: false
+    note: "Wing IV is not served; read it from Deribit."
+  - id: vol_shock_close_all
+    role: stop
+    rule: "Treat a flip of the volatility regime to vol_shock as the close-all trigger"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.volatility_regime.by_symbol.{symbol}.regime
+    note: "From the page's agent workflow. Replay is one daily read: live from about 2026-06-10, reconstructed back to March 2026."
 ---
 
 # Skew Trading (Crypto Options)

@@ -22,6 +22,73 @@ expected_max_drawdown: 0.25
 breakeven_cost_bps: 20
 decay_evidence: "Overend Gurney collapse 1866 wiped out the leading practitioner; WWI disrupted bill market; 1920s-30s central bank open-market operations rewrote money-market structure; classical bill broking essentially extinct post-1931"
 related: ["[[gold-point-arbitrage]]", "[[specie-flow-arbitrage]]", "[[mint-parity-arbitrage]]", "[[covered-interest-arbitrage]]", "[[overend-gurney-collapse-1866]]", "[[bank-of-england]]", "[[bagehot-lombard-street]]", "[[repo-arbitrage]]", "[[commercial-paper]]", "[[arbitrage]]", "[[edge-taxonomy]]", "[[ltcm-collapse-1998]]"]
+gates:
+  - id: geographic_spread
+    role: entry
+    rule: "Geographic arb: buy bills in a provincial market (Liverpool, Manchester, Glasgow, Birmingham, Dublin) when its discount exceeds London's by more than 25 bps net of transport and commission, and sell them in London"
+    runnable: false
+    note: "A retired pre-1914 money-market trade. No bill-of-exchange discount quotes are served; the only source is historical archives (The Economist, Bank of England records)."
+  - id: maturity_kink
+    role: entry
+    rule: "Maturity arb: buy the kinked tenor (for example 60-day bills at 4.0% between 30-day at 3.5% and 90-day at 3.8%) and sell the adjacent tenors against it until the curve smooths"
+    runnable: false
+    note: "No bill discount curve is served."
+  - id: bank_rate_carry
+    role: entry
+    rule: "Bank Rate vs market rate: hold first-class bills funded by call money while the market discount (3.5% in the example) exceeds the call-money rate (2.5%), with Bank Rate (5%) as the rediscount backstop"
+    runnable: false
+    note: "Bank Rate, market discount and call-money rates are not served."
+  - id: second_class_spread
+    role: entry
+    rule: "Credit spread: buy second-class bills at a 25-50 bps discount over first-class when the desk's own credit analysis says the drawee is solvent"
+    runnable: false
+    note: "No bill credit spreads or drawee credit data are served, and the solvency call is a judgement."
+  - id: geographic_exit
+    role: exit
+    rule: "Geographic arb: rebalance inventory within 1-3 days"
+    runnable: true
+    input: position
+  - id: hold_to_maturity
+    role: exit
+    rule: "Hold-to-maturity bills self-liquidate in 30-180 days"
+    runnable: true
+    input: position
+  - id: bank_rate_unwind
+    role: exit
+    rule: "Unwind the Bank Rate carry when the gap compresses or call money tightens"
+    runnable: false
+    note: "Needs the same rates as bank_rate_carry, none served; the page gives no compression threshold."
+  - id: drawee_concentration
+    role: sizing
+    rule: "Limit inventory concentration in any single drawee and stay within call-money lines and acceptance-house credit limits"
+    runnable: partial
+    input: position
+    note: "The page gives no limits, so the caps are the desk's call."
+  - id: kill_call_money
+    role: stop
+    rule: "Kill switch: the call-money rate rises above the portfolio's sustained yield"
+    runnable: false
+    note: "Call-money rates are not served."
+  - id: kill_counterparty
+    role: stop
+    rule: "Kill switch: any acceptance-house default"
+    runnable: false
+    note: "A historical credit event; nothing served covers it."
+  - id: kill_drawdown_10
+    role: stop
+    rule: "Kill switch: cumulative 90-day drawdown above 10% of capital"
+    runnable: true
+    input: position
+  - id: kill_rediscount_refusal
+    role: stop
+    rule: "Kill switch: the central bank refuses to rediscount even first-class paper (the 1866 signal)"
+    runnable: false
+    note: "A central-bank policy event; nothing served covers it."
+  - id: kill_geo_spread
+    role: stop
+    rule: "Kill switch: the geographic spread stays below 10 bps for 3+ months"
+    runnable: false
+    note: "Needs the same provincial and London quotes as geographic_spread."
 ---
 
 # Bill Broking Arbitrage

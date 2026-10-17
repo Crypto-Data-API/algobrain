@@ -22,6 +22,70 @@ expected_max_drawdown: 0.35
 breakeven_cost_bps: 1
 decay_evidence: "Swap spreads went persistently negative after 2008 bank-balance-sheet regulation (SLR, Basel III); textbook arbitrage broke"
 related: ["[[ltcm-collapse-1998]]", "[[interest-rate-swap]]", "[[on-off-the-run-treasury-arbitrage]]", "[[relative-value-arbitrage]]", "[[tips-treasury-arbitrage]]", "[[sofr]]", "[[libor]]", "[[basel-iii]]", "[[supplementary-leverage-ratio]]", "[[failure-modes]]", "[[edge-taxonomy]]"]
+gates:
+  - id: swap_spread
+    role: entry
+    rule: "Swap spread (tenor T) = par SOFR swap rate(T) - off-the-run Treasury yield(T), in bp, at 2Y, 5Y, 10Y and 30Y"
+    runnable: false
+    note: "No swap curve or Treasury yield curve is served. treasury_yield on /sentiment/macro is the average interest rate on all outstanding Treasury notes, not a market yield at any tenor. Needs a rates vendor or FRED and SOFR swap quotes."
+  - id: modern_deeply_negative
+    role: entry
+    rule: "Modern entry: spread more than 30 bp below its trailing 5-year median (or 30Y below -60 bp outright): pay fixed on the swap, buy the Treasury in term repo"
+    runnable: false
+    input: derived
+    inputs: [swap_spread]
+    note: "swap_spread is unserved."
+  - id: classical_too_wide
+    role: entry
+    rule: "Classical entry: 10Y spread above about 60 bp: receive fixed on the swap, short the Treasury via reverse repo"
+    runnable: false
+    input: derived
+    inputs: [swap_spread]
+    note: "swap_spread is unserved."
+  - id: dv01_neutral
+    role: sizing
+    rule: "Build both legs DV01-neutral, with no outright duration view"
+    runnable: true
+    input: position
+  - id: size_for_30bp_shock
+    role: sizing
+    rule: "Size so a 30 bp adverse spread move does not exceed 20% of equity"
+    runnable: true
+    input: position
+  - id: exit_normalised
+    role: exit
+    rule: "Take profit when the spread returns to 40-50 bp (classical) or normalises toward zero (modern)"
+    runnable: false
+    input: derived
+    inputs: [swap_spread]
+    note: "swap_spread is unserved."
+  - id: exit_financing
+    role: exit
+    rule: "Exit when financing terms deteriorate or the position exceeds the prime broker's haircut capacity"
+    runnable: false
+    note: "Repo rates and haircuts are not served; they come from the prime broker."
+  - id: kill_adverse_30bp
+    role: stop
+    rule: "Kill switch: the spread moves more than 30 bp further from entry within any 6-month window"
+    runnable: false
+    input: derived
+    inputs: [swap_spread]
+    note: "swap_spread is unserved."
+  - id: kill_financing_60pct
+    role: stop
+    rule: "Kill switch: repo haircut plus borrow fee exceeds 60% of the expected carry"
+    runnable: false
+    note: "Financing costs come from the prime broker; no repo data is served."
+  - id: kill_return_minus_15pct
+    role: stop
+    rule: "Kill switch: rolling 12-month trade-level return below -15%"
+    runnable: true
+    input: position
+  - id: kill_regulatory_shift
+    role: stop
+    rule: "Kill switch: a regulatory shift (SLR reform) signals imminent repricing of balance-sheet capacity"
+    runnable: false
+    note: "A judgement on bank regulation; no data served covers it."
 ---
 
 # Swap Spread Arbitrage

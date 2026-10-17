@@ -22,6 +22,62 @@ expected_sharpe: 2
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 30
 decay_evidence: "HLP launched 2023; matured 2024 with deposit base growing from $20M to $335M (Q1 2025). Returns compressed from 100%+ APR (early) to ~15-50% APR (typical quarterly windows 15-30%) as more capital deployed."
+gates:
+  - id: hlp_apr_deposit
+    role: entry
+    rule: "Passive: deposit USDC into HLP while its trailing 30-day APR is above the target APR"
+    runnable: false
+    note: "HLP vault returns and NAV history are not served; they come from Hyperliquid's vaultDetails API or dashboards. /hyperliquid/wallet-positions shows only the parent vault's current account_value, which mixes returns with deposits and withdrawals. The page sets no target APR."
+  - id: hlp_withdraw
+    role: exit
+    rule: "Passive: withdraw when HLP's APR falls below the threshold or HLP starts taking large drawdowns"
+    runnable: false
+    note: "Needs the same unserved vault return series; the page gives no threshold or drawdown size."
+  - id: hlp_regime_timing
+    role: filter
+    rule: "Deposit timing: HLP drawdowns cluster in vol_spike and choppy_high_vol regimes, while passive APR is steadiest in range_low_vol"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's agent workflow. The labels are served; whether to withdraw ahead of a cascade, and when to re-enter, is the desk's call."
+  - id: hlp_directional_10m
+    role: entry
+    rule: "Active: when HLP holds more than $10M of net directional exposure in a coin, consider taking the opposite side at typical reversal points"
+    runnable: partial
+    endpoint: /api/v1/quant/positioning?symbol={coin}
+    field: coins.{coin}.by_type.market_maker.net_usd
+    note: "A proxy: market_maker aggregates every classified market-maker account plus vaults (HLP included), not HLP alone, and HLP's own positions sit in child vaults we do not split out. Reversal points are not defined by the page, so timing is the desk's call."
+  - id: liquidation_preposition
+    role: entry
+    rule: "Active: pre-position resting orders at liquidation clusters to fill alongside HLP's automated liquidator"
+    runnable: partial
+    endpoint: /api/v1/quant/positioning/ladder?symbol={coin}
+    field: levels[].price
+    note: "levels lists the nearest liquidation clusters above and below mark (price, dist_pct, total_usd, side) from every Hyperliquid account over $100k, refreshed every few minutes. The page gives no minimum cluster size or order offset; Pro Plus."
+  - id: funding_pairs_universe
+    role: universe
+    rule: "Cross-CEX funding arb on the top pairs: BTC, ETH and SOL"
+    runnable: true
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: coin
+  - id: funding_divergence_5bp
+    role: entry
+    rule: "Open paired positions when Hyperliquid funding diverges from Binance funding by more than 5 bp per 8h: short the venue paying more, long the other"
+    runnable: true
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: hyperliquid.current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "binance.current_rate is in the same response. Hyperliquid's rate is hourly: multiply by 8 before subtracting Binance's 8h rate (the page's pseudocode skips this step). Bybit is not served. The Binance side replays from /backtesting/funding?symbol={coin}USDT&exchange=binance, local from 2026-05-09."
+  - id: hold_to_convergence
+    role: exit
+    rule: "Hold the pair until the spread converges, typically 1-3 funding periods"
+    runnable: partial
+    input: derived
+    inputs: [funding_divergence_5bp]
+    note: "The page sets no convergence level; hl-vs-cex-funding-divergence uses below 2 bp per 8h."
 ---
 
 # Hyperliquid HLP Basis Arbitrage

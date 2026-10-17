@@ -22,6 +22,37 @@ expected_max_drawdown: 0.50
 breakeven_cost_bps: 2
 decay_evidence: "Liquidity premium documented academically by Amihud & Mendelson (1991) and Krishnamurthy (2002); post-2008 the spread averages 2-4 bps, largely competed away by HFT and RV funds; LTCM's 1998 blow-up is the canonical failure case"
 related: ["[[ltcm-collapse-1998]]", "[[convergence-arbitrage]]", "[[swap-spread-arbitrage]]", "[[tips-treasury-arbitrage]]", "[[relative-value-arbitrage]]", "[[basis-trading]]", "[[repo-market]]", "[[flight-to-quality]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[limits-to-arbitrage]]", "[[liquidity-premium]]"]
+gates:
+  - id: otr_ofr_spread_8bp
+    role: entry
+    rule: "Enter when the off-the-run yield minus the on-the-run yield is at least 8 bps (historical median about 5 bps): buy the off-the-run, short the on-the-run"
+    runnable: false
+    note: "Per-CUSIP Treasury yields are not served; /sentiment/macro carries a single aggregate Treasury yield. Needs a Treasury quote feed."
+  - id: otr_borrowable
+    role: filter
+    rule: "The on-the-run issue can be borrowed in repo for the short"
+    runnable: false
+    note: "Repo availability and specialness are not served."
+  - id: dv01_neutral
+    role: sizing
+    rule: "Size the short DV01-neutral to the long (hedge ratio = OFR DV01 / OTR DV01), not notional-neutral"
+    runnable: false
+    note: "Needs each issue's DV01 from price, coupon and maturity, none served."
+  - id: stress_sizing
+    role: sizing
+    rule: "Size so a 20 bp adverse spread move costs no more than 15% of capital (the trade runs 20-50x levered through repo)"
+    runnable: true
+    input: position
+  - id: exit_next_auction
+    role: exit
+    rule: "Exit around the next auction, targeting about 50% of the entry spread (enter at 10 bps, unwind at 4-5 bps); typical hold one auction cycle (3-6 months)"
+    runnable: false
+    note: "Needs the same per-issue yields; the auction calendar is not on /event/calendar either."
+  - id: stop_spread_20bp
+    role: stop
+    rule: "Stop out when the spread reaches 20 bps"
+    runnable: false
+    note: "Needs the unserved per-issue yields."
 ---
 
 # On-the-Run vs Off-the-Run Treasury Arbitrage

@@ -22,6 +22,127 @@ expected_sharpe: 0.7
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 70
 decay_evidence: "Pair-trade dispersion edges decay as more participants identify them; this thesis is currently early — no evidence of crowding as of 2026-05."
+gates:
+  - id: bls_tech_losses
+    role: entry
+    rule: "Trigger: a BLS benchmark revision shows accelerating tech-sector job losses"
+    runnable: false
+    note: "No labour-market or BLS data is served."
+  - id: recession_contract_50
+    role: entry
+    rule: "Trigger: the IBKR Forecast Trader recession contract is above 50%"
+    runnable: false
+    note: "Prediction-market prices are not served."
+  - id: btc_dom_rising
+    role: entry
+    rule: "Trigger: BTC dominance trending up (alts already underperforming)"
+    runnable: partial
+    endpoint: /api/v1/backtesting/snapshots?data_type=cycle_regime&start={start}&limit=1000
+    field: snapshots[].data.signals.btc_dom
+    note: "btc_dom is BTC's share of the top-100 coins' market cap, archived about every 25 minutes from 2026-08-07 (Pro Plus); live value is signals.btc_dom on /api/v1/regimes/current. The page gives no window for trending up (its exit uses 5- and 8-week SMAs), so the test is the desk's call."
+  - id: vix_22_inverted
+    role: entry
+    rule: "Trigger: VIX above 22 with a persistent term-structure inversion"
+    runnable: false
+    note: "No VIX level or VIX futures curve is served (/sentiment/macro carries EUR/USD, gold and Treasury yields only)."
+  - id: muni_spread_widening
+    role: entry
+    rule: "Trigger: major tech-hub municipal bond spreads widening"
+    runnable: false
+    note: "No municipal bond data is served."
+  - id: two_triggers
+    role: entry
+    rule: "Build the book over 4-6 weeks once at least two of the five triggers have fired"
+    runnable: false
+    input: derived
+    inputs: [bls_tech_losses, recession_contract_50, btc_dom_rising, vix_22_inverted, muni_spread_widening]
+    note: "Only btc_dom_rising is served (partially), so two triggers can never be confirmed from this API."
+  - id: leg1_btc_alt_pair
+    role: entry
+    rule: "Leg 1 (30% each side): long BTC, short SOL plus an ex-BTC top-50 alt basket via perps, when BTC dominance is trending up and alt/BTC ratios are breaking down"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles/batch?coins={coin}&interval=1d&limit=60&closed_only=true
+    field: series.{coin}[].close
+    note: "Alt/BTC ratios are each alt's close over BTC's on the same bars. Breaking down is not defined, and btc_dom_rising carries the same open window."
+  - id: leg2_miner_equity_short
+    role: entry
+    rule: "Leg 2 (25%): short MSTR, MARA, RIOT, CLSK, BITF, HUT8, CORZ and CIFR"
+    runnable: false
+    note: "Equity prices and borrow are not served."
+  - id: leg3_coin_short
+    role: entry
+    rule: "Leg 3 (15%): short COIN while its 3-month volume rate of change is negative"
+    runnable: false
+    note: "Coinbase equity price and volume are not served."
+  - id: leg4_ai_token_puts
+    role: entry
+    rule: "Leg 4 (10%): long 90-day puts on TAO, FET and RNDR, sized by implied vol"
+    runnable: false
+    note: "No options chain or implied vol is served for these tokens (implied vol covers BTC and ETH DVOL only)."
+  - id: leg5_defi_short
+    role: entry
+    rule: "Leg 5 (10%): short UNI, AAVE and MKR perps"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "Unconditional in the pseudocode; check each coin is still listed (MKR has migrated to SKY on some venues)."
+  - id: leg6_funding_fade
+    role: entry
+    rule: "Leg 6 (10%, split across BTC, ETH and SOL): short the perp while funding is above +20% APR (hourly rate above about 0.0000228)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "APR = hourly rate x 24 x 365. Stand down as funding normalises."
+  - id: gross_caps
+    role: sizing
+    rule: "Total notional capped at 100% of allocated capital with no leverage beyond what each leg needs (the BTC/alt pair takes gross to about 160-190%); rebalance monthly to the target weights"
+    runnable: true
+    input: position
+  - id: regime_gate
+    role: filter
+    rule: "The thesis needs risk-off macro: a Broad Bull label with a low policy-risk score argues for sizing down or staying flat"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "From the agent workflow. broad_bull_alt_expansion is the regime id; policy_risk_score is on /api/v1/policy/regime/score. Low and the size cut are not defined."
+  - id: btc_dom_sma_exit
+    role: exit
+    rule: "Full exit when BTC dominance's 5-week SMA crosses below its 8-week SMA (the kill criteria add: and the 4-week return is positive, for the pair)"
+    runnable: true
+    endpoint: /api/v1/backtesting/snapshots?data_type=cycle_regime&start={start}&limit=1000
+    field: snapshots[].data.signals.btc_dom
+    note: "start = 8 weeks ago; reduce to one value per day (about 3,200 rows, so page with three or four calls) and compare the 35- and 56-day means. btc_dom reads a few points above total-market dominance charts. Archived from 2026-08-07."
+  - id: coin_volume_reversal
+    role: exit
+    rule: "Full exit when COIN volume bottoms and reverses (3-month rate-of-change inflection)"
+    runnable: false
+    note: "Coinbase equity volume is not served."
+  - id: mstr_collateral
+    role: exit
+    rule: "Full exit when MSTR collateral coverage stops compressing (flatten the miner short after 3 consecutive monthly rises)"
+    runnable: false
+    note: "Needs MSTR 10-Q debt and holdings data, which is not served."
+  - id: fed_easing_decouple
+    role: exit
+    rule: "Flatten if the Fed cuts more than 75 bps in one decision and BTC is up more than 10% in 5 days"
+    runnable: false
+    note: "Fed decision sizes are not served; the BTC half alone is a 5-bar change on /hyperliquid/candles?coin=BTC&interval=1d."
+  - id: etf_flow_watch
+    role: exit
+    rule: "Sustained net BTC ETF creations signal BTC decoupling up: flatten before the drawdown limits are hit"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/etf/btc/flows?days=30
+    field: flows[].flow_usd
+    note: "From the agent workflow. Settled trade days only; never add the in_progress day. Sustained is not defined in size or length."
+  - id: drawdown_stops
+    role: stop
+    rule: "Drawdown above 15%: flatten the DeFi and funding-fade legs and halve the miner short; above 22%: flatten the whole book"
+    runnable: true
+    input: position
 ---
 
 A basket of crypto-specific short and pair-trade legs designed to express the ai-recession-playbook thesis through digital assets. The core insight is that crypto bifurcates in an AI-driven labor recession — BTC may decouple as a monetary debasement hedge while alts, AI tokens, mining equities, and crypto-broker stocks face compounding wealth-destruction and VC-liquidity headwinds. (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]])

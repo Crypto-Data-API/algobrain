@@ -42,6 +42,127 @@ last_review: 2026-04-27
 next_review: 2026-05-27
 
 related: ["[[cash-and-carry]]", "[[basis-trading]]", "[[cross-exchange-arbitrage]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[delta-neutral]]", "[[basis]]", "[[ethena-usde]]", "[[hyperliquid]]", "[[asterdex]]", "[[binance]]", "[[ftx]]", "[[kelly-criterion]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[book-a-man-for-all-markets]]", "[[cryptodataapi]]"]
+gates:
+  - id: funding_entry_003
+    role: entry
+    rule: "8-hour funding rate positive and above 0.03% (0.0003, about 33% annualised)"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=1
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance USDT-M settles every 8 hours, so the latest settled print is the page's 8h rate; current_rate is the live next-period rate. AsterDEX per-asset funding, the deployed perp venue, is not served (/exchanges/asterdex gives only an exchange-wide funding APR), so this is runnable as written only for a bot trading the Binance leg; on AsterDEX, Binance prints are a proxy. On Hyperliquid, sum the last 8 hourly prints for the 8h equivalent. Replay rows are 5-minute samples of the live 8h rate, local from 2026-05-09 (earlier days via /backtesting/archives?data_type=funding)."
+  - id: cross_venue_check
+    role: filter
+    rule: "Cross-check the funding signal on at least one other major venue (Binance, Hyperliquid, Bybit, OKX) to filter venue-specific oracle anomalies"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hyperliquid settles hourly: sum the last 8 prints for an 8h-equivalent rate. Bybit and OKX funding are not served. The page does not say how closely the second venue must agree, so the agreement test is the desk's call."
+  - id: persistence_7d
+    role: filter
+    rule: "7-day rolling average funding positive (and trending up or flat)"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance 8h prints stand in for AsterDEX per-asset funding, the page's deployed venue, which is not served (only an exchange-wide APR on /exchanges/asterdex). Mean of the last 21 settled 8h prints. The pseudocode tests only that the mean is above zero; for the trend, compare it with the 21 prints before (limit=42), a window the page leaves open."
+  - id: spot_leg_liquidity
+    role: filter
+    rule: "Spot leg available: the underlying is purchasable on a venue with adequate liquidity for the intended notional"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/24hr?symbol={symbol}USDT
+    field: quote_volume
+    note: "Binance spot 24h quote volume; an error means no Binance USDT spot pair. The page sets no adequacy level, so the volume-to-notional ratio is the desk's call."
+  - id: oi_health
+    role: filter
+    rule: "Perp open interest rising or stable; the pseudocode waits while the OI z-score is below -1.0"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/open-interest?symbol={symbol}USDT
+    field: history[].sum_open_interest_value
+    note: "30 daily Binance OI points in USD. The page does not define the z-score's window or whether it scores the OI level or its change; a z-score of today's level over the 30 points is one reading. Hyperliquid OI is assets[].open_interest_usd on /hyperliquid/open-interest."
+  - id: oracle_deviation_50bps
+    role: filter
+    rule: "No oracle-vs-CEX spot deviation above 50 bps at entry"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Served for a Hyperliquid perp leg: compare oracle_price with Binance spot (price on /market-data/ticker/price). The deployed AsterDEX index is not served."
+  - id: venue_health_events
+    role: filter
+    rule: "No active insurance-fund drawdown and no funding-mechanism parameter change announced in the last 7 days"
+    runnable: false
+    note: "Venue insurance-fund balances and parameter announcements are not served; they come from the venue's own status pages and API."
+  - id: exit_funding_below_001
+    role: exit
+    rule: "Exit when 8h funding falls below 0.01% (0.0001, about 11% annualised)"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=1
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance 8h prints stand in for AsterDEX per-asset funding, the page's deployed venue, which is not served (only an exchange-wide APR on /exchanges/asterdex)."
+  - id: exit_7d_negative
+    role: exit
+    rule: "Exit when the 7-day average funding turns negative"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance 8h prints stand in for AsterDEX per-asset funding, the page's deployed venue, which is not served (only an exchange-wide APR on /exchanges/asterdex). Exit when the mean of the last 21 settled 8h prints is below zero."
+  - id: basis_blowout_100bps
+    role: stop
+    rule: "Close when the perp's mark-vs-index basis exceeds 100 bps for more than 30 minutes"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].premium
+    note: "Served for a Hyperliquid perp leg: premium is the perp's premium to its oracle, so poll every few minutes and act when its absolute value stays above 0.01 for 30 minutes (mark_price and oracle_price are alongside). AsterDEX's index, the deployed venue, is not served."
+  - id: spot_counterparty_event
+    role: exit
+    rule: "Exit on a spot-leg counterparty event: exchange withdrawal halt, ACH suspension or custody risk flag"
+    runnable: false
+    note: "Exchange operational status is not served. /security/events?type=hack lists exploits after the fact, which can stand in only for the worst case."
+  - id: sleeve_drawdown_8pct
+    role: stop
+    rule: "Flatten everything when the sleeve's drawdown exceeds 8%"
+    runnable: true
+    input: position
+  - id: perp_leverage_1x
+    role: sizing
+    rule: "Perp short at 1x isolated margin, equal notional to the spot long"
+    runnable: true
+    input: position
+  - id: per_asset_cap_25pct
+    role: sizing
+    rule: "At most 25% of the sleeve allocation per asset (Kelly fraction about 0.05-0.10 of book per asset as an upper bound)"
+    runnable: true
+    input: position
+  - id: max_concurrent_3
+    role: sizing
+    rule: "At most 3 concurrent positions"
+    runnable: true
+    input: position
+  - id: delta_rebalance_2pct
+    role: sizing
+    rule: "Rebalance the spot leg hourly when net delta drifts more than 2% of notional"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "Delta drift = (spot quantity - perp quantity) x price over the position notional; quantities come from the position record."
+  - id: quant_regime_cut
+    role: sizing
+    rule: "Cut size or exit as the market regime tilts to strong_trend_bear or vol_spike, the funding-inversion regimes"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's agent workflow. The labels are mechanical; whether to cut or exit, and by how much, is not stated."
 ---
 
 # Funding Rate Arbitrage

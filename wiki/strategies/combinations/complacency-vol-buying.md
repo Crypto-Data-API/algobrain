@@ -34,6 +34,147 @@ kill_criteria: |
   - Deribit halts BTC or ETH options trading (execution venue unavailable)
 
 related: ["[[leverage-stress-tail-hedge]]", "[[post-panic-vol-selling]]", "[[event-vol-buying]]", "[[long-options-trend-expression]]", "[[contrarian-extremes]]", "[[sentiment-positioning-divergence]]", "[[low-leverage-vol-selling]]", "[[crowded-long-funding-fade]]", "[[fear-and-greed-index]]", "[[dvol]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[open-interest]]", "[[funding-rate]]", "[[deribit]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: greed_75_3d
+    role: entry
+    rule: "Gate 1: Fear and Greed index at or above 75 on each of the last 3 consecutive days"
+    runnable: true
+    endpoint: /api/v1/market-health/history?days=3
+    field: history[].components.fear_greed
+    replay: /api/v1/market-health/history?days=365
+    replay_field: history[].components.fear_greed
+    note: "The market-health fear_greed component is the index's value per UTC day (it matches the last fear_greed snapshot of each day), from 2026-01-14. Live: value on /api/v1/sentiment/fear-greed. The served index averages several sources rather than the alternative.me index alone. /market-intelligence/fear-greed-history returns only today's row, so it cannot supply the run."
+  - id: dvol_pctile_35
+    role: entry
+    rule: "Gate 2: DVOL at or below the 35th percentile of its trailing 52-week distribution"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Rank items[].dvol within history[]. The served history is about 180 daily values, half the page's 52 weeks, so the percentile is over a shorter window. Pro Plus."
+  - id: dvol_below_90pct_30d
+    role: entry
+    rule: "Gate 2: DVOL at or below 90% of its 30-day average"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Mean of the last 30 daily values; require items[].dvol at most 0.90x it."
+  - id: funding_7d_003
+    role: entry
+    rule: "Gate 3 (either leg): 7-day average 8h funding at or above +0.030% (0.0003)"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Mean of the last 21 settled Binance 8h prints."
+  - id: oi_pctile_70
+    role: entry
+    rule: "Gate 3 (either leg): open interest at or above the 70th percentile of its trailing 30-day distribution"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/open-interest?symbol={symbol}USDT
+    field: history[].sum_open_interest_value
+    note: "Rank today's value among the 30 daily Binance OI points. The page's /derivatives/open-interest gives the current level only, with no history."
+  - id: all_gates
+    role: entry
+    rule: "Enter only when Gates 1, 2 and 3 all pass at the same time"
+    runnable: partial
+    input: derived
+    inputs: [greed_75_3d, dvol_pctile_35, dvol_below_90pct_30d, funding_7d_003, oi_pctile_70]
+    note: "Gate 3 passes on either funding_7d_003 or oi_pctile_70. Only as runnable as the shortened DVOL percentile window."
+  - id: instrument_choice
+    role: entry
+    rule: "7d funding at or above +0.05%/8h: buy the OTM put; +0.03-0.05%/8h: buy the ATM straddle"
+    runnable: true
+    input: derived
+    inputs: [funding_7d_003]
+  - id: put_strike_dte
+    role: entry
+    rule: "Primary instrument: Deribit BTC or ETH put 10-15% out of the money, 28-45 days to expiry"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "The expiry and strike are computable (expiry_days 28-45; strike 0.85-0.90 x spot). No option prices are served, so the premium comes from Deribit."
+  - id: straddle_dte
+    role: entry
+    rule: "Alternative instrument: Deribit ATM straddle (call and put at the same strike), 21-35 days to expiry"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "atm_iv on the same row prices the straddle by Black-Scholes, but the tradeable premium comes from Deribit."
+  - id: premium_budget
+    role: sizing
+    rule: "Budget 1.0-1.5% of the portfolio per put entry, 1.5-2.0% per straddle entry"
+    runnable: true
+    input: position
+  - id: concurrency_caps
+    role: sizing
+    rule: "At most 2 concurrent complacency entries (one BTC-linked, one ETH-linked) and at most 3.0% of the portfolio in premium at any time"
+    runnable: true
+    input: position
+  - id: regime_context
+    role: filter
+    rule: "Confirm the regime is a rising trend (Trending_Momentum), not a panic spike, while greed holds at 75 or above"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "No regime is named Trending_Momentum. The nearest served state is strong_trend_bull on /quant/market (or the BTC row of /quant/coins/{symbol}); whether that is the page's intent is the desk's call."
+  - id: profit_target_15x
+    role: exit
+    rule: "Close when the option is worth 150% of the premium paid"
+    runnable: false
+    note: "No option prices are served; the option's mark comes from Deribit."
+  - id: dvol_spike_exit
+    role: exit
+    rule: "Close when DVOL is 20 or more vol points above its entry level within 10 days of purchase"
+    runnable: true
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+  - id: sentiment_normalised_exit
+    role: exit
+    rule: "Close when Fear and Greed drops to 50 or below while price has fallen less than 5% from entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/sentiment/fear-greed
+    field: value
+    note: "Price against entry from /api/v1/market-data/ticker/price?symbol=BTCUSDT (or ETHUSDT)."
+  - id: time_exit_dte7
+    role: exit
+    rule: "Close at 7 days to expiry"
+    runnable: true
+    input: position
+  - id: kill_drawdown_35
+    role: stop
+    rule: "Kill: sleeve drawdown above 35% from its high-water mark"
+    runnable: true
+    input: position
+  - id: kill_vol_no_correction
+    role: stop
+    rule: "Kill: 6 consecutive entries where DVOL rose 25% or more within 5 days of purchase without a later price correction of 8% or more"
+    runnable: true
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "The page does not say how long after the spike to wait for the 8% correction; the option's life is one reading."
+  - id: kill_rolling_8
+    role: stop
+    rule: "Kill: rolling 8-signal P&L negative"
+    runnable: true
+    input: position
+  - id: kill_dvol_high_30d
+    role: stop
+    rule: "Kill: DVOL above its 65th percentile for 30 or more consecutive days"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Same shortened window as dvol_pctile_35: about 180 daily values rather than 52 weeks."
+  - id: kill_deribit_halt
+    role: stop
+    rule: "Kill: Deribit halts BTC or ETH options trading"
+    runnable: false
+    note: "Venue status is not served; it comes from Deribit's status page and API."
 ---
 
 # Complacency Vol Buying

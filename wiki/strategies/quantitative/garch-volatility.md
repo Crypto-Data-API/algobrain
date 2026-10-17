@@ -38,6 +38,107 @@ kill_criteria: |
   - realised vol repeatedly exceeds the 99% GARCH forecast band (fat-tail/jump regime the model cannot see)
 
 related: ["[[volatility-clustering]]", "[[realized-volatility]]", "[[historical-volatility]]", "[[volatility-targeting]]", "[[position-sizing]]", "[[funding-aware-position-sizing]]", "[[atr-position-sizing]]", "[[regime-detection]]", "[[vol-regime-detection]]", "[[volatility-regime]]", "[[leverage-effect]]", "[[tail-risk-hedging]]", "[[maximum-drawdown]]", "[[kelly-criterion]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[skew-trading]]", "[[volatility-carry]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[deflated-sharpe-ratio]]", "[[cryptodataapi]]"]
+gates:
+  - id: daily_returns
+    role: universe
+    rule: "Estimation window for the daily model: 500-750 daily close-to-close log returns (about 1.5-2 years) of BTC, ETH or the perp book"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=752
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Drop the forming bar (forming_bar_timestamp). Hyperliquid daily bars go back to 2023; for a longer walk-forward, Binance spot daily bars are /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=1000."
+  - id: hourly_returns
+    role: universe
+    rule: "Estimation window for the intraday model: 1,500-2,000 hourly bars"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].close
+    note: "start about 84 days back gives 2,000 bars; limit alone caps at 1,000, so use start."
+  - id: gjr_garch_fit
+    role: entry
+    rule: "Fit GJR-GARCH(1,1) with skew-t innovations by maximum likelihood (GARCH(1,1) and EGARCH(1,1) as challengers), re-estimating the asymmetry sign every refit; refit weekly (daily model) or daily (hourly model)"
+    runnable: true
+    input: derived
+    inputs: [daily_returns, hourly_returns]
+  - id: vol_forecast
+    role: entry
+    rule: "One-step-ahead sigma, annualised as sigma_daily x sqrt(365); multi-step horizons capped at 5 days"
+    runnable: true
+    input: derived
+    inputs: [gjr_garch_fit]
+  - id: vol_clamp
+    role: sizing
+    rule: "Clamp the forecast to 20%-200% annualised before sizing"
+    runnable: true
+    input: derived
+    inputs: [vol_forecast]
+  - id: target_vol_exposure
+    role: sizing
+    rule: "Exposure = 40% target vol / clamped forecast vol, capped at 2.0x and floored at 0"
+    runnable: true
+    input: derived
+    inputs: [vol_clamp]
+  - id: top_decile_cap
+    role: sizing
+    rule: "When the forecast vol is in the top decile of its 1-year range (above the 90th percentile), hard-cap leverage at 0.5x"
+    runnable: true
+    input: derived
+    inputs: [vol_forecast, daily_returns]
+    note: "Build the 1-year distribution by running the fitted filter over the last 365 daily returns."
+  - id: rebalance_band
+    role: sizing
+    rule: "Rebalance only when the target exposure differs from the current exposure by more than 15%"
+    runnable: true
+    input: position
+  - id: degenerate_fit
+    role: stop
+    rule: "If persistence (alpha + beta + 0.5 x gamma) exceeds 0.999, the fit is degenerate: flatten, or revert to an EWMA estimate until the next refit"
+    runnable: true
+    input: derived
+    inputs: [gjr_garch_fit]
+  - id: sigma_stop
+    role: stop
+    rule: "Dynamic stop at k x sigma_t from the entry (k = 2-3) instead of a fixed percentage"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "sigma_t is vol_forecast converted to the holding horizon (the annualised value / sqrt(365) for a daily sigma); k is fixed once inside 2-3."
+  - id: vol_regime_crosscheck
+    role: filter
+    rule: "If the volatility-regime classifier reads vol_shock while the GARCH forecast is still calm, apply the top-decile 0.5x leverage cap anyway"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.volatility_regime.by_symbol.{symbol}.regime
+    note: "From the page's agent workflow. Replay is one daily read: live from about 2026-06-10, reconstructed back to March 2026."
+  - id: jump_flag
+    role: filter
+    rule: "Flag forecast-invalid days with a jump indicator (bipower variation on 5-minute returns)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=5m&limit=289
+    field: candles[].close
+    note: "From the page's production notes. Realized variance minus bipower variation over the day's 288 five-minute returns measures the jump part; the page sets no threshold for flagging a day, and what the book does on a flagged day is the desk's call."
+  - id: funding_overlay
+    role: sizing
+    rule: "Net the perp's funding carry against the vol-scaled size"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hourly settled prints. This page gives no netting formula (it defers to funding-aware-position-sizing), so how funding changes size is the desk's call."
+  - id: ewma_baseline_kill
+    role: stop
+    rule: "Pause and re-validate if the GARCH forecast underperforms a trailing EWMA baseline on out-of-sample QLIKE or MSE for 90 consecutive days"
+    runnable: true
+    input: derived
+    inputs: [vol_forecast, daily_returns]
+    note: "The page uses 5-minute realized variance as the forecast target; daily realized variance from 5m candles is the closest served target."
 ---
 
 # GARCH Volatility Timing (Crypto)

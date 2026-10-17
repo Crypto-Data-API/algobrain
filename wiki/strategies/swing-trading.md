@@ -21,6 +21,131 @@ expected_sharpe: 0.5
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 30
 related: ["[[day-trading]]", "[[position-trading]]", "[[trend-following]]", "[[support-resistance]]", "[[momentum]]", "[[risk-management]]", "[[day-trading-vs-swing-trading]]", "[[linda-raschke]]", "[[technical-analysis-overview]]"]
+gates:
+  - id: liquid_universe
+    role: universe
+    rule: "Liquid names only (equity version: over $1B market cap and over $10M average daily volume)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    note: "The thresholds are for US stocks; the page's crypto expression sets none. day_volume is the coin's 24h Hyperliquid notional; market cap is coins[].market_cap on /api/v1/coins/top. The crypto cut-offs are the desk's call."
+  - id: uptrend_structure
+    role: filter
+    rule: "Uptrend: daily close above a rising 50-day SMA, and the 50-day SMA above the 200-day"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=210
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].c
+    note: "Compute both SMAs from closed daily bars (drop the forming bar). 'Rising' has no lookback on the page; today's 50-day SMA above its value a few bars ago is one reading. The served levels are ma.sma_50 and ma.sma_200 on /api/v1/indicators/technical/{symbol}."
+  - id: pullback_3_10_days
+    role: entry
+    rule: "Wait for a 3-10 day pullback toward support or the rising 50-day SMA"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=15
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].c
+    note: "The page does not define a pullback day; consecutive lower closes since the last swing high is one reading."
+  - id: near_sma50
+    role: entry
+    rule: "Price no more than 2% above the 50-day SMA at the setup"
+    runnable: true
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: ma.dist_from_50_pct
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].c
+    note: "From the pseudocode (price at most 1.02 x SMA50). dist_from_50_pct at or below 2 passes. Replay: recompute the SMA from closes."
+  - id: catalyst_blackout
+    role: filter
+    rule: "No entries within 5 days of a scheduled major catalyst (crypto's version of the earnings blackout)"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=5&symbol={coin}
+    field: items[].days_until
+    note: "Any item flags the blackout. The calendar holds unlocks, macro prints, depegs and mints; which count as major is the desk's call (magnitude is in the same rows)."
+  - id: reversal_bar
+    role: entry
+    rule: "A bullish reversal bar at the level: hammer, engulfing or higher low"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=3
+    field: candles[].low
+    note: "A higher low is mechanical from the candles; hammer and engulfing are chart patterns the page does not define numerically."
+  - id: buy_stop_above_setup
+    role: entry
+    rule: "Enter on a buy stop one tick above the setup bar's high"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=3
+    field: candles[].high
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].h
+  - id: stop_below_swing_low
+    role: stop
+    rule: "Initial stop one tick below the 10-bar swing low (longs); typical risk 3-7% of price"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=11
+    field: candles[].low
+    note: "The pseudocode uses the lowest low of the last 10 bars."
+  - id: min_reward_risk_2
+    role: filter
+    rule: "Take the trade only if (prior swing high - entry) / (entry - stop) is at least 2"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].high
+    note: "The target is the prior swing high, which the page does not define numerically (a pivot with N lower highs either side is the usual reading). Entry and stop come from buy_stop_above_setup and stop_below_swing_low."
+  - id: scale_out_and_trail
+    role: exit
+    rule: "At +2R scale out half and trail the rest below higher swing lows"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=20
+    field: candles[].low
+  - id: momentum_weakens_exit
+    role: exit
+    rule: "Exit fully if momentum weakens: RSI divergence or a close below the trailing stop"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].close
+    note: "The close below the trailing stop is mechanical. RSI divergence needs RSI(14) computed from the closes and a swing comparison the page leaves to judgement; the daily RSI value alone is rsi.rsi_14_1d on /api/v1/indicators/technical/{symbol}."
+  - id: time_stop_10_bars
+    role: exit
+    rule: "Exit if the trade is flat or losing after 10 bars"
+    runnable: true
+    input: position
+  - id: risk_per_trade
+    role: sizing
+    rule: "Risk 1-2% of equity per trade (the pseudocode uses 1%): size = risk budget / (entry - stop)"
+    runnable: true
+    input: position
+  - id: max_positions_and_theme
+    role: sizing
+    rule: "At most 4-6 concurrent positions and no more than 2 in the same sector or theme"
+    runnable: true
+    input: position
+    endpoint: /api/v1/coins/category-groups
+    field: categories[].coins[].symbol
+    note: "Theme membership comes from the curated category groups; a coin can sit in more than one."
+  - id: regime_fit
+    role: filter
+    rule: "Run the long pullback book only in trending-bull regimes; reduce or go flat in trending-bear, trade ranges smaller in chop, cut size in high-vol shocks"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "strong_trend_bull is the long-pullback state; strong_trend_bear, choppy_high_vol and vol_spike map to the other rows. The page gives no size for 'reduce' or 'cut', so those are the desk's call. The page's /api/v1/quant/timeline (daily labels, entries[].label) covers the model's training history only, 2019 to 2026-06-11; use the replay here for later dates."
+  - id: weekend_downsize
+    role: sizing
+    rule: "Before weekends, recheck vol-target multipliers and downsize where they have fallen"
+    runnable: partial
+    endpoint: /api/v1/quant/coins/risk
+    field: items[].vol_target_multiplier
+    note: "From the page's AI-agent tips; it gives no amount to downsize by."
+  - id: drawdown_circuit_breakers
+    role: stop
+    rule: "Stop and review at a 15% drawdown, retire at 25%; after 3 consecutive full-R losses in a week, halve size for 20 trades"
+    runnable: true
+    input: position
 ---
 
 # Swing Trading

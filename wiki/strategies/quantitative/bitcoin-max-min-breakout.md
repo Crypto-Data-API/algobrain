@@ -26,6 +26,76 @@ kill_criteria: |
   - MIN leg: retire if out-of-sample Sharpe < 0 over 18 months (already marginal per source)
   - drawdown > 35%
 related: ["[[quantpedia]]", "[[quantpedia-strategy-encyclopedia]]", "[[donchian-channel-breakout]]", "[[turtle-trading]]", "[[time-series-momentum]]", "[[crypto-momentum]]", "[[max-anomaly]]", "[[bitcoin-overnight-seasonality]]"]
+gates:
+  - id: max_entry
+    role: entry
+    rule: "MAX leg (the recommended live variant): long BTC when the daily close equals the maximum close of the last 10 days"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=11
+    field: klines[].close
+    replay: /api/v1/hyperliquid/candles?coin=BTC&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Binance spot daily bars; the last row is the forming day, so evaluate on the closed bars (or right after 00:00 UTC). Replay: Hyperliquid BTC daily closes back to 2023; earlier Binance days are in /api/v1/backtesting/archives?data_type=klines."
+  - id: min_entry
+    role: entry
+    rule: "MIN leg (research only until it re-proves itself post-2022): long BTC when the daily close equals the minimum close of the last 10 days"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=11
+    field: klines[].close
+    replay: /api/v1/hyperliquid/candles?coin=BTC&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Same series as max_entry."
+  - id: donchian_exit
+    role: exit
+    rule: "Exit MAX when the daily close falls to or below the 10-day low of closes (Donchian-style adaptation)"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=11
+    field: klines[].close
+    replay: /api/v1/hyperliquid/candles?coin=BTC&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: time_stop_10d
+    role: exit
+    rule: "Alternative exit adaptation: a 10-day time stop, or exit the first day the condition is not re-triggered"
+    runnable: true
+    input: position
+  - id: vol_target_size
+    role: sizing
+    rule: "Volatility-target the position to 20-30% annualised rather than fixed notional"
+    runnable: partial
+    endpoint: /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=61
+    field: klines[].close
+    note: "Size = target vol / (stdev of daily log returns x sqrt(365)). The page names no lookback window, so the 60 days here are a choice."
+  - id: max_not_in_chop
+    role: filter
+    rule: "Take MAX entries only when the market regime is not a range or chop state"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's agent workflow, which names /regimes/current; that cycle regime has no range state, so the HMM labels range_low_vol and choppy_high_vol here are the chop states."
+  - id: min_not_in_bear
+    role: filter
+    rule: "Never run MIN while the regime is trending bear"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "strong_trend_bear is the HMM trending-bear label."
+  - id: funding_carry_check
+    role: filter
+    rule: "On perps, high positive funding erodes a long-breakout hold"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT
+    field: current_rate
+    note: "Binance 8-hour rate. The page gives no level for 'high'."
+  - id: drawdown_kill
+    role: stop
+    rule: "Retire on a drawdown above 35%, or when the MAX leg's rolling 24-month net return is below both 0 and buy-and-hold BTC"
+    runnable: true
+    input: position
+    note: "From the kill criteria; buy-and-hold BTC comes from the same daily closes."
 ---
 
 # Bitcoin MAX/MIN Breakout (10-Day High Trend, 10-Day Low Reversion)

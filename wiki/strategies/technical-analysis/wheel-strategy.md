@@ -12,6 +12,89 @@ markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[covered-call]]", "[[cash-secured-put]]", "[[options-selling]]", "[[crypto-options-volatility-selling]]", "[[collar]]", "[[iron-condor]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[staking]]", "[[theta]]", "[[delta]]", "[[trade-repair-and-rolling]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_universe
+    role: universe
+    rule: "Durable coins you are happy to own: BTC and ETH options on Deribit (or BTC-ETF options, or on-chain vaults)"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "We serve Deribit DVOL and the ATM term structure for BTC and ETH. Option quotes and fills come from Deribit; ETF options and vaults are not covered."
+  - id: neutral_bullish_view
+    role: entry
+    rule: "Neutral-to-bullish on the coin and genuinely willing to accumulate at the put strike"
+    runnable: false
+    note: "A view and a willingness the page leaves to the trader."
+  - id: vol_rich_stable
+    role: filter
+    rule: "Sell puts and calls while vol is rich and stable; pause new cycles in vol_shock"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "Pausing in vol_shock is mechanical. 'Rich' DVOL has no threshold here; dvol and its ~180-day history are on /api/v1/volatility/implied, and /api/v1/volatility/regime/score is the page's market-wide read."
+  - id: csp_strike_tenor
+    role: entry
+    rule: "Phase 1: sell an OTM cash-secured put at delta 0.20-0.30, 21-45 DTE, at a level you consider a fair entry"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "The expiry window is mechanical from expiry_days (Pro Plus). No per-strike Greeks are served: Black-Scholes with the expiry's atm_iv approximates a 0.20-0.30 delta strike, ignoring skew; premiums come from Deribit."
+  - id: cash_secured
+    role: sizing
+    rule: "Reserve USDC equal to the put strike (full cash backing, no leverage)"
+    runnable: true
+    input: position
+  - id: assignment_buy_spot
+    role: entry
+    rule: "When the put settles ITM, buy spot near the strike (Deribit settles in cash, not coin) and move to Phase 2"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "Deribit settles at 08:00 UTC on its own index; the bot buys spot after that."
+  - id: cc_strike_at_or_above_basis
+    role: entry
+    rule: "Phase 2: sell an OTM call at delta 0.25-0.35, at or above the effective cost basis, never below"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "The cost-basis floor is mechanical from the trade log. The delta target is a skew-blind Black-Scholes approximation from atm_iv; exact strikes and premiums need Deribit's chain."
+  - id: strike_context
+    role: entry
+    rule: "Strike context: OI walls and max pain near candidate strikes; positive funding means richer Phase-2 call premium"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    note: "BTC only: one max-pain strike for the largest-OI expiry, which the response does not name; per-strike OI walls are not served. Funding is on /api/v1/hyperliquid/funding-rates. Context with no rule attached."
+  - id: roll_tested_put
+    role: stop
+    rule: "Roll a tested put down and out for a net credit when spot approaches the strike and the thesis is intact"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "The page gives no trigger distance for 'approaches'."
+  - id: manage_7_14_dte
+    role: exit
+    rule: "Close or roll ATM legs at about 7-14 DTE"
+    runnable: true
+    input: position
+  - id: abandon_on_bear_regime
+    role: exit
+    rule: "Abandon the wheel when the thesis breaks: a flip to strong_trend_bear is the trigger; do not keep selling calls into a structural decline"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow; the coin-specific label is regime.label on /api/v1/quant/coins/{symbol}."
+  - id: book_weight_cap
+    role: sizing
+    rule: "Diversify across BTC and ETH and cap any single wheel to a sensible book weight"
+    runnable: partial
+    input: position
+    note: "The page gives no weight cap."
 ---
 
 # The Wheel Strategy (Crypto)

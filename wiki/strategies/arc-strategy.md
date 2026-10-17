@@ -21,6 +21,119 @@ crowding_risk: medium
 expected_sharpe: null
 expected_max_drawdown: null
 breakeven_cost_bps: null
+gates:
+  - id: box_high
+    role: entry
+    rule: "Box high = the prior session's high; for crypto, the prior UTC day's high"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=2
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].high
+    note: "Use the closed bar, not the one named by forming_bar_timestamp. Crypto has no regular session, so the prior UTC day is the page's own convention."
+  - id: box_low
+    role: entry
+    rule: "Box low = the prior session's low (prior UTC day for crypto)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=2
+    field: candles[].low
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].low
+    note: "Same closed-bar rule as box_high."
+  - id: gap_day_box
+    role: entry
+    rule: "On a gap above or below the prior box, redraw the box from the pre-market high and low"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=48
+    field: candles[].open
+    note: "Crypto trades 24/7, so there is no pre-market and no true gap; the page itself says there is nothing to fall back on. A substitute (for example an open outside the prior box redrawing from the first hours of the new day) is the desk's call."
+  - id: swing_high
+    role: entry
+    rule: "Swing high = the next prominent high above the box high, scanning back left"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{symbol}
+    field: sr.resistance[].price
+    note: "The page does not define prominent. sr.resistance lists daily resistance levels with strength and dist_pct; take the nearest one above the box high. A pivot rule on daily candles from /hyperliquid/candles is the alternative."
+  - id: swing_low
+    role: entry
+    rule: "Swing low = the next prominent low below the box low"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{symbol}
+    field: sr.support[].price
+    note: "Same caveat as swing_high: take the nearest support level below the box low."
+  - id: at_level_only
+    role: filter
+    rule: "Sell only at or near the box high or swing high, buy only at or near the box low or swing low; never in the middle"
+    runnable: partial
+    input: derived
+    inputs: [box_high, box_low, swing_high, swing_low]
+    note: "The page does not define near, so the tolerance band is the desk's call."
+  - id: min_move_20pct
+    role: filter
+    rule: "Require an unabated, uninterrupted one-way move of at least 20% of the box range (box high - box low) into the level before a reversal setup"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=5m&limit=100
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=5m&start={start}
+    replay_field: klines[].c
+    note: "The 20% distance is mechanical; unabated and uninterrupted are not defined (the page says they must be encoded first). Replay 1m-based bars run from 2026-05-09."
+  - id: john_wick_candle
+    role: entry
+    rule: "Entry trigger: a long-wick reversal candle at the level (long upper wick to short the high, long lower wick to buy the low)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=5m&limit=3
+    field: candles[].high
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=5m&start={start}
+    replay_field: klines[].h
+    note: "Wick size is computable from open, high, low and close on the closed bar, but the page gives no wick-to-body ratio for a valid John Wick candle; that cutoff is the desk's call. Execution timeframe is 1-5 minutes."
+  - id: regime_fade_only
+    role: filter
+    rule: "Fade only in range-bound regimes (range_low_vol dominant); a strong_trend state is the run-over regime"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the AI-agent workflow. Skipping strong_trend_bull and strong_trend_bear is mechanical; what counts as range probabilities dominating is the desk's call."
+  - id: stop_beyond_wick
+    role: stop
+    rule: "Stop just beyond the trigger candle's wick plus a buffer"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "The wick level is recorded at entry; the page gives no buffer size."
+  - id: wick_invalidation
+    role: stop
+    rule: "A trade back above the wick high invalidates a short (below the wick low invalidates a long)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=5m&limit=3
+    field: candles[].close
+  - id: range_target
+    role: exit
+    rule: "Take profit at 50-100% of the box range from entry, often at the opposite box or swing level"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "Where in the 50-100% band to exit is the desk's call (the pseudocode picks at random)."
+  - id: kill_no_expectancy
+    role: stop
+    rule: "Do not deploy if an encoded backtest shows no positive expectancy net of realistic costs across instruments and regimes"
+    runnable: true
+    input: position
+  - id: kill_live_stats
+    role: stop
+    rule: "Pause when the rolling 1-month win rate falls below break-even for the chosen reward:risk; retire at a drawdown of 15-20% of allocated capital"
+    runnable: true
+    input: position
+  - id: kill_levels_fail
+    role: stop
+    rule: "Re-evaluate when levels stop holding as crowding rises (sweeps no longer revert)"
+    runnable: partial
+    input: position
+    note: "Measured from the bot's own trade log; the page sets no threshold."
 ---
 
 > **Disambiguation.** "ARC" here means the **Area-Range-Candle** discretionary price-action *day-trading method* popularised on YouTube. It is unrelated to **ARC/USDT**, the crypto token/perpetual-futures pair traded on Binance Futures — the two share only an acronym (Source: [[2026-06-19-gap-finder-arc-strategy]]).

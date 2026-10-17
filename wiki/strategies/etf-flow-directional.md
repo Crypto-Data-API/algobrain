@@ -41,6 +41,133 @@ last_review: 2026-07-14
 next_review: 2026-08-14
 
 related: ["[[spot-etf-flows]]", "[[etf-arbitrage]]", "[[gbtc-discount-arbitrage]]", "[[institutional-flow-regime]]", "[[momentum]]", "[[momentum-rotation]]", "[[coinbase-premium]]", "[[on-chain-regime]]", "[[bitcoin]]", "[[ethereum]]", "[[max-pain]]", "[[funding-rate]]", "[[bitcoin-cycle-regime]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi-market-intelligence]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_only
+    role: universe
+    rule: "Trade BTC and ETH only, spot or perp, on their own ETF flow series"
+    runnable: true
+    endpoint: /api/v1/market-intelligence/etf/{asset}/flows?days=1
+    field: flows[].flow_usd
+    note: "asset = btc or eth. SOL flows are also served (thinner, noisier); XRP returns 400."
+  - id: flow_zscore
+    role: entry
+    rule: "Flow z-score = (today's net flow - 20-day mean) / 20-day std of daily US spot ETF net flow, per asset"
+    runnable: true
+    endpoint: /api/v1/market-intelligence/etf/{asset}/flows?days=21
+    field: flows[].flow_usd
+    replay: /api/v1/market-intelligence/etf/{asset}/flows?days=1000
+    replay_field: flows[].flow_usd
+    note: "Settled trade days only, oldest first; key on trade_date and never fold in the in_progress partial day. A trade date settles after the US close, so lag it one day in backtests. BTC history runs from 2024-01-11, ETH from 2024-07-23."
+  - id: flow_ema_slope
+    role: entry
+    rule: "The 5-day EMA of net flow has a slope that agrees with the z-score sign (filters one-day spikes)"
+    runnable: true
+    endpoint: /api/v1/market-intelligence/etf/{asset}/flows?days=30
+    field: flows[].flow_usd
+    replay: /api/v1/market-intelligence/etf/{asset}/flows?days=1000
+    replay_field: flows[].flow_usd
+    note: "Slope = today's EMA minus yesterday's, as in the pseudocode."
+  - id: coinbase_premium_nonneg
+    role: entry
+    rule: "Long confirmation: Coinbase premium at or above zero"
+    runnable: true
+    endpoint: /api/v1/market-intelligence/coinbase-premium
+    field: data[].premium_rate
+    replay: /api/v1/backtesting/snapshots?data_type=coinglass_coinbase_premium&start={start}&limit=1000
+    replay_field: snapshots[].data[].premium_rate
+    note: "Use the latest row (largest time); premium_rate is in percent. BTC only. Replay snapshots each hold a rolling list of samples, so de-duplicate on time; from 2026-05-09."
+  - id: dead_band
+    role: filter
+    rule: "No trade while the flow z-score is between -1.0 and +1.0"
+    runnable: true
+    input: derived
+    inputs: [flow_zscore]
+  - id: long_entry
+    role: entry
+    rule: "Go long when the flow z-score is above +1.0, the 5-day flow EMA slope is positive and the Coinbase premium is at least 0"
+    runnable: true
+    input: derived
+    inputs: [flow_zscore, flow_ema_slope, coinbase_premium_nonneg]
+  - id: short_regime_gate
+    role: filter
+    rule: "Short only when the broader regime is neutral-to-bear; prefer flat to short while a structural bull holds"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "The page names its own bitcoin-cycle-regime and institutional-flow-regime overlays; which of the served regimes (btc_led_bull, broadening_bull, established_bear and so on) count as neutral-to-bear is the desk's call. History from 2026-08-07."
+  - id: short_entry
+    role: entry
+    rule: "Go short (or flat) when the flow z-score is below -1.0 and the 5-day flow EMA slope is negative, subject to short_regime_gate"
+    runnable: partial
+    input: derived
+    inputs: [flow_zscore, flow_ema_slope, short_regime_gate]
+    note: "Only as runnable as short_regime_gate."
+  - id: z_scaled_size
+    role: sizing
+    rule: "Size = base x min(abs(z) / 2, 1.5), capped at 20% of NAV per side"
+    runnable: true
+    input: derived
+    inputs: [flow_zscore]
+  - id: regime_scalar
+    role: sizing
+    rule: "Multiply size by an institutional-flow / cycle regime scalar (0 to 1.5): larger in confirmed inflow regimes, smaller when macro correlation is high"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    note: "The page gives no mapping from regime to scalar (the example uses 1.3), so the table is the desk's call."
+  - id: instrument_choice
+    role: sizing
+    rule: "Express in spot, or in the perp when funding favours the position (shorts collect positive funding; longs want low or negative funding)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    note: "Low funding has no threshold on the page."
+  - id: exchange_flow_confirm
+    role: filter
+    rule: "Confirmation overlay: coins leaving exchanges corroborate inflow-driven accumulation"
+    runnable: partial
+    endpoint: /api/v1/on-chain/exchange-flows/{symbol}
+    field: windows.24h.net
+    note: "net is inflow minus outflow in coin units, so accumulation reads negative. The page sets no size and does not say whether it gates entry."
+  - id: aum_trend_confirm
+    role: filter
+    rule: "Confirmation overlay: the live ETF AUM trend agrees with the flow"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/etf/btc/aum
+    field: data[].aum_usd_from_flows
+    note: "BTC only, reconstructed from flows and daily closes. The page gives no trend window or test."
+  - id: flow_reversal_exit
+    role: exit
+    rule: "Exit when the flow z-score crosses zero against the position or the 5-day flow EMA slope flips"
+    runnable: true
+    input: derived
+    inputs: [flow_zscore, flow_ema_slope]
+  - id: decay_stop
+    role: exit
+    rule: "Exit after more than 10 trading days held without the flow signal renewing"
+    runnable: true
+    input: position
+  - id: hard_stop
+    role: stop
+    rule: "Hard stop at -8% from entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: autocorr_kill
+    role: filter
+    rule: "Suspend the sleeve if the 20-day autocorrelation of daily net flow turns negative"
+    runnable: true
+    endpoint: /api/v1/market-intelligence/etf/{asset}/flows?days=21
+    field: flows[].flow_usd
+    note: "Lag-1 autocorrelation over the last 20 settled days."
+  - id: ap_halt_kill
+    role: exit
+    rule: "Flatten and stand down on an ETF creation/redemption halt or authorised-participant disruption"
+    runnable: false
+    note: "ETF plumbing status is not served; it comes from issuer notices."
 ---
 
 # ETF Flow Directional

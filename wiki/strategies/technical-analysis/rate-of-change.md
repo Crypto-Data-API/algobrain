@@ -46,6 +46,114 @@ kill_criteria: |
   - false-signal rate > 65% on zero-line crossovers over rolling 20 trades → add trend filter (50-period MA)
   - rolling 90-day P&L negative with > 15 completed trades → pause; assess whether lookback period (N) needs adjustment
   - market in persistent sideways regime → pause or require > ±3% threshold instead of zero-line
+gates:
+  - id: roc_cross_up
+    role: entry
+    rule: "Long when ROC(12) on the daily close crosses above zero from negative (ROC = close / close 12 bars earlier - 1)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=20
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Compare ROC on the last two closed bars; drop the forming bar named by forming_bar_timestamp."
+  - id: roc_cross_down
+    role: entry
+    rule: "Short when ROC(12) crosses below zero from positive"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=20
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: roc_threshold_2pct
+    role: filter
+    rule: "Stronger-signal variant: require ROC to cross above +2% (long) or below -2% (short) instead of zero; +-3% in a sideways regime"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=20
+    field: candles[].close
+    note: "Same ROC series as roc_cross_up. The kill criteria switch to this threshold when false signals pile up."
+  - id: ma50_trend_filter
+    role: filter
+    rule: "Take longs only above the 50-period moving average, shorts only below it"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "The page allows SMA or EMA. /api/v1/indicators/technical/{symbol} serves ma.above_50 (SMA) precomputed."
+  - id: funding_aligned
+    role: filter
+    rule: "Take a crossover only when the perp funding sign agrees with the signal (positive for longs, negative for shorts)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: regime_choppy_threshold
+    role: filter
+    rule: "In a range_low_vol or choppy_high_vol market regime, raise the threshold to +-3% or stand down"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow."
+  - id: roc_divergence
+    role: entry
+    rule: "Divergence entry: price/ROC divergence at extremes for reversal trades"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].close
+    note: "The page defines neither the extreme nor the swing points to compare; both are the desk's call."
+  - id: volume_confirms
+    role: filter
+    rule: "Volume confirms the momentum shift"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30
+    field: candles[].volume
+    note: "Listed in the indicator table with no rule; the comparison and cutoff are the desk's."
+  - id: exit_opposite_cross
+    role: exit
+    rule: "Exit longs when ROC crosses back below zero; exit shorts when it crosses back above zero"
+    runnable: true
+    input: derived
+    inputs: [roc_cross_up, roc_cross_down]
+  - id: momentum_fade
+    role: exit
+    rule: "If ROC is positive but declining, tighten the stop or take partial profit"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=20
+    field: candles[].close
+    note: "The page sets no number of declining bars, no new stop distance and no partial size."
+  - id: stop_2atr
+    role: stop
+    rule: "Stop 2x ATR(14) from entry (below for longs, above for shorts)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=40&atr=14
+    field: candles[].atr
+    note: "ATR of the last closed bar at entry."
+  - id: time_stop_10_bars
+    role: exit
+    rule: "If the trade has not reached 1R profit within 10 bars, re-evaluate and consider closing"
+    runnable: true
+    input: position
+  - id: kill_false_signals
+    role: filter
+    rule: "Over a rolling 20 trades, more than 65% false signals (no 1R move within 10 bars): add the 50-MA filter or raise the threshold to +-2%"
+    runnable: true
+    input: position
+  - id: kill_90d_pnl
+    role: filter
+    rule: "Pause when rolling 90-day P&L is negative with more than 15 completed trades"
+    runnable: true
+    input: position
+  - id: kill_sideways_adx
+    role: filter
+    rule: "Pause (or use a +-3% threshold) when ADX is below 20 for more than 30 days"
+    runnable: true
+    endpoint: /api/v1/indicators/adx?coin={coin}&interval=1d&history=31
+    field: items[].history[].adx
+    note: "ADX(14) on daily bars; every history point below 20 means the condition holds."
 ---
 
 # Rate of Change (ROC) Strategy

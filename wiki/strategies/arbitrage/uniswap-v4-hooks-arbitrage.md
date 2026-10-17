@@ -22,6 +22,40 @@ expected_sharpe: 2
 expected_max_drawdown: 0.2
 breakeven_cost_bps: 15
 decay_evidence: "V4 deployed on mainnet 30 January 2025; hook-ecosystem TVL surpassed ~$1B by mid-2025. Strategy alive but each hook becomes commoditized once well-understood."
+gates:
+  - id: hook_pool_universe
+    role: universe
+    rule: "Identify every Uniswap V4 pool with non-trivial TVL and a unique hook behaviour"
+    runnable: false
+    note: "No V4 PoolManager data or hook addresses are served. /dex/trending and /dex/new-pools list pools with reserve_usd, but their dex field is often blank and they never name a pool's hook. Needs V4 PoolManager events or DefiLlama's V4 data."
+  - id: hook_simulation
+    role: entry
+    rule: "Simulate each hook's contract logic (dynamic fees, MEV internalisation, limit orders, custom curves) to predict swap outcomes"
+    runnable: false
+    note: "Needs hook bytecode, pool state and an EVM simulator; none is served."
+  - id: profit_over_gas
+    role: entry
+    rule: "Execute an opportunity (via a Flashbots bundle) only when expected profit exceeds gas plus a threshold"
+    runnable: false
+    input: derived
+    inputs: [hook_simulation]
+    note: "Expected profit comes from the simulation; gas prices are not served, and the threshold is left open."
+  - id: rotate_hooks
+    role: filter
+    rule: "Rotate to newer or less-explored hooks as each one becomes competitive"
+    runnable: false
+    note: "A judgement on competition per hook; no hook-level competition or MEV attribution data is served."
+  - id: kill_hook_frequency
+    role: stop
+    rule: "Kill switch: new-hook deployment frequency below 1 per quarter"
+    runnable: false
+    note: "Hook deployments are not served; needs V4 PoolManager initialise events."
+  - id: kill_spread_5bp
+    role: stop
+    rule: "Kill switch: average hook-specific arb spread compresses below 5 bp"
+    runnable: true
+    input: position
+    note: "Measured from the bot's own opportunity log."
 ---
 
 # Uniswap V4 Hooks Arbitrage

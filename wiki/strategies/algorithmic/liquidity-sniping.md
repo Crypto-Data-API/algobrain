@@ -38,6 +38,145 @@ kill_criteria: |
   - anti-sniper launch mechanics make >70% of monitored launches un-snipeable
 
 related: ["[[memecoin-sniping]]", "[[jito-bundle-sniping]]", "[[token-migration-sniping]]", "[[mev-strategies]]", "[[telegram-bot-trading]]", "[[on-chain-flow-trading]]", "[[airdrop-farming]]", "[[defi-yield-farming]]", "[[algorithmic-trading]]", "[[sentiment-trading]]", "[[slippage]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: new_pool_event
+    role: entry
+    rule: "A new-pool or migration event on a targeted router (Uniswap V2/V3, Raydium, Pump.fun to Raydium, PancakeSwap) for a token not seen before"
+    runnable: partial
+    endpoint: /api/v1/dex/new-pools?chain={chain}
+    field: pools[].created_at
+    note: "The 20 newest pools per chain from a cached feed: launch discovery after the fact, not the same-block trigger, which needs a mempool or Geyser stream. Pump.fun migrations are not flagged as such."
+  - id: min_initial_liquidity
+    role: filter
+    rule: "Initial liquidity at least $8k on Solana graduations, $15k on EVM chains"
+    runnable: partial
+    endpoint: /api/v1/dex/new-pools?chain={chain}
+    field: pools[].reserve_usd
+    note: "reserve_usd is the pool's liquidity when the cached list was refreshed, close to but not the opening reserve in the add-liquidity transaction."
+  - id: sell_simulation
+    role: filter
+    rule: "A simulated buy-then-sell round trip succeeds and returns at least 90% of the theoretical output (no honeypot, no hidden sell tax)"
+    runnable: partial
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: risk_flags.is_honeypot
+    note: "{address} is the launch's token, pools[].base_token.address from new_pool_event. The honeypot flag and taxes.sell_tax_pct are the page's served second opinion; the simulated round trip returning 90% of theoretical output still needs a same-slot fork simulator, which catches delayed-enable honeypots a static report misses."
+  - id: tax_check
+    role: filter
+    rule: "Combined buy and sell tax at most 10%"
+    runnable: true
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: taxes.sell_tax_pct
+    note: "Add taxes.buy_tax_pct and taxes.sell_tax_pct (percent) and require at most 10. {address} comes from new_pool_event (pools[].base_token.address). A token whose tax can still be changed shows risk_flags.has_tax_modification."
+  - id: deployer_not_blacklisted
+    role: filter
+    rule: "Deployer is not in the rug and honeypot database and has no prior removed-liquidity events"
+    runnable: partial
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: ownership.creator_address
+    note: "creator_address is the deployer to look up in the bot's own rug database (which the page says is self-maintained); {address} comes from new_pool_event. The deployer's removed-liquidity history across launches is not served."
+  - id: lp_locked
+    role: filter
+    rule: "LP tokens burned or locked at launch (or guaranteed by the migration, as on Pump.fun)"
+    runnable: partial
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: lp_info.any_lp_locked
+    note: "{address} comes from new_pool_event. any_lp_locked says whether any LP is locked, not how much, and whether burned LP counts as locked is not stated, so a false on a Pump.fun migration (burned by design) needs a manual look; total_lp_holders 0 on a fresh pool means not indexed yet."
+  - id: tip_economics
+    role: filter
+    rule: "Skip when the clearing tip exceeds 30% of the expected gross edge (ticket x calibrated crowd markup, about 25% in the pseudocode)"
+    runnable: false
+    note: "Priority-fee and Jito tip clearing prices are not served, and the crowd markup is the bot's own calibration."
+  - id: meme_season_gate
+    role: filter
+    rule: "Run the strategy only while meme_season is active (crowd exit liquidity exists)"
+    runnable: true
+    endpoint: /api/v1/meme/regime/score
+    field: meme_season
+  - id: promoted_attention
+    role: universe
+    rule: "Treat recent paid promotion as an early signal that a crowd may arrive"
+    runnable: partial
+    endpoint: /api/v1/dex/promoted
+    field: tokens[].promotion_spend
+    note: "From the page's AI-agent workflow, which sets no spend level or weight."
+  - id: ticket_size
+    role: sizing
+    rule: "Fixed ticket of $50-500 per token ($150 in the pseudocode), never more than 2-5% of the pool's opening reserve (3% in the pseudocode)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/dex/new-pools?chain={chain}
+    field: pools[].reserve_usd
+    note: "The opening reserve is in the add-liquidity transaction itself; reserve_usd is the served value once the pool is listed."
+  - id: max_slippage
+    role: sizing
+    rule: "Buy with a maximum slippage of 1,500 bps"
+    runnable: true
+    input: position
+  - id: portfolio_cap
+    role: sizing
+    rule: "Total capital at risk in open snipes at most 5-10% of trading capital"
+    runnable: true
+    input: position
+  - id: scale_out_ladder
+    role: exit
+    rule: "Sell 50% at +100% (2x), 25% at +300% (4x), and let the last 25% ride behind the trailing stop"
+    runnable: true
+    input: position
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "{address} is the held token (from new_pool_event). Pool prices come from a cached feed, seconds to minutes behind the chain."
+  - id: trailing_stop
+    role: exit
+    rule: "Close the runner if it retraces 40% from its post-entry high"
+    runnable: true
+    input: position
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "Same price read as scale_out_ladder; track the post-entry high from your own polls."
+  - id: time_stop_10m
+    role: exit
+    rule: "Exit at market if the token is not at +100% within 10 minutes of entry"
+    runnable: true
+    input: position
+  - id: lp_removal_abort
+    role: stop
+    rule: "Market-sell immediately when the deployer removes liquidity or sends a blacklist transaction"
+    runnable: false
+    note: "Needs live monitoring of the deployer's transactions on-chain; not served."
+  - id: lifecycle_exit_staging
+    role: exit
+    rule: "Stage exits as a token rolls from ignition to distribution in its meme lifecycle"
+    runnable: partial
+    endpoint: /api/v1/meme/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow. The lifecycle covers listed meme coins (Hyperliquid perps and Binance spot), not fresh DEX launches, so it applies only once a token is listed. Pro."
+  - id: daily_loss_limit
+    role: stop
+    rule: "Stop for the session when cumulative net loss exceeds the preset threshold (for example 15% of the sniping sleeve)"
+    runnable: true
+    input: position
+  - id: kill_net_pnl
+    role: stop
+    rule: "Pause when 30-day net P&L across all snipes is below zero after tips, gas, tax, slippage and rug losses"
+    runnable: true
+    input: position
+  - id: kill_rug_rate
+    role: stop
+    rule: "Pause when the rug or honeypot rate exceeds 60% of the trailing 50 filled snipes, or the median winning tip exceeds 30% of the gross win"
+    runnable: true
+    input: position
+  - id: kill_unsnipeable
+    role: stop
+    rule: "Pause when more than 70% of monitored launches are un-snipeable because of anti-sniper mechanics or private launches"
+    runnable: true
+    input: position
+  - id: kill_meme_dormant
+    role: stop
+    rule: "Pause when the meme regime score sits in dormant (or bleeding) for 30+ days"
+    runnable: partial
+    endpoint: /api/v1/meme/regime/score
+    field: sentiment
+    note: "dormant is composite_score below 30; bleeding is a per-coin regime, not a score band. No history of the score is served, so log it daily to measure 30 days."
 ---
 
 # Liquidity Sniping

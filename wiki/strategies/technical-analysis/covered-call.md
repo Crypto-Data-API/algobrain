@@ -12,6 +12,97 @@ markets: [crypto, options]
 complexity: beginner
 backtest_status: untested
 related: ["[[wheel-strategy]]", "[[cash-secured-put]]", "[[collar]]", "[[protective-put]]", "[[options-selling]]", "[[crypto-options-volatility-selling]]", "[[iron-condor]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[staking]]", "[[delta]]", "[[theta]]", "[[vega]]", "[[max-pain]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_holding
+    role: universe
+    rule: "Write calls against spot BTC or ETH held (or a BTC-ETF position), on Deribit"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied vol served. Option quotes come from Deribit itself."
+  - id: short_call_20_35_delta
+    role: entry
+    rule: "Sell 1 OTM call per unit of coin at about 0.20-0.35 delta"
+    runnable: false
+    note: "Strikes by delta need Deribit's option chain with Greeks, which we do not serve."
+  - id: tenor_21_45_dte
+    role: entry
+    rule: "Expiry 21-45 days out"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure lists the nearest 12 Deribit expiries. It is Pro Plus and empty on lower tiers."
+  - id: dvol_upper_half
+    role: filter
+    rule: "Write when DVOL is in the upper half of its trailing range; avoid selling into a suppressed-vol trough"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "Compare the latest dvol with the midpoint of its range over history (about 180 daily closes, Pro Plus). The page names no window."
+  - id: vol_regime_rich_premium
+    role: filter
+    rule: "Sell calls when the coin's vol regime is elevated or expanding (rich premium)"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "expanding is a served label; 'elevated' is not, so whether normal counts is the desk's call."
+  - id: max_pain_below_strike
+    role: filter
+    rule: "Max pain sits below the candidate strike"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    replay: /api/v1/backtesting/snapshots?data_type=coinglass_options&start={start}
+    replay_field: snapshots[].data[].max_pain
+    note: "BTC only (no ETH max pain), computed on the Deribit expiry with the largest open interest, which may not be the call's expiry."
+  - id: bull_trend_veto
+    role: filter
+    rule: "A leading strong_trend_bull probability vetoes the cycle: move to further strikes or skip rather than cap a breakout"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: explain.label_posteriors.strong_trend_bull
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_0
+    note: "Leading = the highest of the six values in label_posteriors. The coin's own read is /api/v1/quant/coins/{symbol}."
+  - id: positive_funding_window
+    role: filter
+    rule: "Positive perp funding fattens call premium: the best selling windows"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    note: "A tip with no threshold."
+  - id: take_profit_50_80
+    role: exit
+    rule: "Buy the call back at 50-80% of max credit, then re-write"
+    runnable: true
+    input: position
+    note: "The call's mark comes from Deribit; no option prices are served."
+  - id: roll_up_and_out
+    role: exit
+    rule: "If spot rallies through the strike, buy back the call and sell a higher-strike, later-dated call, ideally for a net credit"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Spot above the strike triggers it (oracle_price is a CEX spot composite close to Deribit's index); the credit check needs Deribit quotes."
+  - id: roll_down_after_drop
+    role: exit
+    rule: "After a drop, with the call nearly worthless, roll to a lower strike for meaningful premium, only if comfortable capping there"
+    runnable: partial
+    input: position
+    note: "'Nearly worthless' and 'meaningful' are not quantified."
+  - id: manage_7_14_dte
+    role: exit
+    rule: "Close or roll at about 7-14 DTE to sidestep the hottest gamma"
+    runnable: true
+    input: position
+  - id: one_call_per_coin
+    role: sizing
+    rule: "One short call per unit of coin held, never more"
+    runnable: true
+    input: position
 ---
 
 # Covered Call (Crypto)

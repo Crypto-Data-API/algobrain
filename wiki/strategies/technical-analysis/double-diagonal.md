@@ -12,6 +12,112 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[diagonal-spread]]", "[[calendar-spread]]", "[[iron-condor]]", "[[short-strangle]]", "[[theta]]", "[[vega]]", "[[funding-rate]]", "[[deribit]]", "[[crypto-options-volatility-selling]]", "[[trade-repair-and-rolling]]", "[[section-1256-contracts]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit_only
+    role: universe
+    rule: "BTC and ETH Deribit options"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied vol served. Option quotes come from Deribit itself."
+  - id: front_short_strangle
+    role: entry
+    rule: "Sell an OTM call above spot and an OTM put below spot in the front expiry, 21-45 DTE"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "The front expiry is mechanical (Pro Plus). The page gives no OTM distance or delta for the short strikes, and strikes and quotes come from Deribit."
+  - id: back_long_wings
+    role: entry
+    rule: "Buy a further-OTM call and put in the back expiry, 60-120 DTE"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "Same as front_short_strangle: the expiry is served, the wing strikes are not."
+  - id: small_debit_or_neutral
+    role: entry
+    rule: "Net cost a small debit or near-neutral, the front shorts funding the back wings"
+    runnable: false
+    note: "Needs the four legs' quotes; no option prices are served."
+  - id: range_bound_view
+    role: filter
+    rule: "Expect BTC or ETH to be range-bound near-term"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: range_state.width_pct
+    note: "range_state gives the served range high, low and position; the range-bound forecast is the trader's."
+  - id: front_iv_rich
+    role: filter
+    rule: "Front-month implied vol rich relative to back-month (downward-sloping term structure)"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "Compare atm_iv of the front and back expiries you trade. Pro Plus; no term-structure history is served for replay."
+  - id: vol_regime_mean_reverting
+    role: filter
+    rule: "Sell the front strangle when the coin's vol regime reads mean_reverting or normal"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+  - id: max_pain_inside_range
+    role: filter
+    rule: "Max pain sits inside the intended range"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    replay: /api/v1/backtesting/snapshots?data_type=coinglass_options&start={start}
+    replay_field: snapshots[].data[].max_pain
+    note: "BTC only (no ETH max pain), computed on the Deribit expiry with the largest open interest."
+  - id: range_regime_leading
+    role: filter
+    rule: "A leading range_low_vol probability is the range thesis"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: explain.label_posteriors.range_low_vol
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_2
+    note: "Leading = the highest of the six values in label_posteriors."
+  - id: squeeze_spike_widen
+    role: filter
+    rule: "Rising squeeze or vol_spike probability means widen the strikes or stand down"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: explain.label_posteriors.vol_spike
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_4
+    note: "squeeze is beside it (post_label_5). 'Rising' has no window or threshold, and how far to widen is the desk's call."
+  - id: roll_front_shorts
+    role: exit
+    rule: "Roll the front shorts to the next cycle as they decay or their expiry nears; keep the back wings as the next cycle's protection"
+    runnable: true
+    input: position
+  - id: recentre_on_drift
+    role: exit
+    rule: "If spot trends toward one short strike, roll that side out or away and re-centre the tent"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "No distance from the strike is given."
+  - id: front_gamma_21_dte
+    role: exit
+    rule: "Manage the front legs' gamma by about 21 DTE"
+    runnable: true
+    input: position
+  - id: gex_front_management
+    role: exit
+    rule: "Long dealer gamma favours letting the shorts decay; short dealer gamma favours rolling early"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    note: "/quant/gex is a perp analog of dealer gamma, not Deribit options gamma. At or below -0.20 is dampen (long gamma), at or above 0.35 amplify (short gamma); between is transitional, which the page does not cover."
+  - id: cascade_breakout_warning
+    role: stop
+    rule: "Treat a liquidation cascade as the breakout early warning for the wings"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&include_quiet=true
+    field: alerts[].triggered
+    note: "A triggered alert in either direction (short_squeeze up, long_flush down). The page sets no size or action, so the alert's own severity cut stands in. OKX + Bybit + Hyperliquid, no Binance."
 ---
 
 # Double Diagonal

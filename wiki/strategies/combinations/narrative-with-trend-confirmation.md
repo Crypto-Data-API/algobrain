@@ -33,6 +33,116 @@ kill_criteria: |
   - loss rate on confirmed entries exceeds 60% over 20+ consecutive signals (the trend confirmation is no longer a reliable filter in the current regime)
 
 related: ["[[narrative-trading]]", "[[news-trading]]", "[[sentiment-trading]]", "[[meme-coin-cycle]]", "[[trend-following-cta]]", "[[breakout-trading]]", "[[momentum-rotation]]", "[[unlock-aware-momentum]]", "[[contrarian-extremes]]", "[[moving-average]]", "[[behavioral-finance-overview]]", "[[crypto-narratives]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: social_volume_spike
+    role: entry
+    rule: "Narrative option 1: social mention volume in the top 15% of its 90-day history for 2 or more consecutive days"
+    runnable: false
+    note: "Social volume is not served; the page names LunarCrush, Santiment or The Tie."
+  - id: sector_flow_acceleration
+    role: entry
+    rule: "Narrative option 2: capital flows into the asset's sector rising at 2x the prior 30-day rate"
+    runnable: false
+    note: "Sector capital flows are not served. /coins/category-groups gives sector price performance only, which is not a flow."
+  - id: news_catalyst
+    role: entry
+    rule: "Narrative option 3: a specific, verifiable catalyst (partnership, protocol upgrade, major listing) from a credible, non-anonymous source in the last 72 hours"
+    runnable: partial
+    endpoint: /api/v1/news/coin/{symbol}?hours=72
+    field: events[].category
+    note: "Scored headlines naming the coin, with impact_score, corroboration (number of outlets) and confidence. Whether an item is a qualifying catalyst from a credible source is the desk's call; listings are not on /event/calendar."
+  - id: narrative_catalog_score
+    role: entry
+    rule: "Narrative option 4: the asset is an active narrative with momentum score above 50 in the wiki's crypto-narratives catalog"
+    runnable: false
+    note: "No narrative momentum score is served by the API; the catalog is a wiki page."
+  - id: narrative_qualifies
+    role: entry
+    rule: "A narrative signal needs at least one of the four options"
+    runnable: partial
+    input: derived
+    inputs: [news_catalyst]
+    note: "Any one option qualifies, but social_volume_spike, sector_flow_acceleration and narrative_catalog_score are not served, so the news branch is the only runnable path, and only partly."
+  - id: donchian_breakout
+    role: entry
+    rule: "Trend confirmation A: a close above the 20-day channel high (daily or 4h chart)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=22
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].high
+    note: "The latest closed close above the highest high of the 20 closed bars before it. Binance-listed tokens have the same bars on /market-data/klines?symbol={coin}USDT&interval=1d."
+  - id: higher_low_above_sma50
+    role: entry
+    rule: "Trend confirmation B: the latest daily swing low is above the prior swing low and price is above the 50-day SMA"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].low
+    note: "The SMA leg is mechanical (ma.above_50 on /indicators/technical/{symbol} for covered coins). The page does not define a swing low (pivot width), so that is the desk's call."
+  - id: confirmed_after_narrative
+    role: entry
+    rule: "Enter only when donchian_breakout or higher_low_above_sma50 fires within 5 days after the narrative signal, as a response to it"
+    runnable: partial
+    input: derived
+    inputs: [narrative_qualifies, donchian_breakout, higher_low_above_sma50]
+    note: "The text says BOTH but lists the two as alternatives; the pseudocode takes either. Only as runnable as narrative_qualifies."
+  - id: regime_ok
+    role: filter
+    rule: "No narrative long entries in Established Bear or Structural Shock"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Served ids established_bear and structural_shock_crisis. The agent workflow also skips a high strong_trend_bear probability on /quant/market, with no level given."
+  - id: long_only_low_leverage
+    role: sizing
+    rule: "Long spot or perp at no more than 2x leverage, entered at the close of the confirming candle; never short"
+    runnable: true
+    input: position
+  - id: base_size
+    role: sizing
+    rule: "2-3% of the sleeve per trade (2.5% in the pseudocode); 1.2x when both trend confirmations hold at once"
+    runnable: partial
+    input: derived
+    inputs: [donchian_breakout, higher_low_above_sma50]
+    note: "The base size is fixed; the 1.2x bonus is only as runnable as higher_low_above_sma50."
+  - id: max_concurrent
+    role: sizing
+    rule: "At most 3 concurrent narrative positions"
+    runnable: true
+    input: position
+  - id: narrative_decay_exit
+    role: exit
+    rule: "Exit when social volume stays below the 30th percentile of the prior 30 days for 3 or more days, or sector flow reverses"
+    runnable: false
+    note: "Social volume and sector flows are not served."
+  - id: trend_break_exit
+    role: exit
+    rule: "Exit on a close below the 20-day channel low, or below the 50-day SMA by more than one ATR"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60&atr=14
+    field: candles[].low
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].low
+    note: "Donchian low = lowest low of the prior 20 closed bars; SMA(50) from candles[].close and ATR from candles[].atr (period 14 assumed; the page names none)."
+  - id: time_stop
+    role: exit
+    rule: "Close if the position has not shown a 5% unrealised gain within 10 trading days"
+    runnable: true
+    input: position
+  - id: hard_stop
+    role: stop
+    rule: "Hard stop 8% below entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: drawdown_kill
+    role: stop
+    rule: "Stop new entries when the sleeve drawdown exceeds 30%"
+    runnable: true
+    input: position
 ---
 
 # Narrative with Trend Confirmation

@@ -38,6 +38,111 @@ kill_criteria: |
   - short-leg margin buffer breached without ability to top up before liquidation
 
 related: ["[[funding-rate-arbitrage]]", "[[calendar-spread-arbitrage]]", "[[basis-trade]]", "[[fork-futures-spot-basis]]", "[[gbtc-discount-arbitrage]]", "[[cross-exchange-arbitrage]]", "[[contango]]", "[[backwardation]]", "[[basis]]", "[[futures]]", "[[perpetual-futures]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: basis_over_hurdle
+    role: entry
+    rule: "Annualised basis ((future - spot) / spot) x (365 / DTE) must clear the funding hurdle by at least 10% (majors; 8-10% in the text) or 15% (alts), after short-margin funding and both-leg fees"
+    runnable: false
+    note: "Dated-futures prices and days to expiry (CME, Deribit, Binance or OKX quarterlies) are not served, so the basis cannot be built. Needs the venues' dated-futures feeds. Where the short leg is a perp the trade is funding-rate arbitrage, which is runnable from served funding."
+  - id: funding_hurdle
+    role: entry
+    rule: "Funding hurdle: the cost of funding the short's margin plus the opportunity cost of the spot capital (about 6% APY in the example), anchored to perp funding as fair carry"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=30
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Perp funding APY = mean settled 8-hour rate x 3 x 365 gives the fair-carry anchor. The short-leg margin borrow rate is not served (the old borrow-interest endpoint is retired); read it from the exchange. Replay rows are 5-minute samples from 2026-05-09."
+  - id: spot_leg
+    role: entry
+    rule: "Buy spot on a trusted venue (or hold in self-custody or a spot ETF for BTC and ETH)"
+    runnable: true
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    replay: /api/v1/backtesting/klines?symbol={coin}USDT&exchange=binance&interval=1h&start={start}
+    replay_field: klines[].c
+    note: "Binance spot, the convergence anchor."
+  - id: same_index
+    role: filter
+    rule: "Both legs reference the same asset, and the future settles to the index the spot tracks; otherwise it is a cross-basis trade"
+    runnable: true
+    input: position
+    note: "A check on the contract specifications the bot trades."
+  - id: short_leg_liquidity
+    role: filter
+    rule: "Short the nearest liquid dated expiry (quarterly is standard); wait when futures liquidity is insufficient"
+    runnable: partial
+    endpoint: /api/v1/derivatives/open-interest?coin={coin}
+    field: binance.current_oi
+    note: "This is Binance perp open interest in coin units, a crowding proxy, not the dated contract's own OI or depth, and the page sets no liquidity floor."
+  - id: margin_headroom
+    role: sizing
+    rule: "Post the short with enough margin to survive a 50% upward rip (notional x (0.50 + 0.005 maintenance)), or hold spot on the same venue as cross-collateral"
+    runnable: true
+    input: position
+  - id: venue_cap
+    role: sizing
+    rule: "Per-venue exposure at most 20-25% of the book (0.25 in the pseudocode)"
+    runnable: true
+    input: position
+  - id: topup_reserve
+    role: sizing
+    rule: "Keep a margin top-up reserve sized to the planned rip"
+    runnable: true
+    input: position
+  - id: hold_to_expiry
+    role: exit
+    rule: "Default exit: hold to settlement and let the future converge to spot"
+    runnable: true
+    input: position
+  - id: early_exit_compression
+    role: exit
+    rule: "Close early when the annualised basis compresses to about 3% (near carry) well before expiry"
+    runnable: false
+    note: "Needs the dated-futures price, which is not served."
+  - id: roll_far
+    role: exit
+    rule: "At expiry, roll into a further-dated contract if its basis is attractive"
+    runnable: false
+    note: "Needs the further expiry's price, which is not served."
+  - id: basis_inverted
+    role: stop
+    rule: "Unwind when the basis inverts (backwardation) on the held expiry; roll only into a contango expiry"
+    runnable: false
+    note: "Needs the dated-futures price, which is not served."
+  - id: counterparty_flag
+    role: stop
+    rule: "Emergency unwind on a counterparty flag at a venue holding either leg: withdrawal halt, solvency concern, or unscheduled maintenance over 4 hours"
+    runnable: partial
+    endpoint: /api/v1/security/regime/score
+    field: flow_subscore
+    note: "flow_subscore is the worst absolute net exchange-flow z-score across majors and stables, a market-wide withdrawal-flight signal; per-exchange 24h flows are per_exchange_24h on /api/v1/on-chain/exchange-flows/{symbol}. Halts and maintenance windows come from the venues' status pages."
+  - id: margin_buffer_low
+    role: stop
+    rule: "Top up or unwind when the short-leg margin health falls below 0.15 without spot cross-collateral"
+    runnable: true
+    input: position
+  - id: regime_gate
+    role: filter
+    rule: "Pause fresh carry while the HMM market regime is strong_trend_bear or vol_spike, where the majors basis inverts"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow."
+  - id: kill_below_hurdle_30d
+    role: stop
+    rule: "Pause when the chosen expiry's annualised basis has been below the margin-funding plus fee hurdle for 30 consecutive days"
+    runnable: false
+    input: derived
+    inputs: [basis_over_hurdle]
+    note: "Only as runnable as basis_over_hurdle."
+  - id: kill_drawdown_6
+    role: stop
+    rule: "Pause on a sleeve drawdown above 6% in any rolling 30-day window"
+    runnable: true
+    input: position
 ---
 
 # Cash and Carry Arbitrage

@@ -21,6 +21,57 @@ expected_sharpe: 0.8
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 20
 related: ["[[etf-arbitrage]]", "[[activist-investing]]", "[[nav-arbitrage]]", "[[bulldog-investors]]", "[[saba-capital]]", "[[arbitrage]]", "[[edge-taxonomy]]", "[[failure-modes]]"]
+gates:
+  - id: discount_to_nav
+    role: entry
+    rule: "Daily: discount = (price - NAV) / NAV for every US-listed closed-end fund; go long when it is in the bottom decile of its own 5-year history and deeper than -12%"
+    runnable: false
+    note: "No CEF prices or NAVs are served. Needs a fund data vendor (CEFConnect, Morningstar, Bloomberg). The crypto trust analogue (Grayscale premium) is not served live either; its archive stopped on 2026-07-22."
+  - id: fund_quality
+    role: filter
+    rule: "Prefer funds with under 20% leverage, no pending rights offering and a clean portfolio (no gated or illiquid assets)"
+    runnable: false
+    note: "Fund leverage, corporate actions and holdings come from SEC filings and fund reports; not served."
+  - id: nav_hedge
+    role: sizing
+    rule: "Hedge the NAV exposure with a duration-matched ETF basket for the underlying mix (for a muni CEF, short MUB or TLT)"
+    runnable: false
+    note: "ETF prices and fund durations are not served."
+  - id: activist_target
+    role: entry
+    rule: "Activist variant: pick deep-discount funds with governance weakness (staggered board, supermajority vote for liquidation), accumulate 5-10%, file a 13D proposing liquidation, a tender or open-ending, and solicit proxies"
+    runnable: false
+    note: "Governance terms and filings come from SEC EDGAR; the campaign itself is a legal process, not a data condition."
+  - id: passive_exit
+    role: exit
+    rule: "Passive exit: the discount narrows to within 0.5 sigma of its history or reaches -3%"
+    runnable: false
+    note: "Needs the same price and NAV series as discount_to_nav."
+  - id: activist_exit
+    role: exit
+    rule: "Activist exit: the tender completes, the fund open-ends, or the board concedes"
+    runnable: false
+    note: "Corporate events from filings; not served."
+  - id: kill_drawdown_20
+    role: stop
+    rule: "Kill switch: drawdown above 20% from the high-water mark"
+    runnable: true
+    input: position
+  - id: kill_decile_edge
+    role: stop
+    rule: "Kill switch: the discount-decile rule shows negative excess return over the trailing 3 years"
+    runnable: false
+    note: "Needs the CEF price and NAV history in discount_to_nav."
+  - id: kill_poison_pill
+    role: stop
+    rule: "Activist kill switch: the target adopts a poison pill or control-share provision after accumulation"
+    runnable: false
+    note: "A corporate action from filings; not served."
+  - id: kill_hedge_tracking
+    role: stop
+    rule: "Kill switch: NAV-hedge tracking error above 10% annualised"
+    runnable: false
+    note: "Needs fund NAVs and the hedge ETFs' prices, neither served."
 ---
 
 # Closed-End Fund Arbitrage

@@ -22,6 +22,36 @@ expected_sharpe: 1.2
 expected_max_drawdown: 0.05
 breakeven_cost_bps: 8
 decay_evidence: "Reg Q phase-out 1980-1986 + capital-account liberalisation collapsed the original edge; cross-currency basis (post-2008) reopened a related but smaller dislocation."
+gates:
+  - id: onshore_offshore_rates
+    role: filter
+    rule: "Quote onshore USD (Fed funds, NY 90-day CD), offshore USD (London eurodollar deposit) and 30/90/180-day GBP-USD forward FX to 1 bp"
+    runnable: false
+    note: "None of these are served. /sentiment/macro has one Treasury yield and EUR/USD spot, not Fed funds, CD, eurodollar or forward FX rates. The strategy is retired; Reg Q ended in 1986."
+  - id: cip_triangle_8bp
+    role: entry
+    rule: "Open the triangle only when the covered-interest-parity gap exceeds 8 bp net of bid-ask, custody and balance-sheet costs"
+    runnable: false
+    input: derived
+    inputs: [onshore_offshore_rates]
+    note: "Built on the unserved rate and forward quotes."
+  - id: hold_to_maturity
+    role: exit
+    rule: "Hold each leg to maturity (90 days standard) with no mid-term unwind"
+    runnable: true
+    input: position
+  - id: basis_collapse_unwind
+    role: exit
+    rule: "Unwind before maturity only if the cross-currency basis collapses"
+    runnable: false
+    note: "No cross-currency basis series is served, and the page gives no level for a collapse."
+  - id: reverse_on_inversion
+    role: entry
+    rule: "Reverse the triangle when the onshore-offshore gap inverts"
+    runnable: false
+    input: derived
+    inputs: [onshore_offshore_rates]
+    note: "Built on the unserved rate and forward quotes."
 ---
 
 # Eurodollar Triangular Arbitrage

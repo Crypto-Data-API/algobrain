@@ -34,6 +34,64 @@ kill_criteria: |
   - leg-execution fill rate drops below 85% on the harder option leg (infrastructure failing)
   - Deribit fee structure change causes round-trip cost to exceed the average violation size
   - rolling 6-month Sharpe < 0.3
+gates:
+  - id: btc_eth_only
+    role: universe
+    rule: "BTC and ETH options only, on Deribit, preferably USDC-margined (linear); alt option gaps cannot be executed at size"
+    runnable: true
+    input: position
+  - id: parity_violation
+    role: entry
+    rule: "Executable C - P diverges from (F - K) x e^(-rT): conversion when the synthetic short is rich to the future, reversal when the synthetic long is cheap"
+    runnable: false
+    note: "Needs per-strike call and put bid/ask, the Deribit dated-future price and the financing rate. No option chain, option quotes or dated-future price is served; /market-intelligence/options carries aggregate BTC OI, put/call and one max-pain strike only."
+  - id: violation_beats_costs
+    role: entry
+    rule: "Trade only when the captured violation (typically 0.05-0.3% of notional) exceeds all costs: two option crossings, the future leg, fees and carry"
+    runnable: false
+    input: derived
+    inputs: [parity_violation]
+    note: "Built on parity_violation, which needs Deribit quotes."
+  - id: hardest_leg_first
+    role: entry
+    rule: "Fill the hardest (least liquid) option leg first, then hedge with the future; never leg into the future first"
+    runnable: true
+    input: position
+  - id: perp_carry_watch
+    role: filter
+    rule: "On a perp-hedged build, poll perp funding before entry and every interval; exit early if the funding or basis regime flips hard against the package"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol=BTCUSDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance perp funding (Hyperliquid on /hyperliquid/funding-rates); Deribit's own perp funding is not served. The page gives no size for a hard flip, so the trigger is the desk's call. The dated-future basis is not served."
+  - id: dislocation_watch
+    role: filter
+    rule: "Watch forced-unwind flow and heavy option OI for where parity gaps are likely to open next"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/liquidations?symbol=BTC
+    field: data[].liquidation_usd_1h
+    note: "A monitoring aid with no threshold. Liquidations cover OKX, Bybit and Hyperliquid (Binance not captured); option OI is a BTC aggregate on /market-intelligence/options, with no per-strike split."
+  - id: regime_size_cut
+    role: sizing
+    rule: "In vol_spike or choppy_high_vol market regimes, cut per-trade size rather than chase the fatter gaps"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the agent workflow; the size of the cut is not given."
+  - id: hold_to_settlement
+    role: exit
+    rule: "Hold the package to the 08:00 UTC European cash settlement; the P&L is locked at entry"
+    runnable: true
+    input: position
+  - id: early_close
+    role: exit
+    rule: "Close early only if the whole package can be closed for more than its locked value net of costs"
+    runnable: false
+    note: "Needs live option and future marks for the package, which come from Deribit, not from any served endpoint."
 ---
 
 # Conversion & Reversal Arbitrage

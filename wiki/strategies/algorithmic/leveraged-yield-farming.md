@@ -21,6 +21,87 @@ crowding_risk: high
 expected_sharpe: 0.6
 expected_max_drawdown: 0.35
 breakeven_cost_bps: 150
+gates:
+  - id: farm_vs_borrow
+    role: entry
+    rule: "Farm APY (fees plus rewards) above 2x the lending pool's borrow rate"
+    runnable: false
+    note: "Farm APRs and DeFi lending borrow rates are not served. The archived coinglass_borrow_rates snapshots are exchange margin rates, not Alpha Homora or Alpaca pool rates. Read them from the protocol or DefiLlama."
+  - id: net_spread_5pp
+    role: entry
+    rule: "Net APY = L x farm APY - (L - 1) x borrow rate beats the best unleveraged alternative by more than 5 percentage points"
+    runnable: false
+    input: derived
+    inputs: [farm_vs_borrow]
+    note: "Only as runnable as farm_vs_borrow."
+  - id: audited_tvl_floor
+    role: filter
+    rule: "Protocol audited and pool TVL above a floor"
+    runnable: false
+    note: "Audit status and per-pool TVL are not served, and the page does not give the floor."
+  - id: leverage_by_vol
+    role: sizing
+    rule: "Leverage 2x for moderate risk, 2.5-3x for aggressive, never above 3x, chosen from the pair's volatility"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: vol.rv_cc_30
+    note: "30-day realized vol of each pair leg is served; the page does not map vol to a leverage level."
+  - id: alloc_cap
+    role: sizing
+    rule: "At most 10-15% of the crypto portfolio in leveraged farming (15% in the pseudocode), split across 2-3 farms on different protocols and chains"
+    runnable: true
+    input: position
+  - id: collateral_reserve
+    role: sizing
+    rule: "Keep unleveraged stablecoin reserves to add collateral during drawdowns"
+    runnable: true
+    input: position
+  - id: debt_ratio_delever
+    role: stop
+    rule: "Deleverage or add collateral when the debt ratio exceeds 90% of the protocol's liquidation LTV (typically 80-85%); deleverage immediately if collateral cannot be added within 1 hour"
+    runnable: true
+    input: position
+    note: "Read the debt ratio from the protocol contract, which the page wants in a fast on-chain loop."
+  - id: yield_compression_exit
+    role: exit
+    rule: "Close a position when its net spread over the best unleveraged alternative stays below 5 percentage points for 14 consecutive days"
+    runnable: false
+    note: "Needs farm APRs and borrow rates, which are not served."
+  - id: reward_token_crash
+    role: stop
+    rule: "Exit the farm when the primary reward token is down more than 60% over 30 days"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={coin}USDT&interval=1d&limit=31
+    field: klines[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}USDT&exchange=binance&interval=1d&start={start}
+    replay_field: klines[].c
+    note: "Latest daily close over the close 30 bars earlier, for reward tokens listed on Binance spot (CAKEUSDT in the example). An unlisted reward token has no series here."
+  - id: exploit_depeg_exit
+    role: stop
+    rule: "Exit immediately at market on any confirmed exploit, oracle failure or pool-asset stablecoin depeg above 2%"
+    runnable: partial
+    endpoint: /api/v1/security/events
+    field: items[].event_type
+    note: "Hacks (classification names oracle manipulation) and depegs (deviation_bps, 200 = 2%) from the last 10 days. Matching an event to your protocol and pool assets is the bot's job, and coverage of small protocols is not guaranteed."
+  - id: extreme_vol_exit
+    role: exit
+    rule: "Exit on extreme market volatility"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "The page does not define extreme; vol_shock (7-day vol at or above the 90th percentile of its trailing 90 days) is the served read."
+  - id: regime_gate
+    role: filter
+    rule: "Do not run 3x leverage into rising vol_spike or strong_trend_bear probabilities"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: probabilities.regime_transitions.to_vol_spike
+    note: "From the page's AI-agent workflow, which gives no threshold. probabilities.directional.strong_down is the bear side; the committed label is regime.label."
+  - id: drawdown_kill
+    role: stop
+    rule: "Close all positions and retire pending review when equity drawdown on the strategy allocation exceeds 35%"
+    runnable: true
+    input: position
 ---
 
 Leveraged yield farming is the practice of borrowing assets to amplify liquidity provider (LP) positions in [[defi]] protocols, magnifying both yields and risks. Instead of depositing only your own capital into a [[liquidity-pool]], you borrow additional funds -- typically running total exposure of 2-3x your collateral -- and farm with the combined position. Protocols like [[alpha-homora|Alpha Homora]] and Alpaca Finance automate this process, handling the borrowing, LP creation, and position management in a single transaction.

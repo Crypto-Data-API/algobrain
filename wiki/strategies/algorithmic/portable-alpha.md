@@ -12,6 +12,54 @@ markets: [stocks, bonds]
 complexity: advanced
 backtest_status: untested
 related: ["[[factor-investing]]", "[[risk-budgeting]]", "[[black-litterman]]", "[[statistical-arbitrage]]"]
+gates:
+  - id: alpha_source
+    role: universe
+    rule: "Pick an alpha source with positive expected alpha, low beta to the target beta and enough liquidity (long-short equity, pairs, global macro, trend-following CTA)"
+    runnable: false
+    note: "Hedge-fund and strategy return series are not served. The page's betas are equity and bond indices; it offers no crypto version."
+  - id: beta_overlay
+    role: entry
+    rule: "Obtain the target beta cheaply: long equity index futures, or bond futures or a total return swap, sized to the desired notional"
+    runnable: false
+    note: "No equity index, bond futures or swap prices are served; needs CME or a TradFi data vendor."
+  - id: capital_split
+    role: sizing
+    rule: "Derivative margin of 5-15% of notional plus 85-95% in the alpha strategy, totalling 100% of the portfolio"
+    runnable: true
+    input: position
+  - id: financing_hurdle
+    role: filter
+    rule: "When the futures' implied financing rate (basis) is expensive, the alpha must clear a higher hurdle"
+    runnable: false
+    note: "Equity and bond futures basis is not served. /sentiment/macro carries a US Treasury yield (treasury_yield), a reference rate but not the futures' implied financing."
+  - id: roll_and_rebalance
+    role: exit
+    rule: "Roll futures at expiration (quarterly for equity futures) and rebalance the notional as portfolio value changes"
+    runnable: true
+    input: position
+  - id: margin_buffer
+    role: stop
+    rule: "Keep enough margin buffer on the derivative overlay that a crash's margin calls do not force sales of illiquid alpha positions"
+    runnable: partial
+    input: position
+    note: "The page gives no buffer size."
+  - id: correlation_monitor
+    role: exit
+    rule: "Act when the alpha source stops being uncorrelated with the beta (it tends to correlate in crises, doubling exposure)"
+    runnable: false
+    note: "The beta's index returns are not served, and the page sets no correlation limit."
+  - id: liquidity_alignment
+    role: filter
+    rule: "Align the alpha strategy's liquidity (lock-ups, redemption gates) with the futures' daily margin settlement"
+    runnable: true
+    input: position
+  - id: gross_exposure
+    role: sizing
+    rule: "Risk-adjust the implicit ~190% gross exposure (100% beta plus ~90% alpha) using risk budgeting"
+    runnable: partial
+    input: position
+    note: "The page names no exposure limit; see risk-budgeting."
 ---
 
 # Portable Alpha

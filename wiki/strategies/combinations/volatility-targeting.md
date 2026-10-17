@@ -10,6 +10,47 @@ markets: [futures, crypto]
 complexity: advanced
 backtest_status: untested
 related: [risk-on-risk-off-framework, multi-strategy-portfolio, mean-reversion]
+gates:
+  - id: strategy_rv_20d
+    role: sizing
+    rule: "For each strategy, 20-day realised vol of its daily returns x sqrt(252), or x sqrt(365) for crypto strategies"
+    runnable: true
+    input: position
+    note: "Built from each sleeve's own daily P&L, not from market data."
+  - id: target_weight
+    role: sizing
+    rule: "Target weight = (strategy risk budget x portfolio target vol) / strategy realised vol, with the portfolio target at 10% annual vol in the example (8-15% typical)"
+    runnable: true
+    input: derived
+    inputs: [strategy_rv_20d]
+  - id: leverage_caps
+    role: sizing
+    rule: "Cap leverage at 1.5x for any single strategy and 2.0x for the whole portfolio"
+    runnable: true
+    input: position
+  - id: floor_weight
+    role: sizing
+    rule: "Never hold less than 5% in any active strategy"
+    runnable: true
+    input: position
+  - id: weekly_rebalance
+    role: sizing
+    rule: "Every Monday, recompute each strategy's realised vol and reset the weights"
+    runnable: true
+    input: position
+  - id: blended_vol
+    role: sizing
+    rule: "Use a blended vol estimate: 70% realised vol + 30% implied vol (VIX or strategy-specific options)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "For a crypto sleeve, BTC or ETH DVOL (Deribit 30-day implied) can stand in for the implied part. No VIX or equity, futures or other strategy-specific implied vol is served, so the TradFi sleeves need another source."
+  - id: correlation_adjust
+    role: sizing
+    rule: "Adjust for inter-strategy correlation with a rolling 60-day correlation matrix: portfolio vol = sqrt(W' x Cov x W)"
+    runnable: true
+    input: position
+    note: "From each sleeve's own daily returns."
 ---
 
 # Volatility Targeting

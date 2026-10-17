@@ -33,6 +33,103 @@ kill_criteria: |
   - core narrative-entry signal (from whatever strategy supplies entries) has decayed independently (the problem is the entry, not the exit)
 
 related: ["[[narrative-with-trend-confirmation]]", "[[narrative-trading]]", "[[meme-coin-cycle]]", "[[crowded-long-funding-fade]]", "[[funding-filtered-momentum]]", "[[narrative-position-vol-targeting]]", "[[unlock-short-with-crowding-gate]]", "[[contrarian-extremes]]", "[[sentiment-positioning-divergence]]", "[[funding-rate]]", "[[open-interest]]", "[[perpetual-futures]]", "[[behavioral-finance]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: funding_crowded_now
+    role: exit
+    rule: "Gate 1a: the narrative token's current 8h funding at or above +0.050%"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hyperliquid settles hourly: sum of the last 8 prints >= 0.0005. For a token with a Binance perp, the last rates[].funding_rate on /derivatives/binance/funding-rates?symbol={coin}USDT is the native 8h print."
+  - id: funding_crowded_7d
+    role: exit
+    rule: "Gate 1b: 7-day average 8h funding at or above +0.030%"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].funding_rate_mean
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "start = 7 days ago: mean of the 7 daily funding_rate_mean values (hourly rates) x 8 >= 0.0003. The current day is not served until it closes. Bars from 2026-03-30, Pro Plus."
+  - id: funding_gate
+    role: exit
+    rule: "Gate 1 passes when funding_crowded_now and funding_crowded_7d both hold"
+    runnable: true
+    input: derived
+    inputs: [funding_crowded_now, funding_crowded_7d]
+  - id: oi_pctile_75
+    role: exit
+    rule: "Gate 2 option A: open interest at or above the 75th percentile of its trailing 30-day distribution"
+    runnable: true
+    endpoint: /api/v1/derivatives/hyperliquid/history?symbol={coin}&days=30
+    field: history[].open_interest
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].oi_close
+    note: "Rank the current assets[].open_interest on /hyperliquid/open-interest against the 30 daily values (coin units)."
+  - id: oi_7d_build
+    role: exit
+    rule: "Gate 2 option B: open interest up 20% or more over 7 days"
+    runnable: true
+    endpoint: /api/v1/derivatives/hyperliquid/history?symbol={coin}&days=8
+    field: history[].open_interest
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].oi_close
+  - id: oi_gate
+    role: exit
+    rule: "Gate 2 passes when oi_pctile_75 or oi_7d_build holds"
+    runnable: true
+    input: derived
+    inputs: [oi_pctile_75, oi_7d_build]
+  - id: long_short_extreme
+    role: exit
+    rule: "Gate 3 (optional): long/short ratio at or above 1.60"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/long-short-ratio?symbol={coin}USDT
+    field: long_short_ratio
+    note: "Binance global account ratio; tokens without a Binance USD-M perp have no served ratio."
+  - id: full_exit
+    role: exit
+    rule: "Close 100% of the narrative long when Gate 1 and Gate 2 both pass (immediately, without trimming, when Gate 3 also passes)"
+    runnable: true
+    input: derived
+    inputs: [funding_gate, oi_gate, long_short_extreme]
+    note: "The pseudocode exits in full on Gates 1 + 2 with or without Gate 3. The text's partial-trim section contradicts this (it trims 60-70% on Gates 1 + 2 when Gate 3 fails); the pseudocode is the rule here."
+  - id: partial_trim
+    role: exit
+    rule: "Trim 50-70% of the position (65% in the pseudocode) when Gate 1 passes but Gate 2 does not"
+    runnable: true
+    input: derived
+    inputs: [funding_gate, oi_gate]
+  - id: exit_on_4h_close
+    role: exit
+    rule: "Execute exits at the next 4h close after the gates confirm, not on the first spike"
+    runnable: true
+    input: position
+    note: "Pure clock: 4h closes are at 00, 04, 08, 12, 16 and 20 UTC."
+  - id: residual_trailing_stop
+    role: stop
+    rule: "After a partial trim, trail the residual at 6% below the 10-day closing high"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=11
+    field: candles[].close
+    note: "Highest of the last 10 closed daily closes x 0.94 (drop the forming bar)."
+  - id: reentry_crowding_cleared
+    role: entry
+    rule: "Re-enter after a full exit only when 8h funding is back at or below +0.020% and OI has fallen at least 15% from its level when the gate fired"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest
+    note: "Funding as in funding_crowded_now (sum of 8 hourly prints <= 0.0002); record OI at the gate fire."
+  - id: narrative_still_active
+    role: entry
+    rule: "Re-entry also requires the narrative to still be active (social volume not collapsed)"
+    runnable: partial
+    endpoint: /api/v1/news/coin/{symbol}
+    field: news_pressure
+    note: "Social volume is not served. News pressure and the event count over the last 72h are a proxy for whether the story is still live; what counts as collapsed is the desk's call."
 ---
 
 # Narrative Crowding Exit

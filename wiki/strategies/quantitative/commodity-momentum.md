@@ -21,6 +21,64 @@ data_required: [futures-continuous-contracts, ohlcv-daily]
 capacity_usd: 5000000000
 min_capital_usd: 500000
 related: ["[[trend-following-cta]]", "[[commodity-carry-strategy]]", "[[commodity-value-strategy]]", "[[commodity-curve-rolls]]", "[[commodities]]", "[[momentum-rotation]]", "[[carry-anomaly]]"]
+gates:
+  - id: commodity_universe
+    role: universe
+    rule: "20-30 liquid commodity futures spanning energy, metals, agriculture and livestock (crude, natural gas, gold, copper, corn, soybeans, wheat, sugar, coffee, cotton, live cattle, lean hogs)"
+    runnable: false
+    note: "No commodity futures prices are served, and the page offers no crypto adaptation. A commodity futures feed (exchange data or a vendor such as Norgate or CSI) is needed."
+  - id: continuous_contracts
+    role: universe
+    rule: "Use continuous front-month or second-month contracts, adjusted for rolls"
+    runnable: false
+    note: "Needs per-contract commodity futures prices and roll dates to stitch a continuous series; not served."
+  - id: trailing_return_12_1
+    role: entry
+    rule: "Signal: the 12-month trailing return, or the 12-1 month return (252 trading days ending 21 days ago, skipping the latest month)"
+    runnable: false
+    note: "Needs roll-adjusted daily commodity futures closes; not served."
+  - id: long_top_quintile
+    role: entry
+    rule: "Long the top quintile (top 20%) of commodities ranked by trailing return"
+    runnable: false
+    input: derived
+    inputs: [trailing_return_12_1]
+    note: "Built from trailing_return_12_1, which is not served."
+  - id: short_bottom_quintile
+    role: entry
+    rule: "Short the bottom quintile (bottom 20%) of commodities ranked by trailing return"
+    runnable: false
+    input: derived
+    inputs: [trailing_return_12_1]
+    note: "Built from trailing_return_12_1, which is not served."
+  - id: equal_weight
+    role: sizing
+    rule: "Equal-weight the positions within each quintile"
+    runnable: true
+    input: position
+  - id: vol_target
+    role: sizing
+    rule: "Scale the book to a 10-15% annualized portfolio volatility target (12% in the pseudocode) using ex-ante 20-60 day realized volatility"
+    runnable: false
+    note: "Needs commodity futures returns to estimate the book's volatility; not served."
+  - id: single_name_cap
+    role: sizing
+    rule: "Cap any single commodity at 20% of gross exposure"
+    runnable: true
+    input: position
+  - id: monthly_rebalance
+    role: exit
+    rule: "Rebalance monthly on a fixed calendar date, e.g. the last business day of the month"
+    runnable: true
+    input: position
+    note: "No holiday or business-day calendar is served; the bot needs its own exchange calendar for the last business day."
+  - id: quintile_exit
+    role: exit
+    rule: "Exit a position when its commodity drops out of the top or bottom quintile at the next rebalance; no intra-month discretionary exits"
+    runnable: false
+    input: derived
+    inputs: [long_top_quintile, short_bottom_quintile]
+    note: "Built from the quintile ranks, which need commodity futures prices that are not served."
 ---
 
 # Commodity Momentum

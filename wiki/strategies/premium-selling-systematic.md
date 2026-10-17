@@ -36,6 +36,128 @@ kill_criteria: |
   - realized VRP (DVOL − subsequent RV) negative on 6-month rolling basis → halt new entries
   - vol shock with overlay covering < 30% of core gamma loss → overlay misspecified; halt and re-architect
   - discretionary deviation from rules ≥ 3 times per quarter → halt
+gates:
+  - id: btc_primary_eth_secondary
+    role: universe
+    rule: "Primary: Deribit BTC strangles and condors; secondary: ETH at smaller size; altcoin options excluded from the engine"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "BTC and ETH are the coins whose Deribit implied vol is served. Free tier sees BTC only."
+  - id: dte_band
+    role: entry
+    rule: "Entry 1: DTE between 21 and 45 (pseudocode 35)"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "The 12 nearest Deribit expiries with days to expiry and ATM IV (Pro Plus; empty on lower tiers)."
+  - id: short_strike_delta
+    role: entry
+    rule: "Entry 2-3: short call delta 16 (plus or minus 2), short put delta -16 (plus or minus 2); condor wings at 8-10 delta each side"
+    runnable: false
+    note: "No option chain or per-strike Greeks are served; strikes and deltas need Deribit's instruments and ticker API."
+  - id: dvol_percentile_band
+    role: filter
+    rule: "Entry 4: DVOL percentile between about 40 and 90 for the underlying"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "About 180 days of daily DVOL are served (Pro Plus); the page's sibling options-premium-selling ranks against a trailing year, which needs Deribit's DVOL history."
+  - id: vrp_five_points
+    role: filter
+    rule: "Entry 5: DVOL minus 30-day realised vol above 5 vol points"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    note: "vrp = dvol - realized_30 on the same item; the page says DVOL comes from Deribit, but it is served here."
+  - id: catalyst_blackout
+    role: filter
+    rule: "Entry 6: no major macro or crypto catalyst within the next 7 days (FOMC, CPI, large token unlocks, known protocol events)"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=7
+    field: items[].event_type
+    note: "Macro prints (FOMC, CPI, NFP, PCE, PPI) and unlocks are served; protocol events are not. 'Large' unlock has no cut on the page: items[].unlocked_value_usd and pct_of_fdv size them."
+  - id: vol_regime_gate
+    role: filter
+    rule: "The vol regime must not read vol_shock or expanding"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow."
+  - id: vega_budget
+    role: sizing
+    rule: "Entry 7 and exit 5: total short vega at most about 1% of NAV per DVOL point; when breached, close the largest-vega trade first"
+    runnable: partial
+    input: position
+    note: "Book vega comes from the trading venue's position Greeks; we serve no option Greeks."
+  - id: margin_limits
+    role: sizing
+    rule: "Entry 8: Deribit portfolio-margin utilisation below 25%; per-trade margin under 5% of NAV"
+    runnable: true
+    input: position
+  - id: skew_tilt_funding
+    role: entry
+    rule: "Tilt the strangle toward the call wing when 8h funding is above 0.03% (funding_8h > 0.0003), else balanced"
+    runnable: true
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    note: "Binance's 8-hour rate; for Hyperliquid use 8 x hyperliquid.current_rate."
+  - id: profit_take_50
+    role: exit
+    rule: "Exit 1: close at 50% of max profit"
+    runnable: partial
+    input: position
+    note: "Needs the trade's live option marks from Deribit; we serve no option prices."
+  - id: time_exit
+    role: exit
+    rule: "Exit 2: close at DTE 10-14 (pseudocode 12) regardless of P&L"
+    runnable: true
+    input: position
+  - id: stop_2x_credit
+    role: stop
+    rule: "Exit 3: close when the loss reaches 2x the credit collected"
+    runnable: partial
+    input: position
+    note: "Needs the trade's live option marks from Deribit."
+  - id: dvol_shock_kill
+    role: stop
+    rule: "Exit 4: flatten short vega if DVOL rises more than 50% in a session"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol_change_24h
+    note: "dvol_change_24h is the vol-point change between the last two daily DVOL closes: percent = change / (dvol - change). Daily resolution, so an intraday spike shows late; the agent workflow's faster proxy is composite_score on /api/v1/volatility/regime/score with a liquidation burst."
+  - id: untested_side_roll
+    role: exit
+    rule: "If one short strike is breached inside the profit window, roll the untested side closer to spot for a credit only; never roll the tested side out in time; at most two adjustments, then close"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/summary?coin={coin}
+    field: mark_price
+    note: "Breach compares the mark (perp as spot proxy) with the short strike and the adjustment count is on the position record; the credit check needs Deribit prices."
+  - id: delta_band_hedge
+    role: sizing
+    rule: "Hedge aggregate net delta within a band (pseudocode 0.5% of NAV) with the perp or a dated future; re-hedge at least once per 8-hour funding boundary"
+    runnable: partial
+    input: position
+    note: "The 8-hour cadence is a clock rule; book delta comes from the venue's Greeks."
+  - id: mandatory_overlay
+    role: sizing
+    rule: "Permanent long-vol overlay at a fixed annual premium spend (pseudocode 5% of NAV a year): BTC/ETH put ladder 3-6 months out, 15-25% OTM, rolled monthly, plus DVOL convexity armed when DVOL is low"
+    runnable: true
+    input: position
+    note: "The overlay's own entry and monetisation rules are gated on the long-vol-overlay page."
+  - id: drawdown_cuts
+    role: stop
+    rule: "Strategy drawdown of 20% or more: halve size; 30% or more: halt new entries"
+    runnable: true
+    input: position
+  - id: realized_vrp_halt
+    role: filter
+    rule: "Halt new entries while realised VRP (DVOL minus the realised vol that followed) is negative on a 6-month rolling basis"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Pair each day's DVOL with the realised vol over the next 30 days from daily candles. About 180 days of DVOL are served, too short for a full 6-month window of completed pairs."
 ---
 
 Systematic premium selling is the **mechanical, rules-based implementation of [[options-premium-selling]]**, re-scoped to crypto: 21-45 DTE [[deribit]] BTC/ETH strangles, 16-delta short strikes, mechanical entries gated by [[dvol|DVOL]] percentile, exits at 50% of max profit or the crypto gamma-zone time stop (whichever comes first), with an institutional risk-discipline overlay including a permanent [[long-vol-overlay]] and a hard DVOL vol-shock kill switch. The rule set is the tastytrade / [[tom-sosnoff]] research lineage (see [[tastytrade-mechanics]]) cleaned up with institutional risk controls and tightened for crypto's fatter tail. This is the systematic implementation referenced in [[long-vol-vs-short-vol]]'s synthesis section, recommended for traders who cannot reliably make discretionary calls under stress.

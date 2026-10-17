@@ -22,6 +22,76 @@ expected_sharpe: 1.0
 expected_max_drawdown: 0.6
 breakeven_cost_bps: 200
 decay_evidence: "Category emerged Q4 2024 (Virtuals/ai16z); peak Dec 2024-Jan 2025; significant compression by Q2 2025. Most agent tokens trace pump-then-dump pattern."
+gates:
+  - id: launch_universe
+    role: universe
+    rule: "Monitor Virtuals Protocol new agents, ai16z partnerships, Pump.fun AI-themed launches and the Truth Terminal spawn lineage"
+    runnable: partial
+    endpoint: /api/v1/dex/new-pools?chain={chain}
+    field: pools[].base_token.name
+    note: "new-pools lists the 20 newest DEX pools per chain (solana, base and others), refreshed on a cache cycle. It sees a launch only once it has a DEX pool, not a Virtuals or Pump.fun bonding-curve mint before graduation. Filtering to AI-agent names, and the ai16z partnership and lineage watch, are the bot's job."
+  - id: social_momentum
+    role: entry
+    rule: "Social momentum score: X mention and follower velocity plus Crypto Twitter influencer attention (Andreessen, Murad, Cobie)"
+    runnable: false
+    note: "No social data is served (mentions, followers, influencer posts). Needs the X API or a social-data vendor plus Discord and Farcaster feeds."
+  - id: snipe_mentions
+    role: entry
+    rule: "Snipe a new launch with more than X mentions in its first hour, within 30-60 seconds of the signal"
+    runnable: false
+    note: "Mentions are not served and the page leaves X open. The DEX feed is cached, so it is also too slow for a 30-60 second snipe; that needs the launchpad's own events (Virtuals subgraph, Pump.fun) and a priority-fee sender."
+  - id: token_safety
+    role: filter
+    rule: "Screen every agent token for rug and honeypot risk before sizing a snipe"
+    runnable: partial
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: risk_flags.is_honeypot
+    note: "From the page's AI-agent workflow. address is pools[].base_token.address from launch_universe. Reject on is_honeypot; taxes.sell_tax_pct, the other risk_flags and risk_score (0-100, 100 = safest; critical 0-25, high 26-50) on the same response grade the rest. The page sets no risk-score cutoff, so that is the desk's call."
+  - id: meme_backdrop
+    role: filter
+    rule: "Only size up when the meme backdrop is favourable, since the category trades as high-beta memecoins"
+    runnable: partial
+    endpoint: /api/v1/meme/regime/score
+    field: meme_season
+    note: "From the page's AI-agent workflow, which names no threshold: meme_season is the served on/off flag and composite_score (0-100) a finer read. No archive of the score is served."
+  - id: position_size
+    role: sizing
+    rule: "$500-5K per token, diversified across many positions, expecting 90%+ losers"
+    runnable: true
+    input: position
+  - id: tp_ladder
+    role: exit
+    rule: "Take profit in a ladder: 30% at +200%, 30% at +500%, 30% at +1000%, keep a 10% moonbag"
+    runnable: true
+    input: position
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "address is the token's contract (pools[].base_token.address from launch_universe). Read the deepest pool (highest reserve_usd); the response is cached for up to 5 minutes."
+  - id: stop_loss
+    role: stop
+    rule: "Stop loss at -50% from cost"
+    runnable: true
+    input: position
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "Same price lookup as tp_ladder."
+  - id: negative_tweet_exit
+    role: exit
+    rule: "On a negative signal in the agent's own posts, sell half the position"
+    runnable: false
+    note: "From the pseudocode. The agent's X output is not served, and the page does not define a negative signal. Needs the X API plus a classifier."
+  - id: kill_no_100m_launch
+    role: stop
+    rule: "Kill switch: 90 days without a new launch reaching $100M+ market cap"
+    runnable: false
+    note: "No per-coin launch date is served, and /dex/new-pools keeps only the 20 newest pools. Needs CoinGecko's or DexScreener's new-listing history."
+  - id: kill_category_cap
+    role: stop
+    rule: "Kill switch: total AI-agent category market cap below $1B for 90+ days"
+    runnable: partial
+    endpoint: /api/v1/coins?per_page=250&page=1
+    field: coins[].market_cap
+    note: "Sum market_cap over coins whose categories include AI Agents, paging through all of /coins (about 1,900 coins, page up to 8). That is CoinGecko's tag on the coins we track, not a DexScreener category total, and only today's value; keep the daily sums yourself for the 90-day test."
 ---
 
 # AI Agent Token Arbitrage

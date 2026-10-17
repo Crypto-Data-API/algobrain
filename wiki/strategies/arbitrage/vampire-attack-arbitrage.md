@@ -21,6 +21,100 @@ expected_sharpe: 1.4
 expected_max_drawdown: 0.45
 breakeven_cost_bps: 80
 related: ["[[sushiswap]]", "[[uniswap]]", "[[airdrop-farming]]", "[[liquidity-mining]]", "[[curve-gauge-wars-arbitrage]]", "[[2020-09-sushiswap-vampire-attack]]"]
+gates:
+  - id: identify_fork
+    role: universe
+    rule: "Identify new forks that explicitly target an incumbent's liquidity (announcements, governance forums, new-protocol feeds)"
+    runnable: partial
+    endpoint: /api/v1/dex/new-pools?chain={chain}
+    field: pools[].created_at
+    note: "Lists the newest DEX pools per chain, which shows a fork token going live; it says nothing about which incumbent a fork targets. That comes from announcements, a judgement."
+  - id: emission_schedule
+    role: filter
+    rule: "Verify the incentive: a boosted emission period, a snapshot date and the cliff after which rewards taper"
+    runnable: false
+    note: "Liquidity-mining emission schedules and snapshot blocks are contract and governance reads; /supply/unlocks covers vesting cliffs, not farm emissions."
+  - id: contract_screen
+    role: filter
+    rule: "Skip protocols that are unaudited, lack a timelock of at least 24 hours on emission changes, or let the team mint at will"
+    runnable: partial
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: risk_flags.is_mintable
+    note: "Run on the fork token: {address} is its pools[].base_token.address from identify_fork (/dex/new-pools) on the same {chain}. is_mintable, has_hidden_owner and can_pause_transfers cover the mint-at-will screen. Audit status, multisig signers and timelocks are not served."
+  - id: apr_over_hurdle
+    role: entry
+    rule: "Enter only if realised APR = boost emissions x token price / target TVL exceeds the hurdle APR plus a smart-contract risk premium"
+    runnable: false
+    input: derived
+    inputs: [emission_schedule]
+    note: "The token price is served (top_pools[].price_usd on /dex/token/{chain}/{address}), but emissions and the fork's target TVL are not, and the hurdle is the desk's."
+  - id: pre_snapshot_lp
+    role: entry
+    rule: "Hold incumbent LP tokens before the fork's snapshot date when the fork rewards incumbent LPs"
+    runnable: partial
+    input: position
+    note: "The snapshot date comes from the fork's announcement, which is not served."
+  - id: migrate_at_launch
+    role: entry
+    rule: "Move liquidity to the fork as soon as rewards start"
+    runnable: false
+    note: "Reward start is a protocol event that is not served."
+  - id: fork_cap_5pct
+    role: sizing
+    rule: "No more than 5% of book in any single fork"
+    runnable: true
+    input: position
+  - id: incumbent_lp_cap
+    role: sizing
+    rule: "Cap incumbent-LP exposure during the snapshot window in case the incumbent defends (fee changes, blacklists, UI deprecation)"
+    runnable: partial
+    input: position
+    note: "The page sets no cap, so the level is the desk's call."
+  - id: harvest_and_dump
+    role: exit
+    rule: "Claim and sell the reward token on every cycle gas allows; never hold the governance token"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].reserve_usd
+    note: "Claims are on-chain. {address} is the reward token's address, as in contract_screen. Re-estimate the 5-15% dump slippage before each cycle from the deepest pool's reserve_usd (your own selling drains it); exact slippage needs pool reserves per token, which are not served."
+  - id: exit_before_boost_end
+    role: exit
+    rule: "Exit liquidity a buffer of days before the boosted-emission period ends"
+    runnable: partial
+    input: position
+    note: "The boost end date comes from the emission schedule (not served), and the page leaves EXIT_BUFFER_DAYS to be calibrated from past fork-token decay."
+  - id: market_aware_exit
+    role: exit
+    rule: "Exit once a perp lists on the fork token and its funding normalises: the market has priced the emissions"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    note: "From the AI-agent workflow. A Hyperliquid listing shows up in assets[].coin on /hyperliquid/open-interest. The page does not define normalising, so the cutoff is the desk's call."
+  - id: speculative_appetite
+    role: filter
+    rule: "Farm migrations only while speculative appetite can absorb the token's sell pressure, not in risk-off states"
+    runnable: partial
+    endpoint: /api/v1/meme/regime/score
+    field: composite_score
+    note: "From the AI-agent workflow, which also names /quant/market. Neither sets a cutoff, so what counts as risk-off is the desk's call."
+  - id: token_crash_exit
+    role: stop
+    rule: "Exit the fork if the token is down more than 50% in 24 hours"
+    runnable: true
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_change_pct.h24
+    note: "{address} is the fork token's address, as in contract_screen. Read it on the deepest pool by reserve_usd."
+  - id: kill_low_apr_7d
+    role: stop
+    rule: "Exit the fork when realised APR after slippage and gas stays below the hurdle for 7 consecutive days"
+    runnable: true
+    input: position
+  - id: kill_strategy
+    role: stop
+    rule: "Pause on aggregate drawdown above 25% over 90 days; suspend after two consecutive unprofitable forks"
+    runnable: true
+    input: position
 ---
 
 # Vampire Attack Arbitrage

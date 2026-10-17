@@ -12,6 +12,32 @@ markets: [commodities]
 complexity: intermediate
 backtest_status: untested
 related: ["[[crack-spread]]", "[[spark-spread]]", "[[seasonal-spread-trading]]", "[[basis-trading]]", "[[event-driven-trading]]", "[[soybeans]]", "[[corn]]", "[[usda-data]]", "[[commodity-seasonality-patterns]]"]
+gates:
+  - id: board_crush_value
+    role: entry
+    rule: "Board crush in $/bushel = ZM / 2000 x 44 + ZL x 11 - ZS; typical range $0.50-2.50, above $2.00 highly profitable, below $0.50 may cut crushing"
+    runnable: false
+    note: "No CBOT soybean (ZS), soybean meal (ZM) or soybean oil (ZL) futures prices are served. This needs a CME grain futures feed."
+  - id: reverse_crush_entry
+    role: entry
+    rule: "Reverse crush when expecting wider margins: sell 10 ZS, buy 11 ZM, buy 9 ZL (the 50,000-bushel yield ratio)"
+    runnable: false
+    note: "All three legs are CBOT futures we do not serve."
+  - id: seasonal_margin_window
+    role: filter
+    rule: "Margins are tightest at harvest (September-November) and widen in spring/summer as bean supply draws down and meal feeding demand is strong; enter the reverse crush ahead of spring"
+    runnable: false
+    note: "The calendar window is something the bot can encode, but the spread it times is not served."
+  - id: usda_crop_reports
+    role: filter
+    rule: "USDA crop reports (planted acreage, yield estimates, ending stocks) set the soybean input cost"
+    runnable: false
+    note: "USDA WASDE and crop-progress data are not served, and their release dates are not on /event/calendar."
+  - id: demand_drivers
+    role: filter
+    rule: "Meal demand from livestock herds, oil demand from biodiesel and SAF mandates, NOPA monthly crush volumes and the South American harvest"
+    runnable: false
+    note: "None of these agricultural or policy series is served; they need NOPA, USDA and RFS/EPA data."
 ---
 
 # Crush Spread

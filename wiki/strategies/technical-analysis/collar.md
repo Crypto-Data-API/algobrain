@@ -12,6 +12,104 @@ markets: [crypto, options]
 complexity: beginner
 backtest_status: untested
 related: ["[[protective-put]]", "[[married-put]]", "[[covered-call]]", "[[risk-reversal]]", "[[synthetic-long]]", "[[hedging]]", "[[tail-risk-hedging]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[staking]]", "[[delta]]", "[[trade-repair-and-rolling]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_holding
+    role: universe
+    rule: "Collar a spot BTC or ETH holding (or a BTC-ETF position) with Deribit options"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied vol served. The holding itself is the trader's position; option quotes come from Deribit."
+  - id: protective_put_floor
+    role: entry
+    rule: "Buy 1 OTM put about 5-15% below spot to set the floor"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "The strike target follows from spot (oracle_price is a CEX spot composite close to Deribit's index); the listed strikes and put quotes come from Deribit."
+  - id: covered_call_cap
+    role: entry
+    rule: "Sell 1 OTM call about 5-15% above spot, same expiry, to fund the put"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Same as protective_put_floor: spot is served, the strike grid and quotes are not."
+  - id: zero_cost_adjustment
+    role: entry
+    rule: "Adjust the strikes until net premium is about zero (zero-cost collar)"
+    runnable: false
+    note: "Needs put and call quotes across strikes; no option prices are served."
+  - id: tenor_30_90_dte
+    role: entry
+    rule: "Both legs 30-90 DTE, matched to the risk window"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure lists the nearest 12 Deribit expiries. It is Pro Plus and empty on lower tiers."
+  - id: risk_window_catalyst
+    role: entry
+    rule: "Collar through a defined uncertain window: a macro print, election, major unlock, vesting cliff or solvency scare"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=30&symbol={coin}
+    field: items[].date
+    note: "Macro prints and unlocks are on the calendar (30 days out); elections, planned sales and solvency scares are not."
+  - id: funding_tightens_cap
+    role: entry
+    rule: "Strike the collar off funding: positive funding richens the sold call, tightening the zero-cost cap"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    note: "From the page's AI workflow, with no threshold. The call skew it stands for is not served."
+  - id: natural_cap_and_floor
+    role: entry
+    rule: "Use max pain and OI walls to locate natural cap and floor strikes"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    note: "BTC max pain only, on the Deribit expiry with the largest OI; per-strike OI walls are not served."
+  - id: collar_now_regime
+    role: entry
+    rule: "Rising strong_trend_bear or vol_spike probability argues for collaring now"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: explain.label_posteriors.strong_trend_bear
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_1
+    note: "label_posteriors holds the current probability of each regime (vol_spike beside it; post_label_4 in the replay). 'Rising' has no window or threshold."
+  - id: compressed_put_cheap
+    role: entry
+    rule: "A compressed vol regime makes the bought put cheap: the best moment to add the floor"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+  - id: roll_up_after_rally
+    role: exit
+    rule: "Roll the put (and call) up after a rally to lock in more of the gain; roll out in time to extend protection"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "The page gives no rally size that triggers the roll."
+  - id: near_call_strike_decision
+    role: exit
+    rule: "Near the call strike, accept the cap or roll the call up and out for a debit"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Spot against the strike is mechanical; the choice is the holder's."
+  - id: floor_tail_event
+    role: exit
+    rule: "Act between roll dates only on a liquidation tail event that tests the floor"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&include_quiet=true
+    field: alerts[].direction
+    note: "A triggered long_flush alert is the downside tail event. The page gives no size or action, and the alert's own severity cut stands in. OKX + Bybit + Hyperliquid, no Binance."
+  - id: remove_after_catalyst
+    role: exit
+    rule: "Remove the collar once the catalyst passes to get full upside back"
+    runnable: true
+    input: position
 ---
 
 # Collar (Crypto)

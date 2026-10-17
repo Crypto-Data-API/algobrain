@@ -26,6 +26,78 @@ kill_criteria: |
   - drawdown > 25% from high-water mark
   - average holding period collapses below 3 days (whipsaw regime) for 3 months
 related: ["[[quantconnect]]", "[[quantconnect-strategy-library]]", "[[donchian-channel-breakout]]", "[[bollinger-bands]]", "[[turtle-trading]]", "[[dual-thrust]]", "[[volatility-breakout]]"]
+gates:
+  - id: adaptive_lookback
+    role: entry
+    rule: "Start N at 20; each day N = round(N x (1 + deltavol)), clipped to 20-60, where deltavol = (sd of last 30 closes today - the same yesterday) / today's"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=100
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].c
+    note: "N is path-dependent: run the recursion forward from a fixed start date over closed daily bars (drop the forming bar), not from the latest 100 bars alone, or different start points give different N."
+  - id: close_above_upper_band
+    role: entry
+    rule: "Long: yesterday's close above the upper Bollinger band (N-day, 2 sd)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=100
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].c
+    note: "Compute the band over N closes with the adaptive N. The source uses an EMA mid; the pseudocode an SMA. The served bollinger block on /api/v1/indicators/technical/{symbol} is a fixed 20-day band, not this one."
+  - id: price_above_n_day_high
+    role: entry
+    rule: "And the current price above the highest high of the last N days"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=61
+    field: candles[].high
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].h
+    note: "The current price is the forming bar's close or the live mark; the N-day high excludes it."
+  - id: short_entry_mirror
+    role: entry
+    rule: "Short: yesterday's close below the lower band and the current price below the lowest low of the last N days"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=100
+    field: candles[].low
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].l
+  - id: sma_exit
+    role: exit
+    rule: "Exit a long when price falls below the N-day SMA of closes (a short when it rises above)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=61
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].c
+  - id: vol_target_20
+    role: sizing
+    rule: "Crypto adaptation: volatility-target each position to about 20% annualised"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: vol.rv_cc_30
+    note: "size = 20 / realized vol. The page names no realized-vol window; the 30-day close-to-close value here is one reading, and vol.vol_target_multiplier is the API's own 60%-target version."
+  - id: skip_vol_shock
+    role: filter
+    rule: "Skip entries in a vol-shock regime, where band breaks are liquidation noise"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow. No history of the per-coin label is served for replay."
+  - id: funding_carry
+    role: sizing
+    rule: "Subtract perp funding as the holding cost on positions held via perpetuals"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}&end={end}
+    replay_field: data[].funding_sum
+    note: "A cost input, not a trigger."
+  - id: kill_criteria
+    role: stop
+    rule: "Retire on a rolling 12-month net Sharpe below 0, a drawdown over 25%, or average holding period under 3 days for 3 months"
+    runnable: true
+    input: position
 ---
 
 # Dynamic Breakout II

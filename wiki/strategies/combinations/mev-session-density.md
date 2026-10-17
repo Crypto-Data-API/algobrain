@@ -33,6 +33,48 @@ kill_criteria: |
   - competitor latency improvement makes all sessions equally low-yield (latency-race loss, not session-scheduling issue)
 
 related: ["[[mev-strategies]]", "[[jito-solana-mev-arbitrage]]", "[[jit-liquidity]]", "[[mev-execution-guide]]", "[[session-aware-mean-reversion]]", "[[session-overlap-momentum]]", "[[off-hours-liquidation-playbook]]", "[[funding-window-timing]]", "[[market-microstructure]]", "[[latency-and-mev-on-chain-clob]]", "[[mev]]", "[[flashbots]]", "[[gas-price]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: session_density
+    role: sizing
+    rule: "Set the bid schedule from the UTC hour: 12:00-17:00 high (100%), 00:00-03:00 and 08:00-12:00 medium (60-70%), 17:00-21:00 50%, 21:00-24:00 30%, 03:00-08:00 25%"
+    runnable: true
+    input: position
+    note: "Pure clock. The pseudocode collapses the table to three levels: 12-16 high (1.00), 0-2 and 8-11 medium (0.65), every other hour low (0.40)."
+  - id: vol_override
+    role: sizing
+    rule: "Upgrade to the high-density schedule for 45 minutes when BTC moves 1.5% or more within 15 minutes, regardless of session"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin=BTC&interval=1m&limit=31
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol=BTC&exchange=hyperliquid&start={start}
+    replay_field: klines[].c
+    note: "Pseudocode reading: absolute change between the latest close and the close 15 bars earlier. The text says realized 15-minute volatility within any 30-minute window without defining it; the 31 bars cover that window if the desk prefers the largest 15-minute move inside it."
+  - id: strategy_type_by_density
+    role: filter
+    rule: "Dead zones run only liquidation MEV and DEX arb at 2x break-even or more; medium windows add types above 1.5x break-even; high windows run every type above 1.0x, adding sandwich and JIT"
+    runnable: false
+    note: "Whether an opportunity clears its break-even multiple needs mempool transactions, DEX pool reserves and gas prices, none of which are served. The density-to-type mapping itself is pure clock (session_density)."
+  - id: builder_tip_cap
+    role: sizing
+    rule: "Cap the builder tip per block at the base tip times the session's bid fraction, and scale the gas float committed per hour the same way"
+    runnable: true
+    input: position
+  - id: gas_breakeven_pause
+    role: stop
+    rule: "Pause entirely when gas pushes per-attempt break-even above the 90th-percentile gross opportunity value across all sessions"
+    runnable: false
+    note: "Gas prices and per-opportunity extractable value are not served; they need an Ethereum node, a gas oracle and the searcher's own opportunity log."
+  - id: recalibrate_90d
+    role: sizing
+    rule: "Re-weight the session table every 90 days from trailing 90-day MEV P&L (gross EV, gas cost, failed-transaction drag) bucketed by UTC hour"
+    runnable: true
+    input: position
+    note: "Uses the searcher's own P&L record."
+  - id: net_pnl_kill
+    role: stop
+    rule: "Stop when rolling 30-day net MEV P&L after gas, builder bids and failed transactions falls below zero"
+    runnable: true
+    input: position
 ---
 
 # MEV Session Density Filter

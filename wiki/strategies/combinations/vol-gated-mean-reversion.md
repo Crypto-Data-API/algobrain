@@ -34,6 +34,157 @@ kill_criteria: |
   - the HIGH-VOL-GOOD gate fires on fewer than 15% of all HIGH-VOL periods (gate is too restrictive; recalibrate funding/OI thresholds)
 
 related: ["[[mean-reversion]]", "[[session-aware-mean-reversion]]", "[[funding-flush-reversal]]", "[[oi-flush-reversion]]", "[[put-protected-dip-buying]]", "[[vol-targeted-trend-following]]", "[[volatility-targeting]]", "[[narrative-position-vol-targeting]]", "[[regime-adaptive-strategy]]", "[[pullback-trading]]", "[[contrarian-extremes]]", "[[funding-rate]]", "[[open-interest]]", "[[atr]]", "[[realized-volatility]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: rv_20d
+    role: filter
+    rule: "20-day annualised realised vol of BTC daily returns, the vol-regime input"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=22
+    field: klines[].close
+    replay: /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000
+    replay_field: klines[].close
+    note: "std of the 20 daily log returns x sqrt(365), from the 21 closed closes (drop the forming last row). The page's alternative cutoff is ATR(14, 1d) below $1,800 for NORMAL."
+  - id: vol_normal
+    role: sizing
+    rule: "NORMAL-VOL when 20-day RV is below 45%: standard notional = daily risk budget / daily RV (RV / sqrt(365))"
+    runnable: true
+    input: derived
+    inputs: [rv_20d]
+  - id: vol_high
+    role: filter
+    rule: "HIGH-VOL when 20-day RV is at least 45% and below 100%: classify as GOOD, BAD or unclassified below"
+    runnable: true
+    input: derived
+    inputs: [rv_20d]
+  - id: vol_extreme
+    role: sizing
+    rule: "EXTREME-VOL when 20-day RV is at least 100%: 0-20% of standard notional (pseudocode 10%), only on a funding flush and an OI flush together"
+    runnable: true
+    input: derived
+    inputs: [rv_20d, good_funding, good_oi_flush]
+  - id: good_funding
+    role: filter
+    rule: "GOOD leg 1: current funding at or below -0.015% per 8h, or 7-day average funding at or below -0.005% per 8h"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol=BTCUSDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Current = the latest settled print (last row); 7-day average = the mean of all 21. Replay rows are 5-minute samples of the live 8h rate from 2026-05-09: average, never sum."
+  - id: good_oi_flush
+    role: filter
+    rule: "GOOD leg 2: open interest down at least 8% over 24h, or at least 12% over 48h"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin=BTC&interval=1h&start={start}
+    field: data[].oi_close
+    replay: /api/v1/backtesting/hl-funding-bars?coin=BTC&interval=1h&start={start}
+    replay_field: data[].oi_close
+    note: "start = 50 hours ago; compare the last closed hour's oi_close with the bars 24 and 48 earlier (the forming hour is not served). Hyperliquid OI from 2026-03-30; the page's cross-venue OI is not served hourly."
+  - id: good_ls_bearish
+    role: filter
+    rule: "GOOD leg 3: long/short ratio at or below 0.85"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT
+    field: long_short_ratio
+    note: "Binance global account ratio. Local history is about 30 days, so this leg cannot be replayed further back."
+  - id: good_rsi_1h
+    role: filter
+    rule: "GOOD leg 4 (either this or good_support): RSI(14) on 1h at or below 22"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=100
+    field: klines[].close
+    replay: /api/v1/backtesting/klines?symbol=BTCUSDT&exchange=binance&interval=1h&start={start}
+    replay_field: klines[].c
+    note: "Wilder RSI(14) on closed bars; 100 bars lets the smoothing settle. Replay from 2026-05-09."
+  - id: good_support
+    role: filter
+    rule: "GOOD leg 4 (either this or good_rsi_1h): price at or below a significant support level such as the 200h EMA or the prior weekly low"
+    runnable: partial
+    endpoint: /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=600
+    field: klines[].close
+    note: "The 200-hour EMA and last week's low are computable from these bars (use interval=1w for the weekly low). Which other levels count as significant support is the desk's call; the pseudocode uses only RSI."
+  - id: high_vol_good
+    role: sizing
+    rule: "HIGH-VOL-GOOD when all GOOD legs hold: size at 1.0-1.25x standard notional (pseudocode 1.25x), capped at the max position"
+    runnable: partial
+    input: derived
+    inputs: [vol_high, good_funding, good_oi_flush, good_ls_bearish, good_rsi_1h, good_support]
+    note: "The rules need all legs; the pseudocode scores funding and OI 1 each and L/S and RSI 0.5 each and calls GOOD at 2 or more. Only as runnable as good_support."
+  - id: bad_funding_crowded
+    role: filter
+    rule: "BAD leg 1: funding at or above +0.010% per 8h while open interest is rising"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=1
+    field: rates[].funding_rate
+    note: "The funding level is mechanical. Rising OI has no window; the pseudocode takes it as bad_oi_build (24h OI up 10% or more), which makes this leg score double."
+  - id: bad_oi_build
+    role: filter
+    rule: "BAD leg 2: open interest up 10% or more over 24h"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin=BTC&interval=1h&start={start}
+    field: data[].oi_close
+    replay: /api/v1/backtesting/hl-funding-bars?coin=BTC&interval=1h&start={start}
+    replay_field: data[].oi_close
+    note: "Same 24-bar comparison as good_oi_flush."
+  - id: bad_no_flush
+    role: filter
+    rule: "BAD leg 3: funding unchanged or positive despite a large price decline"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=21
+    field: rates[].funding_rate
+    note: "Neither the size of a large decline nor the window is given, and the pseudocode leaves this leg out, so both are the desk's call."
+  - id: high_vol_bad
+    role: sizing
+    rule: "HIGH-VOL-BAD when any BAD leg holds: 25-40% of standard notional (pseudocode 30%) or no new entries"
+    runnable: partial
+    input: derived
+    inputs: [vol_high, bad_funding_crowded, bad_oi_build, bad_no_flush]
+    note: "The pseudocode calls BAD only at a score of 2 (funding crowded and OI build together) and checks it before GOOD."
+  - id: high_vol_unclassified
+    role: sizing
+    rule: "HIGH-VOL that is neither GOOD nor BAD: 50-60% of standard notional (pseudocode 55%)"
+    runnable: partial
+    input: derived
+    inputs: [vol_high, high_vol_good, high_vol_bad]
+    note: "Only as runnable as the GOOD and BAD classes. On a data gap, the page also falls back to this class."
+  - id: reversion_signal
+    role: entry
+    rule: "Enter on the underlying mean-reversion signal; the generic choice is RSI(14) on 1h at or below 20"
+    runnable: partial
+    endpoint: /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=100
+    field: klines[].close
+    note: "The page is a sizing wrapper and leaves the entry signal open (funding-flush-reversal, oi-flush-reversion and session-aware-mean-reversion carry their own rules). Only the generic RSI version is fully specified here."
+  - id: structural_shock_block
+    role: filter
+    rule: "No reversion entries while the long-term regime is Structural Shock, whatever the vol class"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Block on regime structural_shock_crisis. History from 2026-08-07."
+  - id: profit_target
+    role: exit
+    rule: "Take profit when price has recovered 50-70% of the initial move (RSI normalises or price is back above the 200h EMA)"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=600
+    field: klines[].close
+    note: "The page does not define where the initial move starts, or which point in the 50-70% band to use; the example exits at RSI 50 or more with funding positive. Those choices are the desk's."
+  - id: stop_budget
+    role: stop
+    rule: "Stop out at a loss of 2.0x the daily risk budget (a fixed dollar stop, not vol-adjusted)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: regime_flip_exit
+    role: exit
+    rule: "Exit immediately if a HIGH-VOL-GOOD trade reclassifies to HIGH-VOL-BAD mid-trade (funding turns positive and OI starts building)"
+    runnable: partial
+    input: derived
+    inputs: [high_vol_good, high_vol_bad]
+    note: "Only as runnable as the two classes it compares."
 ---
 
 # Vol-Gated Mean Reversion

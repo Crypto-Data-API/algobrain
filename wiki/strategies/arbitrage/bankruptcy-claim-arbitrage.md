@@ -21,6 +21,67 @@ expected_sharpe: 1.6
 expected_max_drawdown: 0.40
 breakeven_cost_bps: 200
 related: ["[[distressed-debt-arbitrage]]", "[[ftx]]", "[[mt-gox]]", "[[3ac]]", "[[governance-restitution-arbitrage]]", "[[ai-amplified-exploit-arbitrage]]"]
+gates:
+  - id: recovery_model
+    role: entry
+    rule: "Build a bottoms-up recovery model per estate from first-day motions, schedules of assets and liabilities, trustee reports, expected clawbacks and professional fees"
+    runnable: false
+    note: "Court filings are not served. Needs PACER (or the Tokyo trustee for Mt. Gox) and the case administrators' sites (Kroll, Stretto)."
+  - id: claim_denomination
+    role: filter
+    rule: "Establish whether the claim pays USD at petition-date value or coin (BTC, BCH, JPY mix for Mt. Gox)"
+    runnable: false
+    note: "Set by each estate's plan documents; not served."
+  - id: irr_hurdle
+    role: entry
+    rule: "Buy only below modelled recovery minus fees minus time discount: IRR above 20% at the broker's offer"
+    runnable: false
+    note: "Claim quotes are not served. Needs the claim brokers' indicative quotes (Cherokee Acquisition, Xclaim) plus the recovery model."
+  - id: hedge_coin_recovery
+    role: sizing
+    rule: "When the recovery is paid in coin, short BTC or ETH perps for position size x expected recovery % to isolate the credit spread"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/summary?coin={coin}
+    field: mark_price
+    note: "The hedge notional comes from the off-API recovery model (recovery_model). funding_rate on the same response is the hourly carry the short pays or earns over a multi-year hold; Binance funding is current_rate on /api/v1/derivatives/binance/funding-rates."
+  - id: size_per_estate
+    role: sizing
+    rule: "No more than 10% of the book per estate"
+    runnable: true
+    input: position
+  - id: stagger_entries
+    role: sizing
+    rule: "Stagger purchase dates to dollar-cost into the discount rather than catch a falling claim price"
+    runnable: partial
+    input: position
+    note: "The page gives no number of tranches or spacing, so the schedule is the desk's call."
+  - id: hold_to_distribution
+    role: exit
+    rule: "Hold each claim to the plan effective date and distribution waterfall"
+    runnable: true
+    input: position
+  - id: sell_up_curve
+    role: exit
+    rule: "As the estate confirms a plan, optionally sell the rerated claim to less patient secondary buyers instead of waiting for cash"
+    runnable: false
+    note: "Needs claim bids from the brokers and plan-confirmation dates from the docket; neither is served, and when to sell is the desk's call."
+  - id: kill_irr_10
+    role: stop
+    rule: "If an estate's IRR drops below 10% on plan delays, mark it down and consider a secondary sale"
+    runnable: false
+    note: "Needs the recovery model and claim quotes, both off-API."
+  - id: kill_drawdown_30
+    role: stop
+    rule: "Review the thesis on every estate when the claim portfolio's mark-to-market drawdown exceeds 30%"
+    runnable: true
+    input: position
+    note: "Marks come from the desk's own broker quotes."
+  - id: kill_timeline_2y
+    role: stop
+    rule: "Redo the recovery math when new fraud or litigation extends the timeline more than 2 years beyond the model"
+    runnable: false
+    note: "A legal judgement from the docket; not served."
 ---
 
 # Crypto Bankruptcy Claim Arbitrage

@@ -19,6 +19,111 @@ capacity_usd: 2000000
 crowding_risk: medium
 breakeven_cost_bps: 50
 related: ["[[bittensor]]", "[[dtao]]", "[[bittensor-subnets]]", "[[alpha-token-arbitrage]]", "[[tao-validator-delegation]]", "[[momentum]]"]
+gates:
+  - id: subnet_depth_500tao
+    role: universe
+    rule: "Active subnets whose alpha bonding-curve pool holds more than about 500 TAO"
+    runnable: false
+    note: "No Bittensor subnet, alpha-pool or Subtensor data is served. Needs taostats, dtao.gg or a Subtensor RPC."
+  - id: emission_momentum
+    role: entry
+    rule: "Emission-share momentum = share now / share 7 days ago - 1 (composite weight 0.40)"
+    runnable: false
+    note: "Subnet emission shares are not served (taostats or Subtensor)."
+  - id: alpha_price_momentum
+    role: entry
+    rule: "Alpha-price momentum = alpha price now / alpha price 7 days ago - 1 (weight 0.20)"
+    runnable: false
+    note: "Subnet alpha-token prices are not served; only TAO itself is."
+  - id: revenue_growth
+    role: entry
+    rule: "Off-chain revenue or usage growth for subnets that report it (weight 0.15)"
+    runnable: false
+    note: "Subnet revenue comes from each subnet's own dashboards; not served."
+  - id: validator_dispersion
+    role: entry
+    rule: "Number of active validators submitting distinct weight vectors (weight 0.15)"
+    runnable: false
+    note: "Validator weight data is a Subtensor read; not served."
+  - id: github_activity
+    role: entry
+    rule: "Weekly or 30-day commit count on the subnet repo (weight 0.10)"
+    runnable: false
+    note: "Not served; needs the GitHub API."
+  - id: top_decile_long
+    role: entry
+    rule: "Rank subnets on the weighted composite and stake into the top decile; unstake or avoid the bottom decile"
+    runnable: false
+    input: derived
+    inputs: [emission_momentum, alpha_price_momentum, revenue_growth, validator_dispersion, github_activity]
+    note: "Every component is unserved."
+  - id: weekly_rebalance
+    role: entry
+    rule: "Rebalance weekly by default"
+    runnable: true
+    input: position
+  - id: event_override
+    role: entry
+    rule: "Allow intraday overweights on subnet owner announcements, major commits or integration wins"
+    runnable: false
+    note: "Subnet-level announcements are not served; a news judgement."
+  - id: position_caps
+    role: sizing
+    rule: "At most 15% of the alpha allocation per subnet; the strategy is 5-15% of crypto NAV"
+    runnable: true
+    input: position
+  - id: tao_beta_hedge
+    role: sizing
+    rule: "Hedge the alpha book's TAO exposure with a TAO perp short during rebalances and leg gaps"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/funding-rates?coin=TAO&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol=TAO&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "From the AI-agent workflow. Hourly funding is the hedge's carry; the TAO exposure comes from the position record and the TAO mark from assets[].mark_price on /hyperliquid/open-interest."
+  - id: regime_cut_gross
+    role: filter
+    rule: "Cut gross rotation exposure when strong_trend_bear or vol_spike becomes likely: alpha tokens do not survive a TAO cascade unhedged"
+    runnable: partial
+    endpoint: /api/v1/quant/coins/TAO
+    field: regime.label
+    replay: /api/v1/quant/history?scope=TAO&start={start}
+    replay_field: entries[].regime_label
+    note: "From the AI-agent workflow, which names /quant/market for the trigger and /quant/coins/TAO for the TAO-specific read; it sets no probability cutoff or cut size."
+  - id: exit_rank_bottom_half
+    role: exit
+    rule: "Exit when the subnet's composite rank falls out of the top half"
+    runnable: false
+    input: derived
+    inputs: [top_decile_long]
+    note: "The composite is unserved."
+  - id: exit_thin_curve
+    role: exit
+    rule: "Exit when bonding-curve depth drops below 2x the intended exit size"
+    runnable: false
+    note: "Alpha-pool depth is not served."
+  - id: exit_red_flags
+    role: exit
+    rule: "Exit on red flags: validator collusion signals, subnet owner wallet dumping, GitHub abandonment"
+    runnable: false
+    note: "Subtensor and GitHub reads, plus a judgement; none is served."
+  - id: kill_vs_benchmark
+    role: stop
+    rule: "Kill switch: rolling 90-day return below -30% against an equal-weighted alpha benchmark"
+    runnable: partial
+    input: position
+    note: "The strategy's own return is in the position record; the equal-weighted alpha benchmark needs alpha prices, which are not served."
+  - id: kill_slippage_200bp
+    role: stop
+    rule: "Kill switch: average realised slippage per rebalance above 200 bp"
+    runnable: true
+    input: position
+  - id: kill_protocol_change
+    role: stop
+    rule: "Kill switch: a governance change that invalidates the dTAO mechanism"
+    runnable: false
+    note: "A judgement on Opentensor governance; not served."
 ---
 
 # Bittensor Subnet Rotation

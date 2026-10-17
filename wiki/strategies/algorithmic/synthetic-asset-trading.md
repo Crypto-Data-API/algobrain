@@ -38,6 +38,90 @@ kill_criteria: |
   - protocol pauses markets or a fee-parameter change inverts the edge
 
 related: ["[[synthetix]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[basis-trading]]", "[[hyperliquid]]", "[[defi-yield-farming]]", "[[cross-exchange-arbitrage]]", "[[delta-neutral]]", "[[slippage]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: skew_funding_edge
+    role: entry
+    rule: "The synth venue's annualised skew-funding on its underweight side beats the CEX funding on the same underlying by at least 10% APY"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Only the CEX benchmark leg is served: Hyperliquid hourly funding, annualised x 24 x 365 (Binance on /derivatives/binance/funding-rates). The Synthetix or GMX skew-funding rate is read from the protocol's contracts. Hourly Hyperliquid prints go back to 2024."
+  - id: take_paid_side
+    role: entry
+    rule: "Take the side the venue is paying (its underweight skew side) and hedge equal notional the other way on a CEX or Hyperliquid perp"
+    runnable: false
+    note: "The synth venue's skew is not served; it comes from the protocol's contracts or SDK."
+  - id: oracle_aligned
+    role: filter
+    rule: "Synth oracle price within 25 bps of CEX spot at entry"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "CEX spot is served (Binance). The synth venue's own oracle read (Chainlink or Pyth as the venue consumes it) is not; Hyperliquid's oracle_price on /hyperliquid/summary is a different oracle."
+  - id: oi_headroom
+    role: filter
+    rule: "The synth market is not at its OI cap and LP utilisation on your side is below its penalty band (pseudocode: cap used under 90%, utilisation under 85%)"
+    runnable: false
+    note: "Synth-venue OI caps and LP utilisation are not served."
+  - id: collateral_peg_entry
+    role: filter
+    rule: "Settlement or collateral stablecoin within 30 bps of peg at entry"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol=USDCUSDT
+    field: price
+    note: "USDC against USDT is a live relative peg read; sUSD and other venue settlement tokens are not served, and /security/events?type=depeg lists depegs from the last 10 days."
+  - id: funding_compression_exit
+    role: exit
+    rule: "Close both legs when the skew-funding advantage over CEX funding falls below 3% APY"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    note: "Same split as skew_funding_edge: the CEX leg is served, the synth leg is not."
+  - id: skew_flip_exit
+    role: exit
+    rule: "Close when the venue's skew flips and it starts charging your side"
+    runnable: false
+    note: "The synth venue's skew is not served."
+  - id: oracle_divergence_kill
+    role: stop
+    rule: "Flatten when the synth oracle and CEX spot diverge by more than 100 bps for more than 15 minutes"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "Only the CEX side is served; poll it against the venue's oracle read every minute or so to time the 15 minutes."
+  - id: collateral_depeg_kill
+    role: stop
+    rule: "Flatten when the collateral stablecoin depegs more than 30 bps for more than 1 hour"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=depeg
+    field: items[].deviation_bps
+    note: "Depeg events from the last 10 days, plus the live USDCUSDT price; sUSD and other settlement tokens may not be covered."
+  - id: venue_pause_kill
+    role: stop
+    rule: "Exit immediately when an LP or debt-pool utilisation cap forces one-sided closure, or the protocol pauses the market or inverts the edge with a parameter change"
+    runnable: false
+    note: "Synth-venue pool state and governance changes are not served."
+  - id: leg_sizing
+    role: sizing
+    rule: "1x notional per leg, delta-neutral, at most 25% of the sleeve on any one synth market; re-hedge when delta drifts more than 2%"
+    runnable: true
+    input: position
+  - id: oi_fraction_cap
+    role: sizing
+    rule: "Entry notional at most 5-10% of the synth market's open interest (8% in the pseudocode)"
+    runnable: false
+    note: "Synth-venue open interest is not served; Hyperliquid and Binance OI are a different market."
+  - id: regime_gate
+    role: filter
+    rule: "Skew-funding richness clusters in trending states; vol_spike raises oracle-lag and depeg tails at the same time"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow, which gives no rule beyond the observation; standing down in vol_spike is one reading."
 ---
 
 # Synthetic Asset Trading

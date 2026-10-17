@@ -37,6 +37,128 @@ kill_criteria: |
   - realised open/reopen slippage consistently exceeds planned per-trade risk
 
 related: ["[[breakout-trading]]", "[[opening-range-breakout]]", "[[fair-value-gaps]]", "[[support-and-resistance]]", "[[vwap]]", "[[volume]]", "[[trend]]", "[[mean-reversion]]", "[[atr]]", "[[liquidation]]", "[[funding-rate]]", "[[open-interest]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[cryptodataapi]]"]
+gates:
+  - id: gap_size_half_pct
+    role: entry
+    rule: "Trade only gaps of at least 0.5%: (reopen or current price - prior reference) / prior reference, the reference being the CME Friday close or the pre-weekend level"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=72
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1h&start={start}&end={end}
+    replay_field: klines[].c
+    note: "No CME futures prices are served. The proxy is the perp (or Binance spot via /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h) at the CME close (Friday about 22:00 UTC) against the CME reopen (Sunday about 23:00 UTC); CME's basis to spot means the real gap edge differs."
+  - id: no_hard_catalyst
+    role: filter
+    rule: "Fade only with no hard catalyst behind the gap (hack, depeg, ETF or macro headline); a real catalyst is the gap-and-go case"
+    runnable: partial
+    endpoint: /api/v1/news/market-moving?symbol={coin}&hours=72
+    field: events[].category
+    note: "Scored headlines with category (hack, depeg, etf_approval, macro and more) and impact_score. Whether an item is the gap's cause is a judgement; /api/v1/security/events adds hacks and depegs."
+  - id: spot_volume_z
+    role: filter
+    rule: "Gap volume: z-score above 1.5 against 30 days means strong volume (continuation); unremarkable volume suits the fade"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=720
+    field: candles[].volume
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1h&start={start}&end={end}
+    replay_field: klines[].v
+    note: "The pseudocode does not say which bars make up the gap's volume or the 30-day baseline. Hyperliquid perp volume here; the page means spot, served hourly for Binance on /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=720."
+  - id: oi_building_z
+    role: filter
+    rule: "OI change z-score above 1.0 in the gap's direction means fresh positioning (follow); falling OI means a deleveraging artefact (fade)"
+    runnable: partial
+    endpoint: /api/v1/liquidity/oi-divergence
+    field: rows[].oi_change_4h_pct
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].oi_change_pct
+    note: "Hyperliquid OI changes (1h, 4h and 24h on the coin's row). The z-score's window is not defined on the page. Replay OI starts 2026-05-09."
+  - id: gap_location
+    role: filter
+    rule: "Fade a gap that runs into prior support or resistance; follow one that breaks out through major structure"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: sr.resistance[].price
+    note: "Served levels are algorithmic (sr.support beside it). 'Major structure' is a chart judgement."
+  - id: funding_veto
+    role: filter
+    rule: "Do not fade a gap that funding is actively pushing (funding extreme in the gap's direction)"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    note: "The page gives no threshold for 'extreme'."
+  - id: fade_entry_stall
+    role: entry
+    rule: "Fade once momentum stalls: failure to extend, a rejection candle, or a loss of VWAP"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=240
+    field: data[].vwap
+    note: "VWAP from 1-minute buckets (weight vwap by buy_notional + sell_notional from the anchor you choose). 'Failure to extend' and the rejection candle are chart judgements; the page sets no VWAP anchor."
+  - id: fade_target_fill
+    role: exit
+    rule: "Target the gap-fill level (full fill) or its midpoint (partial); scale out"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: fade_stop
+    role: stop
+    rule: "Stop beyond the gap's far extreme with a % or ATR buffer for wick noise"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=40&atr=14
+    field: candles[].atr
+    note: "The page gives no % or ATR multiple."
+  - id: go_opening_range_break
+    role: entry
+    rule: "Gap-and-go: enter on a break of the post-gap opening range (the first 15-60 minutes of US-hours trade) or a hold beyond the gap level and VWAP"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&start={start}&end={end}
+    field: candles[].high
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}&end={end}
+    replay_field: klines[].h
+    note: "The range length (15-60 minutes) and the US-hours anchor (13:30 or 14:30 UTC with daylight time) are the desk's call. Hyperliquid serves only a few days of 1m bars live; the archive starts 2026-05-09."
+  - id: go_stop
+    role: stop
+    rule: "Gap-and-go stop: back inside the gap, or below VWAP or the opening range, whichever defines invalidation"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: go_trail
+    role: exit
+    rule: "Trail gap-and-go winners with ATR or prior swing structure"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=40&atr=14
+    field: candles[].atr
+    note: "No ATR multiple or swing definition is given."
+  - id: weekend_depth_guard
+    role: filter
+    rule: "Skip when book depth within 25 bps is below a threshold; size to the depth, not the chart"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth/{coin}?minutes=60
+    field: history[].total_depth_25bps_usd
+    note: "Hyperliquid book. The page leaves the threshold unset."
+  - id: no_fade_in_vol_shock
+    role: filter
+    rule: "Never fade gaps in a vol_shock regime"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+  - id: range_regime_favours_fill
+    role: filter
+    rule: "A high range_low_vol probability favours the fill statistics"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: explain.label_posteriors.range_low_vol
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_2
+    note: "The page gives no threshold."
+  - id: risk_and_leverage_cap
+    role: sizing
+    rule: "Risk a fixed small percentage per trade, with the gap structure setting the stop distance; cap leverage hard"
+    runnable: true
+    input: position
 ---
 
 # Gap Trading (Crypto)

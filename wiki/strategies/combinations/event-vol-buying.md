@@ -33,6 +33,115 @@ kill_criteria: |
   - post-event realized move < 50% of entry ATM straddle breakeven for 4 of 5 consecutive events (events are not generating the realized vol needed to recover premium)
 
 related: ["[[funding-conditioned-vol-selling]]", "[[crypto-options-volatility-selling]]", "[[long-straddle]]", "[[straddle-strangle]]", "[[long-volatility-strategies]]", "[[long-vol-overlay]]", "[[event-driven-trading]]", "[[unlock-aware-momentum]]", "[[unlock-short-with-crowding-gate]]", "[[macro-event-pump]]", "[[volatility-trading]]", "[[deribit]]", "[[dvol]]", "[[implied-volatility]]", "[[variance-risk-premium]]", "[[bitcoin-halving]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: dated_catalyst_core
+    role: universe
+    rule: "Qualifying catalyst with a confirmed date: Bitcoin halving, SEC ETF decision deadline, major Ethereum upgrade, or a dated regulatory hearing or vote; never an undated event"
+    runnable: false
+    note: "None of these are on the served calendar (it carries unlocks, macro prints, depegs and mints). Sources: block-height countdown for halvings, SEC EDGAR for ETF deadlines, Ethereum core-developer calls for upgrades."
+  - id: dated_catalyst_unlock
+    role: universe
+    rule: "Qualifying catalyst: a token TGE or major unlock with a public vesting date"
+    runnable: partial
+    endpoint: /api/v1/supply/unlocks?window_days=35
+    field: items[].date
+    note: "Cliff unlocks with dates, sizes (pct_of_float) and days_until. The page sets no size for major, and BTC and ETH, the only coins with served implied vol, have no unlocks, so an unlock straddle needs that token's own options from Deribit. TGEs are not served."
+  - id: window_10_35d
+    role: entry
+    rule: "Enter only when the catalyst is at least 10 and at most 35 days away"
+    runnable: partial
+    input: derived
+    inputs: [dated_catalyst_unlock]
+    note: "Mechanical once a dated catalyst is known (days_until on the unlock row); only as runnable as the catalyst feed."
+  - id: iv_not_yet_moved
+    role: entry
+    rule: "IV has not moved for the event: ATM IV on the first expiry after the catalyst within 10% of the trailing 30-day average DVOL (skip above 1.10x)"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "Pick the first expiry at least 3 days after the catalyst (Deribit code in expiry, days in expiry_days) and compare its atm_iv with the mean of the last 30 items[].history[].dvol values. BTC and ETH, nearest 12 expiries, Pro Plus."
+  - id: iv_minus_rv_floor
+    role: entry
+    rule: "ATM IV minus 30-day realized vol at or above -5 vol points"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].realized_30
+    note: "Subtract items[].realized_30 (Garman-Klass) from the catalyst expiry's atm_iv. The page also allows close-to-close or Yang-Zhang RV from 60 daily klines."
+  - id: no_structural_shock
+    role: filter
+    rule: "No entry while the regime is Structural Shock"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Structural Shock is regime structural_shock_crisis. History starts 2026-08-07."
+  - id: atm_straddle_expiry
+    role: entry
+    rule: "Buy the Deribit ATM straddle on the expiry immediately after the catalyst (at least 3 days after it); a 10-delta strangle on the same expiry for wide-outcome events such as regulatory votes"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry
+    note: "The expiry is selectable from the served list. No option prices, strikes or per-strike delta are served, so the straddle and strangle themselves are priced on Deribit."
+  - id: no_chasing_iv
+    role: sizing
+    rule: "Never size into rising IV: if IV starts rising during the entry window, enter the planned notional or skip, never chase"
+    runnable: partial
+    input: position
+    note: "The page does not define how much of a rise counts, so the cut is the desk's call."
+  - id: iv_expansion_exit_20
+    role: exit
+    rule: "Close when ATM IV on the catalyst expiry has risen 20 or more vol points from entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "Track the same expiry code captured at entry."
+  - id: post_event_48h
+    role: exit
+    rule: "If IV did not spike before the event, hold through it and close no later than 48 hours after the catalyst"
+    runnable: true
+    input: position
+  - id: expiry_minus_3d
+    role: exit
+    rule: "Never hold within 3 days of expiry"
+    runnable: true
+    input: position
+  - id: premium_stop_40pct
+    role: stop
+    rule: "Stop: close when the position is worth 40% or less of the premium paid"
+    runnable: false
+    note: "No option prices are served; the straddle's mark comes from Deribit."
+  - id: premium_sizing
+    role: sizing
+    rule: "1-2% of the portfolio in premium per event, at most 2 concurrent events (4% in total)"
+    runnable: true
+    input: position
+  - id: kill_drawdown_35
+    role: stop
+    rule: "Pause: strategy drawdown above 35%"
+    runnable: true
+    input: position
+  - id: kill_rolling_4_events
+    role: stop
+    rule: "Pause: rolling 4-event realized P&L negative on 3 consecutive events with more than 5 vol points of IV premium paid each"
+    runnable: true
+    input: position
+  - id: kill_no_iv_bid
+    role: stop
+    rule: "Pause: average IV expansion from entry to peak below 3 vol points across 5 consecutive events"
+    runnable: true
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+  - id: kill_small_moves
+    role: stop
+    rule: "Pause: post-event realized move below 50% of the entry straddle breakeven on 4 of 5 consecutive events"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "Breakeven is the straddle premium as a percent of spot, from the entry record."
 ---
 
 # Event Vol Buying

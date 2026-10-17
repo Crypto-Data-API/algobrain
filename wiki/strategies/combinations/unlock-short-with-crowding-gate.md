@@ -33,6 +33,145 @@ kill_criteria: |
   - 3 consecutive unlock shorts produce negative net P&L after costs (edge priced in at entry)
 
 related: ["[[token-unlock-supply-event]]", "[[token-unlock-arbitrage]]", "[[funding-rate-arbitrage]]", "[[crowded-long-funding-fade]]", "[[crowded-short-funding-fade]]", "[[funding-filtered-momentum]]", "[[funding-rate]]", "[[open-interest]]", "[[perpetual-futures]]", "[[token-unlocks]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: unlock_size
+    role: universe
+    rule: "Cliff unlock of at least 5% of circulating supply, or at least $5M of value at the current price"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={coin}&window_days=35
+    field: items[].pct_of_float
+    replay: /api/v1/backtesting/snapshots?data_type=token_unlocks&start={start}&limit=100
+    replay_field: snapshots[].data[].next_unlock.pct_of_float
+    note: "pct_of_float at least 0.05, or usd on the same row at least 5,000,000. The rules say either; the pseudocode requires both. A cliff calendar (DefiLlama emissions coverage): absence is not proof of no unlock. Replay from 2026-08-20."
+  - id: unlock_type
+    role: universe
+    rule: "Team/founder or VC/seed cliff vesting, preferably the first 1-3 such events; linear monthly emissions are lower edge"
+    runnable: partial
+    endpoint: /api/v1/supply/unlocks?symbol={coin}&window_days=35
+    field: items[].categories
+    note: "categories carries DefiLlama's labels; insiders covers team and investors together, so team versus VC is not split. Whether this is the token's first, second or third cliff is not served. Linear emissions never appear (cliffs only)."
+  - id: entry_window
+    role: entry
+    rule: "Enter 5-14 days before the cliff date"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={coin}&window_days=35
+    field: items[].days_until
+    replay: /api/v1/backtesting/snapshots?data_type=token_unlocks&start={start}&limit=100
+    replay_field: snapshots[].data[].next_unlock.days_until
+  - id: perp_oi_depth
+    role: universe
+    rule: "A liquid perp with open interest of at least 2x the intended short notional"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+    note: "Hyperliquid, the page's preferred venue."
+  - id: funding_gate
+    role: filter
+    rule: "Crowding gate 1: current funding at or above -0.03% per 8h (current hourly rate x 8 at least -0.0003); more negative means shorts are crowded, skip"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: oi_gate_7d
+    role: filter
+    rule: "Crowding gate 2: open interest up no more than 20% over the past 7 days"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_close
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].oi_close
+    note: "start = 8 days ago; compare the last closed day's oi_close with the one 7 bars earlier (the forming day is not served). Bars from 2026-03-30."
+  - id: sentiment_gate
+    role: filter
+    rule: "Crowding gate 3 (optional): the unlock has not been the top trending topic on Crypto Twitter over the past 48h"
+    runnable: partial
+    endpoint: /api/v1/news/coin/{symbol}?hours=48
+    field: news_pressure
+    note: "No social-volume or trending-topic data is served. news_pressure is news-article flow for the coin over 48 hours, a loose proxy; what level counts as extreme is the desk's call."
+  - id: macro_regime
+    role: filter
+    rule: "Crowding gate 4: the long-term regime is not Established Bear or Structural Shock"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Skip when regime is established_bear or structural_shock_crisis. History from 2026-08-07."
+  - id: gate_pass
+    role: entry
+    rule: "Enter only when funding_gate, oi_gate_7d and macro_regime all pass (sentiment_gate optional)"
+    runnable: true
+    input: derived
+    inputs: [funding_gate, oi_gate_7d, macro_regime]
+  - id: entry_bar
+    role: entry
+    rule: "Short the perp on the close of the 4h bar after the crowding gate is confirmed"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=3
+    field: candles[].close
+    note: "Act on the first closed 4h bar after gate_pass; forming_bar_timestamp names the bar still open."
+  - id: atr_size
+    role: sizing
+    rule: "Risk 2% of sleeve per trade: notional = (0.02 x sleeve) / (ATR(14) on 4h / price), capped at 5% of sleeve"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30&atr=14
+    field: candles[].atr
+  - id: hard_stop
+    role: stop
+    rule: "Close 100% if price rallies more than 15% above entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: tp1
+    role: exit
+    rule: "Close 50% of the position at -10% from entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: tp2
+    role: exit
+    rule: "Close the remaining 50% at -20% from entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: funding_neutral_exit
+    role: exit
+    rule: "Alternatively close the remainder when funding starts returning to neutral as short-side pressure fades"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    note: "The page gives no level or window for returning to neutral, so the trigger is the desk's call."
+  - id: funding_crowd_trim
+    role: exit
+    rule: "Exit half the position if funding falls below -0.05% per 8h after entry (current hourly rate x 8 below -0.0005)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: time_stop_post_cliff
+    role: stop
+    rule: "If the cliff has passed and price has not fallen more than 5% from entry, close the rest within 3 days after the cliff"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "Record the cliff date at entry: the calendar drops an unlock once it passes."
+  - id: max_concurrent
+    role: sizing
+    rule: "At most 2 concurrent unlock trades, on different tokens, avoiding correlated pairs"
+    runnable: partial
+    input: position
+    note: "The count is mechanical; the page does not define a correlated pair, so that check is the desk's call."
+  - id: sleeve_allocation
+    role: sizing
+    rule: "The event-driven sleeve is 10-15% of the overall book"
+    runnable: true
+    input: position
 ---
 
 # Unlock Short with Crowding Gate

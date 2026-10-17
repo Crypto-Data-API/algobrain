@@ -38,6 +38,108 @@ kill_criteria: |
   - leg-fill success rate < 80% over any rolling 500 attempts
 
 related: ["[[triangular-arbitrage]]", "[[cross-chain-arbitrage]]", "[[funding-rate-arbitrage]]", "[[cash-and-carry]]", "[[flash-loan-arbitrage]]", "[[latency-arbitrage]]", "[[stablecoin-pair-arbitrage]]", "[[hl-vs-cex-funding-divergence]]", "[[multi-venue-capital-management]]", "[[slippage]]", "[[order-book]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[book-statistical-arbitrage-pole]]", "[[cryptodataapi]]"]
+gates:
+  - id: two_venue_quotes
+    role: entry
+    rule: "Quote the same token's best bid and ask on both venues (CEX vs CEX, or CEX vs a DEX pool)"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "One leg only: Binance spot last price, not a bid and ask. A second CEX (Coinbase, OKX) needs its own feed. For a CEX-DEX pair the DEX leg is top_pools[].price_usd on /api/v1/dex/token/{chain}/{address} (a pool price cached up to 5 minutes, not a bid and ask). Hyperliquid's bids[] and asks[] on /api/v1/hyperliquid/l2-book are a perp book, so a Binance-to-Hyperliquid gap includes the perp premium."
+  - id: net_spread_floor
+    role: entry
+    rule: "net_spread_bps = gross spread - both taker fees - expected slippage - amortised gas or withdrawal cost; fire only at 15 bps or more (majors) or 30 bps or more (thin or new pairs)"
+    runnable: false
+    note: "Needs both venues' bids and asks (two_venue_quotes serves one) plus each venue's fee tier and withdrawal fees. Hyperliquid's own fee schedule is fees on /api/v1/hyperliquid/meta; other venues' fees and gas are not served."
+  - id: depth_3x
+    role: filter
+    rule: "Both venues show at least 3x the intended notional within the target band (order book or pool reserves); size each ticket to the thinner venue's 3x-depth capacity"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth
+    field: coins[].depth_usd.bid
+    note: "Hyperliquid perp books only, at 10/25/50/100 bps from the top 20 levels (levels_truncated says when 20 levels did not reach the band). Binance and other CEX spot books are not served. A DEX pool's liquidity is top_pools[].reserve_usd on /api/v1/dex/token/{chain}/{address}, a total rather than depth within a band."
+  - id: quote_freshness
+    role: filter
+    rule: "Both quotes under 500 ms old, and the gap seen on at least two consecutive snapshots"
+    runnable: false
+    note: "Our quotes are cached REST snapshots, not sub-second streams. Needs the venues' native WebSocket books."
+  - id: inventory_ready
+    role: filter
+    rule: "Buy venue holds enough quote currency and sell venue enough base asset for the ticket; never rely on an in-flight transfer"
+    runnable: true
+    input: position
+  - id: venue_health
+    role: filter
+    rule: "No withdrawal halt or oracle/mark anomaly on either venue"
+    runnable: partial
+    endpoint: /api/v1/security/regime/score
+    field: flow_subscore
+    note: "flow_subscore is the worst absolute net exchange-flow z-score across majors and stables, a market-wide withdrawal-flight read; per-exchange 24h flows are per_exchange_24h on /api/v1/on-chain/exchange-flows/{symbol}. Halts come from the venues' status pages."
+  - id: dex_token_safety
+    role: filter
+    rule: "CEX-DEX legs: no honeypot, blacklist or transfer-tax flag on the token contract"
+    runnable: true
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: risk_flags.is_honeypot
+    note: "address is the DEX leg's token contract, the bot's own or pools[].base_token.address on /api/v1/dex/trending?chain={chain}. Also require risk_flags.is_blacklistable false and taxes.buy_tax_pct and taxes.sell_tax_pct at 0 on the same response."
+  - id: thin_book_floor
+    role: filter
+    rule: "Widen the entry floor when books thin, since stale quotes turn into phantom arbs"
+    runnable: partial
+    endpoint: /api/v1/liquidity/regime/score
+    field: composite_score
+    note: "From the page's AI-agent workflow, which gives no widening amount. The score is built from Hyperliquid books; per-coin states (depth_withdrawal, post_cascade_impaired) are coins[].regime on /api/v1/liquidity/regime."
+  - id: leg_risk_unwind
+    role: exit
+    rule: "If one leg fills and the other misses within 2 seconds, market-flatten the filled leg"
+    runnable: true
+    input: position
+  - id: inventory_rebalance
+    role: exit
+    rule: "Schedule a rebalancing transfer when inventory skew across venues exceeds about 40%"
+    runnable: true
+    input: position
+  - id: venue_cap
+    role: sizing
+    rule: "Inventory on any single exchange at most 20-25% of the sleeve (0.25 in the pseudocode)"
+    runnable: true
+    input: position
+  - id: cash_buffer
+    role: sizing
+    rule: "Keep a working cash buffer for leg-risk flattening and withdrawal fees"
+    runnable: partial
+    input: position
+    note: "The page gives no buffer size."
+  - id: kill_median_spread
+    role: stop
+    rule: "Pause when the median net spread on the monitored pairs has been below breakeven for 30 consecutive days"
+    runnable: false
+    input: derived
+    inputs: [net_spread_floor]
+    note: "Only as runnable as net_spread_floor."
+  - id: kill_drawdown_10
+    role: stop
+    rule: "Pause on a sleeve drawdown above 10% in any rolling 30-day window"
+    runnable: true
+    input: position
+  - id: kill_fill_rate
+    role: stop
+    rule: "Pause when the leg-fill success rate is below 80% over any rolling 500 attempts"
+    runnable: true
+    input: position
+  - id: kill_counterparty
+    role: stop
+    rule: "Flatten and withdraw on a counterparty flag (withdrawal halt, solvency concern, unscheduled maintenance over 4 hours) at any venue holding more than 20% of inventory"
+    runnable: partial
+    endpoint: /api/v1/security/regime/score
+    field: flow_subscore
+    note: "Same market-wide withdrawal-flight proxy as venue_health; venue-specific halts and maintenance come from the venues' status pages."
+  - id: kill_honeypot_losses
+    role: stop
+    rule: "Pause the CEX-DEX book after repeated honeypot or adverse-token losses and tighten the security gate"
+    runnable: partial
+    input: position
+    note: "The page does not say how many losses count as repeated."
 ---
 
 # Cross-Exchange Arbitrage

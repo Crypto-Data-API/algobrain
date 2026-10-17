@@ -29,6 +29,108 @@ breakeven_cost_bps: 2
 decay_evidence: "Majors (BTC/ETH) on Binance/Bybit are saturated by professional MM firms (Wintermute, GSR, Jump, Amber) and exchange MM programs; retail cannot win the latency/rebate game there. Edge has migrated to thin/newly-listed alt perps where spreads are wide but adverse selection and inventory risk are far higher."
 
 related: ["[[hyperliquid-market-making]]", "[[market-making]]", "[[adverse-selection]]", "[[avellaneda-stoikov]]", "[[scalping]]", "[[order-flow-scalping]]", "[[vwap-trading]]", "[[statistical-arbitrage]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[vpin]]", "[[order-flow]]", "[[binance]]", "[[bybit]]", "[[inventory-risk]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[book-trading-and-exchanges]]", "[[book-algorithmic-and-high-frequency-trading]]", "[[book-high-frequency-trading-aldridge]]", "[[cryptodataapi]]"]
+gates:
+  - id: symbol_selection
+    role: universe
+    rule: "Quote symbols where the spread pays for the adverse selection; treat majors and thin alts as separate risk regimes with their own q_max"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth
+    field: coins[].spread_bps
+    note: "Spread and depth at 10/25/50/100 bps are served for the top-25 Hyperliquid perps, sampled about every 2 minutes; Binance and Bybit books are not served. Adverse selection needs your own fill markouts, so the cut is the desk's call."
+  - id: sigma_1m
+    role: entry
+    rule: "Short-horizon realised volatility from 1-minute bars, scaled to the per-second sigma that sets skew and the risk half-spread"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1m&limit=1000
+    field: klines[].close
+    replay: /api/v1/backtesting/klines?symbol={symbol}USDT&exchange=binance&interval=1m&start={start}
+    replay_field: klines[].c
+    note: "Binance spot 1-minute closes; per-second sigma = per-minute sigma / sqrt(60). Replay 1m bars from 2026-05-09."
+  - id: quote_engine
+    role: entry
+    rule: "Quote bid = r - half-spread and ask = r + half-spread around the Avellaneda-Stoikov reservation price r = s - q x gamma x sigma^2 x tau, snapped to tick; re-quote on a mid move over half a tick, an inventory change or a toxicity trigger"
+    runnable: false
+    note: "Needs a live tick-level Binance or Bybit order book and gateway. /hyperliquid/l2-book is a request-time snapshot and /liquidity/depth samples every ~2 minutes, far too slow for quoting."
+  - id: fee_floor
+    role: entry
+    rule: "Half-spread is at least min_half_spread, which covers round-trip maker fees plus target edge (about 1 bp on a rebate tier)"
+    runnable: true
+    input: position
+    note: "The fee tier is the account's own."
+  - id: toxicity_widen
+    role: entry
+    rule: "Triple the half-spread when fill markout falls below -0.8 bps"
+    runnable: false
+    note: "Markout needs your own fills against the mid 1, 5 and 30 seconds later; no sub-minute mid is served."
+  - id: funding_aware_skew
+    role: entry
+    rule: "When inventory sits against funding (long into positive or short into negative funding), push the reservation price toward flat by 1.5 x funding x mid before each funding stamp"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=1
+    field: rates[].funding_rate
+    note: "Binance settles every 8 hours; Bybit is not served."
+  - id: soft_cap
+    role: exit
+    rule: "Above half of q_max, widen the far side and tighten the near side to speed mean reversion"
+    runnable: true
+    input: position
+  - id: hard_cap
+    role: exit
+    rule: "At q_max (3 BTC in the example), quote one side only; if inventory stays over the cap for more than N seconds, cross the spread to flatten"
+    runnable: partial
+    input: position
+    note: "N is not given (the kill criteria pause after 10 minutes over cap more than 3 times a session)."
+  - id: clip_sizing
+    role: sizing
+    rule: "Quote small clips (0.05-0.3 BTC) across 3-5 levels, with total resting notional a small fraction of top-of-book depth"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth
+    field: coins[].total_depth_25bps_usd
+    note: "Depth here is Hyperliquid, not Binance or Bybit, and the page does not quantify a small fraction."
+  - id: margin_buffer
+    role: sizing
+    rule: "Size margin to carry q_max with a large buffer; never run the book at high leverage; separate books and q_max per symbol"
+    runnable: true
+    input: position
+  - id: liquidity_regime_pull
+    role: filter
+    rule: "Widen quotes or pull when the liquidity regime says the book cannot absorb a shock"
+    runnable: partial
+    endpoint: /api/v1/liquidity/regime
+    field: coins[].regime
+    note: "From the agent workflow. Per-coin regimes (deep_book, depth_withdrawal, post_cascade_impaired and so on) cover the top-25 Hyperliquid perps; which regimes trigger a pull, and how much to widen, are not stated."
+  - id: daily_loss_limit
+    role: stop
+    rule: "Hard daily P&L stop: flatten and stand down on breach"
+    runnable: partial
+    input: position
+    note: "The page gives no figure for the daily stop."
+  - id: markout_kill
+    role: stop
+    rule: "Stop quoting a symbol when the rolling 30-minute markout on maker fills is below -0.5 bps"
+    runnable: false
+    note: "Needs per-fill markouts at second resolution, which no endpoint serves."
+  - id: stuck_inventory_kill
+    role: stop
+    rule: "Flatten and stand down if inventory sits above q_max for more than 10 minutes more than 3 times in a session"
+    runnable: true
+    input: position
+  - id: drawdown_kill
+    role: stop
+    rule: "Pause the book on a sleeve drawdown above 12% in any rolling 7-day window"
+    runnable: true
+    input: position
+  - id: funding_drag_kill
+    role: sizing
+    rule: "Cut q_max toward zero when funding drag exceeds spread income over a rolling 24h"
+    runnable: true
+    input: position
+    note: "Both sides come from the book's own P&L; settled funding prints are in rates[] on /derivatives/binance/funding-rates."
+  - id: exchange_halt_kill
+    role: stop
+    rule: "Flatten everything and stop immediately on an exchange halt or degraded matching"
+    runnable: false
+    note: "Exchange status is not served; it comes from the venue's own status feed."
 ---
 
 # Market Making Strategy (CEX)

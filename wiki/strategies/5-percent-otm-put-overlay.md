@@ -33,6 +33,143 @@ kill_criteria: |
   - annual hedging cost exceeds pre-set NAV % budget for 2 consecutive years with no monetisation
   - combined book + overlay risk-adjusted return materially worse than unhedged over 12+ months
   - DVOL structurally elevated (> 85th pct) for > 60 days — float strike or pause
+gates:
+  - id: btc_eth_puts_only
+    role: universe
+    rule: "Hedge with Deribit BTC and ETH puts only; alt-heavy books are BTC-weighted first and hedged with BTC/ETH puts because alt options are thin"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "The coins with Deribit implied vol served are exactly BTC and ETH. ETH needs Pro; Free returns BTC only."
+  - id: book_notional
+    role: sizing
+    rule: "Long-book notional = long BTC/ETH exposure plus alt exposure converted to BTC-weighted notional"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=90
+    field: candles[].close
+    note: "Positions come from the book. The page does not say how to BTC-weight an alt; one reading is each alt's beta to BTC from 90 daily closes of both coins, a window the desk must choose."
+  - id: strike_5pct_otm
+    role: entry
+    rule: "Buy the nearest listed put strike about 5% below spot (at BTC 60,000 the 57,000 strike); 10-20% OTM for the equity-equivalent middle overlay"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "Spot x 0.95 is computable from the Binance spot price, but the Deribit strike grid is not served, so rounding to a listed strike needs Deribit's instrument list. Deribit settles on its own index, a few dollars off Binance spot."
+  - id: expiry_30_60_dte
+    role: entry
+    rule: "Pick an expiry 30-60 days out (45 in the pseudocode): no weeklies and nothing 90 or more days out"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "Take a row with expiry_days between 30 and 60 and trade its expiry code (27NOV26 style). The list holds the nearest 12 Deribit expiries; term_structure is Pro Plus and empty on lower tiers."
+  - id: contracts_coverage
+    role: sizing
+    rule: "Buy N puts where N x strike x contract size is 80-150% of the BTC-weighted long-book notional"
+    runnable: partial
+    input: derived
+    inputs: [book_notional, strike_5pct_otm]
+    note: "Only as runnable as book_notional and strike_5pct_otm. Where to sit in the 80-150% band is the desk's call (the example covers 100%)."
+  - id: layered_tranches
+    role: sizing
+    rule: "Split the overlay into 3-4 tranches rolled on different weeks, so no single expiry holds the whole hedge"
+    runnable: true
+    input: position
+  - id: premium_budget
+    role: sizing
+    rule: "Annualised premium (put mid x contract size x contracts x 365 / DTE) stays within the fixed annual NAV budget (3% in the pseudocode); above 1.5x the budget, float the strike deeper or trim"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "No option quotes are served. A Black-Scholes price from the expiry's ATM IV understates a 5% OTM put because it ignores put skew, so it is a floor on the cost; the real mid comes from Deribit. term_structure is Pro Plus."
+  - id: roll_dte
+    role: exit
+    rule: "Roll a tranche (sell it, buy a new 30-60 DTE put about 5% OTM) once it has 15-20 days or fewer to expiry"
+    runnable: true
+    input: position
+    note: "The page gives 15-20 days; pick one cut and keep it."
+  - id: roll_premium_decay
+    role: exit
+    rule: "Roll a tranche when its premium has decayed to 50% or less of the entry value, whichever roll trigger comes first"
+    runnable: false
+    input: position
+    note: "Needs the held put's current Deribit mark, and we serve no option chain or per-instrument quotes. Read it from Deribit's ticker for that instrument."
+  - id: funding_rich_entry
+    role: entry
+    rule: "Prefer buying or rolling tranches while perp funding is richly positive (call-skew euphoria cheapens downside puts)"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=9
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "The page gives no level for richly positive, so the cut is the desk's. Binance settles every 8h, so limit=9 is three days. Funding is the page's proxy for skew; put skew itself is not served. Replay rows are 5-minute samples of the live rate from 2026-05-09: average them, never sum."
+  - id: vol_calm_entry
+    role: entry
+    rule: "Buy or roll tranches while the market-wide vol-stress composite is calm"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/score
+    field: sentiment
+    replay: /api/v1/volatility/index/history?days=365
+    replay_field: points[].sentiment
+    note: "From the page's AI-agent workflow. calm is the 30-44 band of composite_score; dormant (below 30) is quieter still. The CVI history carries the same composite once a day."
+  - id: dvol_high_trim
+    role: sizing
+    rule: "When DVOL is structurally elevated (a high percentile of its own history), trim overlay size 25-50% or float the strike deeper OTM; restore when DVOL normalises"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Rank today's dvol in the served daily history (from 2026-04-20, Pro Plus). The page gives no percentile for the trim; its kill criteria use the 85th, a default the desk must confirm."
+  - id: iv_backwardation_trim
+    role: sizing
+    rule: "Treat an inverted implied-vol curve (near-dated ATM IV above longer-dated) as elevated DVOL: trim 25-50% or float the strike deeper"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "The page names no tenors. One reading compares the expiry nearest 30 days with the one nearest 90; skip expiries under a week, whose IV is noisy. Pro Plus."
+  - id: quant_vol_spike_trim
+    role: sizing
+    rule: "When the quant model's vol_spike probability is elevated, puts are rich: trim size 25-50% or float the strike deeper OTM"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: probabilities.regime_transitions.to_vol_spike
+    note: "From the page's AI-agent workflow. The page gives no cut for elevated. probabilities.volatility.high is the model's high-vol bucket instead, replayable as entries[].p_vol_high on /quant/history?scope=market."
+  - id: spot_5pct_below_entry
+    role: exit
+    rule: "Spot 5% or more below its level at entry: the put is at or in the money; decide whether to monetise or hold for further downside"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "The trigger is mechanical against the entry spot in the position record; monetise or hold is left to the desk. partial_monetise is the page's mechanical rule."
+  - id: partial_monetise
+    role: exit
+    rule: "Sell half the puts when spot is 7-12% below the entry strike; hold the rest as a continuing tail hedge"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "The page gives a 7-12% band, not one trigger, so where in it to sell is the desk's call."
+  - id: cascade_monetise
+    role: exit
+    rule: "Monetise without hesitation when the coin's volatility regime flips to vol_shock during a liquidation cascade"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow. vol_shock (7-day vol at or above the 90th percentile of its trailing 90 days) is served but computed from daily bars, so it lags an intraday cascade. The page names no liquidation level; alerts[].spike_ratio on /market-intelligence/squeeze-alerts is the served read, at a cut the desk sets."
+  - id: re_establish
+    role: entry
+    rule: "After a monetisation, re-buy puts about 5% OTM at the new lower spot to keep the overlay alive through a multi-leg cascade"
+    runnable: partial
+    input: derived
+    inputs: [strike_5pct_otm, partial_monetise]
+    note: "Only as runnable as strike_5pct_otm (the Deribit strike grid is not served)."
+  - id: dvol_85pct_60d_pause
+    role: filter
+    rule: "Kill rule: DVOL above its 85th percentile for more than 60 days: float the strike deeper or pause the overlay"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "The served daily DVOL history starts 2026-04-20 (Pro Plus), so the percentile is against that window rather than a multi-year one."
 ---
 
 # 5% OTM Put Overlay (Crypto)

@@ -40,6 +40,132 @@ kill_criteria: |
   - extreme-fear buys stop mean-reverting for 60+ days (bear-regime lock-in)
 
 related: ["[[momentum-rotation]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[fear-and-greed-index]]", "[[regime-detection]]", "[[mean-reversion]]", "[[liquidation-cascade-fade]]", "[[exchange-netflow]]", "[[behavioral-finance]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: fear_greed_input
+    role: entry
+    rule: "Composite input, 30% weight: the crypto Fear and Greed Index on its native 0-100 scale"
+    runnable: partial
+    endpoint: /api/v1/sentiment/fear-greed
+    field: value
+    replay: /api/v1/backtesting/snapshots?data_type=fear_greed&start={start}&limit=1000
+    replay_field: snapshots[].data.value
+    note: "The served value averages several sources (individual_values), not alternative.me's index alone. Replay snapshots run from 2026-05-09; /market-intelligence/fear-greed-history returned only the current day on 2026-10-17."
+  - id: funding_input
+    role: entry
+    rule: "Composite input, 25% weight: 8h cross-exchange funding mapped to 0-100, high positive (crowded longs) scoring bearish"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "binance.current_rate is the 8h rate; hyperliquid.current_rate in the same response is hourly (x8 for 8h). The page gives no mapping from funding to the 0-100 score, so the scaling is the desk's call."
+  - id: flows_input
+    role: entry
+    rule: "Composite input, 20% weight: exchange net flows mapped to 0-100, net outflows (accumulation) scoring bullish"
+    runnable: partial
+    endpoint: /api/v1/on-chain/exchange-flows/{symbol}
+    field: windows.24h.net
+    replay: /api/v1/on-chain/exchange-flows/{symbol}/history?start={start}
+    replay_field: points[].net_24h
+    note: "net is inflow minus outflow in coin units (positive = coins moving onto exchanges, bearish); chains_covered and per_exchange_24h say which wallets are tracked. The page gives no 0-100 mapping; spike_zscore_24h in the same response is one ready-made scale."
+  - id: dry_powder_input
+    role: entry
+    rule: "Composite input, 15% weight: stablecoin dry powder mapped to 0-100, rising exchange stablecoin reserves scoring bullish"
+    runnable: partial
+    endpoint: /api/v1/on-chain/stablecoin-reserves/dry-powder
+    field: zscore
+    note: "zscore is today's tracked-exchange stablecoin reserves against their 30-day mean; signal reads accumulating, neutral or depleting. The page gives no 0-100 mapping."
+  - id: social_input
+    role: entry
+    rule: "Composite input, 10% weight: bot-filtered social mention polarity and velocity"
+    runnable: false
+    note: "No social sentiment or social volume is served (LunarCrush or Santiment style data is needed). /api/v1/news/pulse scores news headlines, which is a different input."
+  - id: composite_score
+    role: entry
+    rule: "Composite = weighted average of the five 0-100 inputs; 0-20 extreme fear, 20-40 fear, 40-60 neutral, 60-80 greed, 80-100 extreme greed"
+    runnable: false
+    input: derived
+    inputs: [fear_greed_input, funding_input, flows_input, dry_powder_input, social_input]
+    note: "The social input is not served, and the other four need a 0-100 mapping the page does not give. Re-weighting without social is a different composite, and the desk's call."
+  - id: contrarian_buy
+    role: entry
+    rule: "Buy when the composite is below 20 and has risen on 2 consecutive readings; scale in 50% at the first up-turn and 50% on a hold above the low"
+    runnable: false
+    input: derived
+    inputs: [composite_score]
+    note: "Built on composite_score, which cannot be computed from served data."
+  - id: greed_trim
+    role: exit
+    rule: "Trim or open a modest short when the composite is above 80 and has fallen on 2 consecutive readings; extreme greed with extreme positive funding is the strongest trim"
+    runnable: false
+    input: derived
+    inputs: [composite_score]
+    note: "Built on composite_score."
+  - id: btc_above_200dma
+    role: filter
+    rule: "Regime gate, part 1: contrarian longs only while BTC is above its 200-day MA"
+    runnable: true
+    endpoint: /api/v1/market-data/btc-price-history?days=2
+    field: history[].ma200
+    replay: /api/v1/market-data/btc-price-history?days=730
+    replay_field: history[].ma200
+    note: "Compare history[].price with ma200 on the latest row."
+  - id: not_established_bear
+    role: filter
+    rule: "Regime gate, part 2: no contrarian longs while the market regime is established bear"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "The served slug is established_bear. The Rules join the two gate parts with or, the pseudocode with and (both must pass); the pseudocode is the stricter reading. History starts 2026-08-07."
+  - id: momentum_buy
+    role: entry
+    rule: "Mid-range momentum buy: composite crosses above 50 from below, social velocity accelerating, and price above its 20-day MA"
+    runnable: false
+    input: derived
+    inputs: [composite_score, social_input]
+    note: "Needs the composite and social velocity, neither served. The 20-day MA leg alone is computable from daily candles."
+  - id: momentum_exit
+    role: exit
+    rule: "Exit the momentum trade when the composite crosses back below 50 or social velocity peaks and declines"
+    runnable: false
+    input: derived
+    inputs: [composite_score, social_input]
+    note: "Built on composite_score and social_input."
+  - id: funding_tilt
+    role: filter
+    rule: "Funding sub-rule: bearish tilt when 8h funding is above +0.05% (crowded longs), bullish tilt when below -0.03% (crowded shorts)"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=3
+    field: current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance's 8h rate compares directly with 0.0005 and -0.0003; for Hyperliquid, sum 8 hourly prints. Replay is Hyperliquid hourly prints."
+  - id: extremity_sizing
+    role: sizing
+    rule: "1-3% of the sleeve per signal, larger the more extreme the composite (size = min(3%, (20 - composite)/100 + 1%))"
+    runnable: false
+    input: derived
+    inputs: [composite_score]
+    note: "Scales on composite_score, which is not served."
+  - id: concurrency_cap
+    role: sizing
+    rule: "At most 3 concurrent correlated positions, treating BTC and ETH as one"
+    runnable: true
+    input: position
+  - id: hard_stop
+    role: stop
+    rule: "Hard stop 8% below entry on contrarian longs"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: time_stop
+    role: stop
+    rule: "Time stop after 30 days"
+    runnable: true
+    input: position
 ---
 
 # Sentiment Trading

@@ -12,6 +12,92 @@ markets: [crypto, options]
 complexity: beginner
 backtest_status: untested
 related: ["[[married-put]]", "[[collar]]", "[[covered-call]]", "[[hedging]]", "[[tail-risk-hedging]]", "[[variance-risk-premium]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[staking]]", "[[delta]]", "[[theta]]", "[[vega]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_puts
+    role: universe
+    rule: "Spot BTC or ETH (or a BTC-ETF holding) hedged with puts on the same coin, on Deribit"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "We serve Deribit DVOL and the ATM term structure for BTC and ETH only. Put quotes and fills come from Deribit; ETF options are not covered."
+  - id: concentrated_holding
+    role: filter
+    rule: "Hedge a concentrated position: more than 15-20% of net worth in one coin that cannot be diversified"
+    runnable: true
+    input: position
+  - id: catalyst_window
+    role: entry
+    rule: "Or hedge a known catalyst (unlock, FOMC, election, exchange-risk event) over a defined window"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=30
+    field: items[].event_type
+    note: "Unlocks (unlock rows whose symbols include the coin) and macro prints (macro_print, macro_class FOMC, CPI and others) are on the calendar. Do not pass symbol: macro rows carry no symbols and the filter drops them. BTC and ETH have no unlocks. Elections and exchange-solvency scares are not served; those need the desk's own calendar."
+  - id: strike_5_15_otm
+    role: entry
+    rule: "Buy one put per unit of coin, strike 5-15% below spot (the deductible)"
+    runnable: true
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "Target strike = spot x 0.85 to 0.95, rounded to a listed Deribit strike. The strike grid and put prices come from Deribit."
+  - id: tenor_1_3_months
+    role: entry
+    rule: "Tenor covers the risk window plus a buffer: typically 1-3 months"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "Pick a listed expiry 30-90 days out that ends after the risk window. term_structure is Pro Plus and lists the nearest 12 expiries."
+  - id: entry_vol_regime
+    role: filter
+    rule: "Initiate or roll only while the coin's vol regime is compressed or normal; never right after a vol spike"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow."
+  - id: entry_dvol_low
+    role: filter
+    rule: "Prefer entry when DVOL is low (insurance cheap)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "The page sets no cutoff. One reading: today's dvol in the lower half of the served ~180-day history (Pro Plus); the cutoff is the desk's."
+  - id: monetize_on_spike
+    role: exit
+    rule: "Sell the put (or roll it down) when a selloff takes its delta beyond about -0.60 with DVOL elevated"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "No per-option Greeks are served: approximate the delta with Black-Scholes from spot, strike, expiry_days and the expiry's atm_iv (ignores skew), or read it from Deribit. The page gives no level for 'elevated' DVOL."
+  - id: monetize_stress_score
+    role: exit
+    rule: "AI-workflow trigger: harvest the ITM put when the vol-stress score spikes while liquidation cascades run"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    replay: /api/v1/volatility/index/history?days=365
+    replay_field: points[].composite_score
+    note: "The page gives no score threshold or cascade size. Cascades can be read from /api/v1/market-intelligence/squeeze-alerts (OKX, Bybit, Hyperliquid). The replay is one composite per UTC day."
+  - id: roll_30_dte
+    role: exit
+    rule: "If continuous protection is required, roll at about 30 DTE, resetting the strike to the target OTM distance"
+    runnable: true
+    input: position
+  - id: stop_after_catalyst
+    role: exit
+    rule: "Stop paying once the catalyst passes: do not roll a one-off catalyst hedge"
+    runnable: partial
+    input: derived
+    inputs: [catalyst_window]
+    note: "Only as complete as catalyst_window: a calendar event's date tells the bot when it has passed; an election or exchange-risk window is the desk's to close."
+  - id: hedge_ratio
+    role: sizing
+    rule: "Full hedge = one put per unit of coin; a partial hedge of 50-75% cuts cost"
+    runnable: true
+    input: position
+  - id: hedge_budget_2pct
+    role: sizing
+    rule: "Cap systematic hedging spend at 2% of NAV per year; if protection costs more, widen the deductible or hedge fewer coins"
+    runnable: true
+    input: position
 ---
 
 # Protective Put (Crypto)

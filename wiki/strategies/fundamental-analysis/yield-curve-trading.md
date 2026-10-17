@@ -18,6 +18,53 @@ min_capital_usd: 100000
 capacity_usd: 1000000000
 crowding_risk: medium
 related: ["[[macro-trading]]", "[[interest-rate-risk]]", "[[duration]]", "[[treasury-bonds]]", "[[yield-curve]]", "[[dv01]]", "[[carry-trade]]"]
+gates:
+  - id: steepener
+    role: entry
+    rule: "Steepener: long 2Y + short 10Y Treasury futures (TU vs TY), DV01-weighted; profits as the 2s10s spread widens"
+    runnable: false
+    note: "No Treasury yields by tenor or Treasury futures are served. The only rates figure is treasury_avg_interest_rate on /sentiment/macro, the average rate on outstanding US debt, not a market yield. Needs a 2Y/10Y yield feed (FRED, CME)."
+  - id: flattener
+    role: entry
+    rule: "Flattener: short 2Y + long 10Y, DV01-weighted; profits as 2s10s narrows or inverts"
+    runnable: false
+    note: "Same missing tenor yields and futures as steepener."
+  - id: butterfly
+    role: entry
+    rule: "Butterfly: long 2Y and 30Y wings + short 10Y belly (or the reverse), neutral to both level and slope; profits from a curvature change"
+    runnable: false
+    note: "Needs 2Y, 10Y and 30Y yields or futures, none of which is served."
+  - id: dv01_neutral_sizing
+    role: sizing
+    rule: "Equalise DV01 across legs (contracts = target DV01 / DV01 per contract) so a parallel shift nets to zero"
+    runnable: false
+    note: "DV01 per contract needs futures prices and conversion factors, which are not served."
+  - id: carry_budget
+    role: exit
+    rule: "Track carry (roll-down minus financing) and exit when cumulative negative carry has consumed the expected curve P&L"
+    runnable: false
+    note: "Needs the curve plus repo or SOFR financing rates, none of which is served."
+  - id: thesis_invalidated
+    role: exit
+    rule: "Exit when the policy or inflation thesis is invalidated, e.g. the Fed reverses guidance"
+    runnable: false
+    note: "FOMC decision dates are on /api/v1/policy/regime (items with macro_class FOMC), but reading a guidance reversal from the statement is not served."
+  - id: quarterly_roll
+    role: exit
+    rule: "Roll the futures legs together before the quarterly expiry"
+    runnable: true
+    input: position
+  - id: dv01_drift
+    role: stop
+    rule: "Rebalance or exit when position DV01 drifts from neutral beyond the set tolerance"
+    runnable: false
+    input: position
+    note: "The tolerance is the desk's, and re-measuring DV01 needs futures prices we do not serve."
+  - id: drawdown_limit
+    role: stop
+    rule: "Exit or pause when the rolling drawdown on the curve book breaches the desk's risk limit"
+    runnable: true
+    input: position
 ---
 
 # Yield Curve Trading

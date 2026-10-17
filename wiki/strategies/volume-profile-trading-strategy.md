@@ -16,6 +16,101 @@ edge_source: [structural, behavioral]
 edge_mechanism: "Volume clusters mark where two-sided trade was facilitated; price tends to rotate around those accepted levels and travel quickly through prices the auction rejected, giving statistical reference points for entries, targets and stops."
 data_required: [tick-volume, ohlcv-intraday]
 crowding_risk: medium
+gates:
+  - id: session_profile
+    role: entry
+    rule: "Daily prep: build the prior session's volume profile (POC, VAH and VAL bounding about 68-70% of volume) and a 20-session composite for HVNs, LVNs and naked POCs"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&start={start}&end={end}
+    field: candles[].volume
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}&end={end}&limit=1500
+    replay_field: klines[].v
+    note: "Volume-at-price is approximated by spreading each 1m bar's volume across its high-low range; true tick or footprint volume is not served. Crypto has no session close, so the UTC session cut is the desk's fixed choice. Hyperliquid keeps about 4 days of 1m bars, so the 20-session composite comes from the archive (1m from 2026-05-09; end exclusive)."
+  - id: regime_balance
+    role: filter
+    rule: "Regime picks the setup: balance means rotation setups, imbalance (trend or vol spike) means LVN continuation setups"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "The page's AI-agent mapping: range_low_vol is balance; strong_trend_bull, strong_trend_bear and vol_spike are imbalance. It automates the profile-shape call (profile_shape)."
+  - id: profile_shape
+    role: filter
+    rule: "Classify the prior session's profile shape: D (balance), P or b (imbalance), B"
+    runnable: partial
+    input: derived
+    inputs: [session_profile]
+    note: "Shape classification is the page's 'decisive discretionary judgment'; no rule is given for it."
+  - id: open_inside_value
+    role: filter
+    rule: "Rotation context: today opens inside the prior value area (between VAL and VAH)"
+    runnable: partial
+    input: derived
+    inputs: [session_profile]
+    note: "A plain comparison once the approximated VAL and VAH exist."
+  - id: rotation_entry
+    role: entry
+    rule: "Value-area rotation: long near VAL (short near VAH) on a rejection signal, with CVD turning; target POC then the opposite edge; stop outside the value area"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=60
+    field: candles[].low
+    note: "'Near' and 'rejection' have no thresholds; the stop buffer is unsized."
+  - id: cvd_confirmation
+    role: filter
+    rule: "Confirmation: CVD turning at the rotation edge, or expanding with price on a breakout"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=240
+    field: data[].cvd_usd
+    replay: /api/v1/backtesting/hl-trade-flow?coin={coin}&start={start}
+    replay_field: data[].buy_notional
+    note: "Closed 1-minute taker buy and sell buckets (replay from 2026-09-09; cvd_usd resets per request and is not archived, so rebuild it from buy minus sell). Nothing sub-minute and no footprint; 'turning' has no rule."
+  - id: lvn_breakout
+    role: entry
+    rule: "LVN fast move: enter on acceptance through the value edge into a low-volume node, with CVD expanding; target the next HVN; stop back inside prior value"
+    runnable: partial
+    input: derived
+    inputs: [session_profile, cvd_confirmation]
+    note: "'Acceptance' (time or closes beyond the edge) is not defined."
+  - id: hvn_absorption
+    role: entry
+    rule: "HVN absorption: fade a move stalling at a thick high-volume node, confirmed by absorption on the footprint and CVD divergence"
+    runnable: false
+    note: "Footprint absorption needs aggressor volume per price level, which is not served (trade flow is per minute, not per price)."
+  - id: naked_poc_magnet
+    role: entry
+    rule: "Trade toward a naked (never revisited) POC from the last 20 sessions as a magnet target, then watch the reaction on the touch"
+    runnable: partial
+    input: derived
+    inputs: [session_profile]
+    note: "Mechanical from the approximated POCs; 'reaction quality' on the touch and the tick-based stop are the desk's."
+  - id: depth_at_level
+    role: filter
+    rule: "Before fading a level, check that resting depth actually defends it"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: bids[].size
+    note: "The live Hyperliquid book near the mark (price, size, count per level); a level far from price is outside it. 'Defended' has no size threshold."
+  - id: kill_expectancy
+    role: filter
+    rule: "Kill on a rolling 3-month expectancy below zero net of costs"
+    runnable: true
+    input: position
+  - id: kill_null_win_rate
+    role: filter
+    rule: "Kill when the value-rotation win rate is indistinguishable from the null over at least 100 trades"
+    runnable: true
+    input: position
+  - id: kill_drawdown
+    role: filter
+    rule: "Kill on a drawdown beyond a preset fraction of allocated risk capital (e.g. 15-20%)"
+    runnable: true
+    input: position
+  - id: kill_structural_break
+    role: filter
+    rule: "Kill when the instrument's liquidity or session structure changes (e.g. an exchange migration) so old profile levels no longer reflect participants"
+    runnable: false
+    note: "A judgement about venue structure; nothing served flags it."
 ---
 
 The **volume profile trading strategy** is a family of discretionary (and increasingly semi-automated) setups that use the [[volume-profile]] histogram — [[point-of-control]] (POC), [[value-area]] (VAH/VAL), and [[volume-nodes|high- and low-volume nodes]] — as the structural map for entries, exits, and stops. Rather than predicting direction from price alone, the trader reads *where the auction did business* and trades the tendency of price to rotate inside accepted value and accelerate through rejected value. It is most developed in [[futures]] and crypto perpetuals, where tick-level volume and [[order-flow]] are available, but the core levels apply on any liquid instrument. It is the volume-weighted sibling of [[market-profile]] (which buckets *time* at price rather than *volume* at price).

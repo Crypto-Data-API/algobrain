@@ -22,6 +22,129 @@ expected_max_drawdown: 0.25  # matches the 25% kill criterion
 breakeven_cost_bps: 30    # swing trades on liquid majors; second-move horizon tolerates ~30 bps round-trip
 decay_evidence: "Event-reaction edges decay as algos price headlines faster; binary policy outcomes make this inherently high-variance. No reliable published Sharpe."
 related: ["[[policy-shock-regime]]", "[[crypto-market-regime-taxonomy]]", "[[event-catalyst-regime]]", "[[crypto-macro-correlation-regime]]", "[[regulatory-arbitrage]]", "[[news-trading]]", "[[regulatory-risk-map]]", "[[geopolitical-risk-premium]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[hyperliquid]]", "[[cryptodataapi]]"]
+gates:
+  - id: liquid_majors
+    role: universe
+    rule: "Trade liquid majors only (BTC, ETH) during policy windows; never thin alts or illiquid post-shock books"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "From the Capacity section. BTC and ETH are the named markets."
+  - id: policy_signature
+    role: entry
+    rule: "Classify each policy event into a signature: A pro-crypto policy (executive order, favourable rulemaking, ETF approval), B trade war or tariff, C central-bank rate signal, D single-country ban or adoption. Ambiguous (UNKNOWN) means no trade"
+    runnable: partial
+    endpoint: /api/v1/news/market-moving?hours=24
+    field: events[].category
+    replay: /api/v1/backtesting/news-events?start={start}
+    replay_field: data[].category
+    note: "The tape classifies by keyword, not by the page's signature reading. A reasonable map: A = pro_crypto_eo, legislation, rulemaking, constructive_policy, etf_approval; B = geopolitics (tariff, trade war, sanction); C = macro, macro_tightening, macro_liquidity; D = ban, restrictive_policy, with sovereign_bid and strategic_reserve as adoption. Whether a headline is enforceable or structural stays the desk's call. /api/v1/policy/headlines adds a US-only regulatory feed (top_headlines[].category). The replay archive starts 2026-08-18."
+  - id: base_rate_gate
+    role: filter
+    rule: "Trade a signature only when its measured base rate clears the bar: hit rate above the per-signature threshold (e.g. above 50% for D fades) on at least MIN_N comparable past events"
+    runnable: partial
+    endpoint: /api/v1/backtesting/news-events?start={start}&min_impact=0.45
+    field: data[].ret_4h
+    note: "Each archived event carries its measured ret_15m, ret_1h and ret_4h (percent), so hit rates per category can be counted from 2026-08-18. That is a short sample, the page leaves MIN_N unset, and its fades resolve over hours to days: for a multi-day window, read /api/v1/hyperliquid/candles from the event time instead."
+  - id: funding_crowded
+    role: filter
+    rule: "Crowded: funding z-score above 2 (stand down from a Signature A long into crowded basis)"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    field: data[].funding_rate_mean
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "z = (latest hourly Hyperliquid funding - mean) / stdev over a lookback the page does not give (30 days of hourly bars is one choice). The bars are current to the last closed hour and go back to 2023."
+  - id: oi_crowded
+    role: filter
+    rule: "Crowded: open-interest z-score above 2 (either this or funding_crowded marks the crowd)"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    field: data[].oi_close
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].oi_close
+    note: "oi_close is Hyperliquid OI in coin units at the bar close. The z-score lookback is not given on the page. Binance OI history (daily) is on /api/v1/derivatives/binance/open-interest."
+  - id: sig_a_long
+    role: entry
+    rule: "Signature A: long the initial euphoria as a rented move, but not when funding or OI is crowded"
+    runnable: partial
+    input: derived
+    inputs: [policy_signature, funding_crowded, oi_crowded]
+    note: "Only as runnable as policy_signature and the z-score windows."
+  - id: sig_a_exit
+    role: exit
+    rule: "Signature A: exit into the OI/funding extreme, not into the next headline; tighten or exit as funding spikes and OI balloons"
+    runnable: partial
+    input: derived
+    inputs: [funding_crowded, oi_crowded]
+    note: "The page does not define the extreme; z above 2 from the crowding gates is one reading."
+  - id: sig_b_equity_corr
+    role: filter
+    rule: "Signature B: de-risk or short with equities only while the BTC-equity correlation is above 0.5 and rising; stand down if crypto decouples"
+    runnable: false
+    note: "No equity index (S&P 500, Nasdaq) series is served, so the BTC-equity correlation cannot be computed. The quant regime on /api/v1/quant/market does not measure macro beta."
+  - id: sig_c_macro_direction
+    role: entry
+    rule: "Signature C: trade the macro direction short-horizon, hawkish = short or de-risk, dovish = long, at reduced size"
+    runnable: false
+    note: "FOMC dates are served (/api/v1/policy/regime, macro_class FOMC), but no hawkish or dovish read: macro events on /news/market-moving carry bias 0. Needs the statement or a rates-market surprise measure."
+  - id: sig_d_deceleration
+    role: entry
+    rule: "Signature D: fade only after the first impulse exhausts, shown by clear price deceleration"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=24
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].close
+    note: "The page gives no deceleration test (the example waits about 3 hours for it). Shrinking hourly ranges or a close back inside the impulse bar are readings; the cut is the desk's call."
+  - id: sig_d_funding_flush
+    role: entry
+    rule: "Signature D: funding flush, i.e. funding stops getting more extreme in the direction of the move"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "Hourly Hyperliquid settlements. 'Stops getting more extreme' has no threshold on the page: e.g. the latest print no further from zero than the one before."
+  - id: sig_d_fade_direction
+    role: entry
+    rule: "Signature D: enter against the initial single-day move (bias = -sign of the initial move)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=24
+    field: candles[].close
+    note: "Initial move = close now minus the close before the event's published time (events[].published)."
+  - id: sig_d_invalidation
+    role: stop
+    rule: "Signature D: exit if the policy proves enforceable or structural, or spreads internationally"
+    runnable: false
+    note: "A judgement on policy reach; nothing served answers it."
+  - id: pre_position_scheduled
+    role: entry
+    rule: "Pre-position only when the base rate is strong and the event is scheduled (FOMC, a known vote); otherwise wait for the reaction and trade the second move"
+    runnable: partial
+    endpoint: /api/v1/policy/regime
+    field: items[].days_until
+    note: "FOMC decisions are served with days_until (US macro prints also on /api/v1/event/calendar?type=macro_print). Legislative votes and rulemaking deadlines are not on any calendar we serve."
+  - id: hard_stop
+    role: stop
+    rule: "Every binary event gets a hard stop or a defined-risk option structure; never hold an un-stopped position across a binary print"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "The page gives no stop distance; its example stops below the impulse low."
+  - id: half_size_binary
+    role: sizing
+    rule: "Size for 2-3x the normal range: halve normal position size around binary catalysts"
+    runnable: true
+    input: position
+  - id: overlapping_signatures
+    role: sizing
+    rule: "When two signatures fire at once, the one with the higher-conviction, better base rate governs and size is halved again"
+    runnable: partial
+    input: derived
+    inputs: [policy_signature, base_rate_gate]
+    note: "Only as runnable as the signature classification."
 ---
 
 # Crypto Policy Shock Trading

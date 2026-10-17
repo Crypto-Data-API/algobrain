@@ -34,6 +34,122 @@ kill_criteria: |
   - funding rate changes cadence or methodology at a major venue (signal integrity lost)
 
 related: ["[[contrarian-extremes]]", "[[crowded-long-funding-fade]]", "[[crowded-short-funding-fade]]", "[[funding-flush-reversal]]", "[[smart-money-vs-crowd-divergence]]", "[[funding-filtered-momentum]]", "[[post-panic-vol-selling]]", "[[onchain-capitulation-confluence]]", "[[fear-and-greed-index]]", "[[funding-rate]]", "[[perpetual-futures]]", "[[open-interest]]", "[[behavioral-finance]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: fear_extreme_2d
+    role: entry
+    rule: "Both setups, gate 1: Fear & Greed index at or below 20 for at least 2 consecutive days"
+    runnable: true
+    endpoint: /api/v1/sentiment/fear-greed
+    field: value
+    replay: /api/v1/market-health/history?days=365
+    replay_field: history[].components.fear_greed
+    note: "Our index averages several sources; the page names the Alternative.me index, which is one input. Keep one reading per UTC day; the replay is the daily index value (market-health components.fear_greed) from 2026-01-14, and /market-intelligence/fear-greed-history returned a single row on 2026-10-17."
+  - id: washout_funding
+    role: entry
+    rule: "Washout long, gate 2a: 8h funding at or below -0.005%"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=3
+    field: current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance's 8h rate compares directly with -0.00005; the page's /derivatives/funding-rates carries the same figure under binance."
+  - id: washout_ls
+    role: entry
+    rule: "Washout long, gate 2b: long/short ratio at or below 0.90"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/long-short-ratio?symbol={coin}USDT
+    field: long_short_ratio
+    note: "Binance global account ratio, the page's source."
+  - id: higher_low_10d
+    role: entry
+    rule: "Washout long, gate 3: at least one higher low on the daily chart in the last 10 sessions"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=13
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "The pseudocode reads swing lows on daily closes: the latest local minimum above the one before it (or fewer than two local minima). Drop the forming bar."
+  - id: washout_entry
+    role: entry
+    rule: "Enter a BTC or ETH perp long at market when gates 1, 2a, 2b and 3 all hold"
+    runnable: true
+    input: derived
+    inputs: [fear_extreme_2d, washout_funding, washout_ls, higher_low_10d]
+  - id: regime_override
+    role: filter
+    rule: "In an established bear or Structural Shock regime, require DVOL to be declining before a washout long (the agent workflow says halve the size instead)"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Match established_bear or structural_shock_crisis; DVOL direction is items[].dvol_change_24h on /volatility/implied. The page gives two different responses (DVOL condition vs half size) and no window for declining, so the desk picks one. Regime history starts 2026-08-07."
+  - id: washout_size
+    role: sizing
+    rule: "Washout long: 2-4% of portfolio notional, at most 2x leverage"
+    runnable: true
+    input: position
+  - id: washout_normalised_exit
+    role: exit
+    rule: "Close the washout long when Fear & Greed is above 45 and 8h funding is above +0.01%"
+    runnable: true
+    endpoint: /api/v1/sentiment/fear-greed
+    field: value
+    replay: /api/v1/market-health/history?days=365
+    replay_field: history[].components.fear_greed
+    note: "Funding leg: current_rate on /derivatives/binance/funding-rates?symbol={coin}USDT above 0.0001."
+  - id: new_10d_low_stop
+    role: stop
+    rule: "Close the washout long if BTC makes a new 10-day daily closing low"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=12
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Compare the last closed daily close with the lowest of the 10 before it."
+  - id: washout_time_exit
+    role: exit
+    rule: "Close the washout long after 25 days if neither exit has fired"
+    runnable: true
+    input: position
+  - id: incomplete_cap_funding
+    role: filter
+    rule: "Incomplete capitulation: with extreme fear, 8h funding at or above +0.010%"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=3
+    field: current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+  - id: incomplete_cap_ls
+    role: filter
+    rule: "Incomplete capitulation: long/short ratio at or above 1.10"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/long-short-ratio?symbol={coin}USDT
+    field: long_short_ratio
+  - id: incomplete_cap_no_long
+    role: sizing
+    rule: "In incomplete capitulation enter no long, and cut any existing long by 50%"
+    runnable: true
+    input: derived
+    inputs: [fear_extreme_2d, incomplete_cap_funding, incomplete_cap_ls]
+  - id: incomplete_cap_short
+    role: entry
+    rule: "Optional: in incomplete capitulation short BTC perp at 1-2% of portfolio, 1x leverage"
+    runnable: true
+    input: derived
+    inputs: [fear_extreme_2d, incomplete_cap_funding, incomplete_cap_ls]
+  - id: incomplete_cap_short_exit
+    role: exit
+    rule: "Close the incomplete-capitulation short when funding turns negative or Fear & Greed rises above 35"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=3
+    field: current_rate
+    note: "Fear & Greed leg: value on /sentiment/fear-greed above 35."
+  - id: one_position
+    role: sizing
+    rule: "At most one washout long or one incomplete-capitulation short at a time, never both; cap 4% (long) or 2% (short) of portfolio"
+    runnable: true
+    input: position
 ---
 
 # Sentiment-Positioning Divergence

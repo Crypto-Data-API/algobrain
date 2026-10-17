@@ -22,6 +22,57 @@ expected_sharpe: 1
 expected_max_drawdown: 0.4
 breakeven_cost_bps: 1500
 decay_evidence: "Distressed cycles roughly 7-10 years (post-recession peaks: 2002, 2009, 2020, 2024). Strategy alive across cycles; entry timing critical."
+gates:
+  - id: distressed_universe
+    role: universe
+    rule: "Weekly screen: bonds trading below 60 cents on the dollar with an estimated default probability above 50% within 24 months"
+    runnable: false
+    note: "No corporate bond prices, ratings or CDS are served. Needs TRACE pricing plus ratings and CDS-implied default probabilities."
+  - id: capital_structure_map
+    role: filter
+    rule: "Map the capital structure: rank tranches by priority, liens, guarantees and collateral"
+    runnable: false
+    note: "Needs indentures, credit agreements and SEC filings, none of which are served."
+  - id: recovery_waterfall
+    role: filter
+    rule: "Estimate enterprise value (going-concern multiples plus a liquidation floor) and allocate it down the absolute-priority waterfall to get each tranche's recovery mid"
+    runnable: false
+    note: "A fundamental valuation from company financials and the capital structure; nothing here serves either."
+  - id: entry_discount_70pct
+    role: entry
+    rule: "Enter when the tranche's price is below 70% of its modeled recovery mid and the tranche is senior or the fulcrum security"
+    runnable: false
+    note: "Needs the bond price (TRACE) and the recovery model, neither served."
+  - id: catalyst
+    role: filter
+    rule: "Identify a catalyst: restructuring negotiation, court process or asset sale"
+    runnable: false
+    note: "Needs PACER docket feeds and restructuring press (Reorg, Debtwire). Our news feeds cover crypto only."
+  - id: per_name_size
+    role: sizing
+    rule: "1-3% of fund NAV per name, capped at 5-10% of NAV in any single name"
+    runnable: true
+    input: position
+  - id: blocking_stake
+    role: sizing
+    rule: "Upsize toward a blocking position above one third of a class when the loan-to-own control thesis is intact"
+    runnable: false
+    note: "Needs the class's outstanding claim amount from the indenture or plan documents, which is not served."
+  - id: exit_at_recovery_mid
+    role: exit
+    rule: "Exit early when the price reaches the modeled recovery mid before emergence"
+    runnable: false
+    note: "Needs the bond price and the recovery model, neither served."
+  - id: exit_at_emergence
+    role: exit
+    rule: "Exit at the plan effective date: take the cash or equity distribution, or sell the post-emergence equity"
+    runnable: false
+    note: "Plan dates come from the bankruptcy docket (PACER), which is not served."
+  - id: stop_process_failure
+    role: stop
+    rule: "Cut the position when the liquidation floor is breached, fraud or a material adverse change is found, or the priority thesis is defeated in court"
+    runnable: false
+    note: "Docket and fundamental events with no served feed; the fraud and court reads are also legal judgements."
 ---
 
 # Distressed Debt Arbitrage

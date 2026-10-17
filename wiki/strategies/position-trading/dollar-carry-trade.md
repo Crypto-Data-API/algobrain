@@ -26,6 +26,54 @@ kill_criteria: |
   - drawdown > 30%
   - average forward discount within ±25 bps of US T-bill for 12 months (no signal)
 related: ["[[quantpedia]]", "[[quantpedia-strategy-encyclopedia]]", "[[carry-trade]]", "[[carry-anomaly]]", "[[currency-value-ppp]]", "[[currency-momentum]]", "[[dxy]]", "[[us-dollar]]", "[[yen-carry-trade]]", "[[covered-interest-arbitrage]]"]
+gates:
+  - id: fx_basket
+    role: universe
+    rule: "Equal-weight basket of EUR, AUD, CAD, DKK, JPY, NZD, NOK, SEK, CHF and GBP against USD"
+    runnable: false
+    note: "Only EUR/USD spot is served (/api/v1/sentiment/macro). Needs an FX spot and forwards feed."
+  - id: forward_discount_signal
+    role: entry
+    rule: "Signal = the basket's average 1-month forward discount versus the 3-month US T-bill: T-bill above it means long USD / short basket, otherwise short USD / long basket"
+    runnable: false
+    note: "No FX forward points or T-bill yield are served (treasury_avg_interest_rate on /sentiment/macro is the average rate on outstanding US debt, not the 3-month bill)."
+  - id: monthly_rebalance
+    role: exit
+    rule: "Rebalance monthly via 1-month forwards"
+    runnable: true
+    input: position
+  - id: vol_target
+    role: sizing
+    rule: "Fixed notional, or volatility-targeted to about 8% annualised"
+    runnable: false
+    input: position
+    note: "Fixed notional is a position rule; vol targeting needs the basket's return history, which is not served."
+  - id: no_signal_kill
+    role: stop
+    rule: "Stand down when the average forward discount stays within 25 bps of the US T-bill for 12 months"
+    runnable: false
+    note: "From the kill criteria; needs the same unserved forwards and T-bill series."
+  - id: drawdown_kill
+    role: stop
+    rule: "Retire on a drawdown above 30% or a rolling 5-year net Sharpe below 0"
+    runnable: true
+    input: position
+  - id: crypto_beta_overlay
+    role: filter
+    rule: "Crypto overlay: when the signal is long USD and yields are rising, reduce crypto beta, confirmed by the cycle regime"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "From the page's AI-agent workflow. The dollar signal needs external forward data; the cycle regime is served (history from 2026-08-07). The page gives no reduction size."
+  - id: carry_vs_perp_funding
+    role: filter
+    rule: "Compare USD T-bill carry with perp funding carry to judge whether crypto basis trades beat cash"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    note: "Perp funding is served (Binance 8-hourly; hyperliquid.current_rate hourly; annualise x 3 x 365 or x 24 x 365). The T-bill yield is not."
 ---
 
 # Dollar Carry Trade

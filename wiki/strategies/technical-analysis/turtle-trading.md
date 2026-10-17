@@ -34,6 +34,150 @@ kill_criteria: |
   - equity drawdown exceeds 35% → reduce all positions to half-size; do not add
   - perp funding annualized cost > 20% on any trend position → reduce or exit regardless of signal
   - more than 3 consecutive losing System 1 breakouts in the same market → skip System 1; rely on System 2 only for that market
+gates:
+  - id: perp_universe
+    role: universe
+    rule: "BTC, ETH and liquid alt perpetuals"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/meta
+    field: universe[].name
+    note: "The page names no liquidity floor; it calls top-20 alts workable and warns that the 2N stop gets too close to the spread further down."
+  - id: s1_long_20d_high
+    role: entry
+    rule: "System 1 long: price exceeds the highest high of the last 20 days"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=22
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].high
+    note: "Channel = max high of the 20 closed daily bars before today (drop the forming bar); trigger when the live price trades above it."
+  - id: s1_short_20d_low
+    role: entry
+    rule: "System 1 short: price breaks the lowest low of the last 20 days"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=22
+    field: candles[].low
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].low
+  - id: s1_skip_after_winner
+    role: filter
+    rule: "System 1 filter: skip the signal if the previous System 1 breakout in that market was profitable"
+    runnable: true
+    input: derived
+    inputs: [s1_long_20d_high, s1_short_20d_low, s1_exit_10d, stop_2n]
+    note: "Replay the previous breakout through its 10-day exit or 2N stop on the daily bars, whether or not it was traded, as the original rules do."
+  - id: s2_long_55d_high
+    role: entry
+    rule: "System 2 long: price exceeds the highest high of the last 55 days (no filter)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=57
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].high
+  - id: s2_short_55d_low
+    role: entry
+    rule: "System 2 short: price breaks the lowest low of the last 55 days (no filter)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=57
+    field: candles[].low
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].low
+  - id: regime_gate
+    role: filter
+    rule: "In a choppy_high_vol market regime, run System 2 only or stand down"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow ('outside the trend states')."
+  - id: s1_exit_10d
+    role: exit
+    rule: "System 1 exit: longs on a 10-day lowest low, shorts on a 10-day highest high"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=12
+    field: candles[].low
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].low
+  - id: s2_exit_20d
+    role: exit
+    rule: "System 2 exit: longs on a 20-day lowest low, shorts on a 20-day highest high"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=22
+    field: candles[].low
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].low
+  - id: stop_2n
+    role: stop
+    rule: "Hard stop 2N (2x the 20-day ATR) from each unit's entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60&atr=20
+    field: candles[].atr
+    note: "N from n_value at entry; move stops up as units are added."
+  - id: n_value
+    role: sizing
+    rule: "N = the 20-day exponential average of true range (about ATR(20))"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60&atr=20
+    field: candles[].atr
+    note: "atr=20 is Wilder's smoothing, (prev x 19 + TR) / 20, which is the Turtle N formula. Use the last closed bar and recompute daily."
+  - id: unit_size
+    role: sizing
+    rule: "Unit = 1% of account / (N x dollars per point); for a coin-margined perp, units of coin = 0.01 x equity / N"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60&atr=20
+    field: candles[].atr
+  - id: pyramid_half_n
+    role: sizing
+    rule: "Add one unit every 0.5N of favourable movement, up to 4 units per market"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60&atr=20
+    field: candles[].atr
+  - id: correlation_caps
+    role: sizing
+    rule: "At most 4 units per market, about 6 in closely correlated markets, about 10-12 in one direction across the portfolio"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=62
+    field: candles[].close
+    note: "The page does not define 'closely correlated' and says most alts behave like BTC in risk-off. One reading: 60-day return correlation above a cutoff the desk sets, computed from daily closes."
+  - id: liquidation_inside_2n
+    role: sizing
+    rule: "Keep exchange leverage low enough that the liquidation price sits well beyond the 2N stop"
+    runnable: true
+    input: position
+  - id: funding_cost_exit
+    role: exit
+    rule: "Exit or reduce any trend position whose annualized funding cost exceeds 20%, regardless of signal"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "Annualized = hourly rate x 24 x 365 (8760); a cost for longs when positive, for shorts when negative. The page checks it on every day a pyramid is held."
+  - id: kill_sharpe_6m
+    role: filter
+    rule: "Rolling 6-month Sharpe below 0.1: review parameters and consider running System 2 only"
+    runnable: true
+    input: position
+  - id: kill_drawdown_35
+    role: sizing
+    rule: "Equity drawdown above 35%: cut all positions to half size and add nothing until the drawdown recovers below 20%"
+    runnable: true
+    input: position
+  - id: kill_s1_losers
+    role: filter
+    rule: "More than 3 consecutive losing System 1 breakouts in a market: skip System 1 there and use System 2 only"
+    runnable: true
+    input: position
+  - id: kill_portfolio_streak
+    role: sizing
+    rule: "More than 8 consecutive losing trades across the portfolio: cut each unit from 1% to 0.5% risk until the streak ends"
+    runnable: true
+    input: position
 ---
 
 # Turtle Trading

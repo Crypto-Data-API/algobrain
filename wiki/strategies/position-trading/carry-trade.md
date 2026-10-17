@@ -12,6 +12,49 @@ markets: [forex]
 complexity: advanced
 backtest_status: untested
 related: ["[[forex]]", "[[risk-management]]", "[[interest-rates]]", "[[macroeconomics]]", "[[position-sizing]]"]
+gates:
+  - id: rate_differential
+    role: universe
+    rule: "Pick a currency pair with a significant positive policy-rate differential and go long the high-yielder against the funder (AUD/JPY, NZD/JPY, USD/JPY, MXN/JPY)"
+    runnable: false
+    note: "No FX pairs (beyond EUR/USD on /sentiment/macro) and no central-bank policy rates or swap points are served. Needs an FX and rates feed."
+  - id: risk_on_filter
+    role: filter
+    rule: "Enter only in risk-on conditions: VIX low, equities rising, credit spreads narrow"
+    runnable: false
+    note: "No VIX, equity index or credit-spread series is served. The crypto Fear and Greed index is not a substitute for VIX."
+  - id: differential_stable
+    role: filter
+    rule: "The rate differential is stable or widening: no signals of cuts by the high-yielder or hikes by the funder"
+    runnable: false
+    note: "Needs central-bank policy paths and guidance; only Fed (FOMC) dates are served, on /api/v1/policy/regime."
+  - id: vix_spike_exit
+    role: exit
+    rule: "Close when VIX spikes above 25-30, equities sell off sharply or credit spreads widen"
+    runnable: false
+    note: "No VIX, equity or credit data is served."
+  - id: rate_convergence_exit
+    role: exit
+    rule: "Exit if central banks signal the differential will narrow"
+    runnable: false
+    note: "A reading of central-bank guidance; not served."
+  - id: technical_stop
+    role: stop
+    rule: "Always hold a stop based on ATR or key support and resistance on the pair"
+    runnable: false
+    note: "Needs the FX pair's price history, which is not served."
+  - id: event_risk_reduce
+    role: exit
+    rule: "Reduce or close before major risk events: central-bank meetings, elections, geopolitical flashpoints"
+    runnable: partial
+    endpoint: /api/v1/policy/regime
+    field: items[].days_until
+    note: "Only US FOMC decisions are served (macro_class FOMC). BOJ, RBA and other central-bank meetings, elections and flashpoints are not on any calendar we serve."
+  - id: leverage_and_risk
+    role: sizing
+    rule: "Leverage 2-5x at most; risk 1-2% of capital per carry position; diversify across several pairs"
+    runnable: true
+    input: position
 ---
 
 # Carry Trade

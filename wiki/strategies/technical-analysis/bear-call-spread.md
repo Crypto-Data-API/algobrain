@@ -12,6 +12,128 @@ markets: [crypto, options]
 complexity: beginner
 backtest_status: untested
 related: ["[[bull-put-spread]]", "[[bear-put-spread]]", "[[bull-call-spread]]", "[[iron-condor]]", "[[vertical-spread]]", "[[deribit]]", "[[dvol]]", "[[greeks-live]]", "[[variance-risk-premium]]", "[[implied-volatility]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[theta]]", "[[vega]]", "[[delta]]", "[[max-pain]]", "[[gamma-exposure]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit_only
+    role: universe
+    rule: "BTC and ETH Deribit options only; alt options are too thin for a clean two-leg credit spread"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied vol served. Option quotes come from Deribit itself."
+  - id: below_resistance_view
+    role: entry
+    rule: "Bearish-to-neutral: expect spot to stay below a tested resistance level through expiry"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: sr.resistance[].price
+    note: "Served resistance levels are algorithmic (strength and dist_pct alongside). Which level is 'tested', and the stall forecast itself, are the trader's call."
+  - id: short_call_25_35_delta
+    role: entry
+    rule: "Sell one OTM call at about 25-35 delta, at or above the resistance level"
+    runnable: false
+    note: "Strikes by delta need Deribit's option chain with Greeks, which we do not serve."
+  - id: long_wing_10_20_delta
+    role: entry
+    rule: "Buy one further-OTM call at about 10-20 delta, one to a few strikes higher, same expiry"
+    runnable: false
+    note: "Same gap as short_call_25_35_delta."
+  - id: credit_third_of_width
+    role: entry
+    rule: "Collect about one third of the strike width as credit"
+    runnable: false
+    note: "Needs the legs' bid and ask; no option quotes are served."
+  - id: tenor_21_45_dte
+    role: entry
+    rule: "Expiry 21-45 days out; no weeklies"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure lists the nearest 12 Deribit expiries. It is Pro Plus and empty on lower tiers."
+  - id: dvol_40_90_pctile
+    role: filter
+    rule: "Open only with DVOL in the 40th-90th percentile of its trailing year"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "Rank the latest dvol within history. Only about 180 daily closes are served (Pro Plus), so the percentile is over six months, not a year."
+  - id: vol_regime_gate
+    role: filter
+    rule: "Sell when the coin's vol regime reads expanding (elevated), never vol_shock"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow. No history of the per-coin label is served for replay."
+  - id: funding_rich_tailwind
+    role: filter
+    rule: "Prefer entry when perp funding is richly positive: leveraged longs firm OTM call skew and richen the short call"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    note: "The page gives no threshold; its example is +0.03% per 8 hours (0.0003 on Binance's 8-hour rate). The call skew itself is not served."
+  - id: max_pain_at_or_below_spot
+    role: filter
+    rule: "Max pain sits at or below spot"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    replay: /api/v1/backtesting/snapshots?data_type=coinglass_options&start={start}
+    replay_field: snapshots[].data[].max_pain
+    note: "BTC only (no ETH max pain). It is computed on the Deribit expiry with the largest open interest, which may not be the spread's expiry. Compare it with spot from /api/v1/hyperliquid/open-interest."
+  - id: above_call_oi_wall
+    role: entry
+    rule: "Park the short call above the call open-interest wall"
+    runnable: false
+    note: "No per-strike open interest is served; /market-intelligence/options carries only aggregate OI, the put/call ratio and one max-pain strike."
+  - id: bull_trend_veto
+    role: filter
+    rule: "Veto entry while strong_trend_bull is the leading market regime: call-credit spreads die in squeezes"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "The coin's own read is /api/v1/quant/coins/{symbol}."
+  - id: squeeze_fuel_above_spot
+    role: filter
+    rule: "Short dealer gamma above spot confirms squeeze fuel against the position"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    note: "/quant/gex is a perp analog of dealer gamma, not Deribit options gamma; a score at or above 0.35 is the amplify state. The page sets no threshold for standing aside."
+  - id: profit_target_half_credit
+    role: exit
+    rule: "Close at 50% of max credit"
+    runnable: true
+    input: position
+    note: "The spread's current mark comes from Deribit; no option prices are served."
+  - id: manage_at_21_dte
+    role: exit
+    rule: "Manage or roll at about 21 DTE; roll up and out for a credit only while the bearish-to-neutral thesis holds"
+    runnable: true
+    input: position
+  - id: stop_2x_credit
+    role: stop
+    rule: "Close a tested spread when the buy-back cost reaches about 2x the credit received"
+    runnable: true
+    input: position
+  - id: regime_flip_exit
+    role: exit
+    rule: "Flatten on a DVOL or funding regime flip that invalidates the view"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "The page does not define the flip; a move to vol_shock or a strong rise in funding are the obvious readings."
+  - id: short_squeeze_exit
+    role: exit
+    rule: "Exit early on a short-liquidation cascade while short the spread"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&include_quiet=true
+    field: alerts[].direction
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=5m&start={start}
+    replay_field: data[].short_usd
+    note: "A triggered alert with direction short_squeeze (shorts being liquidated, forced buying) is the trigger. The page defines no cascade size, so the alert's own severity cut (min_severity, default 0.35) stands in for it. OKX + Bybit + Hyperliquid, no Binance; replay is Hyperliquid only, from 2026-07-23."
 ---
 
 # Bear Call Spread

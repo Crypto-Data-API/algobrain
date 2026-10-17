@@ -21,6 +21,62 @@ expected_sharpe: 1.5
 expected_max_drawdown: 0.1
 breakeven_cost_bps: 12
 related: ["[[arbitrage]]", "[[cross-exchange-arbitrage]]", "[[mev-strategies]]", "[[forex]]", "[[order-book]]", "[[slippage]]", "[[latency-arbitrage]]", "[[limits-to-arbitrage]]", "[[market-efficiency]]", "[[restaking-token-arbitrage]]", "[[crisis-currency-triangular-arbitrage]]", "[[medieval-bill-of-exchange-arbitrage]]", "[[historical-cable-arbitrage]]", "[[eurodollar-triangular-arbitrage]]", "[[yen-carry-triangular-arbitrage]]", "[[crypto-spot-perp-futures-triangle]]", "[[dex-pool-triangular-arbitrage]]"]
+gates:
+  - id: liquid_triplet
+    role: universe
+    rule: "Three related pairs on one venue, all liquid (e.g. BTC/USDT, ETH/BTC, ETH/USDT on Binance)"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/24hr?symbol=ETHBTC
+    field: quote_volume
+    note: "24h Binance spot volume per pair (quote_volume is in the quote asset, BTC here); query each of the three legs. The page sets no liquidity floor, so the cutoff is the desk's call."
+  - id: cross_rate_deviation
+    role: entry
+    rule: "Implied cross (BTC/USDT x ETH/BTC) differs from the quoted ETH/USDT; compute both cycle directions on executable bid and ask, not mid"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol=ETHBTC
+    field: price
+    replay: /api/v1/market-data/klines?symbol=ETHBTC&interval=1m&limit=1000
+    replay_field: klines[].close
+    note: "Research only: these are last-trade prices per pair (call BTCUSDT, ETHBTC and ETHUSDT), cached and seconds old, with no best bid or ask, and the real opportunity lives for milliseconds on exchange websockets. Replay is the last 1,000 one-minute closes per pair, an upper bound on opportunity frequency rather than P&L evidence."
+  - id: net_of_three_fees
+    role: filter
+    rule: "Execute only if the cycle's gross surplus exceeds 3 x the taker fee plus spreads and a slippage buffer (12 bp at 4 bp per leg)"
+    runnable: partial
+    input: derived
+    inputs: [cross_rate_deviation]
+    note: "The fee tier is the account's own. Spreads need the order book, which is not served for Binance spot."
+  - id: regime_frequency
+    role: filter
+    rule: "Stale-quote windows widen in vol_spike and choppy_high_vol states and around listings; measure deviation frequency per regime state"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the AI-agent workflow; it tunes where to point the bot rather than gating a trade, and sets no cutoff."
+  - id: pair_constraints
+    role: filter
+    rule: "Check tick sizes and lot filters per pair: a triplet whose thinnest leg cannot take the minimum viable size is dead"
+    runnable: partial
+    endpoint: /api/v1/market-data/exchange-info?symbol=ETHBTC
+    field: base_precision
+    note: "Only base and quote precision are served, not Binance's tick-size, lot-size or min-notional filters."
+  - id: size_thinnest_leg
+    role: sizing
+    rule: "Size each cycle to the order-book depth of the thinnest of the three legs"
+    runnable: false
+    note: "No Binance spot order-book depth is served (/liquidity/depth covers Hyperliquid perps only)."
+  - id: partial_fill_flatten
+    role: exit
+    rule: "If only one or two legs fill, flatten the residual at market immediately"
+    runnable: true
+    input: position
+  - id: kill_execution_stats
+    role: stop
+    rule: "Kill switch: fill-success rate too low for unwinds to leave a profit, median realised edge below 3 x fee + spreads, order-to-fill latency behind the frontier, or partial-fill losses above the set share of arb P&L"
+    runnable: true
+    input: position
+    note: "All from the bot's own execution logs; the page leaves the share for partial-fill losses to the desk."
 ---
 
 # Triangular Arbitrage

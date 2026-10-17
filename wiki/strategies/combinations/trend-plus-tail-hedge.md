@@ -34,6 +34,156 @@ kill_criteria: |
   - tail hedge: annual cost exceeds 4% of NAV without a cascade payoff in 18 months (re-spec strikes/budget)
   - combined drawdown > 25% — reduce both components to half size
   - DVOL structurally above 90th percentile for > 60 days (new-regime bear; stop adding new put wings at peak cost)
+gates:
+  - id: trend_universe
+    role: universe
+    rule: "Trend core on BTC and ETH perps; SOL, BNB and up to 4-5 liquid alt perps as satellites"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "BTC and ETH are fixed. Which alts qualify as liquid satellites is not defined (no volume or OI floor), so the desk picks them; assets[].day_volume and open_interest_usd are on the same rows."
+  - id: ema_cross_long
+    role: entry
+    rule: "Trend long when the 50-day EMA of daily closes is above the 200-day EMA"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=600
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Compute both EMAs from closed daily bars (drop the forming bar named by forming_bar_timestamp); 600 bars gives the 200-day EMA time to settle. Hyperliquid daily history runs back to 2023."
+  - id: ema_cross_short
+    role: entry
+    rule: "Trend short when the 50-day EMA of daily closes is below the 200-day EMA"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=600
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Same series as ema_cross_long."
+  - id: fast_cross_sleeve
+    role: entry
+    rule: "Optional faster sub-allocation on the 20-day versus 50-day EMA crossover"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "The signal is mechanical, but the page gives no size for the sub-allocation, so that is the desk's call."
+  - id: atr_unit_size
+    role: sizing
+    rule: "N-unit sizing: risk 0.5-1% of the portfolio per market per unit, using the 20-day ATR"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=45&atr=20
+    field: candles[].atr
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].high
+    note: "Units = risk budget / ATR in USD per coin. The example uses 0.75%. For replay, compute the 20-day ATR from high, low and close."
+  - id: correlation_cap
+    role: sizing
+    rule: "Treat correlated alt perps (about 0.8+ to BTC in risk-off) as one BTC-beta unit for the correlation limits"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles/batch?coins={coin}&interval=1d&limit=90&closed_only=true
+    field: series.{coin}[].close
+    note: "Correlate daily returns with BTC's. The page names no correlation window, no exact cutoff and no cap on how many units the combined bucket may hold; those are the desk's call."
+  - id: funding_drag
+    role: filter
+    rule: "Net expected funding against trend expectancy: longs pay positive funding, shorts pay negative funding"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_sum
+    note: "Sum the last 24 hourly settlements for the daily carry. The page gives no funding level at which to cut or skip a trend position, so the cutoff is the desk's call."
+  - id: quant_trend_vs_chop
+    role: filter
+    rule: "Before the trend leg deploys, use the HMM regime to separate a sustained trend from chop"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's data and agent-workflow sections, not its rules. Which labels count as chop (for example choppy_high_vol) and what the trend leg does then are not stated."
+  - id: monthly_rebalance
+    role: sizing
+    rule: "On the first day of each month (or a major expiry), re-mark everything, rebalance trend positions to current signals and resize N-units for the new ATR"
+    runnable: true
+    input: position
+  - id: sleeve_allocation
+    role: sizing
+    rule: "Allocate 70-80% to the trend core, 10-15% to OTM put wings, 5% to the straddle sleeve and 5-10% to a stablecoin reserve"
+    runnable: true
+    input: position
+  - id: dvol_pctile_low
+    role: filter
+    rule: "Add put wings and straddles only when the DVOL percentile is below 40"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Rank today's dvol within items[].history (daily Deribit DVOL for BTC and ETH, about 180 days from 2026-04-20; history is Pro Plus). The page names no percentile lookback, so the 180-day window is a substitute. /volatility/regime compressed, which the page also cites, is realised vol, not DVOL."
+  - id: term_contango
+    role: filter
+    rule: "Straddles only when the implied-vol term structure is in contango"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "Contango means atm_iv rises with expiry_days. The page does not say which tenors to compare (for example 7 days against 45 days), so that is the desk's call. Pro Plus."
+  - id: put_wing_buy
+    role: entry
+    rule: "Buy BTC/ETH puts 20-35% out of the money, 45-90 days to expiry, USDC-margined, staggered across two expiries"
+    runnable: false
+    note: "No option chain, strike list or option premium is served; selecting and pricing the wing needs Deribit's chain. Only ATM implied vol per expiry is on /volatility/implied."
+  - id: put_budget
+    role: sizing
+    rule: "Spend about 0.2-0.4% of the total portfolio per month on put premium"
+    runnable: true
+    input: position
+  - id: put_roll
+    role: exit
+    rule: "Roll the put wings quarterly or when days to expiry fall below 14, into the next 45-90 DTE strike"
+    runnable: true
+    input: position
+  - id: straddle_buy
+    role: entry
+    rule: "Buy 45-day ATM BTC/ETH straddles when dvol_pctile_low and term_contango hold; roll monthly"
+    runnable: false
+    note: "The two filters are served, but straddle quotes are not: term_structure gives ATM implied vol per expiry, not tradeable option prices. Price and fill the straddle on Deribit."
+  - id: straddle_scale_out
+    role: exit
+    rule: "Begin scaling out of a straddle once its mark exceeds 2x its cost"
+    runnable: false
+    note: "Needs the straddle's own option mark, which comes from the Deribit position, not from any served endpoint."
+  - id: cascade_monetize
+    role: exit
+    rule: "When a cascade hits, sell 50-70% of the puts and straddles into the spike instead of holding for maximum payout"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&window_s=3600&include_quiet=true
+    field: alerts[].triggered
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].long_usd
+    note: "The page does not define a cascade numerically (its examples are BTC -25% or DVOL 50 to 110). triggered with direction long_flush is the served cascade flag (OKX, Bybit and Hyperliquid; Binance not captured). The option marks to sell at come from Deribit. Replay is Hyperliquid fills from 2026-07-23."
+  - id: reload_short
+    role: entry
+    rule: "After a payoff, use tail-hedge profits to fund new short perp entries once the trend signal confirms the downtrend"
+    runnable: true
+    input: derived
+    inputs: [ema_cross_short]
+  - id: profit_sweep
+    role: sizing
+    rule: "Sweep realised trend profits above the target allocation into the tail-hedge replenishment budget"
+    runnable: true
+    input: position
+  - id: dvol_high_stop_wings
+    role: filter
+    rule: "Stop adding new put wings when DVOL has stayed above its 90th percentile for more than 60 days"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "From the kill criteria. The served daily history is about 180 days, so a 90th-percentile rank over a longer base is not possible; the lookback is the desk's call. Pro Plus."
+  - id: drawdown_half_size
+    role: sizing
+    rule: "Combined drawdown above 25%: cut both the trend and the tail components to half size"
+    runnable: true
+    input: position
 ---
 
 # Trend Following + Tail Risk Hedge

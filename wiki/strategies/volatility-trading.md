@@ -22,6 +22,121 @@ expected_sharpe: 0.7
 expected_max_drawdown: 0.45
 breakeven_cost_bps: 60
 decay_evidence: "BTC DVOL structurally declined from routine 70-90% readings in 2021 to 40-55% baselines through 2024-2025 as the options market deepened, ETF-driven spot ownership diluted the leveraged-long share, and covered-call ETFs plus on-chain option vaults industrialised systematic call-writing. The IV-RV spread compressed roughly in step, but crypto's crash frequency (2020-03, 2022 LUNA/FTX, 2025-10-10) keeps the tail-risk premium alive."
+gates:
+  - id: btc_eth_deribit
+    role: universe
+    rule: "Canonical variant: short the crypto variance risk premium on BTC/ETH options (Deribit), delta-hedged on the perp"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "We serve Deribit DVOL (current and about 180 days of daily history) and the ATM term structure for BTC and ETH, despite the page pointing to Deribit for DVOL. Option quotes and fills come from Deribit."
+  - id: dvol_pctile_40_90
+    role: entry
+    rule: "Enter short premium only when the DVOL percentile of its trailing year is about 40th-90th"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Rank today's dvol against the served daily history, which is about 180 days (Pro Plus), not 365."
+  - id: spread_above_5
+    role: entry
+    rule: "DVOL minus the forecast realized vol (20-30 day close-to-close or Parkinson) above 5 vol points"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "vrp = dvol - realized_30 uses trailing 30-day realized vol as the forecast, as the pseudocode does. For Parkinson, use /api/v1/volatility/regime/{symbol} vol.rv_parkinson_30. Replay: daily DVOL against realized vol from /api/v1/hyperliquid/candles daily bars."
+  - id: no_shock_or_catalyst_day
+    role: filter
+    rule: "Do not enter into an active vol shock (DVOL above about the 90th percentile) or on the day of a major scheduled catalyst (FOMC, CPI, large unlock, ETF decision)"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=1
+    field: items[].days_until
+    note: "macro_print (FOMC, CPI) and unlock rows with days_until 0 or 1 are served; ETF decisions are not and 'large' has no size. The DVOL leg shares dvol_pctile_40_90's 180-day caveat."
+  - id: vol_regime_gate
+    role: filter
+    rule: "No short-premium entries while the coin's vol regime is vol_shock or expanding"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow, which also asks for a rising vol_spike probability to block entries (/api/v1/quant/market probabilities; no threshold given)."
+  - id: structure_tenor_delta
+    role: entry
+    rule: "Sell a 21-45 DTE strangle (35 DTE, 16 delta in the pseudocode) or, strongly preferred, a defined-risk iron condor"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "The expiry is mechanical from expiry_days (Pro Plus). No per-strike Greeks are served; a 16-delta strike is a skew-blind Black-Scholes approximation from that expiry's atm_iv."
+  - id: delta_hedge_perp
+    role: sizing
+    rule: "Delta-hedge on the perp on a band plus funding-boundary schedule; the hedge pays or collects funding"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    note: "Position delta comes from the venue's Greeks; the page gives no band width. Hyperliquid settles funding hourly, Deribit's perp every 8 hours."
+  - id: take_profit_50
+    role: exit
+    rule: "Take profit at 50% of the maximum premium collected"
+    runnable: true
+    input: position
+  - id: close_10_14_dte
+    role: exit
+    rule: "Close or roll at 10-14 DTE (12 in the pseudocode), whichever comes first with the profit take"
+    runnable: true
+    input: position
+  - id: kill_dvol_session_50
+    role: stop
+    rule: "Flatten all short vega immediately if DVOL rises more than 50% in a single session"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "Crypto trades 24/7, so the session start is the desk's choice (00:00 UTC is one). Poll dvol against the value logged at that start; intraday DVOL history is not served."
+  - id: kill_delta_2x
+    role: stop
+    rule: "Flatten if position delta exceeds 2x the entry delta"
+    runnable: true
+    input: position
+  - id: vega_cap
+    role: sizing
+    rule: "Short vega at most 1% of NAV per DVOL vol point"
+    runnable: true
+    input: position
+    note: "Position vega comes from the venue's Greeks."
+  - id: margin_25pct_entry
+    role: sizing
+    rule: "Keep portfolio-margin utilisation at or below 25% at entry; above 60% intraday, cut size 50%"
+    runnable: true
+    input: position
+  - id: long_vol_overlay_required
+    role: sizing
+    rule: "Never run undefined-risk short vol without a live long-vol overlay (deep-OTM BTC puts or DVOL-referenced convexity)"
+    runnable: true
+    input: position
+  - id: kill_drawdown
+    role: filter
+    rule: "Pause 30 days on a drawdown above 30% of allocated capital (45% is the modeled worst case)"
+    runnable: true
+    input: position
+  - id: kill_rv_over_iv_20d
+    role: filter
+    rule: "Suspend when realized vol exceeds DVOL for 20+ consecutive days"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Compare each day's dvol with the 30-day realized vol from /api/v1/hyperliquid/candles daily closes over the last 20 days; the served dvol history covers about 180 days."
+  - id: kill_spread_6m_below_3
+    role: filter
+    rule: "Stand aside when the trailing 6-month average BTC/ETH IV-RV spread is below +3 vol points; re-enter when it normalizes"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Six months fits inside the ~180-day DVOL history (Pro Plus); pair each day with 30-day realized vol from daily candles."
+  - id: kill_venue_event
+    role: filter
+    rule: "Any Deribit auto-liquidation, socialised-loss or unscheduled-outage event: flatten and stand down"
+    runnable: false
+    note: "No venue status or incident feed for Deribit is served."
 ---
 
 # Volatility Trading

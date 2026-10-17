@@ -22,6 +22,69 @@ expected_max_drawdown: 0.20
 breakeven_cost_bps: 50
 decay_evidence: "Post-Shapella (April 2023) withdrawals enabled; depegs now shallow (<1%)."
 related: ["[[funding-rate-arbitrage]]", "[[stablecoin-pair-arbitrage]]", "[[depeg-risk]]", "[[lido]]", "[[rocket-pool]]", "[[curve-finance]]", "[[2022-05-terra-luna-depeg-arb]]", "[[three-arrows-capital]]", "[[ethena]]"]
+gates:
+  - id: lst_ratio_below_097
+    role: entry
+    rule: "Trigger: stETH/ETH (or rETH/ETH, cbETH/ETH) below 0.97"
+    runnable: true
+    endpoint: /api/v1/dex/token/ethereum/{address}
+    field: top_pools[].price_usd
+    note: "address = the LST contract on ethereum: stETH 0xae7ab96520de3a18e5e111b5eaab095312d7fe84, rETH 0xae78736cd615f374d3085123a210448e74fc6393, cbETH 0xbe9895146f7af43049ca1c1ae358b0541ea49704 (LSTs are not on /coins). Take price_usd from the deepest pool (by reserve_usd) whose base token is the LST and divide by ETH's current_price on /coins/ETH; both are cached prices, minutes old. stETH rebases, so its par is 1.0. rETH and cbETH accrue value and trade above 1 ETH, so measure them against the protocol redemption rate, read on-chain (not served). No history is served, so there is no replay."
+  - id: curve_imbalance_70pct
+    role: filter
+    rule: "Curve stETH pool imbalance above 70% on the LST side"
+    runnable: false
+    note: "Per-token pool reserves are not served; reserve_usd is the pool's combined total. Read the Curve pool balances on-chain."
+  - id: forced_seller_confirm
+    role: filter
+    rule: "Confirm forced-seller dynamics: on-chain liquidations and large flows from known wallets (Celsius, Aave whales)"
+    runnable: false
+    note: "Lending-protocol liquidations and labelled-wallet flows on Ethereum are not served. /on-chain/exchange-flows covers flows to and from exchanges only."
+  - id: eth_short_hedge
+    role: sizing
+    rule: "Long the LST and short ETH (perp or borrowed spot) at 1:1 notional"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/summary?coin=ETH
+    field: mark_price
+  - id: curve_depth_2pct
+    role: sizing
+    rule: "Cap exposure at the Curve depth available with no more than 2% slippage on exit; split large size across days"
+    runnable: partial
+    endpoint: /api/v1/dex/token/ethereum/{address}
+    field: top_pools[].reserve_usd
+    note: "reserve_usd is total pool liquidity, a ceiling rather than a 2%-slippage size; computing slippage needs the Curve stableswap curve and per-token balances."
+  - id: short_leg_funding
+    role: sizing
+    rule: "Account for ETH perp funding on the short leg (often deeply negative in these events, a tailwind)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin=ETH&limit=24
+    field: history[].funding_rate
+    note: "Hourly prints; the short receives funding when the rate is positive and pays when it is negative."
+  - id: exit_peg_restored
+    role: exit
+    rule: "Exit when the spread narrows to within 30-50 bps (the pseudocode uses a ratio above 0.995)"
+    runnable: true
+    endpoint: /api/v1/dex/token/ethereum/{address}
+    field: top_pools[].price_usd
+    note: "Same ratio as lst_ratio_below_097."
+  - id: exit_via_withdrawal
+    role: exit
+    rule: "Alternatively unstake through the Lido or Rocket Pool exit queue, redeem 1:1 and close the ETH short, when the queue is short enough"
+    runnable: false
+    note: "Withdrawal-queue length is not served; read it from Lido or Rocket Pool. The page does not define too long."
+  - id: exit_catalyst_close
+    role: exit
+    rule: "Exit when the forced-selling event ends (bankruptcy resolution, liquidation completion)"
+    runnable: false
+    note: "A judgement on off-chain events."
+  - id: stop_spread_widens
+    role: stop
+    rule: "Re-evaluate when the spread widens more than 2% beyond entry AND the exit queue grows beyond the expected hold"
+    runnable: partial
+    endpoint: /api/v1/dex/token/ethereum/{address}
+    field: top_pools[].price_usd
+    note: "The spread leg is served as in lst_ratio_below_097; the queue leg is not."
 ---
 
 # LST Depeg Arbitrage

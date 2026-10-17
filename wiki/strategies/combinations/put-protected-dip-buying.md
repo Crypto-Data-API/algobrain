@@ -34,6 +34,137 @@ kill_criteria: |
   - DVOL ≥ 95th percentile at entry for 3 consecutive events: overlay is consistently purchased at worst-value pricing; recalibrate entry to require lower DVOL
 
 related: ["[[funding-flush-reversal]]", "[[oi-flush-reversion]]", "[[onchain-capitulation-confluence]]", "[[leverage-stress-tail-hedge]]", "[[protective-put]]", "[[cascade-monetization-rotation]]", "[[post-panic-vol-selling]]", "[[crowded-short-funding-fade]]", "[[liquidation-cascade-fade]]", "[[post-liquidation-rebound]]", "[[deribit]]", "[[dvol]]", "[[implied-volatility]]", "[[variance-risk-premium]]", "[[open-interest]]", "[[funding-rate]]", "[[fear-and-greed-index]]", "[[perpetual-futures]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: underlyings
+    role: universe
+    rule: "BTC and ETH only (spot or perp long, protected with a Deribit put)"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+  - id: funding_flush
+    role: entry
+    rule: "Method A leg 1: 8h funding below -0.02% on each of the last 3 settlements (24+ hours)"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=3
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance settles every 8h, so 3 prints cover 24 hours; each below -0.0002. On Hyperliquid use the 8-settlement sums over the last 24 hourly prints."
+  - id: dip_8pct
+    role: entry
+    rule: "Method A leg 2: price at least 8% below its recent 5-day high"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=31
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].high
+    note: "5-day high = the highest high of the last 30 4h bars; compare with the latest close."
+  - id: oi_flush
+    role: entry
+    rule: "Method B leg 1: open interest at least 15% below its 5-day peak"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    field: data[].oi_close
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].oi_close
+    note: "start = 5 days ago; drop = 1 - last oi_close / max oi_close. Hyperliquid OI, closed 1h bars, from 2026-03-30. Binance daily OI is history[].sum_open_interest on /derivatives/binance/open-interest?symbol={coin}USDT."
+  - id: price_below_oi_peak_high
+    role: entry
+    rule: "Method B leg 2: price at least 6% below the high at the time of peak OI"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    field: data[].mark_close
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].mark_close
+    note: "Take the bar with the highest oi_close and read its high from /hyperliquid/candles?interval=1h (join on time = timestamp); mark_close on that row is the close of the same hour."
+  - id: inflow_spike
+    role: entry
+    rule: "Method C leg 1: an on-chain capitulation signal, a top-decile exchange inflow spike"
+    runnable: partial
+    endpoint: /api/v1/on-chain/exchange-flows/{symbol}
+    field: spike_zscore_24h
+    note: "The page names no window for top decile. spike_zscore_24h scores today's 24h flow; a z of about 1.28 is the top decile of a normal. /on-chain/exchange-flows/spike-alerts lists single transfers of $1M or more, not a percentile. Hourly history starts 2026-05-28."
+  - id: fear_extreme_2d
+    role: entry
+    rule: "Method C leg 2: Fear & Greed at or below 20 for 2+ consecutive days"
+    runnable: true
+    endpoint: /api/v1/sentiment/fear-greed
+    field: value
+    replay: /api/v1/market-health/history?days=365
+    replay_field: history[].components.fear_greed
+    note: "One reading per UTC day; the replay is the daily index value (market-health components.fear_greed) from 2026-01-14."
+  - id: method_c
+    role: entry
+    rule: "Method C qualifies when inflow_spike and fear_extreme_2d both hold"
+    runnable: partial
+    input: derived
+    inputs: [inflow_spike, fear_extreme_2d]
+    note: "Only as runnable as inflow_spike."
+  - id: any_method
+    role: entry
+    rule: "Enter when any one method qualifies: A (funding_flush and dip_8pct), B (oi_flush and price_below_oi_peak_high) or C; preference C, then A, then B"
+    runnable: true
+    input: derived
+    inputs: [funding_flush, dip_8pct, oi_flush, price_below_oi_peak_high]
+    note: "Methods A and B are fully runnable, so the gate is too; method_c adds a third, partial path."
+  - id: cascade_still_running
+    role: filter
+    rule: "Defer entry while liquidation cascades are still occurring, even if a capitulation method fires"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/liquidations?symbol={coin}
+    field: data[].liq_1h_vs_7d_median.total
+    note: "From the indicator list. liq_1h_vs_7d_median.total is the last hour's Hyperliquid liquidations over the 7-day median hour (3.0 = three normal hours); the page gives no cut, so the desk sets one. Binance liquidations are not captured."
+  - id: no_structural_shock
+    role: filter
+    rule: "Defer entry while the market regime is Structural Shock"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Block on structural_shock_crisis. Regime history starts 2026-08-07."
+  - id: put_strike_expiry
+    role: entry
+    rule: "Buy an OTM put 15-20% below the entry price (17.5% in the pseudocode) with DTE 21-45"
+    runnable: false
+    note: "Strikes, prices and fills come from Deribit's option chain, which we do not serve. /volatility/implied term_structure lists expiries and ATM IV only."
+  - id: put_cost_budget
+    role: filter
+    rule: "Skip the entry when the put costs more than 2.5% of the long notional"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "The pseudocode estimates the premium from DVOL with a rough Black-Scholes approximation, which DVOL supports; the real cost is the Deribit quote, which we do not serve."
+  - id: risk_sizing
+    role: sizing
+    rule: "Size the long so the full loss to the put floor plus the premium is at most 2-3% of the portfolio: notional = capital x 3% / (floor width + put cost)"
+    runnable: true
+    input: position
+  - id: one_position
+    role: sizing
+    rule: "At most 1 protected dip-buy open at a time"
+    runnable: true
+    input: position
+  - id: recovery_exit
+    role: exit
+    rule: "Close the long when price has recovered 50-70% (60% in the pseudocode) of the decline from the 5-day high; sell the residual put or let it decay"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/prices
+    field: prices.{coin}
+    note: "Record the 5-day high and the entry price at entry; target = entry + 0.6 x (high - entry)."
+  - id: put_floor_exit
+    role: stop
+    rule: "If spot falls to the put strike, close the long and exercise or sell the put"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/prices
+    field: prices.{coin}
+  - id: time_exit
+    role: exit
+    rule: "Close the long and the put 3 days before the put's expiry if neither target nor floor is reached"
+    runnable: true
+    input: position
 ---
 
 # Put-Protected Dip Buying

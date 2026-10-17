@@ -22,6 +22,51 @@ expected_sharpe: 5
 expected_max_drawdown: 0.05
 breakeven_cost_bps: 100
 decay_evidence: "Strategy existed since 1990s; modern aggregators (OddsJam, RebelBetting, Trademate) commoditized detection. Accounts get limited or banned within months once flagged as 'arbitrage'."
+gates:
+  - id: bookmaker_accounts
+    role: universe
+    rule: "Hold active accounts at 8-15 bookmakers across jurisdictions"
+    runnable: true
+    input: position
+  - id: odds_feed
+    role: universe
+    rule: "Subscribe to an odds aggregator (OddsJam, RebelBetting or Trademate Sports)"
+    runnable: false
+    note: "No sports odds are served. Needs one of those aggregators or the bookmakers' own feeds."
+  - id: surebet_2pct
+    role: entry
+    rule: "Alert on sure-bets above 2%: the implied probabilities (1 / decimal odds) across books sum to below 0.98"
+    runnable: false
+    note: "Needs live bookmaker odds, which are not served."
+  - id: proportional_stakes
+    role: sizing
+    rule: "stake_A = (1/odds_A) / (1/odds_A + 1/odds_B) x total stake (about $200 total per arb in the pseudocode)"
+    runnable: false
+    input: derived
+    inputs: [surebet_2pct]
+    note: "Needs the odds, which are not served."
+  - id: all_legs_seconds
+    role: entry
+    rule: "Place every leg within seconds, only when all the arb's bookmaker accounts are active"
+    runnable: partial
+    input: position
+    note: "Account status comes from the desk's records; leg timing is execution against books whose odds are not served."
+  - id: account_rotation
+    role: sizing
+    rule: "Rotate accounts and vary bet patterns to delay limiting; withdraw winnings regularly"
+    runnable: true
+    input: position
+  - id: kill_all_limited
+    role: stop
+    rule: "Kill switch: all major bookmaker accounts limited, or withdrawal restrictions imposed"
+    runnable: true
+    input: position
+  - id: kill_few_arbs
+    role: stop
+    rule: "Kill switch: average daily arb count below 2 for 30 or more days"
+    runnable: partial
+    input: position
+    note: "Counted from the desk's own alert log; the odds feed behind it is not served."
 ---
 
 # Sports Betting Arbitrage (Sure-Bets)

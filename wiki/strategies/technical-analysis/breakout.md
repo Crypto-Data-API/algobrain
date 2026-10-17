@@ -18,6 +18,118 @@ data_required: [ohlcv-daily, volume]
 min_capital_usd: 2000
 capacity_usd: 20000000
 related: ["[[edge-taxonomy]]", "[[support]]", "[[resistance]]", "[[support-resistance]]", "[[volume]]", "[[average-true-range]]", "[[momentum]]", "[[trend-following]]", "[[breakout-trading]]", "[[consolidation]]", "[[position-sizing]]", "[[false-breakout]]"]
+gates:
+  - id: consolidation_range
+    role: entry
+    rule: "A consolidation of at least 4 weeks whose high-low range is at most 10% (resistance = range high, support = range low)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].high
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].h
+    note: "From the pseudocode (min_weeks=4, max_range_pct=0.10). Over closed daily bars before today, find a run of at least 28 bars whose max high / min low - 1 is at most 0.10. Drop the forming bar named by forming_bar_timestamp."
+  - id: level_touches
+    role: filter
+    rule: "The level is tested at least 2-3 times before the break"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].high
+    note: "Count bars whose high (low) comes within a tolerance of resistance (support). The page does not define a touch, so the tolerance is the desk's call."
+  - id: close_beyond_level
+    role: entry
+    rule: "Enter when a daily bar closes beyond the level: long above resistance, short below support (a close, not a wick)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=3
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].c
+    note: "Use the last closed bar only."
+  - id: breakout_volume_1_5x
+    role: entry
+    rule: "Breakout bar volume at least about 1.5x its 20-day average"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=22
+    field: candles[].volume
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].v
+    note: "Average the 20 closed bars before the breakout bar. Hyperliquid perp volume; the page's example uses Binance spot (/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d), which works the same way."
+  - id: retest_entry
+    role: entry
+    rule: "Alternative: enter on the retest, when price pulls back to the broken level and holds"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=10
+    field: candles[].low
+    note: "The return to the level is mechanical; 'holds' is not defined on the page."
+  - id: trend_aligned_filter
+    role: filter
+    rule: "Optional: trade only with-trend breaks, using the 200-day moving average"
+    runnable: true
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: ma.above_200
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].c
+    note: "Longs only when above_200 is true, shorts only when false. Replay: recompute the 200-day SMA from closes."
+  - id: no_fresh_listings
+    role: universe
+    rule: "Skip freshly listed coins: they print fake N-day highs with no real range behind them"
+    runnable: true
+    endpoint: /api/v1/quant/coins/{coin}
+    field: meta.insufficient_history
+    note: "From the page's AI-agent tips; skip when insufficient_history or new_listing is true (new_listing is on each row of /api/v1/quant/coins)."
+  - id: chop_suppression
+    role: filter
+    rule: "Suppress entries while choppy_high_vol dominates the market regime"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "Skip while the committed label is choppy_high_vol."
+  - id: coiled_watchlist
+    role: filter
+    rule: "A compressed vol regime marks the coiled ranges worth watching"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "A watchlist aid from the page's AI workflow, not a hard entry condition."
+  - id: stop_back_inside
+    role: stop
+    rule: "Stop 1.0 ATR(14) back inside the range (rules allow 0.5-1x ATR beyond the level); a close back inside invalidates the break"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30&atr=14
+    field: candles[].atr
+  - id: measured_move_target
+    role: exit
+    rule: "Target = the range height projected from the breakout level"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: atr_trailing_stop
+    role: stop
+    rule: "Or trail: exit on a close below the highest close minus 2 ATR(14)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30&atr=14
+    field: candles[].close
+  - id: risk_per_trade
+    role: sizing
+    rule: "Size so the stop distance risks at most 1-2% of equity (the pseudocode uses 1%)"
+    runnable: true
+    input: position
+  - id: participation_context
+    role: filter
+    rule: "Grade the break with open interest and liquidation context: participation and stop clusters behind it"
+    runnable: partial
+    endpoint: /api/v1/liquidity/oi-divergence
+    field: rows[].oi_change_4h_pct
+    note: "The page names the data but gives no rule. Same-side liquidations are alerts[].direction on /api/v1/market-intelligence/squeeze-alerts?symbol={coin} (short_squeeze for an upside break)."
+  - id: kill_criteria
+    role: stop
+    rule: "Halt on a 25% drawdown, 12 consecutive losers, win rate under 30% with payoff under 1.5 over 50 trades, or realized slippage over 50 bps round-trip across 20 trades"
+    runnable: true
+    input: position
 ---
 
 # Breakout

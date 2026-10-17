@@ -34,6 +34,104 @@ kill_criteria: |
   - rolling 6-month Sharpe < 0 on the combined strategy
 
 related: ["[[regime-gated-grid]]", "[[oi-aware-grid]]", "[[funding-skewed-grid]]", "[[carry-with-tail-hedge]]", "[[leverage-stress-tail-hedge]]", "[[put-protected-dip-buying]]", "[[grid-trading]]", "[[crypto-options-volatility-selling]]", "[[deribit]]", "[[dvol]]", "[[implied-volatility]]", "[[open-interest]]", "[[funding-rate]]", "[[perpetual-futures]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_only
+    role: universe
+    rule: "BTC or ETH perp on Binance or Hyperliquid: the coins with Deribit puts to hedge with"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+  - id: grid_layout
+    role: sizing
+    rule: "Symmetric grid spanning plus and minus 15% from the current mid-price, levels 1.0-1.5% apart (1.2% in the pseudocode), at most 3x leverage on the grid book"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "The mid-price at deployment sets the range; on Binance use price on /market-data/ticker/price?symbol={coin}USDT."
+  - id: adx_run
+    role: filter
+    rule: "Grid runs only while ADX(14) is at or below 25; halt above 25"
+    runnable: true
+    endpoint: /api/v1/indicators/adx?coin={coin}&interval=1h
+    field: items[].adx
+    replay: /api/v1/indicators/adx?coin={coin}&interval=1h&history=500
+    replay_field: items[].history[].adx
+    note: "The page computes ADX from 1h bars; its production notes call it a daily monitor, which is interval=1d. Read the latest bar with final true."
+  - id: oi_build_halt
+    role: filter
+    rule: "Grid runs only while the 24h open-interest change is at or below +3%; halt above it"
+    runnable: true
+    endpoint: /api/v1/liquidity/oi-divergence
+    field: rows[].oi_change_24h_pct
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].oi_close
+    note: "Hyperliquid OI, about 25 large perps including BTC and ETH. The pseudocode uses a 12h change instead: compute it from 12 hourly oi_close values (replay from 2026-03-30)."
+  - id: trending_regime_halt
+    role: filter
+    rule: "Halt the grid and defer put purchases while the regime is Trending_Momentum"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "No served regime is named Trending_Momentum. The HMM labels strong_trend_bull and strong_trend_bear are the nearest; whether to use them, or the per-coin read on /quant/coins/{symbol}, is the desk's call."
+  - id: hedge_budget
+    role: sizing
+    rule: "Put budget = 20% (15-25%) of the trailing 14-day net grid P&L, zero after a losing period, capped at 0.8% of grid notional per purchase"
+    runnable: true
+    input: position
+  - id: dvol_cheap_enough
+    role: entry
+    rule: "Buy the put only when DVOL is at or below the 70th percentile of its trailing 52-week distribution; defer at or above the 75th"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Daily DVOL history is served from 2026-04-20 (about 180 days, Pro Plus), not 52 weeks, so the percentile window is shorter until a year has accrued. The pseudocode defers at the 70th; between 70 and 75 the text is silent."
+  - id: dvol_sustained_high
+    role: filter
+    rule: "Suspend put purchases while DVOL has stayed above its 80th percentile for 30 or more days"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "From the kill criteria. Same shortened percentile window as dvol_cheap_enough."
+  - id: put_strike
+    role: entry
+    rule: "Buy the deepest OTM put the budget can fund, at least 10% below the current mid-price"
+    runnable: false
+    note: "No option chain or per-strike put premium is served; the page itself prices puts from the Deribit API."
+  - id: put_expiry
+    role: entry
+    rule: "Put expiry: the nearest monthly (or weekly if no monthly fits) with 21-35 days to expiry"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "The list holds the nearest 12 Deribit expiries (daily, weekly, monthly and quarterly), Pro Plus. Some days none falls in 21-35 (on 2026-10-17 the nearest were 20 and 41 days)."
+  - id: put_coverage
+    role: sizing
+    rule: "Put notional = budget / put premium, rounded down to whole contracts; target at least 50% of the grid's buy-order notional at the lower boundary"
+    runnable: false
+    note: "Needs the put premium, which is not served (see put_strike)."
+  - id: range_breach_halt
+    role: stop
+    rule: "Halt new grid orders when price falls 3% or more below the lower grid boundary; hold the put"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: grid_reset_48h
+    role: entry
+    rule: "After a range breach, redeploy only once price has held above the prior lower boundary for at least 48 hours, re-centred on the new price"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=49
+    field: candles[].close
+    note: "Require every closed 1h close of the last 48 hours above the old lower boundary (drop the forming bar)."
+  - id: combined_drawdown_stop
+    role: stop
+    rule: "Close the grid and the put and pause when the combined drawdown exceeds 22% of deployed capital"
+    runnable: true
+    input: position
 ---
 
 # Grid with Tail Hedge

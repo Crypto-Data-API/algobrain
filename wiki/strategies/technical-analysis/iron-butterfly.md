@@ -12,6 +12,107 @@ markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[crypto-options-volatility-selling]]", "[[iron-condor]]", "[[butterfly-spread]]", "[[short-strangle]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[volatility-surface]]", "[[variance-risk-premium]]", "[[funding-rate]]", "[[gamma-exposure]]", "[[max-pain]]", "[[section-1256-contracts]]", "[[theta]]", "[[vega]]", "[[gamma]]", "[[delta]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit_only
+    role: universe
+    rule: "BTC and ETH Deribit options only; alt options lack the ATM depth to fly cleanly"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied vol served. Option quotes come from Deribit itself."
+  - id: atm_body_balanced_wings
+    role: entry
+    rule: "Sell the ATM call and put at the strike nearest spot; buy an OTM call and put one equal wing width away"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "The body strike follows from spot (oracle_price is a CEX spot composite close to Deribit's index); the strike grid and quotes come from Deribit, and the page sets no wing width."
+  - id: body_at_max_pain
+    role: entry
+    rule: "Place the body on the max-pain strike"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    replay: /api/v1/backtesting/snapshots?data_type=coinglass_options&start={start}
+    replay_field: snapshots[].data[].max_pain
+    note: "From the page's AI workflow. BTC only (no ETH max pain), computed on the Deribit expiry with the largest open interest, which may not be the fly's."
+  - id: credit_50_75_of_width
+    role: entry
+    rule: "Collect a credit of 50-75% of the wing width"
+    runnable: false
+    note: "Needs the four legs' quotes; no option prices are served."
+  - id: tenor_21_45_dte
+    role: entry
+    rule: "Expiry 21-45 days out"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure lists the nearest 12 Deribit expiries. It is Pro Plus and empty on lower tiers."
+  - id: dvol_40_90_pctile
+    role: filter
+    rule: "Sell only with DVOL inside its 40th-90th percentile band"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "Rank the latest dvol within history (about 180 daily closes, Pro Plus). The page names no lookback window, so the six-month window is the only served one."
+  - id: vrp_positive
+    role: filter
+    rule: "DVOL minus 30-day realized vol comfortably positive"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    note: "vrp = DVOL - 30-day Garman-Klass realized. 'Comfortably' has no number on this page (the iron-condor page uses 5 vol points)."
+  - id: elevated_not_vol_shock
+    role: filter
+    rule: "Sell when the vol regime is elevated but not vol_shock: a rich straddle without an expansion under way"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "Skipping vol_shock is mechanical; 'elevated' is not a served label (the page also names a post-shock mean-reverting tape as ideal, which is mean_reverting)."
+  - id: pin_regime
+    role: filter
+    rule: "range_low_vol probability plus long dealer gamma is the pin regime; either flipping is the exit cue"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    replay: /api/v1/quant/gex/history?symbol={coin}&from={start}
+    replay_field: points[].regime_score
+    note: "Long dealer gamma = score at or below -0.20 (dampen) on the perp-analog GEX, not Deribit options gamma. The regime half is explain.label_posteriors.range_low_vol on /api/v1/quant/market. The page gives no probability threshold."
+  - id: profit_target_25_50
+    role: exit
+    rule: "Close at 25-50% of max credit (enforce 25% mechanically); do not chase the pin"
+    runnable: true
+    input: position
+    note: "The fly's mark comes from Deribit; no option prices are served."
+  - id: time_stop_21_and_7_10
+    role: exit
+    rule: "Manage or close at about 21 DTE; hard exit by 7-10 DTE if spot is near a wing"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "The DTE parts are mechanical; 'near a wing' has no distance."
+  - id: stop_1_5x_credit
+    role: stop
+    rule: "Cut if the loss reaches about 1.5x the credit"
+    runnable: true
+    input: position
+  - id: dvol_shock_kill
+    role: stop
+    rule: "Flatten if DVOL rises more than 50% in a session"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "No intraday DVOL is served; compare the latest dvol with the prior day's close (crypto has no session)."
+  - id: cascade_flatten
+    role: stop
+    rule: "A liquidation cascade is the flatten-now trigger"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&include_quiet=true
+    field: alerts[].triggered
+    note: "A triggered alert in either direction. The page sets no cascade size, so the alert's own severity cut stands in. OKX + Bybit + Hyperliquid, no Binance."
 ---
 
 # Iron Butterfly

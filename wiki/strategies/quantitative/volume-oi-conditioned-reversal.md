@@ -26,6 +26,101 @@ kill_criteria: |
   - drawdown > 35%
   - reversal spread (high-vol/low-OI bucket minus rest) not positive over trailing 52 weeks
 related: ["[[quantpedia]]", "[[quantpedia-strategy-encyclopedia]]", "[[short-term-reversal]]", "[[overreaction-anomaly]]", "[[open-interest]]", "[[trading-volume]]", "[[oi-flush-reversion]]", "[[oi-price-exhaustion]]", "[[mean-reversion]]"]
+gates:
+  - id: top_perps_by_oi
+    role: universe
+    rule: "Universe: the top 30-50 USDT-margined perps by open interest"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+    note: "Rank Hyperliquid perps by open_interest_usd and keep the top 30-50. Hyperliquid perps are USDC-margined, so the cross-section differs from the page's USDT-margined Binance list; Binance OI is served only one symbol at a time (/api/v1/derivatives/binance/open-interest?symbol=SOLUSDT), with no universe listing."
+  - id: weekly_return
+    role: entry
+    rule: "7-day return per perp, measured on the weekly anchor (Wednesday to Wednesday in the original)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=9
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].c
+    note: "Latest closed daily close over the close 7 bars earlier, minus 1. Drop the forming bar named by forming_bar_timestamp. The weekday anchor is a degree of freedom the page warns about; daily bars close at 00:00 UTC."
+  - id: volume_change
+    role: entry
+    rule: "Volume change: trailing 7-day volume over the prior 7 days, above the universe median"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=15
+    field: candles[].volume
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].v
+    note: "Sum volume x close over the last 7 closed daily bars and over the 7 before, take the ratio, then compare with the median ratio across the universe. Hyperliquid volume is base units and qv is null in the replay, so use v x c for notional."
+  - id: oi_change_7d
+    role: entry
+    rule: "Open-interest change over 7 days, below the universe median"
+    runnable: true
+    endpoint: /api/v1/derivatives/hyperliquid/history?symbol={coin}&days=8
+    field: history[].open_interest_usd
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}&end={end}
+    replay_field: data[].oi_close
+    note: "Daily Hyperliquid OI; latest day over the day 7 earlier, minus 1, then compare with the universe median. Replay OI is populated from 2026-05-09 only (null before), and each replay call covers at most 93 days."
+  - id: churn_bucket
+    role: filter
+    rule: "Trade only the bucket with volume change above the median AND OI change below the median"
+    runnable: true
+    input: derived
+    inputs: [volume_change, oi_change_7d]
+  - id: contrarian_weights
+    role: sizing
+    rule: "Within the bucket, weight each perp by -(r_i - mean r): long last week's below-average performers, short the above-average ones, scaled dollar-neutral"
+    runnable: true
+    input: derived
+    inputs: [churn_bucket, weekly_return]
+    note: "Normalise the weights by the sum of absolute deviations, as the pseudocode does."
+  - id: vol_target_15
+    role: sizing
+    rule: "Scale the book to a 15% annual volatility target"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].close
+    note: "Compute the weighted book's realized vol from daily closes and scale gross exposure to 15% annualised. The page names no lookback for the vol estimate, so the window is the desk's call."
+  - id: skip_unlock_week
+    role: filter
+    rule: "Skip names in a major token-unlock week"
+    runnable: partial
+    endpoint: /api/v1/supply/unlocks?symbol={coin}&window_days=7
+    field: items[].pct_of_float
+    note: "An unlock dated inside the coming week flags the name. The page does not say how large counts as major; pct_of_float is the usual cut, and the threshold is the desk's call."
+  - id: skip_delisting_week
+    role: filter
+    rule: "Skip names in a live delisting week"
+    runnable: false
+    note: "No exchange delisting calendar is served; announcements need the exchanges' own notices."
+  - id: oi_divergence_cross_check
+    role: filter
+    rule: "Cross-check the bucket against price/OI divergence flags"
+    runnable: partial
+    endpoint: /api/v1/liquidity/oi-divergence
+    field: rows[].divergence_4h
+    note: "From the page's AI-agent workflow. It is a 4-hour divergence score, not the weekly bucket, and the page gives no rule for acting on it, so how it changes the book is the desk's call."
+  - id: funding_carry_net
+    role: sizing
+    rule: "Net each leg's expected funding before sizing (shorting winners often collects positive funding; longing losers in negative funding also earns)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}&end={end}
+    replay_field: data[].funding_sum
+    note: "Hourly Hyperliquid funding. The page says to net carry but gives no rule for how it changes the weights."
+  - id: conditioning_spread_kill
+    role: filter
+    rule: "Kill when the bucket's reversal spread versus the unconditioned universe is not positive over the trailing 52 weeks"
+    runnable: partial
+    input: derived
+    inputs: [weekly_return, volume_change, oi_change_7d]
+    note: "Needs 52 weeks of weekly OI changes. Live OI history is daily and the replay holds OI only from 2026-05-09, so the full 52-week test is not possible before May 2027."
+  - id: drawdown_kill
+    role: stop
+    rule: "Kill on a rolling 12-month net return below 0 or a drawdown above 35%"
+    runnable: true
+    input: position
 ---
 
 # Volume/OI-Conditioned Short-Term Reversal

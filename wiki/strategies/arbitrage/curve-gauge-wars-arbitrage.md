@@ -22,6 +22,67 @@ expected_max_drawdown: 0.40
 breakeven_cost_bps: 100
 decay_evidence: "Bribe APRs collapsed post-Terra (May 2022), recovered modestly 2023-2024."
 related: ["[[funding-rate-arbitrage]]", "[[lst-depeg-arbitrage]]", "[[stablecoin-pair-arbitrage]]", "[[curve-finance]]", "[[convex]]", "[[yearn]]", "[[frax]]", "[[defi-yield-farming]]", "[[2022-05-terra-luna-depeg-arb]]"]
+gates:
+  - id: bribe_apr_entry
+    role: entry
+    rule: "Buy and lock CVX when bribe APR = last round's USD bribes x 26 / USD value of the vlCVX supply exceeds the stable yield floor plus a risk premium"
+    runnable: false
+    note: "Bribe rounds, vlCVX supply and gauge weights are not served; they come from Votium, Hidden Hand and the Curve GaugeController and Convex contracts. The page names no risk-premium figure."
+  - id: stable_yield_floor
+    role: filter
+    rule: "Benchmark: the stablecoin yield the bribe APR must beat (the kill line is stable yield plus 5%)"
+    runnable: false
+    note: "No stablecoin lending or staking yields are served. Needs DefiLlama yields or the Aave and Compound supply rates."
+  - id: locked_stack_mark
+    role: sizing
+    rule: "Track real bribe yield on USD locked: mark the locked CVX or CRV stack at its market price"
+    runnable: true
+    endpoint: /api/v1/coins/{symbol}
+    field: current_price
+    replay: /api/v1/backtesting/klines?symbol={symbol}USDT&exchange=binance&interval=1d&start={start}
+    replay_field: klines[].c
+    note: "USD locked = tokens locked x current_price. Replay is Binance daily closes: CRVUSDT from 2026-05-09, CVXUSDT only 2026-06-12 to 2026-10-08."
+  - id: vote_for_max_bribe
+    role: entry
+    rule: "Each round, allocate votes to the gauges paying the most bribe per vote"
+    runnable: false
+    note: "Per-gauge bribe offers are not served; they come from Votium and Hidden Hand round data."
+  - id: lock_duration
+    role: sizing
+    rule: "Lock CVX as vlCVX for rolling 16-week locks, or CRV as veCRV for up to 4 years"
+    runnable: true
+    input: position
+  - id: allocation_cap_25pct
+    role: sizing
+    rule: "Cap the allocation at 25% of the stable yield book, diversified across vlCVX, veCRV and vefxs"
+    runnable: true
+    input: position
+  - id: hedge_sleeve_funding
+    role: sizing
+    rule: "Size the short-CVX-perp hedge sleeve separately, costing the funding it pays against the bribe yield it isolates"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=30
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "CVX has no Hyperliquid perp; Binance CVXUSDT settles every 4 hours (read the spacing of funding_time), so annualise by settlements per day. CRV hedges can use /hyperliquid/funding-rates instead. The page gives no hedge ratio or funding ceiling, so both are the desk's call. Replay rows are 5-minute samples of the live rate, not payments."
+  - id: exit_stop_relocking
+    role: exit
+    rule: "Exit by not re-locking when a 16-week vlCVX lock expires, then sell the unlocked CVX (veCRV cannot exit before its lock ends)"
+    runnable: true
+    input: position
+  - id: rotate_on_bribe_yield
+    role: exit
+    rule: "Rotate between CRV and CVX dependencies according to which earns the higher bribe yield"
+    runnable: false
+    note: "Needs per-protocol bribe yields, which are not served."
+  - id: security_tail_derisk
+    role: filter
+    rule: "De-risk when security stress spikes: one bug anywhere in the Curve + Convex + bribe-market + pool stack can zero the position"
+    runnable: partial
+    endpoint: /api/v1/security/regime/score
+    field: security_stress_score
+    note: "From the page's agent workflow, which gives no threshold. band (elevated, heavy, critical) is a ready cut; /security/events?symbol=CRV lists hacks tagged to a specific token. Which level triggers de-risking is the desk's call."
 ---
 
 # Curve Gauge Wars Arbitrage

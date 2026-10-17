@@ -12,6 +12,102 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[backspread]]", "[[butterfly-spread]]", "[[broken-wing-butterfly]]", "[[calendar-spread]]", "[[iron-condor]]", "[[implied-volatility]]", "[[delta]]", "[[gamma]]", "[[vega]]", "[[funding-rate]]", "[[deribit]]", "[[crypto-options-volatility-selling]]", "[[trade-repair-and-rolling]]", "[[gamma-risk]]", "[[section-1256-contracts]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit
+    role: universe
+    rule: "BTC or ETH options on Deribit only; alt options are too thin to leg a ratio"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "We serve Deribit DVOL and the ATM term structure for BTC and ETH. Option quotes, strikes and fills come from Deribit; no option chain is served."
+  - id: moderate_move_view
+    role: entry
+    rule: "Use when you expect a moderate, capped move to a target level, not a runaway trend"
+    runnable: false
+    note: "A directional forecast the page leaves to the trader; nothing served states an expected move size or target."
+  - id: legs_by_delta
+    role: entry
+    rule: "Call ratio: buy 1 ATM or slightly ITM call (about 50 delta), sell 2 OTM calls (about 25-30 delta); mirror with puts for the bearish form"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "No option chain or per-strike Greeks are served. With the expiry's atm_iv, Black-Scholes gives approximate 25-30 delta strikes, ignoring skew; exact deltas need Deribit's chain."
+  - id: zero_cost_or_credit
+    role: entry
+    rule: "Size the strikes for a zero-cost entry or a small net credit; any debit minimal"
+    runnable: false
+    note: "Option premiums are not served; the net cost comes from Deribit's quotes for the legs."
+  - id: tenor_21_45_dte
+    role: entry
+    rule: "Tenor 21-45 DTE"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "Pick a listed expiry with expiry_days 21 to 45 (35 in the example). term_structure is Pro Plus and lists the nearest 12 expiries."
+  - id: dvol_mid_high_pctile
+    role: entry
+    rule: "Best entered when DVOL sits in a mid-to-high percentile of its trailing year and is expected to fall"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Served DVOL history is about 180 days (Pro Plus), not a year, and the page names no percentile band (the example is the 70th). Whether DVOL will fall is a forecast."
+  - id: vol_regime_ok
+    role: filter
+    rule: "Enter on an expanding or normal vol regime likely to mean-revert down; never into vol_shock"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow."
+  - id: sell_overbid_wing
+    role: entry
+    rule: "Sell the wing the leveraged crowd has overbid: richly positive funding firms call skew (sell the call side)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "The page gives no funding threshold, and 25-delta skew itself is not served."
+  - id: take_profit_50_75
+    role: exit
+    rule: "Close at 50-75% of maximum profit; do not hold for a perfect pin"
+    runnable: true
+    input: position
+    note: "Option marks come from the venue."
+  - id: cap_naked_leg
+    role: stop
+    rule: "If price approaches the short strike with momentum, buy the next further-OTM option to turn the ratio into a broken-wing butterfly"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "The page defines neither 'approaches' (a distance to the strike) nor 'momentum'; both are the desk's. Deribit settles on its own index, which tracks spot."
+  - id: hard_stop_breach
+    role: stop
+    rule: "Flatten if the underlying breaches the short strike with momentum"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "The breach is mechanical; 'with momentum' is not defined, so the confirmation is the desk's."
+  - id: dvol_spike_stop
+    role: stop
+    rule: "Flatten if DVOL spikes hard against the short vega"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "The page sets no spike size. Poll dvol against the entry value; dvol_change_24h is the trailing 24h change."
+  - id: overshoot_warning
+    role: stop
+    rule: "Short dealer gamma plus cascade activity warns of the overshoot: trigger the wing purchase"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    note: "From the page's AI-agent workflow. /quant/gex is a perp analog of dealer gamma (score at or above 0.35 = amplify), not Deribit options GEX; cascades are on /api/v1/market-intelligence/squeeze-alerts. No thresholds are given."
+  - id: manage_by_21_dte
+    role: exit
+    rule: "Manage, roll or close the naked leg by about 21 DTE"
+    runnable: true
+    input: position
 ---
 
 # Ratio Spread

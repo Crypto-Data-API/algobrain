@@ -22,6 +22,50 @@ expected_sharpe: 2.5
 expected_max_drawdown: 0.2
 breakeven_cost_bps: 5
 decay_evidence: "Eigenphi reports cyclic-arb extracted MEV declined ~40% from 2022 peak as searcher competition intensified and Uniswap v3 concentrated liquidity reduced cross-pool dislocations."
+gates:
+  - id: pool_graph
+    role: universe
+    rule: "Pool graph: every relevant AMM pool (Uniswap v2/v3, Curve, Balancer, SushiSwap) on the chain, updated every block"
+    runnable: partial
+    endpoint: /api/v1/dex/trending?chain={chain}
+    field: pools[].pool_address
+    note: "Seeds the graph only: trending pools are a short curated list, refreshed on a cache cycle rather than per block, and the dex label can be empty. Building the full graph needs the factory contracts read over RPC."
+  - id: cycle_product_gt_1
+    role: entry
+    rule: "Trade a 3-5 pool cycle whose product of effective swap rates exceeds 1"
+    runnable: false
+    note: "Needs per-block pool reserves and fee tiers for every leg. Our pool prices are periodic snapshots, far too slow for a dislocation that lasts one block. Read reserves from contract state over RPC."
+  - id: optimal_input
+    role: sizing
+    rule: "Size each cycle at the input where marginal profit is zero (closed form for v2 constant-product pools)"
+    runnable: false
+    note: "Needs each leg's per-token reserves and fee; reserve_usd on /dex/trending is a single USD total per pool, not the two reserves the solution needs."
+  - id: gas_net_profit
+    role: filter
+    rule: "Submit only when simulated profit minus the gas estimate clears the minimum profit threshold"
+    runnable: false
+    note: "No gas price or next-block base-fee feed is served, and the page sets no threshold. Needs an RPC gas oracle and a local simulation."
+  - id: priority_fee_share
+    role: sizing
+    rule: "Bid a priority fee of about 70% of expected profit (the page's range is 30-90%) in a Flashbots or private-mempool bundle"
+    runnable: false
+    input: derived
+    inputs: [cycle_product_gt_1]
+    note: "A share of the simulated cycle profit, which this API cannot produce."
+  - id: trade_size_band
+    role: sizing
+    rule: "Keep trade size in the $50K-2M sweet spot, limited by the depth of the thinnest pool in the cycle"
+    runnable: partial
+    endpoint: /api/v1/dex/trending?chain={chain}
+    field: pools[].reserve_usd
+    note: "reserve_usd is the pool's total liquidity at the last snapshot: a ceiling, not a slippage curve. /liquidity/depth is Hyperliquid order-book depth, not AMM pools, so it does not apply here."
+  - id: token_safety
+    role: filter
+    rule: "Screen every leg's token for traps (honeypot, transfer tax, pausable or blacklistable transfers) before trading the cycle"
+    runnable: true
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: risk_flags
+    note: "Call once per leg token. address = base_token.address or quote_token.address of the cycle's pools on /dex/trending?chain={chain}; chain is one of solana, ethereum, base, bsc, arbitrum. Reject the token if risk_flags.is_honeypot, can_pause_transfers or is_blacklistable is true, or taxes.buy_tax_pct or taxes.sell_tax_pct is above zero."
 ---
 
 # DEX Pool Triangular Arbitrage

@@ -25,6 +25,36 @@ kill_criteria: |
   - spread moves > 3 standard deviations from the regression fair value and stays there for 20 trading days (structural break)
   - rolling 12-month net Sharpe < 0
 related: ["[[quantconnect]]", "[[quantconnect-strategy-library]]", "[[crude-oil]]", "[[pairs-trading]]", "[[geographic-spread-trading]]", "[[crack-spread]]", "[[cointegration]]"]
+gates:
+  - id: spread_vs_sma20
+    role: entry
+    rule: "Spread = WTI - Brent on daily closes. Long the spread (long WTI 0.5, short Brent 0.5) when it is below its 20-day SMA; short it when above"
+    runnable: false
+    note: "No WTI or Brent prices (futures or CFDs) are served. This needs an external commodity feed such as CME WTI and ICE Brent."
+  - id: regression_fair_value
+    role: exit
+    rule: "Fit Brent = beta x WTI + alpha on the last 252 days, refit monthly; fair spread = (1 - beta) x WTI - alpha. Exit when the spread crosses fair value"
+    runnable: false
+    note: "Needs the same daily WTI and Brent series, which are not served."
+  - id: structural_break_stop
+    role: stop
+    rule: "Stop out (and stand down) when the spread sits more than 3 standard deviations from regression fair value for 20 trading days"
+    runnable: false
+    note: "From the kill criteria and the page's practical additions. Needs the oil series, which is not served."
+  - id: leg_weights
+    role: sizing
+    rule: "Equal 0.5 / 0.5 legs in matched delivery months, rolled together"
+    runnable: true
+    input: position
+  - id: crypto_risk_gate
+    role: filter
+    rule: "When an oil shock hits, check the crypto cycle regime before adding crypto risk: oil-driven inflation scares tend to be risk-off"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "From the page's AI-agent workflow. The oil-shock trigger needs an external oil feed. The page names no regime ids that count as risk-off; structural_shock_crisis, established_bear and distribution_post_peak are the bearish states, and the choice is the desk's call. Regime history starts 2026-08-07."
 ---
 
 # WTI-Brent Spread Trading

@@ -22,6 +22,71 @@ expected_sharpe: 1.5
 expected_max_drawdown: 0.2
 breakeven_cost_bps: 50
 decay_evidence: "Polymarket volume exploded 2024 ($3B election cycle); spreads compressed but reality-arb opportunities persist. Cross-venue arb gated by US regulatory restrictions on Polymarket."
+gates:
+  - id: same_event_listings
+    role: universe
+    rule: "Identify the same event listed on Polymarket, Kalshi and PredictIt"
+    runnable: false
+    note: "No prediction-market listings are served. Needs the Polymarket, Kalshi and PredictIt APIs and a manual event match."
+  - id: macro_print_dates
+    role: universe
+    rule: "Economic-print and FOMC markets: know when each print or meeting resolves"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=macro_print
+    field: items[].date
+    note: "Gives the dates of scheduled FOMC, CPI, NFP, PCE and PPI releases (macro_class names which), up to 30 days out. It holds no market prices, FedWatch probabilities or consensus forecasts, which the page's FOMC and CPI examples compare against."
+  - id: cross_venue_spread_50bp
+    role: entry
+    rule: "Cross-venue mid-price spread on the same event above 50 bp: buy the cheap venue, sell the rich one"
+    runnable: false
+    note: "No Polymarket, Kalshi or Manifold order books are served."
+  - id: yes_no_below_095
+    role: entry
+    rule: "Buy both YES and NO on Polymarket when their mids sum to less than $0.95"
+    runnable: false
+    note: "No Polymarket order books are served."
+  - id: independent_probability
+    role: filter
+    rule: "Estimate the true probability with an independent model before trading the spread"
+    runnable: false
+    note: "The model is the desk's own (polls, forecasts, economic data); nothing served is a probability for a prediction-market event."
+  - id: kelly_quarter_size
+    role: sizing
+    rule: "Size each trade at a quarter-Kelly fraction of the spread and its volatility estimate"
+    runnable: false
+    input: derived
+    inputs: [cross_venue_spread_50bp, independent_probability]
+    note: "Both inputs are unserved."
+  - id: thin_book_size_cap
+    role: sizing
+    rule: "Size small enough not to move thin prediction-market books against yourself"
+    runnable: false
+    note: "Needs venue order-book depth, which is not served; the page sets no cap."
+  - id: resolution_dispute_watch
+    role: exit
+    rule: "Monitor resolution sources and UMA disputes on held markets"
+    runnable: false
+    note: "No resolution or UMA dispute feed is served."
+  - id: kill_spread_30bp
+    role: stop
+    rule: "Kill switch: cross-venue spread stays inside about 30 bp at executable size for a full major event cycle"
+    runnable: false
+    note: "Needs venue order books, which are not served."
+  - id: kill_yes_no_097
+    role: stop
+    rule: "Kill switch: YES+NO baskets stop offering entries below $0.97 at size"
+    runnable: false
+    note: "Needs Polymarket order books, which are not served."
+  - id: kill_venue_removed
+    role: stop
+    rule: "Kill switch: a regulatory action removes a venue (Polymarket fully blocked or Kalshi enjoined)"
+    runnable: false
+    note: "A news judgement. /news/market-moving tags enforcement stories for crypto assets but does not track prediction-market venues."
+  - id: kill_drawdown_20pct
+    role: stop
+    rule: "Kill switch: peak-to-trough drawdown above 20%"
+    runnable: true
+    input: position
 ---
 
 # Polymarket Prediction Market Arbitrage

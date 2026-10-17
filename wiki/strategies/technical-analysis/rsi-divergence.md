@@ -47,6 +47,131 @@ kill_criteria: |
   - divergence persists more than 10 candles without price confirming → signal stale; exit or reduce
   - "divergence trap" (3 consecutive losing divergence trades in same direction) → skip that direction for 30 days
   - rolling 90-day P&L negative with > 10 completed trades → pause; assess whether support/resistance confluence is being applied rigorously
+gates:
+  - id: bearish_divergence
+    role: entry
+    rule: "Bearish divergence on the daily: price prints a higher high while RSI(14) prints a lower high"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=120
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].high
+    note: "RSI(14) is computable from the closes, but the page leaves the swing points to compare to the trader (it calls this subjective). The bot needs a fixed swing rule, e.g. 5-bar pivots, which is the desk's choice."
+  - id: bullish_divergence
+    role: entry
+    rule: "Bullish divergence on the daily: price prints a lower low while RSI(14) prints a higher low"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=120
+    field: candles[].low
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].low
+    note: "Same swing-point caveat as bearish_divergence."
+  - id: hidden_divergence
+    role: entry
+    rule: "Hidden divergence (continuation): in an uptrend price makes a higher low while RSI makes a lower low; enter on the pullback"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=120
+    field: candles[].low
+    note: "Same swing-point caveat, and the page does not define the uptrend."
+  - id: rsi_extreme_zone
+    role: filter
+    rule: "RSI(14) at the second swing above 60 for a bearish divergence, below 40 for a bullish one"
+    runnable: true
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: rsi.rsi_14_1d
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "The null-hypothesis section's thresholds; the rules also say 'ideally' 60-70 and 30-40. history[].rsi_14 on the same response covers 60 days; a replay recomputes RSI from the closes."
+  - id: at_sr_level
+    role: filter
+    rule: "Only at a predefined support (bullish) or resistance (bearish) level"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: sr.resistance[].price
+    note: "sr.support and sr.resistance list algorithmic levels with a strength count and dist_pct; the page's levels are hand-drawn, and how close counts as 'at' the level is the desk's call."
+  - id: confirmation_candle
+    role: entry
+    rule: "Enter on a confirming reversal candle at the level (bearish engulfing or evening star for shorts, a bullish confirmation candle for longs), at the next bar's open"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=5
+    field: candles[].open
+    note: "Engulfing and evening-star patterns are computable from open, high, low and close, but the page lists them only as examples, so the accepted pattern set is the desk's."
+  - id: lower_tf_timing
+    role: entry
+    rule: "Identify the divergence on the daily, then time the entry on the 4H or 1H chart"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60
+    field: candles[].close
+    note: "The page gives no lower-timeframe trigger rule."
+  - id: funding_confirms
+    role: filter
+    rule: "Bearish divergence with positive funding (crowded longs) is the highest-probability short; bullish divergence with negative funding sets up the squeeze"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: regime_not_strong_trend
+    role: filter
+    rule: "Divergences stack and fail in strong_trend states; prefer range_low_vol"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow: avoid strong_trend_bull and strong_trend_bear."
+  - id: volume_exhaustion
+    role: filter
+    rule: "Volume confirms exhaustion at the extreme"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30
+    field: candles[].volume
+    note: "Listed in the indicator table with no rule; the comparison is the desk's."
+  - id: target_prior_swing
+    role: exit
+    rule: "First target: the previous swing high (longs) or swing low (shorts)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=120
+    field: candles[].high
+    note: "Needs the same swing rule as the divergence gates."
+  - id: rsi_opposite_extreme_exit
+    role: exit
+    rule: "Close when RSI reaches the opposite extreme (overbought, 70, after a bullish entry; oversold, 30, after a bearish one)"
+    runnable: true
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: rsi.rsi_14_1d
+    note: "rsi.state_1d reads overbought at 70 or more, oversold at 30 or less; the page's 'e.g. overbought' fits that cutoff."
+  - id: stop_beyond_extreme
+    role: stop
+    rule: "Stop beyond the divergence pattern's extreme: below its lowest low (bullish), above its highest high (bearish)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "The level is fixed at entry from the pattern. The page warns to leave room for one liquidation-cascade leg, without a size."
+  - id: trail_after_1r
+    role: stop
+    rule: "Once the trade is 1R in favour, trail with a chandelier exit or an ATR-based stop (2x ATR in the example)"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=40&atr=14
+    field: candles[].atr
+    note: "The rules do not fix the method or the multiple; the example uses 2x ATR(14)."
+  - id: kill_stale_signal
+    role: exit
+    rule: "A divergence that runs more than 10 candles (entry timeframe) without price confirmation is stale: exit or reduce"
+    runnable: true
+    input: position
+  - id: kill_divergence_trap
+    role: filter
+    rule: "After 3 consecutive losing divergence trades in the same direction, skip that direction for 30 days"
+    runnable: true
+    input: position
+  - id: kill_90d_pnl
+    role: filter
+    rule: "Pause when rolling 90-day P&L is negative with more than 10 completed trades"
+    runnable: true
+    input: position
 ---
 
 # RSI Divergence Strategy

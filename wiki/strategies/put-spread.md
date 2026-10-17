@@ -12,6 +12,92 @@ markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[bear-put-spread]]", "[[bull-put-spread]]", "[[long-put]]", "[[credit-spread]]", "[[vertical-spread]]", "[[deribit]]", "[[dvol]]", "[[greeks-live]]", "[[implied-volatility]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[delta]]", "[[theta]]", "[[vega]]", "[[max-pain]]", "[[gamma-exposure]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_only
+    role: universe
+    rule: "BTC or ETH options on Deribit only; alt options (SOL and below) are too thin to leg a clean spread"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "BTC and ETH are the coins whose Deribit implied vol is served. Free tier sees BTC only."
+  - id: leg_strikes
+    role: entry
+    rule: "Buy the put near spot (about 45-60 delta); sell the lower put at or just past the downside target (about 25-35 delta); 1:1"
+    runnable: false
+    note: "No option chain, strike list or per-strike Greeks are served; legs need Deribit's instruments and ticker API."
+  - id: debit_vs_width
+    role: entry
+    rule: "Net debit (long ask - short bid) at most about half the width, so max profit is at least max loss"
+    runnable: false
+    note: "Needs Deribit option quotes; we serve no option prices."
+  - id: tenor_window
+    role: entry
+    rule: "Tenor 20-45 DTE"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "The 12 nearest Deribit expiries with days to expiry and ATM IV (Pro Plus; empty on lower tiers)."
+  - id: compressed_vol_entry
+    role: filter
+    rule: "Enter when vol is cheap: the vol regime reads compressed; avoid buying after a spike has inflated both legs"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "The page's entry gate. history[].rv_cc_30 (60 days) shows how rare the current low-vol window is."
+  - id: dvol_low_moderate
+    role: filter
+    rule: "DVOL low to moderate so the long put is affordable"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "About 180 days of daily DVOL are served (Pro Plus); the page says DVOL comes from Deribit, but it is here. No percentile cut is given for 'low to moderate'."
+  - id: downside_target
+    role: entry
+    rule: "A downside target (a broken support, an unlock-driven flush) that maps to the short strike"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: sr.support[].price
+    note: "Daily support levels with strength and distance; unlocks are on /api/v1/event/calendar?type=unlock. Choosing the target is the desk's call."
+  - id: bear_regime_support
+    role: filter
+    rule: "Rising strong_trend_bear or vol_spike probabilities support the thesis; a strong_trend_bull print argues to stand down"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow."
+  - id: profit_target
+    role: exit
+    rule: "Close at 50-75% of max value (width - debit) rather than holding to expiry"
+    runnable: partial
+    input: position
+    note: "Needs the spread's live option marks from Deribit; we serve no option prices."
+  - id: thesis_break_stop
+    role: stop
+    rule: "Cut on thesis break: spot rallies back through the long strike"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/summary?coin={coin}
+    field: mark_price
+    note: "Perp mark as the spot proxy; Deribit settles on its own index."
+  - id: debit_stop
+    role: stop
+    rule: "Or cut at roughly -50% to -70% of the debit"
+    runnable: partial
+    input: position
+    note: "Needs the spread's live option marks from Deribit."
+  - id: time_stop
+    role: exit
+    rule: "Manage or roll inside about 10-14 DTE to limit gamma into the 08:00 UTC expiry"
+    runnable: true
+    input: position
+  - id: no_added_debit
+    role: sizing
+    rule: "Roll down and out only if the thesis strengthens; never add debit to a losing directional trade"
+    runnable: partial
+    input: position
+    note: "'Thesis strengthens' is the desk's judgement; not adding to a loser is checkable from the position record."
 ---
 
 # Put Spread

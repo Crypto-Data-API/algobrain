@@ -33,6 +33,114 @@ kill_criteria: |
   - cointegration p-value of primary pairs deteriorates beyond 0.15 on a 90-day rolling window (structural anchor has broken)
 
 related: ["[[pairs-trading]]", "[[funding-rate-arbitrage]]", "[[hl-vs-cex-funding-divergence]]", "[[funding-filtered-momentum]]", "[[crowded-long-funding-fade]]", "[[crowded-short-funding-fade]]", "[[funding-rate]]", "[[open-interest]]", "[[perpetual-futures]]", "[[stat-arb]]", "[[cointegration]]", "[[z-score]]", "[[spread-trading]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: pair_cointegration
+    role: universe
+    rule: "Universe: pairs whose rolling 90-day Engle-Granger cointegration test gives p at most 0.10"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=92
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Call once per leg, drop the forming bar and test the two legs' log closes over 90 closed daily bars. Re-estimate daily."
+  - id: leg_volume_min
+    role: universe
+    rule: "Both legs need at least $20M of daily perp volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    note: "day_volume is 24h USD notional on Hyperliquid, the page's example venue."
+  - id: leg_oi_min
+    role: universe
+    rule: "Both legs need at least $10M of perp open interest"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+  - id: spread_zscore_entry
+    role: entry
+    rule: "Enter when the log-spread z-score on a rolling 20-day lookback is at or below -2.0 (long A, short B) or at or above +2.0 (short A, long B)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=122
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "The example and agent workflow use 4h bars: 20 days = 120 closed 4h bars (drop the forming one). Spread = log(close A) - log(close B); z = (spread - mean) / std over the window."
+  - id: funding_diff_agrees
+    role: entry
+    rule: "funding_diff = 8h funding A - 8h funding B must be at or below -0.01% for long A / short B, or at or above +0.01% for short A / long B"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hyperliquid settles hourly: each leg's 8h funding = sum of its last 8 settled rates; the cut is 0.0001. current_rate is the predicted next print if the desk prefers it, as the page suggests. The Instrument Structures note (enter at 2.5 sigma when funding disagrees) contradicts the Rules, which block that entry; the Rules are used here."
+  - id: oi_not_collapsing
+    role: filter
+    rule: "No entry if either leg's 24h open-interest change is below -10%"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    field: data[].oi_close
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].oi_close
+    note: "start = 26 hours ago; change = last oi_close / the oi_close 24 rows earlier - 1. Closed 1h bars only; bars start 2026-03-30. For the top 25 perps /liquidity/oi-divergence has rows[].oi_change_24h_pct."
+  - id: no_catalyst_48h
+    role: filter
+    rule: "No entry if either leg has a major protocol catalyst (upgrade, exploit, unlock) within 48 hours"
+    runnable: partial
+    endpoint: /api/v1/event/regime/{symbol}
+    field: pending[].days_until
+    note: "Covers scheduled unlocks (and macro prints and depegs) per coin: block when an unlock is 0-2 days out. Exploits are reported after the fact on /security/regime/{symbol}. No protocol-upgrade calendar is served, so upgrades need a manual check."
+  - id: convergence_exit
+    role: exit
+    rule: "Take profit when the spread z-score is back within 0 plus or minus 0.5; close both legs together"
+    runnable: true
+    input: derived
+    inputs: [spread_zscore_entry]
+  - id: zscore_stop
+    role: stop
+    rule: "Stop out when the spread z-score widens beyond plus or minus 3.5"
+    runnable: true
+    input: derived
+    inputs: [spread_zscore_entry]
+  - id: funding_flip_exit
+    role: exit
+    rule: "Trim or close when the funding differential turns adverse by more than 0.02%/8h for 2 consecutive 8h periods"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=16
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Two consecutive 8-settlement blocks per leg; adverse means the differential pays against the spread by more than 0.0002."
+  - id: time_stop
+    role: exit
+    rule: "Close at market after 15 calendar days without convergence"
+    runnable: true
+    input: position
+  - id: cointegration_break_exit
+    role: exit
+    rule: "Close immediately when the rolling 90-day cointegration p-value rises above 0.15"
+    runnable: true
+    input: derived
+    inputs: [pair_cointegration]
+  - id: pair_overlap_exit
+    role: exit
+    rule: "Exit when two active pairs become more than 0.9 correlated (effectively the same bet)"
+    runnable: partial
+    input: derived
+    inputs: [spread_zscore_entry]
+    note: "From the production-system notes. Correlate the two spreads' returns; the page gives no window, so that is the desk's call."
+  - id: beta_neutral_legs
+    role: sizing
+    rule: "Size legs so each has equal dollar P&L for a 1% BTC move (scale notional by beta to BTC)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=62
+    field: candles[].close
+    note: "Regress each leg's daily returns on BTC's (coin=BTC on the same route). The page gives no beta window; 60 days is a common choice."
+  - id: pair_risk_caps
+    role: sizing
+    rule: "Spread notional at most 7.5% of sleeve capital per pair, at most 3 concurrent pairs, at most 3x leverage on either leg"
+    runnable: true
+    input: position
 ---
 
 # Pairs with Funding Differential

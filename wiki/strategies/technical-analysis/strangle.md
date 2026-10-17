@@ -12,6 +12,123 @@ markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[short-strangle]]", "[[straddle]]", "[[short-straddle]]", "[[straddle-strangle]]", "[[crypto-options-volatility-selling]]", "[[iron-condor]]", "[[iron-fly]]", "[[gamma-scalping]]", "[[delta-hedging]]", "[[theta]]", "[[vega]]", "[[dvol]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[iv-crush]]", "[[deribit]]", "[[greeks-live]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit
+    role: universe
+    rule: "BTC or ETH options on Deribit; liquid strangles beyond them are scarce"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "We do serve Deribit DVOL (current and about 180 days of daily history) and the ATM term structure for BTC and ETH, despite the page saying otherwise. Option quotes, the IV surface and fills come from Deribit."
+  - id: variant_by_regime
+    role: filter
+    rule: "Variant selector: compressed vol regime, buy the strangle; expanding or normal with rich DVOL, sell it (or the iron condor); vol_shock, long side only"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow. The market-view table also allows selling gradually into the post-shock DVOL decay."
+  - id: dvol_low_for_long
+    role: entry
+    rule: "Long strangle: DVOL low in its trailing-year range (cheap convexity)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Served DVOL history is about 180 days (Pro Plus), not a year, and the page gives no percentile (the example is the lower third)."
+  - id: dvol_rich_for_short
+    role: entry
+    rule: "Short strangle: DVOL high and stable (rich premium)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Same ~180-day history caveat; 'high' and 'stable' have no thresholds here (short-strangle gives the 50th-60th percentile)."
+  - id: catalyst_rule
+    role: filter
+    rule: "Buy before a dated catalyst (fork, ETF listing, unlock, FOMC or CPI) if DVOL is not already bid up; never sell across one"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=30
+    field: items[].days_until
+    note: "macro_print and unlock rows are served; forks and ETF listings are not. 'Already bid up' has no threshold."
+  - id: expiry_by_variant
+    role: entry
+    rule: "Expiry: 21-45 DTE for a short strangle, 30-90 DTE for a long one"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure is Pro Plus and lists the nearest 12 expiries."
+  - id: wing_deltas
+    role: entry
+    rule: "Strikes by delta: about 15-25 delta per wing to sell, 25-35 delta to buy, same expiry"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "No per-strike Greeks are served. Black-Scholes with the expiry's atm_iv gives approximate strikes, ignoring skew; exact deltas and premiums need Deribit's chain."
+  - id: wing_lean_funding
+    role: entry
+    rule: "Lean strike selection toward the wing the leveraged crowd overbid (richly positive funding firms call skew)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "Funding is a proxy; skew itself is not served, and the page gives no threshold."
+  - id: oi_walls_near_strikes
+    role: entry
+    rule: "Check OI walls near the candidate strikes"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    note: "BTC only: one max-pain strike on the expiry with the largest open interest. Per-strike OI is not served."
+  - id: long_take_profit
+    role: exit
+    rule: "Long: scale out half at about 100% gain on the debit; after a DVOL spike, sell into the spike"
+    runnable: true
+    input: position
+    note: "The 100% target is mechanical from the position's marks (from the venue). Selling into a spike is a judgement with no threshold."
+  - id: long_time_stop
+    role: exit
+    rule: "Long: time stop at about 21 DTE if the catalyst has not fired"
+    runnable: true
+    input: position
+  - id: long_loss_stop
+    role: stop
+    rule: "Long: loss stop at -50% of the debit"
+    runnable: true
+    input: position
+  - id: short_take_profit
+    role: exit
+    rule: "Short: buy back at about 50% of the maximum credit"
+    runnable: true
+    input: position
+  - id: short_time_stop
+    role: exit
+    rule: "Short: close before the final week before expiry"
+    runnable: true
+    input: position
+  - id: short_defend_wing
+    role: stop
+    rule: "Short: roll the tested wing away for a credit, or cap the tail by converting to an iron condor"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "The page gives no trigger distance for 'tested'; the desk sets it."
+  - id: short_kill_switch
+    role: stop
+    rule: "Short: flatten on a vol-stress spike or a liquidation cascade"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    replay: /api/v1/volatility/index/history?days=365
+    replay_field: points[].composite_score
+    note: "No threshold on this page (short-strangle uses a score above 75). Cascades are on /api/v1/market-intelligence/squeeze-alerts (OKX, Bybit, Hyperliquid)."
+  - id: delta_hedge_perp
+    role: sizing
+    rule: "Both: flatten residual delta with the perpetual; the hedge pays or collects funding"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    note: "Position delta comes from the venue's Greeks; the page gives no rebalance band. Hyperliquid funding stands in for Deribit's perpetual."
 ---
 
 # Strangle

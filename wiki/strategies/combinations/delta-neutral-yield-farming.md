@@ -40,6 +40,119 @@ kill_criteria: |
   - net hedged yield < risk-free stablecoin lending rate for 30+ days
 
 related: ["[[funding-rate-arbitrage]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[delta-neutral]]", "[[basis]]", "[[cash-and-carry]]", "[[ethena-usde]]", "[[stablecoin-yield]]", "[[crypto-yield-stack]]", "[[liquid-staking]]", "[[eth-staking]]", "[[defi-lending]]", "[[hyperliquid]]", "[[binance]]", "[[liquidation-risk]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: yield_leg_apr_3pct
+    role: entry
+    rule: "Yield leg viable: staking APR, or trailing-30-day realised LP fee APR, at or above 3%"
+    runnable: false
+    note: "No staking, restaking or LP APRs are served; they come from the protocol or DefiLlama yields."
+  - id: lst_peg_05
+    role: entry
+    rule: "The yield token trades within 0.5% of its redemption or underlying value (LST peg)"
+    runnable: false
+    note: "No stETH or other LST and LRT prices are served."
+  - id: funding_floor
+    role: entry
+    rule: "8h funding on the hedge perp at or above -0.01% (-0.0001), so any funding drag stays below the staking yield"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hyperliquid (the example's hedge venue) settles hourly: sum the last 8 prints for the 8h rate. A Binance hedge reads rates[].funding_rate on /api/v1/derivatives/binance/funding-rates."
+  - id: carry_hurdle
+    role: entry
+    rule: "Projected net carry (yield-leg APR + annualised funding - all-in costs) above the risk-free stablecoin lending rate plus 300 bps; otherwise hold stablecoins"
+    runnable: false
+    input: derived
+    inputs: [yield_leg_apr_3pct, funding_floor]
+    note: "The yield-leg APR and the stablecoin lending rate (Aave or Compound USDC) are not served. Annualised funding is the 8h rate x 3 x 365."
+  - id: oi_stable_rising
+    role: entry
+    rule: "Perp open interest stable or rising (real long flow behind the funding, not an illiquid quote)"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_change_pct
+    note: "Daily Hyperliquid OI change per closed bar; Binance OI is history[] on /api/v1/derivatives/binance/open-interest (30 daily points). The page gives no window or tolerance for stable, so both are the desk's call."
+  - id: no_exploit_7d
+    role: filter
+    rule: "No protocol exploit flag on the yield leg in the last 7 days"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack&window_days=7
+    field: items[].title
+    note: "Confirmed hacks from the DefiLlama registry, matched by protocol name in title. Emergency pauses are not served."
+  - id: no_venue_or_oracle_stress
+    role: filter
+    rule: "No active insurance-fund drawdown on the perp venue and no LST-vs-underlying oracle deviation above 50 bps"
+    runnable: false
+    note: "Insurance-fund balances and LST oracle prices are not served."
+  - id: funding_7d_negative
+    role: exit
+    rule: "Exit leg: 7-day average funding on the hedge perp is negative"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=100
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Mean of the last 168 hourly Hyperliquid prints. limit=100 covers about 4 days, so take the earlier hours from the replay route (filled through the previous UTC day) and today's from this one. On a Binance hedge it is the mean of the last 21 settled 8h prints."
+  - id: exit_hedge_costs_more
+    role: exit
+    rule: "Exit when the 7-day funding average is negative and the staking or LP yield is below the funding drag"
+    runnable: false
+    input: derived
+    inputs: [funding_7d_negative, yield_leg_apr_3pct]
+    note: "The funding leg is runnable; the yield-leg APR is not served."
+  - id: exit_depeg_2pct
+    role: exit
+    rule: "Exit when the LST or LP leg is more than 2% off its underlying and has not recovered within 24 hours"
+    runnable: false
+    note: "LST and LP-token prices are not served."
+  - id: exit_below_risk_free
+    role: exit
+    rule: "Exit when net hedged yield has been below the risk-free stablecoin rate for 30 days"
+    runnable: false
+    note: "The sleeve's own net yield is known from the position record, but the stablecoin lending rate is not served."
+  - id: rehedge_drift_2pct
+    role: sizing
+    rule: "Keep a 1:1 delta hedge (perp short notional = long-leg USD notional); re-hedge when delta drift exceeds 2%"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: short_leverage
+    role: sizing
+    rule: "Perp short at 1x-2x on isolated margin, keeping 2-3x the maintenance margin as buffer"
+    runnable: true
+    input: position
+  - id: protocol_caps
+    role: sizing
+    rule: "At most 25% of the sleeve per protocol and at most 3 concurrent yield legs"
+    runnable: true
+    input: position
+  - id: kill_drawdown_12
+    role: stop
+    rule: "Pause: sleeve drawdown above 12% in any rolling 30-day window"
+    runnable: true
+    input: position
+  - id: kill_venue_halt
+    role: stop
+    rule: "Pause: perp-venue insurance-fund socialised loss, or a withdrawal halt longer than 4 hours on any leg"
+    runnable: false
+    note: "Venue status and insurance-fund events are not served."
+  - id: kill_yield_exploit
+    role: stop
+    rule: "Pause: a yield-leg protocol exploit or emergency pause"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack&window_days=1
+    field: items[].title
+    note: "Confirmed hacks only, matched by protocol name; emergency pauses are not served, and a registry entry can trail the exploit by hours."
+  - id: redeploy
+    role: entry
+    rule: "Re-deploy when all pause conditions are clear and projected net carry again clears risk-free + 300 bps on at least 2 eligible legs"
+    runnable: false
+    input: derived
+    inputs: [carry_hurdle]
+    note: "Built on carry_hurdle, which needs yield-leg APRs and the stablecoin lending rate."
 ---
 
 # Delta-Neutral Yield Farming

@@ -12,6 +12,123 @@ markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[bull-call-spread]]", "[[bear-put-spread]]", "[[bull-put-spread]]", "[[bear-call-spread]]", "[[iron-condor]]", "[[put-spread]]", "[[credit-spread]]", "[[deribit]]", "[[dvol]]", "[[greeks-live]]", "[[implied-volatility]]", "[[variance-risk-premium]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[delta]]", "[[theta]]", "[[vega]]", "[[gamma]]", "[[max-pain]]", "[[gamma-exposure]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit
+    role: universe
+    rule: "BTC or ETH options on Deribit; alt options (SOL and below) are too thin to leg a clean vertical"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "We do serve Deribit DVOL (current and about 180 days of daily history) and the ATM term structure for BTC and ETH, despite the page saying otherwise. Option quotes, skew and fills come from Deribit."
+  - id: directional_view
+    role: entry
+    rule: "A bounded bullish or bearish view picks the side (bull or bear)"
+    runnable: false
+    note: "A forecast the page leaves to the trader."
+  - id: dvol_debit_band
+    role: entry
+    rule: "Debit verticals when DVOL is depressed: about the 10th-50th percentile"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Rank today's dvol against the served daily history, which is about 180 days (Pro Plus); the page's percentile window is not stated, and its other DVOL pages use a trailing year."
+  - id: dvol_credit_band
+    role: entry
+    rule: "Credit verticals when DVOL is elevated: about the 40th-90th percentile (below 40th the credit is too thin, above 90th you sell into a vol shock)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Same ~180-day history caveat as dvol_debit_band."
+  - id: flavour_by_regime
+    role: filter
+    rule: "Flavour selector: compressed vol regime means debit verticals; expanding or normal with rich DVOL means credit verticals; vol_shock means stand down"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow."
+  - id: debit_strikes
+    role: entry
+    rule: "Debit: buy the ATM or first-ITM strike (about 50-65 delta), sell the strike at the price target (about 30-40 delta); pay at most about two-thirds of the width"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "No per-strike Greeks or premiums are served. Black-Scholes with the expiry's atm_iv approximates the delta strikes, ignoring skew; the debit-vs-width check needs Deribit quotes."
+  - id: credit_strikes
+    role: entry
+    rule: "Credit: sell the 25-35 delta strike at or beyond a tested support or resistance level, buy the wing 1-3 strikes further out (10-20 delta); collect about one-third of the width"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: sr.support[].price
+    note: "sr.support and sr.resistance list algorithmic daily levels (strength = pivot touches). Deltas and the credit need Deribit's chain; atm_iv on /api/v1/volatility/implied gives a skew-blind approximation."
+  - id: width_5_15pct
+    role: entry
+    rule: "Spread width typically 5-15% of spot"
+    runnable: true
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+  - id: tenor_by_type
+    role: entry
+    rule: "Tenor 30-45 DTE for credit verticals, 21-45 DTE for debit verticals; avoid weeklies"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure is Pro Plus and lists the nearest 12 expiries."
+  - id: skew_wing_choice
+    role: entry
+    rule: "Richly positive funding firms call skew (favours selling a bear call spread); after a selloff put skew fattens (favours selling a bull put spread)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "Funding is a proxy; skew itself is not served, and the page gives no funding threshold."
+  - id: no_short_strike_through_catalyst
+    role: filter
+    rule: "Avoid holding short strikes through a scheduled binary catalyst (major unlock, macro print) unless it is an event trade"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=30
+    field: items[].days_until
+    note: "macro_print and unlock rows are served; 'major' has no size threshold."
+  - id: credit_take_profit_50
+    role: exit
+    rule: "Credit: take profit at 50% of the credit"
+    runnable: true
+    input: position
+    note: "Option marks come from the venue."
+  - id: credit_manage_21_dte
+    role: exit
+    rule: "Credit: manage or roll at about 21 DTE; roll out and away only for a net credit while the thesis holds"
+    runnable: true
+    input: position
+  - id: credit_stop_2x
+    role: stop
+    rule: "Credit: stop when the buy-back cost reaches about 2x the credit"
+    runnable: true
+    input: position
+  - id: debit_take_profit
+    role: exit
+    rule: "Debit: take profit at 50-75% of max value or at the price target"
+    runnable: true
+    input: position
+  - id: debit_stop_and_time
+    role: stop
+    rule: "Debit: stop at -50 to -60% of the debit or on thesis invalidation; time-stop by about 10-14 DTE"
+    runnable: true
+    input: position
+    note: "'Thesis invalidation' is the desk's call; the loss and time stops are mechanical."
+  - id: liquidation_early_warning
+    role: stop
+    rule: "Forced flow often announces the move that breaks a credit vertical"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&include_quiet=true
+    field: alerts[].triggered
+    note: "Context with no threshold or action. Squeeze alerts cover OKX, Bybit and Hyperliquid liquidations."
+  - id: risk_per_spread
+    role: sizing
+    rule: "Risk at most 1-3% of the book per spread and cap aggregate correlated short-premium exposure"
+    runnable: partial
+    input: position
+    note: "The per-spread cap is mechanical; the page gives no number for the aggregate cap."
 ---
 
 # Vertical Spread

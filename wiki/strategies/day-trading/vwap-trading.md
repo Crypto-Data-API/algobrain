@@ -38,6 +38,116 @@ kill_criteria: |
   - median hold reaches the session/anchor reset without target (mean-reversion no longer completing)
 
 related: ["[[vwap]]", "[[twap]]", "[[volume-profile-shapes]]", "[[point-of-control]]", "[[value-area-high-and-low]]", "[[market-profile]]", "[[order-flow-scalping]]", "[[scalping]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[crypto-trading-sessions]]", "[[session-overlap-liquidity]]", "[[best-execution]]", "[[market-impact]]", "[[atr]]", "[[stop-hunting]]", "[[liquidity-sweeps]]", "[[fees]]", "[[slippage]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: majors_only
+    role: universe
+    rule: "BTC, ETH and SOL perps (or spot)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+  - id: anchored_vwap
+    role: entry
+    rule: "Anchored VWAP from the daily UTC 00:00 open: cumulative typical price x volume / cumulative volume on 1-minute bars, with +-1 and +-2 sigma bands"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&start={start}&limit=1000
+    field: candles[].volume
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1m&start={start}
+    replay_field: klines[].v
+    note: "start = today 00:00 UTC; a full day is 1,440 bars, so page with a second call from the last bar. typical price = (high + low + close) / 3, all on the same rows. data[].vwap on /hyperliquid/trade-flow?minutes= is the exact per-minute trade VWAP if you prefer it. Replay 1m bars from 2026-05-09."
+  - id: other_anchors
+    role: entry
+    rule: "Alternative anchors: the weekly open (Monday 00:00 UTC), an event (liquidation cascade low, funding flip, range breakout), or a rolling 24h VWAP as fallback"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&start={start}&limit=1000
+    field: candles[].close
+    note: "The weekly and rolling 24h anchors are mechanical. Which event to anchor to is the desk's call; liquidation lows can be located with /backtesting/hl-liquidation-bars and funding flips with /hyperliquid/funding-rates."
+  - id: htf_bias
+    role: filter
+    rule: "Establish the 4h higher-timeframe bias (up, down or range) first; trade VWAP reversion only with it"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60
+    field: candles[].close
+    note: "The page does not define the 4h trend test; the entry rules call a market up-biased when price has held above anchored VWAP for most of the window. The definition is the desk's call."
+  - id: regime_gate
+    role: filter
+    rule: "First-touch reversion works in strong_trend regimes; stand down in choppy_high_vol, the whipsaw regime"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the agent workflow; market-wide labels (strong_trend_bull, strong_trend_bear, choppy_high_vol)."
+  - id: first_touch
+    role: filter
+    rule: "Take only the first touch of the anchored VWAP after a strong move"
+    runnable: partial
+    input: derived
+    inputs: [anchored_vwap]
+    note: "Counting touches is mechanical; how big a move counts as strong is not defined."
+  - id: bounce_long
+    role: entry
+    rule: "VWAP bounce: with an up bias, buy the pullback to or just below VWAP on a bullish rejection candle (engulfing or long lower wick) with a volume uptick"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=5m&limit=50
+    field: candles[].low
+    note: "Rejection candle, just below and volume uptick have no numeric definitions, so the pattern test is the desk's call."
+  - id: rejection_short
+    role: entry
+    rule: "VWAP rejection: with a down bias, sell the rally to or just above VWAP on a bearish rejection candle"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=5m&limit=50
+    field: candles[].high
+    note: "Same undefined pattern test as bounce_long."
+  - id: reclaim
+    role: entry
+    rule: "VWAP reclaim: price opens the window below VWAP then breaks decisively above on strong volume and CVD (the converse for a breakdown)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=60
+    field: data[].cvd_usd
+    note: "Decisive and strong are not defined. CVD is served in 1-minute buckets."
+  - id: band_fade
+    role: entry
+    rule: "Band fade in a range regime: short at or above +2 sigma, long at or below -2 sigma, targeting VWAP, stop 0.6% beyond entry"
+    runnable: partial
+    input: derived
+    inputs: [anchored_vwap, htf_bias]
+    note: "The band test is mechanical; whether the regime is a range rests on htf_bias."
+  - id: target
+    role: exit
+    rule: "Bounce entries target the +1 sigma band (-1 sigma for shorts); band fades target VWAP"
+    runnable: true
+    input: derived
+    inputs: [anchored_vwap]
+  - id: atr_stop
+    role: stop
+    rule: "Stop 0.5-1.0x ATR(14) on 5-minute bars beyond VWAP (pseudocode 0.8x)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=5m&limit=30&atr=14
+    field: candles[].atr
+  - id: vwap_cross_exit
+    role: exit
+    rule: "Exit a long when a full bar closes back below anchored VWAP on rising volume (the mirror for shorts)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=5m&limit=10
+    field: candles[].close
+    note: "The close test is mechanical; rising volume has no window or size."
+  - id: anchor_window_exit
+    role: exit
+    rule: "Close intraday VWAP trades within the anchor's window; never carry a stale-anchor position"
+    runnable: true
+    input: position
+  - id: risk_size
+    role: sizing
+    rule: "Risk 0.5-1.0% of equity per trade; prefer maker entries near VWAP"
+    runnable: true
+    input: position
+  - id: funding_guard
+    role: filter
+    rule: "Do not enter within 120 seconds of a funding stamp when funding is above 0.05% per 8h in absolute terms"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    note: "Hyperliquid stamps every hour: compare abs(current_rate x 8) with 0.0005."
 ---
 
 # VWAP Trading (Crypto Intraday)

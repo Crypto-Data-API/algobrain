@@ -22,6 +22,140 @@ expected_sharpe: 2.0
 expected_max_drawdown: 0.20
 breakeven_cost_bps: 25
 decay_evidence: "Strategy-class is durable — depegs have happened reliably 2-5x per year since 2018. Per-event Sharpe extremely high (3.0+) for the redemption-arb path; lower for the speculative paths. Edge persists because most participants use only one capture method (typically the simplest spot buy); sophisticated layering of methods produces 2-5x the per-event return."
+gates:
+  - id: watched_stables
+    role: universe
+    rule: "Monitor USDC, USDT, DAI, FRAX, sUSDe, GHO and crvUSD"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: current_price
+    note: "USDC, USDT, DAI, GHO and CRVUSD resolve to the right coin. FRAX resolves to Legacy Frax Dollar (about $0.30), not the live stable, and sUSDe is not listed (USDE is the unstaked USDe), so those two need another source."
+  - id: depeg_trigger_30bp
+    role: entry
+    rule: "Trigger: the lowest price across deep venues (Curve 3pool, major CEX spot) more than 30 bp from $1.00"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: current_price
+    replay: /api/v1/backtesting/klines?symbol=USDCUSDT&exchange=binance&interval=1m&start={start}
+    replay_field: klines[].c
+    note: "current_price is the CoinGecko cross-venue aggregate, not the cheapest venue: trigger on 1 - current_price above 0.003. Deep-venue reads: Binance USDC against USDT is price on /market-data/ticker/price?symbol=USDCUSDT, and a Curve pool price is top_pools[].price_usd on /dex/token/{chain}/{address}. /event/calendar?type=depeg lists USDT, USDC, DAI, FDUSD, USDE, TUSD, PYUSD and USDD once they are more than 25 bp off peg (deviation_bps). Replay is Binance USDC/USDT 1-minute closes from 2026-05-09, a cross-stable rate rather than a USD price."
+  - id: mechanism_classification
+    role: filter
+    rule: "Mechanism gate before any size: only a banking scare or contagion-sympathy depeg with verifiably intact reserves qualifies; never a mechanism break, death spiral or wind-down"
+    runnable: false
+    note: "A judgement from issuer attestations, bank exposure and news; no served field classifies a depeg. contagion_hack_check and synthetic_backing_inverted are the served supporting reads."
+  - id: contagion_hack_check
+    role: filter
+    rule: "Check whether the depeg coincides with a hack elsewhere (contagion sympathy) or direct exposure"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack
+    field: items[].title
+    note: "From the AI-agent workflow. Lists confirmed exploits from the last 10 days (DefiLlama registry, hours behind); whether the stable is directly exposed is the desk's call."
+  - id: synthetic_backing_inverted
+    role: filter
+    rule: "For sUSDe: perp funding inverted for days marks a mechanism break: do not trade"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin=ETH&limit=100
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin=ETH&interval=1d&start={start}
+    replay_field: data[].funding_sum
+    note: "100 hourly prints cover about 4 days. The page does not say how many days of negative funding count, so the cutoff is the desk's call; Ethena also hedges with BTC and SOL perps."
+  - id: scale_in_tiers
+    role: sizing
+    rule: "Scale in: 25% of the position at -30 bp, 50% at -100 bp, the final 25% only at capitulation lows (-300 bp or worse)"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: current_price
+    note: "Same aggregate-price caveat as depeg_trigger_30bp; fills happen on the venue, at limit orders."
+  - id: redemption_channel_open
+    role: entry
+    rule: "Run the redemption-arb leg immediately when the issuer's redemption channel is confirmed open"
+    runnable: false
+    note: "Issuer redemption status (Circle, Tether), PSM and GSM capacity are status-page and on-chain reads that are not served."
+  - id: pair_trade_100bp
+    role: entry
+    rule: "Pair trade: when the cross-stable spread exceeds 100 bp and both mechanisms are intact, short the richest major stable against the long"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol=USDCUSDT
+    field: price
+    replay: /api/v1/backtesting/klines?symbol=USDCUSDT&exchange=binance&interval=1m&start={start}
+    replay_field: klines[].c
+    note: "USDC against USDT on Binance is the cross-stable spread itself (price more than 0.010 away from 1); FDUSDUSDT works the same way. Whether both mechanisms are intact is the desk's call, and short-side borrow for a stable is not served."
+  - id: leverage_banking_scare
+    role: sizing
+    rule: "Lever up (Aave or PSM loop, 3x in the pseudocode) only in a banking scare with price below $0.98"
+    runnable: false
+    input: derived
+    inputs: [mechanism_classification, depeg_trigger_30bp]
+    note: "The banking-scare classification is unserved. Lending-protocol borrow rates and oracle settings, which the page says to check first, are not served either."
+  - id: book_caps
+    role: sizing
+    rule: "At most 25% of the book in any single stablecoin, 50% across all depeg trades, and 5x leverage on any position"
+    runnable: true
+    input: position
+  - id: target_size
+    role: sizing
+    rule: "Target size = capital x 0.25 x (1 - mechanism risk factor) x scaling-in tier x (1 - cross-correlation haircut)"
+    runnable: partial
+    input: position
+    note: "The tier comes from scale_in_tiers. The mechanism risk factor and the correlation haircut are the desk's estimates."
+  - id: exit_within_10bp
+    role: exit
+    rule: "Exit spot, pair and leveraged legs once the stable is back within 10 bp of $1.00 (redemption legs at clearing)"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: current_price
+    replay: /api/v1/backtesting/klines?symbol=USDCUSDT&exchange=binance&interval=1m&start={start}
+    replay_field: klines[].c
+    note: "Same aggregate-price caveat as depeg_trigger_30bp."
+  - id: time_stop_30d
+    role: stop
+    rule: "Close every leg after 30 days without peg resolution"
+    runnable: true
+    input: position
+  - id: hard_stop_2x_impaired
+    role: stop
+    rule: "Close at any cost if the depeg deepens to 2x the entry deviation and the mechanism is impaired"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/coins/{symbol}
+    field: current_price
+    note: "The 2x depth test is mechanical from the entry record and the price; mechanism impaired is the desk's judgement."
+  - id: health_factor_115
+    role: stop
+    rule: "Deleverage immediately if a leveraged leg's health factor falls below 1.15"
+    runnable: true
+    input: position
+    note: "Read from the lending-protocol account, not from this API."
+  - id: issuer_suspension_exit
+    role: stop
+    rule: "If the issuer announces a redemption suspension or wind-down, exit spot and leveraged legs the same day, keeping only redemption claims in flight"
+    runnable: false
+    note: "A news judgement; /news/coin/{symbol} lists headlines but does not flag issuer suspensions."
+  - id: overshoot_short
+    role: exit
+    rule: "After resolution, short the formerly rich stable to capture its 10-30 bp overshoot back through par, over 4-12 hours"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: current_price
+    note: "Method 6. The premium is readable (current_price above 1.0, or USDCUSDT below 1.0 for a rich USDT), but no stablecoin perp, borrow rate or short venue data is served, so whether the capture clears carry is the desk's call."
+  - id: kill_two_bad_events
+    role: stop
+    rule: "Retire: two consecutive events each losing more than 10% of deployed capital"
+    runnable: true
+    input: position
+  - id: kill_drawdown_20pct
+    role: stop
+    rule: "Retire: cumulative strategy drawdown above 20% of the allocated book"
+    runnable: true
+    input: position
+  - id: kill_shallow_events
+    role: stop
+    rule: "Retire: redemption-access advantage gone and average event depth below 50 bp for 2 years"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=depeg
+    field: items[].deviation_bps
+    note: "Depeg events are listed only while live (30-day calendar), so the bot must log each event's depth to average two years. Whether the redemption advantage is gone is the desk's call."
 ---
 
 # Stablecoin Depeg Profit Capture Playbook

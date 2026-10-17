@@ -33,6 +33,51 @@ kill_criteria: |
   - collection floor drops > 30% while holding inventory
   - NFT held > 7 days without a bid within 10% of ask (trait arb)
   - combined fees + royalties > 80% of gross spread on any cross-marketplace trade
+gates:
+  - id: liquid_collections
+    role: universe
+    rule: "Screen out thinly traded collections: only collections with enough volume for a realistic exit"
+    runnable: partial
+    endpoint: /api/v1/nfts/overview?days=7
+    field: top_collections[].volume_usd_24h
+    note: "From the page's agent workflow, which sets no volume floor. Treat reported volume as wash-trading suspect; daily per-collection history is on /nfts/collections/{slug} (series[].volume_usd)."
+  - id: cross_marketplace_spread
+    role: entry
+    rule: "Buy when the cross-marketplace price gap exceeds marketplace fee + royalty + gas: more than 5% for low-floor and 3% for high-floor collections"
+    runnable: false
+    note: "Per-marketplace listings and floor prices are not served; /nfts/overview marketplaces[] carries volume and trade counts only. Needs OpenSea, Blur and Magic Eden APIs."
+  - id: trait_underpriced
+    role: entry
+    rule: "Buy a rare-trait NFT listed within 10% of floor when comparable rare traits sold at 2-5x floor recently"
+    runnable: false
+    note: "Trait rarity, listings and per-token sales are not served."
+  - id: wrapped_vault_gap
+    role: entry
+    rule: "Arbitrage a vault token when its redemption value differs from the floor price by more than gas plus the vault fee"
+    runnable: false
+    note: "Vault redemption values and floor prices are not served."
+  - id: speculative_flow
+    role: filter
+    rule: "Cross the 5-15% round-trip fees only while speculative flow is active"
+    runnable: partial
+    endpoint: /api/v1/meme/regime/score
+    field: composite_score
+    note: "From the page's agent workflow: the meme-regime score is the nearest proxy for NFT risk appetite. The page gives no cut-off."
+  - id: immediate_resale
+    role: exit
+    rule: "Cross-marketplace: list on the target marketplace immediately after purchase and accept the best offer above cost"
+    runnable: true
+    input: position
+  - id: price_cut_48_72h
+    role: exit
+    rule: "If the NFT has not sold within 48-72 hours, cut the ask in steps"
+    runnable: true
+    input: position
+  - id: floor_below_cost
+    role: stop
+    rule: "If the collection floor drops below the purchase price, cut the loss unless the trait premium still holds"
+    runnable: false
+    note: "Collection floor prices are not served, and the trait-premium call is a judgement."
 ---
 
 # NFT Arbitrage

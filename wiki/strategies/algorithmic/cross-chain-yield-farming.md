@@ -21,6 +21,108 @@ expected_max_drawdown: 0.30
 breakeven_cost_bps: 100
 aliases: ["Multi-Chain Yield Farming", "Cross-Chain Yield Rotation"]
 related: ["[[defi-yield-farming]]", "[[thorchain]]", "[[beefy-finance]]", "[[yield-farming]]", "[[bridge-risk]]", "[[arbitrage]]"]
+gates:
+  - id: pool_yield_scan
+    role: universe
+    rule: "Scan pool-level APYs across chains (Beefy, Zapper, DefiLlama and chain dashboards), stablecoin pools in the pseudocode"
+    runnable: false
+    note: "Pool APYs are not served. DefiLlama's yields API is the source the page names."
+  - id: min_pool_tvl
+    role: filter
+    rule: "Only pools with TVL above $10M"
+    runnable: false
+    note: "Lending, vault and farm TVL per pool or protocol is not served. reserve_usd on /dex/trending covers DEX swap pools only."
+  - id: audited_protocol
+    role: filter
+    rule: "Only audited protocols"
+    runnable: false
+    note: "Audit status is not served; check DefiSafety, the protocol's audit reports or rekt.news."
+  - id: no_chain_incident
+    role: filter
+    rule: "Skip any chain with an active incident (sequencer, bridge or exploit alert)"
+    runnable: partial
+    endpoint: /api/v1/security/events
+    field: items[].chains
+    note: "Hacks and depegs from the last 10 days, with the chains they hit. Sequencer downtime and bridge settlement delays are not served."
+  - id: net_apy
+    role: entry
+    rule: "Net APY = effective APY (incentive-token APY haircut for sell slippage) minus annualised bridge fee, gas, impermanent-loss estimate and risk premium"
+    runnable: false
+    note: "Pool APYs, bridge fees and gas are not served. Only the incentive-token haircut has served input: its price path on /hyperliquid/candles or /backtesting/klines when the token is listed there."
+  - id: rotate_on_5pct
+    role: entry
+    rule: "Bridge when the best candidate's net APY beats the current position by more than 5% APY and the expected uplift exceeds 2x the rotation cost"
+    runnable: false
+    input: derived
+    inputs: [net_apy, min_pool_tvl, audited_protocol]
+    note: "Only as runnable as net_apy."
+  - id: yield_convergence_exit
+    role: exit
+    rule: "Rotate out when the yield differential narrows below the cost of bridging and redeploying"
+    runnable: false
+    input: derived
+    inputs: [net_apy]
+    note: "Only as runnable as net_apy."
+  - id: bridge_risk_exit
+    role: exit
+    rule: "Exit if the bridge in use shows signs of exploit, liquidity trouble or unusually long settlement times"
+    runnable: partial
+    endpoint: /api/v1/security/regime/score
+    field: security_stress_score
+    note: "From the page's AI-agent workflow: a spike in the security stress score (45% weighted to hacks) is the automated bridge-anomaly trigger, but the page sets no spike size. Bridge liquidity and settlement latency are not served; Li.Fi or Stargate quotes carry them."
+  - id: chain_instability_exit
+    role: exit
+    rule: "Exit when the chain shows instability: validator issues, L2 sequencer downtime or governance attacks"
+    runnable: false
+    note: "Chain health is not served. Needs the chain's status page or an L2 monitor such as L2BEAT."
+  - id: incentive_end_exit
+    role: exit
+    rule: "Exit before the incentive program ends: fewer than 7 days remaining"
+    runnable: false
+    note: "Incentive and emission calendars are not served; read them from the protocol's governance and docs."
+  - id: wrapped_depeg_exit
+    role: exit
+    rule: "Exit when a bridge-wrapped asset depegs from its native asset"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=depeg
+    field: items[].deviation_bps
+    note: "Depeg events from the last 10 days with deviation in bps. Which wrapped assets are covered is not guaranteed, and the page sets no deviation threshold."
+  - id: token_security
+    role: filter
+    rule: "Run a token security check before deploying into an unfamiliar pool token"
+    runnable: partial
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: risk_score
+    note: "{address} is the pool token's contract, from the candidate pool itself (DefiLlama lists it) or pools[].base_token.address on /dex/trending?chain={chain}. risk_score runs to 100 = safest, with risk_flags.is_honeypot and taxes in the same report; the page sets no pass line."
+  - id: regime_gate
+    role: filter
+    rule: "Rotate aggressively only in risk-on market states; hold back in vol_spike, when bridge latency and depeg risk worsen"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow. Which labels count as risk-on is not defined; strong_trend_bull is the clearest."
+  - id: chain_cap
+    role: sizing
+    rule: "Never bridge more than 20% of total DeFi capital to a single new chain"
+    runnable: true
+    input: position
+  - id: safe_chain_floor
+    role: sizing
+    rule: "Keep at least 40% of the portfolio on battle-tested chains (Ethereum, Arbitrum)"
+    runnable: true
+    input: position
+  - id: gas_reserves
+    role: sizing
+    rule: "Keep gas reserves on every chain with an active position, for emergency exits"
+    runnable: true
+    input: position
+  - id: pool_share_cap
+    role: sizing
+    rule: "Cap any single pool position at 1-2% of that pool's TVL"
+    runnable: false
+    note: "Pool TVL is not served for yield pools; read it from DefiLlama or the protocol."
 ---
 
 # Cross-Chain Yield Farming

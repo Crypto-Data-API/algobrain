@@ -18,6 +18,102 @@ min_capital_usd: 0
 capacity_usd: 100000000
 crowding_risk: low
 related: ["[[algorithmic-trading]]", "[[vwap]]", "[[twap]]", "[[market-microstructure]]", "[[market-impact]]", "[[transaction-costs]]", "[[slippage]]", "[[transaction-cost-analysis]]"]
+gates:
+  - id: decision_price
+    role: entry
+    rule: "Record the decision price P_d: the mid at the moment the decision is committed"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: bids[].price
+    note: "Crypto application on Hyperliquid perps, which the page offers: mid = (best bid + best ask) / 2 from the live book (20 levels a side). Equity quotes are not served."
+  - id: adv_fit
+    role: universe
+    rule: "Use IS for orders of roughly 1-20% of average daily volume; below about 0.1% a single order suffices, and above a day's volume switch to multi-day handling"
+    runnable: true
+    endpoint: /api/v1/volume/scanner/{coin}
+    field: avg_volume_30d
+    note: "avg_volume_30d is mean daily USD notional over the last 30 settled days on Hyperliquid; divide the order notional by it. Pro."
+  - id: pretrade_impact
+    role: sizing
+    rule: "Estimate impact as a function of order size / ADV, bid-ask spread and volatility"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth
+    field: coins[].depth_usd.ask
+    note: "Depth in USD within 10/25/50/100 bps of mid and spread_bps for the top-25 Hyperliquid perps; levels_truncated marks bands that are a lower bound because only 20 book levels are read. The impact model and its calibration are the desk's."
+  - id: urgency
+    role: sizing
+    rule: "Set urgency (passive, neutral or aggressive): the risk-aversion parameter trading impact against timing variance"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=120
+    field: candles[].close
+    note: "Short-horizon volatility from 1-minute closes feeds the timing-risk penalty; the urgency level itself is the desk's choice."
+  - id: trajectory
+    role: entry
+    rule: "Build a schedule of child-order slices (40-60 in the example, Almgren-Chriss style) from the impact model and urgency"
+    runnable: partial
+    input: derived
+    inputs: [pretrade_impact, urgency]
+    note: "Only as runnable as its inputs."
+  - id: adapt_to_drift
+    role: entry
+    rule: "Slow down when the mid drifts favourably from P_d; speed up when it drifts adversely"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: asks[].price
+    note: "Compare the current mid with P_d; how much to change the pace is the schedule's tuning."
+  - id: participation_cap
+    role: sizing
+    rule: "Cap the participation rate to limit footprint"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=15
+    field: data[].buy_notional
+    note: "Market volume per closed minute is buy_notional + sell_notional. The page gives no cap, so the rate is the desk's."
+  - id: venue_routing
+    role: entry
+    rule: "Route child orders across lit venues, dark pools and midpoint books to minimise leakage"
+    runnable: false
+    note: "Venue and dark-pool liquidity maps are not served (and crypto perps have no dark pools). This is execution infrastructure, not market data."
+  - id: deep_book_timing
+    role: entry
+    rule: "Time slices into deep-book periods"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth/{coin}?minutes=1440
+    field: history[].total_depth_25bps_usd
+    note: "From the page's AI-agent workflow. Samples every ~2 minutes over the last 24h for the top-25 perps; what counts as deep is the desk's call."
+  - id: fragility_gate
+    role: filter
+    rule: "High liquidity fragility: smaller slices, a longer horizon, or postpone the parent order"
+    runnable: partial
+    endpoint: /api/v1/liquidity/regime/score
+    field: sentiment
+    note: "From the page's AI-agent workflow. fragile is a composite_score below 30 and leaning_fragile 30-44; which band triggers which action is the desk's call. Pro Plus."
+  - id: one_sided_tape
+    role: filter
+    rule: "Flag when the tape is one-sided against the order"
+    runnable: partial
+    endpoint: /api/v1/liquidity/oi-divergence
+    field: rows[].divergence_4h
+    note: "From the page's AI-agent workflow, which names no threshold. divergence_4h is OI change minus price change over 4h; the latest minute's buy minus sell notional on /hyperliquid/trade-flow is a faster read."
+  - id: measure_shortfall
+    role: exit
+    rule: "Realized shortfall = (VWAP of fills - P_d) x size, reported against the pre-trade estimate"
+    runnable: true
+    input: position
+  - id: recalibrate_on_overrun
+    role: stop
+    rule: "Recalibrate or switch algorithm when realized shortfall persistently exceeds the pre-trade estimate beyond a tolerance across many orders"
+    runnable: partial
+    input: position
+    note: "The page sets no tolerance or order count."
+  - id: leakage_reversion
+    role: stop
+    rule: "When post-fill reversion shows detectable leakage, randomise slicing and re-route"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=60
+    field: candles[].close
+    note: "Post-fill reversion = the move after each fill against its side, from 1-minute closes. The page gives no reversion threshold."
 ---
 
 # Implementation Shortfall

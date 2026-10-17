@@ -29,6 +29,144 @@ breakeven_cost_bps: 20
 decay_evidence: "Milionis et al. (2022) and subsequent markout studies show a majority of passive Uniswap v3 positions underperform HODL once LVR is accounted for; the σ²/8 LVR bleed rises with the square of volatility and is amplified by concentration, so unhedged CL LPing on volatile majors is frequently negative-EV. See [[loss-versus-rebalancing]]."
 
 related: ["[[loss-versus-rebalancing]]", "[[impermanent-loss]]", "[[jit-liquidity]]", "[[automated-market-maker]]", "[[uniswap]]", "[[delta-hedging]]", "[[defi-yield-farming]]", "[[mev-strategies]]", "[[volatility]]", "[[funding-rate]]", "[[curve]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: pool_fee_tier
+    role: universe
+    rule: "Match the pool's fee tier to volatility: 1-5 bps for pegged or stable pairs, 30 bps for majors (ETH/USDC), 100 bps for volatile alts"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: vol.rv_gk_30
+    note: "Realized vol and is_stable classify the pair, but pool fee tiers are not served (the dex label on /dex/* pools is often empty), and the page draws no vol cut between majors and volatile alts. Read the tier from the pool contract."
+  - id: fee_apr_screen
+    role: universe
+    rule: "Screen pools by fee APR = volume x fee tier / TVL in range"
+    runnable: partial
+    endpoint: /api/v1/dex/trending?chain={chain}
+    field: pools[].volume.h24
+    note: "Served per pool: 24h volume and reserve_usd (whole-pool TVL), for the 20 trending pools per chain; a named pair's pools are top_pools[] on /dex/token/{chain}/{address} with the token's contract as {address}. Fee tier and the in-range share of TVL (tick liquidity) are not served, so volume x tier / reserve_usd understates in-range APR."
+  - id: range_from_vol
+    role: entry
+    rule: "Set the range half-width to 1.5 x the realized volatility over the rebalance horizon (k = 1-2 standard deviations)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=168
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}USDT&exchange=binance&interval=1h&start={start}
+    replay_field: klines[].c
+    note: "For a one-week horizon: stdev of hourly log returns x sqrt(168), times 1.5, times price. The perp price stands in for the pool price, which tracks it within the arbitrage band. Binance spot 1h replay goes back to 2017."
+  - id: lvr_estimate
+    role: filter
+    rule: "Estimate LVR = sigma_annual^2 / 8 x concentration (about 100x at +-1%, 50x at +-2%, 20x at +-5%, 10x at +-10%)"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: vol.rv_cc_30
+    note: "rv_cc_30 is 30-day close-to-close vol, annualised x sqrt(365), in percent; divide by 100 before squaring. The page names no window; rv_cc_7 is the faster read."
+  - id: fee_apr_beats_lvr
+    role: entry
+    rule: "Deploy only when expected fee APR exceeds LVR plus gas and rebalance cost"
+    runnable: partial
+    input: derived
+    inputs: [fee_apr_screen, lvr_estimate]
+    note: "Only as runnable as fee_apr_screen. Gas is not served either; read it from the chain's RPC."
+  - id: vol_regime_entry
+    role: entry
+    rule: "Enter or widen ranges in compressed volatility states; cut or hedge in expanding or vol_shock"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow. The regime is computed from daily bars."
+  - id: edge_proximity_rerange
+    role: exit
+    rule: "Re-range when price comes within 15% of the range width of either boundary"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/prices
+    field: prices.{coin}
+    note: "The range is in the position record. The perp mid stands in for the pool price; the exact pool price is the pool's slot0 over RPC."
+  - id: out_of_range_dwell
+    role: exit
+    rule: "Re-range when price has been outside the range for more than T minutes"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=120
+    field: candles[].close
+    note: "The page leaves T open, so the dwell limit is the desk's."
+  - id: fee_below_lvr_widen
+    role: exit
+    rule: "When trailing realized fee APR falls below the estimated LVR, widen the range (lower concentration) or exit"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: vol.rv_cc_30
+    note: "Realized fees come from the position record and LVR from lvr_estimate. Whether to widen or exit is left to the desk."
+  - id: gas_gate
+    role: filter
+    rule: "Never rebalance when gas plus slippage of the re-range exceeds the fee income earned since the last rebalance"
+    runnable: false
+    input: position
+    note: "The fee side is in the position record, but gas prices and pool slippage are not served. Read gas from the chain's RPC and quote slippage from the pool."
+  - id: exit_two_cycles
+    role: exit
+    rule: "Exit the pool when trailing fee APR is below LVR for two consecutive rebalance cycles"
+    runnable: true
+    input: position
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: vol.rv_cc_30
+    note: "Fee APR from the position record against lvr_estimate at each rebalance."
+  - id: vol_shock_exit
+    role: exit
+    rule: "Stop deploying when the volatility regime flips to vol_shock or expanding and pool fee volume does not rise to match"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "The regime flip is served (vol.regime_changed marks the bar). Pool volume history is not; /dex/trending gives the current 24h volume only, so the bot must log its own series, and the page does not say how much rise is enough."
+  - id: gas_size_floor
+    role: sizing
+    rule: "Size so one rebalance's gas is under 5% of the fee income between rebalances"
+    runnable: false
+    input: position
+    note: "Gas prices are not served; read them from the chain's RPC."
+  - id: per_pool_cap
+    role: sizing
+    rule: "Cap each pool so one pool's smart-contract or depeg risk cannot dominate the book"
+    runnable: partial
+    input: position
+    note: "The page gives no cap, so the level is the desk's."
+  - id: delta_hedge
+    role: sizing
+    rule: "Hedged variant: short x(p) = L x (1/sqrt(p) - 1/sqrt(p_b)) of the perp to neutralise the position's delta"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/prices
+    field: prices.{coin}
+  - id: rehedge_band
+    role: sizing
+    rule: "Re-hedge when delta drifts more than 8% of position notional (5-10% band)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/prices
+    field: prices.{coin}
+  - id: hedge_net_positive
+    role: filter
+    rule: "Run the hedge only while fee APR - LVR - perp funding - re-hedge slippage - gas stays positive (rolling 30 days)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=100
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_sum
+    note: "Funding is served (hourly Hyperliquid prints; 30 days is 720, so page the replay). Fee APR and slippage come from the position record; gas is not served."
+  - id: out_of_range_7d
+    role: stop
+    rule: "Stop deploying to the pool when the position was out of range more than 50% of the trailing 7 days"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=168
+    field: candles[].close
+    note: "Count hourly closes outside the position's range."
+  - id: rebalance_cost_week
+    role: stop
+    rule: "Stop deploying when rebalance cost exceeds fee income over a rolling week"
+    runnable: true
+    input: position
 ---
 
 # Concentrated Liquidity

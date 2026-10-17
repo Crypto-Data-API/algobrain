@@ -12,6 +12,79 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[risk-reversal]]", "[[collar]]", "[[iron-condor]]", "[[covered-call]]", "[[butterfly-spread]]", "[[jade-lizard]]", "[[skew-trading]]", "[[implied-volatility]]", "[[funding-rate]]", "[[delta]]", "[[deribit]]", "[[greeks-live]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit
+    role: universe
+    rule: "BTC or ETH options on Deribit; alt seagulls are impractical"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "We serve Deribit DVOL and the ATM term structure for BTC and ETH. Option quotes and fills come from Deribit; no option chain is served."
+  - id: directional_or_hedge_view
+    role: entry
+    rule: "Use for a cheap capped directional bet toward the spread, or to hedge a spot BTC/ETH holding (bearish seagull)"
+    runnable: false
+    note: "A view or a hedging need the page leaves to the trader; nothing served states it."
+  - id: legs_by_delta
+    role: entry
+    rule: "Zero-cost tuning at delta targets: buy the 25-delta option, sell the 10-delta wing beyond it, sell the 25-delta funding leg on the other side"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "No option chain or per-strike Greeks are served. Black-Scholes with the expiry's atm_iv gives approximate strikes, ignoring skew; exact deltas and the net cost need Deribit's chain."
+  - id: tenor_by_use
+    role: entry
+    rule: "Tenor 30-90 DTE for a hedge, 21-45 DTE for speculation"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure is Pro Plus and lists the nearest 12 expiries."
+  - id: funding_leg_by_skew
+    role: entry
+    rule: "Sell the wing funding says is rich as the funding leg: positive funding firms call skew (bearish seagull's short call), post-crash put skew funds the bullish build"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "Funding is a proxy for skew; the 25-delta risk reversal itself is not served, and the page gives no funding threshold."
+  - id: no_naked_wing_in_shock
+    role: filter
+    rule: "Do not initiate the naked funding leg in a vol_shock regime"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow."
+  - id: manage_funding_leg
+    role: stop
+    rule: "Buy back or roll the naked funding leg away and out if spot approaches its strike"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "The page gives no distance for 'approaches'; the alert distance is the desk's. Deribit settles on its own index, which tracks spot."
+  - id: cascade_risk_watch
+    role: stop
+    rule: "Dealer gamma and crowded positioning flag cascade risk into the short funding leg"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    note: "/quant/gex is a perp analog of dealer gamma (score at or above 0.35 = amplify), not Deribit options GEX. The page gives no threshold or action beyond managing the leg."
+  - id: take_capped_gain
+    role: exit
+    rule: "Once spot is past the far strike of the spread, the profit is maxed: close to free capital and remove the short-wing risk"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+  - id: size_for_gap
+    role: sizing
+    rule: "Size the funding leg for a Black-Thursday gap (2020-03-12, 2025-10-10), not an average session"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    field: candles[].low
+    note: "The page gives no loss budget. Worst daily drops are measurable from Hyperliquid daily bars back to 2023, which include 2025-10-10 but not 2020."
 ---
 
 # Seagull Option

@@ -22,6 +22,34 @@ expected_sharpe: 1.8
 expected_max_drawdown: 0.15
 breakeven_cost_bps: 4
 decay_evidence: "Solver competition on CoW intensified through 2024-2025; batch win share concentrated in a handful of top solvers. Margins compressed but volume grew faster."
+gates:
+  - id: intent_feed
+    role: universe
+    rule: "Subscribe to the intent feeds: CoW Protocol batches (HTTP poll every second) and UniswapX orders (WebSocket)"
+    runnable: false
+    note: "Intent order flow is not served; it comes from the CoW orderbook API and the UniswapX order feed, and solving requires a whitelisted solver."
+  - id: cow_matches
+    role: entry
+    rule: "Match offsetting buys and sells inside each batch (coincidence of wants, bipartite matching)"
+    runnable: false
+    input: derived
+    inputs: [intent_feed]
+    note: "Built on the unserved intent feed."
+  - id: residual_routing
+    role: entry
+    rule: "Route unmatched residual orders across whitelisted DEXs and private market-maker quotes (Wintermute, GSR, B2C2)"
+    runnable: false
+    note: "Needs live per-block pool reserves and private RFQ quotes. /dex/trending is a cached pool list, not a routing surface."
+  - id: bid_surplus_margin
+    role: entry
+    rule: "Bid surplus x (1 - target margin), where surplus = settlement output minus the orders' minimum outputs, net of estimated gas, before the batch deadline"
+    runnable: false
+    note: "Needs the solver's own settlement simulation and a gas oracle; neither is served, and the page sets no target margin."
+  - id: settlement_inventory
+    role: sizing
+    rule: "Hold inventory across stablecoins, ETH and the top-100 ERC-20s for last-leg fills"
+    runnable: true
+    input: position
 ---
 
 # Intent-Based Arbitrage (Solver-Side)

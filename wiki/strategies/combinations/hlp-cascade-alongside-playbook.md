@@ -21,6 +21,184 @@ expected_sharpe: 2
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 40
 related: ["[[hyperliquid-hlp-basis-arbitrage]]", "[[liquidation-cascade-arbitrage]]", "[[liquidation-cascade-fade]]", "[[hyperliquid]]", "[[hyperliquid-vault-architecture]]", "[[hyperliquid-liquidation-engine]]", "[[cascade-detection-signals]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hl-vs-cex-funding-divergence]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[2024-03-hyperliquid-cascade]]"]
+gates:
+  - id: hlp_allocation
+    role: sizing
+    rule: "Leg A: 50-70% of the book (60% in the pseudocode) deposited in the HLP vault; rebalance when below 95% or above 110% of target"
+    runnable: true
+    input: position
+  - id: hlp_apr_floor
+    role: filter
+    rule: "Leg A inactive (reduce the allocation) when HLP's 30-day APR stays below 10%"
+    runnable: false
+    note: "HLP vault NAV, APR and TVL are not served; the page sources them from the Hyperliquid SDK, on-chain reads or DefiLlama."
+  - id: hlp_tvl_decline
+    role: filter
+    rule: "Leg A inactive when HLP TVL has declined for 90 days"
+    runnable: false
+    note: "HLP TVL is not served (no per-protocol or per-vault TVL)."
+  - id: hlp_nav_circuit
+    role: sizing
+    rule: "HLP drawdown circuit-breaker: when HLP NAV drops more than 3% in 24 hours, cut Leg B size by 50% and suspend Leg C entries"
+    runnable: false
+    note: "Needs HLP NAV per share, which is not served."
+  - id: liq_spike_5m
+    role: entry
+    rule: "Leg B: trailing 5-minute Hyperliquid liquidation notional at least 3.0x its trailing 24h mean"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&window_s=300&include_quiet=true
+    field: alerts[].spike_ratio
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=5m&start={start}
+    replay_field: data[].total_usd
+    note: "spike_ratio is exactly this window over the coin's own 24h mean of equal windows, but summed over OKX + Bybit + Hyperliquid, not Hyperliquid alone. A Hyperliquid-only figure sums data[].usd over the last 5 minutes of /backtesting/hl-liquidations?coin={coin}&start={start} against the 24h sum / 288. Replay from 2026-07-23; bars with no fills are omitted."
+  - id: long_only
+    role: entry
+    rule: "Leg B is long only: fade a cascade where longs are being liquidated"
+    runnable: true
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&window_s=300&include_quiet=true
+    field: alerts[].direction
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=5m&start={start}
+    replay_field: data[].long_usd
+    note: "Require direction long_flush. Replay: long_usd above short_usd in the spike bar."
+  - id: price_drop_15m
+    role: entry
+    rule: "Leg B: mark price down at least 2.0% over the trailing 15 minutes"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=16
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}
+    replay_field: klines[].c
+    note: "Compare the latest close with the close 15 bars earlier. These are trade bars; the live mark is assets[].mark_price on /hyperliquid/open-interest and its 5-minute history is data[].mark_price on /backtesting/funding."
+  - id: cvd_flattening
+    role: entry
+    rule: "Leg B: tick CVD slope over the last 30 seconds at most 0.3x the absolute slope over the prior 30 seconds"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=5
+    field: data[].cvd_usd
+    replay: /api/v1/backtesting/hl-trade-flow?coin={coin}&start={start}&end={end}
+    replay_field: data[].sell_notional
+    note: "We serve closed 1-minute taker buckets, not ticks: the nearest version compares the last closed minute's buy minus sell with the minute before (at most 0.3x), coarser than 30 seconds and up to a minute late. Replay from 2026-09-09."
+  - id: leg_b_size
+    role: sizing
+    rule: "Leg B: 5% of the total book per trade at 3x leverage (15% notional), from a 15-25% margin reserve"
+    runnable: true
+    input: position
+  - id: leg_b_max_concurrent
+    role: sizing
+    rule: "Leg B: at most 2 concurrent positions across all instruments, one per symbol"
+    runnable: true
+    input: position
+  - id: leg_b_target
+    role: exit
+    rule: "Leg B target: the 15-minute VWAP from before the cascade"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=120
+    field: data[].vwap
+    replay: /api/v1/backtesting/hl-trade-flow?coin={coin}&start={start}&end={end}
+    replay_field: data[].vwap
+    note: "Capture it at entry: weight each minute's vwap by buy_notional + sell_notional over the 15 minutes before the cascade began, then compare the live mark with it."
+  - id: leg_b_time_stop
+    role: stop
+    rule: "Leg B: close 4 hours after entry"
+    runnable: true
+    input: position
+  - id: leg_b_hard_stop
+    role: stop
+    rule: "Leg B: hard stop 3.0% below entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: leg_b_three_stops
+    role: filter
+    rule: "Pause the playbook after three consecutive Leg B losses at the -3% hard stop"
+    runnable: true
+    input: position
+  - id: leg_c_pairs
+    role: universe
+    rule: "Leg C: monitor the top 3-5 perps: BTC, ETH, SOL plus 1-2 high-funding alts"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].funding_rate
+    note: "BTC, ETH and SOL are fixed. Which alts count as high-funding, and over what window, is the desk's call; they also need a Binance or Bybit perp."
+  - id: funding_spread_entry
+    role: entry
+    rule: "Leg C: open a delta-neutral pair when the absolute spread between Hyperliquid funding (8h equivalent) and CEX 8h funding exceeds 5 bp"
+    runnable: true
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: hyperliquid.current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "spread = hyperliquid.current_rate x 8 - binance.current_rate (same response); act when its absolute value > 0.0005. binance.current_rate is the latest settled Binance print, and Bybit is not served. Short the venue with the higher rate, long the other. Binance replay is /backtesting/funding?symbol={coin}USDT&exchange=binance (5-minute samples from 2026-03-30)."
+  - id: leg_c_depth_gate
+    role: filter
+    rule: "Leg C liquidity gate: both venues hold more than $5M of book depth within 50 bp of mid for the pair"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth
+    field: coins[].depth_usd.bid
+    note: "Sum the 50bps entries of depth_usd.bid and depth_usd.ask. Hyperliquid side only, about 25 large perps, and counted over the top 20 book levels: where levels_truncated is true (BTC usually is) the figure is a lower bound, so a pass is real but a fail may not be. Binance and Bybit depth is not served."
+  - id: cascade_hold_leg_c
+    role: filter
+    rule: "Hold off Leg C entries for 30 minutes after a Leg B cascade signal fires"
+    runnable: partial
+    input: derived
+    inputs: [liq_spike_5m]
+    note: "Only as runnable as liq_spike_5m."
+  - id: leg_c_size
+    role: sizing
+    rule: "Leg C: equal notional on both venues, 5-8% of the book per side (6% in the pseudocode), keeping 2-3x maintenance margin on the short leg"
+    runnable: true
+    input: position
+  - id: funding_spread_exit
+    role: exit
+    rule: "Leg C: close when the spread falls below 2 bp per 8h, or after 3 funding periods (24 hours), whichever comes first"
+    runnable: true
+    input: position
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: hyperliquid.current_rate
+    note: "Same spread as funding_spread_entry, tested against 0.0002."
+  - id: active_margin_cap
+    role: sizing
+    rule: "Total active margin for Legs B, C and D at most 40% of the book"
+    runnable: true
+    input: position
+  - id: book_drawdown_kill
+    role: stop
+    rule: "Pause the playbook when the combined book drawdown exceeds 18% from peak"
+    runnable: true
+    input: position
+  - id: hype_crash
+    role: sizing
+    rule: "Cut all legs by 50% when HYPE falls more than 50% in 14 days"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin=HYPE&interval=1d&limit=15
+    field: candles[].close
+    note: "Compare the latest close with the close 14 daily bars earlier."
+  - id: exploit_withdraw
+    role: stop
+    rule: "Withdraw 100% on a Hyperliquid smart-contract exploit or governance failure"
+    runnable: partial
+    endpoint: /api/v1/security/regime/HYPE
+    field: events[].event_type
+    note: "Hacks and de-pegs naming HYPE in the last 10 days are served; a governance failure or a vault manipulation like JELLYJELLY is not classified, so confirming the event is the desk's call."
+  - id: chain_outage
+    role: stop
+    rule: "After a Hyperliquid chain outage longer than 60 minutes, withdraw 50% of capital once it recovers"
+    runnable: false
+    note: "Chain status is not served. A stalled ts on /hyperliquid/l2-book or as_of on /hyperliquid/open-interest hints at an outage but cannot tell a chain halt from a feed gap."
+  - id: platform_tvl_decline
+    role: filter
+    rule: "Reduce all legs when Hyperliquid TVL has declined for 6 consecutive months"
+    runnable: false
+    note: "Per-protocol TVL is not served."
+  - id: divergence_frequency
+    role: filter
+    rule: "Reallocate Leg C to Leg A when actionable funding divergences fall below 2 per month for 90 days"
+    runnable: true
+    input: derived
+    inputs: [funding_spread_entry]
+    note: "Count the funding_spread_entry triggers per month; the hourly Hyperliquid replay supports the 90-day count."
 ---
 
 # HLP + Cascade Alongside Playbook

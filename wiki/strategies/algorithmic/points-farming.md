@@ -40,6 +40,95 @@ kill_criteria: |
   - capital lockup extends beyond the modelled farming horizon without a yield offset
 
 related: ["[[airdrop-farming]]", "[[restaking-strategies]]", "[[defi-yield-farming]]", "[[expected-value]]", "[[kelly-criterion]]", "[[hyperliquid]]", "[[ethena-usde]]", "[[eigenlayer]]", "[[funding-rate-arbitrage]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: program_ev
+    role: entry
+    rule: "Enter only when EV = p(TGE) x p(eligible given TGE) x E[allocation value] x (1 - 50% dilution haircut) - gas - lockup opportunity cost beats the opportunity yield by at least 5 points"
+    runnable: false
+    note: "TGE odds, eligibility and allocation value are the farmer's estimates, and points balances and program totals are not served. The pseudocode fixes the opportunity yield at 10%."
+  - id: opportunity_yield
+    role: filter
+    rule: "The hurdle is what the same capital earns elsewhere: about 5-15% from funding-rate arbitrage or a stablecoin vault"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=100
+    field: history[].funding_rate
+    note: "The funding-arb leg is served: mean hourly rate x 24 x 365 is the annual carry of a delta-neutral short perp. Stablecoin vault yields are not served."
+  - id: backer_mechanics
+    role: filter
+    rule: "Credible backers, a live product, a plausible token, and a points schedule not already so diluted that late entry earns dust"
+    runnable: false
+    note: "Backers, product status and points schedules are not served; they are read from the program and its funding announcements."
+  - id: point_day_share
+    role: sizing
+    rule: "Expected allocation is roughly your share of total program point-days: enter early enough for the share to be meaningful"
+    runnable: false
+    note: "Program TVL and total points issued are not served; read them from the protocol dashboard."
+  - id: lockup_check
+    role: filter
+    rule: "Confirm whether deposited capital is locked during the farming window and price that opportunity cost in"
+    runnable: false
+    note: "Lockup terms are protocol facts we do not serve."
+  - id: single_genuine_wallet
+    role: entry
+    rule: "Farm from one well-behaved primary wallet doing real, diverse activity rather than a Sybil cluster"
+    runnable: true
+    input: position
+  - id: sybil_kill
+    role: filter
+    rule: "Avoid the program when the Sybil-disqualification probability on the wallet cluster exceeds 30%"
+    runnable: false
+    note: "No Sybil-cluster analytics are served; the probability is the farmer's own estimate."
+  - id: program_caps
+    role: sizing
+    rule: "EV-weight across 5-10 programs, at most 20% of the farming sleeve per program"
+    runnable: true
+    input: position
+  - id: fractional_kelly
+    role: sizing
+    rule: "Size each program with fractional Kelly on its EV estimate"
+    runnable: false
+    input: derived
+    inputs: [program_ev]
+    note: "Only as runnable as program_ev; the page gives no Kelly fraction."
+  - id: tge_claim
+    role: exit
+    rule: "Claim promptly at TGE; claim windows are finite"
+    runnable: false
+    note: "TGE dates and claim windows are protocol announcements we do not serve. Once the token lists, /coins/search?q={symbol} finds it."
+  - id: ev_compression_exit
+    role: exit
+    rule: "Withdraw and redeploy when modelled EV drops below the opportunity yield (points over-diluted, TGE delayed indefinitely), or stays below it for 30+ days"
+    runnable: false
+    input: derived
+    inputs: [program_ev]
+    note: "Only as runnable as program_ev."
+  - id: dilution_sell
+    role: exit
+    rule: "Sell into TGE liquidity when the token is heavily diluted with large VC unlock cliffs; hold only where fundamentals and float warrant it"
+    runnable: partial
+    endpoint: /api/v1/supply/unlocks?symbol={coin}&window_days=35
+    field: items[].pct_of_float
+    note: "Unlock cliffs within 35 days (Pro) for tokens with a published schedule; float_pct on /supply/float?symbol={coin}&min_market_cap=0 gives the dilution. The page sets no cut, and fundamentals are a judgement."
+  - id: dead_money
+    role: exit
+    rule: "Exit a program that misses a credibly signalled TGE window by more than 6 months"
+    runnable: partial
+    input: position
+    note: "The 6-month count is mechanical once the farmer records the signalled date; whether the signal was credible is a judgement."
+  - id: bear_regime_haircut
+    role: sizing
+    rule: "Deepen the conversion-value haircut when the TGE is likely to land in a bear market state"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow, which gives no haircut size."
+  - id: kill_realisation
+    role: stop
+    rule: "Recalibrate or stop when the last 3 harvests realised under 25% of modelled value"
+    runnable: true
+    input: position
 ---
 
 # Points Farming

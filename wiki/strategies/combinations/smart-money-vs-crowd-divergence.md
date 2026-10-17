@@ -34,6 +34,116 @@ kill_criteria: |
   - on-chain data latency > 2 hours on 3 consecutive trading days (data pipeline failure; execution becomes stale)
 
 related: ["[[smart-money-orderflow-combo]]", "[[on-chain-smart-money-tracking]]", "[[crowded-short-funding-fade]]", "[[spot-led-momentum-filter]]", "[[onchain-capitulation-confluence]]", "[[funding-flush-reversal]]", "[[oi-flush-reversion]]", "[[exchange-netflow]]", "[[whale-onchain-flows]]", "[[funding-rate]]", "[[open-interest]]", "[[perpetual-futures]]", "[[on-chain]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: whale_accumulation
+    role: entry
+    rule: "Gate 1: 7-day whale accumulation score at or above 65/100"
+    runnable: false
+    note: "The /on-chain/whales family, accumulation-score included, answers 503 (coming soon) and is outside the spec; when it ships it is a categorical ERC-20 signal, not a 0-100 BTC score. /quant/whales tracks Hyperliquid perp accounts of $100k or more, a different population. Needs an external whale-balance feed."
+  - id: exchange_outflow
+    role: entry
+    rule: "Gate 2: BTC 24h exchange outflow in the top quartile of its trailing 30-day range, or 7-day net exchange flow negative"
+    runnable: partial
+    endpoint: /api/v1/on-chain/exchange-flows/{symbol}
+    field: windows.7d.net
+    replay: /api/v1/on-chain/exchange-flows/{symbol}/history?start={start}&interval=1h
+    replay_field: points[].outflow_24h
+    note: "7d leg: windows.7d.net below 0. 24h leg: rank windows.24h.outflow against points[].outflow_24h over 30 days of /history (from 2026-05-28). Coverage is tracked CEX wallets only; per_exchange_24h shows which exchanges report (on 2026-10-17 only Binance carried BTC flow), so this is a partial view of exchange flow."
+  - id: funding_flat_or_negative
+    role: entry
+    rule: "Gate 3: 8h funding at or below 0.00%"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=21
+    field: current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance's 8h rate, as on the page's /derivatives/funding-rates."
+  - id: ls_short_biased
+    role: entry
+    rule: "Gate 4a: long/short ratio at or below 0.95"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/long-short-ratio?symbol={coin}USDT
+    field: long_short_ratio
+    note: "Binance global account ratio, the page's source."
+  - id: funding_7d_negative
+    role: entry
+    rule: "Gate 4b: 7-day average 8h funding at or below -0.01%"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Mean of the last 21 settlements."
+  - id: crowd_short
+    role: entry
+    rule: "Gate 4: the crowd is short-biased when ls_short_biased or funding_7d_negative holds"
+    runnable: true
+    input: derived
+    inputs: [ls_short_biased, funding_7d_negative]
+    note: "The Rules say either leg; the pseudocode instead requires funding at or below 0 AND L/S at or below 0.95. Pick one and log it."
+  - id: higher_low_10d
+    role: entry
+    rule: "Gate 5: no run of lower lows on the daily chart, i.e. at least one higher low in the last 10 days"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=13
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "The pseudocode reads local minima of the last 10 closed daily closes: the latest above the previous one (or fewer than two minima)."
+  - id: all_gates
+    role: entry
+    rule: "Go long only when all five gates hold at once"
+    runnable: false
+    input: derived
+    inputs: [whale_accumulation, exchange_outflow, funding_flat_or_negative, crowd_short, higher_low_10d]
+    note: "Blocked by Gate 1: no whale accumulation score is served."
+  - id: regime_size_cut
+    role: sizing
+    rule: "In a Structural Shock or bear-trend regime cut size to 2% and require DVOL to be declining before entry"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "From the indicator list. Match structural_shock_crisis or established_bear; DVOL direction is items[].dvol_change_24h on /volatility/implied, and the page gives no window for declining. Regime history starts 2026-08-07."
+  - id: onchain_health_confirm
+    role: filter
+    rule: "Secondary confirmation: On-chain Health score at or above 50"
+    runnable: true
+    endpoint: /api/v1/on-chain/score
+    field: score
+    note: "From the indicator list, not the five gates. Components with no data (MVRV, whale accumulation) are dropped and the rest renormalised."
+  - id: position_size
+    role: sizing
+    rule: "BTC perp long at 3-5% of portfolio notional, 1-2x leverage, at most 1 open divergence position"
+    runnable: true
+    input: position
+  - id: crowd_long_again_exit
+    role: exit
+    rule: "Take profit when 8h funding is back above +0.02% and long/short is at or above 1.05"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/long-short-ratio?symbol={coin}USDT
+    field: long_short_ratio
+    note: "Funding leg: current_rate on /derivatives/binance/funding-rates?symbol={coin}USDT at or above 0.0002."
+  - id: onchain_reversal_exit
+    role: exit
+    rule: "Close if the whale score is below 50 for 2 consecutive days and exchange inflows spike"
+    runnable: false
+    note: "Needs the whale accumulation score (see whale_accumulation). The inflow leg alone is spike_zscore_24h on /on-chain/exchange-flows/{symbol}."
+  - id: new_10d_low_stop
+    role: stop
+    rule: "Close if BTC makes a new 10-day low on a daily close"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=12
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "The pseudocode stops below 0.995 x the lowest close of the 10 days before entry."
+  - id: time_exit
+    role: exit
+    rule: "Close after 30 days if neither target nor stop has been reached"
+    runnable: true
+    input: position
 ---
 
 # Smart-Money vs Crowd Divergence

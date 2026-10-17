@@ -12,6 +12,119 @@ markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[credit-spread]]", "[[iron-condor]]", "[[short-strangle]]", "[[cash-secured-puts]]", "[[crypto-options-volatility-selling]]", "[[deribit]]", "[[greeks-live]]", "[[dvol]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[volatility-surface]]", "[[funding-rate]]", "[[variance-risk-premium]]", "[[skew]]", "[[max-pain]]", "[[gamma-exposure]]", "[[section-1256-contracts]]", "[[theta]]", "[[vega]]", "[[gamma]]", "[[delta]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit_only
+    role: universe
+    rule: "BTC and ETH Deribit options only; alt options are too thin for a clean defined-risk vertical"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied-vol data served. Option quotes come from Deribit itself."
+  - id: short_put_20_30_delta
+    role: entry
+    rule: "Sell one put at about 20-30 delta, below spot"
+    runnable: false
+    note: "No option chain, per-strike IV or Greeks are served; the strike by delta comes from Deribit's chain."
+  - id: long_wing_8_12_delta
+    role: entry
+    rule: "Buy one put at about 8-12 delta, one to a few strikes lower, same expiry"
+    runnable: false
+    note: "Same gap as short_put_20_30_delta: strike by delta needs Deribit's chain."
+  - id: credit_vs_width
+    role: entry
+    rule: "Net credit at least 25-33% of the strike width"
+    runnable: false
+    note: "Needs the two legs' bid and ask; no option quotes are served."
+  - id: tenor_21_45_dte
+    role: entry
+    rule: "Expiry 21-45 days out; no weeklies and nothing past 60 DTE"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure lists the nearest 12 Deribit expiries. It is Pro Plus and empty on lower tiers."
+  - id: dvol_40_90_pctile
+    role: filter
+    rule: "Enter only with DVOL in its 40th-90th percentile band: skip a low-DVOL grind and an active vol shock"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "Rank the latest dvol within history (about 180 daily closes; Pro Plus). The page names no lookback window; 180 days is the longest served, so a one-year percentile is not possible."
+  - id: vrp_above_5
+    role: filter
+    rule: "DVOL minus 30-day realized vol above about 5 vol points"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    note: "vrp = dvol - realized_30, where realized_30 is the 30-day Garman-Klass estimate rather than close-to-close. For replay, pair items[].history[].dvol with history[].rv_gk_30 on /api/v1/volatility/regime/{symbol} (60 days deep)."
+  - id: not_vol_shock
+    role: filter
+    rule: "No entry while the coin's vol regime reads vol_shock"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+  - id: put_skew_rich
+    role: filter
+    rule: "Put skew fat, so the short put specifically pays well"
+    runnable: false
+    note: "No put skew, 25-delta risk reversal or per-strike IV is served. The page's proxy is funding_flip_skew."
+  - id: funding_flip_skew
+    role: filter
+    rule: "Prefer entry after a selloff in which perp funding has flipped, the signal that put skew has fattened"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=48
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "A sign change from positive to negative over the window is the flip. The page gives no window or size for the selloff, and the skew it stands for is not served. Binance funding is binance.current_rate on /api/v1/derivatives/funding-rates?coin={coin}."
+  - id: bullish_thesis_check
+    role: filter
+    rule: "Stand aside while the market regime shows sustained strong_trend_bear probability: a persistent bear is this spread's weakness"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow. 'Sustained' has no length; regime.in_regime_since and candles_in_regime give how long the label has held. The coin's own read is /api/v1/quant/coins/{symbol}."
+  - id: profit_target_half_credit
+    role: exit
+    rule: "Close at 50% of max credit (50-75% for tighter spreads)"
+    runnable: true
+    input: position
+    note: "The spread's current mark comes from Deribit; no option prices are served."
+  - id: time_stop_21_dte
+    role: exit
+    rule: "Close or roll at about 21 DTE if the target has not hit"
+    runnable: true
+    input: position
+  - id: loss_cap_2x_credit
+    role: stop
+    rule: "Close when the loss reaches about 2x the credit received"
+    runnable: true
+    input: position
+  - id: one_roll_only
+    role: exit
+    rule: "If the short strike is breached but the thesis holds, roll down and out once for a net credit, never a second time"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "The breach (spot below the short strike) and the roll count are mechanical; 'thesis holds' is the trader's judgement. oracle_price is a CEX spot composite close to Deribit's index."
+  - id: dvol_shock_kill
+    role: stop
+    rule: "Flatten if DVOL rises more than 50% in a session, or the position delta exceeds about 2x its entry delta"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Crypto has no session; the nearest served step is the latest dvol against the prior day's close in history (daily closes only, no intraday DVOL). Position delta comes from Deribit; no Greeks are served."
+  - id: down_gap_warning
+    role: stop
+    rule: "Watch liquidations and dealer gamma for the cascade that gaps through the long wing"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/liquidations?symbol={coin}
+    field: data[].liquidation_usd_1h
+    note: "From the page's AI-agent workflow, with no threshold. OKX + Bybit + Hyperliquid (no Binance). The gamma input is coins.{coin}.regime.score on /api/v1/quant/gex?symbol={coin}, a perp analog, not Deribit dealer gamma."
 ---
 
 # Short Put Spread

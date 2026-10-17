@@ -41,6 +41,147 @@ last_review: 2026-07-14
 next_review: 2026-08-14
 
 related: ["[[crypto-options-volatility-selling]]", "[[volatility-carry]]", "[[variance-risk-premium]]", "[[skew-trading]]", "[[short-strangle]]", "[[delta-hedging]]", "[[gamma-scalping]]", "[[correlation]]", "[[pairs-trading]]", "[[statistical-arbitrage]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[volatility-surface]]", "[[realized-volatility]]", "[[btc-dominance]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[crowding-risk]]", "[[cryptodataapi]]"]
+gates:
+  - id: index_proxy
+    role: universe
+    rule: "Index leg (sell vol): BTC as the market proxy, or a BTC/ETH basket weighted by market cap"
+    runnable: true
+    endpoint: /api/v1/coins/top?limit=20
+    field: coins[].market_cap
+    note: "Basket weights are BTC and ETH market_cap over their sum. The option legs themselves trade on Deribit; no option prices are served."
+  - id: single_name_legs
+    role: universe
+    rule: "Single-name legs (buy vol): ETH and, only when liquid, SOL and at most one or two other large-cap alts with a tradeable Deribit surface"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "Implied vol is served for BTC and ETH only (DVOL and ATM IV by expiry). SOL and alt option surfaces and their liquidity are not served, so whether a SOL leg is tradeable is a check on Deribit."
+  - id: implied_corr_top30
+    role: entry
+    rule: "Open only when implied correlation, backed out from index vs basket-weighted single-name implied vols, is in the top ~30% (70th percentile or higher) of its trailing range"
+    runnable: false
+    note: "Backing out implied correlation needs an index (or basket) option IV plus each name's IV. Only BTC and ETH DVOL and ATM IVs are served, with no basket option and no SOL, so implied correlation and its history must come from Deribit surfaces (for example via Greeks.live)."
+  - id: realized_corr_30d
+    role: entry
+    rule: "30-day realized correlation of daily returns between the index proxy and the single names"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=32
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "One call per name (BTC, ETH, SOL), joined on timestamp; drop the forming bar and correlate the last 30 daily log returns."
+  - id: ic_minus_rc
+    role: entry
+    rule: "Require implied correlation minus 30-day realized correlation above 0.10"
+    runnable: false
+    input: derived
+    inputs: [implied_corr_top30, realized_corr_30d]
+    note: "The implied side is not served (see implied_corr_top30)."
+  - id: matched_tenor
+    role: entry
+    rule: "All legs use the same expiry, 21-45 DTE (35 targeted)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "Lists the BTC and ETH Deribit expiries with days to expiry and ATM IV; SOL expiries are not served."
+  - id: vega_neutral
+    role: sizing
+    rule: "Vega-neutral at inception: basket-weighted long single-name vega equals the short index vega"
+    runnable: false
+    note: "Needs per-option vega; no option Greeks or prices are served. The venue's risk view or an option pricer on Deribit quotes is needed."
+  - id: corr_tail_cap
+    role: sizing
+    rule: "Size so a move of realized correlation to 1.0 costs at most 12% of the sleeve"
+    runnable: false
+    note: "A scenario on the option book that needs each leg's Greeks and IV; not served."
+  - id: leg_liquidity_cap
+    role: sizing
+    rule: "No single-name leg larger than 10% of that option's daily volume"
+    runnable: false
+    note: "Per-option volume is not served; /market-intelligence/options carries only a BTC-wide aggregate."
+  - id: max_books
+    role: sizing
+    rule: "At most 2 concurrent dispersion books"
+    runnable: true
+    input: position
+  - id: per_leg_delta_band
+    role: sizing
+    rule: "Delta-hedge every leg independently on its own perp, keeping each leg's delta inside a band of plus or minus 0.5% of NAV"
+    runnable: true
+    input: position
+    note: "Option deltas come from the venue account (no Greeks are served); the hedge is the leg's own perp."
+  - id: funding_rehedge
+    role: sizing
+    rule: "Re-hedge at each 8-hour funding boundary"
+    runnable: true
+    input: position
+    note: "8-hour boundaries are Deribit and Binance settlements; Hyperliquid perps settle hourly."
+  - id: iv_jump_continuous_hedge
+    role: sizing
+    rule: "Switch a leg to continuous hedging when its DVOL or IV jumps more than 25% intraday"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol_change_24h
+    note: "BTC and ETH only. dvol is today's forming daily DVOL bar (refreshed about every 5 minutes) and dvol_change_24h is its move in points since the previous UTC daily close, so dvol_change_24h / (dvol - dvol_change_24h) is the percent move so far today; a jump that straddles 00:00 UTC is split across two days. SOL IV is not served."
+  - id: hedge_leg_funding
+    role: sizing
+    rule: "Budget the funding paid or collected on each perp hedge leg separately"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hourly settled prints per hedge coin; the 8-hourly Binance prints are on /api/v1/derivatives/binance/funding-rates."
+  - id: corr_converged_exit
+    role: exit
+    rule: "Close when the implied-minus-realized correlation spread compresses to near zero"
+    runnable: false
+    input: derived
+    inputs: [ic_minus_rc]
+    note: "The implied side is not served; the alternative trigger index_credit_decay is runnable."
+  - id: index_credit_decay
+    role: exit
+    rule: "Close when the index short has decayed to 50% of its entry credit"
+    runnable: true
+    input: position
+    note: "The short's current mark comes from the venue; no option prices are served."
+  - id: time_stop_dte
+    role: exit
+    rule: "Close the book at 10-14 DTE (12 in the pseudocode)"
+    runnable: true
+    input: position
+  - id: corr_spike_kill
+    role: stop
+    rule: "Flatten every dispersion book when 5-day realized correlation reaches 0.95 and holds"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=121
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].close
+    note: "The page names neither the return frequency (five daily returns make a noisy correlation; 120 hourly returns are used here) nor how long the reading must hold, so both are the desk's call."
+  - id: alt_bidask_kill
+    role: stop
+    rule: "If any single-name leg's bid-ask exceeds 10 vol points, close what remains tradeable and stand down"
+    runnable: false
+    note: "Option quotes are not served; read the leg's bid-ask on Deribit."
+  - id: spike_early_warning
+    role: filter
+    rule: "Correlation-spike early warning: rising market-wide vol stress and cross-exchange liquidations (everything liquidating together)"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    replay: /api/v1/volatility/index/history?days=365
+    replay_field: points[].composite_score
+    note: "From the page's agent workflow, which sets no threshold. Liquidations across venues are on /api/v1/market-intelligence/liquidations (OKX, Bybit and Hyperliquid; Binance is not captured). What level warns is the desk's call."
+  - id: dominance_tell
+    role: filter
+    rule: "BTC dominance trend as a tell: falling dominance suggests an idiosyncratic, dispersion-friendly regime; rising suggests a correlated one"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: signals.btc_dom
+    replay: /api/v1/backtesting/snapshots?data_type=cycle_regime&start={start}&limit=1000
+    replay_field: snapshots[].data.signals.btc_dom
+    note: "From the page's indicator list, which sets no window for the trend. The live call gives the level; the trend comes from the cycle_regime snapshots (about every 25 minutes from 2026-08-07)."
 ---
 
 # Crypto Options Dispersion

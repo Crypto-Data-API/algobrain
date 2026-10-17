@@ -38,6 +38,102 @@ kill_criteria: |
   - NFT market-wide volume in a sustained bleed regime with no catalyst pipeline
 
 related: ["[[memecoin-sniping]]", "[[liquidity-sniping]]", "[[sentiment-trading]]", "[[on-chain-analysis]]", "[[on-chain-smart-money-tracking]]", "[[copy-trading]]", "[[jit-liquidity]]", "[[slippage]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: catalyst_identified
+    role: entry
+    rule: "Floor sweep: a datable catalyst (partnership, airdrop or snapshot, product launch, listing) within about 21 days, ideally before it is widely known"
+    runnable: false
+    note: "NFT catalysts are community and project announcements we do not serve; /event/calendar covers token unlocks and macro prints only."
+  - id: floor_depth
+    role: filter
+    rule: "Sweep only when items listed within +5% of the floor number at least 3x the intended basket"
+    runnable: false
+    note: "NFT floor prices and listings are not served (the nfts routes carry volume and trades only). Needs a marketplace or Reservoir API."
+  - id: real_volume
+    role: filter
+    rule: "The collection's wash-trade-adjusted volume is real"
+    runnable: partial
+    endpoint: /api/v1/nfts/volume?by=collection&from={date}
+    field: points[].volume_usd
+    note: "Daily USD volume per collection (bucket is the collection's slug or contract address), with trade counts on /nfts/collections/{slug}. It is not wash-adjusted, so filtering self-dealing is still the bot's job. Pro."
+  - id: holders_stable
+    role: filter
+    rule: "Holder count stable or rising"
+    runnable: false
+    note: "NFT holder counts are not served; read them from the chain or a marketplace API."
+  - id: sweep_ladder_exit
+    role: exit
+    rule: "List the swept basket on a staggered ladder into the catalyst demand (+30%, +55%, +80% over the entry floor), not all at the top"
+    runnable: true
+    input: position
+    note: "Limit listings set from the entry floor in the position record; the live floor is not served."
+  - id: sweep_time_stop
+    role: exit
+    rule: "Unwind at market if the catalyst passes with no floor move within the hold budget (14 days)"
+    runnable: partial
+    input: position
+    note: "The 14-day clock is mechanical, but whether the floor moved needs a floor price we do not serve."
+  - id: rarity_snipe
+    role: entry
+    rule: "Buy a listing priced at or below 70% of its modelled trait-fair value when its trait tier has recent sales to validate the model; relist at fair value"
+    runnable: false
+    note: "Trait tables, item listings and item-level sales are not served; they come from the marketplace or Reservoir APIs."
+  - id: rarity_max_hold
+    role: exit
+    rule: "Hold a sniped rare at most 90 days before marking it down"
+    runnable: true
+    input: position
+  - id: trait_arbitrage
+    role: entry
+    rule: "Buy items with traits the market under-prices and relist at a trait-scarcity premium supported by comparable sales"
+    runnable: false
+    note: "Trait-level prices and sales are not served."
+  - id: lp_blue_chips
+    role: universe
+    rule: "Liquidity provision on liquid blue-chip collections only"
+    runnable: true
+    endpoint: /api/v1/nfts/collections
+    field: collections[].tier
+    note: "The seeded taxonomy tags tiers (og_blue_chip and others); liquid means checking real_volume too."
+  - id: lp_collection_bid
+    role: entry
+    rule: "Post a collection bid at 85-92% of floor (88% in the pseudocode) and relist fills at the floor"
+    runnable: false
+    note: "Floor prices and collection-bid books are not served."
+  - id: floor_beta_hedge
+    role: sizing
+    rule: "Hedge floor beta with an NFT-perp or floor-index short where one exists"
+    runnable: false
+    note: "NFT perps and floor indices are not served."
+  - id: exposure_caps
+    role: sizing
+    rule: "At most 25% of the NFT sleeve per collection and 10% per item"
+    runnable: true
+    input: position
+  - id: volume_liquidity_gate
+    role: sizing
+    rule: "Never hold more than 1-2x the collection's daily wash-adjusted volume"
+    runnable: partial
+    endpoint: /api/v1/nfts/volume?by=collection&from={date}
+    field: points[].volume_usd
+    note: "Served volume is not wash-adjusted, so it overstates the exit liquidity this cap is meant to protect."
+  - id: nft_risk_regime
+    role: filter
+    rule: "Pause the sleeve when market-wide NFT volume is in a sustained bleed with no catalyst pipeline, or the broad market flips risk-off"
+    runnable: partial
+    endpoint: /api/v1/nfts/overview?days=90
+    field: total_series[].volume_usd
+    note: "Daily total NFT volume (history back years via days, max 3650). The page does not define a bleed; /quant/market regime.label is its risk-off cross-check."
+  - id: collection_correlation
+    role: sizing
+    rule: "Check collection correlations so the book does not become one concentrated bet"
+    runnable: false
+    note: "Collection-to-collection correlations are not served. /nfts/correlations correlates total NFT volume with BTC, ETH and SOL returns, a different question."
+  - id: kill_sleeve
+    role: stop
+    rule: "Pause on trailing 90-day net P&L below zero, median time-to-sell above the hold budget (sweeps taking over 21 days), or a single collection marked down over 40% with no exit liquidity"
+    runnable: true
+    input: position
 ---
 
 # NFT Trading

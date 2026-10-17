@@ -34,6 +34,145 @@ kill_criteria: |
   - realized spread half-life > 2× the modeled half-life on a 40-trade sample (OU model is mis-calibrated; revert to pure z-score or pause)
 
 related: ["[[pairs-trading]]", "[[pairs-with-funding-differential]]", "[[stat-arb]]", "[[ornstein-uhlenbeck]]", "[[cointegration]]", "[[regime-detection]]", "[[regime-adaptive-strategy]]", "[[hl-vs-cex-funding-divergence]]", "[[statistical-arbitrage]]", "[[vol-regime-detection]]", "[[spread-trading]]", "[[augmented-dickey-fuller]]", "[[mean-reversion]]", "[[perpetual-futures]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: pair_universe
+    role: universe
+    rule: "Candidate pairs of co-moving liquid crypto perps: BTC/ETH first, then major L1s, DEX tokens or staking derivatives, 10-15 candidates in all"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "assets[] lists the live Hyperliquid perps. Which pairs share enough beta or sector exposure to be candidates is the desk's call; the regime gates below then filter them."
+  - id: corr_30d_070
+    role: entry
+    rule: "Gate 1: 30-day rolling Pearson correlation of the two legs' log returns at or above 0.70"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles/batch?coins={coin}&interval=1d&limit=91&closed_only=true
+    field: series.{coin}[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Pass both legs as a comma list in coins; correlate the last 30 daily log returns. The page also allows 1h bars (limit=720 on /hyperliquid/candles). Re-check daily. Hyperliquid daily history reaches back to 2023."
+  - id: corr_break_060
+    role: exit
+    rule: "Flatten all legs immediately when the 30-day correlation falls below 0.60 while a spread is open"
+    runnable: true
+    input: derived
+    inputs: [corr_30d_070]
+  - id: coint_adf_010
+    role: entry
+    rule: "Gate 2: Engle-Granger cointegration on a rolling 90-day window of daily closes, ADF p-value on the residual at or below 0.10 (or Johansen trace with at least one cointegrating vector at 5%)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles/batch?coins={coin}&interval=1d&limit=91&closed_only=true
+    field: series.{coin}[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Computed locally (statsmodels coint or adfuller on the OLS residual); no derived-statistic endpoint exists. The OLS slope is the hedge ratio used for sizing; fit it point-in-time and never re-fit during a live trade."
+  - id: coint_fail_5d
+    role: exit
+    rule: "Flatten open positions when the cointegration test has failed on 5 consecutive daily checks"
+    runnable: true
+    input: derived
+    inputs: [coint_adf_010]
+  - id: halflife_3_45
+    role: entry
+    rule: "Gate 3: Ornstein-Uhlenbeck half-life of the 60-day spread, ln(2) / theta, at least 3 days and at most 45 days"
+    runnable: true
+    input: derived
+    inputs: [coint_adf_010]
+    note: "AR(1) fit on the last 60 daily spread values: half-life = ln(2) / abs(ln(b))."
+  - id: zscore_entry_2
+    role: entry
+    rule: "Enter when the spread z-score against its 60-day mean and std is at or beyond +2.0 (short the outperformer, long the underperformer) or -2.0 (the reverse), with all three gates passing that day"
+    runnable: true
+    input: derived
+    inputs: [corr_30d_070, coint_adf_010, halflife_3_45]
+  - id: no_entry_beyond_35
+    role: filter
+    rule: "Do not enter beyond plus or minus 3.5 sigma without confirming there is no regime break"
+    runnable: partial
+    input: derived
+    inputs: [zscore_entry_2]
+    note: "The page does not say what confirms the absence of a break beyond the three gates already passing, so that check is the desk's call."
+  - id: funding_differential
+    role: filter
+    rule: "Optional: when the funding differential agrees with the spread direction (the short leg pays the higher funding), enter at 2.0 sigma; when it disagrees, require 2.5 sigma"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Call once per leg and compare the 8-print sums (Hyperliquid settles hourly). For Binance legs use rates[].funding_rate on /api/v1/derivatives/binance/funding-rates."
+  - id: macro_regime_block
+    role: filter
+    rule: "Enter no new pairs while the macro regime is Structural Shock"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Structural Shock is regime structural_shock_crisis. History starts 2026-08-07."
+  - id: oi_collapse_warning
+    role: filter
+    rule: "Treat open interest collapsing as correlation breaks as an extra warning of a regime shift"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_change_pct
+    note: "Per-leg daily OI change on Hyperliquid. The page gives no size for a collapse and no action beyond the warning, so how to use it is the desk's call."
+  - id: pair_sizing
+    role: sizing
+    rule: "2.5% of the sleeve per active pair, legs sized delta-neutral on the spread by the cointegration hedge ratio; at most 4 concurrent pairs"
+    runnable: true
+    input: position
+  - id: exit_z_05
+    role: exit
+    rule: "Profit target: close both legs when the z-score is back within plus or minus 0.5"
+    runnable: true
+    input: derived
+    inputs: [zscore_entry_2]
+  - id: exit_gate_fails
+    role: exit
+    rule: "Close both legs at market as soon as any regime gate fails during the hold"
+    runnable: true
+    input: derived
+    inputs: [corr_30d_070, coint_adf_010, halflife_3_45]
+  - id: hard_stop_35_3d
+    role: stop
+    rule: "Hard stop: close when the spread is at or beyond plus or minus 3.5 sigma and has been open for 3 days or more"
+    runnable: true
+    input: derived
+    inputs: [zscore_entry_2]
+    note: "The pseudocode's version; the text adds no sign of reversion, which it does not define."
+  - id: time_stop_30d
+    role: exit
+    rule: "Close if the spread has not reverted within 30 calendar days"
+    runnable: true
+    input: position
+  - id: kill_drawdown_20
+    role: stop
+    rule: "Kill: strategy drawdown above 20% in any rolling 60-day window"
+    runnable: true
+    input: position
+  - id: kill_sharpe
+    role: stop
+    rule: "Kill: rolling 6-month net Sharpe below 0 on at least 15 completed pair cycles"
+    runnable: true
+    input: position
+  - id: kill_coint_absent
+    role: stop
+    rule: "Kill: cointegration p-value above 0.15 on a rolling 90-day window for every primary pair for 60 or more consecutive days"
+    runnable: true
+    input: derived
+    inputs: [coint_adf_010]
+  - id: kill_corr_collapse
+    role: stop
+    rule: "Kill: rolling 30-day correlation below the 0.60 floor on 80% or more of days in any 30-day window"
+    runnable: true
+    input: derived
+    inputs: [corr_30d_070]
+  - id: kill_halflife_miscalibrated
+    role: stop
+    rule: "Kill: realized half-life above 2x the modeled half-life over 40 or more trades"
+    runnable: true
+    input: position
 ---
 
 # Correlation-Regime Pairs

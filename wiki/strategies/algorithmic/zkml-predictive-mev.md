@@ -22,6 +22,65 @@ expected_sharpe: 1.8
 expected_max_drawdown: 0.3
 breakeven_cost_bps: 30
 decay_evidence: "No documented production deployments as of mid-2026 (verified via Perplexity 2026-06-10) — category is research-stage. If deployed, likely follows the latency-arb pattern of compression as more searchers adopt."
+gates:
+  - id: stale_oracle_prediction
+    role: entry
+    rule: "Stale-oracle variant: the model predicts the next Chainlink ETH/USD push will exceed the 0.5% deviation threshold within 30 seconds"
+    runnable: false
+    note: "No oracle feed is served (Chainlink, Pyth or Redstone update times, deviation thresholds or on-chain answers). Needs an Ethereum node reading the aggregator contracts plus the oracle networks' own feeds."
+  - id: pool_and_mempool_inputs
+    role: entry
+    rule: "Per block, run inference on pool reserves at 1-second granularity and mempool flow rate by token pair"
+    runnable: false
+    note: "No DEX pool reserves and no mempool stream are served. Needs an archive node for pool state and a mempool feed (a private relay or a node's txpool)."
+  - id: cross_chain_arrival
+    role: entry
+    rule: "Cross-chain variant: the model predicts a pending LayerZero or Wormhole message lands within the next 2 blocks on the destination chain"
+    runnable: false
+    note: "No bridge message or arrival-time data is served. Needs the bridges' own message explorers or nodes on both chains."
+  - id: funding_target
+    role: entry
+    rule: "Funding-prediction variant: the label is the next Hyperliquid hourly funding settlement; pre-position the basis trade on the predicted rate"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=20
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "history[] holds settled hourly prints; current_rate on the same response is the live rate for the hour in progress. The replay's hourly grain is one settled print per row from 2024-01-01, loaded with about a day's lag."
+  - id: book_imbalance_feature
+    role: entry
+    rule: "Funding-prediction variant: order-book imbalance on the Hyperliquid book is the model's input feature"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth/{coin}?minutes=60
+    field: history[].imbalance_10bps
+    replay: /api/v1/backtesting/snapshots?data_type=liquidity_depth&start={start}
+    replay_field: snapshots[].data[].imbalance_10bps
+    note: "The page does not define imbalance. imbalance_10bps is (bid USD - ask USD) / total within 10 bps of mid from the top 20 levels each side; for another depth or level count build it from bids[].size and asks[].size on /api/v1/hyperliquid/l2-book?coin={coin}. The archived snapshots hold about 25 large coins, pick the row by coin."
+  - id: regime_gate
+    role: filter
+    rule: "Condition deployment on the market regime and track hit rate per regime"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow. The page names no regime to stand aside in, so which labels pause the model is the desk's call."
+  - id: profit_over_costs
+    role: entry
+    rule: "Submit the conditional bundle only when predicted profit exceeds proof-generation cost ($1-10) plus verification gas (200K-800K gas) plus a minimum threshold, about 10-30x cost"
+    runnable: false
+    note: "No gas-price feed and no proof-cost data are served. Needs an Ethereum node's fee estimates and the prover's own cost per proof; the profit estimate itself is the model's output."
+  - id: kill_proof_cost
+    role: stop
+    rule: "Kill switch: proof cost above 30% of per-trade gross"
+    runnable: true
+    input: position
+  - id: kill_model_accuracy
+    role: stop
+    rule: "Kill switch: out-of-sample model accuracy below 60%, or a bundle hit rate no better than the unconditional base rate of the predicted event"
+    runnable: true
+    input: position
+    note: "For the funding variant, score each prediction against the settled print in funding_target."
 ---
 
 # ZKML Predictive MEV

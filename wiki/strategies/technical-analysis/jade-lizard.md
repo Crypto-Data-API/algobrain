@@ -12,6 +12,105 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[iron-condor]]", "[[short-strangle]]", "[[broken-wing-butterfly]]", "[[christmas-tree-spread]]", "[[risk-reversal]]", "[[crypto-options-volatility-selling]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[volatility-surface]]", "[[funding-rate]]", "[[gamma-exposure]]", "[[max-pain]]", "[[section-1256-contracts]]", "[[theta]]", "[[vega]]", "[[gamma]]", "[[delta]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit_only
+    role: universe
+    rule: "BTC and ETH Deribit options only; alt-option chains are too thin for the three-leg structure"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied vol served. Option quotes come from Deribit itself."
+  - id: short_put_25_30_delta
+    role: entry
+    rule: "Sell 1 OTM put at about 25-30 delta"
+    runnable: false
+    note: "Strikes by delta need Deribit's option chain with Greeks, which we do not serve."
+  - id: short_call_spread
+    role: entry
+    rule: "Sell 1 OTM call at about 15-25 delta and buy 1 further-OTM call to cap the upside"
+    runnable: false
+    note: "Same gap as short_put_25_30_delta."
+  - id: credit_covers_call_width
+    role: entry
+    rule: "Total credit at least the call-spread width (no upside risk), verified at fill, not at quote"
+    runnable: false
+    note: "Needs the three legs' fills or quotes; no option prices are served."
+  - id: tenor_21_45_dte
+    role: entry
+    rule: "Expiry 21-45 days out"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure lists the nearest 12 Deribit expiries. It is Pro Plus and empty on lower tiers."
+  - id: dvol_40_90_pctile
+    role: filter
+    rule: "Sell only with DVOL inside its 40th-90th percentile band"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "Rank the latest dvol within history (about 180 daily closes, Pro Plus). The page names no lookback window."
+  - id: vol_regime_elevated
+    role: filter
+    rule: "Sell when the vol regime reads elevated"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "'Elevated' is not a served label (vol_shock, expanding, compressed, mean_reverting, normal); expanding is the nearest. Skip vol_shock."
+  - id: positive_funding_call_skew
+    role: filter
+    rule: "Sell when funding is positive: a rich call wing makes the credit-covers-width condition achievable"
+    runnable: true
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&start={start}
+    replay_field: data[].funding_rate
+    note: "Positive = above 0. Binance 8-hour rate live; the replay is Hyperliquid funding. The call skew itself is not served."
+  - id: downside_regime_veto
+    role: filter
+    rule: "Rising strong_trend_bear or vol_spike probability vetoes entry regardless of premium"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: explain.label_posteriors.strong_trend_bear
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_1
+    note: "vol_spike sits beside it (post_label_4). 'Rising' has no window or threshold on the page."
+  - id: profit_target_half
+    role: exit
+    rule: "Close the whole structure at 50% of max profit"
+    runnable: true
+    input: position
+    note: "The structure's mark comes from Deribit; no option prices are served."
+  - id: short_put_breach
+    role: exit
+    rule: "If the short put is breached, roll down and out for a credit or close for a loss"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Breach = spot below the short put strike (oracle_price is a CEX spot composite close to Deribit's index)."
+  - id: time_stop_7_10_dte
+    role: exit
+    rule: "Close with 7-10 DTE remaining"
+    runnable: true
+    input: position
+  - id: dvol_shock_kill
+    role: stop
+    rule: "Flatten if DVOL rises more than 50% in a session"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "No intraday DVOL is served; compare the latest dvol with the prior day's close (crypto has no session)."
+  - id: long_flush_exit_bell
+    role: stop
+    rule: "While short, treat a long-liquidation cascade as the exit bell for the naked put"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&include_quiet=true
+    field: alerts[].direction
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=5m&start={start}
+    replay_field: data[].long_usd
+    note: "A triggered alert with direction long_flush. The page sets no cascade size, so the alert's own severity cut stands in. OKX + Bybit + Hyperliquid, no Binance; replay is Hyperliquid only, from 2026-07-23."
 ---
 
 # Jade Lizard

@@ -32,6 +32,90 @@ kill_criteria: |
   - index-rebalancing front-run edge compresses to < 1% average (crowded out)
   - rolling 6-month calendar-flow trades produce Sharpe < 0.3
 
+gates:
+  - id: opex_calendar
+    role: universe
+    rule: "Trade the Deribit monthly and quarterly expiries (last Friday of the month, 08:00 UTC settlement), focusing on the quarterly ones (March, June, September, December) where the pin is strongest"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry
+    note: "expiry is Deribit's code (27NOV26) with expiry_days alongside; the last-Friday codes are the monthlies, and the March/June/September/December ones the quarterlies. The calendar rule itself is also computable without data. Pro Plus."
+  - id: max_pain_strike
+    role: entry
+    rule: "5 days before the expiry, pull options OI by strike and identify the max-pain strike (where total payout to option buyers is lowest)"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    replay: /api/v1/backtesting/snapshots?data_type=coinglass_options&start={start}
+    replay_field: snapshots[].data[].max_pain
+    note: "BTC only (no ETH max pain), one strike computed on the Deribit expiry with the largest open interest, which the response does not name, so whether it is this expiry's pin is the desk's call. Per-strike OI is not served, so the strike cannot be recomputed. Snapshot history from 2026-05-09."
+  - id: drift_toward_max_pain
+    role: entry
+    rule: "48-24 hours before the expiry, take a small directional position toward max pain: short when spot is above it, long when below"
+    runnable: partial
+    input: derived
+    inputs: [max_pain_strike]
+    note: "Spot from /api/v1/market-data/ticker/price?symbol=BTCUSDT. Only as runnable as the max-pain strike."
+  - id: iron_condor_alt
+    role: entry
+    rule: "Alternative entry: sell a 0DTE or 1DTE iron condor centred on max pain"
+    runnable: false
+    note: "No option prices or chain are served; the condor legs are priced on Deribit."
+  - id: macro_day_skip
+    role: filter
+    rule: "Do not trade the calendar flow when a major scheduled macro catalyst (FOMC, CPI) falls on the expiry window"
+    runnable: true
+    endpoint: /api/v1/event/calendar?type=macro_print&window_days=30
+    field: items[].date
+    note: "macro_class on each row names the print (FOMC, CPI, PPI, NFP, PCE). Major on-chain events, the page's other override, are not on this calendar."
+  - id: flatten_on_breakaway
+    role: stop
+    rule: "Flatten immediately if price moves sharply away from max pain on a macro headline: the pin thesis is overridden"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/news/market-moving?symbol=BTC
+    field: events[].impact_score
+    note: "The page gives no size for a sharp move or a qualifying headline; scored news is alongside, but both cuts are the desk's call."
+  - id: exit_before_settle
+    role: exit
+    rule: "Flatten the pin position before the 08:00 UTC settlement (the example: by 07:00 UTC); never hold short gamma through cash settlement"
+    runnable: true
+    input: position
+  - id: post_expiry_breakout
+    role: entry
+    rule: "30-60 minutes after the 08:00 UTC settle, trade the first confirmed breakout from the settle price (the example: first 15-minute candle above it), stop at the settle price"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin=BTC&interval=15m&limit=12
+    field: candles[].close
+    note: "Deribit's delivery price (a 30-minute average of its index before 08:00) is not served; the mean of 1-minute closes from 07:30 to 08:00 is the nearest proxy. What confirms a breakout beyond the example's first 15-minute close is the desk's call."
+  - id: size_small
+    role: sizing
+    rule: "Size small with modest leverage: OpEx dislocations average 0.5-1.5%"
+    runnable: partial
+    input: position
+    note: "The page gives no size or leverage number."
+  - id: cme_basis_roll
+    role: entry
+    rule: "CME roll: in the 5-8 days before CME BTC quarterly expiry, go long basis (long CME futures, short spot) when CME-minus-Coinbase basis narrows unusually far below its historical range for the roll, and exit as the roll completes"
+    runnable: false
+    note: "No CME futures prices are served. The Coinbase premium on /market-intelligence/coinbase-premium is spot vs spot, not the CME basis."
+  - id: kill_pin_absent
+    role: stop
+    rule: "Kill: the quarterly Deribit OpEx pin is absent for 4 consecutive expirations"
+    runnable: partial
+    input: derived
+    inputs: [max_pain_strike]
+    note: "Compare the settle proxy with the max-pain strike captured before each expiry; the page does not define how close counts as a pin."
+  - id: kill_rebalancing_edge
+    role: stop
+    rule: "Kill: the index-rebalancing front-run edge compresses below 1% on average"
+    runnable: false
+    note: "An equity index-reconstitution rule; no index-rebalancing data is served and the page says it has no crypto equivalent."
+  - id: kill_sharpe_03
+    role: stop
+    rule: "Kill: rolling 6-month calendar-flow Sharpe below 0.3"
+    runnable: true
+    input: position
 ---
 
 # Expiration & Rebalancing Flows

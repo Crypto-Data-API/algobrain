@@ -29,6 +29,75 @@ breakeven_cost_bps: 0
 decay_evidence: "JIT margins compressed sharply as searcher competition and the PBS/builder-auction market matured post-2022; a small number of sophisticated teams win most opportunities, and Uniswap v4 hooks plus JIT-resistant pool designs can now penalize or block same-block mint-and-burn. Profitability is increasingly concentrated in the largest, most clearly-uninformed swaps."
 
 related: ["[[concentrated-liquidity]]", "[[loss-versus-rebalancing]]", "[[mev-strategies]]", "[[flashbots]]", "[[mempool]]", "[[uniswap]]", "[[impermanent-loss]]", "[[automated-market-maker]]", "[[adverse-selection]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: pool_selection
+    role: universe
+    rule: "Target Uniswap v3/v4 pools (and forks) that see large swap flow"
+    runnable: partial
+    endpoint: /api/v1/dex/trending?chain={chain}
+    field: pools[].volume.h24
+    note: "24h volume and trade counts for the 20 trending pools per chain; the size distribution of individual swaps (how many clear $200k) and fee tiers are not served."
+  - id: mempool_trigger
+    role: entry
+    rule: "A pending swap on a target pool with notional of $200k or more appears in the mempool"
+    runnable: false
+    note: "The mempool is not served; it needs a node or a Flashbots mempool stream."
+  - id: uninformed_filter
+    role: filter
+    rule: "Skip swaps that look informed: prefer aggregator and router flow and large single orders; deprioritise flow after a price catalyst or from addresses with a toxic markout history"
+    runnable: false
+    note: "Address-level markout history is not served, and the sender's router is read from the pending transaction itself. /news/market-moving flags catalysts for listed coins only, too coarse for a per-swap call."
+  - id: capturing_range
+    role: entry
+    rule: "Mint the tightest 1-2 tick range around the swap's execution path, with liquidity sized to absorb the swap and no more"
+    runnable: false
+    note: "Pool state and tick liquidity are not served; read them from the pool contract over RPC."
+  - id: economics_gate
+    role: entry
+    rule: "Proceed only when expected fee capture (notional x fee tier x ~80-95% share) exceeds mint gas + burn gas + builder tip + expected single-swap LVR"
+    runnable: false
+    note: "Gas, builder tips and pool fee share are not served."
+  - id: builder_tip
+    role: sizing
+    rule: "Bid the builder tip up to the point where expected profit after the tip stays positive"
+    runnable: false
+    note: "The builder and relay tip market is not served."
+  - id: lvr_risk_cap
+    role: sizing
+    rule: "Cap the single-swap LVR you are willing to eat per opportunity if the swap turns out informed"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=60
+    field: candles[].close
+    note: "1-minute volatility of the traded asset sizes the post-swap move; the page gives no cap."
+  - id: vol_shock_stand_down
+    role: filter
+    rule: "Stand down while the traded asset is in a vol_shock regime"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow. The regime is computed from daily bars."
+  - id: fragility_gate
+    role: filter
+    rule: "Fragile order books raise the odds a large pending swap is informed: provide less or skip"
+    runnable: partial
+    endpoint: /api/v1/liquidity/regime/score
+    field: sentiment
+    note: "From the page's AI-agent workflow, which sets no cut; fragile is a composite_score below 30. This scores Hyperliquid perp books, a proxy for on-chain toxicity. Pro Plus."
+  - id: pnl_100_attempts
+    role: stop
+    rule: "Pause when the rolling 100-attempt net P&L is below zero"
+    runnable: true
+    input: position
+  - id: informed_loss_rate
+    role: stop
+    rule: "Pause when more than 15% of provisions end with unwind cost above the fee captured"
+    runnable: true
+    input: position
+  - id: jit_resistant_pools
+    role: stop
+    rule: "Pause when target pools move to JIT-resistant hooks or large flow moves to private mempools"
+    runnable: false
+    note: "Pool hook configurations and private-flow share are not served."
 ---
 
 # JIT Liquidity

@@ -32,6 +32,96 @@ kill_criteria: |
   - convex bucket has zero payoffs across 3+ full market cycles
   - crypto convex bets repeatedly zero out with no tail event monetisation after 24+ months
 
+gates:
+  - id: safe_bucket_85_90
+    role: sizing
+    rule: "Hold 85-90% of capital in the safe bucket: 3-month T-bills, T-bill money-market funds, or USDC/USDT lent on battle-tested DeFi (Aave, Maker)"
+    runnable: true
+    input: position
+    note: "An allocation rule. No T-bill, money-market or DeFi lending yields are served, so the bucket's income has to be read from the venue."
+  - id: safe_no_duration_credit
+    role: universe
+    rule: "No corporate bonds and no long-duration bonds in the safe bucket"
+    runnable: true
+    input: position
+  - id: risk_bucket_10_15
+    role: sizing
+    rule: "Hold 10-15% of capital in maximum-convexity bets that can return 10x-100x, and nothing in between"
+    runnable: true
+    input: position
+  - id: risk_bucket_cap_15
+    role: sizing
+    rule: "Never let the risk bucket exceed 15% of the portfolio"
+    runnable: true
+    input: position
+  - id: otm_put_leg
+    role: entry
+    rule: "5% in deep OTM puts 3-6 months out (the page's SPY leg; in crypto, Deribit BTC or ETH puts about 15% out of the money)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "SPY options are not served. For the crypto version, pick a Deribit expiry with expiry_days between 90 and 180 (term_structure, Pro Plus) and a strike near 0.85 x spot. No option prices or per-strike quotes are served, so the premium and the order come from Deribit."
+  - id: early_token_leg
+    role: entry
+    rule: "5% in early-stage crypto tokens: moonshot protocol bets where most go to zero and a few return 50-100x"
+    runnable: false
+    note: "Picking positive-EV early-stage tokens is the trader's judgement; nothing served ranks them."
+  - id: biotech_leg
+    role: entry
+    rule: "3% in biotech pre-FDA binary plays"
+    runnable: false
+    note: "No equities, options or FDA calendar data are served."
+  - id: leaps_leg
+    role: entry
+    rule: "2% in deep OTM call LEAPS on disruptive companies, 1-2 years out"
+    runnable: false
+    note: "No equity option chains are served."
+  - id: uncorrelated_bets
+    role: filter
+    rule: "Diversify the risk bucket across uncorrelated bets (crash puts, crypto moonshots, biotech)"
+    runnable: false
+    note: "A qualitative mix across asset classes, and only the crypto legs have served prices; correlation between them cannot be computed from what is served."
+  - id: size_survive_zero
+    role: sizing
+    rule: "Size every risk-bucket bet small enough that its total loss does not destabilise you"
+    runnable: partial
+    input: position
+    note: "The page sets no per-bet cap beyond the bucket split (5%, 5%, 3%, 2%); what is small enough is the trader's call."
+  - id: quarterly_harvest
+    role: exit
+    rule: "Quarterly rebalance: when a risk-bucket bet has grown, harvest the profit back into the safe bucket"
+    runnable: true
+    input: position
+  - id: annual_reset
+    role: sizing
+    rule: "Each January, fund a fresh 10-15% risk bucket from T-bill income and new contributions"
+    runnable: true
+    input: position
+  - id: no_mid_cycle_refill
+    role: sizing
+    rule: "Never replenish the risk bucket mid-cycle: after a blow-up, add nothing until the next annual reset"
+    runnable: true
+    input: position
+  - id: low_rate_downsize
+    role: sizing
+    rule: "Works best when T-bills yield 3% or more; in a low-rate regime cut the risk allocation to 8-10%"
+    runnable: false
+    note: "No T-bill or short-rate yield is served. treasury_avg_interest_rate on /api/v1/sentiment/macro is the average coupon on outstanding Treasury notes, which lags the bill rate by years, so it is not a substitute."
+  - id: kill_yield_below_inflation
+    role: exit
+    rule: "Kill: safe-bucket yield below the inflation rate for more than 12 months"
+    runnable: false
+    note: "No inflation series and no bill yield are served."
+  - id: kill_no_payoffs_cycles
+    role: exit
+    rule: "Kill: the convex bucket has had zero payoffs across 3 or more full market cycles"
+    runnable: true
+    input: position
+  - id: kill_crypto_bets_24m
+    role: exit
+    rule: "Kill: crypto convex bets keep zeroing out with no tail-event payoff after 24 or more months"
+    runnable: true
+    input: position
 ---
 
 # Asymmetric Barbell Strategy

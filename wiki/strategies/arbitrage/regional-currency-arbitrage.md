@@ -21,6 +21,49 @@ expected_sharpe: 1.0
 expected_max_drawdown: 0.40
 breakeven_cost_bps: 200
 decay_evidence: "Extinguished by [[national-banking-act-1863]] and equivalent consolidations in Europe."
+gates:
+  - id: reporter_discount
+    role: entry
+    rule: "Look up the issuing bank's discount in a bank-note reporter no more than a few days old"
+    runnable: false
+    note: "A retired 1830s-1860s strategy: bank-note reporters are period documents and no API carries them. The page's modern parallel, stablecoin depegs, is a separate strategy page."
+  - id: bid_wider_than_redemption
+    role: entry
+    rule: "Bid a discount wider than the redemption cost: reporter discount + a 1.5-3% broker margin (e.g. reporter 5%, bid 7-8%, redemption 2-3%)"
+    runnable: false
+    input: derived
+    inputs: [reporter_discount, redemption_cost]
+    note: "Both inputs are historical records only."
+  - id: counterfeit_check
+    role: filter
+    rule: "Verify plate design, paper and serial ranges against the reporter's counterfeit-detector section; refuse failures"
+    runnable: false
+    note: "A physical inspection of paper notes; no data source applies."
+  - id: refuse_flagged_banks
+    role: filter
+    rule: "Refuse notes of banks flagged closed, doubtful or recently downgraded unless the discount exceeds the likely recovery"
+    runnable: false
+    note: "Needs the period bank-note reporter's status flags."
+  - id: redemption_cost
+    role: exit
+    rule: "Redeem through a correspondent bank in the issuing region for a 0.25-1.5% fee plus freight and insurance, or sell in bulk to an upstream broker"
+    runnable: false
+    note: "Correspondent rate cards and freight costs are historical records only."
+  - id: parcel_batching
+    role: sizing
+    rule: "Ship notes in regional parcels of several hundred to a few thousand dollars, keeping single-issuer exposure small"
+    runnable: true
+    input: position
+  - id: kill_thin_spread
+    role: stop
+    rule: "Kill switch: net redemption spread below about 1% per cycle after freight, insurance and failure losses"
+    runnable: true
+    input: position
+  - id: kill_issuer_exposure
+    role: stop
+    rule: "Kill switch: single-issuer loss exposure above about 5% of broker capital"
+    runnable: true
+    input: position
 ---
 
 # Regional Currency Arbitrage (Pre-1870s Bank Note Discounting)

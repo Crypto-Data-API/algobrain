@@ -33,6 +33,180 @@ kill_criteria: |
   - negative funding persists for > 21 days without reversion (structural bear trend, not a temporary flush)
 
 related: ["[[mean-reversion]]", "[[funding-rate-arbitrage]]", "[[crowded-short-funding-fade]]", "[[crowded-long-funding-fade]]", "[[post-liquidation-rebound]]", "[[funding-filtered-momentum]]", "[[rsi-mean-reversion]]", "[[bollinger-band-reversion]]", "[[funding-rate]]", "[[open-interest]]", "[[perpetual-futures]]", "[[liquidations]]", "[[behavioral-finance-overview]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: funding_8h_flush
+    role: entry
+    rule: "Flush leg 1: current 8h funding at or below -0.02%/8h on the primary perp venue"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hyperliquid settles hourly, so the 8h figure is the sum of the last 8 settled prints: sum <= -0.0002. On Binance (8h native) the same test is the last rates[].funding_rate on /derivatives/binance/funding-rates?symbol={coin}USDT. Hourly replay prints go back to 2023 with about a one-day lag."
+  - id: funding_negative_streak
+    role: entry
+    rule: "Flush leg 2: funding at or below 0 for at least 3 consecutive 8h periods (24h)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Split the last 24 hourly prints into three 8h blocks (oldest first) and require each block's sum <= 0. history is ordered oldest to newest."
+  - id: funding_z_30d
+    role: entry
+    rule: "Flush leg 3: 8h funding z-score against its trailing 30-day distribution at or below -1.5"
+    runnable: true
+    endpoint: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}&limit=1000
+    field: data[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "start = 30 days ago (about 720 settled prints; Pro Plus). Sum into 90 consecutive 8h blocks, then z = (latest 8h sum - mean) / stdev. Settled prints arrive about a day late, so append the newest day from /hyperliquid/funding-rates?coin={coin}&limit=24. On Binance the 30-day sample is the 90 prints of /derivatives/binance/funding-rates?symbol={coin}USDT&limit=90."
+  - id: flush_active
+    role: entry
+    rule: "Funding flush is active when funding_8h_flush, funding_negative_streak and funding_z_30d all hold"
+    runnable: true
+    input: derived
+    inputs: [funding_8h_flush, funding_negative_streak, funding_z_30d]
+  - id: rsi_4h_oversold
+    role: entry
+    rule: "Oversold option 1: RSI(14) on the 4h chart at or below 30"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=100
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=4h&start={start}
+    replay_field: klines[].c
+    note: "Compute Wilder RSI(14) on closed bars: drop the bar whose timestamp equals forming_bar_timestamp. No served field carries a 4h RSI (/indicators/technical has 1d and 1h only)."
+  - id: atr_below_ema
+    role: entry
+    rule: "Oversold option 2: price at least 2 ATR(14, 4h) below the 20-period EMA on the 4h chart"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=100&atr=14
+    field: candles[].atr
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=4h&start={start}
+    replay_field: klines[].c
+    note: "Compute EMA(20) from candles[].close in the same response, then (EMA20 - price) / atr >= 2. Replay computes ATR(14) and EMA(20) from the klines' h, l and c."
+  - id: retrace_20d_high
+    role: entry
+    rule: "Oversold option 3: price at least 15% below its 20-day high"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=20
+    field: candles[].high
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}
+    replay_field: klines[].h
+    note: "Take the highest high of the 20 daily bars (the forming bar included) and require (high - mark) / high >= 0.15; the mark is assets[].mark_price on /hyperliquid/open-interest."
+  - id: oversold
+    role: entry
+    rule: "Price oversold when at least one of rsi_4h_oversold, atr_below_ema or retrace_20d_high holds"
+    runnable: true
+    input: derived
+    inputs: [rsi_4h_oversold, atr_below_ema, retrace_20d_high]
+  - id: oi_not_collapsed
+    role: filter
+    rule: "Open interest still above 50% of its 30-day average"
+    runnable: true
+    endpoint: /api/v1/derivatives/hyperliquid/history?symbol={coin}&days=30
+    field: history[].open_interest
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].oi_close
+    note: "Average the 30 daily open_interest values (coin units) and compare the current assets[].open_interest from /hyperliquid/open-interest. Replay OI starts 2026-03-30; /derivatives/hyperliquid/history serves up to 180 days."
+  - id: no_structural_event
+    role: filter
+    rule: "No confirmed protocol exploit, de-peg or credit event that could explain a permanent repricing"
+    runnable: partial
+    endpoint: /api/v1/security/regime/{symbol}
+    field: events[].event_type
+    note: "Hacks and de-pegs naming the coin over the last 10 days are served (max_severity in the same response). Credit events such as a lender or exchange failure are not classified per coin; /regimes/current reading structural_shock_crisis is the market-wide proxy. Whether an event explains the move is the desk's call, as the page's manual kill switch says."
+  - id: regime_not_bear
+    role: filter
+    rule: "No entry while the market-wide regime is Established Bear"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Block when regime is established_bear. The page's agent workflow also blocks Structural Shock (structural_shock_crisis). History starts 2026-08-07 and cannot be backfilled."
+  - id: exit_funding_normal
+    role: exit
+    rule: "Trim half the position when 8h funding returns to 0 or above"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Sum of the last 8 hourly prints >= 0. The pseudocode trims 50% here."
+  - id: exit_half_retrace
+    role: exit
+    rule: "Take half off at the 50% retracement of the decline from the 20-day high to the flush low"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "Fix the 20-day high at entry (retrace_20d_high) and track the lowest daily low since it (candles[].low on 1d candles); trim when mark >= low + 0.5 x (high - low)."
+  - id: exit_ema20_4h
+    role: exit
+    rule: "Close the remainder when price returns to the 20-period EMA on the 4h chart"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=100
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=4h&start={start}
+    replay_field: klines[].c
+    note: "EMA(20) over the closed 4h closes; exit when the mark is at or above it."
+  - id: time_stop_10d
+    role: stop
+    rule: "Close at market after 10 calendar days if price has not recovered at least 25% of the flushed move"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "Uses the same 20-day high and flush low as exit_half_retrace: 25% recovery = low + 0.25 x (high - low). The pseudocode exits at 10 days regardless."
+  - id: deepening_flush_cut
+    role: stop
+    rule: "After entry, if 8h funding worsens to -0.07%/8h or below and stays there for 3 or more periods, cut the position by 50%"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Each of the last three 8h blocks (8 hourly prints each) sums to <= -0.0007. The pseudocode cuts on the first such 8h reading, without waiting for three."
+  - id: drawdown_kill
+    role: stop
+    rule: "Flatten everything when the sleeve drawdown exceeds 22% from its high-water mark"
+    runnable: true
+    input: position
+  - id: atr_risk_size
+    role: sizing
+    rule: "Size each trade so that one ATR(14, 4h) move risks 1.5% of sleeve capital"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30&atr=14
+    field: candles[].atr
+    note: "notional = 0.015 x sleeve / (atr / price), using the last closed bar's atr."
+  - id: oi_contracting
+    role: sizing
+    rule: "Open interest is contracting (an input to the funding upweight)"
+    runnable: partial
+    endpoint: /api/v1/derivatives/hyperliquid/history?symbol={coin}&days=30
+    field: history[].open_interest
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].oi_close
+    note: "The page gives no window for contracting. Comparing the current assets[].open_interest on /hyperliquid/open-interest with a recent daily value is one reading; the lookback is the desk's call."
+  - id: funding_upweight
+    role: sizing
+    rule: "Apply a 1.2x size multiplier when 8h funding is at or below -0.04%/8h, price is oversold and OI is contracting"
+    runnable: partial
+    input: derived
+    inputs: [funding_8h_flush, oversold, oi_contracting]
+    note: "The funding leg is the same 8h sum as funding_8h_flush, tested at -0.0004. Only as runnable as oi_contracting, whose window the page leaves open."
+  - id: max_position_15pct
+    role: sizing
+    rule: "Maximum single position 15% of the sleeve, applied after the upweight"
+    runnable: true
+    input: position
+  - id: max_concurrent_2
+    role: sizing
+    rule: "At most 2 concurrent flush-reversal positions, in different assets"
+    runnable: true
+    input: position
 ---
 
 # Funding Flush Reversal

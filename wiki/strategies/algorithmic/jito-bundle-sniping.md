@@ -22,6 +22,87 @@ expected_sharpe: null
 expected_max_drawdown: 0.7
 breakeven_cost_bps: 200
 decay_evidence: "Jito Block Engine matured 2023-24 and became the default execution path for serious Solana snipers. Tip floors for hot launches escalated through 2024-25 as more bots adopted bundles; the tip auction now captures a meaningful share of would-be sniper profit. Strategy still works but the margin is thinner each year. Firedancer and any future protocol-level changes to validator economics could reshape the bundle market."
+gates:
+  - id: contested_launches
+    role: universe
+    rule: "Always bundle high-contention buys: token launches, Pump.fun graduations, fresh AMM pool creations and coordinated launch events"
+    runnable: partial
+    endpoint: /api/v1/dex/new-pools?chain=solana
+    field: pools[].created_at
+    note: "Lists the 20 newest Solana DEX pools from a cached feed, so it sees a pool after creation, not the creation slot. Pump.fun bonding-curve launches and graduation (migration) events are not served; those come from the Pump.fun program logs."
+  - id: rug_filter
+    role: filter
+    rule: "Pass the pre-trade rug, holder and dev-wallet filters before building the bundle"
+    runnable: partial
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: holder_info.top_10_pct
+    note: "{address} is the launch's token, pools[].base_token.address from contested_launches (chain solana). The report also has risk_flags (is_honeypot, is_mintable, is_freezable), ownership.creator_balance_pct and risk_score; the thresholds live on the wrapped sniping page, and dev-wallet rug history is not served. Fresh tokens can come back with holder_count 0 and top_10_pct 0 (not indexed yet): treat that as unknown, never as a pass."
+  - id: tip_percentile
+    role: sizing
+    rule: "Tip at the 75th percentile of recent winning tips for hot launches and graduations, the 50th for normal memecoin flow"
+    runnable: false
+    note: "The Jito tip floor and tip stream are not served; read them from Jito's tip-floor API."
+  - id: contention_read
+    role: filter
+    rule: "Hot-trending launches justify 75th-percentile tips; quiet flow does not warrant a bundle at all"
+    runnable: partial
+    endpoint: /api/v1/dex/trending?chain=solana
+    field: pools[].transactions.m5.buys
+    note: "From the page's AI-agent workflow. Trending pools with buy and sell counts over 5 minutes to 24 hours are the served crowd proxy; the page draws no line between hot and quiet."
+  - id: skip_liquid_pools
+    role: filter
+    rule: "Skip the bundle for routine swaps on liquid pools with low slippage, where the tip is dead weight"
+    runnable: partial
+    endpoint: /api/v1/dex/trending?chain=solana
+    field: pools[].reserve_usd
+    note: "reserve_usd is pool liquidity in USD for listed pools (or per token at /dex/token/solana/{address}); the page sets no liquidity cut."
+  - id: target_slot
+    role: entry
+    rule: "Aim the bundle at the slot named by the upstream signal (targetSlot), and only at Jito-validator-led slots"
+    runnable: false
+    note: "Slots, the leader schedule and Jito leader share are not served; they come from Solana RPC and Jito."
+  - id: max_slippage
+    role: sizing
+    rule: "Buy with a maximum slippage of 2,000 bps"
+    runnable: true
+    input: position
+  - id: meme_season_gate
+    role: filter
+    rule: "When meme_season is off, contested launches thin out and the tip auction captures more than it saves"
+    runnable: partial
+    endpoint: /api/v1/meme/regime/score
+    field: meme_season
+    note: "From the page's AI-agent workflow, which does not say how much to cut bundling when the flag is off."
+  - id: hard_stop
+    role: stop
+    rule: "Hard stop at -50% from the landed entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "From the pseudocode. {address} is the held token, pools[].base_token.address from contested_launches. Pool prices come from a cached feed, so a fast-moving launch can gap through the stop."
+  - id: take_profit_ladder
+    role: exit
+    rule: "Apply the underlying strategy's take-profit ladder once the bundle lands"
+    runnable: partial
+    input: position
+    note: "The ladder levels live on the wrapped sniping page (memecoin-sniping, token-migration-sniping), not here."
+  - id: land_rate
+    role: stop
+    rule: "Recalibrate tips when the bundle land rate is persistently under 30%; kill when it stays under 30% for 14 days after recalibration"
+    runnable: true
+    input: position
+  - id: tip_vs_sandwich_tax
+    role: stop
+    rule: "Kill when the average tip cost exceeds the estimated avoided sandwich tax for 30 consecutive days"
+    runnable: partial
+    input: position
+    note: "Tip spend is in the bot's own records; the avoided sandwich tax is an estimate the page leaves to the operator (it illustrates 50-300 bps)."
+  - id: jito_health
+    role: stop
+    rule: "Kill on Jito Block Engine downtime above 4 hours in 30 days or Jito-validator stake share below 50%"
+    runnable: false
+    note: "Jito uptime and validator stake share are not served; Jito's status page and stake dashboards carry them."
 ---
 
 # Jito Bundle Sniping

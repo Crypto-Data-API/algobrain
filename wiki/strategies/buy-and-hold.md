@@ -21,6 +21,83 @@ crowding_risk: low
 expected_sharpe: 0.45
 expected_max_drawdown: 0.55
 breakeven_cost_bps: 5
+gates:
+  - id: broad_index_vehicle
+    role: universe
+    rule: "Hold broad, diversified, low-cost vehicles (total-market or S&P 500 index funds and ETFs) rather than individual stocks"
+    runnable: false
+    note: "No equity, index-fund or ETF prices are served. The crypto expression the page names is long-horizon BTC and ETH holding (crypto_btc_eth)."
+  - id: crypto_btc_eth
+    role: universe
+    rule: "Crypto expression: hold BTC and ETH spot for the long horizon"
+    runnable: true
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "Binance spot price; call once for BTC and once for ETH."
+  - id: entry_lump_or_dca
+    role: entry
+    rule: "Enter lump-sum when capital is available, or phase in by dollar-cost averaging to reduce timing regret"
+    runnable: true
+    input: position
+    note: "A schedule, not a market signal: no price condition gates the buy. The DCA cadence lives on the dca-strategy page."
+  - id: allocation_survives_50pct
+    role: sizing
+    rule: "Size to a long-horizon allocation (an age- or risk-appropriate stock/bond split) the investor can hold through a 50% drawdown without selling"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/btc-price-history?days=730
+    field: history[].price
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "The split itself is the investor's call, and no bond prices are served. For the crypto sleeve, compute the worst peak-to-trough drawdown of daily closes (BTC only, 2 years, on btc-price-history; Hyperliquid perp daily closes for BTC or ETH back to 2023 on the replay) and check the sleeve's loss in a 50%+ drawdown is one the investor can sit through."
+  - id: no_timing_signals
+    role: filter
+    rule: "Do nothing in response to volatility, news or forecasts: never enter or exit on a price move"
+    runnable: true
+    input: position
+    note: "A standing rule, not a data check. The cycle indicators and regimes the page lists are for reporting only; acting on them turns this into market timing."
+  - id: reinvest_dividends
+    role: sizing
+    rule: "Reinvest dividends back into the holdings"
+    runnable: false
+    note: "Equity-index income. Spot BTC and ETH pay no dividends, and no staking or lending yield is served."
+  - id: rebalance_band
+    role: sizing
+    rule: "Rebalance back to target weights when any asset's weight drifts more than 5 percentage points from target"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "Weight = units held x price over total portfolio value; the band is absolute (abs(actual - target) > 0.05). Only the crypto sleeve is priced here; bond or equity-fund sleeves need their own prices."
+  - id: rebalance_calendar
+    role: sizing
+    rule: "Alternatively rebalance to target weights on a fixed calendar, for example once a year"
+    runnable: true
+    input: position
+  - id: exit_thesis_change
+    role: exit
+    rule: "Exit only on a change in goals or a permanent, fundamental impairment of a holding's thesis, never on a price move"
+    runnable: false
+    note: "Goals and thesis impairment are the investor's judgement. No company fundamentals are served, and a protocol-level impairment in crypto is a judgement call too."
+  - id: horizon_kill
+    role: exit
+    rule: "Kill: the time horizon shrinks below about 5-7 years, so shift toward lower-risk assets"
+    runnable: partial
+    input: position
+    note: "The investor's own horizon. Where in the 5-7 year range to act is the investor's call, and the lower-risk assets (bonds, cash funds) have no served prices."
+  - id: concentration_trim
+    role: sizing
+    rule: "Trim any single position that grows beyond 10-15% of the portfolio, for diversification rather than timing"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "Position value over portfolio value. The page gives a 10-15% range, so the exact cap is the investor's call."
+  - id: behaviour_kill
+    role: sizing
+    rule: "If the investor has shown they cannot hold through drawdowns, cut the risk allocation to a level they will actually keep"
+    runnable: false
+    note: "A fact about the investor's past behaviour, not market data."
 ---
 
 Buy and hold is a long-term, low-turnover strategy in which an investor purchases a diversified basket of assets — most commonly a broad equity [[index-funds|index fund]] — and holds it for years or decades regardless of intervening market fluctuations, rather than attempting to time entries and exits. It is the foundational form of [[passive-investing|passive investing]] and the practical embodiment of the empirical claim that, after costs, most active timing and stock-picking underperforms simply owning the market. The strategy's return comes not from any forecasting skill but from harvesting the long-run **equity risk premium** while minimizing costs, taxes, and behavioral mistakes.

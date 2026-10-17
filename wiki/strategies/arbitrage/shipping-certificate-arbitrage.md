@@ -22,6 +22,57 @@ expected_max_drawdown: 0.15
 breakeven_cost_bps: 50
 decay_evidence: "Narrowed after CBOT standardisation reforms of the 1880s-1890s; further compressed by improved rail logistics; disrupted by WWI and permanently altered by 1922 Grain Futures Act"
 related: ["[[gold-point-arbitrage]]", "[[cash-and-carry]]", "[[chicago-board-of-trade]]", "[[liverpool-cotton-exchange]]", "[[corner-the-market]]", "[[leiter-corner-1898]]", "[[hutchinson-corner-1888]]", "[[commodity-basis-trading]]", "[[bill-broking-arbitrage]]", "[[arbitrage]]", "[[edge-taxonomy]]"]
+gates:
+  - id: fair_forward
+    role: entry
+    rule: "Fair forward = cash grain price + storage (about 1c/bu/month) + insurance (0.2c/bu/month) + interest at the call-money rate + inspection fees - convenience yield"
+    runnable: false
+    note: "A retired pre-1914 strategy. No grain or cotton cash prices, storage, insurance or freight rates are served; modern equivalents need CME futures and USDA cash-grain data."
+  - id: futures_price
+    role: entry
+    rule: "Observed futures price for the delivery month (CBOT wheat, corn, oats; Liverpool cotton)"
+    runnable: false
+    note: "No commodity futures are served."
+  - id: cash_and_carry_50bp
+    role: entry
+    rule: "Futures above fair forward by more than 50 bp: buy cash grain, store it under a warehouse receipt, short the futures (one contract per 5,000 bushels)"
+    runnable: false
+    input: derived
+    inputs: [fair_forward, futures_price]
+    note: "Both inputs are unserved."
+  - id: reverse_carry_50bp
+    role: entry
+    rule: "Futures below fair forward by more than 50 bp: go long futures, take delivery and sell the cash grain"
+    runnable: false
+    input: derived
+    inputs: [fair_forward, futures_price]
+    note: "Both inputs are unserved."
+  - id: hold_to_delivery
+    role: exit
+    rule: "Hold to the delivery month and tender or receive the warehouse receipts (1-6 months)"
+    runnable: true
+    input: position
+  - id: capacity_sizing
+    role: sizing
+    rule: "Size by trustworthy elevator capacity, available quality cash grain, counterparty credit and a corner-defence reserve"
+    runnable: partial
+    input: position
+    note: "Capacity and credit are the desk's own records; the corner-defence reserve has no number on the page."
+  - id: kill_corner_forming
+    role: stop
+    rule: "Kill switch: open interest in the delivery month exceeds deliverable supply"
+    runnable: false
+    note: "Needs exchange open interest by contract month and warehouse stock reports, which are not served."
+  - id: kill_basis_nonstationary
+    role: stop
+    rule: "Kill switch: the cash-futures basis behaves non-stationarily for more than 2 contract months"
+    runnable: false
+    note: "Needs cash and futures price history, which is not served."
+  - id: kill_negative_12m
+    role: stop
+    rule: "Kill switch: rolling 12-month return below 0 after carry costs"
+    runnable: true
+    input: position
 ---
 
 # Shipping Certificate Arbitrage

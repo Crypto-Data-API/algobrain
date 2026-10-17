@@ -12,6 +12,91 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[butterfly-spread]]", "[[iron-butterfly]]", "[[iron-condor]]", "[[christmas-tree-spread]]", "[[jade-lizard]]", "[[ratio-spread]]", "[[crypto-options-volatility-selling]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[volatility-surface]]", "[[funding-rate]]", "[[gamma-exposure]]", "[[max-pain]]", "[[section-1256-contracts]]", "[[theta]]", "[[vega]]", "[[gamma]]", "[[delta]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit_only
+    role: universe
+    rule: "BTC and ETH Deribit options only: the skipped-strike build needs strike granularity alt chains do not have"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied vol served. Option quotes and the strike grid come from Deribit."
+  - id: bwb_strikes
+    role: entry
+    rule: "Put BWB: buy 1 put at body + n, sell 2 puts at the body, buy 1 put at body - f with the wide wing f larger than the narrow wing n (call BWB mirrors it)"
+    runnable: false
+    note: "Needs Deribit's strike grid and quotes; no option chain is served. Spot for placing the body is oracle_price on /api/v1/hyperliquid/open-interest."
+  - id: zero_cost_or_credit
+    role: entry
+    rule: "Enter for zero cost or a small credit, the cheap wide-wing long financed by the two short body options"
+    runnable: false
+    note: "Needs the legs' bid and ask; no option quotes are served."
+  - id: tenor_30_45_dte
+    role: entry
+    rule: "Expiry 30-45 days out"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure lists the nearest 12 Deribit expiries. It is Pro Plus and empty on lower tiers."
+  - id: vol_elevated_for_credit
+    role: filter
+    rule: "Build when vol is elevated so the short body options pay for a credit; in compressed DVOL the structure costs a debit"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "The page's AI workflow says the vol regime should read elevated, a word the regime labels do not use; expanding is the nearest, and compressed is the stated no-credit case. DVOL itself is items[].dvol on /api/v1/volatility/implied. Whether a credit is actually available needs Deribit quotes."
+  - id: body_at_max_pain
+    role: entry
+    rule: "Place the body at the max-pain strike"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    replay: /api/v1/backtesting/snapshots?data_type=coinglass_options&start={start}
+    replay_field: snapshots[].data[].max_pain
+    note: "BTC only (no ETH max pain). It is computed on the Deribit expiry with the largest open interest, which may not be the structure's expiry."
+  - id: skew_side_from_funding
+    role: entry
+    rule: "Let funding decide which side's skew funds the skipped wing (put BWB vs call BWB)"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    note: "Funding is served; the skew it stands for is not. The page gives no threshold: positive funding usually means firm call skew, negative a bid put skew."
+  - id: range_regime_favoured
+    role: filter
+    rule: "Favour a leading range_low_vol market regime; a rising vol_spike probability threatens the risk-bearing side"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: explain.label_posteriors.range_low_vol
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_2
+    note: "label_posteriors holds the current probability of each regime (vol_spike beside it; post_label_4 in the replay). 'Favour' and 'rising' have no thresholds on the page."
+  - id: profit_target_50_75
+    role: exit
+    rule: "Close at 50-75% of max profit when spot is near the body"
+    runnable: true
+    input: position
+    note: "The structure's mark comes from Deribit; no option prices are served."
+  - id: wide_wing_decision
+    role: exit
+    rule: "If price moves toward the wide wing, hold to the capped floor or close early"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "The move toward the wing is mechanical; hold or close is the trader's call."
+  - id: vol_shock_close
+    role: stop
+    rule: "If DVOL explodes while you are short the body's gamma, close at the defined floor rather than ride pin uncertainty"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol_change_24h
+    note: "dvol_change_24h is in vol points; the page gives no size for 'explodes'. vol_shock on /api/v1/volatility/regime/{symbol} is a served shock label."
+  - id: dealer_flip_exit
+    role: exit
+    rule: "Adjust or exit when dealers flip to short gamma on the unprotected side, before price gets there"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    note: "/quant/gex is a perp analog of dealer gamma, not Deribit options gamma; a score at or above 0.35 is the amplify (short-gamma) state. The API does not split the read by side of spot."
 ---
 
 # Broken Wing Butterfly

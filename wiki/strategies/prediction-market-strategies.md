@@ -16,6 +16,58 @@ edge_mechanism: "Prediction market participants overweight recent news and excit
 data_required: [polymarket-api, kalshi-api, on-chain-wallet-data, news-feeds]
 crowding_risk: medium
 related: ["[[polymarket]]", "[[kalshi]]", "[[prediction-markets]]", "[[polymarket-vs-kalshi]]", "[[ai-prediction-markets]]", "[[edge-taxonomy]]", "[[arbitrage-opportunity-map]]", "[[failure-modes]]"]
+gates:
+  - id: complement_arb
+    role: entry
+    rule: "Complement or multi-outcome arbitrage: buy every outcome when the sum of best asks is below 1.00 - fees - lockup cost"
+    runnable: false
+    note: "No prediction-market order books or prices are served. Needs Polymarket's CLOB API (and Kalshi's for its markets)."
+  - id: arb_size
+    role: sizing
+    rule: "Arbitrage size = the smallest depth at the ask across the outcomes"
+    runnable: false
+    note: "Needs Polymarket or Kalshi book depth; not served."
+  - id: annualised_edge
+    role: filter
+    rule: "Annualise the locked-in edge over days to resolution and take it only if it clears the risk-free rate"
+    runnable: false
+    note: "The gross edge needs prediction-market prices (not served). No T-bill yield is served either: treasury_avg_interest_rate on /sentiment/macro is the average rate on outstanding US debt."
+  - id: cross_platform_arb
+    role: entry
+    rule: "Cross-platform arbitrage: buy the cheaper of Polymarket and Kalshi for the same event after Kalshi fees, only when resolution criteria match"
+    runnable: false
+    note: "Neither platform's prices are served, and matching resolution criteria is a reading of each market's rules."
+  - id: catalyst_momentum
+    role: entry
+    rule: "Catalyst momentum: buy rapidly repricing shares immediately after breaking news, confirmed by a volume spike, with mechanical exits"
+    runnable: false
+    note: "Breaking crypto and macro news is served (/api/v1/news/market-moving), but the shares and their volume are prediction-market data we do not serve."
+  - id: longshot_fade
+    role: entry
+    rule: "Favourite-longshot fade: buy No when the market's Yes price exceeds your calibrated fair probability by more than the edge threshold; stake = fractional Kelly"
+    runnable: false
+    note: "Needs prediction-market prices and the trader's own calibrated model; neither is served."
+  - id: stake_cap
+    role: sizing
+    rule: "Risk 2-3% of bankroll per trade at most (the fade pseudocode caps at 3%)"
+    runnable: true
+    input: position
+  - id: high_liquidity_only
+    role: filter
+    rule: "Focus on high-liquidity markets with tight spreads"
+    runnable: false
+    note: "Market liquidity is prediction-market data; not served."
+  - id: no_correlated_bets
+    role: sizing
+    rule: "Avoid correlated positions: multiple bets on related outcomes"
+    runnable: true
+    input: position
+    note: "Which outcomes are related is the trader's judgement over the book."
+  - id: resolution_criteria
+    role: filter
+    rule: "Read the resolution criteria before trading; settlement-edge trades act on what actually triggers payout"
+    runnable: false
+    note: "A reading of each market's rules text; nothing served covers it."
 ---
 
 # Prediction Market Trading Strategies

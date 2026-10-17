@@ -32,6 +32,129 @@ kill_criteria: |
   - rolling 6-month win rate on composite-signal setups drops below 50%
   - drawdown > 20% in signal-based portfolio sleeve
 
+gates:
+  - id: equity_alt_data
+    role: entry
+    rule: "Equity alt-data signals: satellite imagery, credit-card spend, app downloads, web traffic, job listings, supply-chain and patent data"
+    runnable: false
+    note: "None of these are served, and no equity prices or earnings dates are served either. The page's crypto legs are the on-chain and sentiment gates below."
+  - id: exchange_net_outflow_spike
+    role: entry
+    rule: "Exchange net-outflow spike (long-term holders withdrawing to accumulate): bullish for the next 7-30 days"
+    runnable: partial
+    endpoint: /api/v1/on-chain/exchange-flows/{symbol}
+    field: spike_zscore_24h
+    replay: /api/v1/on-chain/exchange-flows/{symbol}/history?start={start}
+    replay_field: points[].net_24h
+    note: "Negative windows.24h.net is a net withdrawal; spike_zscore_24h ranks the 24h flow against its rolling history. The page gives no size for a spike (a z-score beyond 2 with a negative net is one reading), so the cut is the desk's call. Coverage is the tracked token list across seven chains plus BTC; history runs from 2026-05-28, 93 days per call."
+  - id: whale_accumulation
+    role: entry
+    rule: "Whale accumulation signal turning accumulating: large accounts are buying"
+    runnable: false
+    note: "The whale accumulation-score route the page names is disabled (it returns a coming-soon placeholder) and is not in the public spec. Run the composite on exchange flows and spike alerts until it returns."
+  - id: social_surge
+    role: entry
+    rule: "Social engagement surge before a price move (LunarCrush, Santiment, Reddit or X volume spike): a momentum window opens"
+    runnable: false
+    note: "No social volume or engagement data is served; it needs LunarCrush or Santiment."
+  - id: dev_activity_spike
+    role: entry
+    rule: "Developer-activity spike on a protocol: a fundamental catalyst is building"
+    runnable: false
+    note: "No developer-activity data is served; it needs Santiment or GitHub commit data."
+  - id: mvrv_zone
+    role: entry
+    rule: "On-chain valuation leg: BTC MVRV-Z and SOPR read accumulation or capitulation"
+    runnable: partial
+    endpoint: /api/v1/on-chain/dormancy/btc
+    field: mvrv_signal.zone
+    note: "BTC only, and raw MVRV (market cap over realized cap), not MVRV-Z; zone is capitulation, accumulation, neutral, elevated or euphoria. SOPR is not served. The page gives no thresholds for these legs."
+  - id: cex_deposit_spikes
+    role: filter
+    rule: "Confluence check: large (at least $1M) transfers into exchanges, a bearish leading signal"
+    runnable: true
+    endpoint: /api/v1/on-chain/exchange-flows/spike-alerts?min_amount=1000000&symbol={symbol}
+    field: alerts[].direction
+    note: "Count direction inflow against outflow over the window; source balance_delta rows can be exchange-internal rebalancing. The live feed holds about the last 10 hours; history since 2026-10-08 is the exchange_flow_spikes snapshot type."
+  - id: fear_greed_confluence
+    role: filter
+    rule: "Confluence check: the Fear and Greed index as one of the confirming signals"
+    runnable: partial
+    endpoint: /api/v1/sentiment/fear-greed
+    field: value
+    replay: /api/v1/market-health/history?days=365
+    replay_field: history[].components.fear_greed
+    note: "The page names the index but no level that confirms a long, so the reading (for example under 25 as contrarian fear) is the desk's call. The served index averages several sources. Replay: the market-health fear_greed component is the index's daily value, from 2026-01-14; /market-intelligence/fear-greed-history returns only today's row."
+  - id: three_confirming
+    role: entry
+    rule: "Combine, never isolate: require 3 or more confirming signals before taking a position"
+    runnable: partial
+    input: derived
+    inputs: [exchange_net_outflow_spike, mvrv_zone, cex_deposit_spikes, fear_greed_confluence]
+    note: "With the social, developer and whale legs unserved, three confirmations must come from these four, two of which are partial."
+  - id: regime_downweight
+    role: filter
+    rule: "Down-weight bullish on-chain composites while the long-term regime is Established Bear or Capitulation"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Match regime established_bear or capitulation. The page does not say by how much to down-weight, so the size cut is the desk's call. History starts 2026-08-07."
+  - id: pullback_to_support
+    role: entry
+    rule: "Technical timing: wait for price to pull back to support or to the 50-day moving average"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{symbol}
+    field: ma.dist_from_50_pct
+    note: "dist_from_50_pct near 0 is a touch of the 50-day SMA; sr.support[].price lists support levels. The page gives no tolerance for reaching the level, so the band is the desk's call."
+  - id: entry_trigger
+    role: entry
+    rule: "Enter on a bullish engulfing candle or a breakout above consolidation"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Bullish engulfing is mechanical from the last two closed bars (prior bar red, latest green, latest body covering the prior body); drop the forming bar named by forming_bar_timestamp. What counts as a consolidation to break out of is the desk's call."
+  - id: stop_below_level
+    role: stop
+    rule: "Stop below the technical level the entry was taken at"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "The level comes from the entry (support or the 50-day SMA); how far below it is the desk's call."
+  - id: earnings_target
+    role: exit
+    rule: "Target the earnings date, where the alt-data thesis is confirmed"
+    runnable: false
+    note: "An equity rule: no earnings calendar is served, and tokens have no earnings date."
+  - id: factor_rank_deciles
+    role: entry
+    rule: "Factor model: score each asset on 3-5 alt-data signals, rank the universe, go long the top decile and short the bottom decile, rebalanced weekly or monthly"
+    runnable: false
+    note: "The page's factor inputs (app downloads, card spend, job listings, web traffic, sentiment score) are not served for any asset."
+  - id: max_position_5pct
+    role: sizing
+    rule: "At most 5% of the portfolio per alt-data trade"
+    runnable: true
+    input: position
+  - id: kill_dataset_distributed
+    role: exit
+    rule: "Kill: the signal dataset becomes widely distributed or sold to institutional desks"
+    runnable: false
+    note: "A judgement about the data market (publication mentions), not market data."
+  - id: kill_win_rate
+    role: exit
+    rule: "Kill: rolling 6-month win rate on composite-signal setups below 50%"
+    runnable: true
+    input: position
+  - id: kill_drawdown
+    role: exit
+    rule: "Kill: drawdown above 20% in the signal-based portfolio sleeve"
+    runnable: true
+    input: position
 ---
 
 # Alternative Data Alpha

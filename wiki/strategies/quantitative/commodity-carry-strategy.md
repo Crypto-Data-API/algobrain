@@ -21,6 +21,41 @@ data_required: [futures-continuous-contracts, futures-curve-data, ohlcv-daily]
 capacity_usd: 5000000000
 min_capital_usd: 500000
 related: ["[[carry-anomaly]]", "[[commodity-momentum]]", "[[roll-yield]]", "[[backwardation]]", "[[contango]]", "[[hedging-pressure]]", "[[commodity-curve-rolls]]", "[[commodities]]"]
+gates:
+  - id: roll_yield
+    role: entry
+    rule: "Annualised roll yield per commodity = (front-month price - second-month price) / second-month price x (12 / months between contracts); positive = backwardation"
+    runnable: false
+    note: "No commodity futures curves are served (gold spot on /sentiment/macro is the only commodity price). Needs front and second-month futures prices from CME, ICE or LME."
+  - id: quintile_book
+    role: entry
+    rule: "Rank by roll yield; long the top quintile (most backwardated), short the bottom quintile (most contango), equal weight within each"
+    runnable: false
+    input: derived
+    inputs: [roll_yield]
+    note: "Only as runnable as roll_yield."
+  - id: vol_target
+    role: sizing
+    rule: "Target 10-15% annualised portfolio volatility (pseudocode 12%), scaling each commodity by its 60-day realised vol"
+    runnable: false
+    note: "Needs each commodity's price history, which is not served."
+  - id: single_commodity_cap
+    role: sizing
+    rule: "Cap any single commodity at 20% of gross exposure"
+    runnable: true
+    input: position
+  - id: monthly_rebalance
+    role: exit
+    rule: "Rebalance monthly: re-rank and exit positions that leave the top or bottom quintile"
+    runnable: false
+    input: derived
+    inputs: [quintile_book]
+    note: "The calendar is mechanical; the re-ranking needs the unserved curves."
+  - id: drawdown_exit
+    role: stop
+    rule: "Emergency exit if portfolio drawdown exceeds 20% intra-month; retire if maximum drawdown exceeds 35%"
+    runnable: true
+    input: position
 ---
 
 # Commodity Carry Strategy

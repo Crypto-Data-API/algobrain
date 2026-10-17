@@ -22,6 +22,55 @@ expected_sharpe: 1.8
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 100
 decay_evidence: "Velodrome 2024 TVL ~$200M; Aerodrome ~$1B. Bribe-yield compression as more capital deploys; recent yields 25-50% APR vs 50-100% in 2023."
+gates:
+  - id: bribe_markets
+    role: universe
+    rule: "Track Velodrome and Aerodrome native incentives, Hidden Hand, and Votium/yBribe for cross-market yield comparison"
+    runnable: false
+    note: "No bribe, gauge-vote or veNFT data is served. Needs the Velodrome and Aerodrome subgraphs and the Hidden Hand API."
+  - id: bribe_yield
+    role: entry
+    rule: "Bribe yield per veToken vote for each pool in the coming epoch"
+    runnable: false
+    note: "Needs per-pool bribe totals and vote weights, which are not served."
+  - id: optimal_votes
+    role: entry
+    rule: "Each epoch, allocate veVELO/veAERO votes to maximise dollars of bribes per vote"
+    runnable: false
+    input: derived
+    inputs: [bribe_yield]
+    note: "bribe_yield is unserved."
+  - id: pre_epoch_buy
+    role: entry
+    rule: "Buy veTokens (secondary veNFTs or new locks) when expected next-epoch bribes far exceed the veToken price"
+    runnable: false
+    input: derived
+    inputs: [bribe_yield]
+    note: "bribe_yield and veNFT secondary prices are unserved. The underlying AERO or VELO price is current_price on /coins/{symbol}, which alone cannot decide the trade."
+  - id: weekly_harvest
+    role: exit
+    rule: "Harvest bribes weekly; convert to stables or compound back into a 4-year lock"
+    runnable: true
+    input: position
+  - id: token_hedge
+    role: sizing
+    rule: "Hedge locked VELO/AERO token-price risk with a perp short when the bribe yield does not compensate for it"
+    runnable: false
+    input: derived
+    inputs: [bribe_yield]
+    note: "The trigger needs bribe_yield. Whether a VELO or AERO perp is listed on Hyperliquid shows in assets[].coin on /hyperliquid/open-interest."
+  - id: kill_yield_15pct
+    role: stop
+    rule: "Kill switch: bribe yield below 15% APR, sustained"
+    runnable: false
+    input: derived
+    inputs: [bribe_yield]
+    note: "bribe_yield is unserved; the page does not say how long counts as sustained."
+  - id: kill_tvl
+    role: stop
+    rule: "Kill switch: TVL below $50M on Velodrome or $200M on Aerodrome"
+    runnable: false
+    note: "Per-protocol TVL is not served. Needs DefiLlama."
 ---
 
 # Velodrome / Aerodrome Bribe Arbitrage

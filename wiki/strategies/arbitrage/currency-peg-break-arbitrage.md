@@ -22,6 +22,80 @@ expected_max_drawdown: 0.25
 breakeven_cost_bps: 50
 decay_evidence: "Capacity constant across decades; quality of individual opportunities varies with macro regime. EM peg breaks continue to occur regularly."
 related: ["[[arbitrage]]", "[[forex]]", "[[macro-trading]]", "[[soros-erm-trade]]", "[[asian-financial-crisis]]", "[[chf-floor-break-2015]]", "[[argentina-peso-crisis]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[volatility-arbitrage]]"]
+gates:
+  - id: pegged_currency_universe
+    role: universe
+    rule: "Universe: currencies held to a peg, band, floor or currency board by their central bank"
+    runnable: false
+    note: "No fiat FX rates or peg registry are served; the only FX quote is EUR/USD (eur_usd_latest on /sentiment/macro), which floats. Needs an FX data vendor and the IMF exchange-arrangement classification."
+  - id: reserves_under_6m_imports
+    role: filter
+    rule: "FX reserves cover fewer than 6 months of imports (score weight 2)"
+    runnable: false
+    note: "No central-bank reserve or import data is served. Needs central-bank releases or IMF IFS."
+  - id: reer_overvalued_20pct
+    role: filter
+    rule: "Real effective exchange rate more than 20% above its 10-year average (score weight 2)"
+    runnable: false
+    note: "No REER series is served. Needs the BIS monthly REER series."
+  - id: current_account_deficit_5pct
+    role: filter
+    rule: "Current-account deficit worse than -5% of GDP, sustained (score weight 2)"
+    runnable: false
+    note: "No balance-of-payments data is served. Needs quarterly BOP releases."
+  - id: political_stress_07
+    role: filter
+    rule: "Political stress index above 0.7 (score weight 1)"
+    runnable: false
+    note: "No country political-risk index is served. Needs EIU or PRS Group. /policy/regime scores crypto policy risk, not sovereign political risk."
+  - id: peg_break_score
+    role: entry
+    rule: "Trade trigger: weighted screen score of at least 5 out of 7"
+    runnable: false
+    input: derived
+    inputs: [reserves_under_6m_imports, reer_overvalued_20pct, current_account_deficit_5pct, political_stress_07]
+    note: "Every input is unserved, so the score cannot be computed from this API."
+  - id: market_confirmation
+    role: filter
+    rule: "Confirm with market signals: forward points widening, NDF premium rising, sovereign CDS widening"
+    runnable: false
+    note: "No FX forwards, NDF quotes or sovereign CDS are served. Needs an FX and credit data vendor."
+  - id: otm_put_10pct
+    role: entry
+    rule: "Express the view with puts on the pegged currency struck 10% out of the money (strike = spot x 0.90), not spot or forwards"
+    runnable: false
+    note: "No FX option chain or FX spot for pegged currencies is served. /volatility/implied covers BTC and ETH options only."
+  - id: tenor_ladder
+    role: sizing
+    rule: "Ladder the puts across 3-, 6- and 12-month expiries"
+    runnable: true
+    input: position
+  - id: budget_per_peg
+    role: sizing
+    rule: "Premium budget 1-2% of capital per named peg, at most 3% per position, at most 5% across correlated pegs"
+    runnable: true
+    input: position
+  - id: ev_sizing
+    role: sizing
+    rule: "Size only when break_prob x payoff_if_break - (1 - break_prob) x option_cost exceeds 2x the option cost"
+    runnable: false
+    note: "Needs FX option prices (not served) and a break probability, which is the desk's estimate."
+  - id: exit_on_break
+    role: exit
+    rule: "Peg breaks: liquidate the options immediately into the jump"
+    runnable: false
+    note: "No FX spot is served for pegged currencies, so the break cannot be detected from this API."
+  - id: exit_credibility_improves
+    role: exit
+    rule: "Cut the position when reserves grow, the current account improves or political support for the peg strengthens"
+    runnable: false
+    note: "Same unserved macro inputs as the entry screen; the political read is also a judgement."
+  - id: roll_before_expiry
+    role: exit
+    rule: "Roll each option forward before expiry while the thesis is intact, accepting 50-70% premium decay without a break"
+    runnable: partial
+    input: position
+    note: "Days to expiry come from the position record. Whether the thesis is still intact is the desk's call, since the screen inputs are not served."
 ---
 
 # Currency Peg Break Arbitrage

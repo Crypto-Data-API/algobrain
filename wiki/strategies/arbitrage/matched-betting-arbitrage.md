@@ -22,6 +22,32 @@ expected_sharpe: 8
 expected_max_drawdown: 0.05
 breakeven_cost_bps: 200
 decay_evidence: "Mature UK industry since ~2010s. Annual bonus value extractable per active matched bettor: £5,000-£20,000. Bookmakers tightened terms 2020-2024 reducing edge."
+gates:
+  - id: bookmaker_offers
+    role: universe
+    rule: "Work through bookmaker promotions in order: sign-up bonuses, then reload bonuses, then casino bonuses, across 30-50 UK bookmakers"
+    runnable: false
+    note: "Sports-betting promotions are not served; they come from the bookmakers or a matched-betting service (OddsMonkey, Profit Accumulator)."
+  - id: back_lay_match
+    role: entry
+    rule: "For each qualifying event, back at the bookmaker and lay at the exchange with stakes from the matched-betting calculator (back odds, lay odds, offer terms)"
+    runnable: false
+    note: "No sports odds or betting-exchange prices are served."
+  - id: free_bet_high_odds
+    role: entry
+    rule: "Place each credited free bet on a high-odds event and lay it on the exchange"
+    runnable: false
+    note: "Same unserved odds data as back_lay_match."
+  - id: account_longevity
+    role: sizing
+    rule: "Vary bet patterns and place small recreational-looking bets to avoid account restriction"
+    runnable: true
+    input: position
+  - id: withdraw_regularly
+    role: exit
+    rule: "Withdraw profits regularly so a later restriction cannot freeze the balance"
+    runnable: true
+    input: position
 ---
 
 # Matched Betting (Bonus Arbitrage)

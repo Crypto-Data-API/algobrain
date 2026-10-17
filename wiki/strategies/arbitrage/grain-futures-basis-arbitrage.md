@@ -22,6 +22,37 @@ expected_sharpe: 1.5
 expected_max_drawdown: 0.15
 breakeven_cost_bps: 50
 decay_evidence: "Gradually compressed by improved storage, interest-rate markets, and 20th-century commercial elevator concentration."
+gates:
+  - id: full_carry
+    role: filter
+    rule: "Full carry = storage per day x days to delivery + insurance + freight to Chicago + interest on the cash outlay + grade premium or discount"
+    runnable: false
+    note: "Historical CBOT strategy (retired). Elevator storage tariffs, freight, insurance and call-money rates are not served."
+  - id: futures_over_cash
+    role: entry
+    rule: "Buy cash grain and sell the nearest CBOT future when futures bid minus cash ask exceeds full carry plus a threshold"
+    runnable: false
+    note: "No grain futures or cash grain bids are served, and the page gives no threshold figure."
+  - id: corner_risk
+    role: sizing
+    rule: "Reduce size and shorten the hold when open-interest concentration signals a corner attempt"
+    runnable: false
+    note: "CBOT open interest and concentration data are not served, and the page sets no level."
+  - id: hold_to_delivery
+    role: exit
+    rule: "Preferred exit: hold to the delivery month, issue a notice of delivery and tender the warehouse receipts against the short futures"
+    runnable: true
+    input: position
+  - id: early_unwind_basis
+    role: exit
+    rule: "Unwind early when the basis narrows faster than carry accrues"
+    runnable: false
+    note: "Needs the same unserved futures and cash quotes."
+  - id: capacity_limits
+    role: sizing
+    rule: "Size within warehouse capacity, committed credit lines and CBOT position limits"
+    runnable: true
+    input: position
 ---
 
 # Grain Futures Basis Arbitrage (Early CBOT)

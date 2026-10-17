@@ -21,6 +21,105 @@ expected_sharpe: 1.5
 expected_max_drawdown: 0.10
 breakeven_cost_bps: 5
 related: ["[[cash-and-carry]]", "[[basis]]", "[[arbitrage]]", "[[futures]]", "[[repo]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[contango]]", "[[edge-taxonomy]]", "[[cryptodataapi]]"]
+gates:
+  - id: treasury_net_basis
+    role: entry
+    rule: "Treasury: net basis = cash bond price - (futures price x conversion factor), carry-adjusted to delivery; enter when the implied repo rate is above the actual repo cost"
+    runnable: false
+    note: "No Treasury cash or futures prices, conversion factors, cheapest-to-deliver data or repo rates are served. /api/v1/sentiment/macro carries one Treasury yield, which is not a basis input. Needs CME futures, a bond pricing feed and a repo rate source (DTCC GCF, SOFR)."
+  - id: crypto_basis
+    role: entry
+    rule: "Crypto analogue: annualised basis = ((future - spot) / spot) x (365 / DTE) on a dated future, or the running funding rate on a perp"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Perp leg only: annualise the sum of the last 24 hourly prints x 365. Dated futures prices (CME, Binance quarterlies, Deribit) are not served, so the DTE version is not runnable. Binance 8-hourly prints are rates[].funding_rate on /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT (x 3 x 365)."
+  - id: carry_beats_financing
+    role: entry
+    rule: "Enter only when the basis or funding beats the all-in financing cost (repo plus haircut drag, or borrow and exchange fees) by a margin that pays for path risk"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/meta
+    field: fees.perps.taker
+    note: "Crypto: compare crypto_basis with round-trip fees (fees.perps and fees.spot, as fractions of notional, with volume tiers) plus the cost of funding the spot. The page sets no margin, so the hurdle is the desk's call. Treasury repo and haircuts are not served."
+  - id: matched_notional
+    role: sizing
+    rule: "Buy the cash leg and short the futures or perp leg in matched notional (conversion-factor and cheapest-to-deliver adjusted for Treasuries)"
+    runnable: partial
+    input: position
+    note: "The crypto version is a 1:1 coin match from the bot's own fills. Treasury conversion factors and the cheapest-to-deliver bond are not served."
+  - id: term_repo
+    role: sizing
+    rule: "Finance the cash leg in term repo where possible to avoid overnight rollover risk"
+    runnable: false
+    note: "Repo rates and term availability are not served."
+  - id: hold_to_delivery
+    role: exit
+    rule: "Default exit: hold to delivery or expiry and let convergence deliver the basis"
+    runnable: true
+    input: position
+  - id: basis_compression_exit
+    role: exit
+    rule: "Unwind both legs early when the spread collapses faster than carry would have delivered it"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    note: "Crypto perp version: funding falling toward zero or negative. The page puts no number on faster than carry, so the trigger is the desk's call."
+  - id: roll_at_expiry
+    role: exit
+    rule: "At expiry, roll the short into the next contract if the new basis is attractive"
+    runnable: false
+    note: "Needs dated-future prices (the next contract's basis), which are not served. Perps never expire."
+  - id: financing_shock_exit
+    role: stop
+    rule: "Exit immediately if repo financing tightens or haircuts spike, regardless of basis"
+    runnable: false
+    note: "Repo rates and haircuts are not served. Needs a repo feed and the prime broker's margin terms."
+  - id: counterparty_stress_exit
+    role: stop
+    rule: "Unwind in full the same day on any credible exchange or counterparty solvency signal"
+    runnable: partial
+    endpoint: /api/v1/security/regime/score
+    field: flow_subscore
+    note: "flow_subscore (0-100) is the worst absolute net exchange-flow z-score across majors and stables, the self-custody-flight signature; per-exchange 24h net flows are per_exchange_24h on /api/v1/on-chain/exchange-flows/{symbol}. What counts as credible is the desk's call."
+  - id: margin_stress_sizing
+    role: sizing
+    rule: "Size to financing capacity and margin survivability: stress against a multi-standard-deviation basis widening and a haircut hike before sizing"
+    runnable: partial
+    input: position
+    note: "The page gives no sigma count. The crypto basis volatility can be measured from crypto_basis's replay; haircuts are not served."
+  - id: venue_cap_25
+    role: sizing
+    rule: "Trim when single-venue or single-counterparty exposure exceeds 25% of the book"
+    runnable: true
+    input: position
+  - id: kill_negative_carry
+    role: stop
+    rule: "Do not enter, or exit, when net carry after all-in financing is below 0 for the holding period"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    note: "Crypto perp version: annualised funding minus fees and spot funding cost below 0. Treasury repo cost is not served."
+  - id: kill_haircut_50
+    role: stop
+    rule: "Cut leverage immediately when the repo haircut on the cash leg is more than ~50% above its level at entry"
+    runnable: false
+    note: "Repo haircuts are not served."
+  - id: kill_mtm_2x_carry
+    role: stop
+    rule: "Reassess and consider unwinding when the mark-to-market loss on the spread exceeds 2x the carry captured"
+    runnable: true
+    input: position
+  - id: regime_gate
+    role: filter
+    rule: "Do not open carry while the HMM market regime is strong_trend_bear or vol_spike, where funding inverts and the basis collapses"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow, which applies to the crypto version."
 ---
 
 # Basis Trade

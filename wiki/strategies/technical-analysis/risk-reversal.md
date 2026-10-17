@@ -12,6 +12,75 @@ markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[skew-trading]]", "[[seagull-option]]", "[[covered-call]]", "[[jade-lizard]]", "[[straddle-strangle]]", "[[crypto-options-volatility-selling]]", "[[implied-volatility]]", "[[volatility-surface]]", "[[funding-rate]]", "[[delta]]", "[[vega]]", "[[deribit]]", "[[greeks-live]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit
+    role: universe
+    rule: "BTC or ETH options on Deribit; clean 25-delta wings exist mainly there"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "We serve Deribit DVOL and the ATM term structure for BTC and ETH. Option quotes and fills come from Deribit; no option chain is served."
+  - id: directional_view
+    role: entry
+    rule: "Directional conviction: bullish for a long-call/short-put RR, bearish for the mirror"
+    runnable: false
+    note: "A view the page leaves to the trader; no served signal is named for it."
+  - id: skew_rich_wing
+    role: entry
+    rule: "Sell the rich wing: a bullish RR when put skew is rich (25-delta risk reversal deeply negative), a bearish RR when call skew is rich"
+    runnable: false
+    note: "The 25-delta risk reversal and the IV surface are not served; they come from Deribit or Greeks.live. funding_skew_proxy is the page's served driver."
+  - id: funding_skew_proxy
+    role: entry
+    rule: "Skew driver: richly positive funding with crowded OI flags rich call skew (favours a bearish RR for a credit); negative funding after a crash flags rich put skew (the bullish RR pays)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "A proxy for skew, not skew itself. The page gives no funding or OI threshold; OI history is oi_close on the replay rows (from 2026-03-30)."
+  - id: legs_25_delta
+    role: entry
+    rule: "Strikes at matching deltas: sell a 25-delta put, buy a 25-delta call (mirror for bearish), same expiry"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "No per-strike Greeks are served. Black-Scholes with the expiry's atm_iv gives approximate 25-delta strikes, ignoring the very skew this trade sells; exact strikes and the net credit need Deribit's chain."
+  - id: no_short_wing_into_shock
+    role: filter
+    rule: "Do not initiate the short wing into a vol_shock regime"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow."
+  - id: roll_short_wing
+    role: stop
+    rule: "If spot approaches the short strike, roll the short wing down and out, or buy it back"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "The page gives no distance for 'approaches'; that is the desk's call. Deribit settles on its own index, which tracks spot."
+  - id: tail_watch_seagull
+    role: stop
+    rule: "When cascade risk builds into the short wing, buy a further-OTM option to turn the RR into a seagull"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&include_quiet=true
+    field: alerts[].severity
+    note: "From the page's AI-agent workflow, with no threshold. Squeeze alerts cover OKX, Bybit and Hyperliquid liquidations; /api/v1/quant/gex adds a perp analog of dealer gamma."
+  - id: bank_skew_reversion
+    role: exit
+    rule: "If the trade was a skew bet and the 25-delta risk reversal has reverted, close for the skew P&L regardless of spot"
+    runnable: false
+    note: "The 25-delta risk reversal is not served; read it from Deribit or Greeks.live."
+  - id: size_for_gap
+    role: sizing
+    rule: "Size the short leg for a Black-Thursday move, not an average day"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    field: candles[].low
+    note: "The page names the event (BTC about -50% in a day on 2020-03-12) but no loss budget. Worst daily drops are measurable from Hyperliquid daily bars back to 2023 (the 2020 crash predates them); the budget is the desk's."
 ---
 
 # Risk Reversal

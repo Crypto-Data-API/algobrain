@@ -34,6 +34,130 @@ kill_criteria: |
   - rolling 8-event P&L negative across all 8 consecutive events where all three structural gates were simultaneously LOW (the clean-book gate is not producing a positive-expectancy window)
 
 related: ["[[crypto-options-volatility-selling]]", "[[funding-conditioned-vol-selling]]", "[[post-panic-vol-selling]]", "[[trend-aligned-premium-selling]]", "[[leverage-stress-tail-hedge]]", "[[funding-flush-reversal]]", "[[oi-flush-reversion]]", "[[short-volatility-strategies]]", "[[deribit]]", "[[dvol]]", "[[implied-volatility]]", "[[variance-risk-premium]]", "[[open-interest]]", "[[funding-rate]]", "[[perpetual-futures]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: oi_mc_clean
+    role: entry
+    rule: "Gate 1: BTC open interest at or below 2.0% of market cap"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/open-interest?symbol={coin}
+    field: data[].exchange_list[].open_interest_usd
+    note: "Take the exchange All row (Binance + Bybit + OKX + Hyperliquid) over market_cap on /coins/{symbol}. Four venues understate global perp OI (no CME, Deribit, Bitget): BTC read about 1.3% on 2026-10-17, so the 2.0% line passes far more often than the page intends; recalibrating it to this subset is the desk's call."
+  - id: funding_8h_flat
+    role: entry
+    rule: "Gate 2a: current 8h funding between -0.01% and +0.02%"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "The last row is the latest settled Binance 8h print: -0.0001 <= rate <= 0.0002."
+  - id: funding_7d_flat
+    role: entry
+    rule: "Gate 2b: 7-day average 8h funding between -0.005% and +0.015%"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Mean of the 21 prints between -0.00005 and 0.00015. Replay averages 5-minute samples of the live rate from 2026-03-30."
+  - id: long_short_balanced
+    role: entry
+    rule: "Gate 3: long/short ratio between 0.9 and 1.2"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/long-short-ratio?symbol={coin}USDT
+    field: long_short_ratio
+    replay: /api/v1/derivatives/binance/history?days=30
+    replay_field: history[].long_short_ratio
+    note: "Binance global account ratio, the page's named source; it has sat well above 1.2 recently (1.73 for BTC on 2026-10-17), so this gate rarely passes. Replay is BTC only, about 30 days deep."
+  - id: dvol_pctile_45
+    role: entry
+    rule: "Gate 4a: DVOL at or above the 45th percentile of its trailing 52 weeks"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Daily DVOL history runs from 2026-04-20 (about 180 days, Pro Plus), so the percentile window is shorter than 52 weeks until a year has accrued."
+  - id: iv_rv_spread
+    role: entry
+    rule: "Gate 4b: DVOL minus 20-day realized vol at least 5 vol points"
+    runnable: true
+    endpoint: /api/v1/backtesting/klines?symbol={coin}USDT&exchange=binance&interval=15m&start={start}&limit=2000
+    field: klines[].c
+    replay: /api/v1/backtesting/klines?symbol={coin}USDT&exchange=binance&interval=15m&start={start}
+    replay_field: klines[].c
+    note: "start = 20 days ago (1,920 bars); annualise the stdev of 15m log returns by sqrt(96 x 365) and subtract it from items[].dvol on /volatility/implied. The page's limit=200 example covers only about 2 days."
+  - id: regime_not_skewed
+    role: filter
+    rule: "Reduce size or skip while the regime is Trending_Momentum or Structural_Shock"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "structural_shock_crisis is served; no served state is named Trending_Momentum (the HMM labels strong_trend_bull and strong_trend_bear on /quant/market are the nearest). The page leaves reduce-or-skip and the size cut open."
+  - id: strangle_strikes
+    role: entry
+    rule: "Sell a BTC strangle: the 25-delta put and the 15-delta call"
+    runnable: false
+    note: "No option chain, strikes, deltas or option prices are served; the page sources them from Deribit."
+  - id: strangle_expiry
+    role: entry
+    rule: "Nearest monthly expiry with 21-35 days to expiry; never front-week"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "Nearest 12 Deribit expiries, Pro Plus. Monthlies are the last-Friday codes; some days none falls in 21-35."
+  - id: delta_hedge
+    role: sizing
+    rule: "Keep the book within plus or minus 5 delta per unit notional, hedging daily, or intraday when spot moves more than 2.5%"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "The position's delta comes from the bot's own options venue; the mark supplies the 2.5% intraday move test (against the day's open, candles[].open on /hyperliquid/candles?coin={coin}&interval=1d&limit=1)."
+  - id: premium_size
+    role: sizing
+    rule: "Collect 1.5-2.5% of the portfolio in premium per entry (2% in the pseudocode); one active position at a time"
+    runnable: true
+    input: position
+  - id: profit_exit
+    role: exit
+    rule: "Close when DVOL is back within 3 vol points of its 30-day average, or at 80% of maximum premium decay"
+    runnable: true
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Mean of the last 30 daily dvol values against items[].dvol; premium decay comes from the position's own option marks."
+  - id: dvol_stop
+    role: stop
+    rule: "Close if DVOL rises 20 vol points or more above its entry level"
+    runnable: true
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+  - id: dvol_session_spike
+    role: stop
+    rule: "Exit immediately if DVOL rises more than 50% in a single session after entry"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol_change_24h
+    note: "From the kill criteria. dvol_change_24h is in vol points against the previous daily value: exit when it exceeds 0.5 x (dvol - dvol_change_24h)."
+  - id: leverage_rebuild_exit
+    role: exit
+    rule: "Close immediately if OI/market cap rises above 2.8% while the position is open"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/open-interest?symbol={coin}
+    field: data[].exchange_list[].open_interest_usd
+    note: "Same four-venue ratio and calibration caveat as oi_mc_clean."
+  - id: time_exit
+    role: exit
+    rule: "Close 3 days before expiry"
+    runnable: true
+    input: position
+  - id: drawdown_kill
+    role: stop
+    rule: "Stop trading when the sleeve drawdown exceeds 28% from its high-water mark"
+    runnable: true
+    input: position
 ---
 
 # Low-Leverage Vol Selling

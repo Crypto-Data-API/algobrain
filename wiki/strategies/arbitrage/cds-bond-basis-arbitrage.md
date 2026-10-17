@@ -21,6 +21,75 @@ expected_sharpe: 0.7
 expected_max_drawdown: 0.5
 breakeven_cost_bps: 15
 related: ["[[credit-default-swap]]", "[[repo-market]]", "[[ltcm-collapse-1998]]", "[[fixed-income-arbitrage]]", "[[dealer-balance-sheet]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[arbitrage]]"]
+gates:
+  - id: universe_ig_hy
+    role: universe
+    rule: "Screen the investment-grade and high-yield corporate universe daily"
+    runnable: false
+    note: "No corporate bond or CDS data is served. Needs a credit data vendor (Markit CDS, TRACE or Bloomberg bond prices)."
+  - id: negative_basis_entry
+    role: entry
+    rule: "Basis = CDS spread - Z-spread of the matching-maturity cash bond; enter the negative-basis trade (buy bond, buy protection) when the basis is below -30 bps (IG) or -100 bps (HY)"
+    runnable: false
+    note: "Needs CDS spreads, bond prices and the Treasury curve, none served."
+  - id: basis_zscore
+    role: filter
+    rule: "Also require the trailing-year z-score of the basis below -2"
+    runnable: false
+    note: "Needs a year of the basis series in negative_basis_entry; not served."
+  - id: repo_and_cds_liquidity
+    role: filter
+    rule: "The bond must be repo-able and the CDS liquid (tier-1 reference entity, centrally cleared)"
+    runnable: false
+    note: "Repo availability and CDS clearing eligibility are not served."
+  - id: term_repo
+    role: sizing
+    rule: "Fund the bond in term repo matching the holding horizon, not overnight"
+    runnable: false
+    note: "Repo rates and term availability are not served."
+  - id: matched_notional
+    role: sizing
+    rule: "Match bond face value and CDS notional 1:1, and duration-hedge the Treasury component with Treasury futures when isolating the spread"
+    runnable: partial
+    input: position
+    note: "The 1:1 match is mechanical from the position. The duration hedge needs bond duration and Treasury futures prices, which are not served."
+  - id: scale_by_zscore
+    role: sizing
+    rule: "Scale each trade by its basis z-score and the liquidity score of each leg"
+    runnable: false
+    input: derived
+    inputs: [basis_zscore, repo_and_cds_liquidity]
+    note: "Only as runnable as its inputs; the page gives no scaling function."
+  - id: exit_reversion
+    role: exit
+    rule: "Close when the basis reverts to within -10 bps (or its historical mean), at bond maturity, or when funding cost exceeds the locked spread"
+    runnable: false
+    note: "Needs the basis series and repo cost, neither served."
+  - id: kill_repo_cost
+    role: stop
+    rule: "Kill switch: repo funding cost above the locked carry + 10 bps"
+    runnable: false
+    note: "Repo rates are not served."
+  - id: kill_basis_widening
+    role: stop
+    rule: "Kill switch: the basis widens more than 100 bps beyond entry without a fundamental catalyst"
+    runnable: false
+    note: "Needs the basis series; not served."
+  - id: kill_rolling_return
+    role: stop
+    rule: "Kill switch: 3-month rolling return below -10%"
+    runnable: true
+    input: position
+  - id: kill_dealer_cds
+    role: stop
+    rule: "Kill switch: the protection seller's own CDS above 200 bps"
+    runnable: false
+    note: "Dealer CDS spreads are not served."
+  - id: kill_leverage
+    role: stop
+    rule: "Deleverage when aggregate leverage exceeds 8x"
+    runnable: true
+    input: position
 ---
 
 # CDS-Bond Basis Arbitrage

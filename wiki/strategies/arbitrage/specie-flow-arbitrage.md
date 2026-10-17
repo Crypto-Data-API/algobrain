@@ -22,6 +22,60 @@ expected_max_drawdown: 0.10
 breakeven_cost_bps: 60
 decay_evidence: "Mechanism fully dependent on classical gold standard; dismantled by WWI moratorium (August 1914) and never restored to full form"
 related: ["[[gold-point-arbitrage]]", "[[mint-parity-arbitrage]]", "[[bill-broking-arbitrage]]", "[[covered-interest-arbitrage]]", "[[gold-standard-mechanics]]", "[[baring-crisis-1890]]", "[[panic-of-1907]]", "[[1914-moratorium]]", "[[bank-of-england]]", "[[arbitrage]]", "[[arbitrage-overview]]", "[[edge-taxonomy]]", "[[global-macro]]"]
+gates:
+  - id: trade_deficit_widening
+    role: entry
+    rule: "British trade deficit (weekly customs data) widens for 2 or more consecutive weeks"
+    runnable: false
+    note: "A retired gold-standard strategy. No trade-balance or customs data is served; the modern analogue needs national statistics or balance-of-payments feeds."
+  - id: reserve_falling_3w
+    role: entry
+    rule: "Bank of England bullion reserve falls for 3 or more consecutive weeks"
+    runnable: false
+    note: "No central-bank reserve data is served. The modern analogue is central-bank balance-sheet and FX-reserve reports."
+  - id: bill_market_stress
+    role: filter
+    rule: "60-day sight bills on London trade at a discount to sight bills"
+    runnable: false
+    note: "No bill-of-exchange or money-market rates are served."
+  - id: outflow_positioning
+    role: entry
+    rule: "Gold outflow expected: short sterling bills, long Paris, Hamburg and New York bills, short Consols ahead of a Bank Rate hike, prepare gold export"
+    runnable: false
+    input: derived
+    inputs: [trade_deficit_widening, reserve_falling_3w, bill_market_stress]
+    note: "Every input is unserved; no FX, bill or government-bond prices are served either."
+  - id: tp_gold_flows_begin
+    role: exit
+    rule: "Partial take-profit once gold flows begin (reserve data confirms)"
+    runnable: false
+    note: "Needs central-bank reserve data, which is not served."
+  - id: tp_bank_rate_move
+    role: exit
+    rule: "Full take-profit on the discount-rate leg once the Bank Rate move is confirmed"
+    runnable: false
+    note: "No central-bank policy-rate series is served. /event/calendar?type=macro_print gives upcoming FOMC dates only, not decisions or other central banks."
+  - id: exit_customs_reversal
+    role: exit
+    rule: "Exit when customs data reverses direction"
+    runnable: false
+    note: "Needs trade-balance data, which is not served."
+  - id: size_by_bill_depth
+    role: sizing
+    rule: "Size by bill-market depth, acceptable drawee credit and capital tied up in in-flight gold"
+    runnable: partial
+    input: position
+    note: "Credit limits and capital in transit are the desk's own records; bill-market depth has no source."
+  - id: kill_regime_break
+    role: stop
+    rule: "Kill switch: convertibility suspended, gold flows sterilised by open-market operations, Bank Rate unresponsive for 2 or more reserve-drain cycles, or capital controls on gold"
+    runnable: false
+    note: "Regime judgements on central-bank policy; no data served covers them."
+  - id: kill_losses_10pct
+    role: stop
+    rule: "Kill switch: two consecutive misread cycles, or cumulative losses above 10% of committed capital over a rolling 12 months"
+    runnable: true
+    input: position
 ---
 
 # Specie Flow Arbitrage

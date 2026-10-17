@@ -21,6 +21,79 @@ crowding_risk: high
 expected_sharpe: 0.7
 expected_max_drawdown: 0.30
 breakeven_cost_bps: 5
+gates:
+  - id: spread_fair_value
+    role: entry
+    rule: "Compute the spread's fair value from cash flows and hedging arguments, not just its historical average"
+    runnable: false
+    note: "The page's spreads are Treasury on-the-run versus off-the-run, swap spreads, futures basis and cross-market rates. No Treasury curve, swap rates or bond futures are served; /api/v1/sentiment/macro carries a single Treasury yield. Needs a rates data vendor."
+  - id: cheap_2sd_with_catalyst
+    role: entry
+    rule: "Enter when the spread is more than 2 standard deviations cheap to fair value and a concrete convergence mechanism exists (for example the on-the-run issue rolling off-the-run at the next auction)"
+    runnable: false
+    note: "Needs the spread series in spread_fair_value, and the catalyst is a judgement on the auction calendar; neither is served."
+  - id: dv01_match
+    role: sizing
+    rule: "DV01-match the two legs so the position carries only the spread, not outright rates"
+    runnable: false
+    note: "Bond DV01s and prices are not served."
+  - id: term_financing
+    role: filter
+    rule: "Lock term financing where possible and confirm the short leg is not trading deeply special in repo"
+    runnable: false
+    note: "Repo rates, specials and term availability are not served."
+  - id: take_profit_fair_value
+    role: exit
+    rule: "Take profit when the spread reaches fair value or comes within 1 standard deviation of it"
+    runnable: false
+    note: "Needs the spread series; not served."
+  - id: stop_2sd_beyond_entry
+    role: stop
+    rule: "Stop out if the spread widens more than 2 standard deviations beyond entry without a change in the fundamental convergence case"
+    runnable: false
+    note: "Needs the spread series; the fundamental case is a judgement."
+  - id: financing_break_exit
+    role: stop
+    rule: "Exit if repo haircuts rise materially or the short leg goes persistently special"
+    runnable: false
+    note: "Repo data is not served, and the page leaves materially undefined here (the kill criteria use +50%)."
+  - id: leverage_cap_10
+    role: sizing
+    rule: "Hard leverage cap of 10:1 on capital, independent of model VaR; deleverage whenever the book exceeds it"
+    runnable: true
+    input: position
+  - id: three_sigma_loss_cap
+    role: sizing
+    rule: "Size each trade so a 3-standard-deviation adverse spread move costs less than 3% of capital"
+    runnable: false
+    note: "Needs the spread's volatility from the off-API spread series."
+  - id: diversify_families
+    role: sizing
+    rule: "Diversify across distinct spread families (curve, swap spread, basis, cross-market), remembering their crisis correlations go to 1"
+    runnable: partial
+    input: position
+    note: "The page gives no per-family cap, so the mix is the desk's call."
+  - id: kill_drawdown
+    role: stop
+    rule: "Drawdown above 20% of allocated capital: halve gross leverage; above 40%: liquidate the book and retire pending review"
+    runnable: true
+    input: position
+  - id: kill_4sd_trade
+    role: stop
+    rule: "Close any single spread more than 4 standard deviations beyond entry with no change in the convergence catalyst"
+    runnable: false
+    note: "Needs the off-API spread series."
+  - id: kill_haircut_50
+    role: stop
+    rule: "Cut the balance sheet by at least a third within 5 business days when core repo haircuts rise more than 50% from inception or term funding disappears"
+    runnable: false
+    note: "Repo haircuts and term funding are not served."
+  - id: kill_sharpe
+    role: stop
+    rule: "Retire when the rolling 12-month Sharpe is below 0 for two consecutive quarters in a non-crisis regime"
+    runnable: partial
+    input: position
+    note: "Whether a quarter counts as non-crisis is the desk's call."
 ---
 
 Convergence arbitrage is a class of [[relative-value-arbitrage|relative-value]] trading strategies that bet on the **price spread between two related securities returning to a historical or theoretically-justified equilibrium**. The trader buys the cheaper security and shorts the more expensive one, then waits for the spread to narrow. The strategy was perfected at [[salomon-brothers|Salomon Brothers]] in the 1980s by [[john-meriwether]]'s desk and was the core methodology of [[long-term-capital-management|Long-Term Capital Management (LTCM)]] in the 1990s. It is also the methodology that destroyed LTCM in 1998 (Source: [[book-when-genius-failed]]) — the canonical case study in how a structurally sound edge becomes ruinous when combined with extreme leverage, crowding, and fragile funding. See [[limits-to-arbitrage]] for why these spreads exist and persist.

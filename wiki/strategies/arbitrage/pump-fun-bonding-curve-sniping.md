@@ -22,6 +22,91 @@ expected_sharpe: 1.2
 expected_max_drawdown: 0.5
 breakeven_cost_bps: 200
 decay_evidence: "Pump.fun launched Jan 2024; processed >6M tokens by Dec 2024 (passing 10M during 2025). Strategy P&L compressed sharply in 2024 as bot competition intensified; remaining edge in Sybil-resistant launches and dev-wallet detection."
+gates:
+  - id: launch_feed
+    role: universe
+    rule: "Monitor new Pump.fun token launches on Solana as they happen"
+    runnable: partial
+    endpoint: /api/v1/dex/new-pools?chain=solana
+    field: pools[].created_at
+    note: "Lists the newest Solana DEX pools (about 20, refreshed every couple of minutes), not a Pump.fun launch stream: dex is often blank, so the bot must pick Pump.fun mints itself (their addresses usually end in pump). The 1-30 second window needs a Helius or QuickNode websocket."
+  - id: buy_first_30s
+    role: entry
+    rule: "Buy within the first 1-30 seconds of the launch via a priority-fee or Jito bundle swap"
+    runnable: false
+    note: "Second-level latency and Jito execution are outside any REST API; no bonding-curve state is served."
+  - id: dev_wallet_clean
+    role: filter
+    rule: "Skip tokens whose dev wallet has a prior rug history"
+    runnable: false
+    note: "No dev-wallet reputation data is served. The security report's ownership.creator_address names the creator but carries no history; needs a rug database such as the one the page cites."
+  - id: rug_screen
+    role: filter
+    rule: "Reject honeypots and rug-prone tokens before committing"
+    runnable: partial
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: risk_score
+    note: "From the AI-agent workflow. {chain} is solana and {address} is the candidate's pools[].base_token.address from launch_feed (/dex/new-pools). risk_score runs 0-100 (100 safest), with risk_flags.is_honeypot, is_mintable and is_freezable alongside; the page sets no cutoff, so rejecting critical and high risk_level is the desk's call. Fresh launches often have empty holder data."
+  - id: prelaunch_promotion
+    role: filter
+    rule: "Require pre-launch Telegram or X promotion"
+    runnable: false
+    note: "No Telegram or X data is served. /dex/promoted lists paid DEX promotion, a different signal the page mentions only for graduated tokens."
+  - id: twitter_mentions_5m
+    role: filter
+    rule: "Require X (Twitter) mentions of the token in the last 5 minutes"
+    runnable: false
+    note: "Social volume is not served."
+  - id: meme_season_on
+    role: filter
+    rule: "Run the bot only while meme_season is true"
+    runnable: true
+    endpoint: /api/v1/meme/regime/score
+    field: meme_season
+    note: "From the AI-agent workflow. The score is built from listed meme perps and spot pairs, not from Pump.fun launches."
+  - id: meme_score_elevated
+    role: filter
+    rule: "Run the bot only while the market-wide meme-hype score is elevated"
+    runnable: partial
+    endpoint: /api/v1/meme/regime/score
+    field: composite_score
+    note: "The page gives no cutoff for elevated (0-100 score; sentiment labels the band), so the line is the desk's call."
+  - id: trade_size
+    role: sizing
+    rule: "Bid $500-5,000 per token"
+    runnable: true
+    input: position
+  - id: stop_minus_50pct
+    role: stop
+    rule: "Immediate stop-loss at -50% of the position"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "{address} is the token's pools[].base_token.address from launch_feed. Price comes from GeckoTerminal pool data, refreshed every few minutes, so a fast dump can gap far through -50%. Bonding-curve prices before graduation may not be listed."
+  - id: tp_ladder
+    role: exit
+    rule: "Take profit 30% at +200%, 30% at +500%, 30% at +1000%, and keep 10% as a moonbag"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "Same minutes-old pool price as stop_minus_50pct. The pseudocode uses 2x, 5x and 10x instead; the page's rules (+200%, +500%, +1000% = 3x, 6x, 11x) are used here."
+  - id: pre_graduation_exit
+    role: exit
+    rule: "Sell 80% of the position once cumulative bonding-curve buys reach $50k, before the $69k graduation"
+    runnable: false
+    note: "Cumulative bonding-curve buys are not served. Needs Pump.fun's on-chain curve state."
+  - id: kill_no_capture_90d
+    role: stop
+    rule: "Kill switch: 90 days without a profitable launch capture"
+    runnable: true
+    input: position
+  - id: kill_launch_volume
+    role: stop
+    rule: "Kill switch: daily Pump.fun launch volume down 75% from its peak"
+    runnable: false
+    note: "No Pump.fun launch counts or volume history are served. Needs Dune's Pump.fun dashboards."
 ---
 
 # Pump.fun Bonding Curve Sniping

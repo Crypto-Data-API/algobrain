@@ -21,6 +21,97 @@ expected_sharpe: 0.0
 expected_max_drawdown: 0.15
 breakeven_cost_bps: 40
 related: ["[[long-vol-vs-short-vol]]", "[[short-volatility-strategies]]", "[[tail-risk-hedging]]", "[[long-vol-overlay]]", "[[crypto-options-volatility-selling]]", "[[crisis-alpha]]", "[[variance-risk-premium]]", "[[dvol]]", "[[deribit]]", "[[greeks-live]]", "[[volatility-regime-classification]]", "[[liquidation-cascade-fade]]", "[[ergodicity]]", "[[variance-swap]]", "[[volatility-swap]]", "[[funding-rate]]"]
+gates:
+  - id: btc_eth_deribit
+    role: universe
+    rule: "Reference implementation: a systematic Deribit BTC/ETH put ladder; liquid long-vol expression exists for BTC and ETH only"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "BTC and ETH are the coins whose Deribit implied vol is served. Free tier sees BTC only."
+  - id: premium_budget
+    role: sizing
+    rule: "Fix the premium budget in advance at 1-3% of NAV per year (pseudocode: 2%, spent monthly); never exceed it to average down mid-year"
+    runnable: true
+    input: position
+  - id: put_tenor
+    role: entry
+    rule: "Buy linear (USDC-margined) puts 1-3 months to expiry (pseudocode: about 60 DTE), laddered so a fraction rolls each month"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "Pick the listed expiry with expiry_days about 30-90 (Pro Plus; empty on lower tiers)."
+  - id: put_strike_otm
+    role: entry
+    rule: "Strikes 15-25% out of the money (pseudocode: spot x 0.80)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/summary?coin={coin}
+    field: mark_price
+    note: "Target strike = mark x 0.75 to 0.85 (Hyperliquid perp mark as the spot proxy). The listed Deribit strike nearest it and its ask price are not served."
+  - id: budget_sizing
+    role: sizing
+    rule: "Size by premium budget, never by contracts or notional: qty = monthly budget / put ask. When DVOL is rich the same budget buys fewer or further options"
+    runnable: false
+    input: position
+    note: "The budget is on the position record, but the put ask comes from Deribit; we serve no option prices."
+  - id: dvol_kicker
+    role: entry
+    rule: "Optional fast-fire kicker: 10-20% of the vol budget in long-vega or DVOL-referenced convexity struck well above current DVOL"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "Current DVOL is served; DVOL futures and per-strike vega are not, so building the leg needs Deribit. 'Well above' is not quantified."
+  - id: roll_at_30dte
+    role: exit
+    rule: "Roll each tranche at about 30 DTE remaining regardless of P&L; never hold to expiry in calm regimes"
+    runnable: true
+    input: position
+  - id: monetize_5x
+    role: exit
+    rule: "When a tranche trades at 5x its cost or more, sell half"
+    runnable: false
+    input: position
+    note: "Needs the tranche's live option mark, which comes from Deribit; we serve no option prices."
+  - id: monetize_10x
+    role: exit
+    rule: "When a tranche trades at 10x its cost or more, sell down to a residual 25%"
+    runnable: false
+    input: position
+    note: "Same missing option mark as monetize_5x."
+  - id: monetize_dvol_double
+    role: exit
+    rule: "Alternative trigger: monetise half when DVOL doubles from entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "Compare the live dvol with the dvol recorded at the tranche's entry."
+  - id: monetize_dvol_95pct
+    role: exit
+    rule: "Alternative trigger: monetise half when DVOL exceeds about its 95th percentile"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "About 180 days of daily DVOL are served (Pro Plus); the page names no percentile window. The agent workflow's machine analogue is a doubling of probabilities.regime_transitions.to_vol_spike on /api/v1/quant/market."
+  - id: rebalance_into_spot
+    role: sizing
+    rule: "Recycle monetisation proceeds into spot BTC/ETH at the depressed price"
+    runnable: true
+    input: position
+  - id: restrike_after_monetize
+    role: entry
+    rule: "After monetising, buy new puts 15-25% out of the money of the new, lower spot to re-arm the hedge"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/summary?coin={coin}
+    field: mark_price
+    note: "Same as put_strike_otm: the target level is computable, the listed strike and its price come from Deribit."
+  - id: avoid_post_shock
+    role: filter
+    rule: "Avoid starting long vol when DVOL is already at extreme percentiles just after a shock, when forward protection is most expensive"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "From 'When to use / avoid'. No percentile cut is given; about 180 days of history are served. /api/v1/volatility/regime/{coin} reporting vol_shock is a served alternative read."
 ---
 
 Long volatility strategies are options structures that are **net long premium**: long [[gamma]], long [[vega]], short [[theta]], with **convex** payoff in either direction (or specifically left-tail for protective/tail variants). They lose small amounts most days and earn outsized payoffs during vol expansions or [[crisis-alpha|crisis events]]. In crypto they are expressed as ladders of deep-OTM [[deribit|Deribit]] BTC/ETH puts and [[dvol|DVOL]]-referenced convexity. This page is a survey/landing page for the family; each canonical implementation has its own page. For the comparison against the [[short-volatility-strategies|short side]], see [[long-vol-vs-short-vol]].

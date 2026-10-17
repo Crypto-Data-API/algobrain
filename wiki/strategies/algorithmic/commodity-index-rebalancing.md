@@ -21,6 +21,63 @@ data_required: [futures-continuous-contracts, ohlcv-intraday, index-roll-schedul
 capacity_usd: 500000000
 min_capital_usd: 250000
 related: ["[[roll-yield]]", "[[contango]]", "[[calendar-spread-arbitrage]]", "[[commodities]]", "[[cme-group]]", "[[trend-following-cta]]"]
+gates:
+  - id: roll_window
+    role: entry
+    rule: "Roll window: S&P GSCI rolls on business days 5-9 of each month; BCOM on its own published window"
+    runnable: false
+    note: "Index roll schedules and an exchange business-day and holiday calendar are not served. S&P and Bloomberg publish the schedules; CME publishes the holidays."
+  - id: index_weight_min
+    role: universe
+    rule: "Trade only commodities with an index weight of at least 2% (crude oil, natural gas, gold, corn, soybeans; crude is about 25-30% of GSCI)"
+    runnable: false
+    note: "Commodity index weights are not served. They come from the GSCI and BCOM methodology documents."
+  - id: expected_roll_volume
+    role: sizing
+    rule: "Expected roll volume = index AUM x commodity weight / number of roll days"
+    runnable: false
+    note: "Index AUM and weights are not served."
+  - id: sell_spread_pre_roll
+    role: entry
+    rule: "Two business days before the roll window, sell the calendar spread (sell near-month, buy deferred); the alternative buys the spread after the window for post-roll mean reversion"
+    runnable: false
+    note: "No commodity futures prices or calendar spreads are served (no CME data). Needs front and second-month futures quotes from CME or a futures data vendor."
+  - id: steep_contango
+    role: filter
+    rule: "Prefer the largest-weight commodities with the steepest contango"
+    runnable: false
+    note: "Commodity futures curves are not served."
+  - id: no_widening_exit
+    role: exit
+    rule: "If the spread does not widen during the roll window, exit (the move was pre-positioned); if it overshoots, consider adding"
+    runnable: false
+    note: "Needs the live calendar spread, which is not served, and the page leaves the overshoot add to judgement."
+  - id: target_exit
+    role: exit
+    rule: "Take profit inside the window if the spread reaches the target level"
+    runnable: false
+    note: "The target comes from past roll-window spread changes, and neither those nor the live spread are served."
+  - id: post_roll_exit
+    role: exit
+    rule: "Close the spread 3-5 business days after the roll window ends (the pseudocode closes on business day 12)"
+    runnable: partial
+    input: position
+    note: "Mechanical from the entry date, but counting business days needs the exchange holiday calendar, which is not served."
+  - id: stop_2x_impact
+    role: stop
+    rule: "Close if the spread moves against the position by more than 2x the expected roll impact"
+    runnable: false
+    note: "Needs the live spread and a historical estimate of roll impact, neither served."
+  - id: spread_vol_sizing
+    role: sizing
+    rule: "Size on calendar-spread volatility (not outright), proportional to index weight"
+    runnable: false
+    note: "Spread history and index weights are not served."
+  - id: risk_cap
+    role: sizing
+    rule: "Risk at most 0.5% of the portfolio per commodity per roll"
+    runnable: true
+    input: position
 ---
 
 # Commodity Index Rebalancing

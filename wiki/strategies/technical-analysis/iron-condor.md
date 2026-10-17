@@ -12,6 +12,115 @@ markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[crypto-options-volatility-selling]]", "[[iron-butterfly]]", "[[reverse-iron-condor]]", "[[jade-lizard]]", "[[short-strangle]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[volatility-surface]]", "[[funding-rate]]", "[[gamma-exposure]]", "[[max-pain]]", "[[section-1256-contracts]]", "[[theta]]", "[[vega]]", "[[gamma]]", "[[delta]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit_only
+    role: universe
+    rule: "BTC and ETH Deribit options only; alt options are too thin for a clean four-leg condor"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied vol served. Option quotes come from Deribit itself."
+  - id: short_strikes_15_20_delta
+    role: entry
+    rule: "Sell a put and a call at about 15-20 delta each side"
+    runnable: false
+    note: "Strikes by delta need Deribit's option chain with Greeks, which we do not serve."
+  - id: wings_8_10_delta
+    role: entry
+    rule: "Buy protective wings at about 8-10 delta, one to a few strikes further out"
+    runnable: false
+    note: "Same gap as short_strikes_15_20_delta."
+  - id: outside_oi_walls
+    role: entry
+    rule: "Set the short strikes outside the open-interest walls"
+    runnable: false
+    note: "No per-strike open interest is served; /market-intelligence/options carries only BTC aggregate OI, the put/call ratio and one max-pain strike."
+  - id: credit_third_of_wing
+    role: entry
+    rule: "Collect at least one third of a wing's width as credit"
+    runnable: false
+    note: "Needs the four legs' quotes; no option prices are served."
+  - id: tenor_21_45_dte
+    role: entry
+    rule: "Expiry 21-45 days out; no weeklies and nothing past 60 DTE"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure lists the nearest 12 Deribit expiries. It is Pro Plus and empty on lower tiers."
+  - id: dvol_40_90_pctile
+    role: filter
+    rule: "Open only with DVOL in the 40th-90th percentile of its trailing year"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "Rank the latest dvol within history. Only about 180 daily closes are served (Pro Plus), so the percentile is over six months, not a year."
+  - id: vrp_above_5
+    role: filter
+    rule: "DVOL minus 30-day realized vol above about 5 vol points"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    note: "vrp = dvol - realized_30 (30-day Garman-Klass). For replay, pair items[].history[].dvol with history[].rv_gk_30 on /api/v1/volatility/regime/{symbol} (60 days deep)."
+  - id: vol_regime_gate
+    role: filter
+    rule: "Enter when the vol regime is elevated or mean_reverting: rich premium, no shock in progress"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "mean_reverting is a served label; 'elevated' is not (expanding is nearest, but expanding is the opposite of no shock in progress). Skip vol_shock."
+  - id: range_regime_leads
+    role: filter
+    rule: "Enter while range_low_vol probability leads"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: explain.label_posteriors.range_low_vol
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_2
+    note: "Leading = the highest of the six values in label_posteriors."
+  - id: squeeze_early_exit
+    role: exit
+    rule: "Falling range probability with a rising squeeze bucket is the early exit, before a strike is threatened"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: explain.label_posteriors.squeeze
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_5
+    note: "The page gives no window or threshold for 'falling' and 'rising'."
+  - id: profit_target_half_credit
+    role: exit
+    rule: "Close at 50% of max credit"
+    runnable: true
+    input: position
+    note: "The condor's mark comes from Deribit; no option prices are served."
+  - id: time_stop_10_14_dte
+    role: exit
+    rule: "Close at 10-14 DTE"
+    runnable: true
+    input: position
+  - id: roll_tested_side
+    role: exit
+    rule: "If spot approaches one short strike, buy back the threatened spread and sell a new one further out in price or time for a credit"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "'Approaches' has no distance on the page."
+  - id: vol_shock_kill
+    role: stop
+    rule: "Flatten immediately if DVOL rises more than 50% in a session or position delta exceeds 2x entry delta"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "No intraday DVOL is served; compare the latest dvol with the prior day's close. Position delta comes from Deribit."
+  - id: tail_watch_close_tested
+    role: stop
+    rule: "A liquidation cascade or a flip to short dealer gamma says close the tested side early"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    note: "Short dealer gamma = score at or above 0.35 on the perp-analog GEX, not Deribit options gamma. Cascades are alerts[].direction on /api/v1/market-intelligence/squeeze-alerts?symbol={coin}. The page sets no sizes."
 ---
 
 # Iron Condor

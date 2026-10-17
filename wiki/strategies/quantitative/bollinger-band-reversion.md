@@ -28,6 +28,89 @@ kill_criteria: |
   - share of trades stopped by 'walking the band' rising above ~40% (regime turned trending)
   - median realized round-trip cost > 20 bps for a full month
 related: ["[[bollinger-bands]]", "[[rsi-mean-reversion]]", "[[mean-reversion]]", "[[keltner-channels]]", "[[donchian-channel-breakout]]", "[[regime-detection]]", "[[volatility]]", "[[cryptodataapi]]"]
+gates:
+  - id: liquid_universe
+    role: universe
+    rule: "Liquid universe: the top 30 coins by open interest plus spot volume"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+    note: "Hyperliquid OI in USD (day_volume sits beside it). Perp volume, not spot; the page does not say how to combine OI and volume, so ranking on OI alone is one reading."
+  - id: lower_band_touch_recover
+    role: entry
+    rule: "Long: the previous 1h close at or below the lower band (20-period SMA - 2 standard deviations) and the latest close back above it (touch and recover)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=25
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].close
+    note: "Compute the bands per bar from the closes; drop the forming bar (forming_bar_timestamp). The page also allows 1d bars. Separate setup not gated here: the Bollinger squeeze breakout (band width at a 3-6 month low, then a close outside a band on expanding volume), which is momentum, not reversion."
+  - id: upper_band_touch_recover
+    role: entry
+    rule: "Short: the previous 1h close at or above the upper band (20-period SMA + 2 standard deviations) and the latest close back below it"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=25
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].close
+  - id: rsi_confirm
+    role: filter
+    rule: "RSI(14) below 30 for longs, above 70 for shorts, on the same bars"
+    runnable: true
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: rsi.rsi_14_1h
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].close
+    note: "rsi.rsi_14_1d is the daily equivalent. Replay computes Wilder RSI(14) from the closes."
+  - id: adx_ranging
+    role: filter
+    rule: "Regime gate (mandatory): ADX(14) below 25 (ranging)"
+    runnable: true
+    endpoint: /api/v1/indicators/adx?coin={coin}&interval=1h&history=2
+    field: items[].adx
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].close
+    note: "The latest item is the forming bar (final false); read the last closed bar from items[].history. Replay computes Wilder ADX(14) from high, low and close."
+  - id: vol_regime_ranging
+    role: filter
+    rule: "Regime gate (mandatory): the vol regime is normal or mean_reverting (never vol_shock or a strong trend)"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "Daily vol regime. The page's agent workflow adds the SIGNUM RGG color: grey is tradeable chop, red or green flag walked bands (/api/v1/indicators/signum-rgg/{coin}, color)."
+  - id: middle_band_exit
+    role: exit
+    rule: "Take profit at the middle band (20-period SMA); in a confirmed range the alternative is to hold for the opposite band"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=25
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].close
+  - id: atr_stop
+    role: stop
+    rule: "Stop 1-2x ATR beyond the entry band (pseudocode: lower band - 1.5 x ATR(14) for longs, upper band + 1.5 x ATR for shorts)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=30&atr=14
+    field: candles[].atr
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}&atr=14
+    replay_field: candles[].atr
+  - id: regime_flip_exit
+    role: exit
+    rule: "Close the position when the regime stops ranging (walking-band risk)"
+    runnable: true
+    input: derived
+    inputs: [adx_ranging, vol_regime_ranging]
+  - id: risk_sizing
+    role: sizing
+    rule: "Risk at most 0.5% of equity to the ATR stop; cap any coin at 5% of the book; 1-2x notional"
+    runnable: true
+    input: position
+  - id: expanding_half_size
+    role: sizing
+    rule: "Scale size down 50% when the vol regime is expanding"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
 ---
 
 # Bollinger Band Reversion

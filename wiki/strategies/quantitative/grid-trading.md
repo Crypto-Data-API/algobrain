@@ -22,6 +22,98 @@ expected_max_drawdown: 0.25
 breakeven_cost_bps: 10
 decay_evidence: "Strategy proliferation via 3Commas/Pionex consumer bots since ~2020 has compressed grid edges; modern viability depends on regime filter quality"
 related: ["[[dollar-cost-averaging]]", "[[mean-reversion]]", "[[bollinger-band-reversion]]", "[[range-trading]]", "[[market-making]]", "[[market-making-strategy]]", "[[regime-detection]]", "[[adx]]", "[[bollinger-bands]]", "[[atr]]", "[[adverse-selection]]", "[[bid-ask-spread]]", "[[edge-taxonomy]]", "[[funding-rate]]", "[[hyperliquid]]", "[[pionex]]"]
+gates:
+  - id: adx_below_20
+    role: filter
+    rule: "Regime gate, part 1: ADX(14) on the 1-hour timeframe below 20"
+    runnable: true
+    endpoint: /api/v1/indicators/adx?coin={coin}&interval=1h&history=2
+    field: items[].history[].adx
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].close
+    note: "history holds closed bars only, newest last; the item's own adx is the forming bar (final false). For 1h history the route takes at most 5 coins per call. Replay: Wilder ADX(14) from the 1h highs, lows and closes."
+  - id: bbw_pctl_below_20
+    role: filter
+    rule: "Regime gate, part 2: Bollinger Bandwidth (20-period, 2 sigma, on 1h bars) in the bottom 20% of its last 252 hourly values"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=274
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].close
+    note: "Drop the forming bar, compute BBW = (upper - lower) / middle for each of the last 252 closed bars, and rank the latest value among them. The daily squeeze_percentile on /indicators/technical is a different (daily) measure."
+  - id: range_bound
+    role: filter
+    rule: "Deploy the grid only when adx_below_20 and bbw_pctl_below_20 both hold; re-check hourly and cancel the grid the moment either fails"
+    runnable: true
+    input: derived
+    inputs: [adx_below_20, bbw_pctl_below_20]
+  - id: grid_center
+    role: entry
+    rule: "Center the grid on the current mark price, reset on each redeploy"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: grid_levels
+    role: entry
+    rule: "Place 10 limit orders symmetric around the center, 5 buys below and 5 sells above, spaced 0.5 x ATR(14) on 1h bars per level (or a fixed 0.4%)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=30&atr=14
+    field: candles[].atr
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}&atr=14
+    replay_field: candles[].atr
+    note: "Read atr on the last closed bar (the one before forming_bar_timestamp). Spacing must exceed twice the per-side fee; taker fees are on /api/v1/hyperliquid/meta."
+  - id: level_depth_cap
+    role: sizing
+    rule: "Keep each level's order below about 25% of the resting depth at its price"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: bids[].size
+    note: "From the page's agent workflow. The book is the top 20 levels per side at Hyperliquid's tick grouping, sizes in coin units, so a level far from the mid may sit outside it; comparing a grid price with the nearest book level is the desk's approximation."
+  - id: grid_capital
+    role: sizing
+    rule: "1x leverage, total grid capital 15% of book equity, per-level notional = that / 10"
+    runnable: true
+    input: position
+  - id: replenish_fill
+    role: entry
+    rule: "On a fill at level k, place the matching opposite-side limit one spacing away (a buy fill gets a sell one spacing above)"
+    runnable: true
+    input: position
+  - id: range_break_exit
+    role: stop
+    rule: "If the absolute distance from mark to the grid center exceeds 2.0 x ATR(14), cancel every grid order and close residual inventory at market; wait for the regime gate before redeploying"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "Use the ATR(14) captured when the grid was deployed (grid_levels)."
+  - id: signum_grey_crosscheck
+    role: filter
+    rule: "Cross-check: deploy only while SIGNUM RGG reads GREY (the ADX-based chop state)"
+    runnable: true
+    endpoint: /api/v1/indicators/signum-rgg/{symbol}?intraday=true
+    field: intraday_color
+    note: "From the page's agent workflow. intraday_color is the 1h read (intraday_timeframe says so) and matches the page's 1h gate; color is the daily read."
+  - id: vol_compressed_crosscheck
+    role: filter
+    rule: "Cross-check: the coin's volatility regime reads compressed, corroborating the bottom-quintile bandwidth"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    note: "From the page's agent workflow. The regime is built from daily realized vol, not 252 hours of 1h bandwidth, so it corroborates rather than replaces bbw_pctl_below_20; whether a non-compressed read blocks deployment is the desk's call."
+  - id: funding_drain_kill
+    role: stop
+    rule: "Pause when funding paid on the grid's inventory exceeds its gross spacing capture for 14 consecutive days"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    note: "Multiply each hourly print by the inventory held through it (from the position record) and compare the daily sum with that day's realized cycle profit."
+  - id: stopout_streak_kill
+    role: stop
+    rule: "Pause after 3 consecutive grid sessions stopped out by the 2.0x ATR range break"
+    runnable: true
+    input: position
 ---
 
 # Grid Trading

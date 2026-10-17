@@ -34,6 +34,95 @@ kill_criteria: |
   - average move post-reentry below 0.5% (spread/funding consumes the edge)
   - rolling 3-month Sharpe < 0.3
   - liquidation cascade data shows increasing frequency of "real" breakdowns vs sweeps (regime shift)
+gates:
+  - id: stop_cluster_level
+    role: universe
+    rule: "Map obvious stop clusters on the 4h or daily chart: below swing lows (above swing highs in a downtrend), below multi-touch support, at round numbers and beyond trendlines"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical?symbol={coin}
+    field: items[].sr.support[].price
+    note: "Daily support and resistance levels are served with a touch strength (items[].sr.support[].strength, items[].sr.resistance[]). Round numbers are arithmetic; trendlines and 'obvious' are chart judgement, so picking the level is the desk's call."
+  - id: significant_level_only
+    role: filter
+    rule: "Only trade sweeps of significant levels: a clear swing low or high, a round number or a high-volume node"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical?symbol={coin}
+    field: items[].sr.support[].strength
+    note: "strength counts how often a served level held; the page gives no minimum, so the cut is the desk's call."
+  - id: sweep_penetration
+    role: entry
+    rule: "Price breaks the level with a wick or spike that penetrates it by 0.5-2%"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=15m&limit=96
+    field: candles[].low
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=15m&start={start}
+    replay_field: klines[].l
+    note: "For a downside sweep, (level - low) / level between 0.005 and 0.02 (use candles[].high above resistance). The 1m replay archive starts 2026-05-09."
+  - id: close_back_inside
+    role: entry
+    rule: "Enter when a 15m or 1h candle closes back inside the prior range (above broken support, below broken resistance)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=15m&limit=96
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=15m&start={start}
+    replay_field: klines[].c
+    note: "Closed bars only; skip the bar named by forming_bar_timestamp. The local replay starts 2026-05-09."
+  - id: reversal_candle
+    role: filter
+    rule: "Confirm with a reversal candle: bullish engulfing, hammer or pin bar"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=15m&limit=96
+    field: candles[].open
+    note: "Computable from OHLC, but the page gives no body or wick ratios for these patterns, so the definitions are the desk's."
+  - id: orderflow_confirmation
+    role: filter
+    rule: "Confirm with order flow: absorption, aggressive buying on the bid, delta divergence showing buyers stepping in despite the breakdown"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=60
+    field: data[].cvd_usd
+    note: "1-minute taker buy and sell notional and running CVD (no footprint or tick data). Delta divergence = price making a lower low while cvd_usd makes a higher low; the page sets no thresholds."
+  - id: sweep_volume
+    role: filter
+    rule: "The sweep candle shows heavy volume (stops triggering)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=15m&limit=96
+    field: candles[].volume
+    note: "From the example; no multiple of average volume is given."
+  - id: liquidation_cluster
+    role: filter
+    rule: "Liquidations cluster around the wick (the page's strongest confirmation signal)"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=5m&start={start}
+    field: data[].long_usd
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=5m&start={start}
+    replay_field: data[].long_usd
+    note: "long_usd for a downside sweep (short_usd for upside) in the buckets around the wick; closed buckets only, Hyperliquid fills from 2026-07-23. OKX and Bybit totals are on /market-intelligence/liquidations at 1h and longer windows; Binance is not captured. No spike threshold is given."
+  - id: low_volume_node
+    role: filter
+    rule: "Prefer sweeps into a low-volume node of the volume profile"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=500
+    field: candles[].volume
+    note: "Build the profile by bucketing volume by price from candles; the lookback and what counts as low are the desk's call."
+  - id: sweep_low_stop
+    role: stop
+    rule: "Stop just below the sweep low (the deepest wick if there is a second sweep)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=15m&limit=96
+    field: candles[].low
+  - id: range_target
+    role: exit
+    rule: "Target the opposite side of the range or the next liquidity pool, typically 1:2 to 1:4 risk-reward"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.levels[].dist_pct
+    note: "The range edge comes from the level map; liquidity pools are judgement. /quant/gex levels list Hyperliquid liquidation clusters near the mark."
+  - id: risk_per_trade
+    role: sizing
+    rule: "Risk at most 2% of capital per trade"
+    runnable: true
+    input: position
 ---
 
 # Stop Hunting & Liquidity Sweeps

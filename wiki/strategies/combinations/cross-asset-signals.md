@@ -32,6 +32,138 @@ kill_criteria: |
   - macro-crypto correlation regime breaks (DXY-BTC correlation near 0 for > 90 days)
   - drawdown > 15% in cross-asset book
 
+gates:
+  - id: dxy_breakout
+    role: entry
+    rule: "DXY breaks above resistance: short crypto (BTC weakness tends to follow within 1-5 days); DXY breaks down: long crypto"
+    runnable: partial
+    endpoint: /api/v1/sentiment/macro
+    field: eur_usd_latest
+    replay: /api/v1/backtesting/snapshots?data_type=macro&start={start}&limit=1000
+    replay_field: snapshots[].data.eur_usd_latest
+    note: "No DXY is served. EUR/USD is about 58% of the DXY basket and moves inversely to it, so a EUR/USD breakdown is the nearest stand-in (eur_usd_7d_change_pct and eur_usd_30d_change_pct are alongside). Which level is resistance is a chart judgement the page leaves open. Snapshot history from 2026-05-09, about every 2 hours."
+  - id: dxy_btc_correlation_active
+    role: filter
+    rule: "Trade the DXY signal only while the DXY-BTC correlation is active (about -0.5 to -0.8 in risk-off regimes)"
+    runnable: partial
+    endpoint: /api/v1/backtesting/snapshots?data_type=macro&start={start}&limit=1000
+    field: snapshots[].data.eur_usd_latest
+    note: "Correlate daily EUR/USD changes (sign-flipped for the dollar) with BTC daily returns (/api/v1/market-data/btc-price-history). A EUR/USD proxy, not DXY, and the page gives no window or cutoff for active, so both are the desk's call."
+  - id: funding_crowded_01
+    role: entry
+    rule: "BTC perp funding above 0.1%/8h: longs overleveraged, expect a spot correction within 1-3 days"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=1
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Latest settled Binance 8h print above 0.001. On Hyperliquid sum the last 8 hourly prints."
+  - id: funding_plus_dxy_short
+    role: entry
+    rule: "High-conviction short: BTC funding above +0.05%/8h combined with DXY strength"
+    runnable: partial
+    input: derived
+    inputs: [funding_crowded_01, dxy_breakout]
+    note: "Funding leg: latest Binance 8h print above 0.0005, on the same endpoint as funding_crowded_01. Only as runnable as the DXY proxy."
+  - id: vix_backwardation
+    role: filter
+    rule: "VIX term structure in backwardation (VIX above its futures): reduce exposure, buy puts, tighten stops"
+    runnable: false
+    note: "No VIX or VIX futures are served."
+  - id: dvol_term_backwardation
+    role: filter
+    rule: "Crypto analog the page names: the DVOL term structure inverts (near-dated implied vol above longer-dated) before spot moves risk-off"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "Compare near-dated atm_iv (about 7 days) with the 30-60 day rows; BTC and ETH, Pro Plus. The page gives no tenors or margin for an inversion, so both are the desk's call. Very short expiries (0-2 days) read low and are noise for this test."
+  - id: credit_spreads
+    role: filter
+    rule: "HY-IG credit spreads widening: risk-off incoming, fade equity rallies and reduce crypto exposure"
+    runnable: false
+    note: "No credit-spread series is served; it needs FRED or a bond data vendor."
+  - id: yields_sector_rotation
+    role: entry
+    rule: "10Y Treasury yield breakout above a key level: rotate from tech to financials"
+    runnable: false
+    note: "No 10Y market yield and no equity sectors are served. treasury_avg_interest_rate on /sentiment/macro is the average coupon on outstanding notes, not the 10Y yield."
+  - id: options_flow
+    role: entry
+    rule: "Unusual equity options flow (large put sweeps on SPY): hedge or reduce equity longs"
+    runnable: false
+    note: "No equity options flow is served."
+  - id: copper_gold
+    role: filter
+    rule: "Copper/gold ratio falling: defensive positioning, long gold"
+    runnable: false
+    note: "Gold is served (gold_price_usd on /sentiment/macro) but copper is not, so the ratio cannot be built."
+  - id: jpy_risk
+    role: filter
+    rule: "USD/JPY dropping sharply: risk-off incoming"
+    runnable: false
+    note: "No JPY rates are served; EUR/USD is the only FX pair."
+  - id: divergence_fade
+    role: entry
+    rule: "Trade divergences: when the leading market (bonds, credit, FX) has moved and the lagging one (equities, crypto) has not, fade the laggard in the leader's direction"
+    runnable: partial
+    input: derived
+    inputs: [dxy_breakout]
+    note: "For crypto the only served leader is the EUR/USD proxy for the dollar; bonds and credit are not served. Whether a divergence is open is a judgement."
+  - id: divergence_time_limit
+    role: exit
+    rule: "Cut the position if the divergence has not resolved within 5-10 trading days"
+    runnable: partial
+    input: position
+    note: "The page gives a 5-10 day range; the exact limit is the desk's call."
+  - id: regime_weighting
+    role: sizing
+    rule: "Weight signals by regime: risk-on (VIX below 15, tight spreads, weak DXY) favours crypto signals, risk-off (VIX above 25, widening spreads, strong DXY) favours bond and credit signals, mixed means smaller size"
+    runnable: false
+    note: "VIX and credit spreads, two of the three regime inputs, are not served."
+  - id: crypto_regime_gate
+    role: filter
+    rule: "Trade the macro signal only in macro-coupled regimes; stand down when crypto-specific flows (ETF, regulatory) dominate"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    note: "From the page's AI-agent workflow, which pairs /regimes/current with composite_score on /api/v1/volatility/regime/score. No served field says whether crypto is macro-coupled, so that call is the desk's."
+  - id: crowding_skip
+    role: filter
+    rule: "Skip divergence entries when crypto positioning is already crowded in the signalled direction"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=1
+    field: rates[].funding_rate
+    note: "From the page's AI-agent workflow; it names no crowding level, so the cut is the desk's call."
+  - id: risk_per_trade
+    role: sizing
+    rule: "Risk 2-3% per divergence trade, expecting 3-10 day holds"
+    runnable: true
+    input: position
+  - id: stop_lagging_technicals
+    role: stop
+    rule: "Place stops on the lagging market's technicals (the example: above the recent swing high), not on the leading market's signal"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/indicators/technical/{symbol}
+    field: sr.resistance[].price
+    note: "Which level is the swing high to stop above is the desk's call; resistance levels come from daily bars."
+  - id: kill_win_rate
+    role: stop
+    rule: "Kill: rolling 6-month win rate on DXY-crypto divergence setups below 45%"
+    runnable: true
+    input: position
+  - id: kill_correlation_zero
+    role: stop
+    rule: "Kill: DXY-BTC correlation near 0 for more than 90 days"
+    runnable: partial
+    input: derived
+    inputs: [dxy_btc_correlation_active]
+    note: "Same EUR/USD proxy; near 0 is not defined."
+  - id: kill_drawdown_15
+    role: stop
+    rule: "Kill: drawdown above 15% in the cross-asset book"
+    runnable: true
+    input: position
 ---
 
 # Cross-Asset Signals

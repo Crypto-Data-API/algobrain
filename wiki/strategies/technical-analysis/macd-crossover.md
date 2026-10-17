@@ -46,6 +46,103 @@ kill_criteria: |
   - false-signal rate exceeds 65% over rolling 20 signals → add trend filter (200 EMA) or shift to longer timeframe
   - rolling 90-day P&L negative with > 15 completed trades → pause; market is range-bound or parameters need revision
   - funding rate > 0.1% per 8h and MACD signals short → skip short signals; funding strongly penalizes shorts
+gates:
+  - id: bullish_cross_below_zero
+    role: entry
+    rule: "Long when MACD(12,26,9) crosses above its signal line while both are below zero, on closed daily candles"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].c
+    note: "MACD = EMA12 - EMA26 of closes, signal = EMA9 of MACD; 200 bars lets the EMAs settle. Drop the forming bar named by forming_bar_timestamp. The page's example uses Binance spot (/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d)."
+  - id: bearish_cross_above_zero
+    role: entry
+    rule: "Short when MACD crosses below its signal line while both are above zero"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].c
+  - id: histogram_expanding
+    role: entry
+    rule: "Confirm with the MACD histogram expanding in the trade's direction"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200
+    field: candles[].close
+    note: "Histogram = MACD - signal; expanding = its absolute value growing bar over bar on the trade's side."
+  - id: trend_filter_200_ema
+    role: filter
+    rule: "Take bullish crossovers only in uptrends and bearish ones only in downtrends, using a moving average such as the 200 EMA on the higher timeframe"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=400
+    field: candles[].close
+    note: "The rule leaves the average and timeframe open ('e.g. 200 EMA on the higher timeframe'); the AI workflow takes the 200 EMA from the same daily series. The served 200-day SMA is ma.above_200 on /api/v1/indicators/technical/{symbol}."
+  - id: funding_short_veto
+    role: filter
+    rule: "Skip a short signal when funding is above 0.1% per 8 hours"
+    runnable: true
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance funding is per 8 hours: skip when current_rate is above 0.001. The replay is Hyperliquid hourly funding; multiply by 8."
+  - id: funding_alignment
+    role: filter
+    rule: "Check funding before every entry: crossovers in the direction of the funding trend are higher-probability; a long against deeply negative funding fights structural short pressure"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    note: "Only the 0.1% short veto has a number; 'deeply negative' and the funding trend are left to the desk."
+  - id: trend_regime_only
+    role: filter
+    rule: "Take crossovers only in strong_trend_bull or strong_trend_bear; stand down in choppy_high_vol"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow. The coin's own read is /api/v1/quant/coins/{symbol}."
+  - id: enough_history
+    role: universe
+    rule: "Respect insufficient-history flags on recently listed perps before trusting a 26-period EMA"
+    runnable: true
+    endpoint: /api/v1/quant/coins/{coin}
+    field: meta.insufficient_history
+  - id: signal_line_exit
+    role: exit
+    rule: "Close when MACD crosses its signal line against the trade"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].c
+  - id: zero_line_exit
+    role: exit
+    rule: "Exit immediately if the MACD line crosses zero against the position"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200
+    field: candles[].close
+  - id: swing_stop
+    role: stop
+    rule: "Stop below the most recent swing low for longs (above the recent swing high for shorts)"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30
+    field: candles[].low
+    note: "The page does not define a swing low (a pivot with N higher lows either side is the usual reading)."
+  - id: target_2r_or_trail
+    role: exit
+    rule: "Take profit at 2:1 reward-to-risk, or trail the stop using the signal line"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: kill_criteria
+    role: stop
+    rule: "If more than 65% of the last 20 signals fail to move 1R within 10 bars, add the 200 EMA filter or lengthen the timeframe; pause on a negative rolling 90-day P&L over more than 15 trades"
+    runnable: true
+    input: position
 ---
 
 # MACD Crossover Strategy

@@ -30,6 +30,114 @@ kill_criteria: |
   - perp DEX changes funding / oracle anchor mechanism
   - sustained drawdown > 20% on book
 related: ["[[basis-trading]]", "[[funding-rate-arbitrage]]", "[[pyth-network]]", "[[perpetual-futures]]", "[[mean-reversion]]", "[[after-hours-trading]]", "[[asterdex]]", "[[oracle-manipulation]]", "[[overnight-vs-intraday]]", "[[hyperliquid]]", "[[asterdex-perp-trading-map]]"]
+gates:
+  - id: stock_perp_universe
+    role: universe
+    rule: "Liquid stock perps on AsterDEX (AAPL, TSLA, NVDA, MSFT, AMZN, META, GOOG) and Hyperliquid HIP-3 equity perps, each with $1M+ daily perp volume"
+    runnable: false
+    note: "No equity perps are served: the Hyperliquid routes cover the main crypto perp universe only (SPX there is the SPX6900 meme coin, not the S&P 500), and AsterDEX appears only as venue-level stats on /exchanges/{slug}."
+  - id: nyse_closed
+    role: filter
+    rule: "Trade only while the NYSE regular session (09:30-16:00 ET, Mon-Fri) is closed; overnight and weekends are the highest-edge zone"
+    runnable: partial
+    input: position
+    note: "Regular hours follow from the clock. NYSE holidays and half-days are not served; the page uses pandas_market_calendars."
+  - id: pyth_status_trading
+    role: filter
+    rule: "Enter only while the Pyth equity feed's status is Trading, never Halted or Unknown"
+    runnable: false
+    note: "No Pyth equity feeds or their status are served."
+  - id: drift_05pct
+    role: entry
+    rule: "drift = (perp mark - Pyth oracle) / Pyth oracle; enter when the absolute drift exceeds 0.5% (0.75% for TSLA and NVDA, 0.4% for MSFT and AAPL optionally)"
+    runnable: false
+    note: "Needs the stock perp's mark and its equity oracle, neither of which is served. /hyperliquid/summary carries mark_price and oracle_price for the crypto perps only."
+  - id: fade_drift
+    role: entry
+    rule: "Fade the drift: short the perp when drift is above +0.5%, long when below -0.5%"
+    runnable: false
+    input: derived
+    inputs: [drift_05pct]
+    note: "drift_05pct is unserved."
+  - id: funding_sanity
+    role: filter
+    rule: "Reduce size or skip when the next hour's predicted funding pays against the position by more than about 50% annualised"
+    runnable: false
+    note: "Stock-perp funding on AsterDEX and HIP-3 markets is not served."
+  - id: macro_event_blackout
+    role: filter
+    rule: "No entries within 30 minutes before scheduled earnings releases or Fed announcements"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=macro_print
+    field: items[].date
+    note: "FOMC dates are served (macro_class names the print), as dates without release times. No earnings calendar is served, so the earnings half needs Nasdaq or a vendor such as the ones the page names."
+  - id: earnings_hold_blackout
+    role: filter
+    rule: "Do not hold any position from 30 minutes before scheduled earnings through the next NYSE open"
+    runnable: false
+    note: "No earnings calendar is served."
+  - id: friday_afternoon
+    role: sizing
+    rule: "After 12:00 ET Friday, open nothing new unless drift exceeds 1.5%, and cut per-stock size to 5% of book"
+    runnable: false
+    input: derived
+    inputs: [drift_05pct]
+    note: "The clock part is trivial, but the drift exception needs data that is not served."
+  - id: max_8_positions
+    role: sizing
+    rule: "At most 8 concurrent stock-perp positions, one per ticker"
+    runnable: true
+    input: position
+  - id: per_stock_size
+    role: sizing
+    rule: "11.25% of book notional per stock at 2x leverage (about 5.6% margin each, 90% notional at 8 positions)"
+    runnable: true
+    input: position
+  - id: exit_converged_01pct
+    role: exit
+    rule: "Close once the absolute drift is below 0.1%"
+    runnable: false
+    input: derived
+    inputs: [drift_05pct]
+    note: "drift_05pct is unserved."
+  - id: exit_open_plus_15
+    role: exit
+    rule: "Force-close every position at 09:45 ET, 15 minutes after the NYSE open"
+    runnable: true
+    input: position
+    note: "A clock rule; on NYSE holidays there is no open, which needs the holiday calendar the page names."
+  - id: drift_extension_stop
+    role: stop
+    rule: "Stop out when drift moves a further 0.75% against the position beyond the entry drift"
+    runnable: false
+    input: derived
+    inputs: [drift_05pct]
+    note: "drift_05pct is unserved."
+  - id: time_cap_36h
+    role: stop
+    rule: "Close any position open longer than 36 hours"
+    runnable: true
+    input: position
+  - id: funding_flip_exit
+    role: exit
+    rule: "Exit early if funding flips against the position by more than 100% APR"
+    runnable: false
+    note: "Stock-perp funding is not served."
+  - id: kill_sharpe_or_drawdown
+    role: stop
+    rule: "Kill switch: 30-day rolling Sharpe below 0, or cumulative drawdown above 20% of book"
+    runnable: true
+    input: position
+  - id: kill_earnings_blowups
+    role: stop
+    rule: "Kill switch: three consecutive earnings-night blow-ups in one quarter, or any single loss above 3x the average win"
+    runnable: true
+    input: position
+  - id: kill_structural_change
+    role: stop
+    rule: "Kill switch: Pyth adds continuous after-hours equity pricing, the DEX changes its oracle or funding anchor, or promo fees end and net Sharpe falls below 0.7"
+    runnable: false
+    note: "Venue and oracle announcements are not served; a desk judgement. The Sharpe half comes from the desk's own P&L."
 ---
 
 # Stock Perp Oracle Basis

@@ -38,6 +38,87 @@ kill_criteria: |
   - orderflow migrates to a venue/mechanism where you have no edge or access
 
 related: ["[[cow-protocol]]", "[[uniswap]]", "[[1inch]]", "[[mev-strategies]]", "[[implementation-shortfall]]", "[[jit-liquidity]]", "[[concentrated-liquidity]]", "[[cross-exchange-arbitrage]]", "[[ai-solvers]]", "[[ai-mev]]", "[[slippage]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: intent_orderflow
+    role: universe
+    rule: "Solver side: receive the intent and batch orderflow from CoW Protocol, UniswapX or 1inch Fusion"
+    runnable: false
+    note: "Intent and auction orderflow is not served; it comes from the CoW auction API, the UniswapX order feed or the Fusion resolver feed."
+  - id: solvable_surplus
+    role: entry
+    rule: "Bid only when the best route (DEX legs, CoW ring matches, inventory fill) returns at least the user's minimum-out plus a margin of 3 bps or more after gas (x1.5 buffer) and the inventory risk charge"
+    runnable: false
+    note: "Live DEX pool state and tick liquidity for routing, and a gas oracle, are not served. /dex/trending gives a 20-pool discovery list per chain, not routable state."
+  - id: beat_rivals
+    role: entry
+    rule: "Bid only when your solution's total surplus beats your estimate of the rival solvers' best (or you hold exclusive or priority access to the batch)"
+    runnable: false
+    note: "Rival solver bids and past auction results are not served; they come from the protocol's auction data."
+  - id: quote_freshness
+    role: filter
+    rule: "Price any inventory leg off a CEX quote no older than the auction window; reject stale quotes"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: ts
+    note: "ts (unix ms) says how old the served book is. Auction windows run seconds, so a polled REST snapshot may already be too old; a direct venue websocket is the usual source."
+  - id: settlement_simulation
+    role: filter
+    rule: "Simulate the settlement transaction: it must succeed and net out positive after worst-case gas at current priority-fee levels"
+    runnable: false
+    note: "Needs an Ethereum node to simulate the transaction and a gas or priority-fee oracle; neither is served."
+  - id: bond_headroom
+    role: sizing
+    rule: "Never let a single batch put more than a set fraction of the solver bond at slashing risk"
+    runnable: partial
+    input: position
+    note: "The page does not give the fraction."
+  - id: inventory_cap
+    role: sizing
+    rule: "Inventory at risk per batch at most 10% of solver capital"
+    runnable: true
+    input: position
+  - id: unwind_inventory
+    role: exit
+    rule: "Hedge or unwind any inventory taken on to fill (not offset by a CoW match) immediately on a CEX or DEX, holding seconds rather than minutes"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: bids[].size
+    note: "The book sizes the hedge leg on Hyperliquid; the hold time is the solver's execution."
+  - id: fragility_widen_margin
+    role: filter
+    rule: "Widen solver margins when order books are fragile"
+    runnable: partial
+    endpoint: /api/v1/liquidity/regime/score
+    field: sentiment
+    note: "From the page's AI-agent workflow, which gives no margin step. fragile is a composite_score below 30, leaning_fragile 30-44. Pro Plus."
+  - id: user_route_size
+    role: universe
+    rule: "User side: route trades of about $10k notional or more through CoW, UniswapX or Fusion instead of a naive DEX swap"
+    runnable: true
+    input: position
+  - id: user_depth_min_out
+    role: entry
+    rule: "User side: set the minimum-out from a live depth-aware quote, not a naive spot price"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth
+    field: coins[].depth_usd.bid
+    note: "Served depth is the Hyperliquid perp book for the top-25 coins, a reference for majors; DEX route quotes for the actual swap are not served."
+  - id: user_solver_competition
+    role: filter
+    rule: "User side: use intents for pairs with deep solver competition (majors); route long-tail tokens directly"
+    runnable: false
+    note: "Solver competition per pair is not served; the page's split is majors versus long tail."
+  - id: user_shortfall_check
+    role: exit
+    rule: "User side: measure realised price against an implementation-shortfall benchmark to confirm the intent path improves fills"
+    runnable: true
+    input: position
+  - id: margin_below_gas_pause
+    role: stop
+    rule: "Pause when net margin per settled batch is below gas plus the settlement-failure reserve over the trailing 30 days"
+    runnable: true
+    input: position
 ---
 
 # Intent-Based Trading

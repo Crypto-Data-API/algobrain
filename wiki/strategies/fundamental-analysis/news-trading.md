@@ -34,6 +34,134 @@ kill_criteria: |
   - average slippage per event trade exceeds 15 bps (execution infrastructure sub-par; edge consumed by costs)
   - rolling 3-month news-trading Sharpe < 0
   - a single news-event loss exceeds 3% of book (position-sizing failure; halt and re-spec)
+gates:
+  - id: scheduled_macro_events
+    role: universe
+    rule: "High-impact scheduled events: US CPI, FOMC decisions, NFP (plus major GDP prints), traded on BTC and ETH perps"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=macro_print
+    field: items[].macro_class
+    note: "Served classes include FOMC, CPI, NFP, PCE and PPI, with date and days_until. Dates only: no release time and no consensus estimate, so the 8:30 ET timestamp comes from the bot's own calendar. GDP prints may be missing."
+  - id: crypto_native_events
+    role: universe
+    rule: "Crypto-native catalysts: ETF approval or rejection, exchange solvency news, major protocol exploits, large token unlocks, regulatory announcements"
+    runnable: true
+    endpoint: /api/v1/news/market-moving?hours=24
+    field: events[].category
+    replay: /api/v1/backtesting/news-events?start={start}
+    replay_field: data[].category
+    note: "Matching categories include etf_approval, insolvency, exchange_hack, hack, token_unlock, ban, restrictive_policy and the policy set. The replay archive starts 2026-08-18. Scheduled unlocks are also on /api/v1/event/calendar?type=unlock."
+  - id: real_story_gate
+    role: filter
+    rule: "Act only on a qualified story: impact above the 0.45 pipeline floor and corroborated by at least 2 sources"
+    runnable: true
+    endpoint: /api/v1/news/market-moving?hours=24&min_impact=0.45
+    field: events[].corroboration
+    replay: /api/v1/backtesting/news-events?start={start}&min_impact=0.45
+    replay_field: data[].corroboration
+    note: "From the page's AI-agent workflow."
+  - id: no_pre_release_entry
+    role: entry
+    rule: "Do not enter before the number hits; wait for the release"
+    runnable: partial
+    input: derived
+    inputs: [scheduled_macro_events]
+    note: "Release time of day is not served; the bot needs its own clock for the 8:30 ET (CPI, NFP) or 14:00 ET (FOMC) print."
+  - id: surprise_size
+    role: entry
+    rule: "Momentum entry only on a significant surprise: CPI at least 0.3 percentage points off consensus, or FOMC language materially more hawkish or dovish than priced"
+    runnable: false
+    note: "No consensus or actual macro values are served, and no hawkish or dovish read: macro events on /news/market-moving carry bias 0. Needs an economic-calendar feed with consensus (e.g. Bloomberg, Forex Factory)."
+  - id: first_reaction
+    role: entry
+    rule: "Within 2-10 seconds of the release, read the immediate BTC/ETH perp reaction and enter in the direction of the surprise inside the first 30 seconds"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=5
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1m&start={start}
+    replay_field: klines[].c
+    note: "Nothing sub-minute is served: the first closed 1-minute bar is the earliest read, already outside the page's 30-second window (the page itself concedes REST polling cannot win it). 1m replay from 2026-05-09."
+  - id: funding_follow_through
+    role: entry
+    rule: "Follow-through is live when perp funding flips sharply in the direction of the move"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=2
+    field: current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&start={start}
+    replay_field: data[].funding_rate
+    note: "current_rate is the live predicted Hyperliquid rate; compare it with the last settled print in history[]. The page gives no size for 'sharply'. Replay is 5-minute funding snapshots."
+  - id: fade_wait
+    role: entry
+    rule: "Fade: let the initial spike complete, waiting 5-15 minutes for the first wave to subside"
+    runnable: true
+    input: position
+    endpoint: /api/v1/news/market-moving?hours=24
+    field: events[].published
+    note: "Time since the release (scheduled) or since published (headlines). Any wait inside 5-15 minutes meets the rule."
+  - id: fade_trigger
+    role: entry
+    rule: "Fade against the spike when the move is disproportionate to the data surprise, or the catalyst is social or narrative with no fundamental underpinning (tweet, rumour, low-credibility news)"
+    runnable: partial
+    endpoint: /api/v1/news/market-moving?hours=24
+    field: events[].corroboration
+    note: "Single-source stories (corroboration 1) and low confidence are the served proxy for low credibility. Disproportion to the data surprise needs consensus data we do not serve, so that half is the desk's call."
+  - id: fade_funding_chase
+    role: filter
+    rule: "The fade is more compelling when funding is spiking in the direction of the move (the crowd chasing)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=2
+    field: current_rate
+    note: "No threshold for 'spiking' is given; the example uses a flip to -0.08%/8h, i.e. about -0.01%/h on Hyperliquid's hourly rate."
+  - id: forced_flow_exhausted
+    role: filter
+    rule: "Fade only once forced liquidations look exhausted (most of the forced selling complete)"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&window_s=300&include_quiet=true
+    field: alerts[].total_liq_usd
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=5m&start={start}
+    replay_field: data[].total_usd
+    note: "From the example and the agent workflow. Falling 5-minute liquidation totals after the spike are the reading; no threshold is given. OKX + Bybit + Hyperliquid only (Binance not captured); replay is Hyperliquid from 2026-07-23."
+  - id: vol_regime_gate
+    role: filter
+    rule: "A compressed pre-event vol state implies the larger move on a surprise; a vol_shock state means the move is already underway and only the fade applies"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow."
+  - id: spread_check
+    role: filter
+    rule: "Avoid taker orders while the bid-ask spread is more than 3x normal"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth/{coin}?minutes=1440
+    field: history[].spread_bps
+    note: "Hyperliquid book, sampled every ~2 minutes. The page does not define normal: the 24-hour median spread_bps is one baseline."
+  - id: momentum_exit
+    role: exit
+    rule: "Momentum: take profit within 30-90 minutes of entry"
+    runnable: true
+    input: position
+  - id: fade_target
+    role: exit
+    rule: "Fade: target a 50-75% retracement of the initial spike, using pre-news support or resistance as the anchor; exit within the session or 4 hours for an intraday catalyst"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=240
+    field: candles[].close
+    note: "Spike = pre-release close to the spike extreme (low or high of the 1m bars after the release). The 4-hour limit is on the position record."
+  - id: stop_loss
+    role: stop
+    rule: "Momentum: stop beyond the pre-news price. Fade: stop beyond the spike extreme"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=240
+    field: candles[].close
+    note: "Pre-news price = the close of the last 1m bar before the release; spike extreme = the highest high or lowest low since."
+  - id: risk_per_trade
+    role: sizing
+    rule: "Risk 0.5-1% of the account per news trade, less in the most volatile events (FOMC, exchange insolvency); never size on conviction"
+    runnable: true
+    input: position
+    note: "How much less for the most volatile events is not given."
 ---
 
 # News Trading

@@ -33,6 +33,104 @@ kill_criteria: |
   - switching frequency exceeds 4 full rotations per calendar month for 2 consecutive months (regime is too noisy for stable carry harvesting)
 
 related: ["[[funding-rate-arbitrage]]", "[[cash-and-carry]]", "[[basis-trading]]", "[[crypto-spot-perp-futures-triangle]]", "[[hl-vs-cex-funding-divergence]]", "[[carry-with-tail-hedge]]", "[[funding-filtered-momentum]]", "[[funding-skewed-grid]]", "[[funding-rate]]", "[[basis]]", "[[perpetual-futures]]", "[[open-interest]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: perp_carry
+    role: entry
+    rule: "Perp carry C_perp = 8h funding x 3 x 365 x 100, minus the round-trip taker fee, as a net annualised % on BTC or ETH"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hyperliquid settles hourly: the 8h rate is the sum of the last 8 settled prints. The taker fee is fees.perps.taker on /hyperliquid/meta (0.00045 at base tier). For Binance's native 8h rate use binance.current_rate on /derivatives/funding-rates?coin={coin}."
+  - id: basis_carry
+    role: entry
+    rule: "Basis carry C_basis = (futures price / spot price - 1) x (365 / days to expiry) x 100, minus round-trip taker fees and the annualised roll cost, for each front, quarterly and back-quarter future"
+    runnable: false
+    note: "No dated-futures (monthly or quarterly) price, expiry or open interest is served; the page itself says to take them from the Binance, Deribit or CME APIs. /volatility/implied lists Deribit option expiries with ATM IV only, not futures prices."
+  - id: min_expiry_30d
+    role: filter
+    rule: "Use only dated futures with at least 30 days to expiry, and among them the one with the highest C_basis"
+    runnable: false
+    note: "Needs the dated-futures expiry list and prices, which are not served (see basis_carry)."
+  - id: perp_eligible
+    role: filter
+    rule: "The perp is an eligible carry instrument only when C_perp is at least 3% net annualised"
+    runnable: true
+    input: derived
+    inputs: [perp_carry]
+  - id: park_when_none
+    role: exit
+    rule: "When neither instrument pays at least 3% net annualised, close the short legs and park in spot"
+    runnable: false
+    input: derived
+    inputs: [perp_carry, basis_carry]
+    note: "Only the perp side is computable; the basis side needs dated-futures prices that are not served."
+  - id: switch_threshold
+    role: entry
+    rule: "Rotate only when the alternative's net annualised carry exceeds the current instrument's by more than 2.0 percentage points"
+    runnable: false
+    input: derived
+    inputs: [perp_carry, basis_carry]
+    note: "Every rotation compares perp carry with basis carry, and basis carry cannot be built from served data."
+  - id: switch_confirmed
+    role: entry
+    rule: "The carry differential must hold for 2 consecutive 8h reviews before the rotation executes"
+    runnable: false
+    input: derived
+    inputs: [switch_threshold]
+    note: "Only as runnable as switch_threshold. The 8h review cadence itself is the bot's own schedule."
+  - id: extreme_funding_reduce
+    role: stop
+    rule: "When perp funding exceeds 0.10%/8h, reduce the perp short leg and do not add to it"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Sum of the last 8 hourly prints > 0.001. The page gives no reduction size."
+  - id: structural_shock_flatten
+    role: stop
+    rule: "Flatten the short legs while the regime is Structural Shock"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "The served id is structural_shock_crisis. History starts 2026-08-07 and cannot be backfilled."
+  - id: drawdown_kill
+    role: stop
+    rule: "Flatten the short legs when the carry book's drawdown exceeds 8%"
+    runnable: true
+    input: position
+  - id: oi_per_instrument
+    role: filter
+    rule: "Secondary signal: open interest per instrument shows which one carries more leveraged-long demand"
+    runnable: false
+    note: "Perp OI is served (/derivatives/open-interest, /hyperliquid/open-interest), but dated-futures OI is not, so the two cannot be compared."
+  - id: taker_buy_pressure
+    role: filter
+    rule: "Secondary sentiment check: extreme taker buy pressure is consistent with elevated perp funding and may precede a basis spike"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/taker-buy-sell?symbol={coin}
+    field: data[].exchange_list[].buy_ratio
+    note: "buy_ratio is the taker-buy share in percent across the listed exchanges. The page sets no level for extreme and no action, so both are the desk's call."
+  - id: spot_leg_fixed
+    role: sizing
+    rule: "Long spot notional stays fixed for the life of the carry book; rotations change only the short leg"
+    runnable: true
+    input: position
+  - id: cash_buffer
+    role: sizing
+    rule: "Keep a 10% cash buffer for margin on the short leg"
+    runnable: true
+    input: position
+  - id: switch_cost_budget
+    role: sizing
+    rule: "Tolerate at most SWITCH_THRESHOLD / 2 x hold period in years of execution cost on a rotation"
+    runnable: true
+    input: position
+    note: "Computed from the bot's own fills against the expected hold; Hyperliquid fees are on /hyperliquid/meta."
 ---
 
 # Funding vs Basis Rotation

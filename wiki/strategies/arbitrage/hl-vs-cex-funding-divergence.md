@@ -21,6 +21,128 @@ expected_sharpe: 2.5
 expected_max_drawdown: 0.15
 breakeven_cost_bps: 25
 related: ["[[funding-rate-arbitrage]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-hlp-basis-arbitrage]]", "[[funding-rate]]", "[[hyperliquid]]", "[[cross-exchange-arbitrage]]", "[[hlp-cascade-alongside-playbook]]", "[[cryptodataapi]]"]
+gates:
+  - id: asset_volume_50m
+    role: universe
+    rule: "Only pairs with Hyperliquid daily volume of at least $50M for the $25k-$1M size band (tighter for larger sizes)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    note: "day_volume is the 24h notional in USD. The coin also needs a Binance USDT-M perp for the CEX leg."
+  - id: hl_rate_8h_eq
+    role: entry
+    rule: "Hyperliquid leg: the current hourly funding rate converted to an 8h equivalent, hl_hourly x 8"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "current_rate is the live hourly rate; history[].funding_rate holds the settled prints. Replay rows are settled hourly prints, local from 2024-01-01."
+  - id: cex_rate_8h
+    role: entry
+    rule: "CEX leg: the current 8h funding rate on Binance, Bybit or OKX"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=3
+    field: current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance only: Bybit and OKX funding are not served, so the bot cannot pick the widest CEX leg. Binance current_rate is the live rate for the coming settlement; rates[].funding_rate are settled prints. Replay rows are 5-minute samples of the live rate, local from 2026-05-09."
+  - id: spread_entry_5bp
+    role: entry
+    rule: "Enter when the cross-venue spread, hl_hourly x 8 minus the CEX 8h rate, exceeds 5 bp (0.0005) in absolute value"
+    runnable: partial
+    input: derived
+    inputs: [hl_rate_8h_eq, cex_rate_8h]
+    note: "Mechanical against Binance; only as broad as cex_rate_8h, which lacks Bybit and OKX."
+  - id: spread_direction
+    role: entry
+    rule: "Positive spread: short the Hyperliquid perp and long the CEX perp. Negative spread: long Hyperliquid, short the CEX"
+    runnable: partial
+    input: derived
+    inputs: [spread_entry_5bp]
+    note: "Sign of the spread from spread_entry_5bp."
+  - id: spread_persistence_1h
+    role: filter
+    rule: "The spread has held above the 5 bp threshold for at least the last hour (one Hyperliquid funding period)"
+    runnable: partial
+    input: derived
+    inputs: [spread_entry_5bp]
+    note: "Keep the bot's own spread readings for the last hour, or rebuild them from the replay endpoints: Binance 5-minute rate samples against the Hyperliquid hourly print."
+  - id: depth_3x_notional
+    role: filter
+    rule: "Both venues show at least 3x the intended notional in top-of-book depth at the entry mark"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: bids[].size
+    note: "Hyperliquid side only: sum price x size over the levels on the side you will hit (20 levels per side). Binance order-book depth is not served. The page does not say how many levels count as top of book."
+  - id: mark_sanity_50bp
+    role: filter
+    rule: "Skip when the Hyperliquid mark and the CEX mark are more than 50 bps apart (an oracle anomaly, not a funding dislocation)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "Compare with the latest Binance perp mark, data[].mark_price on /backtesting/funding?symbol={coin}USDT&exchange=binance (5-minute samples, so up to a few minutes old), or Binance spot price on /market-data/ticker/price as a looser proxy."
+  - id: exit_convergence_2bp
+    role: exit
+    rule: "Close both legs when the spread compresses below 2 bp per 8h-equivalent in absolute value"
+    runnable: partial
+    input: derived
+    inputs: [hl_rate_8h_eq, cex_rate_8h]
+    note: "Mechanical against Binance; partial only because Bybit and OKX are not served."
+  - id: exit_spread_flip
+    role: exit
+    rule: "Close immediately when the spread crosses zero against the entry direction"
+    runnable: partial
+    input: derived
+    inputs: [hl_rate_8h_eq, cex_rate_8h]
+    note: "Mechanical against Binance; partial only because Bybit and OKX are not served."
+  - id: leg_mtm_stress_5pct
+    role: stop
+    rule: "Close when the unrealised loss on either leg exceeds 5% of that leg's margin"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "The CEX leg's loss comes from the CEX account or the Binance mark samples described in mark_sanity_50bp."
+  - id: max_hold_7_periods
+    role: exit
+    rule: "After 7 Hyperliquid funding periods (7 hours), exit if the spread has not delivered the modelled carry"
+    runnable: true
+    input: position
+  - id: mark_divergence_100bp
+    role: stop
+    rule: "Emergency flatten when the venues' marks diverge by more than 100 bps for more than 10 minutes on a held position"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "Same CEX-mark caveat as mark_sanity_50bp; poll every minute or two to time the 10 minutes."
+  - id: venue_health
+    role: stop
+    rule: "On unscheduled maintenance, withdrawal halt, oracle issue or chain outage on either venue, flatten that leg first and then mirror on the other"
+    runnable: false
+    note: "Venue status is not served; read each venue's status page or API."
+  - id: leg_construction
+    role: sizing
+    rule: "1x isolated margin on each leg, equal notional, both legs filled within about 30 seconds"
+    runnable: true
+    input: position
+  - id: exposure_caps
+    role: sizing
+    rule: "At most 25% of the sleeve per pair and 50% of the sleeve on either venue"
+    runnable: true
+    input: position
+  - id: sleeve_drawdown_15pct
+    role: stop
+    rule: "Kill switch: flatten everything at a 15% sleeve drawdown"
+    runnable: true
+    input: position
+  - id: vol_spike_cut
+    role: sizing
+    rule: "Cut gross exposure when the probability of a vol_spike regime rises (a margin break on either leg unhedges the trade)"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: probabilities.regime_transitions.to_vol_spike
+    note: "From the page's agent workflow, which gives no probability threshold or cut size; both are the desk's call. regime.label is the committed regime."
 ---
 
 # HL vs CEX Funding Divergence

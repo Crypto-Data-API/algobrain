@@ -34,6 +34,129 @@ kill_criteria: |
   - fear-and-greed ≤ 20 simultaneously with DVOL ≥ 90th percentile occurs but no stabilisation ever confirms within 48h, across 3 consecutive panic windows (stabilisation filter is structurally never met — recalibrate cascade-clear condition)
 
 related: ["[[crypto-options-volatility-selling]]", "[[funding-conditioned-vol-selling]]", "[[event-vol-buying]]", "[[contrarian-extremes]]", "[[short-volatility-strategies]]", "[[onchain-capitulation-confluence]]", "[[leverage-stress-tail-hedge]]", "[[liquidation-cascade-fade]]", "[[deribit]]", "[[dvol]]", "[[implied-volatility]]", "[[variance-risk-premium]]", "[[fear-and-greed-index]]", "[[funding-rate]]", "[[perpetual-futures]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: fear_extreme_2d
+    role: entry
+    rule: "Gate 1: Fear & Greed index at or below 20 for at least 2 consecutive days"
+    runnable: true
+    endpoint: /api/v1/sentiment/fear-greed
+    field: value
+    replay: /api/v1/market-health/history?days=365
+    replay_field: history[].components.fear_greed
+    note: "Keep one reading per UTC day (today and yesterday). The replay is the daily index value (market-health components.fear_greed) from 2026-01-14; /market-intelligence/fear-greed-history returned a single row on 2026-10-17."
+  - id: dvol_percentile_85
+    role: entry
+    rule: "Gate 2a: DVOL at or above the 85th percentile of its trailing 52-week distribution"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Rank items[].dvol against items[].history (daily, Pro Plus). The served history holds about 180 days, not 52 weeks, so the percentile runs on a shorter window."
+  - id: dvol_spike_5d
+    role: entry
+    rule: "Gate 2b: DVOL has risen at least 20 vol points from its level 5 days earlier"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "items[].dvol minus the history row dated 5 days back."
+  - id: rv_peak_80
+    role: entry
+    rule: "Gate 3a: the peak 24-hour realised vol over the prior 48 hours was at least 80 vol points"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=15m&limit=300
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}USDT&exchange=binance&interval=15m&start={start}
+    replay_field: klines[].c
+    note: "From closed 15m bars: 24h RV = std of the last 96 log returns x sqrt(96 x 365) x 100, rolled across the prior 48 hours. The 1m replay archive starts 2026-05-09."
+  - id: rv_rolling_over
+    role: entry
+    rule: "Gate 3b: the current 24-hour realised vol is below its peak of the prior 48 hours"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=15m&limit=300
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}USDT&exchange=binance&interval=15m&start={start}
+    replay_field: klines[].c
+    note: "Same series as rv_peak_80."
+  - id: no_fresh_cascade
+    role: entry
+    rule: "Gate 4: liquidation volume over the prior 12 hours below 1.5x its 7-day rolling average"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/liquidations?symbol={coin}
+    field: data[].liquidation_usd_12h
+    replay: /api/v1/backtesting/liquidations?symbol={coin}&start={start}
+    replay_field: data[].total_liq_usd
+    note: "For the baseline, take one total_liq_usd sample per day for the last 7 days from /backtesting/liquidations (a rolling 24h level), average them and halve for a 12h figure. The page's example compares 12h with a daily average instead, so the unit is the desk's call. OKX, Bybit and Hyperliquid only; Binance liquidations are not captured."
+  - id: no_new_7d_low
+    role: entry
+    rule: "Gate 5: the most recent 4h candle did not set a new 168-hour low"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=44
+    field: candles[].low
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].low
+    note: "Compare the last closed 4h bar's low with the lowest low of the 42 bars before it."
+  - id: no_structural_shock
+    role: filter
+    rule: "Defer entry while the market regime is Structural Shock, even if all five gates pass"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Block on structural_shock_crisis. Regime history starts 2026-08-07."
+  - id: funding_warning
+    role: filter
+    rule: "Treat deeply negative funding (panic-driven mass shorting) as a warning that the vol entry may be premature"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    note: "From the indicator list. The page gives no threshold for deeply negative, so the cut is the desk's call."
+  - id: sell_25d_put
+    role: entry
+    rule: "Sell the 25-delta BTC put on the nearest expiry with DTE 14-35 (or a strangle with the 15-delta call); avoid front-week options"
+    runnable: false
+    note: "Strike selection by delta needs Deribit's option chain and Greeks, which we do not serve. /volatility/implied term_structure lists expiries and ATM IV only."
+  - id: delta_hedge
+    role: sizing
+    rule: "Keep delta within plus or minus 5 per unit notional; hedge daily, or at once on a spot move above 3% intraday"
+    runnable: false
+    note: "Needs per-option deltas, which we do not serve."
+  - id: premium_target
+    role: sizing
+    rule: "Size the entry to collect 1.5-2.5% of the portfolio in option premium"
+    runnable: true
+    input: position
+  - id: one_position
+    role: sizing
+    rule: "At most 1 concurrent post-panic position"
+    runnable: true
+    input: position
+  - id: dvol_profit_exit
+    role: exit
+    rule: "Close when DVOL is back within 5 vol points of its 30-day trailing average"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Mean of the last 30 history rows vs items[].dvol."
+  - id: dvol_stop
+    role: stop
+    rule: "Close if DVOL rises 15 or more vol points above its level at entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+  - id: dvol_circuit_breaker
+    role: stop
+    rule: "Exit at once if DVOL rises more than 50% in a single session after entry"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "From the kill criteria. Crypto trades around the clock, so 'session' is undefined; dvol_change_24h is the day-over-day change in vol points, which divided by yesterday's DVOL gives a daily percentage."
+  - id: time_exit
+    role: exit
+    rule: "Close 3 days before expiry if neither the profit target nor the stop has triggered"
+    runnable: true
+    input: position
 ---
 
 # Post-Panic Vol Selling

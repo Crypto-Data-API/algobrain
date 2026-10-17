@@ -18,6 +18,91 @@ breakeven_cost_bps: 0
 crowding_risk: low
 capacity_usd: 100000000
 related: ["[[risk-on-risk-off-framework]]", "[[crypto-yield-stack]]", "[[dollar-cost-averaging]]", "[[value-averaging]]", "[[moving-averages]]"]
+gates:
+  - id: conviction_assets
+    role: universe
+    rule: "Accumulate only assets you have high conviction will recover: BTC and ETH (or broad indices), not individual altcoins"
+    runnable: true
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "Binance spot; call for BTC and ETH."
+  - id: weekly_budget
+    role: sizing
+    rule: "Add a fixed weekly budget (the example: $500 a week across BTC and ETH) to the cash reserve on every scheduled buy date"
+    runnable: true
+    input: position
+  - id: below_ma50
+    role: entry
+    rule: "Buy condition A: daily close below the 50-day SMA"
+    runnable: true
+    endpoint: /api/v1/indicators/technical/{symbol}
+    field: ma.above_50
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "above_50 false means price is below the SMA-50 (dist_from_50_pct is alongside). For BTC and ETH these bars are Hyperliquid perp dailies, not the page's Binance spot; Binance spot dailies are klines[].close on /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=60. Replay computes the SMA from daily closes (Hyperliquid back to 2023)."
+  - id: rsi_below_50
+    role: entry
+    rule: "Buy condition B: daily RSI(14) below 50"
+    runnable: true
+    endpoint: /api/v1/indicators/technical/{symbol}
+    field: rsi.rsi_14_1d
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "history[].rsi_14 on the same response covers the last 60 days; older replays compute Wilder RSI(14) from daily closes."
+  - id: near_support_3pct
+    role: entry
+    rule: "Buy condition C: price within 3% of a horizontal support level"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{symbol}
+    field: sr.support[].dist_pct
+    note: "dist_pct is the support level's distance from price in percent (negative below); test abs(dist_pct) at or below 3. The page does not define how support is found, so whether the served levels match the desk's is its call."
+  - id: weekly_red_candle
+    role: entry
+    rule: "Buy condition D: the current week's candle is red (close below the week's open)"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1w&limit=2
+    field: klines[].close
+    note: "The last row is the forming week (Monday 00:00 UTC open); compare its close, the live price, with its open. The page also allows aggregating the last 7 daily bars."
+  - id: buy_any_one
+    role: entry
+    rule: "On a scheduled buy date, if any one of conditions A-D holds, deploy the whole cash reserve, capped at 3x the weekly budget"
+    runnable: partial
+    input: derived
+    inputs: [below_ma50, rsi_below_50, near_support_3pct, weekly_red_candle]
+    note: "Only as runnable as near_support_3pct; A, B and D are mechanical."
+  - id: cash_stack
+    role: sizing
+    rule: "When no condition holds, keep the week's budget in the cash reserve for the next triggered buy"
+    runnable: true
+    input: position
+  - id: time_override_4x
+    role: entry
+    rule: "Time-based override: once the cash reserve exceeds 4x the weekly budget, deploy at market regardless of the filters"
+    runnable: true
+    input: position
+  - id: value_averaging_variant
+    role: sizing
+    rule: "Optional variant: invest the target weekly portfolio growth minus the actual portfolio change, capped at 3x the normal amount"
+    runnable: true
+    input: position
+  - id: kill_cost_basis
+    role: stop
+    rule: "Kill: rolling 12-month cost basis worse than vanilla DCA for 2 consecutive quarters, so simplify the filters or revert to plain DCA"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=400
+    field: klines[].close
+    note: "Vanilla DCA's basis is the average of the closes on the scheduled buy dates."
+  - id: kill_reserve_8x
+    role: stop
+    rule: "Loosen the thresholds when the cash reserve exceeds 8x the weekly budget"
+    runnable: true
+    input: position
+  - id: thesis_invalidated
+    role: exit
+    rule: "Stop accumulating entirely if the underlying asset's thesis is invalidated"
+    runnable: false
+    note: "An asset-selection judgement, not market data."
 ---
 
 # DCA + Technical Analysis Hybrid

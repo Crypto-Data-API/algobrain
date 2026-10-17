@@ -22,6 +22,31 @@ expected_sharpe: 2.5
 expected_max_drawdown: 0.3
 breakeven_cost_bps: 5
 decay_evidence: "Jito launched 2022; matured 2024 with ~$300M annual MEV extraction. Top searchers now extract $10-50M each; competition intensifying as Firedancer launches improve validator performance."
+gates:
+  - id: jito_stream
+    role: universe
+    rule: "Connect to the Jito Block Engine and a paid ShredStream subscription, with co-located infrastructure (Frankfurt, Singapore, Tokyo)"
+    runnable: false
+    note: "Solana shreds, pending transactions and per-slot pool state are not served; they come from Jito and a Solana RPC or validator feed."
+  - id: cyclic_arb_profit
+    role: entry
+    rule: "Bundle a cyclic arbitrage when its profit exceeds the tip plus a threshold, after each confirmed swap updates pool state"
+    runnable: false
+    note: "Needs per-slot Solana pool reserves; our DEX pool data is a cached snapshot, far slower than a slot. The page gives no threshold figure."
+  - id: tip_sizing
+    role: sizing
+    rule: "Tip about 70% of expected bundle profit (range 50-80%), aiming at a 40% win rate"
+    runnable: false
+    input: derived
+    inputs: [cyclic_arb_profit]
+    note: "A share of a profit estimate this API cannot produce; tip levels come from Jito's tip stream."
+  - id: snipe_candidates
+    role: universe
+    rule: "Sniping bot: newly created Solana pools"
+    runnable: partial
+    endpoint: /api/v1/dex/new-pools?chain=solana
+    field: pools[].pool_address
+    note: "Discovery only: the list is cached, so it arrives long after a ShredStream-speed sniper would act. The page gives the sniping bot no entry rule."
 ---
 
 # Jito / Solana MEV Arbitrage

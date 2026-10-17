@@ -34,6 +34,89 @@ kill_criteria: |
   - 7-day funding average turns negative on > 50% of held carry positions (carry primitive dead regardless of sizing)
 
 related: ["[[carry-with-tail-hedge]]", "[[trend-aware-carry]]", "[[funding-vs-basis-rotation]]", "[[funding-rate-arbitrage]]", "[[cash-and-carry]]", "[[vol-targeted-trend-following]]", "[[vol-balanced-pairs]]", "[[narrative-position-vol-targeting]]", "[[volatility-targeting]]", "[[basis-trading]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[open-interest]]", "[[realized-volatility]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: carry_pnl_stream
+    role: sizing
+    rule: "Track the funding-carry book's daily net P&L (funding x perp notional + perp mark-to-market net of the spot leg - fees) as % of notional, separate from any directional P&L"
+    runnable: true
+    input: position
+    note: "Built from the book's own fills and marks. The funding leg can be cross-checked against the settled 8h prints in rates[] on /api/v1/derivatives/binance/funding-rates."
+  - id: basis_pnl_stream
+    role: sizing
+    rule: "For a cash-and-carry book, the daily P&L is the daily change in the dated-futures basis x futures notional, plus roll income or cost, minus fees"
+    runnable: false
+    note: "No dated (quarterly) futures price is served, so the basis cannot be read here; /derivatives/binance/summary carries perp funding, OI and long/short only. A live book can still use its own marks; the data needs Binance or Deribit quarterly futures."
+  - id: carry_vol_20d
+    role: sizing
+    rule: "Carry vol = std of the last 20 daily carry P&L readings (% of notional); with 10-19 days use what exists, with fewer than 10 use the cold-start proxy"
+    runnable: true
+    input: position
+  - id: cold_start_proxy
+    role: sizing
+    rule: "Cold start (funding carry): carry vol = 20-day realised spot vol x 0.15"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=22
+    field: klines[].close
+    replay: /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000
+    replay_field: klines[].close
+    note: "Daily spot vol = std of the 20 daily returns from the closed bars (drop the forming last row). The pseudocode applies 0.15 to the daily figure."
+  - id: basis_cold_start
+    role: sizing
+    rule: "Cold start (basis carry): carry vol = 20-day realised vol of the quarterly futures basis (pseudocode: 0.08 x spot vol)"
+    runnable: false
+    note: "No quarterly futures basis history is served. The pseudocode's fallback (0.08 x 20-day spot vol) is computable from cold_start_proxy's bars, but that is a substitute the rules do not state."
+  - id: target_notional
+    role: sizing
+    rule: "Target notional = daily risk budget (0.50% of portfolio) / daily carry vol (% of notional)"
+    runnable: true
+    input: derived
+    inputs: [carry_vol_20d, cold_start_proxy]
+  - id: notional_bounds
+    role: sizing
+    rule: "Clip the target to at least 0.5x portfolio capital and at most 4x for funding carry (3x for basis carry)"
+    runnable: true
+    input: position
+  - id: weekly_rebalance
+    role: sizing
+    rule: "Recompute the target weekly and adjust only when it differs from the current notional by 15% or more"
+    runnable: true
+    input: position
+  - id: funding_high_vol_flag
+    role: filter
+    rule: "Flag a high-carry, high-risk regime when funding is at or above 0.04% per 8h"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=3
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol=BTCUSDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "The level is mechanical (the latest settled print at least 0.0004), but the page does not say what the flag changes in sizing, so the action is the desk's call."
+  - id: oi_mcap_override
+    role: sizing
+    rule: "Treat the book as HIGH-VOL (minimum sizing) when open interest exceeds 2.5% of market cap, even before the carry-vol estimate rises"
+    runnable: partial
+    endpoint: /api/v1/derivatives/open-interest?coin=BTC
+    field: cross_exchange[].open_interest_usd
+    note: "Divide the row with exchange All by market_cap from /api/v1/coins/BTC. All sums Binance and Hyperliquid only, so the ratio reads below a whole-market figure; where to set the cutoff on this subset is the desk's call."
+  - id: structural_shock_min
+    role: sizing
+    rule: "Cut the carry book to minimum notional at once while the long-term regime is Structural Shock"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Trigger on regime structural_shock_crisis. History from 2026-08-07."
+  - id: trend_overlay_first
+    role: sizing
+    rule: "If trend-aware-carry also runs, apply its percentage cut to the vol-scaled notional, not to the fixed capital target"
+    runnable: true
+    input: position
+    note: "The trend gates themselves are on the trend-aware-carry page."
+  - id: tail_hedge_budget
+    role: sizing
+    rule: "If carry-with-tail-hedge also runs, size its hedge budget as a percentage of the expected vol-scaled carry income"
+    runnable: true
+    input: position
 ---
 
 # Vol-Scaled Carry Sizing

@@ -22,6 +22,94 @@ expected_sharpe: 1.5
 expected_max_drawdown: 0.3
 breakeven_cost_bps: 25
 decay_evidence: "Strategy emerged 2024 with EigenLayer launch; matured rapidly. Most pure-arb opportunities compressed by Q2 2024; remaining alpha in points-farming and AVS-specific basis trades."
+gates:
+  - id: lrt_universe_map
+    role: universe
+    rule: "Map the LRT universe (eETH, ezETH, rsETH, pufETH) with weights, AVS exposures and points multipliers"
+    runnable: false
+    note: "AVS delegations, points multipliers and per-protocol TVL are not served. Needs DefiLlama, EigenLayer data and the LRT protocols' own announcements."
+  - id: lrt_market_price
+    role: entry
+    rule: "Observed market price of each LRT, in ETH"
+    runnable: partial
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "{chain} is ethereum and {address} is each LRT's token contract, a fixed address from the protocol's docs (no gate supplies it). GeckoTerminal pool prices in USD, refreshed every few minutes; use the pool with the largest reserve_usd (thin pools print far-off prices) and divide by ETH spot (price on /market-data/ticker/price?symbol=ETHUSDT). Curve and Balancer quotes at size are not served."
+  - id: lrt_nav
+    role: entry
+    rule: "NAV of each LRT from the ETH price, its exit queue and accrued AVS rewards"
+    runnable: false
+    note: "Exit-queue lengths, exchange rates and AVS rewards are protocol and on-chain reads that are not served."
+  - id: pair_dispersion_25bp
+    role: entry
+    rule: "Enter the pair when the dispersion of LRT deviations from NAV exceeds 25 bp (typically 25-150 bp): long the cheaper LRT, short the richer"
+    runnable: false
+    input: derived
+    inputs: [lrt_market_price, lrt_nav]
+    note: "Without NAV, a raw price spread between two LRTs mixes their different accrued yields with the mispricing."
+  - id: short_leg_borrow
+    role: entry
+    rule: "Short the richer LRT by borrowing it on Aave"
+    runnable: false
+    note: "Aave borrow availability and rates are not served."
+  - id: eth_beta_hedge
+    role: sizing
+    rule: "Hedge residual ETH beta with an ETH perp if needed"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/funding-rates?coin=ETH&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol=ETH&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Net ETH delta comes from the position record; hourly funding prices the hedge. The page leaves when a hedge is needed to the desk."
+  - id: unlock_resets_trade
+    role: filter
+    rule: "An LRT-protocol native-token unlock (ETHFI, REZ, EIGEN) inside the expected convergence window resets the trade"
+    runnable: partial
+    endpoint: /api/v1/supply/unlocks?symbol={symbol}&window_days=35
+    field: items[].days_until
+    note: "Unlock dates are served up to 35 days out (/event/calendar?type=unlock is the 30-day form). The convergence window is the desk's projection."
+  - id: security_stress_gate
+    role: filter
+    rule: "Do not buy a depeg while security stress is elevated; convergence holds only for flow-driven shocks, not protocol failures"
+    runnable: partial
+    endpoint: /api/v1/security/regime/score
+    field: band
+    note: "From the AI-agent workflow. Skip depeg buys while band is elevated, heavy or critical. Telling a flow shock from a protocol failure is the desk's call; /security/events?type=hack lists confirmed exploits."
+  - id: exit_convergence
+    role: exit
+    rule: "Exit when the pair converges"
+    runnable: false
+    input: derived
+    inputs: [pair_dispersion_25bp]
+    note: "Needs LRT NAV, which is not served."
+  - id: exit_catalyst
+    role: exit
+    rule: "Exit on a major catalyst: a native-token or AVS launch"
+    runnable: false
+    note: "Token and AVS launches are not on any served calendar; a news judgement."
+  - id: kill_dispersion_10bp
+    role: stop
+    rule: "Kill switch: LRT-pair dispersion below 10 bp for 90 consecutive days"
+    runnable: false
+    input: derived
+    inputs: [pair_dispersion_25bp]
+    note: "Needs LRT NAV, which is not served."
+  - id: kill_uniform_flows
+    role: stop
+    rule: "Kill switch: cross-LRT weekly net-flow dispersion below 10% of the mean for a full quarter"
+    runnable: false
+    note: "Per-protocol TVL flows are not served. Needs DefiLlama."
+  - id: kill_sharpe
+    role: stop
+    rule: "Kill switch: rolling 6-month Sharpe below 0.5 net of costs"
+    runnable: true
+    input: position
+  - id: kill_slashing_2pct
+    role: stop
+    rule: "Kill switch: a realised slashing event above 2% of any held LRT's NAV"
+    runnable: false
+    note: "No slashing data is served. Needs beacon-chain and EigenLayer slashing records."
 ---
 
 # Restaking Token Arbitrage

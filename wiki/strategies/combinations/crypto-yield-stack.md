@@ -40,6 +40,101 @@ kill_criteria: |
   - EigenLayer / AVS slashing event touches a delegated operator
 
 related: ["[[delta-neutral-yield-farming]]", "[[eth-staking]]", "[[liquid-staking]]", "[[restaking]]", "[[liquidity-provision]]", "[[defi-lending]]", "[[stablecoin-yield]]", "[[points-farming]]", "[[airdrop]]", "[[lido]]", "[[eigenlayer]]", "[[etherfi]]", "[[impermanent-loss]]", "[[smart-contract-risk]]", "[[slashing]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: base_eth_directional
+    role: universe
+    rule: "Stack only ETH you are willing to hold as a directional position: the stack does not remove ETH price risk"
+    runnable: true
+    input: position
+  - id: layer_ladder
+    role: universe
+    rule: "Climb the ladder in order: ETH staking (about 3.0%), liquid staking stETH or rETH (+0-0.5%), restaking on EigenLayer or EtherFi (+1-4%), stETH/ETH LP (+2-6%), then points farming"
+    runnable: false
+    note: "No staking, restaking, LP or lending APRs are served; per-layer yields come from the protocols or DefiLlama yields."
+  - id: layer_net_yield_15
+    role: entry
+    rule: "Add a layer only if its net incremental yield, after gas amortised over the intended hold, is above 1.5% a year"
+    runnable: false
+    note: "Needs per-pool APR and gas costs, neither of which is served."
+  - id: peg_within_05
+    role: entry
+    rule: "Every LST or LRT in the stack trades within 0.5% of its underlying at entry"
+    runnable: false
+    note: "No stETH, rETH or LRT prices are served (/coins does not resolve them), and security depeg events cover stablecoins only. Needs DEX or CoinGecko LST prices."
+  - id: tvl_100m
+    role: entry
+    rule: "Each protocol has TVL above $100M"
+    runnable: false
+    note: "Per-protocol TVL is not served; it comes from DefiLlama."
+  - id: audit_and_no_exploit_30d
+    role: entry
+    rule: "Each protocol has a clean audit and no exploit or emergency pause in the trailing 30 days"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack&window_days=10
+    field: items[].title
+    note: "Hacks come from the DefiLlama hacks registry, matched by protocol name in title (target_type and chains are alongside). The feed reaches back only 10 days, a third of the page's 30, and audits and emergency pauses are not served, so those checks need the protocol's own channels."
+  - id: points_haircut
+    role: sizing
+    rule: "Model any points layer at 0.3x its community-implied APY; never size the stack on face-value points"
+    runnable: true
+    input: position
+  - id: cap_per_protocol_25
+    role: sizing
+    rule: "At most 25% of the book in any one protocol"
+    runnable: true
+    input: position
+  - id: min_book_10k
+    role: sizing
+    rule: "Minimum book of about $10,000 (5-10 ETH) to amortise gas across protocols"
+    runnable: true
+    input: position
+  - id: gas_buffer
+    role: sizing
+    rule: "Reserve a gas and margin buffer of about 2-3% of the book for rebalancing and emergency exits"
+    runnable: true
+    input: position
+  - id: exit_on_exploit
+    role: exit
+    rule: "Exit a layer immediately on an exploit, emergency pause or hostile governance action at its protocol"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack&window_days=1
+    field: items[].title
+    note: "Confirmed hacks only, matched by protocol name in title; emergency pauses and governance takeovers are not served. A registry entry can trail the exploit by hours."
+  - id: exit_depeg_2pct_24h
+    role: exit
+    rule: "Unwind the affected layers when an LST or LRT is more than 2% off its underlying and has not recovered within 24 hours"
+    runnable: false
+    note: "LST and LRT prices are not served."
+  - id: exit_slashing
+    role: exit
+    rule: "Exit the restaking layer on a slashing event at a delegated AVS or operator"
+    runnable: false
+    note: "Slashing events are not served; they come from EigenLayer and the operator."
+  - id: collapse_low_yield_60d
+    role: exit
+    rule: "Collapse to layers 1-2 when the realised incremental yield of the top two layers has been below gas plus monitoring cost for 60 days"
+    runnable: true
+    input: position
+    note: "From the book's own realised yield and costs."
+  - id: eth_drawdown_50
+    role: stop
+    rule: "Reassess holding the beta at all, or hedge it, when the base ETH position is down more than 50%"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol=ETHUSDT
+    field: price
+  - id: security_stress_derisk
+    role: exit
+    rule: "When Security Stress spikes, de-risk the whole stack rather than one layer, since the layers share tail events"
+    runnable: partial
+    endpoint: /api/v1/security/regime/score
+    field: security_stress_score
+    note: "From the page's AI-agent workflow. Bands are dormant, quiet, elevated (30-54), heavy (55-79) and critical (80+); the page gives no level for a spike, so the cut is the desk's call."
+  - id: reclimb
+    role: entry
+    rule: "Re-climb only after the affected protocol is post-mortemed and re-audited, pegs are restored, and net incremental yield clears the 1.5% floor again"
+    runnable: false
+    note: "Audits, LST pegs and per-layer yields are not served."
 ---
 
 # Crypto Yield Stack

@@ -22,6 +22,50 @@ expected_sharpe: 1.5
 expected_max_drawdown: 0.4
 breakeven_cost_bps: 200
 decay_evidence: "BRC-20 TVL peaked April 2024 around halving; declined sharply 2024 H2 as Runes launched. Runes peaked May 2024; both categories declined to ~$1B combined by Q1 2025."
+gates:
+  - id: marketplace_quotes
+    role: universe
+    rule: "Read token prices on every Bitcoin token marketplace: UniSat, Magic Eden, OKX Web3, Ordinals Wallet, Best in Slot"
+    runnable: false
+    note: "No Ordinals, BRC-20 or Runes marketplace order books are served. Needs each marketplace's API."
+  - id: mint_detection
+    role: entry
+    rule: "Detect new BRC-20 and Runes mints from the Bitcoin mempool and bid automatically for allocations, at most $500 per mint"
+    runnable: false
+    note: "No Bitcoin mempool or inscription feed is served. Needs mempool.space or an own node plus an Ordinals indexer; the $500 cap is the bot's own sizing."
+  - id: indexer_parity
+    role: filter
+    rule: "Verify token state across several indexers (UniSat, OrdScan, OKLink) and trade discrepancies"
+    runnable: false
+    note: "No indexer data is served. Needs the indexers' APIs."
+  - id: cross_market_spread
+    role: entry
+    rule: "When (max - min) / max price across marketplaces exceeds 200 bp, buy on the cheapest, transfer, and sell on the richest"
+    runnable: false
+    note: "Needs the marketplace quotes in marketplace_quotes. The 10-30 minute confirmation lag and the fee rate at trade time also need a Bitcoin fee estimator, which is not served."
+  - id: route_cheapest
+    role: entry
+    rule: "Route every trade to the cheapest venue"
+    runnable: false
+    note: "Same missing marketplace quotes and fee schedules."
+  - id: small_size
+    role: sizing
+    rule: "Small size per token (illiquid memecoins), spread across many positions"
+    runnable: partial
+    input: position
+    note: "The page gives no per-token size beyond the $500 mint cap and $1-50K liquidity per trade, so the cap is the desk's call."
+  - id: kill_market_cap
+    role: stop
+    rule: "Kill switch: BRC-20 plus Runes combined market cap below $200M"
+    runnable: partial
+    endpoint: /api/v1/coins?per_page=250&page=1
+    field: coins[].market_cap
+    note: "Sum market_cap over coins whose categories include BRC-20 or Runes, paging through all of /coins (about 1,900 coins, pages 1-8). That covers only the tokens CoinGecko lists among the coins we track, a lower bound on the standards' total."
+  - id: kill_launch_rate
+    role: stop
+    rule: "Kill switch: new-token launch frequency below 100 per week"
+    runnable: false
+    note: "BRC-20 deploys and Runes etchings are not served. Needs an Ordinals indexer's deploy and etching history."
 ---
 
 # Bitcoin Runes / BRC-20 Arbitrage

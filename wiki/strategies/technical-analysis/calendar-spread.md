@@ -12,6 +12,131 @@ markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[diagonal-spread]]", "[[ratio-calendar-spread]]", "[[iron-condor]]", "[[double-diagonal]]", "[[crypto-options-volatility-selling]]", "[[deribit]]", "[[greeks-live]]", "[[dvol]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[volatility-surface]]", "[[funding-rate]]", "[[max-pain]]", "[[gamma-exposure]]", "[[section-1256-contracts]]", "[[theta]]", "[[vega]]", "[[gamma]]", "[[delta]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit_only
+    role: universe
+    rule: "BTC and ETH Deribit options only; alt options rarely list usable strikes in two expiries"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied vol served. Option quotes come from Deribit itself."
+  - id: front_leg_7_21_dte
+    role: entry
+    rule: "Sell the front option about 7-21 days out"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure lists the nearest 12 Deribit expiries. It is Pro Plus and empty on lower tiers."
+  - id: back_leg_30_60_dte
+    role: entry
+    rule: "Buy the back option, same strike and type, about 30-60 days out, roughly 3-4x the front leg's DTE"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+  - id: strike_atm
+    role: entry
+    rule: "Strike ATM (nearest listed strike to spot) for a neutral view; slightly OTM for a directional lean"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Spot is served (oracle_price is a CEX spot composite close to Deribit's index); the listed strike grid is not, so the nearest strike comes from Deribit."
+  - id: debit_30_50_pct
+    role: entry
+    rule: "Net debit typically 30-50% of the back leg's price; the debit is the whole max loss"
+    runnable: false
+    note: "Needs the two legs' quotes; no option prices are served."
+  - id: front_vol_at_or_above_back
+    role: filter
+    rule: "Enter when front-month implied vol is at or above the back-month's (flat-to-backwardated near term); contango is expensive to enter"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "Compare atm_iv of the two expiries you trade. Pro Plus. No term-structure history is served, so this cannot be replayed."
+  - id: dvol_bottom_third
+    role: filter
+    rule: "DVOL low and expected to rise: roughly the bottom third of its trailing-year range"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "Place the latest dvol in its range over history. Only about 180 daily closes are served (Pro Plus), so the range is six months, not a year; the expected rise is a forecast."
+  - id: vol_regime_compressed
+    role: filter
+    rule: "Enter when the coin's vol regime reads compressed (cheap back-month vega)"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow. Its tip: the 60-day history on this route shows the typical compressed-to-expanding cycle length; match the front expiry to it."
+  - id: max_pain_near_strike
+    role: filter
+    rule: "Max pain pins near the chosen strike"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    replay: /api/v1/backtesting/snapshots?data_type=coinglass_options&start={start}
+    replay_field: snapshots[].data[].max_pain
+    note: "BTC only (no ETH max pain), computed on the Deribit expiry with the largest open interest. The page gives no distance for 'near'."
+  - id: range_now_spike_later
+    role: filter
+    rule: "Ideal sequence: range_low_vol now with vol_spike or squeeze probability building later; skip an in-progress vol shock"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "The 'now' half is mechanical (label range_low_vol, not vol_spike). 'Building later' is a forecast; probabilities.regime_transitions gives the 24h odds of moving to vol_spike or squeeze."
+  - id: catalyst_between_expiries
+    role: entry
+    rule: "Optionally place a known catalyst (major unlock, ETF decision, FOMC/CPI) between the two expiries"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=30&symbol={coin}
+    field: items[].days_until
+    note: "Compare days_until with the two expiries' expiry_days. Unlocks and macro prints are on the calendar (30 days out); ETF decisions are not."
+  - id: profit_target_25_50
+    role: exit
+    rule: "Close at 25-50% of the debit in added spread value"
+    runnable: true
+    input: position
+    note: "The spread's mark comes from Deribit; no option prices are served."
+  - id: roll_front_leg
+    role: exit
+    rule: "At front expiry, if spot is still near the strike, sell a new front month against the surviving back leg"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "'Near the strike' has no distance on the page."
+  - id: stop_half_debit_or_1_sigma
+    role: stop
+    rule: "Close if the spread falls to about 50% of the debit, or spot moves more than about 1 sigma from the strike"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "The debit test is mechanical from the position. The page does not define sigma; one reading is spot x atm_iv/100 x sqrt(DTE/365) for the front expiry."
+  - id: no_front_leg_into_expiry
+    role: exit
+    rule: "Never carry the near leg into its final days near the money"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Neither 'final days' nor 'near the money' is quantified."
+  - id: dvol_crush_exit
+    role: exit
+    rule: "Cut early if back-month implied vol collapses in a market-wide vol crush"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol_change_24h
+    note: "dvol_change_24h is in vol points; the back expiry's own atm_iv is in term_structure. The page gives no size for a collapse."
+  - id: funding_spike_warning
+    role: filter
+    rule: "Funding spikes warn of the term-structure inversion that hurts a long calendar"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    note: "From the page's AI tips; no threshold or action is given."
 ---
 
 # Calendar Spread

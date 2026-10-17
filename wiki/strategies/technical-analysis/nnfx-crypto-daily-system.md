@@ -35,6 +35,200 @@ kill_criteria: |
   - rolling 12-month net Sharpe < 0 after at least 40 closed signals
   - average R per trade over last 30 signals < 0
   - funding cost exceeds 30% of gross runner profit over a rolling 6 months
+gates:
+  - id: core_universe
+    role: universe
+    rule: "BTC, ETH, SOL, BNB and XRP perpetuals (Binance or Hyperliquid)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/meta
+    field: universe[].name
+    note: "All five are listed on Hyperliquid. For Binance, the same bars come from /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d."
+  - id: added_coin_volume_floor
+    role: universe
+    rule: "Add another coin only if its 30-day average daily volume is above USD 200M"
+    runnable: true
+    endpoint: /api/v1/volume/scanner/{coin}
+    field: avg_volume_30d
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].volume
+    note: "avg_volume_30d is Hyperliquid perp notional in USD over the last 30 settled days. For Binance volume, average quote_volume over 30 daily bars of /api/v1/market-data/klines. Replay: candle volume is in base units, so USD volume = volume x close."
+  - id: baseline_side
+    role: entry
+    rule: "Baseline: the closed 00:00 UTC daily close is above (long) or below (short) the McGinley Dynamic (N = 14)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Compute McGinley from the closes; no McGinley series is served. Drop the forming bar named by forming_bar_timestamp. Run once a day on the closed 00:00 UTC bar and place orders in the first 15 minutes of the new bar."
+  - id: c1_stc_signal
+    role: entry
+    rule: "C1 signal: Schaff Trend Cycle (fast 23, slow 50, cycle 10) crosses up through 25 (long) or down through 75 (short) on the closed bar"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Compute STC from the closes; no STC is served. C1 state is STC above 50 (long) or below 50 (short), per the pseudocode."
+  - id: c2_vortex_agrees
+    role: entry
+    rule: "C2 agrees: Vortex(14) VI+ minus VI- at least 0.03 for a long (VI- minus VI+ at least 0.03 for a short)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].high
+    note: "Compute VI+ and VI- from the bars' high, low and close; no Vortex series is served."
+  - id: chop_below_55
+    role: entry
+    rule: "Volatility filter: Choppiness Index(14) below 55"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Compute CHOP from 14 bars of true range, high and low; no CHOP series is served. Skipped for continuation entries."
+  - id: within_atr_band
+    role: entry
+    rule: "The close is within 1.0x ATR(14, Wilder) of the baseline"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200&atr=14
+    field: candles[].atr
+    note: "The served atr is Wilder ATR, as the page specifies. Use the last closed bar; skipped for continuation entries."
+  - id: standard_entry
+    role: entry
+    rule: "Standard entry: C1 signals, the close is on the C1 side of the baseline and within 1.0x ATR of it, C2 agrees, CHOP below 55"
+    runnable: true
+    input: derived
+    inputs: [c1_stc_signal, baseline_side, within_atr_band, c2_vortex_agrees, chop_below_55]
+  - id: baseline_cross_entry
+    role: entry
+    rule: "Baseline-cross entry: the close crosses the baseline, C1 agrees and its last signal was fewer than 7 candles ago, within 1.0x ATR, C2 agrees, CHOP below 55"
+    runnable: true
+    input: derived
+    inputs: [baseline_side, c1_stc_signal, within_atr_band, c2_vortex_agrees, chop_below_55]
+  - id: pullback_entry
+    role: entry
+    rule: "Pullback entry: a baseline signal fired with the close more than 1.0x ATR away; enter the next day only if the close returns within 1.0x ATR with all filters agreeing"
+    runnable: true
+    input: derived
+    inputs: [baseline_side, within_atr_band, c1_stc_signal, c2_vortex_agrees, chop_below_55]
+  - id: continuation_entry
+    role: entry
+    rule: "Continuation entry: after a prior entry in the same direction with no baseline cross since, a new C1 signal with the baseline and C2 agreeing (no ATR band, no CHOP gate)"
+    runnable: true
+    input: derived
+    inputs: [c1_stc_signal, baseline_side, c2_vortex_agrees]
+    note: "The prior entry comes from the bot's own trade record."
+  - id: one_candle_rule
+    role: entry
+    rule: "If C2 or CHOP fails on the trigger day, recheck once on the next close"
+    runnable: true
+    input: derived
+    inputs: [c2_vortex_agrees, chop_below_55]
+  - id: event_veto
+    role: filter
+    rule: "No new entries within 24h before FOMC, US CPI, or a scheduled unlock or listing event for the asset"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=2
+    field: items[].days_until
+    note: "FOMC and CPI are macro_print rows (macro_class FOMC or CPI); unlocks are unlock rows naming the asset in symbols. Dates are UTC days with no release time, so 24h becomes 'today or tomorrow'. Listings are not on the calendar. The calendar is forward-only, so a backtest needs the desk's list of past dates."
+  - id: vol_shock_veto
+    role: filter
+    rule: "Optional: no new entries while the asset is in a volatility shock"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "Veto when regime is vol_shock. The page lists it as optional and does not define a shock beyond this endpoint."
+  - id: stop_2atr
+    role: stop
+    rule: "Both orders stop at 2.0x ATR(14) from entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200&atr=14
+    field: candles[].atr
+    note: "ATR of the signal bar (last closed bar at entry)."
+  - id: tp1_1atr
+    role: exit
+    rule: "Order 1 takes profit at 1.0x ATR from entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200&atr=14
+    field: candles[].atr
+  - id: runner_breakeven
+    role: stop
+    rule: "When TP1 fills, move order 2's stop to breakeven"
+    runnable: true
+    input: position
+  - id: runner_trail
+    role: stop
+    rule: "Once order 2 is 2.5x ATR in profit, trail its stop 2.0x ATR behind price, ratcheting in 0.5x ATR steps"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200&atr=14
+    field: candles[].atr
+  - id: runner_exit_c1_flip
+    role: exit
+    rule: "Close the runner on an opposite C1 signal"
+    runnable: true
+    input: derived
+    inputs: [c1_stc_signal]
+  - id: runner_exit_baseline_cross
+    role: exit
+    rule: "Close the runner on a daily close across the baseline"
+    runnable: true
+    input: derived
+    inputs: [baseline_side]
+  - id: risk_per_order
+    role: sizing
+    rule: "Risk 1.5% of equity per signal as two orders of 0.75%: qty per order = 0.0075 x equity / (2.0 x ATR)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200&atr=14
+    field: candles[].atr
+  - id: beta_cap
+    role: sizing
+    rule: "Same-side beta-adjusted open risk at most 3% of equity, using each asset's 60-day beta to BTC"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=62
+    field: candles[].close
+    note: "Beta = cov(asset, BTC) / var(BTC) of 60 daily close-to-close returns; pull the same call for BTC. Open risk per position comes from the book."
+  - id: total_risk_cap
+    role: sizing
+    rule: "Total open risk at most 6% of equity"
+    runnable: true
+    input: position
+  - id: liquidation_distance
+    role: sizing
+    rule: "Use leverage only as needed to fit the size; the liquidation price must be more than 3x ATR from entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200&atr=14
+    field: candles[].atr
+  - id: kill_drawdown
+    role: filter
+    rule: "Pause on an equity drawdown above 25% from peak"
+    runnable: true
+    input: position
+  - id: kill_sharpe
+    role: filter
+    rule: "Pause when the rolling 12-month net Sharpe is below 0 after at least 40 closed signals"
+    runnable: true
+    input: position
+  - id: kill_avg_r
+    role: filter
+    rule: "Pause when the average R per trade over the last 30 signals is below 0"
+    runnable: true
+    input: position
+  - id: kill_funding_share
+    role: filter
+    rule: "Pause when funding cost exceeds 30% of gross runner profit over a rolling 6 months"
+    runnable: true
+    input: position
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].funding_sum
+    note: "The account's own funding payments answer this directly. To rebuild it, sum funding_sum over each runner's holding days x its notional (one call covers at most 93 days, so page the 6 months)."
 ---
 
 # NNFX Crypto Daily System

@@ -11,6 +11,68 @@ markets: [crypto, bonds]
 complexity: intermediate
 backtest_status: untested
 related: ["[[index-investing]]", "[[covered-calls]]", "[[wheel-strategy]]", "[[dollar-cost-averaging]]", "[[momentum-investing]]", "[[crypto-allocation]]"]
+gates:
+  - id: core_index_70
+    role: universe
+    rule: "Core, 70% of the portfolio: US total market (VTI or VOO) 50%, international developed (VXUS or EFA) 10%, bonds (BND or TLT) 10%, bought by regular contributions"
+    runnable: false
+    note: "No equity, ETF or bond prices are served; the core is priced at the investor's broker."
+  - id: options_income_satellite
+    role: entry
+    rule: "Satellite 1, 10%: run the wheel on high-quality stocks, selling cash-secured puts 10-15% below the price at 30-45 DTE and covered calls if assigned, targeting 1-2% a month"
+    runnable: false
+    note: "No equity option chains are served. The crypto version of the put leg is on the cash-secured-puts page."
+  - id: crypto_satellite_dca
+    role: entry
+    rule: "Satellite 2, 10%: buy BTC (60% of the sleeve) and ETH (40%) every week regardless of price"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "A schedule, not a signal; the price only converts the weekly amount into units. The example buys on Coinbase or Kraken; these are Binance spot prices."
+  - id: crypto_hold_cycles
+    role: exit
+    rule: "Hold the crypto sleeve through full market cycles, 4 or more years"
+    runnable: true
+    input: position
+  - id: tactical_satellite
+    role: entry
+    rule: "Satellite 3, 10%: momentum (top stocks over 6-12 months, rotated monthly), swing setups on individual stocks, and event-driven trades such as pre-earnings positions"
+    runnable: false
+    note: "Individual-stock prices, earnings dates and sector data are not served."
+  - id: rebalance_core
+    role: sizing
+    rule: "Rebalance the core annually, or whenever any allocation drifts more than 5% from target"
+    runnable: true
+    input: position
+    note: "Weights come from the account values of each sleeve. The page does not say whether 5% is absolute percentage points or relative to the target."
+  - id: satellite_loss_pause
+    role: stop
+    rule: "Review satellites quarterly: pause and reassess any satellite that loses more than 30% of its allocation in a quarter"
+    runnable: true
+    input: position
+  - id: tactical_vs_core
+    role: exit
+    rule: "If the tactical satellite underperforms the core after 1-2 years, reallocate it to the core"
+    runnable: partial
+    input: position
+    note: "The page gives a 1-2 year window, so when to judge is the investor's call."
+  - id: sweep_profits
+    role: sizing
+    rule: "Sweep profits from successful satellite trades into the core"
+    runnable: true
+    input: position
+  - id: split_by_size
+    role: sizing
+    rule: "Shrink the satellite share as the portfolio grows: about 85/15 core-satellite at $2M, 60/40 at $100K"
+    runnable: partial
+    input: position
+    note: "Two anchor points only; the split between and beyond them is the investor's call."
+  - id: min_portfolio_10k
+    role: universe
+    rule: "Not for portfolios under $10K, where four buckets are too small to be cost-efficient"
+    runnable: true
+    input: position
 ---
 
 # Core-Satellite Portfolio

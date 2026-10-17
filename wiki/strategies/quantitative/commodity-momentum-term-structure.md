@@ -26,6 +26,86 @@ kill_criteria: |
   - drawdown > 25% from high-water mark
   - roll-return and momentum ranks become negatively correlated for 12 months (signals fighting each other)
 related: ["[[quantconnect]]", "[[quantconnect-strategy-library]]", "[[commodity-carry-strategy]]", "[[commodity-momentum]]", "[[roll-yield]]", "[[funding-filtered-momentum]]", "[[trend-aware-carry]]", "[[momentum-value-combination]]"]
+gates:
+  - id: commodity_universe
+    role: universe
+    rule: "Source rules: a universe of 22 commodity futures"
+    runnable: false
+    note: "No commodity futures prices or curves are served. The crypto adaptation (perp_universe onward) is the runnable version of this page."
+  - id: commodity_roll_return
+    role: entry
+    rule: "Source rules: monthly annualized roll return per contract = (P_near - P_next) x 365 / days between the two expiries"
+    runnable: false
+    note: "Needs front and next commodity futures prices, which are not served. funding_roll_proxy is the page's own crypto substitute."
+  - id: perp_universe
+    role: universe
+    rule: "Crypto adaptation: the top 30-50 perps by open interest, point-in-time"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].oi_close
+    note: "Rank Hyperliquid perps by open_interest_usd and keep the top N, with N picked once inside the page's 30-50 range. Replay: oi_close (coin units) x mark_close per daily bar, one call per coin, from 2026-03-30; the coin list comes from today's open-interest call, so coins delisted since then are missing."
+  - id: funding_roll_proxy
+    role: entry
+    rule: "Crypto roll-return proxy: minus the annualized perp funding rate, averaged over the last 7 days (the page's agent workflow); negative funding counts as backwardated"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=100
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Mean of the hourly settled prints x 24 x 365, negated. limit caps at 100 prints (about 4 days), so take the earlier 3 days from the replay route (settled prints, loaded daily with about a 1-day lag). The page's other proxy, annualized dated-futures basis, is not served."
+  - id: roll_tertiles
+    role: entry
+    rule: "Split the universe into tertiles by the roll-return proxy and drop the middle tertile"
+    runnable: true
+    input: derived
+    inputs: [perp_universe, funding_roll_proxy]
+  - id: momentum_lookback
+    role: entry
+    rule: "Momentum: the 21- to 30-day return skipping the most recent day (source rules: the 21-day mean daily return)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=32
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Drop the forming bar (forming_bar_timestamp), then skip the latest closed bar and measure the return over the 21-30 closed bars before it. The exact length inside 21-30 is a parameter to fix once."
+  - id: momentum_halves
+    role: entry
+    rule: "Split the High and Low roll tertiles in half by momentum into winners and losers"
+    runnable: true
+    input: derived
+    inputs: [roll_tertiles, momentum_lookback]
+  - id: double_sort_book
+    role: entry
+    rule: "Long the High-roll Winners (low-funding winners), short the Low-roll Losers (high-funding losers), equal weight, 50% of gross on each side"
+    runnable: true
+    input: derived
+    inputs: [momentum_halves]
+  - id: beta_neutral
+    role: sizing
+    rule: "Crypto adaptation: neutralize the book's BTC beta"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=61
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Regress each leg's daily returns on BTC's and scale the legs (or add a BTC hedge) so the net beta is zero. The page gives no beta window or method; 60 daily bars is used here, but the choice is the desk's."
+  - id: rebalance_cycle
+    role: exit
+    rule: "Rebalance weekly or monthly (source rules: hold one month) and execute the new book the next day"
+    runnable: true
+    input: position
+    note: "Weekly versus monthly is a parameter; the page flags that a monthly funding sort can be stale by the second week."
+  - id: vol_shock_pause
+    role: filter
+    rule: "Pause the long leg while the volatility regime reads vol_shock (the page's agent workflow: momentum crashes cluster there)"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.volatility_regime.by_symbol.{symbol}.regime
+    note: "The page does not say whether it means each long coin's own regime or the market's; per coin read regime here, market-wide read sentiment or the shock share on /api/v1/volatility/regime/score. Replay is one daily read: live from about 2026-06-10, reconstructed back to March 2026 (those days list volatility_regime in snapshot.backfilled_sections)."
 ---
 
 # Commodity Momentum with Term Structure

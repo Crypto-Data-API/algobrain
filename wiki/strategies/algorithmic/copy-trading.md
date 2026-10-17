@@ -18,6 +18,88 @@ min_capital_usd: 100
 capacity_usd: 1000000
 crowding_risk: high
 related: ["[[sentiment-trading]]", "[[on-chain-analysis]]", "[[momentum-rotation]]", "[[telegram-bot-trading]]", "[[social-trading]]", "[[whale]]", "[[nansen]]", "[[survivorship-bias]]", "[[front-running]]", "[[cryptodataapi]]"]
+gates:
+  - id: onchain_whale_labels
+    role: universe
+    rule: "On-chain variant: label wallets of known funds, VCs and proven traders (Nansen, Arkham) and watch them"
+    runnable: false
+    note: "No wallet labels or per-wallet transaction feeds are served for Ethereum, Solana or other chains. The Hyperliquid wallet gates below are the served version of the leader pool."
+  - id: leader_screen
+    role: universe
+    rule: "Screen leaders by risk-adjusted return (Sharpe, not raw PnL), maximum drawdown at most 35% and consistency"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trader-profiles
+    field: profiles.{address}.approx_sharpe
+    note: "Hyperliquid wallets only: approx_sharpe, win_rate, profit_factor and trader_type over the last 30 days for the tracked wallets. No drawdown is served (only max_loser per trade). /hyperliquid/wallets/search filters the daily leaderboard pool (about 50 wallets) by score, win rate and profit factor."
+  - id: track_record_12m
+    role: filter
+    rule: "Demand at least 6-12 months of history (12 in the pseudocode) before following a leader"
+    runnable: false
+    note: "Per-wallet history reaches 90 days (/hyperliquid/wallet-trades/{address}?days=90), and /hyperliquid/top-traders has all-time PnL and ROI but no series, so a 12-month risk-adjusted record cannot be checked. Needs the venue's full fill history."
+  - id: skill_not_luck
+    role: filter
+    rule: "Verify skill over luck: consistent across regimes, with a plausible mechanism for the edge"
+    runnable: false
+    note: "A judgement the page leaves to the follower. The leaderboard persistence record has to be built from your own daily samples of /daily/hl-traders."
+  - id: leader_allocation
+    role: sizing
+    rule: "Allocate a fixed, capped percentage of capital per leader"
+    runnable: true
+    input: position
+  - id: diversify_leaders
+    role: sizing
+    rule: "Spread the book across 3-5 uncorrelated leaders"
+    runnable: partial
+    input: position
+    note: "The page gives no correlation limit. Leaders' trade histories (up to 90 days) are on /hyperliquid/wallet-trades/{address} to compute one."
+  - id: mirror_signal
+    role: entry
+    rule: "Mirror each vetted leader's entry, exit or resize as soon as detected, sized proportionally (my capital x per-leader % x the leader's size change)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/copy-signals?min_score=80&minutes=60
+    field: traders[].signals[].type
+    note: "Signals (ENTRY, EXIT, INCREASE, DECREASE with coin, side, prev_size, new_size) come from periodic polling of watched Hyperliquid wallets, so they reach you minutes after the leader's fill; the page accepts that lag. Proportional size needs the leader's account value, on /hyperliquid/top-traders. Pro."
+  - id: slippage_cap
+    role: sizing
+    rule: "Cap each mirrored trade's size to control slippage and footprint in the asset"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth
+    field: coins[].total_depth_25bps_usd
+    note: "Book depth within 25 bps of mid for the top-25 Hyperliquid perps. The page gives no cap, so the share of depth to take is the desk's call."
+  - id: cull_leaders
+    role: exit
+    rule: "Stop following a leader whose rolling risk-adjusted return decays, whose drawdown breaches the limit, or whose style drifts"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trader-profiles
+    field: profiles.{address}.trader_type
+    note: "approx_sharpe and trader_type (30-day) are served for tracked wallets; re-sample them to see decay or drift. No drawdown is served, and the page gives no Sharpe threshold."
+  - id: follower_divergence
+    role: exit
+    rule: "Stop following when your realized return falls materially below the leader's because of lag and slippage"
+    runnable: partial
+    input: position
+    note: "Your fills are in the position record; the leader's are on /hyperliquid/wallet-trades/{address}. The page does not say how far is material."
+  - id: dormant_leader
+    role: exit
+    rule: "Stop following a leader whose activity goes dormant"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trader-profiles
+    field: profiles.{address}.total_trades
+    note: "Trades over the last 30 days; the page does not define dormant."
+  - id: crowded_trade
+    role: exit
+    rule: "Stop when the copied trade is visibly crowded (copier flows dominate the asset's volume)"
+    runnable: false
+    note: "Copier flow cannot be told apart from other flow in anything we serve."
+  - id: regime_cut_size
+    role: sizing
+    rule: "Cut mirror size in vol_spike or choppy_high_vol market states, where follower lag costs most"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow. The page gives no size cut."
 ---
 
 # Copy Trading

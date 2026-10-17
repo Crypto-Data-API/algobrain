@@ -33,6 +33,181 @@ kill_criteria: |
   - no qualifying stress window activates for 12 consecutive months (strategy is idle; review stress-composite thresholds for recalibration)
 
 related: ["[[leverage-stress-tail-hedge]]", "[[liquidation-cascade-fade]]", "[[post-liquidation-rebound]]", "[[carry-with-tail-hedge]]", "[[tail-hedging]]", "[[tail-risk-hedging]]", "[[oi-flush-reversion]]", "[[funding-flush-reversal]]", "[[post-panic-vol-selling]]", "[[off-hours-liquidation-playbook]]", "[[deribit]]", "[[dvol]]", "[[implied-volatility]]", "[[open-interest]]", "[[funding-rate]]", "[[liquidations]]", "[[perpetual-futures]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: stress_oi_mcap_3pct
+    role: entry
+    rule: "Phase 1 stress gate: BTC open interest over BTC market cap at or above 3.0%"
+    runnable: partial
+    endpoint: /api/v1/derivatives/open-interest?coin=BTC
+    field: cross_exchange[].open_interest_usd
+    note: "Sum open_interest_usd across the rows and divide by market_cap from /api/v1/coins/BTC. Only Binance and Hyperliquid OI are summed, below a whole-market total, so the ratio reads low against the page's 3.0% (its own example uses a 2.5% calibrated threshold); which cut to use is the desk's call."
+  - id: stress_funding_7d_004
+    role: entry
+    rule: "Phase 1 stress gate: 7-day average 8h funding at or above 0.04% (0.0004)"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol=BTCUSDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Mean of the last 21 settled Binance 8h prints."
+  - id: stress_long_short_18
+    role: entry
+    rule: "Phase 1 stress gate: long/short ratio at or above 1.8"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT
+    field: long_short_ratio
+    note: "Binance BTCUSDT global account ratio, the source the page names. history[] here holds the last 5 days; history[].long_short_ratio on /api/v1/derivatives/binance/history?days=90 gives about 30 daily values, and nothing older exists because Binance serves only about 30 days."
+  - id: dvol_not_spiked
+    role: entry
+    rule: "Phase 1: IV not yet spiked: DVOL within 15% of its 30-day trailing average"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "BTC row. Average the last 30 daily values and require items[].dvol at most 1.15x that average. The full history series is Pro Plus."
+  - id: put_10_delta_monthly
+    role: entry
+    rule: "Phase 1 instrument: 10-delta BTC put on Deribit, nearest monthly expiry at least 21 days out"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "The expiry is computable: the nearest last-Friday-of-month code (27NOV26) with expiry_days of 21 or more. No per-strike delta or option prices are served, so the 10-delta strike and the premium come from Deribit."
+  - id: premium_budget
+    role: sizing
+    rule: "Phase 1: premium budget per stress window 0.75-1.5% of the total portfolio"
+    runnable: true
+    input: position
+  - id: one_tail_position
+    role: sizing
+    rule: "Phase 1: at most one active stress-window tail position"
+    runnable: true
+    input: position
+  - id: crash_trigger_12pct
+    role: exit
+    rule: "Phase 2 cascade trigger: BTC at least 12% below its price on the tail-hedge entry date"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol=BTCUSDT
+    field: price
+  - id: dvol_up_25pts
+    role: exit
+    rule: "Phase 2 cascade trigger, IV leg: DVOL at least 25 vol points above its level at tail-hedge entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "BTC row; compare with the DVOL stored at entry."
+  - id: long_liq_6h_500m
+    role: exit
+    rule: "Phase 2 cascade trigger, flow leg: cumulative long liquidations over the prior 6 hours above $500M"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/liquidations?symbol=BTC
+    field: data[].long_liquidation_usd_4h
+    note: "Served windows are 1h, 4h, 12h and 24h (no 6h), summed over OKX, Bybit and Hyperliquid; Binance, the largest venue, is not captured, so the total runs below the page's market-wide figure. For an exact 6h window on Hyperliquid alone, sum long_usd over the last 6 rows of /api/v1/backtesting/hl-liquidation-bars?coin=BTC&interval=1h."
+  - id: cascade_trigger
+    role: exit
+    rule: "Monetize: close the OTM put at the best Deribit bid as soon as crash_trigger_12pct fires, or dvol_up_25pts and long_liq_6h_500m fire together"
+    runnable: partial
+    input: derived
+    inputs: [crash_trigger_12pct, dvol_up_25pts, long_liq_6h_500m]
+    note: "The price leg alone is fully runnable; the IV-plus-flow leg is only as good as the liquidation coverage. The put's bid comes from Deribit."
+  - id: cvd_flattening_15m
+    role: entry
+    rule: "Phase 3 rotation gate: 15-minute CVD no longer making new lows (aggressive selling decelerating)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trade-flow?coin=BTC&minutes=120
+    field: data[].cvd_usd
+    replay: /api/v1/backtesting/hl-trade-flow?coin=BTC&start={start}&end={end}
+    replay_field: data[].sell_notional
+    note: "Closed 1-minute Hyperliquid taker buckets: sample cvd_usd every 15 minutes and require the latest 15-minute value above the lowest so far in the cascade. Hyperliquid flow only, not the page's perp tick tape, and how many bars without a new low count as flattening is the desk's call. Replay from 2026-09-09."
+  - id: liq_decel_half_peak
+    role: entry
+    rule: "Phase 3 rotation gate: liquidations over the prior 30 minutes below 0.5x the peak 30-minute liquidation rate during the cascade"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol=BTC&window_s=1800&include_quiet=true
+    field: alerts[].total_liq_usd
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin=BTC&interval=15m&start={start}
+    replay_field: data[].total_usd
+    note: "total_liq_usd is the trailing 30 minutes over OKX, Bybit and Hyperliquid (no Binance). Poll it through the cascade and keep the peak. Replay is Hyperliquid fills only, from 2026-07-23: sum consecutive 15m bars into 30-minute windows."
+  - id: price_10pct_below
+    role: entry
+    rule: "Phase 3 rotation gate: price at least 10% below the pre-cascade reference price"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol=BTCUSDT
+    field: price
+    note: "The reference is the tail-hedge entry price, as the page's example and pseudocode use."
+  - id: payoff_min_05pct
+    role: entry
+    rule: "Phase 3 rotation gate: put payoff pool at least 0.5% of the portfolio, else skip Phase 3 and treat the trade as a pure tail-hedge exit"
+    runnable: true
+    input: position
+  - id: rotation_gate
+    role: entry
+    rule: "Rotate only when all four Phase 3 gates hold within 4 hours of closing the tail hedge"
+    runnable: partial
+    input: derived
+    inputs: [cvd_flattening_15m, liq_decel_half_peak, price_10pct_below, payoff_min_05pct]
+    note: "Only as runnable as the CVD and liquidation legs."
+  - id: no_fade_structural_shock
+    role: filter
+    rule: "No Phase 3 fade while the long-term regime is Structural Shock"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "From the page's AI-agent workflow: skip while regime is structural_shock_crisis. History starts 2026-08-07."
+  - id: rotation_sizing
+    role: sizing
+    rule: "Deploy 50-70% of the gross put payoff (60% in the pseudocode) into a BTC perp long on Hyperliquid or Binance at 2-3x leverage at most; keep the rest in cash"
+    runnable: true
+    input: position
+  - id: two_tranches
+    role: entry
+    rule: "Enter in two tranches: 50% on CVD-flatten confirmation, the other 50% after a 30-minute hold"
+    runnable: true
+    input: position
+  - id: tp_half_recovery
+    role: exit
+    rule: "Close the fade when price recovers 50% of the cascade move (pre-cascade price minus cascade low)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol=BTCUSDT
+    field: price
+  - id: time_stop_72h
+    role: exit
+    rule: "Close the fade 72 hours after entry if the target has not been reached"
+    runnable: true
+    input: position
+  - id: stop_5pct
+    role: stop
+    rule: "Close the fade if price falls a further 5% below the rotation entry price"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol=BTCUSDT
+    field: price
+  - id: kill_tail_drawdown_30
+    role: stop
+    rule: "Kill: tail-hedge sleeve drawdown above 30% without a qualifying cascade payoff"
+    runnable: true
+    input: position
+  - id: kill_fade_losses_3
+    role: stop
+    rule: "Kill: 3 consecutive monetization events whose Phase 3 fade loses money"
+    runnable: true
+    input: position
+  - id: kill_small_rotation_3
+    role: stop
+    rule: "Kill: rotation capital below 0.5% of the portfolio on 3 consecutive events"
+    runnable: true
+    input: position
+  - id: kill_idle_12m
+    role: stop
+    rule: "Kill: no qualifying stress window for 12 consecutive months, so recalibrate the stress thresholds"
+    runnable: partial
+    input: derived
+    inputs: [stress_oi_mcap_3pct, stress_funding_7d_004, stress_long_short_18]
+    note: "Only as runnable as stress_oi_mcap_3pct."
 ---
 
 # Cascade Monetization Rotation

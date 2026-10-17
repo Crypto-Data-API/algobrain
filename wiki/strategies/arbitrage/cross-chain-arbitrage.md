@@ -21,6 +21,93 @@ expected_sharpe: 1.2
 expected_max_drawdown: 0.10
 breakeven_cost_bps: 50
 related: ["[[cross-exchange-arbitrage]]", "[[flash-loan-arbitrage]]", "[[triangular-arbitrage]]", "[[mev-strategies]]", "[[cross-chain-bridges]]", "[[layer-2]]", "[[cctp]]", "[[arbitrage]]", "[[slippage]]", "[[smart-contract-risk]]", "[[2020-2024-bridge-exploits]]"]
+gates:
+  - id: chain_price_feeds
+    role: universe
+    rule: "Track the best bid and ask for each target token (WETH, USDC, ARB, OP, SOL) on each chain's deepest venue across 5-15+ chains"
+    runnable: partial
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "address is the token's contract on that chain (the bot's own list for WETH, USDC, ARB, OP, SOL; pools[].base_token.address on /api/v1/dex/trending?chain={chain} finds others). Take the deepest pool by reserve_usd. These are pool prices cached up to 5 minutes, not live bids and asks, on solana, ethereum, base, bsc and arbitrum only (no Optimism), and no history is kept."
+  - id: net_spread
+    role: entry
+    rule: "net_spread = price on the high chain - price on the low chain - source gas - destination gas - bridge fee - expected slippage; trade only when it is positive and above 0.1-0.3%"
+    runnable: false
+    note: "Needs the per-chain prices in chain_price_feeds plus gas prices and bridge fees, which are not served (chain RPC fee estimates, bridge quote APIs)."
+  - id: bridge_path_check
+    role: filter
+    rule: "Validate the bridge path: liquidity for the token and route, relayer availability and current fee"
+    runnable: false
+    note: "Bridge liquidity, relayers and fees are not served. Needs the bridges' quote APIs (Across, Stargate, CCTP)."
+  - id: simulate_legs
+    role: filter
+    rule: "Simulate every leg on a fork (Tenderly or local) to confirm net profit and MEV exposure before sending"
+    runnable: false
+    note: "Needs a node or simulation service; not a data feed we serve."
+  - id: execution_mode
+    role: entry
+    rule: "Use pre-positioned inventory when it exists on the sell chain; otherwise bridge-and-arb only when net_spread clears a higher bridge-risk threshold"
+    runnable: partial
+    input: position
+    note: "Inventory per chain is the bot's own; the page does not set the bridge-risk threshold."
+  - id: post_bridge_sell
+    role: exit
+    rule: "Sell on the destination chain as soon as the bridge completes; if the spread closed in transit, sell at market rather than hold directional exposure"
+    runnable: true
+    input: position
+  - id: rebalance_low_gas
+    role: exit
+    rule: "Rebalance pre-positioned capital across chains periodically, during low-gas periods, through the cheapest bridge"
+    runnable: partial
+    input: position
+    note: "Gas prices and bridge fees are not served, so the low-gas window and the bridge choice need chain RPCs and bridge quotes."
+  - id: size_to_min_liquidity
+    role: sizing
+    rule: "Size each arb to the smallest of buy-venue liquidity, bridge capacity and sell-venue liquidity"
+    runnable: partial
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].reserve_usd
+    note: "reserve_usd is each pool's total liquidity (address as in chain_price_feeds): a ceiling, not a slippage curve. Bridge capacity is not served (bridge quote APIs). /api/v1/liquidity/depth is Hyperliquid order-book depth, not DEX pools."
+  - id: bridge_cap
+    role: sizing
+    rule: "Never bridge more than 5-10% of total capital through a single bridge contract at once, and spread bridge exposure over 3-5 protocols"
+    runnable: true
+    input: position
+  - id: gas_reserve
+    role: sizing
+    rule: "Keep a reserve on every chain for gas and unexpected rebalancing"
+    runnable: partial
+    input: position
+    note: "The page gives no reserve size."
+  - id: bridge_exploit_gate
+    role: filter
+    rule: "Stand aside from a bridge when exploit stress is live (the bridge-exploit tail is the trade's existential risk)"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack
+    field: items[].target_type
+    note: "From the page's AI-agent workflow. Match bridge exploits by target_type and title in the DefiLlama hacks registry, which lags by hours to days; the page names no rule beyond the gate."
+  - id: kill_sharpe
+    role: stop
+    rule: "Kill switch: rolling 30-day Sharpe below 0.5"
+    runnable: true
+    input: position
+  - id: kill_net_spread
+    role: stop
+    rule: "Kill switch: average net spread after costs below 0.05% for 14 consecutive days"
+    runnable: false
+    input: derived
+    inputs: [net_spread]
+    note: "Only as runnable as net_spread."
+  - id: kill_bridge_loss
+    role: stop
+    rule: "Kill switch: a bridge-exploit loss above 10% of allocated capital"
+    runnable: true
+    input: position
+  - id: kill_drawdown_15
+    role: stop
+    rule: "Kill switch: drawdown above 15%"
+    runnable: true
+    input: position
 ---
 
 # Cross-Chain Arbitrage

@@ -22,6 +22,89 @@ expected_sharpe: 1.5
 expected_max_drawdown: 0.06
 breakeven_cost_bps: 25
 decay_evidence: "Spread compression 2021→2024 as cross-venue arb desks normalized funding; remains alive around major events (halving, ETF launches, mass liquidations)."
+gates:
+  - id: funding_apr
+    role: entry
+    rule: "Perp implied rate: 8-hour funding x 1095 (annualised)"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=30
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance settled 8-hour prints; current_rate is the live rate. Hyperliquid settles hourly (history[].funding_rate on /api/v1/hyperliquid/funding-rates?coin={coin}, x 24 x 365). Replay rows are 5-minute samples of the live Binance rate from 2026-05-09."
+  - id: basis_apr
+    role: entry
+    rule: "Future implied rate: (future - spot) / spot x 365 / days to expiry"
+    runnable: false
+    note: "Dated-futures prices (Deribit, CME, Binance quarterlies) are not served. The spot side is price on /api/v1/market-data/ticker/price?symbol={coin}USDT."
+  - id: borrow_apr
+    role: entry
+    rule: "Spot borrow rate: the higher of CEX margin and DeFi lending APR (Aave, Compound, Bybit margin)"
+    runnable: false
+    note: "Borrow and lending rates are not served; the old borrow-interest endpoint is retired. Needs the venues' margin-rate APIs and the lending protocols' rates."
+  - id: triangle_open
+    role: entry
+    rule: "Open the triangle when the gap between any two of the three rates exceeds 25 bp net of fees"
+    runnable: false
+    input: derived
+    inputs: [funding_apr, basis_apr, borrow_apr]
+    note: "Only funding_apr is served."
+  - id: triangle_direction
+    role: entry
+    rule: "basis_apr above funding_apr by 25 bp: sell the dated future, buy the perp; funding_apr above basis_apr by 25 bp: sell the perp, buy the dated future; hedge the third leg with spot"
+    runnable: false
+    input: derived
+    inputs: [funding_apr, basis_apr]
+    note: "Only as runnable as basis_apr."
+  - id: hold_periods
+    role: exit
+    rule: "Hold the perp leg to the next funding reset, the future to delivery, and spot indefinitely; roll futures monthly when needed"
+    runnable: true
+    input: position
+  - id: venue_cap
+    role: sizing
+    rule: "Collateral per venue at most 25% of the book"
+    runnable: true
+    input: position
+  - id: oi_cap_1pct
+    role: sizing
+    rule: "Cap each leg at about 1% of that instrument's open interest"
+    runnable: partial
+    endpoint: /api/v1/derivatives/open-interest?coin={coin}
+    field: binance.current_oi
+    note: "Perp OI only, in coin units (hyperliquid.current_oi on the same response). Dated-futures OI per expiry is not served."
+  - id: regime_gate
+    role: filter
+    rule: "Do not open the triangle into a vol_spike HMM market regime, where one leg can become unfundable"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow."
+  - id: kill_spread_compressed
+    role: stop
+    rule: "Kill switch: the basis-perp spread below 8 bp for 30+ days running"
+    runnable: false
+    input: derived
+    inputs: [funding_apr, basis_apr]
+    note: "Only as runnable as basis_apr."
+  - id: kill_withdrawal_restrictions
+    role: stop
+    rule: "Kill switch: a counterparty exchange shows withdrawal restrictions"
+    runnable: partial
+    endpoint: /api/v1/security/regime/score
+    field: flow_subscore
+    note: "flow_subscore is the worst absolute net exchange-flow z-score across majors and stables, a market-wide withdrawal-flight read; per-exchange 24h flows are per_exchange_24h on /api/v1/on-chain/exchange-flows/{symbol}. Actual withdrawal restrictions come from the venue's status page."
+  - id: kill_funding_negative_7d
+    role: stop
+    rule: "Kill switch: funding negative for 7+ days running on the long leg"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "21 settled 8-hour prints are 7 days; all below 0 trips it. Use the venue the long leg sits on."
 ---
 
 # Crypto Spot-Perp-Futures Triangular Arbitrage

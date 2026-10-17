@@ -10,6 +10,51 @@ markets: [crypto, bonds, commodities]
 complexity: intermediate
 backtest_status: untested
 related: [volatility-targeting, multi-strategy-portfolio, sector-momentum-screen]
+gates:
+  - id: vix_below_20
+    role: filter
+    rule: "Composite leg 1 (25%): VIX below 20 scores risk-on"
+    runnable: false
+    note: "No VIX is served. /volatility/implied has crypto DVOL, but the page does not offer it as a stand-in. Needs a CBOE VIX feed."
+  - id: yield_curve_steepening
+    role: filter
+    rule: "Composite leg 2 (25%): 10Y-2Y Treasury slope positive and steepening scores risk-on"
+    runnable: false
+    note: "/sentiment/macro serves a single Treasury yield (treasury_yield), not the 10Y and 2Y points a slope needs. Needs FRED (DGS10, DGS2) or similar."
+  - id: credit_spreads_narrow
+    role: filter
+    rule: "Composite leg 3 (25%): HY-IG credit spread narrowing or below 400 bps scores risk-on"
+    runnable: false
+    note: "No credit-spread series is served. Needs ICE BofA OAS indices via FRED or a bond-data vendor."
+  - id: spx_above_200dma
+    role: filter
+    rule: "Composite leg 4 (25%): S&P 500 above its 200-day moving average scores risk-on"
+    runnable: false
+    note: "No equity index prices are served. A crypto analogue (BTC above its 200-day MA, /indicators/technical) exists but the page does not offer it."
+  - id: composite_regime
+    role: filter
+    rule: "Composite 0-100 from the four equal-weighted legs: 70-100 full risk-on, 40-69 neutral, 0-39 full risk-off"
+    runnable: false
+    input: derived
+    inputs: [vix_below_20, yield_curve_steepening, credit_spreads_narrow, spx_above_200dma]
+    note: "Every leg is TradFi data we do not serve."
+  - id: breadth_confirmation
+    role: filter
+    rule: "Confirm with breadth: more than 60% of S&P 500 stocks above their 50-day MA confirms risk-on, below 30% confirms risk-off"
+    runnable: false
+    note: "No equity breadth is served. /market-health/altcoin-breadth?ma_period=50 is the crypto analogue, which the page does not name."
+  - id: regime_allocation
+    role: sizing
+    rule: "Risk-on: growth equities, crypto at full size (15% BTC/ETH in the example), leverage 1.2-1.5x on conviction; risk-off: long Treasuries, gold, cash, defensive sectors, hedges on"
+    runnable: false
+    input: derived
+    inputs: [composite_regime]
+    note: "Only as runnable as composite_regime."
+  - id: gradual_rebalance
+    role: sizing
+    rule: "Recompute every Friday and move 25% of the allocation gap per week, so a full flip takes 2-3 weeks"
+    runnable: true
+    input: position
 ---
 
 # Risk-On / Risk-Off Framework

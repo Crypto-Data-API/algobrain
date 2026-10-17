@@ -25,6 +25,73 @@ kill_criteria: |
   - trailing 3-year return below the 50/50 static mix of the same two assets
   - more than 4 consecutive losing switches
 related: ["[[quantconnect]]", "[[quantconnect-strategy-library]]", "[[momentum-rotation]]", "[[relative-strength]]", "[[time-series-momentum]]", "[[crypto-beta-rotation]]"]
+gates:
+  - id: pair_choice
+    role: universe
+    rule: "Pick two assets with low or negative return correlation: BTC vs a stablecoin or T-bill yield leg (the classic risk-on/cash switch), BTC vs gold (tokenized gold or futures), or ETH vs BTC"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=92
+    field: candles[].close
+    note: "BTC, ETH and tokenized gold (PAXG, a Hyperliquid perp and a Binance spot pair) all have daily candles here. The cash leg has no served price series (see cash_leg_return). Which pair to run, and checking that its correlation is in fact low, is the desk's call."
+  - id: crypto_leg_return
+    role: entry
+    rule: "At each quarter end, the crypto leg's return over the last 90 days"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin=BTC&interval=1d&limit=92
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin=BTC&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Latest closed daily bar over the close 90 bars earlier, minus 1. Hyperliquid daily bars go back to 2023; Binance spot (/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000) reaches further for backtests."
+  - id: gold_leg_return
+    role: entry
+    rule: "Gold variant: tokenized gold's return over the same 90 days"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin=PAXG&interval=1d&limit=92
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin=PAXG&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "PAXG tracks one troy ounce of gold. For the ETH vs BTC variant, use coin=ETH the same way."
+  - id: cash_leg_return
+    role: entry
+    rule: "Cash variant: the stablecoin or T-bill yield earned over the same 90 days"
+    runnable: partial
+    endpoint: /api/v1/sentiment/macro
+    field: treasury_yield
+    replay: /api/v1/backtesting/snapshots?data_type=macro&start={start}&limit=1000
+    replay_field: snapshots[].data.treasury_yield
+    note: "Accrue the annual percent over 90 days (yield x 90 / 365). This is a US Treasury rate, not a T-bill or stablecoin lending yield, and no stablecoin yield is served; history is snapshots from 2026-05-09 only."
+  - id: hold_the_winner
+    role: entry
+    rule: "Hold 100% of whichever leg had the higher 90-day return until the next quarter end"
+    runnable: partial
+    input: derived
+    inputs: [pair_choice, crypto_leg_return, gold_leg_return, cash_leg_return]
+    note: "Runnable as is for BTC vs gold (PAXG) or ETH vs BTC; the cash variant is only as good as cash_leg_return."
+  - id: both_negative_to_cash
+    role: filter
+    rule: "Optional crypto safety rule: if both 90-day returns are negative, hold the cash leg"
+    runnable: true
+    input: derived
+    inputs: [crypto_leg_return, gold_leg_return]
+  - id: quarterly_switch
+    role: exit
+    rule: "Re-decide only at quarter end; switch (one sell plus one buy) when the winner changes"
+    runnable: true
+    input: position
+  - id: no_stop_no_leverage
+    role: sizing
+    rule: "No stop and no leverage (source rule)"
+    runnable: true
+    input: position
+  - id: regime_wait
+    role: filter
+    rule: "Optionally consult the cycle regime before switching into the crypto leg; a bear reading argues for waiting on the defensive side"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "From the page's agent workflow. Which regimes count as bear (established_bear, capitulation, structural_shock_crisis and the like) is the desk's call. History starts 2026-08-07."
 ---
 
 # Paired Switching

@@ -22,6 +22,59 @@ expected_sharpe: 1.5
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 60
 decay_evidence: "LayerZero's announcement post-KelpDAO that 1-of-1 DVN configs will no longer be supported should compress the spread over 6-12 months as legacy apps migrate or are sunset. Edge persists in the migration window and on smaller cross-chain bridges that haven't standardized verifier configs."
+gates:
+  - id: bridge_universe_tvl
+    role: universe
+    rule: "Universe: the top 30 cross-chain bridge applications by TVL (L2Beat, DeFiLlama)"
+    runnable: false
+    note: "Per-protocol TVL is not served. Needs DeFiLlama or L2Beat."
+  - id: verifier_config_score
+    role: filter
+    rule: "Score each application's verifier configuration 1-5: 5 = BFT majority (Wormhole 13-of-19), 4 = 2-of-3 or 3-of-5 multisig with timelock, 3 = weak timelock or thin-diversity multi-DVN, 2 = single verifier with circuit breaker, 1 = 1-of-1 DVN or single multisig"
+    runnable: false
+    note: "Verifier sets, DVN configs, multisig thresholds and timelocks are on-chain reads (getDVN(), owner sets) that are not served."
+  - id: perp_listed
+    role: universe
+    rule: "Each basket member's token must have a perp market"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/meta
+    field: universe[].name
+    note: "Hyperliquid perps; drop names whose isDelisted is true. Binance perps can be checked with /derivatives/binance/funding-rates?symbol={symbol}USDT."
+  - id: long_basket
+    role: entry
+    rule: "Long the top decile by score (5) where TVL exceeds $200M and a perp exists"
+    runnable: false
+    input: derived
+    inputs: [bridge_universe_tvl, verifier_config_score, perp_listed]
+    note: "Rests on unserved TVL and config scores."
+  - id: short_basket
+    role: entry
+    rule: "Short the bottom decile by score (1-2) where TVL exceeds $50M and a perp exists; size score-1 (1-of-1 DVN) shorts at 2-3x baseline (2.5x in the pseudocode)"
+    runnable: false
+    input: derived
+    inputs: [bridge_universe_tvl, verifier_config_score, perp_listed]
+    note: "Rests on unserved TVL and config scores."
+  - id: pair_sizing
+    role: sizing
+    rule: "Equal weight within each basket, net-zero dollar exposure, 5% of NAV per side"
+    runnable: true
+    input: position
+  - id: leg_funding
+    role: sizing
+    rule: "Track the funding each leg pays or receives; the net carry varies"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+  - id: rebalance_on_config_change
+    role: exit
+    rule: "Rebalance when verifier configs change or applications migrate (for example LayerZero apps moving from 1-of-1 to multi-DVN)"
+    runnable: false
+    note: "Config changes are on-chain and announcement events that are not served."
+  - id: stop_on_config_change
+    role: stop
+    rule: "Close a short when its protocol announces and ships a verifier upgrade; close a long when its config quality degrades"
+    runnable: false
+    note: "Same unserved config data as verifier_config_score."
 ---
 
 # Multi-DVN Bridge Configuration Arbitrage

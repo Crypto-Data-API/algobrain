@@ -29,6 +29,118 @@ breakeven_cost_bps: 3
 decay_evidence: "Hyperliquid maker economics have tightened as HLP and professional MM firms (e.g. via HIP-3 and the vault ecosystem) saturated quoting on majors; base maker fee is 0.015% with rebates only at the top 14-day-volume tier (>$500M) down to -0.003%, so edge on BTC/ETH is now razor-thin and concentrated in long-tail and newly listed perps."
 
 related: ["[[hlp]]", "[[hyperliquid]]", "[[hyperliquid-order-book-microstructure]]", "[[market-making-strategy]]", "[[market-making]]", "[[adverse-selection]]", "[[clob]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[avellaneda-stoikov]]", "[[order-flow]]", "[[vpin]]", "[[latency-and-mev-on-chain-clob]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-liquidation-engine]]", "[[inventory-risk]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: spread_paying_books
+    role: universe
+    rule: "Quote the books where spreads still pay: long-tail and newly listed perps that HLP and professional makers under-serve, rather than saturated BTC and ETH"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth
+    field: coins[].spread_bps
+    note: "spread_bps and depth are served for about 25 large Hyperliquid perps; for any other coin read the best bid and ask from /api/v1/hyperliquid/l2-book?coin={coin}. The page sets no spread or depth cut, so which books pay is the desk's call. new_listing on /api/v1/quant/coins flags fresh perps, which the page says carry the worst adverse selection."
+  - id: book_mid
+    role: entry
+    rule: "Mid s = (best bid + best ask) / 2, read every block"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: bids[].price
+    note: "A polled snapshot (ts says when), not a per-block stream; quoting at block cadence needs Hyperliquid's own websocket, as the page itself says."
+  - id: sigma_short_horizon
+    role: entry
+    rule: "Short-horizon volatility sigma in price per root-second (about $8.9 for BTC at $100k), recomputed on a rolling window"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=61
+    field: candles[].close
+    note: "One-minute closes are the finest bars served: sigma per root-second is about the standard deviation of 1-minute price changes divided by sqrt(60). That scaling ignores sub-minute microstructure noise, and the page names no window."
+  - id: reservation_price
+    role: entry
+    rule: "Reservation price r = s - q x gamma x sigma^2 x tau, with q the signed inventory, gamma 8e-4, tau 300 s"
+    runnable: partial
+    input: derived
+    inputs: [book_mid, sigma_short_horizon]
+    note: "Only as runnable as its snapshot mid and minute-bar sigma; q comes from the position record."
+  - id: half_spread
+    role: entry
+    rule: "Half-spread = max(0.5 x gamma x sigma^2 x tau + (1/gamma) x ln(1 + gamma/k), fee floor of 1.2 bps of mid), with k 1.4; bid = r - half, ask = r + half, snapped to tick"
+    runnable: partial
+    input: derived
+    inputs: [reservation_price, sigma_short_horizon]
+    note: "k (order-arrival decay) has to be calibrated from the trade stream, which is served only as 1-minute buckets (/api/v1/hyperliquid/trade-flow)."
+  - id: fee_tier_viable
+    role: filter
+    rule: "Run the book only at a maker fee low enough that a 2.4 bp quoted spread clears two maker fees (base 0.015% loses; viable at reduced or rebate tiers)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/meta
+    field: fees.volume_tiers[].perps_maker
+    note: "The schedule is served (base tier plus the 14-day volume tiers); the wallet's own tier, HYPE staking discount and rebate status come from its account, not from here."
+  - id: block_requote
+    role: entry
+    rule: "Re-quote every block, or on a mid move above half a tick, an inventory change or a toxicity trigger"
+    runnable: false
+    note: "Block-level book and fill events are not served (polled snapshots and 1-minute trade buckets only); this needs Hyperliquid's websocket."
+  - id: toxic_markout_widen
+    role: filter
+    rule: "Triple the half-spread when recent maker-fill markout is worse than -0.8 bps"
+    runnable: false
+    note: "Markout compares each fill with the mid 1 block, 5 s or 30 s later, which needs sub-minute mids; only 1-minute bars and taker buckets are served. The fills themselves are the trader's own."
+  - id: soft_inventory_cap
+    role: sizing
+    rule: "At half of q_max, widen the far-side quote and tighten the near-side quote to speed mean reversion"
+    runnable: true
+    input: position
+  - id: hard_inventory_cap
+    role: sizing
+    rule: "At q_max (plus or minus 3 BTC on the BTC book) stop quoting the accumulating side and quote only the flattening side"
+    runnable: true
+    input: position
+  - id: stuck_inventory_flatten
+    role: stop
+    rule: "If inventory stays above q_max for more than N blocks, cross the spread to flatten and accept the taker fee"
+    runnable: partial
+    input: position
+    note: "N is not given (N_MAX in the pseudocode); the kill criteria use 10 minutes above q_max more than 3 times in a session as the stand-down line."
+  - id: funding_aware_skew
+    role: sizing
+    rule: "When inventory pays funding (long with positive funding, or short with negative), push the reservation price toward flat by 1.5 x the hourly funding rate x mid"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    note: "current_rate is the live hourly rate; history[] holds the settled prints."
+  - id: clip_sizing
+    role: sizing
+    rule: "Clips of 0.1-0.5 BTC laddered over 3-5 levels, with total resting notional at most about 10% of top-of-book depth"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: bids[].size
+    note: "The page does not define top-of-book depth (best level only, or the visible ladder); sizes here are coin units over the top 20 levels per side. Clip count and size inside the ranges are parameters."
+  - id: fragility_pull
+    role: filter
+    rule: "Widen or pull quotes when the liquidity regime says the book cannot absorb a shock"
+    runnable: partial
+    endpoint: /api/v1/liquidity/regime
+    field: coins[].regime
+    replay: /api/v1/backtesting/snapshots?data_type=liquidity_regime&start={start}&limit=1000
+    replay_field: snapshots[].data.coins[].regime
+    note: "From the page's agent workflow. depth_withdrawal and post_cascade_impaired are the shock states; the regime covers about 25 large Hyperliquid perps only, and how far to widen is the desk's call. Snapshots from 2026-05-30."
+  - id: funding_drag_kill
+    role: stop
+    rule: "If funding drag exceeds spread income over a rolling 24h, reduce q_max toward zero"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    note: "Each hourly print x the inventory held through it, against the book's own 24h spread income."
+  - id: drawdown_kill
+    role: stop
+    rule: "Pause the book on a sleeve drawdown above 12% in any rolling 7-day window"
+    runnable: true
+    input: position
+  - id: oracle_divergence_kill
+    role: stop
+    rule: "Flatten everything on a venue halt or an oracle-divergence flag"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Compare oracle_price with mark_price in the same row; the page gives no divergence threshold, and venue halts are not served, so both need the desk's rule."
 ---
 
 # Hyperliquid Market Making

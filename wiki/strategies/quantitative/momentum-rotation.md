@@ -40,6 +40,86 @@ kill_criteria: |
   - top-decile turnover persistently churns without follow-through (win rate < 45% for 60 days)
 
 related: ["[[sentiment-trading]]", "[[momentum]]", "[[trend-following]]", "[[factor-investing]]", "[[mean-reversion]]", "[[volatility-targeting]]", "[[momentum-crashes]]", "[[funding-rate]]", "[[short-term-reversal]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: top_cap_universe
+    role: universe
+    rule: "Top 20-40 coins by market cap, excluding stablecoins and wrapped assets"
+    runnable: true
+    endpoint: /api/v1/coins/top?limit=50
+    field: coins[].market_cap
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.coins.coins[].symbol
+    note: "Drop rows whose categories include Stablecoins or Wrapped-Tokens and keep the top N (fixed once inside 20-40). Point-in-time membership (top 100 by market cap) is archived only from late May 2026."
+  - id: min_dollar_volume
+    role: universe
+    rule: "Require more than $50M a day of spot volume"
+    runnable: partial
+    endpoint: /api/v1/coins/top?limit=50
+    field: coins[].total_volume
+    note: "total_volume is a 24-hour aggregate across venues, not spot-only and not an average daily volume; the pseudocode screens on average daily dollar volume. Binance spot alone is quote_volume on /api/v1/market-data/ticker/24hr?symbol={symbol}USDT."
+  - id: cost_screen
+    role: universe
+    rule: "Keep a name only if its spread and depth keep round-trip cost at your clip size under the ~35 bps breakeven"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth
+    field: coins[].spread_bps
+    note: "Served for about 25 large Hyperliquid perps, with depth_usd within 10, 25, 50 and 100 bps of mid; the page trades spot, and estimating cost at a clip size from these bands is the desk's model. Other coins need /api/v1/hyperliquid/l2-book?coin={coin}."
+  - id: formation_return
+    role: entry
+    rule: "Formation return over the trailing 4 weeks (28 days), skipping the most recent 3 days"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles/batch?coins={coin}&interval=1d&limit=33&closed_only=true
+    field: series.{coin}[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Return = close 4 days back / close 32 days back - 1 on closed bars, as in the pseudocode. Up to 25 coins per batch call. The page also allows 1-week and 12-week variants."
+  - id: demeaned_momentum
+    role: entry
+    rule: "Rank on formation return minus the equal-weighted universe return (not raw return)"
+    runnable: true
+    input: derived
+    inputs: [formation_return]
+  - id: top_quintile_long
+    role: entry
+    rule: "Buy the top quintile (top ~20%) by de-meaned momentum; the long-short variant also shorts the bottom quintile where perp shorts are cheap"
+    runnable: partial
+    input: derived
+    inputs: [top_cap_universe, min_dollar_volume, cost_screen, demeaned_momentum]
+    note: "Only as runnable as the liquidity and cost screens."
+  - id: inverse_vol_weights
+    role: sizing
+    rule: "Inverse-volatility weights within the top quintile, using 60-day realised vol"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles/batch?coins={coin}&interval=1d&limit=61&closed_only=true
+    field: series.{coin}[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: per_name_cap
+    role: sizing
+    rule: "Cap any name at 15% of the sleeve; no leverage on the long book (the long-short variant runs at most 1x gross per side)"
+    runnable: true
+    input: position
+  - id: weekly_rotation
+    role: exit
+    rule: "Rebalance weekly and sell any name that has dropped out of the top quintile"
+    runnable: partial
+    input: derived
+    inputs: [top_quintile_long]
+    note: "Only as runnable as top_quintile_long."
+  - id: btc_200dma_crash_filter
+    role: filter
+    rule: "Crash filter: when BTC closes below its 200-day moving average, cut gross exposure by 50% (or move fully to stables)"
+    runnable: true
+    endpoint: /api/v1/market-data/btc-price-history?days=2
+    field: history[].ma200
+    replay: /api/v1/market-data/btc-price-history?days=730
+    replay_field: history[].ma200
+    note: "Compare history[].price with ma200 on the latest row."
+  - id: drawdown_throttle
+    role: sizing
+    rule: "Halve position sizes while the sleeve drawdown exceeds 20%"
+    runnable: true
+    input: position
 ---
 
 # Momentum Rotation

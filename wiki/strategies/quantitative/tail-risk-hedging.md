@@ -34,6 +34,100 @@ kill_criteria: |
   - a realized cascade payoff not monetized within the DVOL-spike window → process failure; fix the rule
   - skew so rich that modeled cascade payoff < 3× premium spent → reduce or pause adds
   - DVOL structurally above 85th percentile for > 30 days (buying at a peak; pause new entries)
+gates:
+  - id: underlyings
+    role: universe
+    rule: "Deep OTM BTC and ETH puts on Deribit, USDC-margined (linear) preferred, plus a small long-vol sleeve"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "DVOL, its daily history and ATM IV per expiry are served for BTC and ETH (history and term structure on Pro Plus), contrary to the page's data note; the option chain and put prices are not, so legs are priced and traded on Deribit."
+  - id: annual_budget
+    role: sizing
+    rule: "A fixed annual hedge budget (about 2% of NAV in the example), treated as an insurance line item"
+    runnable: true
+    input: position
+  - id: put_strike_tenor
+    role: entry
+    rule: "Each roll cycle, buy BTC or ETH puts about 25-30% out of the money (20-40% allowed), 30-60 DTE, spread across weekly and monthly expiries"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "The listed expiries and their days to expiry are served, and the target strike is spot x 0.70-0.75 (spot from /api/v1/hyperliquid/open-interest assets[].mark_price). Whether that strike is listed, and its price, needs the Deribit chain."
+  - id: strangle_sleeve
+    role: entry
+    rule: "A small long strangle sleeve (15-delta, about 45 DTE) for long gamma and vega"
+    runnable: false
+    note: "Picking 15-delta strikes needs the option chain with deltas, which is not served."
+  - id: dvol_low_pctl
+    role: filter
+    rule: "Bias adds toward a low DVOL percentile"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "The page sets no percentile cut, and the served history is about 180 daily values (from 2026-04-20). The agent workflow's alternative, a compressed volatility regime, is regime on /api/v1/volatility/regime/{symbol}."
+  - id: funding_rich_positive
+    role: filter
+    rule: "Bias adds toward richly positive funding (a call-skew regime, so downside puts are relatively cheap)"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "8-hourly Binance prints (21 = one week). The page gives no level for richly positive, so the cut is the desk's call."
+  - id: let_losers_expire
+    role: exit
+    rule: "Let losing puts expire; do not manage them"
+    runnable: true
+    input: position
+  - id: roll_survivors
+    role: exit
+    rule: "Roll surviving puts forward before decay when they have gained but the cascade is not yet extreme"
+    runnable: partial
+    input: position
+    note: "The page does not define extreme, so when to roll rather than monetize is the desk's call."
+  - id: monetize_cascade
+    role: exit
+    rule: "When spot has fallen 15% or more and the puts are deep in the money, sell a portion into the DVOL spike, sooner than an equity hedger would"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "The 15% fall is measured against the spot at entry (position record). The portion to sell is not given, and option marks come from Deribit."
+  - id: vol_shock_monetize_trigger
+    role: exit
+    rule: "A vol_shock flip in the volatility regime together with a liquidation spike marks the sell-into-the-spike window"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.volatility_regime.by_symbol.{symbol}.regime
+    note: "From the page's agent workflow. The liquidation leg is spike_ratio on /api/v1/market-intelligence/squeeze-alerts?symbol={coin} (OKX, Bybit and Hyperliquid; Binance not captured), with no spike level given by the page. Regime replay is daily from March 2026."
+  - id: reinvest_at_lows
+    role: sizing
+    rule: "Reinvest hedge gains into coins at cascade lows (the barbell rebalance)"
+    runnable: partial
+    input: position
+    note: "Which coins and what counts as the low are left to judgement."
+  - id: tail_watch
+    role: filter
+    rule: "Watch the hack, depeg and black-swan overlay that price puts cannot see"
+    runnable: partial
+    endpoint: /api/v1/security/regime/score
+    field: security_stress_score
+    note: "From the page's agent workflow, which sets no level; band (dormant to critical) and /api/v1/security/events list the events. How it changes the hedge is the desk's call."
+  - id: pause_adds_at_peak
+    role: filter
+    rule: "Pause new hedge entries while DVOL stays above its 85th percentile for more than 30 days (buying insurance at the peak)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "About 180 daily DVOL values are served, so the percentile is over half a year at most. The agent workflow's version, the vol-stress composite above its 85th percentile for 30+ days, is fully computable from /api/v1/volatility/index/history?days=365 points[].composite_score."
+  - id: skew_too_rich
+    role: filter
+    rule: "Reduce or pause adds when skew is so rich that the modeled cascade payoff is under 3x the premium spent"
+    runnable: false
+    note: "Needs put prices and a payoff model on the Deribit surface; no option prices or skew are served."
 ---
 
 # Tail Risk Hedging

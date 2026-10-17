@@ -25,6 +25,44 @@ kill_criteria: |
   - rolling 5-year net Sharpe < 0
   - drawdown > 40%
 related: ["[[quantpedia]]", "[[quantpedia-strategy-encyclopedia]]", "[[value-anomaly]]", "[[currency-dynamics]]", "[[carry-trade]]", "[[currency-momentum]]", "[[dollar-carry-trade]]", "[[macro-relative-value]]", "[[dxy]]"]
+gates:
+  - id: fx_universe
+    role: universe
+    rule: "10-20 liquid currencies against USD"
+    runnable: false
+    note: "Only EUR/USD is served (/api/v1/sentiment/macro, latest level plus 7d and 30d change). Needs an FX spot feed."
+  - id: ppp_fair_value
+    role: entry
+    rule: "Fair value = latest OECD PPP rate, updated monthly for CPI inflation differentials and spot moves"
+    runnable: false
+    note: "No PPP or CPI series is served. Needs OECD PPP data and national CPI prints."
+  - id: ppp_deviation_rank
+    role: entry
+    rule: "Signal = percentage deviation of spot from PPP fair value; long the 3 most undervalued, short the 3 most overvalued, equal weight"
+    runnable: false
+    input: derived
+    inputs: [fx_universe, ppp_fair_value]
+    note: "Neither input is served."
+  - id: quarterly_rebalance
+    role: exit
+    rule: "Rebalance quarterly (or monthly)"
+    runnable: true
+    input: position
+  - id: drawdown_kill
+    role: stop
+    rule: "Retire on a drawdown above 40% or a rolling 5-year net Sharpe below 0"
+    runnable: true
+    input: position
+    note: "From the kill criteria."
+  - id: crypto_regime_gate
+    role: filter
+    rule: "Crypto use: condition crypto beta on the dollar view (a deeply overvalued USD has preceded dollar weakness, a BTC tailwind) rather than trading FX directly"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "From the page's AI-agent workflow. The dollar view itself needs the unserved PPP model; the cycle regime is served, history from 2026-08-07."
 ---
 
 # Currency Value (PPP) Strategy

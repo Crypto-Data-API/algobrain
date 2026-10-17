@@ -9,6 +9,23 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-10-17 — Runnable gates on every remaining strategy page
+
+**Scope:** After the gated pages below, 314 strategy pages still had no gates, so a bot reading them could not tell which conditions it can automate. Each now has a `gates:` block, 4,373 gates in all: 1,967 runnable, 1,381 partial and 1,025 not runnable. 1,249 are own-position rules (`input: position`), 381 are composites (`input: derived`) and 711 name a replay endpoint. The library now has 395 gated pages and 5,514 gates; every strategy page is mapped except the 13 listed below.
+
+- **Edits:** only frontmatter `gates:` blocks were added; no prose changed. Every route, query parameter and field passed `scripts/validate_algobrain_gates.py` (in the CryptoDataAPI repo) against the OpenAPI spec, and every runnable or partial gate was fetched `--live` on production. Fields the BTC sample left empty (unlocks, squeeze alerts, the event calendar, copy and wallet signals) were confirmed on another coin or a wider window.
+- **TradFi and historical pages** (VIX, SPX 0DTE, equity options, FX carry, pre-1914 bill markets) are mapped too. Where a page offers a crypto analogue the gate uses it and says so; otherwise the gate is not runnable and its note names the missing data. [[crack-spread]], [[crush-spread]] and [[spark-spread]] are not runnable at all, which tells a bot not to try.
+- **Not mapped, because they have no tradeable rules:** the seven arbitrage reference pages ([[arbitrage-backtesting-guide]], [[arbitrage-correlation-matrix]], [[arbitrage-live-performance]], [[arbitrage-monitoring-setup]], [[arbitrage-parameter-cheatsheet]], [[arbitrage-seasonality]], [[arbitrage-worked-examples]]), [[mev-execution-guide]], [[multi-venue-capital-management]], [[regulatory-arbitrage]], [[multi-strategy-portfolio]], [[live-journal]] and [[cash-secured-put]] (merged into [[cash-secured-puts]], which is gated).
+- **Readings recorded in the gate notes:**
+  - The Binance derivative routes take a pair, `symbol={coin}USDT`. A bare coin answers with neutral filler (ratio 1.0, open interest 0), so the validator now fails it.
+  - `/dex/security` reports `holder_count` 0 and `top_10_pct` 0 for a token it has not indexed yet. Every gate that reads it says to treat that as unknown, never as a pass. A new `{address}` placeholder carries the token contract, and each note says which gate supplies it.
+  - Deep daily replay runs on `/hyperliquid/candles` with `start`. A 1m range there is paged from Hyperliquid live and can take 10-45 seconds.
+  - [[funding-rate-arbitrage]]: Binance funding is a proxy for the AsterDEX leg, so those gates are partial.
+- **Most common not-runnable reasons:** no option chain, per-strike Greeks or 25-delta skew; no dated futures; no Bybit or OKX funding; no mempool, gas, priority-fee or per-block DEX state; no DeFi lending rates or per-pool APR and TVL; no LST or LRT prices on `/coins`; no macro-calendar release times, consensus or actual values; no Solana or EVM wallet-level data. DVOL history starts 2026-04-20, so every 52-week DVOL percentile is partial.
+- **Prose now out of date** (found while mapping; the prose was not edited):
+  - [[unlock-cascade-watch]] says token-unlock data is not available from CryptoDataAPI; `/supply/unlocks` serves it.
+  - [[vix-calls]] calls "3-month > 1-month" backwardation in its kill criteria; that is contango. The gate is partial and says so.
+
 ## 2026-10-17 — Three new strategy pages on the 2026-10 data releases
 
 **Scope:** Three new strategy pages, each built on a feed that had no strategy page yet. All are `draft` and `untested`, and each had a full `gates:` block from the start: 48 gates in all, 47 runnable and 1 partial.

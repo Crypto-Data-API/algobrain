@@ -21,6 +21,48 @@ data_required: [futures-continuous-contracts, ohlcv-daily, shipping-rates, pipel
 capacity_usd: 1000000000
 min_capital_usd: 1000000
 related: ["[[crude-oil]]", "[[copper]]", "[[basis-risk]]", "[[basis-trading]]", "[[commodities]]", "[[cme-group]]", "[[london-metal-exchange]]"]
+gates:
+  - id: spread_selection
+    role: universe
+    rule: "A commodity priced at two or more locations with liquid futures or physical markets (WTI-Brent, Brent-Dubai, Midland-Cushing, LME-SHFE copper, CBOT-Matif wheat)"
+    runnable: false
+    note: "No commodity futures or physical prices are served. This needs CME, ICE, LME and SHFE data."
+  - id: fair_value
+    role: filter
+    rule: "Fair spread = transportation cost + quality differential + seasonal adjustment"
+    runnable: false
+    note: "Needs tanker freight (Baltic, Clarksons), pipeline tariffs and grade specs, none of which is served."
+  - id: spread_percentile
+    role: entry
+    rule: "Spread = Price_A - Price_B, ranked against its last 756 trading days (3 years). Long the spread below the 10th percentile, short it above the 90th; size scales into the extreme ((10 - pctile) / 10 of base)"
+    runnable: false
+    note: "Both legs are commodity prices we do not serve."
+  - id: temporary_not_structural
+    role: filter
+    rule: "Confirm the dislocation is temporary (weather, maintenance, ship scheduling), not structural (a new pipeline, a trade-policy change)"
+    runnable: false
+    note: "A fundamental judgement that needs inventory, vessel-tracking and pipeline-flow data; nothing served covers it."
+  - id: reversion_exit
+    role: exit
+    rule: "Close when the spread returns to the 40th-60th percentile (the pseudocode closes at the 50th)"
+    runnable: false
+    note: "Needs the same unserved spread history as spread_percentile."
+  - id: percentile_stop
+    role: stop
+    rule: "Stop out if the spread reaches the 2nd or 98th percentile"
+    runnable: false
+    note: "Needs the same unserved spread history as spread_percentile."
+  - id: time_stop
+    role: stop
+    rule: "Close after 60 days without reversion and reassess the fundamentals"
+    runnable: true
+    input: position
+  - id: risk_per_trade
+    role: sizing
+    rule: "Size on spread volatility, not outright price volatility: 1-2% portfolio risk per spread trade"
+    runnable: false
+    input: position
+    note: "The risk budget is on the position record, but spread volatility needs the unserved spread history."
 ---
 
 # Geographic Spread Trading

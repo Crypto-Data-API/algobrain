@@ -34,6 +34,123 @@ kill_criteria: |
   - OI-build signal fires but no breakout occurs within 48h for 5+ consecutive signals: the OI-build is not predicting breakouts; recalibrate or disable the OI pause
 
 related: ["[[regime-gated-grid]]", "[[funding-skewed-grid]]", "[[grid-trading]]", "[[oi-confirmed-trend]]", "[[oi-flush-reversion]]", "[[leverage-stress-tail-hedge]]", "[[open-interest]]", "[[funding-rate]]", "[[perpetual-futures]]", "[[market-microstructure]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: oi_12h_calm
+    role: filter
+    rule: "Run only while the 12-hour OI change is below +5%; pause when it reaches +5%"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    field: data[].oi_close
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].oi_close
+    note: "start = 13 hours ago: compare the last oi_close with the one 12 bars earlier (coin units, so price moves do not distort it). The forming hour is not served, so the read lags by up to an hour; assets[].open_interest on /hyperliquid/open-interest is the live end point. Hyperliquid OI only, Pro Plus, from 2026-03-30."
+  - id: oi_24h_calm
+    role: filter
+    rule: "Run only while the 24-hour OI change is below +8%; pause when it reaches +8%"
+    runnable: true
+    endpoint: /api/v1/liquidity/oi-divergence
+    field: rows[].oi_change_24h_pct
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].oi_close
+    note: "Hyperliquid OI for about 25 large perps including BTC and ETH."
+  - id: funding_run_band
+    role: filter
+    rule: "Run only while 8h funding is between -0.03% and +0.05%"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hyperliquid settles hourly: the 8h figure is the sum of the last 8 prints. Binance's native 8h print is the last rates[].funding_rate on /derivatives/binance/funding-rates?symbol={coin}USDT."
+  - id: atr_run
+    role: filter
+    rule: "Run only while ATR(14) on 1h candles is at or below 1.2% of spot"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=30&atr=14
+    field: candles[].atr
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1h&start={start}
+    replay_field: klines[].c
+    note: "atr / close on the last closed bar. Replay computes ATR(14) from h, l and c."
+  - id: adx_run
+    role: filter
+    rule: "Run only while ADX(14) on 4h candles is at or below 25"
+    runnable: true
+    endpoint: /api/v1/indicators/adx?coin={coin}&interval=4h
+    field: items[].adx
+    replay: /api/v1/indicators/adx?coin={coin}&interval=4h&history=500
+    replay_field: items[].history[].adx
+  - id: funding_pause
+    role: stop
+    rule: "Pause the grid when 8h funding reaches +0.06% or falls to -0.03%"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Same 8-print sum as funding_run_band. Between +0.05% and +0.06% the grid may not start but does not pause."
+  - id: atr_pause
+    role: stop
+    rule: "Pause the grid when ATR(14, 1h) rises to 1.5% of spot"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=30&atr=14
+    field: candles[].atr
+  - id: adx_pause
+    role: stop
+    rule: "Pause the grid when ADX(14, 4h) rises to 30"
+    runnable: true
+    endpoint: /api/v1/indicators/adx?coin={coin}&interval=4h
+    field: items[].adx
+    replay: /api/v1/indicators/adx?coin={coin}&interval=4h&history=500
+    replay_field: items[].history[].adx
+  - id: regime_pause
+    role: stop
+    rule: "Force a full pause in trending or shock regimes"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "From the agent workflow. structural_shock_crisis is the served shock state; the cycle states are not trend reads, so the HMM labels strong_trend_bull and strong_trend_bear on /quant/market are the nearer trending signal. Which to use is the desk's call."
+  - id: resume_oi_stable
+    role: entry
+    rule: "Resume only after the 12h OI change has stayed below +3% for 6 consecutive hours"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    field: data[].oi_close
+    note: "start = 19 hours ago: for each of the last 6 bars, its oi_close against the one 12 bars earlier."
+  - id: resume_funding_band
+    role: entry
+    rule: "Resume only with 8h funding back within -0.02% to +0.04%"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+  - id: resume_vol_calm
+    role: entry
+    rule: "Resume only with ATR(14, 1h) at or below 1.1% and ADX at or below 25 on the most recent 4h candle"
+    runnable: true
+    endpoint: /api/v1/indicators/adx?coin={coin}&interval=4h
+    field: items[].adx
+    note: "The ATR leg is candles[].atr on /hyperliquid/candles?coin={coin}&interval=1h&limit=30&atr=14."
+  - id: min_pause_12h
+    role: filter
+    rule: "Stay paused at least 12 hours after a pause trigger"
+    runnable: true
+    input: position
+  - id: grid_layout
+    role: sizing
+    rule: "Grid range plus and minus 3-5% from mid at activation, levels 0.4-0.6% apart, capital spread evenly, at most 20% of the portfolio at risk"
+    runnable: true
+    input: position
+  - id: inventory_cap
+    role: stop
+    rule: "Close the grid and exit when one-sided inventory exceeds 15% of the portfolio"
+    runnable: true
+    input: position
+  - id: sleeve_drawdown_kill
+    role: stop
+    rule: "Stop the grid when the sleeve drawdown exceeds 12% from its high-water mark"
+    runnable: true
+    input: position
 ---
 
 # OI-Aware Grid

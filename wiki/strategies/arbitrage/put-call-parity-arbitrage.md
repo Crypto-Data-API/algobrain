@@ -16,6 +16,117 @@ edge_mechanism: "Deribit options flow does not continuously enforce parity again
 crowding_risk: high
 decay_evidence: "BTC/ETH monthly parity holds tight as options desks arbitrage it; residual edge concentrates in funding-spike windows, thin alt/weekly options, and new expiries before market makers adjust."
 related: ["[[arbitrage]]", "[[put-call-parity]]", "[[synthetic-long]]", "[[cash-and-carry]]", "[[funding-rate]]", "[[perpetual-futures]]", "[[deribit]]", "[[greeks-live]]", "[[box-spread]]", "[[volatility-arbitrage]]", "[[limits-to-arbitrage]]", "[[cryptodataapi]]"]
+gates:
+  - id: chain_same_strike
+    role: universe
+    rule: "Scan the Deribit chain for every expiry with a call and a put at the same strike"
+    runnable: false
+    note: "No option chain or per-strike prices are served. /volatility/implied lists BTC and ETH expiries with ATM IV only (term_structure, Pro Plus); the chain needs Deribit's public API."
+  - id: spot_leg
+    role: entry
+    rule: "Spot S for the parity identity"
+    runnable: true
+    endpoint: /api/v1/market-data/ticker/price?symbol=BTCUSDT
+    field: price
+    note: "Binance spot. For a perp-hedged box use the perp mark, assets[].mark_price on /hyperliquid/open-interest. Deribit settles to its own time-averaged index, which is not served."
+  - id: funding_rate_r
+    role: entry
+    rule: "Financing rate r from perp funding and the dated-futures basis, as a funding TWAP over the option's remaining life"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=90
+    field: avg_rate
+    replay: /api/v1/backtesting/funding?symbol=BTC&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "avg_rate is the mean of the last 90 Binance 8h prints (30 days); x 3 x 365 annualises it. That is a trailing TWAP standing in for funding over the remaining life, which nobody can observe. No dated-futures basis is served."
+  - id: parity_residual
+    role: entry
+    rule: "residual = (C - P) - (S - K x e^(-rT)) per strike and expiry"
+    runnable: false
+    note: "Needs call and put prices per strike, which are not served."
+  - id: cost_threshold
+    role: filter
+    rule: "Threshold = exchange and settlement fees + half the bid-ask on each of the 4 legs + a buffer for index-settlement pin and expected perp funding"
+    runnable: false
+    note: "Option bid-ask quotes are not served; the fee schedule and buffer are the desk's."
+  - id: conversion_entry
+    role: entry
+    rule: "residual above threshold + costs: conversion (long spot or perp, long put, short call)"
+    runnable: false
+    input: derived
+    inputs: [parity_residual, cost_threshold]
+    note: "Both inputs are unserved."
+  - id: reversal_entry
+    role: entry
+    rule: "residual below -(threshold + costs): reversal (short spot or perp, short put, long call)"
+    runnable: false
+    input: derived
+    inputs: [parity_residual, cost_threshold]
+    note: "Both inputs are unserved."
+  - id: no_vol_shock
+    role: filter
+    rule: "Enter boxes and conversions only when vol stress is low; not in vol_shock, where perp-leg liquidation risk dominates the locked spread"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    note: "From the AI-agent workflow. Skipping regime vol_shock is mechanical; what counts as low stress is not defined (composite_score on /volatility/regime/score is the market-wide read), so the cutoff is the desk's call."
+  - id: heavy_oi_pin_caution
+    role: filter
+    rule: "Distrust apparent violations near heavy-OI strikes into expiry: they are often real dealer flow"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    note: "BTC only, one max-pain strike on an unnamed expiry; per-strike open interest is not served, so heavy-OI strikes cannot be listed."
+  - id: hold_to_expiry
+    role: exit
+    rule: "Hold to the 08:00 UTC Deribit expiry; European cash settlement self-liquidates the box"
+    runnable: true
+    input: position
+    note: "The settlement index price is not served."
+  - id: early_unwind
+    role: exit
+    rule: "Unwind early if the dislocation reverts before expiry"
+    runnable: false
+    input: derived
+    inputs: [parity_residual]
+    note: "Needs live option prices."
+  - id: perp_margin_headroom
+    role: stop
+    rule: "Keep margin headroom on the perp leg so a DVOL or price spike cannot liquidate the hedge before convergence"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "Margin comes from the position record and DVOL is served for BTC and ETH. The page sets no headroom figure, so that is the desk's call."
+  - id: size_lesser_of
+    role: sizing
+    rule: "Size by the lesser of margin capacity (with perp maintenance margin), option open interest at the strike and single-venue limits"
+    runnable: partial
+    input: position
+    note: "Margin and venue limits come from the account. Open interest at a strike is not served, so that leg of the cap needs Deribit's book summary."
+  - id: kill_net_edge
+    role: stop
+    rule: "Kill switch: rolling 30-day average net edge per box below fees + 2 bp"
+    runnable: true
+    input: position
+  - id: kill_liquidation_loss
+    role: stop
+    rule: "Kill switch: any perp-leg liquidation or forced unwind loss above 3x the expected per-trade profit"
+    runnable: true
+    input: position
+  - id: kill_funding_volatility
+    role: stop
+    rule: "Kill switch: funding so volatile that the forward cannot be pinned over the hold"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=100
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "The standard deviation of the hourly prints measures funding volatility; the page gives no cutoff, so the level is the desk's call."
+  - id: kill_margin_rule_change
+    role: stop
+    rule: "Kill switch: an exchange margin or withdrawal change raises capital lock-up without a matching return"
+    runnable: false
+    note: "Exchange rule changes are not served; a desk judgement."
 ---
 
 # Put-Call Parity Arbitrage (Crypto)

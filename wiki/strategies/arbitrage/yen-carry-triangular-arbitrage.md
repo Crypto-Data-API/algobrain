@@ -22,6 +22,61 @@ expected_sharpe: 0.4
 expected_max_drawdown: 0.4
 breakeven_cost_bps: 12
 decay_evidence: "Crowding-driven crashes: Aug 16 2007, Oct 24 2008, Aug 5 2024 Japan crash (Nikkei -12%, JPY +5%). Returns persist between crashes due to real-rate gap."
+gates:
+  - id: cip_basis
+    role: entry
+    rule: "Cross-currency basis = (USD/JPY forward - CIP-implied forward) / spot, with the CIP forward from spot, TONA and the target T-bill yield"
+    runnable: false
+    note: "No JPY spot or forwards, TONA, T-bill yields or basis-swap quotes are served; the only FX on /sentiment/macro is EUR/USD. Needs an FX and rates vendor."
+  - id: basis_over_12bp
+    role: entry
+    rule: "Put on the triangle (borrow JPY, convert, buy target T-bills, sell target forward) when the basis exceeds 12 bp plus the tail-hedge premium"
+    runnable: false
+    input: derived
+    inputs: [cip_basis]
+    note: "cip_basis is unserved."
+  - id: hold_and_roll
+    role: exit
+    rule: "Hold to forward expiry (1, 3 or 6 months) and roll"
+    runnable: true
+    input: position
+  - id: tail_hedge
+    role: sizing
+    rule: "Tail-hedge with out-of-the-money JPY calls or EM currency puts"
+    runnable: false
+    note: "No FX option prices are served."
+  - id: leverage_cap
+    role: sizing
+    rule: "Cap leverage so an 8-12% JPY spike cannot breach the 25% drawdown kill: at most 2.5x hedged, at most 1x with the FX leg unhedged"
+    runnable: true
+    input: position
+  - id: exit_rate_gap_200bp
+    role: exit
+    rule: "Unwind when the real-rate gap compresses below about 200 bp"
+    runnable: false
+    note: "No Japanese or target-country policy rates or inflation series are served."
+  - id: exit_basis_below_costs
+    role: exit
+    rule: "Unwind the hedged book when the basis falls below round-trip costs (about 12 bp), or when tail-hedge cost exceeds the expected carry for the tenor"
+    runnable: false
+    input: derived
+    inputs: [cip_basis]
+    note: "cip_basis and FX option prices are unserved."
+  - id: kill_usdjpy_vol_20pct
+    role: stop
+    rule: "Kill switch: USD/JPY 1-month implied vol above 20% (crowded-unwind warning)"
+    runnable: false
+    note: "/volatility/implied covers BTC and ETH options only; no FX implied vol is served."
+  - id: kill_drawdown_25pct
+    role: stop
+    rule: "Kill switch: cumulative drawdown above 25% of allocated capital"
+    runnable: true
+    input: position
+  - id: kill_crowding
+    role: stop
+    rule: "De-gross when CFTC IMM or BIS positioning is at crowding extremes while carry-to-risk is poor"
+    runnable: false
+    note: "No CFTC or BIS FX positioning is served."
 ---
 
 # Yen Carry Triangular Arbitrage

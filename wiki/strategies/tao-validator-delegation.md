@@ -19,6 +19,73 @@ capacity_usd: 10000000
 crowding_risk: low
 breakeven_cost_bps: 0
 related: ["[[bittensor]]", "[[dtao]]", "[[bittensor-subnets]]", "[[bittensor-subnet-rotation]]", "[[alpha-token-arbitrage]]", "[[staking-rewards]], [[proof-of-stake]]"]
+gates:
+  - id: take_rate_5_10
+    role: filter
+    rule: "Prefer validators with a 5-10% take rate; avoid 15% and above, and treat 0% as a sustainability risk"
+    runnable: false
+    note: "Bittensor validator data (take rates, vtrust, uptime, stake, subnet exposure) is not served; it comes from taostats.io, dtao.gg or Subtensor RPC."
+  - id: high_vtrust
+    role: filter
+    rule: "Higher vtrust (validator trust score) is better"
+    runnable: false
+    note: "No Bittensor chain data is served."
+  - id: uptime_consistency
+    role: filter
+    rule: "Avoid validators with offline periods or slashing in their history (the pseudocode credits 90-day uptime)"
+    runnable: false
+    note: "No validator uptime or slashing history is served."
+  - id: moderate_total_stake
+    role: filter
+    rule: "Prefer moderate-scale validators with 10K-100K TAO staked"
+    runnable: false
+    note: "No per-validator stake is served."
+  - id: subnet_exposure_quality
+    role: filter
+    rule: "Pick subnets with strong emission share, a non-adversarial validator set, meaningful bonding-curve depth and no pending owner-dump signals"
+    runnable: false
+    note: "No subnet emissions, alpha-token bonding-curve depth or owner activity is served."
+  - id: top5_validator_score
+    role: entry
+    rule: "Delegate equally to the top 5 validators by the composite score (vtrust, take rate, uptime, stake, subnet quality)"
+    runnable: false
+    input: derived
+    inputs: [take_rate_5_10, high_vtrust, uptime_consistency, moderate_total_stake, subnet_exposure_quality]
+    note: "Every input is Bittensor chain data we do not serve."
+  - id: diversify_validators_subnets
+    role: sizing
+    rule: "Spread across 3-5 validators and 5-10 subnets; re-evaluate validator performance quarterly"
+    runnable: true
+    input: position
+  - id: basis_beats_delegation
+    role: exit
+    rule: "Kill when annualised TAO short-perp funding pays more than the blended delegation yield (the basis trade dominates)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin=TAO&limit=100
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin=TAO&interval=1d&start={start}&end={end}
+    replay_field: data[].funding_sum
+    note: "Annualise hourly funding (mean rate x 24 x 365). The delegation APY side comes from taostats and is not served. The page's workflow says a sustained crossover; how long counts as sustained is the desk's call."
+  - id: tao_usd_overlay
+    role: sizing
+    rule: "Mark the TAO plus alpha position to USD so TAO-denominated yield never masks a USD loss"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin=TAO&interval=1d&limit=2
+    field: candles[].close
+    note: "The page names TAOUSDT on Binance spot (/api/v1/market-data/ticker/price?symbol=TAOUSDT); the Hyperliquid TAO perp close works the same. Alpha tokens have no served price."
+  - id: drawdown_guard
+    role: exit
+    rule: "De-risk the staked principal ahead of the 7-day unstaking delay when TAO's regime probabilities deteriorate"
+    runnable: partial
+    endpoint: /api/v1/quant/coins/TAO
+    field: regime.label
+    note: "From the page's AI-agent workflow, which gives no threshold. strong_trend_bear, or a high tomorrow.p_drawdown_gt_5pct (24h horizon), are the obvious reads; respect meta.insufficient_history. What counts as deteriorating is the desk's call."
+  - id: scoring_differentiation_kill
+    role: filter
+    rule: "Kill when the validator scoring model stops differentiating (all validators within 100 bps of each other)"
+    runnable: false
+    note: "Needs per-validator yields from Bittensor chain data, which we do not serve."
 ---
 
 # TAO Validator Delegation

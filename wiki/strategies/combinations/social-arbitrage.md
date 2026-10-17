@@ -19,6 +19,63 @@ capacity_usd: 5000000
 crowding_risk: medium
 breakeven_cost_bps: 100
 related: ["[[chris-camillo]]", "[[sentiment-trading]]", "[[alternative-data-alpha]]", "[[news-trading]]", "[[informational-edge]]", "[[information-asymmetry]]", "[[edge-taxonomy]]", "[[alternative-data-providers]]"]
+gates:
+  - id: observe_inflection
+    role: entry
+    rule: "Step 1: notice a consumer, cultural or product shift in everyday life that feels like an inflection"
+    runnable: false
+    note: "A human observation by design; no data source answers it."
+  - id: google_trends_5y
+    role: filter
+    rule: "Step 2a: Google Trends 5-year view confirms an inflection, not a seasonal peak"
+    runnable: false
+    note: "No search-trend data is served. Needs Google Trends."
+  - id: social_mentions
+    role: filter
+    rule: "Step 2b: social mention frequency for the theme is inflecting"
+    runnable: false
+    note: "No social-volume series is served; /news/* scores news headlines per coin, not social mentions of consumer themes. Needs LunarCrush, Santiment or Reddit/X scraping."
+  - id: web_and_app_traffic
+    role: filter
+    rule: "Step 2c: web traffic and app-store rankings confirm the trend"
+    runnable: false
+    note: "Not served. Needs Similarweb and Sensor Tower."
+  - id: channel_checks
+    role: filter
+    rule: "Step 2d: on-the-ground retail channel checks (store visits, inventory, shelf placement) confirm the trend"
+    runnable: false
+    note: "Physical observation; no data source."
+  - id: pure_play_mapping
+    role: universe
+    rule: "Step 3: trade listed companies with meaningful revenue exposure to the trend (more than 30% of revenue in the pseudocode), preferring pure plays"
+    runnable: false
+    note: "Equity revenue segments are not served; this page trades stocks, not crypto. Needs company filings or a fundamentals feed."
+  - id: call_option_expression
+    role: entry
+    rule: "Express the bet with call options 2-6 months to expiry, aligned with the next one or two earnings prints"
+    runnable: false
+    note: "No equity option chain or earnings calendar is served."
+  - id: conviction_size
+    role: sizing
+    rule: "Size at high conviction: 5-30% of the portfolio per theme, with a cap on total option premium at risk"
+    runnable: true
+    input: position
+  - id: no_stop_add_to_losers
+    role: stop
+    rule: "No stop losses; add to losing positions while the thesis is intact"
+    runnable: partial
+    input: position
+    note: "Whether the thesis is intact is a judgement the page leaves to the trader."
+  - id: mainstream_exit
+    role: exit
+    rule: "Exit when the thesis becomes mainstream, typically before or right after the first confirming earnings print"
+    runnable: false
+    note: "Needs an earnings calendar and sell-side coverage tracking, neither of which is served."
+  - id: thesis_clock
+    role: exit
+    rule: "Pre-commit to an exit date tied to the catalyst, not just a price"
+    runnable: true
+    input: position
 ---
 
 # Social Arbitrage

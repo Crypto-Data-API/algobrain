@@ -39,6 +39,144 @@ kill_criteria: |
   - reward token down > 50% in 30 days with emissions still the majority of APR (unsustainable)
 
 related: ["[[impermanent-loss]]", "[[loss-versus-rebalancing]]", "[[automated-market-maker]]", "[[liquidity-pool]]", "[[delta-neutral]]", "[[funding-rate-arbitrage]]", "[[smart-contract-risk]]", "[[stablecoin-depeg]]", "[[curve]]", "[[convex]]", "[[aave]]", "[[pendle]]", "[[ethena-usde]]", "[[mev-strategies]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[kelly-criterion]]"]
+gates:
+  - id: apr_decomposition
+    role: universe
+    rule: "Decompose each pool's headline APR into fee APR (real yield), emission APR and incentive APR before acting"
+    runnable: false
+    note: "Pool APRs and their split are not served. DefiLlama Yields and protocol subgraphs are the sources the page names."
+  - id: real_yield_floor
+    role: filter
+    rule: "Real-yield ratio fee_APR / total_APR at least 30%, unless running a short-dated emissions harvest with a pre-planned exit"
+    runnable: false
+    input: derived
+    inputs: [apr_decomposition]
+    note: "Only as runnable as apr_decomposition."
+  - id: emissions_at_exit_price
+    role: entry
+    rule: "Mark emission and incentive APR at the reward token's expected exit price, not spot (farming tokens often fall 80-95% from peak)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=90
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}USDT&exchange=binance&interval=1d&start={start}
+    replay_field: klines[].c
+    note: "The reward token's price path is served when it trades on Hyperliquid or Binance; most small farm tokens do not. The expected exit price is the farmer's estimate (the example haircuts 13% emissions to about 6%)."
+  - id: risk_adjusted_hurdle
+    role: entry
+    rule: "Enter only when fee_APR + haircut(emission_APR) - expected IL - expected exploit cost exceeds the required return (6% in the pseudocode)"
+    runnable: false
+    input: derived
+    inputs: [apr_decomposition, emissions_at_exit_price]
+    note: "Only as runnable as apr_decomposition; exploit probability is the farmer's own estimate."
+  - id: tvl_health
+    role: filter
+    rule: "Pool TVL stable or rising, and no single whale holding most of it"
+    runnable: false
+    note: "Per-pool TVL and its holder concentration are not served; read them from DefiLlama or the pool's LP token holders."
+  - id: protocol_audit
+    role: filter
+    rule: "Audited by reputable firms (Trail of Bits, OpenZeppelin, Spearbit), with meaningful TVL-days survived and no unresolved critical findings"
+    runnable: false
+    note: "Audit status and TVL history per protocol are not served."
+  - id: pair_risk
+    role: filter
+    rule: "Stable-stable pairs, or a volatile pair you will delta-hedge; a naked volatile LP only when fee APR clearly exceeds expected LVR"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: is_stable
+    note: "is_stable flags stablecoins and pegged tokens; vol.rv_cc_30 gives the sigma for an LVR estimate (sigma^2 / 8 for a full-range pool). Fee APR is not served, so the naked-pair test cannot be completed."
+  - id: token_security
+    role: filter
+    rule: "Gate every pool token through a rug and honeypot check before capital touches the pool"
+    runnable: partial
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: risk_flags.is_honeypot
+    note: "{address} is each pool token's contract, from the candidate pool or pools[].base_token.address on /dex/trending or /dex/new-pools for {chain}. taxes and risk_score (100 = safest) are in the same report; the page sets no pass line, and this screens the token, not the farm contract's code."
+  - id: exploit_kelly_size
+    role: sizing
+    rule: "Size inversely to exploit probability: expected_net = APR x (1 - P_exploit) - P_exploit x loss, then at most 0.25x Kelly"
+    runnable: false
+    note: "P_exploit is the farmer's estimate from audits, code maturity and dependencies; nothing served answers it."
+  - id: pool_cap
+    role: sizing
+    rule: "Never more than 25% of the DeFi book in one pool, plus a cap per protocol across pools"
+    runnable: true
+    input: position
+    note: "The page sets no per-protocol number; pick one."
+  - id: delta_hedge
+    role: sizing
+    rule: "Volatile-pair LP: short a perp matching the LP's delta (about +0.5 of the position in the volatile asset for a 50/50 pool) and rebalance as delta drifts"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/prices
+    field: prices.{coin}
+  - id: hedge_worth_it
+    role: filter
+    rule: "Hedge only when fee_APR + haircut(emission_APR) exceeds hedge funding + rebalance gas + expected residual LVR"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=100
+    field: history[].funding_rate
+    note: "Hedge funding is served (hourly Hyperliquid prints; mean x 24 x 365 is the annual rate). Pool APRs and gas are not."
+  - id: yield_degradation_exit
+    role: exit
+    rule: "Rotate out when the real fee APR stays below the risk-adjusted hurdle for more than 14 days"
+    runnable: partial
+    input: position
+    note: "Realized fees are in the position record; the hurdle's IL and exploit terms are the farmer's estimates."
+  - id: il_exceeds_fees_exit
+    role: exit
+    rule: "Exit a volatile pair when cumulative impermanent loss exceeds cumulative fees earned"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/prices
+    field: prices.{coin}
+    note: "IL from the entry price ratio and the current price; fees from the position record."
+  - id: security_event_exit
+    role: stop
+    rule: "Exit immediately on any exploit, governance attack or depeg on the protocol or a composed dependency"
+    runnable: partial
+    endpoint: /api/v1/security/events
+    field: items[].event_type
+    note: "Hacks and depegs from the last 10 days (title, target_type, chains, amount_usd); security_stress_score on /security/regime/score is the market-wide read. Governance attacks are covered only when reported as a hack, and matching an event to your dependency tree is the bot's job."
+  - id: depeg_exit
+    role: stop
+    rule: "Exit when a stablecoin in the pool depegs by more than 1%, sustained"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=depeg
+    field: items[].deviation_bps
+    note: "100 bps = 1%. The page does not say how long sustained is."
+  - id: tvl_exodus
+    role: stop
+    rule: "Exit when pool TVL falls more than 40% in 7 days"
+    runnable: false
+    note: "Per-pool TVL history is not served."
+  - id: reward_token_crash
+    role: stop
+    rule: "Exit when the reward token is down more than 50% in 30 days while emissions are still most of the APR"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=31
+    field: candles[].close
+    note: "The price leg is served for listed tokens (latest close over the close 30 bars back); the emissions share of APR is not."
+  - id: harvest_rewards
+    role: exit
+    rule: "Harvest and sell or hedge reward tokens on a schedule rather than accumulating them"
+    runnable: partial
+    input: position
+    note: "The page sets no schedule."
+  - id: rotation_gate
+    role: entry
+    rule: "Rotate only when the new risk-adjusted APR minus the old exceeds the round-trip gas and swap cost of moving"
+    runnable: false
+    note: "Pool APRs and gas are not served."
+  - id: regime_scale
+    role: sizing
+    rule: "Scale the farm book with the market model's bull and bear odds: emissions-heavy APYs decay fastest in bear states"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow, which gives no scaling. probabilities.directional holds the up and down odds."
 ---
 
 # DeFi Yield Farming

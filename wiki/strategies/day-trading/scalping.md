@@ -38,6 +38,105 @@ kill_criteria: |
   - gross-to-net ratio below 1.5 (fees/funding eating >1/3 of gross P&L)
 
 related: ["[[order-flow-scalping]]", "[[vwap-trading]]", "[[market-making-strategy]]", "[[hyperliquid-market-making]]", "[[bid-ask-spread]]", "[[spread]]", "[[order-book]]", "[[depth-of-market]]", "[[cumulative-volume-delta]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-by-hour]]", "[[hyperliquid]]", "[[hyperliquid-fee-tiers-and-maker-rebates]]", "[[fees]]", "[[fees-and-friction]]", "[[slippage]]", "[[latency]]", "[[transaction-costs]]", "[[scalping-vs-position-trading]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: deep_perps_only
+    role: universe
+    rule: "Scalp only the tightest, deepest perps: BTC and ETH, with SOL in active windows"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "BTC and ETH are fixed; when a window is active enough for SOL is the desk's call."
+  - id: maker_fee_venue
+    role: universe
+    rule: "Trade on a venue and tier with maker rebates or near-zero maker fees; the fee tier is a strategy parameter"
+    runnable: true
+    input: position
+    note: "Hyperliquid's base fee schedule is under fees on /api/v1/hyperliquid/meta; your own tier comes from the venue."
+  - id: min_spread_3bps
+    role: filter
+    rule: "Quote only when the spread is at least 3 bps, enough to cover costs"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: bids[].price
+    note: "spread_bps = (best ask - best bid) / mid x 10,000 from bids[0] and asks[0]. The book is a snapshot taken on request (ts gives its age), so recheck before each quote; /liquidity/depth serves spread_bps for the top-25 perps every ~2 minutes."
+  - id: funding_guard
+    role: filter
+    rule: "Do not open within 120 seconds of a funding stamp when funding is above 0.05% per 8h in absolute terms"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    note: "Hyperliquid settles every hour on the hour, so the guard applies before each hour: compare abs(current_rate x 8) with 0.0005. Binance stamps every 8 hours."
+  - id: active_windows
+    role: filter
+    rule: "Trade high-volume windows and avoid dead hours"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=60
+    field: data[].n_trades
+    note: "The page sets no volume level for a dead hour, so the cutoff is the desk's call."
+  - id: regime_gate
+    role: filter
+    rule: "Spread capture works in active two-sided tape and dies in one-way trends; stand down in a vol shock"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the agent workflow. choppy_high_vol fits; the page's vol_shock is vol_spike in this label set; whether strong_trend_* labels mean stand down, and what an active range is, are the desk's call."
+  - id: spread_scalp
+    role: entry
+    rule: "Primary: rest post-only limit orders at or inside the top of book on both sides, skewed toward the side the CVD favours (10-second slope)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=5
+    field: data[].cvd_usd
+    note: "Quoting itself needs the venue's live book. The served CVD is per closed minute, so the lean is a 1-minute read, not 10 seconds."
+  - id: momentum_scalp
+    role: entry
+    rule: "Momentum scalp: enter as maker on a pullback after a sudden volume or CVD surge, using a fast EMA on a tick or second chart"
+    runnable: false
+    note: "Tick and second bars are not served; 1-minute candles and 1-minute trade-flow are the finest."
+  - id: absorption_scalp
+    role: entry
+    rule: "Absorption scalp: join the resting side when large L2 size absorbs aggressive flow without price moving through"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: bids[].size
+    note: "A request-time book snapshot cannot show size absorbing wave after wave or being pulled; the size threshold is not given."
+  - id: profit_target
+    role: exit
+    rule: "Take profit at 5-20 bps on BTC/ETH (pseudocode 10 bps)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: time_exit
+    role: exit
+    rule: "Scratch the trade if it has not moved in favour within 30-90 seconds (pseudocode 75)"
+    runnable: true
+    input: position
+  - id: hard_stop
+    role: stop
+    rule: "Hard stop 5-15 bps from entry (pseudocode 10 bps)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: adverse_flow_exit
+    role: exit
+    rule: "Exit at once if the book loads against the position or CVD flips (5-second slope)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=5
+    field: data[].cvd_usd
+    note: "Only a 1-minute CVD flip and a book snapshot are served, and loading against is not quantified."
+  - id: risk_limits
+    role: sizing
+    rule: "Risk at most 0.3-0.5% of equity per trade with at most 1-3 positions at once"
+    runnable: true
+    input: position
+  - id: maker_fill_ratio
+    role: sizing
+    rule: "Keep the maker fill ratio at 80% or more; pause below 70%"
+    runnable: true
+    input: position
 ---
 
 # Scalping (Crypto Perps)

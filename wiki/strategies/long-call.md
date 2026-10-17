@@ -12,6 +12,88 @@ markets: [crypto, options]
 complexity: beginner
 backtest_status: untested
 related: ["[[long-put]]", "[[synthetic-long]]", "[[risk-reversal]]", "[[straddle]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[deribit]]", "[[greeks-live]]", "[[dvol]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[delta]]", "[[gamma]]", "[[theta]]", "[[vega]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_options
+    role: universe
+    rule: "BTC and ETH options on Deribit, whose books are deep; alt options (SOL, XRP) only accepting wide spreads and sparse strikes"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "Lists the coins whose Deribit implied vol is served (BTC and ETH). Free tier sees BTC only."
+  - id: strike_by_delta
+    role: entry
+    rule: "Pick the strike by delta: ATM about 0.50 for short-dated speculation, OTM 0.20-0.35 around catalysts, ITM 0.65-0.80 as a capped-downside coin substitute"
+    runnable: false
+    note: "No option chain, strike list or per-strike Greeks are served. Needs Deribit's public instruments and ticker API (or Greeks.live)."
+  - id: tenor_window
+    role: entry
+    rule: "Tenor 7-30 DTE for event or swing plays, 60-180 DTE for slower theses"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "The 12 nearest Deribit expiries with their days to expiry and ATM IV (Pro Plus; empty on lower tiers). The list reaches about a year out."
+  - id: dvol_cheap_vs_range
+    role: filter
+    rule: "Buy when DVOL sits in the lower part of its own range, cheap against your realised-vol forecast"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Daily DVOL for about 180 days (Pro Plus), plus realized_30 and vrp (DVOL minus 30-day realized) on each item. The page names no percentile cut or range window, so 'lower part' is the desk's call. The page says DVOL is not on CryptoDataAPI; it is, here."
+  - id: no_dvol_spike
+    role: filter
+    rule: "Do not buy straight into a DVOL spike: crypto vol crushes after the event prices in"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol_change_24h
+    note: "No spike threshold is given. The agent workflow's reading: avoid while /api/v1/volatility/regime/{coin} reports vol_shock."
+  - id: compressed_vol_regime
+    role: filter
+    rule: "A compressed realised-vol state flags cheap convexity ahead of a catalyst; avoid vol_shock"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow."
+  - id: upside_catalyst
+    role: entry
+    rule: "A credible up-move catalyst (ETF flow print, unlock, FOMC/CPI, protocol upgrade) falls inside the option's life"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=30
+    field: items[].days_until
+    note: "Compare days_until with the chosen expiry's expiry_days. Unlocks and US macro prints are served up to 30 days out; protocol upgrades and ETF flow prints are not on the calendar, and judging a catalyst credible is the desk's call."
+  - id: perp_vs_call
+    role: filter
+    rule: "Prefer the call when funding is punishing longs; when funding is low or negative the perp long may be the cheaper bullish vehicle"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: hyperliquid.current_rate
+    note: "Hourly Hyperliquid rate; binance.current_rate in the same response is Binance's 8-hour rate. No funding cut-off is given, so weighing it against theta is the desk's call. Hourly history is on /api/v1/hyperliquid/funding-rates (history[].funding_rate)."
+  - id: catalyst_passed_time_stop
+    role: exit
+    rule: "If the catalyst passes without the move, exit rather than keep paying theta"
+    runnable: partial
+    input: derived
+    inputs: [upside_catalyst]
+    note: "The page gives no move size that counts as the catalyst working."
+  - id: take_profit_roll_up
+    role: exit
+    rule: "Bank a large gain and roll up to a higher strike, or sell a higher call against it once the easy move is in"
+    runnable: false
+    input: position
+    note: "No profit threshold is given, and option marks for the held and the new strike come from Deribit; we serve no option prices."
+  - id: expiry_pin
+    role: exit
+    rule: "Near the 08:00 UTC expiry, max pain and high-OI strikes can pin spot away from the strike in the final days"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    replay: /api/v1/backtesting/snapshots?data_type=coinglass_options&start={start}
+    replay_field: snapshots[].data[].max_pain
+    note: "BTC only, one max-pain strike on an expiry the response does not name. No per-strike open interest is served. Replay from 2026-05-09."
+  - id: max_loss_premium
+    role: sizing
+    rule: "Maximum loss is the premium paid: size the premium as the full risk"
+    runnable: true
+    input: position
 ---
 
 # Long Call (Crypto)

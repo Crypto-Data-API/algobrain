@@ -12,6 +12,80 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[straddle-strangle]]", "[[strangle]]", "[[straddle]]", "[[strip-strap]]", "[[reverse-iron-condor]]", "[[short-straddle]]", "[[implied-volatility]]", "[[gamma-scalping]]", "[[deribit]]", "[[greeks-live]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit_only
+    role: universe
+    rule: "BTC and ETH Deribit options"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied vol served. Option quotes come from Deribit itself."
+  - id: itm_pair_strikes
+    role: entry
+    rule: "Guts: an ITM call at strike A below spot and an ITM put at strike B above spot, A < B (bought for long guts, sold for short guts)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Strikes relative to spot follow from oracle_price (a CEX spot composite close to Deribit's index). How deep ITM is not given, and the strike grid and quotes come from Deribit."
+  - id: tenor_21_45_dte
+    role: entry
+    rule: "Typical tenor 21-45 DTE"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure lists the nearest 12 Deribit expiries. It is Pro Plus and empty on lower tiers."
+  - id: prefer_strangle_if_cheaper
+    role: entry
+    rule: "Trade guts only when the ITM strikes are quoted better than the payoff-equivalent strangle; otherwise use the strangle"
+    runnable: false
+    note: "Needs ITM and OTM quotes at both strikes; no option prices are served. Deep-ITM Deribit strikes are often near-quoteless."
+  - id: direction_from_vol_regime
+    role: entry
+    rule: "Buy guts in a compressed vol regime (cheap vol); sell guts when vol is elevated or in vol_shock (rich)"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "compressed and vol_shock are served labels; 'elevated' is not (expanding is nearest). The page's DVOL gate (buy low, sell rich) has no numbers; DVOL is items[].dvol on /api/v1/volatility/implied."
+  - id: hmm_side_gate
+    role: filter
+    rule: "squeeze or vol_spike probability supports long guts; range_low_vol supports the short side"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: explain.label_posteriors.range_low_vol
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_2
+    note: "squeeze and vol_spike are beside it (post_label_5 and 4). The page gives no thresholds."
+  - id: realized_vs_implied
+    role: filter
+    rule: "Close the loop with realized vol against implied (RV vs DVOL)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    note: "vrp = DVOL minus 30-day Garman-Klass realized. The page gives no threshold for acting on it."
+  - id: long_guts_take_profit
+    role: exit
+    rule: "Long guts: take profit as the move develops; delta-hedge the residual on the perp"
+    runnable: partial
+    input: position
+    note: "The page gives no profit level; the position mark comes from Deribit."
+  - id: short_guts_defined_tail
+    role: stop
+    rule: "Short guts: define the tail with further-OTM wings or hedge delta continuously"
+    runnable: true
+    input: position
+  - id: short_guts_dvol_kill
+    role: stop
+    rule: "Short guts: honour a DVOL-spike kill switch"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol_change_24h
+    note: "The page gives no size for the spike; dvol_change_24h is in vol points (daily closes only)."
+  - id: short_guts_profit_target
+    role: exit
+    rule: "Short guts: take profit at about 50% of the extrinsic credit, not the gross credit"
+    runnable: true
+    input: position
+    note: "Extrinsic = credit minus the intrinsic value of both legs at entry; the current mark comes from Deribit."
 ---
 
 # Gut Spread

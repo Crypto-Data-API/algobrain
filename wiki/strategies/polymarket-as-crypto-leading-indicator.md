@@ -21,6 +21,77 @@ expected_sharpe: 0.3      # prior, not measured -- strategy is untested (see Per
 expected_max_drawdown: 0.20  # prior; matches the 20% kill criterion
 breakeven_cost_bps: 30    # crypto perp leg costs 1-3 bps round-trip; event moves are multi-percent
 related: ["[[polymarket]]", "[[prediction-markets]]", "[[prediction-market-strategies]]", "[[prediction-market-calibration]]", "[[information-arbitrage]]", "[[ai-prediction-markets]]", "[[polymarket-api]]", "[[kalshi]]", "[[nansen]]"]
+gates:
+  - id: pm_event_market
+    role: universe
+    rule: "A live Polymarket event market with material crypto read-through: FOMC, ETF approval, regulation, geopolitics"
+    runnable: false
+    note: "No prediction-market odds are served. Needs Polymarket's Gamma REST API (or CLOB WebSocket, subgraph)."
+  - id: pm_divergence
+    role: entry
+    rule: "Divergence = Polymarket implied probability - consensus proxy (CME FedWatch, poll average or options-implied); enter when it exceeds the calibrated threshold (pseudocode 7 percentage points)"
+    runnable: false
+    note: "Neither leg is served: no Polymarket odds and no FedWatch or poll probabilities."
+  - id: pm_volume_floor
+    role: filter
+    rule: "Polymarket 24-hour notional volume on the market at least $250K"
+    runnable: false
+    note: "Needs Polymarket's volume24hr; not served."
+  - id: pm_repriced_recently
+    role: filter
+    rule: "The divergence is moving: Polymarket has re-priced within the last 6-24 hours, not stale"
+    runnable: false
+    note: "Needs Polymarket price history; not served."
+  - id: trade_direction
+    role: entry
+    rule: "Trade the crypto leg in the direction the odds imply: more dovish than STIR means long BTC/ETH perp, less means short; ETF approval crossing about 70% with rising flow means long the affected token"
+    runnable: false
+    input: derived
+    inputs: [pm_divergence]
+    note: "Only as runnable as pm_divergence."
+  - id: catalyst_resolution_exit
+    role: exit
+    rule: "Exit at catalyst resolution (FOMC print, ETF decision date, regulatory announcement) regardless of P&L"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=macro_print
+    field: items[].date
+    note: "FOMC and US macro print dates are served (date only); ETF decision deadlines and regulatory announcement dates are not on any calendar we serve."
+  - id: pm_reversal_exit
+    role: exit
+    rule: "Exit early if Polymarket reverses past the entry divergence by more than 50% of the original gap"
+    runnable: false
+    note: "Needs live Polymarket odds; not served."
+  - id: stale_time_stop
+    role: stop
+    rule: "Hard time stop 7 days before the stated catalyst date: exit if Polymarket has not moved further"
+    runnable: false
+    note: "The date is computable from the calendar, but the condition is on Polymarket movement, which is not served."
+  - id: straddle_width_stop
+    role: stop
+    rule: "Place the stop at the catalyst's implied move: 1x the ATM straddle width (e.g. for FOMC)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "ATM straddle width is about 0.8 x spot x atm_iv/100 x sqrt(days to the expiry after the event / 365), using the first expiry past the catalyst. BTC and ETH only (Pro Plus); straddle prices themselves are not served."
+  - id: risk_per_event
+    role: sizing
+    rule: "Risk 0.5-1.5% of book at the planned stop (pseudocode 1%); never more than 3% of book on one event"
+    runnable: true
+    input: position
+  - id: event_priced_in
+    role: filter
+    rule: "The event-risk score lifting off its zero baseline confirms the market has started pricing the catalyst"
+    runnable: partial
+    endpoint: /api/v1/event/regime/score
+    field: event_risk_score
+    note: "From the page's AI-agent workflow; no cut is given."
+  - id: etf_flow_confirmation
+    role: filter
+    rule: "ETF-approval trades: confirm the institutional bid the odds predict is actually arriving"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/etf/{asset}/flows?days=10
+    field: flows[].flow_usd
+    note: "Daily net flows by trade date for BTC, ETH and SOL spot ETFs (settled days; the in_progress block is a partial sum). Assets without a listed ETF have no flows to confirm, and no inflow size is given."
 ---
 
 Polymarket-as-crypto-leading-indicator is a hybrid information-arbitrage strategy that treats [[polymarket]] event-resolution odds as a *signal source* for trading crypto spot and perpetuals — not as a venue for trading prediction markets themselves. The thesis is that event-conditional probabilities (Fed cuts, ETF approvals, regulatory enforcement, geopolitical shocks) clear on Polymarket faster and with better calibration than they price into BTC/ETH, opening a short window to pre-position the affected asset before the catalyst resolves.

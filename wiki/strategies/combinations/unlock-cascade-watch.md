@@ -33,6 +33,189 @@ kill_criteria: |
   - token unlock data source becomes unreliable or delayed (calendar data integrity compromised)
 
 related: ["[[unlock-short-with-crowding-gate]]", "[[unlock-aware-momentum]]", "[[unlock-pair-hedge]]", "[[liquidation-cascade-fade]]", "[[off-hours-liquidation-playbook]]", "[[leverage-stress-tail-hedge]]", "[[event-vol-buying]]", "[[oi-aware-grid]]", "[[cascade-monetization-rotation]]", "[[funding-rate]]", "[[open-interest]]", "[[liquidations]]", "[[perpetual-futures]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: unlock_3pct
+    role: universe
+    rule: "A scheduled cliff unlock of at least 3% of circulating supply (pct_of_float at least 0.03)"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={coin}&window_days=35
+    field: items[].pct_of_float
+    replay: /api/v1/backtesting/snapshots?data_type=token_unlocks&start={start}&limit=100
+    replay_field: snapshots[].data[].next_unlock.pct_of_float
+    note: "A cliff calendar from DefiLlama emissions data (the page's claim that CryptoDataAPI has no unlock calendar is out of date). Absence is not proof of no unlock. One row per coin, its soonest cliff only. Replay from 2026-08-20."
+  - id: unlock_10_28d
+    role: universe
+    rule: "The cliff unlock falls 10 to 28 days from now"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={coin}&window_days=35
+    field: items[].days_until
+    replay: /api/v1/backtesting/snapshots?data_type=token_unlocks&start={start}&limit=100
+    replay_field: snapshots[].data[].next_unlock.days_until
+    note: "Pro sees 35 days ahead; Free sees 7, too short for this window."
+  - id: has_perp_market
+    role: universe
+    rule: "The token has a liquid perp market, so OI and funding can be read (otherwise fall back to price-based exits)"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/open-interest?symbol={symbol}USDT
+    field: current_oi
+    note: "Binance USDT perp; a null or an error means there is none. Hyperliquid-only tokens can use assets[].open_interest_usd on /hyperliquid/open-interest and the Hyperliquid funding routes instead."
+  - id: oi_pctile_30d
+    role: filter
+    rule: "Open interest percentile within its trailing 30-day range, for the risk classes below"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/open-interest?symbol={symbol}USDT
+    field: history[].sum_open_interest
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].oi_close
+    note: "history holds 30 daily Binance OI readings; rank current_oi within them. Replay is Hyperliquid daily OI (oi_close) from 2026-03-30."
+  - id: funding_7d_avg
+    role: filter
+    rule: "7-day average funding per 8h, for the risk classes below"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Average the 21 settled Binance 8-hour prints. Replay rows are 5-minute samples of the live 8h rate from 2026-05-09: average, never sum. Hyperliquid-only tokens: sum funding_sum on /backtesting/hl-funding-bars?interval=1d over 7 complete days and divide by 21."
+  - id: long_short_ratio
+    role: filter
+    rule: "Long/short account ratio as a supplemental leverage read in the risk classification"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/long-short-ratio?symbol={symbol}USDT
+    field: long_short_ratio
+    note: "The page gives no threshold and leaves it out of the classification rules and pseudocode, so how it moves a class is the desk's call. Binance accounts only."
+  - id: risk_high
+    role: sizing
+    rule: "HIGH risk when OI is at or above the 75th percentile and 7-day funding at or above +0.030% per 8h: cut existing longs to 25% of normal size by T-7"
+    runnable: true
+    input: derived
+    inputs: [oi_pctile_30d, funding_7d_avg, unlock_10_28d]
+  - id: risk_moderate
+    role: sizing
+    rule: "MODERATE risk when OI is in the 50th-75th percentile or 7-day funding is +0.015% to +0.030% per 8h: cut existing longs to 50% of normal size by T-5"
+    runnable: true
+    input: derived
+    inputs: [oi_pctile_30d, funding_7d_avg, unlock_10_28d]
+  - id: risk_low
+    role: sizing
+    rule: "LOW risk when OI is at or below the 50th percentile and funding at or below +0.015% per 8h: no de-risking, keep monitoring"
+    runnable: true
+    input: derived
+    inputs: [oi_pctile_30d, funding_7d_avg]
+  - id: pause_new_longs
+    role: filter
+    rule: "In a HIGH risk window, pause new long entries in the token until cascade-fade or window-clear conditions are met"
+    runnable: partial
+    input: derived
+    inputs: [risk_high]
+    note: "Window-clear is not defined; the nearest stated end is the fade orders expiring 10 days after the unlock."
+  - id: fade_oi_70
+    role: entry
+    rule: "Cascade-fade precondition: OI still at or above the 70th percentile of its 30-day range at T-1"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/open-interest?symbol={symbol}USDT
+    field: history[].sum_open_interest
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].oi_close
+  - id: fade_funding_025
+    role: entry
+    rule: "Cascade-fade precondition: funding at or above +0.025% per 8h at T-1"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "The rules say the 8h funding; the pseudocode and example use the 7-day average. The latest settled print is the last row; the average is over all 21."
+  - id: fade_not_predropped
+    role: entry
+    rule: "Cascade-fade precondition: price has not already fallen 8% or more over the 5 days before the unlock"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=7
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Compare the T-1 close with the close 5 bars earlier."
+  - id: fade_ladder
+    role: entry
+    rule: "When all three preconditions hold, stage GTC limit buys below the T-1 close: 30% of target at -8%, 40% at -14%, 30% at -20%"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=3
+    field: candles[].close
+    note: "T-1 close = the last closed daily bar before the unlock day."
+  - id: fade_size
+    role: sizing
+    rule: "Total fade target 3-5% of portfolio notional in a HIGH window (pseudocode 4%), 2-3% in a MODERATE one (pseudocode 2.5%)"
+    runnable: true
+    input: derived
+    inputs: [risk_high, risk_moderate]
+  - id: fade_expiry
+    role: exit
+    rule: "Cancel unfilled fade orders 10 days after the unlock and reassess"
+    runnable: true
+    input: position
+    note: "Record the unlock date while it is upcoming: the calendar drops it once it passes."
+  - id: cascade_price_drop
+    role: entry
+    rule: "Cascade check leg 1: an intraday decline of at least 6% inside the unlock window"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=24
+    field: candles[].low
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].low
+    note: "The example measures the drop from the T-1 close; compare the lowest hourly low since then with it."
+  - id: cascade_liq_spike
+    role: entry
+    rule: "Cascade check leg 2: 1h liquidation volume at least 2x its 7-day average"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=1h&start={start}
+    field: data[].total_usd
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].total_usd
+    note: "start = 7 days ago: compare the last closed hour's total_usd with 2x (sum over the window / 168); hours with no fills are omitted. Hyperliquid fills only, from 2026-07-23; OKX and Bybit are in /market-intelligence/liquidations (liq_1h_vs_7d_median compares with the 7-day median, not the mean) and Binance is not captured."
+  - id: cascade_confirmed
+    role: entry
+    rule: "Cascade confirmed when cascade_price_drop and cascade_liq_spike both hold: keep all three tranches live"
+    runnable: partial
+    input: derived
+    inputs: [cascade_price_drop, cascade_liq_spike]
+    note: "Only as runnable as cascade_liq_spike (Hyperliquid liquidations only)."
+  - id: orderly_selling
+    role: entry
+    rule: "Price falls without a liquidation spike (orderly selling): cut the staged orders to Tranche 1 only"
+    runnable: partial
+    input: derived
+    inputs: [cascade_price_drop, cascade_liq_spike]
+    note: "The page sets no drop size for orderly selling; reading it as cascade_price_drop without cascade_liq_spike is the desk's call."
+  - id: exit_target
+    role: exit
+    rule: "Hold 5-10 days after a fill, taking profit on an 8-15% recovery from the tranche entry (the pseudocode exits at 8%)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: stop_below_fills
+    role: stop
+    rule: "Close if price falls 10% or more below the lowest filled tranche entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: oi_deleveraged_exit
+    role: exit
+    rule: "Close if open interest has fallen 20% or more from its unlock-date level"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/open-interest?symbol={symbol}USDT
+    field: current_oi
+    note: "Record current_oi on the unlock day and compare."
+  - id: structural_shock_derisk
+    role: exit
+    rule: "If the long-term regime is Structural Shock, de-risk every position immediately, whatever the unlock window says"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Trigger on regime structural_shock_crisis. History from 2026-08-07."
 ---
 
 # Unlock Cascade Watch

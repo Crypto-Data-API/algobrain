@@ -22,6 +22,93 @@ expected_max_drawdown: 0.25
 breakeven_cost_bps: 10
 decay_evidence: "Lopez-Lira & Tang (2023) report ~38 bps/day pre-cost for a daily long-short ChatGPT news-sentiment portfolio (Oct 2021 - Dec 2022 sample) but note returns shrink substantially after transaction costs; since publication, LLM news-scoring has been commoditized by vendors, compressing the edge."
 related: ["[[ai-trading-agents]]", "[[algorithmic-trading]]", "[[llm-market-analysis]]", "[[nlp-sentiment-analysis]]", "[[backtesting-overview]]", "[[risk-management]]", "[[artificial-intelligence]]"]
+gates:
+  - id: universe_top50_volume
+    role: universe
+    rule: "Crypto variant: the top 50 coins by trading volume (the equity variant uses stocks above $5M average daily dollar volume)"
+    runnable: true
+    endpoint: /api/v1/volume/scanner?sort=volume_24h&limit=50
+    field: items[].symbol
+    note: "Rolling 24h notional on Hyperliquid perps, the venue the rest of this mapping trades. Free returns the top 20 only. No equity data is served."
+  - id: has_news_today
+    role: universe
+    rule: "Exclude coins with no news since the prior close"
+    runnable: partial
+    endpoint: /api/v1/news/pulse?hours=24
+    field: rows[].headlines
+    note: "headlines counts stories naming the coin at high confidence in our crypto RSS feed (no X/Twitter), so 0 means no news there. Only stories that clear the impact threshold are served as text, so most counted headlines cannot be read back."
+  - id: sentiment_score
+    role: entry
+    rule: "After the daily close, score every headline since the prior close from -1 to +1 (good or bad for the price?) and average per coin, weighting by source reliability"
+    runnable: partial
+    endpoint: /api/v1/news/pulse?hours=24
+    field: rows[].news_tilt
+    replay: /api/v1/backtesting/news-events?start={start}&end={end}
+    replay_field: data[].bias
+    note: "news_tilt (-1 to +1) is our impact-weighted direction over qualified catalysts only (about 15-40 a day market-wide), with a category-based bias, not the page's LLM prompt over every headline. To run your own LLM, score events[].title from /news/coin/{coin}; sub-threshold headlines are not served at any tier. Replay is the archived tape from 2026-08-18 (Pro Plus); impact_score is the served source-and-severity weight."
+  - id: decile_book
+    role: entry
+    rule: "Long the top decile of sentiment scores, short the bottom decile (long-only accounts: long the top decile against a benchmark hedge)"
+    runnable: partial
+    input: derived
+    inputs: [universe_top50_volume, has_news_today, sentiment_score, already_priced_skip]
+    note: "Only as runnable as sentiment_score. With 50 coins a decile is 5 names, and most coins carry a news_tilt of 0 on a quiet day, so the bottom decile is often empty."
+  - id: already_priced_skip
+    role: filter
+    rule: "Skip any coin whose absolute return for the day already exceeds 10% (the news is likely priced)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles/batch?coins={coin}&interval=1d&limit=2&closed_only=true
+    field: series.{coin}[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}
+    replay_field: klines[].c
+    note: "Day return = last closed daily close over the one before, minus 1. Batch up to 25 coins per call."
+  - id: daily_rebalance
+    role: exit
+    rule: "Rebalance daily at the next open; hold each name until it leaves its decile (typically 1-3 days)"
+    runnable: partial
+    input: derived
+    inputs: [decile_book]
+    note: "Only as runnable as decile_book. Crypto has no open; the daily bar opens at 00:00 UTC."
+  - id: hard_stop_5pct
+    role: stop
+    rule: "Hard stop at -5% from the entry fill on each position"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/prices
+    field: prices.{coin}
+  - id: news_reversal_exit
+    role: exit
+    rule: "Exit immediately when a new score flips sign against the position with absolute score above 0.5"
+    runnable: partial
+    endpoint: /api/v1/news/coin/{coin}?hours=24
+    field: events[].bias
+    note: "Served event bias is -1, 0 or +1 by category, so any non-neutral new event clears the 0.5 bar; the page means the bot's own LLM score. The RSS feed lags the source by about 30 seconds to 5 minutes."
+  - id: equal_weight_caps
+    role: sizing
+    rule: "Equal weight within each decile, at most 2% of equity per name, gross exposure at most 150% and net within plus or minus 20%"
+    runnable: true
+    input: position
+  - id: vix_halve_gross
+    role: sizing
+    rule: "Halve gross exposure (150% to 75%) when VIX is above 30"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "VIX is not served. The page's crypto equivalent halves gross when vol_spike or choppy_high_vol dominate the quant market read; taking that as the committed label being one of the two is one reading, since the page does not define dominate."
+  - id: vol_target_risk
+    role: sizing
+    rule: "Size risk per coin with the quant vol-target multiplier before acting"
+    runnable: partial
+    endpoint: /api/v1/quant/coins/risk?horizon=24h
+    field: items[].vol_target_multiplier
+    note: "From the page's AI-agent core loop. The Rules section sizes equal weight instead, so how to combine the two is the desk's call."
+  - id: human_approval
+    role: sizing
+    rule: "Queue any single order above a preset dollar threshold for human approval (the hallucination guard)"
+    runnable: true
+    input: position
 ---
 
 # AI Agent Trading Strategies
