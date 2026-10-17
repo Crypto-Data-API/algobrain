@@ -18,6 +18,114 @@ data_required: [ohlcv-daily, social-volume, news-flow, sector-flows]
 min_capital_usd: 1000
 capacity_usd: 50000000
 related: ["[[edge-taxonomy]]", "[[reflexivity]]", "[[momentum]]", "[[sentiment]]", "[[behavioral-finance]]", "[[meme-stocks]]", "[[crypto-narratives]]", "[[sector-rotation]]", "[[contrarian-trading]]", "[[position-sizing]]"]
+gates:
+  - id: dominant_narrative
+    role: universe
+    rule: "Identify the dominant narrative attracting flow: rising social volume, accelerating news mentions, sector inflows and the theme's highest-beta name leading the move"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].price_change_7d_pct
+    note: "Rank themes by their coins' 7-day returns (sector momentum). Social volume is not served, and sector fund inflows exist only for BTC/ETH/SOL spot ETFs (/api/v1/market-intelligence/etf/{asset}/flows). Which signals make a story dominant is the desk's call."
+  - id: news_mentions_rising
+    role: universe
+    rule: "Accelerating news mentions on the theme"
+    runnable: partial
+    endpoint: /api/v1/news/pulse?hours=24
+    field: rows[].news_pressure
+    note: "Per-coin news pressure, event_count and tilt over the window; compare the 24h read with a 72h or 168h one for acceleration. It is per coin, not per theme, so roll coins up to the theme yourself."
+  - id: purest_liquid_leader
+    role: entry
+    rule: "Trade the purest, most liquid expression: prefer the leader most identified with the story over laggards"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].total_volume
+    note: "Liquidity (24h volume, market cap) is served per theme member; 'purest expression' is a judgement. Check the coin has a Hyperliquid perp on /api/v1/hyperliquid/open-interest if you trade perps."
+  - id: above_ma20
+    role: entry
+    rule: "Confirming momentum: the daily close is above its 20-day MA (higher highs), not the rumour alone"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=22
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Drop the forming bar (forming_bar_timestamp) before taking the 20-day mean."
+  - id: volume_expanding
+    role: entry
+    rule: "Confirming momentum: volume expanding (the example breaks out on 2x volume)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=22
+    field: candles[].volume
+    note: "The rule names no window or multiple; the example's 2x the recent average is one reading. volume is in coin units: multiply by close for USD."
+  - id: not_saturated
+    role: filter
+    rule: "Do not enter once the story is on every front page (mainstream saturation)"
+    runnable: partial
+    endpoint: /api/v1/meme/regime/score
+    field: composite_score
+    note: "The page's agent workflow treats a meme-hype score at extremes plus a fear-greed extreme (/api/v1/sentiment/fear-greed, value) as the saturation read. Neither is theme-specific and no cut is given."
+  - id: scale_in_broadening
+    role: sizing
+    rule: "Scale in as the narrative broadens: more participants and more derivative plays appearing"
+    runnable: false
+    note: "Breadth of expression (how many tokens now trade as the theme) is not served as a series; coin_count on /coins/category-groups is static category membership."
+  - id: exhaustion_exit
+    role: exit
+    rule: "Exit on exhaustion: parabolic price, blow-off volume, maximum saturation, or a competing narrative capturing attention"
+    runnable: partial
+    endpoint: /api/v1/meme/regime/score
+    field: composite_score
+    note: "Saturation as in not_saturated. Parabolic price and blow-off volume have no thresholds on the page, and a competing narrative is a judgement."
+  - id: ma20_break_stop
+    role: stop
+    rule: "Hard stop when the close loses the 20-day MA on volume"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=22
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "The close below the MA is mechanical; 'on volume' has no multiple. The pseudocode exits on the close alone."
+  - id: initial_stop
+    role: stop
+    rule: "Initial stop 15% below the entry close (pseudocode: close x 0.85)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/summary?coin={coin}
+    field: mark_price
+  - id: trail_swing_low
+    role: stop
+    rule: "Trail the stop to the recent swing low while the trade is live"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30
+    field: candles[].low
+    note: "The page does not define the swing low (e.g. lowest low of the last N bars)."
+  - id: partial_profits
+    role: exit
+    rule: "Take partial profits into strength; narratives end abruptly"
+    runnable: partial
+    input: position
+    note: "No profit level or fraction is given."
+  - id: risk_one_pct
+    role: sizing
+    rule: "Risk at most 1% of book per trade: size = 0.01 x equity / (entry - stop); never average down into a dying narrative"
+    runnable: true
+    input: position
+  - id: bull_regime_only
+    role: filter
+    rule: "Narrative longs only in trend-bull market states; in risk-off regimes narratives collapse together"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow: strong_trend_bull is the trend-bull label."
+  - id: new_listing_check
+    role: filter
+    rule: "Respect new_listing flags before buying the 'purest expression'"
+    runnable: true
+    endpoint: /api/v1/quant/coins/risk
+    field: items[].meta.new_listing
+    note: "From the page's agent-workflow tips."
 ---
 
 # Narrative Trading

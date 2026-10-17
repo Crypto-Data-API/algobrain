@@ -34,6 +34,151 @@ kill_criteria: |
   - trend regime is in "NEUTRAL" > 70% of potential entry days for 90 consecutive days (trend gate is perpetually blocking entries; IV is elevated but no confirmed trend — reconsider whether to accept neutral-regime entries at reduced size, or accept the low signal frequency)
 
 related: ["[[crypto-options-volatility-selling]]", "[[funding-conditioned-vol-selling]]", "[[post-panic-vol-selling]]", "[[covered-call]]", "[[cash-secured-put]]", "[[options-premium-selling]]", "[[premium-selling-systematic]]", "[[vol-targeted-trend-following]]", "[[trend-following-cta]]", "[[deribit]]", "[[dvol]]", "[[implied-volatility]]", "[[variance-risk-premium]]", "[[skew-trading]]", "[[funding-rate]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: underlyings
+    role: universe
+    rule: "Sell Deribit options on BTC and ETH only"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+  - id: up_sma_distance
+    role: filter
+    rule: "Uptrend leg 1: daily close at least 10% above the 20-day SMA"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={coin}
+    field: items[].ma.dist_from_20_pct
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "dist_from_20_pct in percent (10 = 10%)."
+  - id: up_rsi_4h
+    role: filter
+    rule: "Uptrend leg 2: 4h RSI(14) at or above 60"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=50
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "Wilder RSI(14) on closed 4h closes; /indicators/technical serves only daily and 1h RSI."
+  - id: up_funding_7d
+    role: filter
+    rule: "Uptrend leg 3: 7-day average funding at or above +0.02%/8h"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Mean of the last 21 Binance 8h settlements, at or above 0.0002."
+  - id: uptrend
+    role: filter
+    rule: "Uptrend (sell puts) when all three uptrend legs hold"
+    runnable: true
+    input: derived
+    inputs: [up_sma_distance, up_rsi_4h, up_funding_7d]
+  - id: down_sma_distance
+    role: filter
+    rule: "Downtrend leg 1: daily close at least 8% below the 20-day SMA"
+    runnable: true
+    endpoint: /api/v1/indicators/technical?symbol={coin}
+    field: items[].ma.dist_from_20_pct
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: down_rsi_4h
+    role: filter
+    rule: "Downtrend leg 2: 4h RSI(14) at or below 45"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=50
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+  - id: down_funding_7d
+    role: filter
+    rule: "Downtrend leg 3: 7-day average funding at or below 0.00%/8h"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+  - id: downtrend
+    role: filter
+    rule: "Downtrend (sell calls) when all three downtrend legs hold"
+    runnable: true
+    input: derived
+    inputs: [down_sma_distance, down_rsi_4h, down_funding_7d]
+  - id: neutral_no_entry
+    role: filter
+    rule: "Neutral regime (neither uptrend nor downtrend): no new wing-sell entries; hold existing positions under the exit rules"
+    runnable: true
+    input: derived
+    inputs: [uptrend, downtrend]
+  - id: dvol_percentile_50
+    role: filter
+    rule: "IV gate 1: DVOL at or above the 50th percentile of its trailing 52-week distribution"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "items[].history holds about 180 daily values (Pro Plus), not 52 weeks, so the percentile runs on a shorter window."
+  - id: vrp_positive
+    role: filter
+    rule: "IV gate 2: DVOL minus 30-day realised vol at least +3 vol points"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    note: "vrp = dvol - realized_30, both in vol points."
+  - id: no_structural_shock
+    role: filter
+    rule: "No entries in a Structural Shock regime"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "From the indicator list and agent workflow. Block on structural_shock_crisis; history starts 2026-08-07."
+  - id: wing_instrument
+    role: entry
+    rule: "Uptrend: sell the 25-delta BTC put, DTE 14-35 (or a bull put spread buying the 10-delta put); downtrend: sell the 25-delta call (or a bear call spread)"
+    runnable: false
+    note: "Strike selection by delta needs Deribit's option chain and Greeks, which we do not serve; /volatility/implied term_structure lists expiries and ATM IV only."
+  - id: premium_size
+    role: sizing
+    rule: "Collect 1.5-2.5% of the portfolio in premium per position, at most 2 concurrent positions (one per expiry)"
+    runnable: true
+    input: position
+  - id: delta_hedge
+    role: sizing
+    rule: "Keep delta within plus or minus 10 per unit notional; hedge when the band is breached"
+    runnable: false
+    note: "Needs per-option deltas, which we do not serve."
+  - id: vol_shock_exit
+    role: stop
+    rule: "Close immediately if DVOL rises more than 50% in a single session"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "'Session' is undefined in a 24/7 market; dvol_change_24h (day-over-day, vol points) divided by the prior day's DVOL gives a daily percentage."
+  - id: profit_target
+    role: exit
+    rule: "Close when the sold option is worth 20% of the premium collected"
+    runnable: true
+    input: position
+    note: "The option's mark comes from the venue (Deribit), not from us."
+  - id: premium_stop
+    role: stop
+    rule: "Close if the sold option's value rises to 3x the premium collected"
+    runnable: true
+    input: position
+    note: "Venue mark, as in profit_target."
+  - id: trend_reversal_exit
+    role: exit
+    rule: "Close if the trend regime flips (uptrend to neutral or downtrend while short a put, and the mirror for calls)"
+    runnable: true
+    input: derived
+    inputs: [uptrend, downtrend]
+  - id: time_exit
+    role: exit
+    rule: "Close 3 days before expiry"
+    runnable: true
+    input: position
 ---
 
 # Trend-Aligned Premium Selling

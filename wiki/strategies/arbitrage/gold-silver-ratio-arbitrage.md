@@ -22,6 +22,55 @@ expected_max_drawdown: 0.35
 breakeven_cost_bps: 20
 decay_evidence: "Ratio has trended higher over decades as silver lost monetary role; absolute levels for 'extreme' keep rising. 2020 ratio of 125+ was unthinkable in the 1980s."
 related: ["[[arbitrage]]", "[[commodities]]", "[[gold]]", "[[silver]]", "[[pairs-trading]]", "[[mean-reversion]]", "[[hunt-brothers-silver-corner]]", "[[edge-taxonomy]]", "[[etf-arbitrage]]", "[[limits-to-arbitrage]]", "[[behavioral-finance]]"]
+gates:
+  - id: gsr_percentile_extreme
+    role: entry
+    rule: "Gold-silver ratio (GSR) above the 95th percentile of its 10-year rolling window (long silver / short gold) or below the 5th percentile (long gold / short silver)"
+    runnable: false
+    note: "No silver price history is served, so neither the 10-year window nor the percentile can be built. Needs daily COMEX GC and SI or spot gold and silver history."
+  - id: gsr_absolute_level
+    role: filter
+    rule: "Confirm with the absolute level: above 100:1 is the post-2019 extreme (80:1 historically)"
+    runnable: partial
+    endpoint: /api/v1/sentiment/macro
+    field: gold_price_usd
+    note: "Divide gold_price_usd by a tokenized-silver price, current_price on /api/v1/coins/KAG (Kinesis Silver, one troy ounce per token). That is a thin on-chain proxy for spot silver, not COMEX, so check it against a silver quote before acting."
+  - id: curve_not_backwardated
+    role: filter
+    rule: "Long-silver signal only when the gold and silver futures curves are not in extreme backwardation (a supply crisis rather than a behavioural overshoot)"
+    runnable: false
+    note: "No metals futures curves are served."
+  - id: silver_cot_crowded
+    role: filter
+    rule: "Long-gold signal only when silver speculative long positioning (COT report) is near record highs"
+    runnable: false
+    note: "CFTC Commitments of Traders data is not served."
+  - id: leg_sizing
+    role: sizing
+    rule: "Equal dollar notional on each leg, or volatility parity (silver is about 1.5x as volatile as gold, so the gold leg is larger)"
+    runnable: partial
+    input: position
+    note: "Dollar-neutral sizing needs only the position record. Volatility parity needs realized silver volatility, which is not served; gold's can come from PAXG candles on /hyperliquid/candles."
+  - id: risk_per_trade
+    role: sizing
+    rule: "Risk 1-3% of capital per full-sized trade and at most 10% of capital notional per side"
+    runnable: true
+    input: position
+  - id: exit_at_median
+    role: exit
+    rule: "Close when the GSR returns to the 50th percentile of the rolling window"
+    runnable: false
+    note: "Needs the same unserved silver history as gsr_percentile_extreme."
+  - id: time_stop_24m
+    role: stop
+    rule: "Time stop: close after 24 months (504 trading days) if the ratio has not mean-reverted"
+    runnable: true
+    input: position
+  - id: stop_one_sd
+    role: stop
+    rule: "Stop out when the GSR moves another full standard deviation away from the mean (for example from 100 to 120)"
+    runnable: false
+    note: "The standard deviation needs the unserved silver history."
 ---
 
 # Gold-Silver Ratio Arbitrage

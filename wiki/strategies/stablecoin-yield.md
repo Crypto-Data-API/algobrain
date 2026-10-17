@@ -21,6 +21,87 @@ crowding_risk: medium
 expected_sharpe: 1.5
 expected_max_drawdown: 0.10
 breakeven_cost_bps: 20
+gates:
+  - id: tier1_tbill_and_lending
+    role: universe
+    rule: "Tier 1 (3-5%): tokenized T-bill / money-market stablecoins and blue-chip lending (Aave, Compound) on USDC, USDT, DAI; fill it first as the liquid buffer"
+    runnable: false
+    note: "No per-protocol supply rates, utilization or tokenized-treasury yields are served; they come from the protocols or DeFiLlama."
+  - id: tier2_stable_pair_lp
+    role: universe
+    rule: "Tier 2 (5-12%): stablecoin-pair liquidity on a stable-optimised AMM, only with capital you can afford to see impaired"
+    runnable: false
+    note: "No AMM pool fees, incentives or pool depth are served."
+  - id: tier3_basis_funding
+    role: entry
+    rule: "Tier 3: run the delta-neutral basis (long spot, short perp) only while perp funding is positive"
+    runnable: true
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: hyperliquid.current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&start={start}
+    replay_field: data[].funding_rate
+    note: "Hyperliquid funding is hourly; binance.current_rate in the same response is per 8 hours. Annualise before comparing with the other tiers. Replay is Hyperliquid funding from 2023-05 (exchange=hyperliquid is the default)."
+  - id: real_yield_decomposition
+    role: filter
+    rule: "Strip emissions from the quoted APY: real yield = quoted APY minus emissions APY"
+    runnable: false
+    note: "No venue APYs or emission schedules are served."
+  - id: net_yield_above_tbill
+    role: filter
+    rule: "Deploy to a venue only when its real yield minus expected depeg, exploit and counterparty loss beats the T-bill rate plus a minimum spread"
+    runnable: partial
+    endpoint: /api/v1/sentiment/macro
+    field: treasury_yield
+    note: "The hurdle is served, though treasury_yield is a Treasury average rate rather than the short-dated bill rate. Venue yields and expected-loss estimates are not served, except the basis sleeve, whose yield is annualised funding (tier3_basis_funding). The minimum spread is the desk's call."
+  - id: audited_battle_tested
+    role: filter
+    rule: "Deploy only to audited, battle-tested protocols with deep TVL and a record through at least one stress event"
+    runnable: false
+    note: "No per-protocol TVL, audit status or reserve attestations are served."
+  - id: per_venue_cap
+    role: sizing
+    rule: "At most 20-25% of the sleeve in any one venue or stablecoin issuer; diversify across issuers and chains; trim when one exceeds 25%"
+    runnable: true
+    input: position
+  - id: depeg_exit
+    role: exit
+    rule: "Exit a venue when a held stablecoin deviates more than 0.5% from its peg for a sustained period"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=depeg
+    field: items[].deviation_bps
+    note: "A depeg row appears once a stablecoin is more than 25 bps off peg; exit at deviation_bps of 50 or more. 'Sustained' has no length on the page, and the pseudocode exits on the first reading. The list is empty when nothing is depegged; /api/v1/event/calendar?type=depeg carries the same rows."
+  - id: basis_unwind_negative_funding
+    role: exit
+    rule: "Unwind the basis leg when funding is zero or negative for several consecutive days; park it in Tier 1 until funding normalises"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].funding_sum
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}&end={end}
+    replay_field: data[].funding_sum
+    note: "One closed day per bar (the current day is never served). 'Several' has no count; the pseudocode unwinds on the first reading at or below 0. Live hourly funding is history[].funding_rate on /api/v1/hyperliquid/funding-rates?coin={coin}."
+  - id: protocol_red_flag
+    role: exit
+    rule: "De-risk immediately on a governance or oracle red flag, or loss of a protocol's audit standing or reserve attestation"
+    runnable: partial
+    endpoint: /api/v1/security/regime/score
+    field: security_stress_score
+    note: "The served tripwire is market-wide: confirmed hacks, CEX flow flight and depegs (the page's AI workflow says act on the score). It has no threshold on the page and does not see governance votes, oracle changes or attestation lapses at a given protocol."
+  - id: yield_collapse_exit
+    role: exit
+    rule: "Redeploy to cash when a sleeve's net yield falls below the T-bill rate while risk stays elevated"
+    runnable: partial
+    input: derived
+    inputs: [net_yield_above_tbill]
+    note: "Only as runnable as the net-yield test: mechanical for the basis sleeve, not for Tier 1/2 venues whose yields we do not serve. 'Risk stays elevated' is the desk's judgement."
+  - id: dry_powder_drain
+    role: filter
+    rule: "Treat falling stablecoin supply with negative 14d and 90d flows as a warning that Tier-3 leverage demand is draining"
+    runnable: partial
+    endpoint: /api/v1/sentiment/stablecoins
+    field: change_14d_pct
+    replay: /api/v1/sentiment/stablecoins/remote-history?days=365
+    replay_field: history[].mcap_billions
+    note: "change_90d_pct sits beside it. The page gives no threshold and no action beyond the warning, so how it changes the Tier-3 allocation is the desk's call."
 ---
 
 Stablecoin yield is the practice of earning income on dollar-pegged tokens (USDC, USDT, DAI, etc.) without taking directional crypto exposure. Capital is deployed into lending markets, money-market/treasury-backed stablecoins, stablecoin-pair liquidity pools, or delta-neutral basis trades to harvest a dollar yield. It is the crypto analogue of a cash-management / money-market strategy, with returns ranging from ~3–5% (low risk, treasury-backed) to 10–30%+ (active, higher risk), and the key discipline is matching the yield source to its true risk. See the broader concept page [[stablecoin-yields]] for the market context, and [[stablecoins]] for the instruments themselves.

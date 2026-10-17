@@ -34,6 +34,165 @@ kill_criteria: |
   - skew rebalancing frequency exceeds 3 full rebalances per 24h for 7 consecutive days (funding too volatile for stable skew)
 
 related: ["[[grid-trading]]", "[[regime-gated-grid]]", "[[funding-rate-arbitrage]]", "[[funding-filtered-momentum]]", "[[hyperliquid-market-making]]", "[[carry-with-tail-hedge]]", "[[market-making]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[open-interest]]", "[[adx]]", "[[atr]]", "[[adverse-selection]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: adx_4h_below_20
+    role: entry
+    rule: "Grid activation: ADX(14) on the 4h chart below 20"
+    runnable: true
+    endpoint: /api/v1/indicators/adx?coin={coin}&interval=4h
+    field: items[].adx
+    replay: /api/v1/indicators/adx?coin={coin}&interval=4h&history=500
+    replay_field: items[].history[].adx
+    note: "Read the latest bar with final true. history=500 reaches about 83 days of 4h bars; older replays compute ADX(14) from /backtesting/klines?exchange=hyperliquid&interval=4h."
+  - id: bbw_bottom_30pct
+    role: entry
+    rule: "Grid activation: Bollinger Bandwidth (20, 2 sigma) in the bottom 30th percentile of its 90-day history"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=560
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=4h&start={start}
+    replay_field: klines[].c
+    note: "Bandwidth = (upper - lower) / middle on closed 4h closes; rank the latest against the last 540 bars (90 days) and require a percentile below 30. /indicators/technical/{symbol} serves the same rank on daily bars (bollinger.squeeze_percentile), whose window is not stated."
+  - id: vol_regime_ranging
+    role: entry
+    rule: "Grid activation: volatility regime is compressed or mean_reverting"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.volatility_regime.by_symbol.{coin}.regime
+    note: "Replay is one reading per UTC day from the daily archive."
+  - id: event_score_below_50
+    role: entry
+    rule: "Grid activation: event risk score below 50"
+    runnable: true
+    endpoint: /api/v1/event/regime/score
+    field: event_risk_score
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.event_regime.event_risk_score
+    note: "Market-wide score (unlocks, macro prints, de-pegs) on a 0-100 scale. Replay is one reading per UTC day."
+  - id: funding_8h_level
+    role: sizing
+    rule: "Skew magnitude from current 8h funding: below 0.01%/8h symmetric (1.0), 0.01-0.03% factor 1.3, 0.03-0.05% factor 1.5, 0.05% or more factor 1.75"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hyperliquid settles hourly, so 8h funding is the sum of the last 8 settled prints; band on its absolute value. The receiver side then gets factor / (1 + factor) of grid notional. On Binance the 8h print is rates[].funding_rate on /derivatives/binance/funding-rates."
+  - id: skew_direction
+    role: sizing
+    rule: "Skew toward SHORT (more capital on sell levels) when 8h funding is positive, toward LONG when it is negative"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Sign of the same 8-print sum as funding_8h_level. Level counts stay equal on both sides; only level sizes differ."
+  - id: skew_flip_confirmed
+    role: sizing
+    rule: "Flip the skew direction only after funding has held the new sign for 2 consecutive 8h periods"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=16
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Split the last 16 hourly prints into two 8h blocks and require both sums on the new side of zero."
+  - id: band_change_confirmed
+    role: sizing
+    rule: "Change the skew factor only after funding has stayed in a new band for 2 consecutive 8h periods"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=16
+    field: history[].funding_rate
+    note: "Same two 8h blocks as skew_flip_confirmed, tested against the funding_8h_level bands."
+  - id: rebalance_once_per_8h
+    role: sizing
+    rule: "Never rebalance the skew more than once per 8h period, aligned with funding settlements"
+    runnable: true
+    input: position
+  - id: funding_kill
+    role: stop
+    rule: "Kill the grid when 8h funding exceeds 0.08%/8h"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "The text names extreme positive funding; the pseudocode kills on the absolute value (either sign) at or above 0.0008, and also refuses to open the grid there."
+  - id: adx_kill
+    role: stop
+    rule: "Kill the grid when ADX(14) on the 4h chart reaches 25"
+    runnable: true
+    endpoint: /api/v1/indicators/adx?coin={coin}&interval=4h
+    field: items[].adx
+    replay: /api/v1/indicators/adx?coin={coin}&interval=4h&history=500
+    replay_field: items[].history[].adx
+  - id: atr_breakout_kill
+    role: stop
+    rule: "Kill the grid when price moves more than 1.5 ATR(14, 4h) from the channel midpoint"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30&atr=14
+    field: candles[].atr
+    note: "The channel midpoint is the price the grid was centred on at activation (the channel is midpoint plus and minus 1%). Compare the mark (assets[].mark_price on /hyperliquid/open-interest) with it."
+  - id: vol_regime_kill
+    role: stop
+    rule: "Kill the grid when the volatility regime flips to expanding or vol_shock"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.volatility_regime.by_symbol.{coin}.regime
+  - id: event_score_kill
+    role: stop
+    rule: "Kill the grid when the event risk score reaches 70"
+    runnable: true
+    endpoint: /api/v1/event/regime/score
+    field: event_risk_score
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.event_regime.event_risk_score
+    note: "From the pseudocode (EVENT_SCORE_KILL); the Rules section only names the shared regime-gated-grid kills."
+  - id: grid_drawdown_kill
+    role: stop
+    rule: "Kill the grid when its drawdown exceeds 8%"
+    runnable: true
+    input: position
+  - id: reentry_lockout
+    role: filter
+    rule: "After a kill, wait 24 hours before the grid may re-activate"
+    runnable: true
+    input: position
+  - id: grid_notional_cap
+    role: sizing
+    rule: "Total grid notional at most 25% of sleeve capital per asset, with a 30% cash reserve"
+    runnable: true
+    input: position
+  - id: max_leverage_2x
+    role: sizing
+    rule: "At most 2x leverage on the skewed side"
+    runnable: true
+    input: position
+  - id: grid_spacing
+    role: sizing
+    rule: "Grid spacing at least 0.5% on major perps (BTC, ETH, SOL), at most 12 levels per side, channel 1% either side of the midpoint"
+    runnable: true
+    input: position
+  - id: maker_depth_check
+    role: filter
+    rule: "Confirm adequate order-book depth for the grid's maker fills before deploying levels"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth
+    field: coins[].total_depth_25bps_usd
+    note: "From the page's agent workflow, which gives no depth threshold. Depth covers about 25 large Hyperliquid perps and counts only the top 20 book levels per side (levels_truncated says when that cut binds); deeper ladders are on /hyperliquid/l2-book."
+  - id: hmm_secondary_gate
+    role: filter
+    rule: "Secondary activation gate from the HMM market regime"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "Named in the page's data list and agent workflow without a rule. range_low_vol (mean-reversion on) is the natural pass state; whether squeeze or choppy_high_vol also pass is the desk's call."
 ---
 
 # Funding-Skewed Grid

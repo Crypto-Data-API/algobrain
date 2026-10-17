@@ -33,6 +33,132 @@ kill_criteria: |
   - momentum signal win rate < 40% over 30 consecutive trades (edge decay in base signal)
 
 related: ["[[trend-following-cta]]", "[[volatility-targeting]]", "[[funding-filtered-momentum]]", "[[momentum-rotation]]", "[[breakout-trading]]", "[[atr-position-sizing]]", "[[vol-targeted-trend-following]]", "[[garch-volatility]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: donchian_breakout
+    role: entry
+    rule: "Option A: long when a 4h bar closes above the 20-day Donchian channel high, short when one closes below the 20-day low"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=125
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "The channel is the highest high and lowest low of the 120 closed 4h bars (20 days) before the signal bar; drop the forming bar named by forming_bar_timestamp."
+  - id: ema_cross
+    role: entry
+    rule: "Option B: long when daily EMA(12) crosses above EMA(26), short when it crosses below"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=100
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: tsmom
+    role: entry
+    rule: "Option C: long if the 20-day return is positive and accelerating (20-day return above the 5-day return), short if negative and accelerating"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=22
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "An alternative to A and B; the page says pick one signal and keep it. Accelerating is defined only for longs; the mirror test for shorts (20-day return below the 5-day return) is the desk's call."
+  - id: momentum_long
+    role: entry
+    rule: "Default (pseudocode): go long only when the Donchian breakout and EMA(12) above EMA(26) both hold"
+    runnable: true
+    input: derived
+    inputs: [donchian_breakout, ema_cross]
+  - id: momentum_short
+    role: entry
+    rule: "Default (pseudocode): go short only when the price is below the 20-day channel low and EMA(12) is below EMA(26)"
+    runnable: true
+    input: derived
+    inputs: [donchian_breakout, ema_cross]
+  - id: rv_20d
+    role: sizing
+    rule: "Realised vol = std of 20 daily log returns x sqrt(365), at least 15 days of data, capped at 200% annualised"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=22
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: intraday_vol
+    role: sizing
+    rule: "Optional weekend-gap protection: estimate vol with Parkinson or Yang-Zhang on 4h bars instead of close-to-close"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=125
+    field: candles[].high
+    note: "Needs open, high, low and close per bar, all on the same rows. vol.rv_parkinson_30 on /volatility/regime/{symbol} is a ready 30-day daily Parkinson figure, not the 4h version."
+  - id: vol_target_notional
+    role: sizing
+    rule: "Notional = (0.01 x sleeve) / daily vol, where daily vol = annualised vol / sqrt(365): a 1% daily vol contribution per position"
+    runnable: true
+    input: derived
+    inputs: [rv_20d]
+  - id: min_size_skip
+    role: filter
+    rule: "Do not enter if the vol-targeted notional is below 2% of the sleeve"
+    runnable: true
+    input: derived
+    inputs: [vol_target_notional]
+  - id: max_size_cap
+    role: sizing
+    rule: "Cap each position at 15% of the sleeve"
+    runnable: true
+    input: position
+  - id: funding_guard
+    role: filter
+    rule: "Before a long, require funding at or below 0.06% per 8h (current hourly rate x 8 at most 0.0006)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_rate_mean
+  - id: max_concurrent
+    role: sizing
+    rule: "At most 5 assets held at once"
+    runnable: true
+    input: position
+  - id: exit_reversal
+    role: exit
+    rule: "Exit when the momentum signal reverses (opposite channel breach or opposite EMA crossover)"
+    runnable: true
+    input: derived
+    inputs: [donchian_breakout, ema_cross]
+  - id: vol_scale_exit
+    role: sizing
+    rule: "If realised vol more than doubles from the entry vol within 3 days and the re-sized notional is over 50% smaller, cut to it at the next daily close"
+    runnable: true
+    input: derived
+    inputs: [rv_20d, vol_target_notional]
+  - id: drawdown_stop
+    role: stop
+    rule: "Close a position whose loss exceeds 3x its daily vol contribution at entry (3% of sleeve at the 1% target)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: funding_stop
+    role: exit
+    rule: "Close longs if funding exceeds 0.08% per 8h for 3 consecutive 8h periods"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hyperliquid settles hourly: sum the 24 prints in three 8-hour blocks and require each block above 0.0008."
+  - id: vol_regime_throttle
+    role: sizing
+    rule: "Use the market-wide vol stress composite as a global sizing throttle on top of per-asset vol targeting"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/score
+    field: gross_exposure_multiplier
+    note: "From the page's data and agent sections, not its rules. gross_exposure_multiplier is the served throttle; how it combines with the per-asset size is not stated."
+  - id: vol_shock_flag
+    role: filter
+    rule: "Flag assets in a vol_shock state, where trailing vol lags realised risk"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    note: "The page names the flag but not what to do with it (skip, cut size, or nothing), so the action is the desk's call."
 ---
 
 # Vol-Targeted Trend Following

@@ -21,6 +21,116 @@ expected_sharpe: -0.5
 expected_max_drawdown: 0.05
 breakeven_cost_bps: 0
 related: ["[[long-vol-vs-short-vol]]", "[[long-volatility-strategies]]", "[[short-volatility-strategies]]", "[[crypto-options-volatility-selling]]", "[[dvol]]", "[[deribit]]", "[[greeks-live]]", "[[options-premium-selling]]", "[[premium-selling-systematic]]", "[[tail-risk-hedging]]", "[[options-portfolio-construction]]", "[[vega-budgeting]]", "[[variance-risk-premium]]", "[[implied-volatility]]", "[[volatility-regime-classification]]", "[[liquidation-cascade-fade]]", "[[crisis-alpha]]", "[[sharpe-ratio]]", "[[geometric-mean]]", "[[funding-rate]]"]
+gates:
+  - id: btc_eth_deribit
+    role: universe
+    rule: "The overlay runs on Deribit BTC and ETH options only (majors-only basis risk against an alt book)"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "BTC and ETH are the coins whose Deribit implied vol is served. Free tier sees BTC only."
+  - id: put_tenor
+    role: entry
+    rule: "Slow-burn leg: buy USDC-margined (linear) puts 2-3 months out, one new tranche per month"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "Pick the listed expiry with expiry_days about 60-90 (Pro Plus; empty on lower tiers). Monthly cadence is on the position record."
+  - id: put_strike_otm
+    role: entry
+    rule: "Put strikes 15-25% out of the money"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/summary?coin={coin}
+    field: mark_price
+    note: "Target strike = mark x 0.75 to 0.85 (Hyperliquid perp mark as the spot proxy). The listed Deribit strike nearest that level and its price are not served."
+  - id: put_payoff_target
+    role: entry
+    rule: "Choose the strike for a payoff of 5-10x premium on a 25-35% drawdown"
+    runnable: false
+    note: "Needs Deribit put prices and an option model across strikes; no option chain or prices are served."
+  - id: put_budget
+    role: sizing
+    rule: "Put-ladder premium spend 1.5-3.0% of NAV per year"
+    runnable: true
+    input: position
+  - id: roll_at_30dte
+    role: exit
+    rule: "Roll a put tranche when it reaches about 30 DTE if still out of the money; monetise per the triggers if in the money"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/summary?coin={coin}
+    field: mark_price
+    note: "DTE is on the position record; in or out of the money compares the mark with the tranche's strike."
+  - id: dvol_leg_tenor
+    role: entry
+    rule: "Fast-fire leg: long-vega Deribit options (or DVOL futures) 1-2 months out, rolled monthly, losers left to expire"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "Pick the listed expiry with expiry_days about 30-60 (Pro Plus)."
+  - id: dvol_leg_strike
+    role: entry
+    rule: "Strike or position the DVOL leg to profit from DVOL rising well above its current percentile (e.g. DVOL 45 to 90+)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "Current DVOL and about 180 days of daily history (items[].history[].dvol, Pro Plus) are served. DVOL futures and per-strike vega are not, so building the leg needs Deribit."
+  - id: dvol_budget
+    role: sizing
+    rule: "DVOL-leg premium spend 0.5-1.5% of NAV per year; total overlay 2-4% of NAV per year"
+    runnable: true
+    input: position
+  - id: vega_ratio
+    role: sizing
+    rule: "Overlay long vega = 8-15% of the core's short vega; add protection when it falls below 8%"
+    runnable: partial
+    input: position
+    note: "Book vega comes from the trading venue's position Greeks; we serve no option Greeks."
+  - id: trigger1_slow_burn
+    role: exit
+    rule: "Trigger 1: BTC drawdown of at least 15% within 30 days: sell 1/3 of the put ladder"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin=BTC&interval=1d&limit=31
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin=BTC&interval=1d&start={start}
+    replay_field: candles[].high
+    note: "Drawdown = 1 - mark / highest daily high of the last 30 days; the live mark is assets[].mark_price on /api/v1/hyperliquid/open-interest. Hyperliquid BTC perp; daily history back to 2023."
+  - id: trigger2_acceleration
+    role: exit
+    rule: "Trigger 2: BTC drawdown of at least 30%: sell another 1/3 and hold the final third"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin=BTC&interval=1d&limit=31
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin=BTC&interval=1d&start={start}
+    replay_field: candles[].high
+    note: "Same drawdown as trigger1_slow_burn; the pseudocode measures both over 30 days."
+  - id: trigger3_dvol_doubles
+    role: exit
+    rule: "Trigger 3a: DVOL doubles from the leg's entry level: sell half the DVOL convexity leg and redeploy into fresh convexity if DVOL stays elevated"
+    runnable: true
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "Compare the live dvol with the dvol recorded at entry."
+  - id: trigger3_dvol_95pct
+    role: exit
+    rule: "Trigger 3b: DVOL above about its 95th percentile: sell half the DVOL convexity leg"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "About 180 days of daily DVOL are served (Pro Plus); the page names no percentile window, so a longer one needs Deribit's DVOL history."
+  - id: never_sell_all
+    role: sizing
+    rule: "Never sell the entire overlay: always keep a residual sleeve against second-leg crashes"
+    runnable: true
+    input: position
+  - id: reinvest_monetized
+    role: sizing
+    rule: "Recycle monetised proceeds into replacement protection at distressed strikes, a larger short-vol core when the DVOL percentile is rich, or spot BTC/ETH on the dip"
+    runnable: partial
+    input: derived
+    inputs: [trigger3_dvol_95pct]
+    note: "The page gives no split between the three uses or a cut for 'rich'."
 ---
 
 A **long-vol overlay** is a permanent, rolling allocation to long options (a [[deribit|Deribit]] BTC/ETH put ladder plus a [[dvol|DVOL]]-referenced convexity ladder) attached to a crypto short-vol core book to **cap the left tail** of the combined portfolio. It is not a stand-alone money-maker: in isolation it bleeds 2-4% of NAV per year (fatter than the equity version because crypto premium is fatter). Its job is portfolio-level — to convert a negatively-skewed [[options-premium-selling]] / [[crypto-options-volatility-selling]] book into a roughly symmetric, survival-tolerant book whose **geometric return** dominates the naked premium-selling book over any horizon longer than a single calm regime. This page describes the mechanics, sizing, monetization rules, and integration with the short-vol core. Read [[long-vol-vs-short-vol]] for the conceptual frame, [[tail-risk-hedging]] for the stand-alone Universa-style implementation, [[long-volatility-strategies]] for the broader family.

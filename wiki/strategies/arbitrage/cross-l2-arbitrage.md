@@ -22,6 +22,38 @@ expected_sharpe: 2
 expected_max_drawdown: 0.12
 breakeven_cost_bps: 12
 decay_evidence: "L2 fragmentation grew through 2023-2025 as new rollups launched; cross-L2 arb gross volume doubled 2024 → 2025. Compression begins as Across/Hop and shared sequencers (Espresso, Astria 2025) mature."
+gates:
+  - id: per_block_pool_snapshots
+    role: universe
+    rule: "Per block on each L2 (Arbitrum, Optimism, Base, zkSync, Polygon zkEVM), snapshot pool reserves for the monitored pairs from own nodes or RPC subscriptions"
+    runnable: false
+    note: "Per-block pool reserves are not served. The nearest read is top_pools[].price_usd and reserve_usd on /api/v1/dex/token/{chain}/{address}, cached up to 5 minutes and covering only base and arbitrum among the L2s (plus ethereum, bsc and solana); Optimism, zkSync, Polygon zkEVM, Linea and Scroll need own nodes."
+  - id: divergence_over_costs
+    role: entry
+    rule: "Trade when the cross-L2 price divergence exceeds the bridge fee plus gas on both sides plus a threshold: buy on the cheap L2, sell on the dear one"
+    runnable: false
+    note: "Needs the per-L2 prices in per_block_pool_snapshots plus fast-bridge quotes (Across, Hop, Stargate) and per-L2 gas oracles, none served; the page does not set the threshold."
+  - id: inventory_mode
+    role: sizing
+    rule: "Pre-position USDC and ETH on several L2s and rebalance through the slow bridge weekly"
+    runnable: true
+    input: position
+  - id: size_impact_third
+    role: sizing
+    rule: "Cap each trade where own price impact eats one third of the gross spread, bounded by fast-bridge route depth and per-L2 inventory"
+    runnable: false
+    note: "Needs pool reserves (for impact) and bridge route depth, neither served. /api/v1/liquidity/depth is Hyperliquid order-book depth, not L2 pools."
+  - id: kill_gross_below_cost
+    role: stop
+    rule: "Kill switch: median per-trade gross below combined gas and bridge cost for 30 days"
+    runnable: true
+    input: position
+    note: "Measured from the bot's own fills, gas and bridge receipts."
+  - id: kill_shared_sequencers
+    role: stop
+    rule: "Kill switch: shared-sequencer adoption above 50% of L2 volume"
+    runnable: false
+    note: "Per-rollup volume and sequencer data are not served. Needs L2Beat."
 ---
 
 # Cross-L2 Arbitrage

@@ -37,6 +37,109 @@ kill_criteria: |
   - realised slippage/spread at the session open consistently exceeds planned per-trade risk
 
 related: ["[[opening-range-breakout]]", "[[volatility-breakout]]", "[[breakout-trading]]", "[[supply-demand-zones]]", "[[atr]]", "[[funding-rate]]", "[[open-interest]]", "[[liquidation]]", "[[volatility-regime]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[cryptodataapi]]"]
+gates:
+  - id: deep_book_majors
+    role: universe
+    rule: "Only deep-book majors: BTC, ETH and the top-OI perps; no thin alts and no weekend ranges"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+    note: "BTC and ETH are mechanical; how many top-OI perps qualify is the desk's call. Skip Saturday and Sunday (UTC) from the candle timestamps."
+  - id: asia_range
+    role: entry
+    rule: "Mark the Asia range: the high and low of the 15-minute bars from 00:00 to 07:00 UTC (the US variant uses the window before 13:30 UTC)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=15m&start={start}&end={end}
+    field: candles[].high
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=15m&start={start}&end={end}
+    replay_field: klines[].h
+    note: "Live: start = 00:00, end = 06:45 UTC (end is inclusive). Replay: end = 07:00 UTC (exclusive); 15m replay bars are built from the 1m archive, which starts 2026-05-09."
+  - id: range_size_filter
+    role: filter
+    rule: "Trade only Goldilocks ranges: width / mid between 0.5% and 1.5% (the BTC guide); skip too wide or too tight"
+    runnable: true
+    input: derived
+    inputs: [asia_range]
+    note: "From the pseudocode. Other assets should be calibrated with ATR; that calibration is the desk's call."
+  - id: no_macro_in_window
+    role: filter
+    rule: "Skip, or trade only after the spike resolves, when a major print (CPI, FOMC, NFP, an ETF or regulatory decision) lands in the trade window"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=macro_print&window_days=1
+    field: items[].macro_class
+    note: "Scheduled macro prints are on the calendar (days_until 0 = today; release times come from the print's own schedule). ETF and regulatory decisions are not."
+  - id: range_buffer
+    role: entry
+    rule: "Buffer = max(0.15% of the range mid, 0.25 x ATR)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=15m&limit=40&atr=14
+    field: candles[].atr
+    note: "The page says 'session ATR' but names no timeframe or period; ATR(14) on 15m bars is one reading."
+  - id: oco_stop_entry
+    role: entry
+    rule: "Buy-stop at range high + buffer and sell-stop at range low - buffer; when one fills, cancel the other"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=15m&limit=3
+    field: candles[].high
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=15m&start={start}&end={end}
+    replay_field: klines[].h
+    note: "Resting OCO orders do the job live; for replay, the first bar whose high (low) crosses the level fills."
+  - id: close_confirmation
+    role: entry
+    rule: "Confirmation variant: wait for a 15m close beyond the range edge (or the retest after a sweep-and-reclaim)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=15m&limit=3
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=15m&start={start}&end={end}
+    replay_field: klines[].c
+    note: "Use closed bars only (drop the forming bar named by forming_bar_timestamp). The sweep-and-reclaim retest is a judgement the pseudocode leaves out."
+  - id: stop_opposite_side
+    role: stop
+    rule: "Stop on the opposite side of the range plus the buffer (or the range midpoint for a tighter stop)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: target_2r_partial_1r
+    role: exit
+    rule: "Target 2R; take a partial at 1R and move the stop to breakeven; trail the rest behind intraday structure"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "The trail ('structure or a moving average') has no fixed rule; the 1R and 2R levels are mechanical."
+  - id: time_exit_1600
+    role: exit
+    rule: "Close at 16:00 UTC if the trade has not worked (16:00-18:00 late US session)"
+    runnable: true
+    input: position
+  - id: oi_and_funding_conviction
+    role: sizing
+    rule: "Normal conviction only when OI is rising at the break and funding is calm; flat or falling OI, or a funding spike, means low conviction (smaller size or skip)"
+    runnable: partial
+    endpoint: /api/v1/liquidity/oi-divergence
+    field: rows[].oi_change_1h_pct
+    note: "Hyperliquid OI change on the coin's row. The funding-spike threshold (FUNDING_SPIKE_MAX) is not set on the page; hourly funding is history[].funding_rate on /api/v1/hyperliquid/funding-rates?coin={coin}."
+  - id: compressed_regime_only
+    role: filter
+    rule: "Trade only breaks out of a compressed vol state; skip vol_shock days"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow. No history of the per-coin label is served for replay."
+  - id: edge_depth_check
+    role: filter
+    rule: "Check depth and spread at the range edges: thin books fake the break"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth/{coin}?minutes=60
+    field: history[].total_depth_25bps_usd
+    note: "Hyperliquid book depth around mid, not at the range edges; the page gives no threshold."
+  - id: kill_criteria
+    role: stop
+    rule: "Retire when the false-break rate rises materially over 40 trades, the session stops producing an expansion, or open slippage keeps exceeding planned risk"
+    runnable: partial
+    input: position
+    note: "The slippage test is mechanical from fills; 'materially' and the seasonality shift have no numbers on the page."
 ---
 
 # London Breakout Strategy (Crypto)

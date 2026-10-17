@@ -34,6 +34,125 @@ kill_criteria: |
   - vol-shock regime score > 75 → close or reduce all short-premium positions
   - position reaches 2× credit received → cut or roll; no averaging
   - rolling 90-day P&L negative after 3 consecutive months with regime filter → pause and re-examine VRP
+gates:
+  - id: btc_eth_deribit
+    role: universe
+    rule: "BTC and ETH options on Deribit; altcoin options are too illiquid for a systematic program"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "We serve Deribit DVOL and the ATM term structure for BTC and ETH only. Option quotes, strikes and fills come from Deribit itself; no option chain is served."
+  - id: vrp_live
+    role: entry
+    rule: "Sell only with a live variance risk premium: DVOL above 30-day realized vol"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "vrp = dvol - realized_30, in vol points; sell when it is above 0. Replay: about 180 days of daily DVOL (Pro Plus), compared with 30-day realized vol from /api/v1/hyperliquid/candles daily closes. Older DVOL is Deribit's."
+  - id: dvol_rich
+    role: entry
+    rule: "Prefer elevated DVOL (rich premium, the worked example's upper half of its range)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "The page sets no cutoff. One reading: today's dvol above the median of the served ~180-day history; the window and cutoff are the desk's. history is Pro Plus."
+  - id: vol_regime_ok
+    role: filter
+    rule: "Sell only while the coin's volatility regime is expanding or normal; never into vol_shock"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow. compressed and mean_reverting are not named by the page."
+  - id: tenor_21_45_dte
+    role: entry
+    rule: "Sell in the 21-45 DTE window, where theta decay is fastest"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "Pick the listed expiry with expiry_days 21 to 45; atm_iv gives its ATM implied vol. term_structure is Pro Plus and lists the nearest 12 expiries."
+  - id: short_strike_zones
+    role: entry
+    rule: "Place short strikes using OI walls, max pain and dealer gamma pin zones"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    note: "BTC only: one max-pain strike on the Deribit expiry with the largest open interest, which the response does not name. No per-strike OI (OI walls) or per-strike Greeks are served; /api/v1/quant/gex is a perp analog of dealer gamma, not options GEX. The page gives no delta or distance rule for strikes."
+  - id: funding_wing_lean
+    role: entry
+    rule: "Lean into the wing the leveraged crowd overbid: richly positive funding firms call skew (favour selling calls), negative funding the puts"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "The page gives no funding threshold, and option skew itself is not served, so 'richly positive' is the desk's call. current_rate is hourly."
+  - id: take_profit_50pct
+    role: exit
+    rule: "Close winners at 50% of the maximum credit rather than holding to expiry"
+    runnable: true
+    input: position
+    note: "Option marks come from the venue (Deribit), not from us."
+  - id: loss_2x_credit
+    role: stop
+    rule: "Close or roll a position at 1.5-2x the credit received (hard kill at 2x); never average down"
+    runnable: true
+    input: position
+    note: "Option marks come from the venue."
+  - id: short_strike_tested
+    role: stop
+    rule: "Manage or roll when spot tests a short strike"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "Deribit options settle on Deribit's index, which tracks spot; Binance spot is a close stand-in for monitoring."
+  - id: manage_7_14_dte
+    role: exit
+    rule: "Close or roll at about 7-14 DTE to sidestep the hottest gamma"
+    runnable: true
+    input: position
+  - id: kill_dvol_spike
+    role: stop
+    rule: "Flatten all short vega when DVOL rises more than 50% from the session open in a single session"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "Crypto trades 24/7, so the session is the desk's choice (00:00 UTC is one). Poll dvol and compare with the value recorded at the session open; dvol_change_24h is a trailing 24h change, not from the session open, and the refresh cadence is set by as_of. Intraday DVOL history is not served."
+  - id: kill_vol_score_75
+    role: sizing
+    rule: "Vol-regime score above 75: cut all short-premium positions to at most 25% of normal size and add nothing"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    replay: /api/v1/volatility/index/history?days=365
+    replay_field: points[].composite_score
+    note: "The CVI history carries the same 0-100 composite, one point per UTC day (Pro Plus); days before 2026-08-24 are reconstructed (backfilled true)."
+  - id: kill_liquidation_cascade
+    role: stop
+    rule: "A live liquidation cascade: flatten short vega"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&include_quiet=true
+    field: alerts[].triggered
+    note: "From the page's AI-agent workflow, which gives no cascade threshold. squeeze-alerts flags a liquidation burst against its own baseline across OKX, Bybit and Hyperliquid (no Binance); whether that is the page's cascade is the desk's call."
+  - id: kill_rolling_pnl
+    role: filter
+    rule: "Pause the program when rolling 90-day P&L is negative for 3 consecutive months with the regime filters applied"
+    runnable: true
+    input: position
+  - id: margin_utilization
+    role: sizing
+    rule: "Venue margin utilization above 70% during a DVOL spike: cut short vega until utilization is below 50%"
+    runnable: true
+    input: position
+    note: "Margin is the account's own. A DVOL spike is as in kill_dvol_spike."
+  - id: size_by_vega
+    role: sizing
+    rule: "Size by vega, not contract count: cap short vega per DVOL point of NAV"
+    runnable: partial
+    input: position
+    note: "The page gives no cap. Position vega comes from the venue; we serve no per-option Greeks."
 ---
 
 # Options Selling Strategies (Crypto)

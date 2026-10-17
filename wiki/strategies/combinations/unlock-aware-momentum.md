@@ -33,6 +33,186 @@ kill_criteria: |
   - momentum signal frequency collapses below 2 entries per month across the universe for 3 consecutive months
 
 related: ["[[trend-following-cta]]", "[[momentum-rotation]]", "[[token-unlock-supply-event]]", "[[unlock-short-with-crowding-gate]]", "[[funding-filtered-momentum]]", "[[vol-targeted-trend-following]]", "[[narrative-trading]]", "[[token-unlocks]]", "[[open-interest]]", "[[funding-rate]]", "[[event-driven]]", "[[behavioral-finance-overview]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: not_majors
+    role: universe
+    rule: "Altcoins only: exclude BTC, ETH and fully diluted tokens"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "Drop BTC and ETH by name; float_cap_80 removes the fully diluted rest."
+  - id: float_cap_80
+    role: universe
+    rule: "Circulating supply below 80% of max supply (float_pct under 0.80)"
+    runnable: partial
+    endpoint: /api/v1/supply/float?symbol={coin}
+    field: rows[].float_pct
+    note: "float_pct is circulating over max_supply when the token has a cap (supply_basis max_supply), otherwise over total_supply. For an uncapped token the page's share-of-max test has no answer, so whether total_supply stands in is the desk's call."
+  - id: unlock_next_30d
+    role: universe
+    rule: "At least one cliff unlock or scheduled linear emission event in the next 30 days"
+    runnable: partial
+    endpoint: /api/v1/supply/unlocks?symbol={coin}&window_days=30
+    field: items[].days_until
+    note: "A cliff calendar only (DefiLlama emissions coverage): linear vesting and continuous emissions are deliberately excluded, and absence is not proof of no unlock. Pro sees 30 days ahead, Free 7."
+  - id: spot_volume_20m
+    role: universe
+    rule: "At least $20M of daily spot volume"
+    runnable: true
+    endpoint: /api/v1/coins/{symbol}
+    field: total_volume
+    note: "CoinGecko's 24h volume aggregated across spot markets, in USD."
+  - id: perp_volume_10m
+    role: universe
+    rule: "At least $10M of daily perp volume"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].day_volume
+    note: "Hyperliquid 24h notional volume in USD."
+  - id: donchian_breakout
+    role: entry
+    rule: "Momentum leg 1: daily close above the 20-day channel high (Donchian breakout)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].high
+    note: "Channel high = the highest high of the 20 closed bars before the current one. Drop the forming bar named by forming_bar_timestamp."
+  - id: ema_12_26
+    role: entry
+    rule: "Momentum leg 2: daily EMA(12) above EMA(26)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: roc_20d
+    role: entry
+    rule: "Momentum leg 3: 20-day rate of change above +15%"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: momentum_long
+    role: entry
+    rule: "An active momentum long when any of donchian_breakout, ema_12_26 or roc_20d holds"
+    runnable: true
+    input: derived
+    inputs: [donchian_breakout, ema_12_26, roc_20d]
+    note: "The rules say any one suffices; the pseudocode instead requires (breakout and EMA) or ROC. Pick one and keep it."
+  - id: unlock_freeze_5d
+    role: filter
+    rule: "No new long entries from 5 days before a cliff unlock"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={coin}
+    field: items[].days_until
+    replay: /api/v1/backtesting/snapshots?data_type=token_unlocks&start={start}&limit=100
+    replay_field: snapshots[].data[].next_unlock.days_until
+    note: "Block when days_until is 5 or fewer. Replay is the archived float board (one row per coin, next_unlock = its soonest cliff), from 2026-08-20."
+  - id: unlock_trim_5d
+    role: exit
+    rule: "Trim existing longs by 50% on the 5th day before a cliff unlock"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={coin}
+    field: items[].days_until
+    replay: /api/v1/backtesting/snapshots?data_type=token_unlocks&start={start}&limit=100
+    replay_field: snapshots[].data[].next_unlock.days_until
+  - id: unlock_close_2d
+    role: exit
+    rule: "Close all remaining longs 2 days before a cliff unlock; hold no long through the cliff date +-2 days"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={coin}
+    field: items[].days_until
+    replay: /api/v1/backtesting/snapshots?data_type=token_unlocks&start={start}&limit=100
+    replay_field: snapshots[].data[].next_unlock.days_until
+    note: "Close when days_until is 2 or fewer. Record the cliff date now: the calendar drops an unlock once it passes."
+  - id: unlock_window_flat
+    role: filter
+    rule: "No new longs from 2 days before to 7 days after the cliff date"
+    runnable: true
+    endpoint: /api/v1/backtesting/snapshots?data_type=token_unlocks&start={start}&limit=100
+    field: snapshots[].data[].next_unlock.date
+    note: "start = 10 days ago, to recover a cliff that has already dropped off /supply/unlocks (Pro Plus). Or keep the date recorded by unlock_close_2d."
+  - id: reentry_7d_after
+    role: entry
+    rule: "Re-entry 1: the cliff unlock date passed at least 7 calendar days ago"
+    runnable: true
+    endpoint: /api/v1/backtesting/snapshots?data_type=token_unlocks&start={start}&limit=100
+    field: snapshots[].data[].next_unlock.date
+    note: "Same recovered cliff date as unlock_window_flat."
+  - id: reentry_momentum
+    role: entry
+    rule: "Re-entry 2: the momentum signal that justified the original entry is still firing"
+    runnable: true
+    input: derived
+    inputs: [momentum_long]
+  - id: reentry_drop_15
+    role: entry
+    rule: "Re-entry 3: price no more than 15% below the pre-unlock level (the close the day before the cliff)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    field: candles[].close
+    note: "start = the day before the cliff; compare the latest close with that bar's close. If the drop is over 15%, wait for a fresh momentum signal."
+  - id: reentry_funding
+    role: entry
+    rule: "Re-entry 4: funding at or below 0.04% per 8h (the sum of the last 8 hourly settlements at most 0.0004)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "The pseudocode applies this cap to every new entry, not only re-entries."
+  - id: reentry_oi
+    role: entry
+    rule: "Re-entry 5: 24h open-interest change non-negative or mildly positive"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    field: data[].oi_close
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].oi_close
+    note: "start = 26 hours ago; compare the last closed bar's oi_close with the bar 24 earlier (the forming hour is not served, so up to an hour late). The pseudocode's floor for every entry is looser: not below -5%. Bars from 2026-03-30."
+  - id: exit_momentum_reversal
+    role: exit
+    rule: "Exit when the daily close breaks below the 20-day channel low or EMA(12) crosses below EMA(26)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].low
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].low
+    note: "Channel low = the lowest low of the 20 closed bars before the current one; the EMAs come from candles[].close."
+  - id: exit_funding_kill
+    role: exit
+    rule: "Exit when funding rises above 0.08% per 8h (the sum of the last 8 hourly settlements above 0.0008)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+  - id: time_stop
+    role: stop
+    rule: "Exit after 10 days in the trade without positive mark-to-market"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: atr_risk_size
+    role: sizing
+    rule: "Size each position to 1% sleeve risk using the 14-day ATR on daily bars"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30&atr=14
+    field: candles[].atr
+  - id: reentry_upweight
+    role: sizing
+    rule: "Apply a 1.15x size multiplier to a post-digestion re-entry (unlock passed, momentum still active, OI recovering)"
+    runnable: true
+    input: derived
+    inputs: [reentry_7d_after, reentry_momentum, reentry_oi]
+  - id: position_caps
+    role: sizing
+    rule: "At most 10% of the sleeve in one position and at most 4 concurrent assets"
+    runnable: true
+    input: position
 ---
 
 # Unlock-Aware Momentum

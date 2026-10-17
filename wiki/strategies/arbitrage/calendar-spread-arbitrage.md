@@ -38,6 +38,114 @@ kill_criteria: |
   - realised spread widening beyond 2x entry edge without a convergence catalyst (thesis broken)
 
 related: ["[[cash-and-carry]]", "[[fork-futures-spot-basis]]", "[[funding-rate-arbitrage]]", "[[basis-trade]]", "[[crypto-spot-perp-futures-triangle]]", "[[contango]]", "[[backwardation]]", "[[basis]]", "[[futures]]", "[[perpetual-futures]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: fair_carry_anchor
+    role: entry
+    rule: "Fair carry is the funding-implied rate: the perp's funding APY, in bps"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=30
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance settles every 8 hours: APY = mean of recent settled prints x 3 x 365. The replay rows are 5-minute samples of the live rate from 2026-05-09 (mean x 3 per day, never a sum). Hyperliquid hourly prints are history[].funding_rate on /api/v1/hyperliquid/funding-rates?coin={coin}."
+  - id: dislocation_signal
+    role: entry
+    rule: "Enter when the annualised inter-expiry basis, (far - near) / near x 365 / days between, deviates from fair carry by at least 300 bps (majors) or 600 bps (alts)"
+    runnable: false
+    note: "Dated-futures prices (Deribit, CME, Binance or OKX quarterlies) are not served, so the inter-expiry basis cannot be built; only the fair-carry side is (fair_carry_anchor). Needs the venues' dated-futures feeds."
+  - id: trade_direction
+    role: entry
+    rule: "Curve too steep (far rich against carry): sell far, buy near. Inverted or near too rich: buy far, sell near"
+    runnable: false
+    input: derived
+    inputs: [dislocation_signal, fair_carry_anchor]
+    note: "Only as runnable as dislocation_signal."
+  - id: persistence_one_interval
+    role: filter
+    rule: "The dislocation has stayed outside the fair-carry band for at least one funding interval"
+    runnable: false
+    input: derived
+    inputs: [dislocation_signal]
+    note: "Only as runnable as dislocation_signal; one interval is 8 hours on Binance."
+  - id: depth_3x
+    role: filter
+    rule: "Both legs show at least 3x the intended notional at the target band; size to the thinner far leg's 3x depth"
+    runnable: false
+    note: "Dated-futures order books are not served. /api/v1/liquidity/depth covers Hyperliquid perp books only, which can gauge a perp near leg but not the binding far leg."
+  - id: convergence_horizon
+    role: filter
+    rule: "Time to the near expiry is long enough for the spread to normalise but short enough to bound warehousing cost; never enter a leg inside its settlement window"
+    runnable: false
+    note: "No futures expiry calendar is served, and the page gives no day counts. The Deribit option expiries in items[].term_structure[].expiry on /api/v1/volatility/implied share the monthly and quarterly dates but are not a futures feed."
+  - id: venue_per_cap
+    role: sizing
+    rule: "Per-venue exposure at most 20-25% of the book (0.25 in the pseudocode)"
+    runnable: true
+    input: position
+  - id: total_spread_cap
+    role: sizing
+    rule: "Cap total spread notional to bound the widen-before-converge path risk"
+    runnable: partial
+    input: position
+    note: "The page gives no cap, so it is the desk's call."
+  - id: regime_size_down
+    role: sizing
+    rule: "Size entries down while the HMM market regime is vol_spike or choppy_high_vol, where a contango blowout steepens the curve against the trade"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow, which does not say by how much, so the reduction is the desk's call."
+  - id: exit_converged
+    role: exit
+    rule: "Close both legs when the deviation from fair carry is back inside 75 bps annualised"
+    runnable: false
+    input: derived
+    inputs: [dislocation_signal]
+    note: "Only as runnable as dislocation_signal."
+  - id: hold_near_to_expiry
+    role: exit
+    rule: "Alternatively hold the near leg to expiry (it settles to index) and roll or close the far leg"
+    runnable: true
+    input: position
+  - id: roll_before_settlement
+    role: exit
+    rule: "Close or roll the near leg before it enters its settlement window; carry the thesis forward only if the dislocation persists"
+    runnable: partial
+    input: position
+    note: "The expiry comes from the contract spec the bot holds. Whether the dislocation persists needs dislocation_signal, which is not runnable."
+  - id: stop_2x_entry
+    role: stop
+    rule: "Exit when the deviation widens to 2x the entry deviation with no convergence catalyst; never average down"
+    runnable: false
+    input: derived
+    inputs: [dislocation_signal]
+    note: "Only as runnable as dislocation_signal; the catalyst judgement is the desk's."
+  - id: venue_health
+    role: stop
+    rule: "Flatten on a withdrawal halt, solvency concern or margin-parameter change on either leg's venue"
+    runnable: partial
+    endpoint: /api/v1/security/regime/score
+    field: flow_subscore
+    note: "flow_subscore is the worst absolute net exchange-flow z-score across majors and stables (a withdrawal-flight signal, market-wide); per-exchange 24h flows are per_exchange_24h on /api/v1/on-chain/exchange-flows/{symbol}. Venue halts and margin changes come from the venues' own notices."
+  - id: kill_inside_cost_30d
+    role: stop
+    rule: "Pause when the annualised calendar spread has sat inside round-trip cost (about 15 bps) for 30 consecutive days"
+    runnable: false
+    input: derived
+    inputs: [dislocation_signal]
+    note: "Only as runnable as dislocation_signal."
+  - id: kill_drawdown_12
+    role: stop
+    rule: "Pause on a sleeve drawdown above 12% in any rolling 30-day window"
+    runnable: true
+    input: position
+  - id: kill_margin_change
+    role: stop
+    rule: "Re-model before re-entering after a venue changes its spread-margin parameters"
+    runnable: false
+    note: "Venue margin schedules for dated-futures spreads are not served."
 ---
 
 # Calendar Spread Arbitrage (Crypto)

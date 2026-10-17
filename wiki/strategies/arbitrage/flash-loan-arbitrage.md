@@ -38,6 +38,46 @@ kill_criteria: |
   - flash-loan provider pause/exploit on the primary venue
 
 related: ["[[mev-execution-guide]]", "[[private-mempool-arbitrage]]", "[[jito-solana-mev-arbitrage]]", "[[dex-pool-triangular-arbitrage]]", "[[slippage-optimal-pathfinding]]", "[[cross-exchange-arbitrage]]", "[[triangular-arbitrage]]", "[[aave]]", "[[decentralized-exchanges]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: candidate_pools
+    role: universe
+    rule: "Candidate venues: newly launched and trending DEX pools (fresh pools leave fresh gaps)"
+    runnable: partial
+    endpoint: /api/v1/dex/new-pools?chain={chain}
+    field: pools[].pool_address
+    note: "Discovery only: pools come from a cached list, not a per-block feed, and the dex label can be empty. /dex/trending?chain={chain} adds established pools. The route graph itself is built from contract state over RPC."
+  - id: sim_profit_floor
+    role: entry
+    rule: "Simulated profit minus flash fee, gas and expected builder bid must be at least 0.05% of loan notional and at least 2x the worst-case reverted-gas cost"
+    runnable: false
+    note: "Needs a simulation against pending state (revm, Tenderly or an eth_call bundle sim), a gas feed and builder-bid estimates. None are served: this API has no mempool, gas or simulation endpoint."
+  - id: slippage_robust_route
+    role: filter
+    rule: "The route must still clear after re-pricing against reserves minus any higher-priority pending swaps (the most adverse plausible reordering)"
+    runnable: false
+    note: "Needs mempool visibility and per-block reserves; neither is served."
+  - id: token_safety
+    role: filter
+    rule: "Every token on the path passes a security check: no transfer tax, no honeypot, no pausable or blacklist function"
+    runnable: true
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: risk_flags
+    note: "Call once per token on the route. address = base_token.address or quote_token.address of the route's pools on /dex/new-pools or /dex/trending (same chain); chain is one of solana, ethereum, base, bsc, arbitrum. Reject the route if risk_flags.is_honeypot, can_pause_transfers or is_blacklistable is true, or taxes.buy_tax_pct or taxes.sell_tax_pct is above zero."
+  - id: provider_health
+    role: filter
+    rule: "Flash-loan provider not paused, fee schedule unchanged (Aave v3 0.09%, Balancer and Uniswap flash swaps about 0%) and enough pool liquidity for the borrow"
+    runnable: false
+    note: "Provider pause state, fees and available liquidity are contract reads, not served. /security/events?type=hack lists exploits after the fact, which is not a pause check."
+  - id: optimal_borrow
+    role: sizing
+    rule: "Borrow the route's optimal size, the amount that maximises net_profit(size) before AMM slippage erodes the gap"
+    runnable: false
+    note: "Needs per-token reserves for every pool on the route. reserve_usd on /dex/trending is one USD total per pool, a ceiling at best."
+  - id: bid_discipline
+    role: sizing
+    rule: "Bid the builder at most min(0.9 x net, the competitive tip), never into negative net"
+    runnable: false
+    note: "Builder tip levels and inclusion odds are not served; they come from the relay or builder."
 ---
 
 # Flash Loan Arbitrage

@@ -12,6 +12,93 @@ markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[straddle-strangle]]", "[[straddle]]", "[[short-straddle]]", "[[reverse-iron-condor]]", "[[implied-volatility]]", "[[gamma-scalping]]", "[[deribit]]", "[[greeks-live]]", "[[funding-rate]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit
+    role: universe
+    rule: "BTC or ETH options on Deribit; alt chains are too thin for a clean strip or strap"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "We do serve Deribit DVOL (current and about 180 days of daily history) and the ATM term structure for BTC and ETH, despite the page saying otherwise. Option quotes and fills come from Deribit."
+  - id: big_move_expected
+    role: entry
+    rule: "Use when you expect a large move but hold a directional lean"
+    runnable: false
+    note: "A forecast the page leaves to the trader; the served inputs are the catalyst, regime and DVOL gates below."
+  - id: lean_from_catalyst
+    role: entry
+    rule: "The catalyst's bias picks the doubled side: an unlock (bearish) means a strip, a listing, ETF decision or upgrade (bullish) means a strap"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=30
+    field: items[].bias
+    note: "Unlock and macro_print rows carry a served bias (long, short, neutral, risk_flag, mixed). Do not pass symbol: macro rows carry no symbols and the filter drops them; match unlock rows on symbols instead. BTC and ETH, the only option underlyings, have no unlocks, so their lean comes from macro rows. Listings, ETF decisions and upgrades are not on the calendar."
+  - id: vol_regime_compressed
+    role: entry
+    rule: "Buy from a compressed vol regime; three long legs make cheap vol even more important than for a straddle"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+  - id: dvol_cheap
+    role: entry
+    rule: "DVOL low in its trailing-year range"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Served DVOL history is about 180 days (Pro Plus), not a year, and the page gives no percentile."
+  - id: legs_atm_1_2
+    role: entry
+    rule: "Strip: buy 1 ATM call and 2 ATM puts; strap: 2 ATM calls and 1 ATM put; same strike K close to spot, same expiry"
+    runnable: true
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "K = the listed Deribit strike nearest spot. Premiums come from Deribit."
+  - id: tenor_21_45_dte
+    role: entry
+    rule: "Tenor 21-45 DTE"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure is Pro Plus and lists the nearest 12 expiries."
+  - id: funding_skew_check
+    role: filter
+    rule: "Read funding before choosing: richly positive funding firms call skew (straps cost more), deeply negative funding cheapens the strip's puts"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "Funding is a proxy for skew, which is not served; the page gives no threshold."
+  - id: bank_favored_side
+    role: exit
+    rule: "After a move your way, sell the two same-side contracts into strength and keep or close the lone opposite leg"
+    runnable: partial
+    input: position
+    note: "The page sets no profit level for 'into strength'. Marks come from the venue."
+  - id: roll_before_theta_cliff
+    role: exit
+    rule: "Roll before the final 1-2 weeks if the thesis is intact"
+    runnable: true
+    input: position
+  - id: cut_on_iv_crush
+    role: exit
+    rule: "Cut on a post-catalyst DVOL collapse"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "No collapse size is given (the example is DVOL 50 to 38)."
+  - id: delta_hedge_scalp
+    role: sizing
+    rule: "Optional: neutralize the inception delta tilt on the perpetual and scalp the range; the hedge pays or collects funding"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    note: "Position delta comes from the venue's Greeks; the page gives no rebalance band."
+  - id: size_1_3pct
+    role: sizing
+    rule: "Size at most 1-3% of the book (the debit is the max loss)"
+    runnable: true
+    input: position
 ---
 
 # Strip and Strap

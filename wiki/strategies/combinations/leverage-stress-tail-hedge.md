@@ -33,6 +33,142 @@ kill_criteria: |
   - stress indicators fire continuously for 90+ days without a drawdown event > 15%: signal is perpetually elevated, depleting premium budget without payoff; recalibrate stress thresholds
 
 related: ["[[carry-with-tail-hedge]]", "[[trend-plus-tail-hedge]]", "[[tail-hedging]]", "[[tail-risk-hedging]]", "[[tail-risk]]", "[[convex-tail-hedge-arbitrage]]", "[[long-vol-overlay]]", "[[long-volatility-strategies]]", "[[oi-confirmed-trend]]", "[[oi-flush-reversion]]", "[[crowded-long-funding-fade]]", "[[funding-conditioned-vol-selling]]", "[[deribit]]", "[[dvol]]", "[[implied-volatility]]", "[[open-interest]]", "[[funding-rate]]", "[[perpetual-futures]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: oi_mc_stress
+    role: entry
+    rule: "Gate 1: BTC (or ETH) perpetual open interest at least 3.0% of spot market cap"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/open-interest?symbol={coin}
+    field: data[].exchange_list[].open_interest_usd
+    note: "Take the exchange All row (Binance + Bybit + OKX + Hyperliquid) and divide by market_cap on /coins/{symbol}. Four venues understate global perp OI (no CME, Deribit, Bitget), so on 2026-10-17 BTC read about 1.3%; whether 3.0% still applies to this subset is the desk's call."
+  - id: funding_7d_stretched
+    role: entry
+    rule: "Gate 2: 7-day average 8h funding at least 0.04%"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Mean of the last 21 settled Binance 8h prints >= 0.0004. Replay averages 7 days of 5-minute samples of the live rate (from 2026-03-30); Hyperliquid hourly prints x 8 give a longer history."
+  - id: long_short_crowded
+    role: entry
+    rule: "Gate 3 option A: long/short ratio above 1.8"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/long-short-ratio?symbol={coin}USDT
+    field: long_short_ratio
+    replay: /api/v1/derivatives/binance/history?days=30
+    replay_field: history[].long_short_ratio
+    note: "Binance global account ratio, the page's named source. Replay is BTC only and about 30 days deep (Binance serves no older ratio); earlier days are null."
+  - id: liquidation_heat
+    role: entry
+    rule: "Gate 3 option B: 7-day cumulative long-liquidation volume above 2.5% of open interest"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=1h&start={start}
+    field: data[].long_usd
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].long_usd
+    note: "start = 7 days ago. Sum long_usd and divide by Hyperliquid OI (assets[].open_interest_usd on /hyperliquid/open-interest): one venue on both sides of the ratio. The page means all venues; no 7-day multi-venue liquidation total is served (/market-intelligence/liquidations stops at 24h, and excludes Binance). Replay from 2026-07-23."
+  - id: cascade_fuel
+    role: entry
+    rule: "Gate 3 passes when long_short_crowded or liquidation_heat holds"
+    runnable: partial
+    input: derived
+    inputs: [long_short_crowded, liquidation_heat]
+    note: "The pseudocode uses the long/short ratio alone, which is fully runnable; the either-or reading is only as runnable as liquidation_heat."
+  - id: stress_composite
+    role: entry
+    rule: "Stress composite ACTIVE only when oi_mc_stress, funding_7d_stretched and cascade_fuel all pass; 2 of 3 is a watch, not an entry"
+    runnable: partial
+    input: derived
+    inputs: [oi_mc_stress, funding_7d_stretched, cascade_fuel]
+    note: "Only as runnable as oi_mc_stress, whose venue coverage is narrower than the page's threshold assumes."
+  - id: regime_ok
+    role: filter
+    rule: "No entries while the regime is Structural Shock or Established Bear"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Served ids structural_shock_crisis and established_bear. History starts 2026-08-07."
+  - id: dvol_not_spiked
+    role: entry
+    rule: "IV not already spiked: DVOL within 15% of its 30-day average for full size; 15-20% above it, half size; more than 20% above it, skip"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Average the last 30 daily dvol values and compare items[].dvol. BTC and ETH only; history is Pro Plus."
+  - id: put_instrument
+    role: entry
+    rule: "Buy a 10-delta BTC put on Deribit (put spreads or DVOL futures as alternatives)"
+    runnable: false
+    note: "No option chain, strikes, deltas or option prices are served; the page sources them from the Deribit API."
+  - id: put_expiry
+    role: entry
+    rule: "Expiry: the nearest monthly at least 21 days out (6-8 weeks for larger stress windows)"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "Nearest 12 Deribit expiries, Pro Plus. Monthlies are the last-Friday codes (27NOV26)."
+  - id: catalyst_in_window
+    role: filter
+    rule: "Adjust the expiry when a major catalyst (ETF decision, halving) falls inside the intended hold"
+    runnable: false
+    note: "/event/calendar lists macro prints, unlocks, de-pegs and mints, not ETF decisions or halvings."
+  - id: premium_budget
+    role: sizing
+    rule: "Spend 0.75-1.5% of the portfolio in premium per stress-window activation (0.75% in the pseudocode, scaled by the DVOL size factor)"
+    runnable: true
+    input: position
+  - id: second_tranche
+    role: sizing
+    rule: "If the composite stays active for 7 or more consecutive days, add a second tranche of up to 50% of the first premium (at most 2.25% in total)"
+    runnable: partial
+    input: derived
+    inputs: [stress_composite]
+    note: "Only as runnable as stress_composite."
+  - id: one_window_at_a_time
+    role: sizing
+    rule: "Hold one stress-window position at a time; never stack entries"
+    runnable: true
+    input: position
+  - id: crash_exit
+    role: exit
+    rule: "Close the put when BTC has fallen 12% or more from entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: vega_exit
+    role: exit
+    rule: "Close when DVOL has risen 25 vol points or more from its level at entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+  - id: stress_resolved_exit
+    role: exit
+    rule: "Close when the stress composite deactivates (the precondition resolved without a crash)"
+    runnable: partial
+    input: derived
+    inputs: [stress_composite]
+    note: "The text says all three gates back below threshold; the pseudocode closes as soon as any one fails. Which to follow is the desk's call, and it is only as runnable as stress_composite."
+  - id: time_exit
+    role: exit
+    rule: "Close after 45 days with no crash and no deactivation"
+    runnable: true
+    input: position
+  - id: premium_stop
+    role: stop
+    rule: "Close when the position is worth 20% or less of the premium paid"
+    runnable: true
+    input: position
+    note: "The option's mark comes from the bot's own venue (Deribit); it is not served here."
+  - id: drawdown_kill
+    role: stop
+    rule: "Go flat when the tail-hedge sleeve drawdown exceeds 30%"
+    runnable: true
+    input: position
 ---
 
 # Leverage Stress Tail Hedge

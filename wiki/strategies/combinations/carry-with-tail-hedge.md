@@ -34,6 +34,152 @@ kill_criteria: |
   - exchange insurance-fund socialised loss event on any carry venue
 
 related: ["[[funding-rate-arbitrage]]", "[[delta-neutral-yield-farming]]", "[[convex-tail-hedge-arbitrage]]", "[[trend-plus-tail-hedge]]", "[[tail-risk-hedging]]", "[[5-percent-otm-put-overlay]]", "[[cash-and-carry]]", "[[basis-trading]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[delta-neutral]]", "[[options]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: carry_entry_003
+    role: entry
+    rule: "Carry entry: 8h funding at or above 0.03% (0.0003, about 33% APY); short the perp, long spot"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=1
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "The latest settled Binance 8h print; current_rate is the live next-period rate. On Hyperliquid sum the last 8 hourly prints (/hyperliquid/funding-rates?limit=8) for the 8h equivalent. Binance replay rows are 5-minute samples of the live rate."
+  - id: carry_7d_positive
+    role: filter
+    rule: "Carry entry: 7-day average funding positive"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Mean of the last 21 settled 8h prints above zero."
+  - id: carry_oi_healthy
+    role: filter
+    rule: "Carry entry: open interest healthy"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/open-interest?symbol={symbol}USDT
+    field: history[].sum_open_interest_value
+    note: "30 daily Binance OI points in USD. The page does not define healthy; the funding-rate-arbitrage pseudocode waits while an OI z-score is below -1.0, with no window given, so the test is the desk's call."
+  - id: crowding_filter
+    role: filter
+    rule: "Skip carry entries into crowded, OI-stretched books"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/long-short-ratio?symbol={symbol}USDT
+    field: long_short_ratio
+    note: "From the page's AI-agent workflow. Binance account long/short ratio; the page sets no crowding cutoff, so the level is the desk's call."
+  - id: carry_exit_001
+    role: exit
+    rule: "Carry exit: 8h funding below 0.01% (0.0001)"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=1
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+  - id: carry_exit_7d_negative
+    role: exit
+    rule: "Carry exit: 7-day average funding turns negative"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Mean of the last 21 settled 8h prints below zero."
+  - id: oracle_divergence_100bps
+    role: stop
+    rule: "Carry exit: oracle (mark vs index) divergence above 100 bps"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].premium
+    note: "Served for a Hyperliquid perp leg: premium is the perp's premium to its oracle, so act when its absolute value exceeds 0.01. Binance mark-vs-index premium is not served live."
+  - id: carry_sizing
+    role: sizing
+    rule: "Carry book: 1x leverage on the isolated perp short, at most 25% of the sleeve per asset"
+    runnable: true
+    input: position
+  - id: carry_max_3
+    role: sizing
+    rule: "Carry book: at most 3 concurrent positions"
+    runnable: true
+    input: position
+  - id: iv_rv_gate
+    role: filter
+    rule: "Buy the hedge only while 30-day ATM implied vol is below 1.5x 30-day realized vol"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "Interpolate atm_iv to 30 days between the two expiries that bracket it, and divide by items[].realized_30. BTC and ETH only; term_structure is Pro Plus. items[].dvol (the 30-day DVOL index) is a quicker proxy for the numerator."
+  - id: hedge_budget
+    role: sizing
+    rule: "Annual hedge budget = 15% of expected carry (7d average funding x 3 x 365 x deployed capital), scaled 10-25% by IV/RV: 25% - 15% x (IV/RV - 1) / 0.5, clamped, and 10% when IV/RV is above 1.5"
+    runnable: true
+    input: derived
+    inputs: [carry_7d_positive, iv_rv_gate]
+    note: "Deployed capital comes from the position record. Recompute every 30 days from the trailing 7d funding average."
+  - id: put_selection
+    role: entry
+    rule: "Hedge with Deribit BTC or ETH OTM puts: delta at or below -0.15, strike about 20-30% below spot, tenor 1-3 months (the pseudocode targets about 60 days)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "Tenor and strike are computable: pick an expiry with expiry_days 30-90 and a strike at 0.70-0.80 x spot. No per-strike delta or option prices are served, so the delta check and the premium come from Deribit. The page's fallback (long DVOL perps or other long-vol instruments) is not served either."
+  - id: hedge_allocation
+    role: sizing
+    rule: "Allocate the hedge budget to BTC and ETH puts in proportion to the carry book's underlying exposure"
+    runnable: true
+    input: position
+  - id: premium_within_budget
+    role: sizing
+    rule: "Size the hedge in USD premium, never above the remaining annual budget; no leverage on the options"
+    runnable: true
+    input: position
+  - id: roll_1_week
+    role: exit
+    rule: "Roll each put 1 week before expiry"
+    runnable: true
+    input: position
+  - id: roll_avoid_pinning
+    role: exit
+    rule: "Optional: time put rolls to avoid expiry-pinning periods, using options max pain and expiry open interest"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    note: "BTC only, one max-pain strike on an unnamed expiry, and no per-expiry OI, so judging a pinning window is the desk's call."
+  - id: kill_drawdown_10
+    role: stop
+    rule: "Kill: carry book drawdown above 10%, net of hedge P&L, in any rolling 30-day window"
+    runnable: true
+    input: position
+  - id: kill_carry_below_hedge
+    role: stop
+    rule: "Kill: expected carry (7d average funding annualised x capital) falls below the hedge premium paid per year"
+    runnable: true
+    input: derived
+    inputs: [carry_7d_positive, premium_within_budget]
+  - id: kill_iv_3x_rv
+    role: stop
+    rule: "Kill: options IV above 3x realized vol on the target instruments"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "Same 30-day interpolation over items[].realized_30 as iv_rv_gate. The page names no tenor here; the 30-day read matches the IV gate."
+  - id: kill_7d_negative_majority
+    role: stop
+    rule: "Kill: 7-day average funding negative on more than 50% of held carry positions"
+    runnable: true
+    input: derived
+    inputs: [carry_exit_7d_negative]
+  - id: kill_insurance_fund_event
+    role: stop
+    rule: "Kill: an exchange insurance-fund socialised-loss event on any carry venue"
+    runnable: false
+    note: "Insurance-fund balances and socialised-loss (ADL) notices are not served; they come from each venue's status page and API."
+  - id: redeploy
+    role: entry
+    rule: "Re-deploy when 7-day average funding recovers above 0.015%/8h and hedge IV/RV is back below 1.5"
+    runnable: true
+    input: derived
+    inputs: [carry_7d_positive, iv_rv_gate]
+    note: "The page's third re-deploy leg, no active exchange risk event, is kill_insurance_fund_event, which is not served."
 ---
 
 # Carry with Tail Hedge

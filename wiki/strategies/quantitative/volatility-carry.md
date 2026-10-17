@@ -21,6 +21,112 @@ expected_max_drawdown: 0.40
 breakeven_cost_bps: 30
 backtest_status: walk-forward-validated
 related: ["[[variance-risk-premium]]", "[[options-premium-selling]]", "[[short-straddle]]", "[[short-strangle]]", "[[delta-hedging]]", "[[gamma-scalping]]", "[[vix-trading]]", "[[skew-trading]]", "[[tail-risk-hedging]]", "[[section-1256-contracts]]", "[[options-portfolio-construction]]"]
+gates:
+  - id: spx_underlying
+    role: universe
+    rule: "Sell broad equity-index options: SPX preferred, alternatively SPY, ES futures options, NDX or RUT"
+    runnable: false
+    note: "No SPX, SPY, ES, NDX or RUT price or option data is served. The page names no crypto version; the nearest crypto analogue would be BTC/ETH Deribit options, whose implied vol (DVOL) is on /api/v1/volatility/implied."
+  - id: short_vol_structure
+    role: entry
+    rule: "Structure: short ATM straddle, short ~30-delta strangle or 25-delta cash-secured put (the 25-delta strangle is the professional default)"
+    runnable: false
+    note: "Strike selection by delta needs the SPX option chain with Greeks per strike. No option chain or Greeks are served."
+  - id: tenor_30_45_dte
+    role: entry
+    rule: "Open at 30-45 days to expiration"
+    runnable: false
+    note: "Needs the SPX expiry calendar. The only expiry list served is Deribit BTC/ETH (term_structure on /api/v1/volatility/implied)."
+  - id: laddered_cadence
+    role: entry
+    rule: "Open a new position every 1-2 weeks, laddered across expiries so no single roll cycle holds the exposure"
+    runnable: true
+    input: position
+  - id: iv_rank_30th_pctile
+    role: filter
+    rule: "Open only when VIX or IV rank is at or above the 30th percentile of its trailing 252-day range"
+    runnable: false
+    note: "No VIX or SPX implied-vol history is served."
+  - id: vrp_above_2_points
+    role: filter
+    rule: "Open only when VIX minus the trailing 21-day realized vol of SPX exceeds 2 vol points"
+    runnable: false
+    note: "No VIX or SPX returns are served. The BTC/ETH counterpart, DVOL minus 30-day realized (items[].vrp on /api/v1/volatility/implied), is not something the page names."
+  - id: vega_per_position
+    role: sizing
+    rule: "Vega at most 1% of NAV per vol point per position (a 5-vol spike costs at most 5% of NAV)"
+    runnable: partial
+    input: position
+    note: "Position vega comes from the broker's risk report. No option Greeks are served, so the bot cannot compute it from our data."
+  - id: es_cap
+    role: sizing
+    rule: "Position-level 95% expected shortfall at most 3% of NAV"
+    runnable: partial
+    input: position
+    note: "Needs an option-pricing risk model over the SPX surface, which we do not serve; the broker's or desk's risk engine supplies it."
+  - id: total_short_vega
+    role: sizing
+    rule: "Total short vega across all positions at most 3-5% of NAV per vol point"
+    runnable: partial
+    input: position
+    note: "Sum of per-position vega from the broker. No option Greeks are served. The page's pseudocode uses 5% as the cap."
+  - id: margin_utilization
+    role: sizing
+    rule: "Margin used at most 30% of the portfolio-margin requirement at entry, leaving room for spike-driven margin expansion"
+    runnable: true
+    input: position
+  - id: profit_target_half_credit
+    role: exit
+    rule: "Close at 50% of the maximum credit"
+    runnable: true
+    input: position
+    note: "Compares the position's current option mark, from the broker, with the credit received. No option prices are served."
+  - id: time_stop_21_dte
+    role: exit
+    rule: "Close at 21 DTE regardless of P&L"
+    runnable: true
+    input: position
+  - id: vix_spike_kill
+    role: stop
+    rule: "Close immediately if VIX rises 50% or more in a single session"
+    runnable: false
+    note: "No VIX is served."
+  - id: delta_doubling_kill
+    role: stop
+    rule: "Close immediately if the position's delta exceeds 2x its delta at entry"
+    runnable: partial
+    input: position
+    note: "Position delta comes from the broker. No option Greeks are served."
+  - id: daily_delta_hedge
+    role: sizing
+    rule: "Hedged variant: neutralise net portfolio delta at each close with ES futures or SPY shares (intraday on vol-spike days)"
+    runnable: false
+    note: "No ES or SPY prices are served, and the delta to hedge needs option Greeks."
+  - id: vrp_regime_suspend
+    role: filter
+    rule: "Suspend carry when the trailing 6-month mean of VIX minus 21-day RV falls below 0"
+    runnable: false
+    note: "No VIX or SPX history is served."
+  - id: vvix_pause
+    role: filter
+    rule: "Pause while VVIX stays above 150"
+    runnable: false
+    note: "No VVIX is served, and the page does not define how long counts as sustained."
+  - id: vix_curve_backwardation
+    role: filter
+    rule: "Suspend while the VIX futures curve is in backwardation (front-month VX above the next month)"
+    runnable: false
+    note: "No VIX futures curve is served. Deribit BTC/ETH ATM implied vol per expiry is served (term_structure on /api/v1/volatility/implied), but it is not the VX curve the page reads."
+  - id: drawdown_kill
+    role: stop
+    rule: "Drawdown over 25% of allocated capital pauses the strategy for 30 days; over 40% retires it; 3 or more vol-spike kills in a quarter pause it for review"
+    runnable: true
+    input: position
+  - id: crowding_size_cut
+    role: sizing
+    rule: "Halve sizing when dedicated short-vol AUM (CFTC positioning, volatility-ETP balances) reaches prior peaks"
+    runnable: false
+    note: "No CFTC positioning or volatility-ETP balance data is served."
 ---
 
 # Volatility Carry

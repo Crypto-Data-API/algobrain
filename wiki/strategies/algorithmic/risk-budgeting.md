@@ -12,6 +12,54 @@ markets: [stocks, bonds]
 complexity: advanced
 backtest_status: untested
 related: ["[[black-litterman]]", "[[portable-alpha]]", "[[cppi]]", "[[garch-volatility]]", "[[regime-detection]]"]
+gates:
+  - id: asset_universe
+    role: universe
+    rule: "Universe of asset classes: US, international and EM equity, Treasuries, TIPS, investment-grade and high-yield bonds, commodities, gold, REITs"
+    runnable: false
+    note: "Only a gold price (gold_price_usd on /sentiment/macro) is served; no equity, bond, commodity or REIT series. The method is data-agnostic and could run on crypto from daily candles, but that is not this page's universe."
+  - id: covariance
+    role: sizing
+    rule: "Estimate the covariance matrix from 3-5 years of daily or weekly returns with Ledoit-Wolf shrinkage or EWMA (optionally GARCH forecasts)"
+    runnable: false
+    note: "Needs return history for the asset classes above, which is not served."
+  - id: risk_budgets
+    role: sizing
+    rule: "Set risk budgets: equal for risk parity, or custom (for example 30% equity, 30% bonds, 20% commodities, 20% alternatives)"
+    runnable: true
+    input: position
+  - id: solve_weights
+    role: sizing
+    rule: "Solve for weights whose risk contributions w_i x (Sigma w)_i / sigma_p match the budgets (numerical optimisation)"
+    runnable: false
+    input: derived
+    inputs: [covariance, risk_budgets]
+    note: "Only as runnable as covariance."
+  - id: hrp_allocation
+    role: sizing
+    rule: "HRP variant: cluster the correlation matrix, quasi-diagonalise, and allocate by recursive bisection inversely to cluster variance"
+    runnable: false
+    input: derived
+    inputs: [covariance]
+    note: "Only as runnable as covariance."
+  - id: lever_to_target
+    role: sizing
+    rule: "Lever the risk-parity portfolio with futures when its volatility is below target (for example 2x to lift 5% vol to 10%)"
+    runnable: false
+    input: derived
+    inputs: [solve_weights]
+    note: "Only as runnable as solve_weights; index futures are not served either."
+  - id: regime_budgets
+    role: sizing
+    rule: "Regime-conditional budgets: trending/bull 40% equity risk and 20% bonds; mean-reverting equal budgets; crisis 50% bonds and gold, 10% equity"
+    runnable: false
+    note: "Our regime endpoints classify the crypto market, not the equity and bond regimes this mapping assumes."
+  - id: rebalance
+    role: exit
+    rule: "Rebalance monthly, or when any risk contribution drifts more than 5% from its budget"
+    runnable: partial
+    input: position
+    note: "The monthly calendar is mechanical; the drift test needs the covariance, which is not served."
 ---
 
 # Risk Budgeting

@@ -34,6 +34,152 @@ kill_criteria: |
   - sector peer universe shrinks to < 2 qualifying beta-match candidates per unlock event (pairs approach is operationally infeasible; revert to outright short with crowding gate)
 
 related: ["[[unlock-short-with-crowding-gate]]", "[[pairs-trading]]", "[[pairs-with-funding-differential]]", "[[token-unlock-supply-event]]", "[[correlation-regime-pairs]]", "[[cross-sectional-relative-value]]", "[[unlock-aware-momentum]]", "[[event-driven-trading]]", "[[funding-rate]]", "[[open-interest]]", "[[perpetual-futures]]", "[[statistical-arbitrage]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: unlock_3pct
+    role: universe
+    rule: "A cliff unlock of at least 3% of circulating supply (pct_of_float at least 0.03)"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={coin}&window_days=35
+    field: items[].pct_of_float
+    replay: /api/v1/backtesting/snapshots?data_type=token_unlocks&start={start}&limit=100
+    replay_field: snapshots[].data[].next_unlock.pct_of_float
+    note: "A cliff calendar from DefiLlama emissions data (the page's note that no unlock endpoint exists is out of date). Absence is not proof of no unlock; one row per coin, its soonest cliff. Replay from 2026-08-20."
+  - id: unlock_known_7d
+    role: universe
+    rule: "The unlock date is known at least 7 days in advance"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={coin}&window_days=35
+    field: items[].days_until
+    note: "Qualifies when the cliff is first seen with days_until of 7 or more. Pro sees 35 days ahead, Free only 7."
+  - id: token_oi_2m
+    role: universe
+    rule: "The unlocking token's perp has at least $2M of open interest"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+    note: "Hyperliquid perps. For a Binance-only token, current_oi on /derivatives/binance/open-interest is in coins: multiply by price."
+  - id: token_volume_5m
+    role: universe
+    rule: "The unlocking token's perp averages at least $5M of daily volume"
+    runnable: true
+    endpoint: /api/v1/volume/scanner/{coin}
+    field: avg_volume_30d
+    note: "Mean daily Hyperliquid notional over the last 30 settled days, in USD."
+  - id: peer_sector
+    role: universe
+    rule: "Candidate peers come from the unlocking token's sector (L1, DeFi, AI, Gaming and so on)"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: categories
+    note: "CoinGecko categories are many and overlapping (a token can be L1, AI and Gaming at once), and the page leaves the sector map open, so which category defines the sector is the desk's call. /coins/category-groups lists the coins per group."
+  - id: peer_oi_5m
+    role: universe
+    rule: "The sector peer has a liquid perp with at least $5M of open interest"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+  - id: peer_corr_060
+    role: universe
+    rule: "Peer's 20-day Pearson correlation of daily log returns with the unlocking token at least 0.60"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles/batch?coins={coin}&interval=1d&limit=21&closed_only=true
+    field: series.{coin}[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Request the token and its candidate peers together as a comma list in coins; 21 closes give 20 returns."
+  - id: peer_beta_range
+    role: universe
+    rule: "20-day OLS beta of the unlocking token's daily log returns on the peer's between 0.6 and 1.4"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles/batch?coins={coin}&interval=1d&limit=21&closed_only=true
+    field: series.{coin}[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "beta = cov(R_unlock, R_peer) / var(R_peer) over the same 20 returns as peer_corr_060."
+  - id: peer_pick
+    role: universe
+    rule: "Among 2-3 qualifying peers, pick one: the rules choose the beta closest to 1.0, the pseudocode the highest correlation"
+    runnable: partial
+    input: derived
+    inputs: [peer_sector, peer_oi_5m, peer_corr_060, peer_beta_range]
+    note: "Only as runnable as peer_sector. Skip the trade when no peer qualifies."
+  - id: btc_move_exclusion
+    role: filter
+    rule: "Skip unlock events in the 5 days after a BTC move of 10% or more"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin=BTC&interval=1d&limit=10
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin=BTC&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "The page does not say over what span the 10% is measured (one daily close-to-close, or a multi-day swing), so the definition is the desk's call."
+  - id: funding_token_floor
+    role: entry
+    rule: "The unlocking token's funding is above -0.02% per 8h (the sum of the last 8 hourly settlements above -0.0002)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+  - id: funding_peer_floor
+    role: entry
+    rule: "The sector peer's funding is also above -0.02% per 8h"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "coin = the peer."
+  - id: regime_block
+    role: filter
+    rule: "No entries while the long-term regime is Structural Shock (sector correlations converge and the hedge stops hedging)"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Block on regime structural_shock_crisis. History from 2026-08-07."
+  - id: entry_timing
+    role: entry
+    rule: "Enter the pair 5-7 days before the unlock date (the pseudocode uses 6)"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={coin}&window_days=35
+    field: items[].days_until
+    replay: /api/v1/backtesting/snapshots?data_type=token_unlocks&start={start}&limit=100
+    replay_field: snapshots[].data[].next_unlock.days_until
+  - id: hedge_ratio
+    role: sizing
+    rule: "Short the unlocking token perp at 1x notional and long the peer perp at 1/beta x notional"
+    runnable: true
+    input: derived
+    inputs: [peer_beta_range]
+  - id: exit_digestion
+    role: exit
+    rule: "Close both legs 10 days after the unlock date"
+    runnable: true
+    input: position
+    note: "Record the unlock date at entry: the calendar drops it once it passes."
+  - id: exit_spread_recovered
+    role: exit
+    rule: "Close early if the beta-adjusted spread (token price - beta x peer price) recovers to within 2% of its pre-entry level before day 10"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "Read both legs' marks. As written (and in the pseudocode) the test is already true at entry, so the spread must first move away; how far it must move before this exit arms is not stated and is the desk's call."
+  - id: stop_spread_adverse
+    role: stop
+    rule: "Close both legs if the beta-adjusted spread moves 15% against the position from entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: corr_breakdown_exit
+    role: exit
+    rule: "Close both legs and do not reopen if the peer's daily correlation with the unlocking token drops below 0.50 during the hold"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles/batch?coins={coin}&interval=1d&limit=21&closed_only=true
+    field: series.{coin}[].close
+    note: "Recompute the 20-day correlation of daily log returns each day, as in peer_corr_060."
 ---
 
 # Unlock Pair Hedge

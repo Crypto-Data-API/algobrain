@@ -33,6 +33,122 @@ kill_criteria: |
   - Review trigger: if the event-pause causes strategy capital to be idle > 15% of trading days (the event calendar is too dense), reduce the number of event types covered or narrow the pause window.
 
 related: ["[[event-vol-buying]]", "[[regime-gated-grid]]", "[[trend-aware-carry]]", "[[carry-with-tail-hedge]]", "[[post-panic-vol-selling]]", "[[funding-conditioned-vol-selling]]", "[[oi-aware-grid]]", "[[unlock-cascade-watch]]", "[[unlock-short-with-crowding-gate]]", "[[grid-trading]]", "[[funding-rate-arbitrage]]", "[[volatility-targeting]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: tier1_halving
+    role: filter
+    rule: "Tier 1 (full halt, plus or minus 3 days): BTC or ETH halving events"
+    runnable: false
+    note: "Halving dates are not on the served calendar; derive the BTC date from block height (every 210,000 blocks) via a block explorer."
+  - id: tier1_regulatory
+    role: filter
+    rule: "Tier 1 (plus or minus 1 day of the announced date): US SEC or CFTC decisions on BTC/ETH spot ETFs or exchange enforcement actions"
+    runnable: false
+    note: "Regulatory decision dates are not served; /api/v1/policy/regime lists FOMC rate decisions but not SEC or CFTC dockets (SEC EDGAR is the source)."
+  - id: tier1_hard_forks
+    role: filter
+    rule: "Tier 1 (plus or minus 2 days): major protocol hard forks affecting BTC, ETH or SOL"
+    runnable: false
+    note: "Upgrades and forks are not on the served calendar; they come from protocol announcements."
+  - id: tier1_unlock_10pct
+    role: filter
+    rule: "Tier 1 (plus or minus 3 days): a token cliff unlock of 10% or more of circulating supply"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={symbol}&window_days=35
+    field: items[].pct_of_float
+    note: "pct_of_float is a fraction (0.10 = 10%); days_until is alongside. Cliffs only, from DefiLlama emissions coverage, so absence is not proof of no unlock. Full horizon on Pro and above."
+  - id: tier2_unlock_4_9pct
+    role: filter
+    rule: "Tier 2 (plus or minus 2 days): a token cliff unlock of 4-9% of circulating supply"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={symbol}&window_days=35
+    field: items[].pct_of_float
+  - id: tier2_fomc
+    role: filter
+    rule: "Tier 2 (plus or minus 1 day): major FOMC meetings, only for BTC/ETH strategies while macro correlation is active"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=macro_print&window_days=30
+    field: items[].macro_class
+    note: "Rows with macro_class FOMC give the date (days_until alongside). Whether macro correlation is currently active is the desk's call; the page names no measure."
+  - id: tier2_upgrades
+    role: filter
+    rule: "Tier 2 (plus or minus 2 days): BTC halving-related technical upgrades and Ethereum major EIP implementation dates"
+    runnable: false
+    note: "Upgrade and EIP dates are not served."
+  - id: tier3_unlock_2_4pct
+    role: filter
+    rule: "Tier 3 (monitor only, plus or minus 1 day): token cliff unlocks of 2-4% of circulating supply"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={symbol}&window_days=35
+    field: items[].pct_of_float
+  - id: tier3_macro_prints
+    role: filter
+    rule: "Tier 3 (monitor only): CPI, PPI and NFP releases, when BTC/ETH macro correlation is elevated"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=macro_print&window_days=30
+    field: items[].macro_class
+    note: "Rows with macro_class CPI, PPI or NFP (PCE is listed too). Dates only, no release times. Whether correlation is elevated is the desk's call."
+  - id: tier3_other
+    role: filter
+    rule: "Tier 3 (monitor only): minor protocol upgrades and token TGEs in the same sector as held positions"
+    runnable: false
+    note: "Upgrades and TGEs are not served."
+  - id: tier1_full_halt
+    role: stop
+    rule: "Tier 1: wind down over T - 3 to T - 1 and fully halt by T (grid: cancel orders, flatten inventory; carry: close the short-perp leg; short-vol: buy back short options)"
+    runnable: true
+    input: derived
+    inputs: [tier1_unlock_10pct]
+    note: "Runnable for unlock-driven Tier 1 events. The other Tier 1 triggers (tier1_halving, tier1_regulatory, tier1_hard_forks) are not served, so those halts need a manual calendar."
+  - id: tier2_reduce
+    role: sizing
+    rule: "Tier 2: over T - 2 to T - 1 cut the grid to 40% of size, the carry book to 50%, the short-vol book to 25%"
+    runnable: partial
+    input: derived
+    inputs: [tier2_unlock_4_9pct, tier2_fomc]
+    note: "Only as runnable as the FOMC leg; tier2_upgrades is not served."
+  - id: tier3_oi_escalate
+    role: filter
+    rule: "Tier 3 escalation: open interest up 10% or more in the 24 hours before the event moves the book to Tier 2 actions"
+    runnable: true
+    endpoint: /api/v1/liquidity/oi-divergence
+    field: rows[].oi_change_24h_pct
+    note: "Hyperliquid OI, per coin. Check every 2 hours as the page asks."
+  - id: tier3_dvol_escalate
+    role: filter
+    rule: "Tier 3 escalation: DVOL up 10 vol points or more in the 24 hours before the event moves the book to Tier 2 actions"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol_change_24h
+    note: "BTC and ETH only."
+  - id: resume_grid
+    role: entry
+    rule: "Resume a grid when DVOL has dropped 15 or more vol points from its event peak and price has re-entered the grid range"
+    runnable: true
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "Track the peak from repeated polls during the pause; the grid range comes from the position record, price from /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=12."
+  - id: resume_carry
+    role: entry
+    rule: "Resume a carry book when funding is back within plus or minus 30% of its pre-event level"
+    runnable: true
+    input: position
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=1
+    field: rates[].funding_rate
+    note: "Store the pre-event print; the pseudocode resumes at once if the pre-event rate was zero."
+  - id: resume_short_vol
+    role: entry
+    rule: "Resume a short-vol book when DVOL has dropped 20 or more vol points from its event peak and new realized vol is at or below the IV the options were sold at"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "The DVOL leg is mechanical. The page names no window for the new realized vol (items[].realized_30 is the 30-day figure), and the pseudocode checks only DVOL, so the RV leg is the desk's call."
+  - id: review_idle_15pct
+    role: sizing
+    rule: "Review trigger: if event pauses leave capital idle more than 15% of trading days, narrow the event coverage or the pause windows"
+    runnable: true
+    input: position
 ---
 
 # Event Calendar Risk Gating

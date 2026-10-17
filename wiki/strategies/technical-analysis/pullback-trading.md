@@ -37,6 +37,151 @@ kill_criteria: |
   - pullbacks routinely exceed the 0.618 retracement before any bounce (trend integrity lost)
 
 related: ["[[trend]]", "[[trend-following]]", "[[moving-averages]]", "[[fibonacci-retracement]]", "[[support-and-resistance]]", "[[breakout-trading]]", "[[mean-reversion]]", "[[atr]]", "[[funding-rate]]", "[[open-interest]]", "[[liquidation]]", "[[supply-demand-zones]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[cryptodataapi]]"]
+gates:
+  - id: uptrend_ma_filter
+    role: filter
+    rule: "Trend filter first: the daily close above the 200-day SMA and the 50-day SMA above the 200-day (mirror for shorts)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=203
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "The pseudocode's test; drop the forming bar. The text also wants both MAs rising, with no lookback given (compare with N days ago; N is the desk's). /api/v1/indicators/technical/{symbol} serves ma.sma_50, ma.sma_200 and ma.above_200 precomputed."
+  - id: higher_highs_lows
+    role: filter
+    rule: "A sequence of higher highs and higher lows on the daily"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=120
+    field: candles[].high
+    note: "The page does not define a swing point. One reading: the last two swing highs and lows (3-bar fractals) each above the one before; the swing rule is the desk's."
+  - id: btc_not_downtrend
+    role: filter
+    rule: "BTC itself not in a confirmed downtrend (alt uptrends rarely survive a BTC breakdown)"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/BTC
+    field: ma.above_200
+    note: "The pseudocode reads a btc_trend flag the page never defines. One reading: BTC closing above its 200-day SMA; the regime_strong_bull gate is the page's other test."
+  - id: regime_strong_bull
+    role: filter
+    rule: "Buy dips only while the market regime is strong_trend_bull"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow."
+  - id: pullback_into_ma_zone
+    role: entry
+    rule: "Pullback zone: the day's low between the 50-day SMA and 1.01x the 20-day SMA"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].low
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].low
+    note: "The pseudocode's into_support test, on the last closed bar."
+  - id: pullback_fib_level
+    role: entry
+    rule: "Or a retracement to the 0.382, 0.5 or 0.618 Fibonacci level of the prior leg"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=120
+    field: candles[].close
+    note: "The leg's start and end are swing points the page leaves to the trader; the levels follow once the desk fixes them."
+  - id: pullback_sr_level
+    role: entry
+    rule: "Or a prior breakout level that flipped to support, or a fresh higher-timeframe demand zone"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical?symbol={coin}
+    field: items[].sr.support[].price
+    note: "sr.support lists algorithmic support levels with a strength count; whether one is a flipped breakout level or a demand zone is a chart judgement."
+  - id: reclaim_trigger
+    role: entry
+    rule: "Entry trigger: the day's low swept below the 20-day SMA and the close is above the prior close (do not catch the falling knife)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "The pseudocode's swept_and_reclaimed test. The text's alternatives (an engulfing candle, a reclaimed minor swing high) are chart reads."
+  - id: funding_negative
+    role: sizing
+    rule: "High conviction when funding has flipped negative at support"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "Part of the pseudocode's squeeze_setup (conviction high), which also needs oi_elevated. The page sets no size for high conviction."
+  - id: oi_elevated
+    role: sizing
+    rule: "High conviction when open interest is elevated: OI z-score above 0.5"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_close
+    note: "The page gives no lookback for the z-score. One reading: today's oi_close against the mean and stdev of the last 30 daily bars (OI history from 2026-03-30); the window is the desk's."
+  - id: long_liq_flush
+    role: entry
+    rule: "Highest-conviction dips buy into a long-liquidation flush just below support and reclaim"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=1h&start={start}
+    field: data[].long_usd
+    note: "Hyperliquid's own liquidation tape (from 2026-07-23); bars with none are omitted. The page sets no flush size; a bar at several times the trailing mean is one reading."
+  - id: stop_below_sweep
+    role: stop
+    rule: "Stop 0.5x ATR(14) below the pullback's low (beyond the stop-hunt wick); a close below invalidates the thesis"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=40&atr=14
+    field: candles[].atr
+    note: "Stop = signal bar low - 0.5 x atr of the last closed bar. The served atr is Wilder ATR."
+  - id: min_reward_risk
+    role: entry
+    rule: "Require at least 1:2 reward to risk to the target (prior swing high, next supply zone or measured move)"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical?symbol={coin}
+    field: items[].sr.resistance[].price
+    note: "The nearest sr.resistance level stands in for the prior swing high or supply zone; which target to use is the desk's call."
+  - id: trail_atr
+    role: exit
+    rule: "Trail the remainder 2.5x ATR(14) behind price to ride the resumption"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=40&atr=14
+    field: candles[].atr
+    note: "atr_mult 2.5 from the pseudocode; the example also scales 50% out at about 1:1.4."
+  - id: btc_break_exit
+    role: exit
+    rule: "Exit alt pullback longs wholesale when BTC breaks: the market regime flips toward strong_trend_bear"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+  - id: low_risk_sizing
+    role: sizing
+    rule: "Risk a fixed small percentage of capital per trade at low leverage"
+    runnable: partial
+    input: position
+    note: "The page gives no percentage or leverage cap; both are the desk's."
+  - id: volume_declining
+    role: filter
+    rule: "Ideally volume declines into the pullback and rises on the resumption"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30
+    field: candles[].volume
+    note: "Soft preference with no window or threshold given; base-unit volume."
+  - id: kill_deep_retracements
+    role: filter
+    rule: "Stand aside when pullbacks routinely exceed the 0.618 retracement before any bounce"
+    runnable: partial
+    input: derived
+    inputs: [pullback_fib_level]
+    note: "Needs the desk's swing definition and a count for 'routinely'."
+  - id: kill_lower_lows
+    role: filter
+    rule: "Stand aside when consecutive pullback buys are stopped out as new lower lows form, or the trend filter whipsaws on and off"
+    runnable: partial
+    input: position
+    note: "The page gives no count of consecutive stop-outs or whipsaws; the bot's trade log supplies the stop-outs."
 ---
 
 # Pullback Trading (Crypto)

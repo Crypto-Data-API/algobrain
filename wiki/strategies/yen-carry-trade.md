@@ -21,6 +21,69 @@ expected_sharpe: 0.6
 expected_max_drawdown: 0.40
 breakeven_cost_bps: 10
 related: ["[[carry-trade]]", "[[forex]]", "[[bank-of-japan]]", "[[interest-rates]]", "[[risk-off]]", "[[vix]]", "[[funding-rate]]", "[[edge-taxonomy]]", "[[tail-risk]]"]
+gates:
+  - id: rate_differential
+    role: entry
+    rule: "A wide, stable policy-rate differential between the target central bank and the Bank of Japan, above the cost-plus-hurdle threshold and not about to narrow (e.g. AUD/JPY, MXN/JPY, USD/JPY)"
+    runnable: false
+    note: "No central-bank policy rates or FX swap points are served; /api/v1/sentiment/macro carries EUR/USD, gold and one US Treasury yield only. Needs BOJ, RBA, Banxico and Fed policy rates and FX forward points."
+  - id: risk_on_filter
+    role: entry
+    rule: "Enter only in risk-on conditions: VIX low, equities rising, credit spreads tight"
+    runnable: false
+    note: "No VIX, equity index or credit-spread series is served."
+  - id: long_high_yielder
+    role: entry
+    rule: "Go long the high-yielder against JPY and collect the daily swap"
+    runnable: false
+    note: "No JPY crosses or FX rollover rates are served."
+  - id: avoid_boj_shift
+    role: filter
+    rule: "Do not initiate into BOJ policy-shift risk (an imminent hike)"
+    runnable: false
+    note: "BOJ meetings and guidance are not on /api/v1/event/calendar or /api/v1/policy/regime, which list US prints only."
+  - id: vix_risk_off_exit
+    role: exit
+    rule: "Cut on a VIX spike above about 25-30, a sharp equity selloff or widening credit spreads"
+    runnable: false
+    note: "No VIX, equity or credit series is served."
+  - id: differential_narrowing_exit
+    role: exit
+    rule: "Exit if the BOJ signals hikes or the high-yielder's central bank signals cuts"
+    runnable: false
+    note: "Central-bank guidance is not served; needs BOJ and target-bank statements."
+  - id: event_derisking
+    role: exit
+    rule: "Trim ahead of BOJ meetings, US payrolls and FOMC, elections and geopolitical flashpoints"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=macro_print&window_days=14
+    field: items[].macro_class
+    note: "FOMC and NFP rows are served with dates; BOJ meetings, elections and geopolitical events are not."
+  - id: hard_stop
+    role: stop
+    rule: "Never hold a carry position without a hard technical stop"
+    runnable: false
+    note: "The page gives no stop distance, and no JPY-cross price is served to check one against."
+  - id: leverage_cap
+    role: sizing
+    rule: "Keep leverage at or below 2-5x (4x in the pseudocode)"
+    runnable: true
+    input: position
+  - id: risk_per_position
+    role: sizing
+    rule: "Risk at most 1-2% of capital per position; carry pairs all unwind together, so diversifying across them adds little"
+    runnable: true
+    input: position
+  - id: kill_drawdown
+    role: stop
+    rule: "Cut when a position's drawdown exceeds about 10-15% from peak"
+    runnable: true
+    input: position
+  - id: kill_yen_vol_breakout
+    role: filter
+    rule: "De-risk when yen implied volatility breaks out of its recent range to the upside"
+    runnable: false
+    note: "No FX implied volatility is served."
 ---
 
 # Yen Carry Trade

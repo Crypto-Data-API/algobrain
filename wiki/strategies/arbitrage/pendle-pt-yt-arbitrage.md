@@ -22,6 +22,102 @@ expected_sharpe: 1.8
 expected_max_drawdown: 0.1
 breakeven_cost_bps: 30
 decay_evidence: "Pendle TVL grew from $200M (2023) to $5B+ (2024) on restaking-LRT category. Strategy alive across markets but yields compressing as more institutional capital enters."
+gates:
+  - id: pool_tvl_10m
+    role: universe
+    rule: "Screen Pendle pools with at least $10M TVL"
+    runnable: false
+    note: "No Pendle pool list or per-pool TVL is served. Needs the Pendle API or DefiLlama's per-pool data."
+  - id: pt_implied_yield
+    role: entry
+    rule: "PT implied yield per maturity = (1 / pt_price - 1) x 365 / days_to_maturity"
+    runnable: false
+    note: "No PT or YT prices, maturities or pool reserves are served. Needs the Pendle API or SDK."
+  - id: underlying_yield_model
+    role: entry
+    rule: "Expected underlying yield over the maturity window, from the underlying's base yield"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol=ETHUSDT&limit=90
+    field: avg_rate
+    replay: /api/v1/backtesting/funding?symbol=ETH&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Only for funding-driven underlyings (sUSDe): avg_rate is the mean 8h Binance ETH funding over the last 90 prints (30 days); x 3 x 365 annualises it. That is a proxy for Ethena's yield, not the sUSDe rate itself, and BTC and SOL funding also feed it. LST and LRT staking yields (stETH, eETH, ezETH) are not served."
+  - id: points_value
+    role: entry
+    rule: "Projected points or airdrop value per YT, added to the YT-implied yield"
+    runnable: false
+    note: "No points or airdrop valuation exists in any API; the page says to keep it as an uncertainty band set by the desk."
+  - id: buy_pt_200bp
+    role: entry
+    rule: "Buy PT when its implied yield exceeds the modelled underlying yield by more than 200 bp"
+    runnable: false
+    input: derived
+    inputs: [pt_implied_yield, underlying_yield_model]
+    note: "pt_implied_yield is not served, so the spread cannot be computed from this API."
+  - id: short_yt_200bp
+    role: entry
+    rule: "Short YT when (yt_price + points_value) x 365 / days_to_maturity exceeds the modelled underlying yield by more than 200 bp"
+    runnable: false
+    input: derived
+    inputs: [points_value, underlying_yield_model]
+    note: "YT prices and points value are not served."
+  - id: bear_regime_favour_pt
+    role: filter
+    rule: "In a sustained strong_trend_bear market regime, favour the long-PT (fixed-receiver) side over sUSDe yield exposure"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow. The page does not say how long counts as sustained; regime.candles_in_regime gives the time in state, and the cutoff is the desk's call."
+  - id: position_size
+    role: sizing
+    rule: "1-3% of the fund per trade; the lower end for points-driven YT trades"
+    runnable: true
+    input: position
+    note: "The pseudocode's Kelly size on the yield spread would need the PT implied yield, which is not served."
+  - id: hold_to_maturity
+    role: exit
+    rule: "Hold PT trades to maturity"
+    runnable: true
+    input: position
+  - id: close_on_convergence
+    role: exit
+    rule: "Close early once the PT implied yield converges to the model yield"
+    runnable: false
+    input: derived
+    inputs: [pt_implied_yield, underlying_yield_model]
+    note: "Needs the live PT price, which is not served."
+  - id: roll_at_maturity
+    role: exit
+    rule: "At maturity, roll into the next PT/YT pool for the following period"
+    runnable: partial
+    input: position
+    note: "Maturity dates come from the position record. Choosing the next pool needs Pendle's pool list, which is not served."
+  - id: underlying_depeg_stress
+    role: filter
+    rule: "Watch for a depeg of the underlying LST, LRT or synthetic dollar before it hits a held PT"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=depeg
+    field: items[].deviation_bps
+    note: "Depeg events cover stablecoins such as USDe, not LST or LRT exchange rates (eETH, ezETH). The page sets no deviation threshold. security_stress_score on /security/regime/score is the market-wide stress read."
+  - id: kill_pendle_exploit
+    role: stop
+    rule: "Kill switch: any Pendle core-contract exploit, regardless of size"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack
+    field: items[].title
+    note: "Match Pendle in the title of a confirmed hack. The feed is the DefiLlama hacks registry, which lags the exploit by hours to days."
+  - id: kill_mispricing_100bp
+    role: stop
+    rule: "Kill switch: average implied-yield mispricing across the screened pools below 100 bp for 60 consecutive days"
+    runnable: false
+    note: "Needs PT implied yields, which are not served."
+  - id: kill_pendle_tvl
+    role: stop
+    rule: "Kill switch: Pendle TVL below $1B for 90 consecutive days"
+    runnable: false
+    note: "Per-protocol TVL is not served. Needs DefiLlama's protocol TVL series."
 ---
 
 # Pendle PT/YT Arbitrage

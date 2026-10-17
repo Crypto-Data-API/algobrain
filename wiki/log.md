@@ -9,6 +9,23 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-10-17 — Runnable gates on every remaining strategy page
+
+**Scope:** After the gated pages below, 314 strategy pages still had no gates, so a bot reading them could not tell which conditions it can automate. Each now has a `gates:` block, 4,373 gates in all: 1,967 runnable, 1,381 partial and 1,025 not runnable. 1,249 are own-position rules (`input: position`), 381 are composites (`input: derived`) and 711 name a replay endpoint. The library now has 395 gated pages and 5,514 gates; every strategy page is mapped except the 13 listed below.
+
+- **Edits:** only frontmatter `gates:` blocks were added; no prose changed. Every route, query parameter and field passed `scripts/validate_algobrain_gates.py` (in the CryptoDataAPI repo) against the OpenAPI spec, and every runnable or partial gate was fetched `--live` on production. Fields the BTC sample left empty (unlocks, squeeze alerts, the event calendar, copy and wallet signals) were confirmed on another coin or a wider window.
+- **TradFi and historical pages** (VIX, SPX 0DTE, equity options, FX carry, pre-1914 bill markets) are mapped too. Where a page offers a crypto analogue the gate uses it and says so; otherwise the gate is not runnable and its note names the missing data. [[crack-spread]], [[crush-spread]] and [[spark-spread]] are not runnable at all, which tells a bot not to try.
+- **Not mapped, because they have no tradeable rules:** the seven arbitrage reference pages ([[arbitrage-backtesting-guide]], [[arbitrage-correlation-matrix]], [[arbitrage-live-performance]], [[arbitrage-monitoring-setup]], [[arbitrage-parameter-cheatsheet]], [[arbitrage-seasonality]], [[arbitrage-worked-examples]]), [[mev-execution-guide]], [[multi-venue-capital-management]], [[regulatory-arbitrage]], [[multi-strategy-portfolio]], [[live-journal]] and [[cash-secured-put]] (merged into [[cash-secured-puts]], which is gated).
+- **Readings recorded in the gate notes:**
+  - The Binance derivative routes take a pair, `symbol={coin}USDT`. A bare coin answers with neutral filler (ratio 1.0, open interest 0), so the validator now fails it.
+  - `/dex/security` reports `holder_count` 0 and `top_10_pct` 0 for a token it has not indexed yet. Every gate that reads it says to treat that as unknown, never as a pass. A new `{address}` placeholder carries the token contract, and each note says which gate supplies it.
+  - Deep daily replay runs on `/hyperliquid/candles` with `start`. A 1m range there is paged from Hyperliquid live and can take 10-45 seconds.
+  - [[funding-rate-arbitrage]]: Binance funding is a proxy for the AsterDEX leg, so those gates are partial.
+- **Most common not-runnable reasons:** no option chain, per-strike Greeks or 25-delta skew; no dated futures; no Bybit or OKX funding; no mempool, gas, priority-fee or per-block DEX state; no DeFi lending rates or per-pool APR and TVL; no LST or LRT prices on `/coins`; no macro-calendar release times, consensus or actual values; no Solana or EVM wallet-level data. DVOL history starts 2026-04-20, so every 52-week DVOL percentile is partial.
+- **Prose now out of date** (found while mapping; the prose was not edited):
+  - [[unlock-cascade-watch]] says token-unlock data is not available from CryptoDataAPI; `/supply/unlocks` serves it.
+  - [[vix-calls]] calls "3-month > 1-month" backwardation in its kill criteria; that is contango. The gate is partial and says so.
+
 ## 2026-10-17 — Stale-queue review: the 15 most-linked concept and strategy pages
 
 **Scope:** Ranked the stale queue (not updated in over 90 days, status below `good`) by inbound wikilinks, excluding `wiki/markets/crypto/`, sources, news, history, redirects, empty pages and the six gates-agent pages. Reviewed the top 15. On each page: fixed dated and factual errors against the rest of the wiki, filled trader-facing gaps, linked the strategy pages that use the concept, and added a `## Getting the Data (CryptoDataAPI)` section wherever a real endpoint serves the data (every path and parameter checked against the 2026-10-17 OpenAPI spec). All 15 set to `updated: 2026-10-17`. Tags lines untouched.
@@ -35,6 +52,8 @@ Chronological, append-only record of all wiki operations. Newest entries at the 
 - **Checks:** `tools/check_endpoints.py`, whole wiki and each page with `--only`, reported 0 errors. No new broken wikilinks. Stale count fell 244 → 221.
 
 ## 2026-10-17 — Gates on six funding and carry pages; data-source corrections
+
+> **Superseded on merge (2026-10-17):** the upstream commit bf145fe gated these same six pages independently, from the same base. Its gates were kept for consistency with the rest of that batch, and the gate counts below are no longer on `main` (they are kept on branch `backup/funding-gates-local`). The data-source corrections in this entry are unaffected.
 
 **Scope:** Added `gates:` blocks to six high-traffic funding and carry strategy pages, with no changes to their prose or rules. Recorded dated corrections and observed caveats on the CryptoDataAPI data-source pages. Every gate's path, parameters and field were checked against the 2026-10-17 OpenAPI spec, and every field the spec leaves free-form was confirmed with a live call.
 
@@ -1925,7 +1944,6 @@ Each page expanded to 300-500 words: clear definition, how it works, concrete ex
 - Program completion: 0 planned cells remain. All 120 matrix cells either linked (66) or non-viable (54). Every viable primitive × overlay combination has a page; every non-viable cell has a reasoned footnote (¹–⁶⁵).
 - All 4 new strategy pages: type=strategy, strategy_type=hybrid, markets=[crypto], backtest_status=untested, full 16-section structure + Getting the Data (CryptoDataAPI); verified CryptoDataAPI endpoints only (derivatives/funding-rates, derivatives/open-interest, derivatives/binance/long-short-ratio, market-data/klines, regimes/current, derivatives/binance/summary); approved tags only; honest about Deribit limitation where applicable (oi-gated-pairs footnote on options); no invented endpoints.
 
-
 ## 2026-07-19 — Batch B8: 5 New Combination Strategy Pages + Part 2 Matrix Convergence
 
 - Pages created (5):
@@ -1942,7 +1960,6 @@ Each page expanded to 300-500 words: clear definition, how it works, concrete ex
 - Part 2 matrix convergence: 29 `planned` cells reclassified as `—` after honest per-cell review. Reclassified categories: basis row 4 cells (OI filter, trend gate, sentiment, session); liquidation plays 3 cells (trend gate, vol targeting, sentiment); narrative 2 cells (cross-venue, session); vol selling 2 cells (cross-venue, session); vol buying 4 cells (funding filter, vol targeting, cross-venue, session); grid 2 cells (cross-venue, sentiment); stat-arb 3 cells (trend gate, sentiment, session); on-chain 3 cells (vol targeting, cross-venue, session); sentiment 5 cells (OI filter, vol targeting, cross-venue, unlock/event, session). 9 genuine `planned` gaps remain.
 - All 5 new strategy pages: type=strategy, strategy_type=hybrid, markets=[crypto], backtest_status=untested, full 16-section structure (lead with explicit differentiation from nearest neighbors + Edge source + Why this edge exists + Null hypothesis + Rules + Pseudocode + Indicators + Example trade with concrete illustrative round-trip numbers + Performance + Capacity + What kills it + Kill criteria + Advantages + Disadvantages + Sources + Getting the Data (CryptoDataAPI) + Related); verified CryptoDataAPI endpoints only (derivatives/funding-rates, derivatives/open-interest, derivatives/binance/long-short-ratio, market-data/klines, market-intelligence/dvol-history, market-intelligence/liquidations, sentiment/fear-greed, regimes/current, on-chain/whale-score, on-chain/exchange-flows); honest about Deribit options API requirement (complacency-vol-buying, event-calendar-risk-gating notes); approved tags only; event-calendar-risk-gating honest that token unlock calendar data is NOT in CryptoDataAPI.
 
-
 ## 2026-07-19 — Batch B7: 5 New Combination Strategy Pages
 
 - Pages created (5):
@@ -1957,7 +1974,6 @@ Each page expanded to 300-500 words: clear definition, how it works, concrete ex
 - Candidates skipped (0 of 5 primaries): all five primaries confirmed additive. No backups deployed.
 - Backup evaluation: `higher-timeframe-reversion-gate` (mean-reversion × trend gate backup) confirmed covered by [[pullback-trading]] and [[trend-pullback-rally-fade]] — both document HTF-trend-gated mean-reversion entries. Matrix cell updated to reference [[pullback-trading]]. `vol-balanced-pairs` (stat-arb × vol targeting) remains planned.
 - All 5 new strategy pages: type=strategy, strategy_type=hybrid, markets=[crypto], backtest_status=untested, full 16-section structure (lead with explicit differentiation from nearest neighbors + Edge source + Why this edge exists + Null hypothesis + Rules + Pseudocode + Indicators + Example trade with concrete illustrative round-trip numbers + Performance + Capacity + What kills it + Kill criteria + Advantages + Disadvantages + Sources + Getting the Data (CryptoDataAPI) + Related); verified CryptoDataAPI endpoints only (funding-rates, hyperliquid/funding-rates, open-interest, liquidations, long-short-ratio, fear-greed, dvol-history, klines, binance/summary, mark-price, regimes/current); honest about Deribit options API requirement (grid-with-tail-hedge, long-options-trend-expression); approved tags only.
-
 
 ## 2026-07-19 — Batch B6: 5 New Combination Strategy Pages
 
@@ -1974,7 +1990,6 @@ Each page expanded to 300-500 words: clear definition, how it works, concrete ex
 - Vol-selling differentiation note: [[low-leverage-vol-selling]] (vol selling × OI filter) is explicitly differentiated in its lead from all three prior vol-selling combos: funding-conditioned-vol-selling (HIGH funding), post-panic-vol-selling (post-event fear extreme), and trend-aligned-premium-selling (trend-selected wing). The four vol-selling combos now cover four distinct entry regimes: leverage-absent, leverage-crowded-long, post-crash-fear, and trend-selected.
 - All 5 new strategy pages: type=strategy, strategy_type=hybrid, markets=[crypto], backtest_status=untested, full 16-section structure (lead with explicit differentiation from nearest neighbors + Edge source + Why this edge exists + Null hypothesis + Rules + Pseudocode + Indicators + Example trade with concrete illustrative round-trip numbers + Performance + Capacity + What kills it + Kill criteria + Advantages + Disadvantages + Sources + Getting the Data (CryptoDataAPI) + Related), verified CryptoDataAPI endpoints only (open-interest, funding-rates, long-short-ratio, whale-score, exchange-flows, dvol-history, klines, liquidations, sentiment, regimes/current), honest about Deribit options API requirement (put-protected-dip-buying and low-leverage-vol-selling), approved tags only.
 
-
 ## 2026-07-19 — Batch B5: 5 New Combination Strategy Pages
 
 - Pages created (5):
@@ -1990,7 +2005,6 @@ Each page expanded to 300-500 words: clear definition, how it works, concrete ex
 - Vol-selling differentiation: [[post-panic-vol-selling]] (vol selling × sentiment-extreme) and [[trend-aligned-premium-selling]] (vol selling × trend gate) are in distinct cells; their leads explicitly differentiate from each other and from [[funding-conditioned-vol-selling]].
 - All 5 new strategy pages: type=strategy, strategy_type=hybrid, markets=[crypto], backtest_status=untested, full 16-section structure (lead with explicit differentiation from nearest neighbors + Edge source + Why this edge exists + Null hypothesis + Rules + Pseudocode + Indicators + Example trade with concrete illustrative round-trip numbers + Performance + Capacity + What kills it + Kill criteria + Advantages + Disadvantages + Sources + Getting the Data (CryptoDataAPI) + Related), verified CryptoDataAPI endpoints only (klines, funding-rates, open-interest, dvol-history, liquidations, long-short-ratio, fear-greed-index, regimes/current), honest about Deribit options API requirement (consistent with all B3-B4 vol pages), approved tags only.
 
-
 ## 2026-07-19 — Batch B4: 5 New Combination Strategy Pages
 
 - Pages created (5):
@@ -2004,7 +2018,6 @@ Each page expanded to 300-500 words: clear definition, how it works, concrete ex
   - [[log]] (this file) — Batch B4 entry prepended
 - Candidates skipped (0 of 5 primaries): all five primary candidates confirmed additive. spot-led-momentum-filter assessed against funding-filtered-momentum and confirmed distinct (flow origin vs funding level). No backups used.
 - All 5 new strategy pages: type=strategy, strategy_type=hybrid, markets=[crypto], backtest_status=untested, full 16-section structure (lead with explicit differentiation from nearest neighbors + Edge source + Why this edge exists + Null hypothesis + Rules + Pseudocode + Indicators + Example trade with concrete illustrative round-trip numbers + Performance + Capacity + What kills it + Kill criteria + Advantages + Disadvantages + Sources + Getting the Data (CryptoDataAPI) + Related), honest about Deribit options API requirement (consistent with funding-conditioned-vol-selling), verified CryptoDataAPI endpoints only (coinbase-premium, funding-rates, open-interest, dvol-history, klines, liquidations, long-short-ratio, regimes/current), approved tags only.
-
 
 ## 2026-07-19 — Batch B3: 5 New Combination Strategy Pages
 
@@ -2020,7 +2033,6 @@ Each page expanded to 300-500 words: clear definition, how it works, concrete ex
 - Candidates skipped (0 of 5 primaries): all five primary candidates confirmed additive. The two backup candidates (correlation-regime-pairs, session-aware-mean-reversion) were not needed.
 - All 5 new strategy pages: type=strategy, strategy_type=hybrid, markets=[crypto], backtest_status=untested, full 16-section structure (lead with explicit differentiation from nearest neighbors + Edge source + Why this edge exists + Null hypothesis + Rules + Pseudocode + Indicators + Example trade with concrete round-trip numbers + Performance + Capacity + What kills it + Kill criteria + Advantages + Disadvantages + Sources + Getting the Data (CryptoDataAPI) + Related), verified CryptoDataAPI endpoints only (no invented paths), honest about DVOL/SOPR gaps requiring external sources, kill criteria with numeric triggers, approved tags only.
 
-
 ## 2026-07-19 — Batch B2: 5 New Combination Strategy Pages
 
 - Pages created (5):
@@ -2034,7 +2046,6 @@ Each page expanded to 300-500 words: clear definition, how it works, concrete ex
   - [[log]] (this file) — Batch B2 entry prepended
 - Candidates skipped (0 of 5 primaries): all five primary candidates were confirmed additive (no existing page covered the same combination × primitive pair)
 - All 5 new strategy pages: type=strategy, strategy_type=hybrid, markets=[crypto], backtest_status=untested, full 16-section structure (lead + Edge source + Why this edge + Null hypothesis + Rules + Pseudocode + Indicators + Example trade + Performance + Capacity + What kills it + Kill criteria + Advantages + Disadvantages + Sources + Getting the Data + Related), CryptoDataAPI endpoints verified against B1 exemplars, kill criteria with numeric triggers, differentiation sentences in lead paragraphs, approved tags only.
-
 
 ## 2026-07-18 — Batch B1: Combination Matrix + 5 New Combination Strategy Pages
 
@@ -2053,7 +2064,6 @@ Each page expanded to 300-500 words: clear definition, how it works, concrete ex
   - `sentiment-regime-rotation` — high overlap with [[contrarian-extremes]], [[crypto-beta-rotation]], [[regime-adaptive-strategy]]; noted in matrix
   - `pairs-with-funding-differential` — partial overlap with [[pairs-trading]] and [[hl-vs-cex-funding-divergence]]; deferred to next batch
 - All 5 new strategy pages: type=strategy, strategy_type=hybrid, markets=[crypto], backtest_status=untested, full 16-section structure, CryptoDataAPI data section with verified endpoints only, kill criteria, wikilinks to primitives and neighbors.
-
 
 ## 2026-07-16 12:47 — Batch Import: Top 2376 Cryptocurrencies (CoinGecko)
 

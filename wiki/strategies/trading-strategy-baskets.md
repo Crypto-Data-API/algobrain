@@ -18,6 +18,107 @@ data_required: [ohlcv-daily, fundamentals, correlation-matrix, sector-classifica
 min_capital_usd: 25000
 capacity_usd: 100000000
 related: ["[[edge-taxonomy]]", "[[pairs-trading]]", "[[correlation]]", "[[diversification]]", "[[sector-rotation]]", "[[position-sizing]]", "[[risk-parity]]", "[[beta]]", "[[narrative-trading]]", "[[rebalancing]]", "[[cryptodataapi]]"]
+gates:
+  - id: thesis_inclusion
+    role: universe
+    rule: "Define the thesis and its inclusion criteria precisely (a theme, factor or sector screen)"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].symbol
+    note: "category-groups lists sector members by market cap. /api/v1/trading-strategy-baskets names 50 curated baskets (slug, name, description) but returns no member lists, and there is no membership history, so a backtest using today's members carries survivorship bias. The thesis screen itself is the desk's."
+  - id: breadth_8_30
+    role: universe
+    rule: "Hold 8-30 names: enough to diversify idiosyncratic risk, few enough to stay pure to the thesis (15 in the pseudocode)"
+    runnable: true
+    input: position
+  - id: liquidity_purity_select
+    role: universe
+    rule: "Pick the names by liquidity and purity to the thesis; the least liquid member caps the basket"
+    runnable: partial
+    endpoint: /api/v1/volume/scanner
+    field: items[].avg_volume_30d
+    note: "Liquidity (Hyperliquid 30-day average USD notional, full universe on Pro) is served; purity is a judgement and the page gives no ADV floor."
+  - id: tradeable_perp
+    role: universe
+    rule: "Intersect the basket members with tradeable perps for long/short legs"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/prices
+    field: prices
+    note: "prices is keyed by Hyperliquid coin name; a member without a key has no perp."
+  - id: regime_routing
+    role: filter
+    rule: "The market regime decides which thematic basket groups to deploy"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    note: "The regime-to-basket routing lives on other pages (regime-strategy-playbook), not here; /api/v1/quant/market regime.label is the short-term read. Daily labels for backtests: /api/v1/quant/timeline."
+  - id: thesis_trigger_entry
+    role: entry
+    rule: "Enter the whole basket together when the thesis trigger fires"
+    runnable: false
+    note: "The trigger belongs to each specific basket (see the hyperliquid-baskets pages, which carry their own gates); this page defines none."
+  - id: inverse_vol_weights
+    role: sizing
+    rule: "Risk-weight the names: w = (1 / vol) / sum(1 / vol), so no volatile name dominates (equal or market-cap weight are the alternatives)"
+    runnable: true
+    endpoint: /api/v1/volatility/regime
+    field: items[].vol.rv_cc_30
+    note: "rv_cc_30 is each coin's 30-day close-to-close realized vol, the whole universe in one call. /api/v1/quant/coins/risk vol_target_multiplier is the page's batched alternative."
+  - id: dollar_beta_neutral
+    role: sizing
+    rule: "For long/short, balance the legs dollar-neutral and ideally beta-neutral"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=91
+    field: candles[].close
+    note: "Beta of each name to BTC (the crypto market proxy) from 90 daily close-to-close returns; pull BTC the same way. The lookback is the desk's."
+  - id: basket_risk_budget
+    role: sizing
+    rule: "Size the basket's risk, not each name: target notional = risk budget / portfolio volatility of the weighted basket"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=91
+    field: candles[].close
+    note: "Portfolio vol = sqrt(w' C w) from the names' daily-return covariance. The risk budget is the account's."
+  - id: rebalance_schedule
+    role: sizing
+    rule: "Rebalance on a schedule (e.g. monthly) or when weights drift past a band; net the trades to cut turnover"
+    runnable: partial
+    input: position
+    note: "The page gives no drift band."
+  - id: thesis_exit
+    role: exit
+    rule: "Exit or trim the whole basket on thesis invalidation or target"
+    runnable: false
+    note: "Invalidation and target belong to the specific basket's thesis; this page defines neither."
+  - id: kill_drawdown_20
+    role: filter
+    rule: "Halt and re-examine the thesis on a basket drawdown above 20% of allocated capital"
+    runnable: true
+    input: position
+  - id: kill_spread_return
+    role: filter
+    rule: "Retire when the rolling 12-month net spread return (after costs and the beta hedge) is below 0 over 6 or more rebalances"
+    runnable: true
+    input: position
+  - id: kill_correlation_09
+    role: filter
+    rule: "Restructure when realized intra-basket correlation stays above 0.9 (no diversification benefit)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=61
+    field: candles[].close
+    note: "Mean pairwise correlation of the members' daily returns is computable; the page gives no window for 'persistently'."
+  - id: kill_cost_share
+    role: filter
+    rule: "Slow the rebalance or cut breadth when transaction costs consume more than 50% of the gross spread return"
+    runnable: true
+    input: position
+  - id: kill_short_leg_carry
+    role: filter
+    rule: "Halt the short leg when its borrow cost or a recall makes the long/short unrunnable"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: current_rate
+    note: "On perps there is no borrow or recall; funding is the short leg's carry (shorts pay when it is negative). The page gives no cost threshold."
 ---
 
 # Trading Strategy Baskets

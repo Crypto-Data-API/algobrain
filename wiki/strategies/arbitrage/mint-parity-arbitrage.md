@@ -22,6 +22,37 @@ expected_max_drawdown: 0.08
 breakeven_cost_bps: 15
 decay_evidence: "Edge narrowed after 1866 transatlantic cable and again after 1878 compression of mint assay times; extinguished by 1914 gold standard suspension"
 related: ["[[gold-point-arbitrage]]", "[[specie-flow-arbitrage]]", "[[bill-broking-arbitrage]]", "[[covered-interest-arbitrage]]", "[[gold-standard-mechanics]]", "[[gold-silver-ratio-arbitrage]]", "[[bank-of-england]]", "[[arbitrage]]", "[[arbitrage-overview]]", "[[edge-taxonomy]]", "[[mean-reversion]]"]
+gates:
+  - id: mint_par_fair_value
+    role: filter
+    rule: "Each day compute fair value = mint par ($4.8665 per pound) x (1 + US mint friction - UK mint friction + seasonal bill flow)"
+    runnable: false
+    note: "Historical (gold standard, retired). Mint assay queues, seignorage, call-money rates and seasonal bill flows are not served."
+  - id: cable_rich_15bps
+    role: entry
+    rule: "Sell sterling bills in New York when cable is more than 15 bps above fair value"
+    runnable: false
+    note: "No sterling cable rate is served; /sentiment/macro carries EUR/USD only."
+  - id: cable_cheap_15bps
+    role: entry
+    rule: "Buy sterling bills in New York when cable is more than 15 bps below fair value"
+    runnable: false
+    note: "Same unserved inputs as cable_rich_15bps."
+  - id: seasonal_preposition
+    role: entry
+    rule: "Pre-position in September-October for the cotton-harvest remittance season (October-December), which pushes cable toward the gold import point"
+    runnable: false
+    note: "Needs the historical cable rate; the calendar part alone is mechanical."
+  - id: exit_converged
+    role: exit
+    rule: "Take profit when cable converges to fair value; roll into gold-point arbitrage if cable breaches a gold point; otherwise hold the bill to maturity"
+    runnable: false
+    note: "Needs the same unserved cable rate and fair value."
+  - id: bill_market_size
+    role: sizing
+    rule: "Size by bill-market depth and counterparty creditworthiness, smaller than gold-point arbitrage"
+    runnable: true
+    input: position
 ---
 
 # Mint Parity Arbitrage

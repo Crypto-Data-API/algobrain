@@ -16,6 +16,89 @@ edge_mechanism: "Perpetual liquidity is fragmented across many on-chain order bo
 data_required: [perp-order-books-multivenue, funding-rates-multivenue, fee-schedules, oracle-mark-prices, cex-hedge-prices]
 crowding_risk: medium
 related: ["[[hyperliquid]]", "[[hypercore]]", "[[hip-3-builder-deployed-perps]]", "[[hyperliquid-fee-tiers-and-maker-rebates]]", "[[hyperliquid-margining-modes]]", "[[hyperliquid-funding-rate-microstructure]]", "[[funding-rate]]", "[[orderly-network]]", "[[injective-protocol]]", "[[hyperliquid-vs-dydx-vs-gmx]]", "[[arbitrage]]", "[[slippage]]", "[[market-impact]]", "[[market-microstructure]]", "[[clob]]", "[[order-book]]", "[[edge-taxonomy]]", "[[failure-modes]]"]
+gates:
+  - id: quote_all_venues
+    role: entry
+    rule: "Before sending any child order, build a consolidated top-of-book and depth view for the pair across the venue set (Hyperliquid, Orderly-based, dYdX, GMX, Drift, Vertex, Aevo)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: bids[].price
+    note: "Only the Hyperliquid book is served (price, size, count per level). dYdX, GMX, Drift, Vertex, Aevo and Orderly books must come from those venues' APIs."
+  - id: depth_weighted_split
+    role: entry
+    rule: "Split a large order across venues in proportion to depth available at an acceptable price, stopping each venue before its slippage exceeds the next venue's"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth/{coin}?minutes=5
+    field: history[].depth_usd.ask
+    note: "Hyperliquid depth in USD within 10/25/50/100 bps per side (the map keys); bands report levels_truncated when the 20-level book runs out first. Other venues' depth is not served, and 'acceptable price' is the desk's call."
+  - id: price_discovery_leg
+    role: entry
+    rule: "Route the directional or aggressive leg to the price-discovery venue (often Hyperliquid on majors)"
+    runnable: true
+    input: position
+  - id: fee_inclusive_price
+    role: entry
+    rule: "Compare fee-inclusive prices, using the trader's actual fee tier, not headline prices"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/meta
+    field: fees
+    note: "Hyperliquid's perp taker and maker fees and 14-day volume tiers are served; the wallet's own tier and every other venue's fee schedule are not."
+  - id: funding_venue_shift
+    role: entry
+    rule: "Hold the position where funding pays (or costs least) for your side; roll the held leg only when the funding spread exceeds round-trip cost"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: hyperliquid.current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance (binance.current_rate, 8-hourly) and Hyperliquid (hourly: x 8 to compare) are served; GMX, dYdX and the other DEXs are not. Binance replay uses symbol {coin}USDT with exchange=binance (5-minute samples of the live 8h rate)."
+  - id: premium_roll_timing
+    role: exit
+    rule: "Watch Hyperliquid's premium index (tied to book impact prices): deep-book moments and funding shifts move together, a signal for when to roll"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].premium
+    note: "The hourly premium is served with each settlement; the page gives no premium level that triggers a roll."
+  - id: cex_hedge_basis
+    role: entry
+    rule: "Basis variant: take the perp exposure on the DEX and hedge on a CEX, isolating the funding and basis spread"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/summary?coin={coin}
+    field: oracle_price
+    note: "mark_price minus oracle_price (Hyperliquid's CEX-weighted index) is the served basis read. Binance spot is on /api/v1/market-data/ticker/price?symbol={coin}USDT. The page gives no entry spread."
+  - id: stale_quote_check
+    role: filter
+    rule: "Re-quote immediately before sending; never route on a stale book"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/prices
+    field: prices
+    note: "All Hyperliquid mids in one call, stamped as_of; compare with each venue's own fresh quote. Other venues' quotes are not served."
+  - id: leg_margin_mode
+    role: sizing
+    rule: "Size each leg to its own venue's margin mode and liquidation risk (cross, isolated, HIP-3 no-cross)"
+    runnable: true
+    input: position
+  - id: long_tail_reunderwrite
+    role: filter
+    rule: "Re-underwrite long-tail and HIP-3 markets: enticing funding but thinner books, builder oracles and higher liquidation risk"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth
+    field: coins[].total_depth_25bps_usd
+    note: "Depth is served for the Hyperliquid core perps; HIP-3 builder markets and their oracles are not covered, and no depth floor is given."
+  - id: fragility_leverage_cut
+    role: sizing
+    rule: "High liquidity fragility widens dispersion but raises one-leg liquidation risk: cut leverage per leg before chasing it"
+    runnable: partial
+    endpoint: /api/v1/liquidity/regime/score
+    field: composite_score
+    note: "From the page's AI-agent workflow. No score cut or leverage reduction is given."
+  - id: dispersion_below_cost
+    role: stop
+    rule: "Retire the connector set when cross-venue dispersion stays below round-trip cost (fees, slippage, funding, hedge)"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    note: "Only the Binance-Hyperliquid funding spread is served; price dispersion across the DEX set is not. 'Persistently' has no window on the page."
 ---
 
 # Perp DEX Aggregation & Cross-Venue Routing

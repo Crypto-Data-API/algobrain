@@ -48,6 +48,121 @@ kill_criteria: |
   - false-breakout rate exceeds 60% over rolling 30 signals → re-examine volume filter or timeframe
   - rolling 90-day P&L negative → pause and review; the pattern recognition may be too subjective
   - market regime identified as range-bound with structural factors (e.g., FOMC pinning) → reduce or pause
+gates:
+  - id: pattern_identification
+    role: entry
+    rule: "A clearly defined channel, rectangle, triangle or wedge with at least 2 touches on each boundary, identified before it resolves"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=200
+    field: candles[].high
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=4h&start={start}&end={end}
+    replay_field: klines[].h
+    note: "Trendlines are drawn by hand on the page. A rectangle reduces to an N-bar high and low; sloped channels, triangles and wedges need a line fit and a touch tolerance the page does not define. The page's example works on 4h bars."
+  - id: breakout_close
+    role: entry
+    rule: "Enter when a candle closes outside the channel boundary (for an ascending triangle, above the flat resistance)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=3
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=4h&start={start}&end={end}
+    replay_field: klines[].c
+    note: "Mechanical once the boundary is fixed (see pattern_identification). Use closed 4h candles only; intrabar touches repaint."
+  - id: breakout_volume_1_5x
+    role: entry
+    rule: "The breakout candle's volume above 1.5x its 20-bar average"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=22
+    field: candles[].volume
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=4h&start={start}&end={end}
+    replay_field: klines[].v
+    note: "Average the 20 closed bars before the breakout bar. The kill rule tightens this to 2x when false breakouts exceed 60%."
+  - id: wedge_direction
+    role: filter
+    rule: "Wedges break against their slope: trade falling wedges up and rising wedges down"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=200
+    field: candles[].close
+    note: "Recognising a wedge is a chart judgement; once identified, the direction rule is mechanical."
+  - id: volume_contraction
+    role: filter
+    rule: "Ideal setups show declining volume during the pattern, then a surge on the breakout candle"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=200
+    field: candles[].volume
+    note: "A falling slope of volume across the pattern is one reading; the page gives no threshold."
+  - id: retest_entry
+    role: entry
+    rule: "Safer alternative: enter when price retests the broken boundary"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=10
+    field: candles[].low
+    note: "The return to the boundary is mechanical; what confirms the retest is not defined."
+  - id: funding_direction_bias
+    role: filter
+    rule: "Bias the break with funding: a channel forming during strongly positive funding leans up, negative funding leans down"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=4h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "The sign is mechanical; 'strongly' has no threshold on the page. Binance funding is on /api/v1/derivatives/funding-rates?coin={coin}."
+  - id: measured_move_target
+    role: exit
+    rule: "Target = the pattern's maximum height projected from the breakout point; 1.272x or 1.618x as extended targets for trending breaks"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: stop_inside_channel
+    role: stop
+    rule: "Stop just inside the channel below the broken boundary (above it for shorts); for ascending triangles, below the last higher low"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30&atr=14
+    field: candles[].atr
+    note: "The page sizes the buffer with ATR(14) but gives no multiple."
+  - id: pattern_failure_exit
+    role: exit
+    rule: "Exit immediately if price closes back inside the channel on heavy volume"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=22
+    field: candles[].close
+    note: "The close back inside is mechanical; 'heavy volume' has no threshold (1.5x the 20-bar average, as on entry, is one reading)."
+  - id: partial_and_trail
+    role: exit
+    rule: "At the measured-move target take 50% off and trail the rest with a 2x ATR stop toward the 1.618 extension"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30&atr=14
+    field: candles[].atr
+  - id: no_vol_shock_entries
+    role: filter
+    rule: "No new breakout entries in a vol_shock regime or while the vol regime score is above 75"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    note: "The coin's own label is regime on /api/v1/volatility/regime/{symbol}. No history of the composite is served for replay."
+  - id: chop_whipsaw_warning
+    role: filter
+    rule: "A high choppy_high_vol probability is the whipsaw warning for pattern trades"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: explain.label_posteriors.choppy_high_vol
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_3
+    note: "The page gives no threshold or action."
+  - id: macro_pinning_pause
+    role: filter
+    rule: "Reduce or pause when the market is range-bound for structural reasons such as FOMC pinning"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=macro_print&window_days=7
+    field: items[].macro_class
+    note: "The calendar shows upcoming FOMC and other prints; whether the market is pinned by them, and how much to reduce, are judgements."
+  - id: false_breakout_kill
+    role: stop
+    rule: "If more than 60% of the last 30 signals re-enter the channel within 3 candles, tighten the volume filter to 2x or move up a timeframe; pause on a negative rolling 90-day P&L over at least 20 trades"
+    runnable: true
+    input: position
 ---
 
 # Channel Breakout Strategy

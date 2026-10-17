@@ -12,6 +12,89 @@ markets: [crypto, options]
 complexity: beginner
 backtest_status: untested
 related: ["[[long-call]]", "[[protective-put]]", "[[collar]]", "[[synthetic-long]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[deribit]]", "[[greeks-live]]", "[[dvol]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[volatility-skew]]", "[[delta]]", "[[gamma]]", "[[theta]]", "[[vega]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_options
+    role: universe
+    rule: "BTC and ETH puts on Deribit; alt puts (SOL, XRP) have wide spreads and few strikes, so a BTC/ETH put is often the practical hedge even for an alt-heavy book"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "Lists the coins whose Deribit implied vol is served (BTC and ETH). Free tier sees BTC only."
+  - id: strike_by_delta
+    role: entry
+    rule: "Pick the strike by delta: ATM about -0.50 for short-dated bearish speculation, OTM -0.15 to -0.30 (typically 10-25% below spot) for crash bets and hedges, ITM -0.65 to -0.80 as a capped-loss short substitute"
+    runnable: false
+    note: "No option chain, strike list or per-strike Greeks are served. Spot is served, so 10-25% below spot can be computed, but the listed strike and its delta need Deribit's instruments and ticker API."
+  - id: tenor_window
+    role: entry
+    rule: "Tenor 7-30 DTE for speculation; 30-90 DTE, rolled, for continuous protection"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "The 12 nearest Deribit expiries with days to expiry and ATM IV (Pro Plus; empty on lower tiers)."
+  - id: skew_cheap_wing
+    role: filter
+    rule: "Buy puts when the downside wing is cheap by DVOL and skew standards (crypto skew flips between call skew in euphoria and put skew in stress)"
+    runnable: false
+    note: "No skew (25-delta put vs call IV) or per-strike IV is served; only DVOL and ATM IV per expiry on /api/v1/volatility/implied. Needs Deribit's chain or Greeks.live."
+  - id: funding_call_skew
+    role: filter
+    rule: "Richly positive funding marks the call-skew regime where downside puts are relatively cheap: the best hedging windows"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "From the page's AI-agent workflow. Hourly Hyperliquid funding; the page gives no level for 'richly positive', and funding is only a proxy for skew."
+  - id: protection_before_stress
+    role: entry
+    rule: "Protection is cheapest before the stress bid: buy while the realised-vol state is compressed and the market vol score is low; a put bought in vol_shock pays peak premium"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow. The market-wide read is composite_score on /api/v1/volatility/regime/score; the page gives no cut for 'low'."
+  - id: down_catalyst
+    role: entry
+    rule: "A defined down-catalyst inside the option's life: macro risk-off, exchange or stablecoin stress, a large unlock, a leverage flush"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=30
+    field: items[].days_until
+    note: "Unlocks, US macro prints and depeg risk are served up to 30 days out; compare days_until with the expiry. Exchange stress and leverage flushes are not scheduled events, and judging the catalyst is the desk's call."
+  - id: bear_regime_roll
+    role: filter
+    rule: "Rising strong_trend_bear or vol_spike probabilities argue for rolling protection on schedule and monetising fast into spikes"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: probabilities.regime_transitions.to_vol_spike
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_4
+    note: "From the agent workflow. regime.label gives the current HMM state (strong_trend_bear is id 1, vol_spike id 4); the page gives no level for 'rising'."
+  - id: monetize_into_spike
+    role: exit
+    rule: "Take profit fast in a crash: sell the put into the DVOL spike rather than waiting for the crush that follows"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol_change_24h
+    note: "No spike threshold or profit level is given, and the put's own mark comes from Deribit; we serve no option prices."
+  - id: scheduled_roll
+    role: exit
+    rule: "For continuous protection, roll monthly or quarterly regardless of the tape; never de-hedge in calm markets"
+    runnable: true
+    input: position
+  - id: expiry_context
+    role: exit
+    rule: "Before expiry-week hold or roll decisions, check max pain and open-interest concentration"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    replay: /api/v1/backtesting/snapshots?data_type=coinglass_options&start={start}
+    replay_field: snapshots[].data[].max_pain
+    note: "BTC only, one max-pain strike on an expiry the response does not name. No per-strike open interest is served. Replay from 2026-05-09."
+  - id: max_loss_premium
+    role: sizing
+    rule: "Maximum loss is the premium paid: size the premium as the full risk"
+    runnable: true
+    input: position
 ---
 
 # Long Put (Crypto)

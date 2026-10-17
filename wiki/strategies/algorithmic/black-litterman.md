@@ -12,6 +12,47 @@ markets: [stocks, bonds]
 complexity: advanced
 backtest_status: untested
 related: ["[[risk-budgeting]]", "[[portable-alpha]]", "[[factor-investing]]", "[[regime-detection]]"]
+gates:
+  - id: asset_class_universe
+    role: universe
+    rule: "Universe of asset classes: US, international and EM equity, US and international bonds, commodities, REITs"
+    runnable: false
+    note: "No equity, bond, commodity or REIT index prices are served; /sentiment/macro carries only gold, EUR/USD and a Treasury yield. Needs index or ETF prices from a TradFi vendor. The method itself is data-agnostic, but the page offers no crypto version."
+  - id: covariance_matrix
+    role: sizing
+    rule: "Estimate the covariance matrix Sigma from historical returns with Ledoit-Wolf shrinkage"
+    runnable: false
+    note: "Needs return history for the asset classes above, which is not served."
+  - id: market_cap_weights
+    role: sizing
+    rule: "Market-cap weights w_mkt from global indices or ETF market caps"
+    runnable: false
+    note: "Global index and ETF market caps are not served."
+  - id: implied_returns
+    role: sizing
+    rule: "Implied equilibrium returns Pi = 2.5 x Sigma x w_mkt (risk aversion delta = 2.5)"
+    runnable: false
+    input: derived
+    inputs: [covariance_matrix, market_cap_weights]
+    note: "Only as runnable as its inputs, neither of which is served."
+  - id: investor_views
+    role: entry
+    rule: "Express 1-5 absolute or relative views, each with a confidence mapped to Omega by Idzorek's method"
+    runnable: false
+    note: "Views are the investor's own research on TradFi asset classes; nothing served answers them. The page suggests regime detection to inform views, but our regimes describe crypto, not these asset classes."
+  - id: posterior_weights
+    role: sizing
+    rule: "Blend prior and views with tau = 0.025 into posterior returns, then mean-variance optimise for the weights"
+    runnable: false
+    input: derived
+    inputs: [implied_returns, investor_views]
+    note: "Only as runnable as its inputs."
+  - id: rebalance_quarterly
+    role: exit
+    rule: "Rebalance quarterly, or when views change materially"
+    runnable: partial
+    input: position
+    note: "The quarterly calendar is mechanical; what counts as a material view change is the investor's call."
 ---
 
 # Black-Litterman Model

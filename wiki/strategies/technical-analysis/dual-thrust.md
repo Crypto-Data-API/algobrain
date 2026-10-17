@@ -26,6 +26,81 @@ kill_criteria: |
   - drawdown > 30% from high-water mark
   - false-break rate (reversal through the opposite trigger within one day) > 60% over 50 trades
 related: ["[[quantconnect]]", "[[quantconnect-strategy-library]]", "[[opening-range-breakout]]", "[[donchian-channel-breakout]]", "[[breakout-trading]]", "[[volatility-breakout]]", "[[dynamic-breakout-ii]]"]
+gates:
+  - id: dual_thrust_range
+    role: entry
+    rule: "Over the last 4 completed daily bars: range = max(HH - LC, HC - LL), with HH highest high, LL lowest low, HC highest close, LC lowest close"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=5
+    field: candles[].high
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].h
+    note: "Use the 4 bars before today (drop the forming bar named by forming_bar_timestamp); the same candles carry low and close. Daily bars run 00:00-00:00 UTC."
+  - id: daily_open_anchor
+    role: entry
+    rule: "The open is the 00:00 UTC daily open"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=2
+    field: candles[].open
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}&end={end}
+    replay_field: klines[].o
+    note: "The forming daily bar's open is today's anchor."
+  - id: buy_trigger_cross
+    role: entry
+    rule: "Go long (closing any short) when price crosses open + 0.5 x range (K1 = 0.5)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=3
+    field: candles[].high
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1h&start={start}&end={end}
+    replay_field: klines[].h
+    note: "The pseudocode checks each 1h bar's high against the trigger; resting stop-limit orders at both triggers do the same job. K1 below K2 biases toward longs."
+  - id: sell_trigger_cross
+    role: entry
+    rule: "Go short (closing any long) when price crosses open - 0.5 x range (K2 = 0.5)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=3
+    field: candles[].low
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1h&start={start}&end={end}
+    replay_field: klines[].l
+  - id: reverse_on_opposite_trigger
+    role: exit
+    rule: "Exit (and reverse) on the opposite trigger; optional crypto additions flatten at the daily roll"
+    runnable: true
+    input: position
+  - id: hard_stop_one_range
+    role: stop
+    rule: "Optional hard stop 1 x range from entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: vol_scaled_size
+    role: sizing
+    rule: "Size so a 1 x range move equals about 1% of equity; keep perp leverage low"
+    runnable: true
+    input: position
+    note: "Range from dual_thrust_range."
+  - id: skip_mean_reverting
+    role: filter
+    rule: "Skip new entries when the vol regime flags a mean-reverting state; breakouts need expanding volatility"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow (not in the source system). No history of the per-coin label is served for replay."
+  - id: funding_carry
+    role: sizing
+    rule: "Account for perp funding on held positions: the system is always in the market"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_sum
+    note: "A cost input, not a trigger."
+  - id: kill_criteria
+    role: stop
+    rule: "Retire on a rolling 6-month net Sharpe below 0, a drawdown over 30%, or a false-break rate (reversal through the opposite trigger within a day) over 60% across 50 trades"
+    runnable: true
+    input: position
 ---
 
 # Dual Thrust

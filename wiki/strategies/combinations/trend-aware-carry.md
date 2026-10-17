@@ -34,6 +34,148 @@ kill_criteria: |
   - 7-day funding average turns negative on > 50% of held carry positions (carry primitive dead regardless of trend)
 
 related: ["[[carry-with-tail-hedge]]", "[[funding-vs-basis-rotation]]", "[[funding-rate-arbitrage]]", "[[cash-and-carry]]", "[[funding-filtered-momentum]]", "[[vol-targeted-trend-following]]", "[[trend-following-cta]]", "[[oi-confirmed-trend]]", "[[crowded-long-funding-fade]]", "[[funding-conditioned-vol-selling]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[open-interest]]", "[[basis-trading]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: carry_book
+    role: universe
+    rule: "BTC only: short BTC perp against long BTC spot, equal notional on both legs (delta-neutral)"
+    runnable: true
+    input: position
+  - id: sma20_dist_up
+    role: filter
+    rule: "Strong-uptrend leg 1: BTC daily close at least 15% above its 20-day SMA, (close - SMA20) / SMA20 >= 0.15"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=21
+    field: klines[].close
+    replay: /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000
+    replay_field: klines[].close
+    note: "Binance spot daily bars. The last row is the forming day (close_time still in the future), so average the 20 closed closes before it. limit=1000 covers about 2.7 years for replay."
+  - id: rsi4h_overbought
+    role: filter
+    rule: "Strong-uptrend leg 2: 4h RSI(14) at or above 70"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=50
+    field: klines[].close
+    replay: /api/v1/hyperliquid/candles?coin=BTC&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "Compute Wilder RSI(14) from the closes; no 4h RSI is served (/indicators/technical has 1d and 1h only). Replay uses Hyperliquid BTC perp 4h closes, which run back to 2023; the live Binance route reaches only about 166 days at limit=1000."
+  - id: funding_7d_high
+    role: filter
+    rule: "Strong-uptrend leg 3: 7-day average BTC funding at or above 0.05% per 8h (0.0005)"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol=BTCUSDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Average the 21 settled Binance 8-hour prints (7 days x 3). Replay rows are 5-minute samples of the live 8h rate from 2026-05-09: average them over the 7 days (page with next_cursor), never sum them."
+  - id: strong_uptrend
+    role: sizing
+    rule: "STRONG_UP when sma20_dist_up, rsi4h_overbought and funding_7d_high all hold: cut the carry book to 60% of target notional"
+    runnable: true
+    input: derived
+    inputs: [sma20_dist_up, rsi4h_overbought, funding_7d_high]
+  - id: sustained_uptrend
+    role: sizing
+    rule: "STRONG_UP_SUSTAINED: strong_uptrend has held for 7 or more consecutive days; cut the carry book to 30% of target notional"
+    runnable: true
+    input: derived
+    inputs: [strong_uptrend]
+    note: "Evaluate strong_uptrend once per UTC day and count consecutive passing days; the page names no evaluation hour, so fix one."
+  - id: sma20_dist_down
+    role: filter
+    rule: "Strong-downtrend leg 1: BTC daily close at least 12% below its 20-day SMA, (SMA20 - close) / SMA20 >= 0.12"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=21
+    field: klines[].close
+    replay: /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000
+    replay_field: klines[].close
+    note: "Same bars and forming-day rule as sma20_dist_up."
+  - id: rsi4h_oversold
+    role: filter
+    rule: "Strong-downtrend leg 2: 4h RSI(14) at or below 30"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=50
+    field: klines[].close
+    replay: /api/v1/hyperliquid/candles?coin=BTC&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "Same RSI computation as rsi4h_overbought."
+  - id: strong_downtrend
+    role: sizing
+    rule: "STRONG_DN when sma20_dist_down and rsi4h_oversold both hold: cut the carry book to 50% of target notional"
+    runnable: true
+    input: derived
+    inputs: [sma20_dist_down, rsi4h_oversold]
+  - id: funding_inverted
+    role: exit
+    rule: "Kill: 7-day average funding below zero; exit the carry book to 0% regardless of the trend regime (checked first)"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol=BTCUSDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Same 21-print average as funding_7d_high."
+  - id: neutral_full_size
+    role: sizing
+    rule: "NEUTRAL (none of funding_inverted, strong_uptrend, strong_downtrend): carry book at 100% of target notional"
+    runnable: true
+    input: derived
+    inputs: [funding_inverted, strong_uptrend, strong_downtrend]
+  - id: throttle_both_legs
+    role: sizing
+    rule: "Throttle the short-perp leg by the regime fraction and cut the spot leg by the same fraction, so no spot is left unhedged"
+    runnable: true
+    input: position
+  - id: basis_not_inverting
+    role: filter
+    rule: "Track the perp premium over spot and confirm the basis is not inverting"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/summary?coin=BTC
+    field: mark_price
+    replay: /api/v1/backtesting/funding?symbol=BTC&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].premium
+    note: "Premium = mark_price / oracle_price - 1 on the same response (the oracle is Hyperliquid's spot index). The page names no venue and no threshold, so what counts as inverting (below zero, or for how long) is the desk's call. Replay is the settled hourly premium."
+  - id: reentry_rsi_band
+    role: entry
+    rule: "Re-entry: 4h RSI(14) between 35 and 65"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=50
+    field: klines[].close
+    replay: /api/v1/hyperliquid/candles?coin=BTC&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "Same RSI computation as rsi4h_overbought."
+  - id: reentry_trend_neutral
+    role: entry
+    rule: "Re-entry: both the uptrend and the downtrend conditions are back in the neutral zone and reentry_rsi_band holds"
+    runnable: true
+    input: derived
+    inputs: [strong_uptrend, strong_downtrend, reentry_rsi_band]
+  - id: reentry_funding_floor
+    role: entry
+    rule: "Re-entry: 7-day average funding at or above 0.02% per 8h (0.0002)"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol=BTCUSDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+  - id: post_inversion_positive
+    role: entry
+    rule: "After a funding inversion, re-enter only once funding has been positive on 3 consecutive 8h settlements"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=3
+    field: rates[].funding_rate
+  - id: regime_block
+    role: filter
+    rule: "Block re-entry while the long-term regime is Structural Shock, even if the trend has normalised"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Block when regime is structural_shock_crisis. Regime history exists from 2026-08-07 only."
+  - id: reentry_tranches
+    role: sizing
+    rule: "Re-enter in tranches: one-third of target notional per day, back to 100% over 3 days"
+    runnable: true
+    input: position
 ---
 
 # Trend-Aware Carry

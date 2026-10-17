@@ -38,6 +38,115 @@ kill_criteria: |
   - perp funding (delta-neutral variant) averages negative and exceeds staking yield for 3+ days
 
 related: ["[[lst-depeg-arbitrage]]", "[[restaking-token-arbitrage]]", "[[funding-rate-arbitrage]]", "[[pendle-pt-yt-arbitrage]]", "[[babylon-bitcoin-staking-arbitrage]]", "[[liquid-staking]]", "[[aave]]", "[[defi]]", "[[delta-neutral]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: staking_yield
+    role: entry
+    rule: "LST staking and restaking yield (stETH, rETH, weETH)"
+    runnable: false
+    note: "Staking yields are on-chain protocol reads (Lido, Rocket Pool, EtherFi); none is served."
+  - id: borrow_rate
+    role: entry
+    rule: "DeFi ETH borrow rate on the lending market used for the loop (Aave, Morpho)"
+    runnable: false
+    note: "DeFi borrow rates are not served, and the former CEX borrow-interest endpoint is retired; read Aave or Morpho on-chain."
+  - id: net_carry_150bp
+    role: entry
+    rule: "Open the loop only when staking yield minus borrow rate is at least 150 bp annualised at the chosen leverage, after gas"
+    runnable: false
+    input: derived
+    inputs: [staking_yield, borrow_rate]
+    note: "Both legs of the spread are unserved."
+  - id: lst_discount_75bp
+    role: entry
+    rule: "Basis variant: buy the LST when it trades at least 75 bp below redemption value (the page's range is 50-100 bp)"
+    runnable: partial
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "{chain} is ethereum and {address} is the LST's token contract, a fixed address from the protocol's docs (no gate supplies it). Divide the deepest stETH/ETH pool's price_usd (largest reserve_usd) by ETH spot (price on /market-data/ticker/price?symbol=ETHUSDT); 1 minus that ratio is the discount for stETH, which redeems 1:1. Wrapped or rebasing LSTs (wstETH, rETH) also need their on-chain exchange rate, which is not served. Prices refresh every few minutes."
+  - id: withdrawal_queue_ok
+    role: filter
+    rule: "Withdrawal queue functioning, with no more than a 4-week backlog, before any convergence trade"
+    runnable: false
+    note: "Validator exit-queue length is not served. Needs a beacon-chain source."
+  - id: liquidation_buffer
+    role: sizing
+    rule: "Set leverage so a 5% adverse LST/ETH move does not reach liquidation: target LTV = max LTV x (1 - 0.05) - 0.02, leverage = 1 / (1 - target LTV), typically 3-5x"
+    runnable: true
+    input: position
+    note: "The lending market's max LTV and liquidation threshold come from the protocol, not from this API."
+  - id: funding_not_negative
+    role: filter
+    rule: "Delta-neutral variant: run stake-and-short-perp only while funding is not persistently negative and staking yield exceeds any negative funding"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin=ETH&limit=72
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol=ETH&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "72 hourly prints cover 3 days. The page does not define persistently, and the comparison with staking yield needs the on-chain yield, which is not served."
+  - id: protocol_health
+    role: filter
+    rule: "No active exploit, governance attack, oracle anomaly or more than 25% TVL outflow on the LST, lending market or restaking layer"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack
+    field: items[].title
+    note: "Confirmed exploits appear here hours after the fact (DefiLlama registry). Governance attacks, oracle anomalies and per-protocol TVL outflows are not served."
+  - id: regime_delever
+    role: filter
+    rule: "De-lever the loop as strong_trend_bear and vol_spike states become likely: negative-funding episodes cluster there"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the AI-agent workflow, which sets no probability cutoff; per-label posteriors are in explain.label_posteriors in the same response (post_label_0 to 5 in the replay), and the trigger level is the desk's call."
+  - id: per_protocol_cap
+    role: sizing
+    rule: "At most 20-25% of the book in any single LST, lending market or restaking protocol"
+    runnable: true
+    input: position
+  - id: gas_minimum
+    role: sizing
+    rule: "Below about $10k, use an L2 LST market or a larger ticket: L1 gas erodes the carry"
+    runnable: true
+    input: position
+  - id: carry_inversion_exit
+    role: exit
+    rule: "De-lever immediately once the borrow rate exceeds the staking yield for more than 3 consecutive days"
+    runnable: false
+    input: derived
+    inputs: [staking_yield, borrow_rate]
+    note: "Both rates are unserved."
+  - id: discount_converged_exit
+    role: exit
+    rule: "Basis variant: sell once the LST discount narrows below 10 bp or flips to a premium"
+    runnable: partial
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "Same ratio and caveats as lst_discount_75bp."
+  - id: liquidation_buffer_breach
+    role: exit
+    rule: "De-lever before the protocol does when LST/ETH moves toward the liquidation threshold (the pseudocode acts at a 4% adverse move)"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "The move is computed from the LST/ETH ratio as in lst_discount_75bp. Most lending markets mark collateral with their own oracle, which is not served."
+  - id: funding_flip_exit
+    role: exit
+    rule: "Delta-neutral variant: close when perp funding averages negative and exceeds the staking yield for 3 or more days"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin=ETH&limit=72
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol=ETH&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Average the 72 hourly prints and annualise (x 24 x 365). The staking yield it is compared with is not served."
+  - id: protocol_risk_exit
+    role: exit
+    rule: "On an exploit, governance attack or large TVL flight on any leg, exit that leg first, then the hedge"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack
+    field: items[].title
+    note: "Same reads and gaps as protocol_health."
 ---
 
 # Staking Yield Arbitrage

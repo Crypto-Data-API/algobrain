@@ -22,6 +22,89 @@ expected_sharpe: 1.2
 expected_max_drawdown: 0.4
 breakeven_cost_bps: 30
 decay_evidence: "Major wrapped-asset depegs are recurring 1-3 times per year. WBTC-BTC stayed near peg until BitGo-Justin Sun controversy August 2024 caused ~-1% depeg lasting 1-2 months; renBTC traded ~-19% to BTC when Ren protocol wound down December 2022."
+gates:
+  - id: wrapper_watchlist
+    role: universe
+    rule: "Monitor the major wrapper pegs: WBTC, renBTC, tBTC, sBTC, stETH, cbETH and the USDC variants"
+    runnable: partial
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "{address} is each wrapper's token contract on its {chain}, a fixed address from the custodian's docs (no gate supplies it). Per-pool USD prices on Ethereum, Base, Arbitrum, BSC and Solana (GeckoTerminal, every few minutes); use the deepest pool by reserve_usd and divide by the underlying's spot (price on /market-data/ticker/price?symbol=BTCUSDT). WBTC also trades directly against BTC on Binance (WBTCBTC on the same route)."
+  - id: deviation_30bp
+    role: entry
+    rule: "Buy the wrapper when its deviation from the underlying is below -30 bp minus the custody-risk premium"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol=WBTCBTC
+    field: price
+    replay: /api/v1/market-data/klines?symbol=WBTCBTC&interval=1h&limit=1000
+    replay_field: klines[].close
+    note: "For WBTC the Binance WBTC/BTC price is the ratio itself (deviation = price - 1). Other wrappers use the pool ratio from wrapper_watchlist. The custody-risk premium is the desk's model, which the page does not quantify. Replay holds about 41 days of hourly closes."
+  - id: custodian_signals
+    role: filter
+    rule: "Monitor custodian solvency signals: attestation cadence, audit reports, social media, regulator actions"
+    runnable: false
+    note: "Attestations and audits are documents, not served data; a judgement. /news/coin/{symbol} lists a coin's headlines, which helps only where the wrapper has its own ticker."
+  - id: rail_live
+    role: filter
+    rule: "Gate on the rail, not the discount: enter only if the bridge or redemption mechanism is confirmed live"
+    runnable: false
+    note: "Redemption and bridge status are not served; verify with the custodian or bridge directly."
+  - id: bridge_exploit_check
+    role: filter
+    rule: "A deep discount that coincides with a bridge or custodian exploit is the frozen-rail trap, not an opportunity"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack
+    field: items[].target_type
+    note: "From the AI-agent workflow. The DefiLlama registry lists exploits hours after the fact; target_type and chains say what was hit. Matching an exploit to a wrapper is the desk's call."
+  - id: size_per_wrapper
+    role: sizing
+    rule: "At most 5-10% of the fund per wrapper, and an aggregate cap per custodian (BitGo, Coinbase, Lido) across wrappers"
+    runnable: true
+    input: position
+  - id: custody_risk_scaling
+    role: sizing
+    rule: "Scale size inversely with the wrapper's custody-risk score"
+    runnable: partial
+    input: position
+    note: "The custody-risk score is the desk's model; no served field rates custodians."
+  - id: hedge_underlying
+    role: sizing
+    rule: "Hedge the underlying with a perp short when redemption is deferred (KYC or redemption delay)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/funding-rates?coin=BTC&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol=BTC&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Funding prices the hedge carry through the delay (ETH for the ETH wrappers)."
+  - id: exit_redemption
+    role: exit
+    rule: "Clean exit: redeem the wrapper for the native underlying and sell, realising the discount"
+    runnable: true
+    input: position
+  - id: exit_repeg
+    role: exit
+    rule: "If redemption is slow but the market re-converges, sell the wrapper back at or near parity"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol=WBTCBTC
+    field: price
+    note: "Same per-wrapper ratio as deviation_30bp. The page gives no parity band, so near is the desk's call."
+  - id: cut_on_insolvency
+    role: stop
+    rule: "Exit at any bid once attestations or on-chain reserves reveal genuine under-collateralisation"
+    runnable: false
+    note: "Attestations and reserve proofs are not served."
+  - id: kill_low_deviation
+    role: stop
+    rule: "Kill switch: average deviation across major wrappers below 5 bp for 90 days, or no major depeg event in 18 months"
+    runnable: partial
+    input: position
+    note: "Built from the bot's own logged deviations (deviation_30bp); no served history covers wrapper pegs beyond the last 1,000 Binance WBTC/BTC bars."
+  - id: kill_negative_recovery
+    role: stop
+    rule: "Kill switch: realised recovery-weighted return (impairments included) negative over a rolling 12 months, or a single permanent impairment above 2x the trailing 12-month profit"
+    runnable: true
+    input: position
 ---
 
 # Wrapped Asset Triangular Arbitrage

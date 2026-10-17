@@ -21,6 +21,76 @@ expected_sharpe: 0.4
 expected_max_drawdown: 0.50
 breakeven_cost_bps: 50
 related: ["[[lump-sum-investing]]", "[[rebalancing]]", "[[market-timing]]", "[[behavioral-finance]]", "[[equity-risk-premium]]"]
+gates:
+  - id: asset_choice
+    role: universe
+    rule: "A broad, positive-expected-return asset: a low-cost index fund or ETF (S&P 500, total market), or BTC/ETH for higher risk tolerance; not single stocks"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "BTC and ETH prices are served; index-fund and ETF prices (VTI, S&P 500) are not, so the equity sleeve needs a broker feed."
+  - id: scheduled_buy
+    role: entry
+    rule: "Buy a fixed dollar amount (e.g. $500) on a fixed schedule (weekly, fortnightly or monthly), automated; price is used only to compute quantity, never as a signal"
+    runnable: true
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    replay: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=1000
+    replay_field: klines[].close
+    note: "quantity = amount x weight / price. Replay covers about 2.7 years of Binance daily closes; /hyperliquid/candles?interval=1d&start= reaches back to 2023."
+  - id: lump_sum_window
+    role: entry
+    rule: "When deploying an existing lump sum, spread it over no more than 6-12 months"
+    runnable: true
+    input: position
+  - id: no_price_exit
+    role: exit
+    rule: "No price-based exit: sell only on the financial plan (target date, target allocation, liability needs), optionally by reverse DCA"
+    runnable: true
+    input: position
+  - id: rebalance_band
+    role: sizing
+    rule: "On the annual rebalance date, rebalance to target weights if any weight has drifted more than 5 percentage points"
+    runnable: true
+    input: position
+    note: "Weights come from holdings x current prices; crypto prices from /api/v1/market-data/ticker/price."
+  - id: savings_sizing
+    role: sizing
+    rule: "Size the flow by savings capacity (10-20% of income is the common guideline), never by signal strength"
+    runnable: true
+    input: position
+  - id: crypto_cap
+    role: sizing
+    rule: "Cap crypto at 5-10% of the total DCA flow"
+    runnable: true
+    input: position
+  - id: no_leverage
+    role: sizing
+    rule: "Never DCA with leverage or with money needed within about 5 years"
+    runnable: true
+    input: position
+  - id: single_asset_kill
+    role: stop
+    rule: "Single-asset program: retire it if the asset falls more than 80% from its high and the original thesis is invalidated"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: ath_change_pct
+    note: "The drawdown half is served (ath_change_pct, in percent, below -80). Whether the thesis is broken (protocol abandoned, business impaired) is a judgement no endpoint answers."
+  - id: concentration_kill
+    role: sizing
+    rule: "Retire a single-asset program if the position exceeds 2x its target weight and cannot be rebalanced"
+    runnable: true
+    input: position
+  - id: cost_kill
+    role: filter
+    rule: "Broad-index program: replace the vehicle if total annual costs exceed 0.75% when an equivalent exposure exists below 0.20%"
+    runnable: true
+    input: position
+  - id: horizon_kill
+    role: exit
+    rule: "Retire the program if the investment horizon drops below 5 years (shift the flow to cash or bonds)"
+    runnable: true
+    input: position
 ---
 
 Dollar-cost averaging (DCA) is an investment strategy where a fixed dollar amount is invested at regular intervals (e.g., weekly or monthly) regardless of the asset's price. By investing a constant amount, the investor automatically buys more shares when prices are low and fewer when prices are high, resulting in an average cost per share that is mathematically lower than or equal to the average price over the same period (the harmonic mean of purchase prices is at most the arithmetic mean). DCA is not an alpha strategy — it is a risk-spreading and behavioral commitment device for harvesting the long-run [[equity-risk-premium]].

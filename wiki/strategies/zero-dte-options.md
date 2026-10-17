@@ -34,6 +34,112 @@ kill_criteria: |
   - single position loss exceeds 2.5× credit received → exit immediately; no averaging
   - vol-shock regime score > 70 on CryptoDataAPI → pause all 0DTE selling until regime clears
   - liquidation cascade signal active (DVOL spike > 30% intraday) → flatten all short-gamma immediately
+gates:
+  - id: btc_eth_daily_expiry
+    role: universe
+    rule: "Deribit daily-expiry BTC and ETH options (settle 08:00 UTC); no viable alt 0DTE market"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "The row with expiry_days 0 is today's expiry, with its atm_iv (Pro Plus). Option quotes and fills come from Deribit."
+  - id: implied_move_rich
+    role: entry
+    rule: "Sell 0DTE premium when the day's implied move looks rich relative to the likely realized intraday move"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "Implied move to the settle is about spot x atm_iv/100 x sqrt(hours to 08:00 UTC / 8760), using the expiry_days 0 row. Realized intraday range comes from /api/v1/hyperliquid/candles 5m or 1h bars. 'Looks rich' has no threshold."
+  - id: quiet_no_catalyst
+    role: filter
+    rule: "Sell only in quiet, catalyst-free sessions; stand aside around major macro prints unless the event is the trade"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=macro_print&window_days=1
+    field: items[].days_until
+    note: "Macro prints are dated by UTC day with no release time; 'major' is the desk's list. Other catalysts (listings, upgrades) are not served."
+  - id: vol_regime_not_shock
+    role: filter
+    rule: "Stand aside in a live vol-shock regime"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+  - id: vol_score_70
+    role: filter
+    rule: "Vol-regime score above 70 on a selling day: no new 0DTE shorts; take existing ones to flat if any approach a short strike"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    replay: /api/v1/volatility/index/history?days=365
+    replay_field: points[].composite_score
+    note: "The replay is one composite per UTC day; days before 2026-08-24 are reconstructed. 'Approach' a short strike has no distance."
+  - id: cascade_context
+    role: filter
+    rule: "Stand aside during an active liquidation cascade"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&include_quiet=true
+    field: alerts[].triggered
+    note: "No cascade threshold here beyond the DVOL kill. Squeeze alerts cover OKX, Bybit and Hyperliquid liquidations (no Binance)."
+  - id: gamma_pin_context
+    role: filter
+    rule: "Dealer gamma and max pain give the day's pin-versus-cascade read into the settle"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    note: "/quant/gex is a perp analog of dealer gamma, not Deribit options GEX; BTC max pain on /api/v1/market-intelligence/options is for the largest-OI expiry, not today's. Context with no threshold."
+  - id: defined_risk_only
+    role: entry
+    rule: "Short premium only as defined-risk condors, flies or credit spreads (long wings)"
+    runnable: true
+    input: position
+  - id: take_profit_50
+    role: exit
+    rule: "Take profit at about 50% of max credit"
+    runnable: true
+    input: position
+  - id: stop_2x_credit
+    role: stop
+    rule: "Hard stop at about 2x credit; exit immediately at 2.5x regardless of time to settle, no averaging"
+    runnable: true
+    input: position
+  - id: flatten_before_settle
+    role: exit
+    rule: "Flatten a tested position before the final hours into the 08:00 UTC settle"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "Neither 'tested' (distance to the short strike) nor 'final hours' is pinned down."
+  - id: delta_hedge_perp
+    role: sizing
+    rule: "Delta-hedge residual delta on the perp; a long-gamma straddle can be gamma-scalped against the hedge"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    note: "Position delta comes from the venue's Greeks; the page gives no rebalance band."
+  - id: gamma_budget
+    role: sizing
+    rule: "Size against a gamma budget: at most about 1-2% of the book per position"
+    runnable: true
+    input: position
+  - id: kill_realized_over_implied
+    role: filter
+    rule: "If realized intraday range exceeds the 0DTE implied move on more than 40% of the last 30 days, suspend selling until the ratio falls below 25%"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "Each day's implied move is served live only (the expiry_days 0 row), so the bot must log it daily; there is no history to rebuild the first 30 days. Realized range comes from daily or intraday candles."
+  - id: kill_dvol_spike_30
+    role: stop
+    rule: "DVOL spike above 30% from the session open: flatten all short gamma immediately"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "The session open is the desk's choice in a 24/7 market (the 08:00 UTC settle is the natural one). Poll dvol against the logged open; intraday DVOL history is not served."
+  - id: kill_3_month_pnl
+    role: filter
+    rule: "Pause when net 30-day 0DTE P&L is negative for 3 consecutive months despite the regime filters"
+    runnable: true
+    input: position
 ---
 
 # Zero DTE Options

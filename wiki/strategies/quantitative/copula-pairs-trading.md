@@ -26,6 +26,99 @@ kill_criteria: |
   - drawdown > 25% from high-water mark
   - selected copula family changes on more than half of monthly refits for 6 months (unstable dependence)
 related: ["[[quantconnect]]", "[[quantconnect-strategy-library]]", "[[pairs-trading]]", "[[cointegration]]", "[[gaussian-copula]]", "[[statistical-arbitrage]]", "[[ornstein-uhlenbeck]]", "[[kalman-filter-trading]]"]
+gates:
+  - id: economic_link
+    role: universe
+    rule: "Candidate pairs need an economic link: ETH/BTC, stETH/ETH, two L1s, or SOL against a Solana ecosystem basket"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: categories
+    note: "Call once per leg and look for a shared sector tag. A shared tag is only a screen; whether the link is economic is the desk's call."
+  - id: formation_returns
+    role: universe
+    rule: "Daily log returns for both legs over a 12-month formation window"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=367
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "One call per leg, joined on candles[].timestamp; drop the forming bar (forming_bar_timestamp). Daily history goes back to 2023. A leg not listed on Hyperliquid needs another daily source."
+  - id: tau_selection
+    role: universe
+    rule: "Rank candidate pairs by Kendall's tau on the formation-window daily log returns and keep the highest-tau pairs"
+    runnable: partial
+    input: derived
+    inputs: [formation_returns]
+    note: "The page sets no tau floor and no number of pairs to keep, so the cut is the desk's call."
+  - id: copula_fit
+    role: entry
+    rule: "Monthly: map each leg to uniforms with its empirical CDF, derive theta for Clayton, Gumbel and Frank from tau, and keep the family with the lowest AIC"
+    runnable: true
+    input: derived
+    inputs: [formation_returns]
+  - id: mispricing_indices
+    role: entry
+    rule: "Daily: MI(Y given X) = dC(u,v)/du and MI(X given Y) = dC(u,v)/dv from the fitted copula, with u and v today's returns through the formation-window ECDFs"
+    runnable: true
+    input: derived
+    inputs: [copula_fit, formation_returns]
+    note: "Today's return is the latest closed daily bar of each leg."
+  - id: long_y_short_x
+    role: entry
+    rule: "MI(Y given X) below 0.05 and MI(X given Y) above 0.95: long Y, short X (either this or short_y_long_x)"
+    runnable: true
+    input: derived
+    inputs: [mispricing_indices]
+  - id: short_y_long_x
+    role: entry
+    rule: "MI(Y given X) above 0.95 and MI(X given Y) below 0.05: short Y, long X (either this or long_y_short_x)"
+    runnable: true
+    input: derived
+    inputs: [mispricing_indices]
+  - id: neutral_band_exit
+    role: exit
+    rule: "Close both legs when both mispricing indices are back inside a neutral band, e.g. 0.4-0.6"
+    runnable: true
+    input: derived
+    inputs: [mispricing_indices]
+    note: "0.4-0.6 is the page's example band."
+  - id: time_stop
+    role: stop
+    rule: "Add a time stop on each pair trade (the source specifies none)"
+    runnable: partial
+    input: position
+    note: "The page asks for a time stop but gives no length; the example trade closes after two days. The length is the desk's call."
+  - id: neutral_legs
+    role: sizing
+    rule: "Size the two legs dollar-neutral (or beta-neutral), holding the short leg via perps"
+    runnable: true
+    input: position
+    note: "Dollar-neutral needs only the position record. For beta-neutral, regress the legs' daily returns from formation_returns."
+  - id: vol_shock_gate
+    role: filter
+    rule: "Suspend new entries while the volatility regime shows a vol shock (tail dependence spikes then)"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.volatility_regime.by_symbol.{symbol}.regime
+    note: "From the page's agent workflow, which does not say whether it means either leg's regime or the market's; per leg read regime == vol_shock here, market-wide use /api/v1/volatility/regime/score. Replay is one daily read: live from about 2026-06-10, reconstructed back to March 2026."
+  - id: funding_differential
+    role: filter
+    rule: "Enter only if the funding differential between the two perp legs does not exceed the expected reversion"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=48
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hourly settled prints per leg: the long leg pays its rate and the short leg receives its own. The expected reversion is not something the page quantifies, so comparing the two is the desk's call."
+  - id: structural_event_stop
+    role: stop
+    rule: "Stop trading any pair where one leg suffers a structural event: hack, depeg or delisting"
+    runnable: partial
+    endpoint: /api/v1/security/events?symbol={symbol}
+    field: items[].event_type
+    note: "Call once per leg; a hack or depeg row in the last 10 days counts. Delistings are not served, so those stay a human check."
 ---
 
 # Copula Pairs Trading

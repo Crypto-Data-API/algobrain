@@ -34,6 +34,90 @@ kill_criteria: |
   - vol-targeted position sizing produces sizes below minimum viable trade (< 0.1% of portfolio) for > 60% of narrative candidates screened (book is too large relative to available liquid narrative plays)
 
 related: ["[[vol-targeted-trend-following]]", "[[narrative-trading]]", "[[narrative-with-trend-confirmation]]", "[[meme-coin-cycle]]", "[[risk-budgeting]]", "[[volatility-targeting]]", "[[unlock-aware-momentum]]", "[[funding-filtered-momentum]]", "[[behavioral-finance]]", "[[perpetual-futures]]", "[[altcoins]]", "[[meme-coins]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: min_history
+    role: universe
+    rule: "Size only tokens with at least 20 days of daily price history (14 in the pseudocode); otherwise use a sector-average vol or skip"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30
+    field: candles[].close
+    note: "Count the closed daily bars. Skipping is mechanical; the sector-average fallback has no served input (which tokens form the sector is the desk's call). Binance-listed tokens have the same bars on /market-data/klines?symbol={coin}USDT&interval=1d."
+  - id: dex_volume_floor
+    role: universe
+    rule: "DEX-only memecoins: skip tokens below a minimum DEX volume"
+    runnable: partial
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].volume.h24
+    note: "From the data section. The address is pools[].base_token.address from /dex/trending or /dex/new-pools on the same chain; sum h24 volume over top_pools. The page names no threshold, so the floor is the desk's call. Daily candles for the RV input are not served for DEX-only tokens."
+  - id: rv_20d
+    role: sizing
+    rule: "20-day annualised realized vol from close-to-close log returns: stdev x sqrt(365)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=22
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Use the 20 log returns between the last 21 closed daily closes (drop the forming bar). vol.rv_cc_30 on /volatility/regime/{symbol} is the 30-day equivalent."
+  - id: vol_target_notional
+    role: sizing
+    rule: "Notional = 1% of portfolio / daily vol (RV_20d / sqrt(365)), clamped between 0.1% and 5% of the portfolio"
+    runnable: true
+    input: derived
+    inputs: [rv_20d]
+    note: "The text skips a narrative below the 0.1% floor; the pseudocode raises it to the floor instead."
+  - id: book_notional_cap
+    role: sizing
+    rule: "Total narrative book notional at most 25% of the portfolio; shrink or skip a new entry that would breach it"
+    runnable: true
+    input: position
+  - id: book_vol_cap
+    role: sizing
+    rule: "Sum over open narrative positions of notional x daily vol at most 2.5% of the portfolio"
+    runnable: true
+    input: derived
+    inputs: [rv_20d]
+  - id: risk_off_heat_cut
+    role: sizing
+    rule: "Cut the heat cap to 10% when the regime is Risk_Off or Structural_Shock"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "From the data section. structural_shock_crisis is served; no state is named Risk_Off, and whether established_bear or capitulation count is the desk's call."
+  - id: fear_greed_heat_cut
+    role: sizing
+    rule: "Reduce the heat cap when Fear and Greed is below 30"
+    runnable: partial
+    endpoint: /api/v1/sentiment/fear-greed
+    field: value
+    replay: /api/v1/market-intelligence/fear-greed-history
+    replay_field: history[].value
+    note: "From the data section. The page does not say by how much, so the reduced cap is the desk's call."
+  - id: narrative_fade_exit
+    role: exit
+    rule: "Close when the narrative fades: social volume declining, sector flows rotating out, or the main catalyst resolved"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups?limit=100
+    field: categories[].coins[].price_change_7d_pct
+    note: "Social volume and sector capital flows are not served (the page says so). Sector price performance per category is the nearest proxy, and news_pressure on /news/coin/{symbol} tracks whether the story is still live; whether the narrative has faded is the desk's call."
+  - id: vol_stop
+    role: stop
+    rule: "Stop out when the position has lost 2.5x its daily risk budget: price at or below entry x (1 - 2.5 x daily vol)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: time_exit_21d
+    role: exit
+    rule: "Close after 21 days if neither target nor stop has been reached"
+    runnable: true
+    input: position
+  - id: heat_breach_trim
+    role: sizing
+    rule: "If correlated gains push the book above the heat cap, trim the largest positions"
+    runnable: true
+    input: position
 ---
 
 # Narrative Position Vol Targeting

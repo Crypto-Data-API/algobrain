@@ -15,6 +15,106 @@ edge_source: [behavioral, structural]
 edge_mechanism: "Read the footprints of large operators ('composite man') accumulating and distributing inventory; trade with the absorbed supply/demand rather than against it, exploiting the predictable behavior of trapped weak hands."
 crowding_risk: medium
 related: ["[[smart-money-concepts]]", "[[supply-demand-zones]]", "[[accumulation-distribution]]", "[[elliott-wave]]", "[[volume]]", "[[support-and-resistance]]", "[[edge-taxonomy]]", "[[order-flow]]"]
+gates:
+  - id: selling_climax_range
+    role: entry
+    rule: "Accumulation range: after a significant decline, a Selling Climax (high volume, wide-range bar), an Automatic Rally and a Secondary Test on lower volume define the range low and high"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=300
+    field: candles[].volume
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].volume
+    note: "The bars are served, but 'significant', 'climactic' and 'wide' have no thresholds; the page itself says the rules must be pre-specified by the trader (e.g. volume above N x its 20-day mean)."
+  - id: spring
+    role: entry
+    rule: "Spring: a brief false breakdown below range support that recovers back inside quickly (within about 48 hours in the example)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].low
+    note: "Mechanical once the range low is fixed (a low under it, then a close back above within 2 daily bars); only as firm as selling_climax_range."
+  - id: sign_of_strength
+    role: entry
+    rule: "Sign of Strength: a rally on expanding volume back into or above the range, through the Automatic Rally high"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].volume
+    note: "'Expanding' has no threshold; the AR high comes from selling_climax_range."
+  - id: lps_entry
+    role: entry
+    rule: "Long entry on the Last Point of Support: a higher-low pullback that holds above prior resistance on declining volume"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30
+    field: candles[].close
+    note: "Declining volume over the pullback is computable; whether the low 'holds' is a chart read with no tolerance given."
+  - id: utad_lpsy_short
+    role: entry
+    rule: "Short mirror: after a Buying Climax at the top of a range, an Upthrust After Distribution (false breakout above resistance) that fails; enter on the Last Point of Supply (a weak rally on declining volume that fails to reach the prior high)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=300
+    field: candles[].high
+    note: "Same pre-specification caveats as the long-side events."
+  - id: min_2r
+    role: entry
+    rule: "Take the trade only if (target - entry) / (entry - stop) is at least 2"
+    runnable: partial
+    input: derived
+    inputs: [measured_move_target, stop_beyond_spring]
+    note: "Arithmetic once the levels exist; as firm as the range and Spring labels behind them."
+  - id: effort_vs_result
+    role: filter
+    rule: "Effort vs result: high volume with little price progress inside the range signals absorption; buy-ratio divergence from price is the tell"
+    runnable: partial
+    endpoint: /api/v1/market-data/klines?symbol={coin}USDT&interval=1d&limit=120
+    field: klines[].taker_buy_base_volume
+    note: "Per-coin daily taker-buy volume on Binance spot (divide by volume for the buy ratio); /api/v1/market-data/volume-history, the page's suggestion, is market-wide only. No absorption threshold is given."
+  - id: whale_confirmation
+    role: filter
+    rule: "Whale positioning shifts during the range corroborate or contradict the volume read"
+    runnable: partial
+    endpoint: /api/v1/quant/whales
+    field: top_coins[].long_pct
+    note: "Hyperliquid perp positioning of accounts of $100k and up; long_pct sits structurally below 50% because of hedged market makers, so compare it with its own history (long_pct_pctile_30d on the same row). The page gives no threshold or direction rule."
+  - id: regime_not_bear
+    role: filter
+    rule: "A strong_trend_bear market regime voids the accumulation thesis; accumulation belongs to range_low_vol turning toward strong_trend_bull"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow."
+  - id: stop_beyond_spring
+    role: stop
+    rule: "Stop below the Spring low (longs) or above the UTAD high (shorts); a close back beyond it invalidates the thesis, exit immediately"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=3
+    field: candles[].close
+    note: "The level is fixed at entry from the Spring or UTAD bar; the page adds an unsized buffer."
+  - id: measured_move_target
+    role: exit
+    rule: "Target the range width projected from the breakout point (cause and effect)"
+    runnable: partial
+    input: derived
+    inputs: [selling_climax_range]
+    note: "Range high + (range high - range low); as firm as the range labels."
+  - id: sign_of_weakness_exit
+    role: exit
+    rule: "A Sign of Weakness (heavy-volume break of the range low after a supposed accumulation): abandon the long"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=25
+    field: candles[].volume
+    note: "The break is mechanical; 'heavy volume' has no threshold."
+  - id: risk_1_2pct
+    role: sizing
+    rule: "Size so hitting the stop costs at most 1-2% of the account; no widening the stop"
+    runnable: true
+    input: position
+  - id: kill_prelogged_expectancy
+    role: filter
+    rule: "Stop trading it live when a rolling sample of pre-logged setups shows negative expectancy after costs"
+    runnable: true
+    input: position
 ---
 
 # Wyckoff Method

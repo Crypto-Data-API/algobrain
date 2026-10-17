@@ -22,6 +22,111 @@ expected_max_drawdown: 0.50
 breakeven_cost_bps: 300
 decay_evidence: "Memecoin smart-money alpha is documented as decaying within minutes-to-days as wallets become widely tracked; specific backtested numbers are not reliably published."
 related: ["[[copy-trading]]", "[[smart-money]]", "[[smart-money-concepts]]", "[[memecoin-sniping]]", "[[gmgn]]", "[[birdeye]]", "[[nansen]]", "[[cryptodataapi]]"]
+gates:
+  - id: wallet_leaderboard
+    role: universe
+    rule: "Pull a wallet PnL leaderboard (GMGN, Birdeye, Nansen or a custom Bitquery query) as the candidate pool"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/wallets/search?min_trades_30d=50
+    field: wallets[].score
+    note: "Served for Hyperliquid perp wallets, the page's AI-agent alternative (about 50 leaderboard wallets, refreshed daily). Solana and Ethereum memecoin wallet leaderboards, the page's main market, are not served."
+  - id: wallet_quality
+    role: filter
+    rule: "Keep wallets with a 60-day track record, 50+ trades, and both win rate and average winner/loser reported"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trader-profiles
+    field: profiles.{address}.avg_winner
+    note: "Hyperliquid only. Tracked-wallet profiles cover 30 days (total_trades, win_rate, avg_winner, avg_loser); /hyperliquid/trader-profile/{address}?days=60 gives 60 days for one wallet, whose address no gate placeholder covers ({address} is a DEX token contract)."
+  - id: deployer_connectivity
+    role: filter
+    rule: "Exclude wallets with suspicious connectivity to known deployer wallets (Arkham or on-chain clustering)"
+    runnable: false
+    note: "Wallet clustering and deployer links are not served."
+  - id: wallet_tiers
+    role: sizing
+    rule: "Tier 1 (multi-cycle, multi-meta, diversified) is the core; Tier 2 (single-meta) counts at lower weight; Tier 3 (recent hot hands) is watch-only"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trader-profiles
+    field: profiles.{address}.coin_stats
+    note: "Diversity across coins is computable from coin_stats; multi-cycle needs history beyond the 90 days served per wallet, and the tier lines are the page's judgement."
+  - id: confluence
+    role: entry
+    rule: "Enter when at least N Tier-1 or Tier-2 wallets buy the same token within 5 minutes"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/wallet-signals?minutes=5
+    field: signals[].coin
+    note: "Hyperliquid analog: count ENTRY and INCREASE signals per coin across the watched wallets. Signals come from periodic polling, so they lag fills by minutes, and the page leaves N open (the example uses 3). Solana memecoin buys are not served."
+  - id: rug_check
+    role: filter
+    rule: "Token passes the rug checklist (mint revoked, holder distribution acceptable)"
+    runnable: partial
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: risk_flags.is_mintable
+    note: "Mint revoked = is_mintable false; holder_info.top_10_pct is the holder-distribution read, which the page does not threshold (its example passes at under 25%); holder_count 0 with top_10_pct 0 on a fresh token means not indexed yet. {address} is the token in the smart wallets' buy alert, which comes from the bot's own Solana feed (not served), or pools[].base_token.address on /dex/new-pools?chain=solana. The Hyperliquid analog needs no contract screen."
+  - id: no_smart_seller
+    role: filter
+    rule: "Skip when any wallet in the set is already selling the token within the last 10 minutes (you would be the exit liquidity)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/wallet-signals?minutes=10
+    field: signals[].type
+    note: "Hyperliquid analog: any EXIT or DECREASE on the coin in the window."
+  - id: follow_lag
+    role: filter
+    rule: "Skip when the first smart buy is older than the maximum follow lag"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/wallet-signals?minutes=10
+    field: signals[].timestamp
+    note: "The page leaves the cap open (its example follows a buy 50 seconds old), and polled signals already carry minutes of lag."
+  - id: signal_size
+    role: sizing
+    rule: "0.25-1% of book per signal, at most 5% of book per wallet per day, buying with a 10% slippage cap"
+    runnable: true
+    input: position
+  - id: daily_loss_halt
+    role: stop
+    rule: "Halt for the day when the daily loss reaches 5% of book"
+    runnable: true
+    input: position
+  - id: hard_stop
+    role: stop
+    rule: "Hard stop at -30% to -50% from entry"
+    runnable: partial
+    input: position
+    note: "The page gives a range; pick one level."
+  - id: scale_out
+    role: exit
+    rule: "Scale out at 2x, 5x and 10x depending on holder concentration and curve maturity"
+    runnable: partial
+    input: position
+    note: "The page gives no fractions per level, and holder concentration and curve maturity are judgement calls."
+  - id: mirror_exit
+    role: exit
+    rule: "Exit the whole position immediately when multiple tracked wallets sell, regardless of PnL"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/wallet-signals?minutes=10
+    field: signals[].type
+    note: "Hyperliquid analog: count EXIT signals on the coin across the watched wallets. The page does not fix how many is multiple (its example exits half on one seller, the rest on the second)."
+  - id: regime_gate
+    role: filter
+    rule: "Smart-money follows degrade in choppy_high_vol states, where lag costs dominate: stand down or size down"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow, which gives no size cut."
+  - id: kill_30d_loss
+    role: stop
+    rule: "Halt and re-vet the wallet list when rolling 30-day PnL falls below -20% of allocated capital"
+    runnable: true
+    input: position
+  - id: kill_crowded_wallets
+    role: stop
+    rule: "When more than 25% of tracked wallets sit on widely shared public leaderboards, assume crowding: cut size 50% or rotate"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/top-traders
+    field: traders[].address
+    note: "For Hyperliquid wallets, the share of your set that appears on this public leaderboard is mechanical. Solana leaderboards (GMGN, Nansen) are not served."
 ---
 
 # On-Chain Smart Money Tracking

@@ -35,6 +35,100 @@ kill_criteria: |
   - either: delta-hedge costs (spread + funding) exceed the realized vol premium captured for 2 consecutive months
   - drawdown > 20% on the delta-hedged book → halve size
   - rolling 6-month Sharpe < 0.3
+gates:
+  - id: btc_eth_only
+    role: universe
+    rule: "BTC and ETH options on Deribit, hedged with the perp; alt option books are too thin"
+    runnable: true
+    input: position
+  - id: long_gamma_view
+    role: entry
+    rule: "Long-gamma (buy the straddle or strangle, hedge delta) when DVOL is cheap against a credible realised-vol catalyst inside the option's life"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    note: "vrp = DVOL minus 30-day Garman-Klass realised vol; a low or negative value means implied is cheap to recent realised. Whether a catalyst is credible is the trader's forecast; scheduled macro prints and unlocks are on /event/calendar."
+  - id: short_gamma_view
+    role: entry
+    rule: "Short-gamma (sell the leg, hedge delta) when DVOL is rich and range-bound conditions look likely"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    note: "A high vrp means DVOL is rich to recent realised vol; the page gives no level, and range-bound likelihood is a judgement."
+  - id: vol_regime_config
+    role: filter
+    rule: "A compressed vol regime favours long-gamma ahead of expansion; normal or mean_reverting with rich DVOL favours short-gamma"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    note: "From the agent workflow. The regime label is mechanical; rich DVOL has no threshold (see short_gamma_view)."
+  - id: dealer_gamma_env
+    role: filter
+    rule: "Read dealer gamma for the realised-vol environment the hedges will trade into: short-gamma dealers amplify moves (friendly to long gamma), long-gamma dealers suppress them"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.state
+    note: "state amplify reads as short-gamma dealers, dampen as long-gamma. /quant/gex is a perp-positioning analog of dealer gamma built from Hyperliquid market-maker accounts, not Deribit options dealer gamma, and the page sets no cutoff."
+  - id: option_leg
+    role: entry
+    rule: "Build the options leg (an ATM straddle or strangle for vega-rich gamma) and set its sign from the view"
+    runnable: false
+    note: "No option chain or option quotes are served; price and fill the leg on Deribit."
+  - id: hedge_to_neutral
+    role: entry
+    rule: "Hedge to zero delta at inception with the perp (or spot), converting Deribit coin delta to cash delta first"
+    runnable: false
+    note: "Needs the option's delta, which is not served. Perp prices are (assets[].mark_price on /hyperliquid/open-interest), but the hedge size cannot be computed without the Greek."
+  - id: rehedge_rule
+    role: sizing
+    rule: "Re-hedge on a rule: fixed interval, fixed delta band, or fixed price grid; widen the band as costs rise, tighten it as gamma rises"
+    runnable: false
+    note: "The page sets no interval or band, and a delta band needs the option Greeks from Deribit."
+  - id: size_to_stress
+    role: sizing
+    rule: "Size to stressed gamma and vega, not to expected carry: short-gamma notional must survive a multi-sigma weekend move"
+    runnable: partial
+    input: position
+    note: "The page gives no sigma multiple or loss budget, and the stressed Greeks come from Deribit."
+  - id: funding_carry
+    role: filter
+    rule: "Track perp funding on every interval as a live P&L line of the hedge; a funding flip on a net-long hedge can dwarf the vol premium"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "A monitoring line with no threshold; Binance prints are on /derivatives/binance/funding-rates. Deribit's perp funding is not served."
+  - id: close_on_view
+    role: exit
+    rule: "Close when the vol view is realised or the catalyst passes; roll to keep gamma alive if the thesis persists"
+    runnable: partial
+    input: position
+    note: "Realised and thesis persists are judgements the page does not quantify."
+  - id: long_gamma_kill
+    role: exit
+    rule: "Long-gamma kill: realised vol below DVOL for 20 or more consecutive days"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Pair each day's dvol with that day's 30-day realised vol (history[].rv_gk_30 on /api/v1/volatility/regime/{symbol}, about 60 days; or compute close-to-close from daily klines) and count consecutive days with realised below implied. DVOL history is Pro Plus, from 2026-04-20."
+  - id: short_gamma_shock_kill
+    role: stop
+    rule: "Short-gamma kill: flatten immediately if DVOL rises more than 50% in a session"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "DVOL is served once per day, so the nearest test is today's dvol over yesterday's at least 1.5, coarser than a session. The agent workflow also treats a jump toward the vol_spike label on /quant/market as the machine-readable trigger."
+  - id: hedge_cost_kill
+    role: exit
+    rule: "Either configuration: stop if hedge costs (spread plus funding) exceed the realised vol premium captured for 2 consecutive months"
+    runnable: true
+    input: position
+  - id: drawdown_halve
+    role: sizing
+    rule: "Halve size on a drawdown above 20% of the delta-hedged book"
+    runnable: true
+    input: position
 ---
 
 # Delta-Hedged Options (Crypto)

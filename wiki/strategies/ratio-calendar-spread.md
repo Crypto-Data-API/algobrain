@@ -12,6 +12,109 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[calendar-spread]]", "[[diagonal-spread]]", "[[ratio-spread]]", "[[iron-condor]]", "[[short-strangle]]", "[[crypto-options-volatility-selling]]", "[[deribit]]", "[[greeks-live]]", "[[dvol]]", "[[implied-volatility]]", "[[volatility-surface]]", "[[funding-rate]]", "[[variance-risk-premium]]", "[[max-pain]]", "[[gamma-exposure]]", "[[section-1256-contracts]]", "[[theta]]", "[[vega]]", "[[gamma]]", "[[delta]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit_only
+    role: universe
+    rule: "BTC and ETH Deribit options only: the structure needs liquid same-strike depth in two expiries"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied-vol data served. Option quotes and the order book come from Deribit itself."
+  - id: tilt_from_vol_regime
+    role: entry
+    rule: "Pick the tilt from the vol regime: compressed with expected expansion favours long-heavy 1:2; mean_reverting or range states favour short-heavy income (small)"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow. The regime label is mechanical; 'expected expansion' and the market-view section's 'low-to-mid DVOL' are judgements the page leaves open. Current DVOL is items[].dvol on /api/v1/volatility/implied."
+  - id: curve_contango_or_flat
+    role: filter
+    rule: "Standard direction (sell near, buy far) needs a contango or flat curve: near-expiry ATM IV at or below the far expiry's"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "Compare atm_iv of the near and far expiries you would trade. term_structure (nearest 12 Deribit expiries) is Pro Plus and empty on lower tiers. No history of the term structure is served, so this cannot be replayed."
+  - id: near_leg_10_21_dte
+    role: entry
+    rule: "Short (near) leg on an expiry 10-21 days out"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+  - id: far_leg_tenor
+    role: entry
+    rule: "Long (far) leg 45-90 DTE for the long-heavy build, 60-120 DTE for the short-heavy wing"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "Deribit lists weekly, monthly and quarterly expiries; pick one whose expiry_days falls in the band."
+  - id: shared_strike
+    role: entry
+    rule: "Same strike on both legs: ATM for neutral, slightly OTM in the tilt direction for a lean"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Spot is served (oracle_price is a CEX spot composite, close to Deribit's index); the listed strike grid, per-strike IV and option quotes are not, so the strike comes from Deribit's chain."
+  - id: catalyst_between_expiries
+    role: entry
+    rule: "Long-heavy: a catalyst must land after the near expiry and before the far one"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=30
+    field: items[].days_until
+    note: "Compare days_until with the two expiries' expiry_days. The calendar holds token unlocks, scheduled macro prints, depegs and mints, up to 30 days out; the page's ETF-decision example and other one-off catalysts are not on it."
+  - id: reverse_near_vol_spike
+    role: entry
+    rule: "Reverse build (buy near, sell far) only when a near-term DVOL spike larger than the back month's is expected, e.g. into a known event"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=30
+    field: items[].days_until
+    note: "Whether the event will spike near-dated vol more than the back month is a forecast the page leaves to the trader. Current near and far ATM IV are term_structure[].atm_iv on /api/v1/volatility/implied."
+  - id: size_by_net_cash
+    role: sizing
+    rule: "Size by net cash outlay, not contract count; keep the short-heavy variant small"
+    runnable: partial
+    input: position
+    note: "The page gives no number for 'small'; the size is the desk's call."
+  - id: near_leg_buyback
+    role: exit
+    rule: "Buy back the near leg at 75-85% of its max decay (long-heavy) or about 50% (short-heavy)"
+    runnable: true
+    input: position
+    note: "Compares the near leg's current mark, from Deribit, with its sale price. No option prices are served."
+  - id: loss_threshold
+    role: stop
+    rule: "Exit at 2-3x the credit lost (short-heavy) or about 50% of the premium lost (long-heavy)"
+    runnable: true
+    input: position
+  - id: mid_life_time_stop
+    role: exit
+    rule: "Close if spot has not moved as expected by the near leg's mid-life (about 50% of its DTE elapsed)"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Elapsed time is mechanical; 'moved as expected' depends on the trader's own thesis."
+  - id: curve_inversion_exit
+    role: exit
+    rule: "Exit when the term structure inverts mid-trade: front ATM IV jumps above the back"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "Pro Plus. A one-day DVOL jump is visible in items[].dvol_change_24h."
+  - id: no_near_shorts_into_expiry
+    role: exit
+    rule: "Never carry the near shorts into their final days near the money"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Compare spot with the short strike as the near expiry approaches. The page defines neither 'final days' nor 'near the money', so both cut-offs are the desk's call."
+  - id: gap_watch
+    role: stop
+    rule: "Treat a liquidation burst or a GEX amplify read as the early warning of the gap that breaks a short-heavy ratio"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/liquidations?symbol={coin}
+    field: data[].liquidation_usd_1h
+    note: "From the page's AI-agent workflow, with no threshold. OKX + Bybit + Hyperliquid only (no Binance). The second input is coins.{coin}.regime.score on /api/v1/quant/gex?symbol={coin}, a perp analog of dealer gamma, not Deribit options gamma."
 ---
 
 # Ratio Calendar Spread

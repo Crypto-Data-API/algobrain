@@ -12,6 +12,99 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[butterfly-spread]]", "[[broken-wing-butterfly]]", "[[ratio-spread]]", "[[jade-lizard]]", "[[iron-condor]]", "[[crypto-options-volatility-selling]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[volatility-surface]]", "[[funding-rate]]", "[[gamma-exposure]]", "[[max-pain]]", "[[section-1256-contracts]]", "[[theta]]", "[[vega]]", "[[gamma]]", "[[delta]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit_only
+    role: universe
+    rule: "BTC and ETH Deribit options only; alt options are too thin and their gap risk on the naked leg is worse"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied vol served. Option quotes and the strike grid come from Deribit."
+  - id: ladder_strikes
+    role: entry
+    rule: "Call tree: buy 1 ATM call (K0), sell 1 call at K1 (about +$8k-12k on BTC) and 1 at K2 (about +$18k-22k); the put tree mirrors it"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "The strike targets follow from spot (oracle_price is a CEX spot composite close to Deribit's index); the listed strike grid and quotes come from Deribit. The dollar offsets are BTC examples, not ETH."
+  - id: small_debit_or_free
+    role: entry
+    rule: "Net cost a small debit or near zero, the two shorts financing the long"
+    runnable: false
+    note: "Needs the three legs' quotes; no option prices are served."
+  - id: tenor_30_60_dte
+    role: entry
+    rule: "Expiry 30-60 days out so the move has time to arrive"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure lists the nearest 12 Deribit expiries. It is Pro Plus and empty on lower tiers."
+  - id: bounded_move_target
+    role: entry
+    rule: "Expect a moderate, bounded move to a target zone, with a ceiling (resistance or OI wall) price is not expected to pass"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: sr.resistance[].price
+    note: "Served resistance levels are algorithmic. The bounded-move forecast is the trader's, and OI walls are not served (no per-strike open interest)."
+  - id: k1_k2_at_oi_walls
+    role: entry
+    rule: "Place K1 and K2 against the open-interest walls"
+    runnable: false
+    note: "No per-strike open interest is served; /market-intelligence/options carries only BTC aggregate OI, the put/call ratio and one max-pain strike."
+  - id: vol_elevated_not_expanding
+    role: filter
+    rule: "Sell the ladder only when vol is moderate-to-elevated but not expanding: the naked leg cannot afford an in-progress expansion"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "Skipping expanding and vol_shock is mechanical. The labels have no 'elevated'; normal or mean_reverting with DVOL (items[].dvol on /api/v1/volatility/implied) above its median is one reading."
+  - id: no_trend_or_spike_toward_naked_side
+    role: filter
+    rule: "No trade on any rise in strong-trend or vol_spike probability toward the naked side, regardless of premium"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: explain.label_posteriors.strong_trend_bull
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_0
+    note: "For a call tree the naked side is up (strong_trend_bull, post_label_0); for a put tree read strong_trend_bear (post_label_1). vol_spike is beside them (post_label_4). 'Any rise' has no window on the page."
+  - id: profit_target_50_75
+    role: exit
+    rule: "Close at 50-75% of max profit while price is in the K1-K2 plateau; never hold the uncovered short into expiry-week gamma"
+    runnable: true
+    input: position
+    note: "The structure's mark comes from Deribit; no option prices are served."
+  - id: hard_stop_through_k2
+    role: stop
+    rule: "Close immediately if price blows through K2 with momentum"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Spot beyond K2 is mechanical; the page does not define 'with momentum', so the exit should not wait on it."
+  - id: no_move_accept_loss
+    role: exit
+    rule: "If the catalyst passes and price sits below K0, accept the small debit loss; do not roll indefinitely"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Whether the catalyst has passed is the trader's call."
+  - id: cascade_toward_naked_leg
+    role: stop
+    rule: "Hard exit on a liquidation cascade toward the naked leg"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&include_quiet=true
+    field: alerts[].direction
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=5m&start={start}
+    replay_field: data[].short_usd
+    note: "short_squeeze (shorts liquidated, price up) is the cascade toward a call tree's naked leg; long_flush toward a put tree's. The page sets no size, so the alert's own severity cut stands in. No Binance; replay is Hyperliquid only, from 2026-07-23."
+  - id: dealer_short_gamma_near_naked
+    role: filter
+    rule: "Check dealer gamma daily: short gamma near the naked strike is squeeze fuel aimed at the worst-case band"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    note: "/quant/gex is a perp analog of dealer gamma, not Deribit options gamma, and is not read per strike; a score at or above 0.35 is the amplify state."
 ---
 
 # Christmas Tree Spread

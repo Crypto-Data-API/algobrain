@@ -12,6 +12,148 @@ markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[covered-call]]", "[[vertical-spread]]", "[[iron-condor]]", "[[straddle-strangle]]", "[[options-selling]]", "[[options-premium-selling]]", "[[crypto-options-volatility-selling]]", "[[call-option]]", "[[put-option]]", "[[options]]", "[[cash-secured-put]]", "[[credit-spread]]", "[[volatility-risk-premium]]", "[[variance-risk-premium]]", "[[greeks]]", "[[dvol]]", "[[deribit]]", "[[greeks-live]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[edge-taxonomy]]"]
+gates:
+  - id: btc_eth_deribit
+    role: universe
+    rule: "Underlying: Deribit BTC or ETH options; altcoin chains only in small size"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "The canonical build is a short iron condor. We serve Deribit DVOL and the ATM term structure for BTC and ETH only; option quotes and fills come from Deribit."
+  - id: dvol_pctile_40_90
+    role: entry
+    rule: "Enter only when the DVOL percentile in its 1-year range is between the 40th and 90th"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Rank today's dvol against the served daily history, which is about 180 days (Pro Plus), not the page's 1 year. A full-year percentile needs Deribit's own DVOL history."
+  - id: vrp_above_5
+    role: entry
+    rule: "DVOL minus 30-day realized vol above 5 vol points"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "vrp = dvol - realized_30. Replay: about 180 days of daily DVOL against 30-day realized vol from /api/v1/hyperliquid/candles daily closes."
+  - id: no_active_vol_shock
+    role: filter
+    rule: "Do not sell premium into an active vol shock"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "Skip when regime is vol_shock. The page's family selector: compressed favours debit structures, expanding or normal with rich DVOL favours the condor."
+  - id: regime_range_calm
+    role: filter
+    rule: "Income structures (the condor) fit a range-bound, calm regime; trend regimes favour directional spreads"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow: range_low_vol is the condor regime, strong_trend_bull or strong_trend_bear call for verticals, vol_spike for hedging only."
+  - id: tenor_21_45_dte
+    role: entry
+    rule: "Tenor 21-45 DTE (target 35); avoid weeklies"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "Pick the listed expiry nearest 35 days inside 21-45. term_structure is Pro Plus and lists the nearest 12 expiries."
+  - id: strikes_16_delta
+    role: entry
+    rule: "Short strikes at about 16 delta (1 SD) each side; long wings at 8-10 delta"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "No option chain or per-strike Greeks are served. An approximate 1 SD strike is spot x exp(+-atm_iv/100 x sqrt(expiry_days/365)), which ignores skew; exact 16 and 9 delta strikes need Deribit's chain."
+  - id: skew_lean_funding
+    role: entry
+    rule: "Skew-aware: read perp funding and lean the short toward the overbid wing"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "Richly positive funding means call skew is overbid. The page gives no threshold, and option skew itself is not served."
+  - id: no_binary_events
+    role: filter
+    rule: "Avoid opening short premium through binary macro or crypto catalysts unless that is the explicit trade"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=30
+    field: items[].event_type
+    note: "macro_print rows (FOMC, CPI, NFP, PCE, PPI) and unlock rows inside the expiry window. Which events count as binary is the desk's call; listings and protocol upgrades are not on the calendar."
+  - id: take_profit_50pct
+    role: exit
+    rule: "Take profit at 50% of the maximum credit received"
+    runnable: true
+    input: position
+    note: "Option marks come from the venue (Deribit), not from us."
+  - id: time_exit_10_14_dte
+    role: exit
+    rule: "Close at 10-14 DTE regardless of P&L (12 DTE in the pseudocode)"
+    runnable: true
+    input: position
+  - id: stop_2x_credit
+    role: stop
+    rule: "Stop when the structure trades at 2x the credit received (loss = 1x credit)"
+    runnable: true
+    input: position
+  - id: kill_dvol_spike
+    role: stop
+    rule: "Flatten short vega if DVOL rises more than 50% in a session"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "Crypto trades 24/7, so the session start is the desk's choice (00:00 UTC is one). Poll dvol and compare with the value recorded at that start; dvol_change_24h is a trailing 24h change. Intraday DVOL history is not served."
+  - id: max_loss_2pct
+    role: sizing
+    rule: "Maximum loss per structure at most 2% of account equity: qty = floor(0.02 x equity / (wing width - credit))"
+    runnable: true
+    input: position
+  - id: aggregate_risk_10pct
+    role: sizing
+    rule: "Aggregate max loss across open short-premium structures at most 10% of equity (pseudocode)"
+    runnable: true
+    input: position
+  - id: vega_cap
+    role: sizing
+    rule: "Keep net portfolio vega short but at most about 1% of NAV per DVOL vol point"
+    runnable: true
+    input: position
+    note: "Position vega comes from the venue's Greeks; we serve none per option."
+  - id: wings_required
+    role: sizing
+    rule: "No naked short options in size: every short leg is wing-protected"
+    runnable: true
+    input: position
+  - id: kill_vrp_vanished
+    role: filter
+    rule: "Stand down when the trailing 12-month average of (entry DVOL - subsequent 30-day realized vol) is below 0 vol points"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/klines?symbol={coin}USDT&interval=1d&limit=400
+    field: klines[].close
+    note: "Entry DVOL is logged with each trade; realized vol is the annualised stdev of the 30 daily log returns after entry. Daily history back to 2023 is on /api/v1/hyperliquid/candles?interval=1d&start=."
+  - id: kill_drawdown_35
+    role: filter
+    rule: "Stop and post-mortem on a strategy drawdown above 35% of allocated capital"
+    runnable: true
+    input: position
+  - id: kill_sharpe_24m
+    role: filter
+    rule: "Retire or re-research when the rolling 24-month net Sharpe is below 0"
+    runnable: true
+    input: position
+  - id: kill_cost_budget
+    role: filter
+    rule: "Stop when average realized round-trip cost exceeds about 60 bps of notional"
+    runnable: true
+    input: position
+  - id: kill_venue_event
+    role: filter
+    rule: "Any Deribit auto-liquidation, socialised-loss or unscheduled-outage event: flatten and stand down"
+    runnable: false
+    note: "We serve no venue status or incident feed for Deribit; the desk needs Deribit's status page and announcements."
 ---
 
 # Options Strategies (Crypto)

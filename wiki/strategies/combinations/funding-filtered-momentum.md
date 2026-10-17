@@ -33,6 +33,132 @@ kill_criteria: |
   - funding filter disagrees with >70% of momentum signals for 60+ days (regime where funding and momentum are structurally anti-correlated; overlay losing information value)
 
 related: ["[[funding-rate-arbitrage]]", "[[oi-confirmed-trend]]", "[[crowded-long-funding-fade]]", "[[crowded-short-funding-fade]]", "[[trend-following-cta]]", "[[momentum-rotation]]", "[[breakout-trading]]", "[[funding-rate]]", "[[open-interest]]", "[[perpetual-futures]]", "[[behavioral-finance-overview]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: perp_universe
+    role: universe
+    rule: "Crypto perps, a universe of 10-20 (BTC, ETH, SOL and other majors on Hyperliquid in the example)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "assets[] lists the live Hyperliquid perps. Which 10-20 to trade is the desk's call; the page sizes capacity mainly for the majors."
+  - id: donchian_20d_breakout
+    role: entry
+    rule: "Momentum (long): price above the 20-day channel high (short: below the 20-day channel low)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=22
+    field: candles[].high
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].high
+    note: "Channel = highest high (lowest low for shorts) of the 20 closed daily bars before the current one; drop the forming bar named by forming_bar_timestamp from the channel. The example confirms on a 4h close above it. Hyperliquid daily history back to 2023."
+  - id: ema_12_26_4h
+    role: entry
+    rule: "Momentum (long): EMA(12) above EMA(26) on 4h bars (short: below)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=200
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=4h&start={start}
+    replay_field: klines[].c
+    note: "The pseudocode requires both this and donchian_20d_breakout; the Rules text lets you pick one of channel breakout, EMA cross or a positive 20-day rate of change and use it consistently."
+  - id: funding_long_gate
+    role: filter
+    rule: "Long only while 8h funding is at or below 0.04% (0.0004); short only while it is at or above -0.04%"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hyperliquid settles hourly: the 8h rate is the sum of the last 8 prints. On Binance it is the latest settled print, rates[].funding_rate on /api/v1/derivatives/binance/funding-rates."
+  - id: oi_not_collapsing
+    role: filter
+    rule: "24h open interest change at or above -5% (no collapsing OI into the breakout)"
+    runnable: true
+    endpoint: /api/v1/liquidity/oi-divergence
+    field: rows[].oi_change_24h_pct
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].oi_close
+    note: "Hyperliquid OI per coin, in percent. Replay: oi_close now over oi_close 24 bars earlier."
+  - id: regime_kill
+    role: filter
+    rule: "No entries while the market regime is Established Bear or Structural Shock"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Match regime established_bear or structural_shock_crisis. History starts 2026-08-07."
+  - id: crowding_secondary
+    role: filter
+    rule: "Secondary crowding check: the Binance long/short account ratio"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/long-short-ratio?symbol={symbol}USDT
+    field: long_short_ratio
+    note: "From the page's data list; it gives no cutoff, so how to use it is the desk's call."
+  - id: exit_momentum_reverses
+    role: exit
+    rule: "Exit when the momentum signal reverses (price back through the entry level or the EMA cross flips back)"
+    runnable: true
+    input: derived
+    inputs: [donchian_20d_breakout, ema_12_26_4h]
+  - id: exit_funding_stretched
+    role: exit
+    rule: "Exit a long when 8h funding rises above 0.08% (0.0008); exit a short when it falls below -0.08%"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+  - id: time_stop_10d
+    role: exit
+    rule: "Close at market if the position shows no positive mark-to-market within 10 trading days"
+    runnable: true
+    input: position
+  - id: atr_risk_sizing
+    role: sizing
+    rule: "Size so that 1% of sleeve capital is at risk per ATR(14) on 4h bars: notional = 1% x sleeve / (ATR / price)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30&atr=14
+    field: candles[].atr
+    note: "Read the ATR on the last closed bar (drop the forming one)."
+  - id: vol_scale_optional
+    role: sizing
+    rule: "Optional: multiply size by 1 / (realized_vol_20d / target_vol) to equalise risk across regimes"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=22
+    field: candles[].close
+    note: "20-day realized vol is computable from daily closes; the page names no target vol, so that level is the desk's call."
+  - id: funding_upweight
+    role: sizing
+    rule: "Apply a 1.25x size multiplier when entry funding is at or below 0.01%/8h, momentum is confirmed and OI is rising"
+    runnable: true
+    input: derived
+    inputs: [funding_long_gate, donchian_20d_breakout, ema_12_26_4h, oi_not_collapsing]
+    note: "Rising means oi_change_24h_pct above 0."
+  - id: position_caps
+    role: sizing
+    rule: "At most 10% of the sleeve per position and at most 3 concurrent assets"
+    runnable: true
+    input: position
+  - id: kill_drawdown_25
+    role: stop
+    rule: "Pause: sleeve drawdown above 25% in any rolling 30-day window"
+    runnable: true
+    input: position
+  - id: kill_sharpe
+    role: stop
+    rule: "Pause: rolling 6-month Sharpe below 0 on at least 20 trades"
+    runnable: true
+    input: position
+  - id: kill_signal_collapse
+    role: stop
+    rule: "Pause: fewer than 2 qualifying entries per calendar month over 3 consecutive months"
+    runnable: true
+    input: position
+  - id: kill_filter_divergence
+    role: stop
+    rule: "Pause: the funding filter blocks more than 70% of momentum signals for 60 or more consecutive days"
+    runnable: true
+    input: derived
+    inputs: [funding_long_gate, donchian_20d_breakout, ema_12_26_4h]
 ---
 
 # Funding-Filtered Momentum

@@ -38,6 +38,51 @@ kill_criteria: |
   - taker-fill success rate on stale quotes < 50% over any rolling 1000 attempts
 
 related: ["[[cross-exchange-arbitrage]]", "[[hl-vs-cex-funding-divergence]]", "[[flash-loan-arbitrage]]", "[[jito-solana-mev-arbitrage]]", "[[co-location]]", "[[low-latency-trading]]", "[[high-frequency-trading]]", "[[market-microstructure]]", "[[order-book]]", "[[slippage]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: lead_move_trigger
+    role: entry
+    rule: "A confirmed move on the lead venue's feed (best bid or offer shifts beyond a tick, or a trade prints through a level) that has not yet reached the lagging venue's book"
+    runnable: false
+    note: "Needs native tick-by-tick book feeds from both venues at sub-millisecond resolution. Our books and trades are cached snapshots and closed 1-minute buckets, orders of magnitude too slow."
+  - id: latency_budget
+    role: filter
+    rule: "Trade a pair only when your measured round-trip to the lagging venue is below that pair's stale-quote half-life (about 0.6 ms BTC, 0.8 ms ETH, 1.5 ms SOL)"
+    runnable: false
+    note: "Both sides are measured from co-located infrastructure and native feeds; nothing here serves them."
+  - id: stale_quote_depth
+    role: filter
+    rule: "The stale resting quote on the laggard is large enough to cover per-message and fee costs after expected partial fills"
+    runnable: false
+    note: "Needs the laggard's live book at the moment of the move. /hyperliquid/l2-book is a cached 20-level snapshot, too slow for this."
+  - id: net_edge_2bps
+    role: entry
+    rule: "Fire only when stale gap minus the laggard's taker fee minus expected slippage is at least 2 bps"
+    runnable: false
+    input: derived
+    inputs: [lead_move_trigger]
+    note: "The gap needs tick feeds. Taker fees are partly served: fees.perps.taker on /hyperliquid/meta for Hyperliquid."
+  - id: inventory_neutral
+    role: sizing
+    rule: "Fire only when the position can be offset immediately; never accumulate directional inventory, with a hard cap of $50,000 enforced in the fast path"
+    runnable: true
+    input: position
+  - id: per_fire_size
+    role: sizing
+    rule: "Per-fire size = min(stale quote's available depth, inventory cap)"
+    runnable: false
+    input: derived
+    inputs: [stale_quote_depth]
+    note: "Built on the unserved live depth."
+  - id: round_trip_exit
+    role: exit
+    rule: "Close the instant the laggard's quote updates; flatten at market if the lead move reverses first"
+    runnable: false
+    note: "Needs the same sub-millisecond feeds as lead_move_trigger."
+  - id: markout_100ms
+    role: stop
+    rule: "Stop trading the route when post-fill markout at 100 ms is persistently negative (you are the slow side)"
+    runnable: false
+    note: "Needs prices 100 ms after each fill from a native feed; our finest grain is 1 minute."
 ---
 
 # Latency Arbitrage (Crypto)

@@ -22,6 +22,53 @@ expected_sharpe: 2
 expected_max_drawdown: 0.3
 breakeven_cost_bps: 30
 decay_evidence: "Each crisis triangle closes within days-weeks of the peg breaking; the strategy is event-driven, not steady-state."
+gates:
+  - id: triangle_scanner
+    role: universe
+    rule: "Run a real-time triangle scanner across the 60+ G10 and EM currency crosses"
+    runnable: false
+    note: "No FX quotes are served beyond EUR/USD spot on /api/v1/sentiment/macro. Needs an FX ECN or bank streaming feed."
+  - id: multi_prime_broker
+    role: sizing
+    rule: "Pre-position capital at several prime brokers to spread counterparty risk"
+    runnable: true
+    input: position
+  - id: triangle_over_30bp
+    role: entry
+    rule: "When the triangle inconsistency, the absolute value of (ab x bc x ca - 1), exceeds the three legs' bid-ask cost plus 30 bp, execute all three legs at once"
+    runnable: false
+    note: "Needs bid and ask on every leg of the triangle; no FX quotes are served."
+  - id: fx_option_hedge
+    role: sizing
+    rule: "Hedge tail risk with OTC FX options on the broken currency"
+    runnable: false
+    note: "No FX option prices or risk reversals are served."
+  - id: kelly_quarter
+    role: sizing
+    rule: "Size each three-leg trade at a quarter-Kelly fraction"
+    runnable: partial
+    input: position
+    note: "From the pseudocode; the Kelly inputs (edge and variance per trade) are the desk's own estimates."
+  - id: exit_72h
+    role: exit
+    rule: "Exit within 24-72 hours of entry"
+    runnable: true
+    input: position
+  - id: kill_triangle_restored
+    role: stop
+    rule: "Kill switch: the triangle back under 10 bp inconsistency for 5 days running"
+    runnable: false
+    note: "Needs the same FX quotes as triangle_over_30bp."
+  - id: kill_implied_vol_12
+    role: stop
+    rule: "Kill switch: implied vol on the broken currency below 12%"
+    runnable: false
+    note: "FX implied vol is not served."
+  - id: kill_corridor_restored
+    role: stop
+    rule: "Kill switch: the central bank credibly re-establishes a corridor"
+    runnable: false
+    note: "A policy judgement; no central-bank intervention feed is served."
 ---
 
 # Crisis Currency Triangular Arbitrage

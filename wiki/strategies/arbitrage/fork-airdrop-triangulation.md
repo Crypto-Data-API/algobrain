@@ -22,6 +22,60 @@ expected_sharpe: 1.8
 expected_max_drawdown: 0.15
 breakeven_cost_bps: 50
 decay_evidence: "Major hard forks generate one-time windfalls (BCH 2017: ~$5-7B at fork-day prices, >$60B market cap at the Dec 2017 peak). Modern airdrops more frequent but smaller; total annual addressable market $5-20B."
+gates:
+  - id: fork_snapshot_event
+    role: universe
+    rule: "Fork leg: a hard fork is announced with a snapshot block; buy the parent before it and hold through it"
+    runnable: false
+    note: "Forks, snapshot heights and airdrop dates are not on /event/calendar (it carries unlocks, macro prints, depegs and mints only). Needs project and exchange announcements."
+  - id: credit_immediately_venue
+    role: filter
+    rule: "Buy the parent only on an exchange that credits the forked asset immediately, not one that delays or refuses"
+    runnable: false
+    note: "Exchange fork-credit policies are announcements, not served data."
+  - id: parent_impact_25bp
+    role: sizing
+    rule: "Cap per-event deployment at what the parent asset's order books absorb with no more than 25 bp of impact"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth
+    field: coins[].depth_usd.ask.25bps
+    note: "This is Hyperliquid perp depth for about 25 large coins, not the spot books of the crediting exchange the page means. depth_usd counts only the top 20 levels, so when levels_truncated says true the figure is a lower bound."
+  - id: fork_exit_capacity
+    role: sizing
+    rule: "Never size beyond what can be exited in the first 24-72 hours of fork-token liquidity"
+    runnable: false
+    note: "The fork token has no market before launch, so its exit liquidity is a forecast and the desk's call."
+  - id: sell_fork_token_24h
+    role: exit
+    rule: "Sell the forked asset immediately at launch, within 24 hours (when its price is typically highest), then optionally convert back to the parent"
+    runnable: true
+    input: position
+  - id: airdrop_eligibility
+    role: filter
+    rule: "Airdrop leg: track eligibility criteria (testnet activity, governance votes, volume thresholds) and pre-position eligible activity weeks or months before the snapshot"
+    runnable: false
+    note: "Eligibility criteria and snapshot dates are not served; they come from project announcements and trackers such as DeFiLlama's. Sybil and wash-trading variants break airdrop terms and are not gated."
+  - id: sell_airdrop_72h
+    role: exit
+    rule: "Claim at distribution and sell into the launch liquidity within the first 24-72 hours"
+    runnable: true
+    input: position
+  - id: short_prelaunch_perp
+    role: entry
+    rule: "Optional hedge: short the pre-launch perp, which has systematically priced launches too high"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/summary?coin={coin}
+    field: mark_price
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].close
+    note: "Hyperliquid lists pre-launch perps in its normal universe with no pre-launch flag, so the bot must know which coin is pre-launch. The page sets no premium threshold: implied FDV against a fair value is the desk's call. OKX and dYdX pre-launch markets are not served."
+  - id: prelaunch_funding_crowding
+    role: sizing
+    rule: "Trim the pre-launch short when its funding is negative (shorts crowded)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=3
+    field: history[].funding_rate
+    note: "From the page's agent workflow. Negative is mechanical; how much to trim is not stated, so it is the desk's call."
 ---
 
 # Fork & Airdrop Triangulation

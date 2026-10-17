@@ -33,6 +33,118 @@ kill_criteria: |
   - rolling 3-month Sharpe < 0 on minimum 50 completed grid cycles
 
 related: ["[[grid-trading]]", "[[regime-adaptive-strategy]]", "[[regime-detection]]", "[[volatility-targeting]]", "[[mean-reversion]]", "[[bollinger-band-reversion]]", "[[range-trading]]", "[[market-making]]", "[[adx]]", "[[bollinger-bands]]", "[[atr]]", "[[adverse-selection]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: adx_low
+    role: filter
+    rule: "Grid ON gate 1: ADX(14) below 20 on the 4h chart"
+    runnable: true
+    endpoint: /api/v1/indicators/adx?coin={coin}&interval=4h
+    field: items[].adx
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "Read the item for the coin; final true marks a closed bar. history=500 reaches about 83 days of 4h bars (at most 5 coins per call); older replays compute ADX(14) from 4h candles (high, low and close)."
+  - id: bb_width_compressed
+    role: filter
+    rule: "Grid ON gate 2: Bollinger Bandwidth (20, 2 std) on 4h in the bottom 30th percentile of its trailing 90-day history"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=570
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "Bandwidth = (upper - lower) / middle over 20 closed 4h bars; rank the latest against the last 540 values (90 days). /indicators/technical carries a daily-bar squeeze_percentile, not this 4h one."
+  - id: vol_regime_ok
+    role: filter
+    rule: "Grid ON gate 3: the coin's volatility regime is compressed or mean_reverting"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+  - id: hmm_range_prob
+    role: filter
+    rule: "Grid ON gate 4: HMM probability of the range_low_vol state above 40%"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: explain.label_posteriors.range_low_vol
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_2
+    note: "The market-wide HMM (BTC-led), not a per-coin read. post_label_2 is the range_low_vol posterior in history rows (label id 2 on /quant/regimes)."
+  - id: event_risk_ok
+    role: filter
+    rule: "Grid ON gate 5: event risk score below 50 (no major unlock, macro print or catalyst within 48h)"
+    runnable: true
+    endpoint: /api/v1/event/regime/score
+    field: event_risk_score
+  - id: book_depth_ok
+    role: filter
+    rule: "Confirm the order book can absorb maker quotes at each grid level before deploying"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth/{coin}
+    field: history[].depth_usd.bid.50bps
+    note: "From the agent workflow. Depth within 10, 25, 50 and 100 bps of mid for the top 25 Hyperliquid perps; where levels_truncated is true the figure is the whole 20-level book, a lower bound. The page gives no minimum, so compare it with the per-level order size."
+  - id: channel
+    role: entry
+    rule: "Channel = high and low of the trailing 48 hours on the 4h chart, plus a 1% buffer each side"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=13
+    field: candles[].high
+    note: "Highest high and lowest low (candles[].low) of the last 12 bars."
+  - id: grid_spacing
+    role: sizing
+    rule: "Grid levels every 0.5%, widened to 1.0% where taker fees exceed 0.04%; at most 12 levels per side"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/meta
+    field: fees.perps.taker
+    note: "Hyperliquid's base taker fee is 0.00045 (4.5 bps), above the 0.04% line, so the page's own rule gives 1.0% spacing there."
+  - id: grid_notional
+    role: sizing
+    rule: "Deployed notional at most 25% of the sleeve per asset, split evenly across levels, with a 30% cash reserve kept in the sleeve"
+    runnable: true
+    input: position
+  - id: kill_adx
+    role: exit
+    rule: "Kill the grid at once when ADX(14) on 4h reaches 25"
+    runnable: true
+    endpoint: /api/v1/indicators/adx?coin={coin}&interval=4h
+    field: items[].adx
+  - id: kill_atr_breakout
+    role: exit
+    rule: "Kill the grid when a 4h bar closes more than 1.5x ATR(14) from the channel midpoint"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30&atr=14
+    field: candles[].atr
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&atr=14&start={start}
+    replay_field: candles[].atr
+    note: "Use the last closed bar (skip forming_bar_timestamp): kill if the absolute gap between its close and the channel midpoint exceeds 1.5 x its atr."
+  - id: kill_vol_regime
+    role: exit
+    rule: "Kill the grid when the coin's volatility regime flips to expanding or vol_shock"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+  - id: kill_event_risk
+    role: exit
+    rule: "Kill the grid when the event risk score reaches 70"
+    runnable: true
+    endpoint: /api/v1/event/regime/score
+    field: event_risk_score
+  - id: kill_funding_spike
+    role: exit
+    rule: "Kill the grid when funding exceeds +0.06%/8h"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hyperliquid settles hourly: 8h funding = sum of the last 8 settled rates, above 0.0006."
+  - id: kill_drawdown
+    role: stop
+    rule: "Emergency stop when the grid position's drawdown exceeds 8%"
+    runnable: true
+    input: position
+  - id: reentry_lockout
+    role: filter
+    rule: "After a kill keep the grid off at least 24 hours, then require all five ON gates again"
+    runnable: true
+    input: position
 ---
 
 # Regime-Gated Grid

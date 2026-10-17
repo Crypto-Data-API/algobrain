@@ -33,6 +33,137 @@ kill_criteria: |
   - Pool TVL in the target pool exceeds $500M (fee income per unit LP collapses; move to smaller pool or pause)
 
 related: ["[[delta-neutral-yield-farming]]", "[[concentrated-liquidity]]", "[[leveraged-yield-farming]]", "[[defi-yield-farming]]", "[[regime-adaptive-strategy]]", "[[regime-gated-grid]]", "[[loss-versus-rebalancing]]", "[[impermanent-loss]]", "[[volatility-targeting]]", "[[vol-gated-mean-reversion]]", "[[cryptodataapi-volatility]]", "[[cryptodataapi-regimes]]", "[[deribit]]", "[[uniswap]]", "[[aave]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: pool_selection
+    role: universe
+    rule: "Target established correlated-asset pools (WBTC/ETH, ETH/stETH, USDC/ETH) on the Uniswap v3 0.3% fee tier"
+    runnable: true
+    input: position
+    note: "A fixed list chosen by the operator; no pool data is served to verify it."
+  - id: pool_tvl_floor_5m
+    role: universe
+    rule: "Avoid pools with TVL below $5M"
+    runnable: false
+    note: "Per-pool TVL is not served; it comes from the Uniswap subgraph or DefiLlama."
+  - id: dvol_deploy_45
+    role: entry
+    rule: "DEPLOY (full LP size) needs DVOL at or below 45"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "Read the BTC row (the ETH row for ETH pools). For altcoin pools DVOL is a proxy, not the pool asset's own implied vol, as the page itself warns. history[].dvol (Pro Plus) holds about 180 daily values for calibration."
+  - id: adx_deploy_20
+    role: entry
+    rule: "DEPLOY needs ADX(14) on daily bars at or below 20"
+    runnable: true
+    endpoint: /api/v1/indicators/adx?coin={coin}&interval=1d
+    field: items[].adx
+    replay: /api/v1/indicators/adx?coin={coin}&interval=1d&history=500
+    replay_field: items[].history[].adx
+    note: "The page does not say whose ADX; the pooled risk asset's (BTC for WBTC/ETH) is the natural read."
+  - id: macro_regime_label
+    role: entry
+    rule: "DEPLOY needs the regime to be Range_Bound, Low_Vol or Accumulation; Trending, Bull_Trend or Bear_Trend means REDUCE; High_Vol, Structural_Shock or Crash means PAUSE"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "None of these labels is served verbatim. Nearest mapping: range_low_vol for Range_Bound and Low_Vol, strong_trend_bull or strong_trend_bear for the trend labels, choppy_high_vol or vol_spike for High_Vol; on /api/v1/regimes/current, bottoming_accumulation for Accumulation and structural_shock_crisis for Structural_Shock. No served state is called Crash. The mapping is the desk's call."
+  - id: gas_30_gwei
+    role: entry
+    rule: "DEPLOY needs the ETH base fee at or below 30 gwei; above it, deploy but do not rebalance"
+    runnable: false
+    note: "Gas prices are not served; read the base fee from an Ethereum node or a gas API."
+  - id: reduce_band
+    role: sizing
+    rule: "REDUCE to 50% of the base LP size when DVOL is 45-60, or ADX is 20-28, or the regime is a trend state"
+    runnable: partial
+    input: derived
+    inputs: [dvol_deploy_45, adx_deploy_20, macro_regime_label]
+    note: "Only as runnable as the regime-label mapping."
+  - id: dvol_pause_60
+    role: exit
+    rule: "PAUSE (withdraw the LP into stablecoins or an Aave deposit) when DVOL is above 60"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+  - id: adx_pause_28
+    role: exit
+    rule: "PAUSE when daily ADX(14) is above 28"
+    runnable: true
+    endpoint: /api/v1/indicators/adx?coin={coin}&interval=1d
+    field: items[].adx
+    replay: /api/v1/indicators/adx?coin={coin}&interval=1d&history=500
+    replay_field: items[].history[].adx
+  - id: realvol_pause_80
+    role: exit
+    rule: "PAUSE when the pooled asset's 30-day realized vol is above 80% annualized"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: vol.rv_cc_30
+    note: "Annualized percent. The page names majors[].realized_30 on /volatility/index, which is the Garman-Klass estimate (vol.rv_gk_30 here) and covers BTC and ETH only; this route covers any listed coin."
+  - id: price_move_24h_8pct
+    role: exit
+    rule: "PAUSE immediately when the pooled asset has moved more than 8% in 24 hours"
+    runnable: true
+    endpoint: /api/v1/market-data/ticker/24hr?symbol={symbol}USDT
+    field: price_change_pct
+    note: "Rolling 24h Binance spot change in percent; test its absolute value above 8."
+  - id: funding_leading_reduce
+    role: sizing
+    rule: "Funding above 0.04%/8h signals leverage building ahead of a vol spike: treat it as a leading REDUCE indicator"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=1
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "From the page's indicator list; the classification pseudocode leaves it out. Latest settled 8h print above 0.0004."
+  - id: range_width
+    role: sizing
+    rule: "LP range width = plus or minus (DVOL / 100) x sqrt(days in range / 365) x 2 around the current price, 14 target days by default"
+    runnable: true
+    input: derived
+    inputs: [dvol_deploy_45]
+    note: "The pseudocode's formula; the Rules text writes the square root of days without the /365."
+  - id: rebalance_trigger
+    role: sizing
+    rule: "Recalibrate the range when price leaves the current bounds or DVOL has moved 15% or more since the last calibration; never rebalance into a PAUSE regime"
+    runnable: true
+    input: derived
+    inputs: [dvol_deploy_45, dvol_pause_60]
+  - id: rebalance_cap
+    role: sizing
+    rule: "Target at most 2 range rebalances a month, keeping gas below 10% of fee income"
+    runnable: true
+    input: position
+  - id: lp_sizing
+    role: sizing
+    rule: "Base LP position 20-40% of portfolio notional per pool (30% in the pseudocode), at most 60% of the portfolio in LP in total"
+    runnable: true
+    input: position
+  - id: kill_deploy_pnl
+    role: stop
+    rule: "Kill: 6-month net LP P&L (fees minus IL minus gas) negative across DEPLOY-regime periods"
+    runnable: true
+    input: position
+  - id: kill_lvr_over_fees
+    role: stop
+    rule: "Kill: realised LVR in the low-vol regime above fee income by more than 0.5x for 3 consecutive months"
+    runnable: true
+    input: position
+    note: "From the pool's own fee and price data."
+  - id: kill_stale_dvol
+    role: stop
+    rule: "Pause LP deployment when the DVOL input is more than 4 hours stale on 3 consecutive gate evaluations"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: as_of
+  - id: kill_pool_tvl_500m
+    role: stop
+    rule: "Move pools or retire: target pool TVL above $500M"
+    runnable: false
+    note: "Per-pool TVL is not served."
 ---
 
 # DeFi Yield / LP Regime Gate

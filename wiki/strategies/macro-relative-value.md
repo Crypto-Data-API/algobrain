@@ -21,6 +21,55 @@ crowding_risk: medium
 expected_sharpe: 0.8
 expected_max_drawdown: 0.18
 breakeven_cost_bps: 8
+gates:
+  - id: spread_universe
+    role: universe
+    rule: "Two macro-sensitive instruments sharing a dominant driver: a curve (2s10s, 5s30s), a cross-country rate pair (DE vs US 10y), an FX cross, a swap spread or a cross-country equity index pair"
+    runnable: false
+    note: "No government bond yields, swap rates, FX crosses (beyond EUR/USD on /sentiment/macro) or equity indices are served. Needs a rates, FX and index feed."
+  - id: fair_value_zscore
+    role: entry
+    rule: "z = (market spread - fundamentally fair spread) over a 1-3 year window, fair value modelled from relative growth, core inflation, policy-rate path, fiscal trajectory, real yields and terms of trade. Enter when the absolute z is at least 1.5"
+    runnable: false
+    note: "Needs point-in-time macro fundamentals and the spread history, none of which is served."
+  - id: catalyst_or_carry
+    role: filter
+    rule: "Enter only when the convergent side pays non-negative carry or a convergence catalyst is identifiable (auction, central-bank meeting, index rebalance, election resolution)"
+    runnable: partial
+    endpoint: /api/v1/policy/regime
+    field: items[].macro_class
+    note: "Only US FOMC decision dates are served here (macro_class FOMC, with days_until); US macro prints are on /api/v1/event/calendar?type=macro_print. Auctions, other central banks, index rebalances and elections are not served, and carry needs repo and forward rates we do not serve."
+  - id: factor_hedge
+    role: sizing
+    rule: "Size the legs duration-neutral (DV01-weighted) for rates, beta or notional-neutral for equities, carry-aware for FX"
+    runnable: false
+    note: "Needs DV01s, betas and forward points, none of which is served."
+  - id: take_profit_fair_value
+    role: exit
+    rule: "Exit or scale out when the spread reverts to z near 0, or the carry thesis is realised"
+    runnable: false
+    note: "Needs the unserved spread and fair-value series from fair_value_zscore."
+  - id: thesis_break_stop
+    role: stop
+    rule: "Exit if fair value moves with the market (the dislocation was information, not flow), or at a hard stop of z at least 3.0 against the position"
+    runnable: false
+    note: "Needs the unserved spread and fair-value series."
+  - id: time_stop
+    role: stop
+    rule: "Exit if convergence has not begun within the expected horizon, typically 1-2 quarters"
+    runnable: true
+    input: position
+  - id: risk_budget
+    role: sizing
+    rule: "Risk 0.5-1.0% of book per trade, sized to spread volatility; no single macro theme above 15-20% of risk; hold 8-20 uncorrelated spreads"
+    runnable: false
+    input: position
+    note: "The risk caps sit on the position record, but spread volatility needs the unserved spread history."
+  - id: gross_cap_degross
+    role: sizing
+    rule: "Pre-commit a gross-exposure cap and a de-grossing schedule for drawdowns"
+    runnable: true
+    input: position
 ---
 
 Macro relative value (macro RV) is a family of **spread trades expressed across markets, countries, and the term structure**, where the trader holds a hedged long/short package whose payoff depends on the *relationship* between two macro-sensitive instruments rather than the absolute direction of any one of them. Where [[global-macro]] takes outright directional bets on rates, currencies, and equities, macro RV isolates the *relative* mispricing — e.g. long German Bunds vs short US Treasuries, long Brazilian rates vs short Mexican rates, or a flattener on the 2s10s curve — sized to be neutral to the dominant first-order risk factor (duration, FX beta, equity beta). It sits between pure [[relative-value-arbitrage]] (near-identical instruments, tight convergence) and outright [[global-macro]] (directional, thematic), trading on macro fundamentals plus a convergence or carry thesis.

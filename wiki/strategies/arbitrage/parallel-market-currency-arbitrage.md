@@ -22,6 +22,34 @@ expected_sharpe: 3
 expected_max_drawdown: 0.4
 breakeven_cost_bps: 300
 decay_evidence: "Strategy alive for 80+ years (since the Bretton Woods era). Argentina cepo 2011-2015, 2019-2023, residual controls 2024 until largely lifted for individuals April 2025; Venezuela 2014-present; Lebanon 2019-present; Nigeria 2020-2024; Egypt 2022-2024 — each lasts years."
+gates:
+  - id: dislocated_country
+    role: universe
+    rule: "A country with an active parallel-market dislocation (capital controls with a separate parallel exchange rate)"
+    runnable: false
+    note: "No fiat FX, capital-control or parallel-rate data is served."
+  - id: parallel_premium_20pct
+    role: entry
+    rule: "Enter when the parallel rate (best of Binance or OKX P2P USDT, street rate, regulated alternative window) is more than 20% above the official rate"
+    runnable: false
+    note: "Official rates, street-rate trackers and exchange P2P stablecoin quotes are not served."
+  - id: net_edge_10pct
+    role: filter
+    rule: "Trade only when premium minus route fees minus a counterparty haircut is at least 10%"
+    runnable: false
+    input: derived
+    inputs: [parallel_premium_20pct]
+    note: "Built on the unserved premium; route fees and haircuts are the desk's estimates."
+  - id: route_capacity
+    role: sizing
+    rule: "Size at min(country position limit, the route's daily capacity) and hold the dollars offshore or in stablecoins"
+    runnable: true
+    input: position
+  - id: reverse_on_convergence
+    role: exit
+    rule: "Consider the reverse leg, and flag the country for retirement, when the premium falls below 5%"
+    runnable: false
+    note: "Needs the same unserved rates as parallel_premium_20pct."
 ---
 
 # Parallel Market Currency Arbitrage

@@ -26,6 +26,57 @@ kill_criteria: |
   - mean 22:00-00:00 UTC return over trailing 250 days not > 0 at t-stat 1.5
   - drawdown > 25%
 related: ["[[quantpedia]]", "[[quantpedia-strategy-encyclopedia]]", "[[crypto-trading-sessions]]", "[[calendar-effects]]", "[[overnight-vs-intraday]]", "[[crypto-weekday-weekend-etf-era]]", "[[session-aware-mean-reversion]]", "[[funding-by-hour]]"]
+gates:
+  - id: btc_instrument
+    role: universe
+    rule: "BTC spot or the BTC-USDT perpetual on a deep venue"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=3
+    field: klines[].close
+    note: "Binance spot hourly bars; the Hyperliquid perp is /api/v1/hyperliquid/candles?coin=BTC&interval=1h."
+  - id: edge_still_present
+    role: filter
+    rule: "Re-test before trading and keep trading only while the mean 22:00-00:00 UTC return over the trailing 250 days is above 0 at a t-stat of 1.5 (and positive for 2022-present)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin=BTC&interval=1h&start={start}
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin=BTC&interval=1h&start={start}
+    replay_field: candles[].close
+    note: "Window return = close of the 23:00 bar / close of the 21:00 bar - 1 (bars are stamped at their open). Hyperliquid 1h history reaches back to 2023; Binance spot 1h before 2026-05-09 is in /api/v1/backtesting/archives?data_type=klines. Page through start for 250 days (limit 1000 bars per call)."
+  - id: entry_2200
+    role: entry
+    rule: "Buy at 22:00 UTC (maker bid posted a few minutes before)"
+    runnable: true
+    input: position
+  - id: exit_0000
+    role: exit
+    rule: "Close at 00:00 UTC"
+    runnable: true
+    input: position
+  - id: funding_stamp_exit
+    role: exit
+    rule: "On perps with strongly positive funding, exit at 23:59 to avoid paying the 00:00 Binance funding stamp"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT
+    field: current_rate
+    note: "Binance's 8-hour rate. 'Strongly positive' has no level on the page. Hyperliquid funds hourly, so there every hour of the hold pays."
+  - id: high_vol_skip
+    role: filter
+    rule: "Skip entries when the vol regime reports an extreme or high-vol state"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/BTC
+    field: regime
+    note: "From the page's agent workflow. vol_shock is the extreme state; whether expanding also counts as high-vol is the desk's call."
+  - id: sizing_1x
+    role: sizing
+    rule: "Fixed notional equal to the sleeve allocation, no leverage above 1x; volatility-scale when run beside other sleeves"
+    runnable: true
+    input: position
+  - id: drawdown_kill
+    role: stop
+    rule: "Retire on a drawdown above 25% or a rolling 12-month net-of-cost return below 0"
+    runnable: true
+    input: position
 ---
 
 # Bitcoin Overnight Seasonality (22:00-00:00 UTC)

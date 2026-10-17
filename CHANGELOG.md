@@ -6,11 +6,12 @@ individual wiki page operations.
 
 ## 2026-10-17 — Funding/carry gates; empty, orphan and stale cleanup; tag audit
 
-**Added:** Runnable gates on six funding and carry pages: cash-and-carry,
-funding-rate arbitrage, Hyperliquid-vs-CEX funding divergence, basis trading, momentum
-rotation and market making. 87 pages now carry 1,257 gates. Most carry conditions stay
-partial or not runnable, because the API serves no dated-futures prices, borrow rates or
-non-Hyperliquid perp funding. The pages say so plainly.
+**Added:** Runnable gates now cover essentially every strategy page: 395 pages and
+5,514 gates. A parallel mapping pass gated the remaining 314 strategy pages, including the
+six funding and carry pages this round also mapped. Its gates were kept for those six, so
+the whole batch shares one style. Most carry conditions stay partial or not runnable,
+because the API serves no dated-futures prices, borrow rates or non-Hyperliquid perp
+funding, and the pages say so plainly.
 
 **Changed:**
 - **Stale pages:** the 15 most-linked stale concept and strategy pages were brought

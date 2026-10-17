@@ -48,6 +48,114 @@ kill_criteria: |
   - false-breakout rate > 60% over rolling 20 signals → prefer retest entries only; no aggressive breakout chasing
   - 3 consecutive false breakouts at the same level → the level is being manipulated; abandon it
   - vol-shock regime or active liquidation cascade → no new breakout entries; reduce to flat if short near major support
+gates:
+  - id: key_level
+    role: entry
+    rule: "Key level: a horizontal support or resistance level price has tested at least 2-3 times"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: sr.resistance[].strength
+    note: "sr.support and sr.resistance hold algorithmic daily levels; strength is the number of swing pivots clustered into the level, a close stand-in for touches. The page draws levels by hand, and levels far from price are not listed, so a desk-drawn level can differ."
+  - id: breakout_close_volume
+    role: entry
+    rule: "Aggressive entry: a close above resistance (long) or below support (short) on volume above 1.5x the 20-bar average"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=25
+    field: candles[].volume
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].volume
+    note: "Level from key_level. Compare the breakout bar's volume with the mean of the 20 closed bars before it; drop the forming bar. The example is daily; the page also allows 4h."
+  - id: retest_entry
+    role: entry
+    rule: "Preferred entry: after the break, price pulls back to the broken level and the retest candle holds it"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=10
+    field: candles[].low
+    note: "Touching the level is mechanical; 'holds' (and the hammer-style confirmation candle in the example) is a chart judgement with no tolerance given."
+  - id: higher_tf_trend
+    role: filter
+    rule: "The breakout should align with the trend one timeframe higher (e.g. a 4h break with a bullish daily trend; the example uses the 20 EMA above the 50 EMA)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=120
+    field: candles[].close
+    note: "The page defines the trend only by example: EMA(20) above EMA(50) on the higher timeframe is one reading, computed from the closes."
+  - id: rsi_not_overbought
+    role: filter
+    rule: "Avoid buying into an overbought breakout (RSI 14)"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: rsi.rsi_14_1d
+    note: "The page gives no cutoff; rsi.state_1d marks overbought at 70, the usual reading. Daily RSI only; a 4h breakout needs RSI computed from 4h candles."
+  - id: funding_bias
+    role: filter
+    rule: "Funding direction biases which side of the range to arm (positive funding biases the break upward)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "A soft bias with no threshold or veto rule."
+  - id: vol_shock_no_entry
+    role: filter
+    rule: "No new breakout entries in a vol_shock regime"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+  - id: vol_score_75_no_entry
+    role: filter
+    rule: "Vol-regime score above 75: no new breakout entries; flatten a short sitting near major support"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    replay: /api/v1/volatility/index/history?days=365
+    replay_field: points[].composite_score
+    note: "The replay is one composite per UTC day; days before 2026-08-24 are reconstructed."
+  - id: liquidation_cascade_no_entry
+    role: filter
+    rule: "An active liquidation cascade: no new breakout entries and no retest buying"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&include_quiet=true
+    field: alerts[].triggered
+    note: "The page names a cascade signal without a threshold. Squeeze alerts flag liquidation bursts against their own baseline on OKX, Bybit and Hyperliquid (no Binance)."
+  - id: measured_move_target
+    role: exit
+    rule: "Target the prior range's height (support to resistance) projected from the breakout point"
+    runnable: partial
+    input: derived
+    inputs: [key_level]
+    note: "Mechanical once both range levels are fixed; only as firm as key_level."
+  - id: next_level_target
+    role: exit
+    rule: "Or target the next significant support or resistance level beyond the break"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: sr.resistance[].price
+    note: "The next listed sr level beyond the broken one; whether it is 'significant' is the desk's call."
+  - id: stop_beyond_broken_level
+    role: stop
+    rule: "Stop just below the broken resistance (longs) or above the broken support (shorts)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "The page gives no buffer ('just below'); the example sits about 1.7% under the level."
+  - id: failure_exit
+    role: exit
+    rule: "Exit immediately if price closes back through the level on heavy volume"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=25
+    field: candles[].close
+    note: "The close back through the level is mechanical; 'heavy volume' has no threshold (the entry's 1.5x is one reading)."
+  - id: kill_false_breakouts
+    role: filter
+    rule: "False-breakout rate (back in the range within 3 candles) above 60% over 20 signals: retest entries only, with volume above 2x the 20-day average"
+    runnable: true
+    input: position
+  - id: kill_manipulated_level
+    role: filter
+    rule: "Abandon a level after 3 consecutive false breakouts at it"
+    runnable: true
+    input: position
 ---
 
 # Support and Resistance Breakout Strategy

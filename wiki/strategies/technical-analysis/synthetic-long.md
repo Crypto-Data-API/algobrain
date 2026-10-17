@@ -12,6 +12,74 @@ markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[risk-reversal]]", "[[collar]]", "[[covered-call]]", "[[married-put]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[section-1256-contracts]]", "[[staking]]", "[[delta]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit
+    role: universe
+    rule: "BTC or ETH options on Deribit"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "We serve Deribit DVOL and the ATM term structure for BTC and ETH. Option quotes, the implied forward and fills come from Deribit; no option chain is served."
+  - id: delta_one_view
+    role: entry
+    rule: "Use when you want delta-one long (or short) coin exposure with minimal capital"
+    runnable: false
+    note: "A directional view or exposure need the page leaves to the trader."
+  - id: atm_strike
+    role: entry
+    rule: "Buy 1 ATM call and sell 1 ATM put at the strike nearest spot, same expiry (reverse the legs for a synthetic short)"
+    runnable: true
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "The strike grid and premiums come from Deribit."
+  - id: tenor_30_120_dte
+    role: entry
+    rule: "Tenor 30-120 DTE"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure is Pro Plus and lists the nearest 12 expiries."
+  - id: options_vs_perp
+    role: filter
+    rule: "Choose the options synthetic over the perp when locking a fixed forward beats paying floating funding: funding's sign and level decide"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "The perp side is served (current_rate is hourly; x 24 x DTE for the expected carry over the tenor). The fixed side, the options-implied forward (the combo's net debit or credit), is not; it comes from Deribit quotes. The page gives no cutoff."
+  - id: reversal_basis
+    role: entry
+    rule: "Reversal variant: synthetic long plus short perp captures the spread between the options-implied forward and the perp price"
+    runnable: false
+    note: "The options-implied forward is not served, so the spread cannot be computed from our data; Deribit's chain gives it. Perp funding for the hedge leg is on /api/v1/hyperliquid/funding-rates."
+  - id: crowded_oi_basis
+    role: filter
+    rule: "Crowded OI stretches the basis the reversal captures"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_close
+    note: "Context only: the page gives no OI threshold or action. OI history from 2026-03-30."
+  - id: roll_before_expiry
+    role: exit
+    rule: "Roll before expiry (close the combo, reopen at a later expiry) to avoid pin risk when keeping the exposure"
+    runnable: true
+    input: position
+    note: "BTC max pain on /api/v1/market-intelligence/options is the page's pin context; it is the strike for the largest-OI expiry, not necessarily this one."
+  - id: cap_downside_if_view_sours
+    role: stop
+    rule: "If the view sours, buy a lower put to turn the short put into a put spread and cap the downside"
+    runnable: partial
+    input: position
+    note: "'View sours' has no price or loss trigger; that is the desk's call."
+  - id: short_put_margin_headroom
+    role: sizing
+    rule: "Keep margin headroom so a DVOL spike on the short put cannot force liquidation"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "The page sets no headroom amount. vol_shock or expanding regimes are when margin inflates; the margin itself is the account's."
 ---
 
 # Synthetic Long (Crypto)

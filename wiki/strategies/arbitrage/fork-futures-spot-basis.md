@@ -22,6 +22,77 @@ expected_sharpe: 1.3
 expected_max_drawdown: 0.20
 breakeven_cost_bps: 80
 decay_evidence: "ETHW (Sep 2022) peak IOU $140 vs realized $5-10. UNI futures pre-launch over-priced by 30-50% on dYdX. Pattern repeats but each instance increasingly competitive."
+gates:
+  - id: iou_listings
+    role: universe
+    rule: "Universe: pre-fork IOU products and pre-launch perps listed on OKX, Poloniex, MEXC, Hyperliquid or Bybit"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/meta
+    field: universe[].name
+    note: "Hyperliquid only, and its universe carries no pre-launch flag, so the bot must know which listing is the IOU. OKX, Poloniex, MEXC and Bybit IOU books are not served, and neither are fork or listing announcements."
+  - id: fair_value_band
+    role: filter
+    rule: "Realistic distribution value: base case about 5-15% of the parent's value within 30 days of the fork (bull 20-30%, bear 1-3%), refined by hashrate, mining-cost and exchange-listing analysis"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "The parent price is served (Binance spot), so the page's percentage bands are mechanical. The hashrate forecasts, listing announcements and historical fork-decay curves that refine the median are off-API and the desk's model."
+  - id: short_iou_2x
+    role: entry
+    rule: "Short the IOU when its price exceeds 2x the modeled median distribution value; never below 1.5x"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/summary?coin={coin}
+    field: mark_price
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&start={start}
+    replay_field: candles[].close
+    note: "Hyperliquid IOU or pre-launch perps only. The median comes from fair_value_band, which is partly the desk's model."
+  - id: airdrop_fdv_multiple
+    role: entry
+    rule: "Airdrop variant: short the pre-launch perp when its implied FDV exceeds 2-3x the base case from eligible addresses x per-address allocation x estimated FDV"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/summary?coin={coin}
+    field: mark_price
+    note: "Implied FDV = mark_price x total token supply from the project's tokenomics, which is not served before launch. Eligible-address counts and allocations are off-API; the page leaves the exact multiple between 2x and 3x."
+  - id: parent_hedge
+    role: sizing
+    rule: "Hold parent spot (or a parent perp) against the IOU short, with a margin buffer so a parent rally does not force a cover"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "The page sets no buffer size; it comes from the position record and the desk's margin policy."
+  - id: delivery_cap
+    role: sizing
+    rule: "Never short more IOU than guaranteed delivery covers: parent held through the snapshot plus a confirmed exchange credit policy"
+    runnable: partial
+    input: position
+    note: "Parent holdings come from the position record; exchange credit policies are announcements this API does not serve."
+  - id: oi_fraction_cap
+    role: sizing
+    rule: "Cap each venue's short at a fraction of the visible IOU open interest"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+    note: "Hyperliquid listings only. The page gives no fraction, so it is the desk's call."
+  - id: trim_below_1_5x
+    role: sizing
+    rule: "Short aggressively only above 2x modeled value and trim when the IOU falls below 1.5x, where costs eat the edge"
+    runnable: partial
+    input: derived
+    inputs: [short_iou_2x, fair_value_band]
+    note: "As runnable as the fair-value model behind it."
+  - id: funding_crowding
+    role: sizing
+    rule: "Reduce the short when IOU-perp funding turns negative (short crowding, a tax on the ~80 bp breakeven)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=3
+    field: history[].funding_rate
+    note: "Negative is mechanical; how much to reduce is not stated."
+  - id: deliver_at_fork
+    role: exit
+    rule: "At the fork, deliver the airdropped asset to close the short; if the venue refuses delivery, buy to close at post-launch spot"
+    runnable: true
+    input: position
 ---
 
 # Fork Futures / Spot IOU Basis Arbitrage

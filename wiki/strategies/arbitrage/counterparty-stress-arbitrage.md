@@ -22,6 +22,102 @@ expected_sharpe: 1.3
 expected_max_drawdown: 0.30
 breakeven_cost_bps: 100
 decay_evidence: "Strategy capacity is bounded by frequency of qualifying setups (handful per year) and by the velocity of crowding (each high-profile case attracts copycats). Crypto's transparency increases setup-frequency relative to commodities/equities. Edge persists as long as forced-seller dynamics exist — i.e., as long as capital structures have non-fundamental pressure points."
+gates:
+  - id: stress_watchlist
+    role: universe
+    rule: "Keep a watchlist of counterparties showing position size and capital pressure together: 13F, Form ADV and redemption-gate news (equities), NYMEX large-trader and CFTC COT (commodities), on-chain analytics, exchange leaderboards and Aave/Compound/Euler monitors (crypto), reserve attestations (stablecoins)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/wallet-positions
+    field: wallets.{address}.positions[].coin
+    note: "Only the Hyperliquid side is served: the tracked wallets' open positions here, and per-coin whale and high-leverage books in top_coins[] on /api/v1/quant/whales. 13F, ADV, NYMEX, COT, CEX-account and DeFi-lending positions are not served."
+  - id: size_over_20pct_turnover
+    role: filter
+    rule: "Trade only when the counterparty's position exceeds 20% of the affected market's average daily turnover (10% of pool liquidity for a DeFi whale)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/wallet-positions
+    field: wallets.{address}.positions[].size
+    note: "Hyperliquid wallets only: size x mark against the coin's average daily notional (30 daily candles' volume x close on /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30). Positions held off Hyperliquid, and DeFi pool liquidity, are not served."
+  - id: capital_pressure
+    role: filter
+    rule: "Require at least one capital-pressure sign: drawdown past an LP-gate threshold, margin coverage near the prime broker's red line, a public statement of distress, on-chain liquidation-threshold proximity, or a redemption window within 30 days"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/wallet-positions
+    field: wallets.{address}.positions[].liquidation_price
+    note: "Only liquidation-threshold proximity on Hyperliquid is served: the distance from the coin's mark (assets[].mark_price on /api/v1/hyperliquid/open-interest) to liquidation_price, which is null for well-collateralised positions. Fund drawdowns, prime-broker margins, distress statements and redemption calendars are off-API; the page sets no proximity threshold."
+  - id: defi_health_factor
+    role: filter
+    rule: "Crypto lending stress: a whale with health factor below 1.1 and a position above 10% of pool liquidity"
+    runnable: false
+    note: "Aave, Compound and Euler account health factors and pool liquidity are not served. Needs the protocols' subgraphs or an on-chain position monitor."
+  - id: stablecoin_redemption_stress
+    role: filter
+    rule: "Stablecoin stress: reserve coverage below 1.05 with 24h net redemptions above a threshold"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=mint
+    field: items[].delta_usd
+    note: "Large mints and redemptions are served (negative delta_usd is a redemption; only steps of at least $50M and 0.5% of float). Reserve coverage ratios come from issuer attestations and are not served, and the page gives no redemption threshold."
+  - id: preposition_size
+    role: sizing
+    rule: "Pre-position cheap-to-carry shorts (or longs, by unwind direction) at 25-100 bp of NAV per name (25 bp in the pseudocode)"
+    runnable: true
+    input: position
+  - id: scale_on_unwind
+    role: entry
+    rule: "Scale to 50 bp at the first credible signs of forced selling: anomalous price action, high-volume sweeps, exchange disclosures"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/liquidations?symbol={coin}
+    field: data[].liq_1h_vs_7d_median.total
+    note: "Forced flow read as the last hour's liquidations against the 7-day median hour (Hyperliquid tape, null when that median is zero; the level fields cover OKX, Bybit and Hyperliquid, not Binance). Sweeps show as max_fill_usd and large_fill_share on /api/v1/hyperliquid/trade-flow?coin={coin}. What counts as credible is the desk's call."
+  - id: exit_peak_unwind
+    role: exit
+    rule: "Exit at peak unwind, not at fundamental fair value"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/liquidations?symbol={coin}
+    field: data[].liq_1h_vs_7d_median.total
+    note: "The page does not define the peak; a fading liquidation ratio after a spike is one reading, and the call is the desk's."
+  - id: misread_stop
+    role: stop
+    rule: "Exit the directional leg if the capital-pressure thesis is invalidated (the fund raises capital, the health factor recovers)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/wallet-positions
+    field: wallets.{address}.positions[].liquidation_price
+    note: "On Hyperliquid, a liquidation price moving away from the mark (or the position shrinking) is the served read; capital raises and off-exchange recoveries are judgements."
+  - id: crowding_stand_down
+    role: filter
+    rule: "Stand down if the marginal unwind price is already near fair value on arrival"
+    runnable: false
+    note: "Fair value is a judgement the page leaves open; nothing served defines it."
+  - id: kill_list
+    role: universe
+    rule: "Skip counterparties whose unwinds carry legal, OFAC or reputational risk"
+    runnable: true
+    input: position
+    note: "The list is the desk's own configuration."
+  - id: carry_budget
+    role: sizing
+    rule: "Cap the standing watchlist hedges' bleed at about 50-150 bp a year; cut if exceeded"
+    runnable: true
+    input: position
+  - id: kill_drawdown_30
+    role: stop
+    rule: "Retire on a drawdown above 30% over a rolling 12 months"
+    runnable: true
+    input: position
+  - id: kill_event_value
+    role: stop
+    rule: "Retire when average per-event extracted value is below 1% of capital deployed for 4 consecutive quarters"
+    runnable: true
+    input: position
+  - id: kill_regulation
+    role: stop
+    rule: "Retire on major regulatory action targeting trading ahead of forced unwinds"
+    runnable: false
+    note: "A legal judgement; no feed covers it."
+  - id: kill_no_unwind_18m
+    role: stop
+    rule: "Retire after more than 18 months without a $100M+ forced-unwind event globally"
+    runnable: false
+    note: "Needs a cross-market record of counterparty unwinds; liquidation totals such as cross_exchange.liquidations on /api/v1/derivatives/summary are aggregate flow, not one counterparty's unwind."
 ---
 
 # Counterparty Stress Arbitrage

@@ -21,6 +21,94 @@ expected_sharpe: 0.7
 expected_max_drawdown: 0.35
 breakeven_cost_bps: 50
 related: ["[[variance-swap]]", "[[realized-volatility]]", "[[implied-volatility]]", "[[dvol]]", "[[deribit]]", "[[greeks-live]]", "[[volatility-trading]]", "[[delta-hedged-options]]", "[[gamma-scalping]]", "[[variance-risk-premium]]", "[[liquidation-cascade-fade]]", "[[edge-taxonomy]]"]
+gates:
+  - id: btc_eth_underlying
+    role: universe
+    rule: "Underlying BTC or ETH; 1-3 month vol swaps are most common"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "DVOL (the strike anchor) is served for BTC and ETH. The swap itself is OTC; tenor and terms are negotiated, not served."
+  - id: strike_vs_forecast
+    role: entry
+    rule: "Sell vol (receive fixed) when the strike exceeds your realized-vol forecast by more than a hurdle; buy vol when the forecast exceeds the strike by more than the hurdle"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "Dealer strikes are OTC quotes we do not serve; dvol is the page's anchor (strike = DVOL minus a convexity adjustment). The forecast and the hurdle are the desk's; vrp (dvol - realized_30) is the served history-based gap."
+  - id: realized_vol_leg
+    role: exit
+    rule: "The payoff leg: annualized realized vol over the contract window on the 24/7 tape, weekends included, with the contract's estimator"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Close-to-close: stdev of daily log returns x sqrt(365). Parkinson and Garman-Klass use the same bars' high, low and open. /api/v1/volatility/regime/{symbol} serves vol.rv_cc_30 and vol.rv_gk_30 precomputed. The settlement index is the contract's, which may not be Hyperliquid."
+  - id: no_short_in_expanding_vol
+    role: filter
+    rule: "An expanding or vol_shock regime argues against initiating a short"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow."
+  - id: counterparty_terms
+    role: entry
+    rule: "Negotiate vega notional, observation frequency, annualization, estimator and any cap; vet the counterparty's solvency"
+    runnable: false
+    note: "OTC terms and counterparty credit are off-exchange facts we do not serve."
+  - id: tail_stop
+    role: stop
+    rule: "Exit or hedge a short when realized vol breaks decisively above the strike (by more than a preset multiple)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    field: candles[].close
+    note: "Realized vol to date over the window is computable; the page does not set the multiple."
+  - id: cascade_early_warning
+    role: stop
+    rule: "Liquidations plus the vol-stress score are the early warning for the vol explosion that dominates a short's P&L"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    replay: /api/v1/volatility/index/history?days=365
+    replay_field: points[].composite_score
+    note: "No thresholds are given. Liquidation bursts are on /api/v1/market-intelligence/squeeze-alerts (OKX, Bybit, Hyperliquid)."
+  - id: cover_uncapped_on_spike
+    role: stop
+    rule: "For an uncapped short, cover immediately on any disorderly vol spike"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "'Disorderly' is not defined; a flip to vol_shock is one reading."
+  - id: kill_mtm_vs_carry
+    role: stop
+    rule: "Unwind when the mark-to-market loss exceeds about 2-3x the contract's expected carry"
+    runnable: true
+    input: position
+  - id: kill_counterparty_credit
+    role: exit
+    rule: "Novate or close immediately on any counterparty credit deterioration"
+    runnable: false
+    note: "Counterparty credit is not served."
+  - id: size_to_stress
+    role: sizing
+    rule: "Size vega notional to a stressed scenario such as realized vol tripling in a cascade, not to the expected carry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: vol.rv_cc_30
+    note: "Stress loss = (3 x current realized vol - strike) x vega notional, using the page's example multiple."
+  - id: prefer_cap
+    role: sizing
+    rule: "Prefer capped swaps for short positions to bound the tail"
+    runnable: true
+    input: position
+  - id: counterparty_reserve
+    role: sizing
+    rule: "Reserve for counterparty failure: assume the winning leg may not fully pay after a systemic event"
+    runnable: partial
+    input: position
+    note: "The page gives no reserve size."
 ---
 
 # Volatility Swap

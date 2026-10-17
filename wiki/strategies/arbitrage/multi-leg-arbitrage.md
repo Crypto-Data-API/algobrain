@@ -22,6 +22,38 @@ expected_sharpe: 2
 expected_max_drawdown: 0.15
 breakeven_cost_bps: 8
 decay_evidence: "3-leg cycles compressed by 2023; 4-5 leg cycles still meaningfully profitable for top searchers in 2025; 6+ leg dominated by combinatorics complexity barrier."
+gates:
+  - id: multi_chain_pool_graph
+    role: universe
+    rule: "Build a pool graph across Ethereum, 6-10 L2s and 3-5 sidechains, updating reserves every block"
+    runnable: partial
+    endpoint: /api/v1/dex/trending?chain={chain}
+    field: pools[].pool_address
+    note: "Seed list only, on five chains (solana, ethereum, base, bsc, arbitrum), refreshed on a cache cycle rather than per block. Per-block reserves come from each chain's RPC."
+  - id: negative_cycle
+    role: entry
+    rule: "Trade 4-6 leg negative cycles (Bellman-Ford on edge weights -log(rate x (1 - fee))) whose profit exceeds gas plus a minimum threshold"
+    runnable: false
+    note: "Needs per-block reserves and fees for every pool on every chain plus a gas oracle; none are served."
+  - id: optimal_input
+    role: sizing
+    rule: "Size each cycle at its profit-maximising input"
+    runnable: false
+    input: derived
+    inputs: [negative_cycle]
+    note: "Built on the unserved cycle model."
+  - id: priority_fee_share
+    role: sizing
+    rule: "Bid a priority fee of 60-80% of expected profit"
+    runnable: false
+    input: derived
+    inputs: [negative_cycle]
+    note: "A share of a profit estimate this API cannot produce."
+  - id: revalidate_at_execution
+    role: filter
+    rule: "Re-validate the cycle against state at the execution block, and price bridge latency into any cross-chain cycle"
+    runnable: false
+    note: "Needs live chain state and bridge timing, neither served."
 ---
 
 # Multi-Leg Arbitrage (4+ Legs)

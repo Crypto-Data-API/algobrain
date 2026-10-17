@@ -12,6 +12,48 @@ markets: [commodities]
 complexity: intermediate
 backtest_status: untested
 related: ["[[crack-spread]]", "[[crush-spread]]", "[[spark-spread]]", "[[basis-trading]]", "[[sector-rotation]]"]
+gates:
+  - id: seasonal_win_rate
+    role: universe
+    rule: "Trade only seasonal spread patterns with a win rate above 70% over the past 15+ years, favouring consistent returns and a low maximum adverse excursion"
+    runnable: false
+    note: "Needs 15+ years of commodity futures calendar-spread history (MRCI, Seasonal Algo or exchange data). No commodity futures are served."
+  - id: fundamental_explanation
+    role: filter
+    rule: "The pattern has a known physical driver (harvest, heating season), not just a data-mined artifact"
+    runnable: false
+    note: "A research judgement on commodity fundamentals; nothing served answers it."
+  - id: fundamentals_align
+    role: filter
+    rule: "Current fundamentals agree with the seasonal expectation (e.g. no drought wrecking a harvest-pressure short); cut size when they partly contradict it"
+    runnable: false
+    note: "Needs crop, weather and inventory data (USDA, EIA), which is not served."
+  - id: entry_window
+    role: entry
+    rule: "Enter within 5 trading days of the pattern's historical optimal entry date"
+    runnable: false
+    note: "The optimal date comes from the seasonal study in seasonal_win_rate, which needs commodity history we do not serve."
+  - id: exit_date_or_avg_move
+    role: exit
+    rule: "Exit at the historical optimal exit date, or earlier once the spread reaches the pattern's historical average move"
+    runnable: false
+    note: "Both the date and the average move come from commodity spread history, and the live spread itself is not served."
+  - id: mae_stop
+    role: stop
+    rule: "Stop at 1.5-2x the pattern's average maximum adverse excursion (e.g. $750-1,000 when the typical MAE is $500)"
+    runnable: false
+    note: "The MAE comes from the historical study, and the live spread is not served."
+  - id: time_stop
+    role: stop
+    rule: "Exit if the spread is not working within 2/3 of the pattern's historical trade duration"
+    runnable: partial
+    input: position
+    note: "Time in trade is on the position record; the historical duration comes from the seasonal study, which needs commodity history we do not serve."
+  - id: risk_per_trade
+    role: sizing
+    rule: "Risk 1-2% of trading capital per spread trade, diversified across seasonal patterns in different commodities"
+    runnable: true
+    input: position
 ---
 
 # Seasonal Spread Trading

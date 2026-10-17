@@ -41,6 +41,91 @@ last_review: 2026-07-14
 next_review: 2026-10-14
 
 related: ["[[mvrv]]", "[[mvrv-z-score]]", "[[nupl]]", "[[realized-price]]", "[[bitcoin-halving]]", "[[sopr]]", "[[bitcoin-cycle-regime]]", "[[market-cycle]]", "[[on-chain-analysis]]", "[[on-chain-regime]]", "[[dollar-cost-averaging]]", "[[buy-and-hold]]", "[[miner-capitulation-bottom]]", "[[position-sizing]]", "[[bitcoin]]", "[[btc-dominance]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi-on-chain]]", "[[cryptodataapi]]"]
+gates:
+  - id: mvrv_band
+    role: filter
+    rule: "MVRV band: below 1.0 deep capitulation, 1.0-1.5 accumulation, 1.5-2.5 neutral, 2.5-3.5 distribution, above 3.5 euphoria"
+    runnable: partial
+    endpoint: /api/v1/on-chain/dormancy/btc
+    field: metrics.mvrv
+    note: "mvrv_signal.zone in the same response classifies these exact bands. On 2026-10-17 both came back empty (mvrv null, zone unknown, reason no_data), so check mvrv_signal.reason before trusting a read; the same gap removes MVRV from /on-chain/score."
+  - id: mvrv_z_band
+    role: filter
+    rule: "MVRV-Z band (the pseudocode's zone driver): below 0 deep capitulation, 0-2 accumulation, 2-4 neutral, 4-5.5 distribution, above 5.5 euphoria"
+    runnable: false
+    note: "MVRV-Z is not served: /market-intelligence/btc/cycle-indicators currently returns only pi_cycle_top and golden_ratio. Needs an on-chain provider (Glassnode, CoinMetrics, LookIntoBitcoin)."
+  - id: nupl_band
+    role: filter
+    rule: "NUPL band: below 0 capitulation, 0-0.25 hope/fear, 0.25-0.5 optimism, 0.5-0.75 belief/greed, above 0.75 euphoria"
+    runnable: false
+    note: "NUPL is not served; it needs realized cap from an on-chain provider."
+  - id: realized_price_position
+    role: filter
+    rule: "Price versus realized price: below it (deep capitulation), at or near it (accumulation), far above it (distribution, euphoria)"
+    runnable: false
+    note: "Realized price is not served. BTC price and its 200-day MA are on /api/v1/market-data/btc-price-history, a coarser trend context the page also lists."
+  - id: cycle_zone
+    role: entry
+    rule: "Act only when the four metrics agree on the zone, using each metric's percentile within the current cycle's range rather than fixed lines (thresholds drift lower each cycle)"
+    runnable: false
+    input: derived
+    inputs: [mvrv_band, mvrv_z_band, nupl_band, realized_price_position]
+    note: "Three of the four inputs are not served, and no cycle-length history of any of them is."
+  - id: halving_window
+    role: filter
+    rule: "Halving timing prior: 60-90 days before a halving accumulation bias; 0-6 months after neutral; 6-18 months after the top window; 12-15 months before the next halving the bottom window"
+    runnable: true
+    input: position
+    note: "A calendar computation: the last halving was 2024-04-20 and the next is expected around April 2028 (block 1,050,000)."
+  - id: zone_scaled_dca
+    role: sizing
+    rule: "Monthly DCA clip = 2% of NAV x zone scale (deep capitulation 1.5, accumulation 1.0, neutral 0, distribution -1.0, euphoria -1.5), x1.25 when the halving window agrees, capped at 1.5x; sells scale by the tactical fraction"
+    runnable: false
+    input: derived
+    inputs: [cycle_zone, halving_window]
+    note: "Only as runnable as cycle_zone."
+  - id: scale_out_zones
+    role: exit
+    rule: "Scale out across the distribution and euphoria zones into strength; never try to nail the top"
+    runnable: false
+    input: derived
+    inputs: [cycle_zone]
+    note: "Only as runnable as cycle_zone."
+  - id: core_tactical_split
+    role: sizing
+    rule: "Long-horizon core plus a tactical sleeve capped so a full -70-80% cycle drawdown stays inside the multi-year risk budget; no leverage on the core"
+    runnable: true
+    input: position
+  - id: regime_agrees
+    role: filter
+    rule: "The 10-state cycle regime should agree with the on-chain zone before any tranche (Capitulation or Bottoming for buys, Speculative Euphoria or Distribution for sells)"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "From the page's AI-agent workflow. Ids: capitulation, bottoming_accumulation, speculative_euphoria, distribution_post_peak. History starts 2026-08-07."
+  - id: hash_ribbon_bottom
+    role: filter
+    rule: "Miner capitulation (hash ribbon) corroborates the accumulation zone near cycle bottoms"
+    runnable: true
+    endpoint: /api/v1/on-chain/miners/hash-ribbon
+    field: state
+    note: "state reads capitulation, recovery or normal, with days_in_state and the last crossover."
+  - id: onchain_health_collapse
+    role: stop
+    rule: "Structural kill leg: on-chain health composite below 30"
+    runnable: true
+    endpoint: /api/v1/on-chain/score
+    field: score
+    note: "The composite renormalises over components with data; MVRV was excluded (no data) on 2026-10-17."
+  - id: structural_kill
+    role: stop
+    rule: "Abandon the core only when the cycle thesis breaks: price below realized price, on-chain health below 30 and realized price trending down"
+    runnable: false
+    input: derived
+    inputs: [realized_price_position, onchain_health_collapse]
+    note: "Realized price is not served, so two of the three legs cannot be checked."
 ---
 
 # Bitcoin Halving Cycle Timing

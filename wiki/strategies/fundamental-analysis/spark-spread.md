@@ -12,6 +12,37 @@ markets: [commodities]
 complexity: intermediate
 backtest_status: untested
 related: ["[[crack-spread]]", "[[crush-spread]]", "[[seasonal-spread-trading]]", "[[event-driven-trading]]", "[[basis-trading]]"]
+gates:
+  - id: spark_spread_value
+    role: entry
+    rule: "Spark spread = power price ($/MWh) - heat rate x gas price ($/MMBtu); for an 8,000 BTU/kWh plant, 8 MMBtu of gas per 1 MWh of power"
+    runnable: false
+    note: "No electricity or natural-gas futures prices are served. This needs hub power forwards (ICE, CME) and Henry Hub or regional gas prices."
+  - id: long_spark_season
+    role: entry
+    rule: "Long the spark (buy power, sell heat-rate-weighted gas) ahead of peak demand seasons: summer cooling load, winter heating-driven power demand"
+    runnable: false
+    note: "The calendar is easy to encode, but neither leg is served."
+  - id: short_spark_gas_shock
+    role: entry
+    rule: "Short the spark (sell power, buy gas) when gas should outrun power (LNG export surge, pipeline disruption) or power should fall (high renewable output, mild weather)"
+    runnable: false
+    note: "Needs gas, power, LNG and renewable-output data, none of which is served."
+  - id: weather_forecast
+    role: filter
+    rule: "Temperature forecasts: heat waves and polar vortexes spike the spark spread"
+    runnable: false
+    note: "No weather data is served."
+  - id: gas_storage_report
+    role: filter
+    rule: "Weekly EIA natural gas storage report: low storage lifts gas and compresses the spark unless power rises equally"
+    runnable: false
+    note: "EIA storage data is not served, and the release is not on /event/calendar."
+  - id: renewables_and_outages
+    role: filter
+    rule: "Solar and wind output forecasts, planned and unplanned plant outages and transmission congestion at the node"
+    runnable: false
+    note: "Needs grid operator (ISO) data; nothing served covers it."
 ---
 
 # Spark Spread

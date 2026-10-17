@@ -22,6 +22,47 @@ expected_sharpe: 2.2
 expected_max_drawdown: 0.1
 breakeven_cost_bps: 5
 decay_evidence: "Order flow migration from public mempool to private routes accelerated 2024 — ~70% of swap volume on Ethereum now flows through Flashbots Protect or similar by 2025."
+gates:
+  - id: ofa_hint_feed
+    role: universe
+    rule: "Receive order-flow hints from MEV-Share, Flashbots Protect builder hints, BloXroute Private Tx and Eden"
+    runnable: false
+    note: "No order-flow auction, mempool or relay data is served. Needs whitelisted searcher access to those feeds."
+  - id: simulate_backrun
+    role: entry
+    rule: "For each hint, simulate the user's swap on the cycle pools and find the most profitable backrun cycle"
+    runnable: false
+    note: "Needs live DEX pool reserves (Uniswap, Curve) and an EVM simulator; no pool state is served."
+  - id: min_gross_profit
+    role: entry
+    rule: "Skip the hint when the best cycle's gross profit is below the minimum threshold"
+    runnable: false
+    input: derived
+    inputs: [simulate_backrun]
+    note: "The page leaves the threshold open; the gross profit itself needs the simulation, which cannot run on this API."
+  - id: kickback_50pct
+    role: sizing
+    rule: "Bid a kickback to the user of 50% of the expected gross profit"
+    runnable: false
+    input: derived
+    inputs: [simulate_backrun]
+    note: "The bid follows from the simulated profit, which is not computable from this API."
+  - id: kill_revenue_below_cost
+    role: stop
+    rule: "Kill switch: hint-feed revenue drops below the subscription cost"
+    runnable: true
+    input: position
+  - id: kill_win_rate_1pct
+    role: stop
+    rule: "Kill switch: bundle win rate below 1% for 60 days"
+    runnable: true
+    input: position
+  - id: kill_kickback_80pct
+    role: stop
+    rule: "Kill switch: average kickback to users climbs above 80% of gross profit"
+    runnable: partial
+    input: position
+    note: "Own bundles' kickbacks come from the desk's bid log. The market-wide average the page implies needs mevboost.pics or Eigenphi attribution, which is not served."
 ---
 
 # Private Mempool Arbitrage

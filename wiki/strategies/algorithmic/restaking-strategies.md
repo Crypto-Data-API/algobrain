@@ -40,6 +40,91 @@ kill_criteria: |
   - leverage-loop health factor < 1.15 on any position
 
 related: ["[[defi-yield-farming]]", "[[points-farming]]", "[[airdrop-farming]]", "[[leveraged-yield-farming]]", "[[staking]]", "[[eigenlayer]]", "[[ethereum]]", "[[lido]]", "[[ethena-usde]]", "[[aave]]", "[[expected-value]]", "[[kelly-criterion]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: yield_hurdle
+    role: entry
+    rule: "Net AVS yield (headline AVS reward - expected slashing loss - emission dilution) beats base ETH staking (3.5% in the pseudocode) by at least 150 bps"
+    runnable: false
+    note: "AVS reward rates, LRT native APRs and base staking yield are not served; slashing probability is the operator's estimate. Read rates from EigenLayer and LRT dashboards or DefiLlama."
+  - id: peg_check
+    role: filter
+    rule: "Add size only while the LRT trades within 50 bps of its ETH NAV on secondary markets (Curve, Balancer, Uniswap)"
+    runnable: partial
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "{address} is the LRT's own contract (eETH, ezETH, rsETH), fixed and taken from its docs; no gate on this page supplies it. Price over the ETH price from eth_nav gives the market ratio, but a value-accruing LRT's NAV is its protocol exchange rate, not 1 ETH, and that rate is not served."
+  - id: eth_nav
+    role: sizing
+    rule: "Mark the position in ETH: ETH price is the base asset and the NAV denominator"
+    runnable: true
+    endpoint: /api/v1/market-data/ticker/price?symbol=ETHUSDT
+    field: price
+  - id: avs_diversification
+    role: sizing
+    rule: "Delegate across at least 3 AVSs and reputable operators; never put all restaked ETH behind one slashing condition"
+    runnable: true
+    input: position
+  - id: withdrawal_queue
+    role: filter
+    rule: "Confirm the EigenLayer or LRT unbonding path (often 7+ days) and secondary-market exit depth before sizing"
+    runnable: false
+    note: "Withdrawal queues and LRT pool depth are not served."
+  - id: loop_entry_limits
+    role: sizing
+    rule: "If looping on Aave or Morpho: health factor at least 1.3 at entry, LTV low enough that a 2% LRT depeg cannot breach liquidation, loop leverage at most 2x"
+    runnable: true
+    input: position
+    note: "Read the health factor from the lending protocol."
+  - id: per_lrt_cap
+    role: sizing
+    rule: "At most 25% of the sleeve per LRT; Kelly fraction about 0.05-0.10 of book per LRT"
+    runnable: true
+    input: position
+  - id: yield_compression_exit
+    role: exit
+    rule: "Unwind the AVS layer (keep plain staking) when net-of-slashing AVS yield falls below base staking, or stays below it for 30+ days"
+    runnable: false
+    input: derived
+    inputs: [yield_hurdle]
+    note: "Only as runnable as yield_hurdle."
+  - id: peg_break_exit
+    role: stop
+    rule: "On an LRT/ETH deviation above 2%, repay the loop's borrow first, then decide on the base position"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=depeg
+    field: items[].deviation_bps
+    note: "Depeg events from the last 10 days (200 bps = 2%); whether a given LRT is covered is not guaranteed. The live LRT/ETH ratio is peg_check's read, with the same NAV caveat."
+  - id: slashing_or_param_exit
+    role: stop
+    rule: "Exit on any slashing event touching a delegated operator, or when the LRT changes slashing or operator parameters or pauses withdrawals"
+    runnable: false
+    note: "EigenLayer slashing events and LRT governance changes are not served; watch EigenLayer and the LRT's announcements."
+  - id: loop_delever
+    role: stop
+    rule: "Delever immediately when a leverage loop's health factor falls below 1.15"
+    runnable: true
+    input: position
+  - id: stress_watch
+    role: filter
+    rule: "Watch for stress that precedes a depeg cascade: ETH exchange flows and the security stress score"
+    runnable: partial
+    endpoint: /api/v1/security/regime/score
+    field: security_stress_score
+    note: "From the page's AI-agent workflow, which sets no threshold; spike_zscore_24h on /on-chain/exchange-flows/ETH is the flow side."
+  - id: regime_cut_leverage
+    role: sizing
+    rule: "Cut loop leverage as bear or vol_spike probabilities rise (the unhedged position is a full ETH long)"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: probabilities.regime_transitions.to_vol_spike
+    note: "From the page's AI-agent workflow, which gives no threshold or cut size. probabilities.directional holds the bear odds."
+  - id: reentry
+    role: entry
+    rule: "Re-enter only after peg, yield and parameters have been stable for 14+ days"
+    runnable: false
+    input: derived
+    inputs: [peg_check, yield_hurdle]
+    note: "Only as runnable as its inputs."
 ---
 
 # Restaking Strategies

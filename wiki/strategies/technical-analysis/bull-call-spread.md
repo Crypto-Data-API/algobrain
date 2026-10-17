@@ -12,6 +12,112 @@ markets: [crypto, options]
 complexity: beginner
 backtest_status: untested
 related: ["[[bear-put-spread]]", "[[bull-put-spread]]", "[[bear-call-spread]]", "[[vertical-spread]]", "[[iron-condor]]", "[[deribit]]", "[[dvol]]", "[[greeks-live]]", "[[implied-volatility]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[delta]]", "[[theta]]", "[[vega]]", "[[gamma]]", "[[max-pain]]", "[[gamma-exposure]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit_only
+    role: universe
+    rule: "BTC and ETH Deribit options only; alt options are too thin to leg a clean spread"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied vol served. Option quotes come from Deribit itself."
+  - id: bullish_view
+    role: entry
+    rule: "Moderately bullish on BTC or ETH, ideally on an identifiable catalyst (ETF flow, halving-cycle continuation, macro pivot), with trend context supporting it"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: ma.above_50
+    note: "The page names no trend rule: daily klines 'support the bullish thesis'. Price above its 50- and 200-day SMAs (ma.above_50, ma.above_200) is one reading; the catalyst and the forecast are the trader's."
+  - id: long_call_atm
+    role: entry
+    rule: "Buy one call ATM to slightly ITM (about 50-65 delta)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "ATM follows from spot (oracle_price is a CEX spot composite close to Deribit's index); the strike grid, deltas and quotes come from Deribit."
+  - id: short_call_at_target
+    role: entry
+    rule: "Sell one OTM call at or just past the price target (about 30-40 delta), same expiry"
+    runnable: false
+    note: "Strikes by delta need Deribit's option chain with Greeks; the target is the trader's own."
+  - id: debit_two_thirds_width
+    role: entry
+    rule: "Pay no more than about two thirds of the strike width, so max profit is at least about half the max loss"
+    runnable: false
+    note: "Needs the legs' bid and ask; no option quotes are served."
+  - id: width_5_15_pct
+    role: entry
+    rule: "Strike width roughly 5-15% of spot"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Spot is served; the listed strikes come from Deribit."
+  - id: tenor_21_45_dte
+    role: entry
+    rule: "Expiry 21-45 days out; no weeklies"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure lists the nearest 12 Deribit expiries. It is Pro Plus and empty on lower tiers."
+  - id: dvol_10_50_pctile
+    role: filter
+    rule: "DVOL low-to-moderate: roughly the 10th-50th percentile of its trailing year, so the long call is cheap"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "Rank the latest dvol within history. Only about 180 daily closes are served (Pro Plus), so the percentile is over six months, not a year."
+  - id: vol_regime_compressed
+    role: filter
+    rule: "Buy the spread when the coin's vol regime reads compressed (the debit is cheap)"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow. Its tip: the 60-day history on the same route separates genuinely cheap vol from freshly crushed vol."
+  - id: bull_regime_rising
+    role: filter
+    rule: "Enter on rising strong_trend_bull probability; choppy_high_vol chews the debit without reaching the short strike"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: explain.label_posteriors.strong_trend_bull
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_0
+    note: "label_posteriors holds the current probability of each regime (choppy_high_vol beside it; post_label_3 in the replay). 'Rising' has no window or threshold on the page."
+  - id: short_strike_at_call_wall
+    role: entry
+    rule: "Place the sold strike against the call open-interest wall"
+    runnable: false
+    note: "No per-strike open interest is served; /market-intelligence/options carries only BTC aggregate OI, the put/call ratio and one max-pain strike."
+  - id: funding_richens_short_call
+    role: filter
+    rule: "Prefer richly positive funding: it firms OTM call skew, richens the sold call and cuts the net debit"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    note: "A tip, with no threshold on the page. The call skew itself is not served."
+  - id: profit_target_50_75
+    role: exit
+    rule: "Take profits at 50-75% of max value rather than grinding into expiry-week gamma"
+    runnable: true
+    input: position
+    note: "The spread's mark comes from Deribit; no option prices are served."
+  - id: stop_half_debit
+    role: stop
+    rule: "Cut at roughly -50-60% of the debit"
+    runnable: true
+    input: position
+  - id: thesis_invalidation
+    role: stop
+    rule: "Cut on thesis invalidation: the catalyst passed without the move, or a key level is reclaimed to the downside"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: sr.support[].price
+    note: "A close below the chosen level is mechanical once the level is picked; which level, and whether the catalyst has passed, are the trader's call."
+  - id: time_stop_10_14_dte
+    role: exit
+    rule: "Close by about 10-14 DTE if neither target nor stop has hit"
+    runnable: true
+    input: position
 ---
 
 # Bull Call Spread

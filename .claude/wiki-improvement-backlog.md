@@ -1439,9 +1439,9 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   information-ratio, hyperliquid-order-book-microstructure, recency-bias,
   fed-funds-futures, equity-risk-premium (scope check), charm,
   hyperliquid-fee-tiers-and-maker-rebates, treynor-ratio, sunk-cost-fallacy,
-  gamblers-fallacy; (3) gates on the next ~260 ungated buildable strategy pages (rank
-  by inbound links; momentum-rotation and rsi-mean-reversion are 1-2 gates from fully
-  runnable); (4) the rule/pseudocode/example contradictions recorded in gate notes
+  gamblers-fallacy; (3) gates: DONE upstream in bf145fe (395 pages / 5,514 gates; merged, upstream gates
+  kept on the 6 funding pages, local versions on branch backup/funding-gates-local) --
+  next is pushing pages toward fully runnable (rsi-mean-reversion is 1 gate away); (4) the rule/pseudocode/example contradictions recorded in gate notes
   (~25 pages) want a prose-review pass; (5) report upstream: fear-greed-history returns
   1 row, /coins/FRAX resolves to the legacy token, DAIUSDT price 0.0, /stream replay is
   ~500 events not ~2h; (6) generate_crypto_pages.py appends a duplicate generator block

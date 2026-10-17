@@ -34,6 +34,108 @@ kill_criteria: |
   - rolling 6-month Sharpe < 0.3
   - drawdown > 25% while in a live forced-selling position
   - on-chain exchange inflow persists > 7 days post-liquidation peak (indicates genuine distribution, not forced-sale)
+gates:
+  - id: liq_cascade_500m
+    role: entry
+    rule: "Source 1, cascade leg 1: more than $500M of BTC liquidations within 4 hours"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/liquidations?symbol={coin}
+    field: data[].liquidation_usd_4h
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].total_usd
+    note: "Served totals cover OKX, Bybit and Hyperliquid and exclude Binance, so they run below the cross-exchange figure the $500M line assumes; the desk may scale the cut. Replay sums 4 hourly Hyperliquid buckets (fills from 2026-07-23); venue-merged rolling 24h levels are on /backtesting/liquidations."
+  - id: price_move_5pct
+    role: entry
+    rule: "Source 1, cascade leg 2: a price move of more than 5% alongside the liquidations"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=6
+    field: candles[].low
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1h&start={start}
+    replay_field: klines[].l
+    note: "Over the same 4 hours: (highest high - lowest low) / highest high above 0.05, or the open-to-latest change. The local replay starts 2026-05-09."
+  - id: funding_sharply_negative
+    role: entry
+    rule: "Source 1, cascade leg 3: funding turning sharply negative"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "No level is given for 'sharply'; Source 3 uses -0.05%/8h (sum of 8 hourly settlements at or below -0.0005), which the desk may reuse."
+  - id: not_fundamental
+    role: filter
+    rule: "The decline is liquidation-driven, not fundamental: no major exchange or protocol failure news, no rug pull, exploit or depeg behind it"
+    runnable: partial
+    endpoint: /api/v1/news/market-moving?symbol={coin}&hours=48&min_impact=0
+    field: events[].category
+    note: "Screen for hack, exchange_hack, insolvency, depeg and outage items; /security/events lists recent hacks and depegs. Deciding whether a story is the cause is a judgement."
+  - id: cascade_exhausted_entry
+    role: entry
+    rule: "Enter 12-48 hours after the cascade peak, on the first close back above a key intraday support or a bullish reversal candle with normalising volume"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=72
+    field: candles[].close
+    note: "The peak hour is the largest Hyperliquid liquidation bucket (/backtesting/hl-liquidation-bars). The support level, reversal candle and normal volume are left to the desk."
+  - id: contagion_inflows
+    role: entry
+    rule: "Source 2: large concentrated exchange inflows across several top-50 assets at once signal fund-level liquidation"
+    runnable: partial
+    endpoint: /api/v1/on-chain/exchange-flows/spike-alerts?direction=inflow
+    field: alerts[].symbol
+    note: "Transfers of $1M or more to tracked CEX wallets, about the last 10 hours; source balance_delta can be internal rebalancing. The page sets no count of assets or size, so 'elevated across several' is the desk's call. Archive from 2026-10-08 as exchange_flow_spikes snapshots."
+  - id: correlation_compression
+    role: filter
+    rule: "Source 2 signature: quality DeFi tokens, BTC and ETH all falling together on high volume with no asset-specific news"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups
+    field: categories[].coins[].price_change_7d_pct
+    note: "Category baskets give the breadth of the drop; correlation needs daily closes per coin from /hyperliquid/candles. No correlation threshold or window is given."
+  - id: contagion_entry_timing
+    role: entry
+    rule: "Source 2 entry: 3-10 days after the contagion begins, once exchange inflows have peaked and declined"
+    runnable: partial
+    endpoint: /api/v1/on-chain/exchange-flows/{symbol}/history?start={start}&interval=1h
+    field: points[].inflow_24h
+    note: "Track inflow_24h per asset from the event start (history from 2026-05-28); calling the peak is the desk's judgement."
+  - id: funding_deep_negative
+    role: entry
+    rule: "Source 3: funding at or below -0.05%/8h for more than 3 consecutive 8-hour windows"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=4
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance settles every 8h: the last 4 prints all at or below -0.0005. On Hyperliquid sum each block of 8 hourly settlements."
+  - id: oi_loading
+    role: filter
+    rule: "Source 3 confirmation: open interest stable or rising while funding is negative (the squeeze is still loading); falling OI means shorts are already covering"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=4h&start={start}
+    field: data[].oi_change_pct
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=4h&start={start}
+    replay_field: data[].oi_change_pct
+    note: "No window or tolerance for 'stable' is given; sum oi_change_pct over the deep-negative stretch and pick the band."
+  - id: funding_cross_zero_entry
+    role: entry
+    rule: "Source 3 entry: buy the perp when funding crosses back through zero from deep negative"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=4
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "The first settlement at or above 0 after funding_deep_negative held."
+  - id: position_size
+    role: sizing
+    rule: "At most 3% of the portfolio per position, spread across 3-5 assets; spot or low-leverage perps, never adding leverage during a cascade"
+    runnable: true
+    input: position
+  - id: cascade_low_stop
+    role: stop
+    rule: "Stop below the cascade low"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=72
+    field: candles[].low
 ---
 
 # Structural Forced Selling

@@ -22,6 +22,29 @@ expected_sharpe: 1.0        # rough modern-equivalent estimate; see Performance 
 expected_max_drawdown: 0.50 # sovereign-default tail was total loss (Bardi-Peruzzi)
 breakeven_cost_bps: 200
 decay_evidence: "Fair-cycle inconsistencies compressed as Lyon and Antwerp emerged as continuous markets and as direct sea routes (Genoese galleys to Bruges, 1278) bypassed land fairs."
+gates:
+  - id: fair_cross_rates
+    role: filter
+    rule: "At each fair settlement (every 4-6 weeks) collect bill rates from at least 3 fair cities and compute the implied cross-rates among the 3-4 currencies in play"
+    runnable: false
+    note: "Historical (medieval fair cycle, retired). No such exchange rates exist today, let alone in this API."
+  - id: triangle_inconsistent
+    role: entry
+    rule: "Write new bills along the leg where the cross-rate triangle exceeds 1 plus the cost threshold"
+    runnable: false
+    input: derived
+    inputs: [fair_cross_rates]
+    note: "Built on unserved historical rates."
+  - id: specie_only_beyond_gold_point
+    role: filter
+    rule: "Ship physical specie only when the inconsistency exceeds the gold point including bandit and shipwreck losses; otherwise settle by correspondent book transfer"
+    runnable: false
+    note: "Needs historical shipping and loss costs, which are not served."
+  - id: settle_next_fair
+    role: exit
+    rule: "Close the triangle by settling at the next fair through the correspondent network"
+    runnable: true
+    input: position
 ---
 
 # Medieval Bill of Exchange Arbitrage

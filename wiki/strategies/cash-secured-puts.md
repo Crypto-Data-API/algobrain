@@ -12,6 +12,138 @@ complexity: intermediate
 backtest_status: untested
 aliases: ["Cash-Secured Puts", "Cash Secured Puts", "CSP", "Crypto Cash-Secured Put", "USDC-Secured Put", "BTC Cash-Secured Put"]
 related: ["[[cash-secured-put]]", "[[covered-call]]", "[[wheel-strategy]]", "[[crypto-options-volatility-selling]]", "[[short-strangle]]", "[[iron-condor]]", "[[put-option]]", "[[theta]]", "[[vega]]", "[[dvol]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[iv-crush]]", "[[deribit]]", "[[greeks-live]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[cryptodataapi]]"]
+gates:
+  - id: deribit_btc_eth
+    role: universe
+    rule: "Sell puts on Deribit BTC and ETH options, ideally the USDC-margined (linear) contracts"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "The options-side data served (DVOL, the expiry list with ATM IV) covers BTC and ETH. SOL and other alt options are named by the page as thin; nothing is served for them."
+  - id: want_to_own_coin
+    role: filter
+    rule: "Only sell puts on a coin you genuinely want to accumulate at the strike"
+    runnable: false
+    note: "The page's load-bearing rule is the trader's own conviction about holding the coin; no market data answers it."
+  - id: dvol_rich
+    role: entry
+    rule: "Enter when DVOL (put-side IV) is rich: in the upper part of its trailing-year range"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "items[].dvol is Deribit's live 30-day DVOL; history holds about 180 daily values, half the page's trailing year. The page gives no cutoff for the upper part (a percentile above 70 is one reading), so the level is the desk's call. DVOL is the whole surface, not put-side IV."
+  - id: iv_over_rv
+    role: entry
+    rule: "Confirm premium richness: DVOL above realized vol computed from the last 90 daily closes"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    note: "vrp = dvol - realized_30, a 30-day realized window. For the page's 90-bar version, compute annualized close-to-close vol from /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90 and compare with items[].dvol. The page sets no minimum gap, so how rich is rich enough is the desk's call."
+  - id: put_skew_bid
+    role: entry
+    rule: "Prefer entries when 25-delta put skew is elevated (puts bid), often just after a selloff"
+    runnable: false
+    note: "No skew or per-strike IV is served; 25-delta put skew needs the Deribit option surface (Deribit or a surface vendor)."
+  - id: vol_regime_gate
+    role: filter
+    rule: "Sell puts while the coin's vol regime is expanding or normal; stand aside on vol_shock"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    note: "From the page's AI-agent workflow. compressed and mean_reverting are not named by the page."
+  - id: trend_regime_halt
+    role: filter
+    rule: "Trade in a range-bound-to-rising regime; halt new put sales while strong_trend_bear or vol_spike is the market regime or its probability is elevated"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "Halt on regime.label strong_trend_bear or vol_spike. The page gives no cutoff for an elevated probability; probabilities.regime_transitions.to_vol_spike is the served transition odds, and how high counts is the desk's call."
+  - id: dte_21_45
+    role: entry
+    rule: "Sell the expiry 21-45 days out"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "Pick the row with expiry_days between 21 and 45; expiry is Deribit's code (27NOV26). The list holds the nearest 12 expiries, so there is usually one or two in range. term_structure is Pro Plus and is empty on lower tiers."
+  - id: strike_delta_20_35
+    role: entry
+    rule: "Short strike out of the money at about 20-35 delta"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "No per-strike Greeks or IV are served. Approximate with Black-Scholes using spot, the chosen expiry's atm_iv and expiry_days; that ignores put skew, so it understates an OTM put's delta and places the strike a little too far out. Exact delta needs the Deribit chain."
+  - id: strike_below_support
+    role: entry
+    rule: "Place the short strike below visible support, at a price you would happily own the coin"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{symbol}
+    field: sr.support[].price
+    note: "Served support levels are computed on daily bars, each with a strength count and its distance from price. Which level counts as visible support is the desk's call."
+  - id: collateral_secured
+    role: sizing
+    rule: "Reserve collateral equal to the strike notional, K x 1 USDC per contract (one BTC or one ETH per option), on USDC-margined linear contracts rather than coin-margined inverse ones"
+    runnable: true
+    input: position
+  - id: profit_target_50
+    role: exit
+    rule: "Buy the put back at about 50% of the maximum credit"
+    runnable: false
+    note: "No option prices are served, so the put's current mark against the credit needs the Deribit order book or mark."
+  - id: roll_trigger_near_strike
+    role: exit
+    rule: "Roll down-and-out when spot drops toward the short strike and the thesis still holds"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={symbol}USDT
+    field: price
+    note: "Spot against the position's strike. The page does not say how close counts as toward the strike, and whether the thesis holds is the trader's judgement."
+  - id: roll_for_credit
+    role: exit
+    rule: "Only roll for a net credit (buy back, sell a lower and later put); if the thesis is broken, take the loss instead"
+    runnable: false
+    note: "Needs option prices for both legs, which are not served."
+  - id: liq_cluster_below_strike
+    role: exit
+    rule: "A liquidation cluster below the short strike, as spot approaches it, is the early warning to roll before gamma dominates"
+    runnable: partial
+    endpoint: /api/v1/quant/positioning/ladder?symbol={coin}
+    field: bins[].long_usd
+    note: "long_usd is long-liquidation notional per 0.5% price bin (downside fuel) from Hyperliquid accounts of $100k and up, not Deribit or the whole market. levels[] lists the nearest clusters around mark. The page gives no size for a cluster, so the cut is the desk's call."
+  - id: settle_buy_spot
+    role: exit
+    rule: "If the put settles below the strike and you wanted the coin, buy spot at settlement for an effective basis of K - C, then sell covered calls"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1m&limit=60
+    field: klines[].close
+    note: "Deribit settles to its own index at 08:00 UTC (a 30-minute average of the index), which is not served. The nearest proxy is the mean of Binance spot 1-minute closes from 07:30 to 08:00 UTC on expiry day."
+  - id: bull_put_tail_cap
+    role: stop
+    rule: "Cap the tail by buying a further-OTM put below the short strike, turning the trade into a bull put spread"
+    runnable: false
+    note: "Needs option prices and strikes for the protective put, which are not served."
+  - id: time_stop_final_week
+    role: exit
+    rule: "Manage or roll the put before its final week to expiry, when gamma dominates"
+    runnable: true
+    input: position
+    note: "The page says roughly the final week; 7 calendar days to expiry is the reading used here."
+  - id: funding_not_crowded_long
+    role: filter
+    rule: "The best put-selling windows come when perp funding is negative or neutral; richly positive funding firms call skew and cheapens puts"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT
+    field: current_rate
+    note: "Binance 8-hour funding, whose neutral baseline is 0.0001 (0.01% per 8h). The page sets no cutoff for richly positive, so the line is the desk's call. Hyperliquid's hourly rate is on /api/v1/hyperliquid/funding-rates."
+  - id: avoid_short_gamma_zone
+    role: entry
+    rule: "Do not park the short strike inside a short-gamma dealer zone that would amplify the selloff that tests it"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.gamma_profile[].long_usd
+    note: "/quant/gex is a perp analog built from Hyperliquid market-maker liquidation density by price, not Deribit options dealer gamma. A bin with heavy long_usd around the strike is the analog of an amplifying zone; how heavy is the desk's call. regime.state amplify is the coin-level read."
 ---
 
 # Cash-Secured Puts

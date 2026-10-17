@@ -34,6 +34,110 @@ kill_criteria: |
   - session L2 depth percentile is no longer predictive of reversion probability on a 40-signal sample (liquidity structure has changed)
 
 related: ["[[off-hours-liquidation-playbook]]", "[[range-mean-reversion]]", "[[rsi-mean-reversion]]", "[[session-overlap-momentum]]", "[[crypto-weekday-weekend-etf-era]]", "[[session-overlap-liquidity]]", "[[mean-reversion]]", "[[funding-flush-reversal]]", "[[market-microstructure]]", "[[order-flow]]", "[[behavioral-finance-overview]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: session_classification
+    role: filter
+    rule: "Classify the session by UTC clock: EU peak 07:00-13:30 and NY peak 13:30-22:00 (peak), 22:00-07:00 (off-peak), Fri 22:00-Mon 07:00 (weekend), and plus or minus 30 minutes around 07:00 and 13:30 (transition)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=60
+    field: candles[].timestamp
+    note: "Read the UTC weekday and hour from the signal bar's timestamp (ms). Each session sets its own thresholds in the gates below."
+  - id: rsi_session_threshold
+    role: entry
+    rule: "Signal option 1: RSI(14) on 1h bars at or below the session long threshold (peak 22, off-peak 26, weekend 28) or at or above the short threshold (78, 74, 72)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=60
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1h&start={start}
+    replay_field: klines[].c
+    note: "Wilder RSI(14) on closed 1h closes (drop the forming bar). /indicators/technical?symbol={coin} also serves items[].rsi.rsi_14_1h. The local replay starts 2026-05-09."
+  - id: vwap_deviation
+    role: entry
+    rule: "Signal option 2: price at least 1.5% (peak), 1.0% (off-peak) or 0.8% (weekend) below (long) or above (short) the session VWAP"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=15m&limit=97
+    field: candles[].volume
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=15m&start={start}
+    replay_field: klines[].v
+    note: "VWAP = sum(typical price x volume) / sum(volume) over 15m bars. The page calls it session VWAP in the rules but a rolling 24h VWAP in the data section, so the anchor is the desk's choice. The 1m replay archive starts 2026-05-09."
+  - id: bb_outer_touch
+    role: entry
+    rule: "Signal option 3: a 1h close outside the 2-sigma Bollinger Band (20), with band width at or below the 30th percentile of its 24h range"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=60
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1h&start={start}
+    replay_field: klines[].c
+    note: "Bands from the last 20 closed 1h closes; rank the latest width against the previous 24 widths. The local replay starts 2026-05-09."
+  - id: any_signal
+    role: entry
+    rule: "At least one of the three mean-reversion signals is active for the current session"
+    runnable: true
+    input: derived
+    inputs: [rsi_session_threshold, bb_outer_touch]
+    note: "RSI and the Bollinger touch are fully runnable; vwap_deviation adds a third, partial path."
+  - id: book_thin
+    role: filter
+    rule: "Book depth at plus or minus 1% below the session percentile of its 24h history: under 40th (peak), 35th (off-peak), 30th (weekend)"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth/{coin}?minutes=1440
+    field: history[].depth_usd.bid.100bps
+    note: "About 720 samples over 24h (top 25 Hyperliquid perps only); rank the latest bid plus ask depth. Hyperliquid returns 20 levels a side, so on liquid coins the 100bps figure is the whole 20-level book (levels_truncated true), a lower bound rather than true 1% depth. Its percentile still tracks thinness, but it is not the page's metric."
+  - id: no_cascade
+    role: filter
+    rule: "Defer to the off-hours liquidation playbook when liquidations in a 15-minute window reach 2.5x the 24h average"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=15m&start={start}
+    field: data[].total_usd
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=15m&start={start}
+    replay_field: data[].total_usd
+    note: "start = 24h ago; compare the last closed bucket with the 24h sum / 96 (empty buckets are omitted and count as 0). Hyperliquid fills only, from 2026-07-23; OKX and Bybit totals are on /market-intelligence/liquidations (1h and longer windows), and Binance is not captured."
+  - id: funding_not_deeply_negative
+    role: filter
+    rule: "Skip longs while 8h funding is below -0.03%"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "8h funding = sum of the last 8 hourly settlements, compared with -0.0003."
+  - id: session_size
+    role: sizing
+    rule: "Size 1.0% of the sleeve x the session multiplier (0.8 peak, 1.0 off-peak, 0.9 weekend), +0.2 at an EU or NY open transition; at most 2 positions and 2% of the sleeve"
+    runnable: true
+    input: position
+  - id: profit_target
+    role: exit
+    rule: "Take profit at the session target from entry: 0.8-1.2% (peak), 1.0-1.8% (off-peak), 1.2-2.5% (weekend)"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/prices
+    field: prices.{coin}
+    note: "Each target is a band; where inside it to take profit is the desk's call."
+  - id: session_open_exit
+    role: exit
+    rule: "For Asia/overnight entries, exit at or near the EU open (07:00-07:30 UTC) even if the target is not met"
+    runnable: true
+    input: position
+  - id: time_stop
+    role: exit
+    rule: "Time stop from entry: 2 hours (peak), 3 hours (off-peak), 4 hours (weekend)"
+    runnable: true
+    input: position
+  - id: stop_loss
+    role: stop
+    rule: "Stop at 1.2% (peak), 1.5% (off-peak) or 2.0% (weekend) against entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/prices
+    field: prices.{coin}
+  - id: rsi_normalised_exit
+    role: exit
+    rule: "Close at market if RSI normalises back toward 50 within 1 hour, before the price target"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=60
+    field: candles[].close
+    note: "The page gives no RSI level for 'toward 50', so the cut is the desk's call."
 ---
 
 # Session-Aware Mean Reversion

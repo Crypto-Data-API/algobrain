@@ -34,6 +34,119 @@ kill_criteria: |
   - any single position exceeds 2× credit loss → exit immediately
   - vol-shock regime score > 70 → no new 0DTE shorts; flatten short-gamma before 08:00 UTC
   - DVOL intraday spike > 30% from open → flatten all short-gamma immediately
+gates:
+  - id: btc_eth_same_day_expiry
+    role: universe
+    rule: "Deribit BTC and ETH options on the nearest daily expiry, settling 08:00 UTC; daily expiries barely exist on alts"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "The same-day expiry is the row with expiry_days 0 (its expiry code names the date). term_structure is Pro Plus and empty on lower tiers. Option quotes come from Deribit."
+  - id: no_macro_print_today
+    role: filter
+    rule: "Short condor only on a catalyst-free day: no scheduled macro print inside the window to the 08:00 UTC settle"
+    runnable: true
+    endpoint: /api/v1/event/calendar?type=macro_print&window_days=1
+    field: items[].days_until
+    note: "Skip when a row has days_until 0 (macro_class names CPI, FOMC and the rest). Drop type to also see unlocks and depegs, which the page counts as catalysts too."
+  - id: implied_move_exceeds_realized
+    role: entry
+    rule: "Sell when the day's realized move is likely to come in below the implied move priced into the same-day expiry"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "Implied move = spot x atm_iv/100 x sqrt(hours to settle / 8760), using the expiry_days 0 row. Realized intraday range comes from 1m or 5m bars on /api/v1/hyperliquid/candles. Whether today's range will stay under it is a forecast the page leaves to the trader."
+  - id: open_after_settle_repositioning
+    role: entry
+    rule: "Open the condor only after the immediate post-08:00 UTC settle repositioning has settled"
+    runnable: partial
+    input: position
+    note: "The page gives no time; the worked example opens at 22:00 UTC, about 10 hours before the next settle."
+  - id: condor_strikes
+    role: entry
+    rule: "Sell the short call and short put about 0.5-1.5% OTM and buy wings a few hundred dollars (BTC) further out"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "The strike targets follow from spot (oracle_price is a CEX spot composite close to Deribit's index). The listed strike grid and option quotes are not served, and 'a few hundred dollars' is the desk's call."
+  - id: vol_shock_veto
+    role: filter
+    rule: "A vol_shock regime reading vetoes short-gamma 0DTE outright"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+  - id: vol_score_above_70
+    role: filter
+    rule: "Volatility regime score above 70 on entry day: no new 0DTE shorts, and flatten existing short gamma before the 08:00 UTC settle"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    note: "Market-wide 0-100 composite. No history of it is served for replay; /api/v1/volatility/index/history composite_score is the CVI's vol-stress gauge, a related but different series."
+  - id: dvol_spike_30pct
+    role: stop
+    rule: "Flatten all short gamma immediately if DVOL spikes more than 30% from the session open"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Only daily DVOL closes are served (the last row is today's latest value). Taking the prior day's close as the open gives a 30% test, but intraday moves are seen only as often as the series refreshes. Crypto has no session; 00:00 UTC is our reading of the open."
+  - id: take_profit_half_credit
+    role: exit
+    rule: "Take profit at 50% of max credit"
+    runnable: true
+    input: position
+    note: "The condor's current mark comes from Deribit; no option prices are served."
+  - id: hard_stop_2x_credit
+    role: stop
+    rule: "Hard stop at about 2x the credit received; exit immediately, no averaging"
+    runnable: true
+    input: position
+  - id: short_strike_breach
+    role: stop
+    rule: "Close immediately if spot breaches a short strike"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Deribit settles on its own index; oracle_price is a close spot composite. Flatten a tested position before the final hours to the settle as well."
+  - id: size_per_position
+    role: sizing
+    rule: "At most about 1-2% of the book at risk per 0DTE position, budgeted against a gamma cap rather than vega"
+    runnable: partial
+    input: position
+    note: "The risk-per-position cap is mechanical; the gamma cap needs per-leg Greeks from Deribit, which we do not serve, and the page gives no cap size."
+  - id: straddle_before_catalyst
+    role: entry
+    rule: "Long-straddle variant: buy a 0DTE ATM straddle immediately before a known catalyst (CPI, FOMC, a major unlock or listing); take profit at 50-100%, close if no move within 1-2 hours"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=1
+    field: items[].date
+    note: "Macro prints and unlocks are on the calendar; listings and on-chain events are not. The date field is a calendar day, so the exact release time comes from the print's own schedule."
+  - id: gex_directional
+    role: entry
+    rule: "Directional variant: with short-gamma dealers, trade a single 0DTE call or put with the anticipated hedging flow toward the next gamma level; stop at 50% of premium, close within 1-2 hours"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    note: "/quant/gex is a perp analog of dealer gamma (Hyperliquid market-maker inventory and liquidation clusters), not Deribit options dealer gamma. Score at or above 0.35 is the amplify (short-gamma) state. 'The next gamma level' is not defined on the page."
+  - id: max_pain_magnet
+    role: entry
+    rule: "At session open, locate the max-pain magnet for pin context into the settle"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    note: "BTC only, and computed on the Deribit expiry with the largest open interest, which is usually not the same-day expiry, so it is weak pin context for 0DTE."
+  - id: cascade_flatten
+    role: stop
+    rule: "Poll liquidations through the session: a cascade against a short-gamma book is the flatten-now trigger"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/liquidations?symbol={coin}
+    field: data[].liquidation_usd_1h
+    note: "The page sets no cascade threshold. OKX + Bybit + Hyperliquid only (no Binance); 5-minute Hyperliquid liquidation bars are on /api/v1/backtesting/hl-liquidation-bars (from 2026-07-23)."
+  - id: win_rate_and_pnl_kill
+    role: stop
+    rule: "Rolling 30-day condor win rate below 55% suspends selling until it is back above 60% for 10 days; 3 consecutive negative months pause the program"
+    runnable: true
+    input: position
 ---
 
 # 0DTE Options Trading

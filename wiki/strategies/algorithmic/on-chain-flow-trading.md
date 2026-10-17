@@ -22,6 +22,142 @@ expected_max_drawdown: 0.20
 breakeven_cost_bps: 30
 decay_evidence: "On-chain signals were stronger pre-2020; the spot-ETF era (2024+) routes large flows through custodians/ETFs that are partly off the classic exchange-flow radar, weakening some signals. No reliable published Sharpe."
 related: ["[[on-chain-regime]]", "[[crypto-market-regime-taxonomy]]", "[[on-chain-analysis]]", "[[whale-trade]]", "[[on-chain-smart-money-tracking]]", "[[institutional-flow-regime]]", "[[point-in-time-data]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[hyperliquid]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_perps
+    role: universe
+    rule: "Trade BTC and ETH only, expressed on perps (typically Hyperliquid)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/prices
+    field: prices.{coin}
+  - id: netflow_z
+    role: entry
+    rule: "Netflow leg: z-score of exchange net flow against its own trailing 90-180 day distribution; an inflow spike is bearish, sustained outflow bullish"
+    runnable: partial
+    endpoint: /api/v1/on-chain/exchange-flows/{coin}/history?start={start}
+    field: points[].net_24h
+    replay: /api/v1/on-chain/exchange-flows/{coin}/history?start={start}&end={end}
+    replay_field: points[].net_24h
+    note: "Net flow over our tracked CEX wallets in native coin units, one point per hour, archived as captured since 2026-05-28 (so point-in-time by construction, but under 180 days deep). Max 93 days per call: page for a 90-day window. Coverage is our wallet set, not a vendor's full label set (Coinbase BTC wallets, for one, are not tracked); spike_zscore_24h on /on-chain/exchange-flows/{coin} is a served live z."
+  - id: stablecoin_dry_powder
+    role: entry
+    rule: "Dry-powder leg: high and rising stablecoin balances on exchanges arm a long setup (arm, don't fire)"
+    runnable: partial
+    endpoint: /api/v1/on-chain/stablecoin-reserves/dry-powder
+    field: zscore
+    note: "zscore is today's exchange stablecoin balance against its 30-day mean and stdev, not the page's 90-180 day window. No SSR is served."
+  - id: dormancy_cdd
+    role: entry
+    rule: "Dormancy leg: rising coin days destroyed (old coins moving) is a distribution warning: reduce or short"
+    runnable: false
+    note: "CDD and dormancy are not served; /on-chain/dormancy/btc carries MVRV, active addresses and issuance despite its name. Needs Glassnode or CryptoQuant."
+  - id: whale_accumulation
+    role: entry
+    rule: "Whale leg: large wallets growing with no matching exchange deposits is bullish"
+    runnable: false
+    note: "On-chain whale wallet cohorts are not served (the whale_accumulation component of /on-chain/score is disabled). /quant/whales covers Hyperliquid perp positioning, a different population."
+  - id: mvrv_elevated
+    role: entry
+    rule: "MVRV elevated while coins move: profit-taking into strength, caution and trim"
+    runnable: partial
+    endpoint: /api/v1/on-chain/dormancy/btc
+    field: metrics.mvrv
+    note: "BTC only. metrics.mvrv can be null for a day while the source's newest day is incomplete (the source publishes MVRV a day late); keep the last non-null value. The page gives no level for elevated, and its z-score leg needs your own logged series, since no MVRV history is served; mvrv_signal.zone is the served band."
+  - id: sopr_elevated
+    role: entry
+    rule: "SOPR elevated while coins move: profit-taking into strength, caution and trim"
+    runnable: false
+    note: "SOPR is not served. Needs Glassnode or CryptoQuant."
+  - id: health_score
+    role: entry
+    rule: "Composite health_score = 0.30 netflow + 0.15 stables + 0.20 dormancy + 0.25 whales + 0.10 SOPR (signed z-scores), clipped to -1..+1"
+    runnable: false
+    input: derived
+    inputs: [netflow_z, stablecoin_dry_powder, dormancy_cdd, whale_accumulation, mvrv_elevated, sopr_elevated]
+    note: "The dormancy and whale legs and the SOPR half of the last leg are not served (MVRV is). onchain_composite is the served substitute, with different legs and weights."
+  - id: onchain_composite
+    role: filter
+    rule: "Read the served on-chain composite alongside the market regime before acting"
+    runnable: partial
+    endpoint: /api/v1/on-chain/score
+    field: score
+    note: "From the page's AI-agent workflow. A 0-100 score built from hash ribbon, stablecoin dry powder, exchange flow (stablecoins only), miner flow and MVRV when present, renormalised over the legs with data; not the page's health_score. Bands: bullish 70+, leaning_bullish 55-69, neutral 45-54, leaning_bearish 30-44, bearish below 30."
+  - id: price_confirms
+    role: filter
+    rule: "Price action confirms the signal direction (do not fight a strong opposing trend; for a long, price has stopped making lower lows)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].low
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}
+    replay_field: klines[].l
+    note: "The page does not define the confirmation test or a strong trend; comparing recent swing lows (or highs, for a short) on daily bars is one reading."
+  - id: entry_band
+    role: entry
+    rule: "Open a new position only when the absolute health_score exceeds the entry band and price confirms"
+    runnable: false
+    input: derived
+    inputs: [health_score, price_confirms]
+    note: "Only as runnable as health_score; the page also leaves the band level open."
+  - id: dry_powder_fires
+    role: entry
+    rule: "Dry powder arms a long but it fires only with a confirming exchange outflow (or whale accumulation)"
+    runnable: partial
+    input: derived
+    inputs: [stablecoin_dry_powder, netflow_z]
+    note: "The outflow confirmation is served; the whale alternative is not."
+  - id: regime_agrees
+    role: filter
+    rule: "Act only when the market regime agrees with the flow direction"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow. Which labels agree with a long or short is the desk's mapping; strong_trend_bull and strong_trend_bear are the clear ones."
+  - id: spike_watch
+    role: entry
+    rule: "Large single transfers to exchanges (at least $1M) as the real-time whale-deposit trigger"
+    runnable: partial
+    endpoint: /api/v1/on-chain/exchange-flows/spike-alerts?symbol={coin}&direction=inflow
+    field: alerts[].amount_usd
+    note: "From the page's AI-agent workflow, which gives no rule for acting on one. source balance_delta can be an exchange's own hot-cold rebalancing. History since 2026-10-08 is the exchange_flow_spikes type on /backtesting/snapshots."
+  - id: vol_scaled_size
+    role: sizing
+    rule: "Size the perp proportional to health_score and inverse to 20-day realised vol, up to 2-5% of book risk at full conviction"
+    runnable: false
+    input: derived
+    inputs: [health_score]
+    note: "Only as runnable as health_score. The vol leg alone is served: 20 daily closes from /hyperliquid/candles."
+  - id: leverage_cap
+    role: sizing
+    rule: "Perp leverage at most 3x"
+    runnable: true
+    input: position
+  - id: exit_neutral_band
+    role: exit
+    rule: "Exit when health_score mean-reverts inside the neutral band or flips sign"
+    runnable: false
+    input: derived
+    inputs: [health_score]
+    note: "Only as runnable as health_score."
+  - id: time_stop
+    role: exit
+    rule: "Stand down if the thesis has not played out within about 4-8 weeks"
+    runnable: partial
+    input: position
+    note: "The page gives a 4-8 week range; pick one horizon."
+  - id: risk_stop
+    role: stop
+    rule: "A fixed-percentage adverse move closes the position regardless of score"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/prices
+    field: prices.{coin}
+    note: "The page does not give the percentage."
+  - id: kill_90d_loss
+    role: stop
+    rule: "Flatten and review when rolling 90-day PnL falls below -15% of allocated capital"
+    runnable: true
+    input: position
 ---
 
 # On-Chain Flow Trading

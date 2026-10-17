@@ -34,6 +34,107 @@ kill_criteria: |
   - rolling 6-month Sharpe < 0
 
 related: ["[[liquidation-cascade-fade]]", "[[hl-vs-cex-funding-divergence]]", "[[cross-exchange-arbitrage]]", "[[hlp-cascade-alongside-playbook]]", "[[cascade-monetization-rotation]]", "[[off-hours-liquidation-playbook]]", "[[leverage-stress-tail-hedge]]", "[[liquidation-cascade-arbitrage]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[liquidations]]", "[[market-microstructure]]", "[[open-interest]]", "[[funding-rate]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: cascade_1h_3x_7d
+    role: entry
+    rule: "Condition 1: Hyperliquid 1h liquidation volume at least 3x its 7-day hourly average"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=1h&start={start}
+    field: data[].total_usd
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].total_usd
+    note: "start = 7 days ago. Hours with no fills are omitted, so the 7-day mean is the sum over 168. The bucket containing now is never served; for the hour still forming, sum usd from /api/v1/backtesting/hl-liquidations. Exact Hyperliquid fills from 2026-07-23. /market-intelligence/liquidations?symbol=BTC gives a ready ratio (liq_1h_vs_7d_median), but against the 7-day median, not the mean."
+  - id: hl_dislocation_05
+    role: entry
+    rule: "Condition 2: Hyperliquid BTC perp mark at least 0.5% below the Binance BTC perp mark"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/summary?coin={coin}
+    field: mark_price
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&start={start}
+    replay_field: data[].mark_price
+    note: "The Hyperliquid leg is exact. No live Binance perp mark is served: /derivatives/binance/summary has none, and rates[].mark_price on /derivatives/binance/funding-rates is only at 8h settlements. The nearest references are Binance spot (price on /api/v1/market-data/ticker/price?symbol=BTCUSDT) or Hyperliquid's own oracle_price on the same response, a multi-venue spot index. Spread = (reference - mark_price) / mark_price. Replay: 5-minute HL mark samples against 1-minute Binance spot closes."
+  - id: prefer_07
+    role: filter
+    rule: "Calibrate to execute mainly on dislocations of 0.7% or more, where the 30 bps cost overlay leaves meaningful net P&L"
+    runnable: partial
+    input: derived
+    inputs: [hl_dislocation_05]
+    note: "A soft preference: the page keeps the 0.5% entry threshold and does not say how strictly to apply 0.7%."
+  - id: no_macro_30min
+    role: filter
+    rule: "Condition 3: no scheduled macro event (FOMC, CPI, NFP) within the next 30 minutes"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=macro_print&window_days=1
+    field: items[].date
+    note: "The calendar gives each print's date but not its release time, so the 30-minute window needs the official release clock (8:30 ET for CPI and NFP, 14:00 ET for FOMC statements)."
+  - id: no_hl_incident
+    role: filter
+    rule: "Condition 3: no simultaneous Hyperliquid technical-issue announcement"
+    runnable: false
+    note: "Hyperliquid's status page and announcements are not served."
+  - id: hedge_legs
+    role: sizing
+    rule: "Long the Hyperliquid BTC perp and short the Binance BTC perp at 1:1 notional, 2-3% of the portfolio per leg (2.5% in the pseudocode)"
+    runnable: true
+    input: position
+  - id: fill_within_30s
+    role: entry
+    rule: "Both legs must fill within 30 seconds; otherwise cancel both, and close any leg already filled"
+    runnable: true
+    input: position
+  - id: exit_reconverged
+    role: exit
+    rule: "Close both legs when the HL-Binance spread narrows to 0.1% or less"
+    runnable: partial
+    input: derived
+    inputs: [hl_dislocation_05]
+    note: "Only as runnable as the spread's Binance leg."
+  - id: time_exit_15m
+    role: exit
+    rule: "Close both legs 15 minutes after entry regardless of spread"
+    runnable: true
+    input: position
+  - id: stop_spread_15
+    role: stop
+    rule: "Close both legs at a loss if the spread widens to 1.5% or more"
+    runnable: partial
+    input: derived
+    inputs: [hl_dislocation_05]
+    note: "Only as runnable as the spread's Binance leg."
+  - id: naked_leg_cap
+    role: stop
+    rule: "Naked directional exposure above 3% of the portfolio is prohibited: exit an unhedged leg within 60 seconds"
+    runnable: true
+    input: position
+  - id: structural_shock_size
+    role: sizing
+    rule: "Reduce size while the macro regime is Structural Shock, since macro-driven cascades may reconverge more slowly"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    note: "Structural Shock is regime structural_shock_crisis. The page does not say by how much to reduce, so the size cut is the desk's call."
+  - id: kill_drawdown_25
+    role: stop
+    rule: "Kill: sleeve drawdown above 25% from its high-water mark"
+    runnable: true
+    input: position
+  - id: kill_no_dislocation_10
+    role: stop
+    rule: "Kill: 10 consecutive cascade events where the HL-Binance spread never exceeds 0.5%"
+    runnable: partial
+    input: derived
+    inputs: [cascade_1h_3x_7d, hl_dislocation_05]
+    note: "Only as runnable as the spread's Binance leg."
+  - id: kill_hl_architecture
+    role: stop
+    rule: "Retire: Hyperliquid changes its liquidation engine to Binance-style mark-price partial liquidation"
+    runnable: false
+    note: "A protocol change read from Hyperliquid's announcements; not served."
+  - id: kill_sharpe
+    role: stop
+    rule: "Kill: rolling 6-month Sharpe below 0"
+    runnable: true
+    input: position
 ---
 
 # Cross-Venue Cascade Dislocation

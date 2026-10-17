@@ -33,6 +33,175 @@ kill_criteria: |
   - average hold-to-time-stop ratio exceeds 60% (mean reversion consistently too slow for the time window)
 
 related: ["[[mean-reversion]]", "[[open-interest]]", "[[oi-price-exhaustion]]", "[[oi-confirmed-trend]]", "[[post-liquidation-rebound]]", "[[funding-flush-reversal]]", "[[funding-rate-arbitrage]]", "[[rsi-mean-reversion]]", "[[liquidation-cascade-fade]]", "[[funding-rate]]", "[[perpetual-futures]]", "[[liquidations]]", "[[behavioral-finance-overview]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: oi_off_5d_peak
+    role: entry
+    rule: "Flush leg 1: open interest at least 15% below its 5-day peak"
+    runnable: true
+    endpoint: /api/v1/derivatives/hyperliquid/history?symbol={coin}&days=6
+    field: history[].open_interest
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].oi_close
+    note: "(peak - current) / peak >= 0.15, with current = assets[].open_interest on /hyperliquid/open-interest (coin units). The page does not say daily or intraday peak; daily values are the reading here, and 1h oi_close on /backtesting/hl-funding-bars catches an intraday peak. Hyperliquid OI; the page's agent workflow reads /derivatives/open-interest (Binance and Hyperliquid current values only)."
+  - id: oi_declining_2d
+    role: entry
+    rule: "Flush leg 2: open interest declining or flat for at least 2 consecutive daily periods"
+    runnable: true
+    endpoint: /api/v1/derivatives/hyperliquid/history?symbol={coin}&days=6
+    field: history[].open_interest
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].oi_close
+    note: "Each of the last 2 day-over-day changes <= 0."
+  - id: oi_flush_decelerating
+    role: entry
+    rule: "Flush leg 3 (optional): the latest 24h OI change is less negative than the prior 24h change"
+    runnable: true
+    endpoint: /api/v1/derivatives/hyperliquid/history?symbol={coin}&days=6
+    field: history[].open_interest
+    note: "Optional on the page and absent from the pseudocode's flush test."
+  - id: oi_floor
+    role: filter
+    rule: "Current OI still above 30% of its 90-day average (skip abandoned perps)"
+    runnable: true
+    endpoint: /api/v1/derivatives/hyperliquid/history?symbol={coin}&days=90
+    field: history[].open_interest
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].oi_close
+  - id: flush_active
+    role: entry
+    rule: "OI flush active when oi_off_5d_peak, oi_declining_2d and oi_floor all hold (oi_flush_decelerating is an optional precision filter)"
+    runnable: true
+    input: derived
+    inputs: [oi_off_5d_peak, oi_declining_2d, oi_floor]
+    note: "The text lists oi_floor as a separate entry check; the pseudocode folds it into the flush test."
+  - id: rsi_4h_oversold
+    role: entry
+    rule: "Oversold option 1: RSI(14) on the 4h chart at or below 32"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=100
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=4h&start={start}
+    replay_field: klines[].c
+    note: "Wilder RSI(14) on closed bars (drop the bar at forming_bar_timestamp)."
+  - id: retrace_20d_high
+    role: entry
+    rule: "Oversold option 2: price at least 15% below its 20-day high"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=20
+    field: candles[].high
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}
+    replay_field: klines[].h
+  - id: below_lower_band_2d
+    role: entry
+    rule: "Oversold option 3: daily close below the lower Bollinger Band (20, 2 sigma) for 2 or more consecutive days"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1d&start={start}
+    replay_field: klines[].c
+    note: "The pseudocode tests the current price against today's lower band instead of two closes."
+  - id: oversold
+    role: entry
+    rule: "Price oversold when at least one of rsi_4h_oversold, retrace_20d_high or below_lower_band_2d holds"
+    runnable: true
+    input: derived
+    inputs: [rsi_4h_oversold, retrace_20d_high, below_lower_band_2d]
+  - id: funding_confirm
+    role: sizing
+    rule: "Optional funding confirmation: 8h funding at or below -0.01% (adds a 1.1x size multiplier)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Sum of the last 8 hourly prints <= -0.0001. A refinement, not an entry requirement."
+  - id: no_structural_event
+    role: filter
+    rule: "No confirmed protocol exploit, de-peg or credit event that could explain a permanent repricing"
+    runnable: partial
+    endpoint: /api/v1/security/regime/{symbol}
+    field: events[].event_type
+    note: "Hacks and de-pegs naming the coin over the last 10 days are served; credit events are not classified per coin, so confirming one is the desk's call."
+  - id: regime_ok
+    role: filter
+    rule: "No entry while the regime is Established Bear or Structural Shock"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Served ids established_bear and structural_shock_crisis. History starts 2026-08-07."
+  - id: oi_reexpansion_exit
+    role: exit
+    rule: "Exit when OI re-expands 7% or more from the flush trough (downtrend resuming)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest
+    note: "Track the lowest open_interest since entry as the trough."
+  - id: exit_half_retrace
+    role: exit
+    rule: "Take half off at the 50% Fibonacci retracement of the flushed decline"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "Decline from the 20-day high (retrace_20d_high) to the lowest daily low since it; trim when mark >= low + 0.5 x (high - low)."
+  - id: exit_ema20_4h
+    role: exit
+    rule: "Close the remainder when price returns to the 20-period EMA on the 4h chart"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=100
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=4h&start={start}
+    replay_field: klines[].c
+  - id: funding_trim
+    role: exit
+    rule: "Begin trimming when 8h funding rises above +0.02%"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Sum of the last 8 hourly prints >= 0.0002. The trim size is not given (the pseudocode trims once)."
+  - id: time_stop_12d
+    role: stop
+    rule: "Close at market after 12 calendar days if price has not recovered at least 25% of the flushed decline"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: oi_deepening_cut
+    role: stop
+    rule: "Cut the position by 50% if OI falls a further 10% or more below its entry-day level"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest
+  - id: atr_risk_size
+    role: sizing
+    rule: "Size so that one ATR(14, 4h) move risks 1.2% of the sleeve, capped at 12% of the sleeve per position"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30&atr=14
+    field: candles[].atr
+    note: "notional = 0.012 x sleeve / (atr / price), using the last closed bar's atr."
+  - id: strong_flush_upweight
+    role: sizing
+    rule: "Apply a 1.25x multiplier when OI has fallen 20% or more from its 5-day peak"
+    runnable: true
+    input: derived
+    inputs: [oi_off_5d_peak]
+  - id: max_concurrent
+    role: sizing
+    rule: "At most 2 concurrent positions"
+    runnable: true
+    input: position
+  - id: drawdown_kill
+    role: stop
+    rule: "Stop new entries when the sleeve drawdown exceeds 20%"
+    runnable: true
+    input: position
 ---
 
 # OI Flush Reversion

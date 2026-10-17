@@ -26,6 +26,69 @@ kill_criteria: |
   - average pairwise 90-day correlation of the universe > 0.9 for 3 months
   - drawdown > 25%
 related: ["[[quantpedia]]", "[[quantpedia-strategy-encyclopedia]]", "[[rebalancing]]", "[[crypto-allocation]]", "[[diversification]]", "[[pairs-trading]]", "[[crypto-momentum]]", "[[multi-strategy-crypto-portfolio]]"]
+gates:
+  - id: liquid_universe
+    role: universe
+    rule: "20-30 liquid coins (the source used 27), with survivorship-free membership at each date"
+    runnable: partial
+    endpoint: /api/v1/coins/top?limit=40
+    field: coins[].symbol
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.coins.coins[].symbol
+    note: "The page does not define liquid. The top list is by market cap and includes stablecoins and wrapped tokens, so drop those (categories on /api/v1/coins/{symbol}) and keep N inside 20-30. Point-in-time membership (top 100 by market cap) is archived only from late May 2026; earlier dates and the page's 2021 example are not covered."
+  - id: daily_closes
+    role: entry
+    rule: "Daily closes for every coin in the universe"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles/batch?coins={coin}&interval=1d&limit=2&closed_only=true
+    field: series.{coin}[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Batch up to 25 coins per call. A coin not listed on Hyperliquid needs /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d."
+  - id: rebalanced_long_leg
+    role: entry
+    rule: "Long leg: an equal-weight basket rebalanced to 1/N every day"
+    runnable: partial
+    input: derived
+    inputs: [liquid_universe, daily_closes]
+    note: "Only as runnable as liquid_universe."
+  - id: drift_short_leg
+    role: entry
+    rule: "Short leg: the same equal-weight basket set at inception and left to drift, sized at 70% of the long leg's notional, with the ratio reset daily"
+    runnable: partial
+    input: derived
+    inputs: [liquid_universe, daily_closes]
+    note: "Drift weights compound each coin's daily return from the inception weights. Only as runnable as liquid_universe."
+  - id: netted_book
+    role: sizing
+    rule: "Net the two legs: target weight per coin = 1/N minus 0.70 x its drift weight, leaving about 30% net long the basket"
+    runnable: partial
+    input: derived
+    inputs: [rebalanced_long_leg, drift_short_leg]
+    note: "Only as runnable as the two legs."
+  - id: tolerance_band
+    role: sizing
+    rule: "Trade a coin only when its current weight deviates more than 20% from its target weight"
+    runnable: true
+    input: position
+  - id: one_coin_market_pause
+    role: filter
+    rule: "Pause while altcoin breadth shows a narrow, one-coin-led market where relative mean reversion fails"
+    runnable: partial
+    endpoint: /api/v1/market-health/altcoin-breadth?ma_period=200
+    field: breadth_pct
+    replay: /api/v1/backtesting/snapshots?data_type=altcoin_breadth&start={start}&limit=1000
+    replay_field: snapshots[].data.details.breadth_pct
+    note: "From the page's agent workflow, which gives no breadth level for narrow. breadth_pct is the share of about 30 Binance large caps above their moving average; the page's other overlay, a BTC dominance run, is signals.btc_dom on /api/v1/regimes/current. Snapshots from 2026-05-09."
+  - id: correlation_kill
+    role: stop
+    rule: "Kill when the universe's average pairwise 90-day correlation stays above 0.9 for 3 consecutive months"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=182
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "One call per coin: compute the 90-day correlation of daily returns for every pair, average them each day, and check the last 90 or so daily averages are all above 0.9."
 ---
 
 # Crypto Rebalancing Premium

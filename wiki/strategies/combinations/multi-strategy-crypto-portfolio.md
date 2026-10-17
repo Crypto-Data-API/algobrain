@@ -22,6 +22,88 @@ expected_max_drawdown: 0.25
 breakeven_cost_bps: 40
 decay_evidence: "Perp-carry funding compresses as the delta-neutral basis trade crowds; momentum decays with adoption; memecoin edge is regime-transient. See [[when-to-retire-a-strategy]] and [[failure-modes]]."
 related: ["[[multi-strategy-portfolio]]", "[[crypto-portfolio-heat]]", "[[funding-aware-position-sizing]]", "[[liquidation-price-aware-sizing]]", "[[cross-venue-execution-crypto]]", "[[kelly-for-strategies]]", "[[strategy-correlation-matrix]]", "[[funding-rate-arbitrage]]", "[[basis-trade]]", "[[momentum-investing]]", "[[on-chain-analysis]]", "[[memecoin-sniping]]", "[[correlation-breakdown]]", "[[risk-budgeting]]", "[[regime-matrix]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[live-journal]]"]
+gates:
+  - id: regime_sleeve_weights
+    role: sizing
+    rule: "Tilt sleeve weights by regime: bull/broadening favours momentum, speculative euphoria favours carry, range/low-vol favours carry and cash, bear/capitulation favours on-chain and cash with memecoins off"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Map the served ids: btc_led_bull, broadening_bull and broad_bull_alt_expansion to bull; speculative_euphoria; capitulation and established_bear to bear. Range/low-vol is not a cycle state; the nearest is the HMM label range_low_vol on /quant/market. The table's weights are qualitative (only the broadening-bull example gives numbers: 30/30/20/5/15), so the exact weights are the desk's call."
+  - id: vol_shock_degross
+    role: stop
+    rule: "On a vol-shock or cascade flag, cut every sleeve and raise cash to the maximum, immediately"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/score
+    field: sentiment
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.volatility_regime.composite_score
+    note: "The page says act when the vol-regime score flips but names no level; the stressed band (composite_score 70 or more) is the served reading. Replay is one value per UTC day."
+  - id: fragility_degross
+    role: stop
+    rule: "Also de-gross to cash when liquidity fragility is high"
+    runnable: partial
+    endpoint: /api/v1/liquidity/regime/score
+    field: sentiment
+    replay: /api/v1/backtesting/snapshots?data_type=liquidity_regime&start={start}
+    replay_field: snapshots[].data.composite_score
+    note: "From the pseudocode (regime.fragility_high). The score is health-oriented: the fragile band is composite_score under 30. The page gives no level. Pro Plus."
+  - id: half_kelly_stressed
+    role: sizing
+    rule: "Size across sleeves at half-Kelly on the sleeve return vector, using a stressed (crash-period) correlation matrix, blended with the regime tilt"
+    runnable: partial
+    input: position
+    note: "Built from the book's own sleeve returns. Which crash windows define the stressed matrix, and how the regime tilt and Kelly weights are blended, are the desk's calls."
+  - id: heat_cap
+    role: sizing
+    rule: "Gross beta-weighted heat on stressed betas at most 1.0-1.5x NAV (1.25x in the pseudocode)"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/candles/batch?coins={coin}&interval=1d&limit=365&closed_only=true
+    field: series.{coin}[].close
+    note: "Betas to BTC come from daily closes; the stressed version needs crash windows the page does not name, so the beta window is the desk's call."
+  - id: perp_sleeve_leverage
+    role: sizing
+    rule: "Perp sleeves run single-digit leverage with liquidation beyond a named wick, and funding-adjusted size"
+    runnable: partial
+    input: position
+    note: "Single-digit leverage is checkable on the position. The named wick and the funding adjustment are defined on the linked sizing pages, not here."
+  - id: memecoin_rug_screen
+    role: universe
+    rule: "Memecoin sleeve: screen every candidate for rug and honeypot risk before buying"
+    runnable: partial
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: risk_flags.is_honeypot
+    note: "From the indicator list and agent workflow. The address is pools[].base_token.address from /dex/trending?chain={chain}, the page's candidate source. risk_score and risk_level in the same response summarise the other flags; the page sets no pass level, so which flags or score disqualify is the desk's call."
+  - id: memecoin_cap
+    role: sizing
+    rule: "Memecoin sleeve hard-capped at 3-5% of NAV in total"
+    runnable: true
+    input: position
+  - id: venue_cap
+    role: sizing
+    rule: "No single venue (Binance, Bybit, OKX, Hyperliquid) holds more than 25-40% of book capital (35% in the pseudocode)"
+    runnable: true
+    input: position
+  - id: stablecoin_depeg_watch
+    role: filter
+    rule: "Track de-peg risk on the stablecoin base asset; split the treasury across at least two stablecoins when size warrants"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=depeg
+    field: items[].deviation_bps
+    note: "De-pegs from the last 10 days with their deviation in bps. The page sets no deviation that forces action and no size at which to split, so both are the desk's call."
+  - id: weekly_rebalance
+    role: sizing
+    rule: "Recompute regime, sleeve weights and stressed heat weekly, and immediately on a vol-shock flag"
+    runnable: true
+    input: position
+  - id: book_drawdown_kill
+    role: stop
+    rule: "Stop the book when drawdown exceeds 25% or rolling 6-month net Sharpe falls below zero"
+    runnable: true
+    input: position
 ---
 
 # Multi-Strategy Crypto Portfolio

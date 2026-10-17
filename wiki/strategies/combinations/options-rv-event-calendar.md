@@ -33,6 +33,129 @@ kill_criteria: |
   - Maximum loss on any single event trade exceeds 12% of the options sleeve (position sizing failure; reassess)
 
 related: ["[[calendar-spread-arbitrage]]", "[[skew-trading]]", "[[crypto-options-dispersion]]", "[[event-vol-buying]]", "[[event-calendar-risk-gating]]", "[[post-panic-vol-selling]]", "[[complacency-vol-buying]]", "[[long-options-trend-expression]]", "[[implied-volatility]]", "[[volatility-surface]]", "[[term-structure]]", "[[deribit]]", "[[dvol]]", "[[variance-risk-premium]]", "[[options-greeks]]", "[[vega]]", "[[theta]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: options_underlyings
+    role: universe
+    rule: "Trade BTC and ETH Deribit options only"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "items[] lists BTC and ETH with DVOL and an ATM term structure. Free tier sees BTC only."
+  - id: tier1_events
+    role: entry
+    rule: "Tier 1 events, entered 14 days before: BTC halvings, SEC spot-ETF approval or rejection decisions, Ethereum consensus hard forks"
+    runnable: false
+    note: "None of these are on /event/calendar, which carries unlocks, macro prints, depegs and mints only. Halving dates need a block-height countdown, ETF deadlines the SEC calendar, and fork dates the client-release schedule."
+  - id: tier2_fomc
+    role: entry
+    rule: "Tier 2 event, entered 7 days before: an FOMC meeting"
+    runnable: true
+    endpoint: /api/v1/event/calendar?type=macro_print
+    field: items[].macro_class
+    note: "Match macro_class FOMC; items[].days_until gives the countdown. The window reaches 30 days ahead."
+  - id: btc_spx_corr_065
+    role: filter
+    rule: "Trade an FOMC meeting only when the 30-day BTC-SPX correlation is at least 0.65"
+    runnable: false
+    note: "No SPX price series is served (/sentiment/macro carries EUR/USD, gold and Treasury yields only), so the correlation needs an external equity feed. The BTC leg is /hyperliquid/candles daily closes."
+  - id: tier2_regulatory
+    role: entry
+    rule: "Tier 2 events, entered 7 days before: crypto regulatory decisions (DOJ enforcement, CFTC category rulings) and merge-scale protocol upgrade activations"
+    runnable: false
+    note: "/policy/regime lists scheduled rate decisions, not dated regulatory rulings, and no protocol-upgrade calendar is served. /policy/headlines scores regulatory news after the fact, which cannot set an entry date."
+  - id: tier3_unlock
+    role: entry
+    rule: "Tier 3 event, entered 3-5 days before: a token unlock of at least 5% of supply on a top-10 asset"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=unlock
+    field: items[].pct_of_fdv
+    note: "pct_of_fdv is a fraction of fully diluted supply (0.05 = 5%); /supply/unlocks gives pct_of_float against circulating supply. The page does not say which supply it means. Check rank with market_cap_rank on /coins/{symbol}. Options exist only on BTC and ETH, which have no scheduled unlocks, so the page leaves open which option book an alt unlock moves."
+  - id: tier3_cme_expiry
+    role: entry
+    rule: "Tier 3 event, entered 3-5 days before: the CME BTC/ETH options expiry on the last Friday of the month"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry
+    note: "The last Friday of the month is also Deribit's monthly expiry, so pick that row by its code (30OCT26) and read expiry_days. Calendar arithmetic gives the same date. term_structure is Pro Plus."
+  - id: tier3_macro_print
+    role: entry
+    rule: "Tier 3 events, entered 3-5 days before: CPI and NFP releases, only when the 30-day BTC-SPX correlation is at least 0.70"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=macro_print
+    field: items[].macro_class
+    note: "The dates are served (macro_class CPI or NFP). The correlation condition is not: no SPX series is served."
+  - id: entry_window
+    role: entry
+    rule: "Enter T-14 days for Tier 1, T-7 for Tier 2 and about T-4 for Tier 3, within 2 days before to 1 day after that mark"
+    runnable: true
+    endpoint: /api/v1/event/calendar
+    field: items[].days_until
+    note: "The tolerance is the pseudocode's (entry_window - 2 to + 1 days). Tier 1 dates come from outside sources (see tier1_events)."
+  - id: iv_spread_min
+    role: entry
+    rule: "Enter only when near-dated IV (DTE 14-21) minus back-dated IV (DTE 45-60) is at least 5 vol points"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "term_structure holds ATM IV for the nearest 12 Deribit expiries (Pro Plus), so pick the rows whose expiry_days fall in each window. A listed expiry is not always inside 45-60 days (on 2026-10-17 BTC had 41 and 69), so the desk picks the nearest. ATM only; no per-strike IV, and no term-structure history for replay."
+  - id: funding_hedge_cost
+    role: filter
+    rule: "When perp funding is above 0.08%/8h, enter only if the IV spread is above 10 vol points"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=3
+    field: current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "From the page's failure-mode list. The hedge runs on the Deribit perp, whose funding we do not serve; Binance's 8h rate (0.0008) is the proxy."
+  - id: near_leg_expiry
+    role: entry
+    rule: "Short leg: sell the ATM near-dated option at DTE 14-21 that expires 5-7 days after the event"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "The expiry list and its ATM IV are served; option prices, strikes and Greeks are not, so the leg is priced and filled on Deribit. A bearish event biases the near leg to a 5% OTM put, which needs Deribit's chain."
+  - id: back_leg_expiry
+    role: entry
+    rule: "Long leg: buy the ATM back-dated option at DTE 45-60 that runs through and beyond the event"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "Same as near_leg_expiry: choose the listed expiry nearest the window; price it on Deribit."
+  - id: delta_hedge
+    role: sizing
+    rule: "Delta-hedge the net calendar delta with the perp at once, recompute daily and rebalance when net delta moves more than 0.10"
+    runnable: false
+    note: "Needs per-option deltas, which we do not serve (no Greeks per strike). The perp price itself is on /hyperliquid/prices or Binance tickers."
+  - id: iv_converged_exit
+    role: exit
+    rule: "From T+1, close the calendar when the near-minus-back IV spread is back to 2 vol points or less"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "Same ATM term-structure caveat as iv_spread_min; read the two expiries the position holds."
+  - id: max_hold
+    role: exit
+    rule: "Close the whole position no later than T+5 days after the event"
+    runnable: true
+    input: position
+  - id: near_iv_spike_stop
+    role: stop
+    rule: "Close if near-dated IV rises 20 or more vol points above its level at entry"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "ATM IV of the held near expiry vs the entry value in the position record. The page's other stop, -10% of the options sleeve, needs Deribit marks."
+  - id: tier_sleeve_size
+    role: sizing
+    rule: "Options sleeve per event: 5-12% of portfolio notional for Tier 1, 3-7% for Tier 2, 1-3% for Tier 3"
+    runnable: true
+    input: position
+  - id: concurrency_caps
+    role: sizing
+    rule: "At most 2 concurrent event positions, never two events on the same expiry, and at most 20% of the portfolio in the options sleeve"
+    runnable: true
+    input: position
 ---
 
 # Options Relative-Value × Event Calendar

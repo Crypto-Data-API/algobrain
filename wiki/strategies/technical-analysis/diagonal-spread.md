@@ -12,6 +12,107 @@ markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[calendar-spread]]", "[[covered-call]]", "[[double-diagonal]]", "[[butterfly-spread]]", "[[implied-volatility]]", "[[theta]]", "[[delta]]", "[[funding-rate]]", "[[deribit]]", "[[crypto-options-volatility-selling]]", "[[trade-repair-and-rolling]]", "[[gamma-risk]]", "[[section-1256-contracts]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit_only
+    role: universe
+    rule: "BTC and ETH Deribit options"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied vol served. Option quotes come from Deribit itself."
+  - id: long_leg_deep_itm
+    role: entry
+    rule: "PMCC long leg: buy a deep-ITM call at about 0.70-0.85 delta (a put for the bearish variant), minimising extrinsic value"
+    runnable: false
+    note: "Strikes by delta need Deribit's option chain with Greeks, which we do not serve."
+  - id: long_leg_3_12_months
+    role: entry
+    rule: "Long leg 3-12 months out, carrying at least 3-4x the short leg's DTE"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure lists the nearest 12 Deribit expiries, reaching about a year out (Pro Plus; empty on lower tiers)."
+  - id: short_leg_20_35_delta
+    role: entry
+    rule: "Short leg: sell an OTM call at about 0.20-0.35 delta, 21-45 DTE"
+    runnable: false
+    note: "The 21-45 DTE expiry is visible in term_structure[].expiry_days; the strike by delta needs Deribit's chain."
+  - id: debit_below_width
+    role: entry
+    rule: "Keep the net debit below the strike width so max profit is positive"
+    runnable: false
+    note: "Needs both legs' quotes; no option prices are served."
+  - id: bullish_to_neutral_view
+    role: filter
+    rule: "Bullish-to-neutral on BTC or ETH over months: price expected to grind up or sideways"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: ma.above_200
+    note: "The page's backtest backdrop is the 200-day MA (/api/v1/market-data/btc-price-history has history[].ma200 for BTC). The forecast itself is the trader's."
+  - id: dvol_elevated
+    role: filter
+    rule: "DVOL elevated so the short calls carry fat premium"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "The page gives no level or percentile for 'elevated'. history holds about 180 daily closes (Pro Plus) to rank it."
+  - id: roll_into_rich_vol
+    role: entry
+    rule: "Time each short-call roll into an elevated or expanding vol read"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "expanding is a served label; 'elevated' is not, so whether normal counts is the desk's call."
+  - id: short_strike_vs_max_pain
+    role: entry
+    rule: "Place the short strike against the max-pain strike"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    note: "BTC only (no ETH max pain), computed on the Deribit expiry with the largest open interest."
+  - id: grinding_bull_regime
+    role: filter
+    rule: "The PMCC wants a grinding bull: high strong_trend_bull and low vol_spike probability; a bear-regime flip threatens the long leg itself"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: explain.label_posteriors.strong_trend_bull
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_0
+    note: "label_posteriors holds the current probability of each regime (vol_spike beside it; post_label_4 in the replay). 'High' and 'low' have no thresholds on the page."
+  - id: roll_short_at_75pct
+    role: exit
+    rule: "Roll the short call at about 75% profit or each cycle into a new 21-45 DTE short"
+    runnable: true
+    input: position
+    note: "The short's mark comes from Deribit; no option prices are served."
+  - id: threatened_short_roll
+    role: exit
+    rule: "If a rally threatens the short call, roll up and out for a net credit or close and bank the gain; never pay a significant debit to chase"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "'Threatened' has no distance from the strike on the page."
+  - id: thesis_broken_close
+    role: stop
+    rule: "On a drop that breaks the thesis, close both legs; the loss is capped at the debit"
+    runnable: partial
+    input: position
+    note: "The page gives no level for a broken thesis."
+  - id: short_leg_21_dte
+    role: exit
+    rule: "Roll or close the short leg by about 21 DTE"
+    runnable: true
+    input: position
+  - id: perp_carry_check
+    role: entry
+    rule: "At every roll, compare option carry with perp carry: deeply positive funding can make a perp long a cheaper stand-in for the long call"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    note: "Funding is served; the option carry side needs Deribit quotes. No threshold for 'deeply positive' is given."
 ---
 
 # Diagonal Spread

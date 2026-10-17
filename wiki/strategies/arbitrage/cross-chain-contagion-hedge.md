@@ -22,6 +22,86 @@ expected_sharpe: 0.8
 expected_max_drawdown: 0.15
 breakeven_cost_bps: 120
 decay_evidence: "Strategy is closer to a hedge than an alpha bet. Sharpe is structurally moderate. Expected positive carry over multi-year horizons but strategy may lose money in 2-3 year low-event-frequency windows. Contagion multiplier may compress if defender-AI deployment reduces exploit frequency or if cross-chain composability fragments."
+gates:
+  - id: contagion_basket
+    role: universe
+    rule: "Contagion-target basket: LRTs (rsETH, eETH/weETH, ezETH, pufETH, rstETH), lending tokens (AAVE, COMP, MORPHO, CRV), stablecoin-peg names (USDC, USDT, USDe, GHO, crvUSD) and bridge tokens (STG, ZRO, ACX)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "Of the basket, AAVE, CRV, COMP, MORPHO and ZRO have Hyperliquid perps (ENA, ETHFI and REZ stand in for the USDe and LRT issuers); the LRT tokens themselves, STG, ACX and the stablecoins do not. LRT pegs to ETH are not served."
+  - id: perp_short_legs
+    role: entry
+    rule: "Short the basket names with listed perps at the pseudocode weights (rsETH 0.15; eETH, ezETH, weETH, AAVE, CRV and USDe 0.10 each; COMP, MORPHO, STG, ZRO and ACX 0.05 each)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/summary?coin={coin}
+    field: mark_price
+    note: "Only the perp-listed names in contagion_basket can be shorted here; the weights of unlisted names need a substitute or the put leg, which is the desk's call."
+  - id: otm_put_legs
+    role: entry
+    rule: "For names with options but no perp, buy puts 1-2% out of the money with 30-90 days to expiry (90 in the pseudocode)"
+    runnable: false
+    note: "No option chains are served for AAVE, COMP or other DeFi tokens. Needs Deribit, Aevo or Hyperliquid options data."
+  - id: basket_size
+    role: sizing
+    rule: "Basket notional about 5-10% of the book (7% in the pseudocode), each name smaller"
+    runnable: true
+    input: position
+  - id: carry_budget
+    role: sizing
+    rule: "Keep the basket's carry cost under 100 bp a year"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].funding_sum
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_sum
+    note: "A short pays funding when funding_sum is negative: annual carry per leg = -sum of daily funding_sum over a year (or the last 30 days x 365/30), weighted by basket notional. Pro Plus. Put premiums, if used, add to it."
+  - id: roll
+    role: exit
+    rule: "Roll the OTM puts monthly; keep the perp shorts on continuously"
+    runnable: true
+    input: position
+  - id: resize_after_exploit
+    role: sizing
+    rule: "Increase the basket 1.5x when a major exploit has landed within the last 30 days"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack
+    field: items[].amount_usd
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.security_regime.largest_hack_usd
+    note: "The page does not size a major exploit. The live list covers 10 days, so cover 30 days with largest_hack_usd from daily snapshots 10 and 20 days back. The registry lags the exploit by hours to days."
+  - id: double_on_anomaly
+    role: sizing
+    rule: "Double the position in a basket name when an on-chain anomaly feed alerts on it"
+    runnable: partial
+    endpoint: /api/v1/security/regime/{symbol}
+    field: max_severity
+    note: "Real-time anomaly feeds (Cyvers, Forta, BlockSec) are not served. The served per-symbol overlay lists confirmed hacks and depegs implicating the coin, later than those alerts; what counts as an alert is the desk's call. Pro."
+  - id: take_profit_affected
+    role: exit
+    rule: "When a contagion event lands and an affected leg is up more than 50%, take 60% of it off; hold the rest through the 1-2 week mean-reversion window"
+    runnable: true
+    input: position
+  - id: kill_drawdown_15
+    role: stop
+    rule: "Retire on a drawdown above 15% over a rolling 12 months"
+    runnable: true
+    input: position
+  - id: kill_negative_return
+    role: stop
+    rule: "Retire when the average annual return is below 0% over a rolling 24 months"
+    runnable: true
+    input: position
+  - id: kill_structural_shift
+    role: stop
+    rule: "Retire on a major regulatory or structural shift in DeFi composability (forced unbundling)"
+    runnable: false
+    note: "A judgement; no feed covers it."
+  - id: kill_insurance_coverage
+    role: stop
+    rule: "Retire when insurance protocol coverage exceeds 30% of DeFi TVL"
+    runnable: false
+    note: "Insurance cover (Nexus Mutual, Sherlock) and DeFi TVL are not served. Needs DefiLlama."
 ---
 
 # Cross-Chain Contagion Hedge

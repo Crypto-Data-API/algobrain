@@ -12,6 +12,113 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[short-strangle]]", "[[straddle]]", "[[straddle-strangle]]", "[[crypto-options-volatility-selling]]", "[[iron-condor]]", "[[iron-fly]]", "[[gamma-scalping]]", "[[delta-hedging]]", "[[theta]]", "[[vega]]", "[[dvol]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[iv-crush]]", "[[deribit]]", "[[greeks-live]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit
+    role: universe
+    rule: "BTC or ETH options on Deribit; liquid ATM straddles beyond them barely exist"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "We do serve Deribit DVOL (current and about 180 days of daily history) and the ATM term structure for BTC and ETH, despite the page saying otherwise. Option quotes, the IV surface and fills come from Deribit."
+  - id: dvol_upper_pctile
+    role: entry
+    rule: "DVOL above about the 60th-70th percentile of its trailing year (implied vol rich)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Rank today's dvol against the served daily history, which is about 180 days (Pro Plus), not a year."
+  - id: implied_over_realized
+    role: entry
+    rule: "Implied is rich versus delivered: DVOL above 30-day realized vol"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "vrp = dvol - realized_30; above 0 means implied is rich. The page sets no minimum gap. Replay compares daily DVOL with 30-day realized vol from /api/v1/hyperliquid/candles daily closes."
+  - id: vol_regime_ok
+    role: filter
+    rule: "Sell only in an expanding or normal vol regime; stand aside on vol_shock"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+  - id: dvol_not_spiking
+    role: filter
+    rule: "Do not sell into an already-spiking DVOL; the ideal entry is rich but stable vol about to mean-revert down"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol_change_24h
+    note: "The page gives no spike threshold or stability window; both are the desk's."
+  - id: catalyst_free_window
+    role: filter
+    rule: "No discrete catalyst inside the window: protocol upgrade or hard fork, spot-ETF option decision, large unlock, FOMC or CPI"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=30
+    field: items[].event_type
+    note: "macro_print rows (FOMC, CPI and others) and unlock rows are served; upgrades, forks and ETF decisions are not, and the page sets no size for a 'large' unlock. The calendar reaches 30 days."
+  - id: atm_strike
+    role: entry
+    rule: "Sell one ATM call and one ATM put at the same strike K close to spot, same expiry"
+    runnable: true
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "K = the listed Deribit strike nearest spot. The strike grid and premiums come from Deribit; the page names no tenor (the example is 30 DTE)."
+  - id: pin_context
+    role: filter
+    rule: "Long-gamma dealers dampen the tape the straddle wants pinned; max pain and OI walls give pin context"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    note: "/quant/gex is a perp analog of dealer gamma (score at or below -0.20 = dampen), not Deribit options GEX. BTC max pain is on /api/v1/market-intelligence/options; per-strike OI walls are not served. The page uses this as context with no threshold."
+  - id: take_profit_25_50
+    role: exit
+    rule: "Buy back at about 25-50% of the maximum credit; do not hold ATM into the final days"
+    runnable: true
+    input: position
+    note: "Option marks come from the venue."
+  - id: roll_tested_side
+    role: stop
+    rule: "As spot pushes toward one side, roll that leg out and away for a credit, or roll the whole straddle out in time"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "The page gives no trigger distance from K; the desk sets it."
+  - id: delta_hedge_perp
+    role: sizing
+    rule: "Flatten residual delta with the perpetual; the hedge pays or collects funding"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    note: "Position delta comes from the venue's Greeks. The page gives no rebalance band. The page hedges on Deribit's perpetual; Hyperliquid funding is the served stand-in."
+  - id: time_stop_final_week
+    role: exit
+    rule: "Close or roll before the final week before expiry"
+    runnable: true
+    input: position
+  - id: kill_dvol_jump
+    role: stop
+    rule: "If DVOL jumps hard intraday, flatten rather than average down"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "The page gives no jump size. Poll dvol and compare with the entry or session-open value; intraday DVOL history is not served."
+  - id: kill_stress_or_cascade
+    role: stop
+    rule: "A vol-stress score spike or a live liquidation cascade: flatten, never average down"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    replay: /api/v1/volatility/index/history?days=365
+    replay_field: points[].composite_score
+    note: "From the page's AI-agent workflow, with no thresholds. Cascades are flagged on /api/v1/market-intelligence/squeeze-alerts (OKX, Bybit, Hyperliquid). The replay is one composite per UTC day."
+  - id: stress_loss_cap
+    role: sizing
+    rule: "Size small: at most 1-2% of the book in stress loss per structure"
+    runnable: partial
+    input: position
+    note: "The page does not define the stress scenario (a gap size); that is the desk's call."
 ---
 
 # Short Straddle

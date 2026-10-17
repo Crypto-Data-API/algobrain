@@ -21,6 +21,34 @@ expected_sharpe: 2.0
 expected_max_drawdown: 0.10
 breakeven_cost_bps: 3
 decay_evidence: "Eliminated progressively by shortwave radio (late 1930s), teleprinter networks, and ultimately the Reuters Monitor (1973)."
+gates:
+  - id: three_live_quotes
+    role: filter
+    rule: "Hold simultaneous quotes for GBP/USD (London), USD/FRF (New York) and GBP/FRF (Paris), skipping any quote older than 180 seconds"
+    runnable: false
+    note: "Historical (1920s-1930s, retired). No GBP, FRF or cross-rate quotes are served; /sentiment/macro carries EUR/USD only, and the franc no longer exists."
+  - id: cross_rate_gap
+    role: entry
+    rule: "Signal when the implied GBP/FRF (GBP/USD x USD/FRF) differs from the Paris quote by more than cable fees plus dealer spread plus slippage"
+    runnable: false
+    input: derived
+    inputs: [three_live_quotes]
+    note: "Built on the unserved quotes."
+  - id: two_venue_confirm
+    role: filter
+    rule: "Act only when the dislocation shows on at least two venues, not a single stale print"
+    runnable: false
+    note: "Needs multi-venue FX quotes, which are not served."
+  - id: unfilled_leg_close
+    role: exit
+    rule: "Close any leg left unfilled after 5 minutes at market on the next quote"
+    runnable: true
+    input: position
+  - id: thinnest_leg_size
+    role: sizing
+    rule: "Size to the liquidity of the thinnest leg and the clearing balances at each settlement point (100,000-500,000 pounds per execution at the largest houses)"
+    runnable: true
+    input: position
 ---
 
 # Historical Cable Arbitrage (1920s–1930s Transatlantic FX)

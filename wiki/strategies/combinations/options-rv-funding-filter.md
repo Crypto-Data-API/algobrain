@@ -33,6 +33,130 @@ kill_criteria: |
   - Deribit bid-ask spread on RR25 options > 3 vol pts consistently (execution costs exceed the skew dislocation being traded; pause)
 
 related: ["[[skew-trading]]", "[[funding-conditioned-vol-selling]]", "[[options-rv-event-calendar]]", "[[calendar-spread-arbitrage]]", "[[funding-filtered-momentum]]", "[[narrative-crowding-exit]]", "[[low-leverage-vol-selling]]", "[[complacency-vol-buying]]", "[[crowded-long-funding-fade]]", "[[smart-money-vs-crowd-divergence]]", "[[implied-volatility]]", "[[volatility-surface]]", "[[risk-reversal]]", "[[deribit]]", "[[dvol]]", "[[funding-rate]]", "[[open-interest]]", "[[options-greeks]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi-derivatives]]", "[[cryptodataapi]]"]
+gates:
+  - id: options_underlyings
+    role: universe
+    rule: "BTC and ETH Deribit options only; the ETH book is capped at about 30% of BTC capacity"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+  - id: funding_8h_positive
+    role: entry
+    rule: "Call-rich trade leg 1: current 8h funding at or above +0.035%"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=21
+    field: current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance settles every 8h, so current_rate compares directly with 0.00035. The page's /derivatives/funding-rates carries the same Binance rate beside Hyperliquid's hourly one."
+  - id: funding_7d_positive
+    role: entry
+    rule: "Call-rich trade leg 2: 7-day average 8h funding at or above +0.025%"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Mean of the last 21 settlements (7 days x 3)."
+  - id: funding_8h_negative
+    role: entry
+    rule: "Put-rich trade leg 1: current 8h funding at or below -0.015%"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=21
+    field: current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+  - id: funding_7d_negative
+    role: entry
+    rule: "Put-rich trade leg 2: 7-day average 8h funding at or below -0.010%"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Mean of the last 21 settlements."
+  - id: rr25_call_rich
+    role: entry
+    rule: "Call-rich trade leg 3: BTC 25-delta risk reversal at least +5 vol points above its 20-day rolling mean"
+    runnable: false
+    note: "No 25-delta risk reversal or per-strike IV is served; /volatility/implied has DVOL and ATM IV per expiry only. Needs Deribit's option chain or a vol-surface vendor such as Kaiko, Tardis.dev or Amberdata."
+  - id: rr25_put_rich
+    role: entry
+    rule: "Put-rich trade leg 3: BTC 25-delta risk reversal at least 5 vol points below its 20-day rolling mean"
+    runnable: false
+    note: "Same missing RR25 series as rr25_call_rich."
+  - id: oi_percentile
+    role: filter
+    rule: "Call-rich trade: open interest at or above the 70th percentile of its 30-day distribution"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/open-interest?symbol={coin}USDT
+    field: history[].sum_open_interest
+    note: "history[] holds 30 daily Binance OI points; rank current_oi against them. Hyperliquid's hourly OI is oi_close on /backtesting/hl-funding-bars."
+  - id: ls_long_crowd
+    role: filter
+    rule: "Call-rich trade: long/short ratio at or above 1.15"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/long-short-ratio?symbol={coin}USDT
+    field: long_short_ratio
+    note: "Binance global account ratio, the page's source."
+  - id: ls_short_crowd
+    role: filter
+    rule: "Put-rich trade: long/short ratio at or below 0.85"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/long-short-ratio?symbol={coin}USDT
+    field: long_short_ratio
+  - id: event_risk_low
+    role: filter
+    rule: "No entry unless the Event Risk score is below 40"
+    runnable: true
+    endpoint: /api/v1/event/regime/score
+    field: event_risk_score
+  - id: dvol_not_extreme
+    role: filter
+    rule: "Avoid entering skew trades when DVOL is above its 80th percentile"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "From the indicator list. DVOL is served (the page says it is not): items[].dvol now, items[].history about 180 daily values (Pro Plus). The page sets no lookback for the percentile, so the window is the desk's call."
+  - id: call_rich_structure
+    role: entry
+    rule: "Call-rich trade: buy the 25-delta put and sell the 25-delta call at DTE 21-35, capping the short call with a 15-delta call; if call skew is under 4 vol points rich, sell the 25-delta call alone"
+    runnable: false
+    note: "Strike selection by delta needs per-strike Greeks and prices, which we do not serve. Deribit's chain is required."
+  - id: put_rich_structure
+    role: entry
+    rule: "Put-rich trade: buy the 25-delta call and sell the 25-delta put, capping the short put with a 15-delta put"
+    runnable: false
+    note: "Same per-strike chain dependency as call_rich_structure."
+  - id: delta_hedge
+    role: sizing
+    rule: "Delta-neutral at inception; re-hedge when net delta moves more than 0.10"
+    runnable: false
+    note: "Needs per-option deltas, which we do not serve."
+  - id: skew_reverted_exit
+    role: exit
+    rule: "Close when RR25 is back within 1 vol point of its 20-day rolling mean"
+    runnable: false
+    note: "Needs the RR25 series (see rr25_call_rich)."
+  - id: funding_normalised_exit
+    role: exit
+    rule: "Close when funding normalises: below +0.015%/8h on the call-rich trade, above -0.005%/8h on the put-rich trade"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "The Rules text reads the 7-day average (mean of 21 settlements); the pseudocode and the example read the current 8h rate (current_rate). Pick one and log it."
+  - id: time_exit
+    role: exit
+    rule: "Close after 21 days if neither the skew nor the funding exit has fired"
+    runnable: true
+    input: position
+  - id: skew_adverse_stop
+    role: stop
+    rule: "Stop when RR25 moves a further 3 vol points in the dislocation direction from entry"
+    runnable: false
+    note: "Needs the RR25 series (see rr25_call_rich)."
 ---
 
 # Options Relative-Value × Funding Filter

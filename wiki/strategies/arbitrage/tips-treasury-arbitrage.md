@@ -22,6 +22,71 @@ expected_max_drawdown: 0.30
 breakeven_cost_bps: 3
 decay_evidence: "2008 GFC produced >100 bp TIPS-inflation-swap dislocation; converged over 18 months"
 related: ["[[ltcm-collapse-1998]]", "[[on-off-the-run-treasury-arbitrage]]", "[[swap-spread-arbitrage]]", "[[relative-value-arbitrage]]", "[[inflation-swap]]", "[[breakeven-inflation]]", "[[financial-crisis-2008]]", "[[cpi]]", "[[limits-to-arbitrage]]", "[[edge-taxonomy]]", "[[failure-modes]]"]
+gates:
+  - id: synthetic_nominal_spread
+    role: entry
+    rule: "spread = matched-maturity nominal Treasury yield - (TIPS real yield + zero-coupon inflation swap fixed rate), in bp"
+    runnable: false
+    note: "No TIPS yields, nominal Treasury yields or inflation-swap quotes are served. treasury_yield on /sentiment/macro is the average interest rate on outstanding notes, not a market yield. Needs a rates vendor or FRED plus inflation-swap quotes."
+  - id: synthetic_cheap_30bp
+    role: entry
+    rule: "spread above 30 bp: long TIPS, receive fixed on the inflation swap, short the nominal Treasury in repo"
+    runnable: false
+    input: derived
+    inputs: [synthetic_nominal_spread]
+    note: "synthetic_nominal_spread is unserved."
+  - id: synthetic_rich_30bp
+    role: entry
+    rule: "spread below -30 bp: short TIPS, pay fixed on the inflation swap, long the nominal Treasury"
+    runnable: false
+    input: derived
+    inputs: [synthetic_nominal_spread]
+    note: "synthetic_nominal_spread is unserved."
+  - id: hedge_neutral
+    role: sizing
+    rule: "DV01- and breakeven-neutral hedge ratios across the three legs"
+    runnable: true
+    input: position
+  - id: term_repo_6m
+    role: filter
+    rule: "Require term repo financing of at least 6 months before entering"
+    runnable: true
+    input: position
+    note: "A financing term from the prime broker, not market data."
+  - id: size_for_150bp
+    role: sizing
+    rule: "Size so a 150 bp adverse spread move does not bust the fund"
+    runnable: true
+    input: position
+  - id: exit_10bp
+    role: exit
+    rule: "Close when the spread narrows to about 10 bp or less; otherwise hold to maturity, rolling the inflation swap to match duration"
+    runnable: false
+    input: derived
+    inputs: [synthetic_nominal_spread]
+    note: "synthetic_nominal_spread is unserved."
+  - id: kill_widening_80bp
+    role: stop
+    rule: "Kill switch: spread widens by more than 80 bp against entry within 90 days while financing terms tighten"
+    runnable: false
+    input: derived
+    inputs: [synthetic_nominal_spread]
+    note: "synthetic_nominal_spread is unserved; financing terms come from the prime broker."
+  - id: kill_swap_bid_ask
+    role: stop
+    rule: "Kill switch: inflation-swap bid-ask above 15 bp (normal about 3 bp)"
+    runnable: false
+    note: "No inflation-swap quotes are served."
+  - id: kill_haircut_10pct
+    role: stop
+    rule: "Kill switch: prime broker raises the TIPS haircut above 10%"
+    runnable: true
+    input: position
+  - id: kill_return_minus_15pct
+    role: stop
+    rule: "Kill switch: rolling 12-month strategy return below -15%"
+    runnable: true
+    input: position
 ---
 
 # TIPS-Treasury Arbitrage

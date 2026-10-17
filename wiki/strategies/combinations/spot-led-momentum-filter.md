@@ -34,6 +34,139 @@ kill_criteria: |
   - signal frequency < 2 qualifying entries per month for 3 months (market structure has changed; the cross-venue divergence is no longer generating discriminating signals)
 
 related: ["[[funding-filtered-momentum]]", "[[oi-confirmed-trend]]", "[[coinbase-premium]]", "[[etf-flow-directional]]", "[[hl-vs-cex-funding-divergence]]", "[[trend-following-cta]]", "[[vol-targeted-trend-following]]", "[[unlock-aware-momentum]]", "[[breakout-trading]]", "[[momentum-rotation]]", "[[funding-rate]]", "[[open-interest]]", "[[perpetual-futures]]", "[[market-microstructure]]", "[[on-chain-flow-trading]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: donchian_breakout
+    role: entry
+    rule: "Momentum option 1: a daily close above the 20-day high (below the 20-day low for shorts)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=22
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Compare the last closed daily close with the highest high (candles[].high) of the 20 bars before it."
+  - id: ema_cross_4h
+    role: entry
+    rule: "Momentum option 2: the 12-period EMA crosses above the 26-period EMA on 4h bars (below for shorts)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=120
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "EMAs on closed 4h closes; the cross is on the latest closed bar."
+  - id: roc_14d
+    role: entry
+    rule: "Momentum option 3: 14-day rate of change above +8% (negative for shorts)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=16
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+  - id: momentum_signal
+    role: entry
+    rule: "A momentum signal is active when any one of the three options fires"
+    runnable: true
+    input: derived
+    inputs: [donchian_breakout, ema_cross_4h, roc_14d]
+  - id: coinbase_premium_positive
+    role: filter
+    rule: "Spot-led A: Coinbase premium at least +0.05% and positive in at least 2 of the last 3 hours"
+    runnable: true
+    endpoint: /api/v1/market-intelligence/coinbase-premium
+    field: data[].premium_rate
+    replay: /api/v1/backtesting/snapshots?data_type=coinglass_coinbase_premium&start={start}
+    replay_field: snapshots[].data[].premium_rate
+    note: "premium_rate is in percent (0.05 = 0.05%), Coinbase BTC/USD against Binance BTC/USDT, one point every 10 minutes. The live call holds about the last hour; for the 3-hour count read the snapshots with start = 3 hours ago (archived from 2026-05-09). BTC only."
+  - id: funding_moderate
+    role: filter
+    rule: "Spot-led B: 8h funding at or below +0.03% on the entry day"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=3
+    field: current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance's 8h rate against 0.0003."
+  - id: spot_volume_up
+    role: filter
+    rule: "Spot-led C1: 24h spot volume at least 1.20x its 7-day average"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={coin}USDT&interval=1d&limit=8
+    field: klines[].quote_volume
+    replay: /api/v1/backtesting/klines?symbol={coin}USDT&exchange=binance&interval=1d&start={start}
+    replay_field: klines[].qv
+    note: "Binance spot: rolling 24h quote_volume from /market-data/ticker/24hr?symbol={coin}USDT over the mean daily quote_volume of the last 7 closed days. Coinbase spot volume is not served. The local replay starts 2026-05-09; earlier days come from /backtesting/archives."
+  - id: oi_growth_contained
+    role: filter
+    rule: "Spot-led C2: perp open interest has grown less than 15% over 3 days"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    field: data[].oi_close
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].oi_close
+    note: "start = 3 days and 2 hours ago; growth = last oi_close / the oi_close 72 rows earlier - 1 (Hyperliquid, closed 1h bars from 2026-03-30). Binance daily OI is history[].sum_open_interest on /derivatives/binance/open-interest?symbol={coin}USDT."
+  - id: spot_led_long
+    role: entry
+    rule: "Enter long only when a momentum signal is active and spot-led A, B, C1 and C2 all hold"
+    runnable: true
+    input: derived
+    inputs: [momentum_signal, coinbase_premium_positive, funding_moderate, spot_volume_up, oi_growth_contained]
+  - id: regime_kill
+    role: filter
+    rule: "No entries while the market regime is Established Bear or Structural Shock"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Block on established_bear or structural_shock_crisis. Regime history starts 2026-08-07."
+  - id: short_mirror
+    role: entry
+    rule: "Short mirror: downside momentum, Coinbase premium at or below -0.05%, 8h funding at or above -0.01%, spot volume above average and OI not collapsing faster than spot"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/coinbase-premium
+    field: data[].premium_rate
+    note: "Premium, funding and volume use the same fields as the long gates. 'OI not collapsing faster than spot' has no threshold, so that leg is the desk's call."
+  - id: position_size
+    role: sizing
+    rule: "Base 2% of the sleeve; +0.5% when premium is above 0.15%, funding at most 0.01%/8h, spot volume at least 1.5x and 3-day OI growth under 5%; never above 3%"
+    runnable: true
+    input: derived
+    inputs: [coinbase_premium_positive, funding_moderate, spot_volume_up, oi_growth_contained]
+  - id: donchian_exit
+    role: exit
+    rule: "Close when price breaks the 10-day Donchian low (long) or high (short)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=12
+    field: candles[].low
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].low
+  - id: perp_takeover_trim
+    role: exit
+    rule: "Trim 50% when 8h funding rises above 0.05% while the position is open"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=3
+    field: current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+  - id: premium_negative_trim
+    role: exit
+    rule: "Trim 50% of a long when the Coinbase premium turns negative"
+    runnable: true
+    endpoint: /api/v1/market-intelligence/coinbase-premium
+    field: data[].premium_rate
+    replay: /api/v1/backtesting/snapshots?data_type=coinglass_coinbase_premium&start={start}
+    replay_field: snapshots[].data[].premium_rate
+  - id: time_stop
+    role: exit
+    rule: "Close after at most 20 days"
+    runnable: true
+    input: position
+  - id: hard_stop
+    role: stop
+    rule: "Hard stop 8% against entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/prices
+    field: prices.{coin}
 ---
 
 # Spot-Led Momentum Filter

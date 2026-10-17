@@ -22,6 +22,84 @@ expected_sharpe: null
 expected_max_drawdown: 0.7
 breakeven_cost_bps: 300
 decay_evidence: "Pump.fun launched Jan 2024. Migration sniping was a high-edge meta in 2024; PumpSwap (Pump.fun's native DEX, launched March 20, 2025) made migrations instant and free and became the default venue, ending the Raydium-specific migration-lag arb. Bot competition compressed first-block advantage to single-slot precision; manual snipers are no longer competitive on graduations alone."
+gates:
+  - id: bond_progress_watch
+    role: universe
+    rule: "Watch Pump.fun tokens above 85% bonding-curve progress (program-account watcher or Bitquery subscription)"
+    runnable: false
+    note: "Pump.fun bonding-curve progress and program logs are not served. /dex/new-pools?chain=solana lists DEX pools only after they exist."
+  - id: top10_holders
+    role: filter
+    rule: "Pre-filter: top 10 holders below 40% of supply (filters bundled launches)"
+    runnable: partial
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: holder_info.top_10_pct
+    note: "Exactly the page's metric, in percent (pass below 40), but {address} is a token still on the bonding curve, which only the bot's own Pump.fun watcher supplies (bond_progress_watch is not served), and whether the report covers pre-graduation tokens is unverified. On 2026-10-17 fresh Solana tokens came back with holder_count 0 and top_10_pct 0: that means not indexed yet, so treat it as unknown, never as a pass."
+  - id: dev_not_rugged
+    role: filter
+    rule: "Pre-filter: the dev wallet has not rugged before (rug database cross-reference)"
+    runnable: false
+    note: "Dev-wallet rug history is not served."
+  - id: organic_buys
+    role: filter
+    rule: "Pre-filter: bonding-curve buys look organic (many small wallets), not sybil farming"
+    runnable: false
+    note: "Per-token buyer distribution on the curve is not served, and organic is a judgement."
+  - id: migration_trigger
+    role: entry
+    rule: "Detect the migration instruction in the Pump.fun program and buy in the migration slot or the next one"
+    runnable: false
+    note: "Program logs and slots are not served. The cached /dex/new-pools list shows the new pool seconds to minutes later, after the page's prize window has closed."
+  - id: jito_bundle
+    role: entry
+    rule: "Submit the buy alone in a Jito bundle with a competitive tip, targeting the migration slot"
+    runnable: false
+    note: "Jito tip floors and the leader schedule are not served; see jito-bundle-sniping."
+  - id: no_chase
+    role: filter
+    rule: "If the buy has not landed within the first few slots (about 5 seconds), do not chase: past 30-60 seconds you are the exit liquidity"
+    runnable: true
+    input: position
+  - id: snipe_size
+    role: sizing
+    rule: "0.5-2 SOL per snipe, with up to 2,000 bps slippage on the listing block"
+    runnable: true
+    input: position
+  - id: tp_ladder
+    role: exit
+    rule: "Take profit 50% at +100% (2x), 30% at +300%, 15% at +1000%, keep a 5% moonbag"
+    runnable: true
+    input: position
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "{address} is the held token (the bot's own watchlist, as in top10_holders). Pool prices come from a cached feed, seconds to minutes behind the chain."
+  - id: hard_stop
+    role: stop
+    rule: "Hard stop at -50%; no averaging down"
+    runnable: true
+    input: position
+  - id: time_stop
+    role: exit
+    rule: "Exit if the position is flat or down 15 minutes after entry"
+    runnable: true
+    input: position
+  - id: meme_season_gate
+    role: filter
+    rule: "Gate the whole strategy on the meme_season flag"
+    runnable: true
+    endpoint: /api/v1/meme/regime/score
+    field: meme_season
+    note: "From the page's AI-agent workflow."
+  - id: kill_net_pnl
+    role: stop
+    rule: "Retire when rolling 30-day net PnL is below zero across more than 200 graduations sniped, or the migration-slot tip floor exceeds 50% of expected gross profit per trade"
+    runnable: true
+    input: position
+  - id: kill_graduation_supply
+    role: stop
+    rule: "Retire when daily Pump.fun graduations stay below 5 for 14+ consecutive days, or Pump.fun changes the graduation threshold or AMM seed mechanics"
+    runnable: false
+    note: "Graduation counts and Pump.fun parameter changes are not served; read them from the program or Bitquery."
 ---
 
 # Token Migration Sniping

@@ -40,6 +40,96 @@ kill_criteria: |
   - order-flow confirmation stops improving entry timing (A/B vs no-filter shows no edge for 60 days)
 
 related: ["[[order-flow]]", "[[order-flow-analysis]]", "[[smart-money-concepts]]", "[[hyperliquid]]", "[[cumulative-volume-delta]]", "[[liquidation-cascade-fade]]", "[[whale-tracking]]", "[[copy-trading]]", "[[market-microstructure]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: wallet_persistence
+    role: universe
+    rule: "Track only wallets with a 60-day out-of-sample win rate above 55%, profit factor above 1.3 and more than 30 closed trades, screened on a rolling forward basis"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/wallets/search?min_win_rate=0.55&min_profit_factor=1.3&min_trades_30d=30
+    field: wallets[].win_rate
+    note: "The search screens our tracked pool (about 50 wallets) on trailing 30-day stats, not 60. /hyperliquid/trader-profile/{address}?days=60 gives the 60-day stats for one address. Holding the screen out of sample (select on one window, judge on the next) is the desk's bookkeeping."
+  - id: wallet_style
+    role: universe
+    rule: "Prefer wallets classified as consistent, with positions big enough to matter but small enough to match"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/wallets/search?min_win_rate=0.55&min_profit_factor=1.3&min_trades_30d=30
+    field: wallets[].trader_type
+    note: "trader_type (swing_trader, day_trader and so on) is served; 'consistent' and the size band are not defined on the page, so both are the desk's call. Position sizes per wallet are on /hyperliquid/wallet-positions."
+  - id: fresh_signal
+    role: entry
+    rule: "Act only on entry or size-increase signals from a qualified wallet detected within the last 15 minutes"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/copy-signals?minutes=15
+    field: traders[].signals[].type
+    note: "Take type ENTRY or INCREASE; signals[].coin, side and timestamp come with it. min_score defaults to 80; the min_win_rate, min_profit_factor and min_trades_30d params apply the persistence screen in the same call."
+  - id: cvd_alignment
+    role: entry
+    rule: "CVD on the instrument is turning in the wallet's direction (slope flips from negative to positive for a long)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=30
+    field: data[].cvd_usd
+    note: "cvd_usd is a running sum over closed 1-minute taker buckets (nothing sub-minute). The page gives no slope window (its example uses about 2 minutes), so the window is the desk's call."
+  - id: taker_imbalance_4h
+    role: entry
+    rule: "Trailing 4h taker buy/sell ratio above 1.0 for a long (below 1.0 for a short)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=240
+    field: data[].buy_notional
+    replay: /api/v1/backtesting/hl-trade-flow?coin={coin}&start={start}
+    replay_field: data[].buy_notional
+    note: "Ratio = sum of buy_notional / sum of sell_notional over the 240 minutes (Hyperliquid tape). The cross-exchange 4h figure is buy_ratio on /market-intelligence/taker-buy-sell (a percentage). The rules also allow a ratio extreme against the thesis but give no level for it. Replay from 2026-09-09."
+  - id: book_absorption
+    role: entry
+    rule: "L2 depth shows passive orders on the wallet's side absorbing aggressive flow without price giving way"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: bids[].size
+    note: "A judgement: compare resting size on the wallet's side (asks[] for a short) across snapshots with the taker flow hitting it on /hyperliquid/trade-flow while price holds. The page sets no size or duration."
+  - id: chase_limit
+    role: entry
+    rule: "Never chase more than 10 bps past the wallet's observed entry price"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/copy-signals?minutes=15
+    field: traders[].signals[].entry_price
+    note: "Compare with the current mark (prices.{coin} on /hyperliquid/prices)."
+  - id: trade_size
+    role: sizing
+    rule: "1-2% of the sleeve per trade at 1-3x leverage, at most 3 concurrent positions, counting correlated coins (BTC and ETH) as one"
+    runnable: true
+    input: position
+  - id: hard_stop
+    role: stop
+    rule: "Hard stop 3% against entry, on mark price"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: structural_stop
+    role: stop
+    rule: "Stop below the structural level the wallet's thesis relies on (recent swing or sweep low for longs)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=48
+    field: candles[].low
+    note: "The page does not define the swing (timeframe or lookback), so locating the level is the desk's call."
+  - id: target_scale_out
+    role: exit
+    rule: "Scale out at the next liquidity pool or prior swing"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.levels[].dist_pct
+    note: "Liquidity pools are judgement. /quant/gex levels list Hyperliquid liquidation clusters near the mark (dist_pct from mark); prior swings come from candles."
+  - id: time_stop
+    role: exit
+    rule: "Time stop 8 hours after entry"
+    runnable: true
+    input: position
+  - id: exit_with_wallet
+    role: exit
+    rule: "Exit regardless of P&L when the tracked wallet closes or flips its position"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/copy-signals?minutes=15
+    field: traders[].signals[].type
+    note: "An EXIT signal for the coin and address (a flip arrives as EXIT plus ENTRY). /hyperliquid/wallet-signals?address= gives the same stream for one address."
 ---
 
 # Smart-Money + Order-Flow Combo

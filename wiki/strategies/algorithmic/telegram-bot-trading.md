@@ -22,6 +22,85 @@ expected_max_drawdown: 0.80
 breakeven_cost_bps: null
 decay_evidence: "BonkBot, Trojan, Banana Gun and Maestro have all seen fee-take pressure since 2024 as competing bots launched and traders compared per-trade economics."
 related: ["[[memecoin-sniping]]", "[[copy-trading]]", "[[defi-yield-farming]]", "[[dca-strategy]]", "[[sniping]]", "[[bonkbot]]", "[[trojan-bot]]", "[[banana-gun]]", "[[maestro-bot]]", "[[axiom-pro]]", "[[photon-sol]]", "[[gmgn]]", "[[bullx]]", "[[jito-bundle-sniping]]", "[[rug-detection-checklist]]"]
+gates:
+  - id: candidate_source
+    role: universe
+    rule: "Candidates come from calls: crypto Twitter, Telegram channels and GMGN trending"
+    runnable: partial
+    endpoint: /api/v1/dex/trending?chain={chain}
+    field: pools[].base_token.address
+    note: "Trending and newest DEX pools per chain are served (the page's AI-agent replacement for channel calls); X and Telegram call feeds are not."
+  - id: contract_screen
+    role: filter
+    rule: "Before buying, the pasted contract must pass: market cap, liquidity, top-10 holder %, dev rug score, mint and freeze authority status"
+    runnable: partial
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: holder_info.top_10_pct
+    note: "{address} is the pasted contract, or pools[].base_token.address from candidate_source. The same report has risk_flags.is_mintable, risk_flags.is_freezable and risk_score (the served stand-in for a dev rug score); market cap and liquidity are top_pools[].market_cap_usd and reserve_usd on /dex/token/{chain}/{address}. The page sets no thresholds (its example passes at 22% top-10). holder_count 0 with top_10_pct 0 on a fresh token means not indexed yet, not a clean distribution."
+  - id: paid_promotion
+    role: filter
+    rule: "Check which tokens are paying for visibility before treating a trending call as organic"
+    runnable: partial
+    endpoint: /api/v1/dex/promoted
+    field: tokens[].promotion_spend
+    note: "From the page's AI-agent workflow, which gives no rule for acting on it."
+  - id: meme_season_gate
+    role: filter
+    rule: "Avoid high-frequency memecoin trading outside meme_season, when 0.5-1% fees per trade meet a hostile base rate"
+    runnable: partial
+    endpoint: /api/v1/meme/regime/score
+    field: meme_season
+    note: "From the page's AI-agent workflow, which warns rather than forbids, so how far to cut trading is the user's call."
+  - id: trade_size
+    role: sizing
+    rule: "Per-trade size 1-2% of the bot wallet; the bot wallet itself no larger than what you can afford to lose to a custodial rug"
+    runnable: true
+    input: position
+  - id: copy_trade_caps
+    role: sizing
+    rule: "Copy-trade with a per-trade size cap and a maximum daily loss; never mirror the leader's size blindly"
+    runnable: partial
+    input: position
+    note: "The page gives no cap or loss level."
+  - id: limit_buy_dip
+    role: entry
+    rule: "Limit-buy at -30% from the current price (take it only if it dumps)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "{address} as in contract_screen. The order itself rests in the bot; the served price is a cached pool quote."
+  - id: tp_sl_at_entry
+    role: exit
+    rule: "Set take-profit and stop-loss at entry, not after (take-profit +200%, stop-loss -50% in the page's loop)"
+    runnable: true
+    input: position
+  - id: trailing_stop
+    role: exit
+    rule: "Use a trailing stop where the bot supports one"
+    runnable: partial
+    input: position
+    note: "The page gives no trail distance."
+  - id: stale_limits
+    role: exit
+    rule: "Review and clear stale limit orders weekly"
+    runnable: true
+    input: position
+  - id: custodial_compromise
+    role: stop
+    rule: "Withdraw everything immediately from any bot showing signs of compromise (unexplained wallet activity, dev silence, infrastructure changes)"
+    runnable: false
+    note: "Bot operator health is not served; it is the user's own watch on the bot wallet and the team's channels."
+  - id: fee_review
+    role: stop
+    rule: "Re-evaluate any bot that raises its base fee above 1.2% per trade"
+    runnable: true
+    input: position
+  - id: pnl_audit
+    role: stop
+    rule: "Pause and audit when 90-day PnL across all bot use is negative and declining"
+    runnable: true
+    input: position
 ---
 
 Telegram bot trading uses chat-based interfaces within Telegram to execute on-chain trades without directly interacting with DEX frontends or signing complex wallet transactions. Bots like [[banana-gun|Banana Gun]], [[maestro-bot|Maestro]], [[bonkbot|BonkBot]], and [[trojan-bot|Trojan]] provide one-click [[sniping]], limit orders, [[dca-strategy|DCA]], [[copy-trading]], and portfolio tracking through simple Telegram commands. Originally built for Ethereum, the ecosystem has expanded heavily to [[solana|Solana]] and Base, where low transaction fees make frequent small trades viable. These bots have become the primary trading interface for retail crypto participants — particularly in the [[meme-coins|memecoin]] and small-cap token space — processing billions of dollars in cumulative volume, and are the on-ramp through which most retail flow enters the [[meme-coin-cycle]].

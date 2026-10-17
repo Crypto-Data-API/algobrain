@@ -22,6 +22,119 @@ expected_sharpe: 1.5
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 30
 decay_evidence: "Synthetic stablecoin TVL grew from <$1B in 2023 to $10B+ by Q1 2026; depeg events are mechanism-specific and recurring. Strategy may compress as protocols mature redemption mechanisms — but new synthetic mechanisms (Ethena white-labels jupUSD/USDm/suiUSDe; future protocols) keep the universe expanding faster than each individual mechanism gets robust."
+gates:
+  - id: peg_watchlist
+    role: universe
+    rule: "Watch the pool pegs of sUSDe, USDe, GHO, crvUSD, FRAX, sDAI and the Ethena white-labels (jupUSD, USDm, suiUSDe)"
+    runnable: partial
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "{address} is each stable's token contract on its {chain}, a fixed address from the issuer's docs (no gate supplies it); the later price gates use the same address. Per-pool prices for Solana, Ethereum, Base, BSC and Arbitrum tokens (GeckoTerminal, refreshed every few minutes); use the deepest pool by reserve_usd. Sui (suiUSDe on Cetus) and MegaETH are not covered. current_price on /coins/{symbol} works for USDE, GHO and CRVUSD; FRAX there is the legacy coin, not the live stable."
+  - id: deviation_30bp
+    role: entry
+    rule: "Act on a peg deviation of at least 30 bp (price at least 0.003 away from 1.00)"
+    runnable: partial
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "Same pool-price caveats as peg_watchlist. sUSDe is yield-bearing and normally trades around $1.00-1.05, so its deviation is against its own recent level, not $1.00; the page's implementation plan measures against a 30-day rolling baseline, which the bot must build from its own samples."
+  - id: mechanism_classification
+    role: filter
+    rule: "Classify the trigger (funding, collateral, AMM band, sympathy, bridge) and trade only solvable depegs; skip structural breaks"
+    runnable: false
+    note: "A judgement; no served field classifies a depeg. The served supporting reads are funding_streak_14d and sympathy_exploit_100m."
+  - id: funding_streak_14d
+    role: filter
+    rule: "sUSDe variant: trade only while funding is negative but the negative streak is under about 14 days"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol=ETHUSDT&limit=45
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin=ETH&interval=1d&start={start}
+    replay_field: data[].funding_sum
+    note: "45 Binance 8h prints cover 15 days: count consecutive negative days. Ethena hedges ETH and BTC across several venues, so one venue's ETH funding is a proxy; check BTCUSDT the same way. Replay is Hyperliquid daily funding sums."
+  - id: ethena_reserve_solvent
+    role: filter
+    rule: "sUSDe variant: Ethena's reserve fund is solvent and not draining fast"
+    runnable: false
+    note: "Ethena reserve disclosures are not served; they come from Ethena's governance forum."
+  - id: gho_gsm_utilisation
+    role: filter
+    rule: "GHO variant: GSM (PSM) utilisation below 85% and Aave bad debt below 5%, with Aave governance functioning"
+    runnable: false
+    note: "Aave GSM utilisation and bad-debt data are not served; needs Aave's dashboard or a Dune query."
+  - id: llamma_band_depth
+    role: filter
+    rule: "crvUSD variant: LLAMMA band depth above about 10% with Curve functioning"
+    runnable: false
+    note: "LLAMMA state is not served; needs the Curve subgraph."
+  - id: bridge_recap_credible
+    role: filter
+    rule: "Bridge variant: trade a wrapped stable more than 5% below canonical only when a recapitalisation is credible"
+    runnable: false
+    note: "Recap credibility is a judgement on protocol announcements and bridge configuration, neither of which is served."
+  - id: sympathy_exploit_100m
+    role: entry
+    rule: "Sympathy variant: after an exploit of $100M or more, buy synthetic stables trading more than 30 bp off peg without direct exposure"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack
+    field: items[].amount_usd
+    note: "The DefiLlama registry lists the exploit hours after disclosure; news events with category hack on /news/market-moving come sooner. Direct exposure versus sympathy is the desk's call."
+  - id: scale_in
+    role: sizing
+    rule: "Scale in: 25% at the first 30 bp threshold, 50% at 60 bp, the final 25% reserved for capitulation"
+    runnable: partial
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "Same pool-price caveats as deviation_30bp; the capitulation level is not given."
+  - id: hedge_backing_asset
+    role: sizing
+    rule: "Hedge backing exposure: short ETH perp for sUSDe (about 50% of the long's notional), short AAVE for GHO contagion, CRV for crvUSD"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "ETH, AAVE and CRV perps are listed on Hyperliquid. The hedge ratio beyond the sUSDe example is the desk's call."
+  - id: exit_peg_30bp
+    role: exit
+    rule: "Exit once the peg is restored to within 30 bp of $1.00"
+    runnable: partial
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "Same pool-price caveats as deviation_30bp."
+  - id: exit_mechanism_stabilised
+    role: exit
+    rule: "Exit once the mechanism stabilises: positive funding restored, PSM refilled, LLAMMA rebalanced or bridge recapitalised"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin=ETH&limit=24
+    field: history[].funding_rate
+    note: "Only the funding leg is served (positive funding restored). PSM, LLAMMA and bridge state are not."
+  - id: stop_2x_impaired
+    role: stop
+    rule: "Stop out if the depeg deepens past entry by 2x and the mechanism is materially impaired"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "The 2x depth test is mechanical; mechanism impaired is the desk's judgement."
+  - id: never_long_structural
+    role: stop
+    rule: "Close at any cost on a mechanism failure (Ethena reserve depleted, Aave PSM exhausted, LLAMMA insolvent, bridge recap failed); never add"
+    runnable: false
+    note: "None of these mechanism states is served."
+  - id: kill_drawdown_25pct
+    role: stop
+    rule: "Kill switch: drawdown above 25% over a rolling 12 months"
+    runnable: true
+    input: position
+  - id: kill_low_return
+    role: stop
+    rule: "Kill switch: average monthly return below 30 bp for 4 consecutive quarters"
+    runnable: true
+    input: position
+  - id: kill_mechanism_or_regulation
+    role: stop
+    rule: "Kill switch: a major synthetic-stable death spiral, or regulatory action against synthetic stables in your jurisdiction"
+    runnable: false
+    note: "Judgements on news and regulation; /policy/regime scores crypto policy risk in general, not synthetic-stable rules."
 ---
 
 # Synthetic Stablecoin Depeg Arbitrage

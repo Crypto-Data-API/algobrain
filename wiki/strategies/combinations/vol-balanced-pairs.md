@@ -33,6 +33,136 @@ kill_criteria: |
   - cointegration p-value deteriorates beyond 0.15 on a 90-day rolling window (structural anchor broken)
 
 related: ["[[pairs-trading]]", "[[correlation-regime-pairs]]", "[[pairs-with-funding-differential]]", "[[vol-targeted-trend-following]]", "[[volatility-targeting]]", "[[narrative-position-vol-targeting]]", "[[unlock-pair-hedge]]", "[[stat-arb]]", "[[cointegration]]", "[[z-score]]", "[[realized-volatility]]", "[[funding-rate]]", "[[open-interest]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: pair_universe
+    role: universe
+    rule: "Canonical pairs: BTC/ETH; BTC or ETH against SOL, BNB, ADA or AVAX; same-sector pairs such as ARB/OP or competing DeFi protocols"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "The named pairs are mechanical. Which same-sector DeFi or L2 pairs to add is the desk's call; pair_eligible decides whether any of them trades."
+  - id: corr_60d
+    role: universe
+    rule: "Rolling 60-day correlation of daily returns at least 0.70"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=91
+    field: klines[].close
+    replay: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=1000
+    replay_field: klines[].close
+    note: "Call once per leg and align on open_time. The last row is the forming day: drop it. Binance spot, as the page names; limit=1000 covers about 2.7 years for replay."
+  - id: coint_p
+    role: universe
+    rule: "Engle-Granger cointegration p-value at most 0.05 on 90 days of daily closes"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=91
+    field: klines[].close
+    replay: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=1000
+    replay_field: klines[].close
+    note: "Run the test on the two legs' 90 closed daily closes (log prices)."
+  - id: halflife
+    role: universe
+    rule: "Spread half-life from an OU fit between 3 and 25 days"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=91
+    field: klines[].close
+    replay: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=1000
+    replay_field: klines[].close
+    note: "Regress the change in the spread on its lagged level over the same 90 days; half-life = -ln(2) / slope."
+  - id: pair_eligible
+    role: universe
+    rule: "A pair is tradeable only when corr_60d, coint_p and halflife all pass"
+    runnable: true
+    input: derived
+    inputs: [corr_60d, coint_p, halflife]
+  - id: leg_vol_20d
+    role: sizing
+    rule: "Per-leg 20-day annualised realised vol: std(daily returns over 20 days) x sqrt(365)"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=22
+    field: klines[].close
+    replay: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=1000
+    replay_field: klines[].close
+    note: "21 closed closes give 20 returns; drop the forming last row."
+  - id: vol_balanced_notional
+    role: sizing
+    rule: "Total spread notional N (10% of portfolio in the pseudocode): low-vol leg = N x vol_high / (vol_high + vol_low), high-vol leg = N x vol_low / (vol_high + vol_low)"
+    runnable: true
+    input: derived
+    inputs: [leg_vol_20d]
+  - id: resize_weekly
+    role: sizing
+    rule: "Recompute the vol ratio weekly; if either leg's 20-day vol has changed by 15% or more (relative), re-size at the next spread entry, never mid-trade"
+    runnable: true
+    input: derived
+    inputs: [leg_vol_20d]
+  - id: zscore_entry
+    role: entry
+    rule: "Enter when the log-spread z-score (30-day rolling mean and std) reaches 2.0 or more in either direction: long the under-performing leg, short the over-performing leg"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=31
+    field: klines[].close
+    replay: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=1000
+    replay_field: klines[].close
+    note: "Log-spread = ln(price_A / price_B); the page does not weight it by the cointegration beta."
+  - id: funding_alignment
+    role: filter
+    rule: "Optional: the over-valued (short) leg's perp carries the higher positive funding, so the short is paid"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "Call for both legs and compare. Hyperliquid hourly rates; the page's 8h framing does not change the comparison."
+  - id: short_leg_oi_growth
+    role: sizing
+    rule: "Reduce size if open interest is growing rapidly on the over-valued (short) leg"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_change_pct
+    note: "The page gives no growth threshold, window or size cut, so all three are the desk's call."
+  - id: zscore_exit
+    role: exit
+    rule: "Close when the spread z-score mean-reverts to 0.5 or less in absolute value"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=31
+    field: klines[].close
+  - id: zscore_stop
+    role: stop
+    rule: "Close if the spread z-score widens to 3.5 or more in absolute value"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=31
+    field: klines[].close
+  - id: corr_stop
+    role: exit
+    rule: "Flatten immediately if the rolling 60-day correlation drops below 0.55"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=91
+    field: klines[].close
+  - id: coint_stop
+    role: exit
+    rule: "Flatten immediately if the cointegration p-value rises above 0.10"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=91
+    field: klines[].close
+  - id: time_exit
+    role: exit
+    rule: "Close after 21 days if neither the target nor the stop has been hit"
+    runnable: true
+    input: position
+  - id: regime_flat
+    role: exit
+    rule: "Flatten all spreads while the long-term regime is Structural Shock"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Flatten on regime structural_shock_crisis. History from 2026-08-07."
+  - id: position_limits
+    role: sizing
+    rule: "At most 10-12% of portfolio per spread, at most 3 concurrent spreads, at most 2x leverage on each leg"
+    runnable: true
+    input: position
 ---
 
 # Vol-Balanced Pairs

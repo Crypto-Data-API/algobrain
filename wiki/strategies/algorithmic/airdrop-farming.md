@@ -40,6 +40,108 @@ kill_criteria: |
   - capital rotation blocked (bridged funds stuck) for > 30 days
 
 related: ["[[points-farming]]", "[[restaking-strategies]]", "[[defi-yield-farming]]", "[[liquidity-sniping]]", "[[mev-strategies]]", "[[memecoin-sniping]]", "[[expected-value]]", "[[kelly-criterion]]", "[[funding-rate-arbitrage]]", "[[hyperliquid]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: vc_funded_no_token
+    role: universe
+    rule: "Target protocols with a $50M+ raise from top-tier backers (a16z, Paradigm, Sequoia) and no token yet"
+    runnable: false
+    note: "No funding-round or pre-token protocol data is served. Needs Crunchbase, DefiLlama's raises list or The Block."
+  - id: testnet_live
+    role: filter
+    rule: "Prefer protocols with an open testnet or an unincentivised mainnet beta live"
+    runnable: false
+    note: "Testnet and beta status are off-chain project facts we do not serve; read them from the protocol's docs and announcements."
+  - id: governance_signal
+    role: filter
+    rule: "Prefer protocols whose governance discusses community rewards, DAO formation or tokenisation"
+    runnable: false
+    note: "Governance forum text is not served, and judging it is a read of the discussion. Needs the protocol's forum or Snapshot space."
+  - id: no_token_or_geoblock
+    role: filter
+    rule: "Skip a protocol that states it will have no token or geoblocks the operator's jurisdiction (EV is zero)"
+    runnable: false
+    note: "Project statements and jurisdiction terms are not served; check the protocol's terms and announcements."
+  - id: genuine_activity
+    role: entry
+    rule: "On one primary wallet: bridge $500-5,000, make 10+ transactions across 5+ unique contracts, with activity spread over 3+ months"
+    runnable: true
+    input: position
+    note: "The farmer's own wallet record. We do not track airdrop eligibility or per-wallet on-chain history for these chains."
+  - id: gas_budget
+    role: sizing
+    rule: "Budget $50-200 of gas per wallet across a 6-month campaign and model it into EV"
+    runnable: true
+    input: position
+    note: "A budget the farmer tracks. Live gas prices are not served."
+  - id: campaign_ev
+    role: sizing
+    rule: "Enter only when EV = p(token) x p(eligible) x E[allocation] x (1 - Sybil disqualification p) x (1 - 50% dilution haircut) - gas - bridge - capital x 10% APR x horizon is positive"
+    runnable: false
+    note: "Every input but costs is the desk's own estimate (token and eligibility odds, allocation size, Sybil risk); nothing served answers them. The 10% APR and 50% haircut are fixed in the pseudocode."
+  - id: sybil_kill
+    role: filter
+    rule: "Skip the campaign, or cut wallets, when the Sybil-disqualification probability on the wallet cluster exceeds 30%"
+    runnable: false
+    note: "No Sybil-cluster analytics are served. Needs Nansen, Arkham or the farmer's own funding-source and timing analysis of the cluster."
+  - id: fractional_kelly
+    role: sizing
+    rule: "Size each campaign with fractional Kelly on its EV, given the fat-tailed outcome"
+    runnable: false
+    input: derived
+    inputs: [campaign_ev]
+    note: "Only as runnable as campaign_ev, whose inputs are the desk's estimates. The page gives no Kelly fraction."
+  - id: opportunity_hurdle
+    role: filter
+    rule: "Campaign EV must beat what the rotated capital would earn elsewhere (funding arbitrage or a stablecoin vault)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=100
+    field: history[].funding_rate
+    note: "Hyperliquid settles hourly: mean of the last 100 prints x 24 x 365 is the annualised carry a short-perp hedge earns. Stablecoin vault yields are not served. The pseudocode simply fixes the hurdle at 10% APR."
+  - id: rotate_after_snapshot
+    role: exit
+    rule: "Farm to the snapshot, then rotate the same capital to the next campaign"
+    runnable: false
+    note: "Snapshot dates are announced by each protocol, often after the fact, and are not served."
+  - id: claim_window
+    role: exit
+    rule: "Claim promptly once the airdrop opens; claim windows are finite"
+    runnable: false
+    note: "Claim openings and deadlines are protocol announcements we do not serve. /event/calendar carries unlocks and macro prints, not airdrop claims."
+  - id: token_security
+    role: filter
+    rule: "Rug and honeypot screen the protocol's token before touching it, and the claimed token before selling into or holding through launch"
+    runnable: partial
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: risk_flags.is_honeypot
+    note: "From the page's AI-agent workflow. {address} is the token's contract: pools[].base_token.address on /dex/new-pools?chain={chain} once its first pool lists, or the protocol's published contract. taxes.sell_tax_pct and risk_score (100 = safest) are in the same report; the page sets no pass line, so that is the desk's call."
+  - id: heavy_dilution_sell
+    role: exit
+    rule: "Sell into launch liquidity when the claimed token is heavily diluted (low circulating float)"
+    runnable: partial
+    endpoint: /api/v1/supply/float?symbol={coin}&min_market_cap=0
+    field: rows[].float_pct
+    note: "float_pct is circulating over max or total supply (supply_basis says which); dilution_overhang is locked value over market cap. The page gives no cut for heavily diluted. A token CoinGecko has not indexed yet has no row."
+  - id: unlock_cliff_sell
+    role: exit
+    rule: "Sell into launch liquidity when a large VC unlock cliff is coming soon"
+    runnable: partial
+    endpoint: /api/v1/supply/unlocks?symbol={coin}&window_days=35
+    field: items[].pct_of_float
+    note: "The calendar runs 35 days ahead (Pro; Free sees 7) for tokens with a published schedule; categories names insiders or investors. The page defines neither large nor soon. An empty list for a not_tracked token on /supply/float does not mean no unlock."
+  - id: fundamentals_hold
+    role: exit
+    rule: "Hold part of the allocation when fundamentals are strong and the float is reasonable"
+    runnable: false
+    note: "Strong fundamentals is a judgement the page leaves open, and no protocol revenue or TVL per protocol is served. heavy_dilution_sell covers the float half."
+  - id: bear_regime_dump
+    role: exit
+    rule: "Dump claims fast when strong_trend_bear or vol_spike dominate the quant market read; a bull state supports the partial hold"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's AI-agent workflow. Reading dominate as the committed label being strong_trend_bear or vol_spike is one interpretation; probabilities.directional gives the odds behind it. This is the market regime, not the airdropped token's own."
 ---
 
 # Airdrop Farming

@@ -34,6 +34,136 @@ kill_criteria: |
   - ATR-scaled spacing > 3× the initial deployment spacing for 30+ consecutive days: vol regime is too high for grid trading regardless of adaptive spacing — apply [[regime-gated-grid]] stop
 
 related: ["[[regime-gated-grid]]", "[[oi-aware-grid]]", "[[funding-skewed-grid]]", "[[grid-with-tail-hedge]]", "[[grid-trading]]", "[[event-calendar-risk-gating]]", "[[atr]]", "[[volatility-targeting]]", "[[market-making]]", "[[atr-position-sizing]]", "[[atr-trailing-stop]]", "[[bollinger-bands]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: atr_14_4h_spacing
+    role: sizing
+    rule: "Grid spacing = k x ATR(14) on closed 4h bars, starting at k = 0.25"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=30&atr=14
+    field: candles[].atr
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=4h&start={start}
+    replay_field: klines[].h
+    note: "Read the ATR on the last closed bar: drop the bar named by forming_bar_timestamp, since the page recalibrates only on closed 4h candles. The page's example is a Binance BTCUSDT perp; these are Hyperliquid perp bars. Replay computes ATR(14) from h, l and c (Hyperliquid 4h history back to 2023 is on /hyperliquid/candles with start)."
+  - id: atr_24_1h_fast
+    role: filter
+    rule: "Supplementary ATR(24) on 1h bars, a faster input to detect intraday vol expansion before the 4h ATR updates"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=50&atr=24
+    field: candles[].atr
+    note: "The page computes it but gives no rule for acting on it (no ratio to the 4h ATR that triggers an early recalibration), so the trigger is the desk's call."
+  - id: grid_bounds
+    role: entry
+    rule: "Grid bounds = reference price plus and minus 2.5 x ATR(14, 4h); levels = 5 x ATR / spacing (15-25 at k = 0.25), at least 5"
+    runnable: true
+    input: derived
+    inputs: [atr_14_4h_spacing]
+    note: "The reference price is the mark at calibration (assets[].mark_price on /api/v1/hyperliquid/open-interest)."
+  - id: equal_level_notional
+    role: sizing
+    rule: "Base case: equal notional per level, total grid capital divided by the number of levels"
+    runnable: true
+    input: position
+  - id: high_vol_notional_cut
+    role: sizing
+    rule: "When ATR(14, 4h) is at least 1.5x its deployment baseline, scale per-level notional by baseline ATR / current ATR"
+    runnable: true
+    input: derived
+    inputs: [atr_14_4h_spacing]
+    note: "The baseline is the ATR stored at initial deployment, from the position record."
+  - id: recalib_atr_15pct
+    role: sizing
+    rule: "Every 4 hours on a closed bar, recalibrate (cancel unfilled orders, re-place at new spacing, bounds and notional; never move filled levels) when ATR(14, 4h) has moved 15% or more from the last calibration"
+    runnable: true
+    input: derived
+    inputs: [atr_14_4h_spacing]
+  - id: recalib_48h
+    role: sizing
+    rule: "Otherwise recalibrate when 48 hours have passed since the last recalibration"
+    runnable: true
+    input: position
+  - id: adx_kill
+    role: stop
+    rule: "At recalibration, do not re-place grid orders while ADX(14) on 4h bars is above 25"
+    runnable: true
+    endpoint: /api/v1/indicators/adx?coin={coin}&interval=4h
+    field: items[].adx
+    replay: /api/v1/indicators/adx?coin={coin}&interval=4h&history=500
+    replay_field: items[].history[].adx
+    note: "Read the latest bar with final true. history=500 reaches about 83 days of 4h bars; older replays compute ADX(14) from 4h klines."
+  - id: bbw_kill
+    role: stop
+    rule: "At recalibration, do not re-place grid orders while Bollinger bandwidth (20, 2 sigma) on 4h bars is above its 80th percentile"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=560
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=4h&start={start}
+    replay_field: klines[].c
+    note: "Bandwidth = (upper - lower) / middle on closed 4h closes. The page names no percentile lookback; 540 bars (90 days) matches the regime-gated-grid family, but the window is the desk's call."
+  - id: vol_shock_halt
+    role: stop
+    rule: "Halt the grid when the coin's volatility regime is vol_shock, the regime stop ATR scaling alone cannot catch"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.volatility_regime.by_symbol.{coin}.regime
+    note: "From the page's AI-agent workflow. Replay is one reading per UTC day."
+  - id: oi_build_pause
+    role: stop
+    rule: "Cancel grid orders and skip recalibration while 12h open interest change is +5% or more, until OI normalises"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    field: data[].oi_close
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].oi_close
+    note: "start = 13 hours ago; 12h change = latest oi_close / oi_open of the bar 12 hours earlier - 1. Hyperliquid OI in coin units; the bar containing now is never served, so the read lags up to an hour. Binance OI history here is daily only. The page does not define normalised; back under +5% is one reading."
+  - id: funding_skew_overlay
+    role: sizing
+    rule: "Optional: after computing the ATR-scaled spacing, apply the funding-skewed-grid skew on top (tighter levels on one side, wider on the other)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    note: "8h funding is the sum of the last 8 hourly Hyperliquid prints; the bands and factors are on the funding-skewed-grid page."
+  - id: event_window_pause
+    role: stop
+    rule: "During a Tier 1 or Tier 2 event window, cancel all orders and suspend recalibration until the resume condition is met"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=macro_print
+    field: items[].days_until
+    note: "The tiers, windows and resume conditions are defined on event-calendar-risk-gating. The calendar gives dates, not release times, so intraday windows need the release clock from elsewhere."
+  - id: taker_share_widen
+    role: sizing
+    rule: "If taker fills exceed 60% of fills, or fills are predominantly taker, increase k; if the fill rate is too low, decrease k"
+    runnable: partial
+    input: position
+    note: "From the grid's own fill log. The page does not say by how much to move k or what fill rate is too low."
+  - id: kill_drawdown_13
+    role: stop
+    rule: "Kill: grid sleeve drawdown above 13% from its high-water mark"
+    runnable: true
+    input: position
+  - id: kill_taker_only_20
+    role: stop
+    rule: "Kill or recalibrate: taker-only fills for 20 or more consecutive cycles"
+    runnable: true
+    input: position
+  - id: kill_revenue_below_fee
+    role: stop
+    rule: "Kill or pause: average revenue per cycle below the taker fee cost for 15 consecutive cycles"
+    runnable: true
+    input: position
+  - id: kill_sharpe_negative
+    role: stop
+    rule: "Kill: rolling 3-month Sharpe below 0 on at least 40 completed grid cycles"
+    runnable: true
+    input: position
+  - id: kill_spacing_3x
+    role: stop
+    rule: "Kill: ATR-scaled spacing above 3x the initial deployment spacing for 30 or more consecutive days"
+    runnable: true
+    input: derived
+    inputs: [atr_14_4h_spacing]
+    note: "Compare each day's spacing with the one stored at deployment."
 ---
 
 # ATR-Scaled Grid

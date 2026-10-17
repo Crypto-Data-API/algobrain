@@ -22,6 +22,32 @@ expected_max_drawdown: 0.05
 breakeven_cost_bps: 40
 decay_evidence: "Band narrowed from ~1.3% pre-1866 to ~0.5-0.7% post-1866 after the transatlantic cable; effectively extinguished by the 1914 suspension of the gold standard and the subsequent closing of gold windows"
 related: ["[[covered-interest-arbitrage]]", "[[mint-parity-arbitrage]]", "[[specie-flow-arbitrage]]", "[[bill-broking-arbitrage]]", "[[gold-silver-ratio-arbitrage]]", "[[gold-standard-mechanics]]", "[[telegraph-impact-on-arbitrage]]", "[[arbitrage]]", "[[edge-taxonomy]]"]
+gates:
+  - id: gold_points
+    role: filter
+    rule: "Each morning compute the gold export and import points: mint par ($4.8665 per pound) x (1 +/- freight + insurance + assay + 10 days' interest at the discount rate)"
+    runnable: false
+    note: "Historical (1821-1914, retired). Steamer freight, Lloyd's insurance, mint assay schedules and the Bank of England discount rate are not served."
+  - id: export_point_breach
+    role: entry
+    rule: "Ship gold New York to London when the sterling cable rate exceeds the gold export point by at least 10-15 bps after fees"
+    runnable: false
+    note: "No sterling bill or cable rate is served; /sentiment/macro carries EUR/USD only. The gold standard ended in 1914."
+  - id: import_point_breach
+    role: entry
+    rule: "Ship gold London to New York when the sterling cable rate is below the gold import point by at least 10-15 bps"
+    runnable: false
+    note: "Same unserved inputs as export_point_breach."
+  - id: self_liquidating_exit
+    role: exit
+    rule: "The trade closes itself once the gold is converted on the far side, about 10-14 days after shipping"
+    runnable: true
+    input: position
+  - id: shipment_capacity
+    role: sizing
+    rule: "Size each shipment within steamer hold capacity (about 50,000-500,000 pounds in sovereigns), the Lloyd's insurance line, mint throughput and standing balances"
+    runnable: true
+    input: position
 ---
 
 # Gold Point Arbitrage

@@ -21,6 +21,44 @@ expected_sharpe: -0.3
 expected_max_drawdown: 0.03
 breakeven_cost_bps: 150
 related: ["[[vix-call-spreads]]", "[[tail-risk-hedging]]", "[[options-concentration-risk]]", "[[long-vol-vs-short-vol]]", "[[long-vol-overlay]]", "[[ratio-spread]]", "[[debit-spread]]", "[[put-spread]]", "[[skew]]", "[[implied-volatility]]", "[[universa-investments]]", "[[convexity]]", "[[gamma]]", "[[vega]]", "[[1x2-ratio-spread]]"]
+gates:
+  - id: spx_options
+    role: universe
+    rule: "SPX (or 1/10th-size XSP) index options"
+    runnable: false
+    note: "No SPX or XSP option chain, index level or VIX is served. Needs a listed-options feed (CBOE)."
+  - id: tree_strikes
+    role: entry
+    rule: "1x1x2 tree: long 1 put 5-7% OTM, short 1 put 10-12% OTM, long 2 puts 15-20% OTM (pseudocode 6% / 10% / 18%, rounded to 25 points)"
+    runnable: false
+    note: "Needs the SPX spot and listed strikes, neither of which is served. The 1x2x1 Christmas-tree variant (wings 5-8% and 15-18%, kept near-equidistant from the short strike) has the same gap."
+  - id: net_debit_check
+    role: entry
+    rule: "The tree must price as a small net debit (upper - middle + 2 x lower, at mid); a credit means a strike or skew error"
+    runnable: false
+    note: "Needs SPX put prices; not served."
+  - id: tenor_30_60
+    role: entry
+    rule: "30-60 DTE on the next monthly expiry (pseudocode 45 DTE)"
+    runnable: partial
+    input: position
+    note: "Third-Friday monthly expiries are a calendar rule, but the exchange holiday calendar that shifts them is not served."
+  - id: budget_sizing
+    role: sizing
+    rule: "2-3% of NAV a year (about 0.2-0.25% a month): trees = monthly budget / (net debit x 100)"
+    runnable: false
+    input: position
+    note: "The budget is a position rule, but the tree count needs the net debit, which needs SPX option prices."
+  - id: expiry_ladder
+    role: sizing
+    rule: "Stack 2-3 expiry ladders so part of the structure is always 30+ DTE; roll forward monthly"
+    runnable: true
+    input: position
+  - id: monetize_drawdown
+    role: exit
+    rule: "Sell the whole tree when SPX has dropped 5-12% (the structure's sweet spot); otherwise hold to expiry"
+    runnable: false
+    note: "No SPX price series is served."
 ---
 
 A **put tree** (or "Christmas tree put spread") is a defined-cost long-vol structure that stacks put exposure across three strikes: long one put at a higher strike, short one put at a middle strike, and long two puts at a lower strike — or variants of this 1×1×2 / 1×2×1 ratio. The structure is engineered to **maximize convex payoff in the 5-15% drawdown zone** while remaining funded (small debit) and capping the deepest-tail exposure. It is the structure of choice for traders who want long-vol overlay payoff but cannot stomach the bleed of a continuous OTM SPX put program — and is an explicit recommendation in the [[options-concentration-risk]] long-vol overlay menu.

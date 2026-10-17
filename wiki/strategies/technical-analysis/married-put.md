@@ -12,6 +12,74 @@ markets: [crypto, options]
 complexity: beginner
 backtest_status: untested
 related: ["[[protective-put]]", "[[collar]]", "[[covered-call]]", "[[synthetic-long]]", "[[hedging]]", "[[tail-risk-hedging]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[staking]]", "[[delta]]", "[[theta]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_spot_plus_put
+    role: universe
+    rule: "Buy spot BTC or ETH and one Deribit put per unit of coin in the same ticket"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied vol served. Put quotes come from Deribit itself."
+  - id: put_strike_atm_or_otm
+    role: entry
+    rule: "Put strike ATM for maximum protection, or 5-15% OTM to cut cost and accept a deductible"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "The strike target follows from spot (oracle_price is a CEX spot composite close to Deribit's index); the listed strikes and put quotes come from Deribit."
+  - id: tenor_30_90_dte
+    role: entry
+    rule: "Tenor 30-90 DTE to cover the intended hold or risk window"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure lists the nearest 12 Deribit expiries. It is Pro Plus and empty on lower tiers."
+  - id: risk_window_catalyst
+    role: entry
+    rule: "A new position into an uncertain window: an FOMC print, an unlock or a halving aftermath"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=30&symbol={coin}
+    field: items[].date
+    note: "Macro prints and unlocks are on the calendar (30 days out); the halving is not."
+  - id: vol_not_spiking
+    role: filter
+    rule: "Buy while the vol regime reads compressed or normal; a vol_shock state means insurance is at its most expensive"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow. No history of the per-coin label is served for replay; DVOL itself is items[].dvol on /api/v1/volatility/implied."
+  - id: hedge_ratio
+    role: sizing
+    rule: "One put per unit of coin for full protection; partial hedges of 50-75% cut cost"
+    runnable: true
+    input: position
+  - id: monetize_on_spike
+    role: exit
+    rule: "If a sharp, high-DVOL selloff drives the put deep ITM, sell it to harvest intrinsic plus vega"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    note: "The AI workflow's trigger is a spike in the vol-stress composite off baseline; the page gives no size for the spike or for 'deep ITM'."
+  - id: tail_building_watch
+    role: exit
+    rule: "Cascade activity and stretched funding flag the left tail building: the moment to monetize a deep-ITM put"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&include_quiet=true
+    field: alerts[].direction
+    note: "A triggered long_flush alert is the cascade read; funding is binance.current_rate on /api/v1/derivatives/funding-rates?coin={coin}. The page gives no thresholds."
+  - id: roll_up_after_rally
+    role: exit
+    rule: "After a rally, roll the put to a higher strike to lock in a new floor (or sell a call to convert into a collar)"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "The page gives no rally size that triggers the roll."
+  - id: no_reflexive_roll
+    role: exit
+    rule: "Let the put expire and re-underwrite only if protection is still needed; do not roll a catalyst hedge reflexively"
+    runnable: true
+    input: position
 ---
 
 # Married Put (Crypto)

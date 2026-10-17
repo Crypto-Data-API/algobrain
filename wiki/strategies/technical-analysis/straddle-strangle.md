@@ -12,6 +12,102 @@ markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[straddle]]", "[[strangle]]", "[[short-straddle]]", "[[short-strangle]]", "[[iron-condor]]", "[[gamma-scalping]]", "[[delta-hedging]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[volatility-surface]]", "[[deribit]]", "[[greeks-live]]", "[[crypto-options-volatility-selling]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit
+    role: universe
+    rule: "BTC or ETH options on Deribit; alt option chains are too wide and shallow"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "We do serve Deribit DVOL (current and about 180 days of daily history) and the ATM term structure for BTC and ETH, despite the page saying otherwise. Option quotes, the IV surface and fills come from Deribit."
+  - id: catalyst_ahead
+    role: entry
+    rule: "Buy ahead of a discrete catalyst with uncertain direction: protocol upgrade or fork, spot-ETF decision, solvency or depeg scare, large unlock, FOMC or CPI, governance vote"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=30
+    field: items[].days_until
+    note: "macro_print (FOMC, CPI and others), unlock and depeg rows are served with days_until. Upgrades, forks, ETF decisions, solvency scares and governance votes are not; the page sets no size for a 'large' unlock."
+  - id: dvol_low_pctile
+    role: entry
+    rule: "DVOL below about the 40th percentile of its trailing year (implied vol cheap)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Rank today's dvol against the served daily history, which is about 180 days (Pro Plus), not a year. The page calls this the single most important entry filter."
+  - id: vol_regime_compressed
+    role: entry
+    rule: "Buy only from a compressed vol-regime read"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+  - id: vol_score_low
+    role: filter
+    rule: "A low market-wide vol-stress score flags cheap convexity"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    replay: /api/v1/volatility/index/history?days=365
+    replay_field: points[].composite_score
+    note: "The page sets no cutoff for 'low'. The replay is one composite per UTC day."
+  - id: realized_over_implied_view
+    role: entry
+    rule: "Expect realized vol over the holding period to exceed implied"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    note: "vrp (dvol - realized_30) shows how implied compares with the last 30 days; whether future realized vol will exceed implied is a forecast."
+  - id: not_into_elevated_dvol
+    role: filter
+    rule: "Avoid buying into an already-elevated DVOL right before the event; enter before the vol bid arrives"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol_change_24h
+    note: "The page gives no threshold for 'elevated' or how early 'before' is."
+  - id: structure_strikes
+    role: entry
+    rule: "Straddle: buy the ATM call and put at K close to spot. Strangle: buy about 25-delta OTM call and put"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "ATM is the listed strike nearest spot. No per-strike Greeks are served, so 25-delta strikes are a Black-Scholes approximation from atm_iv that ignores skew; premiums come from Deribit. The page names no tenor (the example is 30 DTE)."
+  - id: dealers_short_gamma
+    role: filter
+    rule: "Short-gamma dealers amplify the move the straddle wants"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    note: "/quant/gex is a perp analog of dealer gamma (amplify at or above 0.35), not Deribit options GEX. The page uses it as context with no threshold."
+  - id: take_profit_scale_out
+    role: exit
+    rule: "Scale out at 50-100% gain on the winning leg once a move develops"
+    runnable: true
+    input: position
+    note: "Option marks come from the venue."
+  - id: roll_before_final_weeks
+    role: exit
+    rule: "Roll up or out before the theta-heavy final 1-2 weeks if the thesis is intact but slow"
+    runnable: true
+    input: position
+  - id: cut_on_iv_crush
+    role: exit
+    rule: "If the catalyst passes with a muted move and DVOL collapses, exit immediately"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "The catalyst date is on the calendar; 'muted' and 'collapses' have no thresholds (the example is DVOL 50 to 38 on a 2.5% move)."
+  - id: gamma_scalp_hedge
+    role: sizing
+    rule: "Optional: delta-hedge on the perpetual and scalp gamma around the range; the hedge pays or collects funding"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    note: "Position delta comes from the venue's Greeks; the page gives no rebalance band. Hyperliquid funding stands in for Deribit's perpetual."
+  - id: risk_1_3pct
+    role: sizing
+    rule: "Risk at most 1-3% of the book per structure (the debit is the max loss)"
+    runnable: true
+    input: position
 ---
 
 # Straddle & Strangle

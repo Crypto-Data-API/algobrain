@@ -12,6 +12,37 @@ markets: [commodities]
 complexity: intermediate
 backtest_status: untested
 related: ["[[spark-spread]]", "[[crush-spread]]", "[[seasonal-spread-trading]]", "[[basis-trading]]", "[[event-driven-trading]]", "[[crude-oil]]", "[[gasoline]]", "[[heating-oil]]", "[[eia-data]]", "[[inventory-cycle-analysis]]", "[[geopolitical-risk-premium]]", "[[commodities]]"]
+gates:
+  - id: crack_321_spread
+    role: entry
+    rule: "3:2:1 crack spread in $/bbl = (2 x RBOB x 42 + 1 x heating oil x 42 - 3 x WTI) / 3, same contract month; typical range $10-30/bbl"
+    runnable: false
+    note: "No WTI, RBOB or ULSD heating-oil futures prices are served. This needs a NYMEX (CME) energy futures feed."
+  - id: long_crack_season
+    role: entry
+    rule: "Go long the crack (the page's legs: buy 3 CL, sell 2 RB and 1 HO in the same month) before peak demand seasons, late spring for the summer driving season, or when refinery outages are expected"
+    runnable: false
+    note: "The calendar date is trivial, but the legs are NYMEX futures we do not serve, and expected refinery outages need an industry outage feed."
+  - id: short_crack_supply_shock
+    role: entry
+    rule: "Go short the crack (sell 3 CL, buy 2 RB and 1 HO) when crude is expected to rise faster than products, e.g. an OPEC supply cut with no matching demand increase"
+    runnable: false
+    note: "No energy futures are served, and OPEC decisions are not on /event/calendar. The news tape (/news/market-moving) is crypto-scoped and has no OPEC category."
+  - id: refinery_utilization
+    role: filter
+    rule: "Low refinery utilization (maintenance season, outages) cuts product supply and widens the crack"
+    runnable: false
+    note: "Needs the weekly EIA refinery utilization series, which is not served."
+  - id: eia_inventories
+    role: filter
+    rule: "Weekly EIA petroleum status report: crude inventories versus product inventories"
+    runnable: false
+    note: "EIA inventory data is not served, and the weekly EIA release is not on /event/calendar (macro_print covers US macro prints only)."
+  - id: seasonal_product_demand
+    role: filter
+    rule: "Gasoline demand peaks in summer (driving season), heating-oil demand peaks in winter"
+    runnable: false
+    note: "A calendar fact the bot can encode, but it only matters for legs we cannot price: no product futures are served."
 ---
 
 # Crack Spread

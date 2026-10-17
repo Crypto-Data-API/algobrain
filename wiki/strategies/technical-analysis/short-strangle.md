@@ -12,6 +12,129 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[short-straddle]]", "[[strangle]]", "[[straddle-strangle]]", "[[crypto-options-volatility-selling]]", "[[iron-condor]]", "[[iron-fly]]", "[[gamma-scalping]]", "[[delta-hedging]]", "[[theta]]", "[[vega]]", "[[dvol]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[iv-crush]]", "[[deribit]]", "[[greeks-live]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit
+    role: universe
+    rule: "BTC or ETH options on Deribit; liquid OTM strangles beyond them are scarce"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "We do serve Deribit DVOL (current and about 180 days of daily history) and the ATM term structure for BTC and ETH, despite the page saying otherwise. Option quotes, the IV surface and fills come from Deribit."
+  - id: dvol_upper_pctile
+    role: entry
+    rule: "DVOL rich: above about the 50th-60th percentile of its trailing year"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Rank today's dvol against the served daily history, which is about 180 days (Pro Plus), not a year."
+  - id: implied_over_realized
+    role: entry
+    rule: "Realized vol expected below implied: DVOL above 30-day realized vol (the richness check)"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "vrp = dvol - realized_30; above 0 means implied is rich. The page sets no minimum gap. Replay compares daily DVOL with 30-day realized vol from /api/v1/hyperliquid/candles daily closes."
+  - id: vol_regime_ok
+    role: filter
+    rule: "Sell only in an expanding or normal vol regime, never in a live vol_shock"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+  - id: dvol_not_spiking
+    role: filter
+    rule: "DVOL rich and stable: do not sell into a spiking DVOL"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol_change_24h
+    note: "The page gives no spike threshold or stability window; both are the desk's."
+  - id: catalyst_free_window
+    role: filter
+    rule: "Never carry both wings across a dated catalyst: protocol upgrade or fork, spot-ETF option decision, large unlock, FOMC or CPI"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=30
+    field: items[].event_type
+    note: "macro_print (FOMC, CPI and others) and unlock rows are served; upgrades, forks and ETF decisions are not, and the page sets no size for a 'large' unlock. The calendar reaches 30 days."
+  - id: wings_15_25_delta
+    role: entry
+    rule: "Sell one OTM call and one OTM put at about 15-25 delta each, same expiry"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "No option chain or per-strike Greeks are served. Black-Scholes with the expiry's atm_iv gives approximate 15-25 delta strikes, ignoring skew; exact strikes and premiums need Deribit's chain. The page names no tenor (the example is 30 DTE)."
+  - id: weight_overbid_wing
+    role: entry
+    rule: "Skew-aware: weight the short toward the wing the leveraged crowd overbid (richly positive funding firms call skew)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "Funding is a proxy; 25-delta skew is not served, and the page gives no threshold or weighting."
+  - id: oi_wall_anchors
+    role: entry
+    rule: "OI walls that pin monthlies serve as strike anchors"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    note: "BTC only: one max-pain strike on the expiry with the largest open interest, which the response does not name. Per-strike OI walls are not served."
+  - id: dealer_gamma_context
+    role: filter
+    rule: "Check whether dealers will dampen or amplify the tape"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    note: "/quant/gex is a perp analog of dealer gamma (dampen at or below -0.20, amplify at or above 0.35), not Deribit options GEX. The page names no action for each state."
+  - id: take_profit_50pct
+    role: exit
+    rule: "Buy back at about 50% of the maximum credit"
+    runnable: true
+    input: position
+    note: "Option marks come from the venue."
+  - id: roll_tested_side
+    role: stop
+    rule: "As spot approaches one strike, roll that leg out and away for a credit, or roll the whole strangle out in time"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "The page gives no trigger distance; the desk sets it."
+  - id: delta_hedge_perp
+    role: sizing
+    rule: "Flatten residual delta with the perpetual; budget the funding the hedge pays or collects"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    note: "Position delta comes from the venue's Greeks; the page gives no rebalance band. Hyperliquid funding stands in for Deribit's perpetual."
+  - id: time_stop_final_week
+    role: exit
+    rule: "Manage or close before the final week before expiry"
+    runnable: true
+    input: position
+  - id: kill_vol_score_75
+    role: stop
+    rule: "Vol-regime score above 75: flatten or convert to an iron condor"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    replay: /api/v1/volatility/index/history?days=365
+    replay_field: points[].composite_score
+    note: "The replay is one composite per UTC day; days before 2026-08-24 are reconstructed."
+  - id: kill_cascade_or_dvol_jump
+    role: stop
+    rule: "A liquidation cascade or an intraday DVOL jump: flatten rather than average down"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&include_quiet=true
+    field: alerts[].triggered
+    note: "No cascade size or DVOL jump size is given. Squeeze alerts cover OKX, Bybit and Hyperliquid (not Binance); poll dvol on /api/v1/volatility/implied for the jump."
+  - id: stress_loss_cap
+    role: sizing
+    rule: "Keep stress loss at most 1-2% of the book per structure; do not add contracts to make up for the thin credit"
+    runnable: partial
+    input: position
+    note: "The page does not define the stress scenario; that is the desk's call."
 ---
 
 # Short Strangle

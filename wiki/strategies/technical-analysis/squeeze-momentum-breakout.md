@@ -26,6 +26,103 @@ kill_criteria: |
   - rolling 30-signal hit rate < 35% with average win/loss < 1.8
   - rolling 12-month net Sharpe < 0
   - fires per year on BTC 4h fall below 4 (setup too rare to evaluate)
+gates:
+  - id: squeeze_run_6
+    role: entry
+    rule: "Squeeze on (Bollinger Bands 20/2.0 inside Keltner Channels 20/1.5) for at least 6 consecutive closed 4h bars"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=80
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "Compute BB and KC from the bars' high, low and close (LazyBear's KC uses a 20-bar SMA with 1.5x the 20-bar mean true range). No squeeze series is served. Drop the forming bar named by forming_bar_timestamp."
+  - id: fire_bar
+    role: entry
+    rule: "The fire bar is the first closed bar where the squeeze is off; enter at the next bar's open, never at the fire bar's close"
+    runnable: true
+    input: derived
+    inputs: [squeeze_run_6]
+  - id: histogram_direction
+    role: entry
+    rule: "Long if the momentum histogram is above zero and rising on the fire bar; short if below zero and falling; skip if sign and slope disagree"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=80
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "LazyBear histogram: 20-bar linear regression of close minus the mean of (the midpoint of the 20-bar highest high and lowest low) and the 20-bar SMA of close. Computed by the bot."
+  - id: funding_top_decile_skip
+    role: filter
+    rule: "Optional: skip longs when perp funding is in the top decile of its 90-day range (shorts in the bottom decile)"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=4h&start={start}
+    field: data[].funding_rate_mean
+    note: "start = 90 days ago (the window cap is 93 days). Rank /hyperliquid/funding-rates current_rate against the 90 days of bar means. Funding history begins 2026-03-30."
+  - id: vol_regime_gate
+    role: filter
+    rule: "Optional: skip if the asset is already in a high-vol regime; the regime should read compressed before the fire"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "The served regime is computed on daily bars, while the setup is 4h. 'High vol' is not a served label: vol_shock is the clear case, and whether expanding also counts is the desk's call."
+  - id: momentum_fade_exit
+    role: exit
+    rule: "Exit at the next open after the second consecutive histogram bar that moves toward zero"
+    runnable: true
+    input: derived
+    inputs: [histogram_direction]
+  - id: initial_stop_1_5atr
+    role: stop
+    rule: "Initial stop 1.5x ATR(14) beyond the entry price"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=40&atr=14
+    field: candles[].atr
+    note: "ATR of the fire bar (the last closed 4h bar)."
+  - id: chandelier_trail
+    role: stop
+    rule: "Then trail with a 2.5x ATR chandelier: highest high since entry minus 2.5x ATR(14) for longs (lowest low plus 2.5x ATR for shorts)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=40&atr=14
+    field: candles[].atr
+  - id: time_stop_20_bars
+    role: exit
+    rule: "Close after 20 bars if neither exit has triggered"
+    runnable: true
+    input: position
+  - id: risk_per_trade
+    role: sizing
+    rule: "Risk 0.5-1% of equity per trade to the initial stop (0.75% in the pseudocode)"
+    runnable: true
+    input: position
+  - id: leverage_cap_3x
+    role: sizing
+    rule: "Cap leverage at 3x on perps"
+    runnable: true
+    input: position
+  - id: kill_hit_rate
+    role: filter
+    rule: "Pause when the rolling 30-signal hit rate is below 35% while the average win/loss ratio is below 1.8"
+    runnable: true
+    input: position
+  - id: kill_sharpe
+    role: filter
+    rule: "Pause when the rolling 12-month net Sharpe is below 0"
+    runnable: true
+    input: position
+  - id: kill_fire_frequency
+    role: filter
+    rule: "Pause when fires per year on BTC 4h fall below 4"
+    runnable: true
+    input: derived
+    inputs: [fire_bar]
+    note: "Count fire bars on BTC over the trailing year; the 4h replay reaches back about 800 days."
+  - id: kill_live_vs_backtest
+    role: filter
+    rule: "Pause when live and backtest fire outcomes diverge by more than 2 standard errors over 20 signals (a repainting backtest)"
+    runnable: true
+    input: position
 ---
 
 # Squeeze Momentum Breakout

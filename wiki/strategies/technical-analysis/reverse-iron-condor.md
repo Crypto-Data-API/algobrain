@@ -12,6 +12,90 @@ markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[iron-condor]]", "[[crypto-options-volatility-selling]]", "[[straddle-strangle]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[volatility-surface]]", "[[funding-rate]]", "[[gamma-exposure]]", "[[max-pain]]", "[[section-1256-contracts]]", "[[theta]]", "[[vega]]", "[[gamma]]", "[[delta]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit
+    role: universe
+    rule: "BTC or ETH options on Deribit only; alt options are too thin for a four-leg structure"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "We serve Deribit DVOL and the ATM term structure for BTC and ETH. Option quotes, strikes and fills come from Deribit."
+  - id: breakout_expected
+    role: entry
+    rule: "Use when you expect a breakout but are unsure of direction"
+    runnable: false
+    note: "A forecast the page leaves to the trader; the served inputs for it are the catalyst and compression gates below."
+  - id: vol_regime_compressed
+    role: entry
+    rule: "Buy when the coin's vol regime reads compressed"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's crypto specifics and AI-agent workflow. Buying at a high DVOL percentile is the long-vol trap the page warns against."
+  - id: dvol_low_pctile
+    role: entry
+    rule: "DVOL compressed: a low percentile of its trailing year (about the 25th in the example)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Served DVOL history is about 180 days (Pro Plus), not a year, and the page sets no cutoff beyond the example."
+  - id: vol_score_low
+    role: filter
+    rule: "A low market-wide vol-stress score flags cheap vol to buy"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    replay: /api/v1/volatility/index/history?days=365
+    replay_field: points[].composite_score
+    note: "The page sets no cutoff for 'low'. The replay is one composite per UTC day; days before 2026-08-24 are reconstructed."
+  - id: catalyst_inside_tenor
+    role: entry
+    rule: "A high-impact catalyst lands inside the tenor: FOMC, CPI, a large token unlock, an ETF decision"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=30
+    field: items[].days_until
+    note: "macro_print (macro_class FOMC, CPI and others), unlock and depeg rows come with days_until and a magnitude. ETF decisions and halvings are not on the calendar, and the page sets no size for a 'large' unlock. The window caps at 30 days, shorter than a 60-DTE tenor."
+  - id: legs_by_delta
+    role: entry
+    rule: "Buy a 25-delta call and a 25-delta put; sell a 10-12 delta call and put further out (1:1:1:1)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "No option chain or per-strike Greeks are served. Black-Scholes with the expiry's atm_iv gives approximate strikes, ignoring skew; exact deltas and the net debit need Deribit's chain."
+  - id: tenor_30_60_dte
+    role: entry
+    rule: "Tenor 30-60 DTE, or a tight expiry timed to the catalyst"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure is Pro Plus and lists the nearest 12 expiries; Deribit expiries settle at 08:00 UTC."
+  - id: dealers_short_gamma
+    role: filter
+    rule: "Favourable backdrop: dealers short gamma (cascade-prone) and funding stretched"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    note: "/quant/gex is a perp analog of dealer gamma (score at or above 0.35 = amplify), not Deribit options GEX. The page sets no funding threshold for 'stretched'."
+  - id: oi_wall_pin_risk
+    role: filter
+    rule: "Beware OI walls and max pain that could pin price and stall the breakout"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    note: "BTC only: one max-pain strike on the expiry with the largest open interest, which the response does not name. Per-strike OI walls are not served."
+  - id: take_winning_side
+    role: exit
+    rule: "On a decisive move, close the winning spread into strength rather than round-tripping it"
+    runnable: partial
+    input: position
+    note: "'Decisive' is not defined; the example closes near 90% of the spread width. Spread marks come from the venue."
+  - id: time_stop_dead_structure
+    role: exit
+    rule: "If the catalyst passes with no move, close early to salvage residual premium (the example closes at about 10 DTE)"
+    runnable: partial
+    input: derived
+    inputs: [catalyst_inside_tenor]
+    note: "The catalyst date says when it has passed; what counts as 'no move' is the desk's."
 ---
 
 # Reverse Iron Condor

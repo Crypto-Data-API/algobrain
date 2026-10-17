@@ -21,6 +21,79 @@ expected_sharpe: -0.5
 expected_max_drawdown: 0.04
 breakeven_cost_bps: 50
 related: ["[[vix]]", "[[vix-futures]]", "[[vix-calls]]", "[[long-volatility-strategies]]", "[[tail-risk-hedging]]", "[[options-concentration-risk]]", "[[long-vol-vs-short-vol]]", "[[long-vol-overlay]]", "[[put-tree]]", "[[call-spread]]", "[[debit-spread]]", "[[implied-volatility]]", "[[vvix]]", "[[vega-budgeting]]", "[[options-selection-framework]]", "[[strike-selection]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[universa-investments]]", "[[contango]]", "[[backwardation]]", "[[sharpe-ratio]]"]
+gates:
+  - id: vix_below_16_ideal
+    role: entry
+    rule: "Best entry: spot VIX below 16 with the VX curve in steep contango (M2/M1 above 1.05); VIX 16-22 with M2/M1 1.02-1.05 is a normal tranche"
+    runnable: false
+    note: "No VIX index or VX futures are served (/api/v1/sentiment/macro carries EUR/USD, gold and Treasury yields only). Needs CBOE VIX and VX futures quotes. Deribit DVOL on /api/v1/volatility/implied is a crypto implied-vol index, not a substitute for these VIX thresholds."
+  - id: skip_vix_above_22
+    role: filter
+    rule: "Skip when spot VIX is above 22 (premium already spiked)"
+    runnable: false
+    note: "No VIX level is served; needs CBOE VIX."
+  - id: skip_flat_or_backwardated
+    role: filter
+    rule: "Skip when VX M2/M1 is below 1.02 (flat curve); below 1.0 (backwardation) skip or monetize"
+    runnable: false
+    note: "No VX futures term structure is served; needs CBOE Futures Exchange VX settlements."
+  - id: long_strike
+    role: entry
+    rule: "Long call 1-3 points above spot VIX or M1 VX (typically the 18-22 strike), 30-60 DTE (30-45 in the pseudocode)"
+    runnable: false
+    note: "No VIX option chain or expiry calendar is served."
+  - id: short_strike
+    role: entry
+    rule: "Short call 8-15 points above the long strike (10 in the pseudocode), same expiry"
+    runnable: false
+    note: "No VIX option chain is served."
+  - id: monthly_budget
+    role: sizing
+    rule: "Spend 0.25-0.5% of NAV per expiry (0.3% a month in the pseudocode), targeting 2-4% of NAV a year; contracts = budget / (debit x 100)"
+    runnable: true
+    input: position
+    note: "The debit itself is a VIX option quote, which is not served."
+  - id: expiry_ladder
+    role: sizing
+    rule: "Stack 2-3 expiries so part of the ladder is always 30+ DTE"
+    runnable: true
+    input: position
+  - id: monetize_3_5x
+    role: exit
+    rule: "Monetize at 3-5x the debit paid when VIX spikes meaningfully (e.g. 25-30+)"
+    runnable: true
+    input: position
+    note: "The multiple is checkable from the position's marks at the broker; the VIX level that accompanies it is not served."
+  - id: let_losers_expire
+    role: exit
+    rule: "Let losing spreads expire worthless if spot stays calm; do not sell in the last week"
+    runnable: true
+    input: position
+  - id: roll_monthly
+    role: exit
+    rule: "Roll monthly as the new front month lists, maintaining the ladder"
+    runnable: true
+    input: position
+  - id: kill_bleed_6pct
+    role: filter
+    rule: "Kill when annualized bleed exceeds 6% of NAV over 24 months with no monetization"
+    runnable: true
+    input: position
+  - id: kill_sharpe_contribution
+    role: filter
+    rule: "Kill when the overlay's realized Sharpe contribution to the combined book is below 0 over 36 months"
+    runnable: true
+    input: position
+  - id: kill_debit_vs_width
+    role: filter
+    rule: "Kill when the spread debit is consistently above 8% of the strike width"
+    runnable: true
+    input: position
+  - id: kill_bid_ask_25pct
+    role: filter
+    rule: "Kill when VIX options bid-ask widens past 25% of mid during normal hours"
+    runnable: false
+    note: "No VIX option quotes are served; needs a CBOE options feed."
 ---
 
 A **VIX call spread** is a long-vol overlay structure: buy a near-the-money or modestly out-of-the-money [[vix-calls|VIX call]] and sell a higher-strike call against it for the same expiry, paying a small net debit in exchange for a defined-risk payoff if the VIX index spikes. The structure is the cheapest convex hedge widely used by [[options-concentration-risk|concentrated short-premium books]] and [[long-vol-vs-short-vol|short-vol portfolios]]: it caps the upside relative to a naked long call, but it also caps the cost — and the cost is what kills tail hedges over multi-year holding periods. It is the single most popular structure cited in institutional playbooks as a [[long-vol-overlay|long-vol overlay]] on a short-strangle book.

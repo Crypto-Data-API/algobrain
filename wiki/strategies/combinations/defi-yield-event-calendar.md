@@ -33,6 +33,133 @@ kill_criteria: |
   - Pool TVL < $5M (insufficient fee income to justify the strategy; move to higher-TVL pools)
 
 related: ["[[defi-yield-regime-gate]]", "[[event-calendar-risk-gating]]", "[[options-rv-event-calendar]]", "[[unlock-cascade-watch]]", "[[unlock-short-with-crowding-gate]]", "[[delta-neutral-yield-farming]]", "[[concentrated-liquidity]]", "[[defi-yield-sentiment-entry]]", "[[defi-yield-farming]]", "[[leveraged-yield-farming]]", "[[impermanent-loss]]", "[[loss-versus-rebalancing]]", "[[token-unlock]]", "[[uniswap]]", "[[aave]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi-regimes]]", "[[cryptodataapi]]"]
+gates:
+  - id: tier1_unlock_5pct
+    role: exit
+    rule: "Tier 1 event: a token unlock of 5% or more of the pooled token's circulating supply"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={symbol}&window_days=35
+    field: items[].pct_of_float
+    note: "pct_of_float is a fraction of circulating float (0.05 = 5%); days_until is alongside. Cliffs only, as tracked by DefiLlama emissions data: absence is not proof of no unlock, so cross-check TokenUnlocks for pool tokens. Full 35-day horizon on Pro and above (Free sees 7 days). Point-in-time history is the token_unlocks snapshot type (rows[].next_unlock), from 2026-08-20."
+  - id: tier1_protocol_events
+    role: exit
+    rule: "Tier 1 event: a protocol contract upgrade with migration, a points or farming program ending, or a token generation event"
+    runnable: false
+    note: "Upgrades, program endings and TGEs are not on the served calendar (it carries unlocks, macro prints, depegs and mints); they come from protocol governance forums and docs."
+  - id: tier2_unlock_2_5pct
+    role: exit
+    rule: "Tier 2 event: a token unlock of 2-4.9% of circulating supply"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={symbol}&window_days=35
+    field: items[].pct_of_float
+    note: "Same coverage caveat as tier1_unlock_5pct. Below 2% is monitor-only."
+  - id: tier2_protocol_events
+    role: exit
+    rule: "Tier 2 event: a major governance vote that could change pool economics, a large airdrop to pool participants, or a staking or restaking deadline"
+    runnable: false
+    note: "Governance votes, airdrops and staking deadlines are not served."
+  - id: withdraw_schedule
+    role: exit
+    rule: "Withdraw the whole LP position from T - 7 days for a Tier 1 event; withdraw 50% from T - 3 days for a Tier 2 event"
+    runnable: true
+    input: derived
+    inputs: [tier1_unlock_5pct, tier2_unlock_2_5pct]
+    note: "For unlock-driven events: act when days_until is 7 or less (Tier 1) or 3 or less (Tier 2). The protocol-event triggers (tier1_protocol_events, tier2_protocol_events) are not served, so those withdrawals need a manual calendar."
+  - id: hold_or_convert
+    role: sizing
+    rule: "After withdrawing, hold the underlying tokens or convert them to the base token (USDC), whichever incurs less IL on re-entry; the page suggests converting half the risky token or hedging it with a perp short"
+    runnable: partial
+    input: position
+    note: "Which choice incurs less IL is the operator's call."
+  - id: reentry_event_passed
+    role: entry
+    rule: "Re-entry condition 1: the catalyst date has passed (re-enter no earlier than T + 3 days for Tier 1, T + 2 for Tier 2)"
+    runnable: true
+    input: position
+  - id: reentry_vol_stable
+    role: entry
+    rule: "Re-entry condition 2: the pooled token's 4h realised vol at or below 1.5x its 7-day pre-event average for at least 48 hours after the event"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=200
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=4h&start={start}
+    replay_field: klines[].c
+    note: "Computable from 4h closes for tokens listed as Hyperliquid perps. The page does not say over how many bars the current 4h vol is measured (6 bars, one day, is one reading), so the window is the desk's call."
+  - id: reentry_dvol_not_expanding
+    role: entry
+    rule: "Re-entry condition 3: DVOL flat or declining from its event peak (the pseudocode: at most 0.9x the peak)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "DVOL exists for BTC and ETH only; most pooled tokens have no implied vol, so for them only the market-wide read is available."
+  - id: reentry_pool_tvl_50
+    role: entry
+    rule: "Re-entry condition 4: pool TVL at least 50% of its pre-event level"
+    runnable: false
+    note: "Per-pool TVL is not served; it comes from the Uniswap subgraph or DefiLlama."
+  - id: reentry_gas_05
+    role: entry
+    rule: "Re-entry condition 5: estimated re-entry gas at or below 0.5% of the re-entry capital"
+    runnable: false
+    note: "Gas prices are not served; estimate from the chain's RPC."
+  - id: reject_new_lows
+    role: filter
+    rule: "Reject re-entry while price is making new lows after the event"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=60
+    field: candles[].low
+    note: "The page does not say what counts as a new low (since the event, over a recent window), so the window is the desk's call."
+  - id: regime_extend_delay
+    role: entry
+    rule: "In a Structural Shock or Established Bear regime, extend the re-entry delay to T + 7 days"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Match regime structural_shock_crisis or established_bear. History starts 2026-08-07."
+  - id: event_score_posture
+    role: filter
+    rule: "An event risk score above 60 means several catalysts are live: take a heightened withdrawal posture across all LP positions"
+    runnable: partial
+    endpoint: /api/v1/event/regime/score
+    field: event_risk_score
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.event_regime.event_risk_score
+    note: "The page does not define a heightened posture, so what it changes is the desk's call. Replay is one reading per UTC day."
+  - id: vol_stress_reentry
+    role: entry
+    rule: "Secondary re-entry check: market-wide vol stress below 50 is preferred"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    note: "A preference, not a hard rule on the page, so how strictly to apply it is the desk's call."
+  - id: kill_lvr_below_gas
+    role: stop
+    rule: "Kill: three consecutive event cycles where the LVR avoided was below the gas paid"
+    runnable: true
+    input: position
+  - id: kill_no_reentry
+    role: stop
+    rule: "Kill: re-entry conditions never trigger for 3 consecutive Tier 1 events"
+    runnable: true
+    input: position
+  - id: kill_gas_1pct
+    role: stop
+    rule: "Pause: gas costs above 1% of withdrawn capital on any single cycle"
+    runnable: true
+    input: position
+  - id: kill_false_events
+    role: stop
+    rule: "Pause: the event calendar lists 2 or more events that do not materialise"
+    runnable: true
+    input: position
+    note: "Track listed unlocks against what actually happened on chain."
+  - id: kill_pool_tvl_5m
+    role: stop
+    rule: "Move pools: pool TVL below $5M"
+    runnable: false
+    note: "Per-pool TVL is not served."
 ---
 
 # DeFi Yield / LP × Unlock/Event Calendar

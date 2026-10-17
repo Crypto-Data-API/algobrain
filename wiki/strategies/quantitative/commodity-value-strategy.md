@@ -21,6 +21,63 @@ data_required: [futures-continuous-contracts, ohlcv-daily, fundamentals-commodit
 capacity_usd: 3000000000
 min_capital_usd: 500000
 related: ["[[commodity-momentum]]", "[[commodity-carry-strategy]]", "[[supply-demand-balance]]", "[[capex-cycle]]", "[[commodity-super-cycle]]", "[[commodities]]"]
+gates:
+  - id: commodity_universe
+    role: universe
+    rule: "A universe of 20-30 commodity futures, measured on roll-adjusted continuous-contract series"
+    runnable: false
+    note: "No commodity futures prices are served, and the page offers no crypto adaptation. /sentiment/macro carries only today's gold level, no history and no other commodity."
+  - id: value_signal_5y
+    role: entry
+    rule: "Value signal = minus the 5-year cumulative roll-adjusted return (3 years in a variant); the biggest 5-year losers rank cheapest"
+    runnable: false
+    note: "Needs about 1,260 daily roll-adjusted commodity futures closes per contract; not served. The alternative signal (price over its trailing 5-year average) needs the same series."
+  - id: long_top_quintile
+    role: entry
+    rule: "Long the top value quintile: the commodities with the largest 5-year declines"
+    runnable: false
+    input: derived
+    inputs: [value_signal_5y]
+    note: "Built from value_signal_5y, which is not served."
+  - id: short_bottom_quintile
+    role: entry
+    rule: "Short the bottom value quintile: the commodities with the largest 5-year gains"
+    runnable: false
+    input: derived
+    inputs: [value_signal_5y]
+    note: "Built from value_signal_5y, which is not served."
+  - id: equal_weight
+    role: sizing
+    rule: "Equal-weight the positions within each quintile"
+    runnable: true
+    input: position
+  - id: vol_target
+    role: sizing
+    rule: "Scale the book to a 10-12% annualized volatility target (10% in the pseudocode) with ex-ante volatility scaling per position"
+    runnable: false
+    note: "Needs commodity futures returns to estimate volatility; not served."
+  - id: single_name_cap
+    role: sizing
+    rule: "Cap any single commodity at 20% of gross exposure"
+    runnable: true
+    input: position
+  - id: monthly_rebalance
+    role: exit
+    rule: "Rebalance monthly"
+    runnable: true
+    input: position
+  - id: quintile_exit
+    role: exit
+    rule: "Exit when a commodity leaves the top or bottom value quintile (typical holding 6-18 months)"
+    runnable: false
+    input: derived
+    inputs: [long_top_quintile, short_bottom_quintile]
+    note: "Built from the quintile ranks, which need commodity futures prices that are not served."
+  - id: fundamental_validation
+    role: filter
+    rule: "Validate value picks against marginal production cost, stocks-to-use and supply-demand reports (USDA WASDE, EIA, IEA) as an overlay, not a hard signal"
+    runnable: false
+    note: "Production-cost and inventory data (Wood Mackenzie, IEA, USDA, EIA) are not served, and the page leaves the overlay to judgement."
 ---
 
 # Commodity Value Strategy

@@ -28,6 +28,102 @@ kill_criteria: |
   - AR(1) coefficient b >= 1 on re-fit (spread no longer stationary) for tracked spreads
   - median realized round-trip cost > 30 bps for a full month
 related: ["[[pairs-trading]]", "[[statistical-arbitrage]]", "[[kalman-filter-trading]]", "[[mean-reversion]]", "[[bollinger-band-reversion]]", "[[cointegration]]", "[[augmented-dickey-fuller]]", "[[book-algorithmic-trading-ernest-chan]]", "[[book-pairs-trading-vidyamurthy]]", "[[cryptodataapi]]"]
+gates:
+  - id: spread_legs
+    role: universe
+    rule: "Build the spread P_A - beta x P_B (or in logs) for a cointegrated pair from 90 days of 4h bars (1h or 1d also used)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&limit=541
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=4h&start={start}
+    replay_field: candles[].close
+    note: "One call per leg, joined on timestamp; 540 closed 4h bars = 90 days. Drop the forming bar."
+  - id: ar1_fit
+    role: universe
+    rule: "Fit X_t = a + b X_(t-1) by OLS; theta = -ln(b) / dt, mu = a / (1 - b), sigma from the residuals, half-life = ln(2) / theta; re-fit weekly"
+    runnable: true
+    input: derived
+    inputs: [spread_legs]
+  - id: stationary_spread
+    role: universe
+    rule: "Trade only a spread with b below 1 that passes the ADF test at p below 0.05; retire it when a re-fit gives b at or above 1"
+    runnable: true
+    input: derived
+    inputs: [ar1_fit]
+  - id: half_life_band
+    role: universe
+    rule: "Reject a half-life above 20 days or below about 4 hours; the swing ideal is 1-15 days (the pseudocode keeps 1-20 days)"
+    runnable: true
+    input: derived
+    inputs: [ar1_fit]
+  - id: amplitude_rank
+    role: universe
+    rule: "Rank candidate spreads by sigma / theta (reversion amplitude per unit time)"
+    runnable: true
+    input: derived
+    inputs: [ar1_fit]
+  - id: z_long_entry
+    role: entry
+    rule: "Long the spread when the stationary z = (X - mu) / sqrt(sigma^2 / (2 theta)) is at or below -1.5 to -2.0 (-1.8 in the pseudocode; either this or z_short_entry)"
+    runnable: true
+    input: derived
+    inputs: [ar1_fit, stationary_spread, half_life_band]
+    note: "Fix one threshold inside 1.5-2.0."
+  - id: z_short_entry
+    role: entry
+    rule: "Short the spread when z is at or above +1.5 to +2.0 (+1.8 in the pseudocode; either this or z_long_entry)"
+    runnable: true
+    input: derived
+    inputs: [ar1_fit, stationary_spread, half_life_band]
+  - id: no_catalyst
+    role: filter
+    rule: "Neither leg has an imminent catalyst (unlock, listing, upgrade) that would shift mu"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?symbol={symbol}
+    field: items[].days_until
+    note: "Call once per leg; unlocks, mints, depegs and macro prints are on the calendar (up to 30 days), listings and upgrades are not, so those stay a human check. The page does not define imminent; the half-life is a natural window."
+  - id: no_strong_trend
+    role: filter
+    rule: "Suspend entries while the market regime is strong_trend_bull or strong_trend_bear, where realized half-lives stretch past the model"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's agent workflow (it writes strong_trend_*)."
+  - id: z_reverted_exit
+    role: exit
+    rule: "Close when z returns to 0, with a partial close at plus or minus 0.5 (the pseudocode closes fully inside 0.3)"
+    runnable: true
+    input: derived
+    inputs: [ar1_fit]
+  - id: z_stop
+    role: stop
+    rule: "Stop out when the absolute z reaches 3.5 (the model is breaking)"
+    runnable: true
+    input: derived
+    inputs: [ar1_fit]
+  - id: half_life_time_stop
+    role: stop
+    rule: "Close and re-estimate if not reverted within 3-4 half-lives (3 in the pseudocode)"
+    runnable: true
+    input: position
+  - id: short_leg_carry
+    role: filter
+    rule: "Price the short leg's funding carry over the half-life (about half-life x 1-4 bps a day); a long half-life at adverse funding can exceed the whole gross edge"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hourly settled prints. The page uses carry to justify the half-life cap but sets no separate funding limit, so any extra cut is the desk's call."
+  - id: z_scaled_sizing
+    role: sizing
+    rule: "Size proportional to the absolute z and inversely to sigma, risking at most 0.5-1% of equity per spread with modest gross leverage (0.5% in the pseudocode)"
+    runnable: partial
+    input: derived
+    inputs: [ar1_fit]
+    note: "The page gives the direction of scaling but no formula, so the curve is the desk's call; the risk cap needs only the position record."
 ---
 
 # Ornstein-Uhlenbeck Process

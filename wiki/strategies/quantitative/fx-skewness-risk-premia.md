@@ -25,6 +25,86 @@ kill_criteria: |
   - rolling 24-month net Sharpe < 0
   - a single crash week costs more than 12 months of accumulated premium
 related: ["[[quantconnect]]", "[[quantconnect-strategy-library]]", "[[skewness]]", "[[carry-trade]]", "[[max-anomaly]]", "[[crash-fear-premium]]", "[[volatility-risk-premium]]"]
+gates:
+  - id: fx_universe
+    role: universe
+    rule: "Source rules: EURUSD, AUDUSD, USDCAD and USDJPY"
+    runnable: false
+    note: "FX is not served beyond a EUR/USD level on /api/v1/sentiment/macro (archived about every 2 hours from 2026-05-09); AUDUSD, USDCAD and USDJPY are absent. The crypto adaptation (perp_universe onward) is the runnable version."
+  - id: fx_skew_threshold
+    role: entry
+    rule: "Source rules: long pairs whose trailing daily-return skewness is below -0.6, short pairs above +0.6, equal weight, weekly"
+    runnable: false
+    note: "Needs daily FX closes for the four pairs; not served."
+  - id: perp_universe
+    role: universe
+    rule: "Crypto adaptation: the top 30-50 liquid perps as of each date (point-in-time)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].open_interest_usd
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].oi_close
+    note: "The page does not say how liquidity is ranked: open_interest_usd or day_volume (both in these rows) are the candidates, and N inside 30-50 is fixed once. Replay: oi_close x mark_close per day from 2026-03-30, one call per coin; coins delisted since are missing from today's list."
+  - id: perp_skew_signal
+    role: entry
+    rule: "Crypto adaptation: rank perps by the skewness of their daily returns over the last 60-90 days (90 in the pseudocode)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=92
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Drop the forming bar and take sample skewness of the last 90 daily returns."
+  - id: short_top_quintile
+    role: entry
+    rule: "Short the top skew quintile (most positive skew, lottery-like)"
+    runnable: partial
+    input: derived
+    inputs: [perp_universe, perp_skew_signal]
+    note: "Only as runnable as perp_universe."
+  - id: long_bottom_quintile
+    role: entry
+    rule: "Optionally long the bottom skew quintile (most negative skew)"
+    runnable: partial
+    input: derived
+    inputs: [perp_universe, perp_skew_signal]
+    note: "Optional on the page; whether to run the long leg is the desk's call."
+  - id: beta_neutral
+    role: sizing
+    rule: "BTC-beta-neutralize the book"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=92
+    field: candles[].close
+    note: "Regress each position's daily returns on BTC's and offset the net beta. The page gives no beta window; reusing the 90-day skew window is one choice, the desk's to make."
+  - id: vol_weighting
+    role: sizing
+    rule: "Volatility-weight the positions"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: vol.rv_cc_30
+    note: "Weight each name by 1 / its realized vol. The page names no window; rv_cc_30 is 30-day close-to-close."
+  - id: weekly_rebalance
+    role: exit
+    rule: "Rebalance weekly, executing on the next bar"
+    runnable: true
+    input: position
+  - id: vol_shock_cut_longs
+    role: filter
+    rule: "Cut the long negative-skew leg while the volatility regime shows a vol shock"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.volatility_regime.by_symbol.{symbol}.regime
+    note: "From the page's agent workflow, which does not say whether the shock is each coin's own or the market's; market-wide read /api/v1/volatility/regime/score. Replay is one daily read: live from about 2026-06-10, reconstructed back to March 2026."
+  - id: no_short_negative_funding
+    role: filter
+    rule: "Avoid shorting a positive-skew coin whose funding is deeply negative (the short pays the crowd's squeeze)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hourly settled prints, where a negative rate means shorts pay longs. The page gives no level for deeply negative, so the cut is the desk's call."
 ---
 
 # FX Skewness Risk Premia

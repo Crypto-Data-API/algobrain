@@ -22,6 +22,160 @@ expected_sharpe: 1.4
 expected_max_drawdown: 0.20
 breakeven_cost_bps: 60
 decay_evidence: "Strategy is more crowded than fork-arb; multiple desks run it (Wintermute, Cumberland, GSR, plus retail Twitter quants). Edge persists because (a) liquidity gates during incidents prevent full price discovery, (b) Asia-overnight exploits give Western desks slow response, (c) IOU markets are illiquid relative to spot."
+gates:
+  - id: exploit_detection
+    role: entry
+    rule: "Detect an exploit: alert on PeckShield, BlockSec or Cyvers posts, large transfers on watchlist contracts, or governance pauses"
+    runnable: partial
+    endpoint: /api/v1/news/market-moving?hours=24&min_impact=0
+    field: events[].category
+    replay: /api/v1/backtesting/news-events?start={start}&end={end}
+    replay_field: data[].category
+    note: "Take events with category hack, exchange_hack or theft; symbol names the affected coin. The feed is crypto news sites, minutes to hours behind the security-firm posts and anomaly feeds the page relies on, so it confirms rather than detects first. No security-firm feed, contract-transfer alert or governance-pause feed is served."
+  - id: multi_source_confirm
+    role: filter
+    rule: "Confirm the exploit is real from at least 2 independent sources, not a single rumour"
+    runnable: partial
+    endpoint: /api/v1/news/market-moving?hours=24&min_impact=0
+    field: events[].corroboration
+    replay: /api/v1/backtesting/news-events?start={start}&end={end}
+    replay_field: data[].corroboration
+    note: "corroboration counts the news sources carrying the same coin and category in the window; require 2 or more. A listing in /security/events?type=hack (the DefiLlama registry, hours later) is a stronger but slower confirmation."
+  - id: loss_over_10m
+    role: filter
+    rule: "Trade only when the estimated loss exceeds $10M; below that, log only"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack
+    field: items[].amount_usd
+    note: "amount_usd is the DefiLlama registry figure, which appears hours after disclosure; in the 5-minute triage window the loss estimate is the desk's from the first reports."
+  - id: vuln_class
+    role: filter
+    rule: "Classify the vulnerability class (it decides the follow-up legs, e.g. a compiler bug is class-wide)"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack
+    field: items[].classification
+    note: "classification and technique are DefiLlama's labels, not the page's vulnerability taxonomy, and arrive with the registry entry. Mapping them to class-wide scope is the desk's call."
+  - id: loss_to_tvl
+    role: entry
+    rule: "Loss-to-TVL ratio = exploit loss / protocol TVL before the event"
+    runnable: false
+    note: "Per-protocol TVL is not served. Needs DefiLlama's protocol TVL history."
+  - id: short_protocol_token
+    role: entry
+    rule: "Within 15 minutes, short the protocol token on perps at 30-50% of the size limit with limit orders at -5%, -10% and -15% from the pre-event price"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=30
+    field: candles[].close
+    note: "Take the pre-event price from the last 1-minute close before disclosure. The security feed often leaves symbols empty, so mapping the protocol to its perp is the desk's call; assets[].coin on /hyperliquid/open-interest lists the Hyperliquid perps."
+  - id: short_depth_cap
+    role: sizing
+    rule: "Short size = min(50% of the size limit, perp book depth within 0.5% slippage)"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth
+    field: coins[].depth_usd.bid
+    note: "Read the 50bps key on the bid side. Only about 25 Hyperliquid perps are covered, and when levels_truncated is true the 20-level book ends before 0.5%, so the figure is a lower bound."
+  - id: panic_funding
+    role: filter
+    rule: "Panic-short signal: perp funding below -100 bp annualised"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hyperliquid funding is hourly: -100 bp a year is a rate below about -0.00000114 per hour. From the page's indicator list."
+  - id: liquidation_cascade_confirm
+    role: filter
+    rule: "Cross-exchange forced long liquidations confirm the cascade the perp-discount leg trades against"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&include_quiet=true
+    field: alerts[].long_liq_usd
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=5m&start={start}
+    replay_field: data[].long_usd
+    note: "From the AI-agent workflow, which sets no threshold. OKX, Bybit and Hyperliquid only; Binance liquidations are not captured. Replay is Hyperliquid only, from 2026-07-23."
+  - id: lst_depeg_overshoot
+    role: entry
+    rule: "LST involved: short the LST until its depeg overshoots past loss_to_tvl x 1.5, then flip long at 30% of the limit"
+    runnable: false
+    note: "No LST/ETH peg (stETH, rETH, cbETH on Curve or Balancer) is served, and the threshold needs loss_to_tvl, which is not served either."
+  - id: stable_depeg_overshoot
+    role: entry
+    rule: "Stablecoin involved: short the stable until its depeg overshoots, then flip long"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=depeg
+    field: items[].deviation_bps
+    note: "Depeg events carry the deviation from $1 in bp for major stablecoins. The overshoot line is loss_to_tvl x 1.5, which needs protocol TVL (not served), so the flip point is the desk's call. For USDC against USDT, /market-data/ticker/price?symbol=USDCUSDT gives the Binance price."
+  - id: cover_overshoot_floor
+    role: exit
+    rule: "Cover the perp short when price reaches the pre-event price x (1 - loss_to_tvl x 1.8)"
+    runnable: false
+    input: derived
+    inputs: [loss_to_tvl]
+    note: "Needs protocol TVL, which is not served."
+  - id: cover_team_confirms
+    role: exit
+    rule: "Cover the perp short when the protocol team confirms scope and patch"
+    runnable: false
+    note: "A news judgement. /news/coin/{symbol} lists the coin's headlines, but reading a confirmation from them is the desk's call."
+  - id: cover_cex_resumes
+    role: exit
+    rule: "Cover the perp short when a major exchange lifts its deposit halt"
+    runnable: false
+    note: "No exchange deposit or withdrawal status is served. Needs the exchanges' status pages."
+  - id: cover_after_12h
+    role: exit
+    rule: "Cover the perp short 12 hours after entry at the latest"
+    runnable: true
+    input: position
+  - id: peg_recovery_tp
+    role: exit
+    rule: "Take profit on the LST or stablecoin long when it is back within 0.5% of peg (price above 0.995)"
+    runnable: partial
+    endpoint: /api/v1/coins/{symbol}
+    field: current_price
+    note: "Works for stablecoins quoted in USD (CoinGecko aggregate, not the Curve pool price the page watches). LST/ETH ratios are not served."
+  - id: sector_rotation
+    role: entry
+    rule: "Over 1-72 hours, long the exploited protocol's competitors (bridge hit: interop alternatives; lending hit: Aave, Compound, Morpho)"
+    runnable: partial
+    endpoint: /api/v1/coins/category-groups
+    field: categories[].coins[].symbol
+    note: "The category groups list lending, DEX, interoperability and other sector coins; picking which competitors benefit is the desk's call."
+  - id: sector_rotation_size
+    role: sizing
+    rule: "Sector-rotation size = 0.2 x exploit loss / number of competitors"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack
+    field: items[].amount_usd
+    note: "Uses the registry loss figure, which lags the event by hours."
+  - id: hard_stop_50pct
+    role: stop
+    rule: "Hard stop at -50% on the directional leg"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: scale_on_multi_feed
+    role: sizing
+    rule: "Scale to the full position limit when Cyvers, BlockSec and PeckShield all alert within 5 minutes of each other, after a human approves"
+    runnable: false
+    note: "No security-firm anomaly feeds are served; the human approval is a desk step."
+  - id: kill_drawdown_20pct
+    role: stop
+    rule: "Kill switch: drawdown above 20% over a rolling 6 months"
+    runnable: true
+    input: position
+  - id: kill_low_extraction
+    role: stop
+    rule: "Kill switch: per-event extracted value below 30 bp of capital deployed for two consecutive quarters"
+    runnable: true
+    input: position
+  - id: kill_few_exploits
+    role: stop
+    rule: "Kill switch: fewer than 4 exploits of $50M or more in a quarter"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack
+    field: items[].amount_usd
+    note: "The feed looks back 10 days only, so the bot must log each event to count a quarter."
 ---
 
 # Post-Hack Incident Response Arbitrage

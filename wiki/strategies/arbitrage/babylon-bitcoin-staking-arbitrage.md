@@ -22,6 +22,64 @@ expected_sharpe: 1.5
 expected_max_drawdown: 0.3
 breakeven_cost_bps: 50
 decay_evidence: "Babylon mainnet launched Aug 2024; LBTC ecosystem exploded Q4 2024 with $5B+ TVL by year-end. Strategy parallels EigenLayer LRT arc; expect compression as LBTCs consolidate."
+gates:
+  - id: lbtc_universe
+    role: universe
+    rule: "Track every live liquid Bitcoin staking token (about 6-10: LBTC, SolvBTC, pumpBTC, uniBTC, kBTC, stBTC)"
+    runnable: false
+    note: "No list of LBTCs is served, and wrapped or staked BTC tokens are not in /coins. Needs DefiLlama's Babylon category or the issuers' own pages for the list and contract addresses."
+  - id: custody_risk
+    role: filter
+    rule: "Score each LBTC's custodian and script setup for solvency and slashing risk; the NAV haircut is BTC price x (1 - custody_risk_haircut)"
+    runnable: false
+    note: "A judgement on custody attestations and slashing terms. /api/v1/dex/security/{chain}/{address} flags each LBTC contract's risks (risk_flags: mintable, pausable, hidden owner; risk_score), which is not a custody or slashing score."
+  - id: yield_model
+    role: entry
+    rule: "Model each LBTC's yield: base BTC staking yield plus protocol points plus Pendle PT/YT pricing"
+    runnable: false
+    note: "Babylon staking yields, points multipliers and Pendle PT/YT prices are not served. Needs the protocols' dashboards and Pendle's API."
+  - id: btc_nav_anchor
+    role: entry
+    rule: "BTC spot price as the NAV anchor every LBTC is priced against"
+    runnable: true
+    endpoint: /api/v1/market-data/ticker/price?symbol=BTCUSDT
+    field: price
+    replay: /api/v1/backtesting/klines?symbol=BTCUSDT&exchange=binance&interval=1h&start={start}
+    replay_field: klines[].c
+    note: "Binance spot."
+  - id: dispersion_50bp
+    role: entry
+    rule: "When cross-LBTC dispersion (observed price against custody-haircut NAV) exceeds 50 bp, long the cheap LBTC and short the rich one"
+    runnable: partial
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "address is each LBTC's contract, which no served gate lists (lbtc_universe is off-API), so the bot supplies it from the issuers' docs. Read the deepest pool by reserve_usd; ethereum, base, arbitrum, bsc and solana only, cached up to 5 minutes, and no history is kept, so poll and store. The NAV side needs the custody haircut, a judgement (custody_risk), and shorting an LBTC needs a borrow market we do not cover."
+  - id: size_per_lbtc
+    role: sizing
+    rule: "5-10% of the fund per LBTC, diversified across protocols"
+    runnable: true
+    input: position
+  - id: security_derisk
+    role: filter
+    rule: "De-risk the stack when Security Stress spikes (Babylon-script or custody tail)"
+    runnable: partial
+    endpoint: /api/v1/security/regime/score
+    field: security_stress_score
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.security_regime.security_stress_score
+    note: "From the page's AI-agent workflow, which gives no spike size. The score is 0-100 with bands dormant under 10, quiet 10-29, elevated 30-54, heavy 55-79 and critical 80+; it is market-wide, not Babylon-specific. Daily snapshots run from 2026-03-02."
+  - id: kill_dispersion
+    role: stop
+    rule: "Retire when cross-LBTC dispersion stays below 20 bp"
+    runnable: partial
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "Same per-contract LBTC prices as dispersion_50bp. No history is served, so the bot must log the dispersion itself to see that it has stayed under 20 bp; the page gives no window for consistently."
+  - id: kill_tvl_decline
+    role: stop
+    rule: "Retire when Babylon and LBTC ecosystem TVL has declined for 6+ months"
+    runnable: false
+    note: "Protocol TVL is not served. Needs DefiLlama's Babylon category TVL series."
 ---
 
 # Babylon Bitcoin Staking Arbitrage

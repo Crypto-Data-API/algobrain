@@ -35,6 +35,114 @@ kill_criteria: |
   - short-vol: drawdown > 25% → halt new entries
   - long-vol: annual cost exceeds 3% of NAV without cascade payoff → re-spec or pause
   - rolling 6-month Sharpe < 0.3 on the vol-trading sleeve
+gates:
+  - id: underlyings
+    role: universe
+    rule: "BTC and ETH only (the two liquid DVOL and option markets), expressed through Deribit options"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "DVOL (live, refreshed about every 5 minutes), its daily history and the ATM IV term structure are served for BTC and ETH (history and term structure on Pro Plus), contrary to the page's data note. The option chain and prices are not."
+  - id: short_vol_dvol_band
+    role: entry
+    rule: "Short vol: sell defined-risk Deribit strangles or condors while DVOL sits in the mid-to-upper part of its trailing-year percentile band (rich but not spiking)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "The band is not numbered here (crypto-options-volatility-selling uses the 40th-90th percentile), and the served history is about 180 days, not a year."
+  - id: short_vol_vrp
+    role: entry
+    rule: "Short vol also needs DVOL minus realized vol to be a healthy positive spread"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    note: "vrp = DVOL minus 30-day Garman-Klass realized vol. The page gives no number for healthy (the sibling page uses 5 vol points)."
+  - id: delta_hedge
+    role: sizing
+    rule: "Delta-hedge short-vol books on the perp on a band plus funding-boundary schedule"
+    runnable: true
+    input: position
+    note: "Option deltas come from the venue account; no Greeks are served."
+  - id: defined_risk_sizing
+    role: sizing
+    rule: "Size small with defined-risk condors, not naked strangles (at most 1% of NAV vega per vol point in the example)"
+    runnable: true
+    input: position
+  - id: dvol_session_shock_exit
+    role: stop
+    rule: "Short vol: flatten all short-gamma positions if DVOL rises more than 50% in a session"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol_change_24h
+    note: "dvol is today's forming daily DVOL bar and dvol_change_24h is its move since the previous UTC daily close, so dvol_change_24h / (dvol - dvol_change_24h) above 0.5 reads the rule for a UTC-day session. A rise that straddles 00:00 UTC is split across two days; the page does not define the session."
+  - id: short_vol_drawdown_halt
+    role: stop
+    rule: "Short vol: halt new entries after a 25% drawdown"
+    runnable: true
+    input: position
+  - id: long_vol_entry
+    role: entry
+    rule: "Long vol: buy Deribit straddles, strangles or OTM put wings while DVOL is in the low part of its percentile band and funding is richly positive (call skew, cheap downside)"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=21
+    field: rates[].funding_rate
+    note: "Neither the low band nor richly positive is numbered, and the DVOL side (items[].history[].dvol on /api/v1/volatility/implied) covers about 180 days."
+  - id: long_vol_exit_into_spike
+    role: exit
+    rule: "Long vol: exit into DVOL spikes and monetize fast, since crypto vol reverts within days"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "The page sets no spike level, so when to sell is the desk's call."
+  - id: long_vol_cost_cap
+    role: sizing
+    rule: "Long vol as an overlay sized to a fixed small % of NAV a year; re-spec or pause if annual cost exceeds 3% of NAV without a cascade payoff"
+    runnable: true
+    input: position
+  - id: cascade_subsided
+    role: entry
+    rule: "Mean-reversion fade, step 1: after a DVOL spike that came with a liquidation cascade, wait until liquidations subside"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=1h&start={start}
+    field: data[].total_usd
+    note: "Hourly Hyperliquid liquidation notional (from 2026-07-23); /api/v1/market-intelligence/squeeze-alerts?symbol={coin} adds OKX and Bybit (Binance is not captured). The page gives no level for subsided."
+  - id: backwardation_flattening
+    role: entry
+    rule: "Mean-reversion fade, step 2: front-month backwardation (front implied vol above back) is flattening"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "Front minus back atm_iv across the listed expiries, compared between polls; the page names no tenors or rate of flattening."
+  - id: fade_entry
+    role: entry
+    rule: "Then sell a defined-risk strangle or condor targeting DVOL reversion to its regime baseline"
+    runnable: partial
+    input: derived
+    inputs: [cascade_subsided, backwardation_flattening]
+    note: "Only as runnable as its two steps; the strikes come from the Deribit chain."
+  - id: new_spike_high_stop
+    role: stop
+    rule: "Flatten if DVOL makes a new high above the spike peak after entry (a regime break, not a spike)"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "Record the spike peak (the highest dvol seen, or the highest daily value in items[].history[]) and compare each poll; dvol refreshes about every 5 minutes."
+  - id: dvol_baseline_target
+    role: exit
+    rule: "Target: DVOL back inside its normal percentile band (the example closes at 50% of max credit)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "The normal band is not numbered; the 50% of credit close in the example is position-based."
+  - id: spike_type_classifier
+    role: filter
+    rule: "Classify the DVOL spike as event-driven (fade it) or a regime break (stand down): a vol_spike read versus a transition into strong_trend_bear"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's agent workflow; the call is the page's central judgement, so the label informs rather than decides it."
 ---
 
 # Crypto Volatility Trading (DVOL)

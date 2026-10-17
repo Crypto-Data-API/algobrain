@@ -22,6 +22,99 @@ expected_max_drawdown: 0.95
 breakeven_cost_bps: null
 decay_evidence: "Pre-bond Pump.fun win rates fell from ~10% (early 2024) to <1% by mid-2025 before XXYY-style filters lifted top-quartile rates back to ~20%. See [[2026-04-22-gap-finder-low-cap-crypto-trading-microcaps-memecoi]]."
 related: ["[[telegram-bot-trading]]", "[[mev-strategies]]", "[[liquidity-sniping]]", "[[copy-trading]]", "[[2024-meme-coin-supercycle]]", "[[sniping]]", "[[pump-fun-bonding-curve-sniping]]", "[[token-migration-sniping]]", "[[jito-bundle-sniping]]", "[[axiom-pro]]", "[[bonkbot]]", "[[trojan-bot]]", "[[banana-gun]]", "[[maestro-bot]]", "[[photon-sol]]", "[[gmgn]]", "[[bullx]]", "[[holder-concentration-analysis]]", "[[rug-detection-checklist]]", "[[cryptodataapi]]"]
+gates:
+  - id: mint_event
+    role: entry
+    rule: "Trigger on each new Pump.fun mint (program events via Geyser or Bitquery), running the filter stack within 100 ms"
+    runnable: false
+    note: "Pump.fun program events are not served. /dex/new-pools?chain=solana lists the 20 newest Solana DEX pools from a cached feed, after the fact and without bonding-curve mints, so it is a discovery list, not this trigger."
+  - id: top5_concentration
+    role: filter
+    rule: "Reject if the top 5 wallets hold more than 50% of supply (bundle indicator)"
+    runnable: partial
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: holder_info.top_10_pct
+    note: "Served as the top 10's share in percent, not the top 5's: top_10_pct at or under 50 guarantees the top 5 pass, but a higher value is not a fail. {address} is the mint from the bot's own Pump.fun stream (mint_event is not served) or pools[].base_token.address on /dex/new-pools?chain=solana once it lists. Whether the report covers a token still on the bonding curve is unverified, and fresh tokens can come back with holder_count 0 and top_10_pct 0 (not indexed yet): treat that as unknown, never as a pass."
+  - id: dev_rug_history
+    role: filter
+    rule: "Reject if the dev wallet has more than 3 prior rug pulls"
+    runnable: false
+    note: "Dev-wallet rug history across launches is not served; it needs the bot's own blocklist or a service such as GMGN or Bitquery."
+  - id: early_buyers
+    role: filter
+    rule: "Prefer tokens with more than 5 unique buyers in the first 30 seconds"
+    runnable: false
+    note: "Per-token buyer counts at launch are not served; read them from the bonding-curve transactions."
+  - id: min_launch_liquidity
+    role: filter
+    rule: "Reject if initial SOL liquidity is below the threshold (2 SOL in the pseudocode)"
+    runnable: false
+    note: "Bonding-curve liquidity at mint is not served. reserve_usd on /dex/new-pools covers DEX pools after listing, not the curve."
+  - id: jito_tip
+    role: entry
+    rule: "Submit the buy through a Jito bundle with the tip sized to current competition"
+    runnable: false
+    note: "Jito tip floors are not served; see jito-bundle-sniping."
+  - id: snipe_size
+    role: sizing
+    rule: "Each snipe 0.5-2% of the sniping bankroll (1% in the pseudocode), the bankroll under 10% of the overall portfolio, never sized on conviction"
+    runnable: true
+    input: position
+  - id: launch_slippage
+    role: sizing
+    rule: "Accept 10-20% slippage at launch (1,500 bps in the pseudocode) and track tips separately for true PnL"
+    runnable: true
+    input: position
+  - id: meme_season_sizing
+    role: sizing
+    rule: "Size the whole book up or down with the meme_season flag"
+    runnable: partial
+    endpoint: /api/v1/meme/regime/score
+    field: meme_season
+    note: "From the page's AI-agent workflow, which gives no size step; composite_score (0-100) is the finer read."
+  - id: take_profit_tiers
+    role: exit
+    rule: "Scale out 30-50% at 3-5x and another 25-30% at 10-20x, leaving a 10-25% moonbag (pseudocode: 40% at 3x, 30% at 10x, 20% at 20x)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "{address} is the held token's mint, as in top5_concentration. Pool prices come from a cached feed, seconds to minutes behind the chain."
+  - id: hard_stop_10m
+    role: stop
+    rule: "Market-sell the whole position if price falls 50% from entry within the first 10 minutes"
+    runnable: true
+    input: position
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "Same price read as take_profit_tiers."
+  - id: time_stop_4h
+    role: exit
+    rule: "Market-sell after 4 hours if the position is below 2x"
+    runnable: true
+    input: position
+  - id: lifecycle_exit_staging
+    role: exit
+    rule: "Stage the exit ladder by the token's meme lifecycle (euphoric, distribution, ignition, bleeding, dormant)"
+    runnable: partial
+    endpoint: /api/v1/meme/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow. The lifecycle covers listed meme coins (Hyperliquid perps and Binance spot), not fresh Pump.fun tokens, so it applies only after a token lists there. Pro."
+  - id: kill_drawdown_60
+    role: stop
+    rule: "Pause when the rolling 30-day drawdown exceeds 60% of the allocated bankroll"
+    runnable: true
+    input: position
+  - id: kill_win_rate
+    role: stop
+    rule: "Pause when the rolling 200-snipe win rate drops below 5%, or more than 20% of passed snipes turn out to be honeypots"
+    runnable: true
+    input: position
+  - id: kill_tip_inflation
+    role: stop
+    rule: "Pause when the average Jito tip exceeds 30% of position size for more than 2 weeks"
+    runnable: true
+    input: position
 ---
 
 Memecoin sniping is the practice of using automated bots to buy newly launched [[meme-coins]] within seconds of liquidity being added to a DEX. The strategy targets the explosive price appreciation that occurs when memecoins launch on platforms like [[pump-fun|Pump.fun]] ([[solana|Solana]]), [[raydium|Raydium]], or Base DEXs and attract viral attention. Snipers aim to be among the first buyers, riding the initial pump before selling into retail demand. This is an extremely high-risk, high-reward strategy — the vast majority of memecoins go to zero, but early entries on tokens that gain traction can return 10-1000x within hours. The strategy is bot-driven, requires fast execution, and sits at the intersection of technical infrastructure and social-media sentiment reading. It is the most contested sub-game inside the [[meme-coin-cycle]], and the canonical example of a Solana-native execution race built on top of [[mev]] infrastructure. See [[sniping]] for the broader taxonomy and [[low-cap-crypto-trading-map]] for where it sits in the wider stack.

@@ -22,6 +22,43 @@ expected_max_drawdown: 0.40
 breakeven_cost_bps: 5
 decay_evidence: "Fed QE 2009-2014 and 2020-2022 compressed MBS OAS to historic lows; 2022 rate shock reversed with extreme convexity pain"
 related: ["[[ltcm-collapse-1998]]", "[[liars-poker]]", "[[salomon-brothers]]", "[[relative-value-arbitrage]]", "[[on-off-the-run-treasury-arbitrage]]", "[[swap-spread-arbitrage]]", "[[tips-treasury-arbitrage]]", "[[option-adjusted-spread]]", "[[negative-convexity]]", "[[prepayment-risk]]", "[[tba-market]]", "[[financial-crisis-2008]]", "[[quantitative-easing]]", "[[edge-taxonomy]]", "[[failure-modes]]"]
+gates:
+  - id: oas_above_60bp
+    role: entry
+    rule: "Buy current-coupon 30-year TBAs when their option-adjusted spread, from a standard prepayment model, exceeds 60 bps (10-year median about 45 bps)"
+    runnable: false
+    note: "No MBS prices, TBAs or prepayment models are served. Needs Yield Book, Andrew Davidson or an internal OAS model plus TBA quotes."
+  - id: duration_hedge
+    role: sizing
+    rule: "Hedge the model's effective duration with short 5-year and 10-year Treasury futures (about 40/60 by DV01) or pay-fixed swaps, rebalanced daily on duration drift"
+    runnable: false
+    note: "No Treasury futures, swap curve or MBS duration model is served; /sentiment/macro carries a single Treasury yield."
+  - id: convexity_hedge
+    role: sizing
+    rule: "Optionally buy payer swaptions (about 50 bp out of the money, 3-month expiry) against the embedded short call"
+    runnable: false
+    note: "No swaption prices are served."
+  - id: refi_signals
+    role: filter
+    rule: "Monitor the primary-secondary mortgage rate spread and aggregate mortgage duration (Bloomberg MBDI) for refinancing waves and convexity-hedging flows"
+    runnable: false
+    note: "Mortgage-rate and MBS-index data are not served."
+  - id: exit_oas_below_30bp
+    role: exit
+    rule: "Take profit when OAS tightens below 30 bps, or exit when a prepayment-model shift breaks the thesis"
+    runnable: false
+    note: "Same unserved OAS model as oas_above_60bp."
+  - id: stress_sizing
+    role: sizing
+    rule: "Size so a 60 bp OAS widening costs no more than 25% of equity"
+    runnable: partial
+    input: position
+    note: "Needs the position's spread duration from the OAS model, which is not served."
+  - id: financing_pulled
+    role: stop
+    rule: "Exit when repo financing is pulled"
+    runnable: true
+    input: position
 ---
 
 # MBS Basis Arbitrage

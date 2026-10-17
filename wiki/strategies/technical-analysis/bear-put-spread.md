@@ -12,6 +12,109 @@ markets: [crypto, options]
 complexity: beginner
 backtest_status: untested
 related: ["[[bull-call-spread]]", "[[bear-call-spread]]", "[[bull-put-spread]]", "[[put-spread]]", "[[vertical-spread]]", "[[deribit]]", "[[dvol]]", "[[greeks-live]]", "[[implied-volatility]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[delta]]", "[[theta]]", "[[vega]]", "[[gamma]]", "[[max-pain]]", "[[gamma-exposure]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit_only
+    role: universe
+    rule: "BTC and ETH Deribit options only; alt options are too thin to leg a clean spread"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied vol served. Option quotes come from Deribit itself."
+  - id: bearish_catalyst
+    role: entry
+    rule: "Moderately bearish on BTC or ETH, ideally on an identifiable catalyst (unlock, macro risk-off, exhaustion at resistance)"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=30&symbol={coin}
+    field: items[].bias
+    note: "Unlocks (bias short) and scheduled macro prints (risk_flag) are on the calendar; exhaustion at resistance is a chart judgement (served levels: sr.resistance[].price on /api/v1/indicators/technical/{symbol}). The bearish forecast itself is the trader's."
+  - id: long_put_atm
+    role: entry
+    rule: "Buy one put ATM to slightly ITM (about 50-65 delta)"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "ATM follows from spot (oracle_price is a CEX spot composite close to Deribit's index); the strike grid, deltas and quotes come from Deribit."
+  - id: short_put_at_target
+    role: entry
+    rule: "Sell one OTM put at or just past the downside target (about 30-40 delta), same expiry"
+    runnable: false
+    note: "Strikes by delta need Deribit's option chain with Greeks; the target price is the trader's own."
+  - id: debit_two_thirds_width
+    role: entry
+    rule: "Pay no more than about two thirds of the strike width, so max profit is at least about half the max loss"
+    runnable: false
+    note: "Needs the legs' bid and ask; no option quotes are served."
+  - id: width_5_15_pct
+    role: entry
+    rule: "Strike width roughly 5-15% of spot"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Spot is served; the listed strikes that make up the width come from Deribit."
+  - id: tenor_21_45_dte
+    role: entry
+    rule: "Expiry 21-45 days out"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure lists the nearest 12 Deribit expiries. It is Pro Plus and empty on lower tiers."
+  - id: dvol_10_50_pctile
+    role: filter
+    rule: "DVOL low-to-moderate: roughly the 10th-50th percentile of its trailing year, so the long put is cheap"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "Rank the latest dvol within history. Only about 180 daily closes are served (Pro Plus), so the percentile is over six months, not a year."
+  - id: vol_regime_compressed
+    role: filter
+    rule: "Buy the debit spread when the coin's vol regime reads compressed (vol is cheap)"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow. Its tip: check vol.days_compressed and the 60-day history so the window is genuinely cheap, not just freshly crushed."
+  - id: funding_positive_fuel
+    role: filter
+    rule: "Enter while perp funding stays positive: crowded longs are the fuel for the down-move"
+    runnable: true
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&start={start}
+    replay_field: data[].funding_rate
+    note: "Positive = above 0. Live is Binance's 8-hour rate (hyperliquid.current_rate is the hourly Hyperliquid rate); the replay is Hyperliquid funding."
+  - id: bear_regime_support
+    role: filter
+    rule: "Rising strong_trend_bear or vol_spike probability supports entry; a stable range_low_vol state means the debit decays unspent"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: explain.label_posteriors.strong_trend_bear
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_1
+    note: "label_posteriors holds the current probability of each of the 6 regimes (vol_spike beside it; post_label_4 in the replay). 'Rising' has no window or threshold on the page. regime.label is the committed state."
+  - id: profit_target_50_75
+    role: exit
+    rule: "Take profits at 50-75% of max value; take them into a deleveraging cascade rather than holding for max"
+    runnable: true
+    input: position
+    note: "The spread's mark comes from Deribit. A long_flush direction on /api/v1/market-intelligence/squeeze-alerts?symbol={coin} flags the cascade."
+  - id: stop_half_debit
+    role: stop
+    rule: "Cut at roughly -50-60% of the debit"
+    runnable: true
+    input: position
+  - id: thesis_invalidation
+    role: stop
+    rule: "Cut on thesis invalidation: support reclaimed, or the catalyst resolved bullishly"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{coin}
+    field: sr.support[].price
+    note: "A close back above the broken support is mechanical once the level is chosen; which level, and whether the catalyst resolved bullishly, are the trader's call."
+  - id: time_stop_10_14_dte
+    role: exit
+    rule: "Close by about 10-14 DTE if neither target nor stop has hit"
+    runnable: true
+    input: position
 ---
 
 # Bear Put Spread

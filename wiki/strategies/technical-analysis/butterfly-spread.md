@@ -12,6 +12,94 @@ markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[crypto-options-volatility-selling]]", "[[iron-butterfly]]", "[[iron-condor]]", "[[broken-wing-butterfly]]", "[[christmas-tree-spread]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[volatility-surface]]", "[[funding-rate]]", "[[gamma-exposure]]", "[[max-pain]]", "[[section-1256-contracts]]", "[[theta]]", "[[vega]]", "[[gamma]]", "[[delta]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit_only
+    role: universe
+    rule: "BTC and ETH Deribit options only; alt-option chains are too sparse to build a clean fly"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied vol served. Option quotes and the strike grid come from Deribit."
+  - id: body_at_max_pain
+    role: entry
+    rule: "Center the body (K) on the expected settlement magnet: the max-pain strike into expiry"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    replay: /api/v1/backtesting/snapshots?data_type=coinglass_options&start={start}
+    replay_field: snapshots[].data[].max_pain
+    note: "BTC only (no ETH max pain). It is computed on the Deribit expiry with the largest open interest, which may not be the fly's expiry; the page also allows a heavy OI wall, which is not served (no per-strike OI)."
+  - id: fly_strikes
+    role: entry
+    rule: "Buy 1 at K - w, sell 2 at K, buy 1 at K + w (calls or puts), equally spaced wings"
+    runnable: false
+    note: "Needs Deribit's strike grid and quotes; no option chain is served."
+  - id: small_debit
+    role: entry
+    rule: "Net debit a small fraction of the wing width (the example: a $6,000-wide BTC fly for about $1,000)"
+    runnable: false
+    note: "Needs the legs' bid and ask; no option quotes are served."
+  - id: tenor_14_45_dte
+    role: entry
+    rule: "Expiry 14-45 days out (shorter = cheaper but needs a more precise pin)"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure lists the nearest 12 Deribit expiries. It is Pro Plus and empty on lower tiers."
+  - id: long_dealer_gamma_pin
+    role: filter
+    rule: "A long-dealer-gamma read confirms the pin thesis the fly monetises"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    replay: /api/v1/quant/gex/history?symbol={coin}&from={start}
+    replay_field: points[].regime_score
+    note: "/quant/gex is a perp analog of dealer gamma (Hyperliquid market-maker inventory and liquidation clusters), not Deribit options dealer gamma. A score at or below -0.20 is the dampen (long-gamma) state."
+  - id: range_regime_leading
+    role: filter
+    rule: "range_low_vol has the leading market-regime probability at entry"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: explain.label_posteriors.range_low_vol
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_2
+    note: "Leading = the highest of the six values in label_posteriors (post_label_0 to 5 in the replay)."
+  - id: vol_elevated_to_crush
+    role: filter
+    rule: "Vol elevated at entry and expected to crush toward a quiet outcome; never buy the fly in a compressed regime that then expands"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "The regime labels have no 'elevated'; expanding is the nearest, and compressed is the stated losing setup. The expected crush is a forecast. DVOL is items[].dvol on /api/v1/volatility/implied."
+  - id: profit_target_50_75
+    role: exit
+    rule: "Close at 50-75% of max profit; do not wait for the perfect pin"
+    runnable: true
+    input: position
+    note: "The fly's mark comes from Deribit; no option prices are served."
+  - id: final_week_management
+    role: exit
+    rule: "In the final week, hold if spot is near the center; close to salvage value if spot is out near a wing"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Spot against the strikes is mechanical; 'near' has no distance on the page."
+  - id: recenter_on_drift
+    role: exit
+    rule: "If spot drifts off the center early with time left, close and re-open centered on the new price"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "No drift distance or time threshold is given."
+  - id: max_pain_migration_roll
+    role: exit
+    rule: "A max-pain migration away from the body in expiry week is the roll signal"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    note: "BTC only, and on the largest-OI expiry, which may differ from the fly's. Poll it more often in expiry week; the page gives no migration distance."
 ---
 
 # Butterfly Spread

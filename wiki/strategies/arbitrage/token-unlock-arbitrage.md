@@ -21,6 +21,112 @@ expected_sharpe: 1.1
 expected_max_drawdown: 0.20
 breakeven_cost_bps: 50
 related: ["[[news-trading]]", "[[short-selling]]", "[[vampire-attack-arbitrage]]", "[[airdrop-farming]]", "[[perpetual-futures]]", "[[cryptodataapi]]"]
+gates:
+  - id: unlock_3pct_30d
+    role: universe
+    rule: "An unlock of more than 3% of circulating supply within the next 30 days (pct_of_float above 0.03)"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={coin}&window_days=30
+    field: items[].pct_of_float
+    note: "A cliff calendar from DefiLlama emissions (linear vesting excluded), one row per coin for its soonest cliff; absence is not proof of no unlock. Free tier sees 7 days ahead, Pro 30-35. Point-in-time boards for backtests are archived from 2026-08-20 as /backtesting/snapshots data_type=token_unlocks."
+  - id: fdv_100m
+    role: universe
+    rule: "FDV above $100M"
+    runnable: true
+    endpoint: /api/v1/coins/{symbol}
+    field: max_supply
+    note: "FDV = current_price x max_supply, or x total_supply when max_supply is null (both in the same response)."
+  - id: perp_volume_10m
+    role: universe
+    rule: "Daily perp volume above $10M"
+    runnable: partial
+    endpoint: /api/v1/volume/scanner/{symbol}
+    field: volume_24h
+    note: "Rolling 24h Hyperliquid notional in USD (Pro). The pseudocode shorts on Binance perps, whose volume is not served per symbol; Hyperliquid volume is usually lower, so this filter is stricter than the page's."
+  - id: short_window
+    role: entry
+    rule: "Open the short 14-21 days before the cliff (the pseudocode allows 7-21)"
+    runnable: true
+    endpoint: /api/v1/supply/unlocks?symbol={coin}&window_days=30
+    field: items[].days_until
+  - id: perps_over_spot
+    role: filter
+    rule: "Short via perps unless funding is already below -30% annualised"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "Hourly rate: -30% a year is below about -0.0000342 per hour. Binance's 8h rate is current_rate on /derivatives/binance/funding-rates?symbol=XUSDT (-30% a year = -0.000274 per 8h). CEX spot borrow rates are not served."
+  - id: expected_move_hurdle
+    role: entry
+    rule: "Short only if the expected drawdown (by unlock size and category: team, VC, ecosystem) minus any positive funding clears the hurdle"
+    runnable: partial
+    endpoint: /api/v1/supply/unlocks?symbol={coin}&window_days=30
+    field: items[].categories
+    note: "Unlock size and category are served. The expected_drawdown model and the hurdle are the desk's; the page gives neither."
+  - id: size_for_funding
+    role: sizing
+    rule: "Size small enough that 30 days of negative funding does not eat the expected move"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    note: "Project the current hourly rate over 720 hours; the expected move is the desk's estimate from expected_move_hurdle."
+  - id: bull_regime_caution
+    role: filter
+    rule: "Unlock shorts underperform in strong_trend_bull states, where fresh demand absorbs new supply"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the AI-agent workflow, which does not say to skip or how much to cut size in that state."
+  - id: oi_crowding_check
+    role: filter
+    rule: "Check crowding via open interest before entering a widely telegraphed cliff"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].oi_change_pct
+    note: "From the AI-agent workflow, which sets no threshold. start = 14 days ago: daily Hyperliquid OI change per bar for any perp (/liquidity/oi-divergence covers only about 25 coins). Rising OI into falling price marks a building short; the cutoff is the desk's call."
+  - id: per_name_size
+    role: sizing
+    rule: "1-3% of book per name (2% in the pseudocode), at most 15% of book in aggregate shorts"
+    runnable: true
+    input: position
+  - id: crowded_funding_exit
+    role: exit
+    rule: "Kill the trade when funding falls below -50% annualised in the week before the cliff"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "Hourly rate below about -0.0000571 (-50% a year)."
+  - id: cover_post_cliff
+    role: exit
+    rule: "Cover into the post-cliff TWAP low, 3-7 days after the cliff (the pseudocode covers at 5 days or at take-profit)"
+    runnable: true
+    input: position
+    note: "Record the cliff date at entry: the unlock feeds are forward-only and drop an unlock once it passes."
+  - id: positive_catalyst_stop
+    role: stop
+    rule: "Cover immediately if a major positive catalyst (exchange listing, partnership) hits during the short window"
+    runnable: partial
+    endpoint: /api/v1/news/coin/{symbol}?hours=24
+    field: events[].category
+    replay: /api/v1/backtesting/news-events?symbol={symbol}&start={start}
+    replay_field: data[].category
+    note: "Watch for categories such as exchange_listing, hl_listing and partnership with positive bias. Whether a story is major is the desk's call; impact_score ranks it."
+  - id: kill_win_rate
+    role: stop
+    rule: "Pause when the win rate over the last 20 trades falls below 50%, or median cost exceeds 30% of the expected move; after 3 consecutive stop-outs, halve size"
+    runnable: true
+    input: position
+  - id: kill_drawdown_20pct
+    role: stop
+    rule: "Suspend for 30 days when strategy drawdown exceeds 20% from peak"
+    runnable: true
+    input: position
 ---
 
 # Token Unlock Arbitrage

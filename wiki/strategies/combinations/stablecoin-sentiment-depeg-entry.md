@@ -33,6 +33,85 @@ kill_criteria: |
   - strategy draws down > 15% of dedicated stablecoin-arb sleeve in any 12-month period
 
 related: ["[[stablecoin-depeg-profit-capture]]", "[[stablecoin-pair-arbitrage]]", "[[synthetic-stablecoin-depeg-arbitrage]]", "[[contrarian-extremes]]", "[[sentiment-positioning-divergence]]", "[[onchain-capitulation-confluence]]", "[[post-panic-vol-selling]]", "[[crowded-short-funding-fade]]", "[[stablecoin-depeg-history]]", "[[stablecoins]]", "[[algorithmic-stablecoin]]", "[[curve-finance]]", "[[makerdao]]", "[[ethena]]", "[[depeg-risk]]", "[[behavioral-finance]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: fear_panic_48h
+    role: entry
+    rule: "Gate 1: Fear & Greed index at or below 15 for at least 48 consecutive hours"
+    runnable: true
+    endpoint: /api/v1/sentiment/fear-greed
+    field: value
+    replay: /api/v1/backtesting/snapshots?data_type=fear_greed&start={start}&limit=1000
+    replay_field: snapshots[].data.value
+    note: "Live value now; for the 48-hour run read the fear_greed snapshots with start = 48 hours ago and require every value at or below 15 (archived from 2026-05-09)."
+  - id: depeg_discount
+    role: entry
+    rule: "Gate 2: the target stablecoin trades at or below $0.97 (a discount of at least 3%) on at least 2 major venues"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "One venue only: Binance spot against USDT (USDCUSDT, FDUSDUSDT), which is a stable-to-stable rate, so a USDT wobble moves it too. /event/calendar?type=depeg (and /security/events?type=depeg) list depegs past a 25 bps dead-zone from an aggregate CoinGecko price, with items[].deviation_bps. No per-venue Coinbase or Kraken stablecoin price is served, so the 2-venue check needs those exchange APIs."
+  - id: redemption_open
+    role: filter
+    rule: "Gate 3: the issuer has not frozen or capped redemptions in the last 24 hours, its reserve report is at most 30 days old with no adverse disclosure, and PSM utilisation (for DAI) is below 95%"
+    runnable: false
+    note: "Issuer communications, attestation dates and PSM utilisation are not served. Needs the issuer's status pages, attestation reports and a MakerDAO/Sky PSM dashboard."
+  - id: no_impairment_news
+    role: filter
+    rule: "Gate 4: no announcement from the issuer, a major custodian or a regulator of mechanism impairment (reserve shortfall, seizure, hack) in the last 12 hours"
+    runnable: partial
+    endpoint: /api/v1/news/market-moving?symbol={coin}&hours=12&min_impact=0
+    field: events[].category
+    note: "Block on depeg, hack, insolvency or enforcement items for the stablecoin (or market-wide rows, symbol MARKET). Headline coverage is scored, not complete, and reading whether a story impairs the mechanism is a judgement."
+  - id: risk_off_context
+    role: filter
+    rule: "Context: DVOL above 80 together with Fear & Greed at or below 15 confirms a systemic risk-off panic"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "From the indicator list; BTC DVOL."
+  - id: regime_context
+    role: filter
+    rule: "Context: a Structural Shock or crash regime confirms the panic; a plain bear trend without panic is not enough"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "From the indicator list. structural_shock_crisis and capitulation are the nearest served ids; the page names no exact ids, so the mapping is the desk's. Regime history starts 2026-08-07."
+  - id: curve_pool_alternative
+    role: entry
+    rule: "If spot is not available at a big enough discount, buy from the Curve pool where the depegged stablecoin is offered at the deepest discount"
+    runnable: false
+    note: "No Curve pool composition or DEX stablecoin quotes are served. Needs Curve or DefiLlama pool data."
+  - id: tiered_size
+    role: sizing
+    rule: "Base 10-20% of the stablecoin-arb sleeve per event, at most 40%: 50% at the first signal, the other 50% if the discount widens a further 1%"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "Same single-venue price caveat as depeg_discount."
+  - id: near_par_exit
+    role: exit
+    rule: "Sell at $0.997 or better, or redeem at $1.00 with the issuer when the redemption channel is open"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "Binance's rate is against USDT, not USD, so it is a proxy for par; redemption is off-exchange."
+  - id: time_exit
+    role: exit
+    rule: "Close at market after 7 days if $0.997 has not been reached"
+    runnable: true
+    input: position
+  - id: stop_082
+    role: stop
+    rule: "Stop out at $0.82"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "Same USDT-quoted proxy as near_par_exit."
 ---
 
 # Stablecoin Depeg Sentiment Entry

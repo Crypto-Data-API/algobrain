@@ -33,6 +33,129 @@ kill_criteria: |
   - Stablecoin flow data (dry-powder gauge) becomes unavailable for 30+ days (key data source failure)
 
 related: ["[[defi-yield-regime-gate]]", "[[defi-yield-event-calendar]]", "[[contrarian-extremes]]", "[[sentiment-positioning-divergence]]", "[[onchain-capitulation-confluence]]", "[[stablecoin-sentiment-depeg-entry]]", "[[delta-neutral-yield-farming]]", "[[concentrated-liquidity]]", "[[defi-yield-farming]]", "[[post-panic-vol-selling]]", "[[put-protected-dip-buying]]", "[[impermanent-loss]]", "[[loss-versus-rebalancing]]", "[[fear-and-greed-index]]", "[[uniswap]]", "[[aave]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi-sentiment]]", "[[cryptodataapi-market-intelligence]]", "[[cryptodataapi]]"]
+gates:
+  - id: fear_20_2d
+    role: entry
+    rule: "Gate 1: Fear and Greed index at or below 20 for at least 2 consecutive days"
+    runnable: true
+    endpoint: /api/v1/market-health/history?days=3
+    field: history[].components.fear_greed
+    replay: /api/v1/market-health/history?days=730
+    replay_field: history[].components.fear_greed
+    note: "The market-health fear_greed component is the index's value per UTC day, from 2026-01-14; live value on /api/v1/sentiment/fear-greed. The served index averages several sources. /market-intelligence/fear-greed-history returns only today's row, so it cannot supply the run."
+  - id: pool_apr_rich
+    role: entry
+    rule: "Gate 2: the target pool's APR at least 1.5x its 30-day rolling average"
+    runnable: false
+    note: "Pool APR is not served; the page itself sources it from DefiLlama yields or the Uniswap v3 subgraph."
+  - id: pool_tvl_thinned
+    role: entry
+    rule: "Gate 2: the target pool's TVL at or below 70% of its 30-day rolling average"
+    runnable: false
+    note: "Per-pool TVL is not served (DefiLlama or the Uniswap v3 subgraph)."
+  - id: vol_stabilised
+    role: entry
+    rule: "Gate 3: the pooled token's vol regime is mean_reverting or normal, not vol_shock or expanding (4h realised vol flat or declining over the last 24 hours)"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.volatility_regime.by_symbol.{coin}.regime
+    note: "The page names the regime label as the source; compressed is not named. For the 4h realised-vol reading itself, compute it from /hyperliquid/candles?interval=4h. Replay is one reading per UTC day."
+  - id: vol_stress_55
+    role: filter
+    rule: "Gate 3 secondary: market-wide vol stress below 55 preferred at entry"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/score
+    field: composite_score
+    note: "A preference rather than a hard gate on the page, so how strictly to apply it is the desk's call."
+  - id: stable_dry_powder
+    role: filter
+    rule: "Gate 4 (optional): stablecoin supply 14-day flow positive (dry powder building)"
+    runnable: true
+    endpoint: /api/v1/sentiment/stablecoins
+    field: inflow_14d_billions
+    replay: /api/v1/sentiment/stablecoins/remote-history?days=365
+    replay_field: history[].inflow
+    note: "Replay rows carry one day's inflow each (and mcap_billions); sum 14 rows for the 14-day flow."
+  - id: health_recovering
+    role: filter
+    rule: "Secondary qualifier: deploy only when the market health score is recovering from its trough, not still declining"
+    runnable: partial
+    endpoint: /api/v1/market-health/summary
+    field: total_score
+    replay: /api/v1/market-health/history?days=365
+    replay_field: history[].score
+    note: "The page gives no window for recovering (for example score above its 7-day low and rising), so that test is the desk's call."
+  - id: entry_all_gates
+    role: entry
+    rule: "Enter only when Gates 1, 2 and 3 all hold at the same time"
+    runnable: false
+    input: derived
+    inputs: [fear_20_2d, pool_apr_rich, pool_tvl_thinned, vol_stabilised]
+    note: "Gate 2, pool yield richness and TVL thinning, needs pool data that is not served."
+  - id: greed_75_2d
+    role: exit
+    rule: "De-risk leg: Fear and Greed at or above 75 for at least 2 consecutive days"
+    runnable: true
+    endpoint: /api/v1/market-health/history?days=3
+    field: history[].components.fear_greed
+    replay: /api/v1/market-health/history?days=730
+    replay_field: history[].components.fear_greed
+  - id: derisk_partial
+    role: exit
+    rule: "Withdraw 60-80% of the LP (70% in the pseudocode) when greed_75_2d holds and pool APR is at or below 80% of its 30-day average, keeping 20-40% as a core position"
+    runnable: false
+    input: derived
+    inputs: [greed_75_2d, pool_apr_rich]
+    note: "The pool-APR leg is not served."
+  - id: full_exit_80_3d
+    role: exit
+    rule: "Full exit: Fear and Greed at or above 80 for at least 3 consecutive days"
+    runnable: true
+    endpoint: /api/v1/market-health/history?days=4
+    field: history[].components.fear_greed
+    replay: /api/v1/market-health/history?days=730
+    replay_field: history[].components.fear_greed
+  - id: sizing
+    role: sizing
+    rule: "4-6% of the portfolio per deployment, no single pool above 5%, at most 15% in this strategy across 3 positions, no leverage"
+    runnable: true
+    input: position
+  - id: kill_net_pnl
+    role: stop
+    rule: "Kill: 6-month net LP P&L (fees minus IL minus gas) negative on fear-extreme entries"
+    runnable: true
+    input: position
+  - id: kill_il_2x_fees
+    role: stop
+    rule: "Kill or add an on-chain capitulation gate: 3 consecutive entries made in mean_reverting where IL exceeded fee income by 2x over the next 30 days"
+    runnable: true
+    input: position
+  - id: kill_chronic_fear
+    role: stop
+    rule: "Raise the fear threshold to 15 when Fear and Greed is at or below 20 on more than 20% of calendar days"
+    runnable: true
+    endpoint: /api/v1/market-health/history?days=365
+    field: history[].components.fear_greed
+    note: "The page gives no look-back; a trailing year is one reading. Daily history from 2026-01-14."
+  - id: kill_tvl_mechanism
+    role: stop
+    rule: "Kill: 3 consecutive fear-extreme entries where pool TVL expanded rather than contracted during the fear window"
+    runnable: false
+    note: "Per-pool TVL is not served."
+  - id: kill_premature_derisk
+    role: stop
+    rule: "Recalibrate: 3 consecutive greed de-risk signals after which pool yields stayed elevated"
+    runnable: false
+    note: "Pool APR is not served."
+  - id: kill_stablecoin_data
+    role: stop
+    rule: "Suspend: the stablecoin flow gauge unavailable for 30 or more days"
+    runnable: true
+    endpoint: /api/v1/sentiment/stablecoins
+    field: inflow_14d_billions
+    note: "Count consecutive days without a value. The page's companion rule, the pool data source unavailable for 30+ days, concerns external DefiLlama or subgraph data."
 ---
 
 # DeFi Yield / LP × Sentiment-Extreme Filter

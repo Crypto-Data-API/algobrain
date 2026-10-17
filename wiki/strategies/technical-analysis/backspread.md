@@ -12,6 +12,105 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[ratio-spread]]", "[[straddle-strangle]]", "[[butterfly-spread]]", "[[risk-reversal]]", "[[implied-volatility]]", "[[gamma]]", "[[vega]]", "[[funding-rate]]", "[[deribit]]", "[[tail-risk-hedging]]", "[[event-driven]]", "[[section-1256-contracts]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit_only
+    role: universe
+    rule: "BTC and ETH Deribit options only; alt options are too thin to buy the extra long legs efficiently"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied vol served. Option quotes come from Deribit itself."
+  - id: short_leg_atm
+    role: entry
+    rule: "Sell 1 ATM or slightly ITM option (about 50 delta): a call for the bullish call backspread, a put for the bearish put backspread"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "ATM follows from spot (oracle_price is a CEX spot composite close to Deribit's index); the listed strike grid, deltas and quotes come from Deribit."
+  - id: long_legs_30_delta
+    role: entry
+    rule: "Buy 2 OTM options at about 30 delta (1:2 standard; 1:3 adds tail leverage)"
+    runnable: false
+    note: "Strikes by delta need Deribit's option chain with Greeks, which we do not serve."
+  - id: zero_cost_entry
+    role: entry
+    rule: "Aim for zero cost or a small debit; a credit entry also pays on a sharp move the other way"
+    runnable: false
+    note: "Needs the legs' bid and ask; no option quotes are served."
+  - id: tenor_30_60_dte
+    role: entry
+    rule: "Expiry 30-60 days out, so the long legs have time"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure lists the nearest 12 Deribit expiries. It is Pro Plus and empty on lower tiers."
+  - id: dvol_low_pctile
+    role: filter
+    rule: "Enter when DVOL sits in a low percentile of its trailing year, with room to expand"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "The page gives no cut-off (its example is about the 20th percentile). Only about 180 daily closes are served (Pro Plus), so the percentile is over six months, not a year."
+  - id: vol_regime_compressed
+    role: entry
+    rule: "Enter when the coin's vol regime reads compressed, late in the compression rather than early"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow. compressed is mechanical; vol.days_compressed says how long it has lasted, but 'late' has no number on the page."
+  - id: catalyst_inside_tenor
+    role: entry
+    rule: "A binary catalyst falls inside the option tenor (spot-ETF ruling, major unlock, halving, FOMC/CPI)"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=30&symbol={coin}
+    field: items[].days_until
+    note: "Unlocks and scheduled macro prints are on the calendar, up to 30 days out; ETF rulings and the halving are not."
+  - id: hmm_tail_support
+    role: filter
+    rule: "Rising vol_spike or squeeze probabilities support paying for tail exposure; a settled range_low_vol book with no catalyst is pure theta bleed"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: explain.label_posteriors.vol_spike
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].post_label_4
+    note: "label_posteriors holds the current probability of each of the 6 regimes (squeeze beside it; post_label_5 in the replay). 'Rising' has no window or threshold on the page. regime.label names the committed state."
+  - id: cheap_wing_from_funding
+    role: entry
+    rule: "Buy the underpriced wing: negative funding with bid put skew makes call convexity relatively cheap, and vice versa"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    note: "Funding is served; the skew it stands for (25-delta risk reversal) is not. The page gives no funding threshold."
+  - id: avoid_valley_into_expiry
+    role: exit
+    rule: "Close before expiry if price is drifting toward the long strike with time running down (the max-loss valley)"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "Compare spot with the long strike. The page gives no distance or days-left cut-off."
+  - id: bank_vol_spike
+    role: exit
+    rule: "Consider banking a DVOL jump that makes the trade profitable on vega alone"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol_change_24h
+    note: "dvol_change_24h is in vol points. The position's P&L comes from Deribit marks; the page sets no size for the jump."
+  - id: time_stop_14_dte
+    role: exit
+    rule: "Close if the move has not arrived with fewer than 14 DTE"
+    runnable: true
+    input: position
+  - id: dealer_gamma_amplifier
+    role: filter
+    rule: "A short-dealer-gamma read is the amplifier the backspread wants behind its breakout"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.score
+    note: "/quant/gex is a perp analog of dealer gamma, not Deribit options dealer gamma. A score at or above 0.35 is the amplify state."
 ---
 
 # Backspread

@@ -12,6 +12,71 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[iron-condor]]", "[[risk-reversal]]", "[[implied-volatility]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[arbitrage]]", "[[deribit]]", "[[section-1256-contracts]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_deribit_only
+    role: universe
+    rule: "BTC and ETH Deribit options only: the only books deep enough to fill four legs tightly enough to leave a rate edge"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit options data served. The four leg quotes come from Deribit itself."
+  - id: four_leg_box
+    role: entry
+    rule: "Long call K_low, short call K_high, long put K_high, short put K_low, same expiry (reverse all four to borrow)"
+    runnable: false
+    note: "Needs the four legs' quotes from Deribit's order book; no option quotes or chain are served."
+  - id: box_implied_rate
+    role: entry
+    rule: "Implied rate = (width / box price - 1) x (365 / DTE)"
+    runnable: false
+    note: "The box price comes from Deribit leg quotes, which we do not serve. DTE can be read from term_structure[].expiry_days on /api/v1/volatility/implied."
+  - id: rate_beats_funding_benchmark
+    role: entry
+    rule: "Lend (buy the box) only when its implied rate beats annualised perp funding after four-leg fees; borrow (sell it) when the implied rate is below your funding cost"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: hyperliquid.current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&start={start}
+    replay_field: data[].funding_rate
+    note: "The benchmark side is served: annualise the hourly Hyperliquid rate (x 24 x 365) or Binance's 8-hour rate (binance.current_rate x 3 x 365). The box's own implied rate is not (see box_implied_rate)."
+  - id: stablecoin_lending_benchmark
+    role: entry
+    rule: "Compare the box rate with the stablecoin lending yield (the worked example's 8% cash yield)"
+    runnable: false
+    note: "No stablecoin lending or borrow rates are served; the borrow-interest endpoint was retired with no replacement, so perp funding is the only served benchmark."
+  - id: options_fillability
+    role: filter
+    rule: "Check options open interest and volume before quoting: on a thin chain, four-leg fill quality is the trade"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].open_interest
+    note: "BTC aggregate only (no ETH, no per-strike or per-expiry depth), so it says little about the two strikes you need. The page gives no minimum."
+  - id: settlement_currency_match
+    role: entry
+    rule: "Match settlement to the loan currency: USDC-margined (linear) for a USD loan, inverse only for a coin-denominated one"
+    runnable: true
+    input: position
+  - id: hold_to_expiry
+    role: exit
+    rule: "Hold to expiry; unwind early only if the implied rate mean-reverts enough to beat the four-leg round-trip cost"
+    runnable: partial
+    input: position
+    note: "Holding is mechanical; the early-unwind test needs live box quotes from Deribit."
+  - id: venue_risk_size_cap
+    role: sizing
+    rule: "Cap size for Deribit counterparty risk: the box is risk-free only while the venue stays solvent"
+    runnable: partial
+    input: position
+    note: "The page gives no cap; the size is the desk's call."
+  - id: usdc_supply_squeeze
+    role: filter
+    rule: "Watch stablecoin supply for USDC squeezes that move the whole crypto rate curve"
+    runnable: partial
+    endpoint: /api/v1/sentiment/stablecoins
+    field: change_14d_pct
+    replay: /api/v1/sentiment/stablecoins/remote-history?days=365
+    replay_field: history[].mcap_billions
+    note: "Total stablecoin supply, not USDC alone (top_stablecoins[] lists per-coin market caps). The page gives no threshold or action."
 ---
 
 # Box Spread

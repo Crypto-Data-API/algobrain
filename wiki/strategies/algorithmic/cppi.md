@@ -12,6 +12,68 @@ markets: [stocks, bonds, crypto]
 complexity: intermediate
 backtest_status: untested
 related: ["[[risk-budgeting]]", "[[tail-risk-hedging]]", "[[black-litterman]]", "[[position-sizing]]", "[[regime-detection]]"]
+gates:
+  - id: risky_safe_assets
+    role: universe
+    rule: "Two assets: a risky one (BTC, or an S&P 500 ETF) and a safe one (stablecoins, or Treasury bills and short-term bonds)"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "The crypto pair (BTC risky, stablecoins safe) is served: BTCUSDT spot prices the risky leg and the stablecoin leg is cash. Equity ETF and T-bill prices are not served, so the TradFi version is not runnable here."
+  - id: floor_setup
+    role: sizing
+    rule: "Floor F = 80-90% of the initial portfolio value (fixed variant)"
+    runnable: true
+    input: position
+    note: "The page offers a range; pick one level per program."
+  - id: rising_floor
+    role: sizing
+    rule: "Rising-floor variant: F_t = F_0 x e^(r x t), growing at the risk-free rate"
+    runnable: partial
+    input: position
+    note: "The page names no rate source. /sentiment/macro carries treasury_yield (a US Treasury yield) as one choice, or the stablecoin lending rate the safe leg actually earns, which is not served."
+  - id: ratchet_floor
+    role: sizing
+    rule: "Ratcheting-floor variant: F = max(F, 0.9 x portfolio peak)"
+    runnable: true
+    input: position
+  - id: risky_allocation
+    role: sizing
+    rule: "Risky allocation = m x (V - F) with multiplier m = 3 (conservative) to 5 (aggressive); the remainder goes to the safe asset"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "V is marked from the risky leg's units x spot price plus the safe leg. The page gives 3-5; pick m per program."
+  - id: cap_100pct
+    role: sizing
+    rule: "Cap the risky allocation at 100% of V (or at the leverage limit if leverage is allowed)"
+    runnable: true
+    input: position
+  - id: rebalance_trigger
+    role: entry
+    rule: "Rebalance daily, or whenever the risky allocation deviates more than 5% from the CPPI target"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "Crypto trades 24/7, so pick a fixed UTC time for the daily rebalance."
+  - id: cash_lock
+    role: stop
+    rule: "If the cushion V - F reaches 0 or below, move 100% to the safe asset (cash lock)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+  - id: regime_multiplier
+    role: sizing
+    rule: "Optionally adjust the multiplier by the detected market regime"
+    runnable: partial
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the page's See Also only: it names no regimes or multiplier values, so the mapping is the desk's call."
 ---
 
 # CPPI (Constant Proportion Portfolio Insurance)

@@ -33,6 +33,110 @@ kill_criteria: |
   - drawdown > 20% from equity peak in the framework-guided book
   - confluence zones are repeatedly violated by macro shocks on 3+ consecutive trades
 
+gates:
+  - id: weekly_trend_bias
+    role: filter
+    rule: "Weekly bias: long when price is above the 20-week and 50-week moving averages and the weekly MACD histogram is positive or turning up; short when both MAs are declining and MACD is negative; mixed means no trade"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1w&limit=100
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}USDT&exchange=binance&interval=1d&start={start}
+    replay_field: klines[].c
+    note: "SMA(20) and SMA(50) and MACD(12, 26, 9) on closed weekly closes (drop the bar at forming_bar_timestamp). The replay resamples Binance daily bars to weeks (back to 2017-08); Binance weekly bars are also on /market-data/klines?symbol={coin}USDT&interval=1w."
+  - id: daily_sr_level
+    role: entry
+    rule: "Daily zone: a horizontal support (for longs) or resistance (for shorts) where price has reversed at least twice"
+    runnable: true
+    endpoint: /api/v1/indicators/technical/{symbol}
+    field: sr.support[].price
+    note: "strength is the number of daily swing pivots (high or low of plus and minus 3 bars) clustered within 1.5% of the level; require strength >= 2. Only the nearest 3 levels per side within 30% of price are served."
+  - id: fib_retracement_level
+    role: entry
+    rule: "The 50% or 61.8% Fibonacci retracement of the most recent major swing aligns with the horizontal level"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=200
+    field: candles[].high
+    note: "The retracement is arithmetic once the swing is fixed, but the page does not define a major swing (minimum size or lookback) or how close counts as aligned; both are the desk's call."
+  - id: ma_through_zone
+    role: entry
+    rule: "The 50-day or 200-day moving average runs through the same zone"
+    runnable: partial
+    endpoint: /api/v1/indicators/technical/{symbol}
+    field: ma.sma_50
+    note: "ma.sma_200 is in the same block. The page gives no zone width, so how close the MA must sit to the level is the desk's call."
+  - id: confluence_zone
+    role: entry
+    rule: "A confluence zone needs three or more independent tools at one price: horizontal S/R, a 50% or 61.8% Fib, the 50- or 200-day MA, or a high-volume node"
+    runnable: partial
+    input: derived
+    inputs: [daily_sr_level, fib_retracement_level, ma_through_zone]
+    note: "Volume-profile nodes are not served, so with the three served legs the strict reading is all three. Only as runnable as its partial legs."
+  - id: rsi_turn_intraday
+    role: entry
+    rule: "At the zone, on the 1H (or 15m) chart, RSI reaches oversold (longs) or overbought (shorts) and then turns"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=100
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&interval=1h&start={start}
+    replay_field: klines[].c
+    note: "Wilder RSI(14) on closed 1h bars. The page names no oversold level (its example hooks up from 32); 30/70 is the usual reading, and the choice of 1H or 15m is the desk's."
+  - id: reversal_candle
+    role: entry
+    rule: "A bullish (or bearish) reversal candle at the zone on the 1H or 15m chart: engulfing, pin bar, or morning/evening star"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=5
+    field: candles[].open
+    note: "Engulfing is mechanical from open and close; pin bar and star patterns need body and wick ratios the page does not give."
+  - id: volume_spike
+    role: entry
+    rule: "A volume spike on the reversal candle confirms the entry"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1h&limit=25
+    field: candles[].volume
+    note: "The page says above-average volume without a lookback or multiple; comparing with the 20-bar mean is one reading."
+  - id: funding_not_crowded
+    role: filter
+    rule: "Skip confluence longs when funding shows leveraged-long crowding at the zone"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    note: "The page names flat or negative funding as the clean case but sets no crowding level; the cut-off is the desk's call."
+  - id: regime_not_shock
+    role: filter
+    rule: "Stand down while the regime is Structural Shock (headline-driven moves break confluence levels)"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Served id structural_shock_crisis. History starts 2026-08-07."
+  - id: entry_on_close
+    role: entry
+    rule: "Enter on the close of the confirming candle"
+    runnable: partial
+    input: derived
+    inputs: [confluence_zone, rsi_turn_intraday, reversal_candle, volume_spike]
+    note: "Only as runnable as its partial inputs."
+  - id: stop_below_zone
+    role: stop
+    rule: "Stop below the confluence zone, beneath the lowest indicator in the cluster"
+    runnable: partial
+    input: derived
+    inputs: [confluence_zone]
+    note: "Only as runnable as confluence_zone; the extra room below it is not quantified."
+  - id: target_next_resistance
+    role: exit
+    rule: "Target the next major daily resistance, or at least 2:1 reward to risk"
+    runnable: true
+    input: position
+    endpoint: /api/v1/indicators/technical/{symbol}
+    field: sr.resistance[].price
+    note: "Take the nearest resistance above entry; if it is closer than 2x the stop distance, use the 2:1 target."
+  - id: drawdown_kill
+    role: stop
+    rule: "Stop trading the framework when drawdown exceeds 20% from the equity peak"
+    runnable: true
+    input: position
 ---
 
 # Multi-Timeframe Confluence

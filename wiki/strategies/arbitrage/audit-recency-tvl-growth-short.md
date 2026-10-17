@@ -22,6 +22,118 @@ expected_sharpe: 1.2
 expected_max_drawdown: 0.30
 breakeven_cost_bps: 80
 decay_evidence: "Strategy depends on the structural gap between protocol shipping velocity and audit-firm capacity. Audit-firm backlog of 2-12 months (Trail of Bits, OpenZeppelin, Halborn) is unlikely to compress meaningfully through 2027. AI-driven auditing may eventually close this gap; not yet at scale as of Apr 2026."
+gates:
+  - id: universe_top100_tvl
+    role: universe
+    rule: "Top 100 DeFi protocols by TVL on DeFiLlama"
+    runnable: false
+    note: "Per-protocol TVL is not served. Needs DefiLlama's protocols endpoint."
+  - id: tvl_growth_6mo
+    role: entry
+    rule: "Score input: TVL_growth_6mo, the % change in protocol TVL over the trailing 6 months (since launch when newer)"
+    runnable: false
+    note: "Needs DefiLlama's per-protocol TVL history, which is not served."
+  - id: audit_staleness
+    role: entry
+    rule: "Score input: audit_staleness_months, months since the most recent independent audit"
+    runnable: false
+    note: "No audit data is served. Needs the audit firms' report archives (Trail of Bits, OpenZeppelin, Halborn, OtterSec, Sherlock, Code4rena)."
+  - id: audit_count_24mo
+    role: entry
+    rule: "Score input: audit_count_24mo, independent audits in the last 24 months, floored at 1"
+    runnable: false
+    note: "Same audit archives as audit_staleness; not served."
+  - id: code_novelty
+    role: entry
+    rule: "Score input: code_novelty, 3 for a novel VM, 2 for a fork of exploited code, novel AMM math or novel cryptography, 1 for established code; updated quarterly"
+    runnable: false
+    note: "A manual or LLM-assisted classification of the protocol's code; nothing served answers it."
+  - id: tvl_at_risk
+    role: entry
+    rule: "Score input: tvl_at_risk, TVL x a loss-elasticity factor that scores concentrated single-contract exposure higher"
+    runnable: false
+    note: "Needs protocol TVL and a contract map, neither served. The composite formula on the page leaves this input out."
+  - id: risk_score
+    role: entry
+    rule: "Monthly composite: risk_score = TVL_growth_6mo x code_novelty x audit_staleness_months / max(audit_count_24mo, 1)"
+    runnable: false
+    input: derived
+    inputs: [tvl_growth_6mo, code_novelty, audit_staleness, audit_count_24mo]
+    note: "Every input is off-API."
+  - id: perp_exists
+    role: universe
+    rule: "Trade only protocols whose token has a perp market"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "Hyperliquid perps; mapping a protocol to its token (Jupiter Lend to JUP, Spark to SPK) is the bot's job and carries basis risk where the protocol has no token of its own."
+  - id: short_top_decile
+    role: entry
+    rule: "Short the top decile by risk_score (10 names) where a perp exists"
+    runnable: false
+    input: derived
+    inputs: [risk_score, perp_exists]
+    note: "Only as runnable as risk_score."
+  - id: long_bottom_decile
+    role: entry
+    rule: "Long the bottom decile by risk_score as the hedge: established protocols with recent multi-firm audits and stable TVL"
+    runnable: false
+    input: derived
+    inputs: [risk_score, perp_exists]
+    note: "Only as runnable as risk_score."
+  - id: size_per_name
+    role: sizing
+    rule: "0.5% of the limit per name on each side (0.05 x limit / 10)"
+    runnable: true
+    input: position
+  - id: carry_budget
+    role: sizing
+    rule: "Keep the short basket's funding cost within the 25-50 bp/month budget"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].funding_sum
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_sum
+    note: "start = 30 days ago. funding_sum is the day's settled Hyperliquid funding; a short pays when it is negative, so the month's cost on a name is -sum over 30 days. Pro Plus. The live hourly rate is current_rate on /api/v1/hyperliquid/funding-rates?coin={coin}."
+  - id: monthly_rebalance
+    role: exit
+    rule: "Rescore and rebalance both baskets monthly"
+    runnable: true
+    input: position
+  - id: stop_audit_completed
+    role: stop
+    rule: "Stop out a short when the protocol announces completion of a major audit"
+    runnable: partial
+    endpoint: /api/v1/news/coin/{symbol}?hours=168
+    field: events[].title
+    note: "Match audit announcements in the coin's news titles. The feed is general crypto news on the coins we track, not an audit registry, so a missed announcement is likely; check the audit firm's archive before acting."
+  - id: stop_exploit_captured
+    role: stop
+    rule: "Stop out (cover) once an exploit lands on the name and the loss is captured"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack&symbol={symbol}
+    field: items[].amount_usd
+    note: "The hacks registry lags the exploit by hours to days and does not always tag a symbol (match the title too). When the loss counts as captured is the desk's call."
+  - id: kill_drawdown
+    role: stop
+    rule: "Retire on a drawdown above 30% over a rolling 12 months"
+    runnable: true
+    input: position
+  - id: kill_low_return
+    role: stop
+    rule: "Retire when the average monthly return is below 30 bp over 4 consecutive quarters"
+    runnable: true
+    input: position
+  - id: kill_regulation
+    role: stop
+    rule: "Retire on major regulatory action against systematic shorting of DeFi tokens in the desk's jurisdiction"
+    runnable: false
+    note: "A legal judgement; no feed covers it."
+  - id: kill_audit_aggregator
+    role: stop
+    rule: "Retire once an audit-data aggregator launches and gains adoption"
+    runnable: false
+    note: "A market-structure judgement; nothing served tracks it."
 ---
 
 # Audit-Recency × TVL-Growth Systematic Short

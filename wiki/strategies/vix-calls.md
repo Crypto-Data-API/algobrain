@@ -34,6 +34,136 @@ kill_criteria: |
   - monetization missed through DVOL spike → process failure; fix rules before next tranche
   - annual bleed exceeds 2.5% of NAV → reduce tranche size or shift to put spreads
   - Deribit access restriction (regulatory/operational) → halt program pending venue alternative
+gates:
+  - id: btc_eth_deribit
+    role: universe
+    rule: "Long-vol structures on Deribit BTC or ETH options (OTM put wings or straddles); no tradeable vol index exists"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "We serve Deribit DVOL (current and about 180 days of daily history) and the ATM term structure for BTC and ETH. Option quotes and fills come from Deribit."
+  - id: dvol_pctile_entry
+    role: entry
+    rule: "DVOL percentile of the trailing year: below the 40th is the best entry (put wings); 40th-60th buys a straddle tranche; 60th-85th reduce or wait"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Rank today's dvol against the served daily history, which is about 180 days (Pro Plus), not a year."
+  - id: no_initiate_dvol_85
+    role: filter
+    rule: "Do not initiate when DVOL is above the 85th percentile (buying the peak)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Same ~180-day history caveat as dvol_pctile_entry."
+  - id: vol_regime_compressed
+    role: filter
+    rule: "Buy put wings only when the coin's vol regime reads compressed"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow."
+  - id: funding_picks_structure
+    role: entry
+    rule: "If 8h funding is above 0.03% (call-skew regime), buy the OTM put wing; otherwise buy a straddle"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: current_rate
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_rate_mean
+    note: "Hyperliquid funding is hourly: compare current_rate x 8 with 0.0003. The text also reads the 25-delta risk reversal, which is not served; the pseudocode uses funding alone."
+  - id: term_structure_contango
+    role: entry
+    rule: "Prefer entry when the vol term structure is in steep contango (front-month implied vol well below back-month)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "Compare atm_iv of the ~30-day and ~90-day expiries (Pro Plus). Contango is mechanical; 'steep' has no threshold."
+  - id: suspend_on_backwardation
+    role: filter
+    rule: "Do not initiate while the vol term structure is in backwardation; suspend the program after more than 30 days of it (3-4 weeks in the entry table)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].atm_iv
+    note: "Backwardation conventionally means front above back: atm_iv of the ~30-day expiry above the ~90-day one. The page's kill criterion writes it as '3-month > 1-month', which is contango, so the desk must confirm the reading. The term structure is live-only: the bot logs it daily to count the days, and no history is served."
+  - id: rv_over_iv_avoid
+    role: filter
+    rule: "Avoid initiating when realized vol has exceeded implied for weeks (a LUNA- or FTX-style regime break)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    note: "vrp below 0 means 30-day realized is above DVOL today; a run of weeks needs the bot's own daily log or a rebuild from the DVOL history and daily candles. 'Weeks' is not pinned down."
+  - id: catalyst_tranche
+    role: entry
+    rule: "Time tranches ahead of known catalysts: ETF decisions, major unlocks, CPI or FOMC, halving windows"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?window_days=30
+    field: items[].days_until
+    note: "macro_print (CPI, FOMC and others) and unlock rows are served; ETF decisions and halvings are not, and 'major' has no size."
+  - id: expiry_21_60
+    role: entry
+    rule: "Expiry 21-60 DTE (45 in the pseudocode); avoid weeklies for a continuous hedge"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure is Pro Plus and lists the nearest 12 expiries."
+  - id: strike_selection
+    role: entry
+    rule: "Put wing 15-30% OTM (25% in the pseudocode); straddle at or near the money"
+    runnable: true
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "Target strike = spot x 0.70 to 0.85 for the wing, rounded to a listed Deribit strike. Premiums come from Deribit."
+  - id: annual_budget_tranches
+    role: sizing
+    rule: "A fixed small annual budget (2% of NAV in the pseudocode) deployed in 4 tranches; never exceed it chasing a spike"
+    runnable: true
+    input: position
+  - id: monetize_scale_out
+    role: exit
+    rule: "Monetize fast into a DVOL spike: sell a third at 3x cost, half the rest at 5x, all at 8x"
+    runnable: true
+    input: position
+    note: "Multiples of the position's own cost; marks come from the venue."
+  - id: cascade_monetize_signal
+    role: exit
+    rule: "Liquidations spiking with short dealer gamma is the cascade signature that triggers the scale-out"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&include_quiet=true
+    field: alerts[].triggered
+    note: "From the page's AI-agent workflow, with no thresholds. Squeeze alerts cover OKX, Bybit and Hyperliquid; /api/v1/quant/gex is a perp analog of dealer gamma, not options GEX."
+  - id: let_expire_and_roll
+    role: exit
+    rule: "Let calm-market structures expire (3 DTE and below cost) and roll across staggered expiries"
+    runnable: true
+    input: position
+  - id: redeploy_gains
+    role: sizing
+    rule: "Redeploy hedge gains into BTC or ETH during the cascade"
+    runnable: true
+    input: position
+  - id: kill_dvol_80_21d
+    role: filter
+    rule: "Suspend new tranches when DVOL stays above the 80th percentile of its trailing year for more than 21 days"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "The daily history allows counting the days, but the percentile rests on about 180 days of history, not a year."
+  - id: kill_missed_monetization
+    role: filter
+    rule: "A cascade payoff not partly monetized within 72 hours of the DVOL peak is a process failure: fix the rules before the next tranche"
+    runnable: true
+    input: position
+  - id: kill_bleed_2_5pct
+    role: sizing
+    rule: "Rolling 12-month bleed above 2.5% of NAV: halve tranche size or switch from put wings to put spreads"
+    runnable: true
+    input: position
+  - id: kill_venue_access
+    role: filter
+    rule: "Halt the program if Deribit access is suspended (regulatory action or outage)"
+    runnable: false
+    note: "No venue status or access feed for Deribit is served."
 ---
 
 # Crypto Long-Vol Overlay (DVOL / Deribit)

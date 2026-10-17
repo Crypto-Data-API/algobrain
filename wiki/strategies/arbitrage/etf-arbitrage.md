@@ -12,6 +12,39 @@ markets: [bonds]
 complexity: advanced
 backtest_status: untested
 related: ["[[structural-forced-selling]]", "[[net-asset-value]]", "[[leveraged-etf-rebalancing]]"]
+gates:
+  - id: premium_vs_iiv
+    role: entry
+    rule: "Monitor the ETF's market price against its intraday indicative value (IIV), published every 15 seconds"
+    runnable: false
+    note: "No ETF prices, NAVs or IIVs are served. /market-intelligence/etf/{asset}/flows carries daily spot-crypto ETF flows only, not prices or NAV."
+  - id: premium_exceeds_cost
+    role: entry
+    rule: "Act when the premium or discount exceeds the creation/redemption cost: 5-20 bps for equity ETFs, 20-50 bps for bond ETFs"
+    runnable: false
+    input: derived
+    inputs: [premium_vs_iiv]
+    note: "Built on the unserved premium; the cost side is the AP's own fee schedule."
+  - id: creation_unit_size
+    role: sizing
+    rule: "Trade in whole creation units, typically 25,000-50,000 shares"
+    runnable: true
+    input: position
+  - id: hedge_until_settlement
+    role: stop
+    rule: "Hedge the exposure immediately and hold the hedge until the creation or redemption settles (T+1 or T+2)"
+    runnable: true
+    input: position
+  - id: exit_on_settlement
+    role: exit
+    rule: "Once the creation or redemption settles, sell the received ETF shares or underlying basket"
+    runnable: true
+    input: position
+  - id: intraday_basket_spread
+    role: entry
+    rule: "Intraday alternative: trade the ETF against its underlying basket on the open market without a formal creation or redemption"
+    runnable: false
+    note: "Needs live ETF and constituent equity or bond quotes, none of which are served."
 ---
 
 # ETF Arbitrage

@@ -34,6 +34,196 @@ kill_criteria: |
   - OI gate blocks > 70% of signal-eligible entry attempts over 90 days (OI is perpetually crowded on the short legs; recalibrate thresholds or reconsider pair selection)
 
 related: ["[[pairs-trading]]", "[[correlation-regime-pairs]]", "[[pairs-with-funding-differential]]", "[[vol-balanced-pairs]]", "[[short-liquidation-squeeze]]", "[[leverage-stress-tail-hedge]]", "[[oi-confirmed-trend]]", "[[oi-flush-reversion]]", "[[crowded-long-funding-fade]]", "[[crowded-short-funding-fade]]", "[[open-interest]]", "[[funding-rate]]", "[[perpetual-futures]]", "[[stat-arb]]", "[[cointegration]]", "[[z-score]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: pair_correlation
+    role: universe
+    rule: "Pair eligible only while the rolling 60-day correlation of the two legs' daily returns is at least 0.70"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=62
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Call once per leg, drop the forming bar (forming_bar_timestamp) and correlate the last 60 daily log returns. Daily Hyperliquid replay reaches back to 2023."
+  - id: pair_cointegration
+    role: universe
+    rule: "Pair eligible only while the Engle-Granger cointegration test on the two legs' log closes gives p at most 0.05"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=92
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Use 90 closed daily bars, the window correlation-regime-pairs and this page's kill criterion use."
+  - id: pair_half_life
+    role: universe
+    rule: "Pair eligible only while the spread's Ornstein-Uhlenbeck half-life is 3 to 25 days"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=62
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Regress the daily change of the 60-day log spread on its lagged level; half-life = -ln(2) / slope."
+  - id: zscore_entry
+    role: entry
+    rule: "Enter when the 30-day log-spread z-score is at least 2.0 in absolute value: short the rich leg, long the cheap leg"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=32
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Spread = log(close A) - hedge ratio x log(close B) over the last 30 closed daily bars; z = (spread - mean) / std. The short leg is the rich one, and every OI and funding gate below reads that leg."
+  - id: regime_no_new_spreads
+    role: filter
+    rule: "No new spreads while the market regime is Structural Shock or High Leverage Stress"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Block on structural_shock_crisis. The served catalogue has no High Leverage Stress state, so that half is the desk's call. Regime history starts 2026-08-07 and cannot be backfilled."
+  - id: oi_7d_build_block
+    role: filter
+    rule: "Block entry while the short leg's 7-day open-interest change is +15% or more; wait until it is back below +8%"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    field: data[].oi_close
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].oi_close
+    note: "start = 7 days and 2 hours ago; change = last oi_close / the oi_close 168 rows earlier - 1. Rows are closed 1h bars (the forming hour is never served). Bars start 2026-03-30. Binance daily OI is on /derivatives/binance/open-interest?symbol={coin}USDT (history[].sum_open_interest)."
+  - id: oi_24h_spike_block
+    role: filter
+    rule: "Block entry while the short leg's 24-hour open-interest change is +8% or more; wait until it is below +4%"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    field: data[].oi_close
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].oi_close
+    note: "start = 26 hours ago; change = last oi_close / the oi_close 24 rows earlier - 1. For the top 25 perps, /liquidity/oi-divergence serves rows[].oi_change_24h_pct directly."
+  - id: funding_squeeze_fuel
+    role: filter
+    rule: "Squeeze-fuel leg 1: the short leg's 8h funding is at or below -0.015% (clears above -0.005%/8h)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hyperliquid settles hourly: 8h funding = the sum of the last 8 settled rates, so the cut is -0.00015. For Binance's native 8h print use /derivatives/binance/funding-rates?symbol={coin}USDT."
+  - id: ls_squeeze_fuel
+    role: filter
+    rule: "Squeeze-fuel leg 2: the short leg's long/short ratio is at or below 0.80 (clears above 0.90)"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/long-short-ratio?symbol={coin}USDT
+    field: long_short_ratio
+    note: "The page's own source: Binance's global long/short account ratio for the USDT perp. Hyperliquid publishes no long/short ratio. top_trader_long_short_ratio is the position-weighted top-trader version. A pair with no Binance perp returns a placeholder 1.0 with an empty history."
+  - id: squeeze_fuel_block
+    role: filter
+    rule: "Block entry while funding_squeeze_fuel and ls_squeeze_fuel both hold; release when funding is above -0.005%/8h or L/S is above 0.90"
+    runnable: true
+    input: derived
+    inputs: [funding_squeeze_fuel, ls_squeeze_fuel]
+  - id: funding_extreme_block
+    role: filter
+    rule: "Block entry unconditionally while the short leg's 8h funding is at or below -0.025%"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Sum of the last 8 hourly settlements at or below -0.00025."
+  - id: all_clear
+    role: filter
+    rule: "Entry allowed only when 7d OI change is below +8%, 24h OI change below +4%, 8h funding above -0.005% and L/S above 0.85"
+    runnable: true
+    input: derived
+    inputs: [oi_7d_build_block, oi_24h_spike_block, funding_squeeze_fuel, ls_squeeze_fuel]
+    note: "Same fields as the block gates, at the stricter all-clear cuts."
+  - id: oi_4h_build_reduce
+    role: exit
+    rule: "Mid-trade, checked every 4 hours: cut to 50% when the short leg's 4h open-interest change is +4% or more; exit fully if it holds for 2 consecutive 4h periods"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=4h&start={start}
+    field: data[].oi_change_pct
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=4h&start={start}
+    replay_field: data[].oi_change_pct
+    note: "oi_change_pct is each closed 4h bar's open-to-close OI change in percent (4 = +4%). Act at the next bar's open."
+  - id: funding_flip_exit
+    role: exit
+    rule: "Exit fully when the short leg's funding crosses from positive to -0.010%/8h or lower while its open interest is building"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=16
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Compare the latest 8-settlement sum (at or below -0.0001) with the previous 8 (above 0). The pseudocode defines building as a 4h OI change of at least +2%, read from oi_4h_build_reduce's field."
+  - id: ls_crowding_exit
+    role: exit
+    rule: "Exit fully when the short leg's long/short ratio drops to 0.75 or lower mid-trade"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/long-short-ratio?symbol={coin}USDT
+    field: long_short_ratio
+    note: "Same Binance account ratio as ls_squeeze_fuel."
+  - id: oi_7d_exit
+    role: exit
+    rule: "Exit fully when the short leg's 7-day open-interest change exceeds +20%; no re-entry until OI normalises"
+    runnable: true
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    field: data[].oi_close
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].oi_close
+    note: "Same 168-row change as oi_7d_build_block. The pseudocode measures the build since entry (7d change now minus 7d change at entry); record the entry value in the position log for that reading."
+  - id: convergence_exit
+    role: exit
+    rule: "Close for profit when the spread z-score is back to 0.5 or less in absolute value"
+    runnable: true
+    input: derived
+    inputs: [zscore_entry]
+  - id: zscore_stop
+    role: stop
+    rule: "Stop out when the spread z-score reaches 3.5 or more against the position"
+    runnable: true
+    input: derived
+    inputs: [zscore_entry]
+  - id: regime_break_exit
+    role: exit
+    rule: "Exit when the 60-day correlation falls below 0.55 or the cointegration p-value rises above 0.10"
+    runnable: true
+    input: derived
+    inputs: [pair_correlation, pair_cointegration]
+  - id: time_exit
+    role: exit
+    rule: "Close the spread after 21 days without convergence"
+    runnable: true
+    input: position
+  - id: reentry_oi_normalised
+    role: filter
+    rule: "After an OI-triggered exit, re-enter only when the short leg's 7-day OI change is below +5%"
+    runnable: true
+    input: derived
+    inputs: [oi_7d_build_block]
+  - id: reentry_funding_positive
+    role: filter
+    rule: "After an OI-triggered exit, re-enter only when the short leg's 8h funding is above 0"
+    runnable: true
+    input: derived
+    inputs: [funding_squeeze_fuel]
+  - id: reentry_cooldown
+    role: filter
+    rule: "After an OI-triggered exit, wait at least 48 hours before re-entering the same spread"
+    runnable: true
+    input: position
+  - id: vol_balanced_legs
+    role: sizing
+    rule: "Size legs by 20-day realised vol: low-vol leg notional = total x vol_high / (vol_high + vol_low)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=22
+    field: candles[].close
+    note: "vol = std of the last 20 closed daily returns x sqrt(365), the vol-balanced-pairs definition."
+  - id: oi_size_scalar
+    role: sizing
+    rule: "Size at 75% of normal notional when the short leg's 7-day OI change is +5% to +8%; cap at 50% if entering at +8% to +15%"
+    runnable: true
+    input: derived
+    inputs: [oi_7d_build_block]
+    note: "Full notional below +5%. The all-clear gate already blocks +8% and above, so the 50% band applies only if the desk overrides it."
 ---
 
 # OI-Gated Pairs

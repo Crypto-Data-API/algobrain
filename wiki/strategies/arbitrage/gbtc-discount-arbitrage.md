@@ -22,6 +22,50 @@ expected_max_drawdown: 0.50
 breakeven_cost_bps: 200
 decay_evidence: "Premium collapsed Feb 2021; discount closed Jan 2024 with ETF conversion."
 related: ["[[funding-rate-arbitrage]]", "[[cash-and-carry]]", "[[2020-03-bond-etf-dislocation]]", "[[basis-trade]]", "[[depeg-risk]]", "[[three-arrows-capital]]", "[[blockfi]]", "[[cryptodataapi]]"]
+gates:
+  - id: creation_eligibility
+    role: universe
+    rule: "Premium era: direct creations with Grayscale need accredited-investor or qualified-purchaser status"
+    runnable: true
+    input: position
+    note: "A fact about the trader, not the market. The strategy is retired: GBTC converted to a spot ETF on 11 January 2024."
+  - id: premium_to_nav
+    role: entry
+    rule: "Premium era: create at NAV and sell on OTCQX while GBTC trades at a premium to NAV, premium = (price - NAV) / NAV"
+    runnable: false
+    note: "GBTC's share price, BTC per share and NAV are not served. They come from OTCQX or NYSE Arca quotes and Grayscale's daily NAV report."
+  - id: discount_entry_10pct
+    role: entry
+    rule: "Discount era: buy GBTC only while it trades at a discount to NAV wider than 10%"
+    runnable: false
+    note: "Same unserved inputs as premium_to_nav."
+  - id: conversion_catalyst
+    role: filter
+    rule: "Discount era: time entries on the conversion catalyst, the Grayscale v. SEC litigation timeline"
+    runnable: false
+    note: "Court dockets and SEC filings are not served; reading them is a legal judgement."
+  - id: btc_short_hedge
+    role: sizing
+    rule: "Short BTC equal to shares held x BTC per share, via CME futures, perps or borrowed spot, held for the whole trade"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/summary?coin=BTC
+    field: mark_price
+    note: "The perp leg is served (Hyperliquid mark here; funding cost on /hyperliquid/funding-rates). BTC per share comes from Grayscale and is not served, and CME futures are not served."
+  - id: lockup_180d
+    role: exit
+    rule: "Premium era: hold the created shares through the 180-day Rule 144 lock-up, then sell on the secondary market and close the futures hedge"
+    runnable: true
+    input: position
+  - id: exit_discount_3pct
+    role: exit
+    rule: "Discount era: unwind both legs when the discount narrows inside 3% (the 1-3% cost band) or the ETF conversion is approved"
+    runnable: false
+    note: "Needs GBTC price and NAV, which are not served."
+  - id: book_share
+    role: sizing
+    rule: "Run the trade at 5-20% of book"
+    runnable: true
+    input: position
 ---
 
 # GBTC Discount/Premium Arbitrage

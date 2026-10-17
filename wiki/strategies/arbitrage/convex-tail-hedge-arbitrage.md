@@ -22,6 +22,117 @@ expected_sharpe: 0.7
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 50
 decay_evidence: "Strategy's edge depends on cyclical periods of cheap convexity. As long as vol-suppression strategies (vol-targeted institutional flow, structured product issuance) systematically underprice tail risk, the edge persists. Periodic crowding (e.g., post-2010 vol-fund proliferation, post-2020 'long convexity' fad) compresses returns; the strategy works best when neglected."
+gates:
+  - id: universe_scan
+    role: universe
+    rule: "Monthly scan: equity vol (VIX, MOVE, index IV curves), credit (CDX IG and HY, EMBI), 5y sovereign CDS, commodity option surfaces, and crypto vol (Deribit DVOL, BVIV)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "Only the crypto sleeve is served: Deribit DVOL for BTC and ETH (ETH needs Pro). VIX, MOVE, CDX, sovereign CDS, commodity vol and BVIV are not; they need CBOE, ICE, Markit and the option venues."
+  - id: cheap_vol_percentile
+    role: entry
+    rule: "Enter when the instrument sits in the lowest 10-15% of its 5-year implied-vol or spread distribution"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "Crypto only, and the served DVOL history is about 180 daily points (Pro Plus), not 5 years, so the percentile is against a much shorter window. A realized-vol cross-check is regime compressed and vol.vol_pctile_30 on /api/v1/volatility/regime/{symbol}."
+  - id: crypto_dvol_below_50
+    role: entry
+    rule: "Crypto cheap-vol signal: DVOL (or BVIV) below about 50"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "Deribit DVOL for BTC and ETH; BVIV is not served. The history covers about 180 days (Pro Plus)."
+  - id: equity_cheap_vol
+    role: entry
+    rule: "Equity cheap-vol signal: VIX sustained below about 13 with a flat 25-delta put skew; rates: MOVE at multi-year tights"
+    runnable: false
+    note: "No VIX, MOVE or equity option skew is served. Needs CBOE and ICE data."
+  - id: credit_cheap_spreads
+    role: entry
+    rule: "Credit and sovereign signal: CDX IG or HY, or 5y sovereign CDS on stressed names, at multi-year tights"
+    runnable: false
+    note: "No CDS or credit-index spreads are served. Needs Markit or a dealer feed."
+  - id: crypto_catalyst_confirm
+    role: filter
+    rule: "Optional catalyst alignment for crypto: on-chain leverage building while funding is compressed"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/open-interest?symbol={coin}USDT
+    field: oi_trend_30d_pct
+    note: "Leverage building read as a rising 30-day OI trend; funding is binance.current_rate or hyperliquid.current_rate on /api/v1/derivatives/funding-rates?coin={coin}. The page sets no thresholds for building or compressed."
+  - id: tradfi_catalyst_confirm
+    role: filter
+    rule: "Optional catalyst alignment for TradFi legs: yield-curve inversion (3m10y, 2s10s), credit-cycle stress, CAPE elevated"
+    runnable: false
+    note: "No yield curve, default-rate or valuation data is served; /api/v1/sentiment/macro carries a single Treasury yield. Needs FRED and an equity valuation source."
+  - id: crypto_otm_put
+    role: entry
+    rule: "Crypto leg: buy OTM puts struck at 0.6 x spot with about 90 days to expiry"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "Spot sets the strike. Option chains and premiums are not served; the Deribit expiries and ATM IV are items[].term_structure on /api/v1/volatility/implied (Pro Plus), not OTM put prices."
+  - id: size_per_quarter
+    role: sizing
+    rule: "25-100 bp of NAV per position per quarter (pseudocode caps at 50 bp), with total carry capped at about 5% of NAV per 12 months"
+    runnable: true
+    input: position
+  - id: book_allocation
+    role: sizing
+    rule: "Keep 1-5% of NAV in the standing tail-hedge book"
+    runnable: true
+    input: position
+  - id: roll_cadence
+    role: exit
+    rule: "Roll short-dated hedges quarterly and long-dated (1-5 year CDS) annually"
+    runnable: true
+    input: position
+  - id: take_profit_ladder
+    role: exit
+    rule: "At 5x the premium take 50% off; at 10x take 80% off"
+    runnable: true
+    input: position
+  - id: underwater_24m
+    role: exit
+    rule: "After more than 24 months underwater, reassess: keep rolling if the thesis is intact, close if it has degraded"
+    runnable: partial
+    input: position
+    note: "Whether the thesis is intact is the desk's call."
+  - id: catalyst_exit
+    role: exit
+    rule: "Exit aggressively when the catalyst event materialises"
+    runnable: partial
+    endpoint: /api/v1/security/regime/score
+    field: band
+    note: "The page does not define the event. For the crypto sleeve, a jump in the security band (hacks, depegs, exchange-flow flight) or band on /api/v1/event/regime/score (unlocks, macro prints) are the served catalyst reads; what counts is the desk's call."
+  - id: kill_drawdown_25
+    role: stop
+    rule: "Retire on a drawdown above 25% over a rolling 24 months"
+    runnable: true
+    input: position
+  - id: kill_low_return
+    role: stop
+    rule: "Retire when the average annual return is below 3% over 4 consecutive quarters"
+    runnable: true
+    input: position
+  - id: kill_no_payoff_7y
+    role: stop
+    rule: "Retire after 7+ years without a major payoff event globally"
+    runnable: partial
+    input: position
+    note: "What counts as a major global payoff event is the desk's call."
+  - id: kill_vrp_compression
+    role: stop
+    rule: "Retire on persistent structural compression of implied versus realized vol spreads"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    note: "vrp is DVOL minus 30-day realized vol, BTC and ETH only; keep the daily values yourself, since no vrp history is served. The page gives no length for persistent."
 ---
 
 # Convex Tail-Hedge Arbitrage

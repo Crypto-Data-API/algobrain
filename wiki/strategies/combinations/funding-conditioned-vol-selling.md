@@ -34,6 +34,124 @@ kill_criteria: |
   - signal frequency < 1 entry per 60 days for 6 months (both conditions rarely coincide — reconsider the threshold calibration)
 
 related: ["[[crypto-options-volatility-selling]]", "[[skew-trading]]", "[[options-premium-selling]]", "[[funding-filtered-momentum]]", "[[funding-flush-reversal]]", "[[crowded-long-funding-fade]]", "[[deribit]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[dvol]]", "[[variance-risk-premium]]", "[[funding-rate]]", "[[open-interest]]", "[[perpetual-futures]]", "[[behavioral-finance-overview]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: funding_crowding_003
+    role: entry
+    rule: "Entry 1: 8h perp funding on BTC (or the target underlying) at or above 0.03% (0.0003)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Hyperliquid (the example's venue) settles hourly: sum the last 8 prints for the 8h rate. On Binance it is the latest settled print, rates[].funding_rate on /api/v1/derivatives/binance/funding-rates. Treat a missing or stale print as no entry, as the page asks."
+  - id: dvol_pctile_40_90
+    role: entry
+    rule: "Entry 2: DVOL between the 40th and 90th percentile of its trailing 1-year distribution"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Rank items[].dvol within history[], which holds about 180 daily values, half the page's year, so the percentile is over a shorter window. Pro Plus."
+  - id: vrp_5_points
+    role: entry
+    rule: "Entry 3: DVOL minus 30-day realized vol at least 5 vol points"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    note: "vrp = dvol - realized_30 (Garman-Klass 30-day). The page computes RV from daily klines; close-to-close from /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=31 is the alternative."
+  - id: call_wing_tilt_005
+    role: sizing
+    rule: "When funding is at or above 0.05%/8h, overweight the call wing (call spread or call-heavy strangle); otherwise keep the structure balanced"
+    runnable: true
+    input: derived
+    inputs: [funding_crowding_003]
+  - id: call_skew_confirm
+    role: filter
+    rule: "Confirm the call-wing richness with the 25-delta risk reversal and call skew"
+    runnable: false
+    note: "No skew or per-strike IV is served; it needs the Deribit surface."
+  - id: gex_context
+    role: filter
+    rule: "Avoid selling premium into a short-gamma cascade environment"
+    runnable: partial
+    endpoint: /api/v1/quant/gex?symbol={coin}
+    field: coins.{coin}.regime.state
+    note: "/quant/gex is a perp analog built from Hyperliquid market-maker positioning, not Deribit dealer gamma; amplify is its short-gamma state. The page gives no rule beyond avoiding cascades, so how to weigh it is the desk's call."
+  - id: structure_strikes_dte
+    role: entry
+    rule: "Sell an iron condor (preferred) or short strangle at 15-25 delta on Deribit BTC/ETH options, 21-45 DTE (35 DTE and 20 delta in the pseudocode, 10-delta protective wings)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "The expiry is selectable from the served list. No per-strike delta or option prices are served, so strikes and credit come from Deribit."
+  - id: vega_budget
+    role: sizing
+    rule: "Short vega at most 1% of NAV per vol point of DVOL"
+    runnable: true
+    input: position
+    note: "Position vega from the venue's greeks; DVOL from items[].dvol on /api/v1/volatility/implied."
+  - id: delta_hedge_band
+    role: sizing
+    rule: "Delta-hedge on a band plus schedule (plus or minus 0.5% of NAV-equivalent delta)"
+    runnable: true
+    input: position
+  - id: continuous_hedge_dvol_25
+    role: sizing
+    rule: "Switch to continuous delta hedging when DVOL rises 25% intraday"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "Crypto trades round the clock, so the page's intraday baseline (session open) is undefined; poll dvol and compare with the UTC-day open or the last 24 hours (dvol_change_24h) at the desk's choice."
+  - id: profit_target_50
+    role: exit
+    rule: "Exit at 50% of the maximum credit"
+    runnable: false
+    note: "No option prices are served; the structure's mark comes from Deribit."
+  - id: time_stop_dte
+    role: exit
+    rule: "Time stop at 10-14 DTE (12 in the pseudocode)"
+    runnable: true
+    input: position
+  - id: funding_dissolved_exit
+    role: exit
+    rule: "If funding drops below 0.01%/8h mid-hold, the crowding premise has dissolved: close early when the position has captured at least 25% of max credit"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=8
+    field: history[].funding_rate
+    note: "The funding leg is mechanical (8-print sum below 0.0001). The profit leg needs the option marks from Deribit."
+  - id: kill_dvol_shock_50
+    role: stop
+    rule: "Flatten all short vega when DVOL rises 50% or more in a single session"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol
+    note: "No session is defined for a 24/7 market; compare with the UTC-day open at the desk's choice. regime vol_shock on /api/v1/volatility/regime/{symbol} is the served shock label the page's workflow also names."
+  - id: kill_delta_2x
+    role: stop
+    rule: "Flatten when position delta exceeds 2x the entry delta"
+    runnable: true
+    input: position
+  - id: kill_drawdown_30
+    role: stop
+    rule: "Pause: sleeve drawdown above 30% from its high-water mark"
+    runnable: true
+    input: position
+  - id: kill_rv_over_dvol_20d
+    role: stop
+    rule: "Pause: realized vol above DVOL for 20 or more consecutive days (structural VRP inversion)"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: history[].rv_gk_30
+    note: "Join history[].rv_gk_30 (60 days) by date with items[].history[].dvol on /api/v1/volatility/implied and count the run of days with RV above DVOL."
+  - id: kill_15_losers
+    role: stop
+    rule: "Pause: 15 or more consecutive combined-signal entries with negative P&L"
+    runnable: true
+    input: position
+  - id: kill_rare_signals
+    role: stop
+    rule: "Recalibrate: fewer than 1 entry per 60 days for 6 consecutive months"
+    runnable: true
+    input: position
 ---
 
 # Funding-Conditioned Vol Selling

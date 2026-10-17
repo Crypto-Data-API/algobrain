@@ -18,6 +18,101 @@ data_required: [ohlcv-daily, sentiment, positioning-data, fundamentals]
 min_capital_usd: 5000
 capacity_usd: 50000000
 related: ["[[edge-taxonomy]]", "[[mean-reversion]]", "[[sentiment]]", "[[behavioral-finance]]", "[[reflexivity]]", "[[capitulation]]", "[[noise-trader-risk]]", "[[narrative-trading]]", "[[position-sizing]]", "[[limits-to-arbitrage]]"]
+gates:
+  - id: fear_bottom_decile
+    role: entry
+    rule: "Objective extreme (pseudocode default): the sentiment index in its bottom decile (percentile below 10)"
+    runnable: partial
+    endpoint: /api/v1/backtesting/snapshots?data_type=fear_greed&start={start}&limit=1000
+    field: snapshots[].data.value
+    note: "Crypto expression: rank the live value (/api/v1/sentiment/fear-greed) within the archived Fear and Greed samples (about one per 25 minutes; reduce to one per day). The archive starts 2026-05-09, and /market-intelligence/fear-greed-history currently returns only the latest day, so the percentile base is months, not years; the window is the desk's call. AAII, put/call and VIX readings for stocks are not served."
+  - id: positioning_crowded
+    role: entry
+    rule: "Alternative extreme: positioning shows crowded one-sided exposure"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/long-short-ratio?symbol={symbol}USDT
+    field: long_short_ratio
+    note: "Binance account long/short ratio for crypto; funding extremes are on /hyperliquid/funding-rates. The page sets no crowding threshold. COT, fund-flow and short-interest data for stocks and futures are not served."
+  - id: rsi_divergence
+    role: entry
+    rule: "Alternative extreme: RSI(14) below 30 with a bullish divergence on daily bars"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=60
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "RSI is computable from the closes; what counts as a bullish divergence (which swing lows, how far apart) is not defined, so that is the desk's call."
+  - id: capitulation_spike
+    role: entry
+    rule: "Alternative extreme: capitulation, a spike in volume, volatility and put/call together"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/liquidations?symbol={coin}
+    field: data[].liquidation_usd_24h
+    note: "No spike sizes are given. For crypto, the liquidation washout the page's agent section uses (OKX, Bybit and Hyperliquid; Binance not captured) plus volume from candles stands in; BTC put/call is on /market-intelligence/options, with no history."
+  - id: extreme_turning
+    role: entry
+    rule: "Enter only after the extreme shows a first sign of exhaustion (bullish divergence or a reversal bar), never into an accelerating move"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=10
+    field: candles[].close
+    note: "Neither a reversal bar nor exhaustion is defined, so the trigger is the desk's call."
+  - id: value_floor
+    role: filter
+    rule: "Require a margin of safety: price below fundamental fair value"
+    runnable: partial
+    endpoint: /api/v1/on-chain/dormancy/btc
+    field: mvrv_signal.zone
+    note: "BTC only: the MVRV zone is the page's crypto stand-in for fair value; it reads unknown when MVRV data is missing. No fundamentals are served for stocks or other coins."
+  - id: regime_gate
+    role: filter
+    rule: "In Established Bear or Capitulation regimes the crowd is often right: fade only in range or bull regimes, or at a fraction of normal size"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "From the agent workflow. The regime ids are established_bear and capitulation; the reduced fraction is not given. History from 2026-08-07."
+  - id: stop_below_low
+    role: stop
+    rule: "Stop 3% below the recent (capitulation) low: stop = recent low x 0.97"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=30
+    field: candles[].low
+    note: "The page does not say how far back the recent low reaches; the window is the desk's call. The rules also allow a fundamental invalidation, which no endpoint answers."
+  - id: risk_size
+    role: sizing
+    rule: "Initial size = 0.5% of equity / (price - stop), with a scale-in budget reserved"
+    runnable: partial
+    input: derived
+    inputs: [stop_below_low]
+    note: "Only as runnable as stop_below_low."
+  - id: max_size
+    role: sizing
+    rule: "Pre-define a maximum position size before scaling in across the extreme; never average down past it"
+    runnable: partial
+    input: position
+    note: "The page gives no number; the cap is the desk's call."
+  - id: target_ma50
+    role: exit
+    rule: "Take profit at reversion to the 50-day moving average"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&limit=51
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin={coin}&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "The pseudocode target; the rules also allow the prior range or fair value."
+  - id: sentiment_flip_exit
+    role: exit
+    rule: "Exit when the sentiment percentile rises above 60 (the crowd flips to greed)"
+    runnable: partial
+    endpoint: /api/v1/backtesting/snapshots?data_type=fear_greed&start={start}&limit=1000
+    field: snapshots[].data.value
+    note: "Same short percentile base as fear_bottom_decile."
+  - id: fundamental_exit
+    role: exit
+    rule: "Cut the position on fundamental deterioration (the crowd was right)"
+    runnable: false
+    note: "Fundamental deterioration is a judgement on news and financials that no endpoint answers."
 ---
 
 # Contrarian Trading

@@ -33,6 +33,116 @@ kill_criteria: |
   - both signals coincide but are confirmed to be caused by a single entity's large sale (non-generalised capitulation) — verify via on-chain attribution before entry
 
 related: ["[[on-chain-flow-trading]]", "[[contrarian-extremes]]", "[[funding-flush-reversal]]", "[[miner-capitulation-bottom]]", "[[fear-and-greed-index]]", "[[on-chain-analysis]]", "[[sentiment-trading]]", "[[exchange-netflow]]", "[[mvrv]]", "[[bitcoin-cycle-regime]]", "[[crypto-market-regime-taxonomy]]", "[[on-chain-regime]]", "[[behavioral-finance-overview]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: exchange_inflow_spike
+    role: entry
+    rule: "On-chain sub-signal A: the 7-day rolling BTC exchange inflow is in the top 10% of its trailing 180-day distribution"
+    runnable: partial
+    endpoint: /api/v1/on-chain/exchange-flows/{symbol}/history?start={start}&interval=1h
+    field: points[].inflow_24h
+    replay: /api/v1/on-chain/exchange-flows/{symbol}/history?start={start}&end={end}&interval=1h
+    replay_field: points[].inflow_24h
+    note: "Sum seven daily inflow_24h readings for each 7-day inflow, then rank today's against the trailing series. History starts 2026-05-28 and each call spans at most 93 days, so the 180-day window is short until late November 2026. Coverage is tracked CEX wallets only and can miss exchanges (per_exchange_24h on /on-chain/exchange-flows/{symbol} shows which report); no wallet-age (dormancy) split is served. The live 7-day total is windows.7d.inflow there."
+  - id: sopr_below_097
+    role: entry
+    rule: "On-chain sub-signal B: 7-day smoothed SOPR at or below 0.97 for at least 5 consecutive days"
+    runnable: false
+    note: "No SOPR is served. It needs a UTXO analytics source such as Glassnode or CryptoQuant."
+  - id: mvrv_z_below_zero
+    role: entry
+    rule: "On-chain sub-signal C: MVRV-Z score below 0 (market at or below its realised value)"
+    runnable: false
+    note: "No MVRV-Z is served. /on-chain/dormancy/btc has a plain mvrv field, not the Z-score, and it returned null (zone unknown, no_data) on 2026-10-17. Needs Glassnode, CryptoQuant or similar."
+  - id: onchain_capitulation
+    role: entry
+    rule: "Signal 1 fires when any one of sub-signals A, B or C fires"
+    runnable: partial
+    input: derived
+    inputs: [exchange_inflow_spike]
+    note: "Only sub-signal A can be read from our data, and only partially; B and C need an external on-chain vendor."
+  - id: onchain_score_low
+    role: filter
+    rule: "On-chain Health composite at or below 20, consistent with capitulation confluence"
+    runnable: true
+    endpoint: /api/v1/on-chain/score
+    field: score
+    note: "From the page's indicator list and agent workflow, not its Rules section. The mvrv component carries weight 0 while MVRV has no data. Point-in-time history only in /backtesting/daily-snapshots."
+  - id: fear_greed_extreme
+    role: entry
+    rule: "Signal 2: Fear & Greed index at or below 20 today and for at least 2 consecutive days"
+    runnable: true
+    endpoint: /api/v1/sentiment/fear-greed
+    field: value
+    replay: /api/v1/market-health/history?days=365
+    replay_field: history[].components.fear_greed
+    note: "Keep one reading per UTC day for the 2-day count. history[].components.fear_greed on /market-health/history is the daily index value from 2026-01-14 (fear_greed snapshots hold intraday readings from 2026-05-09). /market-intelligence/fear-greed-history returned a single row on 2026-10-17, so it cannot supply the run."
+  - id: confluence_window
+    role: entry
+    rule: "Enter only when Signal 1 and Signal 2 both fire within a 5-day coincidence window"
+    runnable: partial
+    input: derived
+    inputs: [onchain_capitulation, fear_greed_extreme]
+    note: "Only as runnable as onchain_capitulation."
+  - id: no_structural_shock
+    role: filter
+    rule: "No entry while the market regime is Structural Shock"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Block on structural_shock_crisis. Regime history starts 2026-08-07 and cannot be backfilled."
+  - id: dry_powder_confirm
+    role: filter
+    rule: "Optional higher-conviction confirmation: the stablecoin dry-powder signal is accumulating"
+    runnable: true
+    endpoint: /api/v1/on-chain/stablecoin-reserves/dry-powder
+    field: signal
+    note: "Served values are accumulating, neutral, depleting and unknown; the page's 'elevated' has no separate state, so read accumulating (zscore is beside it)."
+  - id: tranche_scaling
+    role: sizing
+    rule: "Scale in with 3 tranches of 2-3% of the portfolio each over 5 days, the first on the day both signals confirm"
+    runnable: true
+    input: position
+  - id: high_conviction_size
+    role: sizing
+    rule: "Size each tranche 1.2x when the MVRV-Z sub-signal is the trigger"
+    runnable: false
+    input: derived
+    inputs: [mvrv_z_below_zero]
+    note: "From the pseudocode. Depends on MVRV-Z, which is not served."
+  - id: max_allocation
+    role: sizing
+    rule: "At most 10% of the portfolio in any single bottom-fishing setup, leverage at most 2x on a perp, and 20% of the portfolio held in stablecoins throughout"
+    runnable: true
+    input: position
+  - id: mvrv_z_exit
+    role: exit
+    rule: "Begin trimming when MVRV-Z recovers above +1"
+    runnable: false
+    note: "No MVRV-Z is served (see mvrv_z_below_zero)."
+  - id: sentiment_normalised_exit
+    role: exit
+    rule: "Trim 50% when the Fear & Greed index is above 50 for 5 consecutive days"
+    runnable: true
+    endpoint: /api/v1/sentiment/fear-greed
+    field: value
+    replay: /api/v1/market-health/history?days=365
+    replay_field: history[].components.fear_greed
+    note: "Count one reading per UTC day, as in fear_greed_extreme."
+  - id: time_stop
+    role: exit
+    rule: "If no exit has triggered within 90 days, close half the position and hold the rest with a trailing stop"
+    runnable: partial
+    input: position
+    note: "The page gives no trailing-stop distance for the remainder; that is the desk's call."
+  - id: hard_stop
+    role: stop
+    rule: "Close everything at a further 25% drawdown from the average entry price across all tranches"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
 ---
 
 # On-Chain Capitulation Confluence

@@ -22,6 +22,85 @@ expected_sharpe: 1.3
 expected_max_drawdown: 0.20
 breakeven_cost_bps: 100
 decay_evidence: "Compound v3 explicitly redesigned to prevent donation attacks (single-collateral markets, donation-resistant accounting). New forks of Compound v3 should reduce risk; forks of v2 still ship with the bug. Pattern persists as long as v2 forks continue launching, which they do (Sonne, Mendi, Moonwell, Strike, Iron Bank, Hundred, etc. all v2-derived)."
+gates:
+  - id: fork_universe
+    role: universe
+    rule: "Monitor new Compound v2 deployments: DeFiLlama lending protocols by launch date, fork-of-Compound classification, and audit archives warning about the v2 fork class"
+    runnable: false
+    note: "No protocol registry, fork classification or audit data is served. Needs DefiLlama's protocols list, explorer contract data and the audit firms' archives."
+  - id: tvl_over_50m
+    role: filter
+    rule: "High-risk filter: protocol TVL above $50M"
+    runnable: false
+    note: "Per-protocol TVL is not served (DefiLlama)."
+  - id: launched_12m
+    role: filter
+    rule: "High-risk filter: launched less than 12 months ago"
+    runnable: false
+    note: "Protocol launch dates are not served (DefiLlama, explorer deployment timestamps)."
+  - id: no_mitigation_audit
+    role: filter
+    rule: "High-risk filter: no public audit explicitly addressing donation-attack mitigation, and a permissionless governance role for market creation or adjustment"
+    runnable: false
+    note: "Needs the audit reports and the contracts' role configuration from an explorer; not served."
+  - id: perp_exists
+    role: universe
+    rule: "Short the protocol token only where a perp market exists"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "Hyperliquid perps; open_interest_usd and day_volume on the row show how thin the fork perp is. Mapping a protocol to its token is the bot's job."
+  - id: short_size
+    role: sizing
+    rule: "Short 0.1-0.3% of the book per name (0.2% in the pseudocode) to manage carry"
+    runnable: true
+    input: position
+  - id: carry_budget
+    role: sizing
+    rule: "Budget the short's funding carry (about 0.50 expected over the 12-month hold in the pseudocode)"
+    runnable: partial
+    endpoint: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    field: data[].funding_sum
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].funding_sum
+    note: "The page does not say what unit expected_carry=0.50 is in, so the budget is the desk's call. funding_sum is the day's settled Hyperliquid funding; a short pays when it is negative. Pro Plus."
+  - id: cover_mitigation
+    role: exit
+    rule: "Cover when the protocol formally addresses the donation-attack pattern via audit and redeployment"
+    runnable: false
+    note: "Audit and redeployment announcements are not served; needs the protocol's announcements and the audit archive."
+  - id: time_stop_12m
+    role: exit
+    rule: "Cover after 12 months without an incident (hold 6-12 months or until an exploit lands)"
+    runnable: true
+    input: position
+  - id: cover_exploit
+    role: exit
+    rule: "Cover at the post-exploit low once a donation attack lands and the loss is captured"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack
+    field: items[].technique
+    note: "Match the protocol in items[].title; classification and technique are DefiLlama's labels. The registry lags the exploit by hours to days, and the post-exploit low is a judgement."
+  - id: kill_drawdown_20
+    role: stop
+    rule: "Retire on a drawdown above 20% over a rolling 12 months"
+    runnable: true
+    input: position
+  - id: kill_hit_rate
+    role: stop
+    rule: "Retire when the hit rate stays below 20% over 4 consecutive quarters"
+    runnable: true
+    input: position
+  - id: kill_regulation
+    role: stop
+    rule: "Retire on major regulatory action specifically targeting fork shorts"
+    runnable: false
+    note: "A legal judgement; no feed covers it."
+  - id: kill_v3_adoption
+    role: stop
+    rule: "Retire once v3-style architecture is more than 80% of new lending-protocol launches"
+    runnable: false
+    note: "Needs a classified registry of lending launches; not served."
 ---
 
 # Compound-Fork Donation-Attack Systematic Short

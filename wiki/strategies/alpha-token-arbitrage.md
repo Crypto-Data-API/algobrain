@@ -19,6 +19,95 @@ capacity_usd: 500000
 crowding_risk: medium
 breakeven_cost_bps: 20
 related: ["[[bittensor]]", "[[dtao]]", "[[bittensor-subnets]]", "[[bittensor-subnet-rotation]]", "[[arbitrage]]", "[[bonding-curve]]", "[[automated-market-maker]]"]
+gates:
+  - id: universe_top20_alpha
+    role: universe
+    rule: "Cross-venue flavor: the top 20 Bittensor subnet alpha tokens"
+    runnable: false
+    note: "No Bittensor subnet or alpha-token data is served. Needs taostats.io or a Subtensor RPC read of the subnet list and alpha pools."
+  - id: curve_mid
+    role: entry
+    rule: "Read each alpha token's native bonding-curve mid on Subtensor in real time"
+    runnable: false
+    note: "Bonding-curve state (TAO and alpha reserves per subnet) is not served. Needs a Subtensor RPC read or the taostats.io API."
+  - id: cross_venue_spread
+    role: entry
+    rule: "Trade when (venue_price / curve_mid) - 1 exceeds threshold_bps: round-trip cost (curve slippage, venue fees, bridging) plus at least 40 bps net; buy the cheaper venue, sell the dearer"
+    runnable: false
+    note: "Third-party alpha quotes (Rayon Finance, tao.bit) are not served, and neither is the curve mid. Needs both venues' APIs plus a Subtensor read."
+  - id: tao_leg_hedge
+    role: sizing
+    rule: "Hedge the TAO exposure with a TAO perp on Hyperliquid or Binance whenever the gap between the two legs exceeds 1 minute"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/summary?coin=TAO
+    field: mark_price
+    note: "The leg gap comes from the bot's own fills. funding_rate on the same response is the hourly carry the hedge pays or earns; the Binance spot price is price on /api/v1/market-data/ticker/price?symbol=TAOUSDT."
+  - id: emission_share
+    role: entry
+    rule: "Fundamental-value flavor input: subnet i's current share of the 3,600 TAO/day emission"
+    runnable: false
+    note: "Subnet emission shares are not served. Needs taostats.io or a Subtensor RPC read."
+  - id: alpha_supply_price
+    role: entry
+    rule: "Fundamental-value flavor input: each subnet's outstanding alpha supply and current alpha price on the curve"
+    runnable: false
+    note: "Alpha supply and alpha prices are not served. Needs taostats.io, dtao.gg or a Subtensor RPC read."
+  - id: tao_price
+    role: entry
+    rule: "Fundamental-value flavor input: the TAO/USD price"
+    runnable: true
+    endpoint: /api/v1/market-data/ticker/price?symbol=TAOUSDT
+    field: price
+    replay: /api/v1/backtesting/klines?symbol=TAO&exchange=hyperliquid&interval=1d&start={start}
+    replay_field: klines[].c
+    note: "Binance spot. The replay uses Hyperliquid TAO perp daily closes."
+  - id: fv_spread_entry
+    role: entry
+    rule: "Daily, fair_alpha = share x 3,600 TAO/day x 30 days x TAO price / alpha supply; stake TAO into the subnet (buy alpha) when (fair - current) / current exceeds +10%"
+    runnable: false
+    input: derived
+    inputs: [emission_share, alpha_supply_price, tao_price]
+    note: "Only TAO price is served; emission share, alpha supply and the curve price all need Subtensor data."
+  - id: fv_spread_exit
+    role: exit
+    rule: "Unstake when the spread falls below the exit threshold: +2% in the Rules text, -2% in the pseudocode"
+    runnable: false
+    input: derived
+    inputs: [emission_share, alpha_supply_price, tao_price]
+    note: "Same missing Subtensor inputs as fv_spread_entry. The page's text and pseudocode disagree on the sign of the 2% exit, so that is the desk's call."
+  - id: max_hold
+    role: exit
+    rule: "Unstake once a fundamental-value position has been held longer than N days"
+    runnable: partial
+    input: position
+    note: "The page does not set N; its holding-period table says 1-14 days for this flavor."
+  - id: subnet_cap
+    role: sizing
+    rule: "No single subnet above 15% of the alpha book"
+    runnable: true
+    input: position
+  - id: curve_depth_2x
+    role: filter
+    rule: "Bonding-curve depth must exceed 2x the intended trade size"
+    runnable: false
+    note: "Curve reserves are not served. Needs a Subtensor RPC read of the subnet's TAO and alpha reserves."
+  - id: tao_reserve
+    role: sizing
+    rule: "Keep a TAO reserve outside the alpha pools for sizing new positions"
+    runnable: partial
+    input: position
+    note: "The page gives no reserve size, so it is the desk's call."
+  - id: kill_cross_venue_spread
+    role: stop
+    rule: "Kill switch: cross-venue median spread below 15 bps for a sustained 60-day window"
+    runnable: false
+    note: "Needs the same venue and curve quotes as cross_venue_spread, none of which is served."
+  - id: kill_fv_dispersion
+    role: stop
+    rule: "Kill switch: the fundamental-value spread shows near-zero dispersion across the alpha universe for 90 days"
+    runnable: false
+    note: "Needs the fair-value inputs in fv_spread_entry, which are not served."
 ---
 
 # Alpha Token Arbitrage (Bittensor)

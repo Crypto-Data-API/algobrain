@@ -22,6 +22,91 @@ expected_max_drawdown: null  # mid-accumulation MTM drawdowns of 30-50% must be 
 breakeven_cost_bps: null     # spot BTC, multi-month hold — costs are negligible relative to signal noise
 decay_evidence: "The signal rests on a SMALL sample (a handful of BTC cycles since 2012), and spot-ETF demand (2024+) plus industrial/public miners with balance-sheet buffers may dampen the classic forced-capitulation dynamic. Treat historical hit rate as low-n."
 related: ["[[on-chain-regime]]", "[[bitcoin-cycle-regime]]", "[[crypto-market-regime-taxonomy]]", "[[bitcoin-halving]]", "[[on-chain-analysis]]", "[[institutional-flow-regime]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: ribbon_capitulation_flag
+    role: filter
+    rule: "Capitulation flag (latched): the 30-day moving average of BTC network hashrate crosses below the 60-day"
+    runnable: true
+    endpoint: /api/v1/on-chain/miners/hash-ribbon
+    field: state
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.hash_ribbon.state
+    note: "state reads capitulation while the 30-day MA is below the 60-day; ma30_eh, ma60_eh and ratio_ma30_over_ma60 are in the same response. Replay is one daily read from March 2026 (days listing hash_ribbon in snapshot.backfilled_sections are reconstructed); no older hashrate history is served."
+  - id: ribbon_recovery
+    role: entry
+    rule: "Buy trigger, leg 1: after a capitulation flag, the 30-day hashrate MA crosses back above the 60-day"
+    runnable: true
+    endpoint: /api/v1/on-chain/miners/hash-ribbon
+    field: state
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.hash_ribbon.state
+    note: "state reads recovery for 14 days after the cross back above, then normal; last_crossover_ts dates the cross."
+  - id: price_confirm
+    role: entry
+    rule: "Buy trigger, leg 2: price confirmation, a daily close above the 30-day moving average (or the 10-day MA turning up)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin=BTC&interval=1d&limit=32
+    field: candles[].close
+    replay: /api/v1/hyperliquid/candles?coin=BTC&interval=1d&start={start}
+    replay_field: candles[].close
+    note: "Drop the forming bar; the pseudocode uses the close-above-30-day-MA version."
+  - id: puell_low
+    role: filter
+    rule: "Puell Multiple (daily miner USD revenue / its 365-day MA) in the low band, below 0.5"
+    runnable: false
+    note: "Not served live: the Puell series came from CoinGlass and stopped on 2026-07-22, and /market-intelligence/btc/cycle-indicators/puell_multiple now answers not yet available. For backtests, the full daily history from 2010 sits in /api/v1/backtesting/snapshots?data_type=coinglass_cycle_indicators (data.puell_multiple[].puell_multiple) in snapshots up to 2026-07-21. issuance_usd_24h on /api/v1/on-chain/dormancy/btc is the subsidy part of the numerator only, with no 365-day history."
+  - id: reserves_stable
+    role: filter
+    rule: "Miner reserves flat-to-rising over a multi-week window (a non-negative 28-day slope): forced reserve selling has exhausted"
+    runnable: partial
+    endpoint: /api/v1/on-chain/miners/reserves
+    field: flows.30d.total_net_btc
+    replay: /api/v1/backtesting/daily-snapshots/{date}
+    replay_field: snapshot.miner_flows.total_balance_btc
+    note: "Tracks only the reward addresses of five pools (Foundry USA, AntPool, F2Pool, ViaBTC, Binance Pool), not all miner-tagged wallets. A 30-day net flow at or above zero stands in for the 28-day slope; the replay gives one daily balance from March 2026."
+  - id: accumulate_confluence
+    role: entry
+    rule: "ACCUMULATE only when ribbon_recovery, price_confirm, puell_low and reserves_stable all hold; no single metric fires the trade"
+    runnable: false
+    input: derived
+    inputs: [ribbon_recovery, price_confirm, puell_low, reserves_stable]
+    note: "puell_low is not served live, so the four-way confluence cannot be checked. Running the other three without it is a different rule, and the desk's call."
+  - id: cycle_regime_gate
+    role: filter
+    rule: "Accumulate only while the cycle regime is Capitulation or Bottoming; the same miner signature during Established Bear is the false-positive case"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "From the page's agent workflow. Served slugs are capitulation, bottoming_accumulation and established_bear. Regime history starts 2026-08-07 and cannot be backfilled."
+  - id: laddered_entry
+    role: sizing
+    rule: "Scale in over 3-5 tranches across several weeks rather than one market buy; spot BTC or low-leverage longs only"
+    runnable: true
+    input: position
+  - id: survivable_size
+    role: sizing
+    rule: "Size the core allocation so a further 30-50% drawdown from the first tranche is survivable without forced selling"
+    runnable: true
+    input: position
+  - id: puell_take_profit
+    role: exit
+    rule: "Hold into the next expansion; scale out in tranches once the Puell Multiple climbs into its high band (above 3 in the pseudocode; the text says roughly 3-4)"
+    runnable: false
+    note: "Same gap as puell_low: no live Puell Multiple is served."
+  - id: invalidation
+    role: stop
+    rule: "INVALIDATE: the 30-day hashrate MA crosses back below the 60-day, price makes a new cycle low and miner reserves resume a sustained decline; halt accumulation and reset the flag"
+    runnable: partial
+    endpoint: /api/v1/on-chain/miners/hash-ribbon
+    field: state
+    note: "The ribbon leg is state turning back to capitulation; the new-low leg is the latest daily close below every earlier close in the cycle (/api/v1/hyperliquid/candles?coin=BTC&interval=1d); the reserves leg has the same five-pool limit as reserves_stable, and the page gives no length for sustained."
+  - id: drawdown_no_add
+    role: stop
+    rule: "If the drawdown from the first tranche passes 50% with no Hash Ribbon recovery in sight, stop adding"
+    runnable: true
+    input: position
 ---
 
 # Miner Capitulation Bottom

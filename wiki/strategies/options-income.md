@@ -35,6 +35,130 @@ kill_criteria: |
   - drawdown > 25% of capital → halve size; > 40% → full pause
   - Deribit portfolio-margin utilisation > 60% intraday → cut size 50%
   - rolling 6-12-month Sharpe < 0 in a non-shock environment → investigate VRP crowding
+gates:
+  - id: btc_eth_underlyings
+    role: universe
+    rule: "Deribit BTC and ETH options; altcoin options only as a small satellite sized for thin liquidity"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "BTC and ETH are the coins whose Deribit implied vol is served. Free tier sees BTC only."
+  - id: dte_band
+    role: entry
+    rule: "21-45 DTE at entry; avoid weeklies except as a deliberate sub-allocation"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "The 12 nearest Deribit expiries with days to expiry and ATM IV (Pro Plus; empty on lower tiers)."
+  - id: structure_mix
+    role: sizing
+    rule: "50-60% iron condors, 20-30% short strangles (small, hard kill switch), 10-20% covered calls, cash-secured puts or wheel"
+    runnable: true
+    input: position
+  - id: dvol_percentile_band
+    role: filter
+    rule: "Sell premium only when DVOL is between about the 40th and 90th percentile of its trailing-year history"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "About 180 days of daily DVOL are served (Pro Plus), half the page's trailing year; a full-year percentile needs Deribit's DVOL history. The same series is the only replay."
+  - id: vrp_five_points
+    role: filter
+    rule: "VRP confirmation: DVOL minus 30-day realised vol above 5 vol points"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    note: "vrp = dvol - realized_30, both in the item."
+  - id: short_strike_delta
+    role: entry
+    rule: "Short strikes at 15-20 delta (about 1 standard deviation; pseudocode 0.16)"
+    runnable: false
+    note: "No option chain or per-strike Greeks are served. ATM IV per expiry (term_structure[].atm_iv) gives a 1-sigma distance (spot x atm_iv x sqrt(DTE/365)), but the listed strike and its delta need Deribit."
+  - id: vol_regime_gate
+    role: filter
+    rule: "Open condors or strangles only while the vol regime reads normal or mean_reverting, never vol_shock or expanding"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: regime
+    note: "From the page's AI-agent workflow."
+  - id: skew_lean_funding
+    role: entry
+    rule: "Skew-aware wings: richly positive perp funding firms call skew, so lean the short toward the overbid call wing"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: hyperliquid.current_rate
+    note: "Hourly Hyperliquid rate (binance.current_rate is 8-hourly). No level for 'richly positive' is given, and funding is a proxy for skew, which is not served."
+  - id: max_loss_per_trade
+    role: sizing
+    rule: "0.5-1.5% of NAV at maximum loss per defined-risk trade"
+    runnable: true
+    input: position
+  - id: book_budgets
+    role: sizing
+    rule: "No new trade if it pushes book short vega past about 1% of NAV per DVOL point, theta past 0.05-0.20% of capital a day, or single-underlying notional past 8% of NAV"
+    runnable: partial
+    input: position
+    note: "Book vega and theta come from the trading venue's position Greeks; we serve no option Greeks."
+  - id: profit_take_50
+    role: exit
+    rule: "Close at 50% of maximum profit"
+    runnable: partial
+    input: position
+    note: "Needs the position's current option marks, which come from Deribit; we serve no option prices."
+  - id: time_exit
+    role: exit
+    rule: "Close any position with 10-14 DTE or less remaining (pseudocode: 12)"
+    runnable: true
+    input: position
+  - id: loss_2x_credit
+    role: stop
+    rule: "Close a defined-risk position whose loss reaches 2x the credit received (undefined-risk: loss reaching its vega budget)"
+    runnable: partial
+    input: position
+    note: "Needs the position's option marks from Deribit; we serve no option prices."
+  - id: dvol_shock_kill
+    role: stop
+    rule: "Flatten all short vega immediately if DVOL rises more than 50% in a session"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].dvol_change_24h
+    note: "dvol_change_24h is the change in vol points between the last two daily DVOL closes: percent = change / (dvol - change). Daily resolution, so an intraday +50% shows late; the agent workflow's served proxy is a surge in composite_score on /api/v1/volatility/regime/score with a liquidation burst."
+  - id: rv_above_dvol_20d
+    role: filter
+    rule: "Suspend new entries when realised vol exceeds DVOL for 20 or more consecutive days"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Compare each day's DVOL with that day's 30-day realised vol: history[].rv_cc_30 on /api/v1/volatility/regime/{coin} (60 days) or computed from daily candles."
+  - id: drawdown_cuts
+    role: stop
+    rule: "Drawdown above 25% of capital: halve size; above 40%: full pause"
+    runnable: true
+    input: position
+  - id: margin_utilisation
+    role: sizing
+    rule: "Keep Deribit portfolio-margin utilisation at or below 25%; above 60% intraday, cut size 50%"
+    runnable: true
+    input: position
+  - id: venue_event_stand_down
+    role: stop
+    rule: "Flatten and stand down on any Deribit auto-liquidation, socialised-loss or unscheduled-outage event"
+    runnable: false
+    note: "Venue incidents are not served."
+  - id: perp_delta_hedge
+    role: sizing
+    rule: "Delta-hedge the residual with the perp when net delta exceeds 0.5% of NAV"
+    runnable: partial
+    input: position
+    note: "Book delta comes from the venue's position Greeks; we serve none."
+  - id: tested_side_roll
+    role: exit
+    rule: "When a short strike is breached with more than 10 DTE, roll out and up or down for a credit only; never double up on a loser"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/summary?coin={coin}
+    field: mark_price
+    note: "Strike breach compares the mark (perp as spot proxy) with the short strike; whether the roll is a credit needs option prices from Deribit."
 ---
 
 # Options Income (Crypto)

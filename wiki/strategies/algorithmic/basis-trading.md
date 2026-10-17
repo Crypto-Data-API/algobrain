@@ -40,134 +40,144 @@ kill_criteria: |
   - LRT/stablecoin collateral depeg > 2% used to margin the trade
 
 related: ["[[funding-rate-arbitrage]]", "[[cash-and-carry]]", "[[cross-exchange-arbitrage]]", "[[basis]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[delta-neutral]]", "[[futures]]", "[[hedging]]", "[[pairs-trading]]", "[[ethena-usde]]", "[[binance]]", "[[hyperliquid]]", "[[ftx]]", "[[kelly-criterion]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
-
 gates:
-  - id: dated_basis_entry
+  - id: dated_basis_hurdle
     role: entry
-    rule: "Dated BTC/ETH: annualised basis (F - S) / S x (365 / DTE) at least 10% (either this or perp_funding_entry)"
+    rule: "Dated BTC/ETH futures: annualised basis (F - S) / S x 365 / days_to_expiry at least 10% after netting the ~4% borrow rate"
     runnable: false
-    note: "No dated or quarterly futures price, expiry or DTE is served (/derivatives/binance/summary has funding, OI and long/short only). The pseudocode demands ann - BORROW_RATE_ANN (4%) > 10%, i.e. about 14% gross, stricter than the Rules."
-  - id: perp_funding_entry
+    note: "Dated-future prices and expiries are not served, only spot and perps. Pair our spot price (/market-data/ticker/price) with the quarterly future's quote from Binance, OKX or Deribit."
+  - id: perp_funding_hurdle
     role: entry
-    rule: "Perp variant: funding at least 12% annualised-equivalent (8h rate x 3 x 365, so 8h funding at least about 0.011%) (either this or dated_basis_entry)"
+    rule: "Perp variant: annualised funding at least 12% (8h rate x 3 x 365); the pseudocode floor is 0.01% per 8h, about 11%"
     runnable: true
-    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
-    field: binance.current_rate
-    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
     replay_field: data[].funding_rate
-    note: "Binance last settled 8h print; hyperliquid.current_rate on the same row is hourly (x 24 x 365). The pseudocode never tests funding at entry and sets PERP_ENTRY_FUND = 0.0001 per 8h (~11% APY), used only in the exit; the Rules say 12%. Replay rows are 5-minute samples of the live rate: average them."
+    note: "Annualise the latest settled rate. Hyperliquid (hourly, x 24 x 365) is the other venue the page names: history[].funding_rate on /hyperliquid/funding-rates, with hourly prints on /backtesting/funding?exchange=hyperliquid&grain=hourly back to 2024. Binance replay rows are 5-minute samples of the live rate from 2026-05-09: average, never sum."
   - id: persistence_7d
     role: filter
-    rule: "7-day rolling basis (or funding) is positive and flat-to-rising"
+    rule: "7-day rolling basis or funding is positive and flat-to-rising"
     runnable: partial
-    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=21
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=42
     field: rates[].funding_rate
-    note: "21 settled 8h prints = 7 days. The funding version's sign is runnable; 'flat-to-rising' is not defined, and the dated-basis version needs futures prices that are not served."
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Compare the mean of the last 21 settlements with the 21 before. The page gives no tolerance for flat, so that is the desk's call. The dated-basis version needs futures quotes we do not serve."
   - id: contango_only
     role: filter
-    rule: "Contango only: the short leg trades above spot"
+    rule: "Contango only: buy spot and short the future; avoid backwardation (negative basis) trades"
     runnable: partial
-    endpoint: /api/v1/hyperliquid/open-interest
-    field: assets[].premium
-    note: "For a Hyperliquid perp, premium (and mark_price vs oracle_price) shows the perp above or below its index. Dated-future contango is not served."
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=3
+    field: current_rate
+    note: "For the perp variant, positive funding is the served contango read. The dated future's sign needs its quote from the venue."
   - id: oi_health
     role: filter
-    rule: "Futures OI rising or stable; the pseudocode waits when the OI z-score is below -1.0"
+    rule: "Futures open interest rising or stable; wait when the OI z-score is below -1.0 (capitulation risk)"
     runnable: partial
-    endpoint: /api/v1/derivatives/binance/open-interest?symbol={symbol}USDT
-    field: history[].sum_open_interest
-    note: "Perp OI only (30 daily points), not dated-future OI. The z-score lookback is not set."
-  - id: no_insurance_draw
+    endpoint: /api/v1/derivatives/binance/open-interest?symbol={coin}USDT
+    field: history[].sum_open_interest_value
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1d&start={start}
+    replay_field: data[].oi_close
+    note: "30 daily Binance perp OI points. The page does not say what the z-score is taken over (level or daily change) or the window; a z of the daily change over these 30 days is one reading. Replay is Hyperliquid OI, a different venue."
+  - id: oracle_deviation
     role: filter
-    rule: "No insurance-fund drawdown on the venue"
+    rule: "No oracle-vs-spot deviation above 50 bps"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/summary?coin={coin}
+    field: oracle_price
+    note: "Compare the Hyperliquid perp oracle_price with Binance spot price from /market-data/ticker/price?symbol={coin}USDT. For a Binance perp leg, rates[].mark_price on the funding route is the mark to test."
+  - id: insurance_fund_ok
+    role: filter
+    rule: "No insurance-fund drawdown on the futures venue"
     runnable: false
-    note: "Not served."
-  - id: oracle_vs_spot
-    role: filter
-    rule: "Oracle vs spot deviation at most 50 bps"
-    runnable: partial
-    endpoint: /api/v1/hyperliquid/open-interest
-    field: assets[].oracle_price
-    note: "Compare with price on /api/v1/market-data/ticker/price?symbol={symbol}USDT. Covers Hyperliquid perps only; Binance, OKX and Deribit index prices are not served."
-  - id: no_formula_change
+    note: "Exchange insurance-fund balances are not served. Read them from each venue's insurance-fund page or API."
+  - id: no_funding_formula_change
     role: filter
     rule: "No funding-formula change announced in the last 7 days"
     runnable: false
-    note: "Venue announcements are not served."
+    note: "Exchange rule announcements are not served; watch the venue's announcement feed."
   - id: collateral_peg
     role: stop
-    rule: "Flatten (and kill) if a stablecoin or LRT used as margin is more than 2% off peg"
+    rule: "Any stablecoin or LRT used as margin is at peg; flatten on a collateral depeg above 2%"
     runnable: partial
     endpoint: /api/v1/security/events?type=depeg
     field: items[].deviation_bps
-    note: "200 bps = 2%. Lists live stablecoin depegs over 10 days with affected symbols; LRT collateral is not covered."
-  - id: borrow_cost
-    role: entry
-    rule: "Net the collateral borrow rate (BORROW_RATE_ANN = 4%) against the basis"
-    runnable: false
-    note: "No borrow-rate endpoint is served (/market-intelligence/borrow-interest is retired). The 4% is a pseudocode constant."
+    note: "Depeg events from the last 10 days with their deviation in bps (200 = 2%). Coverage of LRTs is not guaranteed. For a USDC margin leg, /market-data/ticker/price?symbol=USDCUSDT is a live peg read against USDT."
+  - id: venue_event_exit
+    role: exit
+    rule: "Exit on a withdrawal halt, custody flag, insolvency flag or depeg on either leg's venue"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack
+    field: items[].target_type
+    note: "Served: hacks from the last 10 days (target_type names an exchange or a protocol) and the security_stress_score band. Withdrawal halts and insolvency flags are not served; watch the venues' status pages."
   - id: settle_at_expiry
     role: exit
-    rule: "Hold dated futures to settlement; settle at DTE of 1 day or less"
+    rule: "Dated futures: hold to settlement and let both legs converge; settle when one day or less remains to expiry"
     runnable: true
     input: position
-  - id: compression_exit_basis
+  - id: compression_exit
     role: exit
-    rule: "Early close when annualised basis falls below ~5% net of borrow"
-    runnable: false
-    note: "Needs the dated-future price. The pseudocode exits only when ann < 5% (gross, not net of borrow) AND funding_7d_avg < 0.0001 (both this and compression_exit_funding)."
-  - id: compression_exit_funding
-    role: exit
-    rule: "Pseudocode: 7-day average 8h funding below 0.01% (0.0001) (both this and compression_exit_basis)"
-    runnable: true
-    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=21
+    rule: "Close early when annualised basis falls below about 5% net of borrow (pseudocode: and 7-day average funding below 0.01% per 8h)"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=21
     field: rates[].funding_rate
+    note: "The perp half is mechanical: the mean of the last 21 settlements under 0.0001. The dated basis needs futures quotes we do not serve."
   - id: backwardation_stop
     role: stop
     rule: "Exit when the dated future flips to sustained backwardation (basis below 0) outside a settlement window"
-    runnable: false
-    note: "Dated-future prices are not served, and 'sustained' has no duration."
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=9
+    field: rates[].funding_rate
+    note: "The dated future's basis is not served. For the perp variant, funding below 0 is the analog; the page does not say how long sustained is."
   - id: margin_kill
     role: stop
-    rule: "Flatten when short-leg margin utilisation exceeds 80%"
+    rule: "Flatten when margin utilisation on the short leg exceeds 80%"
     runnable: true
     input: position
-  - id: roll_hurdle
+  - id: roll_next_quarter
     role: exit
-    rule: "Roll to the next quarter only if its annualised basis clears the hurdle net of roll cost"
+    rule: "Before expiry, roll into the next-quarter future only if its annualised basis still clears the hurdle net of roll cost"
     runnable: false
-    note: "No dated curve is served."
-  - id: counterparty_event
-    role: stop
-    rule: "Exit on a withdrawal halt, custody flag, insolvency flag or depeg on either leg"
-    runnable: partial
-    endpoint: /api/v1/security/events
-    field: items[].event_type
-    note: "Confirmed hacks and stablecoin depegs only; withdrawal halts and insolvency flags are not served."
-  - id: sizing_caps
+    note: "Next-quarter futures quotes are not served; take them from the venue."
+  - id: leverage_cap
     role: sizing
-    rule: "1-3x on the short future; at most 25% of the sleeve per asset"
+    rule: "1-3x leverage on the short future, fully or over-collateralised so a temporary widening cannot liquidate it before convergence"
     runnable: true
     input: position
-  - id: regime_gate
+  - id: per_asset_cap
+    role: sizing
+    rule: "At most 25% of the sleeve per asset; Kelly fraction about 0.05-0.10 of book per asset"
+    runnable: true
+    input: position
+  - id: delta_rebalance
+    role: sizing
+    rule: "Rebalance the hedge when net delta drifts more than 2%"
+    runnable: true
+    input: position
+  - id: bear_regime_stand_down
     role: filter
-    rule: "Stand down when strong_trend_bear or capitulation probabilities dominate"
+    rule: "Stand down when strong_trend_bear or capitulation probabilities dominate the quant market read"
     runnable: partial
     endpoint: /api/v1/quant/market
     field: regime.label
     replay: /api/v1/quant/history?scope=market&start={start}
     replay_field: entries[].regime_label
-    note: "Stated in the AI agent workflow only. The HMM has no 'capitulation' state and 'dominate' has no probability level."
-  - id: basis_dead_30d
-    role: stop
-    rule: "Kill: annualised basis on all eligible assets under 5% net of borrow for 30+ days"
-    runnable: false
-    note: "Needs dated-future history and a borrow rate, neither served."
-  - id: redeploy_14d
+    note: "From the page's AI-agent workflow. Reading dominate as the committed label being strong_trend_bear (or vol_spike for capitulation) is one interpretation the desk must confirm."
+  - id: pause_basis_30d
+    role: filter
+    rule: "Pause the book when annualised basis on every eligible asset stays below 5% net of borrow for 30+ days"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=90
+    field: rates[].funding_rate
+    note: "90 settlements is 30 days of Binance funding per asset; the perp half is mechanical. Dated basis is not served."
+  - id: redeploy
     role: entry
-    rule: "Re-deploy: 14-day basis back above 10% annualised on at least three eligible assets"
-    runnable: false
-    note: "Dated basis is not served. For the perp variant, 14-day funding is rates[].funding_rate with limit=42 on /derivatives/binance/funding-rates."
+    rule: "Re-deploy after a pause once everything is clear and 14-day basis is back above 10% annualised on at least three eligible assets"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=42
+    field: rates[].funding_rate
+    note: "Perp version: the mean of 42 settlements (14 days) x 3 x 365 above 10% on three or more coins. Which coins are eligible is the desk's list; dated basis is not served."
 ---
 
 # Basis Trading

@@ -33,6 +33,137 @@ kill_criteria: |
   - Bid-ask spread at the entry price > 0.5% consistently (market illiquidity makes cascade fade execution uneconomic)
 
 related: ["[[cross-venue-cascade-dislocation]]", "[[unlock-cascade-watch]]", "[[off-hours-liquidation-playbook]]", "[[funding-flush-reversal]]", "[[oi-flush-reversion]]", "[[vol-gated-mean-reversion]]", "[[liquidation-cascade-fade]]", "[[crowded-long-funding-fade]]", "[[regime-adaptive-strategy]]", "[[liquidity]]", "[[slippage]]", "[[market-microstructure]]", "[[order-book]]", "[[liquidation]]", "[[open-interest]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi-regimes]]", "[[cryptodataapi-market-intelligence]]", "[[cryptodataapi-derivatives]]", "[[cryptodataapi]]"]
+gates:
+  - id: liq_spike_1h
+    role: entry
+    rule: "Cascade leg 1: last-hour liquidation volume at least 2x the 7-day average hourly volume on the dominant venue (Hyperliquid or Binance)"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/liquidations?symbol={coin}
+    field: data[].liq_1h_vs_7d_median.total
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].total_usd
+    note: "The served ratio is last hour over the 7-day MEDIAN hour, from Hyperliquid fills only, and is null when that median is zero. For the page's mean, average 168 hourly total_usd buckets (missing buckets count as 0) and compare the latest. Binance liquidations are not captured. Replay from 2026-07-23."
+  - id: price_drop_1h
+    role: entry
+    rule: "Cascade leg 2: BTC or ETH 1h return at or below -3%"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/candles?coin={coin}&interval=1m&limit=61
+    field: candles[].close
+    replay: /api/v1/backtesting/klines?symbol={coin}&exchange=hyperliquid&start={start}
+    replay_field: klines[].c
+    note: "Latest close against the close 60 bars earlier. The page's data list reads the last 1h kline instead, a clock-aligned rather than rolling hour."
+  - id: funding_flush_4h
+    role: entry
+    rule: "Cascade leg 3 option A: funding over the last 4h at or below -0.005%/8h"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=4
+    field: history[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&grain=hourly&start={start}
+    replay_field: data[].funding_rate
+    note: "Mean of the last 4 hourly prints x 8 <= -0.00005 (the 4h rate restated per 8h)."
+  - id: oi_drop_4h
+    role: entry
+    rule: "Cascade leg 3 option B: 4h open-interest change at or below -5%"
+    runnable: true
+    endpoint: /api/v1/liquidity/oi-divergence
+    field: rows[].oi_change_4h_pct
+    replay: /api/v1/backtesting/hl-funding-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].oi_close
+    note: "Hyperliquid OI for about 25 large perps. Replay: oi_close now against 4 hourly bars earlier, from 2026-03-30."
+  - id: flush_or_oi_drop
+    role: entry
+    rule: "Cascade leg 3 passes when funding_flush_4h or oi_drop_4h holds"
+    runnable: true
+    input: derived
+    inputs: [funding_flush_4h, oi_drop_4h]
+  - id: regime_revertible
+    role: filter
+    rule: "Cascade leg 4: regime is not Structural Shock or Established Bear"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "Served ids structural_shock_crisis and established_bear. History starts 2026-08-07."
+  - id: cascade_confirmed
+    role: entry
+    rule: "Cascade confirmed only when liq_spike_1h, price_drop_1h, flush_or_oi_drop and regime_revertible all hold"
+    runnable: partial
+    input: derived
+    inputs: [liq_spike_1h, price_drop_1h, flush_or_oi_drop, regime_revertible]
+    note: "Only as runnable as liq_spike_1h."
+  - id: depth_ratio_sizing
+    role: sizing
+    rule: "Bid-side depth at 25bps against its 24h average sets the entry: below 20% no entry, 20-39% a quarter, 40-59% half, 60-79% three quarters, 80% or more full size"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth/{coin}?minutes=1440
+    field: history[].depth_usd.bid
+    replay: /api/v1/backtesting/snapshots?data_type=liquidity_depth&start={start}
+    replay_field: snapshots[].data[].bid_depth_25bps_usd
+    note: "Average the 25bps entry of depth_usd.bid over the ~720 samples and compare the latest (or /liquidity/depth). Only the top-25 Hyperliquid perps are tracked, and depth counts the top 20 book levels: where levels_truncated.bid.25bps is true (BTC usually is) the figure is the 20-level total, so the ratio measures near-touch depth rather than the full 25bp band. Replay from 2026-06-01, Pro Plus."
+  - id: max_position
+    role: sizing
+    rule: "Maximum position before depth scaling: 2-3% of the portfolio per cascade trade (3% in the pseudocode)"
+    runnable: true
+    input: position
+  - id: fragility_cut
+    role: sizing
+    rule: "Reduce every entry fraction by 25% when the liquidity fragility score is 70 or more out of 100"
+    runnable: partial
+    endpoint: /api/v1/liquidity/regime/score
+    field: composite_score
+    replay: /api/v1/backtesting/snapshots?data_type=liquidity_regime&start={start}
+    replay_field: snapshots[].data.composite_score
+    note: "Our score runs the other way (higher = healthier; under 30 is the fragile band), so fragility 70 reads as composite_score 30 or lower. The pseudocode multiplies by 0.30 instead of 0.75; the text's 25% cut is the rule here. Pro Plus."
+  - id: off_hours_cut
+    role: sizing
+    rule: "Reduce size by 30% for a cascade between 02:00 and 08:00 UTC"
+    runnable: true
+    input: position
+    note: "Pure clock."
+  - id: cross_venue_dislocation
+    role: filter
+    rule: "When the Hyperliquid-Binance price spread is 0.5% or more, also run the cross-venue-cascade-dislocation playbook"
+    runnable: partial
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "Compare with assets[].mark_price on /hyperliquid/open-interest. This is Binance spot; a live Binance perp price is not served (rates[].mark_price on /derivatives/binance/funding-rates is stamped only at each 8h settlement)."
+  - id: take_profit_partial
+    role: exit
+    rule: "Close 60% of the position at +4% from entry and trail the rest with a 2% stop"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: depth_deterioration_stop
+    role: stop
+    rule: "Close immediately if bid depth at 25bps falls back below 20% of its 24h average after entry"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth
+    field: coins[].depth_usd.bid
+    note: "Same measure and caveats as depth_ratio_sizing; depth refreshes about every 2 minutes, not every minute."
+  - id: time_stop_4h
+    role: stop
+    rule: "Close after 4 hours if price has not recovered at least 2% from entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "The pseudocode closes at 4 hours regardless."
+  - id: stacked_cascade_exit
+    role: exit
+    rule: "Close the position if a second cascade fires (liquidation volume spikes again) while it is open"
+    runnable: partial
+    input: derived
+    inputs: [liq_spike_1h]
+    note: "Only as runnable as liq_spike_1h."
+  - id: wide_spread_pause
+    role: filter
+    rule: "Pause cascade fades when the bid-ask spread at the entry price stays above 0.5%"
+    runnable: partial
+    endpoint: /api/v1/liquidity/depth
+    field: coins[].spread_bps
+    note: "From the kill criteria: spread_bps above 50. The page does not define consistently, so the persistence window is the desk's call."
 ---
 
 # Liquidation Cascade Depth Sizing (Liquidity-Depth Gate)

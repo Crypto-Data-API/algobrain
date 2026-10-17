@@ -38,6 +38,104 @@ kill_criteria: |
   - three consecutive sessions where taker fees + funding exceed gross P&L
 
 related: ["[[order-flow]]", "[[order-flow-analysis]]", "[[order-flow-imbalance]]", "[[cumulative-volume-delta]]", "[[footprint-chart]]", "[[order-book]]", "[[depth-of-market]]", "[[absorption]]", "[[vpin]]", "[[spoofing]]", "[[liquidation]]", "[[forced-liquidation]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hyperliquid]]", "[[hyperliquid-order-book-microstructure]]", "[[microstructure-noise-low-timeframe]]", "[[vwap]]", "[[vwap-trading]]", "[[scalping]]", "[[market-making-strategy]]", "[[fees]]", "[[slippage]]", "[[liquidation-cascade-fade]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: deep_perps_only
+    role: universe
+    rule: "Trade only the deepest perps: BTC and ETH, with SOL acceptable in high-vol windows"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+    note: "BTC and ETH are fixed; whether a window is high-vol enough for SOL is the desk's call."
+  - id: high_flow_windows
+    role: filter
+    rule: "Trade only high-flow windows (US/EU macro releases, Asia open, high-funding regimes, active liquidation clusters) and skip dead low-volume hours"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=macro_print&window_days=1
+    field: items[].date
+    note: "Scheduled macro prints are served (by date; the release time of day is not). Asia open is a clock rule. High funding, active clusters and dead hours have no thresholds on the page, so they are the desk's call."
+  - id: no_dead_tape
+    role: filter
+    rule: "Stand down in range_low_vol dead tape, where imbalance signals are noise"
+    runnable: true
+    endpoint: /api/v1/quant/market
+    field: regime.label
+    replay: /api/v1/quant/history?scope=market&start={start}
+    replay_field: entries[].regime_label
+    note: "From the agent workflow; it is a market-wide label, not per coin."
+  - id: stacked_imbalance
+    role: entry
+    rule: "Footprint shows a stacked diagonal imbalance: aggressive volume on one side at least 3x the opposing side across 3 or more adjacent price levels"
+    runnable: false
+    note: "Needs volume per price level per side from the tick tape. /hyperliquid/trade-flow gives 1-minute buy and sell notional with no price-level split."
+  - id: cvd_confirm_or_diverge
+    role: entry
+    rule: "CVD trends with the intended direction over about 30 seconds, or price makes a new extreme while CVD does not"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=15
+    field: data[].cvd_usd
+    replay: /api/v1/backtesting/hl-trade-flow?coin={coin}&start={start}&end={end}
+    replay_field: data[].buy_notional
+    note: "CVD is served in closed 1-minute buckets, coarser than the 30-second slope and up to a minute late; bar-based CVD overstates edge by 15-30% per the page. Partial buckets carry null notional. Replay from 2026-09-09: buy_notional minus sell_notional per minute."
+  - id: absorption
+    role: entry
+    rule: "Large resting L2 size on one side (more than 3x the opposing aggressive flow) soaks up aggression without price breaking; enter with the side that holds"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/l2-book?coin={coin}
+    field: bids[].size
+    note: "The book is a snapshot fetched on request (ts gives its age) and the aggressive flow is 1-minute trade-flow, so this cannot see wave-by-wave absorption or pulled (spoofed) size. The comparison window is the desk's call."
+  - id: liquidation_tailwind
+    role: entry
+    rule: "Opposite-side liquidation notional over the last 10 seconds is more than 2x its 24h mean"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?symbol={coin}&window_s=60&include_quiet=true
+    field: alerts[].spike_ratio
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=5m&start={start}
+    replay_field: data[].total_usd
+    note: "The shortest served window is 60 seconds, not 10. spike_ratio compares the window with its own 24h mean of equal windows, over OKX, Bybit and Hyperliquid (Binance not captured); long_liq_usd and short_liq_usd give the side. Replay is Hyperliquid fills in 5-minute buckets (the finest served) from 2026-07-23."
+  - id: maker_entry
+    role: entry
+    rule: "Enter with a resting maker limit at the absorption level; never cross the spread to enter"
+    runnable: true
+    input: position
+  - id: flow_reversal_exit
+    role: exit
+    rule: "Exit immediately when CVD flips against the position (5-second slope) or aggressive opposite-side prints appear"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/trade-flow?coin={coin}&minutes=5
+    field: data[].cvd_usd
+    note: "Served CVD is per closed minute, so a 5-second flip is invisible; a minute-level flip is the nearest test."
+  - id: profit_target
+    role: exit
+    rule: "Take profit at 15-40 bps on BTC/ETH (pseudocode 25 bps)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "The page prefers mark price over last trade for level context."
+  - id: hard_stop
+    role: stop
+    rule: "Hard stop 10-20 bps from entry (pseudocode 15 bps), behind the absorption zone"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+  - id: time_stop
+    role: stop
+    rule: "Be flat within 1-3 minutes (pseudocode 180 seconds) if the move has not resolved"
+    runnable: true
+    input: position
+  - id: risk_limits
+    role: sizing
+    rule: "Risk at most 0.5% of equity per trade, with at most 1-2 positions at once"
+    runnable: true
+    input: position
+  - id: funding_stamp_guard
+    role: filter
+    rule: "Do not enter just before a funding timestamp on a high-funding perp"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    note: "Hyperliquid settles on the hour, Binance every 8 hours. Neither how close is just before nor what counts as high funding is given."
 ---
 
 # Order Flow Scalping (Crypto Perps)

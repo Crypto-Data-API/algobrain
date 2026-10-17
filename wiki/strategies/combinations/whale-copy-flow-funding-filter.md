@@ -33,6 +33,138 @@ kill_criteria: |
   - funding filter becomes self-defeating: funding is persistently negative (> 80% of days) for 6+ months (all whale signals fire in negative funding; filter no longer provides selectivity)
 
 related: ["[[smart-money-vs-crowd-divergence]]", "[[on-chain-smart-money-tracking]]", "[[copy-trading]]", "[[crowded-short-funding-fade]]", "[[funding-filtered-momentum]]", "[[smart-money-orderflow-combo]]", "[[onchain-capitulation-confluence]]", "[[narrative-crowding-exit]]", "[[funding-rate]]", "[[open-interest]]", "[[perpetual-futures]]", "[[on-chain]]", "[[nansen]]", "[[whale]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_only
+    role: universe
+    rule: "Long BTC or ETH perps only (Hyperliquid or Binance)"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].coin
+  - id: whale_score_60
+    role: entry
+    rule: "Gate 1: 7-day rolling whale accumulation score at or above 60/100"
+    runnable: false
+    note: "No whale accumulation score is served; the /on-chain/whales routes the page names are not in the API. The nearest on-chain read is net exchange flow (exchange_flow_confirm); /quant/whales covers Hyperliquid perp whales, not on-chain spot accumulation."
+  - id: smart_money_48h
+    role: entry
+    rule: "Gate 1 alternative: Nansen/Arkham smart-money wallets net-bought the asset in the last 48h by at least 0.5% of its 30-day average daily volume"
+    runnable: false
+    note: "Labelled smart-money wallet flows are a Nansen or Arkham product and are not served here."
+  - id: exchange_flow_confirm
+    role: filter
+    rule: "Gate 1 secondary: 24h exchange flow direction confirms accumulation (net outflow from exchanges)"
+    runnable: partial
+    endpoint: /api/v1/on-chain/exchange-flows/{symbol}
+    field: windows.24h.net
+    replay: /api/v1/on-chain/exchange-flows/{symbol}/history?start={start}&interval=1h
+    replay_field: points[].net_24h
+    note: "net is inflow minus outflow in coin units, so accumulation reads negative. The page gives no size threshold, so how negative counts is the desk's call; covered chains and exchanges are listed in chains_covered."
+  - id: funding_8h_flat
+    role: entry
+    rule: "Gate 2a: current funding at or below +0.015% per 8h"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "The latest settled 8h print is the last row (at most 0.00015)."
+  - id: funding_7d_flat
+    role: entry
+    rule: "Gate 2b: 7-day average funding at or below +0.010% per 8h"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=21
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={symbol}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "Mean of the 21 settled 8h prints at most 0.0001. Replay rows are 5-minute samples of the live 8h rate from 2026-05-09: average, never sum."
+  - id: no_lower_lows
+    role: entry
+    rule: "Gate 3: price is not making consecutive lower lows on the daily chart over the last 7 days (at least one higher low or sideways consolidation)"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=10
+    field: klines[].close
+    replay: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=1000
+    replay_field: klines[].close
+    note: "Follow the pseudocode: over the last 7 closed daily closes, the latest swing low (a close below both neighbours) must be above the one before it, and fewer than two swing lows passes."
+  - id: ls_neutral_entry
+    role: filter
+    rule: "Supplementary: long/short ratio at or below 1.10 at entry (crowd neutral)"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/long-short-ratio?symbol={symbol}USDT
+    field: long_short_ratio
+  - id: regime_size_cut
+    role: sizing
+    rule: "Cut size to 2% of portfolio in a Bear_Trend or Structural_Shock regime"
+    runnable: partial
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "structural_shock_crisis maps directly. Bear_Trend is not a served regime; established_bear is the nearest, and whether capitulation also counts is the desk's call. History from 2026-08-07."
+  - id: position_size
+    role: sizing
+    rule: "3-4% of portfolio per signal (pseudocode 3.5%) at 1.5-2x leverage at most; at most 2 concurrent positions (BTC and ETH)"
+    runnable: true
+    input: position
+  - id: funding_partial_exit
+    role: exit
+    rule: "Crowd-follow leg 1: funding at or above +0.035% per 8h"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=1
+    field: rates[].funding_rate
+  - id: ls_partial_exit
+    role: exit
+    rule: "Crowd-follow leg 2: long/short ratio at or above 1.15"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/long-short-ratio?symbol={symbol}USDT
+    field: long_short_ratio
+  - id: crowd_follow_exit
+    role: exit
+    rule: "Close 60% of the position when funding_partial_exit and ls_partial_exit both hold"
+    runnable: true
+    input: derived
+    inputs: [funding_partial_exit, ls_partial_exit]
+  - id: residual_trail
+    role: stop
+    rule: "Trail the residual position with a 5% stop"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "The rules call the residual 20%, but a 60% exit leaves 40%, which is what the example holds."
+  - id: full_exit
+    role: exit
+    rule: "Close the residual when funding is at or above +0.055% per 8h or the long/short ratio is at or above 1.30"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={symbol}USDT&limit=1
+    field: rates[].funding_rate
+    note: "The long/short half reads long_short_ratio on /api/v1/derivatives/binance/long-short-ratio."
+  - id: inflow_spike
+    role: exit
+    rule: "Exchange inflows spike (whale distributing rather than accumulating)"
+    runnable: partial
+    endpoint: /api/v1/on-chain/exchange-flows/{symbol}
+    field: spike_zscore_24h
+    note: "The page gives no spike threshold; a z-score cutoff, or a large inflow on /on-chain/exchange-flows/spike-alerts, is the desk's call."
+  - id: whale_reversal
+    role: exit
+    rule: "Close everything if the whale score stays below 50 for 2 consecutive days and exchange inflows spike"
+    runnable: false
+    input: derived
+    inputs: [whale_score_60, inflow_spike]
+    note: "Needs the whale score, which is not served."
+  - id: price_stop
+    role: stop
+    rule: "Close if price makes a new 7-day low on a daily close"
+    runnable: true
+    endpoint: /api/v1/market-data/klines?symbol={symbol}USDT&interval=1d&limit=10
+    field: klines[].close
+    note: "The pseudocode compares the current 7-day closing low with the one recorded at entry (with a 0.2% buffer)."
+  - id: time_exit
+    role: exit
+    rule: "Close after 25 days if neither the crowd-follow exit nor a stop has fired"
+    runnable: true
+    input: position
 ---
 
 # Whale Copy-Flow Funding Filter

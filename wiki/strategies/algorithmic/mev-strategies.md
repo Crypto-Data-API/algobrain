@@ -39,6 +39,80 @@ kill_criteria: |
   - a target venue introduces protocol-internal ordering / liquidator capture that removes the addressable flow
 
 related: ["[[mev-execution-guide]]", "[[mev]]", "[[flashbots]]", "[[flash-loan-arbitrage]]", "[[slippage-optimal-pathfinding]]", "[[liquidation-cascade-arbitrage]]", "[[cross-exchange-arbitrage]]", "[[defi-yield-farming]]", "[[triangular-arbitrage]]", "[[gas-fees]]", "[[ethereum]]", "[[uniswap]]", "[[jito]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[ai-mev]]"]
+gates:
+  - id: pool_universe
+    role: universe
+    rule: "Maintain the pool universe the searcher watches (new and trending DEX pools per chain)"
+    runnable: partial
+    endpoint: /api/v1/dex/trending?chain={chain}
+    field: pools[].pool_address
+    note: "From the page's AI-agent workflow. Discovery lists only (20 trending pools, and the 20 newest on /dex/new-pools) from a cached feed; per-block reserves and v3 tick maps come from the chain."
+  - id: dex_arb_cycle
+    role: entry
+    rule: "DEX arbitrage: a pool cycle whose product of effective rates exceeds 1 at the current block"
+    runnable: false
+    note: "Per-block pool reserves and tick maps are not served. price_usd per pool on the /dex/* lists is a cached quote, too stale and too coarse for block-level cycles."
+  - id: backrun_trigger
+    role: entry
+    rule: "Back-run: a large pending swap, oracle update or LP add whose post-trade state leaves a cross-pool arb that clears costs"
+    runnable: false
+    note: "The mempool and MEV-Share orderflow are not served; they need a node or relay connection."
+  - id: sandwich_trigger
+    role: entry
+    rule: "Sandwich: a large pending swap with loose slippage tolerance in the public mempool"
+    runnable: false
+    note: "The mempool is not served."
+  - id: jit_trigger
+    role: entry
+    rule: "JIT: a large pending v3 swap whose fee on a tight range around the current tick exceeds gas plus the cost of the mint and burn"
+    runnable: false
+    note: "Mempool, tick liquidity and gas are not served; see jit-liquidity."
+  - id: optimal_size
+    role: sizing
+    rule: "Solve the exact optimal size against convex slippage for each opportunity, never a fixed size"
+    runnable: false
+    note: "Needs per-block pool reserves, which are not served."
+  - id: net_profit_gate
+    role: entry
+    rule: "Submit only when net = gross - gas - flash-loan fee - builder bid clears the chain's minimum (about $5 on Ethereum L1, cents on L2s and Solana)"
+    runnable: false
+    note: "Gas, builder-bid distributions and flash-loan fees are not served."
+  - id: liquidation_context
+    role: entry
+    rule: "Liquidation MEV: time it with cross-exchange liquidation cascade context"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/squeeze-alerts?include_quiet=true
+    field: alerts[].total_liq_usd
+    note: "Served liquidations are perp venues (OKX, Bybit, Hyperliquid) over a rolling window, context only. On-chain lending health factors (Aave, Compound), which are the actual liquidation-MEV trigger, are not served."
+  - id: regime_density
+    role: filter
+    rule: "MEV opportunity density (sandwich flow, liquidations) clusters in vol-shock and fragile states, and so does searcher competition"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/score
+    field: sentiment
+    note: "From the page's AI-agent workflow, which gives no action: stressed (70+) and elevated (55-69) are the high-vol bands; /liquidity/regime/score sentiment adds fragility (Pro Plus)."
+  - id: token_security
+    role: filter
+    rule: "Gate every unfamiliar token through a security check before a bundle touches its pool"
+    runnable: partial
+    endpoint: /api/v1/dex/security/{chain}/{address}
+    field: risk_flags.is_honeypot
+    note: "{address} is the token's contract, pools[].base_token.address from pool_universe. taxes and risk_score (100 = safest) are in the same report; the page sets no pass line."
+  - id: kill_inclusion_economics
+    role: stop
+    rule: "Halt a chain when bundle inclusion leaves infra cost above net MEV for 30 consecutive days, median net per landed bundle falls below breakeven, or the builder bid exceeds 90% of gross on more than 80% of won opportunities for a month"
+    runnable: true
+    input: position
+  - id: kill_execution_loss
+    role: stop
+    rule: "Halt all chains on any single execution loss above 2% of allocated capital from a routing or revert-protection bug"
+    runnable: true
+    input: position
+  - id: kill_venue_capture
+    role: stop
+    rule: "Halt a venue that introduces protocol-internal ordering or liquidator capture that removes the addressable flow"
+    runnable: false
+    note: "Protocol design changes are not served; they come from the venue's announcements."
 ---
 
 # MEV Strategies

@@ -34,6 +34,121 @@ kill_criteria: |
   - Hyperliquid changes hourly funding to 8h cadence (removes the CEX/HL timing divergence dimension)
 
 related: ["[[funding-rate-arbitrage]]", "[[funding-rate-harvest]]", "[[funding-skewed-grid]]", "[[funding-filtered-momentum]]", "[[funding-flush-reversal]]", "[[hl-vs-cex-funding-divergence]]", "[[session-overlap-momentum]]", "[[session-aware-mean-reversion]]", "[[off-hours-liquidation-playbook]]", "[[crowded-long-funding-fade]]", "[[funding-rate]]", "[[perpetual-futures]]", "[[hyperliquid]]", "[[open-interest]]", "[[market-microstructure]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+gates:
+  - id: pick_instrument
+    role: universe
+    rule: "Trade the BTC or ETH perp, whichever has the larger absolute funding and open interest"
+    runnable: partial
+    endpoint: /api/v1/derivatives/open-interest?coin={coin}
+    field: cross_exchange[].open_interest_usd
+    note: "Compare BTC and ETH on both legs: funding from cex_funding_magnitude, OI here (per exchange, summed by the bot). When the two legs pick different coins the page does not say which wins, so that is the desk's call."
+  - id: cex_funding_magnitude
+    role: filter
+    rule: "CEX 8h play: absolute current 8h funding at least 0.015%/8h"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=3
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}USDT&exchange=binance&start={start}
+    replay_field: data[].funding_rate
+    note: "The last row is the latest settled Binance 8h print (current_rate repeats it); Binance's predicted rate for the coming settlement is not served. Replay is a 5-minute sample of Binance's live 8h rate from 2026-03-30."
+  - id: hl_funding_magnitude
+    role: filter
+    rule: "Hyperliquid hourly play: absolute hourly funding at least 0.010%/1h"
+    runnable: true
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=1
+    field: current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&exchange=hyperliquid&start={start}
+    replay_field: data[].funding_rate
+    note: "current_rate is the live hourly rate that the next :00 settlement pays; history[] holds the settled prints. Replay is the live rate sampled every 5 minutes."
+  - id: oi_pctile_60
+    role: filter
+    rule: "Open interest at or above the 60th percentile of its trailing 30-day distribution"
+    runnable: true
+    endpoint: /api/v1/derivatives/binance/open-interest?symbol={coin}USDT
+    field: history[].sum_open_interest
+    note: "Rank current_oi against the 30 daily sum_open_interest values. For the Hyperliquid variant use history[].open_interest on /derivatives/hyperliquid/history?symbol={coin}&days=30 against assets[].open_interest on /hyperliquid/open-interest."
+  - id: no_liq_cascade
+    role: filter
+    rule: "No liquidation cascade before entry: last-hour liquidation volume below 2x its 7-day average hourly volume"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/liquidations?symbol={coin}
+    field: data[].liq_1h_vs_7d_median.total
+    replay: /api/v1/backtesting/hl-liquidation-bars?coin={coin}&interval=1h&start={start}
+    replay_field: data[].total_usd
+    note: "Served ratio is last hour over the 7-day MEDIAN hour from Hyperliquid fills only, and is null when that median is zero (common on quiet coins); the page wants an average and checks a 2-hour pre-window, wording it once as 24h volume. For a mean, average 168 hourly total_usd buckets (missing buckets count as 0). Binance liquidations are not captured. Replay from 2026-07-23."
+  - id: cadence_divergence
+    role: filter
+    rule: "Hyperliquid variant condition: HL hourly funding has the opposite sign to the Binance 8h funding that settles within the next 3 hours"
+    runnable: partial
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: hyperliquid.current_rate
+    note: "Compare its sign with binance.current_rate in the same response. The Binance figure is the last settled 8h print, not the predicted rate for the coming settlement, so it is a proxy. The pseudocode does not apply this condition."
+  - id: regime_not_shock
+    role: filter
+    rule: "Skip every settlement window while the regime is Structural Shock"
+    runnable: true
+    endpoint: /api/v1/regimes/current
+    field: regime
+    replay: /api/v1/regimes/history?from={start}
+    replay_field: transitions[].regime
+    note: "The served id is structural_shock_crisis. History starts 2026-08-07."
+  - id: cex_entry_window
+    role: entry
+    rule: "CEX 8h play: enter 40-50 minutes before the 00:00, 08:00 or 16:00 UTC settlement"
+    runnable: true
+    input: position
+    note: "Pure clock."
+  - id: hl_entry_window
+    role: entry
+    rule: "Hyperliquid hourly play: enter 10-15 minutes before each :00 UTC settlement"
+    runnable: true
+    input: position
+    note: "Pure clock."
+  - id: entry_direction
+    role: entry
+    rule: "Direction = the calibrated pre-settlement drift direction for the funding regime (regime_direction +1 or -1), with funding's sign selecting the regime"
+    runnable: partial
+    endpoint: /api/v1/derivatives/binance/funding-rates?symbol={coin}USDT&limit=3
+    field: rates[].funding_rate
+    replay: /api/v1/backtesting/klines?symbol={coin}USDT&exchange=binance&interval=1m&start={start}
+    replay_field: klines[].c
+    note: "The page leaves the sign open (receiver-addition versus payer-reduction) and says to calibrate it from past settlements before trading. Calibrate by measuring the return from 45 minutes before each settlement to the settlement on 1m bars (local archive from 2026-05-09), split by funding sign; the result is the desk's to adopt."
+  - id: macro_release_clear
+    role: filter
+    rule: "Never hold a pre-settlement position through a major macro release that coincides with the settlement window"
+    runnable: partial
+    endpoint: /api/v1/event/calendar?type=macro_print&window_days=2
+    field: items[].date
+    note: "The calendar gives the release day (FOMC, CPI, NFP, PCE, PPI) but not its time of day, so whether it falls inside a given window is the desk's call."
+  - id: one_window_position
+    role: filter
+    rule: "Hold at most one window position at a time"
+    runnable: true
+    input: position
+  - id: cex_size
+    role: sizing
+    rule: "CEX 8h play: 1.0-2.0% of portfolio notional (1.5% in the pseudocode), at most 2x leverage (1.5x in the pseudocode)"
+    runnable: true
+    input: position
+  - id: hl_size
+    role: sizing
+    rule: "Hyperliquid hourly play: 0.5% of portfolio per trade at 1x leverage"
+    runnable: true
+    input: position
+  - id: post_settlement_exit
+    role: exit
+    rule: "Close 5-15 minutes after the settlement fires"
+    runnable: true
+    input: position
+    note: "Pure clock."
+  - id: adverse_stop
+    role: stop
+    rule: "Close immediately on a 0.8% adverse move from entry"
+    runnable: true
+    input: position
+    endpoint: /api/v1/market-data/ticker/price?symbol={coin}USDT
+    field: price
+    note: "Binance spot price for the CEX play (it tracks the perp closely; a live Binance perp price is not served); for the Hyperliquid play compare assets[].mark_price on /hyperliquid/open-interest."
 ---
 
 # Funding Window Timing

@@ -21,6 +21,75 @@ crowding_risk: high
 expected_sharpe: 1.0
 expected_max_drawdown: 0.10
 breakeven_cost_bps: 20
+gates:
+  - id: pool_graph_state
+    role: universe
+    rule: "Maintain a per-block pool graph: reserves, fee tiers and Uniswap v3 tick maps for every monitored AMM"
+    runnable: false
+    note: "No per-token pool reserves, fee tiers or tick maps are served; /dex/trending gives only a pool's total reserve_usd, refreshed every couple of minutes. Needs an archive or full node or an indexer."
+  - id: profitable_cycle
+    role: entry
+    rule: "Find cycles whose product of effective rates exceeds 1 (negative-log-weight cycle search)"
+    runnable: false
+    input: derived
+    inputs: [pool_graph_state]
+    note: "Needs per-block pool state, which is not served."
+  - id: optimal_input_size
+    role: sizing
+    rule: "Size at x*: closed form for all-constant-product cycles, golden-section or Newton search for mixed v3, Curve and Balancer cycles, split across paths until marginal rates equalise"
+    runnable: false
+    input: derived
+    inputs: [pool_graph_state]
+    note: "The optimiser runs on pool reserves and tick liquidity, which are not served."
+  - id: cost_gate
+    role: entry
+    rule: "Execute only if profit(x*) exceeds gas + priority bid + a minimum margin"
+    runnable: false
+    input: derived
+    inputs: [optimal_input_size]
+    note: "Gas prices and builder tip distributions are not served either."
+  - id: bid_ceiling_85pct
+    role: sizing
+    rule: "Bid at most 85% of profit(x*) to the builder; never bid into negative expected value"
+    runnable: false
+    input: derived
+    inputs: [optimal_input_size]
+    note: "The cap follows from the simulated profit, which cannot be computed from this API."
+  - id: inventory_cap
+    role: sizing
+    rule: "Cap each trade at the inventory held on that chain, or use a flash loan at a 5-9 bp fee"
+    runnable: true
+    input: position
+  - id: inventory_rebalance_30pct
+    role: sizing
+    rule: "Rebalance inventory across chains when skew exceeds about 30% of target"
+    runnable: true
+    input: position
+  - id: kill_negative_30d
+    role: stop
+    rule: "Kill switch: rolling 30-day net P&L (with failed-transaction gas and infra costs) below 0: pause and re-baseline"
+    runnable: true
+    input: position
+  - id: kill_win_rate_5pct
+    role: stop
+    rule: "Kill switch: bundle win rate below 5% over the last 1,000 bundles: stand down on that chain"
+    runnable: true
+    input: position
+  - id: kill_bid_share_90pct
+    role: stop
+    rule: "Kill switch: the required priority bid exceeds 90% of gross on more than 80% of won opportunities for a month: retire the venue"
+    runnable: true
+    input: position
+  - id: kill_single_loss_2pct
+    role: stop
+    rule: "Kill switch: any single execution loss above 2% of allocated capital: halt all chains until root-caused"
+    runnable: true
+    input: position
+  - id: kill_drawdown_10pct
+    role: stop
+    rule: "Kill switch: strategy drawdown above 10% of allocated capital"
+    runnable: true
+    input: position
 ---
 
 # Slippage-Optimal Path-Finding

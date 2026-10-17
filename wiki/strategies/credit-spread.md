@@ -12,6 +12,104 @@ markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[short-put-spread]]", "[[iron-condor]]", "[[vertical-spread]]", "[[crypto-options-volatility-selling]]", "[[deribit]]", "[[greeks-live]]", "[[dvol]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[volatility-surface]]", "[[funding-rate]]", "[[variance-risk-premium]]", "[[max-pain]]", "[[gamma-exposure]]", "[[section-1256-contracts]]", "[[trade-repair-and-rolling]]", "[[theta]]", "[[vega]]", "[[gamma]]", "[[delta]]", "[[cryptodataapi]]"]
+gates:
+  - id: btc_eth_only
+    role: universe
+    rule: "BTC and ETH options only (Deribit), preferably USDC-margined; alt options are too thin for a clean vertical"
+    runnable: true
+    input: position
+  - id: tenor_21_45
+    role: entry
+    rule: "Pick an expiry 21-45 days out; avoid weeklies and anything over 60 DTE"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "The listed Deribit expiries with days to expiry (Pro Plus)."
+  - id: dvol_pctile_40_90
+    role: filter
+    rule: "Open new spreads only while DVOL sits in roughly the 40th-90th percentile of its trailing year"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "Rank today's dvol in the daily DVOL history, which runs about 180 days (from 2026-04-20), not a year; Pro Plus. A full-year base needs Deribit's own DVOL history."
+  - id: vrp_5pts
+    role: filter
+    rule: "VRP confirmation: DVOL minus 30-day realised vol above about 5 vol points"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].vrp
+    note: "vrp = dvol - realized_30, and realized_30 is a 30-day Garman-Klass estimate. For close-to-close realised vol, compute it from daily klines instead."
+  - id: vol_regime_gate
+    role: filter
+    rule: "Open spreads in normal or mean_reverting vol regimes, never in vol_shock"
+    runnable: true
+    endpoint: /api/v1/volatility/regime/{symbol}
+    field: regime
+    note: "From the agent workflow."
+  - id: side_by_funding
+    role: entry
+    rule: "Pick the side: richly positive funding makes the call side richer (bear call spread); after a selloff the put side pays more (bull put spread); otherwise follow the directional view"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/funding-rates?coin={coin}&limit=24
+    field: history[].funding_rate
+    note: "The page gives no funding level for richly positive and no size for a selloff, and the directional view is the trader's. Skew itself is not served."
+  - id: short_strike_delta
+    role: entry
+    rule: "Sell the near leg at about 15-25 delta and buy the wing at about 8-12 delta"
+    runnable: false
+    note: "No per-strike option chain or deltas are served; strike selection needs Deribit's chain."
+  - id: credit_third_width
+    role: entry
+    rule: "Collect a net credit of at least 1/3 of the strike width (never below about 25%)"
+    runnable: false
+    note: "Needs option bid and ask prices, which are not served."
+  - id: strikes_clear_of_pin
+    role: entry
+    rule: "Keep short strikes clear of max-pain pin zones and cascade-prone short-gamma pockets"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/options
+    field: data[].max_pain
+    note: "From the agent workflow. One BTC max-pain strike is served, without naming its expiry. /quant/gex is a perp-positioning analog of dealer gamma, not options dealer gamma. How far is clear is not defined."
+  - id: profit_target_50
+    role: exit
+    rule: "Close at 50% of the maximum credit"
+    runnable: false
+    note: "Needs the spread's own option marks from Deribit."
+  - id: loss_cap_2x
+    role: stop
+    rule: "Close at about 2x the credit received"
+    runnable: false
+    note: "Needs the spread's own option marks from Deribit."
+  - id: short_strike_breach
+    role: stop
+    rule: "Close on a decisive breach of the short strike with the thesis broken"
+    runnable: partial
+    input: position
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].mark_price
+    note: "Compare spot (the perp mark here; settlement uses Deribit's index) with the short strike. Decisive and thesis broken are not defined."
+  - id: time_stop_21dte
+    role: exit
+    rule: "Close or roll at about 21 days to expiry"
+    runnable: true
+    input: position
+  - id: roll_for_credit
+    role: exit
+    rule: "If the short strike is threatened but the thesis holds, roll out and away only for a net credit"
+    runnable: false
+    note: "Needs live quotes for both spreads, which come from Deribit."
+  - id: dvol_shock_kill
+    role: stop
+    rule: "Flatten if DVOL rises more than 50% in a session"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    note: "History is one DVOL value per day, so the test is today's dvol over yesterday's at least 1.5, coarser than a session; dvol_change_24h is the same move in vol points. The example's 55 to 105 would trip it."
+  - id: delta_kill
+    role: stop
+    rule: "Flatten if position delta exceeds about 2x the entry delta"
+    runnable: false
+    note: "Needs the position's option Greeks, which are not served."
 ---
 
 # Credit Spread

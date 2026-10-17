@@ -34,6 +34,108 @@ kill_criteria: |
   - cascade payoff not monetized within the DVOL spike window → process failure; fix the rule
   - skew so rich that modeled cascade payoff < 3× premium spent → reduce or pause adds
   - DVOL structurally above 85th percentile for > 30 days → pause new additions at peak cost
+gates:
+  - id: btc_eth_deribit
+    role: universe
+    rule: "Hedge with Deribit BTC and ETH options, the liquid crypto tail instruments"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].symbol
+    note: "These are the two coins with Deribit implied vol served. Option quotes come from Deribit itself."
+  - id: otm_put_wing
+    role: entry
+    rule: "Put wing: buy BTC/ETH puts about 30% OTM (strike 0.70 x spot; the rules allow 20-40% OTM) at a 60-day tenor, 60% of the budget"
+    runnable: partial
+    endpoint: /api/v1/hyperliquid/open-interest
+    field: assets[].oracle_price
+    note: "The target strike follows from spot (oracle_price is a CEX spot composite close to Deribit's index), and term_structure[].expiry_days on /api/v1/volatility/implied lists the tenors. Put quotes and the listed strike grid are not served."
+  - id: long_strangle_sleeve
+    role: entry
+    rule: "Long-vol sleeve: buy a 15-delta 45-day strangle with 40% of the budget"
+    runnable: false
+    note: "Strikes by delta need Deribit's option chain with Greeks, which we do not serve."
+  - id: dvol_below_40_pctile
+    role: entry
+    rule: "Add protection when DVOL is below the 40th percentile of its trailing year (either this or funding_call_skew)"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "Rank the latest dvol within history. Only about 180 daily closes are served (Pro Plus), so the percentile is over six months, not a year. The AI-agent workflow's stand-in is regime compressed on /api/v1/volatility/regime/{symbol}."
+  - id: funding_call_skew
+    role: entry
+    rule: "Or add when 8-hour perp funding is above 0.03% (0.0003): the call-skew regime in which downside puts are relatively cheap"
+    runnable: true
+    endpoint: /api/v1/derivatives/funding-rates?coin={coin}
+    field: binance.current_rate
+    replay: /api/v1/backtesting/funding?symbol={coin}&start={start}
+    replay_field: data[].funding_rate
+    note: "Binance funding is per 8 hours, so compare it directly. The replay is Hyperliquid hourly funding: multiply by 8. The skew itself (25-delta risk reversal) is not served."
+  - id: annual_bleed_budget
+    role: sizing
+    rule: "Fix an annual premium budget (0.5-2% of the portfolio; about 1% in the example) and treat it as an insurance line item"
+    runnable: true
+    input: position
+  - id: ladder_expiries
+    role: entry
+    rule: "Stagger expiries: ladder tenors (45-60 days in the example) rather than concentrating in one weekly expiry"
+    runnable: true
+    endpoint: /api/v1/volatility/implied
+    field: items[].term_structure[].expiry_days
+    note: "term_structure lists the nearest 12 Deribit expiries (Pro Plus)."
+  - id: cascade_monetize
+    role: exit
+    rule: "When a cascade is under way (DVOL spike plus liquidation surge, dealers short gamma), sell part of the hedge into the spike and rebalance into cheapened coins"
+    runnable: partial
+    endpoint: /api/v1/market-intelligence/liquidations?symbol={coin}
+    field: data[].liquidation_usd_1h
+    note: "The page sets no thresholds for spike or surge, nor how much to sell. Inputs: liquidations here (OKX + Bybit + Hyperliquid, no Binance), dvol_change_24h on /api/v1/volatility/implied, and coins.{coin}.regime.score on /api/v1/quant/gex?symbol={coin} (a perp analog of dealer gamma)."
+  - id: monetize_within_spike
+    role: exit
+    rule: "Monetize within the DVOL-spike window; crypto vol reverts in hours to days, so scale out into the spike, not after it"
+    runnable: partial
+    input: position
+    note: "The page's AI tip is a hard timer from the liquidation trigger, but it gives no length; the timer is the desk's call."
+  - id: roll_before_decay
+    role: exit
+    rule: "Roll surviving hedges before decay erodes them"
+    runnable: partial
+    input: position
+    note: "No DTE for the roll is given; the choice is the desk's."
+  - id: trim_cost_in_calm
+    role: sizing
+    rule: "In extended calm, cut cost by shifting to put spreads or further-OTM strikes"
+    runnable: partial
+    endpoint: /api/v1/volatility/regime/{coin}
+    field: vol.days_compressed
+    note: "The page does not define extended calm; days in the compressed regime is one served reading."
+  - id: dvol_rich_pause
+    role: filter
+    rule: "Pause new additions when DVOL stays above its 85th percentile for more than 30 days"
+    runnable: partial
+    endpoint: /api/v1/volatility/implied
+    field: items[].history[].dvol
+    replay: /api/v1/volatility/implied
+    replay_field: items[].history[].dvol
+    note: "Count the trailing days whose dvol ranks above the 85th percentile. The page's percentile is over a year; only about 180 daily closes are served."
+  - id: skew_payoff_kill
+    role: filter
+    rule: "Reduce or pause adds when skew is so rich that the modeled cascade payoff is under 3x the premium spent"
+    runnable: false
+    note: "Needs per-strike option prices and a pricing model over the surface; no option chain or skew is served."
+  - id: budget_exceeded
+    role: sizing
+    rule: "If the annual hedge cost exceeds the budget, re-spec to cheaper strikes or spreads"
+    runnable: true
+    input: position
+  - id: black_swan_overlay
+    role: filter
+    rule: "Watch the hack and depeg stress composite for the crypto-native tails a price hedge misses"
+    runnable: partial
+    endpoint: /api/v1/security/regime/score
+    field: security_stress_score
+    note: "From the page's AI-agent workflow; it gives no threshold or action."
 ---
 
 # Tail Hedging

@@ -22,6 +22,79 @@ expected_max_drawdown: 0.15
 breakeven_cost_bps: 2
 decay_evidence: "CIP held to within 5-10 bps pre-2008; post-2008 JPY/USD basis reached -70 bps, persistent for 15+ years"
 related: ["[[forex]]", "[[basis-trading]]", "[[cross-currency-basis-swap]]", "[[interest-rate-parity]]", "[[relative-value-arbitrage]]", "[[on-off-the-run-treasury-arbitrage]]", "[[swap-spread-arbitrage]]", "[[limits-to-arbitrage]]", "[[basel-iii]]", "[[supplementary-leverage-ratio]]", "[[edge-taxonomy]]", "[[failure-modes]]"]
+gates:
+  - id: basis_monitor
+    role: universe
+    rule: "Monitor cross-currency basis swaps at 3M, 6M, 1Y and 5Y for JPY, EUR, GBP, CHF, AUD and CAD against USD"
+    runnable: false
+    note: "No FX forwards, FX swaps or cross-currency basis are served. /api/v1/sentiment/macro carries EUR/USD spot only. Needs a dealer or Bloomberg FX swap feed."
+  - id: basis_entry
+    role: entry
+    rule: "Enter when the basis is beyond -30 bps for JPY/USD (comparable thresholds for other pairs)"
+    runnable: false
+    note: "Needs the basis series in basis_monitor; not served."
+  - id: usd_funding
+    role: entry
+    rule: "Borrow USD at the USD OIS rate or via Treasury repo"
+    runnable: false
+    note: "OIS and repo rates are not served; /api/v1/sentiment/macro has one Treasury yield, not a funding rate."
+  - id: fx_swap_leg
+    role: entry
+    rule: "Enter the FX swap: sell USD and buy JPY spot, agreeing to reverse at the forward rate"
+    runnable: false
+    note: "No JPY spot or FX forward prices are served."
+  - id: invest_foreign
+    role: entry
+    rule: "Invest the JPY at JPY OIS or the Japanese money-market rate"
+    runnable: false
+    note: "Foreign money-market rates are not served."
+  - id: size_balance_sheet
+    role: sizing
+    rule: "Size by balance-sheet availability and CSA posting requirements, not by VaR"
+    runnable: partial
+    input: position
+    note: "The page gives no limits; capacity comes from the desk's own balance-sheet budget."
+  - id: exit_basis_normalises
+    role: exit
+    rule: "Unwind for a capital gain as the basis normalises toward zero"
+    runnable: false
+    note: "Needs the basis series; not served."
+  - id: hold_to_maturity
+    role: exit
+    rule: "Or hold to maturity for guaranteed convergence"
+    runnable: true
+    input: position
+  - id: balance_sheet_exit
+    role: exit
+    rule: "Reallocate capital when the balance-sheet cost rises"
+    runnable: partial
+    input: position
+    note: "The page gives no level here; the kill criteria use 70% of expected carry."
+  - id: kill_basis_adverse
+    role: stop
+    rule: "Kill switch: the basis moves more than 50 bps against entry within 30 days"
+    runnable: false
+    note: "Needs the basis series; not served."
+  - id: kill_counterparty_cds
+    role: stop
+    rule: "Kill switch: the swap counterparty's CDS spread widens above 500 bps"
+    runnable: false
+    note: "Bank CDS spreads are not served."
+  - id: kill_balance_sheet_charge
+    role: stop
+    rule: "Kill switch: the prime broker raises the balance-sheet charge above 70% of expected carry"
+    runnable: true
+    input: position
+  - id: kill_fed_swap_lines
+    role: stop
+    rule: "Kill switch: the Fed activates central-bank swap lines at scale"
+    runnable: false
+    note: "A policy event; Fed swap-line usage (H.4.1) is not served."
+  - id: kill_rolling_return
+    role: stop
+    rule: "Kill switch: rolling 12-month return below -10%"
+    runnable: true
+    input: position
 ---
 
 # Covered Interest Arbitrage

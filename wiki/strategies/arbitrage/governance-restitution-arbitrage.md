@@ -22,6 +22,85 @@ expected_sharpe: 1.2
 expected_max_drawdown: 0.30
 breakeven_cost_bps: 100
 decay_evidence: "Strategy is less crowded than incident-response arb because OTC claim trading requires desk relationships and longer holding period. Cetus 2025 (frozen-fund vote arb) and Euler 2023 (restitution-claim arb) are recent canonical cases — each yielded 50-100%+ on the relevant leg. Edge persists because governance outcomes are illiquid to price."
+gates:
+  - id: exploit_trigger
+    role: universe
+    rule: "Trigger: a major exploit is disclosed; act within the first 24-48 hours, when the governance proposal (pause, refund, fork, bounty or freeze) appears"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack
+    field: items[].amount_usd
+    note: "Hacks from the last 10 days with amount_usd, chains, target_type and technique. symbols is often empty, so mapping a hack to its protocol token can need the title. The page sets no size for major, so the cut is the desk's call. Sub-strategy B (OTC restitution claims) is a historical template only and is not gated."
+  - id: governance_read
+    role: filter
+    rule: "Read the forum thread and on-chain voting power: the team's stated preference, whale positions, quorum, voting period and timelock"
+    runnable: false
+    note: "Governance forums (Discourse, Snapshot, Tally) and per-address voting power are not served."
+  - id: vote_probability
+    role: filter
+    rule: "Estimate the probability the restitution proposal passes from forum sentiment, large-holder stakes and the protocol's historical pass rate"
+    runnable: false
+    input: derived
+    inputs: [governance_read]
+    note: "A judgement built on unserved governance data."
+  - id: iou_below_half_fair
+    role: entry
+    rule: "Buy the frozen IOU or protocol token when its market price is below 0.5 x (pass probability x full recovery value)"
+    runnable: false
+    input: derived
+    inputs: [vote_probability]
+    note: "Fair value rests on the unserved vote probability. A listed protocol token's price is served (current_price on /coins/{symbol}); frozen IOU quotes are not."
+  - id: governance_position_size
+    role: sizing
+    rule: "Size only what can be held through a total loss (the vote fails or the attacker refuses to negotiate), at most min(0.3 x limit, 0.05 x IOU market depth)"
+    runnable: partial
+    input: position
+    note: "The loss budget comes from the position record; IOU market depth is not served."
+  - id: governance_stop_50pct
+    role: stop
+    rule: "Stop out at -50% on the governance-window position"
+    runnable: true
+    input: position
+    endpoint: /api/v1/coins/{symbol}
+    field: current_price
+  - id: exit_vote_resolved
+    role: exit
+    rule: "Exit when the vote resolves or the price reaches 0.9 x fair value"
+    runnable: false
+    note: "Vote outcomes are not served, and fair value is the desk's model."
+  - id: bridge_exploit_trigger
+    role: universe
+    rule: "Bridge-token sub-strategy: a bridge is exploited, leaving its wrapped tokens on a fractional reserve"
+    runnable: partial
+    endpoint: /api/v1/security/events?type=hack
+    field: items[].target_type
+    note: "target_type and title identify bridge incidents; which wrapped tokens are affected is not listed."
+  - id: wrapped_discount_30pct
+    role: entry
+    rule: "Buy the wrapped token at a discount of at least 30% to the canonical token, discount = 1 - wrapped price / canonical price"
+    runnable: partial
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "address = the affected wrapped token's contract, which the bot must take from the bridge's incident report (/security/events does not list it); chain is one of solana, ethereum, base, bsc, arbitrum. Take price_usd from the deepest pool (by reserve_usd) whose base token is the wrapped token and divide by the canonical token's current_price on /coins/{symbol}. Pool prices are cached, minutes rather than seconds old."
+  - id: recap_probability
+    role: filter
+    rule: "Only when recapitalization probability is above 50% and the expected timeline is under 3 months"
+    runnable: false
+    note: "Recapitalization depends on team and backer statements (Jump for Wormhole, Sky Mavis for Ronin); nothing here serves it."
+  - id: canonical_hedge
+    role: sizing
+    rule: "Hedge by shorting the canonical token at 0.8x the wrapped long (each leg about 0.2 x limit)"
+    runnable: true
+    input: position
+    endpoint: /api/v1/hyperliquid/summary?coin={coin}
+    field: mark_price
+    note: "Hyperliquid perp mark for the canonical asset (BTC for wBTC, ETH for wETH)."
+  - id: exit_discount_or_recap_fail
+    role: exit
+    rule: "Exit when the discount narrows below 5%, on a recapitalization announcement, or (hard stop) when the protocol says it will not recapitalize"
+    runnable: partial
+    endpoint: /api/v1/dex/token/{chain}/{address}
+    field: top_pools[].price_usd
+    note: "The discount leg is served as in wrapped_discount_30pct. Recapitalization announcements, for and against, are not served."
 ---
 
 # Governance & Restitution Arbitrage
