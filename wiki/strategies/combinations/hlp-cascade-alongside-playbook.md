@@ -2,7 +2,7 @@
 title: "HLP + Cascade Alongside Playbook"
 type: strategy
 created: 2026-05-05
-updated: 2026-07-20
+updated: 2026-10-17
 status: excellent
 tags: [arbitrage, crypto, defi, event-driven, liquidity]
 aliases: ["Alongside-HLP Strategy", "HLP Plus Cascade", "Hyperliquid Combined Playbook"]
@@ -568,7 +568,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid]], 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
 - **Leg C signal** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — both venues' funding in one call; alert when the normalised spread exceeds the 5 bp/8h threshold
-- **Leg B trigger** — `GET /api/v1/market-intelligence/liquidations` polled at 1-minute cadence during armed windows — liquidation-notional spike vs trailing mean; execution-grade CVD exhaustion still needs the Hyperliquid WebSocket
+- **Leg B trigger** — `GET /api/v1/market-intelligence/liquidations` polled at 1-minute cadence during armed windows — read the per-row `liq_1h_vs_7d_median` ratio as the spike test (the `liquidation_usd_*` fields are trailing-window levels, `grain.sum_ok: false`, so never sum or difference successive polls to build a notional series; for incremental flow use the Pro `GET /api/v1/backtesting/hl-liquidation-bars`); execution-grade CVD exhaustion still needs the Hyperliquid WebSocket
 - **Liquidity gate** — `GET /api/v1/hyperliquid/l2-book?coin=BTC` — verify the >$5M-within-50bp depth requirement on the HL side before pairing Leg C
 - **Backtest** — `GET /api/v1/backtesting/funding` (HL hourly since 2023-05) measures Leg C spread frequency and convergence half-life across regimes; `GET /api/v1/backtesting/liquidations` starts 2026-03-30, so treat Leg B event statistics drawn from it as provisional
 - **Tips** — enforce the orchestrator's 30-minute Leg C hold after a cascade in code: check the liquidation-spike timestamp before any funding entry; HLP NAV monitoring stays on the HL SDK at 1-minute cadence, not on this API

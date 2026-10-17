@@ -9,6 +9,13 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-10-17 — Fix: two strategies built liquidation rates by differencing trailing totals
+
+**Scope:** A local sync commit from 2026-09-28 was never pushed, and the upstream sync of the same releases replaced it. Most of its content was already upstream. Two strategy fixes were not, so they were carried over.
+
+- [[cascade-monetization-rotation]]: the liquidation-rate monitor now reads `/market-intelligence/liquidations` rows as trailing-window levels plus `liq_1h_vs_7d_median`. It no longer differences successive polls, because the response's `grain` says `sum_ok: false`. Incremental flow points to `/backtesting/hl-liquidation-bars`.
+- [[hlp-cascade-alongside-playbook]]: the Leg B trigger uses the same rule.
+
 ## 2026-10-17 — Runnable gates on seven more strategy pages
 
 **Scope:** The same desk tester's bot read seven strategy pages outside the basket folder that had no gates, so it could not tell which conditions it can automate. Each one now has a `gates:` block, 131 gates in all: 93 runnable, 35 partial, 3 not runnable.

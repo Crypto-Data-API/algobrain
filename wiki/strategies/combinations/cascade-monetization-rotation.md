@@ -2,7 +2,7 @@
 title: "Cascade Monetization Rotation"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-03
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, options, volatility, derivatives, liquidations, tail-risk, mean-reversion, event-driven, behavioral-finance, quantitative, crypto, bitcoin]
 aliases: ["Tail-to-Fade Rotation", "Crash Hedge Monetization", "Cascade Lifecycle Strategy", "Tail-Payoff Redeployment"]
@@ -224,7 +224,7 @@ def fade_exit(state: StrategyState, current_price: float, pre_cascade_price: flo
     return None
 ```
 
-The production system adds: Deribit API for OTM put pricing and real-time DVOL monitoring; a CVD calculator on 15-minute perp tick data; a liquidation-rate monitor polling `/api/v1/market-intelligence/liquidations`; and an alert when cascade triggers fire so the rotation can be executed within the 4-hour window.
+The production system adds: Deribit API for OTM put pricing and real-time DVOL monitoring; a CVD calculator on 15-minute perp tick data; a liquidation-rate monitor on `/api/v1/market-intelligence/liquidations` (read its rows as trailing 1h/4h/12h/24h *levels* plus the `liq_1h_vs_7d_median` ratio — the response's `grain` says `sum_ok: false`, so a rate must not be built by differencing or summing successive polls; for incremental liquidation flow use the Pro `/api/v1/backtesting/hl-liquidation-bars`, built from the Hyperliquid fill tape); and an alert when cascade triggers fire so the rotation can be executed within the 4-hour window.
 
 ## Indicators / data used
 

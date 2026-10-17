@@ -4,6 +4,14 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-10-17 — Fix: liquidation rates in two strategies
+
+**Fixed:** Two strategy pages measured a liquidation rate by differencing successive
+polls of a trailing-total endpoint, which gives meaningless numbers. They now read the
+endpoint's spike ratio and point to the bucketed liquidation-flow endpoint for
+incremental flow. The fix comes from a local sync that was superseded upstream; the rest
+of that sync was already on `main`.
+
 ## 2026-10-10 — Runnable gates on the Hyperliquid basket strategies
 
 **Added:** Every condition on the 51 Hyperliquid basket strategy pages is now mapped to
