@@ -7,7 +7,8 @@ The canonical feed is the public, key-free endpoint https://cryptodataapi.com/ap
 `api_version` (CalVer YYYY-MM-DD, bumped on any breaking or notable response-shape change)
 plus `changelog[]`, newest-first, each entry `{version, date, breaking, changes[]}`.
 
-IMPORTANT: the feed only retains the **last 10 releases**. Anything older has scrolled off
+IMPORTANT: the feed only retains a bounded window of recent releases (10 when this tool was
+written; 36, back to 2026-06-27, on 2026-10-17). Anything older has scrolled off
 permanently — there is no pagination; `?limit=`, `?since=` and `?all=` are all ignored. This
 tool therefore warns when the local watermark is older than the oldest entry still served,
 because releases in that window were never seen and cannot be recovered from the API.
@@ -100,7 +101,7 @@ def triage(payload, state):
                 "newest_processed": newest_seen,
                 "oldest_still_served": oldest_served,
                 "message": (
-                    "releases between {} and {} scrolled off the 10-entry feed and were never "
+                    "releases between {} and {} scrolled off the bounded feed window and were never "
                     "triaged — they are unrecoverable from the API; reconcile against {} instead"
                 ).format(newest_seen, oldest_served, DOCS_URL),
             }

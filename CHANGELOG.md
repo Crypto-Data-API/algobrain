@@ -4,6 +4,46 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-10-17 — Tooling: endpoint checker; local search matches hosted search
+
+**Added:** `tools/check_endpoints.py` checks every API path, query parameter and value
+range cited anywhere in the wiki, plus every strategy `gates:` block, against the live
+OpenAPI spec. The API now rejects parameters it does not read, so a call that used to
+work quietly can now fail. The first run found 155 errors, which are queued for a fix
+pass.
+
+**Changed:** Local `wiki_search` now ranks results like the hosted wiki search: pages
+the query names first, then title matches, then body matches. It has the same strategy
+filters, including whether a page's gates are runnable, and returns snippets and each
+strategy's frontmatter. `wiki_read` resolves short page names and can return parsed
+gates. `wiki_stats` adds backtest-status and runnable counts. The index is built once
+and cached, so searches take milliseconds instead of re-reading 5,000 files.
+
+**Fixed:** `wiki_stats` category counts were wrong on Windows. The start instructions
+now cover machines without the `py` launcher.
+
+## 2026-10-17 — Sync: 5 API releases absorbed
+
+**Changed:** The CryptoDataAPI pages now cover five more releases (2026-10-02 to
+2026-10-14), three of them breaking:
+- **New endpoints:** liquidation density near the mark, exchange-flow history, and an
+  archive of exchange-flow spike alerts.
+- **Stricter parameter checks:** many routes now reject parameters they do not read.
+- **Klines:** the backtesting klines endpoint now honours its bar interval.
+- **Corrections:** a fix to the Hyperliquid margin tiers that the gamma-exposure
+  endpoint reports, and a correction to the on-chain health score's exchange-flow
+  component.
+- **Removed:** two Solana wallet routes.
+- **API keys:** new limits on creating keys.
+
+The endpoint counts are updated to 220+, and the schema files now say the API
+changelog keeps about 36 releases, not 10.
+
+**Fixed:** Two pages quoted an out-of-date Hyperliquid margin ladder that overstated
+maintenance margin about 2x, and they now carry a correction. Six pages that use the
+on-chain health score now warn that its exchange-flow readings before 2026-10-08 are
+wrong.
+
 ## 2026-10-17 — Fix: liquidation rates in two strategies
 
 **Fixed:** Two strategy pages measured a liquidation rate by differencing successive

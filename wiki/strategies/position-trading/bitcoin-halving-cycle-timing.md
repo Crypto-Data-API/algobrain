@@ -2,7 +2,7 @@
 title: "Bitcoin Halving Cycle Timing"
 type: strategy
 created: 2026-07-14
-updated: 2026-09-03
+updated: 2026-10-17
 status: good
 tags: [position-trading, fundamental-analysis, crypto, bitcoin, on-chain, valuation, market-regime]
 aliases: ["Halving Cycle Timing", "BTC Cycle Timing", "On-Chain Cycle Timing", "MVRV Cycle Strategy", "Halving Position Trade"]
@@ -263,6 +263,7 @@ Re-engage: zones and halving overlay realign with a completed cycle turn, and on
 **Live data:**
 - `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + supply-shock signals, zone classification (capitulation → euphoria) — the core zone input
 - `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100); the structural-kill input
+  - **Caveat (2026-10-08 API fix):** before 2026-10-08 the score's `exchange_flow` component summed every tracked token's 24h flow in its own native units, so it pinned at 20 or 80. Any composite reading, or any threshold calibrated on readings, from before that date is biased. The component now scores the USDT/USDC/DAI 24h net only. Components with no data, currently `whale_accumulation`, carry weight 0 and the rest are renormalised; they are not scored a neutral 50. See [[cryptodataapi-on-chain]].
 - `GET /api/v1/on-chain/miners/hash-ribbon` — Hash Ribbon state (capitulation/recovery/normal); bottom corroboration
 - `GET /api/v1/regimes/current` — current long-horizon 10-state market regime
 

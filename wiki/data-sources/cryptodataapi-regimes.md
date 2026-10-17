@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Market & Quant Regimes"
 type: source
 created: 2026-07-13
-updated: 2026-09-28
+updated: 2026-10-17
 status: good
 tags: [data-provider, crypto, api, market-regime, regime-detection, hmm, volatility, liquidity, gamma-exposure, event-risk]
 aliases: ["CryptoDataAPI Regimes", "CDA Regimes", "CryptoDataAPI Quant Probabilities", "CryptoDataAPI Regime Engine"]
@@ -38,9 +38,9 @@ A [[hidden-markov-models|Hidden Markov Model]] engine refreshed every 15 minutes
 | GET | /api/v1/quant/history | Point-in-time probability records (backtest) | — | Pro Plus |
 | GET | /api/v1/quant/regimes/history | Full 6-regime Parquet download (2020-yesterday) | — | Pro Plus |
 | GET | /api/v1/quant/timeline | Daily market regime labels (2019-now) | — | Pro Plus |
-| GET | /api/v1/quant/positioning | Trader type split (MM/whale/other) | per-coin optional | Pro |
+| GET | /api/v1/quant/positioning | Trader type split (MM/whale/other) | symbol (alias coin; comma list) | Pro |
 | GET | /api/v1/quant/positioning/ladder | Full >=$100k-universe liquidation ladder for one coin, by account class | symbol | Pro Plus |
-| GET | /api/v1/quant/gex | Gamma Exposure (MM inventory + liquidation profile) | per-coin optional | Pro |
+| GET | /api/v1/quant/gex | Gamma Exposure (MM inventory + liquidation profile) | symbol (alias coin; comma list) | Pro |
 | GET | /api/v1/quant/gex/history | Hourly `distribution_context` scalar history for one coin, <=30 days | symbol, from, to, grain=1h | Pro |
 | GET | /api/v1/quant/whales | >=$100k account whale activity summary | — | Pro+ |
 | GET | /api/v1/quant/whales/history | Daily whale positioning timeseries | days 7-540 | Pro Plus |
@@ -72,6 +72,22 @@ A [[hidden-markov-models|Hidden Markov Model]] engine refreshed every 15 minutes
 `/quant/positioning` coins gain **`by_tag {smart_money, high_leverage}`** — an orthogonal overlay, NOT a breakdown of the existing `by_type` (`market_maker`/`whale`/`other`/`all`) partition: an account can carry a `by_tag` tag alongside any `by_type` class, both tags, or neither; the block zeros out when no tagged accounts are present. `symbol` also now accepts a comma-separated list (`BTC,ETH,SOL`). `/quant/whales` gains **`summary.by_tag_usd`** (same two tags) and per-coin **`top_coins[].long_pct_pctile_30d`** — the live long share ranked against that coin's own trailing 30 days (`null` until 2 days of samples exist). Both endpoints add **`meta.classifier_version`** (CalVer of the account-tagging rule set behind `by_type`/`by_tag` — a version bump can move accounts between classes with no change in the market itself; future bumps get their own changelog entry).
 
 New **`GET /api/v1/quant/positioning/ladder?symbol=`** (Pro Plus, added to the table above) — the full >=$100k-universe liquidation ladder for one coin, binned on a 0.5%-of-mark grid: **`bins`** / **`flip`** (all account classes), **`bins_directional`** (market-maker and vault liquidations excluded — the cleaner walls, since MM liquidations are largely hedged noise), **`bins_by_class`** = `{market_maker, whale, other}` on the same grid (sums to `bins`), and **`levels`** — the 3 nearest non-empty all-class clusters above and below mark as `{price, dist_pct, total_usd, side, n_accounts}`. Same builder as the archived `liquidation_map` snapshot type (which itself gained `bins_by_class` in this release), so live and history agree.
+
+**`/quant/gex` and `/quant/positioning`: k-coin matching, `coin` alias, strict parameters (breaking fix, 2026-10-10).** Both routes used to match `symbol` by upper-casing it, so Hyperliquid's k-coins (`kPEPE`, `kBONK`) were never found. Names now match **case-insensitively** against Hyperliquid's own names: `?coin=kpepe` returned `kPEPE` live on 2026-10-17. Both routes take **`coin` as an alias of `symbol`**. An unrecognised parameter is now `400 unknown_parameter`. Previously `?coin=` was silently ignored and returned every coin, so any integration that sent `coin=` got the whole universe. `/quant/gex/history` and `/quant/positioning/ladder` also return 400 on parameters they do not read. `days` on `/gex/history` gets a message pointing to `from` / `to` (the ring holds 30 days), and `/positioning/ladder` accepts only `symbol`.
+
+**`/quant/gex` `meta.maintenance_margin_tiers` corrected (2026-10-10).** The block is now Hyperliquid's **live margin table** for each coin in the response, read from HL `meta.marginTables`. Each tier is `{notional_lo_usd, notional_hi_usd, max_leverage, maintenance_margin_pct, maintenance_deduction_usd}`. HL's formula is `maintenance_margin_pct = 50 / max_leverage` (half the initial margin at the tier's max leverage), and maintenance margin = notional × pct / 100 − `maintenance_deduction_usd`. **The static ladder served before 2026-10-10 was wrong.** It used the initial margin as the maintenance rate, which is 2x too high, and its tiers did not match HL's: BTC stepped down from 40x at $1M, where HL steps at $150M. The `_default_alt` fallback is removed, and every listed perp now has its own ladder. Live tiers on 2026-10-17:
+
+| Coin | Tier 1 (notional, max lev, MM %) | Tier 2 (notional, max lev, MM %, deduction) |
+|------|-----------------------------------|----------------------------------------------|
+| BTC | $0-150M, 40x, 1.25% | >$150M, 20x, 2.5%, $1.875M |
+| ETH | $0-100M, 25x, 2.0% | >$100M, 15x, 3.33%, $1.333M |
+| SOL | $0-70M, 20x, 2.5% | >$70M, 10x, 5.0%, $1.75M |
+| HYPE | $0-20M, 10x, 5.0% | >$20M, 5x, 10.0%, $1.0M |
+| kPEPE | $0-20M, 10x, 5.0% | >$20M, 5x, 10.0%, $1.0M |
+
+The block is reference context only. Liquidation cluster prices in the response use each account's exact on-chain `liquidationPx`, so they were not affected by the old ladder. See [[hyperliquid-liquidation-engine]].
+
+**`/quant/whales` `top_coins` widened to 100 (2026-10-14).** `top_coins` now lists the 100 coins whales hold most by gross notional (it was 60). The fields are unchanged. A coin new to the list reports `long_pct_pctile_30d: null` until it has 48 hourly samples (2 days). The archived `whale_activity` snapshot carries the same 100 from 2026-10-14. **Snapshots before 2026-10-14 hold at most 60**, so a backtest that spans the change sees the universe widen on that date. See [[cryptodataapi-backtesting]].
 
 Also in this release: two new forward-only backtesting-archive snapshot types, **`positioning`** and **`whale_activity`** (5-min cadence; no per-account history exists to backfill from — see [[cryptodataapi-backtesting]]), and `/quant/whales/history?live_only=true` now drops the ~120 modelled `source: seed` seed points, returning only observed data plus a new `meta.first_live_date` (first observed UTC day in the store).
 
@@ -208,5 +224,6 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/market"
 
 ## Sources
 
+- CryptoDataAPI changelog releases 2026-10-10 and 2026-10-14 (via `GET /api/v1/changelog`, fetched 2026-10-17), the live OpenAPI spec (`/api/v1/quant/gex` and `/quant/positioning` `symbol`/`coin` params, `/quant/gex` and `/quant/whales` descriptions; fetched 2026-10-17), and live calls on 2026-10-17: `/quant/gex?coin=BTC,kPEPE` and `?coin=ETH,HYPE,SOL` (`meta.maintenance_margin_tiers`), `/quant/positioning?coin=kpepe`, and the 400s for `/quant/gex?foo=`, `/quant/gex/history?days=` and `/quant/positioning/ladder?foo=`
 - CryptoDataAPI changelog release 2026-09-26 (via `GET /api/v1/changelog`, fetched 2026-09-28) — force-refresh wait / `refreshed: false` semantics
 - https://cryptodataapi.com/api/docs (fetched 2026-07-13)

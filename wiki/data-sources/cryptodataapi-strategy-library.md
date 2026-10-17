@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Strategy & Indicator Library (AlgoBrain API)"
 type: source
 created: 2026-09-28
-updated: 2026-09-28
+updated: 2026-10-17
 status: good
 tags: [data-provider, crypto, api, strategy-development, indicators, agents, ai-trading, llm, backtesting, methodology, open-source]
 aliases: ["CryptoDataAPI Strategy Library", "CDA Strategy Library", "Strategy Library API", "Indicator Catalog API", "AlgoBrain API", "Hosted AlgoBrain Search", "/strategies endpoint", "/algobrain/search"]
@@ -45,6 +45,12 @@ The Strategy & Indicator Library family of [[cryptodataapi]] serves **this wiki*
 - **`read`** on a search result is the `/algobrain/page` URL for that result. `url` is the GitHub blob URL.
 - **Ranking (2026-10-10).** Results come in tiers, named by `match`. First is a page named by the query (`exact_title`: its title, an acronym in its title like "(ADX)", or an alias). Then come the query as a phrase in a title or alias (`title_phrase`), every term in titles/aliases (`title_terms`), every term anywhere (`all_terms`) and any term (`any_term`). Concept and strategy pages rank above generated coin pages within a tier, so "ADX" returns [[adx]] before the coin whose ticker it was. `score` orders results only within a tier.
 - **`gates` (2026-10-10)** on `/algobrain/page` maps every condition a strategy checks to one endpoint and one field, or marks it `partial` / not runnable with a `note`. The format is in the repo's CLAUDE.md under "Gates". On search, `strategy.runnable` (`all` / `partial` / `none`) and `strategy.gate_counts` summarise them, and `runnable=all` finds pages an agent can run end to end. The Hyperliquid basket pages ([[hyperliquid-baskets-overview]]) were mapped first (2026-10-10, 51 pages). Seven more followed on 2026-10-17: [[liquidation-cascade-fade]], [[off-hours-liquidation-playbook]], [[session-overlap-momentum]], [[opening-range-breakout]], [[pairs-trading]], [[alt-season-momentum-gate]] and [[gamma-exposure-trading]]. On any other strategy page `gates` is null, which means not mapped yet, not "not runnable".
+
+### Discovery and strictness (2026-10-09, 2026-10-10)
+
+- **A bare search lists the newest pages (2026-10-09).** `/algobrain/search` with no `q` and no filter now returns 200 with the most recently updated pages and `score: null`. It used to return `400 empty_search`. A `q` with no letters or digits (e.g. `??`) does the same. This lets an agent discover valid page paths from one call. Live on 2026-10-17 the bare call led with `wiki/log.md` (`updated: 2026-10-17`) and `match: null`.
+- **`/algobrain/page` resolves short paths (2026-10-09)** when the file name is unique. `atr-trailing-stop`, `strategies/atr-trailing-stop` and the full path without `.md` all work. The returned `path` is always the stored one: `?path=atr-trailing-stop` returned `wiki/strategies/atr-trailing-stop.md` live.
+- **Unknown parameters are a 400 (breaking, 2026-10-10).** `/algobrain/search` and `/algobrain/page` return `400 unknown_parameter` for a query parameter they do not read, instead of ignoring it. The body lists `unknown` and `accepted`. For search on 2026-10-17 the accepted set was `backtest_status`, `category`, `complexity`, `crowding_risk`, `horizon`, `limit`, `market`, `q`, `runnable`, `strategy_type`, `tag`, `type`.
 
 ### Search filters (added 2026-09-27)
 
@@ -115,7 +121,8 @@ The groups are a CryptoDataAPI taxonomy. They do not mirror this wiki's folders 
 | 400 | `unknown_group` | `?group=` on `/strategies` or `/indicators/catalog` names no group | `valid_groups` lists every valid slug for that catalogue |
 | 404 | `strategy_not_found` | `/strategies/{slug}` with an unknown slug | Message points to `/api/v1/strategies` |
 | 404 | `indicator_not_found` | `/indicators/catalog/{slug}` with an unknown slug | Message points to `/api/v1/indicators/catalog` (seen live 2026-09-28; the changelog does not name it) |
-| 404 | `page_not_found` | `/algobrain/page` with an unknown `path` | Message points to `/api/v1/algobrain/search` |
+| 400 | `unknown_parameter` | Any query parameter `/algobrain/search` or `/algobrain/page` does not read (2026-10-10) | `unknown` and `accepted` lists |
+| 404 | `page_not_found` | `/algobrain/page` with an unknown `path` | Message points to `/api/v1/algobrain/search`. Since 2026-10-09 the detail adds `suggestions` (up to 5 real paths matching the words sent, else the newest pages) and `search_url` (a ready-made search for those words) |
 | 503 | `algobrain_index_unavailable` | The hosted index is not loaded (2026-09-19 release) | — |
 | 503 | `algobrain_index_outdated` | A strategy filter is sent to a server whose index predates the 2026-09-27 fields | — |
 
@@ -199,6 +206,7 @@ The content is **CC BY 4.0**. The `license` field reads "CC BY 4.0 — attribute
 
 ## Sources
 
+- CryptoDataAPI changelog releases 2026-10-09 and 2026-10-10 (via `GET /api/v1/changelog`, fetched 2026-10-17) and live calls on 2026-10-17: a bare `/algobrain/search`, `q=??`, `/algobrain/page?path=atr-trailing-stop`, an unknown path (404 with `suggestions` and `search_url`), and `/algobrain/search?foo=1` (400 `unknown_parameter`)
 - https://cryptodataapi.com/api/docs, OpenAPI spec (fetched 2026-09-28): paths `/api/v1/strategies*`, `/api/v1/indicators/catalog*`, `/api/v1/algobrain/*` and schemas `StrategyDetail`, `IndicatorDetail`, `AlgoBrainSearchResponse`, `AlgoBrainStatsResponse`
 - https://cryptodataapi.com/api/v1/changelog: 2026-09-19, 2026-09-27 and 2026-09-28 entries (fetched 2026-09-28)
 - Live calls on 2026-09-28 to all nine routes, including the error cases (group and count figures above)

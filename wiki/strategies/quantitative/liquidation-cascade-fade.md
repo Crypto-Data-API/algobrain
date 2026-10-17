@@ -2,7 +2,7 @@
 title: "Liquidation Cascade Fade"
 type: strategy
 created: 2026-04-27
-updated: 2026-07-20
+updated: 2026-10-17
 status: excellent
 tags: [mean-reversion, crypto, liquidations, contrarian, market-microstructure, behavioral-finance, volatility, derivatives, scalping]
 aliases: ["Liquidation Reversal", "Cascade Fade", "Falling Knife Catcher", "Panic Bid", "Liquidation Bid", "Liquidity Provision in Cascades"]
@@ -399,6 +399,7 @@ These are deliberately tight. The strategy is too easy to over-trust in calm reg
 - `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
 - `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
 - `GET /api/v1/backtesting/liquidations` — liquidation records archive
+- `GET /api/v1/backtesting/liquidation-density?coin=BTC&start=2026-10-01` (Pro Plus, new 2026-10-08) — Hyperliquid USD of longs liquidating below and shorts above the mark within ±0.5/1/2/3/5%, split `by_trader_type` and `by_leverage`, every 5 minutes (or hourly) from 2026-06-26. Use it to label each historical cascade by how much forced flow was still queued within 1-2% of the mark at entry. The hypothesis to test is that a fade with little density left below snaps back, while a fade with a dense band still below gets run over. See [[cryptodataapi-backtesting]].
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"

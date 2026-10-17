@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Supply"
 type: source
 created: 2026-09-02
-updated: 2026-09-02
+updated: 2026-10-17
 status: good
 tags: [data-provider, crypto, api, on-chain, event-driven, altcoins]
 aliases: ["CryptoDataAPI Supply", "CDA Supply", "Supply & Dilution API", "Token Float API", "Unlock Calendar API"]
@@ -19,7 +19,7 @@ The Supply category of [[cryptodataapi]] serves circulating-float and dilution d
 | Method | Path | Returns | Key Params | Tier |
 |--------|------|---------|------------|------|
 | GET | /api/v1/supply/float | Circulating float & dilution overhang per coin, ranked by ascending float | min_market_cap (query; default $500M, pass 0 for the unfiltered set), min_locked_usd, max_float_pct (0-1), symbol, limit (max 2000, default 250) | Free: top 25 rows; Pro/Pro Plus: full board + filters |
-| GET | /api/v1/supply/unlocks | Forward token-unlock cliff calendar, sized in tokens/USD/% of float | window_days (1-35, default 30), symbol | Free: next 7 days; Pro/Pro Plus: full 35-day horizon |
+| GET | /api/v1/supply/unlocks | Forward token-unlock cliff calendar, sized in tokens/USD/% of float | window_days (1-35, default 30), symbol (accepts an HL k-name), limit | Free: next 7 days; Pro/Pro Plus: full 35-day horizon |
 
 Tier column reflects the response scope limit, not a hard `403` gate — both endpoints are reachable on Free, just truncated.
 
@@ -30,6 +30,8 @@ Tier column reflects the response scope limit, not a hard `403` gate — both en
 **`unlock_coverage: not_tracked` is not a "no unlock" signal.** A null `next_unlock` paired with `not_tracked` means no vesting schedule is published for that token in CryptoDataAPI's source — it does not mean the token has nothing scheduled. Do not read it as safe.
 
 `/supply/unlocks` returns the same underlying cliff data as a dedicated calendar view, each item carrying `date`, `days_until`, `tokens`, `usd`, `pct_of_float`, `pct_of_market_cap`, and `categories` (team/investor/ecosystem/etc.). It is sourced from DefiLlama's emissions data and is deliberately a **cliff calendar, not an emissions feed** — continuous drip (mining inflation, linear vesting, runs of identical daily releases) is excluded on purpose, because publishing it alongside real cliffs would bury the catalysts that actually move price. Coverage is bounded by what DefiLlama tracks, so absence here is not evidence of no unlock.
+
+**`/supply/unlocks` fixes (2026-10-10).** `limit` now caps the rows, soonest first. It was silently ignored before, so `?limit=2` used to return the whole window; it returned exactly 2 rows live on 2026-10-17. `symbol` accepts a Hyperliquid k-name, so `kBONK` finds BONK. An unrecognised parameter is now `400 unknown_parameter`, and the accepted set is `limit`, `symbol`, `window_days`.
 
 ## Historical Data
 
@@ -61,4 +63,5 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 ## Sources
 
+- CryptoDataAPI changelog release 2026-10-10 (via `GET /api/v1/changelog`, fetched 2026-10-17), the live OpenAPI spec (`/api/v1/supply/unlocks` `window_days`/`symbol`/`limit` params), and live calls on 2026-10-17 (`?limit=2`, `?symbol=kBONK`, and the unknown-parameter 400)
 - https://cryptodataapi.com/api/docs (fetched 2026-09-02)

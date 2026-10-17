@@ -9,6 +9,45 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-10-17 — Sync: absorbed CryptoDataAPI releases 2026-10-02 → 2026-10-14 (5 releases)
+
+**Scope:** `tools/check_api_changelog.py` reported 5 unprocessed releases, 3 of them breaking (10-02, 10-10, 10-14). Part of 10-10 was already documented by the gates commit: `/indicators/adx`, the `symbol`/`not_covered` filters, SMA-20, search tiers and `gates`. Only the rest was added. Every path, parameter and field was checked against the live OpenAPI spec, which had 226 paths on 2026-10-17, and the key behaviours were confirmed with live calls.
+
+- **New endpoints:**
+  - `/backtesting/liquidation-density` (Pro Plus, from 2026-06-26) is on [[cryptodataapi-backtesting]].
+  - `/on-chain/exchange-flows/{symbol}/history` (from 2026-05-28, native units) is on [[cryptodataapi-on-chain]].
+  - Spike alerts gain `source` (`transfer` / `balance_delta`) and five filters, and are archived as the `exchange_flow_spikes` snapshot type from 2026-10-08 00:25 UTC.
+- **Fixes that make old data wrong:**
+  - **`/backtesting/klines` ignored `interval` until 2026-10-10.** Every call returned 1m bars. It now aggregates, with `n` per bar and a ~278-day page scan. A new callout on [[cryptodataapi-backtesting]] separates the REST route's local window (BTCUSDT from 2026-05-09) from the `klines` and `klines_deep` Parquet archives.
+  - **The old `/quant/gex` margin ladder was wrong.** [[cryptodataapi-regimes]] now carries the live HL tiers. [[hyperliquid-liquidation-engine]] and [[hyperliquid]] quoted the same wrong BTC ladder (40x to $1M, 2.5% MM). Each now has a correction callout plus a Contradictions entry, and the old table is kept.
+  - **`/on-chain/score` `exchange_flow` was wrong before 2026-10-08.** [[cryptodataapi-on-chain]] documents the fix and the renormalised weighting: missing components are excluded, not scored 50. A dated caveat was added on [[onchain-capitulation-confluence]], [[smart-money-vs-crowd-divergence]], [[bitcoin-halving-cycle-timing]], [[on-chain-flow-trading]], [[miner-capitulation-bottom]] and [[exchange-netflow]].
+  - **`/market-intelligence/liquidations` is now sorted by 24h notional.** The default `limit` could previously drop BTC and ETH. See [[cryptodataapi-market-intelligence]].
+  - **`/quant/whales` `top_coins` grew from 60 to 100.** Archived `whale_activity` snapshots before 2026-10-14 hold at most 60, which is a backtest caveat.
+- **Strict parameters (10-10):**
+  - A list of the routes that now return `400 unknown_parameter` was added to the [[cryptodataapi]] hub, along with the 404 `hint` on guessed indicator paths.
+  - Per-route notes went on [[cryptodataapi-regimes]] (k-coin matching and the `coin` alias on gex/positioning), [[cryptodataapi-supply]] (`limit` now honoured, k-names accepted), [[cryptodataapi-strategy-library]] and [[cryptodataapi-indicators]].
+  - Content-page URLs were not swept here.
+- **Smaller items:**
+  - **Account and payments ([[cryptodataapi]], [[cryptodataapi-mcp]]):**
+    - `upgrade.discount` was removed.
+    - Key minting is limited to one key per network per day and one per mailbox (`409 mailbox_already_registered`).
+    - `/wallet/solana-blockhash` and `/solana-confirm` were removed; no page had cited them.
+    - Solana `/wallet/upgrade` now falls back to a second node and returns 503 with `Retry-After: 30`.
+    - The OpenAPI spec has parameter `example`s and the `x-timeout-seconds` / `x-streaming` / `x-account-scoped` extensions, and is served with a public cache header.
+    - The partner-gateway profile is noted in one line.
+  - **Search:** a bare `/algobrain/search` returns the newest pages, `/algobrain/page` resolves short paths, and its 404 adds `suggestions`.
+  - **Funding:** `history_status` is now `warming` only after an hour with no fetch ([[cryptodataapi-derivatives]]).
+  - **Candles:** the 1h pre-warm is noted on [[cryptodataapi-hyperliquid]].
+  - **Archives:** the archive listing is now cached.
+- **New-signal pointers:** liquidation density was added to [[cascade-detection-signals]], [[liquidation-cascade-fade]] and [[hyperliquid-liquidation-engine]]. Exchange-flow history and spikes were added to [[exchange-netflow]], [[on-chain-flow-trading]] and [[onchain-capitulation-confluence]].
+- **Counts and schema:**
+  - "190+/200+ endpoints" became "220+" in CLAUDE.md, AGENTS.md, README, [[index]], [[overview]], [[cryptodataapi]] and [[cryptodataapi-mcp]].
+  - CLAUDE.md, AGENTS.md and `tools/check_api_changelog.py` no longer say the feed keeps the "last 10 releases". On 2026-10-17 it served 36, back to 2026-06-27.
+- **Left open:**
+  - About 67 content pages still say "`/backtesting/klines` serves 1h/4h/1d back to 2017-08". That depth exists only in the `klines_deep` archive.
+  - 38 citations of the `/on-chain/whales*` routes on 25 content pages now fail the endpoint checker, because the routes were unlisted from the spec.
+  - Both need a separate sweep.
+
 ## 2026-10-17 — Fix: two strategies built liquidation rates by differencing trailing totals
 
 **Scope:** A local sync commit from 2026-09-28 was never pushed, and the upstream sync of the same releases replaced it. Most of its content was already upstream. Two strategy fixes were not, so they were carried over.

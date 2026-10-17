@@ -2,7 +2,7 @@
 title: "Cascade Detection Signals"
 type: concept
 created: 2026-05-05
-updated: 2026-07-19
+updated: 2026-10-17
 status: excellent
 tags: [crypto, indicators, liquidations, market-microstructure, cascade, signals, hyperliquid]
 aliases: ["Liquidation Cascade Indicators", "Cascade Early Warning Signals"]
@@ -512,6 +512,7 @@ The same detector serves all four — only the action handlers differ.
 **Historical data:**
 - `GET /api/v1/backtesting/liquidations` — liquidation records archive (Hyperliquid, since 2026-03-30)
 - `GET /api/v1/backtesting/funding` — funding archive (Hyperliquid hourly since 2023-05)
+- `GET /api/v1/backtesting/liquidation-density?coin=BTC&start=2026-10-01` (Pro Plus, new 2026-10-08) — Hyperliquid USD of longs liquidating below and shorts above the mark within ±0.5/1/2/3/5%, split `by_trader_type` and `by_leverage`, every 5 minutes (or hourly) from 2026-06-26. It measures the pre-cascade "fuel near the mark" as a time series, so a density-percentile early warning can be tuned on history rather than on whole ~1 MB `liquidation_map` snapshots. See [[cryptodataapi-backtesting]].
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"

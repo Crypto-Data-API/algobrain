@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Indicators"
 type: source
 created: 2026-07-13
-updated: 2026-10-10
+updated: 2026-10-17
 status: good
 tags: [data-provider, crypto, api, indicators, adx, rsi, bollinger-bands, moving-average, technical-analysis]
 aliases: ["CryptoDataAPI Indicators", "CDA Indicators", "Signum RGG", "CryptoDataAPI Technical State", "ADX endpoint"]
@@ -34,6 +34,12 @@ The two base endpoints — `/indicators/signum-rgg` and `/indicators/technical` 
 **Refresh semantics (changed 2026-09-26).** A call to `POST /indicators/signum-rgg/refresh` or `/indicators/technical/refresh` made while a rebuild is already running now waits for that rebuild instead of starting another. A call within 5 minutes of the last completed rebuild returns the current data with `refreshed: false`. The response shape (`refreshed`, `count`, `timestamp`) is unchanged, but `refreshed` can now be `false`, so do not treat `false` as an error. Polling refresh faster than every 5 minutes gains nothing.
 
 **ADX per interval, coin filters, SMA-20 (2026-10-10).** `GET /indicators/adx?coin=BTC&interval=4h` serves the ADX(14), +DI and -DI that SIGNUM colours from, as numbers, on `1d`, `4h` (completed bars on the 00/04/08/12/16/20 UTC grid) or `1h`. The 1h value includes the bar forming at the hourly sweep, so it reads `final: false`. Each row also carries `direction` (+DI vs -DI) and `strength` (`strong` at ADX >= 25, `weak` below 20). `history=N` attaches the last N completed bars; on 4h and 1h that needs `coin` with at most 5 symbols. `/indicators/technical` and `/indicators/signum-rgg` now filter by `symbol` (alias `coin`, a comma list) and list any names they do not cover in `not_covered`. Both now return **400 for a parameter they do not read**: `?coin=BTC&interval=4h` used to come back 200 with the whole daily universe. Every series on `/indicators/technical` is daily, and its `ma` block gains `sma_20`, `above_20` and `dist_from_20_pct`.
+
+**Guessed indicator paths return a `hint` (2026-10-10).** A 404 on `/api/*` for a guessed indicator route now names the route and field that serve it. The body keeps `detail: "Not Found"`, `docs` and `endpoints`, and adds `hint`. Live examples from 2026-10-17:
+- `/api/v1/indicators/rsi` and `/api/v1/rsi` hint at `rsi.rsi_14_1d` / `rsi.rsi_14_1h` on `/api/v1/indicators/technical?symbol=BTC`.
+- `/api/v1/indicators/atr` hints at the per-bar column on `/api/v1/hyperliquid/candles?coin=BTC&interval=4h&atr=14`.
+
+An agent that guesses a path should read `hint` instead of retrying variants. The `unknown_parameter` 400 on `/indicators/technical` for `interval` also names `/indicators/adx?interval=4h&coin=BTC` in its message, and lists the `accepted` parameters.
 
 **`sr` support/resistance field (added 2026-08-25):** the technical-structure block on `/indicators/technical` and `/indicators/technical/{symbol}` now carries an `sr` object — `sr.support` and `sr.resistance`, each up to 3 levels, nearest-to-price first. Every level is `{price, strength, dist_pct}`: `strength` is how many swing pivots clustered into that level, and `dist_pct` is the signed % distance from mark (negative for support, positive for resistance). Levels are derived from swing-pivot detection on the same 250-day daily series already backing the rest of the technical block (no new data source), clustered within 1.5% of each other, and dropped once more than 30% away from mark. An empty `[]` on either side is a genuine "no clean level" read, not missing data — `sr` defaults to `{support: [], resistance: []}` when nothing clusters.
 
@@ -83,6 +89,7 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/indicators/signu
 
 ## Sources
 
+- CryptoDataAPI changelog release 2026-10-10 (via `GET /api/v1/changelog`, fetched 2026-10-17) and live calls on 2026-10-17: the 404 `hint` on `/indicators/rsi`, `/indicators/atr` and `/rsi`, and the `unknown_parameter` 400 body for `/indicators/technical?interval=4h`
 - https://cryptodataapi.com/api/docs (fetched 2026-07-13)
 - https://cryptodataapi.com/api (raw OpenAPI JSON; `SignumRggResponse`, `SignumRggDetailResponse`, `SignumRggItem` fields — `color`/`color_live`, `days_in_color`/`days_in_color_live`, `adx`/`adx_live`, `is_final`, `computed_from`, `pegged`, `flip_alert`/`flip_alert_reason`, `intraday_disagrees`, `recent_flip` — and the `offset`/`limit` (max 1000) and `intraday` query params confirmed live, fetched 2026-09-15)
 - https://cryptodataapi.com/api (raw OpenAPI JSON; `/api/v1/indicators/heatmap` path, `HeatmapResponse`/`HeatmapRow` schemas — `symbol`, `source`, `price`, `pct_1h`/`pct_4h`/`pct_24h`, `signum`, `days_in_color`, `adx`, `signum_4h`, `bars_in_color_4h`, `notional_30`, `above_sma200`, `dist_from_200_pct` — its `source`/`interval`/`min_notional_30`/`color`/`color_4h`/`above_sma200`/`sort`/`order`/`limit` params, and the new `h4_color`/`h4_adx`/`h4_plus_di`/`h4_minus_di`/`h4_bars_in_color`/`h4_computed_from` fields on `SignumRggItem`, all confirmed live, fetched 2026-09-22)

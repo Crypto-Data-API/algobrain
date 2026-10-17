@@ -8,7 +8,8 @@ Run the cross-platform launcher (it installs dependencies on first use and start
 server as a background process):
 
 Run `python3 tools/manage_mcp.py start` on macOS/Linux or
-`py tools/manage_mcp.py start` on Windows.
+`py tools/manage_mcp.py start` on Windows. If the `py` launcher is not installed (common
+with the Microsoft Store Python), use `python tools/manage_mcp.py start` instead.
 
 The server exposes the AlgoBrain vault over Streamable HTTP at
 **http://127.0.0.1:8010/mcp** (tools: `wiki_search`, `wiki_read`, `wiki_stats`,
@@ -22,5 +23,5 @@ After launching:
 2. Report the MCP URL. To use it from Claude Code (one-time registration):
    `claude mcp add --transport http algobrain http://127.0.0.1:8010/mcp`
 
-To stop it later: `<python> tools/manage_mcp.py stop` (`python3` on macOS/Linux, `py` on
+To stop it later: `<python> tools/manage_mcp.py stop` (`python3` on macOS/Linux, `py` or `python` on
 Windows).

@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Backtesting Archive"
 type: source
 created: 2026-07-13
-updated: 2026-09-28
+updated: 2026-10-17
 status: good
 tags: [data-provider, crypto, api, backtesting, historical-data, point-in-time, parquet, klines, funding, liquidations]
 aliases: ["CryptoDataAPI Backtesting", "CDA Backtesting", "CryptoDataAPI Historical Archive", "CryptoDataAPI Archives"]
@@ -18,7 +18,8 @@ CryptoDataAPI's Backtesting section is the historical arm of the API: a full arc
 
 | Method | Path | Returns | Key Params | Tier |
 |--------|------|---------|------------|------|
-| GET | /api/v1/backtesting/klines | OHLCV candles, full archive | symbol*, exchange, start*, end, bounds, limit, cursor, format | — |
+| GET | /api/v1/backtesting/klines | OHLCV candles from the local 1m archive; `interval` aggregates them (honoured since 2026-10-10) | symbol*, exchange, interval (1m/5m/15m/30m/1h/4h/1d), start*, end, bounds, limit, cursor, format | — |
+| GET | /api/v1/backtesting/liquidation-density | Hyperliquid liquidation density near the mark (±0.5/1/2/3/5% bands) as a time series, with `by_trader_type` / `by_leverage` splits (new 2026-10-08) | coin* (≤25 comma list), start*, end, interval (5m/1h), splits, bounds, limit, cursor, format | Pro Plus |
 | GET | /api/v1/backtesting/funding | Funding rates, historical (`grain=snapshot_5m` default or `hourly`) | symbol*, exchange, start*, end, bounds, limit, grain, cursor, format | — |
 | GET | /api/v1/backtesting/liquidations | Liquidation records, historical (venue-merged, rolling window) | symbol (≤25 comma list), start*, end, bounds, limit, cursor, format | — |
 | GET | /api/v1/backtesting/hl-liquidations | Per-event Hyperliquid liquidation tape (exact fills: side, px, sz, USD notional, method, mark price) | coin (≤25 comma list), start*, end, bounds, limit, cursor, format | Pro |
@@ -50,6 +51,47 @@ Historical depth: Parquet archive from 2020.
 `/backtesting/hl-funding-bars` (Pro Plus, added 2026-09-19) returns Hyperliquid funding and open interest aligned to the candle clock — one row per closed bar per coin (`interval` 1h/4h/1d), with `time` equal to the matching `/hyperliquid/candles` `timestamp` so a funding/OI condition can be tested against the exact bar a price signal fires on. Per bar: `funding_sum` (carry actually settled in `(time, time + interval]`, summed across every settlement landing in the bar) with `n_settlements`; `funding_rate_mean` (mean live hourly rate over the bar's 5-min samples); `oi_open`/`oi_close`/`oi_change_pct` (base-coin units, first/last 5-min sample in the bar); `mark_close`; and `n_snapshots`. **`funding_sum: null` with `n_settlements: 0` means that day's settled prints are not yet archived — not zero carry** (settled prints are archived daily, for the previous UTC day; `funding_rate_mean` is available immediately since it doesn't depend on that archive step). Bars start **2026-03-30**: Hyperliquid publishes no historical open interest, so OI history is forward-only from CryptoDataAPI's own 5-minute capture and cannot be backfilled further back — older settled funding alone (no OI) is available further back via `/backtesting/funding?grain=hourly` — see below for what that mode actually returns. Coin list up to 25, window ≤ 93 days per call, cursor-paged, `format=csv` available.
 
 **Backfill fix (2026-09-21):** both `/backtesting/hl-funding-bars` and `/backtesting/funding?grain=hourly` collected settled funding prints once a day for the previous day only, so a missed collector run left that day's `funding_sum: null` / `n_settlements: 0` permanently — **2026-09-12, 2026-09-13, and 2026-09-19** were affected this way. The daily job now back-fills any of the last 10 settled days it finds missing, so a single missed run self-heals within that window without manual reconciliation. No response-shape change.
+
+### `/backtesting/klines` now honours `interval` (breaking fix, 2026-10-10)
+
+**Until 2026-10-10 `/backtesting/klines` never read `interval`.** Every call returned 1-minute bars, including `interval=4h` and `interval=1d`. Any backtest that requested coarser bars from this route before that date actually ran on 1m rows. It now takes `interval` = `1m` (default, as stored), `5m`, `15m`, `30m`, `1h`, `4h` or `1d`, and aggregates the stored 1m bars on the UTC grid:
+
+- `t` is the bar open, and `start` is floored to the interval.
+- Each aggregated row gains **`n`**, the number of 1m bars inside it. A full 4h bar has `n: 240` and a full 1d bar `n: 1440`. A smaller `n` means a gap in the archive or a bar still forming at `end`. `n` is null on 1m rows.
+- `grain.cadence` is the requested interval, and `grain.note` restates the `n` rule.
+- **One aggregated page scans at most ~278 days of 1m rows**, so a long `1d` request returns early with `has_more: true`. Keep paging with `next_cursor`.
+- Any query parameter the route does not read is now a `400 unknown_parameter`. The body lists the `accepted` set: `bounds`, `cursor`, `end`, `exchange`, `format`, `interval`, `limit`, `start`, `symbol`.
+
+Live check on 2026-10-17: `?symbol=BTCUSDT&interval=4h&start=2026-10-14&limit=3` returned three 4h rows with `n: 240` and `grain.cadence: "4h"`.
+
+> [!warning] Which klines source covers which depth
+> The aggregated bars can only reach back as far as the local 1m rows behind them. On 2026-10-17 `coverage.local_first` for BTCUSDT was 2026-05-09. A `1d` request starting at 2025-01-01 returned **0 rows with `has_more: false`** and an `archive_hint`, not an error. Deeper history lives in the Parquet archives on `/backtesting/archives` (listed by `/backtesting/archives/index`):
+> - **`klines`**: daily 1m Parquet files from 2026-03-30.
+> - **`klines_deep`**: monthly files at **1h, 4h and 1d**. Binance runs from 2017-08 (BTCUSDT 2017-08 to 2026-07). Hyperliquid BTC 1d runs from 2023-01 and 4h from 2024-03.
+>
+> Many strategy pages say "`/backtesting/klines` serves 1h/4h/1d back to 2017-08". That depth exists only in the `klines_deep` archive, not on the REST route.
+
+### Liquidation density near the mark (new 2026-10-08)
+
+**`GET /backtesting/liquidation-density` (Pro Plus)** is a time series of Hyperliquid liquidation density around the mark. Previously you had to read whole `liquidation_map` / `liquidation_levels` snapshots (~1 MB each) to get this; a point here is ~2 KB. Each point is one coin at one 5-minute snapshot:
+
+- `time` (bucket start), `snapshot_time` and `mark`.
+- **`long_below`**: USD of long positions that liquidate below the mark. **`short_above`**: USD of shorts that liquidate above it. Both are keyed by **cumulative** band, `0.5`, `1`, `2`, `3` and `5` (% of mark), so the `5` band includes the `2` band.
+- The same split **`by_trader_type`** (`vault`, `market_maker`, `whale`, `smart_money`, `high_leverage`, `other`) and **`by_leverage`** (`3`, `5`, `10`, `20`, `25`, `40`, `50`, `100`x).
+- Every key is always present, and `0` means nothing in that band.
+
+Parameters: `coin` (one, or a comma list of up to 25; HL names such as `kPEPE`), `start` / `end` (≤ 93 days per call, `end` exclusive), `interval` (`1h` default = the first snapshot of each hour, or `5m` = every snapshot), `splits` (`trader_type,leverage` default, or `none` for the all-account bands only, ~10x smaller), `bounds`, `limit`, `cursor` and `format=csv` (all-account bands only). The spec gives it `x-timeout-seconds: 30`. **History starts 2026-06-26**, when the full-universe liquidation feed began. The earlier `liquidation_levels` snapshots are a ~25-whale sample and are not included.
+
+Live check on 2026-10-17 (BTC, 2026-10-16 00:00 to 02:00 UTC, 1h): mark 82,225.5; `long_below` was $0 inside ±1%, $149.9M inside 2% and $200.3M inside 5%. Whales held $149.8M of the 2% long band. That is the shape a cascade or magnet strategy reads: how much forced flow sits within a given move of the mark, and whose it is.
+
+### Snapshot types added by the 2026-10 releases
+
+- **`exchange_flow_spikes` (new 2026-10-08).** Every row of `/on-chain/exchange-flows/spike-alerts` is archived. Each 5-minute snapshot holds only the rows first seen in that tick, so a range lists each transfer once. History starts **2026-10-08 00:25 UTC**. The live endpoint keeps only the last 500 rows (about 10 hours), so this archive is the only way to backtest spike alerts. Rows carry the new `source` field (`transfer` or `balance_delta`). See [[cryptodataapi-on-chain]].
+- **`whale_activity` universe widened (2026-10-14).** From 2026-10-14 the snapshot carries the 100 coins in `/quant/whales` `top_coins`. Snapshots before 2026-10-14 hold **at most 60**. A coin missing from a pre-10-14 snapshot may simply have ranked 61-100, so do not read its absence as "no whale positioning". A coin new to the list reports `long_pct_pctile_30d: null` until it has 48 hourly samples. See [[cryptodataapi-regimes]].
+
+### Archive listing cache (2026-10-09)
+
+`/backtesting/archives` and `/archives/download` now read the archive listing from a cache. New uploads appear within 15 minutes under steady use, and within an hour at most. Response shapes and defaults are unchanged. **The unfiltered default `/archives` call is still a ~9 MB listing of every klines file.** Pass `data_type=daily`, `symbol` or a date range to get a small one. The OpenAPI spec now carries `data_type=daily` as the example for both routes.
 
 ### Grain — what a row actually is (2026-09-12)
 
@@ -97,6 +139,12 @@ Everything else is history. `/backtesting/klines`, `/backtesting/funding`, `/bac
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/backtesting/daily-snapshots/2024-01-15"
+
+# 4h bars aggregated from the 1m archive (honoured since 2026-10-10; check each row's n)
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/backtesting/klines?symbol=BTCUSDT&interval=4h&start=2026-10-01"
+
+# Liquidation density within ±0.5-5% of mark, hourly, all-account bands only (Pro Plus)
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/backtesting/liquidation-density?coin=BTC,ETH&start=2026-10-01&splits=none"
 ```
 
 ## From Archive to Validated Strategy
@@ -121,6 +169,7 @@ The dated daily snapshots are what make this rigorous: the same point-in-time fr
 
 ## Sources
 
+- CryptoDataAPI changelog releases 2026-10-08, 2026-10-09, 2026-10-10 and 2026-10-14 (via `GET /api/v1/changelog`, fetched 2026-10-17), the live OpenAPI spec (`/api/v1/backtesting/klines` `interval` param and description, `/api/v1/backtesting/liquidation-density` params and description; fetched 2026-10-17), and live calls on 2026-10-17: `/backtesting/klines?interval=4h` (`n`, `grain.cadence`), a 1d request before local retention (empty page plus `archive_hint`), the unknown-parameter 400, `/backtesting/liquidation-density?coin=BTC`, `/backtesting/snapshots/types` (`exchange_flow_spikes` earliest 2026-10-08 00:25 UTC) and `/backtesting/archives/index` (`klines` and `klines_deep` coverage)
 - https://cryptodataapi.com/api (live OpenAPI JSON) and live curl tests of `/backtesting/hl-liquidations` and `/backtesting/archives/purchase` (fetched 2026-09-08)
 - https://cryptodataapi.com/api/docs (fetched 2026-07-13)
 - https://cryptodataapi.com/api (raw OpenAPI JSON; `/api/v1/backtesting/signum-rgg` path, `date` param, and `SignumRggArchiveResponse` schema — `date`, `as_of`, `computed_from`, `summary`, `by_symbol` — confirmed live, fetched 2026-09-15)

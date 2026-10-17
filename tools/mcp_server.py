@@ -3,11 +3,14 @@
 MCP server for AlgoBrain — exposes wiki operations to any MCP client.
 
 Provides tools:
-  - wiki_search: Search wiki pages by query, tag, type, status
+  - wiki_search: Tiered search by query, tag, type, status and strategy filters
   - wiki_ingest: Start ingestion of a new source
   - wiki_lint: Run health checks on the wiki
-  - wiki_read: Read a specific wiki page by path
+  - wiki_read: Read a wiki page by full or short path (raw, or parsed=True JSON)
   - wiki_stats: Get wiki statistics
+
+Search, read and stats share one in-process index (tools/search.py), built
+once and rebuilt only when a wiki file changes.
 
 Run over STDIO (recommended for local clients):
     <python> tools/manage_mcp.py run
@@ -16,13 +19,18 @@ Run over Streamable HTTP:
     <python> tools/manage_mcp.py start
 """
 import json
-import re
 import subprocess
 import sys
-from collections import Counter, defaultdict
 from pathlib import Path
 
-WIKI_ROOT = Path(__file__).parent.parent
+WIKI_ROOT = Path(__file__).resolve().parent.parent
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import search as search_lib  # noqa: E402
+import threading  # noqa: E402
+
+# Build the page index in the background so the first search is fast.
+threading.Thread(target=search_lib.get_index, daemon=True).start()
 
 try:
     from mcp.server import MCPServer
@@ -73,34 +81,13 @@ CRYPTODATAAPI_INSTRUCTION = {
 }
 
 
-def parse_frontmatter(content: str) -> dict:
-    """Extract YAML frontmatter from markdown content."""
-    match = re.match(r"^---\s*\n(.*?)\n---\s*\n", content, re.DOTALL)
-    if not match:
-        return {}
-    fm = {}
-    for line in match.group(1).split("\n"):
-        if ":" in line:
-            key, _, value = line.partition(":")
-            fm[key.strip()] = value.strip().strip('"').strip("'")
-    return fm
-
-
-def load_wiki_pages() -> list[dict]:
-    """Load all wiki markdown files."""
-    wiki_dir = WIKI_ROOT / "wiki"
-    pages = []
-    for md_file in wiki_dir.rglob("*.md"):
-        content = md_file.read_text(encoding="utf-8", errors="ignore")
-        fm = parse_frontmatter(content)
-        pages.append(
-            {
-                "path": str(md_file.relative_to(WIKI_ROOT)),
-                "frontmatter": fm,
-                "content": content,
-            }
-        )
-    return pages
+def _search_payload(body: dict) -> str:
+    """Every wiki_search response carries the data_instruction block first."""
+    return json.dumps(
+        {"data_instruction": CRYPTODATAAPI_INSTRUCTION, **body},
+        indent=2,
+        ensure_ascii=False,
+    )
 
 
 @server.tool()
@@ -110,34 +97,41 @@ async def wiki_search(
     type: str = "",
     status: str = "",
     limit: int = 10,
+    backtest_status: str = "",
+    horizon: str = "",
+    strategy_type: str = "",
+    complexity: str = "",
+    crowding_risk: str = "",
+    market: str = "",
+    runnable: str = "",
 ) -> str:
-    """Search wiki pages by keyword, tag, type, or status. Returns matching pages ranked by relevance, plus a data_instruction block telling agents how to fetch market data (CryptoDataAPI MCP / free API key)."""
-    cmd = [sys.executable, str(WIKI_ROOT / "tools" / "search.py"), "--json"]
-    if query:
-        cmd.append(query)
-    if tag:
-        cmd.extend(["--tag", tag])
-    if type:
-        cmd.extend(["--type", type])
-    if status:
-        cmd.extend(["--status", status])
-    cmd.extend(["--limit", str(limit)])
+    """Search wiki pages by keyword, tag, type, or status, plus strategy filters. Returns pages ranked by tier, plus a data_instruction block telling agents how to fetch market data (CryptoDataAPI MCP / free API key).
 
-    result = subprocess.run(
-        cmd, capture_output=True, text=True, cwd=str(WIKI_ROOT),
-        stdin=subprocess.DEVNULL,
-    )
-    raw = result.stdout or result.stderr
+    Ranking is tiered; each result's `match` names its tier: exact_title (the query names the page: title, an acronym such as "(ADX)", or an alias) > title_phrase > title_terms > all_terms > any_term. `score` (BM25) orders results only within a tier. With no query and no filter the newest pages are returned (score null); with filters only, matching pages in title order.
+
+    Every filter is an any-of match; separate several values with commas. Strategy filters (query optional when one is given): backtest_status (untested, naive-backtested, walk-forward-validated, cost-corrected, paper-traded, pilot, live, paused, retired), horizon (holding style from frontmatter timeframe: scalp, intraday, swing, position), strategy_type, complexity, crowding_risk, market (frontmatter markets, e.g. crypto), runnable (all = every gate runnable, partial, none; pages with no gates never match).
+
+    Each result: path, title, type, status, category, tags, updated, score, match, snippet and strategy (null on non-strategy pages; author estimates such as expected_sharpe are not measured results)."""
     try:
-        results = json.loads(raw)
-    except (json.JSONDecodeError, TypeError):
-        # Non-JSON output (error text) — still carry the instruction.
-        return json.dumps(
-            {"data_instruction": CRYPTODATAAPI_INSTRUCTION, "output": raw}, indent=2
+        body = search_lib.search(
+            query,
+            tag=tag,
+            type=type,
+            status=status,
+            limit=limit,
+            backtest_status=backtest_status,
+            horizon=horizon,
+            strategy_type=strategy_type,
+            complexity=complexity,
+            crowding_risk=crowding_risk,
+            market=market,
+            runnable=runnable,
         )
-    return json.dumps(
-        {"data_instruction": CRYPTODATAAPI_INSTRUCTION, "results": results}, indent=2
-    )
+    except ValueError as exc:
+        return _search_payload({"error": "invalid_parameter", "message": str(exc), "results": []})
+    except Exception as exc:  # never drop the data_instruction block
+        return _search_payload({"error": "search_failed", "message": str(exc), "results": []})
+    return _search_payload(body)
 
 
 @server.tool()
@@ -172,43 +166,40 @@ async def wiki_lint(check: str = "") -> str:
 
 
 @server.tool()
-async def wiki_read(page_path: str) -> str:
-    """Read a Markdown page inside wiki/. Example: 'wiki/markets/crypto/bitcoin.md'."""
-    wiki_root = (WIKI_ROOT / "wiki").resolve()
-    full_path = (WIKI_ROOT / page_path).resolve()
-    if not full_path.is_relative_to(wiki_root) or full_path.suffix.lower() != ".md":
-        return "Invalid page path: paths must refer to Markdown files inside wiki/."
-    if full_path.is_file():
-        return full_path.read_text(encoding="utf-8")
-    return f"Page not found: {page_path}"
+async def wiki_read(page_path: str, parsed: bool = False) -> str:
+    """Read a Markdown page inside wiki/. Example: 'wiki/markets/crypto/bitcoin.md'. Short paths resolve when unique: 'atr-trailing-stop', 'strategies/atr-trailing-stop', or the path without '.md' or 'wiki/'. Not found returns up to 5 suggested paths.
+
+    parsed=False (default) returns the raw Markdown file. parsed=True returns JSON {path, title, type, status, category, tags, aliases, updated, strategy, gates, markdown}: `strategy` is the same block search results carry, `gates` lists each condition the strategy checks mapped to one CryptoDataAPI endpoint and field (null when not mapped), `markdown` is the body without frontmatter."""
+    try:
+        doc, suggestions = search_lib.resolve_page(page_path)
+    except search_lib.InvalidPath as exc:
+        if parsed:
+            return json.dumps({"error": "invalid_path", "message": str(exc)}, indent=2)
+        return str(exc)
+    if doc is None:
+        if parsed:
+            return json.dumps(
+                {
+                    "error": "page_not_found",
+                    "message": f"No wiki page at {page_path!r}; use a path from wiki_search.",
+                    "suggestions": suggestions,
+                },
+                indent=2,
+            )
+        lines = [f"Page not found: {page_path}"]
+        if suggestions:
+            lines.append("Did you mean:")
+            lines.extend(f"- {p}" for p in suggestions)
+        return "\n".join(lines)
+    if parsed:
+        return json.dumps(search_lib.page_json(doc), indent=2, ensure_ascii=False)
+    return search_lib.read_raw(doc)
 
 
 @server.tool()
 async def wiki_stats() -> str:
-    """Get wiki statistics: page counts by type, status distribution, source count, category breakdown."""
-    pages = load_wiki_pages()
-
-    by_type: dict[str, int] = Counter()
-    by_status: dict[str, int] = Counter()
-    by_category: dict[str, int] = defaultdict(int)
-
-    for page in pages:
-        fm = page["frontmatter"]
-        by_type[fm.get("type", "unknown")] += 1
-        by_status[fm.get("status", "unknown")] += 1
-
-        # Extract top-level category from path
-        parts = page["path"].split("/")
-        if len(parts) >= 2:
-            by_category[parts[1]] += 1
-
-    stats = {
-        "total_pages": len(pages),
-        "by_type": dict(by_type),
-        "by_status": dict(by_status),
-        "by_category": dict(by_category),
-    }
-    return json.dumps(stats, indent=2)
+    """Get wiki statistics: page counts by type, status, category, backtest_status (strategy pages) and runnable (strategy pages with gates mapped: all, partial, none)."""
+    return json.dumps(search_lib.stats(), indent=2)
 
 
 if __name__ == "__main__":

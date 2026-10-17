@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Hyperliquid"
 type: source
 created: 2026-07-13
-updated: 2026-09-28
+updated: 2026-10-17
 status: good
 tags: [data-provider, crypto, api, hyperliquid, perpetual-futures, order-book, funding-rates, open-interest]
 aliases: ["CryptoDataAPI Hyperliquid", "CDA Hyperliquid", "Hyperliquid Perps Data API"]
@@ -64,6 +64,8 @@ Tier "—" = not marked with a plan gate in the API docs; standard plan rate lim
 - **`complete`** (top-level) is `true` when every requested coin is in `series`. A coin is never in both `series` and `pending`, so `complete: false` means some coins need a retry
 - **`symbols`** is accepted as an alias for `coins`. Sending both with different values is a 400 `conflicting_parameters`, as on the single-coin routes
 
+**1h pre-warm (2026-10-10).** The bar-close pre-warm now also fills **1h** bars. It also re-fills every coin requested on 1h or 4h in the last few bars, at the window size it was requested with. A repeat `closed_only` pull of the same book is then a cache hit, not a cold fetch held up to `wait` seconds. There is no shape change on `/hyperliquid/candles` or `/hyperliquid/candles/batch`.
+
 The **4h pre-warm at each 4h close now fetches 500 bars** (was 200), so a `limit=210` pull for an SMA200 is a cache hit. The response shape did not change. A live call on 2026-09-28 (`symbols=BTC,ETH&interval=4h&limit=2&closed_only=true`) returned `complete: true`, `pending: []` and `forming_bar_timestamp: null`. For funding and OI on the same bar grid, join `/backtesting/hl-funding-bars` on `timestamp` (see [[cryptodataapi-backtesting]]).
 
 **Additive `fees` on `/hyperliquid/meta`.** Hyperliquid's published fee schedule as fractions of notional: base-tier `perps`/`spot` `{taker, maker}` (perps taker 0.00045 = 0.045%, maker 0.00015) and the full `volume_tiers` table, plus `as_of`/`source` for provenance. This is Hyperliquid's venue-wide published schedule — a cost-modeling reference for backtests — not any specific wallet's actual negotiated tier.
@@ -107,6 +109,7 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 ## Sources
 
+- CryptoDataAPI changelog release 2026-10-10 (via `GET /api/v1/changelog`, fetched 2026-10-17) — 1h and requested-window pre-warm on `/hyperliquid/candles` and `/candles/batch` (no shape change; not separately live-tested)
 - https://cryptodataapi.com/api/docs (fetched 2026-07-13)
 - https://cryptodataapi.com/api (live OpenAPI JSON; `/hyperliquid/trade-flow`, `/hyperliquid/trade-flow/universe`, `HLTradeFlowResponse`/`HLTradeFlowBucket`/`HLTradeFlowUniverseResponse` schemas confirmed live, fetched 2026-09-17)
 - https://cryptodataapi.com/api (live OpenAPI JSON; `symbol` alias, case-insensitive/`USDT`/`-PERP` coin matching, `unknown_parameter`/`unknown_coin`/`conflicting_parameters` errors, and `atr`/`atr_period`/`forming_bar_timestamp` on `/hyperliquid/candles`, `/hyperliquid/funding-rates`, `/hyperliquid/l2-book`, `/hyperliquid/summary`; `/hyperliquid/candles/batch` path and `HLCandleBatchResponse` schema; `fees` field on `HLMetaResponse` — all confirmed live, fetched 2026-09-20)

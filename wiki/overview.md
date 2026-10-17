@@ -2,7 +2,7 @@
 title: "AlgoBrain — Overview"
 type: overview
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-10-17
 status: good
 tags: [overview, meta]
 ---
@@ -31,7 +31,7 @@ Forked from a broader trading wiki on 2026-07-13, pruned to crypto scope, and si
 
 ## Data Layer
 
-**[[cryptodataapi|CryptoDataAPI]]** (https://cryptodataapi.com) is the canonical data source for this wiki: 190+ REST endpoints covering prices/klines, funding rates, open interest, liquidations, order-book depth, volatility/market/meme/event/security/policy regimes, HMM quant probabilities, on-chain flows, miner metrics, whale tracking, Hyperliquid trader intelligence, sentiment, ETF flows, and a Parquet backtesting archive back to 2020. Pages that map to an endpoint carry a **"Getting the Data (CryptoDataAPI)"** section with live + historical access patterns.
+**[[cryptodataapi|CryptoDataAPI]]** (https://cryptodataapi.com) is the canonical data source for this wiki: 220+ REST endpoints covering prices/klines, funding rates, open interest, liquidations, order-book depth, volatility/market/meme/event/security/policy regimes, HMM quant probabilities, on-chain flows, miner metrics, whale tracking, Hyperliquid trader intelligence, sentiment, ETF flows, and a Parquet backtesting archive back to 2020. Pages that map to an endpoint carry a **"Getting the Data (CryptoDataAPI)"** section with live + historical access patterns.
 
 ## Knowledge Gaps
 

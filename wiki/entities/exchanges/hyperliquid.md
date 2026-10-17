@@ -2,7 +2,7 @@
 title: "Hyperliquid"
 type: entity
 created: 2026-04-06
-updated: 2026-07-20
+updated: 2026-10-17
 status: excellent
 tags: [crypto, exchange, defi, derivatives, algorithmic, api]
 aliases: ["HL", "Hyperliquid DEX"]
@@ -426,6 +426,20 @@ Hyperliquid uses a **tiered maintenance margin** system. The mark price is deriv
 | 5,000,000 - 10,000,000 | 10.0% | 10x |
 | > 10,000,000 | 20.0% | 5x |
 
+> [!warning] Correction (2026-10-17): the table above does not match Hyperliquid's live margin table
+> Hyperliquid's live `meta.marginTables`, as served by CryptoDataAPI `/quant/gex` `meta.maintenance_margin_tiers` on 2026-10-17, gives BTC **two** tiers, stepping down from 40x at **$150M**, not $1M. Maintenance margin is **half** the initial margin at each tier's max leverage (`maintenance_margin_pct = 50 / max_leverage`), less a per-tier deduction: maintenance margin = notional × pct / 100 − deduction. The table above lists the initial-margin rate as the maintenance rate, which is 2x too high, and uses tiers HL does not use. It matches the static ladder that CryptoDataAPI served until its 2026-10-10 fix, which the API changelog describes as wrong in exactly these ways. The old table is kept for the record (see Contradictions below; also on [[hyperliquid-liquidation-engine]]). Live tiers on 2026-10-17:
+>
+> | Coin | Notional tier (USD) | Max leverage | Maintenance margin | Deduction (USD) |
+> |---|---|---|---|---|
+> | BTC | 0 – 150,000,000 | 40x | 1.25% | 0 |
+> | BTC | > 150,000,000 | 20x | 2.5% | 1,875,000 |
+> | ETH | 0 – 100,000,000 | 25x | 2.0% | 0 |
+> | ETH | > 100,000,000 | 15x | 3.33% | 1,333,333 |
+> | HYPE | 0 – 20,000,000 | 10x | 5.0% | 0 |
+> | HYPE | > 20,000,000 | 5x | 10.0% | 1,000,000 |
+>
+> Tiers change. Read them live from `GET /api/v1/quant/gex?coin=BTC` (`meta.maintenance_margin_tiers`), or from Hyperliquid's own `meta` info call, rather than from this page. See [[cryptodataapi-regimes]].
+
 **Liquidation process:** When margin ratio drops below maintenance, the position enters liquidation. The liquidation engine attempts to close the position at the best available price. If the position is closed at a loss exceeding the deposited margin, the insurance fund (HLP vault) covers the shortfall.
 
 ### Auto-Deleveraging (ADL)
@@ -494,6 +508,12 @@ Every order, fill, liquidation, and vault balance is recorded on HyperBVM. This 
 - Position-level data for whale tracking
 
 ---
+
+## Contradictions
+
+> **Claim A** (this page and [[hyperliquid-liquidation-engine]], April 2026 table; confidence: LOW): BTC maintenance margin is 2.5% up to $1M notional at 40x, then steps through 5% / 10% / 20% at $1M / $5M / $10M.
+> **Claim B** (CryptoDataAPI `/quant/gex` `meta.maintenance_margin_tiers`, read live from Hyperliquid `meta.marginTables` on 2026-10-17, plus the API changelog of 2026-10-10; confidence: HIGH): BTC is 1.25% up to $150M at 40x, then 2.5% at 20x above $150M with a $1.875M deduction. Maintenance margin is half the initial margin at the tier's max leverage.
+> **Resolution**: Claim B supersedes. Claim A matches the static ladder CryptoDataAPI served before 2026-10-10, which used the initial margin as the maintenance rate and wrong tier breakpoints.
 
 ## Sources
 

@@ -2,7 +2,7 @@
 title: "Smart-Money vs Crowd Divergence"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-03
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, on-chain, funding-rate, perpetual-futures, behavioral-finance, informational-edge, mean-reversion, quantitative, crypto, bitcoin]
 aliases: ["On-Chain vs Crowd Divergence", "Smart-Money Accumulation Funding Fade", "Informed Flow vs Leverage Crowd", "Whale-Accumulation Short-Squeeze Setup"]
@@ -335,6 +335,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 - `GET /api/v1/on-chain/exchange-flows/BTC` — Gate 2: 24h inflow/outflow and 7-day net flow
 - `GET /api/v1/on-chain/exchange-flows/spike-alerts` — Gate 2 real-time: large transfer alerts for rapid exchange-outflow confirmation
 - `GET /api/v1/on-chain/score` — secondary: on-chain health composite score (context check)
+  - **Caveat (2026-10-08 API fix):** before 2026-10-08 the score's `exchange_flow` component summed every tracked token's 24h flow in its own native units, so it pinned at 20 or 80. Any composite reading, or any threshold calibrated on readings, from before that date is biased. The component now scores the USDT/USDC/DAI 24h net only. Components with no data, currently `whale_accumulation`, carry weight 0 and the rest are renormalised; they are not scored a neutral 50. See [[cryptodataapi-on-chain]].
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — Gate 3: 8h funding and 7-day average
 - `GET /api/v1/derivatives/binance/long-short-ratio` — Gate 4: account long/short ratio
 - `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=15` — Gate 5: trailing daily closes for higher-low check

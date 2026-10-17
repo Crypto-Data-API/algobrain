@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Derivatives"
 type: source
 created: 2026-07-13
-updated: 2026-09-28
+updated: 2026-10-17
 status: good
 tags: [data-provider, crypto, api, derivatives, funding-rates, open-interest, binance, hyperliquid, perpetual-futures]
 aliases: ["CryptoDataAPI Derivatives", "CDA Derivatives", "Derivatives API"]
@@ -38,6 +38,8 @@ Current-state reads: `/derivatives/binance/open-interest` (spot OI level plus 30
 
 - `history_available` (bool)
 - `history_status` is `ok` (history present), `warming` (the fetch is still running, so retry in a few seconds; `current_rate` is unaffected) or `unavailable` (Hyperliquid returned nothing, or the coin is not an HL perp)
+
+**Changed 2026-10-09: `warming` is now rare.** While a refresh runs, `history_count` and `history_status` come from the last good Hyperliquid funding history, if it is at most an hour old. The call no longer waits up to 8 s and returns `warming`. `warming` now appears only when no history has been fetched for that coin in the last hour, typically the first call for a coin nobody has asked about recently. The spec gives the route `x-timeout-seconds: 20`. A live ETH call on 2026-10-17 still returned `warming` with `history_count: 0` on a cold coin, which matches that rule.
 
 **`history_count: 0` with `warming` is not a stuck feed.** A live call for ETH on 2026-09-28 returned exactly that on a cold cache. The route serves one coin per call (`?coin=`, default BTC). To get every Hyperliquid perp's current rate in one call, use `GET /hyperliquid/open-interest` (`assets[].funding_rate`) on [[cryptodataapi-hyperliquid]].
 
@@ -79,6 +81,7 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 ## Sources
 
+- CryptoDataAPI changelog release 2026-10-09 (via `GET /api/v1/changelog`, fetched 2026-10-17) and a live `/derivatives/funding-rates?coin=ETH` call on 2026-10-17 — last-good history served during refresh; `warming` only after an hour with no fetch
 - https://cryptodataapi.com/api/docs (fetched 2026-07-13)
 - https://cryptodataapi.com/api (live OpenAPI JSON; `/derivatives/hyperliquid/history` path, `symbol`/`days` params and `HyperliquidDerivativesHistoryResponse` schema, plus the `history_count`/`history_status` description on `/derivatives/funding-rates`, confirmed against the spec and live calls, fetched 2026-09-28)
 - https://cryptodataapi.com/api/v1/changelog (releases 2026-09-12 and 2026-09-23, fetched 2026-09-28)

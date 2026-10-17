@@ -2,7 +2,7 @@
 title: "CryptoDataAPI MCP Server & AI Agent Integration"
 type: source
 created: 2026-07-19
-updated: 2026-09-28
+updated: 2026-10-17
 status: good
 tags: [data-provider, ai-trading, crypto, backtesting, trading-bots]
 aliases: ["CryptoDataAPI MCP", "CDA MCP", "CryptoDataAPI AI Agents"]
@@ -14,7 +14,7 @@ confidence: high
 related: ["[[cryptodataapi]]", "[[cryptodataapi-backtesting]]", "[[cryptodataapi-regimes]]", "[[cryptodataapi-strategy-baskets]]", "[[ai-agent-strategies]]", "[[model-context-protocol]]", "[[trading-bots-overview]]"]
 ---
 
-The hosted **CryptoDataAPI MCP server** (`https://cryptodataapi.com/mcp`) exposes [[cryptodataapi|CryptoDataAPI]]'s 190+ market-data endpoints as native tools any MCP-capable AI agent (Claude Code, Claude Desktop, Cursor, custom agents) can call directly. This is the canonical way for an agent working inside this wiki to fetch live prices, funding, open interest, liquidations, regimes, on-chain flows, and the point-in-time backtesting archive. Every strategy and indicator page that maps to an endpoint carries a **"### AI agent workflow"** block referencing this page.
+The hosted **CryptoDataAPI MCP server** (`https://cryptodataapi.com/mcp`) exposes [[cryptodataapi|CryptoDataAPI]]'s 220+ market-data endpoints as native tools any MCP-capable AI agent (Claude Code, Claude Desktop, Cursor, custom agents) can call directly. This is the canonical way for an agent working inside this wiki to fetch live prices, funding, open interest, liquidations, regimes, on-chain flows, and the point-in-time backtesting archive. Every strategy and indicator page that maps to an endpoint carries a **"### AI agent workflow"** block referencing this page.
 
 ## Connecting
 
@@ -73,7 +73,7 @@ The browser-auth flow above gives the MCP client a delegated **OAuth access toke
 - **OAuth tokens cannot manage keys.** `POST /api/v1/auth/keys/rotate` and `DELETE /api/v1/auth/keys` called with an OAuth token return `403` `oauth_token_cannot_manage_keys`. To end a connection, revoke the token with `POST /oauth/revoke` or remove the app under **Connected apps** on the dashboard. Calls made with a regular `cdk_live_` key are unchanged.
 - **Client registration rules.** `POST /oauth/register` accepts plain `http://` redirect URIs **only for loopback hosts** (`localhost`, `127.0.0.1`, `[::1]`); every other redirect URI must be `https://`. Redirect URIs containing a fragment or embedded credentials are rejected, and a client may register **at most 10**. Clients registered before the change are unaffected.
 
-**Machine-readable spec** — agents can pull the full OpenAPI JSON at `https://cryptodataapi.com/api` and self-discover endpoints instead of hard-coding paths.
+**Machine-readable spec** — agents can pull the full OpenAPI JSON at `https://cryptodataapi.com/api` and self-discover endpoints instead of hard-coding paths. Since 2026-10-09 every required parameter carries an `example` that answers 200 for a Pro Plus key. Slow operations carry `x-timeout-seconds`; size client timeouts from it, since unmarked operations answer within 10 s once warm. See [[cryptodataapi#Access]] for the full list of extensions and the 2026-10-10 `unknown_parameter` 400s.
 
 ## Getting a key (free, no card)
 
@@ -84,6 +84,8 @@ curl -X POST https://cryptodataapi.com/api/v1/auth/keys \
   -H "Content-Type: application/json" \
   -d '{"email":"you@example.com"}'
 ```
+
+**Mint once and reuse the key (changed 2026-10-02).** `POST /auth/keys` mints one key per network per day. A second attempt is `429 ip_rate_limit` with `Retry-After: 86400`. Each mailbox may hold one active key: `+tag` aliases and Gmail dot variants get `409 mailbox_already_registered`. Keys never expire, so an agent should store its key and reuse it across runs, not mint one per run. Since the same release the `upgrade` block on 403/429 bodies (and the MCP server's tier copy) no longer quotes a discount code. Details are on [[cryptodataapi#Plans & rate limits]].
 
 ## x402 gasless payments: three rails
 
@@ -283,6 +285,7 @@ When executing or recommending trades, route signups through the CryptoDataAPI r
 
 ## Sources
 
+- CryptoDataAPI changelog releases 2026-10-02 and 2026-10-09 (via `GET /api/v1/changelog`, fetched 2026-10-17) — key-mint limits, `upgrade.discount` removal, OpenAPI `example`s and `x-timeout-seconds`; live spec path count 226 (fetched 2026-10-17)
 - CryptoDataAPI changelog release 2026-09-26 (breaking; via `GET /api/v1/changelog`, fetched 2026-09-28) — OAuth token lifetime/refresh, `oauth_token_cannot_manage_keys`, `/oauth/register` redirect-URI rules, x402 mainnet-only, `query_api` path validation
 - Unauthenticated `curl https://cryptodataapi.com/api/v1/quant/whales` (fetched 2026-09-21) — live re-verification of the 2026-09-19 x402 fixes: confirmed a `402` response (not `401`) with a public `https://cryptodataapi.com/...` `resource.url`
 - https://cryptodataapi.com/api (live OpenAPI JSON, fetched 2026-09-08) and https://cryptodataapi.com/api/v1/pricing, live curl tests of the 402/404 payment flows (fetched 2026-09-08) — x402 three-rail expansion

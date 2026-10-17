@@ -2,7 +2,7 @@
 title: "On-Chain Capitulation Confluence"
 type: strategy
 created: 2026-07-19
-updated: 2026-09-03
+updated: 2026-10-17
 status: good
 tags: [combinations, meta-strategy, on-chain, sentiment, mean-reversion, behavioral-finance, bitcoin, quantitative, crypto, position-trading]
 aliases: ["Capitulation Confluence Entry", "On-Chain + Sentiment Bottom", "Dual-Signal Capitulation Buy"]
@@ -329,8 +329,11 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 
 **Live data:**
 - `GET /api/v1/on-chain/exchange-flows/BTC` — CEX inflow/outflow, 1h/6h/24h/7d windows; primary sub-signal A (exchange-inflow spike)
+- `GET /api/v1/on-chain/exchange-flows/{symbol}/history` (new 2026-10-08) — archived trailing 1h/24h `inflow`/`outflow`/`net` plus `per_exchange_1h`, hourly (`interval=1h`) from 2026-05-28, ≤93 days per call. Amounts are in native token units (USD for USDT/USDC/DAI). This is the replay source for netflow rules; a 180-day netflow percentile can only be built from it once 180 days exist (from about 2026-11-24)
+- `GET /api/v1/backtesting/snapshots?data_type=exchange_flow_spikes` — every spike alert archived from 2026-10-08 00:25 UTC. Live, add `source=transfer` to `/on-chain/exchange-flows/spike-alerts` to drop `balance_delta` rows, which can be an exchange moving funds between its own hot and cold wallets
 - `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + dormancy zone classification (capitulation/accumulation/euphoria); primary sub-signal C (MVRV-Z floor)
 - `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100); a score ≤ 20 is consistent with capitulation confluence
+  - **Caveat (2026-10-08 API fix):** before 2026-10-08 the score's `exchange_flow` component summed every tracked token's 24h flow in its own native units, so it pinned at 20 or 80. Any composite reading, or any threshold calibrated on readings, from before that date is biased. The component now scores the USDT/USDC/DAI 24h net only. Components with no data, currently `whale_accumulation`, carry weight 0 and the rest are renormalised; they are not scored a neutral 50. See [[cryptodataapi-on-chain]].
 - `GET /api/v1/sentiment/fear-greed` — live Fear & Greed index reading; Signal 2
 - `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` — stablecoin dry-powder z-score; optional higher-conviction confirmation
 - `GET /api/v1/on-chain/whales/accumulation-score/BTC` — whale accumulation score timeseries; secondary bullish signal

@@ -2,7 +2,7 @@
 title: "Hyperliquid Liquidation Engine"
 type: concept
 created: 2026-05-05
-updated: 2026-07-13
+updated: 2026-10-17
 status: good
 tags: [crypto, defi, derivatives, market-microstructure, leverage]
 aliases: ["HL Liquidation Engine", "Hyperliquid Forced Liquidation", "HL Liq Mechanics"]
@@ -47,6 +47,20 @@ Maintenance margin scales **stepwise** with position notional, not continuously.
 | 1,000,000 – 5,000,000 | 5.0% | 20x |
 | 5,000,000 – 10,000,000 | 10.0% | 10x |
 | > 10,000,000 | 20.0% | 5x |
+
+> [!warning] Correction (2026-10-17): the table above does not match Hyperliquid's live margin table
+> Hyperliquid's live `meta.marginTables`, as served by CryptoDataAPI `/quant/gex` `meta.maintenance_margin_tiers` on 2026-10-17, gives BTC **two** tiers, stepping down from 40x at **$150M**, not $1M. Maintenance margin is **half** the initial margin at each tier's max leverage (`maintenance_margin_pct = 50 / max_leverage`), less a per-tier deduction: maintenance margin = notional × pct / 100 − deduction. The table above lists the initial-margin rate as the maintenance rate, which is 2x too high, and uses tiers HL does not use. It matches the static ladder that CryptoDataAPI served until its 2026-10-10 fix, which the API changelog describes as wrong in exactly these ways. The old table is kept for the record (see Contradictions below). Live tiers on 2026-10-17:
+>
+> | Coin | Notional tier (USD) | Max leverage | Maintenance margin | Deduction (USD) |
+> |---|---|---|---|---|
+> | BTC | 0 – 150,000,000 | 40x | 1.25% | 0 |
+> | BTC | > 150,000,000 | 20x | 2.5% | 1,875,000 |
+> | ETH | 0 – 100,000,000 | 25x | 2.0% | 0 |
+> | ETH | > 100,000,000 | 15x | 3.33% | 1,333,333 |
+> | HYPE | 0 – 20,000,000 | 10x | 5.0% | 0 |
+> | HYPE | > 20,000,000 | 5x | 10.0% | 1,000,000 |
+>
+> Tiers change. Read them live from `GET /api/v1/quant/gex?coin=BTC` (`meta.maintenance_margin_tiers`), or from Hyperliquid's own `meta` info call, rather than from this page. See [[cryptodataapi-regimes]].
 
 ETH and HYPE follow similar curves with slightly tighter tiers. **Long-tail altcoins** (the 200+ HIP-3 markets) have dramatically higher maintenance margins — often 10-25% even at small notionals — and lower max leverage (3-10x). This is the engine's first defense against thin-liquidity exploits like the [[2025-03-jellyjelly-hlp-attack|JELLYJELLY incident]]: tight tiers force the trader to keep skin in the game even on a small position, and the protocol can reject leverage that would be unsupportable in stress.
 
@@ -231,7 +245,17 @@ For HLP depositors, JELLYJELLY revealed that pair-level exposure caps are essent
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BTC"
 ```
 
+**Margin tiers and liquidation density:**
+- `GET /api/v1/quant/gex?coin=BTC` — `meta.maintenance_margin_tiers` is Hyperliquid's live margin table per coin (`max_leverage`, `maintenance_margin_pct`, `maintenance_deduction_usd`), corrected 2026-10-10; see [[cryptodataapi-regimes]]
+- `GET /api/v1/backtesting/liquidation-density?coin=BTC&start=2026-10-01` (Pro Plus, new 2026-10-08) — USD of longs liquidating below and shorts above the mark within ±0.5/1/2/3/5%, split by trader type and leverage bucket, every 5 minutes from 2026-06-26. This is the engine's forced-flow queue as a backtestable series; see [[cryptodataapi-backtesting]]
+
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid]].
+
+## Contradictions
+
+> **Claim A** (this page, April 2026 table; confidence: LOW): BTC maintenance margin is 2.5% up to $1M notional at 40x, then steps through 5% / 10% / 20% at $1M / $5M / $10M.
+> **Claim B** (CryptoDataAPI `/quant/gex` `meta.maintenance_margin_tiers`, read live from Hyperliquid `meta.marginTables` on 2026-10-17, plus the API changelog of 2026-10-10; confidence: HIGH): BTC is 1.25% up to $150M at 40x, then 2.5% at 20x above $150M with a $1.875M deduction. Maintenance margin is half the initial margin at the tier's max leverage.
+> **Resolution**: Claim B supersedes. Claim A matches the static ladder CryptoDataAPI served before 2026-10-10, which used the initial margin as the maintenance rate and wrong tier breakpoints.
 
 ## Related
 

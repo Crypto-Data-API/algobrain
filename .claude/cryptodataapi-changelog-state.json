@@ -1,7 +1,37 @@
 {
-  "last_checked": "2026-09-28",
-  "api_version_seen": "2026-09-28",
+  "last_checked": "2026-10-17",
+  "api_version_seen": "2026-10-14",
   "processed": [
+    {
+      "version": "2026-10-14",
+      "processed_on": "2026-10-17",
+      "disposition": "material",
+      "note": "Removed /wallet/solana-blockhash + /solana-confirm (live 404; no wiki page cited them; struck-through note on cryptodataapi), Solana /wallet/upgrade second-node fallback + 503 Retry-After:30, openapi.json public cache header (live saw max-age=150) on cryptodataapi; /quant/whales top_coins 60->100 + long_pct_pctile_30d null warm-up on cryptodataapi-regimes; whale_activity <=60 before 2026-10-14 backtest caveat on cryptodataapi-backtesting."
+    },
+    {
+      "version": "2026-10-10",
+      "processed_on": "2026-10-17",
+      "disposition": "material",
+      "note": "Remainder after 6c30f08 (adx/symbol/not_covered/SMA-20/search tiers/gates already done): unknown_parameter 400 route list on cryptodataapi hub + per-route notes (strategy-library, regimes, supply, backtesting); 404 hint (cryptodataapi-indicators, live rsi/atr); candles 1h pre-warm (cryptodataapi-hyperliquid); /backtesting/klines interval honoured, n, ~278-day scan, grain.cadence + REST-vs-klines_deep depth callout (cryptodataapi-backtesting, live); gex/positioning k-coin case-insensitive + coin alias + gex/history days->from/to (cryptodataapi-regimes, live); gex maintenance_margin_tiers live HL table (live BTC/ETH/SOL/HYPE/kPEPE tiers) + old-ladder corrections/Contradictions on hyperliquid-liquidation-engine and hyperliquid entity; supply/unlocks limit + k-name (cryptodataapi-supply, live). Content-page 'klines 1h/4h/1d to 2017-08' claims (~67 pages) flagged for a separate sweep."
+    },
+    {
+      "version": "2026-10-09",
+      "processed_on": "2026-10-17",
+      "disposition": "material",
+      "note": "OpenAPI examples + x-timeout-seconds/x-streaming/x-account-scoped (spec: account-scoped only on 2 invoice routes) on cryptodataapi + cryptodataapi-mcp; /on-chain/whales* unlisted while 503 coming_soon (cryptodataapi-on-chain, live); bare /algobrain/search newest pages, /algobrain/page short paths + 404 suggestions/search_url (cryptodataapi-strategy-library, live); funding-rates last-good history_status (cryptodataapi-derivatives); archives listing cache + ~9 MB default (cryptodataapi-backtesting); partner gateway one line (cryptodataapi)."
+    },
+    {
+      "version": "2026-10-08",
+      "processed_on": "2026-10-17",
+      "disposition": "material",
+      "note": "NEW /backtesting/liquidation-density (cryptodataapi-backtesting, live BTC) and /on-chain/exchange-flows/{symbol}/history (cryptodataapi-on-chain, live USDT); exchange_flow_spikes snapshot type (from 2026-10-08 00:25 UTC, live) + spike-alert source/filters; /on-chain/score exchange_flow fix + exclusion/renormalisation docs correction (cryptodataapi-on-chain) with dated caveats on onchain-capitulation-confluence, smart-money-vs-crowd-divergence, bitcoin-halving-cycle-timing, on-chain-flow-trading, miner-capitulation-bottom, exchange-netflow; liquidations sorted by liquidation_usd_24h (cryptodataapi-market-intelligence, live). Signal pointers on cascade-detection-signals, liquidation-cascade-fade, hyperliquid-liquidation-engine."
+    },
+    {
+      "version": "2026-10-02",
+      "processed_on": "2026-10-17",
+      "disposition": "material",
+      "note": "upgrade.discount removed from 403/429/key-mint/MCP tier copy and POST /auth/keys one-per-network-per-day (429 ip_rate_limit, Retry-After 86400) + one-per-mailbox (409 mailbox_already_registered), keys never expire — on cryptodataapi (Plans & rate limits) and cryptodataapi-mcp (Getting a key). No wiki page claimed multi-key minting or quoted upgrade.discount; README's 'emails you a discount code' left (changelog silent on verification emails)."
+    },
     {
       "version": "2026-09-28",
       "processed_on": "2026-09-28",

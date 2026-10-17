@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Market Intelligence"
 type: source
 created: 2026-07-13
-updated: 2026-09-28
+updated: 2026-10-17
 status: good
 tags: [data-provider, crypto, api, etf-flows, liquidations, options, cycle-indicators, coinbase-premium, market-intelligence]
 aliases: ["CryptoDataAPI Market Intelligence", "CDA Market Intelligence", "Market Intelligence API"]
@@ -68,6 +68,8 @@ Live check on 2026-09-28: `?days=3` for BTC returned 2026-09-23 +$346.9M, 2026-0
 
 **`/taker-buy-sell` gained a Hyperliquid leg (2026-09-09).** Previously the endpoint carried only a `Binance` leg (BTC only, from Binance's public taker-volume endpoint). It now adds a `Hyperliquid` exchange leg — `buy_ratio` as a percent (0-100) of taker volume that was buying, notional-weighted over the trailing 4h — for every HL perp with fills, sourced from the collector's own trade tape (see `/hyperliquid/trade-flow` on [[cryptodataapi-hyperliquid]]). A coin only HL lists gets its own top-level entry whose aggregate is the HL figure. **An absent Hyperliquid leg means the tape is still warming (or the pull is not configured) — never that HL had zero trades for that coin.**
 
+**`/liquidations` rows are sorted by `liquidation_usd_24h`, largest first (fixed 2026-10-08).** Rows used to come back in an arbitrary internal order, so `limit` (default 250, of ~440 tracked coins) dropped arbitrary coins. **BTC and ETH were sometimes missing from the default response.** `limit` now keeps the coins with the most liquidated notional. The fields are unchanged. With `exchange=asterdex`, AsterDEX-native rows still follow the aggregate rows. Live on 2026-10-17 the default call returned BTC ($33.1M 24h), ETH ($14.9M) and SOL ($6.4M) first, in strictly descending order. Any consumer that pulled the default response before 2026-10-08 and treated a missing coin as "no liquidations" should re-check.
+
 **`/liquidations` rows are trailing-window levels, not flows (changed 2026-09-23).** Each row's `liquidation_usd_*`, `long_liquidation_usd_*` and `short_liquidation_usd_*` fields (1h/4h/12h/24h) are trailing-window **levels**. **Never sum or difference successive polls**, because that double-counts. The response now says so in a top-level `grain` block (`kind: rolling_window`, `is_cumulative: true`, `sum_ok: false`), which uses the same vocabulary as the `/backtesting/*` readers. For incremental liquidation flow per closed bucket, use `/backtesting/hl-liquidation-bars` (Pro) on [[cryptodataapi-backtesting]]. The same release made two per-row fields real. They were CoinGlass-era leftovers that always read `0` / `null`, so a row with millions liquidated looked empty to anything that counted rows:
 
 - `count` is the number of liquidation events in the 24h window. The new top-level `row_count_meaning: "liquidation_events_24h"` states this
@@ -110,6 +112,7 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 ## Sources
 
+- CryptoDataAPI changelog release 2026-10-08 (via `GET /api/v1/changelog`, fetched 2026-10-17), the live OpenAPI description of `/api/v1/market-intelligence/liquidations` ("Order" paragraph), and a live default call on 2026-10-17 (rows sorted by `liquidation_usd_24h`)
 - https://cryptodataapi.com/api/docs (fetched 2026-07-13)
 - https://cryptodataapi.com/api (live OpenAPI JSON; `/market-intelligence/taker-buy-sell` description confirming the Hyperliquid exchange leg added 2026-09-09, fetched 2026-09-17)
 - https://cryptodataapi.com/api (live OpenAPI JSON; rebuilt `/market-intelligence/etf/{asset}/flows` — `ETFFlowsResponse` `asset`/`units`/`latest`/`in_progress`/`count`/`flows`/`sources`/`source_health`, `days` param 1-1000 — and `/market-intelligence/liquidations` `grain`/`row_count_meaning`/`count`/`source`, confirmed against the spec and live calls, fetched 2026-09-28)

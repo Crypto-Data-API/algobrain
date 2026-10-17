@@ -2,7 +2,7 @@
 title: "Miner Capitulation Bottom"
 type: strategy
 created: 2026-06-03
-updated: 2026-09-03
+updated: 2026-10-17
 status: excellent
 tags: [crypto, bitcoin, market-regime, position-trading, quantitative, regime-detection]
 aliases: ["Miner Capitulation Bottom", "Hash Ribbon Strategy", "Miner Capitulation Trade"]
@@ -261,6 +261,7 @@ These are intentionally conservative because the underlying sample is too small 
 - `GET /api/v1/on-chain/miners/hash-ribbon` — Hash Ribbon state (capitulation/recovery/normal)
 - `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + supply-shock zone classification
 - `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
+  - **Caveat (2026-10-08 API fix):** before 2026-10-08 the score's `exchange_flow` component summed every tracked token's 24h flow in its own native units, so it pinned at 20 or 80. Any composite reading, or any threshold calibrated on readings, from before that date is biased. The component now scores the USDT/USDC/DAI 24h net only. Components with no data, currently `whale_accumulation`, carry weight 0 and the rest are renormalised; they are not scored a neutral 50. See [[cryptodataapi-on-chain]].
 
 **Historical data:**
 - `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score timeseries

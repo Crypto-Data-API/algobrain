@@ -2,7 +2,7 @@
 title: "Exchange Net Flows"
 type: concept
 created: 2026-06-24
-updated: 2026-09-03
+updated: 2026-10-17
 status: draft
 tags: [indicators, bitcoin, behavioral-finance]
 aliases: ["Exchange Net Flows", "exchange-netflow", "Exchange Netflow", "Exchange Net Flow", "Exchange Reserve", "Net Exchange Flow"]
@@ -62,11 +62,14 @@ Suppose, over several weeks, the exchange reserve for [[bitcoin]] steadily decli
 
 **Live data:**
 - `GET /api/v1/on-chain/exchange-flows/{symbol}` — CEX inflow/outflow (1h/6h/24h/7d, per-exchange breakdown)
+- `GET /api/v1/on-chain/exchange-flows/{symbol}/history` (new 2026-10-08) — archived trailing 1h/24h `inflow`/`outflow`/`net` plus `per_exchange_1h`, hourly (`interval=1h`) from 2026-05-28, ≤93 days per call. Amounts are in native token units (USD for USDT/USDC/DAI). This is the replay source for netflow rules
+- `GET /api/v1/backtesting/snapshots?data_type=exchange_flow_spikes` — every spike alert archived from 2026-10-08 00:25 UTC. Live, add `source=transfer` to `/on-chain/exchange-flows/spike-alerts` to drop `balance_delta` rows, which can be an exchange moving funds between its own hot and cold wallets
 - `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` — stablecoin dry-powder z-score signal
 - `GET /api/v1/on-chain/miners/reserves` — BTC miner pool reserves + flows
 - `GET /api/v1/on-chain/miners/hash-ribbon` — Hash Ribbon state (capitulation/recovery/normal)
 - `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + supply-shock zone classification
 - `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
+  - **Caveat (2026-10-08 API fix):** before 2026-10-08 the score's `exchange_flow` component summed every tracked token's 24h flow in its own native units, so it pinned at 20 or 80. Any composite reading, or any threshold calibrated on readings, from before that date is biased. The component now scores the USDT/USDC/DAI 24h net only. Components with no data, currently `whale_accumulation`, carry weight 0 and the rest are renormalised; they are not scored a neutral 50. See [[cryptodataapi-on-chain]].
 
 **Historical data:**
 - `GET /api/v1/on-chain/whales/accumulation-score/{symbol}` — whale accumulation score timeseries

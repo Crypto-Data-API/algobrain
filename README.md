@@ -22,10 +22,16 @@ Windows PowerShell:
 py tools/manage_mcp.py start
 ```
 
+(If the `py` launcher is not installed, use `python` instead.)
+
 The first run creates an isolated `.venv`, installs the current MCP SDK, and starts
 AlgoBrain over Streamable HTTP at **http://127.0.0.1:8010/mcp**. Later starts reuse the
 same environment. The server exposes `wiki_search`, `wiki_read`, `wiki_stats`,
-`wiki_lint`, and `wiki_ingest` over the full vault.
+`wiki_lint`, and `wiki_ingest` over the full vault. `wiki_search` ranks results the
+same way as the hosted CryptoDataAPI wiki search: pages the query names come first,
+then title matches, then body matches. It can also filter strategy pages by
+backtest status, holding style, type, complexity, crowding risk, market, and whether
+their gates are runnable.
 
 Claude Code discovers the checked-in `.mcp.json` automatically. For Codex, register the
 same local endpoint once:
@@ -91,7 +97,7 @@ Start at `wiki/index.md` (master table of contents) or `wiki/overview.md` (state
 
 ## Data layer: CryptoDataAPI
 
-[CryptoDataAPI](https://cryptodataapi.com) provides the wiki's live and historical data: 190+ REST endpoints (auth: `X-API-Key` header) covering prices, funding rates, open interest, liquidations, order-book depth, market/volatility/meme/event/security/policy regimes, HMM quant probabilities, on-chain flows, whale tracking, Hyperliquid trader intelligence, sentiment, ETF flows, NFTs, and a Parquet backtesting archive back to 2020.
+[CryptoDataAPI](https://cryptodataapi.com) provides the wiki's live and historical data: 220+ REST endpoints (auth: `X-API-Key` header) covering prices, funding rates, open interest, liquidations, order-book depth, market/volatility/meme/event/security/policy regimes, HMM quant probabilities, on-chain flows, whale tracking, Hyperliquid trader intelligence, sentiment, ETF flows, NFTs, and a Parquet backtesting archive back to 2020.
 
 - Hub: `wiki/data-sources/cryptodataapi.md`, with per-category pages `cryptodataapi-*.md`; agent guide: `wiki/data-sources/cryptodataapi-mcp.md`
 - Wiki pages that map to an endpoint include a **"Getting the Data (CryptoDataAPI)"** section with live + historical access and a curl example
